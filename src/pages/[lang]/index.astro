@@ -149,11 +149,14 @@ const jsonLd = [
   <!-- ── Hook-writing callout ─────────────────────────────────────────── -->
   <section id="hook-guide" class="container-page">
     <div class="hookband">
-      <div>
-        <p class="section-eyebrow">{t.hookband.eyebrow}</p>
-        <h2 class="hookband__title">{t.hookband.title}</h2>
+      <div class="hookband__mesh mesh-gradient" aria-hidden="true"></div>
+      <div class="hookband__inner">
+        <div>
+          <p class="section-eyebrow">{t.hookband.eyebrow}</p>
+          <h2 class="hookband__title">{t.hookband.title}</h2>
+        </div>
+        <p class="hookband__body">{t.hookband.body}</p>
       </div>
-      <p class="hookband__body">{t.hookband.body}</p>
     </div>
   </section>
 
@@ -310,6 +313,7 @@ const jsonLd = [
   .guides__layout {
     display: grid;
     gap: 48px;
+    justify-items: center;
   }
   .guides__head {
     margin-bottom: 32px;
@@ -320,23 +324,28 @@ const jsonLd = [
   }
   .guides__list {
     display: grid;
-    gap: 16px;
+    gap: 20px;
+    width: 100%;
+    max-width: 960px;
+    margin-inline: auto;
   }
   .guide {
     scroll-margin-top: 80px;
     border-radius: var(--radius-lg);
     background: var(--color-canvas);
-    padding: 24px;
+    padding: 32px 40px;
     box-shadow: var(--shadow-e2);
+    text-align: center;
   }
   .guide__top {
     display: flex;
+    flex-wrap: wrap;
     align-items: baseline;
-    justify-content: space-between;
-    gap: 16px;
+    justify-content: center;
+    gap: 8px 16px;
   }
   .guide__name {
-    font-size: 20px;
+    font-size: 22px;
     font-weight: 600;
     letter-spacing: -0.6px;
     color: var(--color-ink);
@@ -347,28 +356,31 @@ const jsonLd = [
     color: var(--color-mute);
   }
   .guide__body {
-    margin-top: 12px;
+    margin: 18px auto 0;
+    max-width: none;
     font-size: 15px;
-    line-height: 24px;
+    line-height: 26px;
     color: var(--color-body);
   }
   .guide__facts {
-    margin-top: 20px;
+    margin-top: 28px;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 12px;
+    gap: 16px 24px;
   }
   .guide__fact {
     border-top: 1px solid var(--color-hairline);
-    padding-top: 10px;
+    padding-top: 14px;
   }
   .guide__fact dt {
     font-size: 12px;
+    line-height: 18px;
     color: var(--color-mute);
   }
   .guide__fact dd {
-    margin-top: 2px;
+    margin-top: 4px;
     font-size: 14px;
+    line-height: 20px;
     font-weight: 500;
     color: var(--color-ink);
   }
@@ -380,12 +392,28 @@ const jsonLd = [
   .hookband {
     scroll-margin-top: 80px;
     margin-top: 96px;
-    display: grid;
-    gap: 20px;
+    position: relative;
+    overflow: hidden;
     border-radius: var(--radius-xl);
     background: var(--color-ink);
     color: var(--color-on-primary);
     padding: 48px;
+  }
+  /* Same brand mesh as the hero, faded so the dark slab still reads as dark. */
+  .hookband__mesh {
+    position: absolute;
+    inset: -40% 0 auto 0;
+    height: 180%;
+    opacity: 0.22;
+    filter: blur(8px);
+    pointer-events: none;
+  }
+  .hookband__inner {
+    position: relative;
+    display: grid;
+    gap: 20px;
+    text-align: center;
+    justify-items: center;
   }
   .hookband__title {
     font-size: 28px;
@@ -394,6 +422,7 @@ const jsonLd = [
     letter-spacing: -1px;
   }
   .hookband__body {
+    max-width: 620px;
     font-size: 16px;
     line-height: 26px;
     color: #d4d4d4;
@@ -485,10 +514,9 @@ const jsonLd = [
 
   /* ── Responsive ─────────────────────────────────────────────────────── */
   @media (min-width: 1100px) {
-    .guides__layout {
-      grid-template-columns: minmax(0, 1fr) 300px;
-      align-items: start;
-    }
+    /* Cards stay centered on the page; the side banner stacks centered below
+       the list rather than pinning to a right-hand rail (which offset the
+       cards from page-center). */
     .guides__rail {
       display: block;
     }
