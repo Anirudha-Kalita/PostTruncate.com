@@ -1,0 +1,206 @@
+// ──────────────────────────────────────────────────────────────────────────
+// Translation dictionary shape. `en.ts` is the canonical implementation; every
+// other locale file implements this exact interface, so a missing or misspelt
+// key is a TypeScript error rather than a silent English fallback at runtime.
+//
+// Conventions:
+//  • Strings with runtime values hold {named} tokens filled by interp() —
+//    e.g. "{n} / {limit}". Keep tokens identical across every locale.
+//  • Plural is { one, other }; the component picks by count (English-style
+//    binary plural — adequate for these short UI strings across our locales).
+//  • Brand names (PostTruncate, LinkedIn, X, Threads, Instagram, Facebook) are
+//    intentionally NOT translated and live in markup, not here.
+// ──────────────────────────────────────────────────────────────────────────
+
+export interface Plural {
+  one: string;
+  other: string;
+}
+
+/** A platform guide card: heading, mono tag, prose, and three fact rows. */
+export interface GuideEntry {
+  name: string;
+  tag: string;
+  body: string;
+  /** Exactly three [label, value] rows. */
+  facts: [string, string][];
+}
+
+export interface FaqEntry {
+  q: string;
+  a: string;
+}
+
+export interface FooterColumn {
+  title: string;
+  /** Link labels in render order; hrefs are wired in the component. */
+  links: string[];
+}
+
+/**
+ * Strings consumed by the Preact islands. Split out from the rest because this
+ * sub-object — and only this sub-object — is serialized into the client island
+ * props, so it must stay free of any server-only values.
+ */
+export interface IslandStrings {
+  dashboard: {
+    loadSample: string;
+    /** Demo post injected by "Load a sample"; URL kept verbatim. */
+    sample: string;
+  };
+  workspace: {
+    eyebrow: string;
+    title: string;
+    badgeEditor: string;
+    hiddenBadge: Plural;
+    placeholder: string;
+    counters: {
+      characters: string;
+      words: string;
+      lines: string;
+      paragraphs: string;
+    };
+    engineLabel: string;
+    clean: string;
+    sanitize: string;
+    clear: string;
+    /** "{codes}" → comma-joined code points. */
+    hiddenWarning: string;
+  };
+  common: {
+    profileName: string;
+    handle: string;
+    /** "{n} chars" under each tweet/post card. */
+    charsSuffix: string;
+  };
+  linkedin: {
+    title: string;
+    viewAriaLabel: string;
+    viewDesktop: string;
+    viewMobile: string;
+    badgeTruncated: string;
+    badgeSafe: string;
+    /** "{total} / {limit} before fold". */
+    beforeFold: string;
+    seeMore: string;
+    profileMeta: string;
+    placeholder: string;
+    /** "{limit}". */
+    truncatedNote: string;
+    /** "{view}" → translated desktop/mobile label. */
+    safeNote: string;
+  };
+  twitter: {
+    title: string;
+    badgeIdle: string;
+    /** "{n}-tweet thread". */
+    badgeThread: string;
+    badgeSingle: string;
+    /** "{n}" links · "{weight}" each. */
+    links: Plural;
+    weightedLength: string;
+    /** "{limit}". */
+    placeholder: string;
+  };
+  threads: {
+    title: string;
+    badgeIdle: string;
+    /** "{n}-post chain". */
+    badgeThread: string;
+    badgeSingle: string;
+    /** "{n}" links counted in full. */
+    links: Plural;
+    charLength: string;
+    /** "{limit}". */
+    placeholder: string;
+  };
+  meta: {
+    title: string;
+    badgeNeedsFix: string;
+    badgeClean: string;
+    hashtagLabel: string;
+    /** "{limit}" hard limit · remove "{excess}". */
+    over: string;
+    approaching: string;
+    within: string;
+    none: string;
+    a11yLabel: string;
+    /** "{n} flagged". */
+    flagged: string;
+    flaggedNone: string;
+    /** "{n}" pseudo-Unicode characters. */
+    fancyDetected: Plural;
+    fancyClean: string;
+    /** "{n}" characters · Facebook/Instagram caps. */
+    footnote: string;
+  };
+}
+
+export interface Translations {
+  /** SEO + document-level. */
+  seo: {
+    title: string;
+    description: string;
+    skipLink: string;
+  };
+  nav: {
+    brandAria: string;
+    homeAria: string;
+    links: { editor: string; guides: string; faq: string };
+    cta: string;
+    themeToDark: string;
+    themeToLight: string;
+    /** Language switcher button + panel heading. */
+    language: string;
+    languageAria: string;
+    menuAria: string;
+  };
+  hero: {
+    eyebrow: string;
+    title: string;
+    lede: string;
+    primary: string;
+    secondary: string;
+  };
+  workspace: {
+    title: string;
+    sub: string;
+  };
+  guides: {
+    eyebrow: string;
+    title: string;
+    lede: string;
+    /** Keyed by platform id so order/markup stay stable across locales. */
+    items: {
+      linkedin: GuideEntry;
+      twitter: GuideEntry;
+      threads: GuideEntry;
+      instagram: GuideEntry;
+      facebook: GuideEntry;
+    };
+  };
+  hookband: {
+    eyebrow: string;
+    title: string;
+    body: string;
+  };
+  faq: {
+    eyebrow: string;
+    title: string;
+    items: FaqEntry[];
+  };
+  footer: {
+    homeAria: string;
+    tag: string;
+    columns: {
+      tool: FooterColumn;
+      platforms: FooterColumn;
+      learn: FooterColumn;
+      legal: FooterColumn;
+    };
+    /** "{year}". */
+    copyright: string;
+    disclaimer: string;
+  };
+  island: IslandStrings;
+}

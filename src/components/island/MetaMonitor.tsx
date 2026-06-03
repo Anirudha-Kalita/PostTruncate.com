@@ -7,9 +7,13 @@ import {
   LIMITS,
 } from '../../lib/textTools';
 import { Card, CardHead, Badge, Meter, BrandLogo } from './ui';
+import { interp, plural } from '../../i18n/interp';
+import type { IslandStrings } from '../../i18n/types';
 
 interface Props {
   text: string;
+  lang: string;
+  s: IslandStrings;
 }
 
 /**
@@ -18,7 +22,9 @@ interface Props {
  * (𝖁𝖔𝖑𝖉 / 𝓢𝓬𝓻𝓲𝓹𝓽) that render as styled glyphs but are unreadable to
  * screen readers.
  */
-export function MetaMonitor({ text }: Props) {
+export function MetaMonitor({ text, lang, s }: Props) {
+  const m = s.meta;
+  const nf = new Intl.NumberFormat(lang);
   const hashtags = detectHashtags(text);
   const tagCount = hashtags.length;
   const overTagLimit = tagCount > LIMITS.INSTAGRAM_HASHTAGS;
@@ -32,7 +38,7 @@ export function MetaMonitor({ text }: Props) {
     <Card>
       <CardHead
         eyebrow="Instagram · Facebook"
-        title="Formatting monitor"
+        title={m.title}
         logo={
           <span class="flex items-center gap-1.5">
             <BrandLogo brand="instagram" />
@@ -41,9 +47,9 @@ export function MetaMonitor({ text }: Props) {
         }
       >
         {overTagLimit || fancy ? (
-          <Badge tone={overTagLimit ? 'danger' : 'warn'}>Needs a fix</Badge>
+          <Badge tone={overTagLimit ? 'danger' : 'warn'}>{m.badgeNeedsFix}</Badge>
         ) : (
-          <Badge tone="safe">Looks clean</Badge>
+          <Badge tone="safe">{m.badgeClean}</Badge>
         )}
       </CardHead>
 
@@ -54,22 +60,23 @@ export function MetaMonitor({ text }: Props) {
             value={Math.min(tagCount, LIMITS.INSTAGRAM_HASHTAGS)}
             max={LIMITS.INSTAGRAM_HASHTAGS}
             tone={tagTone}
-            label="Hashtag concentration"
-            caption={`${tagCount} / ${LIMITS.INSTAGRAM_HASHTAGS}`}
+            label={m.hashtagLabel}
+            caption={`${nf.format(tagCount)} / ${nf.format(LIMITS.INSTAGRAM_HASHTAGS)}`}
           />
           <p class="mt-2.5 text-[12px] leading-4 text-body">
             {overTagLimit ? (
               <span class="text-error-deep">
-                Over Instagram’s hard limit of {LIMITS.INSTAGRAM_HASHTAGS}{' '}
-                hashtags — the caption will fail to post. Remove{' '}
-                {tagCount - LIMITS.INSTAGRAM_HASHTAGS}.
+                {interp(m.over, {
+                  limit: nf.format(LIMITS.INSTAGRAM_HASHTAGS),
+                  excess: nf.format(tagCount - LIMITS.INSTAGRAM_HASHTAGS),
+                })}
               </span>
             ) : tagCount > 20 ? (
-              'Approaching the 30-tag ceiling. Trim to your highest-intent tags.'
+              m.approaching
             ) : tagCount > 0 ? (
-              'Comfortably within Instagram’s 30-hashtag limit.'
+              m.within
             ) : (
-              'No hashtags detected yet.'
+              m.none
             )}
           </p>
         </div>
@@ -84,30 +91,27 @@ export function MetaMonitor({ text }: Props) {
         >
           <div class="flex items-center justify-between">
             <span class="text-[13px] font-medium text-ink">
-              Accessibility · fancy fonts
+              {m.a11yLabel}
             </span>
             {fancy ? (
-              <Badge tone="warn">{fancyN} flagged</Badge>
+              <Badge tone="warn">{interp(m.flagged, { n: nf.format(fancyN) })}</Badge>
             ) : (
-              <Badge tone="safe">None</Badge>
+              <Badge tone="safe">{m.flaggedNone}</Badge>
             )}
           </div>
           <p class="mt-2 text-[12px] leading-4 text-body">
             {fancy ? (
               <span class="text-warning-deep">
-                Detected {fancyN} pseudo-Unicode “font” character{fancyN > 1 ? 's' : ''}{' '}
-                (𝖁𝖔𝖑𝖉 / 𝓼𝓬𝓻𝓲𝓹𝓽). These look styled but screen readers
-                skip or spell them out — they hurt reach and accessibility.
+                {interp(plural(m.fancyDetected, fancyN), { n: nf.format(fancyN) })}
               </span>
             ) : (
-              'No pseudo-font characters detected. Your text reads cleanly on assistive tech.'
+              m.fancyClean
             )}
           </p>
         </div>
 
         <p class="font-mono text-[11px] text-mute tabular-nums">
-          {charCount(text)} characters · Facebook fold ≈ 480 · Instagram caption
-          cap 2,200
+          {interp(m.footnote, { n: nf.format(charCount(text)) })}
         </p>
       </div>
     </Card>

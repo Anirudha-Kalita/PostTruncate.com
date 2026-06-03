@@ -84,6 +84,69 @@
 }
 
 /* ──────────────────────────────────────────────────────────────────────────
+   Dark theme — token overrides only.
+   Every surface, ink, border, badge and shadow in the app resolves through the
+   @theme variables above (both the scoped Astro styles and the Tailwind
+   utilities the islands use, e.g. `bg-canvas`, `text-ink`). So the entire dark
+   palette is expressed by redefining those same tokens under one selector —
+   no utility classes or component markup change.
+
+   Two tokens deliberately swap roles so inverted CTAs flip for free:
+     --color-ink         light surface text  → ALSO the now-light pill surface
+     --color-on-primary  text on dark pills  → now the dark text on light pills
+   So every `bg-ink text-on-primary` button becomes a light pill with dark
+   text automatically. The one element too large to invert this way — the
+   full-bleed hook band — is handled explicitly in index.astro.
+   ────────────────────────────────────────────────────────────────────────── */
+html {
+  color-scheme: light;
+}
+html[data-theme='dark'] {
+  color-scheme: dark;
+
+  /* ── Surface & ink ─────────────────────────────────────────────── */
+  --color-canvas: #161616; /* elevated cards, nav, hero */
+  --color-canvas-soft: #0a0a0a; /* body — the darkest plane */
+  --color-canvas-soft-2: #232323; /* insets: textarea, meter track, hover */
+  --color-ink: #ededed; /* primary text + inverted pill surface */
+  --color-body: #a1a1a1;
+  --color-mute: #707070;
+  --color-on-primary: #0a0a0a; /* dark text on the now-light pills */
+  --color-hairline: #2a2a2a;
+  --color-hairline-strong: #4d4d4d;
+
+  /* ── Brand / accent ────────────────────────────────────────────── */
+  --color-primary: #ededed;
+  --color-link: #3b9eff; /* brightened for contrast on dark */
+  --color-link-deep: #74b6ff; /* badge/inline text on link-bg-soft */
+  --color-link-bg-soft: #10243f; /* deep-blue badge fill */
+
+  /* ── Semantic — soft fills go dark, deep text goes bright ──────── */
+  --color-success: #3b9eff;
+  --color-error: #f56565;
+  --color-error-soft: #2e1416;
+  --color-error-deep: #f87171;
+  --color-warning: #f5a623;
+  --color-warning-soft: #2c2310;
+  --color-warning-deep: #f3c168;
+
+  /* safe-tone badges read `bg-cyan-soft text-cyan-deep` */
+  --color-cyan-soft: #0c2b25;
+  --color-cyan-deep: #5af0cf;
+
+  /* ── Stacked-shadow elevation — light ring carries the edge on dark,
+        since black drop shadows vanish against a near-black canvas. ── */
+  --shadow-e1: 0 0 0 1px #ffffff14;
+  --shadow-e2: 0 0 0 1px #ffffff14, 0px 1px 2px #00000045;
+  --shadow-e3: 0 0 0 1px #ffffff14, 0px 2px 4px #00000045,
+    0px 8px 8px -8px #00000045;
+  --shadow-e4: 0 0 0 1px #ffffff17, 0px 2px 4px #00000045,
+    0px 8px 16px -4px #00000055;
+  --shadow-e5: 0 0 0 1px #ffffff17, 0px 1px 2px #00000045,
+    0px 8px 16px -4px #00000055, 0px 24px 32px -8px #00000066;
+}
+
+/* ──────────────────────────────────────────────────────────────────────────
    Base layer — element defaults
    ────────────────────────────────────────────────────────────────────────── */
 @layer base {
@@ -101,10 +164,11 @@
     text-rendering: optimizeLegibility;
   }
 
-  /* Ink selection, light text — brand signature. */
+  /* Ink selection, light text — brand signature. Routed through the inverted
+     pair so it stays legible in dark mode (where ink itself is near-white). */
   ::selection {
     background-color: var(--color-ink);
-    color: #f2f2f2;
+    color: var(--color-on-primary);
   }
 
   /* Visible focus ring for keyboard users on every interactive element. */

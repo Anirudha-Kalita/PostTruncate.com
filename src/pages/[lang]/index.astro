@@ -1,0 +1,501 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Ad from '../../components/Ad.astro';
+import Dashboard from '../../components/island/Dashboard.tsx';
+import { getTranslations } from '../../i18n';
+import { LOCALE_CODES } from '../../i18n/config';
+
+// One statically-rendered landing page per locale (/en/, /da/, …). All copy is
+// pulled from that locale's dictionary; the layout/structure is identical.
+export function getStaticPaths() {
+  return LOCALE_CODES.map((lang) => ({ params: { lang } }));
+}
+
+const { lang } = Astro.params as { lang: string };
+const t = getTranslations(lang);
+
+// Platform guides: pair each translated entry with its stable anchor id (the
+// ids are referenced by nav + footer links, so they must not change per locale).
+const guideOrder = [
+  'linkedin',
+  'twitter',
+  'threads',
+  'instagram',
+  'facebook',
+] as const;
+const platforms = guideOrder.map((key) => ({
+  id: `${key}-guide`,
+  ...t.guides.items[key],
+}));
+
+const faqs = t.faq.items;
+
+// ── Structured data — localized so each language page carries its own FAQ
+// rich-result content and a translated app description. ─────────────────────
+const site = Astro.site ?? new URL('https://posttruncate.com');
+const pageUrl = new URL(`/${lang}/`, site).href;
+
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebApplication',
+    name: 'PostTruncate',
+    url: pageUrl,
+    inLanguage: lang,
+    applicationCategory: 'BusinessApplication',
+    operatingSystem: 'Any (web browser)',
+    offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+    description: t.seo.description,
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    inLanguage: lang,
+    mainEntity: faqs.map((f) => ({
+      '@type': 'Question',
+      name: f.q,
+      acceptedAnswer: { '@type': 'Answer', text: f.a },
+    })),
+  },
+];
+---
+
+<Layout lang={lang} path="/" jsonLd={jsonLd}>
+  <!-- ── Hero ─────────────────────────────────────────────────────────── -->
+  <section class="hero">
+    <div class="hero__mesh mesh-gradient" aria-hidden="true"></div>
+    <div class="container-page hero__inner">
+      <p class="hero__eyebrow">{t.hero.eyebrow}</p>
+      <h1 class="hero__title">{t.hero.title}</h1>
+      <p class="hero__lede">{t.hero.lede}</p>
+      <div class="hero__cta">
+        <a href="#workspace" class="hero__primary">{t.hero.primary}</a>
+        <a href="#platforms" class="hero__secondary">{t.hero.secondary}</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Top leaderboard ad (reserved height → 0 CLS) ─────────────────── -->
+  <div class="container-page mt-8">
+    <Ad variant="leaderboard" />
+  </div>
+
+  <!-- ── Interactive workspace (the island) ───────────────────────────── -->
+  <main id="workspace" class="container-page workspace">
+    <div class="workspace__head">
+      <h2 class="workspace__title">{t.workspace.title}</h2>
+      <p class="workspace__sub">{t.workspace.sub}</p>
+    </div>
+    <Dashboard client:load lang={lang} strings={t.island} />
+  </main>
+
+  <!-- ── Static platform guides + sticky side banner ──────────────────── -->
+  <section id="platforms" class="container-page guides">
+    <div class="guides__layout">
+      <div>
+        <header class="guides__head">
+          <p class="section-eyebrow">{t.guides.eyebrow}</p>
+          <h2 class="section-title">{t.guides.title}</h2>
+          <p class="section-lede">{t.guides.lede}</p>
+        </header>
+
+        <div class="guides__list">
+          {
+            platforms.map((p) => (
+              <article id={p.id} class="guide">
+                <div class="guide__top">
+                  <h3 class="guide__name">{p.name}</h3>
+                  <span class="guide__tag">{p.tag}</span>
+                </div>
+                <p class="guide__body">{p.body}</p>
+                <dl class="guide__facts">
+                  {p.facts.map(([k, v]) => (
+                    <div class="guide__fact">
+                      <dt>{k}</dt>
+                      <dd>{v}</dd>
+                    </div>
+                  ))}
+                </dl>
+              </article>
+            ))
+          }
+        </div>
+      </div>
+
+      <!-- Side banner module — sticky, reserved 300×600 footprint -->
+      <aside class="guides__rail">
+        <Ad variant="skyscraper" />
+      </aside>
+    </div>
+  </section>
+
+  <!-- ── Hook-writing callout ─────────────────────────────────────────── -->
+  <section id="hook-guide" class="container-page">
+    <div class="hookband">
+      <div>
+        <p class="section-eyebrow">{t.hookband.eyebrow}</p>
+        <h2 class="hookband__title">{t.hookband.title}</h2>
+      </div>
+      <p class="hookband__body">{t.hookband.body}</p>
+    </div>
+  </section>
+
+  <!-- ── FAQ (FAQPage structured data above) ──────────────────────────── -->
+  <section id="faq" class="container-page faq">
+    <header class="faq__head">
+      <p class="section-eyebrow">{t.faq.eyebrow}</p>
+      <h2 class="section-title">{t.faq.title}</h2>
+    </header>
+    <div class="faq__list">
+      {
+        faqs.map((f) => (
+          <details class="faq__item">
+            <summary class="faq__q">
+              <span>{f.q}</span>
+              <span class="faq__chev" aria-hidden="true">+</span>
+            </summary>
+            <p class="faq__a">{f.a}</p>
+          </details>
+        ))
+      }
+    </div>
+  </section>
+</Layout>
+
+<style>
+  /* ── Hero ───────────────────────────────────────────────────────────── */
+  .hero {
+    position: relative;
+    overflow: hidden;
+    border-bottom: 1px solid var(--color-hairline);
+    background: var(--color-canvas);
+  }
+  .hero__mesh {
+    position: absolute;
+    inset: -40% 0 auto 0;
+    height: 130%;
+    opacity: 0.16;
+    filter: blur(8px);
+    pointer-events: none;
+  }
+  .hero__inner {
+    position: relative;
+    padding-top: 88px;
+    padding-bottom: 72px;
+    text-align: center;
+  }
+  .hero__eyebrow {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--color-mute);
+  }
+  .hero__title {
+    margin: 16px auto 0;
+    max-width: 760px;
+    font-size: clamp(34px, 6vw, 56px);
+    font-weight: 600;
+    line-height: 1.02;
+    letter-spacing: -2.4px;
+    color: var(--color-ink);
+  }
+  .hero__lede {
+    margin: 20px auto 0;
+    max-width: 600px;
+    font-size: 18px;
+    line-height: 28px;
+    color: var(--color-body);
+  }
+  .hero__cta {
+    margin-top: 32px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+  }
+  .hero__primary,
+  .hero__secondary {
+    display: inline-flex;
+    align-items: center;
+    height: 48px;
+    padding: 0 24px;
+    border-radius: var(--radius-pill);
+    font-size: 16px;
+    font-weight: 500;
+    transition: opacity 0.15s ease, background 0.15s ease;
+  }
+  .hero__primary {
+    background: var(--color-ink);
+    color: var(--color-on-primary);
+  }
+  .hero__primary:hover {
+    opacity: 0.88;
+  }
+  .hero__secondary {
+    background: var(--color-canvas);
+    color: var(--color-ink);
+    box-shadow: var(--shadow-e1);
+  }
+  .hero__secondary:hover {
+    background: var(--color-canvas-soft-2);
+  }
+
+  /* ── Workspace ──────────────────────────────────────────────────────── */
+  .workspace {
+    scroll-margin-top: 80px;
+    padding-top: 48px;
+  }
+  .workspace__head {
+    margin-bottom: 24px;
+  }
+  .workspace__title {
+    font-size: 24px;
+    font-weight: 600;
+    letter-spacing: -0.96px;
+    color: var(--color-ink);
+  }
+  .workspace__sub {
+    margin-top: 6px;
+    font-size: 14px;
+    color: var(--color-body);
+  }
+
+  /* ── Shared section type ────────────────────────────────────────────── */
+  .section-eyebrow {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--color-mute);
+  }
+  .section-title {
+    margin-top: 12px;
+    font-size: 32px;
+    font-weight: 600;
+    line-height: 40px;
+    letter-spacing: -1.28px;
+    color: var(--color-ink);
+  }
+  .section-lede {
+    margin-top: 12px;
+    max-width: 520px;
+    font-size: 16px;
+    line-height: 24px;
+    color: var(--color-body);
+  }
+
+  /* ── Platform guides ────────────────────────────────────────────────── */
+  .guides {
+    scroll-margin-top: 80px;
+    padding-top: 96px;
+  }
+  .guides__layout {
+    display: grid;
+    gap: 48px;
+  }
+  .guides__head {
+    margin-bottom: 32px;
+  }
+  .guides__list {
+    display: grid;
+    gap: 16px;
+  }
+  .guide {
+    scroll-margin-top: 80px;
+    border-radius: var(--radius-lg);
+    background: var(--color-canvas);
+    padding: 24px;
+    box-shadow: var(--shadow-e2);
+  }
+  .guide__top {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 16px;
+  }
+  .guide__name {
+    font-size: 20px;
+    font-weight: 600;
+    letter-spacing: -0.6px;
+    color: var(--color-ink);
+  }
+  .guide__tag {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--color-mute);
+  }
+  .guide__body {
+    margin-top: 12px;
+    font-size: 15px;
+    line-height: 24px;
+    color: var(--color-body);
+  }
+  .guide__facts {
+    margin-top: 20px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+  }
+  .guide__fact {
+    border-top: 1px solid var(--color-hairline);
+    padding-top: 10px;
+  }
+  .guide__fact dt {
+    font-size: 12px;
+    color: var(--color-mute);
+  }
+  .guide__fact dd {
+    margin-top: 2px;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--color-ink);
+  }
+  .guides__rail {
+    display: none;
+  }
+
+  /* ── Hook band ──────────────────────────────────────────────────────── */
+  .hookband {
+    scroll-margin-top: 80px;
+    margin-top: 96px;
+    display: grid;
+    gap: 20px;
+    border-radius: var(--radius-xl);
+    background: var(--color-ink);
+    color: var(--color-on-primary);
+    padding: 48px;
+  }
+  .hookband__title {
+    font-size: 28px;
+    font-weight: 600;
+    line-height: 34px;
+    letter-spacing: -1px;
+  }
+  .hookband__body {
+    font-size: 16px;
+    line-height: 26px;
+    color: #d4d4d4;
+  }
+
+  /* ── FAQ ────────────────────────────────────────────────────────────── */
+  .faq {
+    scroll-margin-top: 80px;
+    padding-top: 96px;
+  }
+  .faq__head {
+    margin-bottom: 32px;
+  }
+  .faq__list {
+    display: grid;
+    gap: 12px;
+    max-width: 760px;
+  }
+  .faq__item {
+    border-radius: var(--radius-lg);
+    background: var(--color-canvas);
+    box-shadow: var(--shadow-e1);
+    overflow: hidden;
+  }
+  .faq__q {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    cursor: pointer;
+    padding: 18px 20px;
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--color-ink);
+    list-style: none;
+  }
+  .faq__q::-webkit-details-marker {
+    display: none;
+  }
+  .faq__chev {
+    font-size: 20px;
+    color: var(--color-mute);
+    transition: transform 0.2s ease;
+    line-height: 1;
+  }
+  .faq__item[open] .faq__chev {
+    transform: rotate(45deg);
+  }
+  .faq__a {
+    padding: 0 20px 18px;
+    font-size: 15px;
+    line-height: 24px;
+    color: var(--color-body);
+  }
+
+  /* ── Responsive ─────────────────────────────────────────────────────── */
+  @media (min-width: 1100px) {
+    .guides__layout {
+      grid-template-columns: minmax(0, 1fr) 300px;
+      align-items: start;
+    }
+    .guides__rail {
+      display: block;
+    }
+  }
+
+  /* Tablet & below — pull the generous desktop rhythm in so sections aren't
+     separated by a screenful of dead space on smaller viewports. */
+  @media (max-width: 768px) {
+    .hero__inner {
+      padding-top: 56px;
+      padding-bottom: 48px;
+    }
+    .workspace {
+      padding-top: 36px;
+    }
+    .guides,
+    .faq {
+      padding-top: 64px;
+    }
+    .hookband {
+      margin-top: 64px;
+    }
+    .section-title {
+      font-size: 26px;
+      line-height: 32px;
+      letter-spacing: -1px;
+    }
+  }
+
+  @media (max-width: 520px) {
+    .guide__facts {
+      grid-template-columns: 1fr;
+    }
+    .hookband {
+      padding: 32px 24px;
+    }
+    .guide {
+      padding: 20px;
+    }
+    .hookband__title {
+      font-size: 24px;
+      line-height: 30px;
+    }
+  }
+
+  /* ── Dark theme — targeted fixes for elements the token swap can't carry ──
+     :global() is required because Astro would otherwise scope these selectors
+     to this component, and <html> (rendered by Layout) has no scope hash.
+
+     The hook band is `bg ink / text on-primary` in light mode, so the token
+     swap would flip it to a glaring near-white block. It's too large to read
+     as an inverted pill, so we re-express it as the most-elevated dark card. */
+  :global(html[data-theme='dark']) .hookband {
+    background: var(--color-canvas-soft-2);
+    color: var(--color-ink);
+    box-shadow: var(--shadow-e2);
+  }
+  :global(html[data-theme='dark']) .hookband__body {
+    color: var(--color-body);
+  }
+  /* Bright mesh stops read as washed-out at 0.16 over near-black; lift them. */
+  :global(html[data-theme='dark']) .hero__mesh {
+    opacity: 0.3;
+  }
+</style>

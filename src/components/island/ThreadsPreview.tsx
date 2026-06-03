@@ -1,9 +1,13 @@
 /** @jsxImportSource preact */
 import { splitThread, charCount, detectUrls, LIMITS } from '../../lib/textTools';
 import { Card, CardHead, Badge, Meter, BrandLogo } from './ui';
+import { interp, plural } from '../../i18n/interp';
+import type { IslandStrings } from '../../i18n/types';
 
 interface Props {
   text: string;
+  lang: string;
+  s: IslandStrings;
 }
 
 /**
@@ -12,7 +16,9 @@ interface Props {
  * than collapsing them to a fixed weight, so the splitter measures by plain
  * code-point count.
  */
-export function ThreadsPreview({ text }: Props) {
+export function ThreadsPreview({ text, lang, s }: Props) {
+  const th = s.threads;
+  const nf = new Intl.NumberFormat(lang);
   const trimmed = text.trim();
   const count = charCount(trimmed);
   const urls = detectUrls(trimmed);
@@ -23,15 +29,15 @@ export function ThreadsPreview({ text }: Props) {
     <Card>
       <CardHead
         eyebrow="Threads"
-        title="Post & chain preview"
+        title={th.title}
         logo={<BrandLogo brand="threads" />}
       >
         {!trimmed ? (
-          <Badge tone="neutral" dot={false}>Idle</Badge>
+          <Badge tone="neutral" dot={false}>{th.badgeIdle}</Badge>
         ) : isThread ? (
-          <Badge tone="info">{posts.length}-post chain</Badge>
+          <Badge tone="info">{interp(th.badgeThread, { n: nf.format(posts.length) })}</Badge>
         ) : (
-          <Badge tone="safe">Single post</Badge>
+          <Badge tone="safe">{th.badgeSingle}</Badge>
         )}
       </CardHead>
 
@@ -39,11 +45,11 @@ export function ThreadsPreview({ text }: Props) {
         <div class="flex flex-wrap items-center justify-between gap-x-3 gap-y-1">
           <span class="text-[13px] text-body">
             {urls.length > 0
-              ? `${urls.length} link${urls.length > 1 ? 's' : ''} · counted in full`
-              : 'Character length'}
+              ? interp(plural(th.links, urls.length), { n: nf.format(urls.length) })
+              : th.charLength}
           </span>
           <span class="font-mono text-[12px] text-mute tabular-nums">
-            {count} / {LIMITS.THREADS}
+            {nf.format(count)} / {nf.format(LIMITS.THREADS)}
           </span>
         </div>
         <div class="mt-3">
@@ -58,8 +64,7 @@ export function ThreadsPreview({ text }: Props) {
       <div class="space-y-3 p-4 sm:p-5">
         {posts.length === 0 ? (
           <article class="rounded-md border border-hairline bg-canvas p-4 text-[14px] text-mute">
-            Your Threads preview appears here. Go past {LIMITS.THREADS} characters
-            and it chains into a numbered post sequence.
+            {interp(th.placeholder, { limit: nf.format(LIMITS.THREADS) })}
           </article>
         ) : (
           posts.map((post, i) => (
@@ -67,8 +72,8 @@ export function ThreadsPreview({ text }: Props) {
               <header class="flex items-center gap-2.5">
                 <span class="h-8 w-8 shrink-0 rounded-full bg-linear-to-br from-grad-preview-start to-grad-ship-start" />
                 <div class="min-w-0 leading-tight">
-                  <span class="text-[13px] font-semibold text-ink">Your Name</span>
-                  <span class="ml-1 text-[12px] text-mute">@you</span>
+                  <span class="text-[13px] font-semibold text-ink">{s.common.profileName}</span>
+                  <span class="ml-1 text-[12px] text-mute">{s.common.handle}</span>
                 </div>
               </header>
               <p class="mt-2 whitespace-pre-wrap break-words text-[14px] leading-[21px] text-ink">
@@ -76,11 +81,11 @@ export function ThreadsPreview({ text }: Props) {
               </p>
               {isThread && (
                 <span class="absolute bottom-3 right-4 font-mono text-[11px] text-mute tabular-nums">
-                  {i + 1}/{posts.length}
+                  {nf.format(i + 1)}/{nf.format(posts.length)}
                 </span>
               )}
               <span class="mt-2 block font-mono text-[11px] text-mute/70 tabular-nums">
-                {charCount(post)} chars
+                {interp(s.common.charsSuffix, { n: nf.format(charCount(post)) })}
               </span>
             </article>
           ))

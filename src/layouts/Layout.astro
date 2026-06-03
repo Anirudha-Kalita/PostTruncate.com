@@ -2,33 +2,44 @@
 import '../styles/global.css';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
+import { getTranslations } from '../i18n';
+import { LOCALES, getLocale, DEFAULT_LOCALE } from '../i18n/config';
 
 export interface Props {
-  /** <title> + OpenGraph title. */
+  /** Active locale code (e.g. "en", "da"). Drives every translated string. */
+  lang: string;
+  /** <title> + OG title. Defaults to the locale's SEO title. */
   title?: string;
-  /** Meta description + OG/Twitter description. */
+  /** Meta description + OG/Twitter description. Defaults to the locale's. */
   description?: string;
-  /** Path-only canonical (e.g. "/"); resolved against the configured site. */
+  /** In-locale path (e.g. "/"); the locale prefix is added automatically. */
   path?: string;
   /** Optional JSON-LD blocks to inject (WebApplication, FAQPage, …). */
   jsonLd?: Record<string, unknown>[];
 }
 
-const {
-  title = 'PostTruncate — See exactly where social platforms cut off your text',
-  description =
-    'Free social media preview tool. See LinkedIn’s “…see more” fold, auto-split long copy into clean X/Twitter threads, and catch hashtag overload or screen-reader-breaking fonts before you post.',
-  path = '/',
-  jsonLd = [],
-} = Astro.props;
+const { lang, title, description, path = '/', jsonLd = [] } = Astro.props;
+
+const t = getTranslations(lang);
+const locale = getLocale(lang);
+
+const pageTitle = title ?? t.seo.title;
+const pageDescription = description ?? t.seo.description;
 
 const site = Astro.site ?? new URL('https://posttruncate.com');
-const canonical = new URL(path, site).href;
 const ogImage = new URL('/og.png', site).href;
+
+// Build the absolute URL for this same page in a given locale. Every locale is
+// prefixed (/en/, /da/, …), so the canonical and all hreflang alternates are
+// just the locale code + the in-locale path.
+const localeHref = (code: string) =>
+  new URL(`/${code}${path === '/' ? '/' : path}`, site).href;
+
+const canonical = localeHref(lang);
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang={lang} dir={locale.dir}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -36,23 +47,58 @@ const ogImage = new URL('/og.png', site).href;
     <link rel="icon" href="/favicon.ico" />
     <meta name="generator" content={Astro.generator} />
 
-    <title>{title}</title>
-    <meta name="description" content={description} />
+    <title>{pageTitle}</title>
+    <meta name="description" content={pageDescription} />
     <link rel="canonical" href={canonical} />
     <meta name="theme-color" content="#ffffff" />
+
+    {/* hreflang alternates — one per locale + an x-default so search engines
+        map the language variants to each other. */}
+    {
+      LOCALES.map((l) => (
+        <link rel="alternate" hreflang={l.code} href={localeHref(l.code)} />
+      ))
+    }
+    <link rel="alternate" hreflang="x-default" href={localeHref(DEFAULT_LOCALE)} />
+
+    {/* Apply the saved/system theme before first paint — no flash of light.
+        Inlined (is:inline) so it runs synchronously in <head>, ahead of body
+        render, rather than being bundled and deferred like normal scripts. */}
+    <script is:inline>
+      (function () {
+        try {
+          var stored = localStorage.getItem('theme');
+          var dark =
+            stored === 'dark' ||
+            (!stored &&
+              window.matchMedia('(prefers-color-scheme: dark)').matches);
+          if (dark) {
+            document.documentElement.dataset.theme = 'dark';
+            var m = document.querySelector('meta[name="theme-color"]');
+            if (m) m.setAttribute('content', '#0a0a0a');
+          }
+        } catch (e) {}
+      })();
+    </script>
 
     <!-- OpenGraph -->
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="PostTruncate" />
-    <meta property="og:title" content={title} />
-    <meta property="og:description" content={description} />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={pageDescription} />
     <meta property="og:url" content={canonical} />
     <meta property="og:image" content={ogImage} />
+    <meta property="og:locale" content={locale.ogLocale} />
+    {
+      LOCALES.filter((l) => l.code !== lang).map((l) => (
+        <meta property="og:locale:alternate" content={l.ogLocale} />
+      ))
+    }
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content={title} />
-    <meta name="twitter:description" content={description} />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={pageDescription} />
     <meta name="twitter:image" content={ogImage} />
 
     {
@@ -65,10 +111,10 @@ const ogImage = new URL('/og.png', site).href;
     }
   </head>
   <body>
-    <a href="#workspace" class="skip-link">Skip to the editor</a>
-    <Nav />
+    <a href="#workspace" class="skip-link">{t.seo.skipLink}</a>
+    <Nav lang={lang} nav={t.nav} />
     <slot />
-    <Footer />
+    <Footer lang={lang} footer={t.footer} />
   </body>
 </html>
 

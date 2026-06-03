@@ -1,0 +1,286 @@
+import type { Translations } from './types';
+
+// ──────────────────────────────────────────────────────────────────────────
+// Português (pt-PT) — tradução gerada automaticamente por máquina.
+// REQUER REVISÃO HUMANA antes do lançamento. Verifique a naturalidade do
+// texto, a concordância e a terminologia antes de colocar em produção.
+// ──────────────────────────────────────────────────────────────────────────
+
+export const pt: Translations = {
+  seo: {
+    title:
+      'PostTruncate — Veja exatamente onde as plataformas sociais cortam o seu texto',
+    description:
+      'Ferramenta gratuita de pré-visualização para redes sociais. Veja a dobra «…ver mais» do LinkedIn, divida automaticamente textos longos em threads limpas no X/Twitter e detete o excesso de hashtags ou tipos de letra que quebram os leitores de ecrã antes de publicar.',
+    skipLink: 'Saltar para o editor',
+  },
+
+  nav: {
+    brandAria: 'Página inicial do PostTruncate',
+    homeAria: 'Página inicial do PostTruncate',
+    links: { editor: 'Editor', guides: 'Guias das Plataformas', faq: 'FAQ' },
+    cta: 'Abrir o editor',
+    themeToDark: 'Mudar para o tema escuro',
+    themeToLight: 'Mudar para o tema claro',
+    language: 'Idioma',
+    languageAria: 'Selecionar idioma',
+    menuAria: 'Alternar o menu de navegação',
+  },
+
+  hero: {
+    eyebrow: 'Simulador de pré-visualização e truncagem para redes sociais',
+    title: 'Veja exatamente onde cada plataforma corta o seu texto.',
+    lede: 'Escreva uma vez e veja a sua publicação a ser apresentada em pré-visualizações nativas do LinkedIn, X, Instagram e Facebook — linhas de dobra, divisões de threads, limites de hashtags e avisos de acessibilidade, tudo em tempo real à medida que escreve.',
+    primary: 'Começar a escrever',
+    secondary: 'Ver os limites das plataformas',
+  },
+
+  workspace: {
+    title: 'O seu espaço de trabalho em tempo real',
+    sub: 'Tudo o que está em baixo atualiza-se instantaneamente e permanece no seu dispositivo.',
+  },
+
+  guides: {
+    eyebrow: 'Guias das plataformas',
+    title: 'Conheça todos os limites antes de publicar.',
+    lede: 'Uma referência rápida para os pontos de truncagem, os limites máximos e as armadilhas de formatação que reduzem discretamente o seu alcance em cada rede.',
+    items: {
+      linkedin: {
+        name: 'LinkedIn',
+        tag: 'A dobra «…ver mais»',
+        body: 'O LinkedIn recolhe as publicações a partir de cerca de 210 caracteres no computador e 140 no telemóvel, escondendo tudo o resto atrás de uma ligação «…ver mais». Aquilo que fica acima dessa dobra é toda a sua mensagem no feed — se o seu gancho não resultar aí, a maioria das pessoas nunca o expande. Coloque a tensão, o resultado ou a pergunta logo no início e empurre as hashtags e as ligações para baixo da dobra.',
+        facts: [
+          ['Dobra no computador', '~210 caracteres'],
+          ['Dobra no telemóvel', '~140 caracteres'],
+          ['Limite máximo da publicação', '3000 caracteres'],
+        ],
+      },
+      twitter: {
+        name: 'X / Twitter',
+        tag: 'Threads e peso das ligações',
+        body: 'O X conta uma única publicação contra um limite de 280 caracteres, mas cada ligação é encapsulada pelo t.co e contabilizada com um valor fixo de 23 caracteres, por mais longo que seja o URL real. Se ultrapassar os 280, precisa de uma thread. As boas threads quebram nos limites das frases, nunca a meio de uma palavra, e numeram cada tweet para que os leitores possam seguir a ordem. O PostTruncate divide o seu rascunho automaticamente e marca cada cartão com a respetiva posição.',
+        facts: [
+          ['Limite por tweet', '280 caracteres'],
+          ['Cada ligação conta como', '23 caracteres'],
+          ['Tweets por thread', 'Ilimitados'],
+        ],
+      },
+      threads: {
+        name: 'Threads',
+        tag: 'Encadeamento de publicações',
+        body: 'O Threads, a aplicação de texto da Meta, dá a cada publicação 500 caracteres — quase o dobro do X — e conta as ligações na totalidade em vez de as encurtar. Se passar dos 500, o resto tem de encadear-se como respostas numeradas. A primeira publicação continua a sustentar o feed, por isso coloque o gancho logo no início, tal como em todo o lado. O PostTruncate mede pela contagem total de caracteres e encadeia os textos longos numa sequência numerada e limpa.',
+        facts: [
+          ['Limite por publicação', '500 caracteres'],
+          ['Ligações contadas', 'Na totalidade'],
+          ['Excedente', 'Encadeia como respostas'],
+        ],
+      },
+      instagram: {
+        name: 'Instagram',
+        tag: 'Limite de hashtags',
+        body: 'As legendas do Instagram podem ir até 2200 caracteres, mas só mostram cerca dos primeiros 125 antes de uma ligação «mais». A regra mais rígida são as hashtags: mais de 30 numa única legenda ou comentário e a publicação falha silenciosamente. Acumular dezenas de tags de baixa intenção também é lido como spam. Mantenha as suas tags reduzidas e relevantes e vigie o medidor em tempo real para nunca esbarrar no limite de 30 tags.',
+        facts: [
+          ['Limite da legenda', '2200 caracteres'],
+          ['Limite máximo de hashtags', '30 tags'],
+          ['Pré-visualização da legenda', '~125 caracteres'],
+        ],
+      },
+      facebook: {
+        name: 'Facebook',
+        tag: 'Truncagem do feed',
+        body: 'O Facebook trunca as publicações do feed a cerca de 480 caracteres com uma ligação «Ver mais», e o envolvimento cai acentuadamente em blocos longos e sem quebras. As publicações mais curtas, com uma primeira linha clara, têm um desempenho consistentemente superior. A mesma regra de acessibilidade aplica-se em todo o lado: os «tipos de letra decorativos» em pseudo-Unicode parecem a negrito ou cursivos, mas são lidos caráter a caráter — ou totalmente ignorados — pelos leitores de ecrã, reduzindo discretamente o seu alcance.',
+        facts: [
+          ['Dobra do feed', '~480 caracteres'],
+          ['Comprimento com melhor desempenho', 'Menos de 80 caracteres'],
+          ['Tipos de letra decorativos', 'Quebram os leitores de ecrã'],
+        ],
+      },
+    },
+  },
+
+  hookband: {
+    eyebrow: 'Escrever o gancho',
+    title: 'A primeira linha é a única que a maioria das pessoas lê.',
+    body: 'Em todos os feeds, o texto acima da dobra faz todo o trabalho. Comece com um resultado, uma tensão ou uma pergunta — não com um aquecimento. Mova as ligações e as hashtags para baixo da dobra, mantenha a abertura abaixo do ponto de corte da plataforma e deixe a pré-visualização confirmar que o gancho sobrevive antes de publicar.',
+  },
+
+  faq: {
+    eyebrow: 'FAQ',
+    title: 'Perguntas, respondidas.',
+    items: [
+      {
+        q: 'Qual é a precisão dos limites de caracteres?',
+        a: 'O PostTruncate usa os limites publicados e amplamente observados de cada plataforma — 280 para o X, 210/140 para a dobra do LinkedIn, 30 hashtags para o Instagram e um peso fixo de 23 caracteres para as ligações. As plataformas ajustam-nos ocasionalmente, e a apresentação varia ligeiramente consoante o dispositivo, por isso encare as pré-visualizações como uma estimativa aproximada e não como uma garantia perfeita ao píxel.',
+      },
+      {
+        q: 'Os espaços e a pontuação contam como caracteres?',
+        a: 'Sim. Cada espaço, quebra de linha e sinal de pontuação conta como um caráter, e tanto o contador do PostTruncate como os limites das plataformas os incluem. A única exceção comum são as ligações no X/Twitter, que se reduzem a um valor fixo de 23 caracteres, independentemente do número de letras, símbolos ou barras que o URL real contenha.',
+      },
+      {
+        q: 'Como é que os emojis afetam a contagem de caracteres?',
+        a: 'O PostTruncate conta por pontos de código Unicode, por isso um emoji simples como 🙂 conta como um único caráter. Muitos emojis, porém, são construídos a partir de vários pontos de código unidos — variações de tom de pele, bandeiras e glifos combinados como 👨‍👩‍👧 — e esses registam-se como dois ou mais. A maioria das plataformas, sobretudo o X, também atribui mais peso aos emojis do que às letras simples, por isso um rascunho com muitos emojis consome um pouco mais do seu limite do que a contagem visível de glifos sugere.',
+      },
+      {
+        q: 'Qual é a diferença entre contagem de caracteres e contagem de palavras?',
+        a: 'A contagem de caracteres é o total de cada caráter individual — letras, espaços, pontuação e emojis incluídos — e é com base nela que os limites das plataformas são realmente medidos. A contagem de palavras é o número de palavras separadas por espaços, por mais longa que cada uma seja. Um tweet completo de 280 caracteres pode ter apenas 40 palavras, por isso vigie a contagem de caracteres para se manter abaixo de um limite e use a contagem de palavras como indicador de legibilidade.',
+      },
+      {
+        q: 'Porque é que a minha ligação conta como 23 caracteres no X?',
+        a: 'O X encapsula automaticamente cada URL com o seu encurtador t.co, que ocupa sempre 23 caracteres, independentemente de a ligação original ser longa ou curta. Assim, uma ligação de 5 caracteres e uma de 200 caracteres custam-lhe exatamente 23 face ao limite de 280. O PostTruncate reflete isto no contador ponderado.',
+      },
+      {
+        q: 'O que são os «tipos de letra decorativos» e porque são assinalados?',
+        a: 'Aquelas letras a negrito, em itálico ou em estilo manuscrito que cola de geradores de tipos de letra não são formatação real — são caracteres pseudo-Unicode do bloco de Símbolos Alfanuméricos Matemáticos. Parecem estilizados, mas os leitores de ecrã ou os soletram letra a letra ou os ignoram, o que prejudica tanto a acessibilidade como o seu alcance orgânico. O monitor assinala-os para que possa voltar a texto simples.',
+      },
+      {
+        q: 'O que é que a opção «Sanitizar texto» remove?',
+        a: 'Retira caracteres invisíveis e de largura zero — espaços de largura zero, marcas de ordem de bytes, marcas de controlo bidirecional, hífenes suaves e códigos de controlo dispersos. Estes infiltram-se frequentemente quando copia de outras aplicações e quebram silenciosamente as contagens de caracteres e a acessibilidade em clientes móveis mais antigos, sem nunca serem visíveis.',
+      },
+      {
+        q: 'O meu texto é enviado para algum lado?',
+        a: 'Não. Todo o editor e todas as pré-visualizações funcionam localmente no seu navegador. O seu rascunho nunca sai do seu dispositivo — não há conta, não há carregamento e não há processamento do seu conteúdo num servidor.',
+      },
+      {
+        q: 'O PostTruncate é gratuito?',
+        a: 'Sim, é totalmente gratuito e não exige registo. A ferramenta é financiada por anúncios discretos colocados em espaços reservados que nunca deslocam o esquema da página enquanto trabalha.',
+      },
+    ],
+  },
+
+  footer: {
+    homeAria: 'Página inicial do PostTruncate',
+    tag: 'Veja exatamente onde cada plataforma corta o seu texto — antes de publicar.',
+    columns: {
+      tool: {
+        title: 'Ferramenta',
+        links: [
+          'Editor de texto',
+          'Pré-visualizações em tempo real',
+          'Divisor de threads',
+          'Sanitizador Unicode',
+        ],
+      },
+      platforms: {
+        title: 'Plataformas',
+        links: ['LinkedIn', 'X / Twitter', 'Threads', 'Instagram', 'Facebook'],
+      },
+      learn: {
+        title: 'Aprender',
+        links: [
+          'Limites de caracteres',
+          'FAQ',
+          'Escrita de ganchos',
+          'Acessibilidade',
+        ],
+      },
+      legal: {
+        title: 'Legal',
+        links: ['Privacidade', 'Termos', 'Contacto'],
+      },
+    },
+    copyright: '© {year} PostTruncate. Feito para criadores em todo o lado.',
+    disclaimer:
+      'Sem qualquer afiliação com o LinkedIn, o X, a Meta ou o Instagram. Os limites são estimativas e podem mudar.',
+  },
+
+  island: {
+    dashboard: {
+      loadSample: 'Carregar uma publicação de exemplo →',
+      sample:
+        'Lançámos uma pequena funcionalidade na semana passada que duplicou discretamente a nossa taxa de conversão de avaliações em clientes pagantes.\n\n' +
+        'Sem novos preços. Sem truques de crescimento. Apenas uma alteração ao fluxo de integração que retirou uma única decisão do primeiro ecrã.\n\n' +
+        'Aqui está exatamente o que mudámos e as três coisas que medimos antes de o disponibilizar a todos → https://posttruncate.com/blog/onboarding\n\n' +
+        '#saas #productled #growth #startups',
+    },
+    workspace: {
+      eyebrow: 'Espaço de trabalho',
+      title: 'Escreva a sua publicação',
+      badgeEditor: 'Editor',
+      hiddenBadge: { one: '{n} caráter oculto', other: '{n} caracteres ocultos' },
+      placeholder:
+        'Comece a escrever a sua publicação. Cole um rascunho, adicione algumas ligações e hashtags e veja a pré-visualização de cada plataforma atualizar-se à direita…',
+      counters: {
+        characters: 'Caracteres',
+        words: 'Palavras',
+        lines: 'Linhas',
+        paragraphs: 'Parágrafos',
+      },
+      engineLabel: 'Motor de otimização',
+      clean: 'Limpar espaços em excesso',
+      sanitize: 'Sanitizar texto',
+      clear: 'Limpar editor',
+      hiddenWarning:
+        'Foram encontrados caracteres invisíveis que quebram as contagens e os leitores de ecrã: {codes}. Sanitize para os remover.',
+    },
+    common: {
+      profileName: 'O Seu Nome',
+      handle: '@você',
+      charsSuffix: '{n} caracteres',
+    },
+    linkedin: {
+      title: 'Pré-visualização da zona do gancho',
+      viewAriaLabel: 'Vista da dobra do LinkedIn',
+      viewDesktop: 'Computador',
+      viewMobile: 'Telemóvel',
+      badgeTruncated: 'Texto do feed truncado',
+      badgeSafe: 'Linha do gancho segura',
+      beforeFold: '{total} / {limit} antes da dobra',
+      seeMore: '…ver mais',
+      profileMeta: 'Fundador · 1.º · Agora mesmo',
+      placeholder: 'As primeiras linhas da sua publicação aparecem aqui…',
+      truncatedNote:
+        'Os leitores veem apenas os primeiros {limit} caracteres no feed. Coloque o gancho logo no início, antes da dobra.',
+      safeNote:
+        'A sua publicação inteira cabe acima da dobra {view} do LinkedIn — sem truncagem «…ver mais».',
+    },
+    twitter: {
+      title: 'Divisor de threads',
+      badgeIdle: 'Inativo',
+      badgeThread: 'Thread de {n} tweets',
+      badgeSingle: 'Tweet único',
+      links: {
+        one: '{n} ligação · contada como {weight} cada',
+        other: '{n} ligações · contadas como {weight} cada',
+      },
+      weightedLength: 'Comprimento ponderado',
+      placeholder:
+        'A pré-visualização do seu tweet aparece aqui. Passe dos {limit} caracteres e divide-se automaticamente numa thread.',
+    },
+    threads: {
+      title: 'Pré-visualização de publicação e cadeia',
+      badgeIdle: 'Inativo',
+      badgeThread: 'Cadeia de {n} publicações',
+      badgeSingle: 'Publicação única',
+      links: {
+        one: '{n} ligação · contada na totalidade',
+        other: '{n} ligações · contadas na totalidade',
+      },
+      charLength: 'Comprimento em caracteres',
+      placeholder:
+        'A sua pré-visualização do Threads aparece aqui. Passe dos {limit} caracteres e encadeia-se numa sequência numerada de publicações.',
+    },
+    meta: {
+      title: 'Monitor de formatação',
+      badgeNeedsFix: 'Precisa de correção',
+      badgeClean: 'Parece limpo',
+      hashtagLabel: 'Concentração de hashtags',
+      over: 'Acima do limite máximo do Instagram de {limit} hashtags — a legenda não será publicada. Remova {excess}.',
+      approaching:
+        'A aproximar-se do limite de 30 tags. Reduza às suas tags de maior intenção.',
+      within: 'Confortavelmente dentro do limite de 30 hashtags do Instagram.',
+      none: 'Ainda não foram detetadas hashtags.',
+      a11yLabel: 'Acessibilidade · tipos de letra decorativos',
+      flagged: '{n} assinalados',
+      flaggedNone: 'Nenhum',
+      fancyDetected: {
+        one: 'Foi detetado {n} caráter de «tipo de letra» pseudo-Unicode (𝖁𝖔𝖑𝖉 / 𝓼𝓬𝓻𝓲𝓹𝓽). Parecem estilizados, mas os leitores de ecrã ignoram-nos ou soletram-nos — prejudicam o alcance e a acessibilidade.',
+        other:
+          'Foram detetados {n} caracteres de «tipo de letra» pseudo-Unicode (𝖁𝖔𝖑𝖉 / 𝓼𝓬𝓻𝓲𝓹𝓽). Parecem estilizados, mas os leitores de ecrã ignoram-nos ou soletram-nos — prejudicam o alcance e a acessibilidade.',
+      },
+      fancyClean:
+        'Não foram detetados caracteres de tipo de letra decorativo. O seu texto é lido corretamente em tecnologia de apoio.',
+      footnote:
+        '{n} caracteres · Dobra do Facebook ≈ 480 · Limite da legenda do Instagram 2200',
+    },
+  },
+};

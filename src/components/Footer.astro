@@ -1,57 +1,53 @@
 ---
-// Four-column footer. Mono-caps eyebrow labels, body-sm link rows.
-const year = 2026;
+// Four-column footer. Mono-caps eyebrow labels, body-sm link rows. All copy is
+// localized via the `footer` dictionary; link labels come from the dictionary
+// while their hrefs (anchors + the locale-prefixed home) are wired here.
+import { interp } from '../i18n/interp';
+import type { Translations } from '../i18n/types';
 
-const columns = [
-  {
-    title: 'Tool',
-    links: [
-      { href: '#workspace', label: 'Text editor' },
-      { href: '#platforms', label: 'Live previews' },
-      { href: '#workspace', label: 'Thread splitter' },
-      { href: '#workspace', label: 'Unicode sanitizer' },
-    ],
-  },
-  {
-    title: 'Platforms',
-    links: [
-      { href: '#linkedin-guide', label: 'LinkedIn' },
-      { href: '#twitter-guide', label: 'X / Twitter' },
-      { href: '#threads-guide', label: 'Threads' },
-      { href: '#instagram-guide', label: 'Instagram' },
-      { href: '#facebook-guide', label: 'Facebook' },
-    ],
-  },
-  {
-    title: 'Learn',
-    links: [
-      { href: '#platforms', label: 'Character limits' },
-      { href: '#faq', label: 'FAQ' },
-      { href: '#hook-guide', label: 'Hook writing' },
-      { href: '#faq', label: 'Accessibility' },
-    ],
-  },
-  {
-    title: 'Legal',
-    links: [
-      { href: '#', label: 'Privacy' },
-      { href: '#', label: 'Terms' },
-      { href: '#', label: 'Contact' },
-    ],
-  },
-];
+interface Props {
+  lang: string;
+  footer: Translations['footer'];
+}
+
+const { lang, footer } = Astro.props;
+const year = 2026;
+const home = `/${lang}/`;
+
+// Hrefs paired positionally with each column's translated labels. In-page
+// anchors resolve within the current language page, so they need no prefix.
+const columnHrefs = {
+  tool: ['#workspace', '#platforms', '#workspace', '#workspace'],
+  platforms: [
+    '#linkedin-guide',
+    '#twitter-guide',
+    '#threads-guide',
+    '#instagram-guide',
+    '#facebook-guide',
+  ],
+  learn: ['#platforms', '#faq', '#hook-guide', '#faq'],
+  legal: ['#', '#', '#'],
+};
+
+const columns = (
+  ['tool', 'platforms', 'learn', 'legal'] as const
+).map((key) => ({
+  title: footer.columns[key].title,
+  links: footer.columns[key].links.map((label, i) => ({
+    label,
+    href: columnHrefs[key][i] ?? '#',
+  })),
+}));
 ---
 
 <footer class="footer">
   <div class="container-page footer__inner">
     <div class="footer__brand">
-      <a href="/" class="footer__logo" aria-label="PostTruncate home">
+      <a href={home} class="footer__logo" aria-label={footer.homeAria}>
         <span class="footer__mark" aria-hidden="true"></span>
         <span>PostTruncate</span>
       </a>
-      <p class="footer__tag">
-        See exactly where every platform cuts your copy — before you post.
-      </p>
+      <p class="footer__tag">{footer.tag}</p>
     </div>
 
     <div class="footer__cols">
@@ -75,11 +71,8 @@ const columns = [
   </div>
 
   <div class="container-page footer__bar">
-    <p>© {year} PostTruncate. Built for creators everywhere.</p>
-    <p class="footer__note">
-      Not affiliated with LinkedIn, X, Meta, or Instagram. Limits are estimates
-      and can change.
-    </p>
+    <p>{interp(footer.copyright, { year })}</p>
+    <p class="footer__note">{footer.disclaimer}</p>
   </div>
 </footer>
 

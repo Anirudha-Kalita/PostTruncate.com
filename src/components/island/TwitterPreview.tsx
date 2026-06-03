@@ -7,9 +7,13 @@ import {
   LIMITS,
 } from '../../lib/textTools';
 import { Card, CardHead, Badge, Meter, BrandLogo } from './ui';
+import { interp, plural } from '../../i18n/interp';
+import type { IslandStrings } from '../../i18n/types';
 
 interface Props {
   text: string;
+  lang: string;
+  s: IslandStrings;
 }
 
 /**
@@ -18,7 +22,9 @@ interface Props {
  * splits it into clean tweets — never mid-word — each tagged with an "n/total"
  * counter in the bottom-right corner.
  */
-export function TwitterPreview({ text }: Props) {
+export function TwitterPreview({ text, lang, s }: Props) {
+  const tw = s.twitter;
+  const nf = new Intl.NumberFormat(lang);
   const trimmed = text.trim();
   const weighted = weightedLength(trimmed);
   const urls = detectUrls(trimmed);
@@ -29,15 +35,15 @@ export function TwitterPreview({ text }: Props) {
     <Card>
       <CardHead
         eyebrow="X"
-        title="Thread splitter"
+        title={tw.title}
         logo={<BrandLogo brand="x" />}
       >
         {!trimmed ? (
-          <Badge tone="neutral" dot={false}>Idle</Badge>
+          <Badge tone="neutral" dot={false}>{tw.badgeIdle}</Badge>
         ) : isThread ? (
-          <Badge tone="info">{tweets.length}-tweet thread</Badge>
+          <Badge tone="info">{interp(tw.badgeThread, { n: nf.format(tweets.length) })}</Badge>
         ) : (
-          <Badge tone="safe">Single tweet</Badge>
+          <Badge tone="safe">{tw.badgeSingle}</Badge>
         )}
       </CardHead>
 
@@ -45,11 +51,14 @@ export function TwitterPreview({ text }: Props) {
         <div class="flex flex-wrap items-center justify-between gap-x-3 gap-y-1">
           <span class="text-[13px] text-body">
             {urls.length > 0
-              ? `${urls.length} link${urls.length > 1 ? 's' : ''} · counted as ${LIMITS.URL_WEIGHT} each`
-              : 'Weighted length'}
+              ? interp(plural(tw.links, urls.length), {
+                  n: nf.format(urls.length),
+                  weight: nf.format(LIMITS.URL_WEIGHT),
+                })
+              : tw.weightedLength}
           </span>
           <span class="font-mono text-[12px] text-mute tabular-nums">
-            {weighted} / {LIMITS.TWEET}
+            {nf.format(weighted)} / {nf.format(LIMITS.TWEET)}
           </span>
         </div>
         <div class="mt-3">
@@ -64,8 +73,7 @@ export function TwitterPreview({ text }: Props) {
       <div class="space-y-3 p-4 sm:p-5">
         {tweets.length === 0 ? (
           <article class="rounded-md border border-hairline bg-canvas p-4 text-[14px] text-mute">
-            Your tweet preview appears here. Go past {LIMITS.TWEET} characters and
-            it auto-splits into a thread.
+            {interp(tw.placeholder, { limit: nf.format(LIMITS.TWEET) })}
           </article>
         ) : (
           tweets.map((tweet, i) => (
@@ -73,8 +81,8 @@ export function TwitterPreview({ text }: Props) {
               <header class="flex items-center gap-2.5">
                 <span class="h-8 w-8 shrink-0 rounded-full bg-linear-to-br from-grad-preview-start to-grad-preview-end" />
                 <div class="min-w-0 leading-tight">
-                  <span class="text-[13px] font-semibold text-ink">Your Name</span>
-                  <span class="ml-1 text-[12px] text-mute">@you</span>
+                  <span class="text-[13px] font-semibold text-ink">{s.common.profileName}</span>
+                  <span class="ml-1 text-[12px] text-mute">{s.common.handle}</span>
                 </div>
               </header>
               <p class="mt-2 whitespace-pre-wrap break-words text-[14px] leading-[21px] text-ink">
@@ -82,11 +90,11 @@ export function TwitterPreview({ text }: Props) {
               </p>
               {isThread && (
                 <span class="absolute bottom-3 right-4 font-mono text-[11px] text-mute tabular-nums">
-                  {i + 1}/{tweets.length}
+                  {nf.format(i + 1)}/{nf.format(tweets.length)}
                 </span>
               )}
               <span class="mt-2 block font-mono text-[11px] text-mute/70 tabular-nums">
-                {charCount(tweet)} chars
+                {interp(s.common.charsSuffix, { n: nf.format(charCount(tweet)) })}
               </span>
             </article>
           ))
