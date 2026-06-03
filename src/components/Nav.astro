@@ -1,0 +1,111 @@
+---
+// Sticky brand navigation. Logo left · anchor links center · CTA cluster right.
+// Collapses to logo + CTA on mobile (anchor links hide below md).
+const links = [
+  { href: '#workspace', label: 'Editor' },
+  { href: '#platforms', label: 'Platform Guides' },
+  { href: '#faq', label: 'FAQ' },
+];
+---
+
+<header class="nav">
+  <div class="container-page nav__inner">
+    <a href="/" class="nav__brand" aria-label="PostTruncate home">
+      <span class="nav__mark" aria-hidden="true"></span>
+      <span class="nav__word">PostTruncate</span>
+    </a>
+
+    <nav class="nav__links" aria-label="Primary">
+      {links.map((l) => <a href={l.href} class="nav__link">{l.label}</a>)}
+    </nav>
+
+    <div class="nav__cta">
+      <a href="#workspace" class="nav__pill">Open the editor</a>
+    </div>
+  </div>
+</header>
+
+<style>
+  .nav {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    height: 64px;
+    background: color-mix(in srgb, var(--color-canvas) 80%, transparent);
+    backdrop-filter: saturate(180%) blur(12px);
+    border-bottom: 1px solid var(--color-hairline);
+  }
+  .nav__inner {
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+  }
+
+  .nav__brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--color-ink);
+    font-weight: 600;
+    font-size: 16px;
+    letter-spacing: -0.4px;
+    flex-shrink: 0;
+  }
+  .nav__mark {
+    width: 22px;
+    height: 22px;
+    border-radius: var(--radius-sm);
+    background: linear-gradient(
+      135deg,
+      var(--color-grad-develop-start),
+      var(--color-grad-preview-end)
+    );
+    box-shadow: var(--shadow-e1);
+  }
+
+  .nav__links {
+    display: none;
+    align-items: center;
+    gap: 4px;
+  }
+  .nav__link {
+    padding: 8px 12px;
+    border-radius: var(--radius-pill);
+    color: var(--color-body);
+    font-size: 14px;
+    letter-spacing: -0.28px;
+    transition: color 0.15s ease, background 0.15s ease;
+  }
+  .nav__link:hover {
+    color: var(--color-ink);
+    background: var(--color-canvas-soft-2);
+  }
+
+  .nav__cta {
+    flex-shrink: 0;
+  }
+  .nav__pill {
+    display: inline-flex;
+    align-items: center;
+    height: 36px;
+    padding: 0 16px;
+    border-radius: var(--radius-pill);
+    background: var(--color-ink);
+    color: var(--color-on-primary);
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: -0.28px;
+    transition: opacity 0.15s ease;
+  }
+  .nav__pill:hover {
+    opacity: 0.88;
+  }
+
+  @media (min-width: 880px) {
+    .nav__links {
+      display: flex;
+    }
+  }
+</style>

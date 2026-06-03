@@ -1,0 +1,181 @@
+---
+// Four-column footer. Mono-caps eyebrow labels, body-sm link rows.
+const year = 2026;
+
+const columns = [
+  {
+    title: 'Tool',
+    links: [
+      { href: '#workspace', label: 'Text editor' },
+      { href: '#platforms', label: 'Live previews' },
+      { href: '#workspace', label: 'Thread splitter' },
+      { href: '#workspace', label: 'Unicode sanitizer' },
+    ],
+  },
+  {
+    title: 'Platforms',
+    links: [
+      { href: '#linkedin-guide', label: 'LinkedIn' },
+      { href: '#twitter-guide', label: 'X / Twitter' },
+      { href: '#instagram-guide', label: 'Instagram' },
+      { href: '#facebook-guide', label: 'Facebook' },
+    ],
+  },
+  {
+    title: 'Learn',
+    links: [
+      { href: '#platforms', label: 'Character limits' },
+      { href: '#faq', label: 'FAQ' },
+      { href: '#hook-guide', label: 'Hook writing' },
+      { href: '#faq', label: 'Accessibility' },
+    ],
+  },
+  {
+    title: 'Legal',
+    links: [
+      { href: '#', label: 'Privacy' },
+      { href: '#', label: 'Terms' },
+      { href: '#', label: 'Contact' },
+    ],
+  },
+];
+---
+
+<footer class="footer">
+  <div class="container-page footer__inner">
+    <div class="footer__brand">
+      <a href="/" class="footer__logo" aria-label="PostTruncate home">
+        <span class="footer__mark" aria-hidden="true"></span>
+        <span>PostTruncate</span>
+      </a>
+      <p class="footer__tag">
+        See exactly where every platform cuts your copy — before you post.
+      </p>
+    </div>
+
+    <div class="footer__cols">
+      {
+        columns.map((col) => (
+          <div class="footer__col">
+            <p class="footer__eyebrow">{col.title}</p>
+            <ul class="footer__list">
+              {col.links.map((l) => (
+                <li>
+                  <a href={l.href} class="footer__link">
+                    {l.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+
+  <div class="container-page footer__bar">
+    <p>© {year} PostTruncate. Built for creators everywhere.</p>
+    <p class="footer__note">
+      Not affiliated with LinkedIn, X, Meta, or Instagram. Limits are estimates
+      and can change.
+    </p>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    margin-top: 96px;
+    background: var(--color-canvas);
+    border-top: 1px solid var(--color-hairline);
+  }
+  .footer__inner {
+    display: grid;
+    gap: 48px;
+    padding-top: 64px;
+    padding-bottom: 48px;
+  }
+
+  .footer__logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--color-ink);
+    font-weight: 600;
+    font-size: 16px;
+    letter-spacing: -0.4px;
+  }
+  .footer__mark {
+    width: 20px;
+    height: 20px;
+    border-radius: var(--radius-sm);
+    background: linear-gradient(
+      135deg,
+      var(--color-grad-develop-start),
+      var(--color-grad-preview-end)
+    );
+  }
+  .footer__tag {
+    margin-top: 12px;
+    max-width: 320px;
+    color: var(--color-body);
+    font-size: 14px;
+    line-height: 20px;
+    letter-spacing: -0.28px;
+  }
+
+  .footer__cols {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 32px;
+  }
+  .footer__eyebrow {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    line-height: 16px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--color-mute);
+    margin-bottom: 12px;
+  }
+  .footer__list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: 10px;
+  }
+  .footer__link {
+    color: var(--color-body);
+    font-size: 14px;
+    letter-spacing: -0.28px;
+    transition: color 0.15s ease;
+  }
+  .footer__link:hover {
+    color: var(--color-ink);
+  }
+
+  .footer__bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 24px;
+    justify-content: space-between;
+    padding-top: 24px;
+    padding-bottom: 40px;
+    border-top: 1px solid var(--color-hairline);
+    color: var(--color-mute);
+    font-size: 12px;
+    line-height: 16px;
+  }
+  .footer__note {
+    max-width: 420px;
+  }
+
+  @media (min-width: 720px) {
+    .footer__inner {
+      grid-template-columns: 1.2fr 2fr;
+    }
+    .footer__cols {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+</style>
