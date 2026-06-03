@@ -38,8 +38,8 @@ export function LinkedInPreview({ text, view, setView }: Props) {
         />
       </CardHead>
 
-      <div class="px-5 pt-4">
-        <div class="flex items-center justify-between">
+      <div class="px-4 pt-4 sm:px-5">
+        <div class="flex flex-wrap items-center justify-between gap-x-3 gap-y-1">
           {truncated ? (
             <Badge tone="warn">Truncated feed text</Badge>
           ) : (
@@ -59,7 +59,7 @@ export function LinkedInPreview({ text, view, setView }: Props) {
       </div>
 
       {/* Feed mockup */}
-      <div class="p-5">
+      <div class="p-4 sm:p-5">
         <article class="rounded-md border border-hairline bg-canvas p-4">
           <header class="flex items-center gap-3">
             <span class="h-10 w-10 shrink-0 rounded-full bg-linear-to-br from-grad-develop-start to-grad-preview-start" />
@@ -71,7 +71,7 @@ export function LinkedInPreview({ text, view, setView }: Props) {
             </div>
           </header>
 
-          <div class="mt-3 whitespace-pre-wrap text-[14px] leading-[22px] text-ink">
+          <div class="mt-3 whitespace-pre-wrap break-words text-[14px] leading-[22px] text-ink">
             {text ? (
               <>
                 {/* The portion that survives above the fold, subtly lit. */}

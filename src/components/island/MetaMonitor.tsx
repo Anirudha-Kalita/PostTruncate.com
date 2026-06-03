@@ -47,7 +47,7 @@ export function MetaMonitor({ text }: Props) {
         )}
       </CardHead>
 
-      <div class="space-y-4 p-5">
+      <div class="space-y-4 p-4 sm:p-5">
         {/* Hashtag concentration */}
         <div class="rounded-md border border-hairline bg-canvas p-4">
           <Meter

@@ -37,7 +37,7 @@ export function Workspace({ text, setText }: Props) {
         )}
       </CardHead>
 
-      <div class="p-5">
+      <div class="p-4 sm:p-5">
         <label for="post-input" class="sr-only">
           Your post text
         </label>
@@ -61,7 +61,7 @@ export function Workspace({ text, setText }: Props) {
       </div>
 
       {/* Optimization engine */}
-      <div class="border-t border-hairline px-5 py-4">
+      <div class="border-t border-hairline px-4 py-4 sm:px-5">
         <p class="font-mono text-[11px] uppercase tracking-wide text-mute">
           Optimization engine
         </p>

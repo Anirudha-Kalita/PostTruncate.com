@@ -3,6 +3,7 @@ import { useState } from 'preact/hooks';
 import { Workspace } from './Workspace';
 import { LinkedInPreview, type LinkedInView } from './LinkedInPreview';
 import { TwitterPreview } from './TwitterPreview';
+import { ThreadsPreview } from './ThreadsPreview';
 import { MetaMonitor } from './MetaMonitor';
 
 const SAMPLE =
@@ -42,6 +43,7 @@ export default function Dashboard() {
       <div class="flex flex-col gap-5">
         <LinkedInPreview text={text} view={view} setView={setView} />
         <TwitterPreview text={text} />
+        <ThreadsPreview text={text} />
         <MetaMonitor text={text} />
       </div>
     </div>

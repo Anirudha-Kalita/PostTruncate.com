@@ -12,6 +12,8 @@ export const LIMITS = {
   LINKEDIN_DESKTOP: 210,
   LINKEDIN_MOBILE: 140,
   TWEET: 280,
+  /** Threads (by Meta) per-post character ceiling; longer copy chains as replies. */
+  THREADS: 500,
   /** t.co wraps every URL to a fixed weight regardless of real length. */
   URL_WEIGHT: 23,
   /** Instagram's hard ceiling — posting fails above this. */
@@ -265,35 +267,43 @@ export function linkedInHook(text: string, limit: number): HookSplit {
 const SUFFIX_RESERVE = 8; // room for "\n\n99/99"
 
 /**
- * Split text into a sequential thread where every tweet stays within the 280
- * weighted-character limit. Never cuts a word in half; prefers to break at the
- * nearest sentence end, then comma, then any whitespace. Each card carries an
- * "n/total" counter (appended by the caller / preview at render time, but the
- * budget for it is reserved here).
+ * Split text into a sequential thread where every post stays within `limit`.
+ * Never cuts a word in half; prefers to break at the nearest sentence end, then
+ * comma, then any whitespace. Each card carries an "n/total" counter (appended
+ * by the caller / preview at render time, but the budget for it is reserved
+ * here).
+ *
+ * `measure` decides how a candidate window is sized: X/Twitter flattens every
+ * URL to 23 chars (the default `weightedLength`), whereas Threads counts links
+ * in full, so its caller passes plain `charCount`.
  */
-export function splitThread(text: string, limit = LIMITS.TWEET): string[] {
+export function splitThread(
+  text: string,
+  limit = LIMITS.TWEET,
+  measure: (s: string) => number = weightedLength,
+): string[] {
   const trimmed = text.trim();
   if (!trimmed) return [];
-  if (weightedLength(trimmed) <= limit) return [trimmed];
+  if (measure(trimmed) <= limit) return [trimmed];
 
   const budget = limit - SUFFIX_RESERVE;
   const chunks: string[] = [];
   let remaining = trimmed;
 
   while (remaining.length > 0) {
-    if (weightedLength(remaining) <= budget) {
+    if (measure(remaining) <= budget) {
       chunks.push(remaining.trim());
       break;
     }
 
     // Grow a candidate window word-by-word until the next word would overflow
-    // the weighted budget. This guarantees we never split inside a word.
+    // the budget. This guarantees we never split inside a word.
     const tokens = remaining.split(/(\s+)/); // keep the whitespace tokens
     let candidate = '';
     let lastFit = '';
     for (const tok of tokens) {
       const next = candidate + tok;
-      if (weightedLength(next) > budget) break;
+      if (measure(next) > budget) break;
       candidate = next;
       lastFit = candidate;
     }

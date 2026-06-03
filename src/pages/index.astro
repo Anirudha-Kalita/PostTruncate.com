@@ -28,6 +28,17 @@ const platforms = [
     ],
   },
   {
+    id: 'threads-guide',
+    name: 'Threads',
+    tag: 'Post chaining',
+    body: `Threads, Meta's text app, gives each post 500 characters — almost double X — and counts links in full rather than shortening them. Go past 500 and the rest has to chain on as numbered replies. The first post still carries the feed, so front-load the hook just like everywhere else. PostTruncate measures by full character count and chains long copy into a clean numbered sequence.`,
+    facts: [
+      ['Per-post limit', '500 characters'],
+      ['Links counted', 'In full'],
+      ['Overflow', 'Chains as replies'],
+    ],
+  },
+  {
     id: 'instagram-guide',
     name: 'Instagram',
     tag: 'Hashtag ceiling',
@@ -93,6 +104,7 @@ const jsonLd = [
     featureList: [
       'LinkedIn fold preview (210/140 characters)',
       'X/Twitter thread splitter with 23-character link weighting',
+      'Threads (by Meta) 500-character post & chain preview',
       'Instagram hashtag limit monitor',
       'Hidden Unicode sanitizer',
       'Live character, word, line and paragraph counts',
@@ -506,12 +518,44 @@ const jsonLd = [
       display: block;
     }
   }
+
+  /* Tablet & below — pull the generous desktop rhythm in so sections aren't
+     separated by a screenful of dead space on smaller viewports. */
+  @media (max-width: 768px) {
+    .hero__inner {
+      padding-top: 56px;
+      padding-bottom: 48px;
+    }
+    .workspace {
+      padding-top: 36px;
+    }
+    .guides,
+    .faq {
+      padding-top: 64px;
+    }
+    .hookband {
+      margin-top: 64px;
+    }
+    .section-title {
+      font-size: 26px;
+      line-height: 32px;
+      letter-spacing: -1px;
+    }
+  }
+
   @media (max-width: 520px) {
     .guide__facts {
       grid-template-columns: 1fr;
     }
     .hookband {
       padding: 32px 24px;
+    }
+    .guide {
+      padding: 20px;
+    }
+    .hookband__title {
+      font-size: 24px;
+      line-height: 30px;
     }
   }
 </style>
