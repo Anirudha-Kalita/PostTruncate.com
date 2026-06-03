@@ -40,6 +40,40 @@ export const zh: Translations = {
     sub: '下方的一切都会即时更新，并始终保留在你的设备上。',
   },
 
+  seoCopy: {
+    ariaLabel: '关于 PostTruncate',
+    sections: [
+      {
+        heading: '专业在线字符计数器 & 文本长度检查工具',
+        paragraphs: [
+          '为数字平台撰写高影响力的文案需要极致的精准。<strong>PostTruncate</strong> 是一款高品质且免费的<strong>字符计数器工具</strong>，专为实时分析你的<strong>在线字符数</strong>、追踪字母分布并优化阅读指标而打造。无论你是在权衡一篇学术论文的篇幅、检查<strong>短信字符计数器</strong>的上限，还是润色一份专业草稿，我们的即时字符串分析器都完全在客户端运行，是一款高性能的<strong>在线字符计数器</strong>。',
+          '作为一款全面的<strong>字符与字数统计器</strong>，它让创作者能够即时<strong>统计文本字符数</strong>。与简单的<strong>在线字符统计</strong>不同，本系统可无缝充当<strong>在线字符计数器</strong>与<strong>字符检查器</strong>，以 100% 隐私保护处理你的数据，并完全在你的网页浏览器中运行。把它当作你的首选<strong>字符数量计数器</strong>，用来<strong>统计字符数量</strong>、确保准确的<strong>字符长度</strong>，并在你向网络上任何平台发布之前快速完成一次<strong>字符数检查</strong>。',
+        ],
+      },
+      {
+        heading: '𝕏 (Twitter) 字符计数器 & 自动串文拆分器',
+        paragraphs: [
+          '在免费的 𝕏 (Twitter) 账号上应对严格的<strong>字符数限制</strong>常常令人无比头疼。我们专门打造的<strong>Twitter 字符计数器</strong>引擎整合了该平台原生的链接计数规则，替你完成繁重的工作。粘贴一个网址通常会占用一大段文字，而我们的<strong>字符长度计数器</strong>会自动把任何链接精确计为 23 个字符，真实反映它发布后将占用的<strong>字符长度计数</strong>。',
+          '如果你的思绪超出了标准<strong>文本字符计数器</strong>的边界，内置的智能串文管理器会无缝地为你的文字分段。它不会把词语拦腰截断，而是在最近的句号、逗号或空格处干净利落地断句。它兼具<strong>免费字符计数器</strong>与<strong>字词文本计数器</strong>的功能，把你的草稿排版成一段编号精美的连续串文，让你的表达保持连贯、引人入胜，并为高互动指标做到完美优化。',
+        ],
+      },
+      {
+        heading: 'Instagram & Facebook 字符计数器（含空格）',
+        paragraphs: [
+          '要在高度视觉化的社交网络上抓住目标受众，你必须打赢与信息流截断算法的这场仗。Instagram 给出的标题字数上限相当慷慨，但它会在前 125 个字符之后无情地把你的文字藏到一个隐藏链接后面。我们的<strong>Instagram 字符计数器</strong>会追踪你输入的精确长度——一个<strong>含空格的字符计数器</strong>——确保你的核心行动号召稳稳地落在折叠线以上。',
+          '通过分析你的<strong>含空格字符计数器</strong>并评估你的<strong>文本中的字符数</strong>等参数，你可以把文案的排版做到尽善尽美。此外，仪表板还会实时监测你的话题标签密度。如果你的资料布局中话题标签超过 30 个，我们的系统会立即发出警告，保护你的账号免遭算法的意外限流。它是一款集大成的<strong>字词与字符计数器</strong>和<strong>在线字数统计工具</strong>，助力社交增长。',
+        ],
+      },
+      {
+        heading: '高级字数统计、符号计数与平台文案分析',
+        paragraphs: [
+          '除了常规的社交账号，PostTruncate 还是一款功能强大的<strong>字数统计工具</strong>和<strong>符号计数器</strong>，面向开发者、文案撰稿人和 SEO 专家。无论你是在用<strong>Moz 字符计数器</strong>评估 meta 标签、用<strong>macOS 字符计数器</strong>整理文档、用<strong>中文字符计数器</strong>跟踪本地化，还是用<strong>Grammarly 字符计数器</strong>润色草稿，我们的平台都能带来本地化的多功能体验。',
+          '它是一套先进的<strong>字数与字符数统计</strong>系统，让你能够在线计算字符、<strong>在线统计字母</strong>、<strong>在线统计符号</strong>，并即时运行<strong>在线字母统计</strong>分析。告别那些过时杂乱的<strong>在线字数统计器</strong>吧。使用我们响应式的现代<strong>字数统计器+</strong>仪表板，轻松完成<strong>字数转字符数</strong>换算、审核 <strong>Word 文档中的字符数</strong>，并借助一款高性能的<strong>字符计数器</strong>引擎，全面提升你在美国、英国、澳大利亚乃至全球的数字文案创作流程。',
+        ],
+      },
+    ],
+  },
+
   guides: {
     eyebrow: '平台指南',
     title: '发布前先了解每一项限制。',

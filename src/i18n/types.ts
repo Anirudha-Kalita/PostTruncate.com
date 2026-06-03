@@ -31,6 +31,19 @@ export interface FaqEntry {
   a: string;
 }
 
+/**
+ * One headed block of the long-form SEO copy: an `<h2>` heading plus body
+ * paragraphs. Paragraphs may contain inline `<strong>` keyword markup, so they
+ * are rendered with `set:html`. Brand names (PostTruncate, X, Instagram, …)
+ * stay untranslated inside the markup.
+ */
+export interface SeoSection {
+  /** Heading text — plain (may include brand glyphs like 𝕏 and a literal "&"). */
+  heading: string;
+  /** Body paragraphs, each allowed to carry inline <strong> markup. */
+  paragraphs: string[];
+}
+
 export interface FooterColumn {
   title: string;
   /** Link labels in render order; hrefs are wired in the component. */
@@ -165,6 +178,15 @@ export interface Translations {
   workspace: {
     title: string;
     sub: string;
+  };
+  /**
+   * Long-form SEO body below the editor. Four headed sections of keyword copy;
+   * paragraphs carry inline <strong> markup and render with set:html.
+   */
+  seoCopy: {
+    /** Accessible label for the wrapping <section>. */
+    ariaLabel: string;
+    sections: SeoSection[];
   };
   guides: {
     eyebrow: string;

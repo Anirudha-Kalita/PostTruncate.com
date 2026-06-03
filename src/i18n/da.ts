@@ -40,6 +40,40 @@ export const da: Translations = {
     sub: 'Alt nedenfor opdateres øjeblikkeligt og bliver på din enhed.',
   },
 
+  seoCopy: {
+    ariaLabel: 'Om PostTruncate',
+    sections: [
+      {
+        heading: 'Avanceret online tegntæller & tjek af tekstlængde',
+        paragraphs: [
+          'At skrive slagkraftig tekst til digitale platforme kræver absolut præcision. <strong>PostTruncate</strong> er et premium, gratis <strong>tegntæller-værktøj</strong>, der er designet til at analysere dit <strong>tegnantal online</strong>, spore bogstavfordeling og optimere læsemetrikker i realtid. Uanset om du afbalancerer længden på en akademisk opgave, tjekker en grænse med en <strong>sms-tegntæller</strong> eller rydder op i et professionelt udkast, kører vores øjeblikkelige tekstanalysator helt på klientsiden som en højtydende <strong>online tegntæller</strong>.',
+          'Som en omfattende <strong>tegn- og ordtæller</strong> giver det skabere mulighed for at <strong>tælle tegn i tekst</strong> øjeblikkeligt. I modsætning til en simpel <strong>tegntæller online</strong> fungerer dette system gnidningsløst som en <strong>online tegntæller</strong> og <strong>tegnkontrol</strong>, der behandler dine data med 100% privatliv og kører udelukkende i din webbrowser. Brug det som din foretrukne <strong>tæller af antal tegn</strong> til at <strong>tælle mængden af tegn</strong>, sikre nøjagtig <strong>tegnlængde</strong> og køre et hurtigt <strong>tjek af tegnantal</strong>, før du publicerer noget som helst på nettet.',
+        ],
+      },
+      {
+        heading: '𝕏 (Twitter) tegntæller & automatisk trådopdeler',
+        paragraphs: [
+          'At navigere den strenge <strong>grænse for tegnantal</strong> på gratis 𝕏 (Twitter)-konti kan være utroligt frustrerende. Vores dedikerede <strong>twitter-tegntæller</strong>-motor klarer det tunge arbejde for dig ved at integrere platformens indbyggede regler for linktælling. Hvor indsætning af et URL normalt fylder en massiv tekstblok, beregner vores <strong>tegnlængde-tæller</strong> automatisk ethvert link som præcis 23 tegn, hvilket afspejler det nøjagtige <strong>antal tegn i længden</strong>, det vil fylde efter publicering.',
+          'Hvis dine tanker flyder ud over grænserne for en standard <strong>tekst-tegntæller</strong>, segmenterer den indbyggede smarte trådmanager gnidningsløst din tekst. Den undgår at skære ord midt over og opdeler sætninger rent ved nærmeste punktum, komma eller mellemrum. Den fungerer som en <strong>gratis tegntæller</strong> og <strong>ord- og teksttæller</strong> i ét og formaterer dit udkast i et smukt nummereret, sekventielt trådlayout, så dit budskab forbliver sammenhængende, engagerende og perfekt optimeret til høje engagementstal.',
+        ],
+      },
+      {
+        heading: 'Instagram & Facebook tegntæller inklusive mellemrum',
+        paragraphs: [
+          'For at fange din målgruppe på stærkt visuelle netværk skal du vinde kampen mod feedets afkortningsalgoritmer. Instagram tillader en generøs billedtekstgrænse, men klipper brutalt din tekst af bag et skjult link efter de første 125 tegn. Vores <strong>instagram-tegntæller</strong> sporer din nøjagtige inputlængde som en <strong>tegntæller inklusive mellemrum</strong> for at sikre, at din centrale call-to-action sidder sikkert over folden.',
+          'Ved at analysere din <strong>tegntæller med mellemrum</strong> og evaluere dine parametre for <strong>tegnantal i tekst</strong> kan du formatere dit tekstlayout perfekt. Derudover viser dashboardet en realtidsmonitor for din hashtag-koncentration. Hvis dit profillayout overstiger 30 hashtags, udløser vores system en øjeblikkelig advarsel for at beskytte din profil mod utilsigtede algoritmiske shadowbans. Det fungerer som en alt-i-én <strong>ord- og tegntæller</strong> og <strong>online ordtæller-værktøj</strong> til vækst på sociale medier.',
+        ],
+      },
+      {
+        heading: 'Avanceret ordtælling, symboler og analyse af platformstekst',
+        paragraphs: [
+          'Ud over almindelige sociale profiler fungerer PostTruncate som et robust <strong>ordtæller-værktøj</strong> og en <strong>symboltæller</strong> for udviklere, tekstforfattere og SEO-specialister. Uanset om du vurderer meta-tags med en <strong>moz-tegntæller</strong>, rydder op i dokumentation med en <strong>macos-tegntæller</strong>, sporer lokalisering med en <strong>kinesisk tegntæller</strong> eller finpudser udkast med en <strong>grammarly-tegntæller</strong>, leverer vores platform en lokaliseret oplevelse med flere værktøjer.',
+          'Det fungerer som et avanceret system til <strong>ordtælling og tegntælling</strong>, der lader dig beregne tegn online, <strong>tælle bogstaver online</strong>, <strong>tælle symboler online</strong> og køre en <strong>online bogstavtælling</strong>-analyse øjeblikkeligt. Undgå rodet fra en forældet <strong>online ordtæller</strong>. Brug vores responsive, moderne <strong>ordtæller+</strong>-dashboard til at håndtere konverteringer fra <strong>ord til tegnantal</strong>, gennemgå <strong>tegnantal i Word</strong>-dokumenter og udnytte en højtydende <strong>tegntæller-motor</strong>, der er bygget til at løfte dit digitale copywriting-workflow i USA, Storbritannien, Australien og resten af verden.',
+        ],
+      },
+    ],
+  },
+
   guides: {
     eyebrow: 'Platformsguides',
     title: 'Kend hver grænse, før du poster.',

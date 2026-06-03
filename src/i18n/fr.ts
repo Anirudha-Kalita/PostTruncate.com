@@ -40,6 +40,40 @@ export const fr: Translations = {
     sub: 'Tout ce qui suit se met à jour instantanément et reste sur votre appareil.',
   },
 
+  seoCopy: {
+    ariaLabel: 'À propos de PostTruncate',
+    sections: [
+      {
+        heading: 'Compteur de caractères en ligne ultime & vérificateur de longueur de texte',
+        paragraphs: [
+          'Rédiger un contenu percutant pour les plateformes numériques exige une précision absolue. <strong>PostTruncate</strong> est un <strong>outil de comptage de caractères</strong> premium et gratuit, conçu pour analyser votre <strong>nombre de caractères en ligne</strong>, suivre la répartition des lettres et optimiser les indicateurs de lecture en temps réel. Que vous équilibriez la longueur d’une dissertation universitaire, que vous vérifiiez la limite d’un <strong>compteur de caractères SMS</strong> ou que vous peaufiniez un brouillon professionnel, notre analyseur de chaînes instantané fonctionne entièrement côté client comme un <strong>compteur de caractères en ligne</strong> performant.',
+          'En tant que <strong>compteur de caractères et de mots</strong> complet, il permet aux créateurs de <strong>compter les caractères d’un texte</strong> instantanément. Contrairement à un simple <strong>compteur de caractères en ligne</strong> basique, ce système fonctionne parfaitement comme un <strong>compteur de caractères en ligne</strong> et un <strong>vérificateur de caractères</strong> qui traite vos données avec une confidentialité totale de 100 %, en s’exécutant entièrement dans votre navigateur web. Utilisez-le comme votre <strong>compteur du nombre de caractères</strong> de référence pour <strong>compter la quantité de caractères</strong>, garantir une <strong>longueur de caractères</strong> exacte et effectuer une <strong>vérification rapide du nombre de caractères</strong> avant de publier où que ce soit sur le web.',
+        ],
+      },
+      {
+        heading: 'Compteur de caractères 𝕏 (Twitter) & diviseur automatique de fils',
+        paragraphs: [
+          'Composer avec la <strong>limite stricte de caractères</strong> des comptes 𝕏 (Twitter) gratuits peut être extrêmement frustrant. Notre moteur de <strong>compteur de caractères Twitter</strong> dédié fait le gros du travail pour vous en intégrant les règles natives de décompte des liens de la plateforme. Alors qu’un lien web prend normalement un bloc de texte considérable, notre <strong>compteur de longueur de caractères</strong> calcule automatiquement tout lien comme 23 caractères exactement, reflétant le <strong>nombre exact de caractères</strong> qu’il occupera une fois publié.',
+          'Si vos idées dépassent les limites du <strong>compteur de caractères de texte</strong> standard, le gestionnaire de fils intelligent intégré segmente votre prose en toute fluidité. Il évite de couper les mots en deux, divisant proprement les phrases au point, à la virgule ou à l’espace le plus proche. Il combine un <strong>compteur de caractères gratuit</strong> et un <strong>compteur de mots et de texte</strong>, mettant en forme votre brouillon dans une superbe présentation de fil numéroté et séquentiel pour que votre message reste continu, captivant et parfaitement optimisé pour de forts taux d’engagement.',
+        ],
+      },
+      {
+        heading: 'Compteur de caractères Instagram & Facebook espaces inclus',
+        paragraphs: [
+          'Pour accrocher votre public cible sur les réseaux très visuels, vous devez gagner la bataille contre les algorithmes de troncature du fil. Instagram autorise une limite de légende généreuse, mais il coupe brutalement votre texte derrière un lien masqué après les 125 premiers caractères. Notre <strong>compteur de caractères Instagram</strong> suit la longueur exacte de votre saisie, <strong>compteur de caractères espaces inclus</strong>, pour garantir que votre appel à l’action principal reste bien visible au-dessus de la ligne de flottaison.',
+          'En analysant votre <strong>compteur de caractères avec espaces</strong> et en évaluant vos paramètres de <strong>nombre de caractères dans le texte</strong>, vous pouvez mettre en forme votre contenu à la perfection. De plus, le tableau de bord affiche un moniteur en temps réel de votre concentration de hashtags. Si votre mise en page dépasse 30 hashtags, notre système déclenche un avertissement immédiat pour protéger votre profil des shadowbans algorithmiques accidentels. Il sert de <strong>compteur de mots et de caractères</strong> tout-en-un et d’<strong>outil de comptage de mots en ligne</strong> pour la croissance sur les réseaux sociaux.',
+        ],
+      },
+      {
+        heading: 'Comptage avancé de mots, symboles et analyses de contenu par plateforme',
+        paragraphs: [
+          'Au-delà des profils sociaux classiques, PostTruncate fait office d’<strong>outil de comptage de mots</strong> et de <strong>compteur de symboles</strong> robuste pour les développeurs, les rédacteurs et les spécialistes du SEO. Que vous évaluiez des balises meta avec un <strong>compteur de caractères Moz</strong>, que vous nettoyiez de la documentation avec un <strong>compteur de caractères macOS</strong>, que vous suiviez la localisation avec un <strong>compteur de caractères chinois</strong> ou que vous peaufiniez des brouillons avec un <strong>compteur de caractères Grammarly</strong>, notre plateforme offre une expérience localisée et multifonction.',
+          'Il fonctionne comme un système avancé de <strong>comptage de mots et de caractères</strong> qui vous permet de calculer les caractères en ligne, de <strong>compter les lettres en ligne</strong>, de <strong>compter les symboles en ligne</strong> et de lancer une analyse de <strong>comptage de lettres en ligne</strong> instantanément. Évitez l’encombrement d’un <strong>compteur de mots en ligne</strong> dépassé. Utilisez notre tableau de bord <strong>compteur de mots+</strong> moderne et adaptatif pour gérer les conversions <strong>de mots en nombre de caractères</strong>, auditer le <strong>nombre de caractères dans un document Word</strong> et profiter d’un moteur <strong>compteur de caractères par mot</strong> performant, conçu pour optimiser votre flux de travail de rédaction numérique aux États-Unis, au Royaume-Uni, en Australie et partout dans le monde.',
+        ],
+      },
+    ],
+  },
+
   guides: {
     eyebrow: 'Guides des plateformes',
     title: 'Connaissez chaque limite avant de publier.',

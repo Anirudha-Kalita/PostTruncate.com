@@ -89,37 +89,54 @@ const jsonLd = [
     <Dashboard client:load lang={lang} strings={t.island} />
   </main>
 
+  <!-- ── Long-form SEO copy ───────────────────────────────────────────────
+       Localized keyword body. Headings are plain text; paragraphs carry inline
+       <strong> keyword markup, so they render with set:html. Placed right below
+       the editor so it sits in the main content flow for crawlers. -->
+  <section class="seo-copy container-page" aria-label={t.seoCopy.ariaLabel}>
+    <article class="seo-prose">
+      {
+        t.seoCopy.sections.map((s) => (
+          <Fragment>
+            <h2>{s.heading}</h2>
+            {s.paragraphs.map((p) => (
+              <p set:html={p} />
+            ))}
+          </Fragment>
+        ))
+      }
+    </article>
+  </section>
+
   <!-- ── Static platform guides + sticky side banner ──────────────────── -->
   <section id="platforms" class="container-page guides">
-    <div class="guides__layout">
-      <div>
-        <header class="guides__head">
-          <p class="section-eyebrow">{t.guides.eyebrow}</p>
-          <h2 class="section-title">{t.guides.title}</h2>
-          <p class="section-lede">{t.guides.lede}</p>
-        </header>
+    <header class="guides__head">
+      <p class="section-eyebrow">{t.guides.eyebrow}</p>
+      <h2 class="section-title">{t.guides.title}</h2>
+      <p class="section-lede">{t.guides.lede}</p>
+    </header>
 
-        <div class="guides__list">
-          {
-            platforms.map((p) => (
-              <article id={p.id} class="guide">
-                <div class="guide__top">
-                  <h3 class="guide__name">{p.name}</h3>
-                  <span class="guide__tag">{p.tag}</span>
-                </div>
-                <p class="guide__body">{p.body}</p>
-                <dl class="guide__facts">
-                  {p.facts.map(([k, v]) => (
-                    <div class="guide__fact">
-                      <dt>{k}</dt>
-                      <dd>{v}</dd>
-                    </div>
-                  ))}
-                </dl>
-              </article>
-            ))
-          }
-        </div>
+    <div class="guides__layout">
+      <div class="guides__list">
+        {
+          platforms.map((p) => (
+            <article id={p.id} class="guide">
+              <div class="guide__top">
+                <h3 class="guide__name">{p.name}</h3>
+                <span class="guide__tag">{p.tag}</span>
+              </div>
+              <p class="guide__body">{p.body}</p>
+              <dl class="guide__facts">
+                {p.facts.map(([k, v]) => (
+                  <div class="guide__fact">
+                    <dt>{k}</dt>
+                    <dd>{v}</dd>
+                  </div>
+                ))}
+              </dl>
+            </article>
+          ))
+        }
       </div>
 
       <!-- Side banner module — sticky, reserved 300×600 footprint -->
@@ -296,6 +313,10 @@ const jsonLd = [
   }
   .guides__head {
     margin-bottom: 32px;
+    text-align: center;
+  }
+  .guides__head .section-lede {
+    margin-inline: auto;
   }
   .guides__list {
     display: grid;
@@ -385,11 +406,13 @@ const jsonLd = [
   }
   .faq__head {
     margin-bottom: 32px;
+    text-align: center;
   }
   .faq__list {
     display: grid;
     gap: 12px;
     max-width: 760px;
+    margin-inline: auto;
   }
   .faq__item {
     border-radius: var(--radius-lg);
@@ -426,6 +449,38 @@ const jsonLd = [
     font-size: 15px;
     line-height: 24px;
     color: var(--color-body);
+  }
+
+  /* ── Long-form SEO copy ─────────────────────────────────────────────────
+     Readable measure (~4xl), tokenised colours so dark mode is automatic. */
+  .seo-copy {
+    scroll-margin-top: 80px;
+    padding-top: 96px;
+  }
+  .seo-prose {
+    max-width: 56rem;
+    margin-inline: auto;
+  }
+  .seo-prose h2 {
+    margin-top: 40px;
+    font-size: 22px;
+    font-weight: 600;
+    line-height: 30px;
+    letter-spacing: -0.6px;
+    color: var(--color-ink);
+  }
+  .seo-prose h2:first-child {
+    margin-top: 0;
+  }
+  .seo-prose p {
+    margin-top: 14px;
+    font-size: 16px;
+    line-height: 28px;
+    color: var(--color-body);
+  }
+  .seo-prose strong {
+    font-weight: 600;
+    color: var(--color-ink);
   }
 
   /* ── Responsive ─────────────────────────────────────────────────────── */

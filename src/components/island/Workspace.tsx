@@ -88,7 +88,7 @@ export function Workspace({ text, setText, lang, s }: Props) {
           <button
             type="button"
             onClick={onSanitize}
-            disabled={hidden.count === 0}
+            disabled={!text}
             class="inline-flex items-center gap-1.5 rounded-pill border border-hairline bg-canvas px-3.5 py-2 text-[13px] font-medium text-ink transition-colors hover:bg-canvas-soft-2 disabled:cursor-not-allowed disabled:opacity-45"
           >
             {w.sanitize}

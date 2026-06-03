@@ -40,6 +40,40 @@ export const it: Translations = {
     sub: 'Tutto ciò che vedi qui sotto si aggiorna all’istante e resta sul tuo dispositivo.',
   },
 
+  seoCopy: {
+    ariaLabel: 'Informazioni su PostTruncate',
+    sections: [
+      {
+        heading: 'Contatore di caratteri online e verifica della lunghezza del testo',
+        paragraphs: [
+          'Scrivere testi di grande impatto per le piattaforme digitali richiede precisione assoluta. <strong>PostTruncate</strong> è uno <strong>strumento contatore di caratteri</strong> gratuito e di alta qualità, progettato per analizzare il tuo <strong>conteggio caratteri online</strong>, monitorare la distribuzione delle lettere e ottimizzare le metriche di lettura in tempo reale. Che tu stia calibrando la lunghezza di un saggio accademico, verificando il limite di un <strong>contatore di caratteri per sms</strong> o sistemando una bozza professionale, il nostro analizzatore di testo istantaneo funziona interamente lato client come un <strong>contatore di caratteri online</strong> ad alte prestazioni.',
+          'Come <strong>contatore di caratteri e parole</strong> completo, consente ai creator di <strong>contare i caratteri di un testo</strong> all’istante. A differenza di un semplice <strong>contatore caratteri online</strong>, questo sistema funziona perfettamente come <strong>contatore di caratteri online</strong> e <strong>verificatore di caratteri</strong> che elabora i tuoi dati con privacy al 100%, eseguendo tutto interamente nel tuo browser web. Usalo come <strong>contatore numerico di caratteri</strong> di riferimento per <strong>contare la quantità di caratteri</strong>, garantire una <strong>lunghezza dei caratteri</strong> accurata ed eseguire un rapido <strong>controllo del conteggio caratteri</strong> prima di pubblicare ovunque sul web.',
+        ],
+      },
+      {
+        heading: 'Contatore di caratteri per 𝕏 (Twitter) e divisore automatico di thread',
+        paragraphs: [
+          'Gestire il rigido <strong>limite di conteggio caratteri</strong> sugli account gratuiti 𝕏 (Twitter) può essere incredibilmente frustrante. Il nostro motore dedicato di <strong>contatore di caratteri per Twitter</strong> svolge il lavoro più pesante al posto tuo, integrando le regole native di conteggio dei link della piattaforma. Mentre incollare un URL web occupa normalmente un blocco di testo enorme, il nostro <strong>contatore della lunghezza dei caratteri</strong> calcola automaticamente ogni link come esattamente 23 caratteri, riflettendo il preciso <strong>conteggio della lunghezza dei caratteri</strong> che occuperà una volta pubblicato.',
+          'Se i tuoi pensieri superano i limiti standard del <strong>contatore di caratteri del testo</strong>, il gestore di thread intelligente integrato suddivide la tua prosa senza problemi. Evita di spezzare le parole a metà, dividendo le frasi in modo pulito al punto, alla virgola o allo spazio più vicino. Funziona come un <strong>contatore di caratteri gratuito</strong> e un <strong>contatore di parole e testo</strong> al tempo stesso, formattando la tua bozza in un layout di thread sequenziale con una numerazione ben curata, così il tuo messaggio resta continuo, coinvolgente e perfettamente ottimizzato per metriche di alto coinvolgimento.',
+        ],
+      },
+      {
+        heading: 'Contatore di caratteri per Instagram & Facebook spazi inclusi',
+        paragraphs: [
+          'Per conquistare il tuo pubblico di riferimento sulle reti altamente visive, devi vincere la battaglia contro gli algoritmi di troncamento del feed. Instagram consente un limite di didascalia generoso, ma taglia brutalmente il tuo testo dietro un link nascosto dopo i primi 125 caratteri. Il nostro <strong>contatore di caratteri per Instagram</strong> monitora la lunghezza esatta del tuo input come <strong>contatore di caratteri spazi inclusi</strong> per garantire che la tua call-to-action principale resti ben visibile sopra la piega.',
+          'Analizzando il tuo <strong>contatore di caratteri con spazi</strong> e valutando i parametri del tuo <strong>conteggio dei caratteri nel testo</strong>, puoi formattare il layout del tuo testo alla perfezione. Inoltre, la dashboard mostra un monitoraggio in tempo reale della concentrazione dei tuoi hashtag. Se il layout del tuo profilo supera i 30 hashtag, il nostro sistema segnala un avviso immediato per proteggere il tuo profilo da shadowban algoritmici accidentali. Funziona come un <strong>contatore di parole e caratteri</strong> tutto in uno e uno <strong>strumento contatore di parole online</strong> per la crescita sui social.',
+        ],
+      },
+      {
+        heading: 'Conteggio avanzato di parole, simboli e analisi dei testi per le piattaforme',
+        paragraphs: [
+          'Oltre ai profili social standard, PostTruncate funge da robusto <strong>strumento contatore di parole</strong> e <strong>contatore di simboli</strong> per sviluppatori, copywriter e specialisti SEO. Che tu stia valutando i meta tag con un <strong>contatore di caratteri Moz</strong>, sistemando la documentazione con un <strong>contatore di caratteri per macOS</strong>, monitorando la localizzazione con un <strong>contatore di caratteri cinesi</strong> o rifinendo le bozze con un <strong>contatore di caratteri Grammarly</strong>, la nostra piattaforma offre un’esperienza localizzata e multifunzione.',
+          'Funziona come un sistema avanzato di <strong>conteggio parole e conteggio caratteri</strong> che ti permette di calcolare i caratteri online, <strong>contare le lettere online</strong>, <strong>contare i simboli online</strong> ed eseguire un’analisi di <strong>conteggio lettere online</strong> all’istante. Evita la confusione di un obsoleto <strong>contatore di parole online</strong>. Usa la nostra dashboard <strong>word counter+</strong> moderna e reattiva per gestire le conversioni da <strong>parole a conteggio caratteri</strong>, verificare il <strong>conteggio caratteri in Word</strong> dei documenti e sfruttare un motore <strong>contatore di caratteri per parole</strong> ad alte prestazioni, progettato per migliorare il tuo flusso di lavoro di copywriting digitale in USA, Regno Unito, Australia e in tutto il mondo.',
+        ],
+      },
+    ],
+  },
+
   guides: {
     eyebrow: 'Guide alle piattaforme',
     title: 'Conosci ogni limite prima di pubblicare.',

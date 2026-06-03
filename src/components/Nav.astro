@@ -30,7 +30,7 @@ const home = `/${lang}/`;
 <header class="nav">
   <div class="container-page nav__inner">
     <a href={home} class="nav__brand" aria-label={nav.homeAria}>
-      <span class="nav__mark" aria-hidden="true"></span>
+      <img class="nav__mark" src="/favicon.svg" alt="" aria-hidden="true" width="22" height="22" />
       <span class="nav__word">PostTruncate</span>
     </a>
 
@@ -249,12 +249,8 @@ const home = `/${lang}/`;
     width: 22px;
     height: 22px;
     border-radius: var(--radius-sm);
-    background: linear-gradient(
-      135deg,
-      var(--color-grad-develop-start),
-      var(--color-grad-preview-end)
-    );
     box-shadow: var(--shadow-e1);
+    display: block;
   }
 
   .nav__links {

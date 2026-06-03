@@ -40,6 +40,40 @@ export const pt: Translations = {
     sub: 'Tudo o que está em baixo atualiza-se instantaneamente e permanece no seu dispositivo.',
   },
 
+  seoCopy: {
+    ariaLabel: 'Sobre o PostTruncate',
+    sections: [
+      {
+        heading: 'Contador de Caracteres Online Completo & Verificador de Comprimento de Texto',
+        paragraphs: [
+          'Escrever textos de elevado impacto para plataformas digitais exige uma precisão absoluta. O <strong>PostTruncate</strong> é uma <strong>ferramenta de contagem de caracteres</strong> premium e gratuita, concebida para analisar a sua <strong>contagem de caracteres online</strong>, acompanhar a distribuição de letras e otimizar as métricas de leitura em tempo real. Quer esteja a equilibrar o comprimento de um ensaio académico, a verificar o limite de um <strong>contador de caracteres para SMS</strong> ou a aperfeiçoar um rascunho profissional, o nosso analisador de texto instantâneo funciona totalmente no lado do cliente, como um <strong>contador de caracteres online</strong> de alto desempenho.',
+          'Enquanto <strong>contador de caracteres e palavras</strong> completo, permite aos criadores <strong>contar os caracteres de um texto</strong> de forma instantânea. Ao contrário de um simples <strong>contador de caracteres online</strong> básico, este sistema funciona na perfeição como <strong>contador de caracteres online</strong> e <strong>verificador de caracteres</strong> que processa os seus dados com 100% de privacidade, executando tudo dentro do seu navegador. Use-o como o seu <strong>contador do número de caracteres</strong> de eleição para <strong>contar a quantidade de caracteres</strong>, garantir um <strong>comprimento de caracteres</strong> exato e fazer uma rápida <strong>verificação da contagem de caracteres</strong> antes de publicar em qualquer ponto da web.',
+        ],
+      },
+      {
+        heading: 'Contador de Caracteres do 𝕏 (Twitter) & Divisor Automático de Threads',
+        paragraphs: [
+          'Lidar com o <strong>limite de contagem de caracteres</strong> rigoroso das contas gratuitas do 𝕏 (Twitter) pode ser extremamente frustrante. O nosso motor de <strong>contador de caracteres do Twitter</strong> dedicado faz o trabalho pesado por si, integrando as regras nativas de contagem de ligações da plataforma. Embora colar um URL ocupe normalmente um enorme bloco de texto, o nosso <strong>contador de comprimento de caracteres</strong> calcula automaticamente qualquer ligação como exatamente 23 caracteres, refletindo a <strong>contagem exata do comprimento em caracteres</strong> que ocupará depois de publicada.',
+          'Se as suas ideias ultrapassarem os limites de um <strong>contador de caracteres de texto</strong> normal, o gestor inteligente de threads integrado segmenta a sua prosa sem esforço. Evita cortar palavras a meio, dividindo as frases de forma limpa no ponto, na vírgula ou no espaço mais próximo. Funciona como um <strong>contador de caracteres gratuito</strong> e um <strong>contador de palavras e texto</strong> em simultâneo, formatando o seu rascunho num elegante esquema de thread sequencial e numerado, para que a sua mensagem se mantenha contínua, cativante e perfeitamente otimizada para elevadas métricas de envolvimento.',
+        ],
+      },
+      {
+        heading: 'Contador de Caracteres do Instagram & Facebook Incluindo Espaços',
+        paragraphs: [
+          'Para cativar o seu público-alvo em redes muito visuais, tem de vencer a batalha contra os algoritmos de truncagem do feed. O Instagram permite um limite de legenda generoso, mas corta o seu texto sem dó atrás de uma ligação oculta após os primeiros 125 caracteres. O nosso <strong>contador de caracteres do Instagram</strong> acompanha o comprimento exato do que escreve, um <strong>contador de caracteres incluindo espaços</strong>, para garantir que o seu apelo à ação principal fica em segurança acima da dobra.',
+          'Ao analisar o seu <strong>contador de caracteres com espaços</strong> e ao avaliar os parâmetros da <strong>contagem de caracteres no texto</strong>, pode formatar o esquema do seu texto na perfeição. Além disso, o painel apresenta um monitor em tempo real da sua concentração de hashtags. Se o seu perfil ultrapassar as 30 hashtags, o nosso sistema assinala um aviso imediato para proteger o seu perfil de shadowbans algorítmicos acidentais. Serve como um <strong>contador de palavras e caracteres</strong> tudo-em-um e uma <strong>ferramenta de contagem de palavras online</strong> para o crescimento nas redes sociais.',
+        ],
+      },
+      {
+        heading: 'Análise Avançada de Contagem de Palavras, Símbolos e Textos por Plataforma',
+        paragraphs: [
+          'Para além dos perfis sociais convencionais, o PostTruncate funciona como uma robusta <strong>ferramenta de contagem de palavras</strong> e <strong>contador de símbolos</strong> para programadores, redatores e especialistas de SEO. Quer esteja a avaliar meta tags com um <strong>contador de caracteres do Moz</strong>, a organizar documentação com um <strong>contador de caracteres do macOS</strong>, a acompanhar a localização com um <strong>contador de caracteres chineses</strong> ou a aperfeiçoar rascunhos com um <strong>contador de caracteres do Grammarly</strong>, a nossa plataforma oferece uma experiência localizada e multifuncional.',
+          'Funciona como um sistema avançado de <strong>contagem de palavras e contagem de caracteres</strong> que lhe permite calcular caracteres online, <strong>contar letras online</strong>, <strong>contar símbolos online</strong> e executar instantaneamente uma análise de <strong>contagem de letras online</strong>. Evite a confusão de um <strong>contador de palavras online</strong> desatualizado. Use o nosso painel <strong>word counter+</strong> moderno e responsivo para tratar das conversões de <strong>palavras em contagem de caracteres</strong>, auditar a <strong>contagem de caracteres no Word</strong> em documentos e utilizar um motor de <strong>contador de caracteres por palavra</strong> de alto desempenho, concebido para elevar o seu fluxo de trabalho de redação digital nos EUA, no Reino Unido, na Austrália e em todo o mundo.',
+        ],
+      },
+    ],
+  },
+
   guides: {
     eyebrow: 'Guias das plataformas',
     title: 'Conheça todos os limites antes de publicar.',

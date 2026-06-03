@@ -44,7 +44,7 @@ const columns = (
   <div class="container-page footer__inner">
     <div class="footer__brand">
       <a href={home} class="footer__logo" aria-label={footer.homeAria}>
-        <span class="footer__mark" aria-hidden="true"></span>
+        <img class="footer__mark" src="/favicon.svg" alt="" aria-hidden="true" width="20" height="20" />
         <span>PostTruncate</span>
       </a>
       <p class="footer__tag">{footer.tag}</p>
@@ -78,6 +78,16 @@ const columns = (
 
 <style>
   .footer {
+    /* Footer reads as a dark slab so it separates cleanly from the light page.
+       Re-mapping the surface/ink tokens locally means every var(--color-*)
+       reference inside the footer resolves to this dark palette — no per-element
+       colour overrides needed (same approach the hook band uses). */
+    --color-canvas: #131313;
+    --color-ink: #fafafa;
+    --color-body: #a3a3a3;
+    --color-mute: #737373;
+    --color-hairline: #2a2a2a;
+
     margin-top: 96px;
     background: var(--color-canvas);
     border-top: 1px solid var(--color-hairline);
@@ -102,11 +112,7 @@ const columns = (
     width: 20px;
     height: 20px;
     border-radius: var(--radius-sm);
-    background: linear-gradient(
-      135deg,
-      var(--color-grad-develop-start),
-      var(--color-grad-preview-end)
-    );
+    display: block;
   }
   .footer__tag {
     margin-top: 12px;

@@ -40,6 +40,40 @@ export const en: Translations = {
     sub: 'Everything below updates instantly and stays on your device.',
   },
 
+  seoCopy: {
+    ariaLabel: 'About PostTruncate',
+    sections: [
+      {
+        heading: 'Master Online Character Counter & Text Length Checker',
+        paragraphs: [
+          'Writing high-impact copy for digital platforms requires absolute precision. <strong>PostTruncate</strong> is a premium, free <strong>character counter tool</strong> designed to analyze your <strong>character count online</strong>, track letter distribution, and optimize reading metrics in real-time. Whether you are balancing an academic essay length, checking an <strong>sms character counter</strong> limit, or cleaning up a professional draft, our instant string analyzer operates completely client-side as a high-performance <strong>online char counter</strong>.',
+          'As a comprehensive <strong>character and word counter</strong>, it allows creators to <strong>count characters of text</strong> instantly. Unlike a basic <strong>char counter online</strong>, this system functions seamlessly as an <strong>online character counter</strong> and <strong>character checker</strong> that processes your data with 100% privacy, executing entirely within your web browser. Use it as your go-to <strong>character number counter</strong> to <strong>count amount of characters</strong>, ensure accurate <strong>character length</strong>, and run a quick <strong>character count check</strong> before you publish anywhere on the web.',
+        ],
+      },
+      {
+        heading: '𝕏 (Twitter) Character Counter & Automatic Thread Splitter',
+        paragraphs: [
+          'Navigating the strict <strong>character count limit</strong> on free 𝕏 (Twitter) accounts can be incredibly frustrating. Our dedicated <strong>twitter character counter</strong> engine handles the heavy lifting for you by integrating the platform’s native link-counting rules. While pasting a web URL normally takes up a massive block of text, our <strong>char length counter</strong> automatically calculates any link as exactly 23 characters, reflecting the precise <strong>character length count</strong> it will hold once published.',
+          'If your thoughts spill past the standard <strong>text character counter</strong> boundaries, the built-in smart thread manager seamlessly segments your prose. It avoids cutting words in half, splitting sentences cleanly at the nearest period, comma, or space break. It acts as a <strong>free character counter</strong> and <strong>word text counter</strong> combined, formatting your draft into a beautifully numbered sequential thread layout so your messaging remains continuous, engaging, and perfectly optimized for high engagement metrics.',
+        ],
+      },
+      {
+        heading: 'Instagram & Facebook Character Counter Including Spaces',
+        paragraphs: [
+          'To hook your target audience on highly visual networks, you have to win the battle against feed truncation algorithms. Instagram allows a generous caption limit, but it brutally cuts off your text behind a hidden link after the first 125 characters. Our <strong>instagram character counter</strong> tracks your exact input length <strong>character counter including spaces</strong> to ensure your core call-to-action sits safely above the fold.',
+          'By analyzing your <strong>character counter with spaces</strong> and evaluating your <strong>character count in text</strong> parameters, you can format your copy layout perfectly. Furthermore, the dashboard displays a real-time monitor for your hashtag concentration. If your profile layout exceeds 30 hashtags, our system flags an immediate warning to protect your profile from accidental algorithmic shadowbans. It serves as an all-in-one <strong>words and characters counter</strong> and <strong>word counter tool online</strong> for social growth.',
+        ],
+      },
+      {
+        heading: 'Advanced Word Count, Symbols, and Platform Copy Analytics',
+        paragraphs: [
+          'Beyond standard social profiles, PostTruncate serves as a robust <strong>word counter tool</strong> and <strong>symbol counter</strong> for developers, copywriters, and SEO specialists. If you are assessing meta tags using a <strong>moz character counter</strong>, cleaning up documentation with a <strong>macos character counter</strong>, tracking localization with a <strong>chinese character counter</strong>, or polishing drafts with a <strong>grammarly character counter</strong>, our platform delivers a localized, multi-utility experience.',
+          'It functions as an advanced <strong>word count character count</strong> system that allows you to calculate characters online, <strong>count letter online</strong>, <strong>count symbol online</strong>, and run an <strong>online count letters</strong> analysis instantly. Avoid the clutter of an outdated <strong>on line word counter</strong>. Use our responsive, modern <strong>word counter+</strong> dashboard to handle <strong>word to character count</strong> conversions, audit <strong>character count in word</strong> documents, and utilize a high-performance <strong>character counter word</strong> engine engineered to elevate your digital copywriting workflow across the USA, UK, Australia, and globally.',
+        ],
+      },
+    ],
+  },
+
   guides: {
     eyebrow: 'Platform guides',
     title: 'Know every limit before you post.',

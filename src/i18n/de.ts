@@ -41,6 +41,40 @@ export const de: Translations = {
     sub: 'Alles unten aktualisiert sich sofort und bleibt auf deinem Gerät.',
   },
 
+  seoCopy: {
+    ariaLabel: 'Über PostTruncate',
+    sections: [
+      {
+        heading: 'Professioneller Online-Zeichenzähler & Textlängen-Prüfer',
+        paragraphs: [
+          'Wirkungsvolle Texte für digitale Plattformen zu schreiben erfordert absolute Präzision. <strong>PostTruncate</strong> ist ein hochwertiges, kostenloses <strong>Zeichenzähler-Tool</strong>, das deine <strong>Zeichenanzahl online</strong> analysiert, die Buchstabenverteilung verfolgt und Lesemetriken in Echtzeit optimiert. Ob du die Länge eines akademischen Essays austarierst, ein Limit per <strong>SMS-Zeichenzähler</strong> prüfst oder einen professionellen Entwurf aufräumst — unser sofortiger String-Analysator arbeitet vollständig clientseitig als leistungsstarker <strong>Online-Zeichenzähler</strong>.',
+          'Als umfassender <strong>Zeichen- und Wortzähler</strong> ermöglicht es Creatorn, <strong>Zeichen eines Textes zu zählen</strong> — und das sofort. Anders als ein einfacher <strong>Zeichenzähler online</strong> funktioniert dieses System nahtlos als <strong>Online-Zeichenzähler</strong> und <strong>Zeichenprüfer</strong>, der deine Daten mit 100% Datenschutz verarbeitet und vollständig in deinem Webbrowser ausgeführt wird. Nutze es als deinen bevorzugten <strong>Zeichenanzahl-Zähler</strong>, um die <strong>Anzahl der Zeichen zu zählen</strong>, eine präzise <strong>Zeichenlänge</strong> sicherzustellen und einen schnellen <strong>Zeichenanzahl-Check</strong> durchzuführen, bevor du irgendwo im Web veröffentlichst.',
+        ],
+      },
+      {
+        heading: '𝕏 (Twitter) Zeichenzähler & automatischer Thread-Splitter',
+        paragraphs: [
+          'Das strikte <strong>Zeichenlimit</strong> auf kostenlosen 𝕏-(Twitter-)Konten zu navigieren kann unglaublich frustrierend sein. Unsere spezialisierte <strong>Twitter-Zeichenzähler</strong>-Engine nimmt dir die Schwerarbeit ab, indem sie die nativen Link-Zählregeln der Plattform integriert. Während eine eingefügte Web-URL normalerweise einen riesigen Textblock einnimmt, berechnet unser <strong>Zeichenlängen-Zähler</strong> jeden Link automatisch als genau 23 Zeichen und spiegelt so die präzise <strong>Zeichenlängenzahl</strong> wider, die er nach der Veröffentlichung einnehmen wird.',
+          'Wenn deine Gedanken über die Grenzen des üblichen <strong>Text-Zeichenzählers</strong> hinausgehen, segmentiert der eingebaute smarte Thread-Manager deine Prosa nahtlos. Er vermeidet es, Wörter zu zerschneiden, und trennt Sätze sauber am nächsten Punkt, Komma oder Leerzeichen. Er fungiert als <strong>kostenloser Zeichenzähler</strong> und <strong>Wort- und Textzähler</strong> in einem und formatiert deinen Entwurf zu einem schön nummerierten, fortlaufenden Thread-Layout, damit deine Botschaft durchgängig, fesselnd und perfekt auf hohe Engagement-Werte optimiert bleibt.',
+        ],
+      },
+      {
+        heading: 'Instagram- & Facebook-Zeichenzähler inklusive Leerzeichen',
+        paragraphs: [
+          'Um deine Zielgruppe in stark visuellen Netzwerken zu fesseln, musst du den Kampf gegen die Abschneide-Algorithmen des Feeds gewinnen. Instagram erlaubt ein großzügiges Bildunterschrift-Limit, schneidet deinen Text aber brutal hinter einem versteckten Link nach den ersten 125 Zeichen ab. Unser <strong>Instagram-Zeichenzähler</strong> verfolgt deine exakte Eingabelänge als <strong>Zeichenzähler inklusive Leerzeichen</strong>, damit dein zentraler Call-to-Action sicher über der Falz steht.',
+          'Indem du deinen <strong>Zeichenzähler mit Leerzeichen</strong> analysierst und deine <strong>Zeichenanzahl im Text</strong> auswertest, kannst du dein Text-Layout perfekt formatieren. Darüber hinaus zeigt das Dashboard einen Echtzeit-Monitor für deine Hashtag-Konzentration. Übersteigt dein Profil-Layout 30 Hashtags, gibt unser System sofort eine Warnung aus, um dein Profil vor versehentlichen algorithmischen Shadowbans zu schützen. Es dient als All-in-One-<strong>Wörter- und Zeichenzähler</strong> und <strong>Online-Wortzähler-Tool</strong> für dein Social-Wachstum.',
+        ],
+      },
+      {
+        heading: 'Erweiterte Wortzählung, Symbole und Plattform-Textanalyse',
+        paragraphs: [
+          'Über normale Social-Profile hinaus dient PostTruncate als robustes <strong>Wortzähler-Tool</strong> und <strong>Symbolzähler</strong> für Entwickler, Texter und SEO-Spezialisten. Ob du Meta-Tags mit einem <strong>Moz-Zeichenzähler</strong> bewertest, Dokumentation mit einem <strong>macOS-Zeichenzähler</strong> aufräumst, Lokalisierung mit einem <strong>Zeichenzähler für Chinesisch</strong> verfolgst oder Entwürfe mit einem <strong>Grammarly-Zeichenzähler</strong> verfeinerst — unsere Plattform liefert ein lokalisiertes Multifunktions-Erlebnis.',
+          'Es funktioniert als fortschrittliches System für <strong>Wortzahl und Zeichenzahl</strong>, mit dem du Zeichen online berechnen, <strong>Buchstaben online zählen</strong>, <strong>Symbole online zählen</strong> und sofort eine <strong>online Buchstaben zählen</strong>-Analyse durchführen kannst. Vermeide das Durcheinander eines veralteten <strong>Online-Wortzählers</strong>. Nutze unser responsives, modernes <strong>Wortzähler+</strong>-Dashboard, um <strong>Wort-zu-Zeichen-Umrechnungen</strong> zu erledigen, <strong>Zeichenanzahl in Word</strong>-Dokumenten zu prüfen und eine leistungsstarke <strong>Zeichenzähler-Wort</strong>-Engine zu nutzen, die darauf ausgelegt ist, deinen digitalen Copywriting-Workflow in den USA, Großbritannien, Australien und weltweit zu verbessern.',
+        ],
+      },
+    ],
+  },
+
   guides: {
     eyebrow: 'Plattform-Leitfäden',
     title: 'Kenne jedes Limit, bevor du postest.',

@@ -40,6 +40,40 @@ export const nl: Translations = {
     sub: 'Alles hieronder wordt direct bijgewerkt en blijft op je apparaat.',
   },
 
+  seoCopy: {
+    ariaLabel: 'Over PostTruncate',
+    sections: [
+      {
+        heading: 'Complete online tekenteller & tekstlengtecontrole',
+        paragraphs: [
+          'Impactvolle teksten schrijven voor digitale platforms vereist absolute precisie. <strong>PostTruncate</strong> is een premium, gratis <strong>tool om tekens te tellen</strong> die is ontworpen om je <strong>tekens online te tellen</strong>, de letterverdeling bij te houden en leesstatistieken in realtime te optimaliseren. Of je nu de lengte van een academisch essay afweegt, een limiet controleert met een <strong>sms-tekenteller</strong> of een professioneel concept opschoont, onze directe tekstanalyse draait volledig client-side als een krachtige <strong>online tekenteller</strong>.',
+          'Als veelzijdige <strong>teken- en woordteller</strong> stelt het makers in staat om direct <strong>de tekens van een tekst te tellen</strong>. Anders dan een eenvoudige <strong>tekenteller online</strong> werkt dit systeem naadloos als <strong>online tekenteller</strong> en <strong>tekencontrole</strong> die je gegevens met 100% privacy verwerkt en volledig in je webbrowser draait. Gebruik het als je vaste <strong>tekenaantalteller</strong> om <strong>het aantal tekens te tellen</strong>, een nauwkeurige <strong>tekenlengte</strong> te garanderen en een snelle <strong>tekenaantalcontrole</strong> uit te voeren voordat je waar dan ook op het web publiceert.',
+        ],
+      },
+      {
+        heading: '𝕏 (Twitter) tekenteller & automatische threadsplitser',
+        paragraphs: [
+          'Het strikte <strong>tekenlimiet</strong> van gratis 𝕏 (Twitter)-accounts navigeren kan ongelofelijk frustrerend zijn. Onze speciale <strong>twitter-tekenteller</strong> neemt het zware werk uit handen door de eigen regels van het platform voor het tellen van links te integreren. Waar het plakken van een URL normaal een fors tekstblok inneemt, rekent onze <strong>tekenlengteteller</strong> elke link automatisch als precies 23 tekens, wat de exacte <strong>telling van de tekenlengte</strong> weergeeft die hij na publicatie inneemt.',
+          'Als je gedachten voorbij de grenzen van de standaard <strong>tekenteller voor tekst</strong> stromen, segmenteert de ingebouwde slimme threadmanager je tekst naadloos. Hij hakt geen woorden doormidden, maar splitst zinnen netjes op bij het dichtstbijzijnde punt, komma of spatie. Hij werkt als een <strong>gratis tekenteller</strong> en <strong>woord- en tekstteller</strong> ineen en giet je concept in een fraai genummerde, opeenvolgende threadlay-out, zodat je boodschap doorlopend, boeiend en perfect geoptimaliseerd blijft voor hoge betrokkenheid.',
+        ],
+      },
+      {
+        heading: 'Instagram & Facebook tekenteller inclusief spaties',
+        paragraphs: [
+          'Om je doelgroep te boeien op sterk visuele netwerken moet je de strijd winnen tegen de afkapalgoritmes van de feed. Instagram biedt een royale bijschriftlimiet, maar kapt je tekst genadeloos af achter een verborgen link na de eerste 125 tekens. Onze <strong>instagram-tekenteller</strong> houdt je exacte invoerlengte bij — <strong>tekenteller inclusief spaties</strong> — zodat je belangrijkste call-to-action veilig boven de vouw staat.',
+          'Door je <strong>tekenteller met spaties</strong> te analyseren en je parameters voor <strong>tekenaantal in tekst</strong> te evalueren, kun je de lay-out van je tekst perfect opmaken. Bovendien toont het dashboard een realtime monitor voor je hashtagconcentratie. Overschrijdt je profiel de 30 hashtags, dan geeft ons systeem direct een waarschuwing om je profiel te beschermen tegen onbedoelde algoritmische shadowbans. Het dient als een alles-in-één <strong>woorden- en tekenteller</strong> en <strong>online woordenteller-tool</strong> voor groei op social media.',
+        ],
+      },
+      {
+        heading: 'Geavanceerd woorden tellen, symbolen en platformtekstanalyse',
+        paragraphs: [
+          'Naast standaard socialprofielen fungeert PostTruncate als een robuuste <strong>woordenteller-tool</strong> en <strong>symboolteller</strong> voor ontwikkelaars, copywriters en SEO-specialisten. Of je nu metatags beoordeelt met een <strong>moz-tekenteller</strong>, documentatie opschoont met een <strong>macos-tekenteller</strong>, lokalisatie bijhoudt met een <strong>chinese tekenteller</strong> of concepten bijschaaft met een <strong>grammarly-tekenteller</strong>, ons platform biedt een gelokaliseerde, veelzijdige ervaring.',
+          'Het werkt als een geavanceerd systeem voor <strong>woorden tellen en tekens tellen</strong> waarmee je tekens online berekent, <strong>letters online telt</strong>, <strong>symbolen online telt</strong> en direct een analyse uitvoert om <strong>online letters te tellen</strong>. Vermijd de rommel van een verouderde <strong>online woordenteller</strong>. Gebruik ons responsieve, moderne <strong>woordenteller+</strong>-dashboard om conversies van <strong>woorden naar tekenaantal</strong> af te handelen, <strong>tekenaantal in Word</strong>-documenten te controleren en een krachtige <strong>tekenteller voor woorden</strong>-engine in te zetten die je digitale copywritingworkflow naar een hoger niveau tilt in de VS, het VK, Australië en wereldwijd.',
+        ],
+      },
+    ],
+  },
+
   guides: {
     eyebrow: 'Platformgidsen',
     title: 'Ken elke limiet voordat je plaatst.',
