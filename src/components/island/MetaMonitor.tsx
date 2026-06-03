@@ -6,7 +6,7 @@ import {
   charCount,
   LIMITS,
 } from '../../lib/textTools';
-import { Card, CardHead, Badge, Meter } from './ui';
+import { Card, CardHead, Badge, Meter, BrandLogo } from './ui';
 
 interface Props {
   text: string;
@@ -30,7 +30,16 @@ export function MetaMonitor({ text }: Props) {
 
   return (
     <Card>
-      <CardHead eyebrow="Instagram · Facebook" title="Formatting monitor">
+      <CardHead
+        eyebrow="Instagram · Facebook"
+        title="Formatting monitor"
+        logo={
+          <span class="flex items-center gap-1.5">
+            <BrandLogo brand="instagram" />
+            <BrandLogo brand="facebook" />
+          </span>
+        }
+      >
         {overTagLimit || fancy ? (
           <Badge tone={overTagLimit ? 'danger' : 'warn'}>Needs a fix</Badge>
         ) : (

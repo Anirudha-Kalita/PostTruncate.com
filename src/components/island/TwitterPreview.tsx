@@ -6,7 +6,7 @@ import {
   charCount,
   LIMITS,
 } from '../../lib/textTools';
-import { Card, CardHead, Badge, Meter } from './ui';
+import { Card, CardHead, Badge, Meter, BrandLogo } from './ui';
 
 interface Props {
   text: string;
@@ -27,7 +27,11 @@ export function TwitterPreview({ text }: Props) {
 
   return (
     <Card>
-      <CardHead eyebrow="X / Twitter" title="Thread splitter">
+      <CardHead
+        eyebrow="X"
+        title="Thread splitter"
+        logo={<BrandLogo brand="x" />}
+      >
         {!trimmed ? (
           <Badge tone="neutral" dot={false}>Idle</Badge>
         ) : isThread ? (

@@ -1,6 +1,6 @@
 /** @jsxImportSource preact */
 import { linkedInHook, charCount, LIMITS } from '../../lib/textTools';
-import { Card, CardHead, Badge, Segmented, Meter } from './ui';
+import { Card, CardHead, Badge, Segmented, Meter, BrandLogo } from './ui';
 
 export type LinkedInView = 'desktop' | 'mobile';
 
@@ -22,7 +22,11 @@ export function LinkedInPreview({ text, view, setView }: Props) {
 
   return (
     <Card>
-      <CardHead eyebrow="LinkedIn" title="Hook zone preview">
+      <CardHead
+        eyebrow="LinkedIn"
+        title="Hook zone preview"
+        logo={<BrandLogo brand="linkedin" />}
+      >
         <Segmented<LinkedInView>
           ariaLabel="LinkedIn fold view"
           value={view}
