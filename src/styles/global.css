@@ -1,0 +1,209 @@
+/* ──────────────────────────────────────────────────────────────────────────
+   PostTruncate — global stylesheet
+   Tailwind CSS v4 (CSS-first config). Design tokens mirror DESIGN.md
+   (Vercel-inspired ink/gray system + four-pair mesh gradient).
+   ────────────────────────────────────────────────────────────────────────── */
+
+@import 'tailwindcss';
+
+/* Self-hosted variable fonts — no external DNS, no layout shift. */
+@import '@fontsource-variable/geist/wght.css';
+@import '@fontsource-variable/geist-mono/wght.css';
+
+@theme {
+  /* ── Font families ─────────────────────────────────────────────── */
+  --font-sans: 'Geist Variable', 'Inter', system-ui, -apple-system, sans-serif;
+  --font-mono: 'Geist Mono Variable', ui-monospace, SFMono-Regular, Menlo,
+    Monaco, monospace;
+
+  /* ── Surface & ink ─────────────────────────────────────────────── */
+  --color-canvas: #ffffff;
+  --color-canvas-soft: #fafafa;
+  --color-canvas-soft-2: #f5f5f5;
+  --color-ink: #171717;
+  --color-body: #4d4d4d;
+  --color-mute: #888888;
+  --color-on-primary: #ffffff;
+  --color-hairline: #ebebeb;
+  --color-hairline-strong: #a1a1a1;
+
+  /* ── Brand / accent ────────────────────────────────────────────── */
+  --color-primary: #171717;
+  --color-link: #0070f3;
+  --color-link-deep: #0761d1;
+  --color-link-bg-soft: #d3e5ff;
+  --color-cyan: #50e3c2;
+  --color-cyan-soft: #aaffec;
+  --color-cyan-deep: #29bc9b;
+  --color-violet: #7928ca;
+  --color-violet-soft: #d8ccf1;
+  --color-violet-deep: #4c2889;
+  --color-highlight-pink: #ff0080;
+  --color-highlight-magenta: #eb367f;
+
+  /* ── Semantic ──────────────────────────────────────────────────── */
+  --color-success: #0070f3;
+  --color-error: #ee0000;
+  --color-error-soft: #f7d4d6;
+  --color-error-deep: #c50000;
+  --color-warning: #f5a623;
+  --color-warning-soft: #ffefcf;
+  --color-warning-deep: #ab570a;
+
+  /* ── Gradient stops (the four-pair mesh) ───────────────────────── */
+  --color-grad-develop-start: #007cf0;
+  --color-grad-develop-end: #00dfd8;
+  --color-grad-preview-start: #7928ca;
+  --color-grad-preview-end: #ff0080;
+  --color-grad-ship-start: #ff4d4d;
+  --color-grad-ship-end: #f9cb28;
+
+  /* ── Radius scale ──────────────────────────────────────────────── */
+  --radius-xs: 4px;
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --radius-pill-sm: 64px;
+  --radius-pill: 100px;
+
+  /* ── Stacked-shadow elevation ladder (DESIGN.md levels 1–5) ────── */
+  --shadow-e1: 0 0 0 1px #00000014;
+  --shadow-e2: 0 0 0 1px #00000014, 0px 1px 1px #00000005,
+    0px 2px 2px #0000000a;
+  --shadow-e3: 0 0 0 1px #00000014, 0px 2px 2px #0000000a,
+    0px 8px 8px -8px #0000000a;
+  --shadow-e4: 0 0 0 1px #00000014, 0px 2px 2px #0000000a,
+    0px 8px 16px -4px #0000000a;
+  --shadow-e5: 0 0 0 1px #00000014, 0px 1px 1px #00000005,
+    0px 8px 16px -4px #0000000a, 0px 24px 32px -8px #0000000f;
+
+  /* ── Container ─────────────────────────────────────────────────── */
+  --max-width-page: 1200px;
+  --max-width-page-wide: 1400px;
+}
+
+/* ──────────────────────────────────────────────────────────────────────────
+   Base layer — element defaults
+   ────────────────────────────────────────────────────────────────────────── */
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    scroll-behavior: smooth;
+    font-feature-settings: 'ss01', 'ss02';
+  }
+
+  body {
+    font-family: var(--font-sans);
+    background-color: var(--color-canvas-soft);
+    color: var(--color-ink);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  /* Ink selection, light text — brand signature. */
+  ::selection {
+    background-color: var(--color-ink);
+    color: #f2f2f2;
+  }
+
+  /* Visible focus ring for keyboard users on every interactive element. */
+  :focus-visible {
+    outline: 2px solid var(--color-link);
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+/* ──────────────────────────────────────────────────────────────────────────
+   Type-scale utilities — DESIGN.md display/body tokens.
+   Bundled because size + weight + line-height + the signature negative
+   tracking always travel together; defining them once keeps markup clean.
+   ────────────────────────────────────────────────────────────────────────── */
+@utility text-display-xl {
+  font-size: 48px;
+  font-weight: 600;
+  line-height: 48px;
+  letter-spacing: -2.4px;
+}
+@utility text-display-lg {
+  font-size: 32px;
+  font-weight: 600;
+  line-height: 40px;
+  letter-spacing: -1.28px;
+}
+@utility text-display-md {
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 32px;
+  letter-spacing: -0.96px;
+}
+@utility text-display-sm {
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 28px;
+  letter-spacing: -0.6px;
+}
+@utility text-body-lg {
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 28px;
+}
+@utility text-body-sm {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+  letter-spacing: -0.28px;
+}
+@utility text-caption {
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 16px;
+}
+
+/* Monospace eyebrow / technical label — uppercase tracking handled in markup. */
+@utility text-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 16px;
+  letter-spacing: 0.04em;
+}
+
+/* ──────────────────────────────────────────────────────────────────────────
+   Brand mesh gradient — the only decorative chrome. Hero scale only.
+   ────────────────────────────────────────────────────────────────────────── */
+@utility mesh-gradient {
+  background-image:
+    radial-gradient(at 18% 22%, var(--color-grad-develop-start) 0px, transparent 55%),
+    radial-gradient(at 75% 18%, var(--color-grad-develop-end) 0px, transparent 50%),
+    radial-gradient(at 82% 65%, var(--color-grad-preview-end) 0px, transparent 50%),
+    radial-gradient(at 30% 75%, var(--color-grad-preview-start) 0px, transparent 55%),
+    radial-gradient(at 55% 50%, var(--color-grad-ship-end) 0px, transparent 45%);
+}
+
+/* Page container helper — centered, gutter-aware, capped at brand page width. */
+@utility container-page {
+  width: 100%;
+  max-width: var(--max-width-page-wide);
+  margin-inline: auto;
+  padding-inline: 16px;
+}
+@media (min-width: 768px) {
+  .container-page {
+    padding-inline: 24px;
+  }
+}
