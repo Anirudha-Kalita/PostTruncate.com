@@ -171,8 +171,24 @@ export const en: Translations = {
         a: 'It strips invisible and zero-width characters — zero-width spaces, byte-order marks, bidirectional control marks, soft hyphens, and stray control codes. These often sneak in when you copy from other apps, and they silently break character counts and accessibility on older mobile clients without ever being visible. Run a character count check after sanitizing and the char length counter drops to the real, visible total — handy whenever your character count in word processors and your social drafts disagree.',
       },
       {
+        q: 'What is keyword density, and how does the Overuse Monitor protect my content?',
+        a: 'Keyword density refers to the percentage of times a specific word appears in your text relative to your total word count. While maintaining a focused topic is essential for SEO copywriters, repeating the same keyword too many times triggers automated search engine filters for "keyword stuffing." Our dynamic Keyword Overuse Monitor tracks word frequency in real-time. If any unique word or phrase crosses a safe 3.0% density threshold, the platform automatically flags that specific row in alert orange, allowing you to instantly swap in synonyms and protect your content from algorithmic search penalties before you publish.',
+      },
+      {
+        q: 'How do the Estimated Reading and Speaking timers calculate my post duration?',
+        a: 'Our built-in script timers operate on globally accepted conversational pacing scales to give digital creators and video producers instant metrics. The Reading Time Engine processes your total text divided by an average baseline speed of 275 words per minute, which is perfect for auditing long-form articles, newsletters, or blog copy. The Speaking Time Engine calculates your word count divided by a conversational speed of 150 words per minute. This is an invaluable utility for scriptwriters drafting precisely timed content for TikTok, YouTube Shorts, Instagram Reels, or presentation slide layouts.',
+      },
+      {
+        q: 'What does the Social Sanitizer do, and why should I strip emojis or extract hashtags?',
+        a: 'The multi-case text formatter dashboard includes advanced "Social Sanitizing" modifications engineered to clean your raw copy drafts with a single click. The Emoji Stripper automatically scans and wipes out all graphical icons and special Unicode symbols via regex, which is highly useful when repurposing casual social copy into clean corporate email layouts or professional documents. The Hashtag Extractor isolates all instances of the # symbol within your body paragraphs, strips them from the narrative flow, and groups them neatly together at the absolute bottom of your workspace text area, giving you an instantly organized, high-readability caption layout.',
+      },
+      {
         q: 'Is my text sent anywhere?',
         a: 'No. The entire editor and every preview run locally in your browser, so even though it works as an online character counter, nothing is uploaded — it can calculate characters online without your draft ever leaving the page. Your text never leaves your device: there’s no account, no upload, and no server processing of your content, yet you still get an instant character count in text as you type.',
+      },
+      {
+        q: 'Does the local storage auto-save feature mean my data is stored on a server?',
+        a: 'Absolutely not. PostTruncate values absolute data privacy, meaning your text drafts are never uploaded, processed, or saved onto any external server infrastructure. The Browser Session Auto-Save functionality executes entirely client-side using your web browser’s native localStorage cache engine. Every time you make a keystroke change, a localized copy is safely cached right on your own machine. If you accidentally close your tab, experience a browser crash, or hit a hard page refresh, the tool immediately checks your local cache key on initialization and restores your text workspace right where you left off.',
       },
       {
         q: 'Is PostTruncate free?',
