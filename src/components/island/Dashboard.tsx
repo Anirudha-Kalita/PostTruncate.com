@@ -21,7 +21,7 @@ function readActiveDraft() {
   if (typeof window === 'undefined') return '';
 
   try {
-    return window.localStorage.getItem(DRAFT_STORAGE_KEY) ?? '';
+    return window.sessionStorage.getItem(DRAFT_STORAGE_KEY) ?? '';
   } catch {
     return '';
   }
@@ -35,16 +35,24 @@ function readActiveDraft() {
  * the island carries no hardcoded English.
  */
 export default function Dashboard({ lang, strings }: Props) {
-  const [text, setText] = useState(readActiveDraft);
+  const [text, setText] = useState('');
   const [view, setView] = useState<LinkedInView>('desktop');
+  const [isDraftLoaded, setIsDraftLoaded] = useState(false);
 
   useEffect(() => {
+    setText(readActiveDraft());
+    setIsDraftLoaded(true);
+  }, []);
+
+  useEffect(() => {
+    if (!isDraftLoaded) return;
+
     try {
-      window.localStorage.setItem(DRAFT_STORAGE_KEY, text);
+      window.sessionStorage.setItem(DRAFT_STORAGE_KEY, text);
     } catch {
       // Storage can be unavailable in private browsing or locked-down contexts.
     }
-  }, [text]);
+  }, [isDraftLoaded, text]);
 
   return (
     <div class="grid grid-cols-1 gap-5 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)]">

@@ -61,7 +61,7 @@ export const es: Translations = {
         heading: 'Contador de caracteres de Instagram & Facebook con espacios incluidos',
         paragraphs: [
           'Para enganchar a tu público objetivo en redes muy visuales, tienes que ganar la batalla contra los algoritmos de truncamiento del feed. Instagram permite un límite de descripción generoso, pero corta sin piedad tu texto tras un enlace oculto después de los primeros 125 caracteres. Nuestro <strong>contador de caracteres de Instagram</strong> registra la longitud exacta de tu entrada como un <strong>contador de caracteres con espacios incluidos</strong> para garantizar que tu llamada a la acción principal quede a salvo por encima del pliegue.',
-          'Al analizar tu <strong>contador de caracteres con espacios</strong> y evaluar los parámetros de tu <strong>recuento de caracteres en el texto</strong>, puedes dar formato perfecto a la disposición de tu texto. Además, el panel muestra un monitor en tiempo real de la concentración de tus hashtags. Si la disposición de tu perfil supera los 30 hashtags, nuestro sistema marca un aviso inmediato para proteger tu perfil de shadowbans algorítmicos accidentales. Sirve como un <strong>contador de palabras y caracteres</strong> todo en uno y una <strong>herramienta contador de palabras en línea</strong> para el crecimiento social.',
+          'Al analizar tu <strong>contador de caracteres con espacios</strong> y evaluar los parámetros de tu <strong>recuento de caracteres en el texto</strong>, puedes dar formato perfecto a la disposición de tu texto. Además, el panel muestra un monitor en tiempo real de la concentración de tus hashtags. Si la disposición de tu perfil supera los 5 hashtags, nuestro sistema marca un aviso inmediato para proteger tu perfil de shadowbans algorítmicos accidentales. Sirve como un <strong>contador de palabras y caracteres</strong> todo en uno y una <strong>herramienta contador de palabras en línea</strong> para el crecimiento social.',
         ],
       },
       {
@@ -112,10 +112,10 @@ export const es: Translations = {
       instagram: {
         name: 'Instagram',
         tag: 'Tope de hashtags',
-        body: 'Las descripciones de Instagram llegan hasta 2.200 caracteres, pero solo muestran unos 125 antes de un enlace «más». La regla más estricta son los hashtags: más de 30 en una sola descripción o comentario y la publicación falla en silencio al publicarse. Amontonar decenas de etiquetas de baja intención también se lee como spam. Mantén tus etiquetas ajustadas y relevantes, y vigila el medidor en vivo para no chocar nunca con el muro de las 30 etiquetas.',
+        body: 'Las descripciones de Instagram llegan hasta 2.200 caracteres, pero solo muestran unos 125 antes de un enlace «más». La regla más estricta son los hashtags: más de 5 en una sola descripción o comentario y la publicación falla en silencio al publicarse. Amontonar decenas de etiquetas de baja intención también se lee como spam. Mantén tus etiquetas ajustadas y relevantes, y vigila el medidor en vivo para no chocar nunca con el muro de las 5 etiquetas.',
         facts: [
           ['Límite de la descripción', '2.200 caracteres'],
-          ['Límite estricto de hashtags', '30 etiquetas'],
+          ['Límite estricto de hashtags', '5 etiquetas'],
           ['Vista previa de la descripción', '~125 caracteres'],
         ],
       },
@@ -144,7 +144,7 @@ export const es: Translations = {
     items: [
       {
         q: '¿Qué tan precisos son los límites de caracteres?',
-        a: 'PostTruncate usa los límites publicados y ampliamente observados de cada plataforma: 280 para X, 210/140 para el pliegue de LinkedIn, 30 hashtags para Instagram y un peso fijo de 23 caracteres para los enlaces. Las plataformas los ajustan de vez en cuando, y la renderización varía ligeramente según el dispositivo, así que toma las previsualizaciones como una estimación aproximada en lugar de una garantía perfecta al píxel.',
+        a: 'PostTruncate usa los límites publicados y ampliamente observados de cada plataforma: 280 para X, 210/140 para el pliegue de LinkedIn, 5 hashtags para Instagram y un peso fijo de 23 caracteres para los enlaces. Las plataformas los ajustan de vez en cuando, y la renderización varía ligeramente según el dispositivo, así que toma las previsualizaciones como una estimación aproximada en lugar de una garantía perfecta al píxel.',
       },
       {
         q: '¿Los espacios y la puntuación cuentan como caracteres?',
@@ -171,8 +171,24 @@ export const es: Translations = {
         a: 'Elimina los caracteres invisibles y de ancho cero: espacios de ancho cero, marcas de orden de bytes, marcas de control bidireccional, guiones suaves y códigos de control sueltos. Estos suelen colarse cuando copias desde otras apps, y rompen en silencio los recuentos de caracteres y la accesibilidad en clientes móviles antiguos sin llegar a ser visibles.',
       },
       {
+        q: '¿Qué es la densidad de palabras clave y cómo protege mi contenido el monitor de exceso?',
+        a: 'La densidad de palabras clave es el porcentaje de veces que una palabra aparece respecto al total de palabras. Repetir demasiado una misma palabra puede parecer relleno para buscadores y lectores. El monitor de exceso sigue la frecuencia en tiempo real y marca cualquier término que supere el umbral seguro del 3,0%, para que puedas sustituirlo antes de publicar.',
+      },
+      {
+        q: '¿Cómo calculan los temporizadores la duración de lectura y habla?',
+        a: 'El temporizador de lectura divide tu recuento de palabras por una velocidad media de 275 palabras por minuto. El temporizador de habla usa una velocidad conversacional de 150 palabras por minuto. Así puedes estimar artículos, guiones, newsletters o vídeos cortos sin salir del editor.',
+      },
+      {
+        q: '¿Qué hace el saneador social y por qué debería quitar emojis o extraer hashtags?',
+        a: 'Las acciones de saneado limpian borradores con un clic. El eliminador de emojis retira iconos y símbolos especiales cuando necesitas texto plano, y el extractor de hashtags saca las etiquetas del cuerpo y las agrupa al final para que la descripción sea más legible.',
+      },
+      {
         q: '¿Mi texto se envía a algún sitio?',
         a: 'No. Todo el editor y cada previsualización se ejecutan localmente en tu navegador. Tu borrador nunca sale de tu dispositivo: no hay cuenta, ni subida, ni procesamiento de tu contenido en ningún servidor.',
+      },
+      {
+        q: '¿El guardado automático de sesión significa que mis datos se guardan en un servidor?',
+        a: 'No. El borrador nunca se sube ni se guarda en infraestructura externa. El guardado automático de sesión usa sessionStorage en tu propio navegador, dentro de esa pestaña. Si refrescas la página en la misma pestaña, el texto se restaura; cuando termina la sesión de la pestaña, el navegador borra esa caché temporal.',
       },
       {
         q: '¿PostTruncate es gratis?',
@@ -315,7 +331,7 @@ export const es: Translations = {
         {
           heading: 'Qué hace',
           paragraphs: [
-            'Escribe o pega un borrador una vez, y PostTruncate lo renderiza tal como lo harán realmente <strong>LinkedIn, X, Threads, Instagram y Facebook</strong>: el pliegue «…ver más», la división de hilos de 280 caracteres, el peso de 23 caracteres de los enlaces, el tope de 30 hashtags. Ves exactamente qué sobrevive por encima del pliegue antes de comprometerte a publicar.',
+            'Escribe o pega un borrador una vez, y PostTruncate lo renderiza tal como lo harán realmente <strong>LinkedIn, X, Threads, Instagram y Facebook</strong>: el pliegue «…ver más», la división de hilos de 280 caracteres, el peso de 23 caracteres de los enlaces, el tope de 5 hashtags. Ves exactamente qué sobrevive por encima del pliegue antes de comprometerte a publicar.',
             'También detecta los problemas silenciosos que reducen tu alcance: los caracteres invisibles de ancho cero que rompen los recuentos y los lectores de pantalla, y las «fuentes elegantes» de pseudo-Unicode que parecen estilizadas pero son ilegibles para la tecnología de asistencia.',
           ],
         },
@@ -475,8 +491,8 @@ export const es: Translations = {
       hashtagLabel: 'Concentración de hashtags',
       over: 'Por encima del límite estricto de {limit} hashtags de Instagram: la descripción no se podrá publicar. Elimina {excess}.',
       approaching:
-        'Acercándote al tope de 30 etiquetas. Recorta hasta tus etiquetas de mayor intención.',
-      within: 'Cómodamente dentro del límite de 30 hashtags de Instagram.',
+        'Acercándote al tope de 5 etiquetas. Recorta hasta tus etiquetas de mayor intención.',
+      within: 'Cómodamente dentro del límite de 5 hashtags de Instagram.',
       none: 'Aún no se han detectado hashtags.',
       a11yLabel: 'Accesibilidad · fuentes elegantes',
       flagged: '{n} marcados',

@@ -61,7 +61,7 @@ export const nl: Translations = {
         heading: 'Instagram & Facebook tekenteller inclusief spaties',
         paragraphs: [
           'Om je doelgroep te boeien op sterk visuele netwerken moet je de strijd winnen tegen de afkapalgoritmes van de feed. Instagram biedt een royale bijschriftlimiet, maar kapt je tekst genadeloos af achter een verborgen link na de eerste 125 tekens. Onze <strong>instagram-tekenteller</strong> houdt je exacte invoerlengte bij — <strong>tekenteller inclusief spaties</strong> — zodat je belangrijkste call-to-action veilig boven de vouw staat.',
-          'Door je <strong>tekenteller met spaties</strong> te analyseren en je parameters voor <strong>tekenaantal in tekst</strong> te evalueren, kun je de lay-out van je tekst perfect opmaken. Bovendien toont het dashboard een realtime monitor voor je hashtagconcentratie. Overschrijdt je profiel de 30 hashtags, dan geeft ons systeem direct een waarschuwing om je profiel te beschermen tegen onbedoelde algoritmische shadowbans. Het dient als een alles-in-één <strong>woorden- en tekenteller</strong> en <strong>online woordenteller-tool</strong> voor groei op social media.',
+          'Door je <strong>tekenteller met spaties</strong> te analyseren en je parameters voor <strong>tekenaantal in tekst</strong> te evalueren, kun je de lay-out van je tekst perfect opmaken. Bovendien toont het dashboard een realtime monitor voor je hashtagconcentratie. Overschrijdt je profiel de 5 hashtags, dan geeft ons systeem direct een waarschuwing om je profiel te beschermen tegen onbedoelde algoritmische shadowbans. Het dient als een alles-in-één <strong>woorden- en tekenteller</strong> en <strong>online woordenteller-tool</strong> voor groei op social media.',
         ],
       },
       {
@@ -112,10 +112,10 @@ export const nl: Translations = {
       instagram: {
         name: 'Instagram',
         tag: 'Hashtagplafond',
-        body: 'Instagram-bijschriften kunnen tot 2.200 tekens lang zijn, maar tonen slechts ongeveer de eerste 125 vóór een "meer"-link. De hardere regel zijn hashtags: meer dan 30 in één bijschrift of reactie en het bericht wordt stilletjes niet gepubliceerd. Tientallen tags met lage intentie op elkaar stapelen leest bovendien als spam. Houd je tags strak en relevant en let op de live meter zodat je nooit tegen de muur van 30 tags aanloopt.',
+        body: 'Instagram-bijschriften kunnen tot 2.200 tekens lang zijn, maar tonen slechts ongeveer de eerste 125 vóór een "meer"-link. De hardere regel zijn hashtags: meer dan 5 in één bijschrift of reactie en het bericht wordt stilletjes niet gepubliceerd. Tientallen tags met lage intentie op elkaar stapelen leest bovendien als spam. Houd je tags strak en relevant en let op de live meter zodat je nooit tegen de muur van 5 tags aanloopt.',
         facts: [
           ['Bijschriftlimiet', '2.200 tekens'],
-          ['Harde hashtaglimiet', '30 tags'],
+          ['Harde hashtaglimiet', '5 tags'],
           ['Bijschriftpreview', '~125 tekens'],
         ],
       },
@@ -144,7 +144,7 @@ export const nl: Translations = {
     items: [
       {
         q: 'Hoe nauwkeurig zijn de tekenlimieten?',
-        a: 'PostTruncate gebruikt de gepubliceerde en algemeen waargenomen limieten van elk platform — 280 voor X, 210/140 voor de LinkedIn-vouw, 30 hashtags voor Instagram en een vaste weging van 23 tekens voor links. Platforms passen deze af en toe aan en de weergave verschilt licht per apparaat, dus beschouw de previews als een nauwkeurige schatting in plaats van een pixelperfecte garantie.',
+        a: 'PostTruncate gebruikt de gepubliceerde en algemeen waargenomen limieten van elk platform — 280 voor X, 210/140 voor de LinkedIn-vouw, 5 hashtags voor Instagram en een vaste weging van 23 tekens voor links. Platforms passen deze af en toe aan en de weergave verschilt licht per apparaat, dus beschouw de previews als een nauwkeurige schatting in plaats van een pixelperfecte garantie.',
       },
       {
         q: 'Tellen spaties en leestekens mee als tekens?',
@@ -171,8 +171,24 @@ export const nl: Translations = {
         a: 'Het verwijdert onzichtbare en nulbreedte-tekens — nulbreedtespaties, byte-order marks, bidirectionele besturingstekens, zachte afbreekstreepjes en losse besturingscodes. Die sluipen er vaak in wanneer je vanuit andere apps kopieert, en ze verstoren stilletjes tekenaantallen en toegankelijkheid op oudere mobiele clients zonder ooit zichtbaar te zijn.',
       },
       {
+        q: 'Wat is trefwoorddichtheid en hoe beschermt de overuse-monitor mijn content?',
+        a: 'Trefwoorddichtheid is het percentage waarmee een woord voorkomt ten opzichte van het totale aantal woorden. Herhaal je hetzelfde woord te vaak, dan kan dat voor zoekmachines en lezers als keyword stuffing overkomen. De monitor volgt woordfrequentie live en markeert termen die boven de veilige grens van 3,0% komen, zodat je vóór publicatie kunt herschrijven.',
+      },
+      {
+        q: 'Hoe berekenen de lees- en spreektijdtimers de duur van mijn bericht?',
+        a: 'De leestijdtimer deelt je woordenaantal door een gemiddelde snelheid van 275 woorden per minuut. De spreektijdtimer gebruikt een gesprekstempo van 150 woorden per minuut. Zo kun je artikelen, scripts, nieuwsbrieven of korte video’s timen zonder de editor te verlaten.',
+      },
+      {
+        q: 'Wat doet de Social Sanitizer en waarom zou ik emoji verwijderen of hashtags extraheren?',
+        a: 'De opschoonacties maken ruwe concepten met één klik netter. De emoji-verwijderaar haalt iconen en speciale symbolen weg wanneer je platte tekst nodig hebt, en de hashtag-extractor haalt tags uit de lopende tekst en groepeert ze onderaan voor een leesbaardere caption.',
+      },
+      {
         q: 'Wordt mijn tekst ergens naartoe verstuurd?',
         a: 'Nee. De volledige editor en elke preview draaien lokaal in je browser. Je concept verlaat nooit je apparaat — er is geen account, geen upload en geen serververwerking van je inhoud.',
+      },
+      {
+        q: 'Betekent sessie-autosave dat mijn gegevens op een server worden opgeslagen?',
+        a: 'Nee. Je concepten worden nooit geüpload of opgeslagen op externe infrastructuur. Sessie-autosave gebruikt sessionStorage in je eigen browser, alleen binnen dat tabblad. Vernieuw je de pagina in hetzelfde tabblad, dan wordt je tekst hersteld; wanneer de tabsessie eindigt, wist de browser die tijdelijke cache.',
       },
       {
         q: 'Is PostTruncate gratis?',
@@ -315,7 +331,7 @@ export const nl: Translations = {
         {
           heading: 'Wat het doet',
           paragraphs: [
-            'Schrijf of plak één keer een concept en PostTruncate geeft het weer zoals <strong>LinkedIn, X, Threads, Instagram en Facebook</strong> dat echt zullen doen — de “…meer weergeven”-vouw, de threadsplitsing bij 280 tekens, de linkweging van 23 tekens, het plafond van 30 hashtags. Je ziet precies wat boven de vouw overleeft voordat je besluit te publiceren.',
+            'Schrijf of plak één keer een concept en PostTruncate geeft het weer zoals <strong>LinkedIn, X, Threads, Instagram en Facebook</strong> dat echt zullen doen — de “…meer weergeven”-vouw, de threadsplitsing bij 280 tekens, de linkweging van 23 tekens, het plafond van 5 hashtags. Je ziet precies wat boven de vouw overleeft voordat je besluit te publiceren.',
             'Het spoort ook de stille problemen op die je bereik verkleinen: onzichtbare nulbreedte-tekens die tellingen en schermlezers verstoren, en pseudo-Unicode-“fancy fonts” die er opgemaakt uitzien maar onleesbaar zijn voor hulptechnologie.',
           ],
         },
@@ -475,8 +491,8 @@ export const nl: Translations = {
       hashtagLabel: 'Hashtagconcentratie',
       over: 'Over de harde limiet van Instagram van {limit} hashtags — het bijschrift kan niet worden geplaatst. Verwijder {excess}.',
       approaching:
-        'Je nadert het plafond van 30 tags. Beperk je tot je tags met de hoogste intentie.',
-      within: 'Ruim binnen de limiet van 30 hashtags van Instagram.',
+        'Je nadert het plafond van 5 tags. Beperk je tot je tags met de hoogste intentie.',
+      within: 'Ruim binnen de limiet van 5 hashtags van Instagram.',
       none: 'Nog geen hashtags gedetecteerd.',
       a11yLabel: 'Toegankelijkheid · fancy fonts',
       flagged: '{n} gemarkeerd',

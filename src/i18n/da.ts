@@ -61,7 +61,7 @@ export const da: Translations = {
         heading: 'Instagram & Facebook tegntæller inklusive mellemrum',
         paragraphs: [
           'For at fange din målgruppe på stærkt visuelle netværk skal du vinde kampen mod feedets afkortningsalgoritmer. Instagram tillader en generøs billedtekstgrænse, men klipper brutalt din tekst af bag et skjult link efter de første 125 tegn. Vores <strong>instagram-tegntæller</strong> sporer din nøjagtige inputlængde som en <strong>tegntæller inklusive mellemrum</strong> for at sikre, at din centrale call-to-action sidder sikkert over folden.',
-          'Ved at analysere din <strong>tegntæller med mellemrum</strong> og evaluere dine parametre for <strong>tegnantal i tekst</strong> kan du formatere dit tekstlayout perfekt. Derudover viser dashboardet en realtidsmonitor for din hashtag-koncentration. Hvis dit profillayout overstiger 30 hashtags, udløser vores system en øjeblikkelig advarsel for at beskytte din profil mod utilsigtede algoritmiske shadowbans. Det fungerer som en alt-i-én <strong>ord- og tegntæller</strong> og <strong>online ordtæller-værktøj</strong> til vækst på sociale medier.',
+          'Ved at analysere din <strong>tegntæller med mellemrum</strong> og evaluere dine parametre for <strong>tegnantal i tekst</strong> kan du formatere dit tekstlayout perfekt. Derudover viser dashboardet en realtidsmonitor for din hashtag-koncentration. Hvis dit profillayout overstiger 5 hashtags, udløser vores system en øjeblikkelig advarsel for at beskytte din profil mod utilsigtede algoritmiske shadowbans. Det fungerer som en alt-i-én <strong>ord- og tegntæller</strong> og <strong>online ordtæller-værktøj</strong> til vækst på sociale medier.',
         ],
       },
       {
@@ -112,10 +112,10 @@ export const da: Translations = {
       instagram: {
         name: 'Instagram',
         tag: 'Hashtag-loft',
-        body: 'Instagram-billedtekster kan være op til 2.200 tegn, men viser kun cirka de første 125 før et "mere"-link. Den hårdere regel er hashtags: mere end 30 i en enkelt billedtekst eller kommentar, og opslaget undlader i det stille at blive publiceret. At stable dusinvis af hashtags med lav hensigt læses også som spam. Hold dine hashtags stramme og relevante, og hold øje med live-måleren, så du aldrig rammer 30-hashtag-muren.',
+        body: 'Instagram-billedtekster kan være op til 2.200 tegn, men viser kun cirka de første 125 før et "mere"-link. Den hårdere regel er hashtags: mere end 5 i en enkelt billedtekst eller kommentar, og opslaget undlader i det stille at blive publiceret. At stable dusinvis af hashtags med lav hensigt læses også som spam. Hold dine hashtags stramme og relevante, og hold øje med live-måleren, så du aldrig rammer 5-hashtag-muren.',
         facts: [
           ['Grænse for billedtekst', '2.200 tegn'],
-          ['Hård hashtag-grænse', '30 hashtags'],
+          ['Hård hashtag-grænse', '5 hashtags'],
           ['Preview af billedtekst', '~125 tegn'],
         ],
       },
@@ -144,7 +144,7 @@ export const da: Translations = {
     items: [
       {
         q: 'Hvor nøjagtige er tegngrænserne?',
-        a: 'PostTruncate bruger hver platforms offentliggjorte og bredt observerede grænser — 280 for X, 210/140 for LinkedIn-folden, 30 hashtags for Instagram og en fast vægt på 23 tegn for links. Platforme justerer dem af og til, og gengivelsen varierer en smule fra enhed til enhed, så betragt previewene som et tæt estimat snarere end en pixelperfekt garanti.',
+        a: 'PostTruncate bruger hver platforms offentliggjorte og bredt observerede grænser — 280 for X, 210/140 for LinkedIn-folden, 5 hashtags for Instagram og en fast vægt på 23 tegn for links. Platforme justerer dem af og til, og gengivelsen varierer en smule fra enhed til enhed, så betragt previewene som et tæt estimat snarere end en pixelperfekt garanti.',
       },
       {
         q: 'Tæller mellemrum og tegnsætning med som tegn?',
@@ -171,8 +171,24 @@ export const da: Translations = {
         a: 'Den fjerner usynlige tegn og tegn uden bredde — nulbredde-mellemrum, byte-order marks, tovejs-styretegn, bløde bindestreger og forvildede styrekoder. De sniger sig ofte ind, når du kopierer fra andre apps, og de bryder i det stille tegnantal og tilgængelighed på ældre mobilklienter, uden nogensinde at være synlige.',
       },
       {
+        q: 'Hvad er søgeordstæthed, og hvordan beskytter overforbrugsmonitoren mit indhold?',
+        a: 'Søgeordstæthed er den procentdel, et bestemt ord udgør af det samlede antal ord. Gentager du det samme ord for ofte, kan teksten ligne keyword stuffing for både søgemaskiner og læsere. Monitoren følger frekvensen i realtid og markerer ord, der passerer den sikre grænse på 3,0%, så du kan omskrive, før du publicerer.',
+      },
+      {
+        q: 'Hvordan beregner læse- og taletimerne varigheden af mit opslag?',
+        a: 'Læsetimeren dividerer dit ordantal med en gennemsnitlig hastighed på 275 ord i minuttet. Taletimeren bruger et samtaletempo på 150 ord i minuttet. På den måde kan du tidsvurdere artikler, manuskripter, nyhedsbreve eller korte videoer direkte i editoren.',
+      },
+      {
+        q: 'Hvad gør Social Sanitizer, og hvorfor skal jeg fjerne emojis eller udtrække hashtags?',
+        a: 'Rensehandlingerne rydder op i rå udkast med ét klik. Emoji-fjerneren sletter ikoner og særlige symboler, når du har brug for ren tekst, og hashtag-udtrækkeren flytter tags ud af brødteksten og samler dem nederst, så billedteksten bliver mere læsbar.',
+      },
+      {
         q: 'Bliver min tekst sendt nogen steder hen?',
         a: 'Nej. Hele editoren og hvert preview kører lokalt i din browser. Dit udkast forlader aldrig din enhed — der er ingen konto, ingen upload og ingen serverbehandling af dit indhold.',
+      },
+      {
+        q: 'Betyder automatisk sessionslagring, at mine data gemmes på en server?',
+        a: 'Nej. Dine udkast uploades aldrig og gemmes aldrig på ekstern infrastruktur. Automatisk sessionslagring bruger sessionStorage i din egen browser, kun i den pågældende fane. Hvis du opdaterer siden i samme fane, gendannes teksten; når fanesessionen slutter, rydder browseren den midlertidige cache.',
       },
       {
         q: 'Er PostTruncate gratis?',
@@ -315,7 +331,7 @@ export const da: Translations = {
         {
           heading: 'Hvad det gør',
           paragraphs: [
-            'Skriv eller indsæt et udkast én gang, og PostTruncate gengiver det, som <strong>LinkedIn, X, Threads, Instagram og Facebook</strong> rent faktisk vil — “…se mere”-folden, trådopdelingen ved 280 tegn, link-vægtningen på 23 tegn, hashtag-loftet på 30. Du ser præcis, hvad der overlever over folden, før du forpligter dig til at publicere.',
+            'Skriv eller indsæt et udkast én gang, og PostTruncate gengiver det, som <strong>LinkedIn, X, Threads, Instagram og Facebook</strong> rent faktisk vil — “…se mere”-folden, trådopdelingen ved 280 tegn, link-vægtningen på 23 tegn, hashtag-loftet på 5. Du ser præcis, hvad der overlever over folden, før du forpligter dig til at publicere.',
             'Det fanger også de stille problemer, der skrumper din rækkevidde: usynlige nulbredde-tegn, der bryder tællinger og skærmlæsere, og pseudo-Unicode-“fancy skrifttyper”, der ser stiliserede ud, men er ulæselige for hjælpeteknologi.',
           ],
         },
@@ -475,8 +491,8 @@ export const da: Translations = {
       hashtagLabel: 'Hashtag-koncentration',
       over: 'Over Instagrams hårde grænse på {limit} hashtags — billedteksten kan ikke postes. Fjern {excess}.',
       approaching:
-        'Nærmer dig 30-hashtag-loftet. Skær ned til dine hashtags med højest hensigt.',
-      within: 'Komfortabelt inden for Instagrams grænse på 30 hashtags.',
+        'Nærmer dig 5-hashtag-loftet. Skær ned til dine hashtags med højest hensigt.',
+      within: 'Komfortabelt inden for Instagrams grænse på 5 hashtags.',
       none: 'Ingen hashtags registreret endnu.',
       a11yLabel: 'Tilgængelighed · fancy skrifttyper',
       flagged: '{n} markeret',

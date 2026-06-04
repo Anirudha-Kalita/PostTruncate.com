@@ -62,7 +62,7 @@ export const de: Translations = {
         heading: 'Instagram- & Facebook-Zeichenzähler inklusive Leerzeichen',
         paragraphs: [
           'Um deine Zielgruppe in stark visuellen Netzwerken zu fesseln, musst du den Kampf gegen die Abschneide-Algorithmen des Feeds gewinnen. Instagram erlaubt ein großzügiges Bildunterschrift-Limit, schneidet deinen Text aber brutal hinter einem versteckten Link nach den ersten 125 Zeichen ab. Unser <strong>Instagram-Zeichenzähler</strong> verfolgt deine exakte Eingabelänge als <strong>Zeichenzähler inklusive Leerzeichen</strong>, damit dein zentraler Call-to-Action sicher über der Falz steht.',
-          'Indem du deinen <strong>Zeichenzähler mit Leerzeichen</strong> analysierst und deine <strong>Zeichenanzahl im Text</strong> auswertest, kannst du dein Text-Layout perfekt formatieren. Darüber hinaus zeigt das Dashboard einen Echtzeit-Monitor für deine Hashtag-Konzentration. Übersteigt dein Profil-Layout 30 Hashtags, gibt unser System sofort eine Warnung aus, um dein Profil vor versehentlichen algorithmischen Shadowbans zu schützen. Es dient als All-in-One-<strong>Wörter- und Zeichenzähler</strong> und <strong>Online-Wortzähler-Tool</strong> für dein Social-Wachstum.',
+          'Indem du deinen <strong>Zeichenzähler mit Leerzeichen</strong> analysierst und deine <strong>Zeichenanzahl im Text</strong> auswertest, kannst du dein Text-Layout perfekt formatieren. Darüber hinaus zeigt das Dashboard einen Echtzeit-Monitor für deine Hashtag-Konzentration. Übersteigt dein Profil-Layout 5 Hashtags, gibt unser System sofort eine Warnung aus, um dein Profil vor versehentlichen algorithmischen Shadowbans zu schützen. Es dient als All-in-One-<strong>Wörter- und Zeichenzähler</strong> und <strong>Online-Wortzähler-Tool</strong> für dein Social-Wachstum.',
         ],
       },
       {
@@ -113,10 +113,10 @@ export const de: Translations = {
       instagram: {
         name: 'Instagram',
         tag: 'Hashtag-Obergrenze',
-        body: 'Instagram-Bildunterschriften umfassen bis zu 2.200 Zeichen, zeigen aber nur etwa die ersten 125 vor einem „mehr“-Link. Die härtere Regel sind Hashtags: mehr als 30 in einer einzelnen Bildunterschrift oder einem Kommentar und der Beitrag lässt sich klammheimlich nicht veröffentlichen. Dutzende absichtsschwache Tags zu stapeln wirkt zudem wie Spam. Halte deine Tags knapp und relevant und behalte den Live-Zähler im Blick, damit du nie an die 30-Tag-Wand stößt.',
+        body: 'Instagram-Bildunterschriften umfassen bis zu 2.200 Zeichen, zeigen aber nur etwa die ersten 125 vor einem „mehr“-Link. Die härtere Regel sind Hashtags: mehr als 5 in einer einzelnen Bildunterschrift oder einem Kommentar und der Beitrag lässt sich klammheimlich nicht veröffentlichen. Dutzende absichtsschwache Tags zu stapeln wirkt zudem wie Spam. Halte deine Tags knapp und relevant und behalte den Live-Zähler im Blick, damit du nie an die 5-Tag-Wand stößt.',
         facts: [
           ['Limit Bildunterschrift', '2.200 Zeichen'],
-          ['Hartes Hashtag-Limit', '30 Tags'],
+          ['Hartes Hashtag-Limit', '5 Tags'],
           ['Vorschau Bildunterschrift', '~125 Zeichen'],
         ],
       },
@@ -145,7 +145,7 @@ export const de: Translations = {
     items: [
       {
         q: 'Wie genau sind die Zeichenlimits?',
-        a: 'PostTruncate verwendet die veröffentlichten und weithin beobachteten Limits jeder Plattform — 280 für X, 210/140 für die LinkedIn-Falz, 30 Hashtags für Instagram und ein pauschales Gewicht von 23 Zeichen für Links. Plattformen passen diese gelegentlich an, und die Darstellung variiert je nach Gerät leicht, also behandle die Vorschauen als nahe Schätzung statt als pixelgenaue Garantie.',
+        a: 'PostTruncate verwendet die veröffentlichten und weithin beobachteten Limits jeder Plattform — 280 für X, 210/140 für die LinkedIn-Falz, 5 Hashtags für Instagram und ein pauschales Gewicht von 23 Zeichen für Links. Plattformen passen diese gelegentlich an, und die Darstellung variiert je nach Gerät leicht, also behandle die Vorschauen als nahe Schätzung statt als pixelgenaue Garantie.',
       },
       {
         q: 'Zählen Leerzeichen und Satzzeichen als Zeichen?',
@@ -172,8 +172,24 @@ export const de: Translations = {
         a: 'Es entfernt unsichtbare und nullbreite Zeichen — nullbreite Leerzeichen, Byte-Order-Marks, bidirektionale Steuerzeichen, weiche Trennstriche und verirrte Steuercodes. Diese schleichen sich oft ein, wenn du aus anderen Apps kopierst, und sie stören Zeichenzählungen und die Barrierefreiheit auf älteren mobilen Clients klammheimlich, ohne je sichtbar zu sein.',
       },
       {
+        q: 'Was ist Keyword-Dichte, und wie schützt der Übernutzungsmonitor meine Inhalte?',
+        a: 'Keyword-Dichte ist der Anteil, mit dem ein bestimmtes Wort im Verhältnis zur gesamten Wortzahl vorkommt. Wird dasselbe Wort zu oft wiederholt, wirkt der Text für Suchmaschinen und Menschen schnell wie Keyword-Stuffing. Der Monitor verfolgt die Häufigkeit in Echtzeit und markiert Begriffe, die den sicheren Schwellenwert von 3,0% überschreiten, damit du vor dem Veröffentlichen umformulieren kannst.',
+      },
+      {
+        q: 'Wie berechnen die Lese- und Sprechzeit-Timer die Dauer meines Beitrags?',
+        a: 'Der Lesezeit-Timer teilt deine Wortzahl durch eine durchschnittliche Lesegeschwindigkeit von 275 Wörtern pro Minute. Der Sprechzeit-Timer nutzt ein Gesprächstempo von 150 Wörtern pro Minute. So kannst du Artikel, Skripte, Newsletter oder Kurzvideos direkt im Editor zeitlich einschätzen.',
+      },
+      {
+        q: 'Was macht der Social Sanitizer, und warum sollte ich Emojis entfernen oder Hashtags extrahieren?',
+        a: 'Die Bereinigungsaktionen räumen Rohentwürfe mit einem Klick auf. Der Emoji-Entferner löscht Symbole und Sonderzeichen, wenn du reinen Text brauchst, und der Hashtag-Extractor holt Tags aus dem Fließtext heraus und sammelt sie unten, damit die Caption lesbarer bleibt.',
+      },
+      {
         q: 'Wird mein Text irgendwohin gesendet?',
         a: 'Nein. Der gesamte Editor und jede Vorschau laufen lokal in deinem Browser. Dein Entwurf verlässt nie dein Gerät — es gibt kein Konto, keinen Upload und keine serverseitige Verarbeitung deiner Inhalte.',
+      },
+      {
+        q: 'Bedeutet die Sitzungs-Autospeicherung, dass meine Daten auf einem Server gespeichert werden?',
+        a: 'Nein. Deine Entwürfe werden nie hochgeladen oder auf externer Infrastruktur gespeichert. Die Sitzungs-Autospeicherung nutzt sessionStorage in deinem eigenen Browser und nur in diesem Tab. Wenn du die Seite im selben Tab aktualisierst, wird dein Text wiederhergestellt; endet die Tab-Sitzung, löscht der Browser diesen temporären Cache.',
       },
       {
         q: 'Ist PostTruncate kostenlos?',
@@ -316,7 +332,7 @@ export const de: Translations = {
         {
           heading: 'Was es tut',
           paragraphs: [
-            'Schreib oder füge einen Entwurf einmal ein, und PostTruncate stellt ihn so dar, wie <strong>LinkedIn, X, Threads, Instagram und Facebook</strong> es tatsächlich tun werden — die „…mehr anzeigen“-Falz, die 280-Zeichen-Thread-Aufteilung, die 23-Zeichen-Link-Gewichtung, die 30-Hashtag-Obergrenze. Du siehst genau, was über der Falz überlebt, bevor du dich zur Veröffentlichung entscheidest.',
+            'Schreib oder füge einen Entwurf einmal ein, und PostTruncate stellt ihn so dar, wie <strong>LinkedIn, X, Threads, Instagram und Facebook</strong> es tatsächlich tun werden — die „…mehr anzeigen“-Falz, die 280-Zeichen-Thread-Aufteilung, die 23-Zeichen-Link-Gewichtung, die 5-Hashtag-Obergrenze. Du siehst genau, was über der Falz überlebt, bevor du dich zur Veröffentlichung entscheidest.',
             'Es erkennt auch die stillen Probleme, die deine Reichweite schrumpfen lassen: unsichtbare nullbreite Zeichen, die Zählungen und Screenreader stören, und pseudo-Unicode-„Fancy-Schriften“, die gestaltet aussehen, aber für assistive Technik unlesbar sind.',
           ],
         },
@@ -476,8 +492,8 @@ export const de: Translations = {
       hashtagLabel: 'Hashtag-Konzentration',
       over: 'Über dem harten Limit von Instagram von {limit} Hashtags — die Bildunterschrift lässt sich nicht posten. Entferne {excess}.',
       approaching:
-        'Du näherst dich der 30-Tag-Obergrenze. Reduziere auf deine absichtsstärksten Tags.',
-      within: 'Bequem innerhalb des 30-Hashtag-Limits von Instagram.',
+        'Du näherst dich der 5-Tag-Obergrenze. Reduziere auf deine absichtsstärksten Tags.',
+      within: 'Bequem innerhalb des 5-Hashtag-Limits von Instagram.',
       none: 'Noch keine Hashtags erkannt.',
       a11yLabel: 'Barrierefreiheit · Fancy-Schriften',
       flagged: '{n} markiert',

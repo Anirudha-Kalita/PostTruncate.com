@@ -16,8 +16,8 @@ export const LIMITS = {
   THREADS: 500,
   /** t.co wraps every URL to a fixed weight regardless of real length. */
   URL_WEIGHT: 23,
-  /** Instagram's hard ceiling — posting fails above this. */
-  INSTAGRAM_HASHTAGS: 30,
+  /** Instagram's hard ceiling for hashtags in a post or reel. */
+  INSTAGRAM_HASHTAGS: 5,
 } as const;
 
 /** Count Unicode code points (not UTF-16 units). */

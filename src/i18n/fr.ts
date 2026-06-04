@@ -61,7 +61,7 @@ export const fr: Translations = {
         heading: 'Compteur de caractères Instagram & Facebook espaces inclus',
         paragraphs: [
           'Pour accrocher votre public cible sur les réseaux très visuels, vous devez gagner la bataille contre les algorithmes de troncature du fil. Instagram autorise une limite de légende généreuse, mais il coupe brutalement votre texte derrière un lien masqué après les 125 premiers caractères. Notre <strong>compteur de caractères Instagram</strong> suit la longueur exacte de votre saisie, <strong>compteur de caractères espaces inclus</strong>, pour garantir que votre appel à l’action principal reste bien visible au-dessus de la ligne de flottaison.',
-          'En analysant votre <strong>compteur de caractères avec espaces</strong> et en évaluant vos paramètres de <strong>nombre de caractères dans le texte</strong>, vous pouvez mettre en forme votre contenu à la perfection. De plus, le tableau de bord affiche un moniteur en temps réel de votre concentration de hashtags. Si votre mise en page dépasse 30 hashtags, notre système déclenche un avertissement immédiat pour protéger votre profil des shadowbans algorithmiques accidentels. Il sert de <strong>compteur de mots et de caractères</strong> tout-en-un et d’<strong>outil de comptage de mots en ligne</strong> pour la croissance sur les réseaux sociaux.',
+          'En analysant votre <strong>compteur de caractères avec espaces</strong> et en évaluant vos paramètres de <strong>nombre de caractères dans le texte</strong>, vous pouvez mettre en forme votre contenu à la perfection. De plus, le tableau de bord affiche un moniteur en temps réel de votre concentration de hashtags. Si votre mise en page dépasse 5 hashtags, notre système déclenche un avertissement immédiat pour protéger votre profil des shadowbans algorithmiques accidentels. Il sert de <strong>compteur de mots et de caractères</strong> tout-en-un et d’<strong>outil de comptage de mots en ligne</strong> pour la croissance sur les réseaux sociaux.',
         ],
       },
       {
@@ -112,10 +112,10 @@ export const fr: Translations = {
       instagram: {
         name: 'Instagram',
         tag: 'Plafond de hashtags',
-        body: 'Les légendes Instagram peuvent atteindre 2 200 caractères mais n’en affichent qu’environ 125 avant un lien « plus ». La règle la plus stricte concerne les hashtags : au-delà de 30 dans une même légende ou un même commentaire, la publication échoue silencieusement. Empiler des dizaines de tags à faible intention passe aussi pour du spam. Gardez vos tags concis et pertinents, et surveillez le compteur en direct pour ne jamais heurter le mur des 30 tags.',
+        body: 'Les légendes Instagram peuvent atteindre 2 200 caractères mais n’en affichent qu’environ 125 avant un lien « plus ». La règle la plus stricte concerne les hashtags : au-delà de 5 dans une même légende ou un même commentaire, la publication échoue silencieusement. Empiler des dizaines de tags à faible intention passe aussi pour du spam. Gardez vos tags concis et pertinents, et surveillez le compteur en direct pour ne jamais heurter le mur des 5 tags.',
         facts: [
           ['Limite de légende', '2 200 caractères'],
-          ['Limite stricte de hashtags', '30 tags'],
+          ['Limite stricte de hashtags', '5 tags'],
           ['Aperçu de légende', '~125 caractères'],
         ],
       },
@@ -144,7 +144,7 @@ export const fr: Translations = {
     items: [
       {
         q: 'Quelle est la précision des limites de caractères ?',
-        a: 'PostTruncate utilise les limites publiées et largement observées de chaque plateforme — 280 pour X, 210/140 pour le pli LinkedIn, 30 hashtags pour Instagram, et un poids forfaitaire de 23 caractères pour les liens. Les plateformes les ajustent parfois, et le rendu varie légèrement selon l’appareil, alors considérez les aperçus comme une estimation proche plutôt qu’une garantie au pixel près.',
+        a: 'PostTruncate utilise les limites publiées et largement observées de chaque plateforme — 280 pour X, 210/140 pour le pli LinkedIn, 5 hashtags pour Instagram, et un poids forfaitaire de 23 caractères pour les liens. Les plateformes les ajustent parfois, et le rendu varie légèrement selon l’appareil, alors considérez les aperçus comme une estimation proche plutôt qu’une garantie au pixel près.',
       },
       {
         q: 'Les espaces et la ponctuation comptent-ils comme des caractères ?',
@@ -171,8 +171,24 @@ export const fr: Translations = {
         a: 'Cela retire les caractères invisibles et de largeur nulle — espaces de largeur nulle, marques d’ordre des octets, marques de contrôle bidirectionnel, traits d’union conditionnels et codes de contrôle parasites. Ils se glissent souvent lors d’un copier-coller depuis d’autres applications, et ils faussent silencieusement le nombre de caractères et l’accessibilité sur les anciens clients mobiles sans jamais être visibles.',
       },
       {
+        q: 'Qu’est-ce que la densité de mots-clés, et comment le moniteur de surutilisation protège-t-il mon contenu ?',
+        a: 'La densité de mots-clés correspond au pourcentage d’apparition d’un mot par rapport au nombre total de mots. Répéter trop souvent le même terme peut ressembler à du bourrage de mots-clés pour les moteurs de recherche et les lecteurs. Le moniteur suit la fréquence en temps réel et signale tout terme qui dépasse le seuil sûr de 3,0%, afin que vous puissiez reformuler avant de publier.',
+      },
+      {
+        q: 'Comment les minuteurs de lecture et de prise de parole calculent-ils la durée de mon post ?',
+        a: 'Le minuteur de lecture divise votre nombre total de mots par une vitesse moyenne de 275 mots par minute. Le minuteur de prise de parole utilise un rythme conversationnel de 150 mots par minute. Vous pouvez ainsi estimer articles, scripts, newsletters ou vidéos courtes directement dans l’éditeur.',
+      },
+      {
+        q: 'Que fait le Social Sanitizer, et pourquoi supprimer les emojis ou extraire les hashtags ?',
+        a: 'Les actions de nettoyage remettent vos brouillons au propre en un clic. Le suppresseur d’emojis retire les icônes et symboles spéciaux lorsque vous avez besoin d’un texte brut, tandis que l’extracteur de hashtags sort les tags du corps du texte et les regroupe en bas pour rendre la légende plus lisible.',
+      },
+      {
         q: 'Mon texte est-il envoyé quelque part ?',
         a: 'Non. L’ensemble de l’éditeur et chaque aperçu fonctionnent localement dans votre navigateur. Votre brouillon ne quitte jamais votre appareil — pas de compte, pas de téléversement et aucun traitement de votre contenu sur un serveur.',
+      },
+      {
+        q: 'L’enregistrement automatique de session signifie-t-il que mes données sont stockées sur un serveur ?',
+        a: 'Non. Vos brouillons ne sont jamais téléversés ni stockés sur une infrastructure externe. L’enregistrement automatique de session utilise sessionStorage dans votre propre navigateur, uniquement dans cet onglet. Si vous actualisez la page dans le même onglet, le texte est restauré; lorsque la session de l’onglet se termine, le navigateur efface ce cache temporaire.',
       },
       {
         q: 'PostTruncate est-il gratuit ?',
@@ -315,7 +331,7 @@ export const fr: Translations = {
         {
           heading: 'Ce qu’il fait',
           paragraphs: [
-            'Écrivez ou collez un brouillon une seule fois, et PostTruncate l’affiche tel que <strong>LinkedIn, X, Threads, Instagram et Facebook</strong> le feront réellement — le pli « …voir plus », la découpe en fil à 280 caractères, la pondération des liens à 23 caractères, le plafond de 30 hashtags. Vous voyez exactement ce qui survit au-dessus du pli avant de vous engager à publier.',
+            'Écrivez ou collez un brouillon une seule fois, et PostTruncate l’affiche tel que <strong>LinkedIn, X, Threads, Instagram et Facebook</strong> le feront réellement — le pli « …voir plus », la découpe en fil à 280 caractères, la pondération des liens à 23 caractères, le plafond de 5 hashtags. Vous voyez exactement ce qui survit au-dessus du pli avant de vous engager à publier.',
             'Il repère aussi les problèmes discrets qui réduisent votre portée : les caractères invisibles de largeur nulle qui faussent les décomptes et les lecteurs d’écran, et les « polices fantaisie » en pseudo-Unicode qui paraissent stylisées mais sont illisibles pour les technologies d’assistance.',
           ],
         },
@@ -475,8 +491,8 @@ export const fr: Translations = {
       hashtagLabel: 'Concentration de hashtags',
       over: 'Au-delà de la limite stricte de {limit} hashtags d’Instagram — la légende ne pourra pas être publiée. Retirez-en {excess}.',
       approaching:
-        'Vous approchez du plafond de 30 tags. Réduisez à vos tags les plus pertinents.',
-      within: 'Confortablement sous la limite de 30 hashtags d’Instagram.',
+        'Vous approchez du plafond de 5 tags. Réduisez à vos tags les plus pertinents.',
+      within: 'Confortablement sous la limite de 5 hashtags d’Instagram.',
       none: 'Aucun hashtag détecté pour l’instant.',
       a11yLabel: 'Accessibilité · polices fantaisie',
       flagged: '{n} signalé(s)',

@@ -61,7 +61,7 @@ export const en: Translations = {
         heading: 'Instagram & Facebook Character Counter Including Spaces',
         paragraphs: [
           'To hook your target audience on highly visual networks, you have to win the battle against feed truncation algorithms. Instagram allows a generous caption limit, but it brutally cuts off your text behind a hidden link after the first 125 characters. Our <strong>instagram character counter</strong> tracks your exact input length <strong>character counter including spaces</strong> to ensure your core call-to-action sits safely above the fold.',
-          'By analyzing your <strong>character counter with spaces</strong> and evaluating your <strong>character count in text</strong> parameters, you can format your copy layout perfectly. Furthermore, the dashboard displays a real-time monitor for your hashtag concentration. If your profile layout exceeds 30 hashtags, our system flags an immediate warning to protect your profile from accidental algorithmic shadowbans. It serves as an all-in-one <strong>words and characters counter</strong> and <strong>word counter tool online</strong> for social growth.',
+          'By analyzing your <strong>character counter with spaces</strong> and evaluating your <strong>character count in text</strong> parameters, you can format your copy layout perfectly. Furthermore, the dashboard displays a real-time monitor for your hashtag concentration. If your profile layout exceeds 5 hashtags, our system flags an immediate warning to protect your profile from accidental algorithmic shadowbans. It serves as an all-in-one <strong>words and characters counter</strong> and <strong>word counter tool online</strong> for social growth.',
         ],
       },
       {
@@ -112,10 +112,10 @@ export const en: Translations = {
       instagram: {
         name: 'Instagram',
         tag: 'Hashtag ceiling',
-        body: 'Instagram captions run up to 2,200 characters but only show about the first 125 before a "more" link. The harder rule is hashtags: more than 30 in a single caption or comment and the post silently fails to publish. Stacking dozens of low-intent tags also reads as spam. Keep your tags tight and relevant, and watch the live meter so you never trip the 30-tag wall.',
+        body: 'Instagram captions run up to 2,200 characters but only show about the first 125 before a "more" link. The harder rule is hashtags: more than 5 in a single caption or comment and the post silently fails to publish. Stacking dozens of low-intent tags also reads as spam. Keep your tags tight and relevant, and watch the live meter so you never trip the 5-tag wall.',
         facts: [
           ['Caption cap', '2,200 characters'],
-          ['Hashtag hard limit', '30 tags'],
+          ['Hashtag hard limit', '5 tags'],
           ['Caption preview', '~125 characters'],
         ],
       },
@@ -144,7 +144,7 @@ export const en: Translations = {
     items: [
       {
         q: 'How accurate are the character limits?',
-        a: 'PostTruncate works as a live character counter against each platform’s published and widely-observed limits — 280 for X, 210/140 for the LinkedIn fold, 30 hashtags for Instagram, and a flat 23-character weight for links. The same engine doubles as a Twitter character counter, Instagram character counter, and general character checker, so one character count check covers every network. Platforms occasionally adjust these character count limits, and rendering varies slightly by device, so treat the previews as a close estimate rather than a pixel-perfect guarantee.',
+        a: 'PostTruncate works as a live character counter against each platform’s published and widely-observed limits — 280 for X, 210/140 for the LinkedIn fold, 5 hashtags for Instagram, and a flat 23-character weight for links. The same engine doubles as a Twitter character counter, Instagram character counter, and general character checker, so one character count check covers every network. Platforms occasionally adjust these character count limits, and rendering varies slightly by device, so treat the previews as a close estimate rather than a pixel-perfect guarantee.',
       },
       {
         q: 'Do spaces and punctuation count as characters?',
@@ -187,8 +187,8 @@ export const en: Translations = {
         a: 'No. The entire editor and every preview run locally in your browser, so even though it works as an online character counter, nothing is uploaded — it can calculate characters online without your draft ever leaving the page. Your text never leaves your device: there’s no account, no upload, and no server processing of your content, yet you still get an instant character count in text as you type.',
       },
       {
-        q: 'Does the local storage auto-save feature mean my data is stored on a server?',
-        a: 'Absolutely not. PostTruncate values absolute data privacy, meaning your text drafts are never uploaded, processed, or saved onto any external server infrastructure. The Browser Session Auto-Save functionality executes entirely client-side using your web browser’s native localStorage cache engine. Every time you make a keystroke change, a localized copy is safely cached right on your own machine. If you accidentally close your tab, experience a browser crash, or hit a hard page refresh, the tool immediately checks your local cache key on initialization and restores your text workspace right where you left off.',
+        q: 'Does the session auto-save feature mean my data is stored on a server?',
+        a: 'Absolutely not. PostTruncate values absolute data privacy, meaning your text drafts are never uploaded, processed, or saved onto any external server infrastructure. The Browser Session Auto-Save functionality executes entirely client-side using your web browser’s native sessionStorage cache. Every time you make a keystroke change, a temporary copy is cached in that browser tab. If you refresh the page in the same tab, the tool restores your text workspace right where you left off; when the tab session ends, the temporary draft cache is cleared by the browser.',
       },
       {
         q: 'Is PostTruncate free?',
@@ -331,7 +331,7 @@ export const en: Translations = {
         {
           heading: 'What it does',
           paragraphs: [
-            'Write or paste a draft once, and PostTruncate renders it the way <strong>LinkedIn, X, Threads, Instagram, and Facebook</strong> actually will — the “…see more” fold, the 280-character thread split, the 23-character link weighting, the 30-hashtag ceiling. You see exactly what survives above the fold before you commit to publishing.',
+            'Write or paste a draft once, and PostTruncate renders it the way <strong>LinkedIn, X, Threads, Instagram, and Facebook</strong> actually will — the “…see more” fold, the 280-character thread split, the 23-character link weighting, the 5-hashtag ceiling. You see exactly what survives above the fold before you commit to publishing.',
             'It also catches the quiet problems that shrink your reach: invisible zero-width characters that break counts and screen readers, and pseudo-Unicode “fancy fonts” that look styled but are unreadable to assistive tech.',
           ],
         },
@@ -491,8 +491,8 @@ export const en: Translations = {
       hashtagLabel: 'Hashtag concentration',
       over: 'Over Instagram’s hard limit of {limit} hashtags — the caption will fail to post. Remove {excess}.',
       approaching:
-        'Approaching the 30-tag ceiling. Trim to your highest-intent tags.',
-      within: 'Comfortably within Instagram’s 30-hashtag limit.',
+        'Approaching the 5-tag ceiling. Trim to your highest-intent tags.',
+      within: 'Comfortably within Instagram’s 5-hashtag limit.',
       none: 'No hashtags detected yet.',
       a11yLabel: 'Accessibility · fancy fonts',
       flagged: '{n} flagged',

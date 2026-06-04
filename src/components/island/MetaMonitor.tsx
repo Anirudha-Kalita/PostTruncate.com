@@ -45,7 +45,10 @@ export function MetaMonitor({ text, lang, s }: Props) {
   const hashtags = detectHashtags(text);
   const tagCount = hashtags.length;
   const overTagLimit = tagCount > LIMITS.INSTAGRAM_HASHTAGS;
-  const tagTone = overTagLimit ? 'danger' : tagCount > 20 ? 'warn' : 'safe';
+  const tagTone =
+    overTagLimit || tagCount >= LIMITS.INSTAGRAM_HASHTAGS - 1
+      ? overTagLimit ? 'danger' : 'warn'
+      : 'safe';
 
   const fancy = hasFancyUnicode(text);
   const fancyN = countFancyUnicode(text);
@@ -68,12 +71,12 @@ export function MetaMonitor({ text, lang, s }: Props) {
           logo={<BrandLogo brand="instagram" />}
         >
           <Segmented<FeedView>
-            ariaLabel="Instagram feed view"
+            ariaLabel={`${m.title} Instagram`}
             value={instagramView}
             onChange={setInstagramView}
             options={[
-              { value: 'desktop', label: 'Desktop' },
-              { value: 'mobile', label: 'Mobile' },
+              { value: 'desktop', label: s.linkedin.viewDesktop },
+              { value: 'mobile', label: s.linkedin.viewMobile },
             ]}
           />
         </CardHead>
@@ -81,9 +84,9 @@ export function MetaMonitor({ text, lang, s }: Props) {
         <div class="px-4 pt-4 sm:px-5">
           <div class="flex flex-wrap items-center justify-between gap-x-3 gap-y-1">
             {instagramPreview.isTruncated ? (
-              <Badge tone="warn">Truncated</Badge>
+              <Badge tone="warn">{s.linkedin.badgeTruncated}</Badge>
             ) : (
-              <Badge tone="safe">Fits feed</Badge>
+              <Badge tone="safe">{m.badgeClean}</Badge>
             )}
             <span class="font-mono text-[12px] text-mute tabular-nums">
               {nf.format(activeCount)} / {nf.format(instagramLimit)}
@@ -108,7 +111,9 @@ export function MetaMonitor({ text, lang, s }: Props) {
             </header>
             <p class="mt-2 min-h-[42px] whitespace-pre-wrap break-words text-[14px] leading-[21px] text-ink">
               {instagramPreview.previewText}
-              {instagramPreview.isTruncated && <span class="text-slate-400">... more</span>}
+              {instagramPreview.isTruncated && (
+                <span class="text-slate-400">{s.linkedin.seeMore}</span>
+              )}
             </p>
           </article>
 
@@ -128,7 +133,7 @@ export function MetaMonitor({ text, lang, s }: Props) {
                     excess: nf.format(tagCount - LIMITS.INSTAGRAM_HASHTAGS),
                   })}
                 </span>
-              ) : tagCount > 20 ? (
+              ) : tagCount >= LIMITS.INSTAGRAM_HASHTAGS - 1 ? (
                 m.approaching
               ) : tagCount > 0 ? (
                 m.within
@@ -147,12 +152,12 @@ export function MetaMonitor({ text, lang, s }: Props) {
           logo={<BrandLogo brand="facebook" />}
         >
           <Segmented<FeedView>
-            ariaLabel="Facebook feed view"
+            ariaLabel={`${m.title} Facebook`}
             value={facebookView}
             onChange={setFacebookView}
             options={[
-              { value: 'desktop', label: 'Desktop' },
-              { value: 'mobile', label: 'Mobile' },
+              { value: 'desktop', label: s.linkedin.viewDesktop },
+              { value: 'mobile', label: s.linkedin.viewMobile },
             ]}
           />
         </CardHead>
@@ -160,9 +165,9 @@ export function MetaMonitor({ text, lang, s }: Props) {
         <div class="px-4 pt-4 sm:px-5">
           <div class="flex flex-wrap items-center justify-between gap-x-3 gap-y-1">
             {facebookPreview.isTruncated ? (
-              <Badge tone="warn">Truncated</Badge>
+              <Badge tone="warn">{s.linkedin.badgeTruncated}</Badge>
             ) : (
-              <Badge tone="safe">Fits feed</Badge>
+              <Badge tone="safe">{m.badgeClean}</Badge>
             )}
             <span class="font-mono text-[12px] text-mute tabular-nums">
               {nf.format(activeCount)} / {nf.format(facebookLimit)}
@@ -187,7 +192,9 @@ export function MetaMonitor({ text, lang, s }: Props) {
             </header>
             <p class="mt-2 min-h-[42px] whitespace-pre-wrap break-words text-[14px] leading-[21px] text-ink">
               {facebookPreview.previewText}
-              {facebookPreview.isTruncated && <span class="text-slate-400"> See more</span>}
+              {facebookPreview.isTruncated && (
+                <span class="text-slate-400"> {s.linkedin.seeMore}</span>
+              )}
             </p>
           </article>
 

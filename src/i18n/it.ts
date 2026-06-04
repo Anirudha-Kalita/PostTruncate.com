@@ -61,7 +61,7 @@ export const it: Translations = {
         heading: 'Contatore di caratteri per Instagram & Facebook spazi inclusi',
         paragraphs: [
           'Per conquistare il tuo pubblico di riferimento sulle reti altamente visive, devi vincere la battaglia contro gli algoritmi di troncamento del feed. Instagram consente un limite di didascalia generoso, ma taglia brutalmente il tuo testo dietro un link nascosto dopo i primi 125 caratteri. Il nostro <strong>contatore di caratteri per Instagram</strong> monitora la lunghezza esatta del tuo input come <strong>contatore di caratteri spazi inclusi</strong> per garantire che la tua call-to-action principale resti ben visibile sopra la piega.',
-          'Analizzando il tuo <strong>contatore di caratteri con spazi</strong> e valutando i parametri del tuo <strong>conteggio dei caratteri nel testo</strong>, puoi formattare il layout del tuo testo alla perfezione. Inoltre, la dashboard mostra un monitoraggio in tempo reale della concentrazione dei tuoi hashtag. Se il layout del tuo profilo supera i 30 hashtag, il nostro sistema segnala un avviso immediato per proteggere il tuo profilo da shadowban algoritmici accidentali. Funziona come un <strong>contatore di parole e caratteri</strong> tutto in uno e uno <strong>strumento contatore di parole online</strong> per la crescita sui social.',
+          'Analizzando il tuo <strong>contatore di caratteri con spazi</strong> e valutando i parametri del tuo <strong>conteggio dei caratteri nel testo</strong>, puoi formattare il layout del tuo testo alla perfezione. Inoltre, la dashboard mostra un monitoraggio in tempo reale della concentrazione dei tuoi hashtag. Se il layout del tuo profilo supera i 5 hashtag, il nostro sistema segnala un avviso immediato per proteggere il tuo profilo da shadowban algoritmici accidentali. Funziona come un <strong>contatore di parole e caratteri</strong> tutto in uno e uno <strong>strumento contatore di parole online</strong> per la crescita sui social.',
         ],
       },
       {
@@ -112,10 +112,10 @@ export const it: Translations = {
       instagram: {
         name: 'Instagram',
         tag: 'Tetto degli hashtag',
-        body: 'Le didascalie di Instagram arrivano fino a 2.200 caratteri ma ne mostrano solo i primi 125 circa prima di un link "altro". La regola più rigida riguarda gli hashtag: più di 30 in una singola didascalia o commento e il post fallisce silenziosamente la pubblicazione. Anche accumulare decine di tag a bassa intenzione viene letto come spam. Tieni i tag essenziali e pertinenti, e tieni d’occhio il contatore in tempo reale per non sbattere mai contro il muro dei 30 tag.',
+        body: 'Le didascalie di Instagram arrivano fino a 2.200 caratteri ma ne mostrano solo i primi 125 circa prima di un link "altro". La regola più rigida riguarda gli hashtag: più di 5 in una singola didascalia o commento e il post fallisce silenziosamente la pubblicazione. Anche accumulare decine di tag a bassa intenzione viene letto come spam. Tieni i tag essenziali e pertinenti, e tieni d’occhio il contatore in tempo reale per non sbattere mai contro il muro dei 5 tag.',
         facts: [
           ['Limite didascalia', '2.200 caratteri'],
-          ['Limite rigido hashtag', '30 tag'],
+          ['Limite rigido hashtag', '5 tag'],
           ['Anteprima didascalia', '~125 caratteri'],
         ],
       },
@@ -144,7 +144,7 @@ export const it: Translations = {
     items: [
       {
         q: 'Quanto sono accurati i limiti di caratteri?',
-        a: 'PostTruncate usa i limiti pubblicati e ampiamente osservati di ogni piattaforma — 280 per X, 210/140 per la soglia di LinkedIn, 30 hashtag per Instagram e un peso fisso di 23 caratteri per i link. Le piattaforme li modificano di tanto in tanto e la resa varia leggermente da dispositivo a dispositivo, quindi considera le anteprime una stima approssimata piuttosto che una garanzia perfetta al pixel.',
+        a: 'PostTruncate usa i limiti pubblicati e ampiamente osservati di ogni piattaforma — 280 per X, 210/140 per la soglia di LinkedIn, 5 hashtag per Instagram e un peso fisso di 23 caratteri per i link. Le piattaforme li modificano di tanto in tanto e la resa varia leggermente da dispositivo a dispositivo, quindi considera le anteprime una stima approssimata piuttosto che una garanzia perfetta al pixel.',
       },
       {
         q: 'Spazi e punteggiatura contano come caratteri?',
@@ -171,8 +171,24 @@ export const it: Translations = {
         a: 'Elimina i caratteri invisibili e a larghezza zero — spazi a larghezza zero, byte-order mark, segni di controllo bidirezionale, trattini morbidi e codici di controllo vaganti. Spesso si infiltrano quando copi da altre app e mandano silenziosamente in tilt i conteggi dei caratteri e l’accessibilità sui client mobili più vecchi senza mai essere visibili.',
       },
       {
+        q: 'Che cos’è la densità delle parole chiave e in che modo il monitor di eccesso protegge i miei contenuti?',
+        a: 'La densità delle parole chiave è la percentuale con cui una parola compare rispetto al totale delle parole. Ripetere troppo lo stesso termine può sembrare keyword stuffing per motori di ricerca e lettori. Il monitor segue la frequenza in tempo reale e segnala ogni termine che supera la soglia sicura del 3,0%, così puoi riformulare prima di pubblicare.',
+      },
+      {
+        q: 'Come calcolano i timer di lettura e parlato la durata del mio post?',
+        a: 'Il timer di lettura divide il conteggio parole per una velocità media di 275 parole al minuto. Il timer del parlato usa un ritmo conversazionale di 150 parole al minuto. Così puoi stimare articoli, script, newsletter o video brevi direttamente nell’editor.',
+      },
+      {
+        q: 'Che cosa fa il Social Sanitizer e perché dovrei rimuovere emoji o estrarre hashtag?',
+        a: 'Le azioni di pulizia sistemano le bozze con un clic. Il rimuovi emoji elimina icone e simboli speciali quando serve testo semplice, mentre l’estrattore di hashtag toglie le etichette dal corpo del testo e le raggruppa in fondo per rendere la didascalia più leggibile.',
+      },
+      {
         q: 'Il mio testo viene inviato da qualche parte?',
         a: 'No. L’intero editor e ogni anteprima girano localmente nel tuo browser. La tua bozza non lascia mai il tuo dispositivo — niente account, niente caricamento e nessuna elaborazione dei tuoi contenuti sul server.',
+      },
+      {
+        q: 'Il salvataggio automatico di sessione significa che i miei dati vengono salvati su un server?',
+        a: 'No. Le bozze non vengono mai caricate né salvate su infrastrutture esterne. Il salvataggio automatico di sessione usa sessionStorage nel tuo browser, solo in quella scheda. Se aggiorni la pagina nella stessa scheda, il testo viene ripristinato; quando termina la sessione della scheda, il browser cancella quella cache temporanea.',
       },
       {
         q: 'PostTruncate è gratuito?',
@@ -315,7 +331,7 @@ export const it: Translations = {
         {
           heading: 'Cosa fa',
           paragraphs: [
-            'Scrivi o incolla una bozza una sola volta, e PostTruncate la mostra nel modo in cui <strong>LinkedIn, X, Threads, Instagram e Facebook</strong> la renderanno davvero — la soglia “…altro”, la suddivisione del thread a 280 caratteri, il peso dei link a 23 caratteri, il tetto dei 30 hashtag. Vedi esattamente cosa sopravvive sopra la soglia prima di decidere di pubblicare.',
+            'Scrivi o incolla una bozza una sola volta, e PostTruncate la mostra nel modo in cui <strong>LinkedIn, X, Threads, Instagram e Facebook</strong> la renderanno davvero — la soglia “…altro”, la suddivisione del thread a 280 caratteri, il peso dei link a 23 caratteri, il tetto dei 5 hashtag. Vedi esattamente cosa sopravvive sopra la soglia prima di decidere di pubblicare.',
             'Individua inoltre i problemi silenziosi che riducono la tua portata: i caratteri invisibili a larghezza zero che mandano in tilt conteggi e screen reader, e i “font fantasiosi” pseudo-Unicode che sembrano stilizzati ma sono illeggibili per le tecnologie assistive.',
           ],
         },
@@ -475,8 +491,8 @@ export const it: Translations = {
       hashtagLabel: 'Concentrazione di hashtag',
       over: 'Oltre il limite rigido di {limit} hashtag di Instagram — la didascalia non riuscirà a pubblicarsi. Rimuovine {excess}.',
       approaching:
-        'Ti stai avvicinando al tetto dei 30 tag. Riduci ai tag con la massima intenzione.',
-      within: 'Comodamente entro il limite di 30 hashtag di Instagram.',
+        'Ti stai avvicinando al tetto dei 5 tag. Riduci ai tag con la massima intenzione.',
+      within: 'Comodamente entro il limite di 5 hashtag di Instagram.',
       none: 'Nessun hashtag rilevato finora.',
       a11yLabel: 'Accessibilità · font fantasiosi',
       flagged: '{n} segnalati',

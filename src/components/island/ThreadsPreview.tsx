@@ -30,7 +30,6 @@ export function ThreadsPreview({ text, lang, s }: Props) {
   const urls = detectUrls(trimmed);
   const posts = trimmed ? splitThread(trimmed, LIMITS.THREADS, charCount) : [];
   const isChain = posts.length > 1;
-  const isOverLimit = count > LIMITS.THREADS;
   const visualFold =
     view === 'mobile' ? THREADS_MOBILE_FOLD : THREADS_DESKTOP_FOLD;
 
@@ -41,13 +40,13 @@ export function ThreadsPreview({ text, lang, s }: Props) {
         title={th.title}
         logo={<BrandLogo brand="threads" />}
       >
-        <Segmented<FeedView>
-          ariaLabel="Threads feed view"
+          <Segmented<FeedView>
+          ariaLabel={`${th.title} ${s.linkedin.viewAriaLabel}`}
           value={view}
           onChange={setView}
           options={[
-            { value: 'desktop', label: 'Desktop' },
-            { value: 'mobile', label: 'Mobile' },
+            { value: 'desktop', label: s.linkedin.viewDesktop },
+            { value: 'mobile', label: s.linkedin.viewMobile },
           ]}
         />
       </CardHead>
@@ -67,7 +66,7 @@ export function ThreadsPreview({ text, lang, s }: Props) {
               : th.charLength}
           </span>
           <span class="font-mono text-[12px] text-mute tabular-nums">
-            {nf.format(count)} / {nf.format(visualFold)}
+            {nf.format(count)} / {nf.format(LIMITS.THREADS)}
           </span>
         </div>
       </div>
@@ -75,7 +74,7 @@ export function ThreadsPreview({ text, lang, s }: Props) {
       <div class="space-y-3 p-4 sm:p-5">
         {posts.length === 0 ? (
           <article class="rounded-md border border-hairline bg-canvas p-4 text-[14px] text-mute">
-            {interp(th.placeholder, { limit: nf.format(visualFold) })}
+            {interp(th.placeholder, { limit: nf.format(LIMITS.THREADS) })}
           </article>
         ) : (
           posts.map((post, i) => (
@@ -87,7 +86,11 @@ export function ThreadsPreview({ text, lang, s }: Props) {
                   <span class="ml-1 text-[12px] text-mute">{s.common.handle}</span>
                 </div>
               </header>
-              <ThreadsPostText post={post} visualFold={visualFold} />
+              <ThreadsPostText
+                post={post}
+                visualFold={visualFold}
+                seeMore={s.linkedin.seeMore}
+              />
               {isChain && (
                 <span class="absolute bottom-3 right-4 font-mono text-[11px] text-mute tabular-nums">
                   {nf.format(i + 1)}/{nf.format(posts.length)}
@@ -107,9 +110,11 @@ export function ThreadsPreview({ text, lang, s }: Props) {
 function ThreadsPostText({
   post,
   visualFold,
+  seeMore,
 }: {
   post: string;
   visualFold: number;
+  seeMore: string;
 }) {
   const shouldFold = charCount(post) > visualFold;
   const visible = shouldFold
@@ -119,7 +124,7 @@ function ThreadsPostText({
   return (
     <p class="mt-2 whitespace-pre-wrap break-words text-[14px] leading-[21px] text-ink">
       {visible}
-      {shouldFold && <span class="text-mute">see more ...</span>}
+      {shouldFold && <span class="text-mute">{seeMore}</span>}
     </p>
   );
 }
