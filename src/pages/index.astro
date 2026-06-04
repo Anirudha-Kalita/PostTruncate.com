@@ -1,61 +1,160 @@
 ---
-// Root redirect (/) → a locale landing page. Every locale is URL-prefixed, so
-// "/" itself renders nothing meaningful; this picks the best language and
-// forwards. Resolution order, all client-side so the static HTML stays cacheable:
-//   1. a previously stored choice (localStorage 'lang')
-//   2. the browser's preferred languages (navigator.languages)
-//   3. the default locale (en)
-// A <meta http-equiv="refresh"> + <noscript> link guarantee a forward even with
-// JS disabled or before the inline script runs.
-import { LOCALE_CODES, DEFAULT_LOCALE } from '../i18n/config';
+// Bare-root locale router. This page must run on demand so it can inspect each
+// visitor's request headers instead of shipping a one-size static redirect.
+export const prerender = false;
 
-const codes = LOCALE_CODES;
-const fallback = `/${DEFAULT_LOCALE}/`;
+import {
+  DEFAULT_LOCALE,
+  LOCALE_CODES,
+  isLocale,
+  type LocaleCode,
+} from '../i18n/config';
+
+const LANGUAGE_COOKIE = 'preferred_locale';
+const REDIRECT_VARY =
+  'Accept-Language, Cookie, x-vercel-ip-country, cf-ipcountry, x-country-code, x-nf-country, fastly-client-country-code';
+
+const COUNTRY_LOCALE = {
+  AD: 'es',
+  AR: 'es',
+  BO: 'es',
+  CL: 'es',
+  CO: 'es',
+  CR: 'es',
+  CU: 'es',
+  DO: 'es',
+  EC: 'es',
+  ES: 'es',
+  GT: 'es',
+  HN: 'es',
+  MX: 'es',
+  NI: 'es',
+  PA: 'es',
+  PE: 'es',
+  PR: 'es',
+  PY: 'es',
+  SV: 'es',
+  UY: 'es',
+  VE: 'es',
+
+  AT: 'de',
+  CH: 'de',
+  DE: 'de',
+  LI: 'de',
+
+  BE: 'fr',
+  FR: 'fr',
+  LU: 'fr',
+  MC: 'fr',
+
+  AO: 'pt',
+  BR: 'pt',
+  MZ: 'pt',
+  PT: 'pt',
+
+  IT: 'it',
+  SM: 'it',
+  VA: 'it',
+
+  NL: 'nl',
+  SR: 'nl',
+
+  JP: 'ja',
+
+  CN: 'zh',
+  HK: 'zh',
+  MO: 'zh',
+  TW: 'zh',
+
+  DK: 'da',
+
+  AU: 'en',
+  CA: 'en',
+  GB: 'en',
+  IE: 'en',
+  IN: 'en',
+  NZ: 'en',
+  SG: 'en',
+  US: 'en',
+  ZA: 'en',
+} satisfies Record<string, LocaleCode>;
+
+type CloudflareRequest = Request & {
+  cf?: {
+    country?: string;
+  };
+};
+
+const supportedLocales = new Set(LOCALE_CODES);
+const requestUrl = new URL(Astro.request.url);
+
+const normalizeLocale = (value: string | null | undefined): LocaleCode | undefined => {
+  const base = value?.trim().toLowerCase().replace('_', '-').split('-')[0];
+  return isLocale(base) ? base : undefined;
+};
+
+const redirectTarget = (locale: LocaleCode) => {
+  const target = new URL(`/${locale}/`, requestUrl);
+  for (const [key, value] of requestUrl.searchParams) {
+    if (key.toLowerCase() !== 'lang') target.searchParams.append(key, value);
+  }
+  return `${target.pathname}${target.search}`;
+};
+
+const redirectTo = (locale: LocaleCode) => {
+  const response = Astro.redirect(redirectTarget(locale), 302);
+  response.headers.set('Vary', REDIRECT_VARY);
+  return response;
+};
+
+const getBrowserLocale = (): LocaleCode | undefined => {
+  const browserLocales = [
+    Astro.preferredLocale,
+    ...(Astro.preferredLocaleList ?? []),
+  ];
+
+  for (const locale of browserLocales) {
+    const normalized = normalizeLocale(locale);
+    if (normalized && supportedLocales.has(normalized)) return normalized;
+  }
+};
+
+const getGeoCountry = () => {
+  const request = Astro.request as CloudflareRequest;
+  const headers = Astro.request.headers;
+
+  return (
+    request.cf?.country ??
+    headers.get('x-vercel-ip-country') ??
+    headers.get('cf-ipcountry') ??
+    headers.get('x-country-code') ??
+    headers.get('x-nf-country') ??
+    headers.get('fastly-client-country-code') ??
+    ''
+  )
+    .trim()
+    .toUpperCase();
+};
+
+const getGeoLocale = (): LocaleCode | undefined => {
+  const country = getGeoCountry();
+  return COUNTRY_LOCALE[country];
+};
+
+const queryLocale = normalizeLocale(requestUrl.searchParams.get('lang'));
+if (queryLocale) {
+  Astro.cookies.set(LANGUAGE_COOKIE, queryLocale, {
+    path: '/',
+    maxAge: 60 * 60 * 24 * 365,
+    sameSite: 'lax',
+  });
+
+  return redirectTo(queryLocale);
+}
+
+const savedLocale = normalizeLocale(Astro.cookies.get(LANGUAGE_COOKIE)?.value);
+const detectedLocale =
+  savedLocale ?? getBrowserLocale() ?? getGeoLocale() ?? DEFAULT_LOCALE;
+
+return redirectTo(detectedLocale);
 ---
-
-<!doctype html>
-<html lang={DEFAULT_LOCALE}>
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>PostTruncate</title>
-    <link rel="canonical" href={fallback} />
-    {/* JS-off / pre-script fallback: forward to the default locale. */}
-    <meta http-equiv="refresh" content={`0; url=${fallback}`} />
-    <meta name="robots" content="noindex" />
-
-    <script is:inline define:vars={{ codes, fallback }}>
-      (function () {
-        try {
-          var pick = function () {
-            var stored = null;
-            try {
-              stored = localStorage.getItem('lang');
-            } catch (e) {}
-            if (stored && codes.indexOf(stored) !== -1) return stored;
-
-            var prefs = navigator.languages || [navigator.language || ''];
-            for (var i = 0; i < prefs.length; i++) {
-              var base = String(prefs[i]).toLowerCase().split('-')[0];
-              if (codes.indexOf(base) !== -1) return base;
-            }
-            return null;
-          };
-          var lang = pick();
-          // Replace (not push) so the bare "/" doesn't sit in history between
-          // the user and the back button.
-          location.replace(lang ? '/' + lang + '/' : fallback);
-        } catch (e) {
-          location.replace(fallback);
-        }
-      })();
-    </script>
-  </head>
-  <body>
-    <noscript>
-      <p>
-        Redirecting to PostTruncate. <a href={fallback}>Continue</a>.
-      </p>
-    </noscript>
-  </body>
-</html>

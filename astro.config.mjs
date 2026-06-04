@@ -1,6 +1,7 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
 import preact from '@astrojs/preact';
+import vercel from '@astrojs/vercel';
 import tailwindcss from '@tailwindcss/vite';
 import { LOCALE_CODES, DEFAULT_LOCALE } from './src/i18n/config.ts';
 
@@ -21,6 +22,7 @@ export default defineConfig({
       redirectToDefaultLocale: false,
     },
   },
+  adapter: vercel(),
   integrations: [preact()],
   vite: {
     plugins: [tailwindcss()],

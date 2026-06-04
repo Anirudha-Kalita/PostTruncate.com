@@ -7,6 +7,8 @@
 export interface LocaleMeta {
   /** Route + hreflang code (e.g. "en" → /en, hreflang="en"). */
   code: string;
+  /** Country flag icon shown beside the language name in the switcher. */
+  flagSrc: string;
   /** Endonym shown in the language switcher (the language's own name). */
   label: string;
   /** OpenGraph locale (language_TERRITORY). */
@@ -17,16 +19,16 @@ export interface LocaleMeta {
 
 // Order here is the order rendered in the switcher. English first (default).
 export const LOCALES: LocaleMeta[] = [
-  { code: 'en', label: 'English', ogLocale: 'en_US', dir: 'ltr' },
-  { code: 'es', label: 'Español', ogLocale: 'es_ES', dir: 'ltr' },
-  { code: 'de', label: 'Deutsch', ogLocale: 'de_DE', dir: 'ltr' },
-  { code: 'fr', label: 'Français', ogLocale: 'fr_FR', dir: 'ltr' },
-  { code: 'pt', label: 'Português', ogLocale: 'pt_PT', dir: 'ltr' },
-  { code: 'it', label: 'Italiano', ogLocale: 'it_IT', dir: 'ltr' },
-  { code: 'nl', label: 'Nederlands', ogLocale: 'nl_NL', dir: 'ltr' },
-  { code: 'ja', label: '日本語', ogLocale: 'ja_JP', dir: 'ltr' },
-  { code: 'zh', label: '中文', ogLocale: 'zh_CN', dir: 'ltr' },
-  { code: 'da', label: 'Dansk', ogLocale: 'da_DK', dir: 'ltr' },
+  { code: 'en', flagSrc: '/flags/us.svg', label: 'English', ogLocale: 'en_US', dir: 'ltr' },
+  { code: 'es', flagSrc: '/flags/es.svg', label: 'Español', ogLocale: 'es_ES', dir: 'ltr' },
+  { code: 'de', flagSrc: '/flags/de.svg', label: 'Deutsch', ogLocale: 'de_DE', dir: 'ltr' },
+  { code: 'fr', flagSrc: '/flags/fr.svg', label: 'Français', ogLocale: 'fr_FR', dir: 'ltr' },
+  { code: 'pt', flagSrc: '/flags/pt.svg', label: 'Português', ogLocale: 'pt_PT', dir: 'ltr' },
+  { code: 'it', flagSrc: '/flags/it.svg', label: 'Italiano', ogLocale: 'it_IT', dir: 'ltr' },
+  { code: 'nl', flagSrc: '/flags/nl.svg', label: 'Nederlands', ogLocale: 'nl_NL', dir: 'ltr' },
+  { code: 'ja', flagSrc: '/flags/jp.svg', label: '日本語', ogLocale: 'ja_JP', dir: 'ltr' },
+  { code: 'zh', flagSrc: '/flags/cn.svg', label: '中文', ogLocale: 'zh_CN', dir: 'ltr' },
+  { code: 'da', flagSrc: '/flags/dk.svg', label: 'Dansk', ogLocale: 'da_DK', dir: 'ltr' },
 ];
 
 export const DEFAULT_LOCALE = 'en';
