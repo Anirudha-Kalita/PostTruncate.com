@@ -1,6 +1,6 @@
 /** @jsxImportSource preact */
 import { useState } from 'preact/hooks';
-import { charCount, detectUrls, LIMITS } from '../../lib/textTools';
+import { charCount, detectUrls, LIMITS, splitThread } from '../../lib/textTools';
 import { Card, CardHead, Badge, Segmented, Meter, BrandLogo } from './ui';
 import { interp, plural } from '../../i18n/interp';
 import type { IslandStrings } from '../../i18n/types';
@@ -28,7 +28,8 @@ export function ThreadsPreview({ text, lang, s }: Props) {
   const trimmed = text.trim();
   const count = charCount(trimmed);
   const urls = detectUrls(trimmed);
-  const posts = trimmed ? [trimmed] : [];
+  const posts = trimmed ? splitThread(trimmed, LIMITS.THREADS, charCount) : [];
+  const isChain = posts.length > 1;
   const isOverLimit = count > LIMITS.THREADS;
   const visualFold =
     view === 'mobile' ? THREADS_MOBILE_FOLD : THREADS_DESKTOP_FOLD;
@@ -55,8 +56,10 @@ export function ThreadsPreview({ text, lang, s }: Props) {
         <div class="flex flex-wrap items-center justify-between gap-x-3 gap-y-1">
           {!trimmed ? (
             <Badge tone="neutral" dot={false}>{th.badgeIdle}</Badge>
+          ) : isChain ? (
+            <Badge tone="info">{interp(th.badgeThread, { n: nf.format(posts.length) })}</Badge>
           ) : (
-            <Badge tone={isOverLimit ? 'danger' : 'safe'}>{th.badgeSingle}</Badge>
+            <Badge tone="safe">{th.badgeSingle}</Badge>
           )}
           <span class="text-[13px] text-body">
             {urls.length > 0
@@ -67,13 +70,6 @@ export function ThreadsPreview({ text, lang, s }: Props) {
             {nf.format(count)} / {nf.format(LIMITS.THREADS)}
           </span>
         </div>
-        <div class="mt-3">
-          <Meter
-            value={Math.min(count, LIMITS.THREADS)}
-            max={LIMITS.THREADS}
-            tone={isOverLimit ? 'danger' : count > LIMITS.THREADS * 0.9 ? 'warn' : 'safe'}
-          />
-        </div>
       </div>
 
       <div class="space-y-3 p-4 sm:p-5">
@@ -82,7 +78,7 @@ export function ThreadsPreview({ text, lang, s }: Props) {
             {interp(th.placeholder, { limit: nf.format(LIMITS.THREADS) })}
           </article>
         ) : (
-          posts.map((post) => (
+          posts.map((post, i) => (
             <article class="relative rounded-md border border-hairline bg-canvas p-4">
               <header class="flex items-center gap-2.5">
                 <span class="h-8 w-8 shrink-0 rounded-full bg-linear-to-br from-grad-preview-start to-grad-ship-start" />
@@ -92,6 +88,11 @@ export function ThreadsPreview({ text, lang, s }: Props) {
                 </div>
               </header>
               <ThreadsPostText post={post} visualFold={visualFold} />
+              {isChain && (
+                <span class="absolute bottom-3 right-4 font-mono text-[11px] text-mute tabular-nums">
+                  {nf.format(i + 1)}/{nf.format(posts.length)}
+                </span>
+              )}
               <span class="mt-2 block font-mono text-[11px] text-mute/70 tabular-nums">
                 {interp(s.common.charsSuffix, { n: nf.format(charCount(post)) })}
               </span>
@@ -110,7 +111,7 @@ function ThreadsPostText({
   post: string;
   visualFold: number;
 }) {
-  const shouldFold = !/[\r\n]/.test(post) && charCount(post) > visualFold;
+  const shouldFold = charCount(post) > visualFold;
   const visible = shouldFold
     ? Array.from(post).slice(0, visualFold).join('')
     : post;
@@ -118,7 +119,7 @@ function ThreadsPostText({
   return (
     <p class="mt-2 whitespace-pre-wrap break-words text-[14px] leading-[21px] text-ink">
       {visible}
-      {shouldFold && <span class="text-mute">... more</span>}
+      {shouldFold && <span class="text-mute">see more ...</span>}
     </p>
   );
 }
