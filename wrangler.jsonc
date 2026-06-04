@@ -1,0 +1,13 @@
+{
+  // Root Wrangler config. The @astrojs/cloudflare adapter reads this as the base
+  // and merges Astro's generated settings (ASSETS binding, SESSION KV, IMAGES,
+  // compatibility date) on top into dist/server/wrangler.json at build time.
+  // Put durable, rebuild-safe settings HERE, not in the generated file.
+  "name": "posttruncate-com",
+  "compatibility_date": "2026-04-15",
+  // Serve the Worker at the apex custom domain. custom_domain:true tells
+  // Cloudflare to manage the DNS record + edge certificate for this hostname.
+  "routes": [
+    { "pattern": "posttruncate.com", "custom_domain": true }
+  ]
+}
