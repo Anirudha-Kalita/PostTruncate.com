@@ -448,11 +448,15 @@ export const nl: Translations = {
       viewDesktop: 'Desktop',
       viewMobile: 'Mobiel',
       badgeTruncated: 'Afgekapte feedtekst',
+      badgeOverLimit: 'Boven berichtlimiet',
       badgeSafe: 'Veilige hookregel',
       beforeFold: '{total} / {limit} vóór de vouw',
+      postLimit: '{total} / {limit} berichtlimiet',
       seeMore: '…meer weergeven',
       profileMeta: 'Oprichter · 1e · Zojuist',
       placeholder: 'De openingsregels van je bericht verschijnen hier…',
+      overLimitNote:
+        'LinkedIn-berichten zijn beperkt tot {limit} tekens. Kort met {excess} in voordat je publiceert.',
       truncatedNote:
         'Lezers zien in de feed alleen de eerste {limit} tekens. Zet je hook vooraan, vóór de vouw.',
       safeNote:
@@ -488,6 +492,10 @@ export const nl: Translations = {
       title: 'Opmaakmonitor',
       badgeNeedsFix: 'Heeft een fix nodig',
       badgeClean: 'Ziet er schoon uit',
+      badgeCaptionOver: 'Bijschrift te lang',
+      captionLimit: '{total} / {limit} bijschriftlimiet',
+      captionOver:
+        'Instagram-bijschriften zijn beperkt tot {limit} tekens. Kort met {excess} in voordat je publiceert.',
       hashtagLabel: 'Hashtagconcentratie',
       over: 'Over de harde limiet van Instagram van {limit} hashtags — het bijschrift kan niet worden geplaatst. Verwijder {excess}.',
       approaching:

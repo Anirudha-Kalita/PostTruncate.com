@@ -25,6 +25,7 @@ export function LinkedInPreview({ text, view, setView, lang, s }: Props) {
   const limit = view === 'mobile' ? LIMITS.LINKEDIN_MOBILE : LIMITS.LINKEDIN_DESKTOP;
   const { hook, rest, truncated } = linkedInHook(text, limit);
   const total = charCount(text);
+  const isOverPostLimit = total > LIMITS.LINKEDIN_POST;
   const viewLabel = view === 'mobile' ? l.viewMobile : l.viewDesktop;
 
   return (
@@ -47,20 +48,27 @@ export function LinkedInPreview({ text, view, setView, lang, s }: Props) {
 
       <div class="px-4 pt-4 sm:px-5">
         <div class="flex flex-wrap items-center justify-between gap-x-3 gap-y-1">
-          {truncated ? (
+          {isOverPostLimit ? (
+            <Badge tone="danger">{l.badgeOverLimit}</Badge>
+          ) : truncated ? (
             <Badge tone="warn">{l.badgeTruncated}</Badge>
           ) : (
             <Badge tone="safe">{l.badgeSafe}</Badge>
           )}
           <span class="font-mono text-[12px] text-mute tabular-nums">
-            {interp(l.beforeFold, { total: nf.format(total), limit: nf.format(limit) })}
+            {isOverPostLimit
+              ? interp(l.postLimit, {
+                  total: nf.format(total),
+                  limit: nf.format(LIMITS.LINKEDIN_POST),
+                })
+              : interp(l.beforeFold, { total: nf.format(total), limit: nf.format(limit) })}
           </span>
         </div>
         <div class="mt-3">
           <Meter
-            value={total}
-            max={limit}
-            tone={truncated ? 'warn' : 'safe'}
+            value={Math.min(total, isOverPostLimit ? LIMITS.LINKEDIN_POST : limit)}
+            max={isOverPostLimit ? LIMITS.LINKEDIN_POST : limit}
+            tone={isOverPostLimit ? 'danger' : truncated ? 'warn' : 'safe'}
           />
         </div>
       </div>
@@ -104,7 +112,12 @@ export function LinkedInPreview({ text, view, setView, lang, s }: Props) {
         </article>
 
         <p class="mt-3 text-[12px] leading-4 text-body">
-          {truncated
+          {isOverPostLimit
+            ? interp(l.overLimitNote, {
+                limit: nf.format(LIMITS.LINKEDIN_POST),
+                excess: nf.format(total - LIMITS.LINKEDIN_POST),
+              })
+            : truncated
             ? interp(l.truncatedNote, { limit: nf.format(limit) })
             : interp(l.safeNote, { view: viewLabel })}
         </p>

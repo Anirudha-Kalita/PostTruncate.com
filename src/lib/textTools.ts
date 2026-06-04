@@ -11,6 +11,8 @@
 export const LIMITS = {
   LINKEDIN_DESKTOP: 210,
   LINKEDIN_MOBILE: 140,
+  /** LinkedIn's published hard cap for a standard feed post. */
+  LINKEDIN_POST: 3000,
   TWEET: 280,
   /** Threads (by Meta) per-post character ceiling; longer copy chains as replies. */
   THREADS: 500,
@@ -18,6 +20,8 @@ export const LIMITS = {
   URL_WEIGHT: 23,
   /** Instagram's hard ceiling for hashtags in a post or reel. */
   INSTAGRAM_HASHTAGS: 5,
+  /** Instagram's published caption character cap. */
+  INSTAGRAM_CAPTION: 2200,
 } as const;
 
 /** Count Unicode code points (not UTF-16 units). */
@@ -148,6 +152,16 @@ function isWideCodePoint(cp: number): boolean {
   );
 }
 
+function isSingleWeightCodePoint(cp: number): boolean {
+  return (
+    cp <= 0x007f || // Basic Latin, ASCII punctuation, digits, whitespace.
+    (cp >= 0x00a0 && cp <= 0x024f) || // Latin-1 + Latin Extended blocks.
+    (cp >= 0x2000 && cp <= 0x206f) || // General punctuation.
+    (cp >= 0x20a0 && cp <= 0x20cf) || // Currency symbols.
+    (cp >= 0x2100 && cp <= 0x214f) // Letterlike symbols.
+  );
+}
+
 function plainTextWeight(text: string): number {
   if (!text) return 0;
 
@@ -161,7 +175,9 @@ function plainTextWeight(text: string): number {
 
       for (const ch of segment) {
         const cp = ch.codePointAt(0);
-        if (cp !== undefined) weight += isWideCodePoint(cp) ? 2 : 1;
+        if (cp !== undefined) {
+          weight += isWideCodePoint(cp) || !isSingleWeightCodePoint(cp) ? 2 : 1;
+        }
       }
     }
     return weight;
@@ -171,28 +187,29 @@ function plainTextWeight(text: string): number {
   for (const ch of text) {
     const cp = ch.codePointAt(0);
     if (cp === undefined) continue;
-    weight += isEmojiCluster(ch) || isWideCodePoint(cp) ? 2 : 1;
+    weight += isEmojiCluster(ch) || isWideCodePoint(cp) || !isSingleWeightCodePoint(cp) ? 2 : 1;
   }
   return weight;
 }
 
 /**
  * Weighted length the way X/Twitter counts it: every URL collapses to a flat
- * URL_WEIGHT (23), emoji and wide CJK/Japanese/Korean-style characters count
- * as 2, and ordinary Latin text counts as 1.
+ * URL_WEIGHT (23), text is normalized to NFC, emoji/CJK/other Unicode count
+ * as 2, and ordinary Latin text, punctuation, and common symbols count as 1.
  */
 export function weightedLength(text: string): number {
-  const urls = detectUrls(text);
-  if (urls.length === 0) return plainTextWeight(text);
+  const normalized = text.normalize('NFC');
+  const urls = detectUrls(normalized);
+  if (urls.length === 0) return plainTextWeight(normalized);
 
   let weight = 0;
   let cursor = 0;
   for (const u of urls) {
-    weight += plainTextWeight(text.slice(cursor, u.start));
+    weight += plainTextWeight(normalized.slice(cursor, u.start));
     weight += LIMITS.URL_WEIGHT; // URL as a fixed cost
     cursor = u.end;
   }
-  weight += plainTextWeight(text.slice(cursor));
+  weight += plainTextWeight(normalized.slice(cursor));
   return weight;
 }
 

@@ -139,7 +139,7 @@ const links = [
       </button>
 
       <div class="nav__cta">
-        <a href="#workspace" class="nav__pill">{nav.cta}</a>
+        <a href={`${home}#workspace`} class="nav__pill">{nav.cta}</a>
       </div>
 
       <!-- Mobile disclosure menu (shown < md). CSS-only baseline; the script
@@ -154,7 +154,7 @@ const links = [
           <nav class="nav__panel-links" aria-label="Primary mobile">
             {links.map((l) => <a href={l.href} class="nav__panel-link">{l.label}</a>)}
           </nav>
-          <a href="#workspace" class="nav__pill nav__pill--block">{nav.cta}</a>
+          <a href={`${home}#workspace`} class="nav__pill nav__pill--block">{nav.cta}</a>
         </div>
       </details>
     </div>

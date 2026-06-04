@@ -448,11 +448,15 @@ export const pt: Translations = {
       viewDesktop: 'Computador',
       viewMobile: 'Telemóvel',
       badgeTruncated: 'Texto do feed truncado',
+      badgeOverLimit: 'Acima do limite da publicação',
       badgeSafe: 'Linha do gancho segura',
       beforeFold: '{total} / {limit} antes da dobra',
+      postLimit: '{total} / {limit} limite da publicação',
       seeMore: '…ver mais',
       profileMeta: 'Fundador · 1.º · Agora mesmo',
       placeholder: 'As primeiras linhas da sua publicação aparecem aqui…',
+      overLimitNote:
+        'As publicações do LinkedIn estão limitadas a {limit} caracteres. Encurte {excess} antes de publicar.',
       truncatedNote:
         'Os leitores veem apenas os primeiros {limit} caracteres no feed. Coloque o gancho logo no início, antes da dobra.',
       safeNote:
@@ -488,6 +492,10 @@ export const pt: Translations = {
       title: 'Monitor de formatação',
       badgeNeedsFix: 'Precisa de correção',
       badgeClean: 'Parece limpo',
+      badgeCaptionOver: 'Legenda demasiado longa',
+      captionLimit: '{total} / {limit} limite da legenda',
+      captionOver:
+        'As legendas do Instagram estão limitadas a {limit} caracteres. Encurte {excess} antes de publicar.',
       hashtagLabel: 'Concentração de hashtags',
       over: 'Acima do limite máximo do Instagram de {limit} hashtags — a legenda não será publicada. Remova {excess}.',
       approaching:

@@ -446,11 +446,15 @@ export const zh: Translations = {
       viewDesktop: '桌面端',
       viewMobile: '移动端',
       badgeTruncated: '被截断的信息流文字',
+      badgeOverLimit: '超过帖子上限',
       badgeSafe: '安全的钩子行',
       beforeFold: '折叠前 {total} / {limit}',
+      postLimit: '{total} / {limit} 帖子上限',
       seeMore: '…查看更多',
       profileMeta: '创始人 · 1度人脉 · 刚刚',
       placeholder: '你帖子的开头几行会显示在这里……',
+      overLimitNote:
+        'LinkedIn 帖子最多 {limit} 个字符。发布前请缩短 {excess}。',
       truncatedNote:
         '读者在信息流里只能看到前 {limit} 个字符。把你的钩子放在折叠线之前。',
       safeNote:
@@ -486,6 +490,10 @@ export const zh: Translations = {
       title: '格式监测器',
       badgeNeedsFix: '需要修正',
       badgeClean: '看起来不错',
+      badgeCaptionOver: '说明文字过长',
+      captionLimit: '{total} / {limit} 说明文字上限',
+      captionOver:
+        'Instagram 说明文字最多 {limit} 个字符。发布前请缩短 {excess}。',
       hashtagLabel: '话题标签密度',
       over: '超过了 Instagram {limit} 个话题标签的硬性上限——标题将发布失败。请移除 {excess}。',
       approaching:

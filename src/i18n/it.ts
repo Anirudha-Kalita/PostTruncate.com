@@ -448,11 +448,15 @@ export const it: Translations = {
       viewDesktop: 'Desktop',
       viewMobile: 'Mobile',
       badgeTruncated: 'Testo del feed troncato',
+      badgeOverLimit: 'Oltre il limite del post',
       badgeSafe: 'Riga del gancio al sicuro',
       beforeFold: '{total} / {limit} prima della soglia',
+      postLimit: '{total} / {limit} limite del post',
       seeMore: '…altro',
       profileMeta: 'Founder · 1° · Adesso',
       placeholder: 'Le righe di apertura del tuo post appaiono qui…',
+      overLimitNote:
+        'I post LinkedIn sono limitati a {limit} caratteri. Accorcia di {excess} prima di pubblicare.',
       truncatedNote:
         'Chi legge vede solo i primi {limit} caratteri nel feed. Anticipa il tuo gancio prima della soglia.',
       safeNote:
@@ -488,6 +492,10 @@ export const it: Translations = {
       title: 'Monitor di formattazione',
       badgeNeedsFix: 'Da correggere',
       badgeClean: 'Sembra pulito',
+      badgeCaptionOver: 'Didascalia troppo lunga',
+      captionLimit: '{total} / {limit} limite didascalia',
+      captionOver:
+        'Le didascalie Instagram sono limitate a {limit} caratteri. Accorcia di {excess} prima di pubblicare.',
       hashtagLabel: 'Concentrazione di hashtag',
       over: 'Oltre il limite rigido di {limit} hashtag di Instagram — la didascalia non riuscirà a pubblicarsi. Rimuovine {excess}.',
       approaching:

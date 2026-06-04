@@ -448,11 +448,15 @@ export const da: Translations = {
       viewDesktop: 'Desktop',
       viewMobile: 'Mobil',
       badgeTruncated: 'Afkortet feed-tekst',
+      badgeOverLimit: 'Over opslagets grænse',
       badgeSafe: 'Sikker hook-linje',
       beforeFold: '{total} / {limit} før folden',
+      postLimit: '{total} / {limit} opslagets grænse',
       seeMore: '…se mere',
       profileMeta: 'Stifter · 1. · Lige nu',
       placeholder: 'Dit opslags indledende linjer vises her…',
+      overLimitNote:
+        'LinkedIn-opslag er begrænset til {limit} tegn. Forkort med {excess} før udgivelse.',
       truncatedNote:
         'Læserne ser kun de første {limit} tegn i feedet. Læg din hook forrest, før folden.',
       safeNote:
@@ -488,6 +492,10 @@ export const da: Translations = {
       title: 'Formateringsmonitor',
       badgeNeedsFix: 'Skal rettes',
       badgeClean: 'Ser rent ud',
+      badgeCaptionOver: 'Billedtekst for lang',
+      captionLimit: '{total} / {limit} billedtekstgrænse',
+      captionOver:
+        'Instagram-billedtekster er begrænset til {limit} tegn. Forkort med {excess} før udgivelse.',
       hashtagLabel: 'Hashtag-koncentration',
       over: 'Over Instagrams hårde grænse på {limit} hashtags — billedteksten kan ikke postes. Fjern {excess}.',
       approaching:

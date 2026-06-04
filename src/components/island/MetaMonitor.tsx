@@ -55,6 +55,7 @@ export function MetaMonitor({ text, lang, s }: Props) {
 
   const activeText = text.trim();
   const activeCount = charCount(activeText);
+  const overCaptionLimit = activeCount > LIMITS.INSTAGRAM_CAPTION;
   const instagramLimit =
     instagramView === 'mobile' ? INSTAGRAM_MOBILE_FOLD : INSTAGRAM_DESKTOP_FOLD;
   const facebookLimit =
@@ -83,13 +84,20 @@ export function MetaMonitor({ text, lang, s }: Props) {
 
         <div class="px-4 pt-4 sm:px-5">
           <div class="flex flex-wrap items-center justify-between gap-x-3 gap-y-1">
-            {instagramPreview.isTruncated ? (
+            {overCaptionLimit ? (
+              <Badge tone="danger">{m.badgeCaptionOver}</Badge>
+            ) : instagramPreview.isTruncated ? (
               <Badge tone="warn">{s.linkedin.badgeTruncated}</Badge>
             ) : (
               <Badge tone="safe">{m.badgeClean}</Badge>
             )}
             <span class="font-mono text-[12px] text-mute tabular-nums">
-              {nf.format(activeCount)} / {nf.format(instagramLimit)}
+              {overCaptionLimit
+                ? interp(m.captionLimit, {
+                    total: nf.format(activeCount),
+                    limit: nf.format(LIMITS.INSTAGRAM_CAPTION),
+                  })
+                : `${nf.format(activeCount)} / ${nf.format(instagramLimit)}`}
             </span>
           </div>
         </div>
@@ -116,6 +124,14 @@ export function MetaMonitor({ text, lang, s }: Props) {
               )}
             </p>
           </article>
+          {overCaptionLimit && (
+            <p class="text-[12px] leading-4 text-error-deep">
+              {interp(m.captionOver, {
+                limit: nf.format(LIMITS.INSTAGRAM_CAPTION),
+                excess: nf.format(activeCount - LIMITS.INSTAGRAM_CAPTION),
+              })}
+            </p>
+          )}
 
           <div class="rounded-md border border-hairline bg-canvas p-4">
             <Meter

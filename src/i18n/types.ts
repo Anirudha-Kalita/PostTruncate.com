@@ -167,12 +167,17 @@ export interface IslandStrings {
     viewDesktop: string;
     viewMobile: string;
     badgeTruncated: string;
+    badgeOverLimit: string;
     badgeSafe: string;
     /** "{total} / {limit} before fold". */
     beforeFold: string;
+    /** "{total} / {limit} post limit". */
+    postLimit: string;
     seeMore: string;
     profileMeta: string;
     placeholder: string;
+    /** "{limit}", "{excess}". */
+    overLimitNote: string;
     /** "{limit}". */
     truncatedNote: string;
     /** "{view}" → translated desktop/mobile label. */
@@ -206,6 +211,11 @@ export interface IslandStrings {
     title: string;
     badgeNeedsFix: string;
     badgeClean: string;
+    badgeCaptionOver: string;
+    /** "{total} / {limit} caption cap". */
+    captionLimit: string;
+    /** "{limit}", "{excess}". */
+    captionOver: string;
     hashtagLabel: string;
     /** "{limit}" hard limit · remove "{excess}". */
     over: string;

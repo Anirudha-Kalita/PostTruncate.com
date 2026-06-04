@@ -449,11 +449,15 @@ export const de: Translations = {
       viewDesktop: 'Desktop',
       viewMobile: 'Mobil',
       badgeTruncated: 'Abgeschnittener Feed-Text',
+      badgeOverLimit: 'Über dem Beitragslimit',
       badgeSafe: 'Sichere Aufhänger-Zeile',
       beforeFold: '{total} / {limit} vor der Falz',
+      postLimit: '{total} / {limit} Beitragslimit',
       seeMore: '…mehr anzeigen',
       profileMeta: 'Gründer · 1. Grades · Gerade eben',
       placeholder: 'Die einleitenden Zeilen deines Beitrags erscheinen hier…',
+      overLimitNote:
+        'LinkedIn-Beiträge sind auf {limit} Zeichen begrenzt. Kürze vor dem Veröffentlichen um {excess}.',
       truncatedNote:
         'Lesende sehen im Feed nur die ersten {limit} Zeichen. Stell deinen Aufhänger vor die Falz.',
       safeNote:
@@ -489,6 +493,10 @@ export const de: Translations = {
       title: 'Formatierungs-Monitor',
       badgeNeedsFix: 'Braucht eine Korrektur',
       badgeClean: 'Sieht sauber aus',
+      badgeCaptionOver: 'Bildunterschrift zu lang',
+      captionLimit: '{total} / {limit} Limit der Bildunterschrift',
+      captionOver:
+        'Instagram-Bildunterschriften sind auf {limit} Zeichen begrenzt. Kürze vor dem Veröffentlichen um {excess}.',
       hashtagLabel: 'Hashtag-Konzentration',
       over: 'Über dem harten Limit von Instagram von {limit} Hashtags — die Bildunterschrift lässt sich nicht posten. Entferne {excess}.',
       approaching:

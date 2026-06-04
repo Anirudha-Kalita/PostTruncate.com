@@ -448,11 +448,15 @@ export const en: Translations = {
       viewDesktop: 'Desktop',
       viewMobile: 'Mobile',
       badgeTruncated: 'Truncated feed text',
+      badgeOverLimit: 'Over post limit',
       badgeSafe: 'Safe hook line',
       beforeFold: '{total} / {limit} before fold',
+      postLimit: '{total} / {limit} post limit',
       seeMore: '…see more',
       profileMeta: 'Founder · 1st · Just now',
       placeholder: 'Your post’s opening lines appear here…',
+      overLimitNote:
+        'LinkedIn posts cap at {limit} characters. Shorten by {excess} before publishing.',
       truncatedNote:
         'Readers see only the first {limit} characters in-feed. Front-load your hook before the fold.',
       safeNote:
@@ -488,6 +492,10 @@ export const en: Translations = {
       title: 'Formatting monitor',
       badgeNeedsFix: 'Needs a fix',
       badgeClean: 'Looks clean',
+      badgeCaptionOver: 'Caption too long',
+      captionLimit: '{total} / {limit} caption cap',
+      captionOver:
+        'Instagram captions cap at {limit} characters. Shorten by {excess} before publishing.',
       hashtagLabel: 'Hashtag concentration',
       over: 'Over Instagram’s hard limit of {limit} hashtags — the caption will fail to post. Remove {excess}.',
       approaching:

@@ -170,8 +170,9 @@ const canonical = localeHref(lang);
     {faqSchema.length > 0 && <FAQSchema faqs={faqSchema} />}
   </head>
   <body>
-    <a href="#workspace" class="skip-link">{t.seo.skipLink}</a>
+    <a href="#main-content" class="skip-link">{t.seo.skipLink}</a>
     <Nav lang={lang} nav={t.nav} />
+    <span id="main-content" class="skip-target" tabindex="-1" aria-hidden="true"></span>
     <slot />
     <Footer lang={lang} footer={t.footer} isHome={path === '/'} />
   </body>
@@ -194,5 +195,9 @@ const canonical = localeHref(lang);
   }
   .skip-link:focus {
     top: 16px;
+  }
+  .skip-target {
+    display: block;
+    scroll-margin-top: 80px;
   }
 </style>

@@ -448,11 +448,15 @@ export const fr: Translations = {
       viewDesktop: 'Ordinateur',
       viewMobile: 'Mobile',
       badgeTruncated: 'Texte du fil tronqué',
+      badgeOverLimit: 'Limite de publication dépassée',
       badgeSafe: 'Ligne d’accroche sûre',
       beforeFold: '{total} / {limit} avant le pli',
+      postLimit: '{total} / {limit} limite de publication',
       seeMore: '…voir plus',
       profileMeta: 'Fondateur · 1er · À l’instant',
       placeholder: 'Les premières lignes de votre publication apparaissent ici…',
+      overLimitNote:
+        'Les publications LinkedIn sont limitées à {limit} caractères. Raccourcissez de {excess} avant de publier.',
       truncatedNote:
         'Les lecteurs ne voient que les {limit} premiers caractères dans le fil. Placez votre accroche en tête, avant le pli.',
       safeNote:
@@ -488,6 +492,10 @@ export const fr: Translations = {
       title: 'Moniteur de mise en forme',
       badgeNeedsFix: 'À corriger',
       badgeClean: 'Semble propre',
+      badgeCaptionOver: 'Légende trop longue',
+      captionLimit: '{total} / {limit} limite de légende',
+      captionOver:
+        'Les légendes Instagram sont limitées à {limit} caractères. Raccourcissez de {excess} avant de publier.',
       hashtagLabel: 'Concentration de hashtags',
       over: 'Au-delà de la limite stricte de {limit} hashtags d’Instagram — la légende ne pourra pas être publiée. Retirez-en {excess}.',
       approaching:

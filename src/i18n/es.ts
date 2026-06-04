@@ -448,11 +448,15 @@ export const es: Translations = {
       viewDesktop: 'Escritorio',
       viewMobile: 'Móvil',
       badgeTruncated: 'Texto del feed truncado',
+      badgeOverLimit: 'Supera el límite del post',
       badgeSafe: 'Línea de gancho segura',
       beforeFold: '{total} / {limit} antes del pliegue',
+      postLimit: '{total} / {limit} límite del post',
       seeMore: '…ver más',
       profileMeta: 'Fundador · 1.º · Justo ahora',
       placeholder: 'Las primeras líneas de tu publicación aparecen aquí…',
+      overLimitNote:
+        'Los posts de LinkedIn tienen un límite de {limit} caracteres. Acorta {excess} antes de publicar.',
       truncatedNote:
         'Los lectores solo ven los primeros {limit} caracteres en el feed. Pon tu gancho al frente, antes del pliegue.',
       safeNote:
@@ -488,6 +492,10 @@ export const es: Translations = {
       title: 'Monitor de formato',
       badgeNeedsFix: 'Necesita un arreglo',
       badgeClean: 'Se ve limpio',
+      badgeCaptionOver: 'Pie de foto demasiado largo',
+      captionLimit: '{total} / {limit} límite del pie de foto',
+      captionOver:
+        'Los pies de foto de Instagram tienen un límite de {limit} caracteres. Acorta {excess} antes de publicar.',
       hashtagLabel: 'Concentración de hashtags',
       over: 'Por encima del límite estricto de {limit} hashtags de Instagram: la descripción no se podrá publicar. Elimina {excess}.',
       approaching:

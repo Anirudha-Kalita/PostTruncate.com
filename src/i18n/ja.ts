@@ -448,11 +448,15 @@ export const ja: Translations = {
       viewDesktop: 'デスクトップ',
       viewMobile: 'モバイル',
       badgeTruncated: '切り詰められたフィードテキスト',
+      badgeOverLimit: '投稿上限を超過',
       badgeSafe: '安全なフックの行',
       beforeFold: '折りたたみまで {total} / {limit}',
+      postLimit: '{total} / {limit} 投稿上限',
       seeMore: '…続きを見る',
       profileMeta: '創業者 · 1次 · たった今',
       placeholder: '投稿の冒頭の数行がここに表示されます…',
+      overLimitNote:
+        'LinkedInの投稿は{limit}文字までです。公開前に{excess}短くしてください。',
       truncatedNote:
         '読者がフィードで見るのは最初の {limit} 文字だけです。折りたたみより前にフックを置きましょう。',
       safeNote:
@@ -488,6 +492,10 @@ export const ja: Translations = {
       title: '書式モニター',
       badgeNeedsFix: '修正が必要',
       badgeClean: '問題なし',
+      badgeCaptionOver: 'キャプションが長すぎます',
+      captionLimit: '{total} / {limit} キャプション上限',
+      captionOver:
+        'Instagramのキャプションは{limit}文字までです。公開前に{excess}短くしてください。',
       hashtagLabel: 'ハッシュタグの密度',
       over: 'Instagramの上限である {limit} 個のハッシュタグを超えています。キャプションは投稿に失敗します。{excess} 削除してください。',
       approaching:
