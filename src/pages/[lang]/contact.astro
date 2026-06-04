@@ -14,12 +14,10 @@ const t = getTranslations(lang);
 const page = t.pages.contact;
 
 // ── Contact address + form endpoint ─────────────────────────────────────────
-// The mailto fallback and the form both point here. To make the form actually
-// deliver mail, create a Formspree form (https://formspree.io) and paste its
-// form ID below. Until then the form renders and validates fine but submitting
-// posts to a placeholder endpoint — swap CONTACT_FORM_ID for your real ID.
+// The mailto fallback and the form both point here. The form delivers via
+// Formspree (https://formspree.io) — CONTACT_FORM_ID is the live form ID.
 const CONTACT_EMAIL = 'contact@posttruncate.com';
-const CONTACT_FORM_ID = 'your-form-id'; // ← replace with your Formspree form ID
+const CONTACT_FORM_ID = 'xpqezyng'; // Formspree form ID
 const formAction = `https://formspree.io/f/${CONTACT_FORM_ID}`;
 
 const altBody = interp(page.altBody, { email: CONTACT_EMAIL });

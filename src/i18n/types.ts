@@ -199,7 +199,7 @@ export interface Translations {
   nav: {
     brandAria: string;
     homeAria: string;
-    links: { editor: string; guides: string; faq: string };
+    links: { editor: string; guides: string; faq: string; about: string; contact: string };
     cta: string;
     themeToDark: string;
     themeToLight: string;

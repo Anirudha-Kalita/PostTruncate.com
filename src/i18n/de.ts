@@ -19,7 +19,7 @@ export const de: Translations = {
   nav: {
     brandAria: 'PostTruncate Startseite',
     homeAria: 'PostTruncate Startseite',
-    links: { editor: 'Editor', guides: 'Plattform-Leitfäden', faq: 'FAQ' },
+    links: { editor: 'Editor', guides: 'Plattform-Leitfäden', faq: 'FAQ', about: 'Über uns', contact: 'Kontakt' },
     cta: 'Editor öffnen',
     themeToDark: 'Zu dunklem Design wechseln',
     themeToLight: 'Zu hellem Design wechseln',

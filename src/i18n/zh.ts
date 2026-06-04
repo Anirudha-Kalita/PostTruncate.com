@@ -18,7 +18,7 @@ export const zh: Translations = {
   nav: {
     brandAria: 'PostTruncate 首页',
     homeAria: 'PostTruncate 首页',
-    links: { editor: '编辑器', guides: '平台指南', faq: '常见问题' },
+    links: { editor: '编辑器', guides: '平台指南', faq: '常见问题', about: '关于', contact: '联系我们' },
     cta: '打开编辑器',
     themeToDark: '切换到深色主题',
     themeToLight: '切换到浅色主题',

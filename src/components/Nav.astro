@@ -16,15 +16,17 @@ interface Props {
 const { lang, nav } = Astro.props;
 const current = getLocale(lang);
 
-// Anchor links stay relative — they resolve within whichever language page
-// they're on, so no locale prefix is needed. Only the brand home link is a
-// real route, so it gets the locale prefix.
-const links = [
-  { href: '#workspace', label: nav.links.editor },
-  { href: '#platforms', label: nav.links.guides },
-  { href: '#faq', label: nav.links.faq },
-];
+// Section anchors are made absolute (prefixed with the locale home) so they
+// resolve from any page — on a standalone route like /about/ a bare "#faq"
+// would point nowhere. About/Contact are real locale-prefixed routes.
 const home = `/${lang}/`;
+const links = [
+  { href: `${home}#workspace`, label: nav.links.editor },
+  { href: `${home}#platforms`, label: nav.links.guides },
+  { href: `${home}#faq`, label: nav.links.faq },
+  { href: `${home}about/`, label: nav.links.about },
+  { href: `${home}contact/`, label: nav.links.contact },
+];
 ---
 
 <header class="nav">

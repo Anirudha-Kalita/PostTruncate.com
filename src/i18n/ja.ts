@@ -18,7 +18,7 @@ export const ja: Translations = {
   nav: {
     brandAria: 'PostTruncate ホーム',
     homeAria: 'PostTruncate ホーム',
-    links: { editor: 'エディター', guides: 'プラットフォームガイド', faq: 'よくある質問' },
+    links: { editor: 'エディター', guides: 'プラットフォームガイド', faq: 'よくある質問', about: '概要', contact: 'お問い合わせ' },
     cta: 'エディターを開く',
     themeToDark: 'ダークテーマに切り替える',
     themeToLight: 'ライトテーマに切り替える',

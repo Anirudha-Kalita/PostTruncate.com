@@ -18,7 +18,7 @@ export const pt: Translations = {
   nav: {
     brandAria: 'Página inicial do PostTruncate',
     homeAria: 'Página inicial do PostTruncate',
-    links: { editor: 'Editor', guides: 'Guias das Plataformas', faq: 'FAQ' },
+    links: { editor: 'Editor', guides: 'Guias das Plataformas', faq: 'FAQ', about: 'Sobre', contact: 'Contacto' },
     cta: 'Abrir o editor',
     themeToDark: 'Mudar para o tema escuro',
     themeToLight: 'Mudar para o tema claro',
