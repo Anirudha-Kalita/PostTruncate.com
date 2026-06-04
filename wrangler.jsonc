@@ -5,9 +5,14 @@
   // Put durable, rebuild-safe settings HERE, not in the generated file.
   "name": "posttruncate-com",
   "compatibility_date": "2026-04-15",
-  // Serve the Worker at the apex custom domain. custom_domain:true tells
-  // Cloudflare to manage the DNS record + edge certificate for this hostname.
+  // Serve the Worker at both the apex and the www hostname. custom_domain:true
+  // tells Cloudflare to manage the DNS record + edge certificate for each
+  // hostname and point it at this Worker (this is preferred over raw
+  // pattern/zone_name routes for serving a whole site — no manual proxied DNS
+  // record or cert wrangling needed). The bare-root locale router inside the
+  // Worker then 302s either host to the visitor's /<lang>/ path.
   "routes": [
-    { "pattern": "posttruncate.com", "custom_domain": true }
+    { "pattern": "posttruncate.com", "custom_domain": true },
+    { "pattern": "www.posttruncate.com", "custom_domain": true }
   ]
 }
