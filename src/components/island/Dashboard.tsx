@@ -1,5 +1,5 @@
 /** @jsxImportSource preact */
-import { useState } from 'preact/hooks';
+import { useEffect, useState } from 'preact/hooks';
 import { Workspace } from './Workspace';
 import { LinkedInPreview, type LinkedInView } from './LinkedInPreview';
 import { TwitterPreview } from './TwitterPreview';
@@ -15,6 +15,18 @@ interface Props {
   strings: IslandStrings;
 }
 
+const DRAFT_STORAGE_KEY = 'post_truncate_active_draft';
+
+function readActiveDraft() {
+  if (typeof window === 'undefined') return '';
+
+  try {
+    return window.localStorage.getItem(DRAFT_STORAGE_KEY) ?? '';
+  } catch {
+    return '';
+  }
+}
+
 /**
  * Root interactive island. Owns the single source of truth (the editor text +
  * the LinkedIn fold view) and feeds every preview. Mounted client:load from the
@@ -23,8 +35,16 @@ interface Props {
  * the island carries no hardcoded English.
  */
 export default function Dashboard({ lang, strings }: Props) {
-  const [text, setText] = useState('');
+  const [text, setText] = useState(readActiveDraft);
   const [view, setView] = useState<LinkedInView>('desktop');
+
+  useEffect(() => {
+    try {
+      window.localStorage.setItem(DRAFT_STORAGE_KEY, text);
+    } catch {
+      // Storage can be unavailable in private browsing or locked-down contexts.
+    }
+  }, [text]);
 
   return (
     <div class="grid grid-cols-1 gap-5 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)]">
