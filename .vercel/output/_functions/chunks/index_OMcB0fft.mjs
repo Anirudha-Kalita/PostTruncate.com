@@ -1,6 +1,6 @@
-import { c as createComponent } from './astro-component_Bt6-1hb-.mjs';
+import { c as createComponent } from './astro-component_CKMXp43h.mjs';
 import 'piccolore';
-import './entrypoint_fJZ6Q37E.mjs';
+import './entrypoint_Dr6-kruh.mjs';
 import 'clsx';
 
 const LOCALES = [{

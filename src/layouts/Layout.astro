@@ -71,6 +71,22 @@ const canonical = localeHref(lang);
     <link rel="manifest" href="/site.webmanifest" />
     <meta name="generator" content={Astro.generator} />
 
+    <!-- Google tag (gtag.js) -->
+    <script
+      is:inline
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-VS8NYMW8FJ"
+    ></script>
+    <script is:inline>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag('js', new Date());
+
+      gtag('config', 'G-VS8NYMW8FJ');
+    </script>
+
     <title>{pageTitle}</title>
     <meta name="description" content={pageDescription} />
     {/* Keyword set is intentionally English across every locale — the long-form
