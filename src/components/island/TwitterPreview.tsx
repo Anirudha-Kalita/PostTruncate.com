@@ -3,7 +3,6 @@ import {
   splitThread,
   weightedLength,
   detectUrls,
-  charCount,
   LIMITS,
 } from '../../lib/textTools';
 import { Card, CardHead, Badge, Meter, BrandLogo } from './ui';
@@ -94,7 +93,7 @@ export function TwitterPreview({ text, lang, s }: Props) {
                 </span>
               )}
               <span class="mt-2 block font-mono text-[11px] text-mute/70 tabular-nums">
-                {interp(s.common.charsSuffix, { n: nf.format(charCount(tweet)) })}
+                {interp(s.common.charsSuffix, { n: nf.format(weightedLength(tweet)) })}
               </span>
             </article>
           ))

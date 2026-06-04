@@ -106,22 +106,93 @@ export function detectUrls(text: string): UrlMatch[] {
   return matches;
 }
 
+const GRAPHEME_SEGMENTER =
+  typeof Intl !== 'undefined' && 'Segmenter' in Intl
+    ? new Intl.Segmenter(undefined, { granularity: 'grapheme' })
+    : null;
+
+const EMOJI_RE = /[\p{Extended_Pictographic}\p{Emoji_Presentation}]/u;
+
+function isEmojiCluster(text: string): boolean {
+  if (EMOJI_RE.test(text)) return true;
+
+  const cps = Array.from(text, (ch) => ch.codePointAt(0) ?? 0);
+  return cps.some(
+    (cp) =>
+      // Regional indicator pairs render as flag emoji.
+      (cp >= 0x1f1e6 && cp <= 0x1f1ff) ||
+      // Keycap and combining mark emoji sequences.
+      cp === 0x20e3,
+  );
+}
+
+function isWideCodePoint(cp: number): boolean {
+  return (
+    (cp >= 0x1100 && cp <= 0x11ff) || // Hangul Jamo
+    (cp >= 0x2e80 && cp <= 0x2fff) || // CJK / Kangxi / radicals
+    (cp >= 0x3000 && cp <= 0x303f) || // CJK punctuation
+    (cp >= 0x3040 && cp <= 0x30ff) || // Hiragana + Katakana
+    (cp >= 0x3100 && cp <= 0x312f) || // Bopomofo
+    (cp >= 0x3130 && cp <= 0x318f) || // Hangul compatibility Jamo
+    (cp >= 0x31a0 && cp <= 0x31bf) || // Bopomofo extended
+    (cp >= 0x31f0 && cp <= 0x31ff) || // Katakana phonetic extensions
+    (cp >= 0x3400 && cp <= 0x4dbf) || // CJK extension A
+    (cp >= 0x4e00 && cp <= 0x9fff) || // CJK unified ideographs
+    (cp >= 0xa960 && cp <= 0xa97f) || // Hangul Jamo extended A
+    (cp >= 0xac00 && cp <= 0xd7af) || // Hangul syllables
+    (cp >= 0xd7b0 && cp <= 0xd7ff) || // Hangul Jamo extended B
+    (cp >= 0xf900 && cp <= 0xfaff) || // CJK compatibility ideographs
+    (cp >= 0xff01 && cp <= 0xff60) || // Fullwidth ASCII variants
+    (cp >= 0xffe0 && cp <= 0xffe6) || // Fullwidth symbols
+    (cp >= 0x20000 && cp <= 0x3fffd) // CJK extensions B and later
+  );
+}
+
+function plainTextWeight(text: string): number {
+  if (!text) return 0;
+
+  if (GRAPHEME_SEGMENTER) {
+    let weight = 0;
+    for (const { segment } of GRAPHEME_SEGMENTER.segment(text)) {
+      if (isEmojiCluster(segment)) {
+        weight += 2;
+        continue;
+      }
+
+      for (const ch of segment) {
+        const cp = ch.codePointAt(0);
+        if (cp !== undefined) weight += isWideCodePoint(cp) ? 2 : 1;
+      }
+    }
+    return weight;
+  }
+
+  let weight = 0;
+  for (const ch of text) {
+    const cp = ch.codePointAt(0);
+    if (cp === undefined) continue;
+    weight += isEmojiCluster(ch) || isWideCodePoint(cp) ? 2 : 1;
+  }
+  return weight;
+}
+
 /**
  * Weighted length the way X/Twitter counts it: every URL collapses to a flat
- * URL_WEIGHT (23), all other characters count as 1 code point each.
+ * URL_WEIGHT (23), emoji and wide CJK/Japanese/Korean-style characters count
+ * as 2, and ordinary Latin text counts as 1.
  */
 export function weightedLength(text: string): number {
   const urls = detectUrls(text);
-  if (urls.length === 0) return charCount(text);
+  if (urls.length === 0) return plainTextWeight(text);
 
   let weight = 0;
   let cursor = 0;
   for (const u of urls) {
-    weight += charCount(text.slice(cursor, u.start)); // plain text before URL
+    weight += plainTextWeight(text.slice(cursor, u.start));
     weight += LIMITS.URL_WEIGHT; // URL as a fixed cost
     cursor = u.end;
   }
-  weight += charCount(text.slice(cursor)); // trailing plain text
+  weight += plainTextWeight(text.slice(cursor));
   return weight;
 }
 
@@ -525,8 +596,7 @@ export function splitThread(
 
     // A single word longer than the budget: hard-slice by code points.
     if (!lastFit.trim()) {
-      const cps = Array.from(remaining);
-      lastFit = cps.slice(0, budget).join('');
+      lastFit = takeWeightedPrefix(remaining, budget, measure);
     }
 
     // Back off to the best boundary inside the fitted window.
@@ -537,6 +607,20 @@ export function splitThread(
   }
 
   return chunks.filter(Boolean);
+}
+
+function takeWeightedPrefix(
+  text: string,
+  budget: number,
+  measure: (s: string) => number,
+): string {
+  let out = '';
+  for (const ch of text) {
+    const next = out + ch;
+    if (measure(next) > budget) break;
+    out = next;
+  }
+  return out || Array.from(text)[0] || '';
 }
 
 /**
