@@ -69,8 +69,8 @@ export default function Dashboard({ lang, strings }: Props) {
       <div class="flex flex-col gap-5">
         <LinkedInPreview text={text} view={view} setView={setView} lang={lang} s={strings} />
         <TwitterPreview text={text} lang={lang} s={strings} />
-        <ThreadsPreview text={text} lang={lang} s={strings} />
         <MetaMonitor text={text} lang={lang} s={strings} />
+        <ThreadsPreview text={text} lang={lang} s={strings} />
       </div>
     </div>
   );
