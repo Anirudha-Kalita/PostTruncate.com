@@ -41,6 +41,8 @@ export default function Dashboard({ lang, strings }: Props) {
             {strings.dashboard.loadSample}
           </button>
         )}
+
+        <KeywordMonitor text={text} lang={lang} s={strings} />
       </div>
 
       {/* Right column — live platform matrix */}
@@ -49,7 +51,6 @@ export default function Dashboard({ lang, strings }: Props) {
         <TwitterPreview text={text} lang={lang} s={strings} />
         <ThreadsPreview text={text} lang={lang} s={strings} />
         <MetaMonitor text={text} lang={lang} s={strings} />
-        <KeywordMonitor text={text} lang={lang} s={strings} />
       </div>
     </div>
   );
