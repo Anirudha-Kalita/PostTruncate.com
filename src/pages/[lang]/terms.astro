@@ -1,0 +1,33 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Prose from '../../components/Prose.astro';
+import { getTranslations } from '../../i18n';
+import { interp } from '../../i18n/interp';
+import { LOCALE_CODES } from '../../i18n/config';
+
+// One static Terms page per locale (/en/terms/, /da/terms/, …).
+export function getStaticPaths() {
+  return LOCALE_CODES.map((lang) => ({ params: { lang } }));
+}
+
+const { lang } = Astro.params as { lang: string };
+const t = getTranslations(lang);
+const page = t.pages.terms;
+const lastUpdated = interp(t.pages.common.lastUpdated, {
+  date: t.pages.common.lastUpdatedDate,
+});
+---
+
+<Layout
+  lang={lang}
+  path="/terms/"
+  title={page.title}
+  description={page.description}
+>
+  <Prose
+    lang={lang}
+    page={page}
+    lastUpdated={lastUpdated}
+    backHome={t.pages.common.backHome}
+  />
+</Layout>

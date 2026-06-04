@@ -209,12 +209,152 @@ export const da: Translations = {
       },
       legal: {
         title: 'Juridisk',
-        links: ['Privatliv', 'Vilkår', 'Kontakt'],
+        links: ['Privatliv', 'Vilkår', 'Om', 'Kontakt'],
       },
     },
     copyright: '© {year} PostTruncate. Bygget til kreative overalt.',
     disclaimer:
       'Ikke tilknyttet LinkedIn, X, Meta eller Instagram. Grænser er estimater og kan ændre sig.',
+  },
+
+  pages: {
+    common: {
+      lastUpdated: 'Sidst opdateret: {date}',
+      lastUpdatedDate: '1. juni 2026',
+      backHome: '← Tilbage til editoren',
+    },
+
+    privacy: {
+      title: 'Privatlivspolitik',
+      description:
+        'Sådan håndterer PostTruncate dine data: din tekst forlader aldrig din browser, der er ingen konti, og intet du skriver bliver uploadet eller gemt.',
+      intro:
+        'PostTruncate er bygget med privatliv først. Alt du skriver, kører lokalt i din browser — dit udkast bliver aldrig uploadet, gemt eller set af os. Denne politik forklarer præcis, hvad det betyder, og de få begrænsede tilfælde, hvor tredjeparter er involveret.',
+      sections: [
+        {
+          heading: 'Din tekst bliver på din enhed',
+          paragraphs: [
+            'Editoren, hvert platforms-preview, trådopdeleren og Unicode-renseren kører alle udelukkende i <strong>din browser</strong>. Teksten, du skriver eller indsætter, behandles på din egen enhed og bliver <strong>aldrig sendt til vores servere</strong> — faktisk har PostTruncate ingen indholdsserver at sende den til. Når du lukker fanen, er dit udkast væk, medmindre din browser vælger at gemme det lokalt.',
+            'Fordi intet uploades, kan vi ikke læse, gemme, sælge eller dele det, du skriver. Der er <strong>ingen konto, ingen tilmelding og intet login</strong>, så vi beder aldrig om dit navn, din e-mail eller nogen personlige oplysninger for at bruge værktøjet.',
+          ],
+        },
+        {
+          heading: 'Hvad vi gemmer lokalt',
+          paragraphs: [
+            'Et lille antal indstillinger gemmes i din browsers <strong>localStorage</strong>, så siden husker, hvordan du foretrækker den — nærmere bestemt dit valgte tema (lyst eller mørkt) og dit foretrukne sprog. Disse værdier lever kun på din enhed, kan kun læses af PostTruncate og når aldrig frem til os. Du kan rydde dem når som helst via din browsers indstillinger.',
+          ],
+        },
+        {
+          heading: 'Annoncering',
+          paragraphs: [
+            'PostTruncate finansieres af diskrete annoncer vist i faste, reserverede felter, der aldrig forskyder layoutet, mens du arbejder. Hvis der bruges tredjeparts-annoncepartnere, kan de sætte deres egne cookies eller bruge enheds-id’er til at vise relevante annoncer, underlagt deres egne privatlivspolitikker. Disse partnere modtager aldrig indholdet af dit udkast, fordi det indhold aldrig forlader din browser.',
+          ],
+        },
+        {
+          heading: 'Kontaktformularen',
+          paragraphs: [
+            'Den eneste funktion, der sender data væk fra din enhed, er <strong>kontaktformularen</strong>. Når du vælger at sende os en besked, leveres det navn, den e-mail og den besked, du indtaster, til os gennem en tredjeparts-formulartjeneste, så vi kan læse og svare. Vi bruger udelukkende disse oplysninger til at svare dig og bruger dem ikke til markedsføring. Hvis du hellere vil undgå en tredjepart, kan du i stedet sende os en e-mail direkte.',
+          ],
+        },
+        {
+          heading: 'Ændringer & kontakt',
+          paragraphs: [
+            'Vi kan opdatere denne politik, efterhånden som produktet udvikler sig; “sidst opdateret”-datoen ovenfor afspejler altid den aktuelle version. Hvis du har spørgsmål om privatliv, så skriv til os på <strong>contact@posttruncate.com</strong>.',
+          ],
+        },
+      ],
+    },
+
+    terms: {
+      title: 'Vilkår & betingelser',
+      description:
+        'Brugsvilkårene for PostTruncate: et gratis værktøj leveret som det er, hvis platformsgrænser er estimater, leveret uden garanti og ikke tilknyttet noget socialt netværk.',
+      intro:
+        'Ved at bruge PostTruncate accepterer du disse vilkår. De er bevidst korte og enkle — værktøjet er gratis, kører i din browser og leveres som det er.',
+      sections: [
+        {
+          heading: 'Brug af tjenesten',
+          paragraphs: [
+            'PostTruncate er et gratis værktøj til at forhåndsvise og optimere opslag på sociale medier. Du må bruge det til ethvert lovligt formål. Du accepterer <strong>ikke at misbruge tjenesten</strong> — for eksempel ved at forsøge at forstyrre den, omgå dens beskyttelser eller bruge den til at bryde loven eller krænke andres rettigheder.',
+          ],
+        },
+        {
+          heading: 'Estimater, ikke garantier',
+          paragraphs: [
+            'De tegngrænser, foldpunkter og formateringsregler, der vises her, er baseret på hver platforms offentliggjorte og bredt observerede adfærd. Platforme <strong>ændrer disse grænser uden varsel</strong>, og gengivelsen varierer fra enhed til enhed og fra appversion til appversion. Betragt hvert preview og hver optælling som et tæt estimat, ikke en pixelperfekt garanti. Du er selv ansvarlig for at gennemgå dine egne opslag, før du publicerer dem.',
+          ],
+        },
+        {
+          heading: 'Ingen tilknytning',
+          paragraphs: [
+            'PostTruncate er et uafhængigt værktøj og er <strong>ikke tilknyttet, godkendt af eller sponsoreret af</strong> LinkedIn, X (Twitter), Meta, Instagram, Facebook eller Threads. Alle produktnavne, logoer og varemærker tilhører deres respektive ejere og bruges her kun til at beskrive hver platforms adfærd.',
+          ],
+        },
+        {
+          heading: 'Leveret “som det er”',
+          paragraphs: [
+            'Tjenesten leveres <strong>“som den er” og “som tilgængelig”, uden nogen form for garanti</strong>, hverken udtrykkelig eller underforstået. I videst muligt omfang tilladt af loven er vi ikke ansvarlige for tab eller skade, der opstår som følge af din brug af — eller manglende evne til at bruge — værktøjet, herunder beslutninger, du træffer på baggrund af dets previews eller optællinger.',
+          ],
+        },
+        {
+          heading: 'Ændringer af disse vilkår',
+          paragraphs: [
+            'Vi kan revidere disse vilkår fra tid til anden; “sidst opdateret”-datoen ovenfor afspejler den aktuelle version, og fortsat brug af værktøjet betyder, at du accepterer de seneste vilkår. Spørgsmål? Skriv til <strong>contact@posttruncate.com</strong>.',
+          ],
+        },
+      ],
+    },
+
+    about: {
+      title: 'Om PostTruncate',
+      description:
+        'PostTruncate er et gratis værktøj med privatliv først, der viser skabere præcis, hvor hver social platform klipper deres tekst over — før de trykker på publicer.',
+      intro:
+        'PostTruncate findes af én grund: den første linje i dit opslag er den eneste linje, de fleste læser, og hver platform klipper den over et forskelligt sted. Vi gør de usynlige grænser synlige.',
+      sections: [
+        {
+          heading: 'Hvad det gør',
+          paragraphs: [
+            'Skriv eller indsæt et udkast én gang, og PostTruncate gengiver det, som <strong>LinkedIn, X, Threads, Instagram og Facebook</strong> rent faktisk vil — “…se mere”-folden, trådopdelingen ved 280 tegn, link-vægtningen på 23 tegn, hashtag-loftet på 30. Du ser præcis, hvad der overlever over folden, før du forpligter dig til at publicere.',
+            'Det fanger også de stille problemer, der skrumper din rækkevidde: usynlige nulbredde-tegn, der bryder tællinger og skærmlæsere, og pseudo-Unicode-“fancy skrifttyper”, der ser stiliserede ud, men er ulæselige for hjælpeteknologi.',
+          ],
+        },
+        {
+          heading: 'Hvorfor vi byggede det',
+          paragraphs: [
+            'De fleste tegntællere giver dig blot ét tal. Skabere har brug for mere end det — de har brug for at vide, <strong>hvor</strong> teksten bliver klippet over på hvert netværk, for det er der, hooken lever eller dør. Vi ville have ét arbejdsområde, der simulerer alle platforme på én gang, kører øjeblikkeligt og respekterer dit privatliv fuldstændigt.',
+          ],
+        },
+        {
+          heading: 'Bygget med privatliv først',
+          paragraphs: [
+            'Alt kører i din browser. Din tekst bliver aldrig uploadet, der er ingen konti, og værktøjet er gratis at bruge. Det finansieres af diskrete annoncer i reserverede felter, der aldrig forskyder layoutet. Læs alle detaljer i vores <strong>privatlivspolitik</strong>.',
+          ],
+        },
+      ],
+    },
+
+    contact: {
+      title: 'Kontakt os',
+      description:
+        'Kom i kontakt med PostTruncate-teamet — send os en besked eller skriv direkte til os med feedback, fejlrapporter eller spørgsmål.',
+      intro:
+        'Har du fundet en fejl, opdaget en platformsgrænse, der har flyttet sig, eller har du en idé til at gøre PostTruncate bedre? Vi vil meget gerne høre fra dig.',
+      form: {
+        name: 'Dit navn',
+        email: 'Din e-mail',
+        subject: 'Emne',
+        message: 'Besked',
+        submit: 'Send besked',
+        sending: 'Sender…',
+        success: 'Tak — din besked er på vej. Vi vender tilbage til dig snart.',
+        error:
+          'Noget gik galt under afsendelsen af din besked. Prøv igen, eller skriv direkte til os.',
+      },
+      altHeading: 'Foretrækker du e-mail?',
+      altBody:
+        'Du kan altid nå os på {email}. Vi læser hver besked og svarer så hurtigt, vi kan.',
+    },
   },
 
   island: {

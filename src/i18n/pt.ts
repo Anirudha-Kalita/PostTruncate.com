@@ -209,12 +209,152 @@ export const pt: Translations = {
       },
       legal: {
         title: 'Legal',
-        links: ['Privacidade', 'Termos', 'Contacto'],
+        links: ['Privacidade', 'Termos', 'Sobre', 'Contacto'],
       },
     },
     copyright: '© {year} PostTruncate. Feito para criadores em todo o lado.',
     disclaimer:
       'Sem qualquer afiliação com o LinkedIn, o X, a Meta ou o Instagram. Os limites são estimativas e podem mudar.',
+  },
+
+  pages: {
+    common: {
+      lastUpdated: 'Última atualização: {date}',
+      lastUpdatedDate: '1 de junho de 2026',
+      backHome: '← Voltar ao editor',
+    },
+
+    privacy: {
+      title: 'Política de Privacidade',
+      description:
+        'Como o PostTruncate trata os seus dados: o seu texto nunca sai do navegador, não existem contas e nada do que escreve é carregado ou armazenado.',
+      intro:
+        'O PostTruncate foi concebido com a privacidade em primeiro lugar. Tudo o que escreve é executado localmente no seu navegador — o seu rascunho nunca é carregado, armazenado ou visto por nós. Esta política explica exatamente o que isso significa e os poucos casos limitados em que existem terceiros envolvidos.',
+      sections: [
+        {
+          heading: 'O seu texto permanece no seu dispositivo',
+          paragraphs: [
+            'O editor, todas as pré-visualizações das plataformas, o divisor de threads e o sanitizador Unicode funcionam totalmente no <strong>seu navegador</strong>. O texto que escreve ou cola é processado no seu próprio dispositivo e <strong>nunca é transmitido para os nossos servidores</strong> — na verdade, o PostTruncate não tem qualquer servidor de conteúdo para onde o enviar. Quando fecha o separador, o seu rascunho desaparece, a menos que o seu navegador opte por o manter localmente.',
+            'Como nada é carregado, não podemos ler, armazenar, vender ou partilhar aquilo que escreve. Não há <strong>conta, registo nem início de sessão</strong>, por isso nunca lhe pedimos o seu nome, e-mail ou qualquer dado pessoal para utilizar a ferramenta.',
+          ],
+        },
+        {
+          heading: 'O que armazenamos localmente',
+          paragraphs: [
+            'Um pequeno número de preferências é guardado no <strong>localStorage</strong> do seu navegador para que o site se lembre de como gosta dele — especificamente o tema escolhido (claro ou escuro) e o seu idioma preferido. Estes valores vivem apenas no seu dispositivo, só podem ser lidos pelo PostTruncate e nunca chegam até nós. Pode limpá-los a qualquer momento através das definições do seu navegador.',
+          ],
+        },
+        {
+          heading: 'Publicidade',
+          paragraphs: [
+            'O PostTruncate é financiado por anúncios discretos apresentados em espaços fixos e reservados que nunca deslocam o esquema da página enquanto trabalha. Caso sejam utilizados parceiros publicitários terceiros, estes podem definir os seus próprios cookies ou usar identificadores de dispositivo para mostrar anúncios relevantes, sujeitos às respetivas políticas de privacidade. Estes parceiros nunca recebem o conteúdo do seu rascunho, porque esse conteúdo nunca sai do seu navegador.',
+          ],
+        },
+        {
+          heading: 'O formulário de contacto',
+          paragraphs: [
+            'A única funcionalidade que envia dados para fora do seu dispositivo é o <strong>formulário de contacto</strong>. Quando opta por enviar-nos uma mensagem, o nome, o e-mail e a mensagem que introduz são-nos entregues através de um serviço terceiro de processamento de formulários, para que os possamos ler e responder. Usamos essa informação exclusivamente para lhe responder e não a utilizamos para marketing. Se preferir não recorrer a terceiros, pode enviar-nos um e-mail diretamente.',
+          ],
+        },
+        {
+          heading: 'Alterações e contacto',
+          paragraphs: [
+            'Podemos atualizar esta política à medida que o produto evolui; a data de «última atualização» acima reflete sempre a versão atual. Se tiver alguma questão sobre privacidade, envie-nos um e-mail para <strong>contact@posttruncate.com</strong>.',
+          ],
+        },
+      ],
+    },
+
+    terms: {
+      title: 'Termos e Condições',
+      description:
+        'Os termos de utilização do PostTruncate: uma ferramenta gratuita, fornecida tal como está, cujos limites das plataformas são estimativas, disponibilizada sem garantia e sem afiliação a qualquer rede social.',
+      intro:
+        'Ao utilizar o PostTruncate, concorda com estes termos. São propositadamente curtos e simples — a ferramenta é gratuita, funciona no seu navegador e é fornecida tal como está.',
+      sections: [
+        {
+          heading: 'Utilização do serviço',
+          paragraphs: [
+            'O PostTruncate é uma ferramenta gratuita para pré-visualizar e otimizar publicações nas redes sociais. Pode usá-la para qualquer fim lícito. Concorda em <strong>não fazer uso indevido do serviço</strong> — por exemplo, tentando perturbá-lo, contornar as suas proteções ou usá-lo para infringir a lei ou violar os direitos de terceiros.',
+          ],
+        },
+        {
+          heading: 'Estimativas, não garantias',
+          paragraphs: [
+            'Os limites de caracteres, os pontos de dobra e as regras de formatação aqui apresentados baseiam-se no comportamento publicado e amplamente observado de cada plataforma. As plataformas <strong>alteram estes limites sem aviso prévio</strong>, e a apresentação varia consoante o dispositivo e a versão da aplicação. Encare cada pré-visualização e contagem como uma estimativa aproximada, não como uma garantia perfeita ao píxel. É da sua responsabilidade rever as suas próprias publicações antes de as publicar.',
+          ],
+        },
+        {
+          heading: 'Sem afiliação',
+          paragraphs: [
+            'O PostTruncate é uma ferramenta independente e <strong>não está afiliado, aprovado nem patrocinado por</strong> LinkedIn, X (Twitter), Meta, Instagram, Facebook ou Threads. Todos os nomes de produtos, logótipos e marcas são propriedade dos respetivos detentores e são aqui usados apenas para descrever o comportamento de cada plataforma.',
+          ],
+        },
+        {
+          heading: 'Fornecido «tal como está»',
+          paragraphs: [
+            'O serviço é fornecido <strong>«tal como está» e «conforme disponível», sem garantias de qualquer tipo</strong>, expressas ou implícitas. Na máxima medida permitida por lei, não nos responsabilizamos por qualquer perda ou dano resultante da utilização — ou da impossibilidade de utilização — da ferramenta, incluindo quaisquer decisões que tome com base nas suas pré-visualizações ou contagens.',
+          ],
+        },
+        {
+          heading: 'Alterações a estes termos',
+          paragraphs: [
+            'Podemos rever estes termos de tempos a tempos; a data de «última atualização» acima reflete a versão atual, e a utilização continuada da ferramenta significa que aceita os termos mais recentes. Dúvidas? Envie um e-mail para <strong>contact@posttruncate.com</strong>.',
+          ],
+        },
+      ],
+    },
+
+    about: {
+      title: 'Sobre o PostTruncate',
+      description:
+        'O PostTruncate é uma ferramenta gratuita, que coloca a privacidade em primeiro lugar e mostra aos criadores exatamente onde cada plataforma social corta o seu texto — antes de carregarem em publicar.',
+      intro:
+        'O PostTruncate existe por uma razão: a primeira linha da sua publicação é a única que a maioria das pessoas lê, e cada plataforma corta-a num ponto diferente. Nós tornamos visíveis esses limites invisíveis.',
+      sections: [
+        {
+          heading: 'O que faz',
+          paragraphs: [
+            'Escreva ou cole um rascunho uma vez e o PostTruncate apresenta-o tal como o <strong>LinkedIn, o X, o Threads, o Instagram e o Facebook</strong> o farão de facto — a dobra «…ver mais», a divisão de threads aos 280 caracteres, o peso de 23 caracteres das ligações, o limite de 30 hashtags. Vê exatamente o que sobrevive acima da dobra antes de se comprometer a publicar.',
+            'Também deteta os problemas discretos que reduzem o seu alcance: caracteres invisíveis de largura zero que quebram as contagens e os leitores de ecrã, e os «tipos de letra decorativos» em pseudo-Unicode que parecem estilizados mas são ilegíveis para a tecnologia de apoio.',
+          ],
+        },
+        {
+          heading: 'Porque a criámos',
+          paragraphs: [
+            'A maioria dos contadores de caracteres dá-lhe apenas um número. Os criadores precisam de mais do que isso — precisam de saber <strong>onde</strong> o texto é cortado em cada rede, porque é aí que o gancho vive ou morre. Quisemos um único espaço de trabalho que simulasse todas as plataformas em simultâneo, funcionasse instantaneamente e respeitasse por completo a sua privacidade.',
+          ],
+        },
+        {
+          heading: 'Concebido com a privacidade em primeiro lugar',
+          paragraphs: [
+            'Tudo funciona no seu navegador. O seu texto nunca é carregado, não existem contas e a ferramenta é gratuita. É financiada por anúncios discretos em espaços reservados que nunca deslocam o esquema da página. Leia todos os detalhes na nossa <strong>Política de Privacidade</strong>.',
+          ],
+        },
+      ],
+    },
+
+    contact: {
+      title: 'Contacte-nos',
+      description:
+        'Entre em contacto com a equipa do PostTruncate — envie-nos uma mensagem ou um e-mail diretamente com comentários, relatórios de erros ou questões.',
+      intro:
+        'Encontrou um erro, reparou num limite de plataforma que mudou ou tem uma ideia para melhorar o PostTruncate? Adorávamos saber a sua opinião.',
+      form: {
+        name: 'O seu nome',
+        email: 'O seu e-mail',
+        subject: 'Assunto',
+        message: 'Mensagem',
+        submit: 'Enviar mensagem',
+        sending: 'A enviar…',
+        success: 'Obrigado — a sua mensagem está a caminho. Entraremos em contacto consigo em breve.',
+        error:
+          'Ocorreu um problema ao enviar a sua mensagem. Tente novamente ou envie-nos um e-mail diretamente.',
+      },
+      altHeading: 'Prefere e-mail?',
+      altBody:
+        'Pode contactar-nos a qualquer momento através de {email}. Lemos todas as mensagens e respondemos com a maior brevidade possível.',
+    },
   },
 
   island: {

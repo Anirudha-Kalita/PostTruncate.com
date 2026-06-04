@@ -51,6 +51,46 @@ export interface FooterColumn {
 }
 
 /**
+ * A standalone informational page built from headed prose sections. `privacy`,
+ * `terms`, and `about` all share this shape — a title, a lede intro paragraph,
+ * and an ordered list of `SeoSection` blocks (each an `<h2>` + `set:html`
+ * paragraphs). Brand names and the contact email stay untranslated in markup.
+ */
+export interface ContentPage {
+  /** Page `<h1>` + document/OG title. */
+  title: string;
+  /** One-line meta description for this page. */
+  description: string;
+  /** Lede paragraph under the title. */
+  intro: string;
+  sections: SeoSection[];
+}
+
+/** The contact page: a lede, a message form, and an email/social fallback. */
+export interface ContactPage {
+  title: string;
+  description: string;
+  intro: string;
+  form: {
+    name: string;
+    email: string;
+    subject: string;
+    message: string;
+    submit: string;
+    /** Shown on the button while the async POST is in flight. */
+    sending: string;
+    /** Inline confirmation after a successful submit. */
+    success: string;
+    /** Inline error if the submit fails (network / service down). */
+    error: string;
+  };
+  /** Heading + body for the "or just email us" fallback block. */
+  altHeading: string;
+  /** Body copy — "{email}" token is filled with the contact address. */
+  altBody: string;
+}
+
+/**
  * Strings consumed by the Preact islands. Split out from the rest because this
  * sub-object — and only this sub-object — is serialized into the client island
  * props, so it must stay free of any server-only values.
@@ -223,6 +263,23 @@ export interface Translations {
     /** "{year}". */
     copyright: string;
     disclaimer: string;
+  };
+  /**
+   * Standalone informational routes (/{lang}/privacy/, /terms/, /about/,
+   * /contact/). Each renders through the shared Layout as its own HTML page.
+   */
+  pages: {
+    /** Strings shared by every standalone page. */
+    common: {
+      /** "{date}" → the last-updated date for the legal pages. */
+      lastUpdated: string;
+      lastUpdatedDate: string;
+      backHome: string;
+    };
+    privacy: ContentPage;
+    terms: ContentPage;
+    about: ContentPage;
+    contact: ContactPage;
   };
   island: IslandStrings;
 }

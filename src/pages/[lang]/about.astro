@@ -1,0 +1,24 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Prose from '../../components/Prose.astro';
+import { getTranslations } from '../../i18n';
+import { LOCALE_CODES } from '../../i18n/config';
+
+// One static About page per locale (/en/about/, /da/about/, …).
+export function getStaticPaths() {
+  return LOCALE_CODES.map((lang) => ({ params: { lang } }));
+}
+
+const { lang } = Astro.params as { lang: string };
+const t = getTranslations(lang);
+const page = t.pages.about;
+---
+
+<Layout
+  lang={lang}
+  path="/about/"
+  title={page.title}
+  description={page.description}
+>
+  <Prose lang={lang} page={page} backHome={t.pages.common.backHome} />
+</Layout>

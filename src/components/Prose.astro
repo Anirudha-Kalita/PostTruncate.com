@@ -1,0 +1,125 @@
+---
+// Shared renderer for the standalone text pages (Privacy, Terms, About). Each
+// is just a title, an optional "last updated" line, a lede intro, and an
+// ordered list of headed prose sections — so they all flow through here and
+// share one set of styles (lifted from the landing page's .seo-prose block).
+// Paragraphs may carry inline <strong> keyword markup, so they render with
+// set:html. The Contact page builds its own body and does not use this.
+import type { ContentPage } from '../i18n/types';
+
+interface Props {
+  /** Active locale — drives the back-to-home link prefix. */
+  lang: string;
+  /** Title + intro + headed sections for this page. */
+  page: ContentPage;
+  /** Pre-formatted "Last updated: …" line (legal pages only). */
+  lastUpdated?: string;
+  /** "← Back to the editor" label. */
+  backHome: string;
+}
+
+const { lang, page, lastUpdated, backHome } = Astro.props;
+const home = `/${lang}/`;
+---
+
+<section class="page container-page">
+  <article class="page__prose">
+    <header class="page__head">
+      <h1 class="page__title">{page.title}</h1>
+      {lastUpdated && <p class="page__meta">{lastUpdated}</p>}
+      <p class="page__intro">{page.intro}</p>
+    </header>
+
+    {
+      page.sections.map((s) => (
+        <Fragment>
+          <h2>{s.heading}</h2>
+          {s.paragraphs.map((p) => (
+            <p set:html={p} />
+          ))}
+        </Fragment>
+      ))
+    }
+
+    <p class="page__back">
+      <a href={home}>{backHome}</a>
+    </p>
+  </article>
+</section>
+
+<style>
+  .page {
+    scroll-margin-top: 80px;
+    padding-top: 64px;
+    padding-bottom: 24px;
+  }
+  .page__prose {
+    max-width: 48rem;
+    margin-inline: auto;
+  }
+  .page__head {
+    margin-bottom: 8px;
+  }
+  .page__title {
+    font-size: clamp(30px, 5vw, 40px);
+    font-weight: 600;
+    line-height: 1.08;
+    letter-spacing: -1.6px;
+    color: var(--color-ink);
+  }
+  .page__meta {
+    margin-top: 12px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--color-mute);
+  }
+  .page__intro {
+    margin-top: 16px;
+    font-size: 18px;
+    line-height: 28px;
+    color: var(--color-body);
+  }
+
+  /* Section type — matches the landing page's .seo-prose rhythm. */
+  .page__prose h2 {
+    margin-top: 40px;
+    font-size: 22px;
+    font-weight: 600;
+    line-height: 30px;
+    letter-spacing: -0.6px;
+    color: var(--color-ink);
+  }
+  .page__prose p {
+    margin-top: 14px;
+    font-size: 16px;
+    line-height: 28px;
+    color: var(--color-body);
+  }
+  .page__prose :global(strong) {
+    font-weight: 600;
+    color: var(--color-ink);
+  }
+
+  .page__back {
+    margin-top: 48px;
+    padding-top: 24px;
+    border-top: 1px solid var(--color-hairline);
+  }
+  .page__back a {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--color-body);
+    transition: color 0.15s ease;
+  }
+  .page__back a:hover {
+    color: var(--color-ink);
+  }
+
+  @media (max-width: 768px) {
+    .page {
+      padding-top: 48px;
+    }
+  }
+</style>

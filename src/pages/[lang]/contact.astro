@@ -1,0 +1,322 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getTranslations } from '../../i18n';
+import { interp } from '../../i18n/interp';
+import { LOCALE_CODES } from '../../i18n/config';
+
+// One static Contact page per locale (/en/contact/, /da/contact/, …).
+export function getStaticPaths() {
+  return LOCALE_CODES.map((lang) => ({ params: { lang } }));
+}
+
+const { lang } = Astro.params as { lang: string };
+const t = getTranslations(lang);
+const page = t.pages.contact;
+
+// ── Contact address + form endpoint ─────────────────────────────────────────
+// The mailto fallback and the form both point here. To make the form actually
+// deliver mail, create a Formspree form (https://formspree.io) and paste its
+// form ID below. Until then the form renders and validates fine but submitting
+// posts to a placeholder endpoint — swap CONTACT_FORM_ID for your real ID.
+const CONTACT_EMAIL = 'contact@posttruncate.com';
+const CONTACT_FORM_ID = 'your-form-id'; // ← replace with your Formspree form ID
+const formAction = `https://formspree.io/f/${CONTACT_FORM_ID}`;
+
+const altBody = interp(page.altBody, { email: CONTACT_EMAIL });
+const home = `/${lang}/`;
+---
+
+<Layout
+  lang={lang}
+  path="/contact/"
+  title={page.title}
+  description={page.description}
+>
+  <section class="contact container-page">
+    <div class="contact__wrap">
+      <header class="contact__head">
+        <h1 class="contact__title">{page.title}</h1>
+        <p class="contact__intro">{page.intro}</p>
+      </header>
+
+      <form
+        class="contact__form"
+        action={formAction}
+        method="POST"
+        data-sending={page.form.sending}
+        data-success={page.form.success}
+        data-error={page.form.error}
+      >
+        <div class="field">
+          <label class="field__label" for="name">{page.form.name}</label>
+          <input
+            class="field__input"
+            id="name"
+            name="name"
+            type="text"
+            autocomplete="name"
+            required
+          />
+        </div>
+
+        <div class="field">
+          <label class="field__label" for="email">{page.form.email}</label>
+          <input
+            class="field__input"
+            id="email"
+            name="email"
+            type="email"
+            autocomplete="email"
+            required
+          />
+        </div>
+
+        <div class="field">
+          <label class="field__label" for="subject">{page.form.subject}</label>
+          <input
+            class="field__input"
+            id="subject"
+            name="subject"
+            type="text"
+            required
+          />
+        </div>
+
+        <div class="field">
+          <label class="field__label" for="message">{page.form.message}</label>
+          <textarea
+            class="field__input field__textarea"
+            id="message"
+            name="message"
+            rows="6"
+            required></textarea>
+        </div>
+
+        <button type="submit" class="contact__submit">{page.form.submit}</button>
+
+        <p class="contact__status" role="status" aria-live="polite" hidden></p>
+      </form>
+
+      <aside class="contact__alt">
+        <h2 class="contact__alt-heading">{page.altHeading}</h2>
+        <p class="contact__alt-body">
+          <Fragment set:html={altBody.replace(
+            CONTACT_EMAIL,
+            `<a href="mailto:${CONTACT_EMAIL}">${CONTACT_EMAIL}</a>`
+          )} />
+        </p>
+      </aside>
+
+      <p class="contact__back">
+        <a href={home}>{t.pages.common.backHome}</a>
+      </p>
+    </div>
+  </section>
+</Layout>
+
+<script>
+  // Progressive enhancement: the form is a real POST and works with JS off.
+  // With JS, submit over fetch so we can show inline success/error without a
+  // full page nav. Localized status copy comes from the form's data-* attrs.
+  const form = document.querySelector<HTMLFormElement>('.contact__form');
+  const status = document.querySelector<HTMLParagraphElement>('.contact__status');
+  const submit = document.querySelector<HTMLButtonElement>('.contact__submit');
+
+  if (form && status && submit) {
+    const SENDING = form.dataset.sending ?? 'Sending…';
+    const SUCCESS = form.dataset.success ?? 'Thanks — your message is on its way.';
+    const ERROR = form.dataset.error ?? 'Something went wrong. Please try again.';
+    const submitLabel = submit.textContent ?? '';
+
+    const showStatus = (text: string, ok: boolean) => {
+      status.textContent = text;
+      status.hidden = false;
+      status.classList.toggle('contact__status--ok', ok);
+      status.classList.toggle('contact__status--err', !ok);
+    };
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      submit.disabled = true;
+      submit.textContent = SENDING;
+      status.hidden = true;
+
+      try {
+        const res = await fetch(form.action, {
+          method: 'POST',
+          body: new FormData(form),
+          headers: { Accept: 'application/json' },
+        });
+        if (res.ok) {
+          form.reset();
+          showStatus(SUCCESS, true);
+        } else {
+          showStatus(ERROR, false);
+        }
+      } catch {
+        showStatus(ERROR, false);
+      } finally {
+        submit.disabled = false;
+        submit.textContent = submitLabel;
+      }
+    });
+  }
+</script>
+
+<style>
+  .contact {
+    scroll-margin-top: 80px;
+    padding-top: 64px;
+    padding-bottom: 24px;
+  }
+  .contact__wrap {
+    max-width: 40rem;
+    margin-inline: auto;
+  }
+  .contact__head {
+    margin-bottom: 32px;
+  }
+  .contact__title {
+    font-size: clamp(30px, 5vw, 40px);
+    font-weight: 600;
+    line-height: 1.08;
+    letter-spacing: -1.6px;
+    color: var(--color-ink);
+  }
+  .contact__intro {
+    margin-top: 16px;
+    font-size: 18px;
+    line-height: 28px;
+    color: var(--color-body);
+  }
+
+  /* ── Form ───────────────────────────────────────────────────────────── */
+  .contact__form {
+    display: grid;
+    gap: 18px;
+    padding: 28px;
+    border-radius: var(--radius-lg);
+    background: var(--color-canvas);
+    box-shadow: var(--shadow-e2);
+  }
+  .field {
+    display: grid;
+    gap: 7px;
+  }
+  .field__label {
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: -0.2px;
+    color: var(--color-ink);
+  }
+  .field__input {
+    width: 100%;
+    padding: 11px 13px;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--color-hairline);
+    background: var(--color-canvas-soft-2);
+    color: var(--color-ink);
+    font-size: 15px;
+    line-height: 22px;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  }
+  .field__input::placeholder {
+    color: var(--color-mute);
+  }
+  .field__input:focus {
+    outline: none;
+    border-color: var(--color-ink);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-ink) 12%, transparent);
+  }
+  .field__textarea {
+    resize: vertical;
+    min-height: 120px;
+    font-family: inherit;
+  }
+
+  .contact__submit {
+    justify-self: start;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 44px;
+    padding: 0 24px;
+    border: none;
+    border-radius: var(--radius-pill);
+    background: var(--color-ink);
+    color: var(--color-on-primary);
+    font-size: 15px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: opacity 0.15s ease;
+  }
+  .contact__submit:hover {
+    opacity: 0.88;
+  }
+  .contact__submit:disabled {
+    opacity: 0.6;
+    cursor: default;
+  }
+
+  .contact__status {
+    margin-top: 2px;
+    font-size: 14px;
+    line-height: 20px;
+  }
+  .contact__status--ok {
+    color: var(--color-ink);
+  }
+  .contact__status--err {
+    color: #dc2626;
+  }
+
+  /* ── Email fallback ─────────────────────────────────────────────────── */
+  .contact__alt {
+    margin-top: 36px;
+    padding: 24px 28px;
+    border-radius: var(--radius-lg);
+    background: var(--color-canvas-soft-2);
+  }
+  .contact__alt-heading {
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: -0.4px;
+    color: var(--color-ink);
+  }
+  .contact__alt-body {
+    margin-top: 8px;
+    font-size: 15px;
+    line-height: 24px;
+    color: var(--color-body);
+  }
+  .contact__alt-body :global(a) {
+    color: var(--color-ink);
+    font-weight: 500;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  .contact__back {
+    margin-top: 40px;
+    padding-top: 24px;
+    border-top: 1px solid var(--color-hairline);
+  }
+  .contact__back a {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--color-body);
+    transition: color 0.15s ease;
+  }
+  .contact__back a:hover {
+    color: var(--color-ink);
+  }
+
+  @media (max-width: 768px) {
+    .contact {
+      padding-top: 48px;
+    }
+    .contact__form {
+      padding: 20px;
+    }
+  }
+</style>

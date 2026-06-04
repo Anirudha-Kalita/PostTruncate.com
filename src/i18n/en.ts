@@ -144,39 +144,39 @@ export const en: Translations = {
     items: [
       {
         q: 'How accurate are the character limits?',
-        a: 'PostTruncate uses each platform’s published and widely-observed limits — 280 for X, 210/140 for the LinkedIn fold, 30 hashtags for Instagram, and a flat 23-character weight for links. Platforms occasionally adjust these, and rendering varies slightly by device, so treat the previews as a close estimate rather than a pixel-perfect guarantee.',
+        a: 'PostTruncate works as a live character counter against each platform’s published and widely-observed limits — 280 for X, 210/140 for the LinkedIn fold, 30 hashtags for Instagram, and a flat 23-character weight for links. The same engine doubles as a Twitter character counter, Instagram character counter, and general character checker, so one character count check covers every network. Platforms occasionally adjust these character count limits, and rendering varies slightly by device, so treat the previews as a close estimate rather than a pixel-perfect guarantee.',
       },
       {
         q: 'Do spaces and punctuation count as characters?',
-        a: 'Yes. Every space, line break, and punctuation mark counts as one character, and both PostTruncate’s counter and the platform limits include them. The only common exception is links on X/Twitter, which collapse to a flat 23 characters regardless of how many letters, symbols, or slashes the real URL contains.',
+        a: 'Yes. Every space, line break, and punctuation mark counts as one character, and both PostTruncate’s counter and the platform limits include them. That makes it a true character counter with spaces — a character counter including spaces — so when you count amount of characters or count no of characters here, the total matches what each platform actually measures. The only common exception is links on X/Twitter, which collapse to a flat 23 characters regardless of how many letters, symbols, or slashes the real URL contains.',
       },
       {
         q: 'How do emojis affect the character count?',
-        a: 'PostTruncate counts by Unicode code points, so a simple emoji like 🙂 counts as a single character. Many emoji are built from several joined code points, though — skin-tone variations, flags, and combined glyphs such as 👨‍👩‍👧 — and those register as two or more. Most platforms, X especially, also weight emoji more heavily than plain letters, so an emoji-heavy draft uses up a little more of your limit than the visible glyph count suggests.',
+        a: 'PostTruncate counts by Unicode code points, so as a symbol counter it treats a simple emoji like 🙂 as a single character. Many emoji are built from several joined code points, though — skin-tone variations, flags, and combined glyphs such as 👨‍👩‍👧 — and those register as two or more. The same code-point logic lets it work as a Chinese character counter and a letter counter for any script, so you can count symbol online or count letters online with the same accuracy. Most platforms, X especially, also weight emoji more heavily than plain letters, so an emoji-heavy draft uses up a little more of your limit than the visible glyph count suggests.',
       },
       {
         q: 'What is the difference between character count and word count?',
-        a: 'Character count is the total of every individual character — letters, spaces, punctuation, and emoji all included — and it is what platform limits are actually measured against. Word count is the number of whitespace-separated words, no matter how long each one is. A full 280-character tweet might be only 40 words, so watch the character count to stay under a limit and use word count as a readability gauge.',
+        a: 'Character count is the total of every individual character — letters, spaces, punctuation, and emoji all included — and it is what platform limits are actually measured against. Word count is the number of whitespace-separated words, no matter how long each one is. Because PostTruncate is a character and word counter in one, you can count words and characters together and read the word count character count side by side; it doubles as a word counter tool and a word to character count converter when you need both numbers. A full 280-character tweet might be only 40 words, so watch the character count to stay under a limit and use word count as a readability gauge.',
       },
       {
         q: 'Why does my link count as 23 characters on X?',
-        a: 'X automatically wraps every URL with its t.co shortener, which always occupies 23 characters regardless of how long or short the original link is. So a 5-character link and a 200-character link both cost you exactly 23 toward the 280 limit. PostTruncate mirrors this in the weighted counter.',
+        a: 'X automatically wraps every URL with its t.co shortener, which always occupies 23 characters regardless of how long or short the original link is. So a 5-character link and a 200-character link both cost you exactly 23 toward the 280 limit. PostTruncate mirrors this in its weighted Twitter character counter, and because it also tracks plain character length it works as an SMS character counter when you need to fit a message into a single text. Either way you get an exact character length count for the medium you are posting to.',
       },
       {
         q: 'What are “fancy fonts” and why are they flagged?',
-        a: 'Those bold, italic, or script-style letters you paste from font generators aren’t real formatting — they’re pseudo-Unicode characters from the Mathematical Alphanumeric Symbols block. They look styled but screen readers either spell them out letter by letter or skip them, which hurts both accessibility and your organic reach. The monitor flags them so you can swap back to plain text.',
+        a: 'Those bold, italic, or script-style letters you paste from font generators aren’t real formatting — they’re pseudo-Unicode characters from the Mathematical Alphanumeric Symbols block. They look styled but screen readers either spell them out letter by letter or skip them, which hurts both accessibility and your organic reach. As a character number counter PostTruncate still tallies them so you can see exactly how many characters they add, and the monitor flags them so you can swap back to plain text.',
       },
       {
         q: 'What does “Sanitize text” remove?',
-        a: 'It strips invisible and zero-width characters — zero-width spaces, byte-order marks, bidirectional control marks, soft hyphens, and stray control codes. These often sneak in when you copy from other apps, and they silently break character counts and accessibility on older mobile clients without ever being visible.',
+        a: 'It strips invisible and zero-width characters — zero-width spaces, byte-order marks, bidirectional control marks, soft hyphens, and stray control codes. These often sneak in when you copy from other apps, and they silently break character counts and accessibility on older mobile clients without ever being visible. Run a character count check after sanitizing and the char length counter drops to the real, visible total — handy whenever your character count in word processors and your social drafts disagree.',
       },
       {
         q: 'Is my text sent anywhere?',
-        a: 'No. The entire editor and every preview run locally in your browser. Your draft never leaves your device — there’s no account, no upload, and no server processing of your content.',
+        a: 'No. The entire editor and every preview run locally in your browser, so even though it works as an online character counter, nothing is uploaded — it can calculate characters online without your draft ever leaving the page. Your text never leaves your device: there’s no account, no upload, and no server processing of your content, yet you still get an instant character count in text as you type.',
       },
       {
         q: 'Is PostTruncate free?',
-        a: 'Yes, it’s completely free to use with no sign-up required. The tool is supported by unobtrusive ads placed in reserved spaces that never shift the layout while you’re working.',
+        a: 'Yes, it’s completely free to use with no sign-up required — a free character counter and word counter tool online that’s ready the moment the page loads. Whether you want a quick char counter online, a character count online free, or a full character count tool for every platform, there’s nothing to install. The tool is supported by unobtrusive ads placed in reserved spaces that never shift the layout while you’re working.',
       },
     ],
   },
@@ -209,12 +209,152 @@ export const en: Translations = {
       },
       legal: {
         title: 'Legal',
-        links: ['Privacy', 'Terms', 'Contact'],
+        links: ['Privacy', 'Terms', 'About', 'Contact'],
       },
     },
     copyright: '© {year} PostTruncate. Built for creators everywhere.',
     disclaimer:
       'Not affiliated with LinkedIn, X, Meta, or Instagram. Limits are estimates and can change.',
+  },
+
+  pages: {
+    common: {
+      lastUpdated: 'Last updated: {date}',
+      lastUpdatedDate: 'June 1, 2026',
+      backHome: '← Back to the editor',
+    },
+
+    privacy: {
+      title: 'Privacy Policy',
+      description:
+        'How PostTruncate handles your data: your text never leaves your browser, there are no accounts, and nothing you write is uploaded or stored.',
+      intro:
+        'PostTruncate is built privacy-first. Everything you type runs locally in your browser — your draft is never uploaded, stored, or seen by us. This policy explains exactly what that means and the few limited cases where third parties are involved.',
+      sections: [
+        {
+          heading: 'Your text stays on your device',
+          paragraphs: [
+            'The editor, every platform preview, the thread splitter, and the Unicode sanitizer all run entirely in <strong>your browser</strong>. The text you write or paste is processed on your own device and is <strong>never transmitted to our servers</strong> — in fact, PostTruncate has no content server to send it to. When you close the tab, your draft is gone unless your browser chooses to keep it locally.',
+            'Because nothing is uploaded, we cannot read, store, sell, or share what you write. There is <strong>no account, no sign-up, and no login</strong>, so we never ask for your name, email, or any personal detail to use the tool.',
+          ],
+        },
+        {
+          heading: 'What we store locally',
+          paragraphs: [
+            'A small number of preferences are saved in your browser’s <strong>localStorage</strong> so the site remembers how you like it — specifically your chosen theme (light or dark) and your preferred language. These values live only on your device, are readable only by PostTruncate, and never reach us. You can clear them at any time through your browser’s settings.',
+          ],
+        },
+        {
+          heading: 'Advertising',
+          paragraphs: [
+            'PostTruncate is supported by unobtrusive ads shown in fixed, reserved spaces that never shift the layout while you work. If third-party ad partners are used, they may set their own cookies or use device identifiers to display relevant ads, subject to their own privacy policies. These partners never receive the content of your draft, because that content never leaves your browser.',
+          ],
+        },
+        {
+          heading: 'The contact form',
+          paragraphs: [
+            'The only feature that sends data off your device is the <strong>contact form</strong>. When you choose to send us a message, the name, email, and message you enter are delivered to us through a third-party form-handling service so we can read and reply. We use that information solely to respond to you and do not use it for marketing. If you would rather not use a third party, you can email us directly instead.',
+          ],
+        },
+        {
+          heading: 'Changes & contact',
+          paragraphs: [
+            'We may update this policy as the product evolves; the “last updated” date above always reflects the current version. If you have any questions about privacy, email us at <strong>contact@posttruncate.com</strong>.',
+          ],
+        },
+      ],
+    },
+
+    terms: {
+      title: 'Terms & Conditions',
+      description:
+        'The terms of use for PostTruncate: a free, as-is tool whose platform limits are estimates, provided without warranty and not affiliated with any social network.',
+      intro:
+        'By using PostTruncate you agree to these terms. They’re intentionally short and plain — the tool is free, runs in your browser, and is provided as-is.',
+      sections: [
+        {
+          heading: 'Use of the service',
+          paragraphs: [
+            'PostTruncate is a free tool for previewing and optimizing social media posts. You may use it for any lawful purpose. You agree <strong>not to misuse the service</strong> — for example by attempting to disrupt it, reverse its protections, or use it to break the law or infringe someone else’s rights.',
+          ],
+        },
+        {
+          heading: 'Estimates, not guarantees',
+          paragraphs: [
+            'The character limits, fold points, and formatting rules shown here are based on each platform’s published and widely-observed behavior. Platforms <strong>change these limits without notice</strong>, and rendering varies by device and app version. Treat every preview and count as a close estimate, not a pixel-perfect guarantee. You are responsible for reviewing your own posts before publishing them.',
+          ],
+        },
+        {
+          heading: 'No affiliation',
+          paragraphs: [
+            'PostTruncate is an independent tool and is <strong>not affiliated with, endorsed by, or sponsored by</strong> LinkedIn, X (Twitter), Meta, Instagram, Facebook, or Threads. All product names, logos, and brands are the property of their respective owners and are used here only to describe each platform’s behavior.',
+          ],
+        },
+        {
+          heading: 'Provided “as is”',
+          paragraphs: [
+            'The service is provided <strong>“as is” and “as available,” without warranties of any kind</strong>, express or implied. To the fullest extent permitted by law, we are not liable for any loss or damage arising from your use of — or inability to use — the tool, including any decisions you make based on its previews or counts.',
+          ],
+        },
+        {
+          heading: 'Changes to these terms',
+          paragraphs: [
+            'We may revise these terms from time to time; the “last updated” date above reflects the current version, and continued use of the tool means you accept the latest terms. Questions? Email <strong>contact@posttruncate.com</strong>.',
+          ],
+        },
+      ],
+    },
+
+    about: {
+      title: 'About PostTruncate',
+      description:
+        'PostTruncate is a free, privacy-first tool that shows creators exactly where every social platform cuts off their text — before they hit post.',
+      intro:
+        'PostTruncate exists for one reason: the first line of your post is the only line most people read, and every platform cuts it off in a different place. We make those invisible limits visible.',
+      sections: [
+        {
+          heading: 'What it does',
+          paragraphs: [
+            'Write or paste a draft once, and PostTruncate renders it the way <strong>LinkedIn, X, Threads, Instagram, and Facebook</strong> actually will — the “…see more” fold, the 280-character thread split, the 23-character link weighting, the 30-hashtag ceiling. You see exactly what survives above the fold before you commit to publishing.',
+            'It also catches the quiet problems that shrink your reach: invisible zero-width characters that break counts and screen readers, and pseudo-Unicode “fancy fonts” that look styled but are unreadable to assistive tech.',
+          ],
+        },
+        {
+          heading: 'Why we built it',
+          paragraphs: [
+            'Most character counters tell you a single number. Creators need more than that — they need to know <strong>where</strong> the text gets cut on each network, because that’s where the hook lives or dies. We wanted one workspace that simulates every platform at once, runs instantly, and respects your privacy completely.',
+          ],
+        },
+        {
+          heading: 'Built privacy-first',
+          paragraphs: [
+            'Everything runs in your browser. Your text is never uploaded, there are no accounts, and the tool is free to use. It’s supported by unobtrusive ads in reserved spaces that never shift the layout. Read the full details in our <strong>Privacy Policy</strong>.',
+          ],
+        },
+      ],
+    },
+
+    contact: {
+      title: 'Contact Us',
+      description:
+        'Get in touch with the PostTruncate team — send us a message or email us directly with feedback, bug reports, or questions.',
+      intro:
+        'Found a bug, spotted a platform limit that’s drifted, or have an idea to make PostTruncate better? We’d love to hear from you.',
+      form: {
+        name: 'Your name',
+        email: 'Your email',
+        subject: 'Subject',
+        message: 'Message',
+        submit: 'Send message',
+        sending: 'Sending…',
+        success: 'Thanks — your message is on its way. We’ll get back to you soon.',
+        error:
+          'Something went wrong sending your message. Please try again, or email us directly.',
+      },
+      altHeading: 'Prefer email?',
+      altBody:
+        'You can reach us any time at {email}. We read every message and reply as quickly as we can.',
+    },
   },
 
   island: {

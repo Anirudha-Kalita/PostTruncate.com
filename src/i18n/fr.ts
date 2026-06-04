@@ -209,12 +209,152 @@ export const fr: Translations = {
       },
       legal: {
         title: 'Mentions légales',
-        links: ['Confidentialité', 'Conditions', 'Contact'],
+        links: ['Confidentialité', 'Conditions', 'À propos', 'Contact'],
       },
     },
     copyright: '© {year} PostTruncate. Conçu pour les créateurs du monde entier.',
     disclaimer:
       'Sans affiliation avec LinkedIn, X, Meta ou Instagram. Les limites sont des estimations et peuvent changer.',
+  },
+
+  pages: {
+    common: {
+      lastUpdated: 'Dernière mise à jour : {date}',
+      lastUpdatedDate: '1 juin 2026',
+      backHome: '← Retour à l’éditeur',
+    },
+
+    privacy: {
+      title: 'Politique de confidentialité',
+      description:
+        'Comment PostTruncate traite vos données : votre texte ne quitte jamais votre navigateur, il n’y a aucun compte, et rien de ce que vous écrivez n’est téléversé ni stocké.',
+      intro:
+        'PostTruncate est conçu selon le principe de confidentialité avant tout. Tout ce que vous tapez s’exécute localement dans votre navigateur — votre brouillon n’est jamais téléversé, stocké ni vu par nous. Cette politique explique exactement ce que cela signifie et les rares cas limités où des tiers interviennent.',
+      sections: [
+        {
+          heading: 'Votre texte reste sur votre appareil',
+          paragraphs: [
+            'L’éditeur, chaque aperçu de plateforme, le découpeur de fils et le nettoyeur Unicode s’exécutent entièrement dans <strong>votre navigateur</strong>. Le texte que vous écrivez ou collez est traité sur votre propre appareil et n’est <strong>jamais transmis à nos serveurs</strong> — en réalité, PostTruncate n’a aucun serveur de contenu vers lequel l’envoyer. Lorsque vous fermez l’onglet, votre brouillon disparaît, à moins que votre navigateur ne choisisse de le conserver localement.',
+            'Comme rien n’est téléversé, nous ne pouvons pas lire, stocker, vendre ni partager ce que vous écrivez. Il n’y a <strong>aucun compte, aucune inscription et aucune connexion</strong>, nous ne vous demandons donc jamais votre nom, votre adresse e-mail ni aucune donnée personnelle pour utiliser l’outil.',
+          ],
+        },
+        {
+          heading: 'Ce que nous stockons localement',
+          paragraphs: [
+            'Un petit nombre de préférences sont enregistrées dans le <strong>localStorage</strong> de votre navigateur afin que le site se souvienne de vos réglages — précisément le thème que vous avez choisi (clair ou sombre) et votre langue préférée. Ces valeurs ne résident que sur votre appareil, ne sont lisibles que par PostTruncate et ne nous parviennent jamais. Vous pouvez les effacer à tout moment dans les paramètres de votre navigateur.',
+          ],
+        },
+        {
+          heading: 'Publicité',
+          paragraphs: [
+            'PostTruncate est financé par des publicités discrètes affichées dans des espaces fixes et réservés qui ne décalent jamais la mise en page pendant que vous travaillez. Si des partenaires publicitaires tiers sont utilisés, ils peuvent déposer leurs propres cookies ou utiliser des identifiants d’appareil pour afficher des publicités pertinentes, conformément à leurs propres politiques de confidentialité. Ces partenaires ne reçoivent jamais le contenu de votre brouillon, car ce contenu ne quitte jamais votre navigateur.',
+          ],
+        },
+        {
+          heading: 'Le formulaire de contact',
+          paragraphs: [
+            'La seule fonctionnalité qui envoie des données hors de votre appareil est le <strong>formulaire de contact</strong>. Lorsque vous choisissez de nous envoyer un message, le nom, l’adresse e-mail et le message que vous saisissez nous sont transmis via un service tiers de traitement des formulaires afin que nous puissions les lire et y répondre. Nous utilisons ces informations uniquement pour vous répondre et ne les utilisons pas à des fins de marketing. Si vous préférez ne pas passer par un tiers, vous pouvez nous écrire directement par e-mail.',
+          ],
+        },
+        {
+          heading: 'Modifications et contact',
+          paragraphs: [
+            'Nous pouvons mettre à jour cette politique à mesure que le produit évolue ; la date de « dernière mise à jour » ci-dessus reflète toujours la version actuelle. Si vous avez des questions concernant la confidentialité, écrivez-nous à <strong>contact@posttruncate.com</strong>.',
+          ],
+        },
+      ],
+    },
+
+    terms: {
+      title: 'Conditions générales',
+      description:
+        'Les conditions d’utilisation de PostTruncate : un outil gratuit, fourni en l’état, dont les limites de plateforme sont des estimations, sans garantie et sans affiliation à aucun réseau social.',
+      intro:
+        'En utilisant PostTruncate, vous acceptez ces conditions. Elles sont volontairement courtes et simples — l’outil est gratuit, s’exécute dans votre navigateur et est fourni en l’état.',
+      sections: [
+        {
+          heading: 'Utilisation du service',
+          paragraphs: [
+            'PostTruncate est un outil gratuit pour prévisualiser et optimiser les publications sur les réseaux sociaux. Vous pouvez l’utiliser à toute fin licite. Vous vous engagez à <strong>ne pas détourner le service</strong> — par exemple en tentant de le perturber, de contourner ses protections ou de l’utiliser pour enfreindre la loi ou les droits d’autrui.',
+          ],
+        },
+        {
+          heading: 'Des estimations, pas des garanties',
+          paragraphs: [
+            'Les limites de caractères, les points de pli et les règles de mise en forme présentés ici reposent sur le comportement publié et largement observé de chaque plateforme. Les plateformes <strong>modifient ces limites sans préavis</strong>, et le rendu varie selon l’appareil et la version de l’application. Considérez chaque aperçu et chaque décompte comme une estimation proche, et non comme une garantie au pixel près. Il vous appartient de relire vos propres publications avant de les publier.',
+          ],
+        },
+        {
+          heading: 'Aucune affiliation',
+          paragraphs: [
+            'PostTruncate est un outil indépendant et n’est <strong>ni affilié à, ni approuvé par, ni sponsorisé par</strong> LinkedIn, X (Twitter), Meta, Instagram, Facebook ou Threads. Tous les noms de produits, logos et marques sont la propriété de leurs détenteurs respectifs et ne sont utilisés ici que pour décrire le comportement de chaque plateforme.',
+          ],
+        },
+        {
+          heading: 'Fourni « en l’état »',
+          paragraphs: [
+            'Le service est fourni <strong>« en l’état » et « selon disponibilité », sans garantie d’aucune sorte</strong>, expresse ou implicite. Dans toute la mesure permise par la loi, nous ne sommes pas responsables des pertes ou dommages découlant de votre utilisation — ou de votre impossibilité d’utiliser — l’outil, y compris toute décision que vous prenez sur la base de ses aperçus ou décomptes.',
+          ],
+        },
+        {
+          heading: 'Modifications de ces conditions',
+          paragraphs: [
+            'Nous pouvons réviser ces conditions de temps à autre ; la date de « dernière mise à jour » ci-dessus reflète la version actuelle, et le fait de continuer à utiliser l’outil signifie que vous acceptez les dernières conditions. Des questions ? Écrivez à <strong>contact@posttruncate.com</strong>.',
+          ],
+        },
+      ],
+    },
+
+    about: {
+      title: 'À propos de PostTruncate',
+      description:
+        'PostTruncate est un outil gratuit et respectueux de la vie privée qui montre aux créateurs exactement où chaque plateforme sociale coupe leur texte — avant qu’ils ne publient.',
+      intro:
+        'PostTruncate existe pour une seule raison : la première ligne de votre publication est la seule que la plupart des gens lisent, et chaque plateforme la coupe à un endroit différent. Nous rendons visibles ces limites invisibles.',
+      sections: [
+        {
+          heading: 'Ce qu’il fait',
+          paragraphs: [
+            'Écrivez ou collez un brouillon une seule fois, et PostTruncate l’affiche tel que <strong>LinkedIn, X, Threads, Instagram et Facebook</strong> le feront réellement — le pli « …voir plus », la découpe en fil à 280 caractères, la pondération des liens à 23 caractères, le plafond de 30 hashtags. Vous voyez exactement ce qui survit au-dessus du pli avant de vous engager à publier.',
+            'Il repère aussi les problèmes discrets qui réduisent votre portée : les caractères invisibles de largeur nulle qui faussent les décomptes et les lecteurs d’écran, et les « polices fantaisie » en pseudo-Unicode qui paraissent stylisées mais sont illisibles pour les technologies d’assistance.',
+          ],
+        },
+        {
+          heading: 'Pourquoi nous l’avons créé',
+          paragraphs: [
+            'La plupart des compteurs de caractères vous donnent un seul chiffre. Les créateurs ont besoin de plus que cela — ils doivent savoir <strong>où</strong> le texte est coupé sur chaque réseau, car c’est là que l’accroche vit ou meurt. Nous voulions un seul espace de travail qui simule toutes les plateformes à la fois, s’exécute instantanément et respecte totalement votre vie privée.',
+          ],
+        },
+        {
+          heading: 'Conçu selon le principe de confidentialité avant tout',
+          paragraphs: [
+            'Tout s’exécute dans votre navigateur. Votre texte n’est jamais téléversé, il n’y a aucun compte, et l’outil est gratuit. Il est financé par des publicités discrètes dans des espaces réservés qui ne décalent jamais la mise en page. Lisez tous les détails dans notre <strong>Politique de confidentialité</strong>.',
+          ],
+        },
+      ],
+    },
+
+    contact: {
+      title: 'Nous contacter',
+      description:
+        'Entrez en contact avec l’équipe PostTruncate — envoyez-nous un message ou écrivez-nous directement par e-mail pour nous faire part de vos retours, signaler un bug ou poser une question.',
+      intro:
+        'Vous avez trouvé un bug, repéré une limite de plateforme qui a évolué, ou avez une idée pour améliorer PostTruncate ? Nous serions ravis de vous lire.',
+      form: {
+        name: 'Votre nom',
+        email: 'Votre adresse e-mail',
+        subject: 'Objet',
+        message: 'Message',
+        submit: 'Envoyer le message',
+        sending: 'Envoi…',
+        success: 'Merci — votre message est en route. Nous vous répondrons bientôt.',
+        error:
+          'Une erreur s’est produite lors de l’envoi de votre message. Veuillez réessayer ou nous écrire directement par e-mail.',
+      },
+      altHeading: 'Vous préférez l’e-mail ?',
+      altBody:
+        'Vous pouvez nous joindre à tout moment à l’adresse {email}. Nous lisons chaque message et répondons aussi vite que possible.',
+    },
   },
 
   island: {

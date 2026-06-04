@@ -16,6 +16,7 @@ const home = `/${lang}/`;
 
 // Hrefs paired positionally with each column's translated labels. In-page
 // anchors resolve within the current language page, so they need no prefix.
+// The legal column points at real standalone routes, which are locale-prefixed.
 const columnHrefs = {
   tool: ['#workspace', '#platforms', '#workspace', '#workspace'],
   platforms: [
@@ -26,7 +27,12 @@ const columnHrefs = {
     '#facebook-guide',
   ],
   learn: ['#platforms', '#faq', '#hook-guide', '#faq'],
-  legal: ['#', '#', '#'],
+  legal: [
+    `/${lang}/privacy/`,
+    `/${lang}/terms/`,
+    `/${lang}/about/`,
+    `/${lang}/contact/`,
+  ],
 };
 
 const columns = (

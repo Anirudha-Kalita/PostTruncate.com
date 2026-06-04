@@ -209,12 +209,152 @@ export const nl: Translations = {
       },
       legal: {
         title: 'Juridisch',
-        links: ['Privacy', 'Voorwaarden', 'Contact'],
+        links: ['Privacy', 'Voorwaarden', 'Over', 'Contact'],
       },
     },
     copyright: '© {year} PostTruncate. Gebouwd voor creators overal.',
     disclaimer:
       'Niet gelieerd aan LinkedIn, X, Meta of Instagram. Limieten zijn schattingen en kunnen veranderen.',
+  },
+
+  pages: {
+    common: {
+      lastUpdated: 'Laatst bijgewerkt: {date}',
+      lastUpdatedDate: '1 juni 2026',
+      backHome: '← Terug naar de editor',
+    },
+
+    privacy: {
+      title: 'Privacybeleid',
+      description:
+        'Hoe PostTruncate omgaat met je gegevens: je tekst verlaat nooit je browser, er zijn geen accounts en niets van wat je schrijft wordt geüpload of opgeslagen.',
+      intro:
+        'PostTruncate is privacy-first gebouwd. Alles wat je typt draait lokaal in je browser — je concept wordt nooit geüpload, opgeslagen of door ons gezien. Dit beleid legt precies uit wat dat betekent en de paar beperkte gevallen waarin derden betrokken zijn.',
+      sections: [
+        {
+          heading: 'Je tekst blijft op je apparaat',
+          paragraphs: [
+            'De editor, elke platformpreview, de threadsplitter en de Unicode-opschoner draaien allemaal volledig in <strong>je browser</strong>. De tekst die je schrijft of plakt, wordt op je eigen apparaat verwerkt en wordt <strong>nooit naar onze servers verzonden</strong> — sterker nog, PostTruncate heeft geen inhoudsserver om het naartoe te sturen. Wanneer je het tabblad sluit, is je concept weg, tenzij je browser ervoor kiest het lokaal te bewaren.',
+            'Omdat er niets wordt geüpload, kunnen we niet lezen, opslaan, verkopen of delen wat je schrijft. Er is <strong>geen account, geen aanmelding en geen login</strong>, dus we vragen nooit om je naam, e-mailadres of enig persoonlijk gegeven om de tool te gebruiken.',
+          ],
+        },
+        {
+          heading: 'Wat we lokaal opslaan',
+          paragraphs: [
+            'Een klein aantal voorkeuren wordt opgeslagen in de <strong>localStorage</strong> van je browser, zodat de site onthoudt hoe jij hem het liefst hebt — specifiek je gekozen thema (licht of donker) en je voorkeurstaal. Deze waarden leven alleen op je apparaat, zijn alleen leesbaar door PostTruncate en bereiken ons nooit. Je kunt ze op elk moment wissen via de instellingen van je browser.',
+          ],
+        },
+        {
+          heading: 'Advertenties',
+          paragraphs: [
+            'PostTruncate wordt ondersteund door onopvallende advertenties op vaste, gereserveerde plekken die de lay-out nooit verschuiven terwijl je werkt. Als er externe advertentiepartners worden gebruikt, kunnen zij hun eigen cookies plaatsen of apparaat-identificatoren gebruiken om relevante advertenties te tonen, onderworpen aan hun eigen privacybeleid. Deze partners ontvangen nooit de inhoud van je concept, omdat die inhoud nooit je browser verlaat.',
+          ],
+        },
+        {
+          heading: 'Het contactformulier',
+          paragraphs: [
+            'De enige functie die gegevens van je apparaat verstuurt, is het <strong>contactformulier</strong>. Wanneer je ervoor kiest ons een bericht te sturen, worden de naam, het e-mailadres en het bericht die je invult via een externe formulierverwerkingsdienst aan ons bezorgd, zodat we ze kunnen lezen en beantwoorden. We gebruiken die informatie uitsluitend om je te antwoorden en niet voor marketing. Wil je liever geen derde partij gebruiken, dan kun je ons ook rechtstreeks mailen.',
+          ],
+        },
+        {
+          heading: 'Wijzigingen & contact',
+          paragraphs: [
+            'We kunnen dit beleid bijwerken naarmate het product evolueert; de datum “laatst bijgewerkt” hierboven geeft altijd de huidige versie weer. Heb je vragen over privacy, mail ons dan op <strong>contact@posttruncate.com</strong>.',
+          ],
+        },
+      ],
+    },
+
+    terms: {
+      title: 'Algemene voorwaarden',
+      description:
+        'De gebruiksvoorwaarden voor PostTruncate: een gratis tool die wordt geleverd zoals hij is, waarvan de platformlimieten schattingen zijn, zonder garantie en niet gelieerd aan welk sociaal netwerk dan ook.',
+      intro:
+        'Door PostTruncate te gebruiken ga je akkoord met deze voorwaarden. Ze zijn bewust kort en helder — de tool is gratis, draait in je browser en wordt geleverd zoals hij is.',
+      sections: [
+        {
+          heading: 'Gebruik van de dienst',
+          paragraphs: [
+            'PostTruncate is een gratis tool om socialemediaberichten te previewen en te optimaliseren. Je mag het voor elk wettig doel gebruiken. Je gaat ermee akkoord <strong>de dienst niet te misbruiken</strong> — bijvoorbeeld door te proberen hem te verstoren, zijn beveiligingen te omzeilen of hem te gebruiken om de wet te overtreden of de rechten van iemand anders te schenden.',
+          ],
+        },
+        {
+          heading: 'Schattingen, geen garanties',
+          paragraphs: [
+            'De tekenlimieten, vouwpunten en opmaakregels die hier worden getoond, zijn gebaseerd op het gepubliceerde en algemeen waargenomen gedrag van elk platform. Platforms <strong>wijzigen deze limieten zonder kennisgeving</strong>, en de weergave verschilt per apparaat en app-versie. Beschouw elke preview en telling als een nauwkeurige schatting, niet als een pixelperfecte garantie. Je bent zelf verantwoordelijk voor het controleren van je eigen berichten voordat je ze publiceert.',
+          ],
+        },
+        {
+          heading: 'Geen affiliatie',
+          paragraphs: [
+            'PostTruncate is een onafhankelijke tool en is <strong>niet gelieerd aan, onderschreven door of gesponsord door</strong> LinkedIn, X (Twitter), Meta, Instagram, Facebook of Threads. Alle productnamen, logo’s en merken zijn eigendom van hun respectieve eigenaren en worden hier alleen gebruikt om het gedrag van elk platform te beschrijven.',
+          ],
+        },
+        {
+          heading: 'Geleverd “zoals het is”',
+          paragraphs: [
+            'De dienst wordt geleverd <strong>“zoals het is” en “zoals beschikbaar”, zonder enige vorm van garantie</strong>, expliciet of impliciet. Voor zover wettelijk toegestaan zijn wij niet aansprakelijk voor enig verlies of schade die voortvloeit uit je gebruik van — of het niet kunnen gebruiken van — de tool, inclusief beslissingen die je neemt op basis van de previews of tellingen.',
+          ],
+        },
+        {
+          heading: 'Wijzigingen in deze voorwaarden',
+          paragraphs: [
+            'We kunnen deze voorwaarden van tijd tot tijd herzien; de datum “laatst bijgewerkt” hierboven geeft de huidige versie weer, en voortgezet gebruik van de tool betekent dat je de meest recente voorwaarden accepteert. Vragen? Mail <strong>contact@posttruncate.com</strong>.',
+          ],
+        },
+      ],
+    },
+
+    about: {
+      title: 'Over PostTruncate',
+      description:
+        'PostTruncate is een gratis, privacy-first tool die creators precies laat zien waar elk social platform hun tekst afkapt — voordat ze op plaatsen drukken.',
+      intro:
+        'PostTruncate bestaat om één reden: de eerste regel van je bericht is de enige regel die de meeste mensen lezen, en elk platform kapt die op een andere plek af. Wij maken die onzichtbare limieten zichtbaar.',
+      sections: [
+        {
+          heading: 'Wat het doet',
+          paragraphs: [
+            'Schrijf of plak één keer een concept en PostTruncate geeft het weer zoals <strong>LinkedIn, X, Threads, Instagram en Facebook</strong> dat echt zullen doen — de “…meer weergeven”-vouw, de threadsplitsing bij 280 tekens, de linkweging van 23 tekens, het plafond van 30 hashtags. Je ziet precies wat boven de vouw overleeft voordat je besluit te publiceren.',
+            'Het spoort ook de stille problemen op die je bereik verkleinen: onzichtbare nulbreedte-tekens die tellingen en schermlezers verstoren, en pseudo-Unicode-“fancy fonts” die er opgemaakt uitzien maar onleesbaar zijn voor hulptechnologie.',
+          ],
+        },
+        {
+          heading: 'Waarom we het hebben gebouwd',
+          paragraphs: [
+            'De meeste tekentellers geven je één getal. Creators hebben meer nodig — ze moeten weten <strong>waar</strong> de tekst op elk netwerk wordt afgekapt, want dat is waar de hook leeft of sterft. We wilden één werkruimte die elk platform tegelijk simuleert, direct werkt en je privacy volledig respecteert.',
+          ],
+        },
+        {
+          heading: 'Privacy-first gebouwd',
+          paragraphs: [
+            'Alles draait in je browser. Je tekst wordt nooit geüpload, er zijn geen accounts en de tool is gratis te gebruiken. Hij wordt ondersteund door onopvallende advertenties op gereserveerde plekken die de lay-out nooit verschuiven. Lees alle details in ons <strong>Privacybeleid</strong>.',
+          ],
+        },
+      ],
+    },
+
+    contact: {
+      title: 'Neem contact op',
+      description:
+        'Neem contact op met het PostTruncate-team — stuur ons een bericht of mail ons rechtstreeks met feedback, bugmeldingen of vragen.',
+      intro:
+        'Een bug gevonden, een platformlimiet gespot die is verschoven of een idee om PostTruncate beter te maken? We horen graag van je.',
+      form: {
+        name: 'Je naam',
+        email: 'Je e-mailadres',
+        subject: 'Onderwerp',
+        message: 'Bericht',
+        submit: 'Bericht versturen',
+        sending: 'Versturen…',
+        success: 'Bedankt — je bericht is onderweg. We nemen snel contact met je op.',
+        error:
+          'Er is iets misgegaan bij het versturen van je bericht. Probeer het opnieuw of mail ons rechtstreeks.',
+      },
+      altHeading: 'Liever e-mail?',
+      altBody:
+        'Je kunt ons altijd bereiken op {email}. We lezen elk bericht en antwoorden zo snel als we kunnen.',
+    },
   },
 
   island: {
