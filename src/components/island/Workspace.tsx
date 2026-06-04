@@ -7,6 +7,12 @@ import {
   cleanExcessSpace,
   sanitizeText,
   detectHiddenUnicode,
+  extractHashtagsToBottom,
+  formatLowercase,
+  formatSentenceCase,
+  formatTitleCase,
+  formatUppercase,
+  stripEmojiAndSymbols,
 } from '../../lib/textTools';
 import { Card, CardHead, Stat, Badge } from './ui';
 import { interp, plural } from '../../i18n/interp';
@@ -32,6 +38,15 @@ export function Workspace({ text, setText, lang, s }: Props) {
   const onClean = () => setText(cleanExcessSpace(text));
   const onSanitize = () => setText(sanitizeText(text).text);
   const onClear = () => setText('');
+
+  const formatterActions = [
+    { label: w.uppercase, action: () => setText(formatUppercase(text)) },
+    { label: w.lowercase, action: () => setText(formatLowercase(text)) },
+    { label: w.titleCase, action: () => setText(formatTitleCase(text)) },
+    { label: w.sentenceCase, action: () => setText(formatSentenceCase(text)) },
+    { label: w.emojiStripper, action: () => setText(stripEmojiAndSymbols(text).text) },
+    { label: w.hashtagExtractor, action: () => setText(extractHashtagsToBottom(text)) },
+  ];
 
   // Keep the code list in a mono span by splitting the sentence on its token.
   const [warnBefore, warnAfter] = w.hiddenWarning.split('{codes}');
@@ -61,6 +76,24 @@ export function Workspace({ text, setText, lang, s }: Props) {
           spellcheck
           class="block w-full resize-y rounded-md border border-hairline bg-canvas-soft px-4 py-3 text-[15px] leading-7 text-ink placeholder:text-mute focus:border-link focus:bg-canvas focus:outline-none"
         />
+
+        <div class="mt-3 rounded-md border border-hairline bg-canvas-soft p-2.5">
+          <p class="px-1 font-mono text-[11px] uppercase tracking-wide text-mute">
+            {w.formatterLabel}
+          </p>
+          <div class="mt-2 grid grid-cols-2 gap-2 sm:grid-cols-3">
+            {formatterActions.map((item) => (
+              <button
+                type="button"
+                onClick={item.action}
+                disabled={!text}
+                class="min-h-9 rounded-md border border-hairline bg-canvas px-2.5 py-2 text-center text-[12px] font-medium leading-4 text-ink transition-colors hover:border-hairline-strong hover:bg-canvas-soft-2 disabled:cursor-not-allowed disabled:opacity-45"
+              >
+                {item.label}
+              </button>
+            ))}
+          </div>
+        </div>
 
         {/* Live meta counters */}
         <div class="mt-4 grid grid-cols-2 gap-2.5 sm:grid-cols-4">

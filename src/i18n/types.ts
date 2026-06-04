@@ -134,6 +134,13 @@ export interface IslandStrings {
       lines: string;
       paragraphs: string;
     };
+    formatterLabel: string;
+    uppercase: string;
+    lowercase: string;
+    titleCase: string;
+    sentenceCase: string;
+    emojiStripper: string;
+    hashtagExtractor: string;
     engineLabel: string;
     clean: string;
     sanitize: string;

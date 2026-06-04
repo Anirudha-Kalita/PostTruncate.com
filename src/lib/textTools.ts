@@ -321,6 +321,102 @@ export function sanitizeText(text: string): SanitizeResult {
   return { text: out.join(''), removed };
 }
 
+const CASE_WORD_RE = /[\p{L}\p{N}]+(?:['-][\p{L}\p{N}]+)*/gu;
+
+const TITLE_MINOR_WORDS = new Set<string>([
+  'a', 'an', 'and', 'as', 'at', 'but', 'by', 'for', 'from', 'in', 'into',
+  'nor', 'of', 'on', 'or', 'over', 'per', 'the', 'to', 'up', 'via', 'with',
+  'yet',
+]);
+
+function capitalizeFirstLetter(token: string): string {
+  return token.replace(/\p{L}/u, (letter) => letter.toUpperCase());
+}
+
+export function formatUppercase(text: string): string {
+  return text.toUpperCase();
+}
+
+export function formatLowercase(text: string): string {
+  return text.toLowerCase();
+}
+
+export function formatTitleCase(text: string): string {
+  const lower = text.toLowerCase();
+  const words = Array.from(lower.matchAll(CASE_WORD_RE));
+  if (words.length === 0) return lower;
+
+  const firstIndex = words[0].index ?? 0;
+  const lastIndex = words[words.length - 1].index ?? firstIndex;
+
+  return lower.replace(CASE_WORD_RE, (word, ...args) => {
+    const offset = args[args.length - 2] as number;
+    if (
+      offset !== firstIndex &&
+      offset !== lastIndex &&
+      TITLE_MINOR_WORDS.has(word)
+    ) {
+      return word;
+    }
+    return capitalizeFirstLetter(word);
+  });
+}
+
+export function formatSentenceCase(text: string): string {
+  let shouldCapitalize = true;
+  let out = '';
+
+  for (const ch of text.toLowerCase()) {
+    if (/\p{L}/u.test(ch)) {
+      out += shouldCapitalize ? ch.toUpperCase() : ch;
+      shouldCapitalize = false;
+      continue;
+    }
+
+    out += ch;
+    if (ch === '.') shouldCapitalize = true;
+  }
+
+  return out;
+}
+
+export interface StripResult {
+  text: string;
+  removed: number;
+}
+
+const EMOJI_SYMBOL_RE =
+  /[\p{Extended_Pictographic}\p{Emoji_Presentation}\p{S}\u200D\uFE0E\uFE0F]/gu;
+
+export function stripEmojiAndSymbols(text: string): StripResult {
+  let removed = 0;
+  const next = text
+    .replace(EMOJI_SYMBOL_RE, () => {
+      removed++;
+      return '';
+    })
+    .replace(/[ \t]{2,}/g, ' ')
+    .replace(/ +\n/g, '\n')
+    .replace(/\n{3,}/g, '\n\n');
+
+  return { text: next, removed };
+}
+
+export function extractHashtagsToBottom(text: string): string {
+  const hashtags = detectHashtags(text);
+  if (hashtags.length === 0) return text;
+
+  const body = text
+    .replace(HASHTAG_RE, '')
+    .replace(/[ \t]{2,}/g, ' ')
+    .replace(/ +\n/g, '\n')
+    .replace(/\n{3,}/g, '\n\n')
+    .trim();
+
+  const grouped = hashtags.join(' ');
+  return body ? `${body}\n\n${grouped}` : grouped;
+}
+
 // ──────────────────────────────────────────────────────────────────────────
 // LinkedIn hook zone
 // ──────────────────────────────────────────────────────────────────────────
