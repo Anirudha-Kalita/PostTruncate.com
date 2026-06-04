@@ -400,6 +400,13 @@ export const fr: Translations = {
         lines: 'Lignes',
         paragraphs: 'Paragraphes',
       },
+      timers: {
+        reading: 'Lecture',
+        speaking: 'Oral',
+        lessThan30Sec: '< 30 s',
+        minute: { one: 'min', other: 'min' },
+        second: { one: 's', other: 's' },
+      },
       formatterLabel: 'Outils de formatage',
       uppercase: 'MAJUSCULES',
       lowercase: 'minuscules',

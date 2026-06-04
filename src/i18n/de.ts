@@ -401,6 +401,13 @@ export const de: Translations = {
         lines: 'Zeilen',
         paragraphs: 'Absätze',
       },
+      timers: {
+        reading: 'Lesen',
+        speaking: 'Sprechen',
+        lessThan30Sec: '< 30 Sek.',
+        minute: { one: 'Min.', other: 'Min.' },
+        second: { one: 'Sek.', other: 'Sek.' },
+      },
       formatterLabel: 'Format-Werkzeuge',
       uppercase: 'GROSSBUCHSTABEN',
       lowercase: 'kleinbuchstaben',

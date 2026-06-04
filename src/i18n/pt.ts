@@ -400,6 +400,13 @@ export const pt: Translations = {
         lines: 'Linhas',
         paragraphs: 'Parágrafos',
       },
+      timers: {
+        reading: 'Leitura',
+        speaking: 'Fala',
+        lessThan30Sec: '< 30 s',
+        minute: { one: 'min', other: 'min' },
+        second: { one: 's', other: 's' },
+      },
       formatterLabel: 'Ferramentas de formato',
       uppercase: 'MAIÚSCULAS',
       lowercase: 'minúsculas',

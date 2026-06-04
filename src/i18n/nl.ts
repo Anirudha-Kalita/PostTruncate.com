@@ -400,6 +400,13 @@ export const nl: Translations = {
         lines: 'Regels',
         paragraphs: 'Alinea’s',
       },
+      timers: {
+        reading: 'Lezen',
+        speaking: 'Spreken',
+        lessThan30Sec: '< 30 sec',
+        minute: { one: 'min', other: 'min' },
+        second: { one: 'sec', other: 'sec' },
+      },
       formatterLabel: 'Opmaaktools',
       uppercase: 'HOOFDLETTERS',
       lowercase: 'kleine letters',

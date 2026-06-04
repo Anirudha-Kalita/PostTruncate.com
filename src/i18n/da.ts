@@ -400,6 +400,13 @@ export const da: Translations = {
         lines: 'Linjer',
         paragraphs: 'Afsnit',
       },
+      timers: {
+        reading: 'Læsning',
+        speaking: 'Tale',
+        lessThan30Sec: '< 30 sek.',
+        minute: { one: 'min.', other: 'min.' },
+        second: { one: 'sek.', other: 'sek.' },
+      },
       formatterLabel: 'Formatværktøjer',
       uppercase: 'STORE BOGSTAVER',
       lowercase: 'små bogstaver',

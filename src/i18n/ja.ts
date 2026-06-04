@@ -400,6 +400,13 @@ export const ja: Translations = {
         lines: '行数',
         paragraphs: '段落数',
       },
+      timers: {
+        reading: '読了',
+        speaking: '話す',
+        lessThan30Sec: '30秒未満',
+        minute: { one: '分', other: '分' },
+        second: { one: '秒', other: '秒' },
+      },
       formatterLabel: 'フォーマットツール',
       uppercase: '大文字',
       lowercase: '小文字',

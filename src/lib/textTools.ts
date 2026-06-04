@@ -32,6 +32,37 @@ export function wordCount(text: string): number {
   return trimmed.split(/\s+/).length;
 }
 
+export interface DurationCopy {
+  lessThan30Sec: string;
+  minute: { one: string; other: string };
+  second: { one: string; other: string };
+}
+
+/** Convert word count + pacing into a compact creator-facing duration label. */
+export function estimatedDuration(
+  words: number,
+  wordsPerMinute: number,
+  copy: DurationCopy,
+  nf: Intl.NumberFormat,
+): string {
+  const totalSeconds = Math.round((words / wordsPerMinute) * 60);
+  if (totalSeconds < 30) return copy.lessThan30Sec;
+
+  const minutes = Math.floor(totalSeconds / 60);
+  const seconds = totalSeconds % 60;
+
+  if (minutes === 0) {
+    return `${nf.format(seconds)} ${seconds === 1 ? copy.second.one : copy.second.other}`;
+  }
+
+  const minuteText = `${nf.format(minutes)} ${minutes === 1 ? copy.minute.one : copy.minute.other}`;
+  if (seconds === 0) return minuteText;
+
+  return `${minuteText} ${nf.format(seconds)} ${
+    seconds === 1 ? copy.second.one : copy.second.other
+  }`;
+}
+
 /** Lines = newline-delimited rows (an empty editor is 0 lines). */
 export function lineCount(text: string): number {
   if (!text) return 0;

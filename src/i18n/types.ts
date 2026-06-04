@@ -134,6 +134,13 @@ export interface IslandStrings {
       lines: string;
       paragraphs: string;
     };
+    timers: {
+      reading: string;
+      speaking: string;
+      lessThan30Sec: string;
+      minute: Plural;
+      second: Plural;
+    };
     formatterLabel: string;
     uppercase: string;
     lowercase: string;

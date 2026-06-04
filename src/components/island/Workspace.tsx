@@ -4,6 +4,7 @@ import {
   wordCount,
   lineCount,
   paragraphCount,
+  estimatedDuration,
   cleanExcessSpace,
   sanitizeText,
   detectHiddenUnicode,
@@ -17,6 +18,9 @@ import {
 import { Card, CardHead, Stat, Badge } from './ui';
 import { interp, plural } from '../../i18n/interp';
 import type { IslandStrings } from '../../i18n/types';
+
+const READING_WORDS_PER_MINUTE = 275;
+const SPEAKING_WORDS_PER_MINUTE = 150;
 
 interface Props {
   text: string;
@@ -34,6 +38,9 @@ export function Workspace({ text, setText, lang, s }: Props) {
   const hidden = detectHiddenUnicode(text);
   const w = s.workspace;
   const nf = new Intl.NumberFormat(lang);
+  const words = wordCount(text);
+  const readingTime = estimatedDuration(words, READING_WORDS_PER_MINUTE, w.timers, nf);
+  const speakingTime = estimatedDuration(words, SPEAKING_WORDS_PER_MINUTE, w.timers, nf);
 
   const onClean = () => setText(cleanExcessSpace(text));
   const onSanitize = () => setText(sanitizeText(text).text);
@@ -98,9 +105,14 @@ export function Workspace({ text, setText, lang, s }: Props) {
         {/* Live meta counters */}
         <div class="mt-4 grid grid-cols-2 gap-2.5 sm:grid-cols-4">
           <Stat label={w.counters.characters} value={nf.format(charCount(text))} />
-          <Stat label={w.counters.words} value={nf.format(wordCount(text))} />
+          <Stat label={w.counters.words} value={nf.format(words)} />
           <Stat label={w.counters.lines} value={nf.format(lineCount(text))} />
           <Stat label={w.counters.paragraphs} value={nf.format(paragraphCount(text))} />
+        </div>
+
+        <div class="mt-2.5 grid grid-cols-1 gap-2.5 sm:grid-cols-2">
+          <TimerStat icon="book" label={w.timers.reading} value={readingTime} />
+          <TimerStat icon="microphone" label={w.timers.speaking} value={speakingTime} />
         </div>
       </div>
 
@@ -150,5 +162,48 @@ export function Workspace({ text, setText, lang, s }: Props) {
         )}
       </div>
     </Card>
+  );
+}
+
+interface TimerStatProps {
+  icon: 'book' | 'microphone';
+  label: string;
+  value: string;
+}
+
+function TimerStat({ icon, label, value }: TimerStatProps) {
+  return (
+    <div class="flex min-h-16 items-center gap-3 rounded-md border border-hairline bg-canvas px-3 py-2.5">
+      <span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-md bg-canvas-soft-2 text-link-deep">
+        {icon === 'book' ? <BookIcon /> : <MicrophoneIcon />}
+      </span>
+      <div class="min-w-0">
+        <div class="font-mono text-[11px] uppercase tracking-wide text-mute">
+          {label}
+        </div>
+        <div class="mt-0.5 font-mono text-[18px] font-medium leading-6 text-ink tabular-nums">
+          {value}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function BookIcon() {
+  return (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />
+      <path d="M4 4.5A2.5 2.5 0 0 1 6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5z" />
+    </svg>
+  );
+}
+
+function MicrophoneIcon() {
+  return (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3z" />
+      <path d="M19 10v2a7 7 0 0 1-14 0v-2" />
+      <path d="M12 19v3" />
+    </svg>
   );
 }

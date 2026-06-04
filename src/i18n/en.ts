@@ -416,6 +416,13 @@ export const en: Translations = {
         lines: 'Lines',
         paragraphs: 'Paragraphs',
       },
+      timers: {
+        reading: 'Reading',
+        speaking: 'Speaking',
+        lessThan30Sec: '< 30 sec',
+        minute: { one: 'min', other: 'min' },
+        second: { one: 'sec', other: 'sec' },
+      },
       formatterLabel: 'Format toolkit',
       uppercase: 'UPPERCASE',
       lowercase: 'lowercase',

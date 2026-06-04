@@ -398,6 +398,13 @@ export const zh: Translations = {
         lines: '行数',
         paragraphs: '段落',
       },
+      timers: {
+        reading: '阅读',
+        speaking: '口播',
+        lessThan30Sec: '少于30秒',
+        minute: { one: '分钟', other: '分钟' },
+        second: { one: '秒', other: '秒' },
+      },
       formatterLabel: '格式工具',
       uppercase: '大写',
       lowercase: '小写',
