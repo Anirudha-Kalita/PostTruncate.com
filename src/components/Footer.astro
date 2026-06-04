@@ -8,9 +8,12 @@ import type { Translations } from '../i18n/types';
 interface Props {
   lang: string;
   footer: Translations['footer'];
+  /** Show the in-page "Tool" column only on the landing page; its anchors
+      (#workspace, #platforms) don't exist on standalone routes. */
+  isHome?: boolean;
 }
 
-const { lang, footer } = Astro.props;
+const { lang, footer, isHome = false } = Astro.props;
 const year = 2026;
 const home = `/${lang}/`;
 
@@ -44,38 +47,62 @@ const columns = (
     href: columnHrefs[key][i] ?? '#',
   })),
 }));
+
+// Standalone (non-home) pages drop the in-page Tool/Platforms/Learn anchors
+// entirely — those sections only exist on the landing page. Only the Legal
+// links carry over, laid out as a single balanced row beside the brand.
+const legalLinks = footer.columns.legal.links.map((label, i) => ({
+  label,
+  href: columnHrefs.legal[i] ?? '#',
+}));
 ---
 
-<footer class="footer">
+<footer class="footer" class:list={{ 'footer--compact': !isHome }}>
   <div class="footer__mesh mesh-gradient" aria-hidden="true"></div>
-  <div class="container-page footer__inner">
-    <div class="footer__brand">
-      <a href={home} class="footer__logo" aria-label={footer.homeAria}>
-        <img class="footer__mark" src="/favicon.svg" alt="" aria-hidden="true" width="20" height="20" />
-        <span>PostTruncate</span>
-      </a>
-      <p class="footer__tag">{footer.tag}</p>
-    </div>
+  {
+    isHome ? (
+      <div class="container-page footer__inner">
+        <div class="footer__brand">
+          <a href={home} class="footer__logo" aria-label={footer.homeAria}>
+            <img class="footer__mark" src="/favicon.svg" alt="" aria-hidden="true" width="20" height="20" />
+            <span>PostTruncate</span>
+          </a>
+          <p class="footer__tag">{footer.tag}</p>
+        </div>
 
-    <div class="footer__cols">
-      {
-        columns.map((col) => (
-          <div class="footer__col">
-            <p class="footer__eyebrow">{col.title}</p>
-            <ul class="footer__list">
-              {col.links.map((l) => (
-                <li>
-                  <a href={l.href} class="footer__link">
-                    {l.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-        ))
-      }
-    </div>
-  </div>
+        <div class="footer__cols">
+          {columns.map((col) => (
+            <div class="footer__col">
+              <p class="footer__eyebrow">{col.title}</p>
+              <ul class="footer__list">
+                {col.links.map((l) => (
+                  <li>
+                    <a href={l.href} class="footer__link">
+                      {l.label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+      </div>
+    ) : (
+      <div class="container-page footer__inner footer__inner--compact">
+        <a href={home} class="footer__logo" aria-label={footer.homeAria}>
+          <img class="footer__mark" src="/favicon.svg" alt="" aria-hidden="true" width="20" height="20" />
+          <span>PostTruncate</span>
+        </a>
+        <nav class="footer__legal" aria-label={footer.columns.legal.title}>
+          {legalLinks.map((l) => (
+            <a href={l.href} class="footer__link">
+              {l.label}
+            </a>
+          ))}
+        </nav>
+      </div>
+    )
+  }
 
   <div class="container-page footer__bar">
     <p>{interp(footer.copyright, { year })}</p>
@@ -182,9 +209,30 @@ const columns = (
     max-width: 420px;
   }
 
+  /* Compact layout for standalone pages: brand on one side, Legal links on the
+     other, as a single balanced row. Avoids the lone-column blankness left by
+     dropping the in-page Tool/Platforms/Learn columns. */
+  .footer__inner--compact {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px 32px;
+    padding-top: 40px;
+    padding-bottom: 32px;
+  }
+  .footer__legal {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px 28px;
+  }
+
   @media (min-width: 720px) {
     .footer__inner {
       grid-template-columns: 1.2fr 2fr;
+    }
+    .footer__inner--compact {
+      grid-template-columns: none;
     }
     .footer__cols {
       grid-template-columns: repeat(4, 1fr);
