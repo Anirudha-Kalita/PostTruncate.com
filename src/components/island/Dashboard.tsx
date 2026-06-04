@@ -5,6 +5,7 @@ import { LinkedInPreview, type LinkedInView } from './LinkedInPreview';
 import { TwitterPreview } from './TwitterPreview';
 import { ThreadsPreview } from './ThreadsPreview';
 import { MetaMonitor } from './MetaMonitor';
+import { KeywordMonitor } from './KeywordMonitor';
 import type { IslandStrings } from '../../i18n/types';
 
 interface Props {
@@ -48,6 +49,7 @@ export default function Dashboard({ lang, strings }: Props) {
         <TwitterPreview text={text} lang={lang} s={strings} />
         <ThreadsPreview text={text} lang={lang} s={strings} />
         <MetaMonitor text={text} lang={lang} s={strings} />
+        <KeywordMonitor text={text} lang={lang} s={strings} />
       </div>
     </div>
   );

@@ -456,5 +456,21 @@ export const zh: Translations = {
       footnote:
         '{n} 个字符 · Facebook 折叠 ≈ 480 · Instagram 标题上限 2,200',
     },
+    keywords: {
+      eyebrow: '关键词',
+      title: '过度使用监测器',
+      badgeIdle: '空闲',
+      badgeStuffing: '关键词堆砌',
+      badgeBalanced: '均衡',
+      colKeyword: '关键词',
+      colUses: '次数',
+      colDensity: '密度',
+      overused: '过度使用',
+      empty: '开始输入即可查看你最常用的关键词及其密度。',
+      stuffingNote:
+        '高亮的关键词密度超过 {threshold}%——搜索引擎可能会将其视为关键词堆砌。请变换你的措辞。',
+      footnote:
+        '{total} 个词 · 密度超过 {threshold}% 的关键词将被标记',
+    },
   },
 };

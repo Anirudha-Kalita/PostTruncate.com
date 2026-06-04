@@ -456,5 +456,21 @@ export const nl: Translations = {
       footnote:
         '{n} tekens · Facebook-vouw ≈ 480 · Instagram-bijschriftlimiet 2.200',
     },
+    keywords: {
+      eyebrow: 'Trefwoorden',
+      title: 'Overgebruikmonitor',
+      badgeIdle: 'Inactief',
+      badgeStuffing: 'Keyword stuffing',
+      badgeBalanced: 'In balans',
+      colKeyword: 'Trefwoord',
+      colUses: 'Gebruik',
+      colDensity: 'Dichtheid',
+      overused: 'Te vaak gebruikt',
+      empty: 'Begin met typen om je meestgebruikte trefwoorden en hun dichtheid te zien.',
+      stuffingNote:
+        'Gemarkeerde trefwoorden overschrijden {threshold}% dichtheid — zoekmachines kunnen dit lezen als keyword stuffing. Varieer je woordkeuze.',
+      footnote:
+        '{total} woorden · trefwoorden boven {threshold}% dichtheid worden gemarkeerd',
+    },
   },
 };

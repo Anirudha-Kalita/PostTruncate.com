@@ -456,5 +456,21 @@ export const fr: Translations = {
       footnote:
         '{n} caractères · pli Facebook ≈ 480 · limite de légende Instagram 2 200',
     },
+    keywords: {
+      eyebrow: 'Mots-clés',
+      title: 'Détecteur de surutilisation',
+      badgeIdle: 'Inactif',
+      badgeStuffing: 'Bourrage de mots-clés',
+      badgeBalanced: 'Équilibré',
+      colKeyword: 'Mot-clé',
+      colUses: 'Occurrences',
+      colDensity: 'Densité',
+      overused: 'Surutilisé',
+      empty: 'Commencez à écrire pour voir vos mots-clés les plus utilisés et leur densité.',
+      stuffingNote:
+        'Les mots-clés surlignés dépassent {threshold} % de densité — les moteurs de recherche peuvent y voir du bourrage de mots-clés. Variez votre formulation.',
+      footnote:
+        '{total} mots · les mots-clés au-delà de {threshold} % de densité sont signalés',
+    },
   },
 };

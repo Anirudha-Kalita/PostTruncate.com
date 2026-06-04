@@ -456,5 +456,21 @@ export const da: Translations = {
       footnote:
         '{n} tegn · Facebook-fold ≈ 480 · Instagram-billedtekstgrænse 2.200',
     },
+    keywords: {
+      eyebrow: 'Nøgleord',
+      title: 'Overforbrugsmonitor',
+      badgeIdle: 'Inaktiv',
+      badgeStuffing: 'Nøgleordsspam',
+      badgeBalanced: 'Balanceret',
+      colKeyword: 'Nøgleord',
+      colUses: 'Brug',
+      colDensity: 'Tæthed',
+      overused: 'Overforbrugt',
+      empty: 'Begynd at skrive for at se dine mest brugte nøgleord og deres tæthed.',
+      stuffingNote:
+        'Fremhævede nøgleord overstiger {threshold}% tæthed — søgemaskiner kan læse det som nøgleordsspam. Varier dine ord.',
+      footnote:
+        '{total} ord · nøgleord over {threshold}% tæthed markeres',
+    },
   },
 };

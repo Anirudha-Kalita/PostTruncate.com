@@ -456,5 +456,21 @@ export const en: Translations = {
       footnote:
         '{n} characters · Facebook fold ≈ 480 · Instagram caption cap 2,200',
     },
+    keywords: {
+      eyebrow: 'Keywords',
+      title: 'Overuse monitor',
+      badgeIdle: 'Idle',
+      badgeStuffing: 'Keyword stuffing',
+      badgeBalanced: 'Balanced',
+      colKeyword: 'Keyword',
+      colUses: 'Uses',
+      colDensity: 'Density',
+      overused: 'Overused',
+      empty: 'Start typing to see your most-used keywords and their density.',
+      stuffingNote:
+        'Highlighted keywords exceed {threshold}% density — search engines may read this as keyword stuffing. Vary your wording.',
+      footnote:
+        '{total} words · keywords over {threshold}% density are flagged',
+    },
   },
 };

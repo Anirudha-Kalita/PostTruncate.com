@@ -456,5 +456,21 @@ export const pt: Translations = {
       footnote:
         '{n} caracteres · Dobra do Facebook ≈ 480 · Limite da legenda do Instagram 2200',
     },
+    keywords: {
+      eyebrow: 'Palavras-chave',
+      title: 'Monitor de utilização excessiva',
+      badgeIdle: 'Inativo',
+      badgeStuffing: 'Excesso de palavras-chave',
+      badgeBalanced: 'Equilibrado',
+      colKeyword: 'Palavra-chave',
+      colUses: 'Usos',
+      colDensity: 'Densidade',
+      overused: 'Em excesso',
+      empty: 'Comece a escrever para ver as suas palavras-chave mais usadas e a respetiva densidade.',
+      stuffingNote:
+        'As palavras-chave destacadas ultrapassam {threshold}% de densidade — os motores de pesquisa podem interpretar isto como excesso de palavras-chave. Varie a sua formulação.',
+      footnote:
+        '{total} palavras · palavras-chave acima de {threshold}% de densidade são assinaladas',
+    },
   },
 };

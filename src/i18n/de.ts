@@ -457,5 +457,21 @@ export const de: Translations = {
       footnote:
         '{n} Zeichen · Facebook-Falz ≈ 480 · Instagram-Bildunterschrift-Limit 2.200',
     },
+    keywords: {
+      eyebrow: 'Keywords',
+      title: 'Übernutzungs-Monitor',
+      badgeIdle: 'Inaktiv',
+      badgeStuffing: 'Keyword-Stuffing',
+      badgeBalanced: 'Ausgewogen',
+      colKeyword: 'Keyword',
+      colUses: 'Nutzungen',
+      colDensity: 'Dichte',
+      overused: 'Übernutzt',
+      empty: 'Tippe los, um deine meistgenutzten Keywords und ihre Dichte zu sehen.',
+      stuffingNote:
+        'Markierte Keywords überschreiten {threshold}% Dichte — Suchmaschinen könnten das als Keyword-Stuffing werten. Variiere deine Wortwahl.',
+      footnote:
+        '{total} Wörter · Keywords über {threshold}% Dichte werden markiert',
+    },
   },
 };

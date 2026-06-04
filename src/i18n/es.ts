@@ -456,5 +456,21 @@ export const es: Translations = {
       footnote:
         '{n} caracteres · Pliegue de Facebook ≈ 480 · Límite de descripción de Instagram 2.200',
     },
+    keywords: {
+      eyebrow: 'Palabras clave',
+      title: 'Monitor de uso excesivo',
+      badgeIdle: 'Inactivo',
+      badgeStuffing: 'Saturación de palabras clave',
+      badgeBalanced: 'Equilibrado',
+      colKeyword: 'Palabra clave',
+      colUses: 'Usos',
+      colDensity: 'Densidad',
+      overused: 'Sobreutilizada',
+      empty: 'Empieza a escribir para ver tus palabras clave más usadas y su densidad.',
+      stuffingNote:
+        'Las palabras clave resaltadas superan el {threshold}% de densidad — los motores de búsqueda pueden interpretarlo como saturación de palabras clave. Varía tu redacción.',
+      footnote:
+        '{total} palabras · se marcan las palabras clave que superan el {threshold}% de densidad',
+    },
   },
 };

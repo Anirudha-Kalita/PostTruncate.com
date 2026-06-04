@@ -109,6 +109,94 @@ export function countHashtags(text: string): number {
 }
 
 // ──────────────────────────────────────────────────────────────────────────
+// Keyword density / overuse
+// ──────────────────────────────────────────────────────────────────────────
+
+/**
+ * Density (% of all words) above which a single keyword reads as stuffing.
+ * 3.0% is the conventional SEO ceiling — past it, search ranking and human
+ * readability both start to suffer.
+ */
+export const KEYWORD_STUFFING_THRESHOLD = 3.0;
+
+/**
+ * Common English function words excluded from the ranking — they dominate any
+ * frequency count without carrying topical meaning. Density is still measured
+ * against the FULL word total (stop words included), so percentages match how
+ * SEO tools report them and the 3% threshold stays calibrated.
+ */
+const STOP_WORDS = new Set<string>([
+  'the', 'a', 'an', 'and', 'or', 'but', 'is', 'are', 'was', 'were', 'be',
+  'been', 'being', 'of', 'to', 'in', 'on', 'at', 'by', 'for', 'with', 'as',
+  'it', 'its', 'this', 'that', 'these', 'those', 'i', 'you', 'he', 'she',
+  'we', 'they', 'me', 'him', 'her', 'us', 'them', 'my', 'your', 'his', 'our',
+  'their', 'from', 'up', 'out', 'so', 'if', 'then', 'than', 'too', 'very',
+  'can', 'will', 'just', 'not', 'no', 'do', 'does', 'did', 'has', 'have',
+  'had', 'what', 'which', 'who', 'when', 'where', 'why', 'how', 'all', 'any',
+  'about', 'into', 'over', 'after', 'more', 'most', 'such', 'some', 'only',
+]);
+
+/**
+ * Word tokens: maximal runs of Unicode letters/digits, allowing internal
+ * apostrophes and hyphens (so "don't" and "trial-to-paid" stay whole). Strips
+ * surrounding punctuation — commas, periods, exclamation marks — by construction.
+ */
+const WORD_RE = /[\p{L}\p{N}]+(?:['’\-][\p{L}\p{N}]+)*/gu;
+
+export interface KeywordStat {
+  word: string;
+  count: number;
+  /** (count / total words) * 100 — full-document density. */
+  density: number;
+  /** True when density exceeds KEYWORD_STUFFING_THRESHOLD. */
+  overused: boolean;
+}
+
+export interface KeywordReport {
+  /** Total word tokens in the text (denominator for density). */
+  total: number;
+  /** Top keywords by frequency, stop words removed, highest first. */
+  keywords: KeywordStat[];
+  /** True if any unique keyword is over the stuffing threshold. */
+  hasOveruse: boolean;
+}
+
+/**
+ * Rank the most-used content words and their density. Lowercases and tokenizes
+ * the text, drops stop words and single characters, counts each unique word,
+ * and computes its density as a share of the full word total. Returns the top
+ * `topN` by frequency (ties broken alphabetically for stable ordering).
+ */
+export function keywordDensity(text: string, topN = 10): KeywordReport {
+  const tokens = text.toLowerCase().match(WORD_RE) ?? [];
+  const total = tokens.length;
+  if (total === 0) {
+    return { total: 0, keywords: [], hasOveruse: false };
+  }
+
+  const freq = new Map<string, number>();
+  for (const tok of tokens) {
+    if (tok.length < 2 || STOP_WORDS.has(tok)) continue;
+    freq.set(tok, (freq.get(tok) ?? 0) + 1);
+  }
+
+  let hasOveruse = false;
+  const ranked: KeywordStat[] = [];
+  for (const [word, count] of freq) {
+    const density = (count / total) * 100;
+    const overused = density > KEYWORD_STUFFING_THRESHOLD;
+    if (overused) hasOveruse = true;
+    ranked.push({ word, count, density, overused });
+  }
+
+  ranked.sort((a, b) =>
+    b.count !== a.count ? b.count - a.count : a.word.localeCompare(b.word),
+  );
+
+  return { total, keywords: ranked.slice(0, topN), hasOveruse };
+}
+
+// ──────────────────────────────────────────────────────────────────────────
 // Pseudo-font ("fancy") Unicode — 𝖁𝖔𝖑𝖉 / 𝓢𝓬𝓻𝓲𝓹𝓽 style text
 // ──────────────────────────────────────────────────────────────────────────
 

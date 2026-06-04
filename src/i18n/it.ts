@@ -456,5 +456,21 @@ export const it: Translations = {
       footnote:
         '{n} caratteri · soglia Facebook ≈ 480 · limite didascalia Instagram 2.200',
     },
+    keywords: {
+      eyebrow: 'Parole chiave',
+      title: 'Monitor di sovrautilizzo',
+      badgeIdle: 'Inattivo',
+      badgeStuffing: 'Keyword stuffing',
+      badgeBalanced: 'Bilanciato',
+      colKeyword: 'Parola chiave',
+      colUses: 'Usi',
+      colDensity: 'Densità',
+      overused: 'Sovrautilizzata',
+      empty: 'Inizia a scrivere per vedere le parole chiave più usate e la loro densità.',
+      stuffingNote:
+        'Le parole chiave evidenziate superano il {threshold}% di densità — i motori di ricerca potrebbero interpretarlo come keyword stuffing. Varia il linguaggio.',
+      footnote:
+        '{total} parole · le parole chiave oltre il {threshold}% di densità vengono segnalate',
+    },
   },
 };

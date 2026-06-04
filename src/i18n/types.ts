@@ -187,6 +187,24 @@ export interface IslandStrings {
     /** "{n}" characters · Facebook/Instagram caps. */
     footnote: string;
   };
+  keywords: {
+    eyebrow: string;
+    title: string;
+    badgeIdle: string;
+    badgeStuffing: string;
+    badgeBalanced: string;
+    colKeyword: string;
+    colUses: string;
+    colDensity: string;
+    /** Row flag on keywords over the density threshold. */
+    overused: string;
+    /** Shown before any rankable words exist. */
+    empty: string;
+    /** "{threshold}" — warning shown when a keyword is over the limit. */
+    stuffingNote: string;
+    /** "{total}" total words · "{threshold}" flag line. */
+    footnote: string;
+  };
 }
 
 export interface Translations {

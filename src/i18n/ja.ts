@@ -456,5 +456,21 @@ export const ja: Translations = {
       footnote:
         '{n} 文字 · Facebookの折りたたみ ≈ 480 · Instagramのキャプション上限 2,200',
     },
+    keywords: {
+      eyebrow: 'キーワード',
+      title: '使いすぎモニター',
+      badgeIdle: '待機中',
+      badgeStuffing: 'キーワードの詰め込み',
+      badgeBalanced: 'バランス良好',
+      colKeyword: 'キーワード',
+      colUses: '使用回数',
+      colDensity: '密度',
+      overused: '使いすぎ',
+      empty: '入力を始めると、最も使われているキーワードとその密度が表示されます。',
+      stuffingNote:
+        'ハイライトされたキーワードは密度 {threshold}% を超えています — 検索エンジンにキーワードの詰め込みと判断される可能性があります。表現に変化をつけましょう。',
+      footnote:
+        '{total} 語 · 密度 {threshold}% を超えるキーワードが検出されます',
+    },
   },
 };
