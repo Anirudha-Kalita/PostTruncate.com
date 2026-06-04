@@ -357,6 +357,27 @@ export const it: Translations = {
     },
   },
 
+  errors: {
+    notFound: {
+      code: '404',
+      title: 'Pagina non trovata',
+      description:
+        'La pagina che cerchi non esiste. Torna all’editor di PostTruncate.',
+      heading: 'Questa pagina è stata troncata',
+      body: 'La pagina che cerchi non esiste, è stata spostata o non è mai esistita. L’editor è ancora esattamente dove l’hai lasciato.',
+      cta: 'Torna all’editor',
+    },
+    serverError: {
+      code: '500',
+      title: 'Qualcosa è andato storto',
+      description:
+        'Si è verificato un errore imprevisto. Torna all’editor di PostTruncate e riprova.',
+      heading: 'Qualcosa è andato storto dalla nostra parte',
+      body: 'È un errore del server, non tuo. Riprova tra un momento — l’editor funziona interamente nel tuo browser, quindi il tuo testo è al sicuro in ogni caso.',
+      cta: 'Torna all’editor',
+    },
+  },
+
   island: {
     dashboard: {
       loadSample: 'Carica un post di esempio →',

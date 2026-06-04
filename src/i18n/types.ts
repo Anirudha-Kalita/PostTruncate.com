@@ -91,6 +91,27 @@ export interface ContactPage {
 }
 
 /**
+ * One error page (404 / 500). Rendered through the shared ErrorPage component.
+ * `title`/`description` drive <title> + meta; `heading`/`body`/`cta` are the
+ * on-page copy. Brand names stay untranslated. No <strong> markup — these are
+ * plain text, swapped client-side by the locale-detect script.
+ */
+export interface ErrorPageStrings {
+  /** Big numeral aside, e.g. "404" — kept here so it could localize digits. */
+  code: string;
+  /** Document/OG title (brand suffix added in markup). */
+  title: string;
+  /** Meta description for the error page. */
+  description: string;
+  /** On-page <h1>. */
+  heading: string;
+  /** Reassuring body line under the heading. */
+  body: string;
+  /** "Back to the editor" CTA label. */
+  cta: string;
+}
+
+/**
  * Strings consumed by the Preact islands. Split out from the rest because this
  * sub-object — and only this sub-object — is serialized into the client island
  * props, so it must stay free of any server-only values.
@@ -298,6 +319,15 @@ export interface Translations {
     terms: ContentPage;
     about: ContentPage;
     contact: ContactPage;
+  };
+  /**
+   * Error pages (404 / 500). Served as single root-level files for every
+   * language, so all locales' copy ships in the page and the visitor's
+   * language is selected client-side.
+   */
+  errors: {
+    notFound: ErrorPageStrings;
+    serverError: ErrorPageStrings;
   };
   island: IslandStrings;
 }

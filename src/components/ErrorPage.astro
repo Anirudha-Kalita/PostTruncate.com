@@ -1,0 +1,189 @@
+---
+// Shared renderer for the 404 and 500 pages. Both build to a single root-level
+// file (/404.html, /500.html) that a host serves for ANY path in ANY language,
+// so unlike the /[lang]/ routes we can't pre-render one file per locale.
+//
+// Strategy: render the DEFAULT_LOCALE (English) copy server-side so the page is
+// correct with JS off, but embed every locale's error strings and swap to the
+// visitor's language client-side — same resolution order as the root redirect
+// (localStorage 'lang' → navigator.languages → en). Chrome (nav/footer) stays
+// in English; only the error message localizes, and it's tagged with its own
+// `lang` so screen readers announce it correctly. The CTA points at "/", which
+// the root redirect then forwards to the visitor's language.
+import Layout from '../layouts/Layout.astro';
+import { getTranslations } from '../i18n';
+import { LOCALE_CODES, DEFAULT_LOCALE } from '../i18n/config';
+
+interface Props {
+  /** Which error dictionary entry to render. */
+  kind: 'notFound' | 'serverError';
+  /** In-locale path used for the (noindex) page; e.g. "/404/". */
+  path: string;
+}
+
+const { kind, path } = Astro.props;
+
+// English copy for the server render (no-JS baseline).
+const en = getTranslations(DEFAULT_LOCALE).errors[kind];
+
+// Every locale's copy for this error kind, keyed by code — handed to the
+// client script so it can swap text to the visitor's language.
+const byLocale = Object.fromEntries(
+  LOCALE_CODES.map((code) => [code, getTranslations(code).errors[kind]]),
+);
+
+const brand = 'PostTruncate';
+---
+
+<Layout
+  lang={DEFAULT_LOCALE}
+  path={path}
+  title={`${en.title} · ${brand}`}
+  description={en.description}
+  noindex
+>
+  <section class="error" lang={DEFAULT_LOCALE}>
+    <div class="error__mesh mesh-gradient" aria-hidden="true"></div>
+    <div class="container-page error__inner">
+      <p class="error__code">{en.code}</p>
+      <h1 class="error__title">{en.heading}</h1>
+      <p class="error__lede">{en.body}</p>
+      <div class="error__cta">
+        <a href="/" class="error__primary">{en.cta}</a>
+      </div>
+    </div>
+  </section>
+
+  {/* Inline (define:vars makes it inline) and placed AFTER the section, so the
+      elements above already exist when it runs — the text swaps during parse,
+      before load, minimizing any flash of English. Mirrors the locale pick in
+      src/pages/index.astro. */}
+  <script is:inline define:vars={{ byLocale, codes: LOCALE_CODES, brand }}>
+    (function () {
+      try {
+        var pick = function () {
+          // 1. URL path prefix — the strongest signal for an error page. A
+          //    broken link like /da/whatever still leaves "da" in
+          //    location.pathname even though the host served the shared
+          //    /404.html, so this is what actually localizes the page.
+          var seg = location.pathname.split('/')[1];
+          if (seg && codes.indexOf(seg) !== -1) return seg;
+
+          // 2. A previously stored choice (same key the root redirect reads).
+          var stored = null;
+          try {
+            stored = localStorage.getItem('lang');
+          } catch (e) {}
+          if (stored && codes.indexOf(stored) !== -1) return stored;
+
+          // 3. The browser's preferred languages.
+          var prefs = navigator.languages || [navigator.language || ''];
+          for (var i = 0; i < prefs.length; i++) {
+            var base = String(prefs[i]).toLowerCase().split('-')[0];
+            if (codes.indexOf(base) !== -1) return base;
+          }
+          return null;
+        };
+
+        var lang = pick();
+        // English is already on the page — nothing to swap.
+        if (!lang || lang === 'en') return;
+        var t = byLocale[lang];
+        if (!t) return;
+
+        var setText = function (sel, text) {
+          var el = document.querySelector(sel);
+          if (el) el.textContent = text;
+        };
+        setText('.error__code', t.code);
+        setText('.error__title', t.heading);
+        setText('.error__lede', t.body);
+        setText('.error__primary', t.cta);
+
+        document.title = t.title + ' · ' + brand;
+        var desc = document.querySelector('meta[name="description"]');
+        if (desc) desc.setAttribute('content', t.description);
+        // Re-tag the localized region so assistive tech reads it correctly
+        // (the surrounding chrome stays English).
+        var sec = document.querySelector('.error');
+        if (sec) sec.setAttribute('lang', lang);
+      } catch (e) {}
+    })();
+  </script>
+</Layout>
+
+<style>
+  .error {
+    position: relative;
+    overflow: hidden;
+    background: var(--color-canvas);
+    min-height: clamp(420px, 70vh, 680px);
+    display: grid;
+    place-items: center;
+  }
+  .error__mesh {
+    position: absolute;
+    inset: -40% 0 auto 0;
+    height: 160%;
+    opacity: 0.16;
+    filter: blur(8px);
+    pointer-events: none;
+  }
+  .error__inner {
+    position: relative;
+    padding-top: 72px;
+    padding-bottom: 72px;
+    text-align: center;
+  }
+  .error__code {
+    font-family: var(--font-mono);
+    font-size: clamp(72px, 16vw, 140px);
+    font-weight: 600;
+    line-height: 1;
+    letter-spacing: -4px;
+    color: var(--color-ink);
+  }
+  .error__title {
+    margin: 12px auto 0;
+    max-width: 560px;
+    font-size: clamp(26px, 5vw, 40px);
+    font-weight: 600;
+    line-height: 1.08;
+    letter-spacing: -1.6px;
+    color: var(--color-ink);
+  }
+  .error__lede {
+    margin: 18px auto 0;
+    max-width: 480px;
+    font-size: 17px;
+    line-height: 27px;
+    color: var(--color-body);
+  }
+  .error__cta {
+    margin-top: 32px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+  }
+  .error__primary {
+    display: inline-flex;
+    align-items: center;
+    height: 48px;
+    padding: 0 24px;
+    border-radius: var(--radius-pill);
+    background: var(--color-ink);
+    color: var(--color-on-primary);
+    font-size: 16px;
+    font-weight: 500;
+    transition: opacity 0.15s ease;
+  }
+  .error__primary:hover {
+    opacity: 0.88;
+  }
+
+  /* Bright mesh stops read washed-out at 0.16 over near-black; lift them. */
+  :global(html[data-theme='dark']) .error__mesh {
+    opacity: 0.3;
+  }
+</style>

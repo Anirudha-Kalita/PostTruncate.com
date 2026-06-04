@@ -1,0 +1,14 @@
+---
+import ErrorPage from '../components/ErrorPage.astro';
+
+// Custom 500 → built to /500.html. NOTE: this is a static (SSG) site, so Astro
+// does not render this on-demand at runtime; instead the build emits a static
+// /500.html that most hosts (Netlify, Vercel, Cloudflare Pages) can be pointed
+// at to serve on server errors. One root-level file for every language;
+// ErrorPage renders English and swaps to the visitor's locale client-side.
+//
+// `Astro.props.error` (passed only for on-demand pages) is always undefined
+// here and is never rendered — leaking a stack/message would expose internals.
+---
+
+<ErrorPage kind="serverError" path="/500/" />

@@ -358,6 +358,27 @@ export const de: Translations = {
     },
   },
 
+  errors: {
+    notFound: {
+      code: '404',
+      title: 'Seite nicht gefunden',
+      description:
+        'Die gesuchte Seite existiert nicht. Zurück zum PostTruncate-Editor.',
+      heading: 'Diese Seite wurde abgeschnitten',
+      body: 'Die gesuchte Seite existiert nicht, wurde verschoben oder gab es nie. Der Editor ist noch genau dort, wo du ihn verlassen hast.',
+      cta: 'Zurück zum Editor',
+    },
+    serverError: {
+      code: '500',
+      title: 'Etwas ist schiefgelaufen',
+      description:
+        'Ein unerwarteter Fehler ist aufgetreten. Zurück zum PostTruncate-Editor und erneut versuchen.',
+      heading: 'Auf unserer Seite ist etwas schiefgelaufen',
+      body: 'Das ist ein Serverfehler, nicht deiner. Versuch es gleich noch einmal — der Editor läuft komplett in deinem Browser, dein Text ist also so oder so sicher.',
+      cta: 'Zurück zum Editor',
+    },
+  },
+
   island: {
     dashboard: {
       loadSample: 'Beispielbeitrag laden →',

@@ -357,6 +357,27 @@ export const da: Translations = {
     },
   },
 
+  errors: {
+    notFound: {
+      code: '404',
+      title: 'Siden blev ikke fundet',
+      description:
+        'Siden, du leder efter, findes ikke. Vend tilbage til PostTruncate-editoren.',
+      heading: 'Denne side blev afkortet',
+      body: 'Siden, du leder efter, findes ikke, er flyttet eller har aldrig eksisteret. Editoren er stadig præcis, hvor du forlod den.',
+      cta: 'Tilbage til editoren',
+    },
+    serverError: {
+      code: '500',
+      title: 'Noget gik galt',
+      description:
+        'Der opstod en uventet fejl. Vend tilbage til PostTruncate-editoren, og prøv igen.',
+      heading: 'Noget gik galt i vores ende',
+      body: 'Det er en serverfejl, ikke din. Prøv igen om et øjeblik — editoren kører helt i din browser, så din tekst er sikker under alle omstændigheder.',
+      cta: 'Tilbage til editoren',
+    },
+  },
+
   island: {
     dashboard: {
       loadSample: 'Indlæs et eksempelopslag →',

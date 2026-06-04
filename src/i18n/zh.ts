@@ -357,6 +357,25 @@ export const zh: Translations = {
     },
   },
 
+  errors: {
+    notFound: {
+      code: '404',
+      title: '页面未找到',
+      description: '你要找的页面不存在。返回 PostTruncate 编辑器。',
+      heading: '此页面被截断了',
+      body: '你要找的页面不存在、已被移动，或从未存在过。编辑器仍在你离开时的位置。',
+      cta: '返回编辑器',
+    },
+    serverError: {
+      code: '500',
+      title: '出了点问题',
+      description: '发生了意外错误。返回 PostTruncate 编辑器并重试。',
+      heading: '我们这边出了点问题',
+      body: '这是服务器错误，不是你的问题。请稍后重试——编辑器完全在你的浏览器中运行，所以无论如何你的文本都是安全的。',
+      cta: '返回编辑器',
+    },
+  },
+
   island: {
     dashboard: {
       loadSample: '加载示例帖子 →',

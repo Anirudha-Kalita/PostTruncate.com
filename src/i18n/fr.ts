@@ -357,6 +357,27 @@ export const fr: Translations = {
     },
   },
 
+  errors: {
+    notFound: {
+      code: '404',
+      title: 'Page introuvable',
+      description:
+        'La page que vous cherchez n’existe pas. Retournez à l’éditeur PostTruncate.',
+      heading: 'Cette page a été tronquée',
+      body: 'La page que vous cherchez n’existe pas, a été déplacée ou n’a jamais existé. L’éditeur est toujours là où vous l’avez laissé.',
+      cta: 'Retour à l’éditeur',
+    },
+    serverError: {
+      code: '500',
+      title: 'Une erreur est survenue',
+      description:
+        'Une erreur inattendue s’est produite. Retournez à l’éditeur PostTruncate et réessayez.',
+      heading: 'Une erreur est survenue de notre côté',
+      body: 'C’est une erreur serveur, pas la vôtre. Réessayez dans un instant — l’éditeur fonctionne entièrement dans votre navigateur, votre texte est donc à l’abri dans tous les cas.',
+      cta: 'Retour à l’éditeur',
+    },
+  },
+
   island: {
     dashboard: {
       loadSample: 'Charger un exemple de publication →',

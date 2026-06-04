@@ -357,6 +357,27 @@ export const es: Translations = {
     },
   },
 
+  errors: {
+    notFound: {
+      code: '404',
+      title: 'Página no encontrada',
+      description:
+        'La página que buscas no existe. Vuelve al editor de PostTruncate.',
+      heading: 'Esta página quedó truncada',
+      body: 'La página que buscas no existe, se movió o nunca existió. El editor sigue justo donde lo dejaste.',
+      cta: 'Volver al editor',
+    },
+    serverError: {
+      code: '500',
+      title: 'Algo salió mal',
+      description:
+        'Ocurrió un error inesperado. Vuelve al editor de PostTruncate e inténtalo de nuevo.',
+      heading: 'Algo salió mal de nuestro lado',
+      body: 'Es un error del servidor, no es culpa tuya. Inténtalo de nuevo en un momento: el editor funciona por completo en tu navegador, así que tu texto está a salvo igualmente.',
+      cta: 'Volver al editor',
+    },
+  },
+
   island: {
     dashboard: {
       loadSample: 'Cargar una publicación de ejemplo →',

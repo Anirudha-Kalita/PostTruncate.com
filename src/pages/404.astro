@@ -1,0 +1,10 @@
+---
+import ErrorPage from '../components/ErrorPage.astro';
+
+// Custom 404 → built to /404.html, which most hosts serve for unknown paths.
+// A single root-level file answers for every language; ErrorPage renders the
+// English baseline and swaps to the visitor's locale client-side. See the
+// component for the full rationale.
+---
+
+<ErrorPage kind="notFound" path="/404/" />

@@ -357,6 +357,27 @@ export const en: Translations = {
     },
   },
 
+  errors: {
+    notFound: {
+      code: '404',
+      title: 'Page not found',
+      description:
+        'The page you’re looking for doesn’t exist. Head back to the PostTruncate editor.',
+      heading: 'This page got truncated',
+      body: 'The page you’re looking for doesn’t exist, moved, or never did. The editor is still right where you left it.',
+      cta: 'Back to the editor',
+    },
+    serverError: {
+      code: '500',
+      title: 'Something went wrong',
+      description:
+        'An unexpected error occurred. Head back to the PostTruncate editor and try again.',
+      heading: 'Something went wrong on our end',
+      body: 'That’s a server error, not you. Try again in a moment — the editor runs entirely in your browser, so your text is safe either way.',
+      cta: 'Back to the editor',
+    },
+  },
+
   island: {
     dashboard: {
       loadSample: 'Load a sample post →',

@@ -357,6 +357,27 @@ export const nl: Translations = {
     },
   },
 
+  errors: {
+    notFound: {
+      code: '404',
+      title: 'Pagina niet gevonden',
+      description:
+        'De pagina die je zoekt bestaat niet. Ga terug naar de PostTruncate-editor.',
+      heading: 'Deze pagina is afgekapt',
+      body: 'De pagina die je zoekt bestaat niet, is verplaatst of heeft nooit bestaan. De editor staat nog precies waar je hem achterliet.',
+      cta: 'Terug naar de editor',
+    },
+    serverError: {
+      code: '500',
+      title: 'Er ging iets mis',
+      description:
+        'Er is een onverwachte fout opgetreden. Ga terug naar de PostTruncate-editor en probeer het opnieuw.',
+      heading: 'Er ging iets mis aan onze kant',
+      body: 'Dat is een serverfout, niet die van jou. Probeer het zo opnieuw — de editor draait volledig in je browser, dus je tekst is hoe dan ook veilig.',
+      cta: 'Terug naar de editor',
+    },
+  },
+
   island: {
     dashboard: {
       loadSample: 'Laad een voorbeeldbericht →',
