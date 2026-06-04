@@ -67,7 +67,7 @@ export function ThreadsPreview({ text, lang, s }: Props) {
               : th.charLength}
           </span>
           <span class="font-mono text-[12px] text-mute tabular-nums">
-            {nf.format(count)} / {nf.format(LIMITS.THREADS)}
+            {nf.format(count)} / {nf.format(visualFold)}
           </span>
         </div>
       </div>
@@ -75,7 +75,7 @@ export function ThreadsPreview({ text, lang, s }: Props) {
       <div class="space-y-3 p-4 sm:p-5">
         {posts.length === 0 ? (
           <article class="rounded-md border border-hairline bg-canvas p-4 text-[14px] text-mute">
-            {interp(th.placeholder, { limit: nf.format(LIMITS.THREADS) })}
+            {interp(th.placeholder, { limit: nf.format(visualFold) })}
           </article>
         ) : (
           posts.map((post, i) => (

@@ -2,6 +2,7 @@
 import { defineConfig } from 'astro/config';
 import preact from '@astrojs/preact';
 import vercel from '@astrojs/vercel';
+import sitemap from '@astrojs/sitemap';
 import tailwindcss from '@tailwindcss/vite';
 import { LOCALE_CODES, DEFAULT_LOCALE } from './src/i18n/config.ts';
 
@@ -23,7 +24,23 @@ export default defineConfig({
     },
   },
   adapter: vercel(),
-  integrations: [preact()],
+  integrations: [
+    preact(),
+    // Sitemap is driven by the same locale registry as the i18n routes, so the
+    // hreflang map can never drift from the languages we actually ship. We drop
+    // the bare "/" (a 302 locale router with no content of its own) and the
+    // noindex 404/500 error files.
+    sitemap({
+      i18n: {
+        defaultLocale: DEFAULT_LOCALE,
+        locales: Object.fromEntries(LOCALE_CODES.map((code) => [code, code])),
+      },
+      filter: (page) => {
+        const { pathname } = new URL(page);
+        return pathname !== '/' && !/\/(404|500)\/?$/.test(pathname);
+      },
+    }),
+  ],
   vite: {
     plugins: [tailwindcss()],
   },
