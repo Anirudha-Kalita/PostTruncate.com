@@ -22,7 +22,7 @@
   --color-canvas-soft-2: #f5f5f5;
   --color-ink: #171717;
   --color-body: #4d4d4d;
-  --color-mute: #888888;
+  --color-mute: #666666;
   --color-on-primary: #ffffff;
   --color-hairline: #ebebeb;
   --color-hairline-strong: #a1a1a1;
@@ -110,7 +110,7 @@ html[data-theme='dark'] {
   --color-canvas-soft-2: #232323; /* insets: textarea, meter track, hover */
   --color-ink: #ededed; /* primary text + inverted pill surface */
   --color-body: #a1a1a1;
-  --color-mute: #707070;
+  --color-mute: #9a9a9a;
   --color-on-primary: #0a0a0a; /* dark text on the now-light pills */
   --color-hairline: #2a2a2a;
   --color-hairline-strong: #4d4d4d;
@@ -269,5 +269,19 @@ html[data-theme='dark'] {
 @media (min-width: 768px) {
   .container-page {
     padding-inline: 24px;
+  }
+}
+
+/* Shared social-feed mockup widths. Keeps preview cards close to real mobile
+   feed measures instead of letting them stretch to the dashboard column. */
+@layer components {
+  .feed-phone {
+    width: min(100%, 390px);
+    min-width: 0;
+    margin-inline: auto;
+  }
+
+  .feed-phone--desktop {
+    width: min(100%, 552px);
   }
 }

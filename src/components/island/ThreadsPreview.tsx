@@ -1,6 +1,6 @@
 /** @jsxImportSource preact */
 import { useState } from 'preact/hooks';
-import { charCount, detectUrls, LIMITS, splitThread } from '../../lib/textTools';
+import { charCount, detectUrls, LIMITS, sliceChars, splitThread } from '../../lib/textTools';
 import { Card, CardHead, Badge, Segmented, Meter, BrandLogo } from './ui';
 import { interp, plural } from '../../i18n/interp';
 import type { IslandStrings } from '../../i18n/types';
@@ -78,7 +78,11 @@ export function ThreadsPreview({ text, lang, s }: Props) {
           </article>
         ) : (
           posts.map((post, i) => (
-            <article class="relative rounded-md border border-hairline bg-canvas p-4">
+            <article
+              class={`feed-phone relative rounded-md border border-hairline bg-canvas p-4 ${
+                view === 'desktop' ? 'feed-phone--desktop' : ''
+              }`}
+            >
               <header class="flex items-center gap-2.5">
                 <span class="h-8 w-8 shrink-0 rounded-full bg-linear-to-br from-grad-preview-start to-grad-ship-start" />
                 <div class="min-w-0 leading-tight">
@@ -117,9 +121,7 @@ function ThreadsPostText({
   seeMore: string;
 }) {
   const shouldFold = charCount(post) > visualFold;
-  const visible = shouldFold
-    ? Array.from(post).slice(0, visualFold).join('')
-    : post;
+  const visible = shouldFold ? sliceChars(post, 0, visualFold) : post;
 
   return (
     <p class="mt-2 whitespace-pre-wrap break-words text-[14px] leading-[21px] text-ink">

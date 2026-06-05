@@ -76,7 +76,7 @@ export function TwitterPreview({ text, lang, s }: Props) {
           </article>
         ) : (
           tweets.map((tweet, i) => (
-            <article class="relative rounded-md border border-hairline bg-canvas p-4">
+            <article class="feed-phone relative rounded-md border border-hairline bg-canvas p-4">
               <header class="flex items-center gap-2.5">
                 <span class="h-8 w-8 shrink-0 rounded-full bg-linear-to-br from-grad-preview-start to-grad-preview-end" />
                 <div class="min-w-0 leading-tight">

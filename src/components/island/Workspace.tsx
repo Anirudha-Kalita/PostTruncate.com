@@ -81,7 +81,7 @@ export function Workspace({ text, setText, lang, s }: Props) {
           placeholder={w.placeholder}
           rows={12}
           spellcheck
-          class="block w-full resize-y rounded-md border border-hairline bg-canvas-soft px-4 py-3 text-[15px] leading-7 text-ink placeholder:text-mute focus:border-link focus:bg-canvas focus:outline-none"
+          class="block w-full resize-y rounded-md border border-hairline bg-canvas-soft px-4 py-3 text-[15px] leading-7 text-ink placeholder:text-mute focus:border-link focus:bg-canvas focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-link"
         />
 
         <div class="mt-3 rounded-md border border-hairline bg-canvas-soft p-2.5">

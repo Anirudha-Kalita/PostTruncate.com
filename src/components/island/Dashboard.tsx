@@ -16,6 +16,8 @@ interface Props {
 }
 
 const DRAFT_STORAGE_KEY = 'post_truncate_active_draft';
+const ANALYSIS_DEBOUNCE_MS = 80;
+const STORAGE_DEBOUNCE_MS = 250;
 
 function readActiveDraft() {
   if (typeof window === 'undefined') return '';
@@ -36,22 +38,37 @@ function readActiveDraft() {
  */
 export default function Dashboard({ lang, strings }: Props) {
   const [text, setText] = useState('');
+  const [analysisText, setAnalysisText] = useState('');
   const [view, setView] = useState<LinkedInView>('desktop');
   const [isDraftLoaded, setIsDraftLoaded] = useState(false);
 
   useEffect(() => {
-    setText(readActiveDraft());
+    const draft = readActiveDraft();
+    setText(draft);
+    setAnalysisText(draft);
     setIsDraftLoaded(true);
   }, []);
 
   useEffect(() => {
+    const id = window.setTimeout(() => {
+      setAnalysisText(text);
+    }, ANALYSIS_DEBOUNCE_MS);
+
+    return () => window.clearTimeout(id);
+  }, [text]);
+
+  useEffect(() => {
     if (!isDraftLoaded) return;
 
-    try {
-      window.sessionStorage.setItem(DRAFT_STORAGE_KEY, text);
-    } catch {
-      // Storage can be unavailable in private browsing or locked-down contexts.
-    }
+    const id = window.setTimeout(() => {
+      try {
+        window.sessionStorage.setItem(DRAFT_STORAGE_KEY, text);
+      } catch {
+        // Storage can be unavailable in private browsing or locked-down contexts.
+      }
+    }, STORAGE_DEBOUNCE_MS);
+
+    return () => window.clearTimeout(id);
   }, [isDraftLoaded, text]);
 
   return (
@@ -70,15 +87,15 @@ export default function Dashboard({ lang, strings }: Props) {
           </button>
         )}
 
-        <KeywordMonitor text={text} lang={lang} s={strings} />
+        <KeywordMonitor text={analysisText} lang={lang} s={strings} />
       </div>
 
       {/* Right column — live platform matrix */}
       <div class="flex flex-col gap-5">
-        <LinkedInPreview text={text} view={view} setView={setView} lang={lang} s={strings} />
-        <TwitterPreview text={text} lang={lang} s={strings} />
-        <MetaMonitor text={text} lang={lang} s={strings} />
-        <ThreadsPreview text={text} lang={lang} s={strings} />
+        <LinkedInPreview text={analysisText} view={view} setView={setView} lang={lang} s={strings} />
+        <TwitterPreview text={analysisText} lang={lang} s={strings} />
+        <MetaMonitor text={analysisText} lang={lang} s={strings} />
+        <ThreadsPreview text={analysisText} lang={lang} s={strings} />
       </div>
     </div>
   );

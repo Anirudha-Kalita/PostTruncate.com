@@ -5,6 +5,7 @@ import {
   hasFancyUnicode,
   countFancyUnicode,
   charCount,
+  sliceChars,
   LIMITS,
 } from '../../lib/textTools';
 import { Card, CardHead, Badge, Segmented, Meter, BrandLogo } from './ui';
@@ -25,11 +26,10 @@ const FACEBOOK_DESKTOP_FOLD = 480;
 const FACEBOOK_MOBILE_FOLD = 110;
 
 function truncateForFeed(text: string, limit: number) {
-  const chars = Array.from(text);
+  const count = charCount(text);
   return {
-    isTruncated: chars.length > limit,
-    previewText:
-      chars.length > limit ? chars.slice(0, limit).join('') : text,
+    isTruncated: count > limit,
+    previewText: count > limit ? sliceChars(text, 0, limit) : text,
   };
 }
 
@@ -103,7 +103,11 @@ export function MetaMonitor({ text, lang, s }: Props) {
         </div>
 
         <div class="space-y-4 p-4 sm:p-5">
-          <article class="rounded-md border border-hairline bg-canvas p-4">
+          <article
+            class={`feed-phone rounded-md border border-hairline bg-canvas p-4 ${
+              instagramView === 'desktop' ? 'feed-phone--desktop' : ''
+            }`}
+          >
             <header class="flex items-center justify-between gap-3">
               <div class="flex min-w-0 items-center gap-2.5">
                 <span class="h-8 w-8 shrink-0 rounded-full bg-linear-to-br from-grad-preview-start to-grad-ship-start" />
@@ -192,7 +196,11 @@ export function MetaMonitor({ text, lang, s }: Props) {
         </div>
 
         <div class="space-y-4 p-4 sm:p-5">
-          <article class="rounded-md border border-hairline bg-canvas p-4">
+          <article
+            class={`feed-phone rounded-md border border-hairline bg-canvas p-4 ${
+              facebookView === 'desktop' ? 'feed-phone--desktop' : ''
+            }`}
+          >
             <header class="flex items-center justify-between gap-3">
               <div class="flex min-w-0 items-center gap-2.5">
                 <span class="h-8 w-8 shrink-0 rounded-full bg-linear-to-br from-grad-develop-start to-grad-preview-start" />

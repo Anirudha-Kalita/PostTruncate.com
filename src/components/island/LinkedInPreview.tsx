@@ -75,7 +75,11 @@ export function LinkedInPreview({ text, view, setView, lang, s }: Props) {
 
       {/* Feed mockup */}
       <div class="p-4 sm:p-5">
-        <article class="rounded-md border border-hairline bg-canvas p-4">
+        <article
+          class={`feed-phone rounded-md border border-hairline bg-canvas p-4 ${
+            view === 'desktop' ? 'feed-phone--desktop' : ''
+          }`}
+        >
           <header class="flex items-center gap-3">
             <span class="h-10 w-10 shrink-0 rounded-full bg-linear-to-br from-grad-develop-start to-grad-preview-start" />
             <div class="min-w-0">

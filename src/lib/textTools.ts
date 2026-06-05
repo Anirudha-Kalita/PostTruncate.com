@@ -2,9 +2,9 @@
  * PostTruncate text engine — pure, DOM-free functions.
  *
  * Everything the previews rely on lives here so the logic is testable in
- * isolation and shared across the Preact islands. All counting is done on
- * Unicode code points (via Array.from / spread) rather than UTF-16 code
- * units, so emoji and astral-plane characters are not miscounted.
+ * isolation and shared across the Preact islands. User-facing character
+ * counts are done on Unicode grapheme clusters, so emoji sequences, flags,
+ * combining marks, and astral-plane characters are not miscounted or split.
  */
 
 /** Platform truncation/limit constants. */
@@ -24,9 +24,25 @@ export const LIMITS = {
   INSTAGRAM_CAPTION: 2200,
 } as const;
 
-/** Count Unicode code points (not UTF-16 units). */
+const GRAPHEME_SEGMENTER =
+  typeof Intl !== 'undefined' && 'Segmenter' in Intl
+    ? new Intl.Segmenter(undefined, { granularity: 'grapheme' })
+    : null;
+
+function splitGraphemes(text: string): string[] {
+  if (!text) return [];
+  if (!GRAPHEME_SEGMENTER) return Array.from(text);
+  return Array.from(GRAPHEME_SEGMENTER.segment(text), ({ segment }) => segment);
+}
+
+/** Count user-perceived Unicode characters (grapheme clusters). */
 export function charCount(text: string): number {
-  return Array.from(text).length;
+  return splitGraphemes(text).length;
+}
+
+/** Slice by user-perceived characters without breaking emoji/combining marks. */
+export function sliceChars(text: string, start: number, end?: number): string {
+  return splitGraphemes(text).slice(start, end).join('');
 }
 
 /** Words = maximal runs of non-whitespace. */
@@ -109,11 +125,6 @@ export function detectUrls(text: string): UrlMatch[] {
   }
   return matches;
 }
-
-const GRAPHEME_SEGMENTER =
-  typeof Intl !== 'undefined' && 'Segmenter' in Intl
-    ? new Intl.Segmenter(undefined, { granularity: 'grapheme' })
-    : null;
 
 const EMOJI_RE = /[\p{Extended_Pictographic}\p{Emoji_Presentation}]/u;
 
@@ -217,10 +228,36 @@ export function weightedLength(text: string): number {
 // Hashtags
 // ──────────────────────────────────────────────────────────────────────────
 
-const HASHTAG_RE = /#[\p{L}\p{N}_]+/gu;
+const HASHTAG_RE = /#[\p{L}\p{M}\p{N}_]+/gu;
+
+interface HashtagMatch {
+  tag: string;
+  start: number;
+  end: number;
+}
+
+function hasValidHashtagBoundary(text: string, start: number): boolean {
+  if (start === 0) return true;
+
+  const prevChars = Array.from(text.slice(Math.max(0, start - 2), start));
+  const prev = prevChars[prevChars.length - 1];
+  if (!prev) return true;
+
+  // Avoid matching foo#bar, ##tag, and URL fragments like example.com/#pricing.
+  return !/[\p{L}\p{M}\p{N}_/#]/u.test(prev);
+}
+
+function detectHashtagMatches(text: string): HashtagMatch[] {
+  const matches: HashtagMatch[] = [];
+  for (const m of text.matchAll(HASHTAG_RE)) {
+    if (m.index === undefined || !hasValidHashtagBoundary(text, m.index)) continue;
+    matches.push({ tag: m[0], start: m.index, end: m.index + m[0].length });
+  }
+  return matches;
+}
 
 export function detectHashtags(text: string): string[] {
-  return text.match(HASHTAG_RE) ?? [];
+  return detectHashtagMatches(text).map((match) => match.tag);
 }
 
 export function countHashtags(text: string): number {
@@ -504,16 +541,15 @@ export interface StripResult {
   removed: number;
 }
 
-const EMOJI_SYMBOL_RE =
-  /[\p{Extended_Pictographic}\p{Emoji_Presentation}\p{S}\u200D\uFE0E\uFE0F]/gu;
-
 export function stripEmojiAndSymbols(text: string): StripResult {
   let removed = 0;
-  const next = text
-    .replace(EMOJI_SYMBOL_RE, () => {
+  const next = splitGraphemes(text)
+    .filter((segment) => {
+      if (!isEmojiCluster(segment)) return true;
       removed++;
-      return '';
+      return false;
     })
+    .join('')
     .replace(/[ \t]{2,}/g, ' ')
     .replace(/ +\n/g, '\n')
     .replace(/\n{3,}/g, '\n\n');
@@ -522,11 +558,19 @@ export function stripEmojiAndSymbols(text: string): StripResult {
 }
 
 export function extractHashtagsToBottom(text: string): string {
-  const hashtags = detectHashtags(text);
+  const matches = detectHashtagMatches(text);
+  const hashtags = matches.map((match) => match.tag);
   if (hashtags.length === 0) return text;
 
-  const body = text
-    .replace(HASHTAG_RE, '')
+  let body = '';
+  let cursor = 0;
+  for (const match of matches) {
+    body += text.slice(cursor, match.start);
+    cursor = match.end;
+  }
+  body += text.slice(cursor);
+
+  body = body
     .replace(/[ \t]{2,}/g, ' ')
     .replace(/ +\n/g, '\n')
     .replace(/\n{3,}/g, '\n\n')
@@ -549,15 +593,15 @@ export interface HookSplit {
   limit: number;
 }
 
-/** Split text at the LinkedIn fold, counting by code points. */
+/** Split text at the LinkedIn fold, counting by user-perceived characters. */
 export function linkedInHook(text: string, limit: number): HookSplit {
-  const cps = Array.from(text);
-  if (cps.length <= limit) {
+  const chars = splitGraphemes(text);
+  if (chars.length <= limit) {
     return { hook: text, rest: '', truncated: false, limit };
   }
   return {
-    hook: cps.slice(0, limit).join(''),
-    rest: cps.slice(limit).join(''),
+    hook: chars.slice(0, limit).join(''),
+    rest: chars.slice(limit).join(''),
     truncated: true,
     limit,
   };
@@ -567,7 +611,13 @@ export function linkedInHook(text: string, limit: number): HookSplit {
 // X / Twitter thread splitter
 // ──────────────────────────────────────────────────────────────────────────
 
-const SUFFIX_RESERVE = 8; // room for "\n\n99/99"
+function threadSuffixReserve(
+  index: number,
+  total: number,
+  measure: (s: string) => number,
+): number {
+  return total > 1 ? measure(`\n\n${index}/${total}`) : 0;
+}
 
 /**
  * Split text into a sequential thread where every post stays within `limit`.
@@ -589,11 +639,31 @@ export function splitThread(
   if (!trimmed) return [];
   if (measure(trimmed) <= limit) return [trimmed];
 
-  const budget = limit - SUFFIX_RESERVE;
+  let totalGuess = 2;
+  let chunks: string[] = [];
+  for (let attempt = 0; attempt < 5; attempt++) {
+    chunks = splitThreadWithTotal(trimmed, limit, totalGuess, measure);
+    const nextGuess = chunks.length;
+    if (String(nextGuess).length === String(totalGuess).length) break;
+    totalGuess = nextGuess;
+  }
+
+  return chunks;
+}
+
+function splitThreadWithTotal(
+  trimmed: string,
+  limit: number,
+  totalGuess: number,
+  measure: (s: string) => number,
+): string[] {
   const chunks: string[] = [];
   let remaining = trimmed;
 
   while (remaining.length > 0) {
+    const chunkIndex = chunks.length + 1;
+    const budget = limit - threadSuffixReserve(chunkIndex, totalGuess, measure);
+
     if (measure(remaining) <= budget) {
       chunks.push(remaining.trim());
       break;
@@ -611,7 +681,7 @@ export function splitThread(
       lastFit = candidate;
     }
 
-    // A single word longer than the budget: hard-slice by code points.
+    // A single word longer than the budget: hard-slice by grapheme clusters.
     if (!lastFit.trim()) {
       lastFit = takeWeightedPrefix(remaining, budget, measure);
     }
@@ -632,12 +702,12 @@ function takeWeightedPrefix(
   measure: (s: string) => number,
 ): string {
   let out = '';
-  for (const ch of text) {
+  for (const ch of splitGraphemes(text)) {
     const next = out + ch;
     if (measure(next) > budget) break;
     out = next;
   }
-  return out || Array.from(text)[0] || '';
+  return out || splitGraphemes(text)[0] || '';
 }
 
 /**
