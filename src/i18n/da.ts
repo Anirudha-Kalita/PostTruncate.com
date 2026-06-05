@@ -195,6 +195,14 @@ export const da: Translations = {
         q: 'Er PostTruncate gratis?',
         a: 'Ja, det er helt gratis at bruge uden tilmelding. Værktøjet finansieres af diskrete annoncer placeret i reserverede felter, der aldrig forskyder layoutet, mens du arbejder.',
       },
+      {
+        q: 'Hvorfor tællede min SMS på 160 tegn pludselig som to beskeder?',
+        a: 'Dette sker på grund af en ændring i kodningsstilen for din tekst. Standard tekstbeskeder bruger GSM 7-bit kodning, som tillader præcis 160 tegn pr. SMS-pakke. Men i det øjeblik du indsætter et enkelt ikke-GSM-tegn — såsom en emoji, et specialsymbol eller et regionalt skrifttegn (som assamesisk eller hindi) — tvinger hele beskeden straks et skift til Unicode-kodning. Når en besked skifter til Unicode, falder den maksimale kapacitet pr. individuel SMS-pakke drastisk fra 160 tegn til kun 70 tegn. Desuden skal systemet, hvis din tekst overskrider den tærskel på 70 tegn, bruge data til sammenkoblet besked (User Data Headers), hvilket reducerer din pakke til 67 tegn pr. sammenkædet SMS-segment. For at undgå uventede overraskelser på din teleregning, brug altid en online SMS-tegntæller til at overvåge dit aktive kodningsmærke, før du kører en masse-kampagne!',
+      },
+      {
+        q: 'Tæller specialtegn og emojis som ét tegn i en SMS?',
+        a: 'Nej. Mens et standard bogstav eller tal tæller som et enkelt tegn, behandles specialsymboler og emojis meget anderledes af globale telekommunikationsnetværk. Specialsymboler tilhørende den standard GSM-basis-udvidelsestabel — såsom Euro-symbolet (€), firkantede parenteser [ ], krullede parenteser { } og lodret streg | — tæller faktisk som 2 tegn hver, selvom de holder din besked i den effektive GSM 7-bit tilstand. På den anden side er emojis meget komplekse datapakker, der ikke kan passes ind i standard 7-bit tekst. Tilføjelse af en emoji tvinger din besked til 16-bit Unicode, og komprimerer din samlede beskedtildeling pr. segment fra 160 tegn til 70 tegn.',
+      },
     ],
   },
 

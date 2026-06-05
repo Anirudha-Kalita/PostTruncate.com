@@ -195,6 +195,14 @@ export const nl: Translations = {
         q: 'Is PostTruncate gratis?',
         a: 'Ja, het is volledig gratis te gebruiken en er is geen aanmelding vereist. De tool wordt ondersteund door onopvallende advertenties op gereserveerde plekken die de lay-out nooit verschuiven terwijl je werkt.',
       },
+      {
+        q: 'Waarom telde mijn SMS van 160 tekens plotseling als twee berichten?',
+        a: 'Dit gebeurt vanwege een wijziging in de coderingstijl van je tekst. Standaard tekstberichten gebruiken GSM 7-bit codering, wat ruimte biedt voor precies 160 tekens per SMS-pakket. Zodra je echter één enkel niet-GSM-teken invoegt — zoals een emoji, een speciaal symbool of een regionaal schriftteken (zoals Assamees of Hindi) — forceert het volledige bericht onmiddellijk een overschakeling naar Unicode-codering. Wanneer een bericht overschakelt naar Unicode, daalt de maximale capaciteit per individueel SMS-pakket drastisch van 160 tekens naar slechts 70 tekens. Bovendien moet het systeem, als je tekst die drempel van 70 tekens overschrijdt, meerdelige samenvoegingsgegevens (User Data Headers) gebruiken, waardoor je pakketgrootte daalt naar 67 tekens per samengevoegd SMS-segment. Gebruik altijd een online SMS-tekenteller om je actieve coderingsmarkering te controleren voordat je een bulkcampagne uitvoert, om onverwachte verassingen op je telecomrekening te voorkomen!',
+      },
+      {
+        q: 'Tellen speciale tekens en emoji als één teken in een SMS?',
+        a: 'Nee. Terwijl een standaardletter of -cijfer als één teken telt, worden speciale symbolen en emoji heel anders behandeld door wereldwijde telecommunicatienetwerken. Speciale symbolen die behoren tot de standaard GSM-basis-uitbreidingstabel — zoals het euroteken (€), haakjes [ ], accolades { } en het pipe-symbool | — tellen in feite als 2 tekens elk, ook al houden ze je bericht in de efficiënte GSM 7-bit modus. Aan de andere kant zijn emoji zeer complexe datapakketten die niet passen in standaard 7-bit tekst. Het toevoegen van een emoji dwingt je bericht naar 16-bit Unicode, waardoor je totale berichtruimte per segment wordt gecomprimeerd van 160 tekens naar 70 tekens.',
+      },
     ],
   },
 

@@ -195,6 +195,14 @@ export const en: Translations = {
         q: 'Is PostTruncate free?',
         a: 'Yes, it’s completely free to use with no sign-up required — a free character counter and word counter tool online that’s ready the moment the page loads. Whether you want a quick char counter online, a character count online free, or a full character count tool for every platform, there’s nothing to install. The tool is supported by unobtrusive ads placed in reserved spaces that never shift the layout while you’re working.',
       },
+      {
+        q: 'Why did my 160-character SMS suddenly count as two messages?',
+        a: 'This happens because of a change in your text\'s encoding style. Standard text messages use GSM 7-bit encoding, which allows for exactly 160 characters per SMS packet. However, the moment you insert even a single non-GSM character—such as an emoji, a special symbol, or a regional script character (like Assamese or Hindi)—the entire message instantly forces a shift to Unicode encoding. When a message shifts to Unicode, the maximum capacity per individual SMS packet drops dramatically from 160 characters down to just 70 characters. Furthermore, if your text exceeds that 70-character threshold, the system has to use multi-part stitching data (User Data Headers), which cuts your packet size down to 67 characters per stitched SMS segment. To prevent unexpected telecommunication billing surprises, always use an online SMS character counter to monitor your active encoding badge before running a bulk campaign!',
+      },
+      {
+        q: 'Do special characters and emojis count as one character in an SMS?',
+        a: 'No, they do not. While a standard letter or number counts as a single character, special symbols and emojis are treated very differently by global telecom networks. Special symbols belonging to the standard GSM basic extension table—such as the Euro symbol (€), brackets [ ], braces { }, and the pipe symbol |—actually count as 2 characters each, even though they keep your message in the efficient GSM 7-bit mode. On the other hand, emojis are highly complex data packets that cannot fit into standard 7-bit text. Adding an emoji forces your message into 16-bit Unicode, compressing your total message allowance per segment from 160 characters down to 70 characters.',
+      },
     ],
   },
 

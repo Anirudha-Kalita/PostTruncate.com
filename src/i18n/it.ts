@@ -195,6 +195,14 @@ export const it: Translations = {
         q: 'PostTruncate è gratuito?',
         a: 'Sì, è completamente gratuito da usare e non richiede alcuna registrazione. Lo strumento è sostenuto da annunci discreti collocati in spazi riservati che non spostano mai il layout mentre lavori.',
       },
+      {
+        q: 'Perché il mio SMS di 160 caratteri è stato improvvisamente contato come due messaggi?',
+        a: 'Questo accade a causa di un cambiamento nello stile di codifica del tuo testo. I messaggi di testo standard utilizzano la codifica GSM a 7 bit, che consente esattamente 160 caratteri per pacchetto SMS. Tuttavia, non appena inserisci un solo carattere non GSM, come un\'emoji, un simbolo speciale o un carattere di scrittura regionale (come l\'assamese o l\'hindi), l\'intero messaggio forza istantaneamente il passaggio alla codifica Unicode. Quando un messaggio passa a Unicode, la capacità massima per singolo pacchetto SMS scende drasticamente da 160 caratteri a soli 70 caratteri. Inoltre, se il tuo testo supera tale soglia di 70 caratteri, il sistema deve utilizzare dati di concatenazione multiparte (User Data Headers), riducendo la dimensione del pacchetto a 67 caratteri per segmento SMS concatenato. Per evitare sorprese inaspettate sulla bolletta telefonica, utilizza sempre un contatore di caratteri SMS online per monitorare il badge di codifica attivo prima di lanciare una campagna di massa!',
+      },
+      {
+        q: 'I caratteri speciali e le emoji contano come un singolo carattere in un SMS?',
+        a: 'No, non è così. Mentre una lettera o un numero standard conta come un singolo carattere, i simboli speciali e le emoji vengono trattati in modo molto diverso dalle reti di telecomunicazione globali. I simboli speciali appartenenti alla tabella di estensione di base GSM standard, come il simbolo dell\'Euro (€), le parentesi quadre [ ], le parentesi graffe { } e il simbolo del tubo |, contano in realtà come 2 caratteri ciascuno, sebbene mantengano il messaggio nell\'efficiente modalità GSM a 7 bit. D\'altra parte, le emoji sono pacchetti di dati altamente complessi che non possono essere inseriti in un testo standard a 7 bit. L\'aggiunta di un\'emoji forza il tuo messaggio in Unicode a 16 bit, comprimendo la tua capacità totale di messaggio per segmento da 160 caratteri a 70 caratteri.',
+      },
     ],
   },
 

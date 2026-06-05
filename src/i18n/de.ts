@@ -196,6 +196,14 @@ export const de: Translations = {
         q: 'Ist PostTruncate kostenlos?',
         a: 'Ja, die Nutzung ist völlig kostenlos und ohne Anmeldung. Das Tool wird durch unaufdringliche Werbung in reservierten Bereichen finanziert, die das Layout nie verschiebt, während du arbeitest.',
       },
+      {
+        q: 'Warum zählte meine 160-Zeichen-SMS plötzlich als zwei Nachrichten?',
+        a: 'Dies geschieht aufgrund einer Änderung in der Codierungsart Ihres Textes. Standard-Textnachrichten verwenden die GSM 7-bit-Codierung, die genau 160 Zeichen pro SMS-Paket zulässt. Sobald Sie jedoch auch nur ein einziges Nicht-GSM-Zeichen einfügen – wie ein Emoji, ein Sonderzeichen oder ein regionales Schriftzeichen (wie Assamesisch oder Hindi) – erzwingt die gesamte Nachricht sofort einen Wechsel zur Unicode-Codierung. Wenn eine Nachricht zu Unicode wechselt, sinkt die maximale Kapazität pro einzelnem SMS-Paket drastisch von 160 Zeichen auf nur noch 70 Zeichen. Wenn Ihr Text außerdem diese Grenze von 70 Zeichen überschreitet, muss das System mehrteilige Verkettungsdaten (User Data Headers) verwenden, wodurch Ihre Paketgröße auf 67 Zeichen pro verkettetem SMS-Segment reduziert wird. Um unerwartete Überraschungen bei der Telekommunikationsabrechnung zu vermeiden, verwenden Sie immer einen Online-SMS-Zeichenzähler, um Ihr aktives Codierungs-Badge zu überprüfen, bevor Sie eine Massenkampagne starten!',
+      },
+      {
+        q: 'Zählen Sonderzeichen und Emojis als ein Zeichen in einer SMS?',
+        a: 'Nein, das tun sie nicht. Während ein Standardbuchstabe oder eine Zahl als ein einzelnes Zeichen zählt, werden Sonderzeichen und Emojis von globalen Telekommunikationsnetzwerken ganz anders behandelt. Sonderzeichen, die zur standardmäßigen GSM-Basis-Erweiterungstabelle gehören – wie das Euro-Symbol (€), eckige Klammern [ ], geschweifte Klammern { } und das Pipe-Symbol | – zählen tatsächlich jeweils als 2 Zeichen, obwohl sie Ihre Nachricht im effizienten GSM 7-bit-Modus belassen. Andererseits sind Emojis hochkomplexe Datenpakete, die nicht in Standard-7-bit-Text passen. Das Hinzufügen eines Emojis erzwingt Ihre Nachricht in 16-bit-Unicode und komprimiert Ihre gesamte Nachrichtenzulage pro Segment von 160 Zeichen auf 70 Zeichen.',
+      },
     ],
   },
 
