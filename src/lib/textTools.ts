@@ -24,6 +24,109 @@ export const LIMITS = {
   INSTAGRAM_CAPTION: 2200,
 } as const;
 
+export type SmsEncoding = 'GSM 7-bit' | 'Unicode';
+
+export interface SmsAnalysis {
+  encoding: SmsEncoding;
+  units: number;
+  parts: number;
+  charactersLeft: number;
+  singlePartLimit: number;
+  multipartLimit: number;
+  isGsm: boolean;
+}
+
+const SMS_LIMITS = {
+  GSM: {
+    encoding: 'GSM 7-bit' as const,
+    singlePart: 160,
+    multipart: 153,
+  },
+  UNICODE: {
+    encoding: 'Unicode' as const,
+    singlePart: 70,
+    multipart: 67,
+  },
+} as const;
+
+export const GSM_BASIC_CHARS = [
+  '@', '£', '$', '¥', 'è', 'é', 'ù', 'ì', 'ò', 'Ç', '\n', 'Ø', 'ø', '\r',
+  'Å', 'å', 'Δ', '_', 'Φ', 'Γ', 'Λ', 'Ω', 'Π', 'Ψ', 'Σ', 'Θ', 'Ξ',
+  'Æ', 'æ', 'ß', 'É', ' ', '!', '"', '#', '¤', '%', '&', "'", '(', ')',
+  '*', '+', ',', '-', '.', '/',
+  '0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
+  ':', ';', '<', '=', '>', '?', '¡',
+  'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M',
+  'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z',
+  'Ä', 'Ö', 'Ñ', 'Ü', '§', '¿',
+  'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm',
+  'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z',
+  'ä', 'ö', 'ñ', 'ü', 'à',
+] as const;
+
+export const GSM_EXTENSION_CHARS = [
+  '\f', '^', '{', '}', '\\', '[', '~', ']', '|', '€',
+] as const;
+
+const GSM_BASIC_SET = new Set<string>(GSM_BASIC_CHARS);
+const GSM_EXTENSION_SET = new Set<string>(GSM_EXTENSION_CHARS);
+
+function gsmPayloadUnits(text: string): number | null {
+  let units = 0;
+
+  for (let i = 0; i < text.length; i++) {
+    const char = text[i];
+
+    if (GSM_BASIC_SET.has(char)) {
+      units++;
+      continue;
+    }
+
+    if (GSM_EXTENSION_SET.has(char)) {
+      units += 2;
+      continue;
+    }
+
+    return null;
+  }
+
+  return units;
+}
+
+function smsPartsForUnits(units: number, singlePartLimit: number, multipartLimit: number): number {
+  if (units === 0) return 0;
+  if (units <= singlePartLimit) return 1;
+  return Math.ceil(units / multipartLimit);
+}
+
+function smsCharactersLeft(
+  units: number,
+  parts: number,
+  singlePartLimit: number,
+  multipartLimit: number,
+): number {
+  if (units === 0) return singlePartLimit;
+  if (parts === 1) return singlePartLimit - units;
+  return parts * multipartLimit - units;
+}
+
+export function analyzeSms(text: string): SmsAnalysis {
+  const gsmUnits = gsmPayloadUnits(text);
+  const limits = gsmUnits === null ? SMS_LIMITS.UNICODE : SMS_LIMITS.GSM;
+  const units = gsmUnits === null ? text.length : gsmUnits;
+  const parts = smsPartsForUnits(units, limits.singlePart, limits.multipart);
+
+  return {
+    encoding: limits.encoding,
+    units,
+    parts,
+    charactersLeft: smsCharactersLeft(units, parts, limits.singlePart, limits.multipart),
+    singlePartLimit: limits.singlePart,
+    multipartLimit: limits.multipart,
+    isGsm: gsmUnits !== null,
+  };
+}
+
 const GRAPHEME_SEGMENTER =
   typeof Intl !== 'undefined' && 'Segmenter' in Intl
     ? new Intl.Segmenter(undefined, { granularity: 'grapheme' })

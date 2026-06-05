@@ -48,6 +48,7 @@ export const ja: Translations = {
         paragraphs: [
           'デジタルプラットフォームで反響を呼ぶ文章を書くには、絶対的な正確さが欠かせません。<strong>PostTruncate</strong> は、<strong>オンライン文字数カウント</strong>を解析し、文字の構成を把握し、読みやすさの指標をリアルタイムで最適化するために設計された、上質で無料の<strong>文字数カウンターツール</strong>です。レポートの長さを調整するときも、<strong>SMS文字数カウンター</strong>の上限を確認するときも、仕事の下書きを整えるときも、当ツールの瞬時の文字列解析は高性能な<strong>オンライン文字カウンター</strong>として完全にお使いの端末側で動作します。',
           '総合的な<strong>文字数・単語数カウンター</strong>として、クリエイターはその場で<strong>テキストの文字数を数える</strong>ことができます。ありふれた<strong>オンライン文字カウンター</strong>とは違い、本システムは<strong>オンライン文字数カウンター</strong>および<strong>文字数チェッカー</strong>としてシームレスに機能し、データをすべてあなたのウェブブラウザー内だけで処理してプライバシーを 100% 守ります。ウェブのどこかに公開する前に、<strong>文字数を数える</strong>定番の<strong>文字数カウンター</strong>として活用し、正確な<strong>文字数</strong>を確かめ、すばやく<strong>文字数チェック</strong>を行いましょう。',
+          '専用の<strong>SMS文字数カウンター</strong>は、通常の文字数チェックを超えて、<strong>GSM 7-bit</strong> と <strong>Unicode SMS</strong> を判定し、€、角括弧、波括弧、パイプなどのGSM拡張記号を正しく数え、送信前にマルチパートSMSのセグメント数を見積もります。大量SMSキャンペーン、OTPメッセージ、国際マーケティング文、ヒンディー語や日本語のSMSコピー、そして絵文字や非GSM文字が1つ入るだけで実際のSMSコストが変わるワークフローに最適です。',
         ],
       },
       {
@@ -441,6 +442,19 @@ export const ja: Translations = {
       profileName: 'あなたの名前',
       handle: '@you',
       charsSuffix: '{n} 文字',
+    },
+    sms: {
+      eyebrow: 'SMS',
+      title: 'グローバル文字数カウンター',
+      characterCount: '文字数',
+      charactersLeft: '残り文字数',
+      parts: 'SMSパート',
+      encoding: 'エンコード',
+      partsValue: '{n} SMS',
+      gsmNote:
+        'GSM 7-bit: 1通のSMSは160文字、連結SMSでは1通あたり153文字です。€, [, ], {, }, \\ や | などの拡張テーブル文字は2文字として数えます。',
+      unicodeNote:
+        'Unicode UTF-16: 1通のSMSは70文字、連結SMSでは1通あたり67文字です。絵文字や非GSM文字が1つでも含まれる場合に適用されます。',
     },
     linkedin: {
       title: 'フックゾーンのプレビュー',

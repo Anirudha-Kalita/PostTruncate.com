@@ -48,6 +48,7 @@ export const pt: Translations = {
         paragraphs: [
           'Escrever textos de elevado impacto para plataformas digitais exige uma precisão absoluta. O <strong>PostTruncate</strong> é uma <strong>ferramenta de contagem de caracteres</strong> premium e gratuita, concebida para analisar a sua <strong>contagem de caracteres online</strong>, acompanhar a distribuição de letras e otimizar as métricas de leitura em tempo real. Quer esteja a equilibrar o comprimento de um ensaio académico, a verificar o limite de um <strong>contador de caracteres para SMS</strong> ou a aperfeiçoar um rascunho profissional, o nosso analisador de texto instantâneo funciona totalmente no lado do cliente, como um <strong>contador de caracteres online</strong> de alto desempenho.',
           'Enquanto <strong>contador de caracteres e palavras</strong> completo, permite aos criadores <strong>contar os caracteres de um texto</strong> de forma instantânea. Ao contrário de um simples <strong>contador de caracteres online</strong> básico, este sistema funciona na perfeição como <strong>contador de caracteres online</strong> e <strong>verificador de caracteres</strong> que processa os seus dados com 100% de privacidade, executando tudo dentro do seu navegador. Use-o como o seu <strong>contador do número de caracteres</strong> de eleição para <strong>contar a quantidade de caracteres</strong>, garantir um <strong>comprimento de caracteres</strong> exato e fazer uma rápida <strong>verificação da contagem de caracteres</strong> antes de publicar em qualquer ponto da web.',
+          'O <strong>contador de caracteres SMS</strong> dedicado vai além de uma simples verificação de comprimento de texto: deteta <strong>GSM 7-bit</strong> ou <strong>SMS Unicode</strong>, conta corretamente símbolos GSM estendidos como €, parênteses retos, chavetas e barras verticais, e estima segmentos SMS multipart antes do envio. É ideal para campanhas de SMS em massa, mensagens OTP, textos de marketing internacional, SMS em hindi ou japonês e qualquer fluxo em que um único emoji ou caráter não GSM possa alterar o custo real do SMS.',
         ],
       },
       {
@@ -441,6 +442,19 @@ export const pt: Translations = {
       profileName: 'O Seu Nome',
       handle: '@você',
       charsSuffix: '{n} caracteres',
+    },
+    sms: {
+      eyebrow: 'SMS',
+      title: 'Contador global de caracteres',
+      characterCount: 'Contagem de caracteres',
+      charactersLeft: 'Caracteres restantes',
+      parts: 'Partes SMS',
+      encoding: 'Codificação',
+      partsValue: '{n} SMS',
+      gsmNote:
+        'GSM 7-bit: 160 caracteres para um SMS, depois 153 por SMS concatenado. Caracteres da tabela estendida como €, [, ], {, }, \\ e | contam como 2.',
+      unicodeNote:
+        'Unicode UTF-16: 70 caracteres para um SMS, depois 67 por SMS concatenado. Aplica-se quando existe qualquer emoji ou escrita não GSM.',
     },
     linkedin: {
       title: 'Pré-visualização da zona do gancho',

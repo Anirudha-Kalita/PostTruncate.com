@@ -49,6 +49,7 @@ export const de: Translations = {
         paragraphs: [
           'Wirkungsvolle Texte für digitale Plattformen zu schreiben erfordert absolute Präzision. <strong>PostTruncate</strong> ist ein hochwertiges, kostenloses <strong>Zeichenzähler-Tool</strong>, das deine <strong>Zeichenanzahl online</strong> analysiert, die Buchstabenverteilung verfolgt und Lesemetriken in Echtzeit optimiert. Ob du die Länge eines akademischen Essays austarierst, ein Limit per <strong>SMS-Zeichenzähler</strong> prüfst oder einen professionellen Entwurf aufräumst — unser sofortiger String-Analysator arbeitet vollständig clientseitig als leistungsstarker <strong>Online-Zeichenzähler</strong>.',
           'Als umfassender <strong>Zeichen- und Wortzähler</strong> ermöglicht es Creatorn, <strong>Zeichen eines Textes zu zählen</strong> — und das sofort. Anders als ein einfacher <strong>Zeichenzähler online</strong> funktioniert dieses System nahtlos als <strong>Online-Zeichenzähler</strong> und <strong>Zeichenprüfer</strong>, der deine Daten mit 100% Datenschutz verarbeitet und vollständig in deinem Webbrowser ausgeführt wird. Nutze es als deinen bevorzugten <strong>Zeichenanzahl-Zähler</strong>, um die <strong>Anzahl der Zeichen zu zählen</strong>, eine präzise <strong>Zeichenlänge</strong> sicherzustellen und einen schnellen <strong>Zeichenanzahl-Check</strong> durchzuführen, bevor du irgendwo im Web veröffentlichst.',
+          'Der spezielle <strong>SMS-Zeichenzähler</strong> geht über einfache Textlängenprüfungen hinaus: Er erkennt <strong>GSM 7-bit</strong> gegenüber <strong>Unicode-SMS</strong>, zählt erweiterte GSM-Symbole wie €, eckige Klammern, geschweifte Klammern und senkrechte Striche korrekt und schätzt Multipart-SMS-Segmente vor dem Versand. Ideal für Bulk-SMS-Kampagnen, OTP-Nachrichten, internationale Marketingtexte, Hindi- oder Japanisch-SMS und jeden Workflow, bei dem ein einziges Emoji oder Nicht-GSM-Zeichen die realen SMS-Kosten verändern kann.',
         ],
       },
       {
@@ -442,6 +443,19 @@ export const de: Translations = {
       profileName: 'Dein Name',
       handle: '@du',
       charsSuffix: '{n} Zeichen',
+    },
+    sms: {
+      eyebrow: 'SMS',
+      title: 'Globaler Zeichenzähler',
+      characterCount: 'Zeichenzahl',
+      charactersLeft: 'Zeichen übrig',
+      parts: 'SMS-Teile',
+      encoding: 'Kodierung',
+      partsValue: '{n} SMS',
+      gsmNote:
+        'GSM 7-bit: 160 Zeichen für eine SMS, danach 153 pro verketteter SMS. Zeichen aus der Erweiterungstabelle wie €, [, ], {, }, \\ und | zählen als 2.',
+      unicodeNote:
+        'Unicode UTF-16: 70 Zeichen für eine SMS, danach 67 pro verketteter SMS. Das gilt, sobald ein Emoji oder eine Nicht-GSM-Schrift enthalten ist.',
     },
     linkedin: {
       title: 'Vorschau der Aufhänger-Zone',

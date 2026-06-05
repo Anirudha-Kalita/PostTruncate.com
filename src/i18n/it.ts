@@ -48,6 +48,7 @@ export const it: Translations = {
         paragraphs: [
           'Scrivere testi di grande impatto per le piattaforme digitali richiede precisione assoluta. <strong>PostTruncate</strong> è uno <strong>strumento contatore di caratteri</strong> gratuito e di alta qualità, progettato per analizzare il tuo <strong>conteggio caratteri online</strong>, monitorare la distribuzione delle lettere e ottimizzare le metriche di lettura in tempo reale. Che tu stia calibrando la lunghezza di un saggio accademico, verificando il limite di un <strong>contatore di caratteri per sms</strong> o sistemando una bozza professionale, il nostro analizzatore di testo istantaneo funziona interamente lato client come un <strong>contatore di caratteri online</strong> ad alte prestazioni.',
           'Come <strong>contatore di caratteri e parole</strong> completo, consente ai creator di <strong>contare i caratteri di un testo</strong> all’istante. A differenza di un semplice <strong>contatore caratteri online</strong>, questo sistema funziona perfettamente come <strong>contatore di caratteri online</strong> e <strong>verificatore di caratteri</strong> che elabora i tuoi dati con privacy al 100%, eseguendo tutto interamente nel tuo browser web. Usalo come <strong>contatore numerico di caratteri</strong> di riferimento per <strong>contare la quantità di caratteri</strong>, garantire una <strong>lunghezza dei caratteri</strong> accurata ed eseguire un rapido <strong>controllo del conteggio caratteri</strong> prima di pubblicare ovunque sul web.',
+          'Il <strong>contatore di caratteri SMS</strong> dedicato va oltre un normale controllo della lunghezza del testo: rileva <strong>GSM 7-bit</strong> oppure <strong>SMS Unicode</strong>, conta correttamente i simboli GSM estesi come €, parentesi quadre, graffe e barre verticali, e stima i segmenti SMS multipart prima dell’invio. È ideale per campagne SMS massive, messaggi OTP, testi di marketing internazionale, SMS in hindi o giapponese e qualsiasi flusso in cui un solo emoji o carattere non GSM può cambiare il costo reale dell’SMS.',
         ],
       },
       {
@@ -441,6 +442,19 @@ export const it: Translations = {
       profileName: 'Il tuo nome',
       handle: '@tu',
       charsSuffix: '{n} caratteri',
+    },
+    sms: {
+      eyebrow: 'SMS',
+      title: 'Contatore globale di caratteri',
+      characterCount: 'Conteggio caratteri',
+      charactersLeft: 'Caratteri rimasti',
+      parts: 'Parti SMS',
+      encoding: 'Codifica',
+      partsValue: '{n} SMS',
+      gsmNote:
+        'GSM 7-bit: 160 caratteri per un SMS, poi 153 per SMS concatenato. I caratteri della tabella estesa come €, [, ], {, }, \\ e | valgono 2.',
+      unicodeNote:
+        'Unicode UTF-16: 70 caratteri per un SMS, poi 67 per SMS concatenato. Si applica quando è presente un emoji o una scrittura non GSM.',
     },
     linkedin: {
       title: 'Anteprima della zona gancio',

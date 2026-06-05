@@ -48,6 +48,7 @@ export const da: Translations = {
         paragraphs: [
           'At skrive slagkraftig tekst til digitale platforme kræver absolut præcision. <strong>PostTruncate</strong> er et premium, gratis <strong>tegntæller-værktøj</strong>, der er designet til at analysere dit <strong>tegnantal online</strong>, spore bogstavfordeling og optimere læsemetrikker i realtid. Uanset om du afbalancerer længden på en akademisk opgave, tjekker en grænse med en <strong>sms-tegntæller</strong> eller rydder op i et professionelt udkast, kører vores øjeblikkelige tekstanalysator helt på klientsiden som en højtydende <strong>online tegntæller</strong>.',
           'Som en omfattende <strong>tegn- og ordtæller</strong> giver det skabere mulighed for at <strong>tælle tegn i tekst</strong> øjeblikkeligt. I modsætning til en simpel <strong>tegntæller online</strong> fungerer dette system gnidningsløst som en <strong>online tegntæller</strong> og <strong>tegnkontrol</strong>, der behandler dine data med 100% privatliv og kører udelukkende i din webbrowser. Brug det som din foretrukne <strong>tæller af antal tegn</strong> til at <strong>tælle mængden af tegn</strong>, sikre nøjagtig <strong>tegnlængde</strong> og køre et hurtigt <strong>tjek af tegnantal</strong>, før du publicerer noget som helst på nettet.',
+          'Den dedikerede <strong>SMS-tegntæller</strong> går længere end almindelige kontroller af tekstlængde: den registrerer <strong>GSM 7-bit</strong> kontra <strong>Unicode-SMS</strong>, tæller udvidede GSM-symboler som €, kantede parenteser, krøllede parenteser og lodrette streger korrekt og estimerer multipart-SMS-segmenter før afsendelse. Den er ideel til bulk-SMS-kampagner, OTP-beskeder, internationale marketingtekster, hindi- eller japansk SMS-copy og ethvert workflow, hvor én emoji eller et ikke-GSM-tegn kan ændre den reelle SMS-pris.',
         ],
       },
       {
@@ -441,6 +442,19 @@ export const da: Translations = {
       profileName: 'Dit navn',
       handle: '@dig',
       charsSuffix: '{n} tegn',
+    },
+    sms: {
+      eyebrow: 'SMS',
+      title: 'Global tegntæller',
+      characterCount: 'Tegnantal',
+      charactersLeft: 'Tegn tilbage',
+      parts: 'SMS-dele',
+      encoding: 'Kodning',
+      partsValue: '{n} SMS',
+      gsmNote:
+        'GSM 7-bit: 160 tegn for én SMS, derefter 153 pr. sammenkædet SMS. Tegn fra udvidelsestabellen som €, [, ], {, }, \\ og | tæller som 2.',
+      unicodeNote:
+        'Unicode UTF-16: 70 tegn for én SMS, derefter 67 pr. sammenkædet SMS. Det gælder, når der findes en emoji eller et ikke-GSM-skrifttegn.',
     },
     linkedin: {
       title: 'Preview af hook-zonen',

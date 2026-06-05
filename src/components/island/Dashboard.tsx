@@ -6,6 +6,7 @@ import { TwitterPreview } from './TwitterPreview';
 import { ThreadsPreview } from './ThreadsPreview';
 import { MetaMonitor } from './MetaMonitor';
 import { KeywordMonitor } from './KeywordMonitor';
+import { SmsCounter } from './SmsCounter';
 import type { IslandStrings } from '../../i18n/types';
 
 interface Props {
@@ -76,6 +77,7 @@ export default function Dashboard({ lang, strings }: Props) {
       {/* Left column — editor + engine */}
       <div class="flex flex-col gap-5">
         <Workspace text={text} setText={setText} lang={lang} s={strings} />
+        <SmsCounter text={analysisText} lang={lang} s={strings.sms} />
 
         {!text && (
           <button

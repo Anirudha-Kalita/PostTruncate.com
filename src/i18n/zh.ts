@@ -48,6 +48,7 @@ export const zh: Translations = {
         paragraphs: [
           '为数字平台撰写高影响力的文案需要极致的精准。<strong>PostTruncate</strong> 是一款高品质且免费的<strong>字符计数器工具</strong>，专为实时分析你的<strong>在线字符数</strong>、追踪字母分布并优化阅读指标而打造。无论你是在权衡一篇学术论文的篇幅、检查<strong>短信字符计数器</strong>的上限，还是润色一份专业草稿，我们的即时字符串分析器都完全在客户端运行，是一款高性能的<strong>在线字符计数器</strong>。',
           '作为一款全面的<strong>字符与字数统计器</strong>，它让创作者能够即时<strong>统计文本字符数</strong>。与简单的<strong>在线字符统计</strong>不同，本系统可无缝充当<strong>在线字符计数器</strong>与<strong>字符检查器</strong>，以 100% 隐私保护处理你的数据，并完全在你的网页浏览器中运行。把它当作你的首选<strong>字符数量计数器</strong>，用来<strong>统计字符数量</strong>、确保准确的<strong>字符长度</strong>，并在你向网络上任何平台发布之前快速完成一次<strong>字符数检查</strong>。',
+          '专用的<strong>短信字符计数器</strong>不只是检查文本长度：它会识别 <strong>GSM 7-bit</strong> 与 <strong>Unicode SMS</strong>，正确计算 €、方括号、花括号和竖线等 GSM 扩展符号，并在发送前估算多段短信数量。它非常适合批量短信活动、OTP 验证码、国际营销短信、印地语或日语短信文案，以及任何一个表情符号或非 GSM 字符就可能改变真实短信成本的工作流程。',
         ],
       },
       {
@@ -439,6 +440,19 @@ export const zh: Translations = {
       profileName: '你的名字',
       handle: '@you',
       charsSuffix: '{n} 个字符',
+    },
+    sms: {
+      eyebrow: 'SMS',
+      title: '全球短信字符计数器',
+      characterCount: '字符数',
+      charactersLeft: '剩余字符',
+      parts: '短信段数',
+      encoding: '编码',
+      partsValue: '{n} SMS',
+      gsmNote:
+        'GSM 7-bit：单条短信最多160个字符，拼接短信每段153个字符。扩展表字符如 €、[、]、{、}、\\ 和 | 按2个字符计算。',
+      unicodeNote:
+        'Unicode UTF-16：单条短信最多70个字符，拼接短信每段67个字符。只要包含任何表情符号或非GSM文字，就会使用此规则。',
     },
     linkedin: {
       title: '钩子区预览',

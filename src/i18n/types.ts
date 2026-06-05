@@ -161,6 +161,18 @@ export interface IslandStrings {
     /** "{n} chars" under each tweet/post card. */
     charsSuffix: string;
   };
+  sms: {
+    eyebrow: string;
+    title: string;
+    characterCount: string;
+    charactersLeft: string;
+    parts: string;
+    encoding: string;
+    /** "{n}" SMS segment count. */
+    partsValue: string;
+    gsmNote: string;
+    unicodeNote: string;
+  };
   linkedin: {
     title: string;
     viewAriaLabel: string;

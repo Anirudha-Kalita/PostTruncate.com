@@ -48,6 +48,7 @@ export const nl: Translations = {
         paragraphs: [
           'Impactvolle teksten schrijven voor digitale platforms vereist absolute precisie. <strong>PostTruncate</strong> is een premium, gratis <strong>tool om tekens te tellen</strong> die is ontworpen om je <strong>tekens online te tellen</strong>, de letterverdeling bij te houden en leesstatistieken in realtime te optimaliseren. Of je nu de lengte van een academisch essay afweegt, een limiet controleert met een <strong>sms-tekenteller</strong> of een professioneel concept opschoont, onze directe tekstanalyse draait volledig client-side als een krachtige <strong>online tekenteller</strong>.',
           'Als veelzijdige <strong>teken- en woordteller</strong> stelt het makers in staat om direct <strong>de tekens van een tekst te tellen</strong>. Anders dan een eenvoudige <strong>tekenteller online</strong> werkt dit systeem naadloos als <strong>online tekenteller</strong> en <strong>tekencontrole</strong> die je gegevens met 100% privacy verwerkt en volledig in je webbrowser draait. Gebruik het als je vaste <strong>tekenaantalteller</strong> om <strong>het aantal tekens te tellen</strong>, een nauwkeurige <strong>tekenlengte</strong> te garanderen en een snelle <strong>tekenaantalcontrole</strong> uit te voeren voordat je waar dan ook op het web publiceert.',
+          'De speciale <strong>sms-tekenteller</strong> gaat verder dan gewone controles van tekstlengte: hij detecteert <strong>GSM 7-bit</strong> tegenover <strong>Unicode-sms</strong>, telt uitgebreide GSM-symbolen zoals €, vierkante haken, accolades en pipes correct, en schat multipart-sms-segmenten voordat je verzendt. Ideaal voor bulk-sms-campagnes, OTP-berichten, internationale marketingteksten, Hindi- of Japanse sms-copy en elke workflow waarin één emoji of niet-GSM-teken de echte sms-kosten kan veranderen.',
         ],
       },
       {
@@ -441,6 +442,19 @@ export const nl: Translations = {
       profileName: 'Jouw naam',
       handle: '@jij',
       charsSuffix: '{n} tekens',
+    },
+    sms: {
+      eyebrow: 'SMS',
+      title: 'Wereldwijde tekenteller',
+      characterCount: 'Tekenaantal',
+      charactersLeft: 'Tekens over',
+      parts: 'SMS-delen',
+      encoding: 'Codering',
+      partsValue: '{n} SMS',
+      gsmNote:
+        'GSM 7-bit: 160 tekens voor één SMS, daarna 153 per samengevoegde SMS. Tekens uit de uitbreidingstabel zoals €, [, ], {, }, \\ en | tellen als 2.',
+      unicodeNote:
+        'Unicode UTF-16: 70 tekens voor één SMS, daarna 67 per samengevoegde SMS. Dit geldt zodra er een emoji of niet-GSM-schrift aanwezig is.',
     },
     linkedin: {
       title: 'Preview van de hookzone',

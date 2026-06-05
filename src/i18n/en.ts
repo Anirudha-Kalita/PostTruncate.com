@@ -48,6 +48,7 @@ export const en: Translations = {
         paragraphs: [
           'Writing high-impact copy for digital platforms requires absolute precision. <strong>PostTruncate</strong> is a premium, free <strong>character counter tool</strong> designed to analyze your <strong>character count online</strong>, track letter distribution, and optimize reading metrics in real-time. Whether you are balancing an academic essay length, checking an <strong>sms character counter</strong> limit, or cleaning up a professional draft, our instant string analyzer operates completely client-side as a high-performance <strong>online char counter</strong>.',
           'As a comprehensive <strong>character and word counter</strong>, it allows creators to <strong>count characters of text</strong> instantly. Unlike a basic <strong>char counter online</strong>, this system functions seamlessly as an <strong>online character counter</strong> and <strong>character checker</strong> that processes your data with 100% privacy, executing entirely within your web browser. Use it as your go-to <strong>character number counter</strong> to <strong>count amount of characters</strong>, ensure accurate <strong>character length</strong>, and run a quick <strong>character count check</strong> before you publish anywhere on the web.',
+          'The dedicated <strong>SMS character counter</strong> goes beyond ordinary text length checks by detecting <strong>GSM 7-bit</strong> versus <strong>Unicode SMS</strong>, counting extended GSM symbols such as €, brackets, braces and pipes correctly, and estimating multipart SMS segments before you send. It is ideal for bulk SMS campaigns, OTP messages, international marketing texts, Hindi or Japanese SMS copy, and any workflow where one emoji or non-GSM character can change the real SMS cost.',
         ],
       },
       {
@@ -441,6 +442,19 @@ export const en: Translations = {
       profileName: 'Your Name',
       handle: '@you',
       charsSuffix: '{n} chars',
+    },
+    sms: {
+      eyebrow: 'SMS',
+      title: 'Global character counter',
+      characterCount: 'Character count',
+      charactersLeft: 'Characters left',
+      parts: 'SMS parts',
+      encoding: 'Encoding',
+      partsValue: '{n} SMS',
+      gsmNote:
+        'GSM 7-bit: 160 characters for one SMS, then 153 per stitched SMS. Extension-table characters such as €, [, ], {, }, \\ and | count as 2.',
+      unicodeNote:
+        'Unicode UTF-16: 70 characters for one SMS, then 67 per stitched SMS. This applies when any emoji or non-GSM script is present.',
     },
     linkedin: {
       title: 'Hook zone preview',
