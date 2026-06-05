@@ -168,6 +168,8 @@ export interface IslandStrings {
     charactersLeft: string;
     parts: string;
     encoding: string;
+    encodingGsm: string;
+    encodingUnicode: string;
     /** "{n}" SMS segment count. */
     partsValue: string;
     gsmNote: string;

@@ -447,10 +447,12 @@ export const it: Translations = {
       eyebrow: 'SMS',
       title: 'Contatore globale di caratteri',
       characterCount: 'Conteggio caratteri',
-      charactersLeft: 'Caratteri rimasti',
-      parts: 'Parti SMS',
+      charactersLeft: 'Caratteri rimanenti',
+      parts: 'Messaggi',
       encoding: 'Codifica',
-      partsValue: '{n} SMS',
+      encodingGsm: 'GSM 7 bit',
+      encodingUnicode: 'Unicode',
+      partsValue: '{n} messaggi',
       gsmNote:
         'GSM 7-bit: 160 caratteri per un SMS, poi 153 per SMS concatenato. I caratteri della tabella estesa come €, [, ], {, }, \\ e | valgono 2.',
       unicodeNote:

@@ -446,11 +446,13 @@ export const da: Translations = {
     sms: {
       eyebrow: 'SMS',
       title: 'Global tegntæller',
-      characterCount: 'Tegnantal',
+      characterCount: 'Antal tegn',
       charactersLeft: 'Tegn tilbage',
-      parts: 'SMS-dele',
+      parts: 'Beskeder',
       encoding: 'Kodning',
-      partsValue: '{n} SMS',
+      encodingGsm: 'GSM 7-bit',
+      encodingUnicode: 'Unicode',
+      partsValue: '{n} beskeder',
       gsmNote:
         'GSM 7-bit: 160 tegn for én SMS, derefter 153 pr. sammenkædet SMS. Tegn fra udvidelsestabellen som €, [, ], {, }, \\ og | tæller som 2.',
       unicodeNote:

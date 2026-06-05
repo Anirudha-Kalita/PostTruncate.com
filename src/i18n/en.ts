@@ -450,6 +450,8 @@ export const en: Translations = {
       charactersLeft: 'Characters left',
       parts: 'SMS parts',
       encoding: 'Encoding',
+      encodingGsm: 'GSM 7-bit',
+      encodingUnicode: 'Unicode',
       partsValue: '{n} SMS',
       gsmNote:
         'GSM 7-bit: 160 characters for one SMS, then 153 per stitched SMS. Extension-table characters such as €, [, ], {, }, \\ and | count as 2.',

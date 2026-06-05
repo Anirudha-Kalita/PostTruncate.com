@@ -444,13 +444,15 @@ export const ja: Translations = {
       charsSuffix: '{n} 文字',
     },
     sms: {
-      eyebrow: 'SMS',
+      eyebrow: 'ショートメッセージ',
       title: 'グローバル文字数カウンター',
       characterCount: '文字数',
       charactersLeft: '残り文字数',
-      parts: 'SMSパート',
+      parts: 'メッセージ数',
       encoding: 'エンコード',
-      partsValue: '{n} SMS',
+      encodingGsm: 'GSM 7ビット',
+      encodingUnicode: 'Unicode',
+      partsValue: '{n} 通',
       gsmNote:
         'GSM 7-bit: 1通のSMSは160文字、連結SMSでは1通あたり153文字です。€, [, ], {, }, \\ や | などの拡張テーブル文字は2文字として数えます。',
       unicodeNote:

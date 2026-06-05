@@ -20,7 +20,7 @@ export function SmsCounter({ text, lang, s }: Props) {
   return (
     <Card>
       <CardHead eyebrow={s.eyebrow} title={s.title}>
-        <Badge tone={badgeTone}>{sms.encoding}</Badge>
+        <Badge tone={badgeTone}>{sms.isGsm ? s.encodingGsm : s.encodingUnicode}</Badge>
       </CardHead>
 
       <div class="p-4 sm:p-5">
@@ -28,7 +28,7 @@ export function SmsCounter({ text, lang, s }: Props) {
           <Stat label={s.characterCount} value={nf.format(sms.units)} />
           <Stat label={s.charactersLeft} value={nf.format(sms.charactersLeft)} />
           <Stat label={s.parts} value={partLabel} />
-          <Stat label={s.encoding} value={sms.encoding} />
+          <Stat label={s.encoding} value={sms.isGsm ? s.encodingGsm : s.encodingUnicode} />
         </div>
 
         <div class="mt-3 rounded-md border border-hairline bg-canvas-soft px-3 py-2.5">

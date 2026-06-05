@@ -447,11 +447,13 @@ export const de: Translations = {
     sms: {
       eyebrow: 'SMS',
       title: 'Globaler Zeichenzähler',
-      characterCount: 'Zeichenzahl',
-      charactersLeft: 'Zeichen übrig',
-      parts: 'SMS-Teile',
-      encoding: 'Kodierung',
-      partsValue: '{n} SMS',
+      characterCount: 'Zeichenanzahl',
+      charactersLeft: 'Verbleibende Zeichen',
+      parts: 'Nachrichten',
+      encoding: 'Codierung',
+      encodingGsm: 'GSM 7-bit',
+      encodingUnicode: 'Unicode',
+      partsValue: '{n} Nachrichten',
       gsmNote:
         'GSM 7-bit: 160 Zeichen für eine SMS, danach 153 pro verketteter SMS. Zeichen aus der Erweiterungstabelle wie €, [, ], {, }, \\ und | zählen als 2.',
       unicodeNote:

@@ -446,13 +446,15 @@ export const nl: Translations = {
     sms: {
       eyebrow: 'SMS',
       title: 'Wereldwijde tekenteller',
-      characterCount: 'Tekenaantal',
-      charactersLeft: 'Tekens over',
-      parts: 'SMS-delen',
+      characterCount: 'Aantal tekens',
+      charactersLeft: 'Resterende tekens',
+      parts: 'Berichten',
       encoding: 'Codering',
-      partsValue: '{n} SMS',
+      encodingGsm: 'GSM 7-bit',
+      encodingUnicode: 'Unicode',
+      partsValue: '{n} berichten',
       gsmNote:
-        'GSM 7-bit: 160 tekens voor één SMS, daarna 153 per samengevoegde SMS. Tekens uit de uitbreidingstabel zoals €, [, ], {, }, \\ en | tellen als 2.',
+        'GSM 7-bit: 160 tekens voor één SMS, daarna 153 per samengevoegde SMS. Tekens uit de uitbreidingstabel zoals €, [, ], {, }, \\ and | tellen als 2.',
       unicodeNote:
         'Unicode UTF-16: 70 tekens voor één SMS, daarna 67 per samengevoegde SMS. Dit geldt zodra er een emoji of niet-GSM-schrift aanwezig is.',
     },

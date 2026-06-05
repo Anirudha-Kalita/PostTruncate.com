@@ -444,13 +444,15 @@ export const es: Translations = {
       charsSuffix: '{n} caracteres',
     },
     sms: {
-      eyebrow: 'SMS',
+      eyebrow: 'Mensaje de texto',
       title: 'Contador global de caracteres',
       characterCount: 'Recuento de caracteres',
       charactersLeft: 'Caracteres restantes',
-      parts: 'Partes SMS',
+      parts: 'Mensajes',
       encoding: 'Codificación',
-      partsValue: '{n} SMS',
+      encodingGsm: 'GSM 7 bits',
+      encodingUnicode: 'Unicode',
+      partsValue: '{n} mensajes',
       gsmNote:
         'GSM 7-bit: 160 caracteres para un SMS, luego 153 por SMS concatenado. Los caracteres de la tabla extendida como €, [, ], {, }, \\ y | cuentan como 2.',
       unicodeNote:

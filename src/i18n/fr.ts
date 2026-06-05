@@ -448,9 +448,11 @@ export const fr: Translations = {
       title: 'Compteur global de caractères',
       characterCount: 'Nombre de caractères',
       charactersLeft: 'Caractères restants',
-      parts: 'Parties SMS',
+      parts: 'Messages',
       encoding: 'Encodage',
-      partsValue: '{n} SMS',
+      encodingGsm: 'GSM 7 bits',
+      encodingUnicode: 'Unicode',
+      partsValue: '{n} messages',
       gsmNote:
         'GSM 7-bit : 160 caractères pour un SMS, puis 153 par SMS concaténé. Les caractères de la table étendue comme €, [, ], {, }, \\ et | comptent pour 2.',
       unicodeNote:

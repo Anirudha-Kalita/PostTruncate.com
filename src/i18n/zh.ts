@@ -442,13 +442,15 @@ export const zh: Translations = {
       charsSuffix: '{n} 个字符',
     },
     sms: {
-      eyebrow: 'SMS',
+      eyebrow: '短信',
       title: '全球短信字符计数器',
       characterCount: '字符数',
       charactersLeft: '剩余字符',
       parts: '短信段数',
       encoding: '编码',
-      partsValue: '{n} SMS',
+      encodingGsm: 'GSM 7位',
+      encodingUnicode: 'Unicode',
+      partsValue: '{n} 条',
       gsmNote:
         'GSM 7-bit：单条短信最多160个字符，拼接短信每段153个字符。扩展表字符如 €、[、]、{、}、\\ 和 | 按2个字符计算。',
       unicodeNote:
