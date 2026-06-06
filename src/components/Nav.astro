@@ -4,7 +4,9 @@
 // on mobile). Both disclosure menus are CSS-first <details> elements; the
 // script below only adds close-on-navigate / outside-tap / Escape as polish.
 import { LOCALES, getLocale } from '../i18n/config';
+import { getTranslations } from '../i18n';
 import type { Translations } from '../i18n/types';
+import { tools } from '../data/tools';
 
 interface Props {
   /** Active locale code — drives the localized links and current-language UI. */
@@ -15,6 +17,7 @@ interface Props {
 
 const { lang, nav } = Astro.props;
 const current = getLocale(lang);
+const t = getTranslations(lang);
 
 // Section anchors are made absolute (prefixed with the locale home) so they
 // resolve from any page — on a standalone route like /about/ a bare "#faq"
@@ -22,11 +25,27 @@ const current = getLocale(lang);
 const home = `/${lang}/${current.slug}/`;
 const links = [
   { href: `${home}#workspace`, label: nav.links.editor },
-  { href: `${home}#platforms`, label: nav.links.guides },
+  // "Platform Guides" is now a dropdown — handled separately below.
   { href: `${home}#faq`, label: nav.links.faq },
   { href: `${home}about/`, label: nav.links.about },
   { href: `${home}contact/`, label: nav.links.contact },
 ];
+
+// Platform Guides dropdown items — URLs from tools.ts, labels from i18n.
+const PLATFORM_EMOJI: Record<string, string> = {
+  twitter: '𝕏',
+  instagram: '📸',
+  linkedin: '💼',
+  facebook: '📘',
+  sms: '💬',
+  threads: '🧵',
+  'google-serp': '🔍',
+};
+const guidesLinks = tools.map((tool, i) => ({
+  label: t.footer.columns.guides.links[i],
+  href: `/${lang}/${tool.slugs[lang] ?? tool.slugs['en']}/`,
+  emoji: PLATFORM_EMOJI[tool.id] ?? '📄',
+}));
 ---
 
 <header class="nav">
@@ -37,7 +56,34 @@ const links = [
     </a>
 
     <nav class="nav__links" aria-label="Primary">
-      {links.map((l) => <a href={l.href} class="nav__link">{l.label}</a>)}
+      {/* First link (Editor) */}
+      <a href={links[0].href} class="nav__link">{links[0].label}</a>
+
+      {/* Platform Guides dropdown */}
+      <details class="nav__guides" id="nav-guides-desktop">
+        <summary class="nav__link nav__guides-toggle">
+          {nav.links.guides}
+          <svg class="nav__guides-chevron" width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M2.5 3.5 5 6.5 7.5 3.5" />
+          </svg>
+        </summary>
+        <div class="nav__guides-panel">
+          <p class="nav__guides-heading">{nav.links.guides}</p>
+          <ul class="nav__guides-list">
+            {guidesLinks.map((gl) => (
+              <li>
+                <a href={gl.href} class="nav__guides-link">
+                  <span class="nav__guides-emoji" aria-hidden="true">{gl.emoji}</span>
+                  <span>{gl.label}</span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </details>
+
+      {/* Remaining links (FAQ, About, Contact) */}
+      {links.slice(1).map((l) => <a href={l.href} class="nav__link">{l.label}</a>)}
     </nav>
 
     <div class="nav__actions">
@@ -152,7 +198,29 @@ const links = [
         </summary>
         <div class="nav__panel">
           <nav class="nav__panel-links" aria-label="Primary mobile">
-            {links.map((l) => <a href={l.href} class="nav__panel-link">{l.label}</a>)}
+            {/* First link (Editor) */}
+            <a href={links[0].href} class="nav__panel-link">{links[0].label}</a>
+
+            {/* Platform Guides — inline expand */}
+            <details class="nav__guides-mobile" id="nav-guides-mobile">
+              <summary class="nav__panel-link nav__guides-mobile-toggle">
+                {nav.links.guides}
+                <svg class="nav__guides-chevron" width="12" height="12" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M2.5 3.5 5 6.5 7.5 3.5" />
+                </svg>
+              </summary>
+              <div class="nav__guides-mobile-panel">
+                {guidesLinks.map((gl) => (
+                  <a href={gl.href} class="nav__panel-link nav__guides-mobile-link">
+                    <span class="nav__guides-emoji" aria-hidden="true">{gl.emoji}</span>
+                    <span>{gl.label}</span>
+                  </a>
+                ))}
+              </div>
+            </details>
+
+            {/* Remaining links (FAQ, About, Contact) */}
+            {links.slice(1).map((l) => <a href={l.href} class="nav__panel-link">{l.label}</a>)}
           </nav>
           <a href={`${home}#workspace`} class="nav__pill nav__pill--block">{nav.cta}</a>
         </div>
@@ -163,9 +231,12 @@ const links = [
 
 <script>
   // Close-on-navigate / outside-tap / Escape for every CSS-first disclosure in
-  // the nav (the mobile menu and the language switcher share this behavior).
+  // the nav (the mobile menu, language switcher, and guides dropdown share
+  // this behavior).
   const disclosures = Array.from(
-    document.querySelectorAll<HTMLDetailsElement>('.nav__menu, .nav__lang')
+    document.querySelectorAll<HTMLDetailsElement>(
+      '.nav__menu, .nav__lang, .nav__guides, .nav__guides-mobile'
+    )
   );
   const LANGUAGE_COOKIE = 'preferred_locale';
 
@@ -201,6 +272,19 @@ const links = [
     if (e.key === 'Escape')
       for (const d of disclosures) d.removeAttribute('open');
   });
+
+  // ── Guides dropdown: open on hover (desktop) ───────────────────────────
+  const guidesDesktop = document.querySelector<HTMLDetailsElement>('.nav__guides');
+  if (guidesDesktop) {
+    let hoverTimeout: ReturnType<typeof setTimeout> | undefined;
+    guidesDesktop.addEventListener('mouseenter', () => {
+      clearTimeout(hoverTimeout);
+      guidesDesktop.setAttribute('open', '');
+    });
+    guidesDesktop.addEventListener('mouseleave', () => {
+      hoverTimeout = setTimeout(() => guidesDesktop.removeAttribute('open'), 150);
+    });
+  }
 
   // ── Theme toggle ────────────────────────────────────────────────────────
   // The initial theme is applied pre-paint by the inline script in Layout
@@ -565,6 +649,125 @@ const links = [
     background: var(--color-canvas-soft-2);
   }
 
+  /* ── Platform Guides dropdown (desktop ≥ md) ──────────────────────── */
+  .nav__guides {
+    position: relative;
+    flex-shrink: 0;
+  }
+  .nav__guides-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    cursor: pointer;
+    list-style: none;
+  }
+  .nav__guides-toggle::-webkit-details-marker {
+    display: none;
+  }
+  .nav__guides-chevron {
+    transition: transform 0.2s ease;
+    flex-shrink: 0;
+  }
+  .nav__guides[open] .nav__guides-chevron {
+    transform: rotate(180deg);
+  }
+  .nav__guides-panel {
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 50%;
+    transform: translateX(-50%);
+    width: 240px;
+    max-height: min(70vh, 420px);
+    overflow-y: auto;
+    padding: 8px;
+    background: var(--color-canvas);
+    border: 1px solid var(--color-hairline);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-e4);
+    z-index: 60;
+  }
+  .nav__guides-heading {
+    padding: 6px 10px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--color-mute);
+  }
+  .nav__guides-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 2px;
+  }
+  .nav__guides-link {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 9px 10px;
+    border-radius: var(--radius-md);
+    color: var(--color-ink);
+    font-size: 14px;
+    transition: background 0.15s ease;
+  }
+  .nav__guides-link:hover {
+    background: var(--color-canvas-soft-2);
+  }
+  .nav__guides-emoji {
+    flex-shrink: 0;
+    width: 20px;
+    text-align: center;
+    font-size: 15px;
+    line-height: 1;
+  }
+
+  /* ── Platform Guides mobile inline expand ───────────────────────────── */
+  .nav__guides-mobile {
+    /* sits inline within the mobile panel links */
+  }
+  .nav__guides-mobile-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    cursor: pointer;
+    list-style: none;
+  }
+  .nav__guides-mobile-toggle::-webkit-details-marker {
+    display: none;
+  }
+  .nav__guides-mobile[open] .nav__guides-chevron {
+    transform: rotate(180deg);
+  }
+  .nav__guides-mobile-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    padding-left: 16px;
+    margin-top: 2px;
+  }
+  .nav__guides-mobile-link {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 14px !important;
+    padding: 10px 12px !important;
+    color: var(--color-body) !important;
+    font-weight: 400 !important;
+  }
+  .nav__guides-mobile-link:hover {
+    color: var(--color-ink) !important;
+  }
+
+  /* Hide desktop guides dropdown and show mobile version at < md. */
+  .nav__guides {
+    display: none;
+  }
+  .nav__guides-mobile {
+    display: block;
+  }
+
   @media (min-width: 768px) {
     .nav__links {
       display: flex;
@@ -573,6 +776,12 @@ const links = [
       display: block;
     }
     .nav__menu {
+      display: none;
+    }
+    .nav__guides {
+      display: block;
+    }
+    .nav__guides-mobile {
       display: none;
     }
   }
