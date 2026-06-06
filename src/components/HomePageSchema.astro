@@ -1,0 +1,62 @@
+---
+// Renders two JSON-LD <script> blocks into <head> for every locale homepage:
+//   1. WebApplication — describes the tool to search engines.
+//   2. FAQPage        — maps the translated Q&A section to structured data.
+//
+// Usage (inside a Layout call, via the named "head" slot):
+//   <HomePageSchema
+//     slot="head"
+//     toolName={locale.toolName}
+//     canonicalUrl={pageUrl}
+//     description={t.seo.description}
+//     inLanguage={lang}
+//     faqItems={t.faq.items}
+//   />
+import type { FaqEntry } from '../i18n/types';
+
+interface Props {
+  /** Localized tool name for the WebApplication schema (e.g. "Zeichenzähler"). */
+  toolName: string;
+  /** Absolute keyword-rich homepage URL (e.g. https://posttruncate.com/de/zeichenzaehler/). */
+  canonicalUrl: string;
+  /** Locale meta description — reused as the schema description. */
+  description: string;
+  /** BCP-47 language tag (e.g. "en", "ja"). */
+  inLanguage: string;
+  /** Translated FAQ items from t.faq.items. */
+  faqItems: FaqEntry[];
+}
+
+const { toolName, canonicalUrl, description, inLanguage, faqItems } = Astro.props;
+
+const webApp = {
+  '@context': 'https://schema.org',
+  '@type': 'WebApplication',
+  name: toolName,
+  url: canonicalUrl,
+  description,
+  inLanguage,
+  applicationCategory: 'UtilityApplication',
+  operatingSystem: 'Any',
+  offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+};
+
+const faqPage = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqItems.map((item) => ({
+    '@type': 'Question',
+    name: item.q,
+    acceptedAnswer: {
+      '@type': 'Answer',
+      text: item.a,
+    },
+  })),
+};
+
+// Escape "</script>" injection vectors while keeping valid JSON.
+const stringify = (obj: unknown) => JSON.stringify(obj).replace(/</g, '\\u003c');
+---
+
+<script type="application/ld+json" set:html={stringify(webApp)} />
+<script type="application/ld+json" set:html={stringify(faqPage)} />

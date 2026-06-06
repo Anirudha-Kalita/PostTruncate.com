@@ -562,5 +562,25 @@ export const nl: Translations = {
       footnote:
         '{total} woorden · trefwoorden boven {threshold}% dichtheid worden gemarkeerd',
     },
+    seoPreview: {
+      eyebrow: 'SEO-voorbeeld',
+      title: 'Google SERP-simulator',
+      badgeIdle: 'Inactief',
+      badgeSafe: 'Goed',
+      badgeWarn: 'Limiet overschreden',
+      titleLabel: 'Paginatitel',
+      titleCounter: '{n} / {limit}',
+      pixelNote: '~{px}px · Google knipt af bij ~{max}px',
+      titleOverChar:
+        'Titel overschrijdt {limit} tekens — Google kan afkappen in zoekresultaten.',
+      titleOverPixel:
+        'Titel kan worden afgesneden in zoekresultaten (~{max}px renderinglimiet).',
+      descLabel: 'Metabeschrijving',
+      descCounter: '{n} / {limit}',
+      descOverChar: 'Beschrijving overschrijdt {limit} tekens.',
+      previewLabel: 'Google zoekvoorbeeld',
+      titlePlaceholder: 'De titel van je pagina…',
+      descPlaceholder: 'Een korte beschrijving van je pagina voor de zoekresultaten…',
+    },
   },
 };

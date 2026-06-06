@@ -7,6 +7,7 @@ import { ThreadsPreview } from './ThreadsPreview';
 import { MetaMonitor } from './MetaMonitor';
 import { KeywordMonitor } from './KeywordMonitor';
 import { SmsCounter } from './SmsCounter';
+import { SeoPreview } from './SeoPreview';
 import type { IslandStrings } from '../../i18n/types';
 
 interface Props {
@@ -98,6 +99,7 @@ export default function Dashboard({ lang, strings }: Props) {
         <TwitterPreview text={analysisText} lang={lang} s={strings} />
         <MetaMonitor text={analysisText} lang={lang} s={strings} />
         <ThreadsPreview text={analysisText} lang={lang} s={strings} />
+        <SeoPreview s={strings} />
       </div>
     </div>
   );

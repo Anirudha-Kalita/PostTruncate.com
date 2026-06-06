@@ -562,5 +562,25 @@ export const da: Translations = {
       footnote:
         '{total} ord · nøgleord over {threshold}% tæthed markeres',
     },
+    seoPreview: {
+      eyebrow: 'SEO-forhåndsvisning',
+      title: 'Google SERP-simulator',
+      badgeIdle: 'Inaktiv',
+      badgeSafe: 'God',
+      badgeWarn: 'Over grænsen',
+      titleLabel: 'Sidetitel',
+      titleCounter: '{n} / {limit}',
+      pixelNote: '~{px}px · Google klipper ved ~{max}px',
+      titleOverChar:
+        'Titel overskrider {limit} tegn — Google kan afkorte i søgeresultater.',
+      titleOverPixel:
+        'Titel kan blive afkortet i søgeresultater (~{max}px renderingsgrænse).',
+      descLabel: 'Metabeskrivelse',
+      descCounter: '{n} / {limit}',
+      descOverChar: 'Beskrivelse overskrider {limit} tegn.',
+      previewLabel: 'Google-søgeforhåndsvisning',
+      titlePlaceholder: 'Din sidetitel…',
+      descPlaceholder: 'En kort beskrivelse af din side til søgeresultater…',
+    },
   },
 };

@@ -171,6 +171,7 @@ const canonical = localeHref(lang);
       ))
     }
     {faqSchema.length > 0 && <FAQSchema faqs={faqSchema} />}
+    <slot name="head" />
   </head>
   <body>
     <a href="#main-content" class="skip-link">{t.seo.skipLink}</a>

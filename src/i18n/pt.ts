@@ -562,5 +562,25 @@ export const pt: Translations = {
       footnote:
         '{total} palavras · palavras-chave acima de {threshold}% de densidade são assinaladas',
     },
+    seoPreview: {
+      eyebrow: 'Pré-visualização SEO',
+      title: 'Simulador de SERP do Google',
+      badgeIdle: 'Inativo',
+      badgeSafe: 'Ok',
+      badgeWarn: 'Limite excedido',
+      titleLabel: 'Título da página',
+      titleCounter: '{n} / {limit}',
+      pixelNote: '~{px}px · Google corta em ~{max}px',
+      titleOverChar:
+        'O título excede {limit} caracteres — o Google pode truncar nos resultados de pesquisa.',
+      titleOverPixel:
+        'O título pode ser cortado nos resultados de pesquisa (limite de ~{max}px de renderização).',
+      descLabel: 'Meta descrição',
+      descCounter: '{n} / {limit}',
+      descOverChar: 'A descrição excede {limit} caracteres.',
+      previewLabel: 'Pré-visualização no Google Search',
+      titlePlaceholder: 'O título da sua página…',
+      descPlaceholder: 'Uma breve descrição da sua página para os resultados de pesquisa…',
+    },
   },
 };

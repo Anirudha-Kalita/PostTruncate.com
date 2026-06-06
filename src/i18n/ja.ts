@@ -562,5 +562,25 @@ export const ja: Translations = {
       footnote:
         '{total} 語 · 密度 {threshold}% を超えるキーワードが検出されます',
     },
+    seoPreview: {
+      eyebrow: 'SEOプレビュー',
+      title: 'Google SERPシミュレーター',
+      badgeIdle: 'アイドル',
+      badgeSafe: '良好',
+      badgeWarn: '上限超過',
+      titleLabel: 'ページタイトル',
+      titleCounter: '{n} / {limit}',
+      pixelNote: '~{px}px · Googleは~{max}pxでカット',
+      titleOverChar:
+        'タイトルが{limit}文字を超えています — Googleが検索結果で切り詰める可能性があります。',
+      titleOverPixel:
+        '検索結果でタイトルが切り詰められる可能性があります（~{max}pxの描画制限）。',
+      descLabel: 'メタディスクリプション',
+      descCounter: '{n} / {limit}',
+      descOverChar: 'ディスクリプションが{limit}文字を超えています。',
+      previewLabel: 'Google検索プレビュー',
+      titlePlaceholder: 'ページのタイトルを入力…',
+      descPlaceholder: '検索結果に表示するページの簡単な説明を入力…',
+    },
   },
 };

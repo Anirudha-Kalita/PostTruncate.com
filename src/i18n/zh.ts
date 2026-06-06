@@ -560,5 +560,25 @@ export const zh: Translations = {
       footnote:
         '{total} 个词 · 密度超过 {threshold}% 的关键词将被标记',
     },
+    seoPreview: {
+      eyebrow: 'SEO 预览',
+      title: 'Google 搜索结果模拟器',
+      badgeIdle: '空闲',
+      badgeSafe: '良好',
+      badgeWarn: '超出限制',
+      titleLabel: '页面标题',
+      titleCounter: '{n} / {limit}',
+      pixelNote: '~{px}px · Google 截断于 ~{max}px',
+      titleOverChar:
+        '标题超过 {limit} 个字符——Google 可能在搜索结果中截断。',
+      titleOverPixel:
+        '标题在搜索结果中可能被截断（~{max}px 渲染限制）。',
+      descLabel: '元描述',
+      descCounter: '{n} / {limit}',
+      descOverChar: '描述超过 {limit} 个字符。',
+      previewLabel: 'Google 搜索预览',
+      titlePlaceholder: '您的页面标题…',
+      descPlaceholder: '为搜索结果提供的页面简短描述…',
+    },
   },
 };

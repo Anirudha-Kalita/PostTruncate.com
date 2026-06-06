@@ -264,6 +264,35 @@ export interface IslandStrings {
     /** "{total}" total words · "{threshold}" flag line. */
     footnote: string;
   };
+  seoPreview: {
+    /** Card header large title. */
+    eyebrow: string;
+    /** Card header subtitle (function label). */
+    title: string;
+    badgeIdle: string;
+    badgeSafe: string;
+    badgeWarn: string;
+    /** Input label for the page title field. */
+    titleLabel: string;
+    /** "{n} / {limit}" — character counter caption. */
+    titleCounter: string;
+    /** "~{px}px · Google clips at ~{max}px" — pixel-width progress bar label. */
+    pixelNote: string;
+    /** Over-char-limit warning. "{limit}" token. */
+    titleOverChar: string;
+    /** Over-pixel-limit warning (only shown when char count is within limit). "{max}" token. */
+    titleOverPixel: string;
+    /** Input label for the meta description field. */
+    descLabel: string;
+    /** "{n} / {limit}" — character counter caption. */
+    descCounter: string;
+    /** Over-char-limit warning for description. "{limit}" token. */
+    descOverChar: string;
+    /** Section heading above the live SERP card. */
+    previewLabel: string;
+    titlePlaceholder: string;
+    descPlaceholder: string;
+  };
 }
 
 export interface Translations {
