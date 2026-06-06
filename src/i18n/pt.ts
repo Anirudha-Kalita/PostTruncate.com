@@ -9,7 +9,7 @@ import type { Translations } from './types';
 export const pt: Translations = {
   seo: {
     title:
-      'PostTruncate — Veja exatamente onde as plataformas sociais cortam o seu texto',
+      'Contador de Caracteres — Ferramenta Gratuita de Contagem de Caracteres e Palavras | PostTruncate',
     description:
       'Ferramenta gratuita de pré-visualização para redes sociais. Veja a dobra «…ver mais» do LinkedIn, divida automaticamente textos longos em threads limpas no X/Twitter e detete o excesso de hashtags ou tipos de letra que quebram os leitores de ecrã antes de publicar.',
     skipLink: 'Saltar para o editor',

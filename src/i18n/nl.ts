@@ -9,7 +9,7 @@ import type { Translations } from './types';
 export const nl: Translations = {
   seo: {
     title:
-      'PostTruncate — Zie precies waar socialemediaplatforms je tekst afkappen',
+      'Tekenteller — Gratis Online Teken- en Woordteller | PostTruncate',
     description:
       'Gratis previewtool voor social media. Bekijk de “…meer weergeven”-vouw van LinkedIn, splits lange teksten automatisch op in nette X/Twitter-threads en spoor hashtagoverdaad of schermlezeronvriendelijke lettertypes op voordat je plaatst.',
     skipLink: 'Ga direct naar de editor',

@@ -10,7 +10,7 @@ import type { Translations } from './types';
 export const de: Translations = {
   seo: {
     title:
-      'PostTruncate — Sieh genau, wo soziale Plattformen deinen Text abschneiden',
+      'Zeichenzähler — Kostenloser Online-Zeichen- und Wortzähler | PostTruncate',
     description:
       'Kostenloses Vorschau-Tool für Social Media. Sieh die „…mehr anzeigen“-Falz von LinkedIn, teile lange Texte automatisch in saubere X/Twitter-Threads auf und erkenne Hashtag-Überladung oder Screenreader-feindliche Schriften, bevor du postest.',
     skipLink: 'Zum Editor springen',

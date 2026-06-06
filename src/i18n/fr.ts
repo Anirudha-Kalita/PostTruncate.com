@@ -9,7 +9,7 @@ import type { Translations } from './types';
 export const fr: Translations = {
   seo: {
     title:
-      'PostTruncate — Voyez exactement où les plateformes sociales coupent votre texte',
+      'Compteur de Caractères — Outil Gratuit de Comptage de Caractères et de Mots | PostTruncate',
     description:
       'Outil gratuit d’aperçu pour les réseaux sociaux. Visualisez le pli « …voir plus » de LinkedIn, découpez automatiquement vos longs textes en fils X/Twitter clairs, et repérez la surcharge de hashtags ou les polices qui cassent les lecteurs d’écran avant de publier.',
     skipLink: 'Aller à l’éditeur',

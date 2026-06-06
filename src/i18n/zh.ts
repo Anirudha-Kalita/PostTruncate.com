@@ -9,7 +9,7 @@ import type { Translations } from './types';
 export const zh: Translations = {
   seo: {
     title:
-      'PostTruncate —— 精准查看各大社交平台会在哪里截断你的文字',
+      '字符计数器 — 免费在线字符和单词计数工具 | PostTruncate',
     description:
       '免费的社交媒体预览工具。查看 LinkedIn 的“…查看更多”折叠位置，将长文自动拆分为干净的 X/Twitter 串文，并在发布前发现话题标签超量或破坏屏幕阅读器的花式字体。',
     skipLink: '跳转到编辑器',

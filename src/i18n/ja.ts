@@ -9,7 +9,7 @@ import type { Translations } from './types';
 export const ja: Translations = {
   seo: {
     title:
-      'PostTruncate — 各SNSが投稿テキストをどこで切り詰めるかを正確に確認',
+      '文字数カウンター — 無料オンライン文字数・単語数カウントツール | PostTruncate',
     description:
       '無料のSNSプレビューツール。LinkedInの「…続きを見る」の折りたたみ位置を確認し、長文を読みやすいX/Twitterのスレッドに自動分割。投稿前にハッシュタグの過多やスクリーンリーダーで読めないフォントも検出します。',
     skipLink: 'エディターへスキップ',

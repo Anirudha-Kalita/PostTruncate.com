@@ -9,7 +9,7 @@ import type { Translations } from './types';
 export const en: Translations = {
   seo: {
     title:
-      'PostTruncate — See exactly where social platforms cut off your text',
+      'Character Counter — Free Online Character & Word Count Tool | PostTruncate',
     description:
       'Free social media preview tool. See LinkedIn’s “…see more” fold, auto-split long copy into clean X/Twitter threads, and catch hashtag overload or screen-reader-breaking fonts before you post.',
     skipLink: 'Skip to the editor',

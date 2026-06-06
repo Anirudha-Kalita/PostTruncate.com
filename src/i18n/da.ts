@@ -9,7 +9,7 @@ import type { Translations } from './types';
 export const da: Translations = {
   seo: {
     title:
-      'PostTruncate — Se præcis hvor sociale platforme klipper din tekst over',
+      'Tegnoptæller — Gratis Online Tegn- og Ordoptælningsværktøj | PostTruncate',
     description:
       'Gratis previewværktøj til sociale medier. Se LinkedIns “…se mere”-fold, opdel automatisk lange tekster i rene X/Twitter-tråde, og opdag hashtag-overflod eller skærmlæser-brydende skrifttyper, før du poster.',
     skipLink: 'Spring til editoren',
