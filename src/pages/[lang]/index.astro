@@ -266,7 +266,8 @@ const jsonLd = [
     border-radius: var(--radius-pill);
     font-size: 16px;
     font-weight: 500;
-    transition: opacity 0.15s ease, background 0.15s ease;
+    transition: transform 100ms ease, opacity 0.15s ease, background 0.15s ease,
+      box-shadow 0.15s ease;
   }
   .hero__primary {
     background: var(--color-ink);
@@ -275,12 +276,21 @@ const jsonLd = [
   .hero__primary:hover {
     opacity: 0.88;
   }
+  .hero__primary:active {
+    transform: scale(0.955);
+    opacity: 0.82;
+  }
   .hero__secondary {
     background: var(--color-canvas);
     color: var(--color-ink);
     box-shadow: var(--shadow-e1);
   }
   .hero__secondary:hover {
+    background: var(--color-canvas-soft-2);
+  }
+  .hero__secondary:active {
+    transform: scale(0.955);
+    box-shadow: var(--shadow-e1);
     background: var(--color-canvas-soft-2);
   }
 
@@ -522,6 +532,11 @@ const jsonLd = [
     font-weight: 500;
     color: var(--color-ink);
     list-style: none;
+    transition: transform 100ms ease, background 0.15s ease;
+  }
+  .faq__q:active {
+    transform: scale(0.985);
+    background: var(--color-canvas-soft-2);
   }
   .faq__q::-webkit-details-marker {
     display: none;

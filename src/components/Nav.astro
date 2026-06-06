@@ -328,11 +328,14 @@ const links = [
     cursor: pointer;
     list-style: none;
     color: var(--color-body);
-    transition: color 0.15s ease, background 0.15s ease;
+    transition: transform 100ms ease, color 0.15s ease, background 0.15s ease;
   }
   .nav__lang-toggle:hover {
     color: var(--color-ink);
     background: var(--color-canvas-soft-2);
+  }
+  .nav__lang-toggle:active {
+    transform: scale(0.94);
   }
   .nav__lang-toggle::-webkit-details-marker {
     display: none;
@@ -427,11 +430,14 @@ const links = [
     background: transparent;
     border: none;
     cursor: pointer;
-    transition: color 0.15s ease, background 0.15s ease;
+    transition: transform 100ms ease, color 0.15s ease, background 0.15s ease;
   }
   .nav__theme:hover {
     color: var(--color-ink);
     background: var(--color-canvas-soft-2);
+  }
+  .nav__theme:active {
+    transform: scale(0.9);
   }
   .nav__moon {
     display: none;
@@ -460,10 +466,14 @@ const links = [
     font-size: 14px;
     font-weight: 500;
     letter-spacing: -0.28px;
-    transition: opacity 0.15s ease;
+    transition: transform 100ms ease, opacity 0.15s ease;
   }
   .nav__pill:hover {
     opacity: 0.88;
+  }
+  .nav__pill:active {
+    transform: scale(0.955);
+    opacity: 0.82;
   }
   .nav__pill--block {
     width: 100%;
@@ -484,10 +494,13 @@ const links = [
     cursor: pointer;
     list-style: none;
     color: var(--color-ink);
-    transition: background 0.15s ease;
+    transition: transform 100ms ease, background 0.15s ease;
   }
   .nav__toggle:hover {
     background: var(--color-canvas-soft-2);
+  }
+  .nav__toggle:active {
+    transform: scale(0.9);
   }
   /* Strip the native disclosure triangle across engines. */
   .nav__toggle::-webkit-details-marker {
@@ -542,9 +555,13 @@ const links = [
     font-size: 15px;
     font-weight: 500;
     letter-spacing: -0.28px;
-    transition: background 0.15s ease;
+    transition: transform 100ms ease, background 0.15s ease;
   }
   .nav__panel-link:hover {
+    background: var(--color-canvas-soft-2);
+  }
+  .nav__panel-link:active {
+    transform: scale(0.975);
     background: var(--color-canvas-soft-2);
   }
 

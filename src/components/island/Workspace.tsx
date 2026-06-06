@@ -94,7 +94,7 @@ export function Workspace({ text, setText, lang, s }: Props) {
                 type="button"
                 onClick={item.action}
                 disabled={!text}
-                class="min-h-9 rounded-md border border-hairline bg-canvas px-2.5 py-2 text-center text-[12px] font-medium leading-4 text-ink transition-colors hover:border-hairline-strong hover:bg-canvas-soft-2 disabled:cursor-not-allowed disabled:opacity-45"
+                class="min-h-9 rounded-md border border-hairline bg-canvas px-2.5 py-2 text-center text-[12px] font-medium leading-4 text-ink transition-[transform,color,background,border-color] duration-100 hover:border-hairline-strong hover:bg-canvas-soft-2 active:scale-[0.955] active:bg-canvas-soft-2 disabled:cursor-not-allowed disabled:opacity-45 disabled:active:scale-100"
               >
                 {item.label}
               </button>
@@ -126,7 +126,7 @@ export function Workspace({ text, setText, lang, s }: Props) {
             type="button"
             onClick={onClean}
             disabled={!text}
-            class="inline-flex items-center gap-1.5 rounded-pill border border-hairline bg-canvas px-3.5 py-2 text-[13px] font-medium text-ink transition-colors hover:bg-canvas-soft-2 disabled:cursor-not-allowed disabled:opacity-45"
+            class="inline-flex items-center gap-1.5 rounded-pill border border-hairline bg-canvas px-3.5 py-2 text-[13px] font-medium text-ink transition-[transform,color,background] duration-100 hover:bg-canvas-soft-2 active:scale-[0.96] active:bg-canvas-soft-2 disabled:cursor-not-allowed disabled:opacity-45 disabled:active:scale-100"
           >
             {w.clean}
           </button>
@@ -134,7 +134,7 @@ export function Workspace({ text, setText, lang, s }: Props) {
             type="button"
             onClick={onSanitize}
             disabled={!text}
-            class="inline-flex items-center gap-1.5 rounded-pill border border-hairline bg-canvas px-3.5 py-2 text-[13px] font-medium text-ink transition-colors hover:bg-canvas-soft-2 disabled:cursor-not-allowed disabled:opacity-45"
+            class="inline-flex items-center gap-1.5 rounded-pill border border-hairline bg-canvas px-3.5 py-2 text-[13px] font-medium text-ink transition-[transform,color,background] duration-100 hover:bg-canvas-soft-2 active:scale-[0.96] active:bg-canvas-soft-2 disabled:cursor-not-allowed disabled:opacity-45 disabled:active:scale-100"
           >
             {w.sanitize}
             {hidden.count > 0 && (
@@ -147,7 +147,7 @@ export function Workspace({ text, setText, lang, s }: Props) {
             type="button"
             onClick={onClear}
             disabled={!text}
-            class="ml-auto inline-flex items-center gap-1.5 rounded-pill px-3.5 py-2 text-[13px] font-medium text-error transition-colors hover:bg-error-soft disabled:cursor-not-allowed disabled:opacity-45"
+            class="ml-auto inline-flex items-center gap-1.5 rounded-pill px-3.5 py-2 text-[13px] font-medium text-error transition-[transform,color,background] duration-100 hover:bg-error-soft active:scale-[0.96] active:bg-error-soft disabled:cursor-not-allowed disabled:opacity-45 disabled:active:scale-100"
           >
             {w.clear}
           </button>

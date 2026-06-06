@@ -131,7 +131,7 @@ export function Segmented<T extends string>({
             type="button"
             aria-pressed={active}
             onClick={() => onChange(opt.value)}
-            class={`rounded-pill px-3 py-1 text-[12px] font-medium transition-colors ${
+            class={`rounded-pill px-3 py-1 text-[12px] font-medium transition-[transform,color,background] duration-100 active:scale-[0.93] ${
               active
                 ? 'bg-ink text-on-primary'
                 : 'text-body hover:text-ink'

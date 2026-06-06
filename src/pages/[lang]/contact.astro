@@ -246,10 +246,14 @@ const home = `/${lang}/`;
     font-size: 15px;
     font-weight: 500;
     cursor: pointer;
-    transition: opacity 0.15s ease;
+    transition: transform 100ms ease, opacity 0.15s ease;
   }
   .contact__submit:hover {
     opacity: 0.88;
+  }
+  .contact__submit:active:not(:disabled) {
+    transform: scale(0.955);
+    opacity: 0.82;
   }
   .contact__submit:disabled {
     opacity: 0.6;
