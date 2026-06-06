@@ -244,6 +244,18 @@ export const nl: Translations = {
         title: 'Juridisch',
         links: ['Privacy', 'Voorwaarden', 'Over', 'Contact'],
       },
+      guides: {
+        title: 'Platformgidsen',
+        links: [
+          'X / Twitter',
+          'Instagram',
+          'LinkedIn',
+          'Facebook',
+          'SMS',
+          'Threads',
+          'Google SERP-voorbeeld',
+        ],
+      },
     },
     copyright: '© {year} PostTruncate. Gebouwd voor creators overal.',
     disclaimer:

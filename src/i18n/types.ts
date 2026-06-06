@@ -412,6 +412,7 @@ export interface Translations {
       platforms: FooterColumn;
       learn: FooterColumn;
       legal: FooterColumn;
+      guides: FooterColumn;
     };
     /** "{year}". */
     copyright: string;

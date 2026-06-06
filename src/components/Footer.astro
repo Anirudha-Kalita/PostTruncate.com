@@ -5,6 +5,7 @@
 import { interp } from '../i18n/interp';
 import { getLocale } from '../i18n/config';
 import type { Translations } from '../i18n/types';
+import { tools } from '../data/tools';
 
 interface Props {
   lang: string;
@@ -57,6 +58,13 @@ const legalLinks = footer.columns.legal.links.map((label, i) => ({
   label,
   href: columnHrefs.legal[i] ?? '#',
 }));
+
+// Platform Guides column: URLs come from tools.ts (single source of truth);
+// display labels come from the locale's footer.columns.guides.links array.
+const guidesLinks = tools.map((tool, i) => ({
+  label: footer.columns.guides.links[i],
+  href: `/${lang}/${tool.slugs[lang] ?? tool.slugs['en']}/`,
+}));
 ---
 
 <footer class="footer" class:list={{ 'footer--compact': !isHome }}>
@@ -87,6 +95,16 @@ const legalLinks = footer.columns.legal.links.map((label, i) => ({
               </ul>
             </div>
           ))}
+          <div class="footer__col">
+            <p class="footer__eyebrow">{footer.columns.guides.title}</p>
+            <ul class="footer__list">
+              {guidesLinks.map((l) => (
+                <li>
+                  <a href={l.href} class="footer__link">{l.label}</a>
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
       </div>
     ) : (
@@ -100,6 +118,11 @@ const legalLinks = footer.columns.legal.links.map((label, i) => ({
             <a href={l.href} class="footer__link">
               {l.label}
             </a>
+          ))}
+        </nav>
+        <nav class="footer__guides-compact" aria-label={footer.columns.guides.title}>
+          {guidesLinks.map((l) => (
+            <a href={l.href} class="footer__link">{l.label}</a>
           ))}
         </nav>
       </div>
@@ -228,6 +251,14 @@ const legalLinks = footer.columns.legal.links.map((label, i) => ({
     flex-wrap: wrap;
     gap: 12px 28px;
   }
+  .footer__guides-compact {
+    flex: 0 0 100%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 20px;
+    padding-top: 16px;
+    border-top: 1px solid var(--color-hairline);
+  }
 
   @media (min-width: 720px) {
     .footer__inner {
@@ -237,7 +268,13 @@ const legalLinks = footer.columns.legal.links.map((label, i) => ({
       grid-template-columns: none;
     }
     .footer__cols {
-      grid-template-columns: repeat(4, 1fr);
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  @media (min-width: 1100px) {
+    .footer__cols {
+      grid-template-columns: repeat(5, 1fr);
     }
   }
 </style>

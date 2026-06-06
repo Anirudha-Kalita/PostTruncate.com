@@ -244,6 +244,18 @@ export const zh: Translations = {
         title: '法律',
         links: ['隐私', '条款', '关于', '联系我们'],
       },
+      guides: {
+        title: '平台指南',
+        links: [
+          'X / Twitter',
+          'Instagram',
+          'LinkedIn',
+          'Facebook',
+          'SMS',
+          'Threads',
+          'Google SERP 预览',
+        ],
+      },
     },
     copyright: '© {year} PostTruncate。为世界各地的创作者打造。',
     disclaimer:

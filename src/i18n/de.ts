@@ -245,6 +245,18 @@ export const de: Translations = {
         title: 'Rechtliches',
         links: ['Datenschutz', 'AGB', 'Über uns', 'Kontakt'],
       },
+      guides: {
+        title: 'Plattform-Anleitungen',
+        links: [
+          'X / Twitter',
+          'Instagram',
+          'LinkedIn',
+          'Facebook',
+          'SMS',
+          'Threads',
+          'Google SERP-Vorschau',
+        ],
+      },
     },
     copyright: '© {year} PostTruncate. Gebaut für Creator überall.',
     disclaimer:

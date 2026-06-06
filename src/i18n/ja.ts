@@ -244,6 +244,18 @@ export const ja: Translations = {
         title: '法的事項',
         links: ['プライバシー', '利用規約', '概要', 'お問い合わせ'],
       },
+      guides: {
+        title: 'プラットフォームガイド',
+        links: [
+          'X / Twitter',
+          'Instagram',
+          'LinkedIn',
+          'Facebook',
+          'SMS',
+          'Threads',
+          'Google SERPプレビュー',
+        ],
+      },
     },
     copyright: '© {year} PostTruncate. 世界中のクリエイターのために作られました。',
     disclaimer:

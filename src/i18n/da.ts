@@ -244,6 +244,18 @@ export const da: Translations = {
         title: 'Juridisk',
         links: ['Privatliv', 'Vilkår', 'Om', 'Kontakt'],
       },
+      guides: {
+        title: 'Platformguider',
+        links: [
+          'X / Twitter',
+          'Instagram',
+          'LinkedIn',
+          'Facebook',
+          'SMS',
+          'Threads',
+          'Google SERP-forhåndsvisning',
+        ],
+      },
     },
     copyright: '© {year} PostTruncate. Bygget til kreative overalt.',
     disclaimer:
