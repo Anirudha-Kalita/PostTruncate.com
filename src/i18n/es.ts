@@ -224,6 +224,7 @@ export const es: Translations = {
           'Previsualizaciones en vivo',
           'Divisor de hilos',
           'Saneador de Unicode',
+          'Widget de inserción',
         ],
       },
       platforms: {
@@ -387,6 +388,28 @@ export const es: Translations = {
       altBody:
         'Puedes escribirnos en cualquier momento a {email}. Leemos todos los mensajes y respondemos lo más rápido que podemos.',
     },
+  },
+
+  embedWidget: {
+    title: 'Widget gratuito de contador de caracteres — PostTruncate',
+    description:
+      'Añade un contador de caracteres en vivo a cualquier blog o sitio web con una línea de HTML. Controla los límites de X, LinkedIn, Threads, Instagram y SMS.',
+    eyebrow: 'Inserción gratuita',
+    heading: 'Inserta un contador de caracteres en vivo en tu sitio',
+    lede:
+      'Pega una línea de HTML para añadir un contador de caracteres en tiempo real a cualquier página. Cuenta caracteres y palabras, y controla los límites de X, LinkedIn, Threads, Instagram y SMS, sin salir de tu sitio.',
+    previewLabel: 'Vista previa en vivo',
+    copyButton: 'Copiar código de inserción',
+    copiedButton: '¡Copiado!',
+    codeLabel: 'Código de inserción',
+    audienceHeading: '¿Para quién es?',
+    forBloggers:
+      'Los bloggers y creadores de contenido pueden añadir un contador de caracteres en vivo directamente en su página de redacción para que los lectores comprueben los límites de las plataformas sin cambiar de pestaña.',
+    forEducators:
+      'Los educadores y autores de cursos pueden insertar el contador dentro de una lección, permitiendo a los estudiantes practicar la escritura con restricciones de longitud.',
+    forDevelopers:
+      'Los desarrolladores pueden añadir el widget en cualquier CMS, página de documentación o herramienta interna con un único <iframe>, sin clave de API, cuenta ni paso de compilación.',
+    homepageLinkLabel: 'Insertar en tu sitio →',
   },
 
   errors: {
@@ -600,6 +623,20 @@ export const es: Translations = {
         'La facilidad de lectura Flesch puntúa el texto en una escala de 0 a 100. A mayor puntuación, más fácil de leer. Entre 60 y 70 es prosa estándar.',
       notApplicable:
         'La fórmula Flesch está diseñada para texto en escritura latina y no se aplica a este idioma. Usa el recuento de palabras como medida principal de legibilidad.',
+    },
+    embed: {
+      placeholder: 'Empieza a escribir para contar caracteres…',
+      charCount: 'Caracteres',
+      wordCount: 'Palabras',
+      remaining: '{n} restantes',
+      overLimit: '{n} de más',
+      platforms: {
+        twitter: 'X / Twitter',
+        linkedin: 'LinkedIn',
+        threads: 'Threads',
+        instagram: 'Instagram',
+        sms: 'SMS',
+      },
     },
   },
 };

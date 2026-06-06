@@ -224,6 +224,7 @@ export const zh: Translations = {
           '实时预览',
           '串文拆分器',
           'Unicode 净化器',
+          '嵌入式小部件',
         ],
       },
       platforms: {
@@ -387,6 +388,28 @@ export const zh: Translations = {
       altBody:
         '你随时都可以通过 {email} 联系我们。我们会阅读每一条消息，并尽快回复。',
     },
+  },
+
+  embedWidget: {
+    title: '免费字符计数嵌入式小部件 — PostTruncate',
+    description:
+      '只需一行 HTML，即可为任意博客或网站添加免费的实时字符计数器。支持 X、LinkedIn、Threads、Instagram 和短信的字符限制。',
+    eyebrow: '免费嵌入',
+    heading: '在你的网站上嵌入实时字符计数器',
+    lede:
+      '粘贴一行 HTML，即可为任意页面添加实时字符计数器。它能统计字符数和字数，并追踪 X、LinkedIn、Threads、Instagram 和短信的字符限制——无需离开你的网站。',
+    previewLabel: '实时预览',
+    copyButton: '复制嵌入代码',
+    copiedButton: '已复制！',
+    codeLabel: '嵌入代码',
+    audienceHeading: '适合哪些人？',
+    forBloggers:
+      '博主和内容创作者可以直接在写作页面添加实时字符计数器，让读者无需切换标签页即可查看平台字符限制。',
+    forEducators:
+      '教育者和课程作者可以将计数器嵌入课程中，让学生在练习写作时实时了解字数限制。',
+    forDevelopers:
+      '开发者只需一个 <iframe>，即可将该小部件集成到任意 CMS、文档页面或内部工具中——无需 API 密钥、账号或构建步骤。',
+    homepageLinkLabel: '嵌入到你的网站 →',
   },
 
   errors: {
@@ -598,6 +621,20 @@ export const zh: Translations = {
         'Flesch 阅读易度在 0–100 的范围内对文本进行评分。分数越高，越容易阅读。60–70 分属于标准散文水平。',
       notApplicable:
         'Flesch 公式专为拉丁字母文本设计，不适用于中文。建议以字数作为主要的可读性衡量标准。',
+    },
+    embed: {
+      placeholder: '开始输入以统计字符数…',
+      charCount: '字符数',
+      wordCount: '字数',
+      remaining: '还剩 {n} 个字符',
+      overLimit: '超出 {n} 个字符',
+      platforms: {
+        twitter: 'X / Twitter',
+        linkedin: 'LinkedIn',
+        threads: 'Threads',
+        instagram: 'Instagram',
+        sms: 'SMS',
+      },
     },
   },
 };

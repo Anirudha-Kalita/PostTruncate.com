@@ -224,6 +224,7 @@ export const fr: Translations = {
           'Aperçus en direct',
           'Découpeur de fils',
           'Nettoyeur Unicode',
+          'Widget à intégrer',
         ],
       },
       platforms: {
@@ -385,8 +386,30 @@ export const fr: Translations = {
       },
       altHeading: 'Vous préférez l’e-mail ?',
       altBody:
-        'Vous pouvez nous joindre à tout moment à l’adresse {email}. Nous lisons chaque message et répondons aussi vite que possible.',
+        "",
     },
+  },
+
+  embedWidget: {
+    title: "Widget de compteur de caractères gratuit à intégrer — PostTruncate",
+    description:
+      "Ajoutez un compteur de caractères en direct à n’importe quel blog ou site web avec une seule ligne HTML. Suit les limites pour X, LinkedIn, Threads, Instagram et SMS.",
+    eyebrow: "Intégration gratuite",
+    heading: "Intégrez un compteur de caractères en direct sur votre site",
+    lede:
+      "Collez une ligne HTML pour ajouter un compteur de caractères en temps réel à n’importe quelle page. Il compte les caractères et les mots, et suit les limites de X, LinkedIn, Threads, Instagram et SMS — sans quitter votre site.",
+    previewLabel: "Aperçu en direct",
+    copyButton: "Copier le code d’intégration",
+    copiedButton: "Copié !",
+    codeLabel: "Code d’intégration",
+    audienceHeading: "Pour qui est-ce ?",
+    forBloggers:
+      "Les blogueurs et créateurs de contenu peuvent ajouter un compteur de caractères en direct directement sur leur page de rédaction pour que les lecteurs vérifient les limites des plateformes sans changer d’onglet.",
+    forEducators:
+      "Les enseignants et auteurs de cours peuvent intégrer le compteur dans une leçon, permettant aux étudiants de s’entraîner à écrire avec des contraintes de longueur.",
+    forDevelopers:
+      "Les développeurs peuvent intégrer le widget dans n’importe quel CMS, page de documentation ou outil interne avec un seul <iframe> — sans clé API, compte ou étape de compilation.",
+    homepageLinkLabel: "Intégrer sur votre site →",
   },
 
   errors: {
@@ -599,7 +622,21 @@ export const fr: Translations = {
       tooltip:
         'Le score de Flesch évalue le texte sur une échelle de 0 à 100. Plus le score est élevé, plus la lecture est facile. Entre 60 et 70 correspond à une prose standard.',
       notApplicable:
-        'La formule de Flesch est conçue pour les textes en écriture latine et ne s’applique pas à cette langue. Utilisez le nombre de mots comme mesure principale de lisibilité.',
+        "La formule de Flesch est conçue pour les textes en écriture latine et ne s’applique pas à cette langue. Utilisez le nombre de mots comme mesure principale de lisibilité.",
+    },
+    embed: {
+      placeholder: "Commencez à taper pour compter les caractères…",
+      charCount: "Caractères",
+      wordCount: "Mots",
+      remaining: "{n} restants",
+      overLimit: "{n} en trop",
+      platforms: {
+        twitter: "X / Twitter",
+        linkedin: "LinkedIn",
+        threads: "Threads",
+        instagram: "Instagram",
+        sms: "SMS",
+      },
     },
   },
 };

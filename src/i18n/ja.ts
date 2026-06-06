@@ -224,6 +224,7 @@ export const ja: Translations = {
           'リアルタイムプレビュー',
           'スレッド分割',
           'Unicodeサニタイザー',
+          '埋め込みウィジェット',
         ],
       },
       platforms: {
@@ -387,6 +388,28 @@ export const ja: Translations = {
       altBody:
         'いつでも {email} までご連絡いただけます。すべてのメッセージに目を通し、できるだけ早く返信します。',
     },
+  },
+
+  embedWidget: {
+    title: '無料の文字数カウンター埋め込みウィジェット — PostTruncate',
+    description:
+      '1行のHTMLで、あらゆるブログやウェブサイトに無料のライブ文字数カウンターを追加できます。X、LinkedIn、Threads、Instagram、SMSの制限に対応。',
+    eyebrow: '無料埋め込み',
+    heading: 'ライブ文字数カウンターをサイトに埋め込む',
+    lede:
+      '1行のHTMLを貼り付けるだけで、任意のページにリアルタイムの文字数カウンターを追加できます。文字数と単語数をカウントし、X、LinkedIn、Threads、Instagram、SMSの制限を追跡します。サイトを離れることなく利用可能です。',
+    previewLabel: 'ライブプレビュー',
+    copyButton: '埋め込みコードをコピー',
+    copiedButton: 'コピーしました！',
+    codeLabel: '埋め込みコード',
+    audienceHeading: 'こんな方におすすめ',
+    forBloggers:
+      'ブロガーやコンテンツクリエイターは、執筆ページに直接ライブ文字数カウンターを追加できます。読者はタブを切り替えることなくプラットフォームの制限を確認できます。',
+    forEducators:
+      '教育者やコース作成者は、レッスン内にカウンターを埋め込むことで、生徒が文字数制限を意識しながら文章を練習できる環境を提供できます。',
+    forDevelopers:
+      '開発者は、APIキー・アカウント・ビルドステップ不要で、1つの <iframe> でCMS・ドキュメントページ・社内ツールにウィジェットを組み込めます。',
+    homepageLinkLabel: 'サイトに埋め込む →',
   },
 
   errors: {
@@ -600,6 +623,20 @@ export const ja: Translations = {
         'フレッシュ読みやすさ指数は、テキストを0〜100のスケールで評価します。スコアが高いほど読みやすいとされます。60〜70が標準的な文章です。',
       notApplicable:
         'フレッシュ公式はラテン文字のテキスト向けに設計されており、日本語には適用できません。読みやすさの主要な指標として単語数をご参照ください。',
+    },
+    embed: {
+      placeholder: '文字を入力して文字数をカウント…',
+      charCount: '文字数',
+      wordCount: '単語数',
+      remaining: 'あと{n}文字',
+      overLimit: '{n}文字オーバー',
+      platforms: {
+        twitter: 'X / Twitter',
+        linkedin: 'LinkedIn',
+        threads: 'Threads',
+        instagram: 'Instagram',
+        sms: 'SMS',
+      },
     },
   },
 };

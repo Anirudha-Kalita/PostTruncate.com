@@ -224,6 +224,7 @@ export const nl: Translations = {
           'Live previews',
           'Threadsplitter',
           'Unicode-opschoner',
+          'Insluit-widget',
         ],
       },
       platforms: {
@@ -387,6 +388,28 @@ export const nl: Translations = {
       altBody:
         'Je kunt ons altijd bereiken op {email}. We lezen elk bericht en antwoorden zo snel als we kunnen.',
     },
+  },
+
+  embedWidget: {
+    title: 'Gratis tekenteller-widget om in te sluiten — PostTruncate',
+    description:
+      'Voeg een gratis live tekenteller toe aan elke blog of website met één regel HTML. Houdt limieten bij voor X, LinkedIn, Threads, Instagram en SMS.',
+    eyebrow: 'Gratis insluiting',
+    heading: 'Sluit een live tekenteller in op je site',
+    lede:
+      'Plak één regel HTML om een realtime tekenteller toe te voegen aan elke pagina. Telt tekens en woorden, en houdt limieten bij voor X, LinkedIn, Threads, Instagram en SMS — zonder je site te verlaten.',
+    previewLabel: 'Live preview',
+    copyButton: 'Insluitcode kopiëren',
+    copiedButton: 'Gekopieerd!',
+    codeLabel: 'Insluitcode',
+    audienceHeading: 'Voor wie is dit?',
+    forBloggers:
+      'Bloggers en contentmakers kunnen een live tekenteller direct op hun schrijfpagina plaatsen, zodat lezers platformlimieten kunnen controleren zonder van tabblad te wisselen.',
+    forEducators:
+      'Docenten en cursusauteurs kunnen de teller in een les insluiten, zodat studenten kunnen oefenen met schrijven binnen lengtebeperkingen.',
+    forDevelopers:
+      'Ontwikkelaars kunnen de widget met één <iframe> toevoegen aan elk CMS, elke documentatiepagina of intern tool — zonder API-sleutel, account of buildstap.',
+    homepageLinkLabel: 'Insluiten op je site →',
   },
 
   errors: {
@@ -600,6 +623,20 @@ export const nl: Translations = {
         'De Flesch-leesbaarheidsindex beoordeelt tekst op een schaal van 0–100. Hoe hoger de score, hoe makkelijker te lezen. Tussen 60 en 70 is standaard proza.',
       notApplicable:
         'De Flesch-formule is ontworpen voor teksten in het Latijnse schrift en is niet van toepassing op deze taal. Gebruik de woordtelling als primaire maatstaf voor leesbaarheid.',
+    },
+    embed: {
+      placeholder: 'Begin te typen om tekens te tellen…',
+      charCount: 'Tekens',
+      wordCount: 'Woorden',
+      remaining: '{n} resterend',
+      overLimit: '{n} te veel',
+      platforms: {
+        twitter: 'X / Twitter',
+        linkedin: 'LinkedIn',
+        threads: 'Threads',
+        instagram: 'Instagram',
+        sms: 'SMS',
+      },
     },
   },
 };

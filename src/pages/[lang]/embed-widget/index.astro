@@ -1,0 +1,248 @@
+---
+// Embed-widget landing page at /[lang]/embed-widget/.
+// Explains the widget, shows a live iframe preview, and lets visitors copy
+// the one-line embed snippet.
+import Layout from '../../../layouts/Layout.astro';
+import { getTranslations } from '../../../i18n';
+import { LOCALE_CODES } from '../../../i18n/config';
+
+export function getStaticPaths() {
+  return LOCALE_CODES.map((lang) => ({ params: { lang } }));
+}
+
+const { lang } = Astro.params as { lang: string };
+const t = getTranslations(lang);
+const ew = t.embedWidget;
+const embedSrc = `https://posttruncate.com/${lang}/embed/`;
+const embedCode = `<iframe src="${embedSrc}" width="100%" height="420" frameborder="0"></iframe>`;
+---
+
+<Layout
+  lang={lang}
+  path="/embed-widget/"
+  title={ew.title}
+  description={ew.description}
+  noindex={false}
+>
+  <div class="ew-page container-page">
+    <!-- Header -->
+    <header class="ew-header">
+      <p class="ew-eyebrow">{ew.eyebrow}</p>
+      <h1 class="ew-heading">{ew.heading}</h1>
+      <p class="ew-lede">{ew.lede}</p>
+    </header>
+
+    <!-- Live iframe preview -->
+    <section class="ew-preview-section" aria-label={ew.previewLabel}>
+      <h2 class="ew-section-title">{ew.previewLabel}</h2>
+      <div class="ew-preview-frame">
+        <iframe
+          src={embedSrc}
+          width="100%"
+          height="420"
+          frameborder="0"
+          title={ew.previewLabel}
+          loading="lazy"
+        ></iframe>
+      </div>
+    </section>
+
+    <!-- Embed code block -->
+    <section class="ew-code-section">
+      <h2 class="ew-section-title">{ew.codeLabel}</h2>
+      <div class="ew-code-wrap">
+        <pre class="ew-code"><code id="embed-code">{embedCode}</code></pre>
+        <button
+          id="copy-btn"
+          type="button"
+          class="ew-copy-btn"
+          data-code={embedCode}
+          data-label-default={ew.copyButton}
+          data-label-copied={ew.copiedButton}
+        >
+          {ew.copyButton}
+        </button>
+      </div>
+    </section>
+
+    <!-- Audience paragraphs -->
+    <section class="ew-audience">
+      <h2 class="ew-section-title">{ew.audienceHeading}</h2>
+      <div class="ew-audience-grid">
+        <div class="ew-audience-card">
+          <p>{ew.forBloggers}</p>
+        </div>
+        <div class="ew-audience-card">
+          <p>{ew.forEducators}</p>
+        </div>
+        <div class="ew-audience-card">
+          <p>{ew.forDevelopers}</p>
+        </div>
+      </div>
+    </section>
+  </div>
+</Layout>
+
+<script>
+  const btn = document.getElementById('copy-btn') as HTMLButtonElement | null;
+  if (btn) {
+    btn.addEventListener('click', async () => {
+      const code = btn.dataset.code ?? '';
+      const labelDefault = btn.dataset.labelDefault ?? 'Copy';
+      const labelCopied = btn.dataset.labelCopied ?? 'Copied!';
+      try {
+        await navigator.clipboard.writeText(code);
+      } catch {
+        // execCommand fallback for older browsers / restricted contexts
+        const ta = document.createElement('textarea');
+        ta.value = code;
+        ta.style.position = 'fixed';
+        ta.style.opacity = '0';
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand('copy');
+        document.body.removeChild(ta);
+      }
+      btn.textContent = labelCopied;
+      btn.disabled = true;
+      setTimeout(() => {
+        btn.textContent = labelDefault;
+        btn.disabled = false;
+      }, 2000);
+    });
+  }
+</script>
+
+<style>
+  .ew-page {
+    padding-top: 64px;
+    padding-bottom: 96px;
+    display: flex;
+    flex-direction: column;
+    gap: 56px;
+  }
+
+  /* Header */
+  .ew-header {
+    max-width: 680px;
+  }
+  .ew-eyebrow {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--color-mute);
+  }
+  .ew-heading {
+    margin-top: 12px;
+    font-size: clamp(28px, 5vw, 44px);
+    font-weight: 600;
+    line-height: 1.05;
+    letter-spacing: -1.6px;
+    color: var(--color-ink);
+  }
+  .ew-lede {
+    margin-top: 16px;
+    font-size: 17px;
+    line-height: 28px;
+    color: var(--color-body);
+  }
+
+  /* Shared section heading */
+  .ew-section-title {
+    font-size: 20px;
+    font-weight: 600;
+    letter-spacing: -0.6px;
+    color: var(--color-ink);
+    margin-bottom: 16px;
+  }
+
+  /* Preview iframe */
+  .ew-preview-frame {
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--color-hairline);
+    overflow: hidden;
+    background: var(--color-canvas);
+    box-shadow: var(--shadow-e1);
+  }
+  .ew-preview-frame iframe {
+    display: block;
+  }
+
+  /* Code block */
+  .ew-code-wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    align-items: flex-start;
+  }
+  .ew-code {
+    width: 100%;
+    background: var(--color-canvas-soft);
+    border: 1px solid var(--color-hairline);
+    border-radius: var(--radius-md);
+    padding: 16px;
+    font-family: var(--font-mono);
+    font-size: 13px;
+    line-height: 20px;
+    color: var(--color-ink);
+    white-space: pre-wrap;
+    word-break: break-all;
+    overflow-x: auto;
+  }
+  .ew-copy-btn {
+    display: inline-flex;
+    align-items: center;
+    height: 40px;
+    padding: 0 20px;
+    border-radius: var(--radius-pill);
+    background: var(--color-ink);
+    color: var(--color-on-primary);
+    font-size: 14px;
+    font-weight: 500;
+    border: none;
+    cursor: pointer;
+    transition: opacity 0.15s ease, transform 0.1s ease;
+  }
+  .ew-copy-btn:hover {
+    opacity: 0.88;
+  }
+  .ew-copy-btn:active {
+    transform: scale(0.96);
+  }
+  .ew-copy-btn:disabled {
+    opacity: 0.6;
+    cursor: default;
+  }
+
+  /* Audience grid */
+  .ew-audience-grid {
+    display: grid;
+    gap: 16px;
+  }
+  .ew-audience-card {
+    border-radius: var(--radius-lg);
+    background: var(--color-canvas);
+    border: 1px solid var(--color-hairline);
+    padding: 20px 24px;
+    box-shadow: var(--shadow-e1);
+  }
+  .ew-audience-card p {
+    font-size: 15px;
+    line-height: 26px;
+    color: var(--color-body);
+  }
+
+  @media (min-width: 720px) {
+    .ew-audience-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+    .ew-code-wrap {
+      flex-direction: row;
+      align-items: flex-end;
+    }
+    .ew-code {
+      flex: 1;
+    }
+  }
+</style>

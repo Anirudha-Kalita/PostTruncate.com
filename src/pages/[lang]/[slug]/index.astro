@@ -83,6 +83,7 @@ const pageUrl = new URL(`/${lang}/${locale.slug}/`, site).href;
       <div class="hero__cta">
         <a href="#workspace" class="hero__primary">{t.hero.primary}</a>
         <a href="#platforms" class="hero__secondary">{t.hero.secondary}</a>
+        <a href={`/${lang}/embed-widget/`} class="hero__tertiary">{t.embedWidget.homepageLinkLabel}</a>
       </div>
     </div>
   </section>
@@ -250,7 +251,8 @@ const pageUrl = new URL(`/${lang}/${locale.slug}/`, site).href;
     gap: 12px;
   }
   .hero__primary,
-  .hero__secondary {
+  .hero__secondary,
+  .hero__tertiary {
     display: inline-flex;
     align-items: center;
     height: 48px;
@@ -284,6 +286,19 @@ const pageUrl = new URL(`/${lang}/${locale.slug}/`, site).href;
     transform: scale(0.955);
     box-shadow: var(--shadow-e1);
     background: var(--color-canvas-soft-2);
+  }
+  .hero__tertiary {
+    background: transparent;
+    color: var(--color-body);
+    font-size: 14px;
+    height: 40px;
+    padding: 0 12px;
+  }
+  .hero__tertiary:hover {
+    color: var(--color-ink);
+  }
+  .hero__tertiary:active {
+    transform: scale(0.96);
   }
 
   /* ── Workspace ──────────────────────────────────────────────────────── */

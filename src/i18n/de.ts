@@ -225,6 +225,7 @@ export const de: Translations = {
           'Live-Vorschauen',
           'Thread-Splitter',
           'Unicode-Bereinigung',
+          'Einbett-Widget',
         ],
       },
       platforms: {
@@ -388,6 +389,28 @@ export const de: Translations = {
       altBody:
         'Du erreichst uns jederzeit unter {email}. Wir lesen jede Nachricht und antworten so schnell wir können.',
     },
+  },
+
+  embedWidget: {
+    title: 'Kostenloses Zeichenzähler-Widget zum Einbetten — PostTruncate',
+    description:
+      'Füge einen kostenlosen Live-Zeichenzähler mit einer Zeile HTML zu jedem Blog oder jeder Website hinzu. Verfolgt Limits für X, LinkedIn, Threads, Instagram und SMS.',
+    eyebrow: 'Kostenloses Widget',
+    heading: 'Binde einen Live-Zeichenzähler auf deiner Website ein',
+    lede:
+      'Füge eine HTML-Zeile ein, um einen Echtzeit-Zeichenzähler zu jeder Seite hinzuzufügen. Er zählt Zeichen und Wörter, verfolgt Limits für X, LinkedIn, Threads, Instagram und SMS — alles ohne deine Website zu verlassen.',
+    previewLabel: 'Live-Vorschau',
+    copyButton: 'Einbettcode kopieren',
+    copiedButton: 'Kopiert!',
+    codeLabel: 'Einbettcode',
+    audienceHeading: 'Für wen ist das?',
+    forBloggers:
+      'Blogger und Content-Creator können einen Live-Zeichenzähler direkt auf ihrer Schreibseite einbinden, damit Leser Plattformlimits prüfen können, ohne den Tab zu wechseln.',
+    forEducators:
+      'Lehrende und Kursautor·innen können den Zähler in eine Lektion einbetten, damit Studierende das Schreiben mit Längenbeschränkungen direkt im Kurs üben können.',
+    forDevelopers:
+      'Entwickler können das Widget mit einem einzigen <iframe> in jedes CMS, jede Dokumentationsseite oder jedes interne Tool einbinden — ohne API-Schlüssel, Konto oder Build-Schritt.',
+    homepageLinkLabel: 'Auf deiner Website einbetten →',
   },
 
   errors: {
@@ -601,6 +624,20 @@ export const de: Translations = {
         'Der Flesch-Lesbarkeitsindex bewertet Text auf einer Skala von 0–100. Ein höherer Wert bedeutet leichter lesbar. 60–70 entspricht normalem Fließtext.',
       notApplicable:
         'Die Flesch-Formel ist für lateinschriftliche Texte konzipiert und gilt nicht für diese Sprache. Verwende die Wortanzahl als primäres Lesbarkeitsmaß.',
+    },
+    embed: {
+      placeholder: 'Tippe, um Zeichen zu zählen…',
+      charCount: 'Zeichen',
+      wordCount: 'Wörter',
+      remaining: '{n} verbleibend',
+      overLimit: '{n} zu viel',
+      platforms: {
+        twitter: 'X / Twitter',
+        linkedin: 'LinkedIn',
+        threads: 'Threads',
+        instagram: 'Instagram',
+        sms: 'SMS',
+      },
     },
   },
 };

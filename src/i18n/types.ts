@@ -320,6 +320,26 @@ export interface IslandStrings {
      */
     notApplicable: string;
   };
+  /** Strings for the stripped-down embeddable widget at /[lang]/embed/. */
+  embed: {
+    placeholder: string;
+    /** Label under the character count stat tile. */
+    charCount: string;
+    /** Label under the word count stat tile. */
+    wordCount: string;
+    /** "{n} remaining" — shown when within the platform limit. */
+    remaining: string;
+    /** "{n} over" — shown when the character limit is exceeded. */
+    overLimit: string;
+    /** Platform selector button labels. */
+    platforms: {
+      twitter: string;
+      linkedin: string;
+      threads: string;
+      instagram: string;
+      sms: string;
+    };
+  };
 }
 
 export interface Translations {
@@ -419,6 +439,41 @@ export interface Translations {
    * language, so all locales' copy ships in the page and the visitor's
    * language is selected client-side.
    */
+  /**
+   * Copy for the embed-widget landing page at /[lang]/embed-widget/.
+   * Explains the embeddable character counter, shows a live preview, and
+   * lets visitors copy the one-line iframe snippet.
+   */
+  embedWidget: {
+    /** Document <title>. */
+    title: string;
+    /** Meta description. */
+    description: string;
+    /** Small mono eyebrow label (e.g. "Free embed"). */
+    eyebrow: string;
+    /** Page <h1>. */
+    heading: string;
+    /** Intro paragraph under the heading. */
+    lede: string;
+    /** Heading above the live iframe preview. */
+    previewLabel: string;
+    /** Copy-button default label. */
+    copyButton: string;
+    /** Copy-button label shown for 2 s after a successful copy. */
+    copiedButton: string;
+    /** Heading above the code snippet. */
+    codeLabel: string;
+    /** Heading above the three audience paragraphs. */
+    audienceHeading: string;
+    /** Paragraph addressed at bloggers / content creators. */
+    forBloggers: string;
+    /** Paragraph addressed at educators / course authors. */
+    forEducators: string;
+    /** Paragraph addressed at developers. */
+    forDevelopers: string;
+    /** Short link text used in the homepage hero (e.g. "Embed on your site →"). */
+    homepageLinkLabel: string;
+  };
   errors: {
     notFound: ErrorPageStrings;
     serverError: ErrorPageStrings;

@@ -224,6 +224,7 @@ export const en: Translations = {
           'Live previews',
           'Thread splitter',
           'Unicode sanitizer',
+          'Embed widget',
         ],
       },
       platforms: {
@@ -387,6 +388,28 @@ export const en: Translations = {
       altBody:
         'You can reach us any time at {email}. We read every message and reply as quickly as we can.',
     },
+  },
+
+  embedWidget: {
+    title: 'Free Character Counter Embed Widget — PostTruncate',
+    description:
+      'Add a free live character counter to any blog or website with one line of HTML. Tracks limits for X, LinkedIn, Threads, Instagram, and SMS.',
+    eyebrow: 'Free embed',
+    heading: 'Embed a live character counter on your site',
+    lede:
+      'Paste one line of HTML to add a real-time character counter to any page. It counts characters and words, tracks limits for X, LinkedIn, Threads, Instagram, and SMS — all without leaving your site.',
+    previewLabel: 'Live preview',
+    copyButton: 'Copy embed code',
+    copiedButton: 'Copied!',
+    codeLabel: 'Embed code',
+    audienceHeading: 'Who is this for?',
+    forBloggers:
+      'Bloggers and content creators can add a live character counter directly to their write-up page so readers can check platform limits without switching tabs.',
+    forEducators:
+      'Educators and course authors can embed the counter inside a lesson, letting students practise writing to length constraints as part of the exercise.',
+    forDevelopers:
+      'Developers can drop the widget into any CMS, documentation page, or internal tool with a single <iframe> — no API key, no account, no build step required.',
+    homepageLinkLabel: 'Embed on your site →',
   },
 
   errors: {
@@ -600,6 +623,20 @@ export const en: Translations = {
         'Flesch Reading Ease scores text on a 0–100 scale. Higher is easier to read. 60–70 is standard prose; below 30 is very difficult.',
       notApplicable:
         'The Flesch formula is designed for Latin-script text and does not apply to this language. Use word count as your primary readability measure.',
+    },
+    embed: {
+      placeholder: 'Start typing to count characters…',
+      charCount: 'Characters',
+      wordCount: 'Words',
+      remaining: '{n} remaining',
+      overLimit: '{n} over',
+      platforms: {
+        twitter: 'X / Twitter',
+        linkedin: 'LinkedIn',
+        threads: 'Threads',
+        instagram: 'Instagram',
+        sms: 'SMS',
+      },
     },
   },
 };

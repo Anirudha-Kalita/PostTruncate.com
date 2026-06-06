@@ -224,6 +224,7 @@ export const da: Translations = {
           'Live-previews',
           'Trådopdeler',
           'Unicode-renser',
+          'Indlejrings-widget',
         ],
       },
       platforms: {
@@ -387,6 +388,28 @@ export const da: Translations = {
       altBody:
         'Du kan altid nå os på {email}. Vi læser hver besked og svarer så hurtigt, vi kan.',
     },
+  },
+
+  embedWidget: {
+    title: 'Gratis tegntæller-widget til indlejring — PostTruncate',
+    description:
+      'Tilføj en gratis live-tegntæller til enhver blog eller hjemmeside med én linje HTML. Sporer grænser for X, LinkedIn, Threads, Instagram og SMS.',
+    eyebrow: 'Gratis indlejring',
+    heading: 'Indlejr en live-tegntæller på dit websted',
+    lede:
+      'Indsæt én linje HTML for at tilføje en tegntæller i realtid til enhver side. Den tæller tegn og ord og sporer grænser for X, LinkedIn, Threads, Instagram og SMS — uden at forlade dit websted.',
+    previewLabel: 'Live-forhåndsvisning',
+    copyButton: 'Kopiér indlejringskode',
+    copiedButton: 'Kopieret!',
+    codeLabel: 'Indlejringskode',
+    audienceHeading: 'Hvem er det til?',
+    forBloggers:
+      'Bloggere og indholdsskabere kan tilføje en live-tegntæller direkte på deres skriveside, så læserne kan tjekke platformsgrænser uden at skifte fane.',
+    forEducators:
+      'Undervisere og kursusforfattere kan indlejre tælleren i en lektion, så eleverne kan øve sig i at skrive inden for længdebegrænsninger.',
+    forDevelopers:
+      "Udviklere kan indsætte widget'en i et hvilket som helst CMS, dokumentationsside eller internt værktøj med en enkelt <iframe> — ingen API-nøgle, konto eller build-trin kræves.",
+    homepageLinkLabel: 'Indlejr på dit websted →',
   },
 
   errors: {
@@ -600,6 +623,20 @@ export const da: Translations = {
         'Flesch-indekset vurderer tekst på en skala fra 0 til 100. Jo højere score, jo lettere er teksten at læse. Mellem 60 og 70 er standard prosa.',
       notApplicable:
         'Flesch-formlen er designet til tekster med latinsk skrift og gælder ikke for dette sprog. Brug ordtælling som dit primære mål for læsbarhed.',
+    },
+    embed: {
+      placeholder: 'Begynd at skrive for at tælle tegn…',
+      charCount: 'Tegn',
+      wordCount: 'Ord',
+      remaining: '{n} tilbage',
+      overLimit: '{n} for mange',
+      platforms: {
+        twitter: 'X / Twitter',
+        linkedin: 'LinkedIn',
+        threads: 'Threads',
+        instagram: 'Instagram',
+        sms: 'SMS',
+      },
     },
   },
 };

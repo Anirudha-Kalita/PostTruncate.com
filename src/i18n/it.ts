@@ -224,6 +224,7 @@ export const it: Translations = {
           'Anteprime in tempo reale',
           'Suddivisore di thread',
           'Sanificatore Unicode',
+          'Widget incorporabile',
         ],
       },
       platforms: {
@@ -385,8 +386,30 @@ export const it: Translations = {
       },
       altHeading: 'Preferisci l’email?',
       altBody:
-        'Puoi contattarci in qualsiasi momento all’indirizzo {email}. Leggiamo ogni messaggio e rispondiamo il più velocemente possibile.',
+        "",
     },
+  },
+
+  embedWidget: {
+    title: "Widget gratuito di contatore di caratteri da incorporare — PostTruncate",
+    description:
+      "Aggiungi un contatore di caratteri in tempo reale a qualsiasi blog o sito web con una riga di HTML. Monitora i limiti per X, LinkedIn, Threads, Instagram e SMS.",
+    eyebrow: "Incorporazione gratuita",
+    heading: "Incorpora un contatore di caratteri in tempo reale nel tuo sito",
+    lede:
+      "Incolla una riga di HTML per aggiungere un contatore di caratteri in tempo reale a qualsiasi pagina. Conta caratteri e parole, e monitora i limiti di X, LinkedIn, Threads, Instagram e SMS — senza lasciare il tuo sito.",
+    previewLabel: "Anteprima in tempo reale",
+    copyButton: "Copia codice di incorporazione",
+    copiedButton: "Copiato!",
+    codeLabel: "Codice di incorporazione",
+    audienceHeading: "Per chi è?",
+    forBloggers:
+      "I blogger e i creator di contenuti possono aggiungere un contatore di caratteri in tempo reale direttamente nella loro pagina di scrittura, così i lettori possono verificare i limiti delle piattaforme senza cambiare scheda.",
+    forEducators:
+      "Gli insegnanti e gli autori di corsi possono incorporare il contatore in una lezione, permettendo agli studenti di esercitarsi a scrivere con vincoli di lunghezza.",
+    forDevelopers:
+      "Gli sviluppatori possono inserire il widget in qualsiasi CMS, pagina di documentazione o strumento interno con un solo <iframe> — senza chiave API, account o passaggio di build.",
+    homepageLinkLabel: "Incorpora nel tuo sito →",
   },
 
   errors: {
@@ -600,6 +623,20 @@ export const it: Translations = {
         "L'indice Flesch valuta il testo su una scala da 0 a 100. Un punteggio più alto indica una lettura più facile. Tra 60 e 70 è prosa standard.",
       notApplicable:
         "La formula Flesch è progettata per testi in scrittura latina e non si applica a questa lingua. Usa il conteggio delle parole come misura principale di leggibilità.",
+    },
+    embed: {
+      placeholder: 'Inizia a digitare per contare i caratteri…',
+      charCount: 'Caratteri',
+      wordCount: 'Parole',
+      remaining: '{n} rimanenti',
+      overLimit: '{n} in eccesso',
+      platforms: {
+        twitter: 'X / Twitter',
+        linkedin: 'LinkedIn',
+        threads: 'Threads',
+        instagram: 'Instagram',
+        sms: 'SMS',
+      },
     },
   },
 };

@@ -1,0 +1,60 @@
+---
+// Bare embeddable widget page — served at /[lang]/embed/ and iframed by third-
+// party sites. This page intentionally uses its own complete HTML document with
+// no Nav, Footer, language switcher, ads, or any other site chrome. It must
+// never import Layout.astro or any wrapper that injects those components.
+export const prerender = true;
+
+import '../../../styles/global.css';
+import { EmbedWidget } from '../../../components/island/EmbedWidget';
+import { getTranslations } from '../../../i18n';
+import { LOCALE_CODES } from '../../../i18n/config';
+
+export function getStaticPaths() {
+  return LOCALE_CODES.map((lang) => ({ params: { lang } }));
+}
+
+const { lang } = Astro.params as { lang: string };
+const t = getTranslations(lang);
+---
+
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex,nofollow" />
+    <title>PostTruncate — Character Counter Widget</title>
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  </head>
+  <body>
+    <div class="wrap">
+      <EmbedWidget client:load lang={lang} s={t.island.embed} />
+    </div>
+  </body>
+</html>
+
+<style is:global>
+  /* ── Reset ─────────────────────────────────────────────────────── */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  /* ── Embed-specific overrides ───────────────────────────────────
+     Force an explicit white background regardless of CSS-variable
+     resolution order — important when embedded in a dark-mode host. */
+  html, body {
+    background: #ffffff;
+    color: #171717;
+    font-family: var(--font-sans, 'Geist Variable', system-ui, sans-serif);
+    font-size: 16px;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+</style>
+
+<style>
+  .wrap {
+    padding: 14px 16px 18px;
+    max-width: 700px;
+    margin-inline: auto;
+  }
+</style>
