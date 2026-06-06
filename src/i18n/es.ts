@@ -582,5 +582,24 @@ export const es: Translations = {
       titlePlaceholder: 'El título de tu página…',
       descPlaceholder: 'Una breve descripción de tu página para los resultados de búsqueda…',
     },
+    readability: {
+      eyebrow: 'Legibilidad',
+      title: 'Facilidad de lectura Flesch',
+      scoreLabel: 'Facilidad de lectura',
+      gradeLabel: 'Nivel de grado',
+      descriptors: {
+        veryEasy: 'Muy fácil',
+        easy: 'Fácil',
+        fairlyEasy: 'Bastante fácil',
+        standard: 'Estándar',
+        fairlyDifficult: 'Bastante difícil',
+        difficult: 'Difícil',
+        veryDifficult: 'Muy difícil',
+      },
+      tooltip:
+        'La facilidad de lectura Flesch puntúa el texto en una escala de 0 a 100. A mayor puntuación, más fácil de leer. Entre 60 y 70 es prosa estándar.',
+      notApplicable:
+        'La fórmula Flesch está diseñada para texto en escritura latina y no se aplica a este idioma. Usa el recuento de palabras como medida principal de legibilidad.',
+    },
   },
 };

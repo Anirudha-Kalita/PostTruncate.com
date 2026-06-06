@@ -582,5 +582,24 @@ export const en: Translations = {
       titlePlaceholder: 'Your page title…',
       descPlaceholder: 'A brief description of your page for search results…',
     },
+    readability: {
+      eyebrow: 'Readability',
+      title: 'Flesch Reading Ease',
+      scoreLabel: 'Reading Ease',
+      gradeLabel: 'Grade Level',
+      descriptors: {
+        veryEasy: 'Very easy',
+        easy: 'Easy',
+        fairlyEasy: 'Fairly easy',
+        standard: 'Standard',
+        fairlyDifficult: 'Fairly difficult',
+        difficult: 'Difficult',
+        veryDifficult: 'Very difficult',
+      },
+      tooltip:
+        'Flesch Reading Ease scores text on a 0–100 scale. Higher is easier to read. 60–70 is standard prose; below 30 is very difficult.',
+      notApplicable:
+        'The Flesch formula is designed for Latin-script text and does not apply to this language. Use word count as your primary readability measure.',
+    },
   },
 };

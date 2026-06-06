@@ -582,5 +582,24 @@ export const fr: Translations = {
       titlePlaceholder: 'Le titre de votre page…',
       descPlaceholder: 'Une brève description de votre page pour les résultats de recherche…',
     },
+    readability: {
+      eyebrow: 'Lisibilité',
+      title: 'Score de Flesch',
+      scoreLabel: 'Facilité de lecture',
+      gradeLabel: 'Niveau scolaire',
+      descriptors: {
+        veryEasy: 'Très facile',
+        easy: 'Facile',
+        fairlyEasy: 'Assez facile',
+        standard: 'Standard',
+        fairlyDifficult: 'Assez difficile',
+        difficult: 'Difficile',
+        veryDifficult: 'Très difficile',
+      },
+      tooltip:
+        'Le score de Flesch évalue le texte sur une échelle de 0 à 100. Plus le score est élevé, plus la lecture est facile. Entre 60 et 70 correspond à une prose standard.',
+      notApplicable:
+        'La formule de Flesch est conçue pour les textes en écriture latine et ne s’applique pas à cette langue. Utilisez le nombre de mots comme mesure principale de lisibilité.',
+    },
   },
 };

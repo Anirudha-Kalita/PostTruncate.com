@@ -582,5 +582,24 @@ export const nl: Translations = {
       titlePlaceholder: 'De titel van je pagina…',
       descPlaceholder: 'Een korte beschrijving van je pagina voor de zoekresultaten…',
     },
+    readability: {
+      eyebrow: 'Leesbaarheid',
+      title: 'Flesch-leesbaarheidsindex',
+      scoreLabel: 'Leesbaarheid',
+      gradeLabel: 'Leesniveau',
+      descriptors: {
+        veryEasy: 'Zeer eenvoudig',
+        easy: 'Eenvoudig',
+        fairlyEasy: 'Vrij eenvoudig',
+        standard: 'Standaard',
+        fairlyDifficult: 'Vrij moeilijk',
+        difficult: 'Moeilijk',
+        veryDifficult: 'Zeer moeilijk',
+      },
+      tooltip:
+        'De Flesch-leesbaarheidsindex beoordeelt tekst op een schaal van 0–100. Hoe hoger de score, hoe makkelijker te lezen. Tussen 60 en 70 is standaard proza.',
+      notApplicable:
+        'De Flesch-formule is ontworpen voor teksten in het Latijnse schrift en is niet van toepassing op deze taal. Gebruik de woordtelling als primaire maatstaf voor leesbaarheid.',
+    },
   },
 };

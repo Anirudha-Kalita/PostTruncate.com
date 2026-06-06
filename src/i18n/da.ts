@@ -582,5 +582,24 @@ export const da: Translations = {
       titlePlaceholder: 'Din sidetitel…',
       descPlaceholder: 'En kort beskrivelse af din side til søgeresultater…',
     },
+    readability: {
+      eyebrow: 'Læsbarhed',
+      title: 'Flesch-læsbarhedsindeks',
+      scoreLabel: 'Læsbarhed',
+      gradeLabel: 'Klassetrin',
+      descriptors: {
+        veryEasy: 'Meget let',
+        easy: 'Let',
+        fairlyEasy: 'Temmelig let',
+        standard: 'Standard',
+        fairlyDifficult: 'Temmelig svær',
+        difficult: 'Svær',
+        veryDifficult: 'Meget svær',
+      },
+      tooltip:
+        'Flesch-indekset vurderer tekst på en skala fra 0 til 100. Jo højere score, jo lettere er teksten at læse. Mellem 60 og 70 er standard prosa.',
+      notApplicable:
+        'Flesch-formlen er designet til tekster med latinsk skrift og gælder ikke for dette sprog. Brug ordtælling som dit primære mål for læsbarhed.',
+    },
   },
 };

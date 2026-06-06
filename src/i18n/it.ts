@@ -582,5 +582,24 @@ export const it: Translations = {
       titlePlaceholder: 'Il titolo della tua pagina…',
       descPlaceholder: 'Una breve descrizione della tua pagina per i risultati di ricerca…',
     },
+    readability: {
+      eyebrow: 'Leggibilità',
+      title: 'Indice Flesch di leggibilità',
+      scoreLabel: 'Facilità di lettura',
+      gradeLabel: 'Livello scolastico',
+      descriptors: {
+        veryEasy: 'Molto facile',
+        easy: 'Facile',
+        fairlyEasy: 'Abbastanza facile',
+        standard: 'Standard',
+        fairlyDifficult: 'Abbastanza difficile',
+        difficult: 'Difficile',
+        veryDifficult: 'Molto difficile',
+      },
+      tooltip:
+        "L'indice Flesch valuta il testo su una scala da 0 a 100. Un punteggio più alto indica una lettura più facile. Tra 60 e 70 è prosa standard.",
+      notApplicable:
+        "La formula Flesch è progettata per testi in scrittura latina e non si applica a questa lingua. Usa il conteggio delle parole come misura principale di leggibilità.",
+    },
   },
 };

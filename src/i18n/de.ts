@@ -583,5 +583,24 @@ export const de: Translations = {
       titlePlaceholder: 'Ihr Seitentitel…',
       descPlaceholder: 'Eine kurze Beschreibung Ihrer Seite für die Suchergebnisse…',
     },
+    readability: {
+      eyebrow: 'Lesbarkeit',
+      title: 'Flesch-Lesbarkeitsindex',
+      scoreLabel: 'Lesbarkeit',
+      gradeLabel: 'Klassenstufe',
+      descriptors: {
+        veryEasy: 'Sehr leicht',
+        easy: 'Leicht',
+        fairlyEasy: 'Ziemlich leicht',
+        standard: 'Standard',
+        fairlyDifficult: 'Ziemlich schwer',
+        difficult: 'Schwer',
+        veryDifficult: 'Sehr schwer',
+      },
+      tooltip:
+        'Der Flesch-Lesbarkeitsindex bewertet Text auf einer Skala von 0–100. Ein höherer Wert bedeutet leichter lesbar. 60–70 entspricht normalem Fließtext.',
+      notApplicable:
+        'Die Flesch-Formel ist für lateinschriftliche Texte konzipiert und gilt nicht für diese Sprache. Verwende die Wortanzahl als primäres Lesbarkeitsmaß.',
+    },
   },
 };

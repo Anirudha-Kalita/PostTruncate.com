@@ -582,5 +582,24 @@ export const ja: Translations = {
       titlePlaceholder: 'ページのタイトルを入力…',
       descPlaceholder: '検索結果に表示するページの簡単な説明を入力…',
     },
+    readability: {
+      eyebrow: '可読性',
+      title: 'フレッシュ読みやすさ指数',
+      scoreLabel: '読みやすさ',
+      gradeLabel: '学年レベル',
+      descriptors: {
+        veryEasy: 'とても読みやすい',
+        easy: '読みやすい',
+        fairlyEasy: 'やや読みやすい',
+        standard: '標準',
+        fairlyDifficult: 'やや難しい',
+        difficult: '難しい',
+        veryDifficult: 'とても難しい',
+      },
+      tooltip:
+        'フレッシュ読みやすさ指数は、テキストを0〜100のスケールで評価します。スコアが高いほど読みやすいとされます。60〜70が標準的な文章です。',
+      notApplicable:
+        'フレッシュ公式はラテン文字のテキスト向けに設計されており、日本語には適用できません。読みやすさの主要な指標として単語数をご参照ください。',
+    },
   },
 };

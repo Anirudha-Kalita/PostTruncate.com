@@ -293,6 +293,33 @@ export interface IslandStrings {
     titlePlaceholder: string;
     descPlaceholder: string;
   };
+  readability: {
+    /** Card header large title (e.g., "Readability"). */
+    eyebrow: string;
+    /** Card header subtitle — formula name (e.g., "Flesch Reading Ease"). */
+    title: string;
+    /** Label under the Flesch Ease score stat tile. */
+    scoreLabel: string;
+    /** Label under the Flesch-Kincaid Grade Level stat tile. */
+    gradeLabel: string;
+    /** Plain-language descriptors keyed by score band. */
+    descriptors: {
+      veryEasy: string;
+      easy: string;
+      fairlyEasy: string;
+      standard: string;
+      fairlyDifficult: string;
+      difficult: string;
+      veryDifficult: string;
+    };
+    /** Native browser tooltip / aria-label on the ℹ info icon. */
+    tooltip: string;
+    /**
+     * Shown instead of scores for ja / zh locales where the Flesch formula
+     * does not apply to the writing system.
+     */
+    notApplicable: string;
+  };
 }
 
 export interface Translations {

@@ -844,3 +844,81 @@ function bestBoundary(window: string): number {
 
   return window.length;
 }
+
+// ──────────────────────────────────────────────────────────────────────────
+// Readability — Flesch Reading Ease + Flesch-Kincaid Grade Level
+// All counting is client-side with no external libraries.
+// ──────────────────────────────────────────────────────────────────────────
+
+export interface ReadabilityResult {
+  /** Flesch Reading Ease score, clamped to 0–100. */
+  fleschEase: number;
+  /** Flesch-Kincaid Grade Level (rounded to one decimal). */
+  gradeLevel: number;
+  /** False when the text contains no analysable alphabetic words. */
+  hasData: boolean;
+}
+
+/**
+ * Estimate the syllable count for a single English word.
+ * Uses a vowel-group heuristic with corrections for common silent-e patterns.
+ */
+export function countSyllables(word: string): number {
+  const w = word.toLowerCase().replace(/[^a-z]/g, '');
+  if (w.length === 0) return 0;
+  if (w.length <= 3) return 1;
+
+  let count = 0;
+  let prevVowel = false;
+  for (const ch of w) {
+    const v = 'aeiouy'.includes(ch);
+    if (v && !prevVowel) count++;
+    prevVowel = v;
+  }
+
+  // Silent trailing 'e' (e.g., "time", "have", "place")
+  if (w.endsWith('e') && count > 1) count--;
+
+  // Consonant + 'le' at end forms its own syllable (e.g., "ta-ble", "sim-ple")
+  if (/[^aeiouy]le$/.test(w)) count++;
+
+  // Silent 'e' before 'd' in past-tense forms like "smiled", "loved", "moved"
+  // Excludes -ted/-ded/-yed where the 'e' is pronounced (e.g., "wanted", "needed")
+  if (/[^aeiouytd]ed$/.test(w) && count > 1) count--;
+
+  return Math.max(1, count);
+}
+
+/**
+ * Compute Flesch Reading Ease and Flesch-Kincaid Grade Level for the given text.
+ *
+ * Formula sources:
+ *   Flesch RE  = 206.835 − 1.015 × (words/sentences) − 84.6 × (syllables/words)
+ *   FK Grade   = 0.39 × (words/sentences) + 11.8 × (syllables/words) − 15.59
+ */
+export function analyzeReadability(text: string): ReadabilityResult {
+  const wordList = text.match(/[a-zA-Z]+/g) ?? [];
+  const words = wordList.length;
+
+  if (words === 0) return { fleschEase: 0, gradeLevel: 0, hasData: false };
+
+  // Count sentence-ending punctuation runs as one sentence boundary each
+  const sentenceMatches = text.match(/[.!?]+/g) ?? [];
+  const sentences = Math.max(1, sentenceMatches.length);
+
+  let syllables = 0;
+  for (const word of wordList) {
+    syllables += countSyllables(word);
+  }
+
+  const asl = words / sentences;   // average sentence length
+  const asw = syllables / words;   // average syllables per word
+
+  const rawEase = 206.835 - 1.015 * asl - 84.6 * asw;
+  const fleschEase = Math.round(Math.max(0, Math.min(100, rawEase)));
+
+  const rawGrade = 0.39 * asl + 11.8 * asw - 15.59;
+  const gradeLevel = Math.round(Math.max(0, rawGrade) * 10) / 10;
+
+  return { fleschEase, gradeLevel, hasData: true };
+}

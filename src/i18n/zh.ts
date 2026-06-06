@@ -580,5 +580,24 @@ export const zh: Translations = {
       titlePlaceholder: '您的页面标题…',
       descPlaceholder: '为搜索结果提供的页面简短描述…',
     },
+    readability: {
+      eyebrow: '可读性',
+      title: 'Flesch 阅读易度',
+      scoreLabel: '阅读易度',
+      gradeLabel: '年级水平',
+      descriptors: {
+        veryEasy: '非常容易',
+        easy: '容易',
+        fairlyEasy: '比较容易',
+        standard: '标准',
+        fairlyDifficult: '比较困难',
+        difficult: '困难',
+        veryDifficult: '非常困难',
+      },
+      tooltip:
+        'Flesch 阅读易度在 0–100 的范围内对文本进行评分。分数越高，越容易阅读。60–70 分属于标准散文水平。',
+      notApplicable:
+        'Flesch 公式专为拉丁字母文本设计，不适用于中文。建议以字数作为主要的可读性衡量标准。',
+    },
   },
 };
