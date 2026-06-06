@@ -48,7 +48,14 @@ export const en: Translations = {
         paragraphs: [
           'Writing high-impact copy for digital platforms requires absolute precision. <strong>PostTruncate</strong> is a premium, free <strong>character counter tool</strong> designed to analyze your <strong>character count online</strong>, track letter distribution, and optimize reading metrics in real-time. Whether you are balancing an academic essay length, checking an <strong>sms character counter</strong> limit, or cleaning up a professional draft, our instant string analyzer operates completely client-side as a high-performance <strong>online char counter</strong>.',
           'As a comprehensive <strong>character and word counter</strong>, it allows creators to <strong>count characters of text</strong> instantly. Unlike a basic <strong>char counter online</strong>, this system functions seamlessly as an <strong>online character counter</strong> and <strong>character checker</strong> that processes your data with 100% privacy, executing entirely within your web browser. Use it as your go-to <strong>character number counter</strong> to <strong>count amount of characters</strong>, ensure accurate <strong>character length</strong>, and run a quick <strong>character count check</strong> before you publish anywhere on the web.',
-          'The dedicated <strong>SMS character counter</strong> goes beyond ordinary text length checks by detecting <strong>GSM 7-bit</strong> versus <strong>Unicode SMS</strong>, counting extended GSM symbols such as €, brackets, braces and pipes correctly, and estimating multipart SMS segments before you send. It is ideal for bulk SMS campaigns, OTP messages, international marketing texts, Hindi or Japanese SMS copy, and any workflow where one emoji or non-GSM character can change the real SMS cost.',
+        ],
+      },
+      {
+        heading: 'Advanced SMS Character Counter & Segment Calculator',
+        paragraphs: [
+          'The professional <strong>SMS character counter</strong> goes far beyond basic text length checks by analyzing the underlying telecommunication data structures of your message in real time. Built specifically for complex messaging workflows, the tool accurately differentiates between standard <strong>GSM 7-bit encoding</strong> (which allows up to 160 characters per single text) and <strong>Unicode encoding</strong> (which slashes your limit down to 70 characters).',
+          'Furthermore, it accounts for the hidden technical nuances that cause unexpected carrier billings. For example, it tracks <strong>GSM Extended Table characters</strong>—such as the Euro symbol (€), brackets [ ], braces { }, and the pipe symbol (|)—which safely remain in GSM-7 mode but instantly consume 2 character slots each.',
+          'If your marketing copy exceeds a single threshold, our built-in <strong>SMS segment calculator</strong> estimates exact multipart message splits, factoring in the invisible User Data Headers (UDH) that reduce multi-part message boundaries to 153 characters for GSM or 67 characters for Unicode.',
         ],
       },
       {
