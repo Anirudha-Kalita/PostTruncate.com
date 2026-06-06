@@ -6,6 +6,7 @@
 // Paragraphs may carry inline <strong> keyword markup, so they render with
 // set:html. The Contact page builds its own body and does not use this.
 import type { ContentPage } from '../i18n/types';
+import { getLocale } from '../i18n/config';
 
 interface Props {
   /** Active locale — drives the back-to-home link prefix. */
@@ -19,7 +20,8 @@ interface Props {
 }
 
 const { lang, page, lastUpdated, backHome } = Astro.props;
-const home = `/${lang}/`;
+const homeLocale = getLocale(lang);
+const home = `/${lang}/${homeLocale.slug}/`;
 ---
 
 <section class="page container-page">

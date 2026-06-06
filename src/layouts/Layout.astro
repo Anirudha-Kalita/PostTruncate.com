@@ -49,11 +49,14 @@ const pageDescription = description ?? t.seo.description;
 const site = Astro.site ?? new URL('https://posttruncate.com');
 const ogImage = new URL('/og.png', site).href;
 
-// Build the absolute URL for this same page in a given locale. Every locale is
-// prefixed (/en/, /da/, …), so the canonical and all hreflang alternates are
-// just the locale code + the in-locale path.
-const localeHref = (code: string) =>
-  new URL(`/${code}${path === '/' ? '/' : path}`, site).href;
+// Build the absolute URL for this same page in a given locale. For the
+// homepage (path === '/') each locale uses its keyword-rich slug; other pages
+// keep the shared in-locale path unchanged.
+const localeHref = (code: string) => {
+  const l = getLocale(code);
+  const resolvedPath = path === '/' ? `/${l.slug}/` : path;
+  return new URL(`/${code}${resolvedPath}`, site).href;
+};
 
 const canonical = localeHref(lang);
 ---

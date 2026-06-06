@@ -2,7 +2,7 @@
 import Layout from '../../layouts/Layout.astro';
 import { getTranslations } from '../../i18n';
 import { interp } from '../../i18n/interp';
-import { LOCALE_CODES } from '../../i18n/config';
+import { LOCALE_CODES, getLocale } from '../../i18n/config';
 
 // One static Contact page per locale (/en/contact/, /da/contact/, …).
 export function getStaticPaths() {
@@ -21,7 +21,8 @@ const CONTACT_FORM_ID = 'xpqezyng'; // Formspree form ID
 const formAction = `https://formspree.io/f/${CONTACT_FORM_ID}`;
 
 const altBody = interp(page.altBody, { email: CONTACT_EMAIL });
-const home = `/${lang}/`;
+const contactLocale = getLocale(lang);
+const home = `/${lang}/${contactLocale.slug}/`;
 ---
 
 <Layout

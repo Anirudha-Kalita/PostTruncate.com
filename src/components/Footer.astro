@@ -3,6 +3,7 @@
 // localized via the `footer` dictionary; link labels come from the dictionary
 // while their hrefs (anchors + the locale-prefixed home) are wired here.
 import { interp } from '../i18n/interp';
+import { getLocale } from '../i18n/config';
 import type { Translations } from '../i18n/types';
 
 interface Props {
@@ -15,7 +16,8 @@ interface Props {
 
 const { lang, footer, isHome = false } = Astro.props;
 const year = 2026;
-const home = `/${lang}/`;
+const locale = getLocale(lang);
+const home = `/${lang}/${locale.slug}/`;
 
 // Hrefs paired positionally with each column's translated labels. In-page
 // anchors resolve within the current language page, so they need no prefix.
