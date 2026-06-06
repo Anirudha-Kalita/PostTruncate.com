@@ -636,6 +636,13 @@ export const nl: Translations = {
       notApplicable:
         'De Flesch-formule is ontworpen voor teksten in het Latijnse schrift en is niet van toepassing op deze taal. Gebruik de woordtelling als primaire maatstaf voor leesbaarheid.',
     },
+    toolLinks: {
+      linkedin: 'Meer over LinkedIn-tekenlimieten →',
+      twitter: 'Meer over X / Twitter-tekenlimieten →',
+      instagram: 'Meer over Instagram-tekenlimieten →',
+      facebook: 'Meer over Facebook-tekenlimieten →',
+      threads: 'Meer over Threads-tekenlimieten →',
+    },
     embed: {
       placeholder: 'Begin te typen om tekens te tellen…',
       charCount: 'Tekens',

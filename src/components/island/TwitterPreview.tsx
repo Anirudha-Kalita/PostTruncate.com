@@ -5,7 +5,7 @@ import {
   detectUrls,
   LIMITS,
 } from '../../lib/textTools';
-import { Card, CardHead, Badge, Meter, BrandLogo } from './ui';
+import { Card, CardHead, Badge, Meter, BrandLogo, ToolLink } from './ui';
 import { interp, plural } from '../../i18n/interp';
 import type { IslandStrings } from '../../i18n/types';
 
@@ -13,6 +13,7 @@ interface Props {
   text: string;
   lang: string;
   s: IslandStrings;
+  toolLinkHref?: string;
 }
 
 /**
@@ -21,7 +22,7 @@ interface Props {
  * splits it into clean tweets — never mid-word — each tagged with an "n/total"
  * counter in the bottom-right corner.
  */
-export function TwitterPreview({ text, lang, s }: Props) {
+export function TwitterPreview({ text, lang, s, toolLinkHref }: Props) {
   const tw = s.twitter;
   const nf = new Intl.NumberFormat(lang);
   const trimmed = text.trim();
@@ -99,6 +100,7 @@ export function TwitterPreview({ text, lang, s }: Props) {
           ))
         )}
       </div>
+      {toolLinkHref && <ToolLink href={toolLinkHref}>{s.toolLinks.twitter}</ToolLink>}
     </Card>
   );
 }

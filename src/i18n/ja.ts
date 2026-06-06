@@ -636,6 +636,13 @@ export const ja: Translations = {
       notApplicable:
         'フレッシュ公式はラテン文字のテキスト向けに設計されており、日本語には適用できません。読みやすさの主要な指標として単語数をご参照ください。',
     },
+    toolLinks: {
+      linkedin: 'LinkedInの文字数制限について →',
+      twitter: 'X / Twitterの文字数制限について →',
+      instagram: 'Instagramの文字数制限について →',
+      facebook: 'Facebookの文字数制限について →',
+      threads: 'Threadsの文字数制限について →',
+    },
     embed: {
       placeholder: '文字を入力して文字数をカウント…',
       charCount: '文字数',

@@ -1,7 +1,7 @@
 /** @jsxImportSource preact */
 import { useState } from 'preact/hooks';
 import { charCount, detectUrls, LIMITS, sliceChars, splitThread } from '../../lib/textTools';
-import { Card, CardHead, Badge, Segmented, Meter, BrandLogo } from './ui';
+import { Card, CardHead, Badge, Segmented, Meter, BrandLogo, ToolLink } from './ui';
 import { interp, plural } from '../../i18n/interp';
 import type { IslandStrings } from '../../i18n/types';
 
@@ -11,6 +11,7 @@ interface Props {
   text: string;
   lang: string;
   s: IslandStrings;
+  toolLinkHref?: string;
 }
 
 const THREADS_DESKTOP_FOLD = LIMITS.THREADS;
@@ -21,7 +22,7 @@ const THREADS_MOBILE_FOLD = 250;
  * validator keeps that full allowance, while the mock mobile card visually
  * folds one-block posts behind a "... more" affordance.
  */
-export function ThreadsPreview({ text, lang, s }: Props) {
+export function ThreadsPreview({ text, lang, s, toolLinkHref }: Props) {
   const th = s.threads;
   const nf = new Intl.NumberFormat(lang);
   const [view, setView] = useState<FeedView>('mobile');
@@ -107,6 +108,7 @@ export function ThreadsPreview({ text, lang, s }: Props) {
           ))
         )}
       </div>
+      {toolLinkHref && <ToolLink href={toolLinkHref}>{s.toolLinks.threads}</ToolLink>}
     </Card>
   );
 }

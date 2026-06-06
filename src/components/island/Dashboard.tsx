@@ -16,6 +16,8 @@ interface Props {
   lang: string;
   /** Translated island strings, serialized from the server dictionary. */
   strings: IslandStrings;
+  /** Locale-specific tool page slugs for contextual links. */
+  toolSlugs: Record<string, string>;
 }
 
 const DRAFT_STORAGE_KEY = 'post_truncate_active_draft';
@@ -39,7 +41,7 @@ function readActiveDraft() {
  * around it stays static HTML for SEO. All copy arrives as `strings` props so
  * the island carries no hardcoded English.
  */
-export default function Dashboard({ lang, strings }: Props) {
+export default function Dashboard({ lang, strings, toolSlugs }: Props) {
   const [text, setText] = useState('');
   const [analysisText, setAnalysisText] = useState('');
   const [view, setView] = useState<LinkedInView>('desktop');
@@ -97,10 +99,10 @@ export default function Dashboard({ lang, strings }: Props) {
 
       {/* Right column — live platform matrix */}
       <div class="flex flex-col gap-5">
-        <LinkedInPreview text={analysisText} view={view} setView={setView} lang={lang} s={strings} />
-        <TwitterPreview text={analysisText} lang={lang} s={strings} />
-        <MetaMonitor text={analysisText} lang={lang} s={strings} />
-        <ThreadsPreview text={analysisText} lang={lang} s={strings} />
+        <LinkedInPreview text={analysisText} view={view} setView={setView} lang={lang} s={strings} toolLinkHref={`/${lang}/${toolSlugs.linkedin}/`} />
+        <TwitterPreview text={analysisText} lang={lang} s={strings} toolLinkHref={`/${lang}/${toolSlugs.twitter}/`} />
+        <MetaMonitor text={analysisText} lang={lang} s={strings} toolLinkHref={`/${lang}/${toolSlugs.instagram}/`} facebookToolLinkHref={`/${lang}/${toolSlugs.facebook}/`} />
+        <ThreadsPreview text={analysisText} lang={lang} s={strings} toolLinkHref={`/${lang}/${toolSlugs.threads}/`} />
         <SeoPreview s={strings} />
       </div>
     </div>

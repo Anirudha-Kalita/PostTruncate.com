@@ -1,6 +1,6 @@
 /** @jsxImportSource preact */
 import { linkedInHook, charCount, LIMITS } from '../../lib/textTools';
-import { Card, CardHead, Badge, Segmented, Meter, BrandLogo } from './ui';
+import { Card, CardHead, Badge, Segmented, Meter, BrandLogo, ToolLink } from './ui';
 import { interp } from '../../i18n/interp';
 import type { IslandStrings } from '../../i18n/types';
 
@@ -12,6 +12,7 @@ interface Props {
   setView: (v: LinkedInView) => void;
   lang: string;
   s: IslandStrings;
+  toolLinkHref?: string;
 }
 
 /**
@@ -19,7 +20,7 @@ interface Props {
  * "…see more" fold (210 chars desktop / 140 mobile) and injects a non-clickable
  * bold "…see more" at the exact boundary when the post is truncated.
  */
-export function LinkedInPreview({ text, view, setView, lang, s }: Props) {
+export function LinkedInPreview({ text, view, setView, lang, s, toolLinkHref }: Props) {
   const l = s.linkedin;
   const nf = new Intl.NumberFormat(lang);
   const limit = view === 'mobile' ? LIMITS.LINKEDIN_MOBILE : LIMITS.LINKEDIN_DESKTOP;
@@ -126,6 +127,8 @@ export function LinkedInPreview({ text, view, setView, lang, s }: Props) {
             : interp(l.safeNote, { view: viewLabel })}
         </p>
       </div>
+
+      {toolLinkHref && <ToolLink href={toolLinkHref}>{s.toolLinks.linkedin}</ToolLink>}
     </Card>
   );
 }

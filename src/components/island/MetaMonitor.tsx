@@ -8,7 +8,7 @@ import {
   sliceChars,
   LIMITS,
 } from '../../lib/textTools';
-import { Card, CardHead, Badge, Segmented, Meter, BrandLogo } from './ui';
+import { Card, CardHead, Badge, Segmented, Meter, BrandLogo, ToolLink } from './ui';
 import { interp, plural } from '../../i18n/interp';
 import type { IslandStrings } from '../../i18n/types';
 
@@ -18,6 +18,8 @@ interface Props {
   text: string;
   lang: string;
   s: IslandStrings;
+  toolLinkHref?: string;
+  facebookToolLinkHref?: string;
 }
 
 const INSTAGRAM_DESKTOP_FOLD = 125;
@@ -37,7 +39,7 @@ function truncateForFeed(text: string, limit: number) {
  * Independent Instagram and Facebook monitors. Instagram owns caption preview
  * and hashtag concentration; Facebook owns feed preview and accessibility.
  */
-export function MetaMonitor({ text, lang, s }: Props) {
+export function MetaMonitor({ text, lang, s, toolLinkHref, facebookToolLinkHref }: Props) {
   const m = s.meta;
   const nf = new Intl.NumberFormat(lang);
   const [instagramView, setInstagramView] = useState<FeedView>('mobile');
@@ -163,6 +165,7 @@ export function MetaMonitor({ text, lang, s }: Props) {
             </p>
           </div>
         </div>
+        {toolLinkHref && <ToolLink href={toolLinkHref}>{s.toolLinks.instagram}</ToolLink>}
       </Card>
 
       <Card>
@@ -250,6 +253,7 @@ export function MetaMonitor({ text, lang, s }: Props) {
             </p>
           </div>
         </div>
+        {facebookToolLinkHref && <ToolLink href={facebookToolLinkHref}>{s.toolLinks.facebook}</ToolLink>}
       </Card>
     </>
   );

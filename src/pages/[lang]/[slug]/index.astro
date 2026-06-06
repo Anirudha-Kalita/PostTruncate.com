@@ -5,6 +5,7 @@ import Dashboard from '../../../components/island/Dashboard.tsx';
 import HomePageSchema from '../../../components/HomePageSchema.astro';
 import { getTranslations } from '../../../i18n';
 import { LOCALES, getLocale } from '../../../i18n/config';
+import { tools } from '../../../data/tools';
 
 // One statically-rendered landing page per locale at the keyword-rich slug
 // (/en/character-counter/, /de/zeichenzaehler/, …). Slug values come from the
@@ -16,6 +17,12 @@ export function getStaticPaths() {
 const { lang } = Astro.params as { lang: string };
 const t = getTranslations(lang);
 const locale = getLocale(lang);
+
+// Resolve locale-specific slugs for the platform sub-tool pages.
+const toolSlugs: Record<string, string> = {};
+for (const tool of tools) {
+  toolSlugs[tool.id] = tool.slugs[lang] ?? tool.slugs['en'];
+}
 
 // Platform guides: pair each translated entry with its stable anchor id (the
 // ids are referenced by nav + footer links, so they must not change per locale).
@@ -99,7 +106,7 @@ const pageUrl = new URL(`/${lang}/${locale.slug}/`, site).href;
       <h2 class="workspace__title">{t.workspace.title}</h2>
       <p class="workspace__sub">{t.workspace.sub}</p>
     </div>
-    <Dashboard client:load lang={lang} strings={t.island} />
+    <Dashboard client:load lang={lang} strings={t.island} toolSlugs={toolSlugs} />
   </main>
 
   <!-- ── Long-form SEO copy ───────────────────────────────────────────────

@@ -320,6 +320,14 @@ export interface IslandStrings {
      */
     notApplicable: string;
   };
+  /** Contextual links below each platform card header → sub-tool pages. */
+  toolLinks: {
+    linkedin: string;
+    twitter: string;
+    instagram: string;
+    facebook: string;
+    threads: string;
+  };
   /** Strings for the stripped-down embeddable widget at /[lang]/embed/. */
   embed: {
     placeholder: string;

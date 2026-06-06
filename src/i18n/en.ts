@@ -636,6 +636,13 @@ export const en: Translations = {
       notApplicable:
         'The Flesch formula is designed for Latin-script text and does not apply to this language. Use word count as your primary readability measure.',
     },
+    toolLinks: {
+      linkedin: 'Learn about LinkedIn character limits →',
+      twitter: 'Learn about X / Twitter character limits →',
+      instagram: 'Learn about Instagram character limits →',
+      facebook: 'Learn about Facebook character limits →',
+      threads: 'Learn about Threads character limits →',
+    },
     embed: {
       placeholder: 'Start typing to count characters…',
       charCount: 'Characters',

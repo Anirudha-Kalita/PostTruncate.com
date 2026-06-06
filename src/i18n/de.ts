@@ -637,6 +637,13 @@ export const de: Translations = {
       notApplicable:
         'Die Flesch-Formel ist für lateinschriftliche Texte konzipiert und gilt nicht für diese Sprache. Verwende die Wortanzahl als primäres Lesbarkeitsmaß.',
     },
+    toolLinks: {
+      linkedin: 'Mehr über LinkedIn-Zeichenlimits erfahren →',
+      twitter: 'Mehr über X / Twitter-Zeichenlimits erfahren →',
+      instagram: 'Mehr über Instagram-Zeichenlimits erfahren →',
+      facebook: 'Mehr über Facebook-Zeichenlimits erfahren →',
+      threads: 'Mehr über Threads-Zeichenlimits erfahren →',
+    },
     embed: {
       placeholder: 'Tippe, um Zeichen zu zählen…',
       charCount: 'Zeichen',

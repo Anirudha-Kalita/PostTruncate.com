@@ -634,6 +634,13 @@ export const zh: Translations = {
       notApplicable:
         'Flesch 公式专为拉丁字母文本设计，不适用于中文。建议以字数作为主要的可读性衡量标准。',
     },
+    toolLinks: {
+      linkedin: '了解LinkedIn字符限制 →',
+      twitter: '了解X / Twitter字符限制 →',
+      instagram: '了解Instagram字符限制 →',
+      facebook: '了解Facebook字符限制 →',
+      threads: '了解Threads字符限制 →',
+    },
     embed: {
       placeholder: '开始输入以统计字符数…',
       charCount: '字符数',

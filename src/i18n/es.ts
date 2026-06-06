@@ -636,6 +636,13 @@ export const es: Translations = {
       notApplicable:
         'La fórmula Flesch está diseñada para texto en escritura latina y no se aplica a este idioma. Usa el recuento de palabras como medida principal de legibilidad.',
     },
+    toolLinks: {
+      linkedin: 'Más sobre los límites de caracteres en LinkedIn →',
+      twitter: 'Más sobre los límites de caracteres en X / Twitter →',
+      instagram: 'Más sobre los límites de caracteres en Instagram →',
+      facebook: 'Más sobre los límites de caracteres en Facebook →',
+      threads: 'Más sobre los límites de caracteres en Threads →',
+    },
     embed: {
       placeholder: 'Empieza a escribir para contar caracteres…',
       charCount: 'Caracteres',

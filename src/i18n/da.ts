@@ -636,6 +636,13 @@ export const da: Translations = {
       notApplicable:
         'Flesch-formlen er designet til tekster med latinsk skrift og gælder ikke for dette sprog. Brug ordtælling som dit primære mål for læsbarhed.',
     },
+    toolLinks: {
+      linkedin: 'Lær om LinkedIns tegngrænser →',
+      twitter: 'Lær om X / Twitters tegngrænser →',
+      instagram: 'Lær om Instagrams tegngrænser →',
+      facebook: 'Lær om Facebooks tegngrænser →',
+      threads: 'Lær om Threads\' tegngrænser →',
+    },
     embed: {
       placeholder: 'Begynd at skrive for at tælle tegn…',
       charCount: 'Tegn',

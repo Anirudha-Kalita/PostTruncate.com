@@ -195,6 +195,23 @@ export function CardHead({ eyebrow, title, logo, children }: CardHeadProps) {
 // kept inline so they ship with the island and inherit no external assets.
 // ──────────────────────────────────────────────────────────────────────────
 
+interface ToolLinkProps {
+  href: string;
+  children: ComponentChildren;
+}
+
+/** Subtle contextual link rendered at the bottom of a platform card. */
+export function ToolLink({ href, children }: ToolLinkProps) {
+  return (
+    <a
+      href={href}
+      class="block border-t border-hairline px-4 py-2.5 text-[13px] text-mute transition-colors hover:text-link sm:px-5"
+    >
+      {children}
+    </a>
+  );
+}
+
 export type Brand = 'linkedin' | 'x' | 'instagram' | 'facebook' | 'threads';
 
 interface BrandLogoProps {
