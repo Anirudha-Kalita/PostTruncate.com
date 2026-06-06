@@ -46,37 +46,37 @@ export const da: Translations = {
       {
         heading: 'Avanceret online tegntæller & tjek af tekstlængde',
         paragraphs: [
-          'At skrive slagkraftig tekst til digitale platforme kræver absolut præcision. <strong>PostTruncate</strong> er et premium, gratis <strong>tegntæller-værktøj</strong>, der er designet til at analysere dit <strong>tegnantal online</strong>, spore bogstavfordeling og optimere læsemetrikker i realtid. Uanset om du afbalancerer længden på en akademisk opgave, tjekker en grænse med en <strong>sms-tegntæller</strong> eller rydder op i et professionelt udkast, kører vores øjeblikkelige tekstanalysator helt på klientsiden som en højtydende <strong>online tegntæller</strong>.',
-          'Som en omfattende <strong>tegn- og ordtæller</strong> giver det skabere mulighed for at <strong>tælle tegn i tekst</strong> øjeblikkeligt. I modsætning til en simpel <strong>tegntæller online</strong> fungerer dette system gnidningsløst som en <strong>online tegntæller</strong> og <strong>tegnkontrol</strong>, der behandler dine data med 100% privatliv og kører udelukkende i din webbrowser. Brug det som din foretrukne <strong>tæller af antal tegn</strong> til at <strong>tælle mængden af tegn</strong>, sikre nøjagtig <strong>tegnlængde</strong> og køre et hurtigt <strong>tjek af tegnantal</strong>, før du publicerer noget som helst på nettet.',
+          '<strong>PostTruncate</strong> er en gratis tegntæller, der kører direkte i din browser — ingen uploads, ingen konto nødvendig. Indsæt eller skriv en tekst, og du ser straks antal tegn, ord, læsetid og bogstavfordeling, alt opdateret i realtid.',
+          'Den er nyttig for alle, der arbejder med tekstgrænser: skribenter, der forkorter en overskrift, udviklere, der tjekker en streng, eller studerende, der kontrollerer længden på en opgave. Da alt behandles lokalt, forlader din tekst aldrig din enhed.',
         ],
       },
       {
         heading: 'Avanceret SMS-tegntæller og segmentberegner',
         paragraphs: [
-          'Den professionelle <strong>SMS-tegntæller</strong> går langt ud over grundlæggende kontrol af tekstlængde ved at analysere de underliggende telekommunikationsdatastrukturer i din besked i realtid. Værktøjet er udviklet specifikt til komplekse beskedforløb og skelner præcist mellem standard <strong>GSM 7-bit-kodning</strong> (som tillader op til 160 tegn pr. enkelt besked) og <strong>Unicode-kodning</strong> (som reducerer din grænse til 70 tegn).',
-          'Desuden tager den højde for de skjulte tekniske nuancer, der forårsager uventede regninger fra teleudbyderen. For eksempel registrerer den <strong>tegn fra den udvidede GSM-tabel</strong>—såsom eurosymbolet (€), kantede parenteser [ ], krøllede parenteser { } og pipe-symbolet (|)—der trygt forbliver i GSM-7-tilstand, men øjeblikkeligt bruger 2 tegnpladser hver.',
-          'Hvis din marketingtekst overskrider en enkelt grænse, estimerer vores indbyggede <strong>SMS-segmentberegner</strong> de nøjagtige opdelinger i flerdelte beskeder og tager højde for de usynlige User Data Headers (UDH), der reducerer grænserne for flerdelte beskeder til 153 tegn for GSM eller 67 tegn for Unicode.',
+          'SMS bruger to kodningsformer, og de fleste værktøjer ignorerer forskellen. PostTruncate registrerer automatisk, om din besked anvender standard <strong>GSM-7</strong> (160 tegn pr. sms) eller <strong>Unicode</strong> (70 tegn) — og skiftet kan ske ved blot ét emoji eller specialtegn.',
+          'Værktøjet markerer også tegn fra den udvidede GSM-tabel — som eurosymbolet (€), kantede parenteser eller pipe-symbolet — der forbliver i GSM-7-tilstand, men bruger to tegnpladser i stedet for én. Den skjulte omkostning er ofte årsagen til uventet segmentering.',
+          'Når teksten strækker sig over flere segmenter, viser den indbyggede <strong>segmentberegner</strong> præcis, hvor mange sms\'er der sendes, med UDH-overhead medregnet, som reducerer brugbar plads pr. segment til 153 tegn (GSM) eller 67 (Unicode).',
         ],
       },
       {
         heading: '𝕏 (Twitter) tegntæller & automatisk trådopdeler',
         paragraphs: [
-          'At navigere den strenge <strong>grænse for tegnantal</strong> på gratis 𝕏 (Twitter)-konti kan være utroligt frustrerende. Vores dedikerede <strong>twitter-tegntæller</strong>-motor klarer det tunge arbejde for dig ved at integrere platformens indbyggede regler for linktælling. Hvor indsætning af et URL normalt fylder en massiv tekstblok, beregner vores <strong>tegnlængde-tæller</strong> automatisk ethvert link som præcis 23 tegn, hvilket afspejler det nøjagtige <strong>antal tegn i længden</strong>, det vil fylde efter publicering.',
-          'Hvis dine tanker flyder ud over grænserne for en standard <strong>tekst-tegntæller</strong>, segmenterer den indbyggede smarte trådmanager gnidningsløst din tekst. Den undgår at skære ord midt over og opdeler sætninger rent ved nærmeste punktum, komma eller mellemrum. Den fungerer som en <strong>gratis tegntæller</strong> og <strong>ord- og teksttæller</strong> i ét og formaterer dit udkast i et smukt nummereret, sekventielt trådlayout, så dit budskab forbliver sammenhængende, engagerende og perfekt optimeret til høje engagementstal.',
+          'X (Twitter) har to regler, der ofte overrasker: grænsen på 280 tegn og det faktum, at ethvert link — uanset dets faktiske længde — tæller som præcis 23 tegn. PostTruncate anvender begge regler, så den viste tæller svarer til, hvad X viser efter t.co-wrapper er anvendt.',
+          'Når dit udkast er for langt, deler den indbyggede <strong>trådopdeler</strong> det i nummererede tweets ved naturlige sætningsgrænser — aldrig midt i et ord. Hvert kort viser tegnantallets og positionen, så du kan gennemgå hele tråden, før du poster.',
         ],
       },
       {
         heading: 'Instagram & Facebook tegntæller inklusive mellemrum',
         paragraphs: [
-          'For at fange din målgruppe på stærkt visuelle netværk skal du vinde kampen mod feedets afkortningsalgoritmer. Instagram tillader en generøs billedtekstgrænse, men klipper brutalt din tekst af bag et skjult link efter de første 125 tegn. Vores <strong>instagram-tegntæller</strong> sporer din nøjagtige inputlængde som en <strong>tegntæller inklusive mellemrum</strong> for at sikre, at din centrale call-to-action sidder sikkert over folden.',
-          'Ved at analysere din <strong>tegntæller med mellemrum</strong> og evaluere dine parametre for <strong>tegnantal i tekst</strong> kan du formatere dit tekstlayout perfekt. Derudover viser dashboardet en realtidsmonitor for din hashtag-koncentration. Hvis dit profillayout overstiger 5 hashtags, udløser vores system en øjeblikkelig advarsel for at beskytte din profil mod utilsigtede algoritmiske shadowbans. Det fungerer som en alt-i-én <strong>ord- og tegntæller</strong> og <strong>online ordtæller-værktøj</strong> til vækst på sociale medier.',
+          'Instagram tillader op til 2.200 tegn i en billedtekst, men viser kun de første ca. 125, inden resten gemmes bag et "mere"-link. PostTruncate viser præcis, hvor dette klip falder, så den første synlige linje i feedet altid er den, du vil frem med.',
+          'Dashboardet overvåger også <strong>antal hashtags</strong> i realtid. Instagram udgiver lydløst ikke opslag med mere end 5 hashtags, så en advarsel vises, inden du når denne grænse. Mellemrum tæller altid med, præcis som platformen selv gør.',
         ],
       },
       {
         heading: 'Avanceret ordtælling, symboler og analyse af platformstekst',
         paragraphs: [
-          'Ud over almindelige sociale profiler fungerer PostTruncate som et robust <strong>ordtæller-værktøj</strong> og en <strong>symboltæller</strong> for udviklere, tekstforfattere og SEO-specialister. Uanset om du vurderer meta-tags med en <strong>moz-tegntæller</strong>, rydder op i dokumentation med en <strong>macos-tegntæller</strong>, sporer lokalisering med en <strong>kinesisk tegntæller</strong> eller finpudser udkast med en <strong>grammarly-tegntæller</strong>, leverer vores platform en lokaliseret oplevelse med flere værktøjer.',
-          'Det fungerer som et avanceret system til <strong>ordtælling og tegntælling</strong>, der lader dig beregne tegn online, <strong>tælle bogstaver online</strong>, <strong>tælle symboler online</strong> og køre en <strong>online bogstavtælling</strong>-analyse øjeblikkeligt. Undgå rodet fra en forældet <strong>online ordtæller</strong>. Brug vores responsive, moderne <strong>ordtæller+</strong>-dashboard til at håndtere konverteringer fra <strong>ord til tegnantal</strong>, gennemgå <strong>tegnantal i Word</strong>-dokumenter og udnytte en højtydende <strong>tegntæller-motor</strong>, der er bygget til at løfte dit digitale copywriting-workflow i USA, Storbritannien, Australien og resten af verden.',
+          'Ud over platformsgrænser tæller PostTruncate også ord, sætninger, afsnit og symboler — alt opdateres live, mens du skriver. Det er nyttigt til SEO-metabeskrivelser, gennemgang af dokumentation eller enhver skriveopgave, der kræver mere end et simpelt tegnantal.',
+          'Dashboardet håndterer flersproget tekst korrekt, herunder CJK-skriftsystemer, hvor tegnantallets semantiske vægt er anderledes. Uanset om du skriver på dansk, engelsk, japansk eller kinesisk, afspejler tællingerne, hvad målplatformen faktisk ser.',
         ],
       },
     ],

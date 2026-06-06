@@ -1,0 +1,134 @@
+---
+// Shared body component for all tool sub-pages. Renders the translated heading,
+// long-form prose body, and a deep-link CTA into the editor island.
+import type { ToolDefinition } from '../data/tools';
+import { DEFAULT_LOCALE } from '../i18n/config';
+import { getTranslations } from '../i18n';
+
+interface Props {
+  tool: ToolDefinition;
+  lang: string;
+  /** Absolute or root-relative URL that deep-links to this tool in the editor. */
+  editorHref: string;
+}
+
+const { tool, lang, editorHref } = Astro.props;
+
+const tStr = <T>(record: Record<string, T>): T => record[lang] ?? record[DEFAULT_LOCALE];
+const globalT = getTranslations(lang);
+---
+
+<section class="tool-page container-page">
+  <article class="tool-page__prose">
+    <header class="tool-page__head">
+      <h1 class="tool-page__title">{tStr(tool.titles)}</h1>
+    </header>
+
+    <div class="tool-page__body" set:html={tStr(tool.content)} />
+
+    <div class="tool-page__cta">
+      <a href={editorHref} class="tool-page__btn">
+        {globalT.hero.primary}
+      </a>
+    </div>
+  </article>
+</section>
+
+<style>
+  .tool-page {
+    scroll-margin-top: 80px;
+    padding-top: 64px;
+    padding-bottom: 64px;
+  }
+
+  .tool-page__prose {
+    max-width: 48rem;
+    margin-inline: auto;
+  }
+
+  .tool-page__head {
+    margin-bottom: 32px;
+  }
+
+  .tool-page__title {
+    font-size: clamp(30px, 5vw, 44px);
+    font-weight: 600;
+    line-height: 1.06;
+    letter-spacing: -1.6px;
+    color: var(--color-ink);
+  }
+
+  /* Prose body — same rhythm as the homepage SEO copy block */
+  .tool-page__body :global(h2) {
+    margin-top: 40px;
+    font-size: 22px;
+    font-weight: 600;
+    line-height: 30px;
+    letter-spacing: -0.6px;
+    color: var(--color-ink);
+  }
+
+  .tool-page__body :global(h2:first-child) {
+    margin-top: 0;
+  }
+
+  .tool-page__body :global(p) {
+    margin-top: 14px;
+    font-size: 16px;
+    line-height: 28px;
+    color: var(--color-body);
+  }
+
+  .tool-page__body :global(strong) {
+    font-weight: 600;
+    color: var(--color-ink);
+  }
+
+  .tool-page__body :global(ul),
+  .tool-page__body :global(ol) {
+    margin-top: 14px;
+    padding-left: 1.5rem;
+    font-size: 16px;
+    line-height: 28px;
+    color: var(--color-body);
+  }
+
+  .tool-page__body :global(li) {
+    margin-top: 6px;
+  }
+
+  .tool-page__cta {
+    margin-top: 40px;
+    padding-top: 32px;
+    border-top: 1px solid var(--color-hairline);
+  }
+
+  .tool-page__btn {
+    display: inline-flex;
+    align-items: center;
+    height: 48px;
+    padding: 0 24px;
+    border-radius: var(--radius-pill);
+    background: var(--color-ink);
+    color: var(--color-on-primary);
+    font-size: 16px;
+    font-weight: 500;
+    transition: opacity 0.15s ease, transform 100ms ease;
+  }
+
+  .tool-page__btn:hover {
+    opacity: 0.88;
+  }
+
+  .tool-page__btn:active {
+    transform: scale(0.955);
+    opacity: 0.82;
+  }
+
+  @media (max-width: 768px) {
+    .tool-page {
+      padding-top: 48px;
+      padding-bottom: 48px;
+    }
+  }
+</style>

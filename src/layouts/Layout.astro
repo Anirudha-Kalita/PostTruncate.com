@@ -28,6 +28,18 @@ export interface Props {
       (they're served locale-neutrally at the host root, so per-locale
       alternates would point at URLs that don't exist). */
   noindex?: boolean;
+  /**
+   * Override the auto-generated hreflang alternates. When provided, these are
+   * emitted instead of the LOCALES-derived block. Required for tool pages where
+   * each locale has a different URL slug (so localeHref(code) would be wrong).
+   * Must include an x-default entry if desired.
+   */
+  hreflangUrls?: { hreflang: string; href: string }[];
+  /**
+   * Override the canonical URL. When provided, replaces the localeHref-derived
+   * canonical. Used by tool pages whose canonical can't be derived from `path`.
+   */
+  canonicalUrl?: string;
 }
 
 const {
@@ -38,6 +50,8 @@ const {
   jsonLd = [],
   faqSchema = [],
   noindex = false,
+  hreflangUrls,
+  canonicalUrl: canonicalOverride,
 } = Astro.props;
 
 const t = getTranslations(lang);
@@ -58,7 +72,7 @@ const localeHref = (code: string) => {
   return new URL(`/${code}${resolvedPath}`, site).href;
 };
 
-const canonical = localeHref(lang);
+const canonical = canonicalOverride ?? localeHref(lang);
 ---
 
 <!doctype html>
@@ -105,15 +119,21 @@ const canonical = localeHref(lang);
 
     {/* hreflang alternates — one per locale + an x-default so search engines
         map the language variants to each other. Skipped on noindex (error)
-        pages, which are served locale-neutrally at the host root. */}
+        pages, which are served locale-neutrally at the host root.
+        Tool pages supply hreflangUrls directly because each locale has a
+        different slug that localeHref() cannot derive from `path` alone. */}
     {
-      !noindex &&
-        LOCALES.map((l) => (
-          <link rel="alternate" hreflang={l.code} href={localeHref(l.code)} />
-        ))
+      !noindex && hreflangUrls
+        ? hreflangUrls.map((a) => (
+            <link rel="alternate" hreflang={a.hreflang} href={a.href} />
+          ))
+        : !noindex &&
+          LOCALES.map((l) => (
+            <link rel="alternate" hreflang={l.code} href={localeHref(l.code)} />
+          ))
     }
     {
-      !noindex && (
+      !noindex && !hreflangUrls && (
         <link
           rel="alternate"
           hreflang="x-default"

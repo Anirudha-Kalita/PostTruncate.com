@@ -1,0 +1,81 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import ToolPageContent from '../../../components/ToolPageContent.astro';
+import { tools } from '../../../data/tools';
+import type { ToolDefinition } from '../../../data/tools';
+import { LOCALES, getLocale, DEFAULT_LOCALE } from '../../../i18n/config';
+
+export function getStaticPaths() {
+  const paths: {
+    params: { lang: string; tool: string };
+    props: { tool: ToolDefinition; currentLang: string };
+  }[] = [];
+
+  for (const tool of tools) {
+    for (const locale of LOCALES) {
+      const slug = tool.slugs[locale.code] ?? tool.slugs[DEFAULT_LOCALE];
+      paths.push({
+        params: { lang: locale.code, tool: slug },
+        props: { tool, currentLang: locale.code },
+      });
+    }
+  }
+
+  return paths;
+}
+
+const { tool, currentLang: lang } = Astro.props as {
+  tool: ToolDefinition;
+  currentLang: string;
+};
+
+// Locale-aware lookup with English fallback
+const t = <T>(record: Record<string, T>): T => record[lang] ?? record[DEFAULT_LOCALE];
+
+const site = Astro.site ?? new URL('https://posttruncate.com');
+const toolSlug = tool.slugs[lang] ?? tool.slugs[DEFAULT_LOCALE];
+const canonicalUrl = new URL(`/${lang}/${toolSlug}/`, site).href;
+
+// One hreflang entry per locale, each pointing at that locale's own slug.
+// x-default resolves to the English URL per Google best practice.
+const hreflangUrls = [
+  ...LOCALES.map((l) => {
+    const slug = tool.slugs[l.code] ?? tool.slugs[DEFAULT_LOCALE];
+    return { hreflang: l.code, href: new URL(`/${l.code}/${slug}/`, site).href };
+  }),
+  {
+    hreflang: 'x-default',
+    href: new URL(`/${DEFAULT_LOCALE}/${tool.slugs[DEFAULT_LOCALE]}/`, site).href,
+  },
+];
+
+// WebApplication JSON-LD
+const locale = getLocale(lang);
+const editorHref = `/${lang}/${locale.slug}/#${tool.editorAnchor}`;
+
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebApplication',
+    name: t(tool.schemaName),
+    url: canonicalUrl,
+    inLanguage: lang,
+    applicationCategory: 'UtilityApplication',
+    operatingSystem: 'Web',
+    browserRequirements: 'Requires JavaScript',
+    description: t(tool.metaDescriptions),
+    offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+  },
+];
+---
+
+<Layout
+  lang={lang}
+  title={t(tool.titles)}
+  description={t(tool.metaDescriptions)}
+  canonicalUrl={canonicalUrl}
+  hreflangUrls={hreflangUrls}
+  jsonLd={jsonLd}
+>
+  <ToolPageContent tool={tool} lang={lang} editorHref={editorHref} />
+</Layout>

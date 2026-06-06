@@ -133,7 +133,7 @@ export function SeoPreview({ s }: Props) {
           <p class="mb-2 font-mono text-[11px] uppercase tracking-wide text-mute">
             {sp.previewLabel}
           </p>
-          <div class="overflow-hidden rounded-lg border border-hairline bg-white p-4">
+          <div class="overflow-hidden rounded-lg border border-hairline bg-white p-4" style="font-family:Arial,sans-serif;font-feature-settings:normal;">
             {/* Site attribution: favicon + name + URL */}
             <div class="mb-1 flex items-center gap-2">
               <div
