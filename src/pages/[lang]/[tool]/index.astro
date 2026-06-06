@@ -51,7 +51,7 @@ const hreflangUrls = [
 
 // WebApplication JSON-LD
 const locale = getLocale(lang);
-const editorHref = `/${lang}/${locale.slug}/#${tool.editorAnchor}`;
+const editorHref = `/${lang}/${locale.slug}/?platform=${tool.id}#${tool.editorAnchor}`;
 
 const jsonLd = [
   {

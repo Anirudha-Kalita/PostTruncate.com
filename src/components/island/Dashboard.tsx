@@ -1,5 +1,5 @@
 /** @jsxImportSource preact */
-import { useEffect, useState } from 'preact/hooks';
+import { useEffect, useLayoutEffect, useState } from 'preact/hooks';
 import { Workspace } from './Workspace';
 import { LinkedInPreview, type LinkedInView } from './LinkedInPreview';
 import { TwitterPreview } from './TwitterPreview';
@@ -24,6 +24,19 @@ const DRAFT_STORAGE_KEY = 'post_truncate_active_draft';
 const ANALYSIS_DEBOUNCE_MS = 80;
 const STORAGE_DEBOUNCE_MS = 250;
 
+type CardKey = 'linkedin' | 'twitter' | 'meta' | 'threads';
+
+const PLATFORM_TO_CARD: Record<string, CardKey> = {
+  linkedin: 'linkedin',
+  twitter: 'twitter',
+  instagram: 'meta',
+  facebook: 'meta',
+  threads: 'threads',
+};
+
+const DEFAULT_ORDER: CardKey[] = ['linkedin', 'twitter', 'meta', 'threads'];
+
+
 function readActiveDraft() {
   if (typeof window === 'undefined') return '';
 
@@ -46,6 +59,17 @@ export default function Dashboard({ lang, strings, toolSlugs }: Props) {
   const [analysisText, setAnalysisText] = useState('');
   const [view, setView] = useState<LinkedInView>('desktop');
   const [isDraftLoaded, setIsDraftLoaded] = useState(false);
+  const [cardOrder, setCardOrder] = useState<CardKey[]>(DEFAULT_ORDER);
+  const [metaPriority, setMetaPriority] = useState<'facebook' | undefined>(undefined);
+
+  useLayoutEffect(() => {
+    const platform = new URLSearchParams(window.location.search).get('platform');
+    if (platform && PLATFORM_TO_CARD[platform]) {
+      const key = PLATFORM_TO_CARD[platform];
+      setCardOrder([key, ...DEFAULT_ORDER.filter(k => k !== key)]);
+      if (platform === 'facebook') setMetaPriority('facebook');
+    }
+  }, []);
 
   useEffect(() => {
     const draft = readActiveDraft();
@@ -99,10 +123,12 @@ export default function Dashboard({ lang, strings, toolSlugs }: Props) {
 
       {/* Right column — live platform matrix */}
       <div class="flex flex-col gap-5">
-        <LinkedInPreview text={analysisText} view={view} setView={setView} lang={lang} s={strings} toolLinkHref={`/${lang}/${toolSlugs.linkedin}/`} />
-        <TwitterPreview text={analysisText} lang={lang} s={strings} toolLinkHref={`/${lang}/${toolSlugs.twitter}/`} />
-        <MetaMonitor text={analysisText} lang={lang} s={strings} toolLinkHref={`/${lang}/${toolSlugs.instagram}/`} facebookToolLinkHref={`/${lang}/${toolSlugs.facebook}/`} />
-        <ThreadsPreview text={analysisText} lang={lang} s={strings} toolLinkHref={`/${lang}/${toolSlugs.threads}/`} />
+        {cardOrder.map(key => {
+          if (key === 'linkedin') return <LinkedInPreview key="linkedin" text={analysisText} view={view} setView={setView} lang={lang} s={strings} toolLinkHref={`/${lang}/${toolSlugs.linkedin}/`} />;
+          if (key === 'twitter')  return <TwitterPreview  key="twitter"  text={analysisText} lang={lang} s={strings} toolLinkHref={`/${lang}/${toolSlugs.twitter}/`} />;
+          if (key === 'meta')     return <MetaMonitor     key="meta"     text={analysisText} lang={lang} s={strings} toolLinkHref={`/${lang}/${toolSlugs.instagram}/`} facebookToolLinkHref={`/${lang}/${toolSlugs.facebook}/`} priority={metaPriority} />;
+          if (key === 'threads')  return <ThreadsPreview  key="threads"  text={analysisText} lang={lang} s={strings} toolLinkHref={`/${lang}/${toolSlugs.threads}/`} />;
+        })}
         <SeoPreview s={strings} />
       </div>
     </div>

@@ -20,6 +20,8 @@ interface Props {
   s: IslandStrings;
   toolLinkHref?: string;
   facebookToolLinkHref?: string;
+  /** When 'facebook', render the Facebook card above the Instagram card. */
+  priority?: 'facebook';
 }
 
 const INSTAGRAM_DESKTOP_FOLD = 125;
@@ -39,7 +41,7 @@ function truncateForFeed(text: string, limit: number) {
  * Independent Instagram and Facebook monitors. Instagram owns caption preview
  * and hashtag concentration; Facebook owns feed preview and accessibility.
  */
-export function MetaMonitor({ text, lang, s, toolLinkHref, facebookToolLinkHref }: Props) {
+export function MetaMonitor({ text, lang, s, toolLinkHref, facebookToolLinkHref, priority }: Props) {
   const m = s.meta;
   const nf = new Intl.NumberFormat(lang);
   const [instagramView, setInstagramView] = useState<FeedView>('mobile');
@@ -65,9 +67,8 @@ export function MetaMonitor({ text, lang, s, toolLinkHref, facebookToolLinkHref 
   const instagramPreview = truncateForFeed(activeText, instagramLimit);
   const facebookPreview = truncateForFeed(activeText, facebookLimit);
 
-  return (
-    <>
-      <Card>
+  const instagramCard = (
+    <Card key="instagram">
         <CardHead
           eyebrow="Instagram"
           title={m.title}
@@ -167,8 +168,10 @@ export function MetaMonitor({ text, lang, s, toolLinkHref, facebookToolLinkHref 
         </div>
         {toolLinkHref && <ToolLink href={toolLinkHref}>{s.toolLinks.instagram}</ToolLink>}
       </Card>
+  );
 
-      <Card>
+  const facebookCard = (
+    <Card key="facebook">
         <CardHead
           eyebrow="Facebook"
           title={m.a11yLabel}
@@ -255,6 +258,9 @@ export function MetaMonitor({ text, lang, s, toolLinkHref, facebookToolLinkHref 
         </div>
         {facebookToolLinkHref && <ToolLink href={facebookToolLinkHref}>{s.toolLinks.facebook}</ToolLink>}
       </Card>
-    </>
   );
+
+  return priority === 'facebook'
+    ? <>{facebookCard}{instagramCard}</>
+    : <>{instagramCard}{facebookCard}</>;
 }
