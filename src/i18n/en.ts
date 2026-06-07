@@ -44,6 +44,10 @@ export const en: Translations = {
     platformLogo: '{platform} logo',
   },
 
+  breadcrumbs: {
+    home: 'Home',
+  },
+
   workspace: {
     title: 'Your live workspace',
     sub: 'Everything below updates instantly and stays on your device.',

@@ -14,6 +14,8 @@ export interface ToolDefinition {
   id: string;
   /** Hash fragment (without #) that scrolls to this tool's card in the editor. */
   editorAnchor: string;
+  /** ISO date-only (YYYY-MM-DD) when this tool's content was last revised. */
+  lastUpdated: string;
   /** locale → URL slug segment, e.g. { en: "twitter-character-counter", de: "twitter-zeichenzaehler" } */
   slugs: Record<string, string>;
   /** locale → page <title> */

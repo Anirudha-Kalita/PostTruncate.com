@@ -44,6 +44,10 @@ export const ja: Translations = {
     platformLogo: '{platform}のロゴ',
   },
 
+  breadcrumbs: {
+    home: 'ホーム',
+  },
+
   workspace: {
     title: 'リアルタイムワークスペース',
     sub: '以下のすべてが即座に更新され、データはお使いの端末内にとどまります。',

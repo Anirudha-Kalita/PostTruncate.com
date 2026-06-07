@@ -44,6 +44,10 @@ export const zh: Translations = {
     platformLogo: '{platform}标志',
   },
 
+  breadcrumbs: {
+    home: '首页',
+  },
+
   workspace: {
     title: '你的实时工作区',
     sub: '下方的一切都会即时更新，并始终保留在你的设备上。',

@@ -44,6 +44,10 @@ export const nl: Translations = {
     platformLogo: '{platform}-logo',
   },
 
+  breadcrumbs: {
+    home: 'Home',
+  },
+
   workspace: {
     title: 'Je live werkruimte',
     sub: 'Alles hieronder wordt direct bijgewerkt en blijft op je apparaat.',

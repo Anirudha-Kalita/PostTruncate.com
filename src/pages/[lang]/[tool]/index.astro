@@ -6,6 +6,7 @@ import { tools } from '../../../data/tools';
 import type { ToolDefinition } from '../../../data/tools';
 import { LOCALES, getLocale, DEFAULT_LOCALE } from '../../../i18n/config';
 import { getTranslations } from '../../../i18n';
+import { buildToolBreadcrumbList } from '../../../lib/toolBreadcrumbSchema';
 
 export function getStaticPaths() {
   const paths: {
@@ -51,8 +52,9 @@ const hreflangUrls = [
   },
 ];
 
-// WebApplication JSON-LD
+// JSON-LD: WebApplication + BreadcrumbList
 const locale = getLocale(lang);
+const t = getTranslations(lang);
 const editorHref = `/${lang}/${locale.slug}/?platform=${tool.id}#${tool.editorAnchor}`;
 const home = `/${lang}/${locale.slug}/`;
 
@@ -69,6 +71,16 @@ const jsonLd = [
     description: tStr(tool.metaDescriptions),
     offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
   },
+  buildToolBreadcrumbList({
+    site,
+    lang,
+    localeSlug: locale.slug,
+    tool,
+    labels: {
+      home: t.breadcrumbs.home,
+      platformGuides: t.nav.links.guides,
+    },
+  }),
 ];
 
 // SERP-page-specific data — only computed for the google-serp tool.

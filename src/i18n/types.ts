@@ -388,6 +388,10 @@ export interface Translations {
     /** "{platform}" → localized platform name, e.g. "X / Twitter logo". */
     platformLogo: string;
   };
+  /** Labels for BreadcrumbList JSON-LD on tool sub-pages. */
+  breadcrumbs: {
+    home: string;
+  };
   workspace: {
     title: string;
     sub: string;

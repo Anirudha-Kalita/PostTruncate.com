@@ -45,6 +45,10 @@ export const de: Translations = {
     platformLogo: '{platform}-Logo',
   },
 
+  breadcrumbs: {
+    home: 'Startseite',
+  },
+
   workspace: {
     title: 'Dein Live-Arbeitsbereich',
     sub: 'Alles unten aktualisiert sich sofort und bleibt auf deinem Gerät.',
