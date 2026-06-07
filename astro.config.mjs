@@ -4,7 +4,35 @@ import preact from '@astrojs/preact';
 import cloudflare from '@astrojs/cloudflare';
 import sitemap from '@astrojs/sitemap';
 import tailwindcss from '@tailwindcss/vite';
-import { LOCALE_CODES, DEFAULT_LOCALE } from './src/i18n/config.ts';
+import { LOCALES, LOCALE_CODES, DEFAULT_LOCALE } from './src/i18n/config.ts';
+import { tools } from './src/data/tools.ts';
+
+// ── Build a reverse look-up: given a URL pathname, resolve the tool + locale
+//    so the serialize hook can emit the correct hreflang alternates even when
+//    each locale uses a different URL slug.
+//
+//    slugToTool: Map<slug, ToolDefinition>  (every locale slug → its tool)
+//    toolHreflang: Map<toolId, { hreflang, href }[]>  (toolId → all alternates)
+const SITE = 'https://posttruncate.com';
+const slugToTool = new Map();
+const toolHreflang = new Map();
+
+for (const tool of tools) {
+  const alternates = LOCALE_CODES.map((code) => {
+    const slug = tool.slugs[code] ?? tool.slugs[DEFAULT_LOCALE];
+    slugToTool.set(`/${code}/${slug}/`, tool);
+    return { hreflang: code, href: `${SITE}/${code}/${slug}/` };
+  });
+  // x-default points to the English variant per Google best practice.
+  alternates.push({
+    hreflang: 'x-default',
+    href: `${SITE}/${DEFAULT_LOCALE}/${tool.slugs[DEFAULT_LOCALE]}/`,
+  });
+  toolHreflang.set(tool.id, alternates);
+}
+
+// Locale-homepage slug look-up: /en/character-counter/ etc.
+const homepageSlugs = new Set(LOCALES.map((l) => `/${l.code}/${l.slug}/`));
 
 // https://astro.build/config
 // Default static (SSG) output: informational copy + platform guides are
@@ -14,7 +42,7 @@ import { LOCALE_CODES, DEFAULT_LOCALE } from './src/i18n/config.ts';
 // to a chosen locale. Locales come from the single registry in src/i18n/config
 // so routes, the language switcher, and hreflang tags never drift apart.
 export default defineConfig({
-  site: 'https://posttruncate.com',
+  site: SITE,
   i18n: {
     defaultLocale: DEFAULT_LOCALE,
     locales: LOCALE_CODES,
@@ -27,9 +55,21 @@ export default defineConfig({
   integrations: [
     preact(),
     // Sitemap is driven by the same locale registry as the i18n routes, so the
-    // hreflang map can never drift from the languages we actually ship. We drop
-    // the bare "/" (a 302 locale router with no content of its own) and the
-    // noindex 404/500 error files.
+    // hreflang map can never drift from the languages we actually ship.
+    //
+    // Filtering:
+    //  • Drop the bare "/" (a 302 locale router with no content of its own).
+    //  • Drop noindex 404/500 error pages.
+    //  • Drop /[lang]/embed/ pages (noindex iframes, not real landing pages).
+    //  • Drop slug-nested duplicates (/en/character-counter/about/ etc.) that
+    //    duplicate the canonical /en/about/ versions.
+    //
+    // Serialization:
+    //  • Tool pages have different slugs per locale, so @astrojs/sitemap's
+    //    built-in i18n matching can't link them. The serialize hook injects
+    //    the correct hreflang alternates from the tools registry.
+    //  • Locale homepages also have different keyword slugs, so they get
+    //    hreflang injected the same way.
     sitemap({
       i18n: {
         defaultLocale: DEFAULT_LOCALE,
@@ -37,7 +77,48 @@ export default defineConfig({
       },
       filter: (page) => {
         const { pathname } = new URL(page);
-        return pathname !== '/' && !/\/(404|500)\/?$/.test(pathname);
+        // Drop bare root, 404/500, embed iframes, and slug-nested duplicates
+        if (pathname === '/') return false;
+        if (/\/(404|500)\/?$/.test(pathname)) return false;
+        if (/\/[a-z]{2}\/embed\/?$/.test(pathname)) return false;
+        // Drop slug-nested /en/character-counter/about|contact|privacy|terms/
+        if (/\/[a-z]{2}\/[^/]+\/(about|contact|privacy|terms)\/?$/.test(pathname)) return false;
+        return true;
+      },
+      serialize: (item) => {
+        const { pathname } = new URL(item.url);
+
+        // ── Tool pages: inject hreflang from the tools registry ──
+        const tool = slugToTool.get(pathname);
+        if (tool) {
+          const alternates = toolHreflang.get(tool.id);
+          if (alternates) {
+            item.links = alternates.map((a) => ({
+              lang: a.hreflang,
+              url: a.href,
+            }));
+          }
+          return item;
+        }
+
+        // ── Locale homepages: inject hreflang across keyword slugs ──
+        if (homepageSlugs.has(pathname)) {
+          item.links = [
+            ...LOCALES.map((l) => ({
+              lang: l.code,
+              url: `${SITE}/${l.code}/${l.slug}/`,
+            })),
+            {
+              lang: 'x-default',
+              url: `${SITE}/${DEFAULT_LOCALE}/${LOCALES.find((l) => l.code === DEFAULT_LOCALE).slug}/`,
+            },
+          ];
+          return item;
+        }
+
+        // Everything else (about, contact, privacy, terms, embed-widget)
+        // keeps the auto-generated hreflang from the i18n config.
+        return item;
       },
     }),
   ],

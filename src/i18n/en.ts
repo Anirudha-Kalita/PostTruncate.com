@@ -152,11 +152,11 @@ export const en: Translations = {
     items: [
       {
         q: 'How accurate are the character limits?',
-        a: ‘PostTruncate counts against each platform’s published and widely-observed limits — 280 for X, 210/140 for the LinkedIn fold, 5 hashtags for Instagram, and a flat 23-character weight for links. Platforms occasionally adjust these, and rendering varies slightly by device, so treat the previews as a close estimate rather than a pixel-perfect guarantee.’,
+        a: 'PostTruncate counts against each platform’s published and widely-observed limits — 280 for X, 210/140 for the LinkedIn fold, 5 hashtags for Instagram, and a flat 23-character weight for links. Platforms occasionally adjust these, and rendering varies slightly by device, so treat the previews as a close estimate rather than a pixel-perfect guarantee.',
       },
       {
         q: 'Do spaces and punctuation count as characters?',
-        a: ‘Yes. Every space, line break, and punctuation mark counts as one character, and both PostTruncate’s counter and the platform limits include them. The only common exception is links on X/Twitter, which collapse to a flat 23 characters regardless of how many letters, symbols, or slashes the real URL contains.’,
+        a: 'Yes. Every space, line break, and punctuation mark counts as one character, and both PostTruncate’s counter and the platform limits include them. The only common exception is links on X/Twitter, which collapse to a flat 23 characters regardless of how many letters, symbols, or slashes the real URL contains.',
       },
       {
         q: 'How do emojis affect the character count?',
@@ -172,7 +172,7 @@ export const en: Translations = {
       },
       {
         q: 'What are “fancy fonts” and why are they flagged?',
-        a: ‘Those bold, italic, or script-style letters you paste from font generators aren’t real formatting — they’re pseudo-Unicode characters from the Mathematical Alphanumeric Symbols block. They look styled but screen readers either spell them out letter by letter or skip them, which hurts both accessibility and your organic reach. PostTruncate tallies them so you can see exactly how many characters they add, and the monitor flags them so you can swap back to plain text.’,
+        a: 'Those bold, italic, or script-style letters you paste from font generators aren’t real formatting — they’re pseudo-Unicode characters from the Mathematical Alphanumeric Symbols block. They look styled but screen readers either spell them out letter by letter or skip them, which hurts both accessibility and your organic reach. PostTruncate tallies them so you can see exactly how many characters they add, and the monitor flags them so you can swap back to plain text.',
       },
       {
         q: 'What does “Sanitize text” remove?',
@@ -192,19 +192,19 @@ export const en: Translations = {
       },
       {
         q: 'Is my text sent anywhere?',
-        a: ‘No. The entire editor and every preview run locally in your browser — nothing is uploaded. Your text never leaves your device: there’s no account, no upload, and no server processing of your content.’,
+        a: 'No. The entire editor and every preview run locally in your browser — nothing is uploaded. Your text never leaves your device: there’s no account, no upload, and no server processing of your content.',
       },
       {
         q: 'Does the session auto-save feature mean my data is stored on a server?',
-        a: ‘No. The auto-save runs entirely in your browser using sessionStorage — a temporary, tab-scoped cache built into every browser. When you refresh the page in the same tab, the tool restores your draft from that local cache. When you close the tab, the draft is cleared. Nothing is sent to any server.’,
+        a: 'No. The auto-save runs entirely in your browser using sessionStorage — a temporary, tab-scoped cache built into every browser. When you refresh the page in the same tab, the tool restores your draft from that local cache. When you close the tab, the draft is cleared. Nothing is sent to any server.',
       },
       {
         q: 'Is PostTruncate free?',
-        a: ‘Yes, completely free to use with no sign-up required and nothing to install. The tool is supported by unobtrusive ads placed in reserved spaces that never shift the layout while you’re working.’,
+        a: 'Yes, completely free to use with no sign-up required and nothing to install. The tool is supported by unobtrusive ads placed in reserved spaces that never shift the layout while you’re working.',
       },
       {
         q: 'Why did my 160-character SMS suddenly count as two messages?',
-        a: 'This happens because of a change in your text's encoding. Standard SMS uses GSM 7-bit encoding, which fits up to 160 characters in a single message. The moment your text includes a non-GSM character — an emoji, a regional script, or certain symbols — the entire message switches to Unicode, which holds only 70 characters per segment. If a Unicode message exceeds 70 characters, a multi-part header is added and the usable space per segment drops to 67 characters. PostTruncate shows your current encoding and segment count live, so you always know where the break happens.',
+        a: `This happens because of a change in your text's encoding. Standard SMS uses GSM 7-bit encoding, which fits up to 160 characters in a single message. The moment your text includes a non-GSM character — an emoji, a regional script, or certain symbols — the entire message switches to Unicode, which holds only 70 characters per segment. If a Unicode message exceeds 70 characters, a multi-part header is added and the usable space per segment drops to 67 characters. PostTruncate shows your current encoding and segment count live, so you always know where the break happens.`,
       },
       {
         q: 'Do special characters and emojis count as one character in an SMS?',

@@ -661,7 +661,7 @@ export const da: Translations = {
       twitter: 'Lær om X / Twitters tegngrænser →',
       instagram: 'Lær om Instagrams tegngrænser →',
       facebook: 'Lær om Facebooks tegngrænser →',
-      threads: 'Lær om Threads\' tegngrænser →',
+      threads: `Lær om Threads\' tegngrænser →`,
     },
     embed: {
       placeholder: 'Begynd at skrive for at tælle tegn…',

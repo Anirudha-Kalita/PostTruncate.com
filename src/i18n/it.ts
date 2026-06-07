@@ -204,11 +204,11 @@ export const it: Translations = {
       },
       {
         q: 'Perché il mio SMS di 160 caratteri è stato improvvisamente contato come due messaggi?',
-        a: 'Questo accade a causa di un cambio di codifica del testo. Gli SMS standard usano la codifica GSM-7, che contiene fino a 160 caratteri in un unico messaggio. Non appena il testo include un carattere non-GSM — un emoji, un sistema di scrittura regionale o certi simboli — l'intero messaggio passa a Unicode, che contiene solo 70 caratteri per segmento. Se un messaggio Unicode supera i 70 caratteri, viene aggiunta un'intestazione multipart e lo spazio utilizzabile per segmento scende a 67 caratteri. PostTruncate mostra in tempo reale la codifica attiva e il numero di segmenti, così sai sempre dove avviene la divisione.',
+        a: `Questo accade a causa di un cambio di codifica del testo. Gli SMS standard usano la codifica GSM-7, che contiene fino a 160 caratteri in un unico messaggio. Non appena il testo include un carattere non-GSM — un emoji, un sistema di scrittura regionale o certi simboli — l'intero messaggio passa a Unicode, che contiene solo 70 caratteri per segmento. Se un messaggio Unicode supera i 70 caratteri, viene aggiunta un'intestazione multipart e lo spazio utilizzabile per segmento scende a 67 caratteri. PostTruncate mostra in tempo reale la codifica attiva e il numero di segmenti, così sai sempre dove avviene la divisione.`,
       },
       {
         q: 'I caratteri speciali e le emoji contano come un singolo carattere in un SMS?',
-        a: 'Non sempre. Lettere e numeri standard contano ciascuno come un carattere. I simboli della tabella GSM estesa — tra cui il simbolo dell'euro (€), le parentesi quadre, le parentesi graffe e la barra verticale | — contano ciascuno come due caratteri, anche se il messaggio rimane in modalità GSM-7. Le emoji sono diverse: aggiungerne una forza l'intero messaggio in Unicode, riducendo il limite per segmento da 160 a 70 caratteri.',
+        a: `Non sempre. Lettere e numeri standard contano ciascuno come un carattere. I simboli della tabella GSM estesa — tra cui il simbolo dell'euro (€), le parentesi quadre, le parentesi graffe e la barra verticale | — contano ciascuno come due caratteri, anche se il messaggio rimane in modalità GSM-7. Le emoji sono diverse: aggiungerne una forza l'intero messaggio in Unicode, riducendo il limite per segmento da 160 a 70 caratteri.`,
       },
     ],
   },
@@ -448,7 +448,7 @@ export const it: Translations = {
   serpPage: {
     crossPromo: {
       heading: 'Verifica anche i tuoi limiti sui social media',
-      editorLink: 'O apri l\'editor completo di PostTruncate →',
+      editorLink: `O apri l\'editor completo di PostTruncate →`,
       platforms: {
         twitter:   { name: 'X / Twitter',  desc: '280 car. per tweet · i link contano come 23' },
         instagram: { name: 'Instagram',    desc: '2.200 car. didascalia · limite di 30 hashtag' },
