@@ -35,6 +35,10 @@ export const ja: Translations = {
     secondary: 'プラットフォームの上限を見る',
   },
 
+  toolPage: {
+    onThisPage: 'このページの内容',
+  },
+
   workspace: {
     title: 'リアルタイムワークスペース',
     sub: '以下のすべてが即座に更新され、データはお使いの端末内にとどまります。',

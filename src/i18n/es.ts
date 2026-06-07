@@ -35,6 +35,10 @@ export const es: Translations = {
     secondary: 'Ver los límites de cada plataforma',
   },
 
+  toolPage: {
+    onThisPage: 'En esta página',
+  },
+
   workspace: {
     title: 'Tu espacio de trabajo en vivo',
     sub: 'Todo lo de abajo se actualiza al instante y permanece en tu dispositivo.',

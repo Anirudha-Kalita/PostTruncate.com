@@ -35,6 +35,10 @@ export const en: Translations = {
     secondary: 'See platform limits',
   },
 
+  toolPage: {
+    onThisPage: 'On this page',
+  },
+
   workspace: {
     title: 'Your live workspace',
     sub: 'Everything below updates instantly and stays on your device.',
@@ -204,7 +208,7 @@ export const en: Translations = {
       },
       {
         q: 'Why did my 160-character SMS suddenly count as two messages?',
-        a: `This happens because of a change in your text's encoding. Standard SMS uses GSM 7-bit encoding, which fits up to 160 characters in a single message. The moment your text includes a non-GSM character — an emoji, a regional script, or certain symbols — the entire message switches to Unicode, which holds only 70 characters per segment. If a Unicode message exceeds 70 characters, a multi-part header is added and the usable space per segment drops to 67 characters. PostTruncate shows your current encoding and segment count live, so you always know where the break happens.`,
+        a: `This happens because of a change in your text's encoding. Standard SMS uses GSM 7-bit encoding, which fits up to 160 characters in a single message. The moment your text includes a non-GSM character — an emoji, a regional script, or certain symbols — the entire message switches to Unicode, which holds only 70 characters per segment. If a Unicode message exceeds 70 characters, a multi-part header is added and the usable space per segment drops to 67 characters. PostTruncate shows your current encoding and segment count live, so you always know where the break happens.`,
       },
       {
         q: 'Do special characters and emojis count as one character in an SMS?',

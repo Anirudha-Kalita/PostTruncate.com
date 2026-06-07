@@ -36,6 +36,10 @@ export const de: Translations = {
     secondary: 'Plattform-Limits ansehen',
   },
 
+  toolPage: {
+    onThisPage: 'Auf dieser Seite',
+  },
+
   workspace: {
     title: 'Dein Live-Arbeitsbereich',
     sub: 'Alles unten aktualisiert sich sofort und bleibt auf deinem Gerät.',

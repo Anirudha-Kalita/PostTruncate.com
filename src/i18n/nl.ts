@@ -35,6 +35,10 @@ export const nl: Translations = {
     secondary: 'Bekijk de platformlimieten',
   },
 
+  toolPage: {
+    onThisPage: 'Op deze pagina',
+  },
+
   workspace: {
     title: 'Je live werkruimte',
     sub: 'Alles hieronder wordt direct bijgewerkt en blijft op je apparaat.',

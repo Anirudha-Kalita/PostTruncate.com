@@ -376,6 +376,11 @@ export interface Translations {
     primary: string;
     secondary: string;
   };
+  /** Shared strings for /[lang]/[tool]/ sub-tool pages. */
+  toolPage: {
+    /** Accessible label for the in-page H2 jump navigation. */
+    onThisPage: string;
+  };
   workspace: {
     title: string;
     sub: string;

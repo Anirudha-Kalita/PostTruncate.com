@@ -35,6 +35,10 @@ export const fr: Translations = {
     secondary: 'Voir les limites des plateformes',
   },
 
+  toolPage: {
+    onThisPage: 'Sur cette page',
+  },
+
   workspace: {
     title: 'Votre espace de travail en direct',
     sub: 'Tout ce qui suit se met à jour instantanément et reste sur votre appareil.',
@@ -204,7 +208,7 @@ export const fr: Translations = {
       },
       {
         q: 'Pourquoi mon SMS de 160 caractères a-t-il soudainement compté comme deux messages ?',
-        a: `Cela se produit à cause d'un changement d'encodage du texte. Les SMS standard utilisent l'encodage GSM-7, qui peut contenir jusqu'à 160 caractères dans un seul message. Dès que le texte inclut un caractère non GSM — un emoji, un alphabet régional ou certains symboles — le message entier bascule en Unicode, qui ne peut contenir que 70 caractères par segment. Si un message Unicode dépasse 70 caractères, un en-tête multipartie est ajouté et l'espace utilisable par segment tombe à 67 caractères. PostTruncate affiche en direct l'encodage et le nombre de segments, vous savez donc toujours où se produit la coupure.`,
+        a: `Cela se produit à cause d'un changement d'encodage du texte. Les SMS standard utilisent l'encodage GSM-7, qui peut contenir jusqu'à 160 caractères dans un seul message. Dès que le texte inclut un caractère non GSM — un emoji, un alphabet régional ou certains symboles — le message entier bascule en Unicode, qui ne peut contenir que 70 caractères par segment. Si un message Unicode dépasse 70 caractères, un en-tête multipartie est ajouté et l'espace utilisable par segment tombe à 67 caractères. PostTruncate affiche en direct l'encodage et le nombre de segments, vous savez donc toujours où se produit la coupure.`,
       },
       {
         q: 'Les caractères spéciaux et les emojis comptent-ils pour un seul caractère dans un SMS ?',
@@ -448,7 +452,7 @@ export const fr: Translations = {
   serpPage: {
     crossPromo: {
       heading: 'Vérifiez aussi vos limites sur les réseaux sociaux',
-      editorLink: `Ou ouvrir l\'éditeur complet PostTruncate →`,
+      editorLink: `Ou ouvrir l\'éditeur complet PostTruncate →`,
       platforms: {
         twitter:   { name: 'X / Twitter',  desc: '280 caract. par tweet · les liens comptent comme 23' },
         instagram: { name: 'Instagram',    desc: '2 200 caract. de légende · limite de 30 hashtags' },

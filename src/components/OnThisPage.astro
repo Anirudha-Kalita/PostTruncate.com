@@ -1,0 +1,165 @@
+---
+// Compact in-page jump navigation for tool sub-pages. Links are generated from
+// the page's H2 headings at build time (see headingAnchors.ts).
+import type { SectionAnchor } from '../lib/headingAnchors';
+
+interface Props {
+  label: string;
+  sections: SectionAnchor[];
+}
+
+const { label, sections } = Astro.props;
+---
+
+{sections.length > 0 && (
+  <nav class="on-page" aria-label={label}>
+    {/* Mobile: collapsible dropdown so the hero area stays uncluttered */}
+    <details class="on-page__mobile">
+      <summary class="on-page__mobile-toggle">
+        <span class="on-page__label">{label}</span>
+        <svg class="on-page__chevron" width="12" height="12" viewBox="0 0 12 12" aria-hidden="true">
+          <path d="M2.5 4.5 6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+      </summary>
+      <ul class="on-page__mobile-list">
+        {sections.map((section) => (
+          <li>
+            <a class="on-page__link" href={`#${section.id}`}>{section.label}</a>
+          </li>
+        ))}
+      </ul>
+    </details>
+
+    {/* Desktop: horizontal pill row */}
+    <div class="on-page__desktop">
+      <span class="on-page__label">{label}</span>
+      <ul class="on-page__pills">
+        {sections.map((section) => (
+          <li>
+            <a class="on-page__pill" href={`#${section.id}`}>{section.label}</a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </nav>
+)}
+
+<style>
+  .on-page {
+    margin-top: 20px;
+  }
+
+  .on-page__label {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--color-mute);
+  }
+
+  /* ── Mobile dropdown ─────────────────────────────────────────────────── */
+  .on-page__mobile {
+    border: 1px solid var(--color-hairline);
+    border-radius: var(--radius-md);
+    background: var(--color-canvas);
+  }
+
+  .on-page__mobile-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 10px 14px;
+    cursor: pointer;
+    list-style: none;
+    user-select: none;
+  }
+
+  .on-page__mobile-toggle::-webkit-details-marker {
+    display: none;
+  }
+
+  .on-page__chevron {
+    flex-shrink: 0;
+    color: var(--color-mute);
+    transition: transform 0.15s ease;
+  }
+
+  .on-page__mobile[open] .on-page__chevron {
+    transform: rotate(180deg);
+  }
+
+  .on-page__mobile-list {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    margin: 0;
+    padding: 0 8px 8px;
+    list-style: none;
+    border-top: 1px solid var(--color-hairline);
+  }
+
+  .on-page__link {
+    display: block;
+    padding: 8px 10px;
+    border-radius: var(--radius-sm);
+    font-size: 13px;
+    line-height: 18px;
+    color: var(--color-body);
+    text-decoration: none;
+    transition: color 0.15s ease, background 0.15s ease;
+  }
+
+  .on-page__link:hover {
+    color: var(--color-ink);
+    background: var(--color-canvas-soft-2);
+  }
+
+  /* ── Desktop pill row ────────────────────────────────────────────────── */
+  .on-page__desktop {
+    display: none;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .on-page__pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .on-page__pill {
+    display: inline-flex;
+    align-items: center;
+    max-width: 100%;
+    padding: 5px 12px;
+    border: 1px solid var(--color-hairline);
+    border-radius: var(--radius-pill);
+    background: var(--color-canvas);
+    font-size: 12px;
+    line-height: 16px;
+    color: var(--color-body);
+    text-decoration: none;
+    transition: color 0.15s ease, border-color 0.15s ease, background 0.15s ease;
+  }
+
+  .on-page__pill:hover {
+    color: var(--color-ink);
+    border-color: var(--color-hairline-strong);
+    background: var(--color-canvas-soft);
+  }
+
+  @media (min-width: 640px) {
+    .on-page__mobile {
+      display: none;
+    }
+
+    .on-page__desktop {
+      display: flex;
+    }
+  }
+</style>

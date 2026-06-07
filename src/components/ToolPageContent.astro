@@ -1,9 +1,11 @@
 ---
 // Shared body component for all tool sub-pages. Renders the translated heading,
 // long-form prose body, and a deep-link CTA into the editor island.
+import OnThisPage from './OnThisPage.astro';
 import type { ToolDefinition } from '../data/tools';
 import { DEFAULT_LOCALE } from '../i18n/config';
 import { getTranslations } from '../i18n';
+import { buildCanonicalSlugs, prepareToolContent } from '../lib/headingAnchors';
 
 interface Props {
   tool: ToolDefinition;
@@ -18,15 +20,19 @@ const { tool, lang, editorHref, hideCta = false } = Astro.props;
 
 const tStr = <T>(record: Record<string, T>): T => record[lang] ?? record[DEFAULT_LOCALE];
 const globalT = getTranslations(lang);
+
+const canonicalSlugs = buildCanonicalSlugs(tool.content[DEFAULT_LOCALE] ?? '');
+const { html: bodyHtml, sections } = prepareToolContent(tStr(tool.content), canonicalSlugs);
 ---
 
 <section class="tool-page container-page">
   <article class="tool-page__prose">
     <header class="tool-page__head">
       <h1 class="tool-page__title">{tStr(tool.titles)}</h1>
+      <OnThisPage label={globalT.toolPage.onThisPage} sections={sections} />
     </header>
 
-    <div class="tool-page__body" set:html={tStr(tool.content)} />
+    <div class="tool-page__body" set:html={bodyHtml} />
 
     {!hideCta && (
       <div class="tool-page__cta">
@@ -54,6 +60,10 @@ const globalT = getTranslations(lang);
     margin-bottom: 32px;
   }
 
+  .tool-page__head :global(.on-page) {
+    margin-top: 20px;
+  }
+
   .tool-page__title {
     font-size: clamp(30px, 5vw, 44px);
     font-weight: 600;
@@ -64,6 +74,7 @@ const globalT = getTranslations(lang);
 
   /* Prose body — same rhythm as the homepage SEO copy block */
   .tool-page__body :global(h2) {
+    scroll-margin-top: 80px;
     margin-top: 40px;
     font-size: 22px;
     font-weight: 600;

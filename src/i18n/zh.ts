@@ -35,6 +35,10 @@ export const zh: Translations = {
     secondary: '查看平台限制',
   },
 
+  toolPage: {
+    onThisPage: '本页内容',
+  },
+
   workspace: {
     title: '你的实时工作区',
     sub: '下方的一切都会即时更新，并始终保留在你的设备上。',
