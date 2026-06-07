@@ -7,7 +7,6 @@ import { ThreadsPreview } from './ThreadsPreview';
 import { MetaMonitor } from './MetaMonitor';
 import { KeywordMonitor } from './KeywordMonitor';
 import { SmsCounter } from './SmsCounter';
-import { SeoPreview } from './SeoPreview';
 import { ReadabilityCard } from './ReadabilityCard';
 import type { IslandStrings } from '../../i18n/types';
 
@@ -124,12 +123,11 @@ export default function Dashboard({ lang, strings, toolSlugs }: Props) {
       {/* Right column — live platform matrix */}
       <div class="flex flex-col gap-5">
         {cardOrder.map(key => {
-          if (key === 'linkedin') return <LinkedInPreview key="linkedin" text={analysisText} view={view} setView={setView} lang={lang} s={strings} toolLinkHref={`/${lang}/${toolSlugs.linkedin}/`} />;
-          if (key === 'twitter')  return <TwitterPreview  key="twitter"  text={analysisText} lang={lang} s={strings} toolLinkHref={`/${lang}/${toolSlugs.twitter}/`} />;
-          if (key === 'meta')     return <MetaMonitor     key="meta"     text={analysisText} lang={lang} s={strings} toolLinkHref={`/${lang}/${toolSlugs.instagram}/`} facebookToolLinkHref={`/${lang}/${toolSlugs.facebook}/`} priority={metaPriority} />;
-          if (key === 'threads')  return <ThreadsPreview  key="threads"  text={analysisText} lang={lang} s={strings} toolLinkHref={`/${lang}/${toolSlugs.threads}/`} />;
+          if (key === 'linkedin') return <div id="platform-card-linkedin" key="lw"><LinkedInPreview key="linkedin" text={analysisText} view={view} setView={setView} lang={lang} s={strings} toolLinkHref={`/${lang}/${toolSlugs.linkedin}/`} /></div>;
+          if (key === 'twitter')  return <div id="platform-card-twitter"  key="tw"><TwitterPreview  key="twitter"  text={analysisText} lang={lang} s={strings} toolLinkHref={`/${lang}/${toolSlugs.twitter}/`} /></div>;
+          if (key === 'meta')     return <div id="platform-card-meta"     key="mw"><MetaMonitor     key="meta"     text={analysisText} lang={lang} s={strings} toolLinkHref={`/${lang}/${toolSlugs.instagram}/`} facebookToolLinkHref={`/${lang}/${toolSlugs.facebook}/`} priority={metaPriority} /></div>;
+          if (key === 'threads')  return <div id="platform-card-threads"  key="thw"><ThreadsPreview  key="threads"  text={analysisText} lang={lang} s={strings} toolLinkHref={`/${lang}/${toolSlugs.threads}/`} /></div>;
         })}
-        <SeoPreview s={strings} />
       </div>
     </div>
   );

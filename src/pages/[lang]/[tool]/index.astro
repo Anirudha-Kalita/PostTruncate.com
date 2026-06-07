@@ -1,9 +1,11 @@
 ---
 import Layout from '../../../layouts/Layout.astro';
 import ToolPageContent from '../../../components/ToolPageContent.astro';
+import { SeoPreview } from '../../../components/island/SeoPreview';
 import { tools } from '../../../data/tools';
 import type { ToolDefinition } from '../../../data/tools';
 import { LOCALES, getLocale, DEFAULT_LOCALE } from '../../../i18n/config';
+import { getTranslations } from '../../../i18n';
 
 export function getStaticPaths() {
   const paths: {
@@ -30,7 +32,7 @@ const { tool, currentLang: lang } = Astro.props as {
 };
 
 // Locale-aware lookup with English fallback
-const t = <T>(record: Record<string, T>): T => record[lang] ?? record[DEFAULT_LOCALE];
+const tStr = <T>(record: Record<string, T>): T => record[lang] ?? record[DEFAULT_LOCALE];
 
 const site = Astro.site ?? new URL('https://posttruncate.com');
 const toolSlug = tool.slugs[lang] ?? tool.slugs[DEFAULT_LOCALE];
@@ -52,30 +54,156 @@ const hreflangUrls = [
 // WebApplication JSON-LD
 const locale = getLocale(lang);
 const editorHref = `/${lang}/${locale.slug}/?platform=${tool.id}#${tool.editorAnchor}`;
+const home = `/${lang}/${locale.slug}/`;
 
 const jsonLd = [
   {
     '@context': 'https://schema.org',
     '@type': 'WebApplication',
-    name: t(tool.schemaName),
+    name: tStr(tool.schemaName),
     url: canonicalUrl,
     inLanguage: lang,
     applicationCategory: 'UtilityApplication',
     operatingSystem: 'Web',
     browserRequirements: 'Requires JavaScript',
-    description: t(tool.metaDescriptions),
+    description: tStr(tool.metaDescriptions),
     offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
   },
 ];
+
+// SERP-page-specific data — only computed for the google-serp tool.
+const isSerpPage = tool.id === 'google-serp';
+const translations = isSerpPage ? getTranslations(lang) : null;
+
+const PROMO_IDS = ['twitter', 'instagram', 'linkedin', 'facebook', 'threads', 'sms'] as const;
+const promoItems = isSerpPage
+  ? PROMO_IDS.map((id) => {
+      const pt = tools.find((tool) => tool.id === id)!;
+      const promo = translations!.serpPage.crossPromo.platforms[id];
+      return {
+        id,
+        name: promo.name,
+        desc: promo.desc,
+        href: `/${lang}/${pt.slugs[lang] ?? pt.slugs[DEFAULT_LOCALE]}/`,
+      };
+    })
+  : [];
 ---
 
 <Layout
   lang={lang}
-  title={t(tool.titles)}
-  description={t(tool.metaDescriptions)}
+  path="/tool/"
+  title={tStr(tool.titles)}
+  description={tStr(tool.metaDescriptions)}
   canonicalUrl={canonicalUrl}
   hreflangUrls={hreflangUrls}
   jsonLd={jsonLd}
 >
-  <ToolPageContent tool={tool} lang={lang} editorHref={editorHref} />
+  <ToolPageContent tool={tool} lang={lang} editorHref={editorHref} hideCta={isSerpPage} />
+
+  {isSerpPage && translations && (
+    <>
+      <section class="serp-island container-page">
+        <div class="serp-island__inner">
+          <SeoPreview client:load s={translations.island} />
+        </div>
+      </section>
+
+      <section class="serp-xpromo container-page">
+        <h2 class="serp-xpromo__heading">{translations.serpPage.crossPromo.heading}</h2>
+        <div class="serp-xpromo__grid">
+          {promoItems.map((item) => (
+            <a href={item.href} class="serp-xpromo__card">
+              <span class="serp-xpromo__name">{item.name}</span>
+              <span class="serp-xpromo__desc">{item.desc}</span>
+            </a>
+          ))}
+        </div>
+        <p class="serp-xpromo__foot">
+          <a href={home}>{translations.serpPage.crossPromo.editorLink}</a>
+        </p>
+      </section>
+    </>
+  )}
 </Layout>
+
+<style>
+  /* ── Embedded SERP tool ─────────────────────────────────────────────────── */
+  .serp-island {
+    padding-top: 40px;
+    padding-bottom: 0;
+  }
+  .serp-island__inner {
+    max-width: 48rem;
+    margin-inline: auto;
+  }
+
+  /* ── Cross-promotion section ─────────────────────────────────────────────── */
+  .serp-xpromo {
+    padding-top: 64px;
+    padding-bottom: 80px;
+  }
+  .serp-xpromo__heading {
+    max-width: 48rem;
+    margin-inline: auto;
+    margin-bottom: 24px;
+    font-size: clamp(22px, 4vw, 30px);
+    font-weight: 600;
+    letter-spacing: -0.96px;
+    color: var(--color-ink);
+  }
+  .serp-xpromo__grid {
+    max-width: 48rem;
+    margin-inline: auto;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+  }
+  .serp-xpromo__card {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    padding: 18px 20px;
+    border-radius: var(--radius-lg);
+    background: var(--color-canvas);
+    box-shadow: var(--shadow-e1);
+    border: 1px solid var(--color-hairline);
+    transition: box-shadow 0.15s ease, transform 100ms ease;
+    text-decoration: none;
+  }
+  .serp-xpromo__card:hover {
+    box-shadow: var(--shadow-e2);
+  }
+  .serp-xpromo__card:active {
+    transform: scale(0.98);
+  }
+  .serp-xpromo__name {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--color-ink);
+  }
+  .serp-xpromo__desc {
+    font-size: 13px;
+    line-height: 18px;
+    color: var(--color-body);
+  }
+  .serp-xpromo__foot {
+    max-width: 48rem;
+    margin-inline: auto;
+    margin-top: 28px;
+  }
+  .serp-xpromo__foot a {
+    font-size: 14px;
+    color: var(--color-body);
+    transition: color 0.15s ease;
+  }
+  .serp-xpromo__foot a:hover {
+    color: var(--color-ink);
+  }
+
+  @media (min-width: 560px) {
+    .serp-xpromo__grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+</style>

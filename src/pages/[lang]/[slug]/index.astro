@@ -6,6 +6,7 @@ import HomePageSchema from '../../../components/HomePageSchema.astro';
 import { getTranslations } from '../../../i18n';
 import { LOCALES, getLocale } from '../../../i18n/config';
 import { tools } from '../../../data/tools';
+import PlatformBanner from '../../../components/PlatformBanner.astro';
 
 // One statically-rendered landing page per locale at the keyword-rich slug
 // (/en/character-counter/, /de/zeichenzaehler/, …). Slug values come from the
@@ -23,6 +24,16 @@ const toolSlugs: Record<string, string> = {};
 for (const tool of tools) {
   toolSlugs[tool.id] = tool.slugs[lang] ?? tool.slugs['en'];
 }
+
+// Referral banner: the ?platform= param is only known at runtime (static page),
+// so we pass all translated platform data to the client script via data attributes.
+const bannerPlatforms = {
+  linkedin:  { name: t.guides.items.linkedin.name,  cardId: 'platform-card-linkedin', logo: '/logos/linkedin.svg',  color: '#0A66C2' },
+  twitter:   { name: t.guides.items.twitter.name,   cardId: 'platform-card-twitter',  logo: '/logos/twitter.svg',   color: '#000000' },
+  instagram: { name: t.guides.items.instagram.name, cardId: 'platform-card-meta',     logo: '/logos/instagram.svg', color: '#E1306C' },
+  facebook:  { name: t.guides.items.facebook.name,  cardId: 'platform-card-meta',     logo: '/logos/facebook.svg',  color: '#1877F2' },
+  threads:   { name: t.guides.items.threads.name,   cardId: 'platform-card-threads',  logo: '/logos/threads.svg',   color: '#101010' },
+};
 
 // Platform guides: pair each translated entry with its stable anchor id (the
 // ids are referenced by nav + footer links, so they must not change per locale).
@@ -79,6 +90,11 @@ const pageUrl = new URL(`/${lang}/${locale.slug}/`, site).href;
     description={t.seo.description}
     inLanguage={lang}
     faqItems={faqs}
+  />
+  <PlatformBanner
+    platforms={bannerPlatforms}
+    textTemplate={t.banner.text}
+    closeLabel={t.banner.close}
   />
   <!-- ── Hero ─────────────────────────────────────────────────────────── -->
   <section class="hero">

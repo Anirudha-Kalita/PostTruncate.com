@@ -32,19 +32,19 @@ const links = [
 ];
 
 // Platform Guides dropdown items — URLs from tools.ts, labels from i18n.
-const PLATFORM_EMOJI: Record<string, string> = {
-  twitter: '𝕏',
-  instagram: '📸',
-  linkedin: '💼',
-  facebook: '📘',
-  sms: '💬',
-  threads: '🧵',
-  'google-serp': '🔍',
+const PLATFORM_LOGOS: Record<string, string> = {
+  twitter:     '/logos/twitter.svg',
+  instagram:   '/logos/instagram.svg',
+  linkedin:    '/logos/linkedin.svg',
+  facebook:    '/logos/facebook.svg',
+  sms:         '/logos/sms.svg',
+  threads:     '/logos/threads.svg',
+  'google-serp': '/logos/google-serp.svg',
 };
 const guidesLinks = tools.map((tool, i) => ({
   label: t.footer.columns.guides.links[i],
   href: `/${lang}/${tool.slugs[lang] ?? tool.slugs['en']}/`,
-  emoji: PLATFORM_EMOJI[tool.id] ?? '📄',
+  logo: PLATFORM_LOGOS[tool.id] ?? '/logos/google-serp.svg',
 }));
 ---
 
@@ -73,7 +73,7 @@ const guidesLinks = tools.map((tool, i) => ({
             {guidesLinks.map((gl) => (
               <li>
                 <a href={gl.href} class="nav__guides-link">
-                  <span class="nav__guides-emoji" aria-hidden="true">{gl.emoji}</span>
+                  <img src={gl.logo} width="20" height="20" alt="" aria-hidden="true" class="nav__guides-logo" loading="lazy" decoding="async" />
                   <span>{gl.label}</span>
                 </a>
               </li>
@@ -212,7 +212,7 @@ const guidesLinks = tools.map((tool, i) => ({
               <div class="nav__guides-mobile-panel">
                 {guidesLinks.map((gl) => (
                   <a href={gl.href} class="nav__panel-link nav__guides-mobile-link">
-                    <span class="nav__guides-emoji" aria-hidden="true">{gl.emoji}</span>
+                    <img src={gl.logo} width="20" height="20" alt="" aria-hidden="true" class="nav__guides-logo" loading="lazy" decoding="async" />
                     <span>{gl.label}</span>
                   </a>
                 ))}
@@ -714,12 +714,12 @@ const guidesLinks = tools.map((tool, i) => ({
   .nav__guides-link:hover {
     background: var(--color-canvas-soft-2);
   }
-  .nav__guides-emoji {
+  .nav__guides-logo {
     flex-shrink: 0;
     width: 20px;
-    text-align: center;
-    font-size: 15px;
-    line-height: 1;
+    height: 20px;
+    border-radius: 4px;
+    display: block;
   }
 
   /* ── Platform Guides mobile inline expand ───────────────────────────── */

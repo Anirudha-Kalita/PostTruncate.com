@@ -1,0 +1,203 @@
+---
+/**
+ * Sticky mobile-only banner that appears when a user arrives at the homepage
+ * editor via a platform sub-tool page (e.g. /en/twitter-character-counter/).
+ *
+ * The page is statically pre-rendered, so the ?platform= query param is only
+ * known at runtime in the browser. All translated platform names are encoded
+ * into data attributes at build time; the inline script activates the correct
+ * banner state on the client.
+ */
+
+interface PlatformData {
+  name: string;
+  cardId: string;
+  logo: string;
+  color: string;
+}
+
+interface Props {
+  platforms: Record<string, PlatformData>;
+  textTemplate: string;
+  closeLabel: string;
+}
+
+const { platforms, textTemplate, closeLabel } = Astro.props;
+---
+
+<div
+  id="platform-banner"
+  class="platform-banner"
+  data-platforms={JSON.stringify(platforms)}
+  data-text={textTemplate}
+  role="alert"
+  aria-live="polite"
+  hidden
+>
+  <a id="platform-banner-link" href="#" class="platform-banner__link">
+    <img
+      id="platform-banner-logo"
+      src=""
+      width="20"
+      height="20"
+      alt=""
+      class="platform-banner__logo"
+    />
+    <span id="platform-banner-text" class="platform-banner__text"></span>
+    <span aria-hidden="true" class="platform-banner__arrow">↓</span>
+  </a>
+  <button
+    type="button"
+    id="platform-banner-close"
+    class="platform-banner__close"
+    aria-label={closeLabel}
+  >
+    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+      <path d="M1 1l12 12M13 1L1 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+    </svg>
+  </button>
+</div>
+
+<style>
+  .platform-banner {
+    position: fixed;
+    top: 64px;
+    left: 0;
+    right: 0;
+    z-index: 40;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+    padding: 0.625rem 1rem;
+    background-color: color-mix(in srgb, var(--brand, #6b7280) 10%, var(--color-canvas));
+    border-bottom: 2px solid var(--brand, #6b7280);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  }
+
+  .platform-banner[hidden] {
+    display: none;
+  }
+
+  /* Desktop: always hidden — this is a mobile-only nudge */
+  @media (min-width: 768px) {
+    .platform-banner {
+      display: none !important;
+    }
+  }
+
+  .platform-banner__link {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex: 1;
+    min-width: 0;
+    text-decoration: none;
+    color: var(--color-ink);
+  }
+
+  .platform-banner__link:hover .platform-banner__text {
+    text-decoration: underline;
+  }
+
+  .platform-banner__logo {
+    flex-shrink: 0;
+    width: 20px;
+    height: 20px;
+    border-radius: 4px;
+  }
+
+  .platform-banner__text {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--color-ink);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .platform-banner__arrow {
+    font-size: 0.875rem;
+    color: var(--color-mute);
+    flex-shrink: 0;
+  }
+
+  .platform-banner__close {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    border: none;
+    background: transparent;
+    color: var(--color-mute);
+    cursor: pointer;
+    border-radius: 4px;
+    padding: 0;
+    transition: background-color 0.1s, color 0.1s;
+  }
+
+  .platform-banner__close:hover {
+    background-color: color-mix(in srgb, var(--brand, #6b7280) 15%, transparent);
+    color: var(--color-ink);
+  }
+
+  /* Dark mode: elevate background; lighten brand color so it stays visible
+     against the near-black canvas (especially for Twitter/Threads black). */
+  :global(html[data-theme='dark']) .platform-banner {
+    background-color: var(--color-canvas-soft-2);
+    border-bottom-color: color-mix(in srgb, var(--brand, #6b7280) 60%, #fff);
+  }
+</style>
+
+<script>
+  const banner = document.getElementById('platform-banner');
+  if (banner) {
+    const allPlatforms = JSON.parse(banner.dataset.platforms ?? '{}') as Record<
+      string,
+      { name: string; cardId: string; logo: string; color: string }
+    >;
+    const tpl = banner.dataset.text ?? '';
+    const pid = new URLSearchParams(location.search).get('platform');
+    const data = pid ? allPlatforms[pid] : undefined;
+
+    if (data) {
+      banner.style.setProperty('--brand', data.color);
+
+      const link = document.getElementById('platform-banner-link') as HTMLAnchorElement | null;
+      const logo = document.getElementById('platform-banner-logo') as HTMLImageElement | null;
+      const textEl = document.getElementById('platform-banner-text');
+      const closeBtn = document.getElementById('platform-banner-close');
+
+      if (link) link.href = '#' + data.cardId;
+      if (logo) { logo.src = data.logo; logo.alt = data.name; }
+      if (textEl) textEl.textContent = tpl.replace('{platform}', data.name);
+
+      banner.hidden = false;
+      closeBtn?.addEventListener('click', () => { banner.hidden = true; });
+
+      // Wait for the Preact island to hydrate and render the card element,
+      // then observe it — hide the banner once the user scrolls it into view.
+      function setupObserver(retries: number): void {
+        const card = document.getElementById(data!.cardId);
+        if (!card) {
+          if (retries > 0) requestAnimationFrame(() => setupObserver(retries - 1));
+          return;
+        }
+        const obs = new IntersectionObserver(
+          (entries) => {
+            if (entries[0]?.isIntersecting) {
+              banner.hidden = true;
+              obs.disconnect();
+            }
+          },
+          { threshold: 0.3 }
+        );
+        obs.observe(card);
+      }
+
+      requestAnimationFrame(() => requestAnimationFrame(() => setupObserver(10)));
+    }
+  }
+</script>

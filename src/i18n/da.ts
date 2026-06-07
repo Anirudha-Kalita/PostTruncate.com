@@ -18,7 +18,7 @@ export const da: Translations = {
   nav: {
     brandAria: 'PostTruncate hjem',
     homeAria: 'PostTruncate hjem',
-    links: { editor: 'Editor', guides: 'Platformsguides', faq: 'FAQ', about: 'Om', contact: 'Kontakt' },
+    links: { editor: 'Editor', guides: 'Platformguider', faq: 'FAQ', about: 'Om', contact: 'Kontakt' },
     cta: 'Åbn editoren',
     themeToDark: 'Skift til mørkt tema',
     themeToLight: 'Skift til lyst tema',
@@ -443,6 +443,26 @@ export const da: Translations = {
       body: 'Det er en serverfejl, ikke din. Prøv igen om et øjeblik — editoren kører helt i din browser, så din tekst er sikker under alle omstændigheder.',
       cta: 'Tilbage til editoren',
     },
+  },
+
+  serpPage: {
+    crossPromo: {
+      heading: 'Tjek også dine sociale medie-grænser',
+      editorLink: 'Eller åbn den fulde PostTruncate-editor →',
+      platforms: {
+        twitter:   { name: 'X / Twitter',  desc: '280 tegn pr. tweet · links tæller som 23' },
+        instagram: { name: 'Instagram',    desc: '2.200 tegn billedtekst · 30 hashtag-grænse' },
+        linkedin:  { name: 'LinkedIn',     desc: '3.000 tegn · desktop fold ved 210' },
+        facebook:  { name: 'Facebook',     desc: '63.206 tegn · feed fold ved 480' },
+        threads:   { name: 'Threads',      desc: '500 tegn pr. Threads indlæg' },
+        sms:       { name: 'SMS',          desc: '160 GSM · 70 Unicode tegn pr. SMS' },
+      },
+    },
+  },
+
+  banner: {
+    text: 'Din {platform}-forhåndsvisning er nedenfor',
+    close: 'Luk',
   },
 
   island: {

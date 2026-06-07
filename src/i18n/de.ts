@@ -446,6 +446,26 @@ export const de: Translations = {
     },
   },
 
+  serpPage: {
+    crossPromo: {
+      heading: 'Prüfe auch deine Social-Media-Limits',
+      editorLink: 'Oder öffne den vollständigen PostTruncate-Editor →',
+      platforms: {
+        twitter:   { name: 'X / Twitter',  desc: '280 Zeichen pro Tweet · Links zählen als 23' },
+        instagram: { name: 'Instagram',    desc: '2.200 Zeichen Bildunterschrift · 30-Hashtag-Limit' },
+        linkedin:  { name: 'LinkedIn',     desc: '3.000 Zeichen · Desktop-Fold bei 210 Zeichen' },
+        facebook:  { name: 'Facebook',     desc: '63.206 Zeichen · Feed-Fold bei 480 Zeichen' },
+        threads:   { name: 'Threads',      desc: '500 Zeichen pro Threads-Beitrag' },
+        sms:       { name: 'SMS',          desc: '160 GSM · 70 Unicode-Zeichen pro SMS' },
+      },
+    },
+  },
+
+  banner: {
+    text: 'Deine {platform}-Vorschau ist weiter unten',
+    close: 'Schließen',
+  },
+
   island: {
     dashboard: {
       loadSample: 'Beispielbeitrag laden →',

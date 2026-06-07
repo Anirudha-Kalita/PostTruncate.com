@@ -10,9 +10,11 @@ interface Props {
   lang: string;
   /** Absolute or root-relative URL that deep-links to this tool in the editor. */
   editorHref: string;
+  /** When true, suppresses the "Start writing" CTA button at the bottom. */
+  hideCta?: boolean;
 }
 
-const { tool, lang, editorHref } = Astro.props;
+const { tool, lang, editorHref, hideCta = false } = Astro.props;
 
 const tStr = <T>(record: Record<string, T>): T => record[lang] ?? record[DEFAULT_LOCALE];
 const globalT = getTranslations(lang);
@@ -26,11 +28,13 @@ const globalT = getTranslations(lang);
 
     <div class="tool-page__body" set:html={tStr(tool.content)} />
 
-    <div class="tool-page__cta">
-      <a href={editorHref} class="tool-page__btn">
-        {globalT.hero.primary}
-      </a>
-    </div>
+    {!hideCta && (
+      <div class="tool-page__cta">
+        <a href={editorHref} class="tool-page__btn">
+          {globalT.hero.primary}
+        </a>
+      </div>
+    )}
   </article>
 </section>
 

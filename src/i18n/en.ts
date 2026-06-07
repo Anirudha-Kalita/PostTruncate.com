@@ -445,6 +445,26 @@ export const en: Translations = {
     },
   },
 
+  serpPage: {
+    crossPromo: {
+      heading: 'Also check your social media limits',
+      editorLink: 'Or open the full PostTruncate editor →',
+      platforms: {
+        twitter:   { name: 'X / Twitter',  desc: '280 chars per tweet · links count as 23' },
+        instagram: { name: 'Instagram',    desc: '2,200-char captions · 30-hashtag limit' },
+        linkedin:  { name: 'LinkedIn',     desc: '3,000 chars · 210-char desktop fold' },
+        facebook:  { name: 'Facebook',     desc: '63,206-char posts · 480-char feed fold' },
+        threads:   { name: 'Threads',      desc: '500 chars per Threads post' },
+        sms:       { name: 'SMS',          desc: '160 GSM · 70 Unicode chars per SMS' },
+      },
+    },
+  },
+
+  banner: {
+    text: 'Your {platform} preview is below',
+    close: 'Dismiss',
+  },
+
   island: {
     dashboard: {
       loadSample: 'Load a sample post →',

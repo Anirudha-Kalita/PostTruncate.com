@@ -445,6 +445,26 @@ export const es: Translations = {
     },
   },
 
+  serpPage: {
+    crossPromo: {
+      heading: 'También comprueba tus límites en redes sociales',
+      editorLink: 'O abre el editor completo de PostTruncate →',
+      platforms: {
+        twitter:   { name: 'X / Twitter',  desc: '280 caracteres por tweet · los enlaces cuentan como 23' },
+        instagram: { name: 'Instagram',    desc: '2.200 caracteres de leyenda · límite de 30 hashtags' },
+        linkedin:  { name: 'LinkedIn',     desc: '3.000 caracteres · pliegue de escritorio a 210' },
+        facebook:  { name: 'Facebook',     desc: '63.206 caracteres · pliegue de feed a 480' },
+        threads:   { name: 'Threads',      desc: '500 caracteres por publicación en Threads' },
+        sms:       { name: 'SMS',          desc: '160 GSM · 70 Unicode caracteres por SMS' },
+      },
+    },
+  },
+
+  banner: {
+    text: 'La vista previa de {platform} está abajo',
+    close: 'Cerrar',
+  },
+
   island: {
     dashboard: {
       loadSample: 'Cargar una publicación de ejemplo →',

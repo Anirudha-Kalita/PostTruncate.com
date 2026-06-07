@@ -1,0 +1,23 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import Prose from '../../../components/Prose.astro';
+import { getTranslations } from '../../../i18n';
+import { LOCALES } from '../../../i18n/config';
+
+export function getStaticPaths() {
+  return LOCALES.map((l) => ({ params: { lang: l.code, slug: l.slug } }));
+}
+
+const { lang } = Astro.params as { lang: string };
+const t = getTranslations(lang);
+const page = t.pages.about;
+---
+
+<Layout
+  lang={lang}
+  path="/about/"
+  title={page.title}
+  description={page.description}
+>
+  <Prose lang={lang} page={page} backHome={t.pages.common.backHome} />
+</Layout>

@@ -445,6 +445,26 @@ export const ja: Translations = {
     },
   },
 
+  serpPage: {
+    crossPromo: {
+      heading: 'ソーシャルメディアの制限もチェック',
+      editorLink: 'または PostTruncate の全機能エディターを開く →',
+      platforms: {
+        twitter:   { name: 'X / Twitter',  desc: '1ツイート280文字・リンクは23文字換算' },
+        instagram: { name: 'Instagram',    desc: 'キャプション2,200文字・ハッシュタグ30個上限' },
+        linkedin:  { name: 'LinkedIn',     desc: '3,000文字・デスクトップ折り返し210文字' },
+        facebook:  { name: 'Facebook',     desc: '63,206文字・フィード折り返し480文字' },
+        threads:   { name: 'Threads',      desc: 'Threadsは1投稿500文字' },
+        sms:       { name: 'SMS',          desc: 'GSM 160文字・Unicode 70文字/SMS' },
+      },
+    },
+  },
+
+  banner: {
+    text: '{platform}のプレビューは下にあります',
+    close: '閉じる',
+  },
+
   island: {
     dashboard: {
       loadSample: 'サンプル投稿を読み込む →',

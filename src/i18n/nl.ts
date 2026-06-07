@@ -445,6 +445,26 @@ export const nl: Translations = {
     },
   },
 
+  serpPage: {
+    crossPromo: {
+      heading: 'Controleer ook jouw sociale media-limieten',
+      editorLink: 'Of open de volledige PostTruncate-editor →',
+      platforms: {
+        twitter:   { name: 'X / Twitter',  desc: '280 tekens per tweet · links tellen als 23' },
+        instagram: { name: 'Instagram',    desc: '2.200 tekens bijschrift · limiet van 30 hashtags' },
+        linkedin:  { name: 'LinkedIn',     desc: '3.000 tekens · desktop vouw op 210' },
+        facebook:  { name: 'Facebook',     desc: '63.206 tekens · feed vouw op 480' },
+        threads:   { name: 'Threads',      desc: '500 tekens per Threads bericht' },
+        sms:       { name: 'SMS',          desc: '160 GSM · 70 Unicode tekens per SMS' },
+      },
+    },
+  },
+
+  banner: {
+    text: 'Jouw {platform}-voorbeeld staat hieronder',
+    close: 'Sluiten',
+  },
+
   island: {
     dashboard: {
       loadSample: 'Laad een voorbeeldbericht →',

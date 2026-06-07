@@ -445,6 +445,26 @@ export const it: Translations = {
     },
   },
 
+  serpPage: {
+    crossPromo: {
+      heading: 'Verifica anche i tuoi limiti sui social media',
+      editorLink: 'O apri l\'editor completo di PostTruncate →',
+      platforms: {
+        twitter:   { name: 'X / Twitter',  desc: '280 car. per tweet · i link contano come 23' },
+        instagram: { name: 'Instagram',    desc: '2.200 car. didascalia · limite di 30 hashtag' },
+        linkedin:  { name: 'LinkedIn',     desc: '3.000 car. · fold desktop a 210 car.' },
+        facebook:  { name: 'Facebook',     desc: '63.206 car. · fold feed a 480 car.' },
+        threads:   { name: 'Threads',      desc: '500 car. per post su Threads' },
+        sms:       { name: 'SMS',          desc: '160 GSM · 70 Unicode car. per SMS' },
+      },
+    },
+  },
+
+  banner: {
+    text: "L'anteprima di {platform} è qui sotto",
+    close: 'Chiudi',
+  },
+
   island: {
     dashboard: {
       loadSample: 'Carica un post di esempio →',
