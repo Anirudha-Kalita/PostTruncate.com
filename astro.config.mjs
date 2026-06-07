@@ -106,6 +106,7 @@ export default defineConfig({
             }));
           }
           item.lastmod = resolveSitemapLastmod(pathname, toolLastmodByPath, homepageSlugs);
+          item.priority = 1.0;
           return item;
         }
 
@@ -122,12 +123,16 @@ export default defineConfig({
             },
           ];
           item.lastmod = resolveSitemapLastmod(pathname, toolLastmodByPath, homepageSlugs);
+          item.priority = 1.0;
           return item;
         }
 
         // Everything else (about, contact, privacy, terms, embed-widget)
         // keeps the auto-generated hreflang from the i18n config.
         item.lastmod = resolveSitemapLastmod(pathname, toolLastmodByPath, homepageSlugs);
+        if (/\/(about|contact|privacy|terms)\/?$/.test(pathname)) {
+          item.priority = 0.5;
+        }
         return item;
       },
     }),
