@@ -35,6 +35,24 @@ export const da: Translations = {
     secondary: 'Se platformsgrænser',
   },
 
+  howItWorks: {
+    heading: 'Sådan fungerer det',
+    steps: [
+      {
+        name: 'Indsæt eller skriv din tekst',
+        text: 'Sæt dit udkast ind i editoren, og karaktertælleren opdateres øjeblikkeligt, mens du skriver.',
+      },
+      {
+        name: 'Alle platforme vises på én gang',
+        text: 'Forhåndsvisningskortene til LinkedIn, X, Threads, Instagram, Facebook og SMS opdateres alle på samme tid — ingen valg er nødvendigt.',
+      },
+      {
+        name: 'Se præcis, hvor teksten afskæres',
+        text: 'Forhåndsvisningen fremhæver afskæringsstedet, så du ved præcis, hvad læserne vil se.',
+      },
+    ],
+  },
+
   toolPage: {
     onThisPage: 'På denne side',
     lastUpdated: 'Sidst opdateret: {date}',

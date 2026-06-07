@@ -35,6 +35,24 @@ export const en: Translations = {
     secondary: 'See platform limits',
   },
 
+  howItWorks: {
+    heading: 'How it works',
+    steps: [
+      {
+        name: 'Paste or type your text',
+        text: 'Drop your draft into the editor and the live character count updates instantly as you type.',
+      },
+      {
+        name: 'All platforms render at once',
+        text: 'LinkedIn, X, Threads, Instagram, Facebook, and SMS preview cards all update simultaneously — no selection needed.',
+      },
+      {
+        name: 'See exactly where it cuts off',
+        text: 'The preview highlights the truncation point so you know precisely what readers will see.',
+      },
+    ],
+  },
+
   toolPage: {
     onThisPage: 'On this page',
     lastUpdated: 'Last updated: {date}',

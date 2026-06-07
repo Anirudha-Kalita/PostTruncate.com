@@ -18,21 +18,20 @@ const { variant, class: extra = '' } = Astro.props;
 // 728×90 on desktop, collapsing to a 320×100 mobile banner via CSS, but the
 // height is fixed at each breakpoint so there is never any reflow.
 const SIZES = {
-  leaderboard: { w: 728, h: 90, label: 'Leaderboard · 728×90' },
-  rectangle: { w: 300, h: 250, label: 'Medium Rectangle · 300×250' },
-  skyscraper: { w: 300, h: 600, label: 'Wide Skyscraper · 300×600' },
+  leaderboard: { w: 728, h: 90 },
+  rectangle:   { w: 300, h: 250 },
+  skyscraper:  { w: 300, h: 600 },
 } as const;
 
-const { w, h, label } = SIZES[variant];
+const { w, h } = SIZES[variant];
 ---
 
 <aside
   class:list={['ad', `ad--${variant}`, extra]}
   style={`--ad-w:${w}px;--ad-h:${h}px;`}
-  aria-label="Advertisement"
+  aria-hidden="true"
 >
   <div class="ad__slot">
-    <span class="ad__label">Ad space · {label}</span>
     {/* AdSense <ins class="adsbygoogle" …/> goes here. */}
   </div>
 </aside>
@@ -48,20 +47,7 @@ const { w, h, label } = SIZES[variant];
     width: 100%;
     max-width: var(--ad-w);
     height: var(--ad-h);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: 1px dashed var(--color-hairline-strong);
-    border-radius: var(--radius-md);
-    background: var(--color-canvas-soft-2);
     overflow: hidden;
-  }
-  .ad__label {
-    font-family: var(--font-mono);
-    font-size: 11px;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-    color: var(--color-mute);
   }
 
   /* Mobile leaderboard: shorter fixed height so the reserved space still

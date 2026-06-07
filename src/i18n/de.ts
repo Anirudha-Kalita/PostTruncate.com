@@ -36,6 +36,24 @@ export const de: Translations = {
     secondary: 'Plattform-Limits ansehen',
   },
 
+  howItWorks: {
+    heading: 'So funktioniert es',
+    steps: [
+      {
+        name: 'Text einfügen oder eingeben',
+        text: 'Füge deinen Entwurf in den Editor ein und die Zeichenanzahl aktualisiert sich sofort beim Tippen.',
+      },
+      {
+        name: 'Alle Plattformen werden gleichzeitig angezeigt',
+        text: 'LinkedIn, X, Threads, Instagram, Facebook und SMS – alle Vorschaukarten aktualisieren sich gleichzeitig, ohne dass eine Auswahl nötig ist.',
+      },
+      {
+        name: 'Sieh genau, wo der Text abgeschnitten wird',
+        text: 'Die Vorschau markiert den Kürzungspunkt, damit du genau weißt, was die Leser sehen werden.',
+      },
+    ],
+  },
+
   toolPage: {
     onThisPage: 'Auf dieser Seite',
     lastUpdated: 'Zuletzt aktualisiert: {date}',

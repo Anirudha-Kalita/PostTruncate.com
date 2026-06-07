@@ -35,6 +35,24 @@ export const zh: Translations = {
     secondary: '查看平台限制',
   },
 
+  howItWorks: {
+    heading: '使用方法',
+    steps: [
+      {
+        name: '粘贴或输入您的文本',
+        text: '将草稿粘贴到编辑器中，字符计数器会随着您的输入实时更新。',
+      },
+      {
+        name: '所有平台同时渲染',
+        text: 'LinkedIn、X、Threads、Instagram、Facebook 和短信预览卡同时更新，无需手动选择。',
+      },
+      {
+        name: '精确查看截断位置',
+        text: '预览会突出显示截断点，让您清楚地了解读者将看到的内容。',
+      },
+    ],
+  },
+
   toolPage: {
     onThisPage: '本页内容',
     lastUpdated: '最后更新：{date}',

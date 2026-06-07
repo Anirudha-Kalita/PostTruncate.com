@@ -35,6 +35,24 @@ export const fr: Translations = {
     secondary: 'Voir les limites des plateformes',
   },
 
+  howItWorks: {
+    heading: 'Comment ça marche',
+    steps: [
+      {
+        name: 'Collez ou saisissez votre texte',
+        text: 'Déposez votre brouillon dans l\'éditeur et le compteur de caractères se met à jour instantanément au fil de la frappe.',
+      },
+      {
+        name: 'Toutes les plateformes s\'affichent en même temps',
+        text: 'Les aperçus de LinkedIn, X, Threads, Instagram, Facebook et SMS se mettent à jour simultanément — aucune sélection n\'est nécessaire.',
+      },
+      {
+        name: 'Voyez exactement où le texte est coupé',
+        text: 'L\'aperçu met en évidence le point de troncature pour que vous sachiez précisément ce que verront les lecteurs.',
+      },
+    ],
+  },
+
   toolPage: {
     onThisPage: 'Sur cette page',
     lastUpdated: 'Dernière mise à jour : {date}',

@@ -376,6 +376,18 @@ export interface Translations {
     primary: string;
     secondary: string;
   };
+  /** Three-step "How it works" explainer on the homepage. Steps must match
+      the visible card content exactly — used for both rendering and HowTo JSON-LD. */
+  howItWorks: {
+    /** Screen-reader-only section heading. */
+    heading: string;
+    /** Exactly three ordered steps; order matches the on-page cards. */
+    steps: [
+      { name: string; text: string },
+      { name: string; text: string },
+      { name: string; text: string },
+    ];
+  };
   /** Shared strings for /[lang]/[tool]/ sub-tool pages. */
   toolPage: {
     /** Accessible label for the in-page H2 jump navigation. */

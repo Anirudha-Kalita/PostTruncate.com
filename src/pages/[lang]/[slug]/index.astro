@@ -83,9 +83,24 @@ const faqs = t.faq.items;
 // Canonical URL for this locale's keyword-rich homepage — passed to the schema.
 const site = Astro.site ?? new URL('https://posttruncate.com');
 const pageUrl = new URL(`/${lang}/${locale.slug}/`, site).href;
+
+// HowTo JSON-LD built from the same i18n strings the visible section uses,
+// so schema and on-page content are guaranteed to match in every locale.
+const howToSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'HowTo',
+  name: `${locale.toolName} — ${t.howItWorks.heading}`,
+  inLanguage: lang,
+  step: t.howItWorks.steps.map((s, i) => ({
+    '@type': 'HowToStep',
+    position: i + 1,
+    name: s.name,
+    text: s.text,
+  })),
+};
 ---
 
-<Layout lang={lang} path="/">
+<Layout lang={lang} path="/" jsonLd={[howToSchema]}>
   <HomePageSchema
     slot="head"
     toolName={locale.toolName}
@@ -123,7 +138,7 @@ const pageUrl = new URL(`/${lang}/${locale.slug}/`, site).href;
   </div>
 
   <!-- ── How it works ─────────────────────────────────────────────────── -->
-  <HowItWorks />
+  <HowItWorks lang={lang} />
 
   <!-- ── Interactive workspace (the island) ───────────────────────────── -->
   <main id="workspace" class="container-page workspace">

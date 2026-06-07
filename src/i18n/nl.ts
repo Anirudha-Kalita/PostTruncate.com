@@ -35,6 +35,24 @@ export const nl: Translations = {
     secondary: 'Bekijk de platformlimieten',
   },
 
+  howItWorks: {
+    heading: 'Hoe het werkt',
+    steps: [
+      {
+        name: 'Plak of typ uw tekst',
+        text: 'Zet uw concept in de editor en de tekenteller wordt direct bijgewerkt terwijl u typt.',
+      },
+      {
+        name: 'Alle platforms worden tegelijk weergegeven',
+        text: 'De voorbeeldkaarten van LinkedIn, X, Threads, Instagram, Facebook en sms worden allemaal tegelijk bijgewerkt — zonder dat u iets hoeft te selecteren.',
+      },
+      {
+        name: 'Zie precies waar de tekst wordt afgekapt',
+        text: 'De voorbeeldweergave markeert het afkappunt zodat u precies weet wat de lezers zullen zien.',
+      },
+    ],
+  },
+
   toolPage: {
     onThisPage: 'Op deze pagina',
     lastUpdated: 'Laatst bijgewerkt: {date}',

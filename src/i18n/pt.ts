@@ -35,6 +35,24 @@ export const pt: Translations = {
     secondary: 'Ver os limites das plataformas',
   },
 
+  howItWorks: {
+    heading: 'Como funciona',
+    steps: [
+      {
+        name: 'Cole ou escreva o seu texto',
+        text: 'Introduza o seu rascunho no editor e o contador de caracteres atualiza-se instantaneamente enquanto escreve.',
+      },
+      {
+        name: 'Todas as plataformas são apresentadas de uma vez',
+        text: 'Os cartões de pré-visualização do LinkedIn, X, Threads, Instagram, Facebook e SMS atualizam-se simultaneamente — sem necessidade de seleção.',
+      },
+      {
+        name: 'Veja exatamente onde o texto é cortado',
+        text: 'A pré-visualização destaca o ponto de truncagem para que saiba precisamente o que os leitores irão ver.',
+      },
+    ],
+  },
+
   toolPage: {
     onThisPage: 'Nesta página',
     lastUpdated: 'Última atualização: {date}',

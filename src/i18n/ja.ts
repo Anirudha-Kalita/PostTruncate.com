@@ -35,6 +35,24 @@ export const ja: Translations = {
     secondary: 'プラットフォームの上限を見る',
   },
 
+  howItWorks: {
+    heading: '使い方',
+    steps: [
+      {
+        name: 'テキストを貼り付けるか入力する',
+        text: 'エディタに下書きを貼り付けると、入力するたびに文字数がリアルタイムで更新されます。',
+      },
+      {
+        name: 'すべてのプラットフォームが同時に表示される',
+        text: 'LinkedIn、X、Threads、Instagram、Facebook、SMSのプレビューカードがすべて同時に更新されます。選択は不要です。',
+      },
+      {
+        name: 'どこで切れるかを正確に確認する',
+        text: 'プレビューが切り捨てポイントをハイライト表示するので、読者に何が見えるかを正確に把握できます。',
+      },
+    ],
+  },
+
   toolPage: {
     onThisPage: 'このページの内容',
     lastUpdated: '最終更新：{date}',

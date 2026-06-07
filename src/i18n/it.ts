@@ -35,6 +35,24 @@ export const it: Translations = {
     secondary: 'Vedi i limiti delle piattaforme',
   },
 
+  howItWorks: {
+    heading: 'Come funziona',
+    steps: [
+      {
+        name: 'Incolla o digita il tuo testo',
+        text: 'Inserisci la tua bozza nell\'editor e il contatore di caratteri si aggiorna istantaneamente mentre scrivi.',
+      },
+      {
+        name: 'Tutte le piattaforme vengono visualizzate contemporaneamente',
+        text: 'Le anteprime di LinkedIn, X, Threads, Instagram, Facebook e SMS si aggiornano simultaneamente — nessuna selezione necessaria.',
+      },
+      {
+        name: 'Vedi esattamente dove viene tagliato il testo',
+        text: 'L\'anteprima evidenzia il punto di troncamento in modo da sapere esattamente cosa vedranno i lettori.',
+      },
+    ],
+  },
+
   toolPage: {
     onThisPage: 'In questa pagina',
     lastUpdated: 'Ultimo aggiornamento: {date}',

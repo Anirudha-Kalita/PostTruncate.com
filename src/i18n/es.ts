@@ -35,6 +35,24 @@ export const es: Translations = {
     secondary: 'Ver los límites de cada plataforma',
   },
 
+  howItWorks: {
+    heading: 'Cómo funciona',
+    steps: [
+      {
+        name: 'Pega o escribe tu texto',
+        text: 'Introduce tu borrador en el editor y el contador de caracteres se actualiza al instante mientras escribes.',
+      },
+      {
+        name: 'Todas las plataformas se muestran a la vez',
+        text: 'Las tarjetas de vista previa de LinkedIn, X, Threads, Instagram, Facebook y SMS se actualizan simultáneamente, sin necesidad de selección.',
+      },
+      {
+        name: 'Ve exactamente dónde se corta el texto',
+        text: 'La vista previa resalta el punto de truncamiento para que sepas exactamente qué verán tus lectores.',
+      },
+    ],
+  },
+
   toolPage: {
     onThisPage: 'En esta página',
     lastUpdated: 'Última actualización: {date}',
