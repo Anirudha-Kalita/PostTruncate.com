@@ -11,7 +11,7 @@ export const fr: Translations = {
     title:
       'Compteur de Caractères — Outil Gratuit de Comptage de Caractères et de Mots | PostTruncate',
     description:
-      'Outil gratuit d’aperçu pour les réseaux sociaux. Visualisez le pli « …voir plus » de LinkedIn, découpez automatiquement vos longs textes en fils X/Twitter clairs, et repérez la surcharge de hashtags ou les polices qui cassent les lecteurs d’écran avant de publier.',
+      'Aperçu gratuit pour réseaux sociaux. Pli LinkedIn, fils X/Twitter, hashtags en excès et pièges d’accessibilité — live dans votre navigateur.',
     skipLink: 'Aller à l’éditeur',
   },
 

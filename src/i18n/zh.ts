@@ -11,7 +11,7 @@ export const zh: Translations = {
     title:
       '字符计数器 — 免费在线字符和单词计数工具 | PostTruncate',
     description:
-      '免费的社交媒体预览工具。查看 LinkedIn 的“…查看更多”折叠位置，将长文自动拆分为干净的 X/Twitter 串文，并在发布前发现话题标签超量或破坏屏幕阅读器的花式字体。',
+      '免费的社交媒体帖子预览工具。查看LinkedIn折叠点，拆分X/Twitter串文，实时检测话题标签上限和无障碍问题——直接在浏览器中运行。',
     skipLink: '跳转到编辑器',
   },
 

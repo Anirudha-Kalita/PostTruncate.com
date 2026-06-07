@@ -11,7 +11,7 @@ export const it: Translations = {
     title:
       'Contatore di Caratteri — Strumento Gratuito per Contare Caratteri e Parole | PostTruncate',
     description:
-      'Strumento gratuito di anteprima per i social media. Vedi la soglia “…altro” di LinkedIn, suddividi automaticamente i testi lunghi in thread X/Twitter puliti e individua il sovraccarico di hashtag o i font che mandano in tilt gli screen reader prima di pubblicare.',
+      'Anteprima gratuita per i social. Soglia LinkedIn, thread X/Twitter, hashtag eccessivi e problemi di accessibilità — tutto nel browser.',
     skipLink: 'Vai all’editor',
   },
 

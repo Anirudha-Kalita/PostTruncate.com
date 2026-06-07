@@ -11,7 +11,7 @@ export const da: Translations = {
     title:
       'Tegnoptæller — Gratis Online Tegn- og Ordoptælningsværktøj | PostTruncate',
     description:
-      'Gratis previewværktøj til sociale medier. Se LinkedIns “…se mere”-fold, opdel automatisk lange tekster i rene X/Twitter-tråde, og opdag hashtag-overflod eller skærmlæser-brydende skrifttyper, før du poster.',
+      'Gratis forhåndsvisning til sociale medier. Se LinkedIns fold, opdel X/Twitter-tråde, find hashtag-grænser og tilgængelighedsfælder — i din browser.',
     skipLink: 'Spring til editoren',
   },
 

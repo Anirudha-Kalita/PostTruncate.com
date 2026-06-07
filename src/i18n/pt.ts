@@ -11,7 +11,7 @@ export const pt: Translations = {
     title:
       'Contador de Caracteres — Ferramenta Gratuita de Contagem de Caracteres e Palavras | PostTruncate',
     description:
-      'Ferramenta gratuita de pré-visualização para redes sociais. Veja a dobra «…ver mais» do LinkedIn, divida automaticamente textos longos em threads limpas no X/Twitter e detete o excesso de hashtags ou tipos de letra que quebram os leitores de ecrã antes de publicar.',
+      'Pré-visualizador gratuito para redes sociais. Plica do LinkedIn, threads X/Twitter, hashtags e acessibilidade — tudo no seu navegador.',
     skipLink: 'Saltar para o editor',
   },
 

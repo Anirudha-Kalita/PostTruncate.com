@@ -11,7 +11,7 @@ export const en: Translations = {
     title:
       'Character Counter — Free Online Character & Word Count Tool | PostTruncate',
     description:
-      'Free social media preview tool. See LinkedIn’s “…see more” fold, auto-split long copy into clean X/Twitter threads, and catch hashtag overload or screen-reader-breaking fonts before you post.',
+      ‘Free social media post previewer. See LinkedIn’s fold, split X/Twitter threads, catch hashtag limits and accessibility traps — live in your browser.’,
     skipLink: 'Skip to the editor',
   },
 

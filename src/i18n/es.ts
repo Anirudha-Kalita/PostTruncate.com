@@ -11,7 +11,7 @@ export const es: Translations = {
     title:
       'Contador de Caracteres — Herramienta Gratuita de Recuento de Caracteres y Palabras | PostTruncate',
     description:
-      'Herramienta gratuita de previsualización para redes sociales. Mira el pliegue «…ver más» de LinkedIn, divide automáticamente los textos largos en hilos limpios de X/Twitter y detecta el exceso de hashtags o las fuentes que rompen los lectores de pantalla antes de publicar.',
+      'Previsualiza publicaciones gratis. Pliegue LinkedIn, hilos X/Twitter, límites de hashtag y trampas de accesibilidad — directo en tu navegador.',
     skipLink: 'Saltar al editor',
   },
 

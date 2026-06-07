@@ -12,7 +12,7 @@ export const de: Translations = {
     title:
       'Zeichenzähler — Kostenloser Online-Zeichen- und Wortzähler | PostTruncate',
     description:
-      'Kostenloses Vorschau-Tool für Social Media. Sieh die „…mehr anzeigen“-Falz von LinkedIn, teile lange Texte automatisch in saubere X/Twitter-Threads auf und erkenne Hashtag-Überladung oder Screenreader-feindliche Schriften, bevor du postest.',
+      'Kostenloses Social-Media-Vorschau-Tool. LinkedIn-Fold, X/Twitter-Threads, Hashtag-Limits und Barrierefreiheitsprobleme erkennen — direkt im Browser.',
     skipLink: 'Zum Editor springen',
   },
 

@@ -11,7 +11,7 @@ export const nl: Translations = {
     title:
       'Tekenteller — Gratis Online Teken- en Woordteller | PostTruncate',
     description:
-      'Gratis previewtool voor social media. Bekijk de “…meer weergeven”-vouw van LinkedIn, splits lange teksten automatisch op in nette X/Twitter-threads en spoor hashtagoverdaad of schermlezeronvriendelijke lettertypes op voordat je plaatst.',
+      'Gratis social-media-previewtool. Zie de LinkedIn-fold, splits X/Twitter-threads, check hashtag-limieten en toegankelijkheidsvallen — live in je browser.',
     skipLink: 'Ga direct naar de editor',
   },
 
