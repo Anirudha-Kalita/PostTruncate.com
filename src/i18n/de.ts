@@ -374,7 +374,7 @@ export const de: Translations = {
         {
           heading: 'Von Grund auf datenschutzorientiert',
           paragraphs: [
-            'Alles läuft in deinem Browser. Dein Text wird nie hochgeladen, es gibt keine Konten, und das Tool ist kostenlos nutzbar. Es wird durch unaufdringliche Werbung in reservierten Bereichen finanziert, die das Layout nie verschieben. Lies die vollständigen Details in unserer <strong>Datenschutzerklärung</strong>.',
+            'Alles läuft in deinem Browser. Dein Text wird nie hochgeladen, es gibt keine Konten, und das Tool ist kostenlos nutzbar. Es wird durch unaufdringliche Werbung in reservierten Bereichen finanziert, die das Layout nie verschieben. Lies die vollständigen Details in unserer <a href="../privacy/"><strong>Datenschutzerklärung</strong></a>.',
           ],
         },
       ],

@@ -373,7 +373,7 @@ export const fr: Translations = {
         {
           heading: 'Conçu selon le principe de confidentialité avant tout',
           paragraphs: [
-            'Tout s’exécute dans votre navigateur. Votre texte n’est jamais téléversé, il n’y a aucun compte, et l’outil est gratuit. Il est financé par des publicités discrètes dans des espaces réservés qui ne décalent jamais la mise en page. Lisez tous les détails dans notre <strong>Politique de confidentialité</strong>.',
+            'Tout s’exécute dans votre navigateur. Votre texte n’est jamais téléversé, il n’y a aucun compte, et l’outil est gratuit. Il est financé par des publicités discrètes dans des espaces réservés qui ne décalent jamais la mise en page. Lisez tous les détails dans notre <a href="../privacy/"><strong>Politique de confidentialité</strong></a>.',
           ],
         },
       ],

@@ -219,6 +219,36 @@ const pageUrl = new URL(`/${lang}/${locale.slug}/`, site).href;
       }
     </div>
   </section>
+
+  <!-- Re-scroll to URL hash after the Dashboard island finishes rendering.
+       The Preact island is an empty shell in the initial HTML; once it hydrates
+       the page grows ~8 000 px and the browser's original hash-scroll lands in
+       the wrong section. We poll page height until it stabilises (≥3 stable
+       frames), then scroll to the intended target. -->
+  <script is:inline>
+    (function () {
+      var hash = window.location.hash;
+      if (!hash) return;
+      var el = document.querySelector(hash);
+      if (!el) return;
+
+      var lastH = document.documentElement.scrollHeight;
+      var stable = 0;
+
+      function tryScroll() {
+        var h = document.documentElement.scrollHeight;
+        if (h !== lastH) { lastH = h; stable = 0; }
+        else { stable++; }
+        if (stable >= 3) {
+          el.scrollIntoView({ block: 'start' });
+          return;
+        }
+        requestAnimationFrame(tryScroll);
+      }
+
+      requestAnimationFrame(tryScroll);
+    })();
+  </script>
 </Layout>
 
 <style>

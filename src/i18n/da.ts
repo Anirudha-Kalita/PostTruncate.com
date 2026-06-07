@@ -373,7 +373,7 @@ export const da: Translations = {
         {
           heading: 'Bygget med privatliv først',
           paragraphs: [
-            'Alt kører i din browser. Din tekst bliver aldrig uploadet, der er ingen konti, og værktøjet er gratis at bruge. Det finansieres af diskrete annoncer i reserverede felter, der aldrig forskyder layoutet. Læs alle detaljer i vores <strong>privatlivspolitik</strong>.',
+            'Alt kører i din browser. Din tekst bliver aldrig uploadet, der er ingen konti, og værktøjet er gratis at bruge. Det finansieres af diskrete annoncer i reserverede felter, der aldrig forskyder layoutet. Læs alle detaljer i vores <a href="../privacy/"><strong>privatlivspolitik</strong></a>.',
           ],
         },
       ],

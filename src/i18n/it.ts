@@ -373,7 +373,7 @@ export const it: Translations = {
         {
           heading: 'Costruito con la privacy al primo posto',
           paragraphs: [
-            'Tutto gira nel tuo browser. Il tuo testo non viene mai caricato, non ci sono account e lo strumento è gratuito da usare. È sostenuto da annunci discreti in spazi riservati che non spostano mai il layout. Leggi tutti i dettagli nella nostra <strong>Informativa sulla privacy</strong>.',
+            'Tutto gira nel tuo browser. Il tuo testo non viene mai caricato, non ci sono account e lo strumento è gratuito da usare. È sostenuto da annunci discreti in spazi riservati che non spostano mai il layout. Leggi tutti i dettagli nella nostra <a href="../privacy/"><strong>Informativa sulla privacy</strong></a>.',
           ],
         },
       ],

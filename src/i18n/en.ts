@@ -373,7 +373,7 @@ export const en: Translations = {
         {
           heading: 'Built privacy-first',
           paragraphs: [
-            'Everything runs in your browser. Your text is never uploaded, there are no accounts, and the tool is free to use. It’s supported by unobtrusive ads in reserved spaces that never shift the layout. Read the full details in our <strong>Privacy Policy</strong>.',
+            'Everything runs in your browser. Your text is never uploaded, there are no accounts, and the tool is free to use. It’s supported by unobtrusive ads in reserved spaces that never shift the layout. Read the full details in our <a href="../privacy/"><strong>Privacy Policy</strong></a>.',
           ],
         },
       ],

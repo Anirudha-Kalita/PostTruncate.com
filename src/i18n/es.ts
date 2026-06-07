@@ -373,7 +373,7 @@ export const es: Translations = {
         {
           heading: 'Construido con la privacidad como prioridad',
           paragraphs: [
-            'Todo se ejecuta en tu navegador. Tu texto nunca se sube, no hay cuentas y la herramienta es gratuita. Se financia con anuncios discretos en espacios reservados que nunca desplazan el diseño. Lee todos los detalles en nuestra <strong>Política de privacidad</strong>.',
+            'Todo se ejecuta en tu navegador. Tu texto nunca se sube, no hay cuentas y la herramienta es gratuita. Se financia con anuncios discretos en espacios reservados que nunca desplazan el diseño. Lee todos los detalles en nuestra <a href="../privacy/"><strong>Política de privacidad</strong></a>.',
           ],
         },
       ],

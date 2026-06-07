@@ -373,7 +373,7 @@ export const nl: Translations = {
         {
           heading: 'Privacy-first gebouwd',
           paragraphs: [
-            'Alles draait in je browser. Je tekst wordt nooit geüpload, er zijn geen accounts en de tool is gratis te gebruiken. Hij wordt ondersteund door onopvallende advertenties op gereserveerde plekken die de lay-out nooit verschuiven. Lees alle details in ons <strong>Privacybeleid</strong>.',
+            'Alles draait in je browser. Je tekst wordt nooit geüpload, er zijn geen accounts en de tool is gratis te gebruiken. Hij wordt ondersteund door onopvallende advertenties op gereserveerde plekken die de lay-out nooit verschuiven. Lees alle details in ons <a href="../privacy/"><strong>Privacybeleid</strong></a>.',
           ],
         },
       ],
