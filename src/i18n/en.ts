@@ -44,14 +44,14 @@ export const en: Translations = {
     ariaLabel: 'About PostTruncate',
     sections: [
       {
-        heading: 'Master Online Character Counter & Text Length Checker',
+        heading: 'A character counter built for social media',
         paragraphs: [
           '<strong>PostTruncate</strong> is a free, browser-based character counter that works entirely on your device — no uploads, no accounts needed. Paste or type any text and you instantly see character count, word count, reading time, and letter distribution update as you write.',
           'It’s built for anyone working with text under a limit: writers trimming an essay, marketers checking a headline, developers auditing a string. Because everything runs client-side, your drafts never leave your browser.',
         ],
       },
       {
-        heading: 'Advanced SMS Character Counter & Segment Calculator',
+        heading: 'SMS encoding and segment counting',
         paragraphs: [
           'SMS has two encoding modes and most tools ignore the difference. PostTruncate detects automatically whether your message uses standard <strong>GSM-7</strong> (160 characters per text) or <strong>Unicode</strong> (70 characters) — and the switch can happen the moment you type a single emoji or special character.',
           'It also flags extended GSM characters — things like the Euro sign (€), square brackets, and the pipe symbol — which stay in GSM-7 mode but each consume two character slots instead of one. That hidden cost is why messages sometimes segment unexpectedly.',
@@ -59,21 +59,21 @@ export const en: Translations = {
         ],
       },
       {
-        heading: '𝕏 (Twitter) Character Counter & Automatic Thread Splitter',
+        heading: 'X (Twitter) limits and automatic thread splitting',
         paragraphs: [
           'X (Twitter) has two rules that catch people off guard: the 280-character limit, and the fact that every link — regardless of length — counts as exactly 23 characters. PostTruncate handles both, so the counter you see matches what X will actually report once the t.co wrapper is applied.',
           'When your draft runs long, the built-in <strong>thread splitter</strong> breaks it into numbered posts at natural sentence boundaries — never mid-word. Each card shows its character count and position, so you can review the full split before you post.',
         ],
       },
       {
-        heading: 'Instagram & Facebook Character Counter Including Spaces',
+        heading: 'Instagram and Facebook character limits',
         paragraphs: [
           'Instagram caps captions at 2,200 characters, but only shows roughly the first 125 before hiding the rest behind a “more” link. PostTruncate tracks exactly where that cutoff falls so your opening line — the part visible in the feed — says what you actually need it to say.',
           'The dashboard also monitors <strong>hashtag count</strong> in real time. Instagram silently fails to publish posts that exceed 5 hashtags, so a live warning fires before you hit that wall. Spaces are always counted, matching Instagram’s own behavior.',
         ],
       },
       {
-        heading: 'Advanced Word Count, Symbols, and Platform Copy Analytics',
+        heading: 'Word count, readability, and platform analytics',
         paragraphs: [
           'Beyond platform limits, PostTruncate also counts words, sentences, paragraphs, and symbols — all updating live as you type. It’s useful for SEO meta descriptions, documentation reviews, or any writing workflow where you need more than a raw character tally.',
           'The dashboard handles multilingual text correctly, including CJK scripts where character count carries different semantic weight. Whether you’re writing in English, German, Japanese, or Chinese, the counts reflect what the target platform will actually see.',
@@ -152,31 +152,31 @@ export const en: Translations = {
     items: [
       {
         q: 'How accurate are the character limits?',
-        a: 'PostTruncate works as a live character counter against each platform’s published and widely-observed limits — 280 for X, 210/140 for the LinkedIn fold, 5 hashtags for Instagram, and a flat 23-character weight for links. The same engine doubles as a Twitter character counter, Instagram character counter, and general character checker, so one character count check covers every network. Platforms occasionally adjust these character count limits, and rendering varies slightly by device, so treat the previews as a close estimate rather than a pixel-perfect guarantee.',
+        a: ‘PostTruncate counts against each platform’s published and widely-observed limits — 280 for X, 210/140 for the LinkedIn fold, 5 hashtags for Instagram, and a flat 23-character weight for links. Platforms occasionally adjust these, and rendering varies slightly by device, so treat the previews as a close estimate rather than a pixel-perfect guarantee.’,
       },
       {
         q: 'Do spaces and punctuation count as characters?',
-        a: 'Yes. Every space, line break, and punctuation mark counts as one character, and both PostTruncate’s counter and the platform limits include them. That makes it a true character counter with spaces — a character counter including spaces — so when you count amount of characters or count no of characters here, the total matches what each platform actually measures. The only common exception is links on X/Twitter, which collapse to a flat 23 characters regardless of how many letters, symbols, or slashes the real URL contains.',
+        a: ‘Yes. Every space, line break, and punctuation mark counts as one character, and both PostTruncate’s counter and the platform limits include them. The only common exception is links on X/Twitter, which collapse to a flat 23 characters regardless of how many letters, symbols, or slashes the real URL contains.’,
       },
       {
         q: 'How do emojis affect the character count?',
-        a: 'PostTruncate counts by Unicode code points, so as a symbol counter it treats a simple emoji like 🙂 as a single character. Many emoji are built from several joined code points, though — skin-tone variations, flags, and combined glyphs such as 👨‍👩‍👧 — and those register as two or more. The same code-point logic lets it work as a Chinese character counter and a letter counter for any script, so you can count symbol online or count letters online with the same accuracy. Most platforms, X especially, also weight emoji more heavily than plain letters, so an emoji-heavy draft uses up a little more of your limit than the visible glyph count suggests.',
+        a: 'PostTruncate counts by Unicode code points, so a simple emoji like 🙂 registers as one character. Many emoji are built from several joined code points — skin-tone variations, flags, and combined glyphs such as 👨‍👩‍👧 — and those register as two or more. The tool handles any script correctly, including CJK characters. Most platforms, X especially, also weight emoji more heavily than plain letters, so an emoji-heavy draft uses up a little more of your limit than the visible glyph count suggests.',
       },
       {
         q: 'What is the difference between character count and word count?',
-        a: 'Character count is the total of every individual character — letters, spaces, punctuation, and emoji all included — and it is what platform limits are actually measured against. Word count is the number of whitespace-separated words, no matter how long each one is. Because PostTruncate is a character and word counter in one, you can count words and characters together and read the word count character count side by side; it doubles as a word counter tool and a word to character count converter when you need both numbers. A full 280-character tweet might be only 40 words, so watch the character count to stay under a limit and use word count as a readability gauge.',
+        a: 'Character count is the total of every individual character — letters, spaces, punctuation, and emoji all included — and it is what platform limits are actually measured against. Word count is the number of whitespace-separated words, no matter how long each one is. PostTruncate shows both side by side, updating live as you type. A full 280-character tweet might be only 40 words, so watch the character count to stay under a limit and use word count as a readability gauge.',
       },
       {
         q: 'Why does my link count as 23 characters on X?',
-        a: 'X automatically wraps every URL with its t.co shortener, which always occupies 23 characters regardless of how long or short the original link is. So a 5-character link and a 200-character link both cost you exactly 23 toward the 280 limit. PostTruncate mirrors this in its weighted Twitter character counter, and because it also tracks plain character length it works as an SMS character counter when you need to fit a message into a single text. Either way you get an exact character length count for the medium you are posting to.',
+        a: 'X automatically wraps every URL with its t.co shortener, which always occupies 23 characters regardless of how long or short the original link is. So a 5-character link and a 200-character link both cost you exactly 23 toward the 280 limit. PostTruncate reflects this in its counter, so the number you see matches what X will actually report.',
       },
       {
         q: 'What are “fancy fonts” and why are they flagged?',
-        a: 'Those bold, italic, or script-style letters you paste from font generators aren’t real formatting — they’re pseudo-Unicode characters from the Mathematical Alphanumeric Symbols block. They look styled but screen readers either spell them out letter by letter or skip them, which hurts both accessibility and your organic reach. As a character number counter PostTruncate still tallies them so you can see exactly how many characters they add, and the monitor flags them so you can swap back to plain text.',
+        a: ‘Those bold, italic, or script-style letters you paste from font generators aren’t real formatting — they’re pseudo-Unicode characters from the Mathematical Alphanumeric Symbols block. They look styled but screen readers either spell them out letter by letter or skip them, which hurts both accessibility and your organic reach. PostTruncate tallies them so you can see exactly how many characters they add, and the monitor flags them so you can swap back to plain text.’,
       },
       {
         q: 'What does “Sanitize text” remove?',
-        a: 'It strips invisible and zero-width characters — zero-width spaces, byte-order marks, bidirectional control marks, soft hyphens, and stray control codes. These often sneak in when you copy from other apps, and they silently break character counts and accessibility on older mobile clients without ever being visible. Run a character count check after sanitizing and the char length counter drops to the real, visible total — handy whenever your character count in word processors and your social drafts disagree.',
+        a: 'It strips invisible and zero-width characters — zero-width spaces, byte-order marks, bidirectional control marks, soft hyphens, and stray control codes. These often sneak in when you copy from other apps, and they silently break character counts and screen reader behavior without ever being visible. Sanitizing reveals the real, visible character total.',
       },
       {
         q: 'What is keyword density, and how does the Overuse Monitor protect my content?',
@@ -184,31 +184,31 @@ export const en: Translations = {
       },
       {
         q: 'How do the Estimated Reading and Speaking timers calculate my post duration?',
-        a: 'Our built-in script timers operate on globally accepted conversational pacing scales to give digital creators and video producers instant metrics. The Reading Time Engine processes your total text divided by an average baseline speed of 275 words per minute, which is perfect for auditing long-form articles, newsletters, or blog copy. The Speaking Time Engine calculates your word count divided by a conversational speed of 150 words per minute. This is an invaluable utility for scriptwriters drafting precisely timed content for TikTok, YouTube Shorts, Instagram Reels, or presentation slide layouts.',
+        a: 'The reading timer divides your word count by 275 words per minute — a standard silent reading speed — which is useful for judging how long an article or newsletter will take to read. The speaking timer uses 150 words per minute, a comfortable conversational pace, which helps scriptwriters and video creators check timing for short-form content.',
       },
       {
         q: 'What does the Social Sanitizer do, and why should I strip emojis or extract hashtags?',
-        a: 'The multi-case text formatter dashboard includes advanced "Social Sanitizing" modifications engineered to clean your raw copy drafts with a single click. The Emoji Stripper automatically scans and wipes out all graphical icons and special Unicode symbols via regex, which is highly useful when repurposing casual social copy into clean corporate email layouts or professional documents. The Hashtag Extractor isolates all instances of the # symbol within your body paragraphs, strips them from the narrative flow, and groups them neatly together at the absolute bottom of your workspace text area, giving you an instantly organized, high-readability caption layout.',
+        a: 'The Emoji Stripper removes all emoji and graphical Unicode symbols from your text — useful when repurposing a social post into a clean email or document. The Hashtag Extractor pulls all # tags out of the body copy and groups them at the end of the text, giving you a cleaner caption layout.',
       },
       {
         q: 'Is my text sent anywhere?',
-        a: 'No. The entire editor and every preview run locally in your browser, so even though it works as an online character counter, nothing is uploaded — it can calculate characters online without your draft ever leaving the page. Your text never leaves your device: there’s no account, no upload, and no server processing of your content, yet you still get an instant character count in text as you type.',
+        a: ‘No. The entire editor and every preview run locally in your browser — nothing is uploaded. Your text never leaves your device: there’s no account, no upload, and no server processing of your content.’,
       },
       {
         q: 'Does the session auto-save feature mean my data is stored on a server?',
-        a: 'Absolutely not. PostTruncate values absolute data privacy, meaning your text drafts are never uploaded, processed, or saved onto any external server infrastructure. The Browser Session Auto-Save functionality executes entirely client-side using your web browser’s native sessionStorage cache. Every time you make a keystroke change, a temporary copy is cached in that browser tab. If you refresh the page in the same tab, the tool restores your text workspace right where you left off; when the tab session ends, the temporary draft cache is cleared by the browser.',
+        a: ‘No. The auto-save runs entirely in your browser using sessionStorage — a temporary, tab-scoped cache built into every browser. When you refresh the page in the same tab, the tool restores your draft from that local cache. When you close the tab, the draft is cleared. Nothing is sent to any server.’,
       },
       {
         q: 'Is PostTruncate free?',
-        a: 'Yes, it’s completely free to use with no sign-up required — a free character counter and word counter tool online that’s ready the moment the page loads. Whether you want a quick char counter online, a character count online free, or a full character count tool for every platform, there’s nothing to install. The tool is supported by unobtrusive ads placed in reserved spaces that never shift the layout while you’re working.',
+        a: ‘Yes, completely free to use with no sign-up required and nothing to install. The tool is supported by unobtrusive ads placed in reserved spaces that never shift the layout while you’re working.’,
       },
       {
         q: 'Why did my 160-character SMS suddenly count as two messages?',
-        a: 'This happens because of a change in your text\'s encoding style. Standard text messages use GSM 7-bit encoding, which allows for exactly 160 characters per SMS packet. However, the moment you insert even a single non-GSM character—such as an emoji, a special symbol, or a regional script character (like Assamese or Hindi)—the entire message instantly forces a shift to Unicode encoding. When a message shifts to Unicode, the maximum capacity per individual SMS packet drops dramatically from 160 characters down to just 70 characters. Furthermore, if your text exceeds that 70-character threshold, the system has to use multi-part stitching data (User Data Headers), which cuts your packet size down to 67 characters per stitched SMS segment. To prevent unexpected telecommunication billing surprises, always use an online SMS character counter to monitor your active encoding badge before running a bulk campaign!',
+        a: 'This happens because of a change in your text's encoding. Standard SMS uses GSM 7-bit encoding, which fits up to 160 characters in a single message. The moment your text includes a non-GSM character — an emoji, a regional script, or certain symbols — the entire message switches to Unicode, which holds only 70 characters per segment. If a Unicode message exceeds 70 characters, a multi-part header is added and the usable space per segment drops to 67 characters. PostTruncate shows your current encoding and segment count live, so you always know where the break happens.',
       },
       {
         q: 'Do special characters and emojis count as one character in an SMS?',
-        a: 'No, they do not. While a standard letter or number counts as a single character, special symbols and emojis are treated very differently by global telecom networks. Special symbols belonging to the standard GSM basic extension table—such as the Euro symbol (€), brackets [ ], braces { }, and the pipe symbol |—actually count as 2 characters each, even though they keep your message in the efficient GSM 7-bit mode. On the other hand, emojis are highly complex data packets that cannot fit into standard 7-bit text. Adding an emoji forces your message into 16-bit Unicode, compressing your total message allowance per segment from 160 characters down to 70 characters.',
+        a: 'Not always. Standard letters and numbers each count as one character. Symbols from the GSM extended table — including the Euro sign (€), square brackets, curly braces, and the pipe character | — count as two characters each, even though they keep the message in GSM 7-bit mode. Emoji are different: adding one forces the entire message into Unicode, which reduces the per-segment limit from 160 characters down to 70.',
       },
     ],
   },

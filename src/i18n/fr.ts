@@ -44,14 +44,14 @@ export const fr: Translations = {
     ariaLabel: 'À propos de PostTruncate',
     sections: [
       {
-        heading: 'Compteur de caractères en ligne ultime & vérificateur de longueur de texte',
+        heading: 'Un compteur de caractères pour les réseaux sociaux',
         paragraphs: [
           '<strong>PostTruncate</strong> est un compteur de caractères gratuit qui fonctionne entièrement dans votre navigateur — sans téléchargement, sans compte. Collez ou saisissez n’importe quel texte, et vous voyez instantanément le nombre de caractères, de mots, le temps de lecture et la répartition des lettres, mis à jour au fil de la frappe.',
           'Il s’adresse à toute personne travaillant avec des limites de texte : rédacteurs qui raccourcissent un titre, développeurs qui vérifient une chaîne, ou étudiants qui contrôlent la longueur d’un devoir. Comme tout se traite localement, vos brouillons ne quittent jamais votre appareil.',
         ],
       },
       {
-        heading: 'Compteur de caractères SMS avancé et calculateur de segments',
+        heading: 'Encodage SMS et calcul de segments',
         paragraphs: [
           'Les SMS fonctionnent avec deux modes d’encodage, et la plupart des outils ignorent cette différence. PostTruncate détecte automatiquement si votre message utilise le <strong>GSM-7</strong> standard (160 caractères par message) ou l’<strong>Unicode</strong> (70 caractères) — et la bascule peut intervenir dès qu’un seul emoji ou caractère spécial est tapé.',
           'Il signale également les caractères de la table GSM étendue — comme le signe euro (€), les crochets ou la barre verticale — qui restent en mode GSM-7 mais occupent chacun deux emplacements au lieu d’un. Ce coût caché est souvent à l’origine d’une segmentation inattendue.',
@@ -59,21 +59,21 @@ export const fr: Translations = {
         ],
       },
       {
-        heading: 'Compteur de caractères 𝕏 (Twitter) & diviseur automatique de fils',
+        heading: 'X (Twitter) : limites et découpage automatique de fils',
         paragraphs: [
           'X (Twitter) applique deux règles qui prennent souvent les utilisateurs par surprise : la limite de 280 caractères, et le fait que tout lien — quelle que soit sa longueur réelle — compte exactement pour 23 caractères. PostTruncate intègre ces deux règles, de sorte que le compteur affiché correspond exactement à ce que X affichera après application du raccourcisseur t.co.',
           'Si votre brouillon est trop long, le <strong>diviseur de fil</strong> intégré le découpe en tweets numérotés aux limites naturelles des phrases — jamais en plein milieu d’un mot. Chaque carte indique son nombre de caractères et sa position, pour que vous puissiez relire l’intégralité du fil avant de publier.',
         ],
       },
       {
-        heading: 'Compteur de caractères Instagram & Facebook espaces inclus',
+        heading: 'Limites de caractères sur Instagram et Facebook',
         paragraphs: [
           'Instagram autorise jusqu’à 2 200 caractères dans une légende, mais n’affiche que les 125 premiers environ avant de masquer le reste derrière un lien « plus ». PostTruncate indique exactement où tombe cette coupure, afin que la première ligne visible dans le fil soit toujours celle qui compte.',
           'Le tableau de bord surveille également le <strong>nombre de hashtags</strong> en temps réel. Instagram ne publie silencieusement pas les posts dépassant 5 hashtags, donc une alerte s’affiche avant d’atteindre cette limite. Les espaces sont toujours comptabilisés, conformément au comportement de la plateforme.',
         ],
       },
       {
-        heading: 'Comptage avancé de mots, symboles et analyses de contenu par plateforme',
+        heading: 'Comptage de mots, lisibilité et analyses par plateforme',
         paragraphs: [
           'Au-delà des limites de plateformes, PostTruncate compte aussi les mots, phrases, paragraphes et symboles — en temps réel pendant la frappe. Utile pour les méta-descriptions SEO, les révisions de documentation ou tout flux de rédaction nécessitant plus qu’un simple décompte de caractères.',
           'Le tableau de bord traite correctement les textes multilingues, y compris les systèmes d’écriture CJK où le nombre de caractères a un poids sémantique différent. Que vous écriviez en français, en anglais, en japonais ou en chinois, les compteurs reflètent ce que la plateforme cible verra réellement.',
@@ -204,11 +204,11 @@ export const fr: Translations = {
       },
       {
         q: 'Pourquoi mon SMS de 160 caractères a-t-il soudainement compté comme deux messages ?',
-        a: 'Cela se produit en raison d\'un changement dans le style d\'encodage de votre texte. Les SMS standards utilisent l\'encodage GSM 7 bits, ce qui permet exactement 160 caractères par paquet SMS. Cependant, dès que vous insérez un seul caractère non-GSM (comme un emoji, un symbole spécial ou un caractère d\'écriture régionale comme l\'assamais ou le hindi), l\'intégralité du message bascule instantanément vers l\'encodage Unicode. Lorsqu\'un message passe en Unicode, la capacité maximale par paquet SMS individuel chute considérablement, passant de 160 caractères à seulement 70 caractères. De plus, si votre texte dépasse ce seuil de 70 caractères, le système doit utiliser des données de concaténation multipartites (User Data Headers), ce qui réduit la taille de votre paquet à 67 caractères par segment SMS concaténé. Pour éviter les surprises inattendues sur votre facture de télécommunications, utilisez toujours un compteur de caractères SMS en ligne pour surveiller votre badge d\'encodage actif avant de lancer une campagne de masse !',
+        a: 'Cela se produit à cause d'un changement d'encodage du texte. Les SMS standard utilisent l'encodage GSM-7, qui peut contenir jusqu'à 160 caractères dans un seul message. Dès que le texte inclut un caractère non GSM — un emoji, un alphabet régional ou certains symboles — le message entier bascule en Unicode, qui ne peut contenir que 70 caractères par segment. Si un message Unicode dépasse 70 caractères, un en-tête multipartie est ajouté et l'espace utilisable par segment tombe à 67 caractères. PostTruncate affiche en direct l'encodage et le nombre de segments, vous savez donc toujours où se produit la coupure.',
       },
       {
         q: 'Les caractères spéciaux et les emojis comptent-ils pour un seul caractère dans un SMS ?',
-        a: 'Non. Alors qu\'une lettre ou un chiffre standard compte comme un seul caractère, les symboles spéciaux et les emojis sont traités très différemment par les réseaux de télécommunications mondiaux. Les symboles spéciaux appartenant à la table d\'extension de base GSM standard (comme le symbole Euro (€), les crochets [ ], les accolades { } et la barre verticale |) comptent en réalité pour 2 caractères chacun, même s\'ils maintiennent votre message dans le mode efficace GSM 7 bits. D\'autre part, les emojis sont des paquets de données très complexes qui ne peuvent pas tenir dans un texte standard de 7 bits. L\'ajout d\'un emoji force votre message en Unicode 16 bits, compressant votre allocation totale de message par segment de 160 caractères à 70 caractères.',
+        a: 'Pas toujours. Les lettres et chiffres standard comptent chacun pour un caractère. Les symboles de la table GSM étendue — comme le signe euro (€), les crochets, les accolades et la barre verticale | — comptent chacun pour deux caractères, même si le message reste en mode GSM-7. Les emojis sont différents : en ajouter un force tout le message en Unicode, ce qui ramène la limite par segment de 160 à 70 caractères.',
       },
     ],
   },

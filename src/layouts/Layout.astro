@@ -106,13 +106,6 @@ const canonical = canonicalOverride ?? localeHref(lang);
 
     <title>{pageTitle}</title>
     <meta name="description" content={pageDescription} />
-    {/* Keyword set is intentionally English across every locale — the long-form
-        body copy below the editor targets the same high-volume English search
-        terms regardless of UI language. */}
-    <meta
-      name="keywords"
-      content="character counter, twitter character counter, letter counter, character checker, symbol counter, char length counter, character and word counter, character count check, character count in text, character count in word, character count limit, character counts online, character length, character length count, character number counter, count amount of characters, count characters of text, count letter online, count no of characters, count symbol online, count words and characters, online char counter, online count letters, word text counter, word to character count, words and characters counter, on line word counter, word counter tool, character and word count, word count character count, character count tool, character count online free, count how many characters, word counter tool online, character counter online, online character counter, chinese character counter, character counter tool, text character counter, character counter with spaces, instagram character counter, moz character counter, character counter including spaces, grammarly character counter, sms character counter, character counter word, macos character counter, word character counter, free character counter"
-    />
     {noindex && <meta name="robots" content="noindex" />}
     {!noindex && <link rel="canonical" href={canonical} />}
     <meta name="theme-color" content="#ffffff" />

@@ -45,14 +45,14 @@ export const de: Translations = {
     ariaLabel: 'Über PostTruncate',
     sections: [
       {
-        heading: 'Professioneller Online-Zeichenzähler & Textlängen-Prüfer',
+        heading: 'Ein Zeichenzähler für soziale Medien',
         paragraphs: [
           '<strong>PostTruncate</strong> ist ein kostenloser, browserbasierter Zeichenzähler, der vollständig auf deinem Gerät läuft — ohne Datei-Upload, ohne Konto. Schreib oder füge beliebigen Text ein, und du siehst sofort Zeichenanzahl, Wortzahl, Lesezeit und Buchstabenverteilung — alles in Echtzeit.',
           'Das Tool richtet sich an alle, die mit Textlängen-Limits arbeiten: Texter, die eine Überschrift kürzen, Entwickler, die einen String prüfen, oder Studierende, die den Umfang einer Hausarbeit kontrollieren. Da alles lokal im Browser verarbeitet wird, verlässt dein Text zu keinem Zeitpunkt dein Gerät.',
         ],
       },
       {
-        heading: 'Erweiterter SMS-Zeichenzähler & Segment-Rechner',
+        heading: 'SMS-Kodierung und Segmentberechnung',
         paragraphs: [
           'SMS kennt zwei Kodierungsmodi, und die meisten Tools ignorieren den Unterschied. PostTruncate erkennt automatisch, ob deine Nachricht <strong>GSM-7</strong> (160 Zeichen pro SMS) oder <strong>Unicode</strong> (70 Zeichen) verwendet — ein einziges Emoji reicht, um den Modus zu wechseln.',
           'Dazu werden Sonderzeichen der erweiterten GSM-Tabelle — etwa das Euro-Zeichen (€), eckige Klammern oder das Pipe-Symbol — markiert, die zwar im GSM-7-Modus bleiben, aber je zwei Zeichenplätze belegen. Genau dieser versteckte Verbrauch sorgt dafür, dass Nachrichten unerwartet aufgeteilt werden.',
@@ -60,21 +60,21 @@ export const de: Translations = {
         ],
       },
       {
-        heading: '𝕏 (Twitter) Zeichenzähler & automatischer Thread-Splitter',
+        heading: 'X (Twitter): Zeichenlimits und Thread-Splitter',
         paragraphs: [
           'Bei X (Twitter) gibt es zwei Regeln, die oft überraschen: das 280-Zeichen-Limit und die Tatsache, dass jeder Link — unabhängig von seiner echten Länge — genau 23 Zeichen zählt. PostTruncate berücksichtigt beides, sodass der angezeigte Zähler exakt dem entspricht, was X nach der t.co-Verkürzung anzeigt.',
           'Ist der Entwurf zu lang, teilt der integrierte <strong>Thread-Splitter</strong> den Text an natürlichen Satzgrenzen in nummerierte Tweets auf — niemals mitten in einem Wort. Jede Karte zeigt Zeichenanzahl und Position, damit du den vollständigen Thread vor dem Veröffentlichen prüfen kannst.',
         ],
       },
       {
-        heading: 'Instagram- & Facebook-Zeichenzähler inklusive Leerzeichen',
+        heading: 'Zeichenlimits bei Instagram und Facebook',
         paragraphs: [
           'Instagram erlaubt bis zu 2.200 Zeichen in einer Bildunterschrift, zeigt aber nur die ersten rund 125 an, bevor der Rest hinter einem „Mehr"-Link verschwindet. PostTruncate zeigt genau, wo dieser Schnitt liegt — damit die erste sichtbare Zeile im Feed immer die ist, die du vermitteln willst.',
           'Das Dashboard überwacht außerdem die <strong>Hashtag-Anzahl</strong> in Echtzeit. Instagram veröffentlicht Beiträge mit mehr als 5 Hashtags stillschweigend nicht, daher erscheint rechtzeitig eine Warnung, bevor du dieses Limit erreichst. Leerzeichen werden immer mitgezählt — genau wie auf der Plattform selbst.',
         ],
       },
       {
-        heading: 'Erweiterte Wortzählung, Symbole und Plattform-Textanalyse',
+        heading: 'Wörter, Lesbarkeit und plattformübergreifende Analyse',
         paragraphs: [
           'Über Plattform-Limits hinaus zählt PostTruncate auch Wörter, Sätze, Absätze und Symbole — alles live beim Tippen. Das ist nützlich für SEO-Meta-Beschreibungen, Dokumentations-Reviews oder jeden Schreibworkflow, bei dem mehr als eine reine Zeichenzahl gefragt ist.',
           'Das Dashboard verarbeitet mehrsprachige Texte korrekt, einschließlich CJK-Schriftsystemen, bei denen die Zeichenanzahl eine andere semantische Bedeutung hat. Egal ob du auf Deutsch, Englisch, Japanisch oder Chinesisch schreibst — die Zählwerte spiegeln das wider, was die Zielplattform tatsächlich sieht.',
@@ -205,11 +205,11 @@ export const de: Translations = {
       },
       {
         q: 'Warum zählte meine 160-Zeichen-SMS plötzlich als zwei Nachrichten?',
-        a: 'Dies geschieht aufgrund einer Änderung in der Codierungsart Ihres Textes. Standard-Textnachrichten verwenden die GSM 7-bit-Codierung, die genau 160 Zeichen pro SMS-Paket zulässt. Sobald Sie jedoch auch nur ein einziges Nicht-GSM-Zeichen einfügen – wie ein Emoji, ein Sonderzeichen oder ein regionales Schriftzeichen (wie Assamesisch oder Hindi) – erzwingt die gesamte Nachricht sofort einen Wechsel zur Unicode-Codierung. Wenn eine Nachricht zu Unicode wechselt, sinkt die maximale Kapazität pro einzelnem SMS-Paket drastisch von 160 Zeichen auf nur noch 70 Zeichen. Wenn Ihr Text außerdem diese Grenze von 70 Zeichen überschreitet, muss das System mehrteilige Verkettungsdaten (User Data Headers) verwenden, wodurch Ihre Paketgröße auf 67 Zeichen pro verkettetem SMS-Segment reduziert wird. Um unerwartete Überraschungen bei der Telekommunikationsabrechnung zu vermeiden, verwenden Sie immer einen Online-SMS-Zeichenzähler, um Ihr aktives Codierungs-Badge zu überprüfen, bevor Sie eine Massenkampagne starten!',
+        a: 'Das passiert durch einen Wechsel der Textkodierung. Standard-SMS nutzt GSM-7-Kodierung und fasst bis zu 160 Zeichen in einer einzigen Nachricht. Sobald dein Text ein Nicht-GSM-Zeichen enthält — ein Emoji, ein regionales Schriftsystem oder bestimmte Sonderzeichen — wechselt die gesamte Nachricht zu Unicode, das nur 70 Zeichen pro Segment fasst. Überschreitet eine Unicode-Nachricht 70 Zeichen, wird ein Mehrteil-Header eingefügt und der nutzbare Platz pro Segment sinkt auf 67 Zeichen. PostTruncate zeigt dir Kodierung und Segmentanzahl live an, sodass du immer siehst, wo der Bruch liegt.',
       },
       {
         q: 'Zählen Sonderzeichen und Emojis als ein Zeichen in einer SMS?',
-        a: 'Nein, das tun sie nicht. Während ein Standardbuchstabe oder eine Zahl als ein einzelnes Zeichen zählt, werden Sonderzeichen und Emojis von globalen Telekommunikationsnetzwerken ganz anders behandelt. Sonderzeichen, die zur standardmäßigen GSM-Basis-Erweiterungstabelle gehören – wie das Euro-Symbol (€), eckige Klammern [ ], geschweifte Klammern { } und das Pipe-Symbol | – zählen tatsächlich jeweils als 2 Zeichen, obwohl sie Ihre Nachricht im effizienten GSM 7-bit-Modus belassen. Andererseits sind Emojis hochkomplexe Datenpakete, die nicht in Standard-7-bit-Text passen. Das Hinzufügen eines Emojis erzwingt Ihre Nachricht in 16-bit-Unicode und komprimiert Ihre gesamte Nachrichtenzulage pro Segment von 160 Zeichen auf 70 Zeichen.',
+        a: 'Nicht immer. Standardbuchstaben und -zahlen zählen je als ein Zeichen. Zeichen aus der erweiterten GSM-Tabelle — darunter das Euro-Zeichen (€), eckige Klammern, geschweifte Klammern und das Pipe-Symbol | — zählen je als zwei Zeichen, obwohl die Nachricht im GSM-7-Modus bleibt. Emojis sind ein Sonderfall: Eines davon zwingt die gesamte Nachricht in Unicode und reduziert das Limit pro Segment von 160 auf 70 Zeichen.',
       },
     ],
   },

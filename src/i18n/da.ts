@@ -44,14 +44,14 @@ export const da: Translations = {
     ariaLabel: 'Om PostTruncate',
     sections: [
       {
-        heading: 'Avanceret online tegntæller & tjek af tekstlængde',
+        heading: 'En tegntæller til sociale medier',
         paragraphs: [
           '<strong>PostTruncate</strong> er en gratis tegntæller, der kører direkte i din browser — ingen uploads, ingen konto nødvendig. Indsæt eller skriv en tekst, og du ser straks antal tegn, ord, læsetid og bogstavfordeling, alt opdateret i realtid.',
           'Den er nyttig for alle, der arbejder med tekstgrænser: skribenter, der forkorter en overskrift, udviklere, der tjekker en streng, eller studerende, der kontrollerer længden på en opgave. Da alt behandles lokalt, forlader din tekst aldrig din enhed.',
         ],
       },
       {
-        heading: 'Avanceret SMS-tegntæller og segmentberegner',
+        heading: 'SMS-kodning og segmentberegning',
         paragraphs: [
           'SMS bruger to kodningsformer, og de fleste værktøjer ignorerer forskellen. PostTruncate registrerer automatisk, om din besked anvender standard <strong>GSM-7</strong> (160 tegn pr. sms) eller <strong>Unicode</strong> (70 tegn) — og skiftet kan ske ved blot ét emoji eller specialtegn.',
           'Værktøjet markerer også tegn fra den udvidede GSM-tabel — som eurosymbolet (€), kantede parenteser eller pipe-symbolet — der forbliver i GSM-7-tilstand, men bruger to tegnpladser i stedet for én. Den skjulte omkostning er ofte årsagen til uventet segmentering.',
@@ -59,21 +59,21 @@ export const da: Translations = {
         ],
       },
       {
-        heading: '𝕏 (Twitter) tegntæller & automatisk trådopdeler',
+        heading: 'X (Twitter): grænser og automatisk trådopdeling',
         paragraphs: [
           'X (Twitter) har to regler, der ofte overrasker: grænsen på 280 tegn og det faktum, at ethvert link — uanset dets faktiske længde — tæller som præcis 23 tegn. PostTruncate anvender begge regler, så den viste tæller svarer til, hvad X viser efter t.co-wrapper er anvendt.',
           'Når dit udkast er for langt, deler den indbyggede <strong>trådopdeler</strong> det i nummererede tweets ved naturlige sætningsgrænser — aldrig midt i et ord. Hvert kort viser tegnantallets og positionen, så du kan gennemgå hele tråden, før du poster.',
         ],
       },
       {
-        heading: 'Instagram & Facebook tegntæller inklusive mellemrum',
+        heading: 'Tegngrænser på Instagram og Facebook',
         paragraphs: [
           'Instagram tillader op til 2.200 tegn i en billedtekst, men viser kun de første ca. 125, inden resten gemmes bag et "mere"-link. PostTruncate viser præcis, hvor dette klip falder, så den første synlige linje i feedet altid er den, du vil frem med.',
           'Dashboardet overvåger også <strong>antal hashtags</strong> i realtid. Instagram udgiver lydløst ikke opslag med mere end 5 hashtags, så en advarsel vises, inden du når denne grænse. Mellemrum tæller altid med, præcis som platformen selv gør.',
         ],
       },
       {
-        heading: 'Avanceret ordtælling, symboler og analyse af platformstekst',
+        heading: 'Ordtælling, læsbarhed og platformsanalyse',
         paragraphs: [
           'Ud over platformsgrænser tæller PostTruncate også ord, sætninger, afsnit og symboler — alt opdateres live, mens du skriver. Det er nyttigt til SEO-metabeskrivelser, gennemgang af dokumentation eller enhver skriveopgave, der kræver mere end et simpelt tegnantal.',
           'Dashboardet håndterer flersproget tekst korrekt, herunder CJK-skriftsystemer, hvor tegnantallets semantiske vægt er anderledes. Uanset om du skriver på dansk, engelsk, japansk eller kinesisk, afspejler tællingerne, hvad målplatformen faktisk ser.',
@@ -204,11 +204,11 @@ export const da: Translations = {
       },
       {
         q: 'Hvorfor tællede min SMS på 160 tegn pludselig som to beskeder?',
-        a: 'Dette sker på grund af en ændring i kodningsstilen for din tekst. Standard tekstbeskeder bruger GSM 7-bit kodning, som tillader præcis 160 tegn pr. SMS-pakke. Men i det øjeblik du indsætter et enkelt ikke-GSM-tegn — såsom en emoji, et specialsymbol eller et regionalt skrifttegn (som assamesisk eller hindi) — tvinger hele beskeden straks et skift til Unicode-kodning. Når en besked skifter til Unicode, falder den maksimale kapacitet pr. individuel SMS-pakke drastisk fra 160 tegn til kun 70 tegn. Desuden skal systemet, hvis din tekst overskrider den tærskel på 70 tegn, bruge data til sammenkoblet besked (User Data Headers), hvilket reducerer din pakke til 67 tegn pr. sammenkædet SMS-segment. For at undgå uventede overraskelser på din teleregning, brug altid en online SMS-tegntæller til at overvåge dit aktive kodningsmærke, før du kører en masse-kampagne!',
+        a: 'Det sker på grund af en ændring i tekstens kodning. Standard-sms bruger GSM-7-kodning, som rummer op til 160 tegn i en enkelt besked. Straks teksten indeholder et ikke-GSM-tegn — en emoji, et regionalt skriftsystem eller visse symboler — skifter hele beskeden til Unicode, der kun rummer 70 tegn pr. segment. Overstiger en Unicode-besked 70 tegn, tilføjes en flerdelssheader og den brugbare plads pr. segment falder til 67 tegn. PostTruncate viser live den aktive kodning og antallet af segmenter, så du altid ved, hvor bruddet sker.',
       },
       {
         q: 'Tæller specialtegn og emojis som ét tegn i en SMS?',
-        a: 'Nej. Mens et standard bogstav eller tal tæller som et enkelt tegn, behandles specialsymboler og emojis meget anderledes af globale telekommunikationsnetværk. Specialsymboler tilhørende den standard GSM-basis-udvidelsestabel — såsom Euro-symbolet (€), firkantede parenteser [ ], krullede parenteser { } og lodret streg | — tæller faktisk som 2 tegn hver, selvom de holder din besked i den effektive GSM 7-bit tilstand. På den anden side er emojis meget komplekse datapakker, der ikke kan passes ind i standard 7-bit tekst. Tilføjelse af en emoji tvinger din besked til 16-bit Unicode, og komprimerer din samlede beskedtildeling pr. segment fra 160 tegn til 70 tegn.',
+        a: 'Ikke altid. Standardbogstaver og -tal tæller hvert som ét tegn. Symboler fra den udvidede GSM-tabel — herunder eurotegnet (€), firkantede parenteser, krøllede parenteser og lodret streg | — tæller hvert som to tegn, selv om beskeden forbliver i GSM-7-tilstand. Emojis er anderledes: ét emoji tvinger hele beskeden til Unicode og reducerer grænsen pr. segment fra 160 til 70 tegn.',
       },
     ],
   },

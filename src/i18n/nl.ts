@@ -44,14 +44,14 @@ export const nl: Translations = {
     ariaLabel: 'Over PostTruncate',
     sections: [
       {
-        heading: 'Complete online tekenteller & tekstlengtecontrole',
+        heading: 'Een tekenteller voor sociale media',
         paragraphs: [
           '<strong>PostTruncate</strong> is een gratis tekenteller die volledig in je browser werkt — geen uploads, geen account vereist. Plak of typ een tekst en je ziet direct het aantal tekens, woorden, leestijd en letterverdeling, alles live bijgewerkt.',
           'Het is handig voor iedereen die met tekstlimieten werkt: schrijvers die een kop inkorten, ontwikkelaars die een string controleren, of studenten die de lengte van een essay nagaan. Omdat alles lokaal verwerkt wordt, verlaat je tekst je apparaat op geen enkel moment.',
         ],
       },
       {
-        heading: 'Geavanceerde SMS-tekenteller en segmentcalculator',
+        heading: 'SMS-codering en segmentberekening',
         paragraphs: [
           'SMS gebruikt twee coderingen en de meeste tools negeren dat onderscheid. PostTruncate herkent automatisch of je bericht <strong>GSM-7</strong> (160 tekens per sms) of <strong>Unicode</strong> (70 tekens) gebruikt — en de overstap kan plaatsvinden zodra je één emoji of speciaal teken typt.',
           'De tool markeert ook tekens uit de uitgebreide GSM-tabel — zoals het euroteken (€), vierkante haken of het pipe-symbool — die in GSM-7-modus blijven maar elk twee tekenplaatsen innemen in plaats van één. Dat verborgen verbruik zorgt regelmatig voor onverwachte segmentering.',
@@ -59,21 +59,21 @@ export const nl: Translations = {
         ],
       },
       {
-        heading: '𝕏 (Twitter) tekenteller & automatische threadsplitser',
+        heading: 'X (Twitter): limieten en automatische threadsplitsing',
         paragraphs: [
           'X (Twitter) hanteert twee regels die mensen vaak verrassen: de limiet van 280 tekens, en het feit dat elk link — ongeacht de werkelijke lengte — voor precies 23 tekens meetelt. PostTruncate past beide regels toe, zodat de getoonde teller overeenkomt met wat X toont na het t.co-wrapper.',
           'Wanneer je concept te lang is, verdeelt de ingebouwde <strong>threadsplitser</strong> het automatisch in genummerde tweets op natuurlijke zinsgrenzen — nooit midden in een woord. Elke kaart toont het tekenantal en de positie, zodat je de volledige thread kunt nakijken voor je publiceert.',
         ],
       },
       {
-        heading: 'Instagram & Facebook tekenteller inclusief spaties',
+        heading: 'Tekenlimits op Instagram en Facebook',
         paragraphs: [
           'Instagram staat tot 2.200 tekens toe in een bijschrift, maar toont slechts de eerste 125 of zo voordat de rest achter een link verdwijnt. PostTruncate geeft precies aan waar die grens valt, zodat de eerste zichtbare regel in de feed altijd de regel is die je wilt overbrengen.',
           'Het dashboard houdt ook het <strong>aantal hashtags</strong> realtime bij. Instagram plaatst berichten met meer dan 5 hashtags stilletjes niet, daarom verschijnt er een waarschuwing voor je die grens bereikt. Spaties worden altijd meegeteld, net als het platform zelf doet.',
         ],
       },
       {
-        heading: 'Geavanceerd woorden tellen, symbolen en platformtekstanalyse',
+        heading: 'Woordtelling, leesbaarheid en platformanalyse',
         paragraphs: [
           'Naast platformlimieten telt PostTruncate ook woorden, zinnen, alinea\'s en symbolen — alles live terwijl je typt. Handig voor SEO-metabeschrijvingen, documentatiereviews of elk schrijfproces waarbij je meer nodig hebt dan alleen een tekenaantal.',
           'Het dashboard verwerkt meertalige tekst correct, inclusief CJK-schriftsystemen waarbij tekenaantal een ander semantisch gewicht heeft. Of je nu in het Nederlands, Engels, Japans of Chinees schrijft, de tellers weerspiegelen wat het doelplatform werkelijk te zien krijgt.',
@@ -204,11 +204,11 @@ export const nl: Translations = {
       },
       {
         q: 'Waarom telde mijn SMS van 160 tekens plotseling als twee berichten?',
-        a: 'Dit gebeurt vanwege een wijziging in de coderingstijl van je tekst. Standaard tekstberichten gebruiken GSM 7-bit codering, wat ruimte biedt voor precies 160 tekens per SMS-pakket. Zodra je echter één enkel niet-GSM-teken invoegt — zoals een emoji, een speciaal symbool of een regionaal schriftteken (zoals Assamees of Hindi) — forceert het volledige bericht onmiddellijk een overschakeling naar Unicode-codering. Wanneer een bericht overschakelt naar Unicode, daalt de maximale capaciteit per individueel SMS-pakket drastisch van 160 tekens naar slechts 70 tekens. Bovendien moet het systeem, als je tekst die drempel van 70 tekens overschrijdt, meerdelige samenvoegingsgegevens (User Data Headers) gebruiken, waardoor je pakketgrootte daalt naar 67 tekens per samengevoegd SMS-segment. Gebruik altijd een online SMS-tekenteller om je actieve coderingsmarkering te controleren voordat je een bulkcampagne uitvoert, om onverwachte verassingen op je telecomrekening te voorkomen!',
+        a: 'Dit komt door een wijziging in de codering van de tekst. Standaard-sms gebruikt GSM-7-codering, die maximaal 160 tekens in één bericht past. Zodra de tekst een niet-GSM-teken bevat — een emoji, een regionaal schrift of bepaalde symbolen — schakelt het volledige bericht over naar Unicode, dat maar 70 tekens per segment bevat. Als een Unicode-bericht meer dan 70 tekens heeft, wordt een meerdelig header toegevoegd en daalt de bruikbare ruimte per segment tot 67 tekens. PostTruncate toont live de actieve codering en het aantal segmenten, zodat je altijd weet waar de grens valt.',
       },
       {
         q: 'Tellen speciale tekens en emoji als één teken in een SMS?',
-        a: 'Nee. Terwijl een standaardletter of -cijfer als één teken telt, worden speciale symbolen en emoji heel anders behandeld door wereldwijde telecommunicatienetwerken. Speciale symbolen die behoren tot de standaard GSM-basis-uitbreidingstabel — zoals het euroteken (€), haakjes [ ], accolades { } en het pipe-symbool | — tellen in feite als 2 tekens elk, ook al houden ze je bericht in de efficiënte GSM 7-bit modus. Aan de andere kant zijn emoji zeer complexe datapakketten die niet passen in standaard 7-bit tekst. Het toevoegen van een emoji dwingt je bericht naar 16-bit Unicode, waardoor je totale berichtruimte per segment wordt gecomprimeerd van 160 tekens naar 70 tekens.',
+        a: 'Niet altijd. Standaardletters en -cijfers tellen elk als één teken. Symbolen uit de uitgebreide GSM-tabel — waaronder het euroteken (€), vierkante haken, accolades en het pipe-symbool | — tellen elk als twee tekens, ook al blijft het bericht in GSM-7-modus. Emoji zijn anders: één emoji toevoegen dwingt het hele bericht naar Unicode, waardoor de limiet per segment van 160 naar 70 tekens daalt.',
       },
     ],
   },
