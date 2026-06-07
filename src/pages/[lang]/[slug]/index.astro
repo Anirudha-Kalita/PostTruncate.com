@@ -28,6 +28,27 @@ for (const tool of tools) {
   toolSlugs[tool.id] = tool.slugs[lang] ?? tool.slugs['en'];
 }
 
+// Build a per-tool { href, label } lookup used by seoCopy and guide card links.
+const toolLinks: Record<string, { href: string; label: string }> = {};
+for (const tool of tools) {
+  const slug = toolSlugs[tool.id];
+  if (slug) {
+    toolLinks[tool.id] = {
+      href: `/${lang}/${slug}/`,
+      label: tool.schemaName[lang] ?? tool.schemaName['en'],
+    };
+  }
+}
+
+// Parallel to t.seoCopy.sections — maps section index → tool ID (undefined = no link).
+const SECTION_TOOL_IDS: (string | undefined)[] = [
+  undefined,    // "A character counter built for social media"
+  'sms',        // "SMS encoding and segment counting"
+  'twitter',    // "X (Twitter) limits and automatic thread splitting"
+  'instagram',  // "Instagram and Facebook character limits"
+  undefined,    // "Word count, readability, and platform analytics"
+];
+
 // Referral banner: the ?platform= param is only known at runtime (static page),
 // so we pass all translated platform data to the client script via data attributes.
 const bannerPlatforms = {
@@ -156,14 +177,22 @@ const howToSchema = {
   <section class="seo-copy container-page" aria-label={t.seoCopy.ariaLabel}>
     <article class="seo-prose">
       {
-        t.seoCopy.sections.map((s) => (
-          <Fragment>
-            <h2>{s.heading}</h2>
-            {s.paragraphs.map((p) => (
-              <p set:html={p} />
-            ))}
-          </Fragment>
-        ))
+        t.seoCopy.sections.map((s, i) => {
+          const link = SECTION_TOOL_IDS[i] ? toolLinks[SECTION_TOOL_IDS[i]!] : undefined;
+          return (
+            <Fragment>
+              <h2>{s.heading}</h2>
+              {s.paragraphs.map((p) => (
+                <p set:html={p} />
+              ))}
+              {link && (
+                <p class="seo-copy__tool-link">
+                  <a href={link.href}>{link.label}</a>
+                </p>
+              )}
+            </Fragment>
+          );
+        })
       }
     </article>
   </section>
@@ -197,6 +226,11 @@ const howToSchema = {
                   </div>
                 ))}
               </dl>
+              {toolLinks[p.key] && (
+                <a href={toolLinks[p.key]!.href} class="guide__tool-link">
+                  {toolLinks[p.key]!.label}
+                </a>
+              )}
             </article>
           ))
         }
@@ -572,6 +606,18 @@ const howToSchema = {
     font-weight: 500;
     color: var(--color-ink);
   }
+  .guide__tool-link {
+    display: inline-block;
+    margin-top: 24px;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--color-ink);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  .guide__tool-link:hover {
+    opacity: 0.75;
+  }
   .guides__rail {
     display: none;
   }
@@ -707,6 +753,19 @@ const howToSchema = {
   .seo-prose strong {
     font-weight: 600;
     color: var(--color-ink);
+  }
+  .seo-copy__tool-link {
+    margin-top: 20px;
+  }
+  .seo-copy__tool-link a {
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--color-ink);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  .seo-copy__tool-link a:hover {
+    opacity: 0.75;
   }
 
   /* ── Responsive ─────────────────────────────────────────────────────── */
