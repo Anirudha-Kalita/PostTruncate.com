@@ -184,6 +184,21 @@ const canonical = canonicalOverride ?? localeHref(lang);
         url: 'https://posttruncate.com/',
       })}
     />
+    <script
+      type="application/ld+json"
+      set:html={JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'Organization',
+        name: 'PostTruncate',
+        url: 'https://posttruncate.com/',
+        logo: 'https://posttruncate.com/favicon-96x96.png',
+        contactPoint: {
+          '@type': 'ContactPoint',
+          contactType: 'customer support',
+          email: 'contact@posttruncate.com',
+        },
+      })}
+    />
     {
       jsonLd.map((block) => (
         <script
