@@ -8,6 +8,7 @@ import { LOCALES, getLocale } from '../../../i18n/config';
 import { tools } from '../../../data/tools';
 import PlatformBanner from '../../../components/PlatformBanner.astro';
 import TrustBar from '../../../components/TrustBar.astro';
+import HowItWorks from '../../../components/HowItWorks.astro';
 
 // One statically-rendered landing page per locale at the keyword-rich slug
 // (/en/character-counter/, /de/zeichenzaehler/, …). Slug values come from the
@@ -119,6 +120,9 @@ const pageUrl = new URL(`/${lang}/${locale.slug}/`, site).href;
   <div class="container-page mt-8">
     <Ad variant="leaderboard" />
   </div>
+
+  <!-- ── How it works ─────────────────────────────────────────────────── -->
+  <HowItWorks />
 
   <!-- ── Interactive workspace (the island) ───────────────────────────── -->
   <main id="workspace" class="container-page workspace">
