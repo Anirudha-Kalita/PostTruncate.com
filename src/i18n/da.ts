@@ -39,6 +39,11 @@ export const da: Translations = {
     onThisPage: 'På denne side',
   },
 
+  images: {
+    logoAlt: 'PostTruncate-logo',
+    platformLogo: '{platform}-logo',
+  },
+
   workspace: {
     title: 'Dit live-arbejdsområde',
     sub: 'Alt nedenfor opdateres øjeblikkeligt og bliver på din enhed.',

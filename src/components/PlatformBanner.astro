@@ -11,6 +11,7 @@
 
 interface PlatformData {
   name: string;
+  logoAlt: string;
   cardId: string;
   logo: string;
   color: string;
@@ -42,6 +43,7 @@ const { platforms, textTemplate, closeLabel } = Astro.props;
       height="20"
       alt=""
       class="platform-banner__logo"
+      aria-hidden="true"
     />
     <span id="platform-banner-text" class="platform-banner__text"></span>
     <span aria-hidden="true" class="platform-banner__arrow">↓</span>
@@ -156,7 +158,7 @@ const { platforms, textTemplate, closeLabel } = Astro.props;
   if (banner) {
     const allPlatforms = JSON.parse(banner.dataset.platforms ?? '{}') as Record<
       string,
-      { name: string; cardId: string; logo: string; color: string }
+      { name: string; logoAlt: string; cardId: string; logo: string; color: string }
     >;
     const tpl = banner.dataset.text ?? '';
     const pid = new URLSearchParams(location.search).get('platform');
@@ -171,7 +173,11 @@ const { platforms, textTemplate, closeLabel } = Astro.props;
       const closeBtn = document.getElementById('platform-banner-close');
 
       if (link) link.href = '#' + data.cardId;
-      if (logo) { logo.src = data.logo; logo.alt = data.name; }
+      if (logo) {
+        logo.src = data.logo;
+        logo.alt = data.logoAlt;
+        logo.removeAttribute('aria-hidden');
+      }
       if (textEl) textEl.textContent = tpl.replace('{platform}', data.name);
 
       banner.hidden = false;

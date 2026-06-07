@@ -39,6 +39,11 @@ export const ja: Translations = {
     onThisPage: 'このページの内容',
   },
 
+  images: {
+    logoAlt: 'PostTruncateのロゴ',
+    platformLogo: '{platform}のロゴ',
+  },
+
   workspace: {
     title: 'リアルタイムワークスペース',
     sub: '以下のすべてが即座に更新され、データはお使いの端末内にとどまります。',

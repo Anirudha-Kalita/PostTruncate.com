@@ -39,6 +39,11 @@ export const nl: Translations = {
     onThisPage: 'Op deze pagina',
   },
 
+  images: {
+    logoAlt: 'PostTruncate-logo',
+    platformLogo: '{platform}-logo',
+  },
+
   workspace: {
     title: 'Je live werkruimte',
     sub: 'Alles hieronder wordt direct bijgewerkt en blijft op je apparaat.',

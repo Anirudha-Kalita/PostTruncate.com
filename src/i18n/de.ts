@@ -40,6 +40,11 @@ export const de: Translations = {
     onThisPage: 'Auf dieser Seite',
   },
 
+  images: {
+    logoAlt: 'PostTruncate-Logo',
+    platformLogo: '{platform}-Logo',
+  },
+
   workspace: {
     title: 'Dein Live-Arbeitsbereich',
     sub: 'Alles unten aktualisiert sich sofort und bleibt auf deinem Gerät.',

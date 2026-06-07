@@ -381,6 +381,13 @@ export interface Translations {
     /** Accessible label for the in-page H2 jump navigation. */
     onThisPage: string;
   };
+  /** Alt text for site images — logos, platform icons, etc. */
+  images: {
+    /** Site mark shown beside the wordmark in nav and footer. */
+    logoAlt: string;
+    /** "{platform}" → localized platform name, e.g. "X / Twitter logo". */
+    platformLogo: string;
+  };
   workspace: {
     title: string;
     sub: string;

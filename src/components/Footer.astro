@@ -4,6 +4,7 @@
 // while their hrefs (anchors + the locale-prefixed home) are wired here.
 import { interp } from '../i18n/interp';
 import { getLocale } from '../i18n/config';
+import { getTranslations } from '../i18n';
 import type { Translations } from '../i18n/types';
 import { tools } from '../data/tools';
 
@@ -18,6 +19,7 @@ interface Props {
 const { lang, footer, isHome = false } = Astro.props;
 const year = 2026;
 const locale = getLocale(lang);
+const images = getTranslations(lang).images;
 const home = `/${lang}/${locale.slug}/`;
 
 // Hrefs paired positionally with each column's translated labels. In-page
@@ -74,7 +76,7 @@ const guidesLinks = tools.map((tool, i) => ({
       <div class="container-page footer__inner">
         <div class="footer__brand">
           <a href={home} class="footer__logo" aria-label={footer.homeAria}>
-            <img class="footer__mark" src="/favicon.svg" alt="" aria-hidden="true" width="20" height="20" />
+            <img class="footer__mark" src="/favicon.svg" alt={images.logoAlt} width="20" height="20" />
             <span>PostTruncate</span>
           </a>
           <p class="footer__tag">{footer.tag}</p>
@@ -111,7 +113,7 @@ const guidesLinks = tools.map((tool, i) => ({
       <div class="container-page footer__inner footer__inner--compact">
         <div class="footer__brand">
           <a href={home} class="footer__logo" aria-label={footer.homeAria}>
-            <img class="footer__mark" src="/favicon.svg" alt="" aria-hidden="true" width="20" height="20" />
+            <img class="footer__mark" src="/favicon.svg" alt={images.logoAlt} width="20" height="20" />
             <span>PostTruncate</span>
           </a>
           <p class="footer__tag">{footer.tag}</p>

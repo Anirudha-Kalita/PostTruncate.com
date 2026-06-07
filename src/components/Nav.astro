@@ -5,6 +5,7 @@
 // script below only adds close-on-navigate / outside-tap / Escape as polish.
 import { LOCALES, getLocale } from '../i18n/config';
 import { getTranslations } from '../i18n';
+import { interp } from '../i18n/interp';
 import type { Translations } from '../i18n/types';
 import { tools } from '../data/tools';
 
@@ -41,17 +42,21 @@ const PLATFORM_LOGOS: Record<string, string> = {
   threads:     '/logos/threads.svg',
   'google-serp': '/logos/google-serp.svg',
 };
-const guidesLinks = tools.map((tool, i) => ({
-  label: t.footer.columns.guides.links[i],
-  href: `/${lang}/${tool.slugs[lang] ?? tool.slugs['en']}/`,
-  logo: PLATFORM_LOGOS[tool.id] ?? '/logos/google-serp.svg',
-}));
+const guidesLinks = tools.map((tool, i) => {
+  const label = t.footer.columns.guides.links[i];
+  return {
+    label,
+    logoAlt: interp(t.images.platformLogo, { platform: label }),
+    href: `/${lang}/${tool.slugs[lang] ?? tool.slugs['en']}/`,
+    logo: PLATFORM_LOGOS[tool.id] ?? '/logos/google-serp.svg',
+  };
+});
 ---
 
 <header class="nav">
   <div class="container-page nav__inner">
     <a href={home} class="nav__brand" aria-label={nav.homeAria}>
-      <img class="nav__mark" src="/favicon.svg" alt="" aria-hidden="true" width="22" height="22" />
+      <img class="nav__mark" src="/favicon.svg" alt={t.images.logoAlt} width="22" height="22" />
       <span class="nav__word">PostTruncate</span>
     </a>
 
@@ -73,7 +78,7 @@ const guidesLinks = tools.map((tool, i) => ({
             {guidesLinks.map((gl) => (
               <li>
                 <a href={gl.href} class="nav__guides-link">
-                  <img src={gl.logo} width="20" height="20" alt="" aria-hidden="true" class="nav__guides-logo" loading="lazy" decoding="async" />
+                  <img src={gl.logo} width="20" height="20" alt={gl.logoAlt} class="nav__guides-logo" loading="lazy" decoding="async" />
                   <span>{gl.label}</span>
                 </a>
               </li>
@@ -125,12 +130,11 @@ const guidesLinks = tools.map((tool, i) => ({
                       <img
                         class="nav__lang-flag"
                         src={l.flagSrc}
-                        alt=""
+                        alt={l.label}
                         width="22"
                         height="16"
                         loading="lazy"
                         decoding="async"
-                        aria-hidden="true"
                       />
                       <span class="nav__lang-name">{l.label}</span>
                     </span>
@@ -212,7 +216,7 @@ const guidesLinks = tools.map((tool, i) => ({
               <div class="nav__guides-mobile-panel">
                 {guidesLinks.map((gl) => (
                   <a href={gl.href} class="nav__panel-link nav__guides-mobile-link">
-                    <img src={gl.logo} width="20" height="20" alt="" aria-hidden="true" class="nav__guides-logo" loading="lazy" decoding="async" />
+                    <img src={gl.logo} width="20" height="20" alt={gl.logoAlt} class="nav__guides-logo" loading="lazy" decoding="async" />
                     <span>{gl.label}</span>
                   </a>
                 ))}

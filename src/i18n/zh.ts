@@ -39,6 +39,11 @@ export const zh: Translations = {
     onThisPage: '本页内容',
   },
 
+  images: {
+    logoAlt: 'PostTruncate 标志',
+    platformLogo: '{platform}标志',
+  },
+
   workspace: {
     title: '你的实时工作区',
     sub: '下方的一切都会即时更新，并始终保留在你的设备上。',
