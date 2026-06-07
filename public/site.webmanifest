@@ -1,6 +1,6 @@
 {
   "name": "PostTruncate",
-  "short_name": "Truncater",
+  "short_name": "Truncate",
   "icons": [
     {
       "src": "/web-app-manifest-192x192.png",

@@ -7,6 +7,7 @@ import { getTranslations } from '../../../i18n';
 import { LOCALES, getLocale } from '../../../i18n/config';
 import { tools } from '../../../data/tools';
 import PlatformBanner from '../../../components/PlatformBanner.astro';
+import TrustBar from '../../../components/TrustBar.astro';
 
 // One statically-rendered landing page per locale at the keyword-rich slug
 // (/en/character-counter/, /de/zeichenzaehler/, …). Slug values come from the
@@ -110,6 +111,9 @@ const pageUrl = new URL(`/${lang}/${locale.slug}/`, site).href;
       </div>
     </div>
   </section>
+
+  <!-- ── Trust bar ─────────────────────────────────────────────────────── -->
+  <TrustBar />
 
   <!-- ── Top leaderboard ad (reserved height → 0 CLS) ─────────────────── -->
   <div class="container-page mt-8">
@@ -221,32 +225,68 @@ const pageUrl = new URL(`/${lang}/${locale.slug}/`, site).href;
   </section>
 
   <!-- Re-scroll to URL hash after the Dashboard island finishes rendering.
-       The Preact island is an empty shell in the initial HTML; once it hydrates
-       the page grows ~8 000 px and the browser's original hash-scroll lands in
-       the wrong section. We poll page height until it stabilises (≥3 stable
-       frames), then scroll to the intended target. -->
+       Problem: the Preact island (<astro-island>) is an empty shell in initial
+       HTML. Once Preact hydrates, the page grows ~8 000 px and the browser's
+       native hash-scroll lands far above the intended section.
+
+       Fix strategy:
+       1. MutationObserver detects when Preact mounts into the island.
+       2. After hydration starts, poll scrollHeight until it stabilises (layout done).
+       3. Scroll with behavior:'instant' to bypass CSS scroll-behavior:smooth on
+          <html>, which would otherwise animate from the wrong position. -->
   <script is:inline>
     (function () {
       var hash = window.location.hash;
-      if (!hash) return;
+      if (!hash || hash === '#') return;
       var el = document.querySelector(hash);
       if (!el) return;
 
-      var lastH = document.documentElement.scrollHeight;
-      var stable = 0;
+      // No island on this page → browser's native hash scroll is sufficient.
+      var island = document.querySelector('astro-island');
+      if (!island) return;
 
-      function tryScroll() {
-        var h = document.documentElement.scrollHeight;
-        if (h !== lastH) { lastH = h; stable = 0; }
-        else { stable++; }
-        if (stable >= 3) {
-          el.scrollIntoView({ block: 'start' });
-          return;
+      /** Scroll to target once page layout has fully settled. */
+      function waitThenScroll() {
+        var lastH = document.documentElement.scrollHeight;
+        var stable = 0;
+        var ticks  = 0;
+        var MAX    = 150; // ~2.5 s safety cap at 60 fps
+
+        function tick() {
+          ticks++;
+          var h = document.documentElement.scrollHeight;
+          if (h !== lastH) { lastH = h; stable = 0; }
+          else              { stable++; }
+
+          if (stable >= 5 || ticks >= MAX) {
+            // Use 'instant' to skip the CSS smooth-scroll animation; otherwise
+            // scroll-behavior:smooth on <html> conflicts with the native hash
+            // scroll and the corrective scroll never visibly lands.
+            el.scrollIntoView({ block: 'start', behavior: 'instant' });
+            return;
+          }
+          requestAnimationFrame(tick);
         }
-        requestAnimationFrame(tryScroll);
+        requestAnimationFrame(tick);
       }
 
-      requestAnimationFrame(tryScroll);
+      // Island already hydrated (fast connection / bfcache)?
+      if (island.children.length > 0) {
+        waitThenScroll();
+        return;
+      }
+
+      // Wait for Preact to mount its first child into the island.
+      var obs = new MutationObserver(function () {
+        if (island.children.length > 0) {
+          obs.disconnect();
+          waitThenScroll();
+        }
+      });
+      obs.observe(island, { childList: true });
+
+      // Hard fallback: if island never hydrates, scroll anyway after 6 s.
+      setTimeout(function () { obs.disconnect(); waitThenScroll(); }, 6000);
     })();
   </script>
 </Layout>
