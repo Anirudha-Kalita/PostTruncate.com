@@ -5,7 +5,9 @@ import OnThisPage from './OnThisPage.astro';
 import type { ToolDefinition } from '../data/tools';
 import { DEFAULT_LOCALE } from '../i18n/config';
 import { getTranslations } from '../i18n';
+import { interp } from '../i18n/interp';
 import { buildCanonicalSlugs, prepareToolContent } from '../lib/headingAnchors';
+import { formatLocaleDate } from '../lib/contentDates';
 
 interface Props {
   tool: ToolDefinition;
@@ -23,6 +25,9 @@ const globalT = getTranslations(lang);
 
 const canonicalSlugs = buildCanonicalSlugs(tool.content[DEFAULT_LOCALE] ?? '');
 const { html: bodyHtml, sections } = prepareToolContent(tStr(tool.content), canonicalSlugs);
+const lastUpdatedLine = interp(globalT.toolPage.lastUpdated, {
+  date: formatLocaleDate(tool.lastUpdated, lang),
+});
 ---
 
 <section class="tool-page container-page">
@@ -33,6 +38,8 @@ const { html: bodyHtml, sections } = prepareToolContent(tStr(tool.content), cano
     </header>
 
     <div class="tool-page__body" set:html={bodyHtml} />
+
+    <p class="tool-page__updated">{lastUpdatedLine}</p>
 
     {!hideCta && (
       <div class="tool-page__cta">
@@ -112,8 +119,17 @@ const { html: bodyHtml, sections } = prepareToolContent(tStr(tool.content), cano
     margin-top: 6px;
   }
 
+  .tool-page__updated {
+    margin-top: 32px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--color-mute);
+  }
+
   .tool-page__cta {
-    margin-top: 40px;
+    margin-top: 24px;
     padding-top: 32px;
     border-top: 1px solid var(--color-hairline);
   }

@@ -37,6 +37,7 @@ export const ja: Translations = {
 
   toolPage: {
     onThisPage: 'このページの内容',
+    lastUpdated: '最終更新：{date}',
   },
 
   images: {

@@ -37,6 +37,7 @@ export const zh: Translations = {
 
   toolPage: {
     onThisPage: '本页内容',
+    lastUpdated: '最后更新：{date}',
   },
 
   images: {

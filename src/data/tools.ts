@@ -34,6 +34,7 @@ export const tools: ToolDefinition[] = [
   {
     id: 'twitter',
     editorAnchor: 'workspace',
+    lastUpdated: '2026-05-18',
     platformLimits:
       '280 characters per tweet, links always count as 23 characters regardless of length, unlimited thread tweets',
 
@@ -255,6 +256,7 @@ export const tools: ToolDefinition[] = [
   {
     id: 'instagram',
     editorAnchor: 'workspace',
+    lastUpdated: '2026-05-22',
     platformLimits:
       '2200 character caption limit, feed truncates at ~125 characters behind a "more" link, maximum 5 hashtags before the post silently fails to publish',
 
@@ -485,6 +487,7 @@ export const tools: ToolDefinition[] = [
   {
     id: 'linkedin',
     editorAnchor: 'workspace',
+    lastUpdated: '2026-05-25',
     platformLimits:
       '3000 character post hard limit, desktop feed folds at ~210 characters, mobile feed folds at ~140 characters',
 
@@ -686,6 +689,7 @@ export const tools: ToolDefinition[] = [
   {
     id: 'facebook',
     editorAnchor: 'workspace',
+    lastUpdated: '2026-06-01',
     platformLimits:
       '63,206 character technical limit, feed truncates at ~480 characters with a See More link, posts under 80 characters consistently get highest engagement',
 
@@ -907,6 +911,7 @@ export const tools: ToolDefinition[] = [
   {
     id: 'sms',
     editorAnchor: 'workspace',
+    lastUpdated: '2026-05-15',
     platformLimits:
       '160 characters per segment in GSM-7 encoding, 70 characters per segment in Unicode encoding, multipart GSM reduces to 153 chars per segment, multipart Unicode reduces to 67 chars per segment, GSM extended characters (€ [ ] { } |) count as 2 characters each',
 
@@ -1139,6 +1144,7 @@ export const tools: ToolDefinition[] = [
   {
     id: 'threads',
     editorAnchor: 'workspace',
+    lastUpdated: '2026-05-28',
     platformLimits:
       '500 characters per post, links counted in full (not shortened like X), overflow chains as numbered reply posts, first post carries all feed weight',
 
@@ -1370,6 +1376,7 @@ export const tools: ToolDefinition[] = [
   {
     id: 'google-serp',
     editorAnchor: 'workspace',
+    lastUpdated: '2026-06-05',
     platformLimits:
       'Page title: 60 characters before Google truncates in search results (~600px pixel width), meta description: 155 characters before truncation in search snippets',
 

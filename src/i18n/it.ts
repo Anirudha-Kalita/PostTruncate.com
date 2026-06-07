@@ -37,6 +37,7 @@ export const it: Translations = {
 
   toolPage: {
     onThisPage: 'In questa pagina',
+    lastUpdated: 'Ultimo aggiornamento: {date}',
   },
 
   images: {

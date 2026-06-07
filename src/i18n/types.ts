@@ -380,6 +380,8 @@ export interface Translations {
   toolPage: {
     /** Accessible label for the in-page H2 jump navigation. */
     onThisPage: string;
+    /** "{date}" → locale-formatted date from tools.ts lastUpdated. */
+    lastUpdated: string;
   };
   /** Alt text for site images — logos, platform icons, etc. */
   images: {

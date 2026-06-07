@@ -37,6 +37,7 @@ export const da: Translations = {
 
   toolPage: {
     onThisPage: 'På denne side',
+    lastUpdated: 'Sidst opdateret: {date}',
   },
 
   images: {

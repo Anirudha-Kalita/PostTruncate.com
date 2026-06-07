@@ -6,6 +6,10 @@ import sitemap from '@astrojs/sitemap';
 import tailwindcss from '@tailwindcss/vite';
 import { LOCALES, LOCALE_CODES, DEFAULT_LOCALE } from './src/i18n/config.ts';
 import { tools } from './src/data/tools.ts';
+import {
+  buildToolLastmodByPath,
+  resolveSitemapLastmod,
+} from './src/lib/sitemapLastmod.ts';
 
 // ── Build a reverse look-up: given a URL pathname, resolve the tool + locale
 //    so the serialize hook can emit the correct hreflang alternates even when
@@ -33,6 +37,9 @@ for (const tool of tools) {
 
 // Locale-homepage slug look-up: /en/character-counter/ etc.
 const homepageSlugs = new Set(LOCALES.map((l) => `/${l.code}/${l.slug}/`));
+
+// Per-URL lastmod: tool pages from tools.ts; static routes from git history.
+const toolLastmodByPath = buildToolLastmodByPath();
 
 // https://astro.build/config
 // Default static (SSG) output: informational copy + platform guides are
@@ -98,6 +105,7 @@ export default defineConfig({
               url: a.href,
             }));
           }
+          item.lastmod = resolveSitemapLastmod(pathname, toolLastmodByPath, homepageSlugs);
           return item;
         }
 
@@ -113,11 +121,13 @@ export default defineConfig({
               url: `${SITE}/${DEFAULT_LOCALE}/${LOCALES.find((l) => l.code === DEFAULT_LOCALE).slug}/`,
             },
           ];
+          item.lastmod = resolveSitemapLastmod(pathname, toolLastmodByPath, homepageSlugs);
           return item;
         }
 
         // Everything else (about, contact, privacy, terms, embed-widget)
         // keeps the auto-generated hreflang from the i18n config.
+        item.lastmod = resolveSitemapLastmod(pathname, toolLastmodByPath, homepageSlugs);
         return item;
       },
     }),
