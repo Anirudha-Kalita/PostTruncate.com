@@ -260,7 +260,11 @@ export function MetaMonitor({ text, lang, s, toolLinkHref, facebookToolLinkHref,
       </Card>
   );
 
-  return priority === 'facebook'
-    ? <>{facebookCard}{instagramCard}</>
-    : <>{instagramCard}{facebookCard}</>;
+  return (
+    <div class="flex flex-col gap-5">
+      {priority === 'facebook'
+        ? <>{facebookCard}{instagramCard}</>
+        : <>{instagramCard}{facebookCard}</>}
+    </div>
+  );
 }
