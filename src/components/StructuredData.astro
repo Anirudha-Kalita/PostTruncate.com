@@ -35,7 +35,8 @@ interface Props {
   description: string;
   /** BCP-47 language tag (e.g. "en", "ja"). */
   inLanguage: string;
-  /** FAQ Q&A pairs — required when type="home". Source: t.faq.items. */
+  /** FAQ Q&A pairs → FAQPage. Home uses t.faq.items; platform pages pass their
+      own tool.faq. Emitted whenever present, on either page type. */
   faqItems?: FaqEntry[];
   /** Ordered breadcrumb trail — required when type="platform". */
   breadcrumbs?: BreadcrumbCrumb[];
@@ -64,9 +65,10 @@ const softwareApplication = {
   offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
 };
 
-// ── FAQPage — home only, from the same Q&A the page renders ───────────────
+// ── FAQPage — home + any platform page that supplies its own Q&A, from the
+//    same items the page renders below ──────────────────────────────────────
 const faqPage =
-  type === 'home' && faqItems.length > 0
+  faqItems.length > 0
     ? {
         '@context': 'https://schema.org',
         '@type': 'FAQPage',

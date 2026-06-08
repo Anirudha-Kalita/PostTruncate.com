@@ -24,6 +24,14 @@ export interface ToolDefinition {
   metaDescriptions: Record<string, string>;
   /** locale → 300+ word body content (may contain inline HTML like <strong>) */
   content: Record<string, string>;
+  /** locale → short intro lede shown above the embedded tool on platform pages. Optional. */
+  intro?: Record<string, string>;
+  /**
+   * locale → platform-specific FAQ items, rendered as an accordion and as
+   * FAQPage JSON-LD from this single source. Optional; its presence switches a
+   * platform page to the standalone template (embedded tool + FAQ + cross-promo).
+   */
+  faq?: Record<string, { q: string; a: string }[]>;
   /** locale → tool name used in WebApplication JSON-LD schema */
   schemaName: Record<string, string>;
   /** Plain English description of platform character/word limits — used as a shared reference when authoring content. Not rendered directly. */
@@ -90,23 +98,116 @@ export const tools: ToolDefinition[] = [
       da: 'Gratis Twitter/X tegntæller. Følg 280-tegns-grænsen live, se hvorfor hvert link tæller som 23 tegn, og opdel lange tekster automatisk i tråde.',
     },
 
+    intro: {
+      en: "Check any tweet against X's real limits before you post — the counter below updates live as you type, applies the 23-character link rule, and splits long drafts into clean threads.",
+      es: "Comprueba cualquier tweet con los límites reales de X antes de publicar: el contador de abajo se actualiza en vivo mientras escribes, aplica la regla de los 23 caracteres para enlaces y divide los textos largos en hilos limpios.",
+      de: "Prüfe jeden Tweet anhand der echten Limits von X, bevor du postest — der Zähler unten aktualisiert sich live beim Tippen, wendet die 23-Zeichen-Regel für Links an und teilt lange Entwürfe in saubere Threads.",
+      fr: "Vérifiez n'importe quel tweet selon les vraies limites de X avant de publier : le compteur ci-dessous se met à jour en direct pendant que vous écrivez, applique la règle des 23 caractères pour les liens et divise les longs brouillons en fils nets.",
+      pt: "Confira qualquer tweet com os limites reais do X antes de publicar: o contador abaixo é atualizado ao vivo enquanto você digita, aplica a regra dos 23 caracteres para links e divide textos longos em threads organizadas.",
+      it: "Controlla qualsiasi tweet con i limiti reali di X prima di pubblicare: il contatore qui sotto si aggiorna in tempo reale mentre scrivi, applica la regola dei 23 caratteri per i link e divide le bozze lunghe in thread ordinati.",
+      nl: "Controleer elke tweet aan de echte limieten van X voordat je plaatst — de teller hieronder werkt live bij terwijl je typt, past de 23-tekenregel voor links toe en splitst lange concepten in nette threads.",
+      ja: "投稿する前に、Xの実際の制限でツイートをチェック。下のカウンターは入力中にリアルタイムで更新され、リンクの23文字ルールを適用し、長い下書きをきれいなスレッドに分割します。",
+      zh: "发布前用 X 的真实限制检查任意推文：下方的计数器在你输入时实时更新，应用链接 23 字符规则，并将长草稿拆分为整齐的推文串。",
+      da: "Tjek ethvert tweet mod X's reelle grænser, før du poster — tælleren nedenfor opdateres live, mens du skriver, anvender 23-tegns-reglen for links og opdeler lange udkast i rene tråde.",
+    },
+
+    faq: {
+      en: [
+        {
+          q: 'Is the X character limit still 280?',
+          a: 'For free accounts, yes — standard posts, replies, and quote posts are all capped at 280 characters. X Premium subscribers can publish long posts of up to 25,000 characters, but everyone reading without Premium still sees the same public post.',
+        },
+        {
+          q: 'Do links and images count toward the 280-character limit?',
+          a: 'Links do: every URL counts as a flat 23 characters via the t.co shortener, even when it displays in full. Attached photos, videos, GIFs, and polls don\'t count at all, and a quoted post\'s URL is free too.',
+        },
+        {
+          q: 'Why does my Japanese or emoji-heavy tweet hit the limit so fast?',
+          a: 'X uses weighted character counting. Latin letters and digits weigh 1, but characters in CJK ranges (Chinese, Japanese, Korean) and most emoji weigh 2 apiece — so a visually short post can still reach 280. The counter on this page reflects that weighting in real time.',
+        },
+        {
+          q: 'How do I post something longer than 280 characters?',
+          a: 'Either subscribe to X Premium for long posts, or split your text into a thread. Paste your draft into the editor above and the thread splitter breaks it into numbered, sub-280 tweets at natural sentence boundaries.',
+        },
+      ],
+      es: [
+        { q: "¿El límite de caracteres de X sigue siendo 280?", a: "En las cuentas gratuitas, sí: las publicaciones, respuestas y citas tienen un límite de 280 caracteres. Los suscriptores de X Premium pueden publicar posts largos de hasta 25 000 caracteres, pero quien lee sin Premium ve la misma publicación pública." },
+        { q: "¿Los enlaces y las imágenes cuentan para el límite de 280 caracteres?", a: "Los enlaces sí: cada URL cuenta como 23 caracteres fijos por el acortador t.co, aunque se muestre completa. Las fotos, vídeos, GIF y encuestas adjuntos no cuentan, y la URL de una cita tampoco." },
+        { q: "¿Por qué mi tweet en japonés o con muchos emojis llega tan rápido al límite?", a: "X usa un recuento ponderado. Las letras y cifras latinas pesan 1, pero los caracteres de los rangos CJK (chino, japonés, coreano) y la mayoría de los emojis pesan 2 cada uno, así que un texto corto a la vista puede alcanzar los 280. El contador de esta página refleja esa ponderación en tiempo real." },
+        { q: "¿Cómo publico algo de más de 280 caracteres?", a: "Suscríbete a X Premium para posts largos o divide tu texto en un hilo. Pega tu borrador en el editor de arriba y el divisor de hilos lo separa en tweets numerados de menos de 280 caracteres en los límites naturales de las frases." },
+      ],
+      de: [
+        { q: "Liegt das Zeichenlimit von X immer noch bei 280?", a: "Bei kostenlosen Konten ja: Beiträge, Antworten und Zitate sind auf 280 Zeichen begrenzt. X-Premium-Abonnenten können lange Beiträge mit bis zu 25.000 Zeichen veröffentlichen, doch ohne Premium sieht man denselben öffentlichen Beitrag." },
+        { q: "Zählen Links und Bilder zum 280-Zeichen-Limit?", a: "Links schon: Jede URL zählt durch den t.co-Shortener pauschal 23 Zeichen, auch wenn sie vollständig angezeigt wird. Angehängte Fotos, Videos, GIFs und Umfragen zählen gar nicht, und die URL eines Zitats ist ebenfalls frei." },
+        { q: "Warum erreicht mein japanischer oder emoji-lastiger Tweet das Limit so schnell?", a: "X verwendet eine gewichtete Zählung. Lateinische Buchstaben und Ziffern wiegen 1, aber Zeichen aus den CJK-Bereichen (Chinesisch, Japanisch, Koreanisch) und die meisten Emojis wiegen je 2 — ein optisch kurzer Beitrag kann so trotzdem 280 erreichen. Der Zähler hier spiegelt diese Gewichtung in Echtzeit wider." },
+        { q: "Wie poste ich etwas, das länger als 280 Zeichen ist?", a: "Abonniere X Premium für lange Beiträge oder teile deinen Text in einen Thread. Füge deinen Entwurf in den Editor oben ein und der Thread-Splitter zerlegt ihn an natürlichen Satzgrenzen in nummerierte Tweets unter 280 Zeichen." },
+      ],
+      fr: [
+        { q: "La limite de caractères de X est-elle toujours de 280 ?", a: "Pour les comptes gratuits, oui : les posts, réponses et citations sont limités à 280 caractères. Les abonnés X Premium peuvent publier de longs posts jusqu'à 25 000 caractères, mais sans Premium on voit le même post public." },
+        { q: "Les liens et les images comptent-ils dans la limite de 280 caractères ?", a: "Les liens oui : chaque URL compte pour 23 caractères fixes via le raccourcisseur t.co, même affichée en entier. Les photos, vidéos, GIF et sondages joints ne comptent pas, et l'URL d'une citation est gratuite aussi." },
+        { q: "Pourquoi mon tweet en japonais ou plein d'émojis atteint-il si vite la limite ?", a: "X utilise un comptage pondéré. Les lettres et chiffres latins pèsent 1, mais les caractères des plages CJK (chinois, japonais, coréen) et la plupart des émojis pèsent 2 chacun — un texte visuellement court peut donc atteindre 280. Le compteur de cette page reflète cette pondération en temps réel." },
+        { q: "Comment publier un texte de plus de 280 caractères ?", a: "Abonnez-vous à X Premium pour les longs posts, ou divisez votre texte en fil. Collez votre brouillon dans l'éditeur ci-dessus et le diviseur de fils le découpe en tweets numérotés de moins de 280 caractères aux limites naturelles des phrases." },
+      ],
+      pt: [
+        { q: "O limite de caracteres do X ainda é 280?", a: "Em contas gratuitas, sim: publicações, respostas e citações têm limite de 280 caracteres. Assinantes do X Premium podem publicar posts longos de até 25.000 caracteres, mas quem lê sem Premium vê a mesma publicação pública." },
+        { q: "Links e imagens contam para o limite de 280 caracteres?", a: "Links contam: cada URL conta como 23 caracteres fixos pelo encurtador t.co, mesmo exibida por completo. Fotos, vídeos, GIFs e enquetes anexados não contam, e a URL de uma citação também é gratuita." },
+        { q: "Por que meu tweet em japonês ou com muitos emojis atinge o limite tão rápido?", a: "O X usa contagem ponderada. Letras e números latinos pesam 1, mas caracteres das faixas CJK (chinês, japonês, coreano) e a maioria dos emojis pesam 2 cada — então um texto curto na aparência pode chegar a 280. O contador desta página reflete esse peso em tempo real." },
+        { q: "Como publico algo com mais de 280 caracteres?", a: "Assine o X Premium para posts longos ou divida seu texto em uma thread. Cole seu rascunho no editor acima e o divisor de threads o separa em tweets numerados com menos de 280 caracteres nos limites naturais das frases." },
+      ],
+      it: [
+        { q: "Il limite di caratteri di X è ancora 280?", a: "Per gli account gratuiti sì: post, risposte e citazioni hanno un limite di 280 caratteri. Gli abbonati a X Premium possono pubblicare post lunghi fino a 25.000 caratteri, ma chi legge senza Premium vede lo stesso post pubblico." },
+        { q: "I link e le immagini contano per il limite di 280 caratteri?", a: "I link sì: ogni URL conta come 23 caratteri fissi tramite l'abbreviatore t.co, anche se mostrata per intero. Foto, video, GIF e sondaggi allegati non contano, e anche l'URL di una citazione è gratuita." },
+        { q: "Perché il mio tweet in giapponese o pieno di emoji raggiunge così in fretta il limite?", a: "X usa un conteggio ponderato. Lettere e cifre latine pesano 1, ma i caratteri degli intervalli CJK (cinese, giapponese, coreano) e la maggior parte delle emoji pesano 2 ciascuno — così un testo visivamente breve può comunque arrivare a 280. Il contatore di questa pagina riflette questo peso in tempo reale." },
+        { q: "Come pubblico qualcosa di più lungo di 280 caratteri?", a: "Abbonati a X Premium per i post lunghi, oppure dividi il testo in un thread. Incolla la bozza nell'editor qui sopra e il divisore di thread la suddivide in tweet numerati sotto i 280 caratteri ai confini naturali delle frasi." },
+      ],
+      nl: [
+        { q: "Is de tekenlimiet van X nog steeds 280?", a: "Voor gratis accounts wel: posts, reacties en quotes zijn beperkt tot 280 tekens. X Premium-abonnees kunnen lange posts tot 25.000 tekens plaatsen, maar wie zonder Premium leest, ziet hetzelfde openbare bericht." },
+        { q: "Tellen links en afbeeldingen mee voor de limiet van 280 tekens?", a: "Links wel: elke URL telt via de t.co-verkorter als vaste 23 tekens, ook als die volledig wordt getoond. Bijgevoegde foto's, video's, GIF's en polls tellen helemaal niet mee, en de URL van een quote is ook gratis." },
+        { q: "Waarom bereikt mijn Japanse of emoji-rijke tweet de limiet zo snel?", a: "X gebruikt gewogen tellen. Latijnse letters en cijfers wegen 1, maar tekens uit de CJK-bereiken (Chinees, Japans, Koreaans) en de meeste emoji wegen er elk 2 — een visueel korte post kan zo toch 280 raken. De teller op deze pagina weerspiegelt die weging in real time." },
+        { q: "Hoe plaats ik iets dat langer is dan 280 tekens?", a: "Neem X Premium voor lange posts, of splits je tekst in een thread. Plak je concept in de editor hierboven en de thread-splitter verdeelt het in genummerde tweets onder de 280 tekens op natuurlijke zinsgrenzen." },
+      ],
+      ja: [
+        { q: "Xの文字数制限はまだ280文字ですか？", a: "無料アカウントでははい。投稿・返信・引用はすべて280文字までです。X Premiumの加入者は最大25,000文字の長文投稿を公開できますが、Premiumなしで読む人には同じ公開投稿が表示されます。" },
+        { q: "リンクや画像は280文字の制限に含まれますか？", a: "リンクは含まれます。各URLはt.co短縮機能により、全文表示されても一律23文字としてカウントされます。添付した写真・動画・GIF・アンケートはまったくカウントされず、引用元のURLも無料です。" },
+        { q: "なぜ日本語や絵文字の多いツイートはすぐ制限に達するのですか？", a: "Xは重み付きカウントを使います。ラテン文字や数字は1、CJK（中国語・日本語・韓国語）の文字とほとんどの絵文字はそれぞれ2の重みです。見た目が短くても280に達することがあります。このページのカウンターはその重み付けをリアルタイムで反映します。" },
+        { q: "280文字を超える投稿はどうすればできますか？", a: "X Premiumに加入して長文投稿にするか、テキストをスレッドに分割します。上のエディターに下書きを貼り付けると、スレッド分割機能が自然な文の区切りで280文字未満の番号付きツイートに分けます。" },
+      ],
+      zh: [
+        { q: "X 的字符上限还是 280 吗？", a: "免费账户是的：发帖、回复和引用均上限 280 字符。X Premium 订阅者可发布最多 25,000 字符的长帖，但没有 Premium 的读者看到的仍是同一条公开帖子。" },
+        { q: "链接和图片会计入 280 字符上限吗？", a: "链接会：每个 URL 经 t.co 短链接服务固定计为 23 字符，即使完整显示也一样。附带的图片、视频、GIF 和投票完全不计入，引用帖的 URL 也免费。" },
+        { q: "为什么我的日文或多表情推文这么快就到上限？", a: "X 采用加权计数。拉丁字母和数字各计 1，但 CJK（中文、日文、韩文）字符和大多数表情各计 2，因此看起来很短的内容也可能达到 280。本页计数器实时反映这种加权。" },
+        { q: "怎样才能发布超过 280 字符的内容？", a: "订阅 X Premium 发布长帖，或将文本拆分为推文串。把草稿粘贴到上方编辑器，推文串分割功能会在自然句子边界处将其拆分为不超过 280 字符的编号推文。" },
+      ],
+      da: [
+        { q: "Er tegngrænsen på X stadig 280?", a: "For gratis konti, ja: opslag, svar og citater er begrænset til 280 tegn. X Premium-abonnenter kan udgive lange opslag på op til 25.000 tegn, men uden Premium ser man det samme offentlige opslag." },
+        { q: "Tæller links og billeder med i grænsen på 280 tegn?", a: "Links gør: hver URL tæller som faste 23 tegn via t.co-forkorteren, selv når den vises i fuld længde. Vedhæftede fotos, videoer, GIF'er og afstemninger tæller slet ikke, og et citats URL er også gratis." },
+        { q: "Hvorfor når mit japanske eller emoji-tunge tweet grænsen så hurtigt?", a: "X bruger vægtet optælling. Latinske bogstaver og tal vejer 1, men tegn i CJK-områderne (kinesisk, japansk, koreansk) og de fleste emoji vejer 2 hver — så et visuelt kort opslag kan stadig nå 280. Tælleren på denne side afspejler den vægtning i realtid." },
+        { q: "Hvordan poster jeg noget længere end 280 tegn?", a: "Abonnér på X Premium for lange opslag, eller del din tekst op i en tråd. Indsæt dit udkast i editoren ovenfor, og tråd-splitteren deler det op i nummererede tweets under 280 tegn ved naturlige sætningsgrænser." },
+      ],
+    },
+
     content: {
-      en: `<h2>The 280-character limit explained</h2>
-<p>Every tweet on <strong>X (formerly Twitter)</strong> is capped at <strong>280 characters</strong>. That ceiling covers letters, spaces, punctuation, emoji, and line breaks — everything visible in the compose box. Hit 281 and the platform simply won't let you post. Knowing exactly where you stand before you hit send is the difference between a clean publish and a last-second scramble to cut words.</p>
-<p>PostTruncate's <strong>Twitter character counter</strong> updates in real time as you type. A colour-coded meter shows your remaining budget at a glance, turning amber as you approach the limit and red the moment you go over. No more counting on your fingers or pasting into the native app just to check.</p>
+      en: `<h2>The exact character limits on X (Twitter)</h2>
+<p>A standard post on <strong>X (formerly Twitter)</strong> is capped at <strong>280 characters</strong>. That budget counts every letter, space, punctuation mark, emoji, and line break shown in the compose box — reach 281 and the Post button locks. Accounts with an <strong>X Premium</strong> subscription can publish <strong>long posts of up to 25,000 characters</strong>, but the 280 ceiling still applies to everyone else, and to most replies and quote posts.</p>
+<p>Not everything you attach spends that budget. <strong>Photos, videos, GIFs, and polls cost zero characters</strong>, and when you quote-post, the tweet you are quoting does not eat into your 280 either. What does count are <strong>@mentions and #hashtags</strong> placed inside the body — though the handles shown in the "Replying to…" line above a reply are free.</p>
 
-<h2>Why links always count as 23 characters</h2>
-<p>Here's the rule that trips up almost everyone: <strong>every URL you paste into a tweet — no matter how short or long — is wrapped by Twitter's t.co shortener and counts as exactly 23 characters</strong>. A two-character link and a 200-character link eat the same 23 characters from your budget. This is true even if the URL never appears shortened in the published tweet.</p>
-<p>PostTruncate applies the same weighted-length calculation that Twitter's own API uses, so the character count you see here matches exactly what the platform accepts. Paste three links into your draft and the counter deducts 69 characters automatically — no guesswork required.</p>
+<h2>Why links always cost 23 characters</h2>
+<p>Here is the rule that catches almost everyone: <strong>every URL is wrapped in X's t.co shortener and counts as exactly 23 characters</strong>, no matter how long or short the real address is. A five-character link and a 200-character link both spend 23. PostTruncate applies the same weighted-length math X's own API uses, so paste three links and the counter deducts 69 characters instantly — the number you see is the number X will enforce.</p>
 
-<h2>Threads: when one tweet isn't enough</h2>
-<p>Long-form ideas don't have to be crushed into 280 characters. Twitter threads let you chain multiple tweets together, published as a connected sequence under your handle. There is no hard limit on thread length — you can go as long as the idea demands.</p>
-<p>The challenge is splitting your text at natural boundaries so each tweet reads as a self-contained thought. Do it wrong and a sentence gets sliced mid-word, or a tweet starts with a dangling conjunction that confuses readers arriving mid-thread.</p>
-<p>PostTruncate's <strong>thread splitter</strong> handles this automatically. Paste your full post into the editor and the tool divides it into numbered tweet-sized segments, each staying safely under 280 characters, each breaking at a sentence boundary where possible. You can review every segment before copying to X.</p>
+<h2>The emoji and non-Latin trap</h2>
+<p>X does not count every character as one. It uses <strong>weighted counting</strong>: standard Latin letters, digits, and common punctuation weigh 1, but characters in <strong>CJK ranges (Chinese, Japanese, Korean) weigh 2</strong>, and most emoji count as 2 as well. A tweet that looks like 150 visible glyphs can therefore hit the 280 ceiling far sooner than you expect. The counter on this page mirrors that weighting, so an emoji-heavy or Japanese draft shows its true cost as you type.</p>
 
-<h2>Why character count affects engagement</h2>
-<p>Studies of X engagement data consistently show that <strong>tweets between 71 and 100 characters receive the highest reply and retweet rates</strong>. Shorter tweets leave room for quoted replies; longer tweets feel like a wall of text on mobile. The 280-character limit is a ceiling, not a target — the most shareable tweets typically use well under half the available space.</p>
-<p>Staying tight also forces clarity. If you can say something in 140 characters, the 280-character version is almost always weaker. Use the counter to draft lean, then expand with a thread if the idea genuinely needs more room.</p>`,
+<h2>Common truncation mistakes on X</h2>
+<ul>
+<li><strong>Pasting a long link near the limit.</strong> Because the link still costs 23 characters, a draft that looks like it fits suddenly will not post.</li>
+<li><strong>Trusting the visible glyph count.</strong> Emoji and non-Latin scripts weigh 2, so the compose box fills faster than the letters suggest.</li>
+<li><strong>Splitting a thread by hand.</strong> Manual breaks slice sentences mid-word or open a tweet with a dangling "and," confusing anyone who joins the thread halfway.</li>
+<li><strong>Burying the hook.</strong> Long Premium posts collapse behind a "Show more" link in the timeline, so a weak first line costs you the click before anyone expands it.</li>
+<li><strong>Stacking hashtags at the end.</strong> Three or four trailing tags are the most common reason a finished tweet tips just over 280.</li>
+</ul>
+
+<h2>When one tweet isn't enough</h2>
+<p>If an idea genuinely needs more room, chain it. <strong>Threads</strong> publish as a connected sequence with no length ceiling, and the engagement data is clear that <strong>tweets of 71–100 characters earn the most replies and retweets</strong> — the 280 limit is a ceiling, not a target. Paste your full draft into the editor above and the <strong>thread splitter</strong> divides it into numbered, sub-280 segments that break on sentence boundaries, so every tweet reads as a complete thought before you copy it to X.</p>`,
 
       es: `<h2>El límite de 280 caracteres en detalle</h2>
 <p>Cada tweet publicado en <strong>X (antes Twitter)</strong> tiene un límite de <strong>280 caracteres</strong>. Este límite incluye letras, espacios, signos de puntuación, emojis y saltos de línea: todo lo que aparece visible en el cuadro de composición. Con 281 caracteres la plataforma simplemente bloquea el envío. Saber exactamente cuánto espacio tienes antes de publicar marca la diferencia entre un tweet impecable y recortar palabras a contrarreloj.</p>
@@ -310,6 +411,94 @@ export const tools: ToolDefinition[] = [
       ja: '無料のInstagramキャプションカウンター。2200文字の上限を追跡し、125文字の折り返し点をプレビューし、リーチを静かに下げるハッシュタグの落とし穴を回避。',
       zh: '免费Instagram说明文字计数器。追踪2200字符上限，预览125字符折叠点，并避开悄悄削减触达的标签陷阱。',
       da: 'Gratis Instagram billedtekst-tæller. Følg 2200-tegns-grænsen, forhåndsvis 125-tegns-folden, og undgå de hashtag-fælder, der stille sænker din rækkevidde.',
+    },
+
+    intro: {
+      en: "Check your Instagram caption before you post — the editor below counts live against the 2200-character limit, shows where the 125-character “more” fold cuts your text, and flags hashtag overload.",
+      es: "Revisa tu pie de foto de Instagram antes de publicar: el editor de abajo cuenta en vivo frente al límite de 2200 caracteres, muestra dónde corta el texto el pliegue de «más» a los 125 caracteres y avisa del exceso de hashtags.",
+      de: "Prüfe deine Instagram-Caption vor dem Posten — der Editor unten zählt live gegen das 2200-Zeichen-Limit, zeigt, wo der „Mehr“-Umbruch bei 125 Zeichen deinen Text abschneidet, und warnt vor zu vielen Hashtags.",
+      fr: "Vérifiez votre légende Instagram avant de publier : l’éditeur ci-dessous compte en direct par rapport à la limite de 2200 caractères, montre où la coupure « plus » à 125 caractères tronque votre texte et signale le trop-plein de hashtags.",
+      pt: "Confira a legenda do seu Instagram antes de publicar: o editor abaixo conta ao vivo em relação ao limite de 2200 caracteres, mostra onde o corte de «mais» aos 125 caracteres trunca seu texto e sinaliza o excesso de hashtags.",
+      it: "Controlla la didascalia di Instagram prima di pubblicare: l’editor qui sotto conta in tempo reale rispetto al limite di 2200 caratteri, mostra dove il taglio «altro» a 125 caratteri tronca il testo e segnala l’eccesso di hashtag.",
+      nl: "Controleer je Instagram-bijschrift voordat je plaatst — de editor hieronder telt live tegen de limiet van 2200 tekens, laat zien waar de ‘meer’-vouw bij 125 tekens je tekst afkapt en waarschuwt voor te veel hashtags.",
+      ja: "投稿する前にInstagramのキャプションをチェック。下のエディターは2200文字の上限に対してリアルタイムでカウントし、125文字の「続きを読む」で本文が切れる位置を示し、ハッシュタグの付けすぎを警告します。",
+      zh: "发布前检查你的 Instagram 说明文字：下方编辑器实时对照 2200 字符上限计数，显示 125 字符“更多”折叠点在哪里截断文本，并提示标签过多。",
+      da: "Tjek din Instagram-billedtekst, før du poster — editoren nedenfor tæller live mod 2200-tegns-grænsen, viser hvor „mere“-folden ved 125 tegn skærer din tekst af, og advarer om for mange hashtags.",
+    },
+
+    faq: {
+      en: [
+        {
+          q: 'What is Instagram\'s caption character limit?',
+          a: 'Captions on feed posts, Reels, and carousels are capped at 2200 characters, and comments share the same 2200 limit. Going over simply blocks the caption, so the counter above warns you before you hit it.',
+        },
+        {
+          q: 'Why does my caption get cut off with "… more"?',
+          a: 'Instagram collapses captions after roughly 125 characters in the feed — everything after that hides behind "more." Front-load your hook and any call to action into the first line so it lands before the fold.',
+        },
+        {
+          q: 'How many hashtags should I actually use?',
+          a: 'You can add up to 30, but stuffing all 30 looks spammy and can suppress reach. Most creators see better results with a focused 3–5 relevant tags, and the editor flags when you pile on too many.',
+        },
+        {
+          q: 'Do emojis and line breaks count toward the limit?',
+          a: 'Yes. Emojis, spaces, and every line break count as characters against the 2200 limit — and line breaks in particular eat space fast in a structured, multi-paragraph caption.',
+        },
+      ],
+      es: [
+        { q: "¿Cuál es el límite de caracteres de la leyenda de Instagram?", a: "Las leyendas de publicaciones del feed, Reels y carruseles tienen un límite de 2200 caracteres, y los comentarios comparten ese mismo límite de 2200. Si te pasas, la leyenda no se publica, así que el contador de arriba te avisa antes de llegar." },
+        { q: "¿Por qué se corta mi leyenda con «… más»?", a: "Instagram colapsa las leyendas tras unos 125 caracteres en el feed: todo lo que sigue se oculta tras «más». Pon tu gancho y cualquier llamada a la acción en la primera línea para que aparezca antes del corte." },
+        { q: "¿Cuántos hashtags debería usar realmente?", a: "Puedes añadir hasta 30, pero meter los 30 parece spam y puede reducir tu alcance. La mayoría de creadores obtienen mejores resultados con 3–5 etiquetas relevantes, y el editor te avisa cuando pones demasiadas." },
+        { q: "¿Los emojis y los saltos de línea cuentan para el límite?", a: "Sí. Los emojis, los espacios y cada salto de línea cuentan como caracteres frente al límite de 2200, y los saltos de línea en particular consumen espacio rápido en una leyenda estructurada de varios párrafos." },
+      ],
+      de: [
+        { q: "Wie lautet das Zeichenlimit für Instagram-Bildunterschriften?", a: "Bildunterschriften bei Feed-Beiträgen, Reels und Karussells sind auf 2200 Zeichen begrenzt, und Kommentare teilen sich dasselbe Limit von 2200. Wer darüber liegt, kann die Bildunterschrift nicht posten — der Zähler oben warnt dich rechtzeitig." },
+        { q: "Warum wird meine Bildunterschrift mit „… mehr“ abgeschnitten?", a: "Instagram klappt Bildunterschriften im Feed nach etwa 125 Zeichen ein — alles danach versteckt sich hinter „mehr“. Setze deinen Hook und jeden Call-to-Action in die erste Zeile, damit er vor dem Umbruch erscheint." },
+        { q: "Wie viele Hashtags sollte ich wirklich verwenden?", a: "Du kannst bis zu 30 hinzufügen, aber alle 30 wirken spammig und können die Reichweite drücken. Die meisten Creator fahren mit gezielten 3–5 relevanten Tags besser, und der Editor warnt, wenn es zu viele werden." },
+        { q: "Zählen Emojis und Zeilenumbrüche zum Limit?", a: "Ja. Emojis, Leerzeichen und jeder Zeilenumbruch zählen als Zeichen gegen das 2200-Limit — und gerade Zeilenumbrüche verbrauchen in einer strukturierten Bildunterschrift mit mehreren Absätzen schnell Platz." },
+      ],
+      fr: [
+        { q: "Quelle est la limite de caractères d’une légende Instagram ?", a: "Les légendes des publications du fil, des Reels et des carrousels sont limitées à 2200 caractères, et les commentaires partagent cette même limite de 2200. Au-delà, la légende ne se publie pas : le compteur ci-dessus vous prévient avant." },
+        { q: "Pourquoi ma légende est-elle coupée par « … plus » ?", a: "Instagram replie les légendes après environ 125 caractères dans le fil : tout ce qui suit se cache derrière « plus ». Placez votre accroche et tout appel à l’action dans la première ligne pour qu’ils apparaissent avant la coupure." },
+        { q: "Combien de hashtags faut-il vraiment utiliser ?", a: "Vous pouvez en ajouter jusqu’à 30, mais en mettre 30 fait spam et peut réduire votre portée. La plupart des créateurs obtiennent de meilleurs résultats avec 3 à 5 tags pertinents, et l’éditeur vous alerte quand vous en mettez trop." },
+        { q: "Les émojis et les sauts de ligne comptent-ils dans la limite ?", a: "Oui. Les émojis, les espaces et chaque saut de ligne comptent comme des caractères dans la limite de 2200, et les sauts de ligne en particulier consomment vite de l’espace dans une légende structurée en plusieurs paragraphes." },
+      ],
+      pt: [
+        { q: "Qual é o limite de caracteres da legenda do Instagram?", a: "As legendas de publicações do feed, Reels e carrosséis têm limite de 2200 caracteres, e os comentários compartilham esse mesmo limite de 2200. Se passar, a legenda não é publicada, então o contador acima avisa antes de você chegar lá." },
+        { q: "Por que minha legenda é cortada com «… mais»?", a: "O Instagram recolhe as legendas após cerca de 125 caracteres no feed: tudo depois disso fica escondido atrás de «mais». Coloque seu gancho e qualquer chamada para ação na primeira linha para que apareça antes do corte." },
+        { q: "Quantas hashtags eu realmente devo usar?", a: "Você pode adicionar até 30, mas usar as 30 parece spam e pode reduzir seu alcance. A maioria dos criadores tem melhores resultados com 3 a 5 tags relevantes, e o editor avisa quando você coloca demais." },
+        { q: "Emojis e quebras de linha contam para o limite?", a: "Sim. Emojis, espaços e cada quebra de linha contam como caracteres no limite de 2200 — e as quebras de linha em particular consomem espaço rápido em uma legenda estruturada de vários parágrafos." },
+      ],
+      it: [
+        { q: "Qual è il limite di caratteri della didascalia di Instagram?", a: "Le didascalie di post del feed, Reel e caroselli hanno un limite di 2200 caratteri, e i commenti condividono lo stesso limite di 2200. Se superi, la didascalia non viene pubblicata, quindi il contatore qui sopra ti avvisa prima." },
+        { q: "Perché la mia didascalia viene tagliata con «… altro»?", a: "Instagram comprime le didascalie dopo circa 125 caratteri nel feed: tutto ciò che segue si nasconde dietro «altro». Metti il tuo gancio e ogni invito all’azione nella prima riga, così compaiono prima del taglio." },
+        { q: "Quanti hashtag dovrei usare davvero?", a: "Puoi aggiungerne fino a 30, ma metterli tutti e 30 sembra spam e può ridurre la portata. La maggior parte dei creator ottiene risultati migliori con 3–5 tag pertinenti, e l’editor avvisa quando ne metti troppi." },
+        { q: "Le emoji e gli a capo contano per il limite?", a: "Sì. Emoji, spazi e ogni a capo contano come caratteri rispetto al limite di 2200, e gli a capo in particolare consumano spazio in fretta in una didascalia strutturata su più paragrafi." },
+      ],
+      nl: [
+        { q: "Wat is de tekenlimiet voor een Instagram-bijschrift?", a: "Bijschriften bij feedposts, Reels en carrousels zijn beperkt tot 2200 tekens, en reacties delen diezelfde limiet van 2200. Ga je eroverheen, dan wordt het bijschrift niet geplaatst, dus de teller hierboven waarschuwt je op tijd." },
+        { q: "Waarom wordt mijn bijschrift afgekapt met ‘… meer’?", a: "Instagram klapt bijschriften in het feed na ongeveer 125 tekens in: alles daarna verdwijnt achter ‘meer’. Zet je hook en elke call-to-action in de eerste regel zodat die vóór de vouw verschijnt." },
+        { q: "Hoeveel hashtags moet ik echt gebruiken?", a: "Je kunt er tot 30 toevoegen, maar alle 30 oogt als spam en kan je bereik drukken. De meeste makers presteren beter met 3–5 relevante tags, en de editor waarschuwt als je er te veel plaatst." },
+        { q: "Tellen emoji en regeleinden mee voor de limiet?", a: "Ja. Emoji, spaties en elk regeleinde tellen als tekens tegen de limiet van 2200 — en juist regeleinden verbruiken snel ruimte in een gestructureerd bijschrift met meerdere alinea’s." },
+      ],
+      ja: [
+        { q: "Instagramのキャプションの文字数制限は？", a: "フィード投稿・リール・カルーセルのキャプションは2200文字まで、コメントも同じ2200文字の上限です。超えるとキャプションを投稿できないため、上のカウンターが到達前に警告します。" },
+        { q: "なぜキャプションが「…続きを読む」で切れるのですか？", a: "Instagramはフィードで約125文字を超えるとキャプションを折りたたみ、それ以降は「続きを読む」の後ろに隠れます。フックや行動喚起は最初の行に置き、折り返しの前に表示されるようにしましょう。" },
+        { q: "ハッシュタグは実際いくつ使うべきですか？", a: "最大30個まで付けられますが、30個すべて付けるとスパムっぽく見え、リーチが下がることがあります。多くのクリエイターは関連性の高い3〜5個に絞ると成果が出やすく、付けすぎるとエディターが警告します。" },
+        { q: "絵文字や改行は文字数に含まれますか？", a: "はい。絵文字・スペース・改行はすべて2200文字の上限に対して1文字としてカウントされます。とくに改行は、段落を分けた構成のキャプションでは一気に文字数を消費します。" },
+      ],
+      zh: [
+        { q: "Instagram 说明文字的字符上限是多少？", a: "动态帖、Reels 和轮播图的说明文字上限为 2200 字符，评论也共用这 2200 字符的上限。超出后说明文字将无法发布，因此上方计数器会在你到达前提醒。" },
+        { q: "为什么我的说明文字会以“……更多”被截断？", a: "Instagram 在动态中超过约 125 字符后会折叠说明文字，之后的内容都藏在“更多”后面。把你的钩子和任何行动号召放在第一行，让它在折叠点之前出现。" },
+        { q: "我到底应该用多少个标签？", a: "最多可添加 30 个，但全用 30 个会显得像垃圾信息，并可能压低触达。多数创作者使用 3–5 个相关标签效果更好，添加过多时编辑器会提示。" },
+        { q: "表情符号和换行会计入上限吗？", a: "会。表情符号、空格和每个换行都按字符计入 2200 上限，尤其是换行，在分段落的结构化说明文字中会很快消耗字符。" },
+      ],
+      da: [
+        { q: "Hvad er tegngrænsen for en Instagram-billedtekst?", a: "Billedtekster på feed-opslag, Reels og karruseller er begrænset til 2200 tegn, og kommentarer deler den samme grænse på 2200. Går du over, kan billedteksten ikke udgives, så tælleren ovenfor advarer dig i tide." },
+        { q: "Hvorfor bliver min billedtekst skåret af med „… mere“?", a: "Instagram folder billedtekster sammen efter cirka 125 tegn i feedet: alt derefter gemmes bag „mere“. Placer din hook og enhver opfordring til handling i første linje, så de vises før folden." },
+        { q: "Hvor mange hashtags bør jeg egentlig bruge?", a: "Du kan tilføje op til 30, men alle 30 virker som spam og kan dæmpe din rækkevidde. De fleste skabere får bedre resultater med fokuserede 3–5 relevante tags, og editoren advarer, når du sætter for mange på." },
+        { q: "Tæller emoji og linjeskift med i grænsen?", a: "Ja. Emoji, mellemrum og hvert linjeskift tæller som tegn mod grænsen på 2200 — og især linjeskift bruger plads hurtigt i en struktureret billedtekst med flere afsnit." },
+      ],
     },
 
     content: {
@@ -543,6 +732,94 @@ export const tools: ToolDefinition[] = [
       da: 'Gratis LinkedIn tegntæller. Følg 3000-tegns-grænsen og forhåndsvis desktop-folden (~210) og mobil-folden (~140), så dit hook vises først.',
     },
 
+    intro: {
+      en: "Check your LinkedIn post before you publish — the editor below tracks the 3000-character limit live and shows exactly where the desktop and mobile “see more” folds cut your text.",
+      es: "Revisa tu publicación de LinkedIn antes de publicar: el editor de abajo controla en vivo el límite de 3000 caracteres y muestra exactamente dónde cortan el texto los pliegues de «ver más» en escritorio y móvil.",
+      de: "Prüfe deinen LinkedIn-Beitrag vor dem Veröffentlichen — der Editor unten verfolgt live das 3000-Zeichen-Limit und zeigt genau, wo die „Mehr anzeigen“-Umbrüche auf Desktop und Mobil deinen Text abschneiden.",
+      fr: "Vérifiez votre publication LinkedIn avant de publier : l’éditeur ci-dessous suit en direct la limite de 3000 caractères et montre exactement où les plis « voir plus » sur ordinateur et mobile coupent votre texte.",
+      pt: "Confira sua publicação do LinkedIn antes de publicar: o editor abaixo acompanha ao vivo o limite de 3000 caracteres e mostra exatamente onde os cortes de «ver mais» no desktop e no celular truncam seu texto.",
+      it: "Controlla il tuo post LinkedIn prima di pubblicare: l’editor qui sotto monitora in tempo reale il limite di 3000 caratteri e mostra esattamente dove le soglie «mostra altro» su desktop e mobile tagliano il testo.",
+      nl: "Controleer je LinkedIn-bericht voordat je publiceert — de editor hieronder volgt live de limiet van 3000 tekens en laat precies zien waar de ‘meer weergeven’-vouwen op desktop en mobiel je tekst afkappen.",
+      ja: "公開する前にLinkedInの投稿をチェック。下のエディターは3000文字の上限をリアルタイムで追跡し、デスクトップとモバイルの「もっと見る」折り返しが本文を切る位置を正確に示します。",
+      zh: "发布前检查你的 LinkedIn 帖子：下方编辑器实时追踪 3000 字符上限，并精确显示桌面端和移动端“查看更多”折叠点在哪里截断文本。",
+      da: "Tjek dit LinkedIn-opslag, før du udgiver — editoren nedenfor følger live 3000-tegns-grænsen og viser præcis, hvor „se mere“-foldene på computer og mobil skærer din tekst af.",
+    },
+
+    faq: {
+      en: [
+        {
+          q: 'What is LinkedIn\'s character limit for posts?',
+          a: 'A LinkedIn text post — or the caption on an image or video post — is capped at 3000 characters. The counter above tracks every character so you always know how much room is left.',
+        },
+        {
+          q: 'Where does LinkedIn cut my post with "see more"?',
+          a: 'The feed collapses your post after roughly 210 characters on desktop and about 140 on mobile. Anything past that hides behind "see more," so put your hook in the first line or two before either fold.',
+        },
+        {
+          q: 'Do hashtags and @mentions count toward the limit?',
+          a: 'Yes, both count toward the 3000 characters and appear in the body. Mentions also notify the tagged person, so use them deliberately rather than as a way to add length.',
+        },
+        {
+          q: 'Why do my line breaks disappear on LinkedIn?',
+          a: 'Pasting from some editors collapses blank lines, and LinkedIn strips certain formatting. The preview above shows how your spacing actually renders, so a wall of text does not slip through by accident.',
+        },
+      ],
+      es: [
+        { q: "¿Cuál es el límite de caracteres de LinkedIn para las publicaciones?", a: "Una publicación de texto de LinkedIn —o el pie de una publicación con imagen o vídeo— tiene un límite de 3000 caracteres. El contador de arriba cuenta cada carácter para que siempre sepas cuánto espacio te queda." },
+        { q: "¿Dónde corta LinkedIn mi publicación con «ver más»?", a: "El feed colapsa tu publicación tras unos 210 caracteres en escritorio y unos 140 en móvil. Todo lo que sigue se oculta tras «ver más», así que pon tu gancho en la primera o segunda línea, antes de cualquiera de los cortes." },
+        { q: "¿Los hashtags y las @menciones cuentan para el límite?", a: "Sí, ambos cuentan para los 3000 caracteres y aparecen en el cuerpo. Las menciones además notifican a la persona etiquetada, así que úsalas con intención y no para alargar el texto." },
+        { q: "¿Por qué desaparecen mis saltos de línea en LinkedIn?", a: "Pegar desde algunos editores elimina las líneas en blanco, y LinkedIn descarta cierto formato. La vista previa de arriba muestra cómo se ve realmente tu espaciado, para que no se cuele un muro de texto sin querer." },
+      ],
+      de: [
+        { q: "Wie lautet das Zeichenlimit von LinkedIn für Beiträge?", a: "Ein LinkedIn-Textbeitrag — oder die Bildunterschrift eines Bild- oder Videobeitrags — ist auf 3000 Zeichen begrenzt. Der Zähler oben erfasst jedes Zeichen, sodass du immer weißt, wie viel Platz bleibt." },
+        { q: "Wo schneidet LinkedIn meinen Beitrag mit „Mehr anzeigen“ ab?", a: "Der Feed klappt deinen Beitrag nach etwa 210 Zeichen am Desktop und rund 140 am Handy ein. Alles danach versteckt sich hinter „Mehr anzeigen“ — setze deinen Hook also in die erste oder zweite Zeile, vor beide Umbrüche." },
+        { q: "Zählen Hashtags und @Erwähnungen zum Limit?", a: "Ja, beide zählen zu den 3000 Zeichen und erscheinen im Text. Erwähnungen benachrichtigen zudem die markierte Person, nutze sie also bewusst und nicht, um Länge zu gewinnen." },
+        { q: "Warum verschwinden meine Zeilenumbrüche auf LinkedIn?", a: "Das Einfügen aus manchen Editoren entfernt Leerzeilen, und LinkedIn streicht bestimmte Formatierungen. Die Vorschau oben zeigt, wie dein Abstand tatsächlich aussieht, damit sich nicht versehentlich eine Textwand einschleicht." },
+      ],
+      fr: [
+        { q: "Quelle est la limite de caractères de LinkedIn pour les publications ?", a: "Une publication texte LinkedIn — ou la légende d’une publication avec image ou vidéo — est limitée à 3000 caractères. Le compteur ci-dessus compte chaque caractère pour que vous sachiez toujours combien d’espace il reste." },
+        { q: "Où LinkedIn coupe-t-il ma publication avec « voir plus » ?", a: "Le fil replie votre publication après environ 210 caractères sur ordinateur et 140 sur mobile. Tout ce qui suit se cache derrière « voir plus » : placez donc votre accroche dans la première ou la deuxième ligne, avant les deux coupures." },
+        { q: "Les hashtags et les @mentions comptent-ils dans la limite ?", a: "Oui, les deux comptent dans les 3000 caractères et apparaissent dans le corps. Les mentions notifient aussi la personne taguée, alors utilisez-les à dessein et non pour rallonger le texte." },
+        { q: "Pourquoi mes sauts de ligne disparaissent-ils sur LinkedIn ?", a: "Coller depuis certains éditeurs supprime les lignes vides, et LinkedIn retire certaines mises en forme. L’aperçu ci-dessus montre comment votre espacement s’affiche réellement, pour éviter qu’un mur de texte passe par mégarde." },
+      ],
+      pt: [
+        { q: "Qual é o limite de caracteres do LinkedIn para publicações?", a: "Uma publicação de texto do LinkedIn — ou a legenda de uma publicação com imagem ou vídeo — tem limite de 3000 caracteres. O contador acima conta cada caractere para você sempre saber quanto espaço resta." },
+        { q: "Onde o LinkedIn corta minha publicação com «ver mais»?", a: "O feed recolhe sua publicação após cerca de 210 caracteres no desktop e cerca de 140 no celular. Tudo depois disso fica escondido atrás de «ver mais», então coloque seu gancho na primeira ou segunda linha, antes de qualquer corte." },
+        { q: "Hashtags e @menções contam para o limite?", a: "Sim, ambos contam para os 3000 caracteres e aparecem no corpo. As menções também notificam a pessoa marcada, então use-as de propósito e não como forma de aumentar o tamanho." },
+        { q: "Por que minhas quebras de linha somem no LinkedIn?", a: "Colar de alguns editores elimina as linhas em branco, e o LinkedIn remove certa formatação. A pré-visualização acima mostra como seu espaçamento aparece de verdade, para um paredão de texto não passar sem querer." },
+      ],
+      it: [
+        { q: "Qual è il limite di caratteri di LinkedIn per i post?", a: "Un post di testo su LinkedIn — o la didascalia di un post con immagine o video — ha un limite di 3000 caratteri. Il contatore qui sopra conta ogni carattere, così sai sempre quanto spazio resta." },
+        { q: "Dove LinkedIn taglia il mio post con «mostra altro»?", a: "Il feed comprime il post dopo circa 210 caratteri su desktop e circa 140 su mobile. Tutto ciò che segue si nasconde dietro «mostra altro», quindi metti il gancio nella prima o seconda riga, prima di entrambe le soglie." },
+        { q: "Gli hashtag e le @menzioni contano per il limite?", a: "Sì, entrambi contano nei 3000 caratteri e compaiono nel corpo. Le menzioni notificano anche la persona taggata, quindi usale con criterio e non per allungare il testo." },
+        { q: "Perché i miei a capo spariscono su LinkedIn?", a: "Incollare da alcuni editor elimina le righe vuote, e LinkedIn rimuove certa formattazione. L’anteprima qui sopra mostra come appare davvero la tua spaziatura, così non passa per sbaglio un muro di testo." },
+      ],
+      nl: [
+        { q: "Wat is de tekenlimiet van LinkedIn voor berichten?", a: "Een LinkedIn-tekstbericht — of het bijschrift bij een afbeelding- of videobericht — is beperkt tot 3000 tekens. De teller hierboven telt elk teken, zodat je altijd weet hoeveel ruimte er over is." },
+        { q: "Waar kapt LinkedIn mijn bericht af met ‘meer weergeven’?", a: "Het feed klapt je bericht in na ongeveer 210 tekens op desktop en zo’n 140 op mobiel. Alles daarna verdwijnt achter ‘meer weergeven’, dus zet je hook in de eerste of tweede regel, vóór beide vouwen." },
+        { q: "Tellen hashtags en @vermeldingen mee voor de limiet?", a: "Ja, beide tellen mee voor de 3000 tekens en verschijnen in de tekst. Vermeldingen sturen ook een melding naar de getagde persoon, dus gebruik ze bewust en niet om lengte toe te voegen." },
+        { q: "Waarom verdwijnen mijn regeleinden op LinkedIn?", a: "Plakken vanuit sommige editors verwijdert lege regels, en LinkedIn haalt bepaalde opmaak weg. De voorbeeldweergave hierboven laat zien hoe je witruimte er echt uitziet, zodat er niet per ongeluk een muur van tekst doorheen glipt." },
+      ],
+      ja: [
+        { q: "LinkedInの投稿の文字数制限は？", a: "LinkedInのテキスト投稿、または画像・動画投稿のキャプションは3000文字までです。上のカウンターがすべての文字を数えるので、残りのスペースが常にわかります。" },
+        { q: "LinkedInは「もっと見る」でどこで投稿を切りますか？", a: "フィードはデスクトップで約210文字、モバイルで約140文字を超えると投稿を折りたたみます。それ以降は「もっと見る」の後ろに隠れるので、フックは最初の1〜2行、どちらの折り返しよりも前に置きましょう。" },
+        { q: "ハッシュタグや@メンションは制限に含まれますか？", a: "はい、どちらも3000文字に含まれ、本文に表示されます。メンションはタグ付けした相手にも通知が届くので、文字数稼ぎではなく意図的に使いましょう。" },
+        { q: "なぜLinkedInで改行が消えるのですか？", a: "一部のエディターから貼り付けると空行が詰められ、LinkedInは一部の書式を取り除きます。上のプレビューは実際の行間の見え方を示すので、うっかり文字の壁になるのを防げます。" },
+      ],
+      zh: [
+        { q: "LinkedIn 帖子的字符上限是多少？", a: "LinkedIn 文字帖子（或图片、视频帖子的说明文字）上限为 3000 字符。上方计数器会统计每个字符，让你随时清楚还剩多少空间。" },
+        { q: "LinkedIn 会在哪里用“查看更多”截断我的帖子？", a: "信息流在桌面端约 210 字符、移动端约 140 字符后折叠你的帖子，之后的内容都藏在“查看更多”后面。因此把钩子放在前一两行，确保在两个折叠点之前出现。" },
+        { q: "话题标签和 @提及会计入上限吗？", a: "会，两者都计入 3000 字符并显示在正文中。提及还会通知被标记的人，所以要有目的地使用，而不是用来凑字数。" },
+        { q: "为什么我的换行在 LinkedIn 上消失了？", a: "从某些编辑器粘贴会压缩空行，LinkedIn 也会去除部分格式。上方的预览会显示你的间距实际呈现的样子，避免不小心出现一堵文字墙。" },
+      ],
+      da: [
+        { q: "Hvad er LinkedIns tegngrænse for opslag?", a: "Et LinkedIn-tekstopslag — eller billedteksten på et billed- eller videoopslag — er begrænset til 3000 tegn. Tælleren ovenfor tæller hvert tegn, så du altid ved, hvor meget plads der er tilbage." },
+        { q: "Hvor skærer LinkedIn mit opslag af med „se mere“?", a: "Feedet folder dit opslag sammen efter cirka 210 tegn på computer og cirka 140 på mobil. Alt derefter gemmes bag „se mere“, så placer din hook i første eller anden linje, før begge fold." },
+        { q: "Tæller hashtags og @-omtaler med i grænsen?", a: "Ja, begge tæller med i de 3000 tegn og vises i teksten. Omtaler giver også besked til den taggede person, så brug dem bevidst og ikke som en måde at fylde op på." },
+        { q: "Hvorfor forsvinder mine linjeskift på LinkedIn?", a: "At indsætte fra nogle editorer fjerner tomme linjer, og LinkedIn fjerner visse formateringer. Forhåndsvisningen ovenfor viser, hvordan din linjeafstand faktisk ser ud, så en mur af tekst ikke smutter med ved et uheld." },
+      ],
+    },
+
     content: {
       en: `<h2>LinkedIn's 3000-character post limit</h2>
 <p>LinkedIn allows up to <strong>3000 characters</strong> per post — significantly more room than Twitter but with its own hidden constraints that trip up even experienced creators. The hard limit is generous enough for a detailed case study, a numbered list, or a short opinion piece, but the real writing challenge isn't the ceiling: it's the two fold points that determine whether anyone reads past the first sentence.</p>
@@ -743,6 +1020,94 @@ export const tools: ToolDefinition[] = [
       ja: '無料のFacebook文字数カウンター。約480文字のフィード折り返しをプレビューし、80文字未満の投稿がリーチを伸ばす理由を把握し、アクセシビリティを壊すUnicodeフォントを検出。',
       zh: '免费Facebook字符计数器。预览约480字符的信息流折叠点，了解80字符以内的帖子为何触达更高，并检测破坏无障碍访问的Unicode字体。',
       da: 'Gratis Facebook tegntæller. Forhåndsvis ~480-tegns-folden, se hvorfor opslag under 80 tegn får mere rækkevidde, og fang Unicode-skrifttyper, der ødelægger tilgængeligheden.',
+    },
+
+    intro: {
+      en: "Check your Facebook post before you publish — the editor below shows where the ~480-character feed fold cuts your text and flags fancy Unicode fonts that break accessibility.",
+      es: "Revisa tu publicación de Facebook antes de publicar: el editor de abajo muestra dónde corta el texto el pliegue del feed a los ~480 caracteres y señala las fuentes Unicode decorativas que rompen la accesibilidad.",
+      de: "Prüfe deinen Facebook-Beitrag vor dem Veröffentlichen — der Editor unten zeigt, wo der Feed-Umbruch bei ~480 Zeichen deinen Text abschneidet, und erkennt schicke Unicode-Schriften, die die Barrierefreiheit beeinträchtigen.",
+      fr: "Vérifiez votre publication Facebook avant de publier : l’éditeur ci-dessous montre où le pli du fil à ~480 caractères coupe votre texte et signale les polices Unicode fantaisistes qui nuisent à l’accessibilité.",
+      pt: "Confira sua publicação do Facebook antes de publicar: o editor abaixo mostra onde o corte do feed aos ~480 caracteres trunca seu texto e sinaliza as fontes Unicode decorativas que prejudicam a acessibilidade.",
+      it: "Controlla il tuo post Facebook prima di pubblicare: l’editor qui sotto mostra dove il taglio del feed a ~480 caratteri tronca il testo e segnala i font Unicode decorativi che compromettono l’accessibilità.",
+      nl: "Controleer je Facebook-bericht voordat je publiceert — de editor hieronder laat zien waar de feedvouw bij ~480 tekens je tekst afkapt en signaleert chique Unicode-lettertypen die de toegankelijkheid schaden.",
+      ja: "公開する前にFacebookの投稿をチェック。下のエディターは約480文字のフィード折り返しが本文を切る位置を示し、アクセシビリティを損なう装飾的なUnicodeフォントを検出します。",
+      zh: "发布前检查你的 Facebook 帖子：下方编辑器显示约 480 字符的信息流折叠点在哪里截断文本，并标记会破坏无障碍访问的花式 Unicode 字体。",
+      da: "Tjek dit Facebook-opslag, før du udgiver — editoren nedenfor viser, hvor feed-folden ved ~480 tegn skærer din tekst af, og markerer smarte Unicode-skrifttyper, der ødelægger tilgængeligheden.",
+    },
+
+    faq: {
+      en: [
+        {
+          q: 'What is Facebook\'s character limit for posts?',
+          a: 'A single post can technically hold more than 63,000 characters, so length is rarely the wall. What matters is the feed fold: Facebook hides text after roughly 480 characters behind "See more."',
+        },
+        {
+          q: 'Why do shorter Facebook posts get more reach?',
+          a: 'Posts under about 80 characters consistently see higher engagement — they read fully in-feed without a "See more" click and feel more conversational. The counter above helps you keep it tight.',
+        },
+        {
+          q: 'Why do my fancy bold or italic letters look broken to some people?',
+          a: 'Those styled letters are pseudo-Unicode symbols, not real formatting. Screen readers skip or mangle them, which hurts accessibility and reach. The editor flags them so you can switch back to plain text.',
+        },
+        {
+          q: 'Do emojis and links count toward the character count?',
+          a: 'Yes — emojis and the full link text count as characters in your post, even though Facebook also generates a separate link-preview card. The counter reflects the true character total.',
+        },
+      ],
+      es: [
+        { q: "¿Cuál es el límite de caracteres de Facebook para las publicaciones?", a: "Una sola publicación puede contener técnicamente más de 63.000 caracteres, así que la longitud rara vez es el muro. Lo que importa es el pliegue del feed: Facebook oculta el texto tras unos 480 caracteres con «Ver más»." },
+        { q: "¿Por qué las publicaciones más cortas de Facebook tienen más alcance?", a: "Las publicaciones de menos de unos 80 caracteres logran de forma constante más interacción: se leen enteras en el feed sin pulsar «Ver más» y resultan más cercanas. El contador de arriba te ayuda a ser conciso." },
+        { q: "¿Por qué mis letras decorativas en negrita o cursiva se ven rotas para algunas personas?", a: "Esas letras con estilo son símbolos pseudo-Unicode, no formato real. Los lectores de pantalla las omiten o las leen mal, lo que perjudica la accesibilidad y el alcance. El editor las señala para que vuelvas al texto normal." },
+        { q: "¿Los emojis y los enlaces cuentan para el recuento de caracteres?", a: "Sí: los emojis y el texto completo del enlace cuentan como caracteres en tu publicación, aunque Facebook también genere una tarjeta de vista previa aparte. El contador refleja el total real de caracteres." },
+      ],
+      de: [
+        { q: "Wie lautet das Zeichenlimit von Facebook für Beiträge?", a: "Ein einzelner Beitrag kann technisch über 63.000 Zeichen fassen, Länge ist also selten die Hürde. Entscheidend ist der Feed-Umbruch: Facebook verbirgt Text nach etwa 480 Zeichen hinter „Mehr anzeigen“." },
+        { q: "Warum haben kürzere Facebook-Beiträge mehr Reichweite?", a: "Beiträge unter etwa 80 Zeichen erzielen durchweg mehr Interaktion — sie sind im Feed komplett lesbar, ohne auf „Mehr anzeigen“ zu klicken, und wirken nahbarer. Der Zähler oben hilft dir, es knapp zu halten." },
+        { q: "Warum sehen meine schicken fett- oder kursivgesetzten Buchstaben für manche kaputt aus?", a: "Diese stilisierten Buchstaben sind Pseudo-Unicode-Symbole, keine echte Formatierung. Screenreader überspringen oder verstümmeln sie, was Barrierefreiheit und Reichweite schadet. Der Editor markiert sie, damit du zu normalem Text zurückkehren kannst." },
+        { q: "Zählen Emojis und Links zur Zeichenanzahl?", a: "Ja — Emojis und der vollständige Linktext zählen als Zeichen in deinem Beitrag, auch wenn Facebook zusätzlich eine separate Link-Vorschaukarte erzeugt. Der Zähler zeigt die tatsächliche Gesamtzahl." },
+      ],
+      fr: [
+        { q: "Quelle est la limite de caractères de Facebook pour les publications ?", a: "Une seule publication peut techniquement contenir plus de 63 000 caractères, la longueur est donc rarement le mur. Ce qui compte, c’est le pli du fil : Facebook masque le texte après environ 480 caractères derrière « Voir plus »." },
+        { q: "Pourquoi les publications Facebook plus courtes ont-elles plus de portée ?", a: "Les publications de moins de 80 caractères obtiennent régulièrement plus d’engagement : elles se lisent entièrement dans le fil sans clic « Voir plus » et paraissent plus conviviales. Le compteur ci-dessus vous aide à rester concis." },
+        { q: "Pourquoi mes lettres fantaisie en gras ou en italique semblent-elles cassées pour certains ?", a: "Ces lettres stylisées sont des symboles pseudo-Unicode, pas une vraie mise en forme. Les lecteurs d’écran les sautent ou les déforment, ce qui nuit à l’accessibilité et à la portée. L’éditeur les signale pour que vous reveniez au texte simple." },
+        { q: "Les émojis et les liens comptent-ils dans le nombre de caractères ?", a: "Oui — les émojis et le texte complet du lien comptent comme des caractères dans votre publication, même si Facebook génère aussi une carte d’aperçu de lien distincte. Le compteur reflète le total réel de caractères." },
+      ],
+      pt: [
+        { q: "Qual é o limite de caracteres do Facebook para publicações?", a: "Uma única publicação pode tecnicamente conter mais de 63.000 caracteres, então o comprimento raramente é o muro. O que importa é o corte do feed: o Facebook oculta o texto após cerca de 480 caracteres atrás de «Ver mais»." },
+        { q: "Por que publicações mais curtas no Facebook têm mais alcance?", a: "Publicações com menos de cerca de 80 caracteres têm consistentemente mais engajamento: são lidas por inteiro no feed sem clicar em «Ver mais» e parecem mais próximas. O contador acima ajuda você a ser conciso." },
+        { q: "Por que minhas letras decorativas em negrito ou itálico parecem quebradas para algumas pessoas?", a: "Essas letras estilizadas são símbolos pseudo-Unicode, não formatação real. Os leitores de tela as ignoram ou as leem errado, o que prejudica a acessibilidade e o alcance. O editor as sinaliza para você voltar ao texto comum." },
+        { q: "Emojis e links contam para a contagem de caracteres?", a: "Sim — emojis e o texto completo do link contam como caracteres na sua publicação, mesmo que o Facebook também gere um cartão de pré-visualização separado. O contador reflete o total real de caracteres." },
+      ],
+      it: [
+        { q: "Qual è il limite di caratteri di Facebook per i post?", a: "Un singolo post può tecnicamente contenere più di 63.000 caratteri, quindi la lunghezza è raramente il muro. Ciò che conta è il taglio del feed: Facebook nasconde il testo dopo circa 480 caratteri dietro «Altro»." },
+        { q: "Perché i post Facebook più brevi hanno più portata?", a: "I post sotto circa 80 caratteri ottengono costantemente più interazione: si leggono per intero nel feed senza cliccare «Altro» e risultano più diretti. Il contatore qui sopra ti aiuta a restare conciso." },
+        { q: "Perché le mie lettere decorative in grassetto o corsivo appaiono rotte ad alcune persone?", a: "Quelle lettere stilizzate sono simboli pseudo-Unicode, non vera formattazione. Gli screen reader le saltano o le storpiano, danneggiando accessibilità e portata. L’editor le segnala così puoi tornare al testo normale." },
+        { q: "Le emoji e i link contano nel conteggio dei caratteri?", a: "Sì — le emoji e l’intero testo del link contano come caratteri nel post, anche se Facebook genera pure una scheda di anteprima separata. Il contatore riflette il totale reale dei caratteri." },
+      ],
+      nl: [
+        { q: "Wat is de tekenlimiet van Facebook voor berichten?", a: "Eén bericht kan technisch meer dan 63.000 tekens bevatten, dus lengte is zelden de muur. Wat telt is de feedvouw: Facebook verbergt tekst na ongeveer 480 tekens achter ‘Meer weergeven’." },
+        { q: "Waarom krijgen kortere Facebook-berichten meer bereik?", a: "Berichten onder ongeveer 80 tekens krijgen consequent meer interactie: ze zijn volledig leesbaar in het feed zonder ‘Meer weergeven’ en voelen persoonlijker. De teller hierboven helpt je het kort te houden." },
+        { q: "Waarom zien mijn chique vette of cursieve letters er voor sommige mensen kapot uit?", a: "Die gestileerde letters zijn pseudo-Unicode-symbolen, geen echte opmaak. Schermlezers slaan ze over of verhaspelen ze, wat de toegankelijkheid en het bereik schaadt. De editor markeert ze zodat je terug kunt naar gewone tekst." },
+        { q: "Tellen emoji en links mee voor het aantal tekens?", a: "Ja — emoji en de volledige linktekst tellen als tekens in je bericht, ook al maakt Facebook daarnaast een aparte linkvoorbeeldkaart. De teller toont het werkelijke totale aantal tekens." },
+      ],
+      ja: [
+        { q: "Facebookの投稿の文字数制限は？", a: "1件の投稿は技術的には63,000文字以上入るため、長さが壁になることはほとんどありません。重要なのはフィードの折り返しで、Facebookは約480文字を超えるとテキストを「もっと見る」の後ろに隠します。" },
+        { q: "なぜ短いFacebook投稿のほうがリーチが伸びるのですか？", a: "約80文字未満の投稿は一貫してエンゲージメントが高く、「もっと見る」を押さずにフィードで全文読め、より親しみやすく感じられます。上のカウンターが簡潔さを保つ手助けをします。" },
+        { q: "なぜ装飾的な太字や斜体の文字が一部の人には壊れて見えるのですか？", a: "それらの装飾文字は本物の書式ではなく擬似Unicode記号です。スクリーンリーダーは読み飛ばしたり誤読したりするため、アクセシビリティとリーチを損ないます。エディターが検出するので、通常のテキストに戻せます。" },
+        { q: "絵文字やリンクは文字数に含まれますか？", a: "はい。絵文字とリンクの全文は投稿の文字数に含まれます。Facebookが別途リンクプレビューカードを生成してもです。カウンターは実際の合計文字数を反映します。" },
+      ],
+      zh: [
+        { q: "Facebook 帖子的字符上限是多少？", a: "单条帖子技术上可容纳超过 63,000 字符，因此长度很少成为障碍。关键在于信息流折叠点：Facebook 在约 480 字符后用“查看更多”隐藏文本。" },
+        { q: "为什么较短的 Facebook 帖子触达更高？", a: "约 80 字符以内的帖子互动率持续更高：无需点击“查看更多”即可在信息流中读完，也更显亲切。上方计数器帮助你保持简洁。" },
+        { q: "为什么我的花式粗体或斜体字母对某些人显示为乱码？", a: "那些样式化字母是伪 Unicode 符号，并非真正的格式。屏幕阅读器会跳过或读错它们，从而损害无障碍访问和触达。编辑器会标记它们，方便你改回普通文本。" },
+        { q: "表情符号和链接会计入字符数吗？", a: "会——表情符号和完整的链接文本都计入帖子的字符数，即使 Facebook 还会另外生成链接预览卡片。计数器反映真实的字符总数。" },
+      ],
+      da: [
+        { q: "Hvad er Facebooks tegngrænse for opslag?", a: "Et enkelt opslag kan teknisk rumme mere end 63.000 tegn, så længden er sjældent muren. Det vigtige er feed-folden: Facebook skjuler tekst efter cirka 480 tegn bag „Se mere“." },
+        { q: "Hvorfor får kortere Facebook-opslag mere rækkevidde?", a: "Opslag under cirka 80 tegn får konsekvent mere engagement: de kan læses helt i feedet uden et „Se mere“-klik og virker mere personlige. Tælleren ovenfor hjælper dig med at holde det kort." },
+        { q: "Hvorfor ser mine smarte fede eller kursive bogstaver i stykker ud for nogle?", a: "De stiliserede bogstaver er pseudo-Unicode-symboler, ikke rigtig formatering. Skærmlæsere springer dem over eller forvansker dem, hvilket skader tilgængelighed og rækkevidde. Editoren markerer dem, så du kan skifte tilbage til almindelig tekst." },
+        { q: "Tæller emoji og links med i tegnantallet?", a: "Ja — emoji og hele linkteksten tæller som tegn i dit opslag, selvom Facebook også laver et separat link-forhåndsvisningskort. Tælleren afspejler det reelle samlede tegnantal." },
+      ],
     },
 
     content: {
@@ -965,6 +1330,94 @@ export const tools: ToolDefinition[] = [
       ja: '無料のSMS文字数カウンター。エンコード（GSM-7またはUnicode）、リアルタイムのセグメント数、絵文字1つで上限が1セグメント160文字から70文字に下がる理由を確認。',
       zh: '免费SMS字符计数器。查看编码（GSM-7或Unicode）、实时短信段数，以及为何一个表情符号会让每段上限从160降至70字符。',
       da: 'Gratis SMS-tegntæller. Se din kodning (GSM-7 eller Unicode), live segmentantal, og hvorfor én emoji sænker din grænse fra 160 til 70 tegn pr. segment.',
+    },
+
+    intro: {
+      en: "Check your text message before you send — the counter below shows your encoding (GSM-7 or Unicode), the live segment count, and exactly when one character tips you into a second message.",
+      es: "Revisa tu mensaje de texto antes de enviarlo: el contador de abajo muestra tu codificación (GSM-7 o Unicode), el número de segmentos en vivo y exactamente cuándo un carácter te empuja a un segundo mensaje.",
+      de: "Prüfe deine SMS vor dem Senden — der Zähler unten zeigt deine Codierung (GSM-7 oder Unicode), die Segmentanzahl live und genau, wann ein einzelnes Zeichen dich in eine zweite Nachricht kippt.",
+      fr: "Vérifiez votre SMS avant de l’envoyer : le compteur ci-dessous indique votre encodage (GSM-7 ou Unicode), le nombre de segments en direct et exactement quand un caractère vous fait basculer dans un second message.",
+      pt: "Confira sua mensagem de texto antes de enviar: o contador abaixo mostra sua codificação (GSM-7 ou Unicode), a contagem de segmentos ao vivo e exatamente quando um caractere empurra você para uma segunda mensagem.",
+      it: "Controlla il tuo SMS prima di inviarlo: il contatore qui sotto mostra la tua codifica (GSM-7 o Unicode), il conteggio dei segmenti in tempo reale ed esattamente quando un carattere ti fa passare a un secondo messaggio.",
+      nl: "Controleer je sms voordat je verstuurt — de teller hieronder toont je codering (GSM-7 of Unicode), het live segmentaantal en precies wanneer één teken je naar een tweede bericht duwt.",
+      ja: "送信する前にSMSをチェック。下のカウンターは、エンコード（GSM-7またはUnicode）、リアルタイムのセグメント数、そして1文字でいつ2通目に切り替わるかを正確に表示します。",
+      zh: "发送前检查你的短信：下方计数器显示你的编码（GSM-7 或 Unicode）、实时短信段数，以及一个字符究竟会在何时把你推入第二条短信。",
+      da: "Tjek din sms, før du sender — tælleren nedenfor viser din kodning (GSM-7 eller Unicode), segmentantallet live og præcis hvornår ét tegn tipper dig over i en anden besked.",
+    },
+
+    faq: {
+      en: [
+        {
+          q: 'How many characters fit in one SMS?',
+          a: '160 characters in standard GSM-7 encoding. Add a single emoji or other non-GSM character and the whole message switches to Unicode, which holds only 70 characters per segment.',
+        },
+        {
+          q: 'Why did my message split into two?',
+          a: 'When your text exceeds one segment, it is sent as multiple parts with a small header, dropping the usable space to 153 characters per part in GSM-7 (or 67 in Unicode). The counter above shows the split point live.',
+        },
+        {
+          q: 'Which characters force Unicode mode?',
+          a: 'Emojis, most non-Latin scripts, and curly "smart" quotes. A few GSM "extended" characters like €, {, }, [, ], and | stay in GSM-7 but count as two characters each.',
+        },
+        {
+          q: 'Do spaces and line breaks count in an SMS?',
+          a: 'Yes — every space and line break is one character (or two for an extended-table character), and they count toward the per-segment limit exactly like letters do.',
+        },
+      ],
+      es: [
+        { q: "¿Cuántos caracteres caben en un SMS?", a: "160 caracteres en la codificación estándar GSM-7. Añade un solo emoji u otro carácter que no sea GSM y todo el mensaje cambia a Unicode, que solo admite 70 caracteres por segmento." },
+        { q: "¿Por qué se dividió mi mensaje en dos?", a: "Cuando tu texto supera un segmento, se envía en varias partes con una pequeña cabecera, lo que reduce el espacio útil a 153 caracteres por parte en GSM-7 (o 67 en Unicode). El contador de arriba muestra el punto de división en vivo." },
+        { q: "¿Qué caracteres fuerzan el modo Unicode?", a: "Los emojis, la mayoría de los alfabetos no latinos y las comillas «tipográficas». Algunos caracteres «extendidos» de GSM como €, {, }, [, ] y | siguen en GSM-7, pero cuentan como dos caracteres cada uno." },
+        { q: "¿Los espacios y los saltos de línea cuentan en un SMS?", a: "Sí: cada espacio y salto de línea es un carácter (o dos si es un carácter de la tabla extendida), y cuentan para el límite por segmento igual que las letras." },
+      ],
+      de: [
+        { q: "Wie viele Zeichen passen in eine SMS?", a: "160 Zeichen in der Standard-Codierung GSM-7. Füge ein einziges Emoji oder anderes Nicht-GSM-Zeichen hinzu, und die ganze Nachricht wechselt zu Unicode, das nur 70 Zeichen pro Segment fasst." },
+        { q: "Warum wurde meine Nachricht in zwei geteilt?", a: "Überschreitet dein Text ein Segment, wird er als mehrere Teile mit einem kleinen Header gesendet, wodurch der nutzbare Platz auf 153 Zeichen pro Teil in GSM-7 (oder 67 in Unicode) sinkt. Der Zähler oben zeigt den Teilungspunkt live." },
+        { q: "Welche Zeichen erzwingen den Unicode-Modus?", a: "Emojis, die meisten nicht-lateinischen Schriften und typografische „Smart“-Anführungszeichen. Einige „erweiterte“ GSM-Zeichen wie €, {, }, [, ] und | bleiben in GSM-7, zählen aber je zwei Zeichen." },
+        { q: "Zählen Leerzeichen und Zeilenumbrüche in einer SMS?", a: "Ja — jedes Leerzeichen und jeder Zeilenumbruch ist ein Zeichen (oder zwei bei einem Zeichen der erweiterten Tabelle) und zählt genau wie Buchstaben zum Limit pro Segment." },
+      ],
+      fr: [
+        { q: "Combien de caractères tiennent dans un SMS ?", a: "160 caractères dans l’encodage standard GSM-7. Ajoutez un seul émoji ou un autre caractère non-GSM et tout le message bascule en Unicode, qui ne contient que 70 caractères par segment." },
+        { q: "Pourquoi mon message s’est-il divisé en deux ?", a: "Quand votre texte dépasse un segment, il est envoyé en plusieurs parties avec un petit en-tête, ce qui réduit l’espace utile à 153 caractères par partie en GSM-7 (ou 67 en Unicode). Le compteur ci-dessus montre le point de coupure en direct." },
+        { q: "Quels caractères forcent le mode Unicode ?", a: "Les émojis, la plupart des écritures non latines et les guillemets « typographiques ». Quelques caractères « étendus » du GSM comme €, {, }, [, ] et | restent en GSM-7 mais comptent pour deux caractères chacun." },
+        { q: "Les espaces et les sauts de ligne comptent-ils dans un SMS ?", a: "Oui — chaque espace et chaque saut de ligne est un caractère (ou deux pour un caractère de la table étendue), et ils comptent dans la limite par segment exactement comme les lettres." },
+      ],
+      pt: [
+        { q: "Quantos caracteres cabem em um SMS?", a: "160 caracteres na codificação padrão GSM-7. Adicione um único emoji ou outro caractere não-GSM e a mensagem inteira muda para Unicode, que comporta apenas 70 caracteres por segmento." },
+        { q: "Por que minha mensagem foi dividida em duas?", a: "Quando seu texto excede um segmento, ele é enviado em várias partes com um pequeno cabeçalho, reduzindo o espaço útil para 153 caracteres por parte em GSM-7 (ou 67 em Unicode). O contador acima mostra o ponto de divisão ao vivo." },
+        { q: "Quais caracteres forçam o modo Unicode?", a: "Emojis, a maioria dos alfabetos não latinos e as aspas «tipográficas». Alguns caracteres «estendidos» do GSM como €, {, }, [, ] e | permanecem em GSM-7, mas contam como dois caracteres cada." },
+        { q: "Espaços e quebras de linha contam em um SMS?", a: "Sim — cada espaço e quebra de linha é um caractere (ou dois para um caractere da tabela estendida), e contam para o limite por segmento exatamente como as letras." },
+      ],
+      it: [
+        { q: "Quanti caratteri stanno in un SMS?", a: "160 caratteri nella codifica standard GSM-7. Aggiungi una sola emoji o un altro carattere non-GSM e l’intero messaggio passa a Unicode, che contiene solo 70 caratteri per segmento." },
+        { q: "Perché il mio messaggio si è diviso in due?", a: "Quando il testo supera un segmento, viene inviato in più parti con una piccola intestazione, riducendo lo spazio utile a 153 caratteri per parte in GSM-7 (o 67 in Unicode). Il contatore qui sopra mostra il punto di divisione in tempo reale." },
+        { q: "Quali caratteri forzano la modalità Unicode?", a: "Le emoji, la maggior parte degli alfabeti non latini e le virgolette «tipografiche». Alcuni caratteri «estesi» del GSM come €, {, }, [, ] e | restano in GSM-7 ma contano due caratteri ciascuno." },
+        { q: "Gli spazi e gli a capo contano in un SMS?", a: "Sì — ogni spazio e a capo è un carattere (o due per un carattere della tabella estesa), e contano per il limite per segmento esattamente come le lettere." },
+      ],
+      nl: [
+        { q: "Hoeveel tekens passen in één sms?", a: "160 tekens in de standaard GSM-7-codering. Voeg één emoji of ander niet-GSM-teken toe en het hele bericht schakelt over naar Unicode, dat slechts 70 tekens per segment bevat." },
+        { q: "Waarom werd mijn bericht in tweeën gesplitst?", a: "Als je tekst één segment overschrijdt, wordt die in meerdere delen met een kleine header verzonden, waardoor de bruikbare ruimte daalt naar 153 tekens per deel in GSM-7 (of 67 in Unicode). De teller hierboven toont het splitspunt live." },
+        { q: "Welke tekens forceren de Unicode-modus?", a: "Emoji, de meeste niet-Latijnse schriften en ‘slimme’ typografische aanhalingstekens. Een paar ‘uitgebreide’ GSM-tekens zoals €, {, }, [, ] en | blijven in GSM-7, maar tellen elk als twee tekens." },
+        { q: "Tellen spaties en regeleinden mee in een sms?", a: "Ja — elke spatie en elk regeleinde is één teken (of twee voor een teken uit de uitgebreide tabel), en ze tellen mee voor de limiet per segment, net als letters." },
+      ],
+      ja: [
+        { q: "1通のSMSには何文字入りますか？", a: "標準のGSM-7エンコードで160文字です。絵文字やGSM以外の文字を1つでも加えると、メッセージ全体がUnicodeに切り替わり、1セグメントあたり70文字しか入らなくなります。" },
+        { q: "なぜメッセージが2通に分かれたのですか？", a: "テキストが1セグメントを超えると、小さなヘッダー付きの複数パートとして送信され、使える文字数が1パートあたりGSM-7で153文字（Unicodeで67文字）に下がります。上のカウンターが分割点をリアルタイムで表示します。" },
+        { q: "どの文字がUnicodeモードを強制しますか？", a: "絵文字、ほとんどの非ラテン文字、そして丸い「スマート」引用符です。€、{、}、[、]、| などGSMの「拡張」文字はGSM-7のままですが、それぞれ2文字としてカウントされます。" },
+        { q: "スペースや改行はSMSでカウントされますか？", a: "はい。スペースや改行はそれぞれ1文字（拡張テーブルの文字なら2文字）で、文字と同じようにセグメントごとの上限にカウントされます。" },
+      ],
+      zh: [
+        { q: "一条短信能放多少字符？", a: "标准 GSM-7 编码下为 160 字符。只要加入一个表情符号或其他非 GSM 字符，整条短信就会切换到 Unicode，每段仅能容纳 70 字符。" },
+        { q: "为什么我的短信被拆成了两条？", a: "当文本超过一段时，会以带小标头的多段形式发送，使每段可用空间在 GSM-7 下降至 153 字符（Unicode 下为 67 字符）。上方计数器会实时显示拆分点。" },
+        { q: "哪些字符会强制进入 Unicode 模式？", a: "表情符号、大多数非拉丁文字，以及弯引号（“智能”引号）。少数 GSM“扩展”字符如 €、{、}、[、] 和 | 仍属 GSM-7，但每个计为两个字符。" },
+        { q: "空格和换行会计入短信吗？", a: "会——每个空格和换行都是一个字符（扩展表字符则为两个），它们与字母一样计入每段的上限。" },
+      ],
+      da: [
+        { q: "Hvor mange tegn er der plads til i én sms?", a: "160 tegn i standardkodningen GSM-7. Tilføj en enkelt emoji eller et andet ikke-GSM-tegn, og hele beskeden skifter til Unicode, der kun rummer 70 tegn pr. segment." },
+        { q: "Hvorfor blev min besked delt i to?", a: "Når din tekst overskrider ét segment, sendes den som flere dele med et lille header, hvilket sænker den brugbare plads til 153 tegn pr. del i GSM-7 (eller 67 i Unicode). Tælleren ovenfor viser delepunktet live." },
+        { q: "Hvilke tegn fremtvinger Unicode-tilstand?", a: "Emoji, de fleste ikke-latinske skrifter og krøllede „smarte“ anførselstegn. Et par „udvidede“ GSM-tegn som €, {, }, [, ] og | bliver i GSM-7, men tæller som to tegn hver." },
+        { q: "Tæller mellemrum og linjeskift med i en sms?", a: "Ja — hvert mellemrum og linjeskift er ét tegn (eller to for et tegn fra den udvidede tabel), og de tæller med i grænsen pr. segment præcis som bogstaver." },
+      ],
     },
 
     content: {
@@ -1198,6 +1651,94 @@ export const tools: ToolDefinition[] = [
       ja: '無料のThreads文字数カウンター。500文字の上限をリアルタイムで追跡し、Xと違ってフルのリンクが文字数を消費する仕組みを確認し、超過分を返信に自動連結。',
       zh: '免费Threads字符计数器。实时追踪500字符上限，了解链接为何不同于X会按完整长度计入，并将超出内容自动连缀为回复。',
       da: 'Gratis Threads tegntæller. Følg 500-tegns-grænsen live, se hvordan fulde links bruger din plads i modsætning til X, og kæd overskud automatisk til svar.',
+    },
+
+    intro: {
+      en: "Check your Threads post before you publish — the counter below tracks the 500-character limit live and auto-chains anything longer into numbered reply posts.",
+      es: "Revisa tu publicación de Threads antes de publicar: el contador de abajo controla en vivo el límite de 500 caracteres y encadena automáticamente todo lo que sobre en respuestas numeradas.",
+      de: "Prüfe deinen Threads-Beitrag vor dem Veröffentlichen — der Zähler unten verfolgt live das 500-Zeichen-Limit und verkettet alles Längere automatisch zu nummerierten Antwortbeiträgen.",
+      fr: "Vérifiez votre publication Threads avant de publier : le compteur ci-dessous suit en direct la limite de 500 caractères et enchaîne automatiquement tout dépassement en réponses numérotées.",
+      pt: "Confira sua publicação do Threads antes de publicar: o contador abaixo acompanha ao vivo o limite de 500 caracteres e encadeia automaticamente qualquer excedente em respostas numeradas.",
+      it: "Controlla il tuo post Threads prima di pubblicare: il contatore qui sotto monitora in tempo reale il limite di 500 caratteri e concatena automaticamente tutto ciò che eccede in risposte numerate.",
+      nl: "Controleer je Threads-bericht voordat je publiceert — de teller hieronder volgt live de limiet van 500 tekens en koppelt alles wat langer is automatisch aan genummerde antwoordberichten.",
+      ja: "公開する前にThreadsの投稿をチェック。下のカウンターは500文字の上限をリアルタイムで追跡し、超過分を自動で番号付きの返信投稿に連結します。",
+      zh: "发布前检查你的 Threads 帖子：下方计数器实时追踪 500 字符上限，并将任何超出内容自动连缀为编号回复帖。",
+      da: "Tjek dit Threads-opslag, før du udgiver — tælleren nedenfor følger live 500-tegns-grænsen og kæder automatisk alt længere sammen til nummererede svar-opslag.",
+    },
+
+    faq: {
+      en: [
+        {
+          q: 'What is the character limit on Threads?',
+          a: 'Each Threads post is capped at 500 characters. Need more room? Chain additional posts together — the tool above splits overflow into numbered replies automatically.',
+        },
+        {
+          q: 'Do links count differently on Threads than on X?',
+          a: 'Yes. Unlike X, which collapses every link to 23 characters, Threads counts the full visible URL against your 500. A long link can eat a big chunk of your budget, so shorten it first.',
+        },
+        {
+          q: 'How do I post something longer than 500 characters?',
+          a: 'Add it as a chained reply under your original post. Paste your full draft into the editor above and it breaks the text into 500-character segments at natural sentence boundaries.',
+        },
+        {
+          q: 'Do emojis and line breaks count toward the 500 limit?',
+          a: 'Yes — emojis, spaces, and line breaks all count. Threads gives you less room than it looks, so the live counter keeps you from getting cut off mid-thought.',
+        },
+      ],
+      es: [
+        { q: "¿Cuál es el límite de caracteres en Threads?", a: "Cada publicación de Threads tiene un límite de 500 caracteres. ¿Necesitas más espacio? Encadena publicaciones adicionales: la herramienta de arriba divide el sobrante en respuestas numeradas automáticamente." },
+        { q: "¿Los enlaces cuentan distinto en Threads que en X?", a: "Sí. A diferencia de X, que reduce cada enlace a 23 caracteres, Threads cuenta la URL visible completa contra tus 500. Un enlace largo puede consumir buena parte de tu espacio, así que acórtalo primero." },
+        { q: "¿Cómo publico algo de más de 500 caracteres?", a: "Añádelo como respuesta encadenada bajo tu publicación original. Pega tu borrador completo en el editor de arriba y lo dividirá en segmentos de 500 caracteres en los límites naturales de las frases." },
+        { q: "¿Los emojis y los saltos de línea cuentan para el límite de 500?", a: "Sí: los emojis, los espacios y los saltos de línea cuentan todos. Threads ofrece menos espacio del que parece, así que el contador en vivo evita que te corten a media idea." },
+      ],
+      de: [
+        { q: "Wie lautet das Zeichenlimit bei Threads?", a: "Jeder Threads-Beitrag ist auf 500 Zeichen begrenzt. Brauchst du mehr Platz? Verkette weitere Beiträge — das Tool oben teilt den Überschuss automatisch in nummerierte Antworten auf." },
+        { q: "Zählen Links bei Threads anders als bei X?", a: "Ja. Anders als X, das jeden Link auf 23 Zeichen reduziert, zählt Threads die vollständige sichtbare URL zu deinen 500. Ein langer Link kann einen großen Teil deines Budgets fressen, kürze ihn also vorher." },
+        { q: "Wie poste ich etwas, das länger als 500 Zeichen ist?", a: "Füge es als verkettete Antwort unter deinem ursprünglichen Beitrag hinzu. Füge deinen vollständigen Entwurf in den Editor oben ein, und er teilt den Text an natürlichen Satzgrenzen in 500-Zeichen-Segmente auf." },
+        { q: "Zählen Emojis und Zeilenumbrüche zum 500-Limit?", a: "Ja — Emojis, Leerzeichen und Zeilenumbrüche zählen alle. Threads bietet weniger Platz, als es aussieht, daher bewahrt dich der Live-Zähler davor, mitten im Gedanken abgeschnitten zu werden." },
+      ],
+      fr: [
+        { q: "Quelle est la limite de caractères sur Threads ?", a: "Chaque publication Threads est limitée à 500 caractères. Besoin de plus de place ? Enchaînez d’autres publications : l’outil ci-dessus répartit automatiquement le surplus en réponses numérotées." },
+        { q: "Les liens comptent-ils différemment sur Threads que sur X ?", a: "Oui. Contrairement à X, qui réduit chaque lien à 23 caractères, Threads compte l’URL visible complète dans vos 500. Un lien long peut consommer une grande partie de votre espace, alors raccourcissez-le d’abord." },
+        { q: "Comment publier un texte de plus de 500 caractères ?", a: "Ajoutez-le en réponse enchaînée sous votre publication d’origine. Collez votre brouillon complet dans l’éditeur ci-dessus et il découpe le texte en segments de 500 caractères aux limites naturelles des phrases." },
+        { q: "Les émojis et les sauts de ligne comptent-ils dans la limite de 500 ?", a: "Oui — les émojis, les espaces et les sauts de ligne comptent tous. Threads offre moins de place qu’il n’y paraît, donc le compteur en direct vous évite d’être coupé en pleine idée." },
+      ],
+      pt: [
+        { q: "Qual é o limite de caracteres no Threads?", a: "Cada publicação do Threads tem limite de 500 caracteres. Precisa de mais espaço? Encadeie publicações adicionais: a ferramenta acima divide o excedente em respostas numeradas automaticamente." },
+        { q: "Os links contam de forma diferente no Threads e no X?", a: "Sim. Ao contrário do X, que reduz cada link a 23 caracteres, o Threads conta a URL visível completa nos seus 500. Um link longo pode consumir boa parte do seu espaço, então encurte-o primeiro." },
+        { q: "Como publico algo com mais de 500 caracteres?", a: "Adicione como resposta encadeada sob a publicação original. Cole seu rascunho completo no editor acima e ele divide o texto em segmentos de 500 caracteres nos limites naturais das frases." },
+        { q: "Emojis e quebras de linha contam para o limite de 500?", a: "Sim — emojis, espaços e quebras de linha contam todos. O Threads oferece menos espaço do que parece, então o contador ao vivo evita que você seja cortado no meio de uma ideia." },
+      ],
+      it: [
+        { q: "Qual è il limite di caratteri su Threads?", a: "Ogni post di Threads ha un limite di 500 caratteri. Ti serve più spazio? Concatena altri post: lo strumento qui sopra divide automaticamente l’eccedenza in risposte numerate." },
+        { q: "I link contano diversamente su Threads rispetto a X?", a: "Sì. A differenza di X, che riduce ogni link a 23 caratteri, Threads conta l’intera URL visibile nei tuoi 500. Un link lungo può consumare gran parte del tuo spazio, quindi accorcialo prima." },
+        { q: "Come pubblico qualcosa di più lungo di 500 caratteri?", a: "Aggiungilo come risposta concatenata sotto il post originale. Incolla la bozza completa nell’editor qui sopra e dividerà il testo in segmenti da 500 caratteri ai confini naturali delle frasi." },
+        { q: "Le emoji e gli a capo contano per il limite di 500?", a: "Sì — emoji, spazi e a capo contano tutti. Threads offre meno spazio di quanto sembri, quindi il contatore in tempo reale ti evita di essere tagliato a metà pensiero." },
+      ],
+      nl: [
+        { q: "Wat is de tekenlimiet op Threads?", a: "Elk Threads-bericht is beperkt tot 500 tekens. Meer ruimte nodig? Koppel extra berichten aan elkaar: het hulpmiddel hierboven splitst het surplus automatisch op in genummerde antwoorden." },
+        { q: "Tellen links anders op Threads dan op X?", a: "Ja. Anders dan X, dat elke link tot 23 tekens terugbrengt, telt Threads de volledige zichtbare URL mee voor je 500. Een lange link kan een groot deel van je ruimte opslokken, dus kort hem eerst in." },
+        { q: "Hoe plaats ik iets dat langer is dan 500 tekens?", a: "Voeg het toe als gekoppeld antwoord onder je oorspronkelijke bericht. Plak je volledige concept in de editor hierboven en die splitst de tekst op in segmenten van 500 tekens op natuurlijke zinsgrenzen." },
+        { q: "Tellen emoji en regeleinden mee voor de limiet van 500?", a: "Ja — emoji, spaties en regeleinden tellen allemaal mee. Threads geeft je minder ruimte dan het lijkt, dus de live teller voorkomt dat je midden in een gedachte wordt afgekapt." },
+      ],
+      ja: [
+        { q: "Threadsの文字数制限は？", a: "Threadsの各投稿は500文字までです。もっとスペースが必要なら、投稿を連結しましょう。上のツールが超過分を自動で番号付きの返信に分割します。" },
+        { q: "リンクはThreadsとXで数え方が違いますか？", a: "はい。すべてのリンクを23文字に短縮するXとは異なり、Threadsは表示されるURL全体を500文字に算入します。長いリンクは文字数を大きく消費するので、先に短縮しましょう。" },
+        { q: "500文字を超える投稿はどうすればできますか？", a: "元の投稿の下に連結した返信として追加します。上のエディターに全文を貼り付けると、自然な文の区切りで500文字ごとのセグメントに分割します。" },
+        { q: "絵文字や改行は500文字の上限に含まれますか？", a: "はい。絵文字・スペース・改行はすべてカウントされます。Threadsは見た目より余裕がないため、リアルタイムのカウンターが考えの途中で切れるのを防ぎます。" },
+      ],
+      zh: [
+        { q: "Threads 的字符上限是多少？", a: "Threads 每条帖子上限为 500 字符。需要更多空间？把多条帖子连缀起来——上方工具会将超出内容自动拆分为编号回复。" },
+        { q: "链接在 Threads 和 X 上的计数方式不同吗？", a: "不同。与把每个链接都缩为 23 字符的 X 不同，Threads 会按可见的完整 URL 计入你的 500 字符。长链接会占用很大一部分空间，所以先缩短它。" },
+        { q: "怎样才能发布超过 500 字符的内容？", a: "把它作为连缀回复添加在原帖下方。把完整草稿粘贴到上方编辑器，它会在自然句子边界处将文本拆分为 500 字符的片段。" },
+        { q: "表情符号和换行会计入 500 上限吗？", a: "会——表情符号、空格和换行都计入。Threads 的可用空间比看上去少，因此实时计数器能防止你在表达到一半时被截断。" },
+      ],
+      da: [
+        { q: "Hvad er tegngrænsen på Threads?", a: "Hvert Threads-opslag er begrænset til 500 tegn. Brug for mere plads? Kæd flere opslag sammen — værktøjet ovenfor deler automatisk overskuddet op i nummererede svar." },
+        { q: "Tæller links anderledes på Threads end på X?", a: "Ja. I modsætning til X, der reducerer hvert link til 23 tegn, tæller Threads hele den synlige URL med i dine 500. Et langt link kan bruge en stor del af din plads, så forkort det først." },
+        { q: "Hvordan poster jeg noget længere end 500 tegn?", a: "Tilføj det som et kædet svar under dit oprindelige opslag. Indsæt hele dit udkast i editoren ovenfor, og den deler teksten op i 500-tegns-segmenter ved naturlige sætningsgrænser." },
+        { q: "Tæller emoji og linjeskift med i grænsen på 500?", a: "Ja — emoji, mellemrum og linjeskift tæller alle med. Threads giver dig mindre plads, end det ser ud til, så live-tælleren forhindrer, at du bliver skåret af midt i en tanke." },
+      ],
     },
 
     content: {

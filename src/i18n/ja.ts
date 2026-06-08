@@ -56,6 +56,11 @@ export const ja: Translations = {
   toolPage: {
     onThisPage: 'このページの内容',
     lastUpdated: '最終更新：{date}',
+    crossPromo: {
+      heading: '他のプラットフォームも確認しますか？',
+      text: 'PostTruncateは{platform}だけのものではありません。ホームページの全機能エディターなら、LinkedIn、X、Instagram、Facebook、Threads、SMSへの表示を同時にプレビューでき、各プラットフォームの折り返し・文字数制限・エンコードの落とし穴を一度に把握できます。一度書けば、どこでも確認。',
+      cta: '全機能エディターを開く',
+    },
   },
 
   images: {

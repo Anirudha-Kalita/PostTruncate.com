@@ -66,6 +66,14 @@ const breadcrumbs = [
   { name: tStr(tool.schemaName), item: canonicalUrl },
 ];
 
+// Inputs for the embedded editor on standalone platform pages.
+const toolSlugs: Record<string, string> = {};
+for (const entry of tools) toolSlugs[entry.id] = entry.slugs[lang] ?? entry.slugs[DEFAULT_LOCALE];
+const homeHref = `${home}#workspace`;
+// FAQ items feed both the on-page accordion and FAQPage JSON-LD. Locale-specific
+// (no fallback) so a page only emits FAQPage when it actually renders that FAQ.
+const faqItems = tool.faq?.[lang];
+
 // SERP-page-specific data — only computed for the google-serp tool.
 const isSerpPage = tool.id === 'google-serp';
 const translations = isSerpPage ? getTranslations(lang) : null;
@@ -101,8 +109,17 @@ const promoItems = isSerpPage
     description={tStr(tool.metaDescriptions)}
     inLanguage={lang}
     breadcrumbs={breadcrumbs}
+    faqItems={faqItems}
   />
-  <ToolPageContent tool={tool} lang={lang} editorHref={editorHref} hideCta={isSerpPage} />
+  <ToolPageContent
+    tool={tool}
+    lang={lang}
+    editorHref={editorHref}
+    hideCta={isSerpPage}
+    strings={t.island}
+    toolSlugs={toolSlugs}
+    homeHref={homeHref}
+  />
 
   {isSerpPage && translations && (
     <>

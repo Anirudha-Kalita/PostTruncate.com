@@ -56,6 +56,11 @@ export const da: Translations = {
   toolPage: {
     onThisPage: 'På denne side',
     lastUpdated: 'Sidst opdateret: {date}',
+    crossPromo: {
+      heading: 'Skal du tjekke andre platforme?',
+      text: 'PostTruncate er ikke kun til {platform}. Den fulde editor på forsiden forhåndsviser dit opslag på LinkedIn, X, Instagram, Facebook, Threads og SMS på én gang — så du fanger hver platforms fold, grænse og kodningsfælder i ét gennemløb. Skriv det én gang, tjek det overalt.',
+      cta: 'Åbn den fulde editor',
+    },
   },
 
   images: {

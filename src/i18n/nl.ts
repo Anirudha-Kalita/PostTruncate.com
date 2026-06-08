@@ -56,6 +56,11 @@ export const nl: Translations = {
   toolPage: {
     onThisPage: 'Op deze pagina',
     lastUpdated: 'Laatst bijgewerkt: {date}',
+    crossPromo: {
+      heading: 'Andere platforms controleren?',
+      text: 'PostTruncate is niet alleen voor {platform}. De volledige editor op de homepage toont je bericht tegelijk voor LinkedIn, X, Instagram, Facebook, Threads en SMS — zodat je de vouw, limiet en coderingsvalkuilen van elk platform in één keer opmerkt. Schrijf het één keer, controleer het overal.',
+      cta: 'Open de volledige editor',
+    },
   },
 
   images: {

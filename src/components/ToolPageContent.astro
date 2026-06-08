@@ -1,8 +1,14 @@
 ---
-// Shared body component for all tool sub-pages. Renders the translated heading,
-// long-form prose body, and a deep-link CTA into the editor island.
+// Shared body component for all tool sub-pages.
+//
+// Two layouts, switched by whether the tool defines a `faq` block:
+//   • Standalone (platform pages with faq): intro lede → embedded scoped editor
+//     → prose → FAQ accordion → cross-promo to the full home editor.
+//   • Classic (everything else, e.g. google-serp): heading → prose → CTA.
 import OnThisPage from './OnThisPage.astro';
+import Dashboard from './island/Dashboard.tsx';
 import type { ToolDefinition } from '../data/tools';
+import type { IslandStrings } from '../i18n/types';
 import { DEFAULT_LOCALE } from '../i18n/config';
 import { getTranslations } from '../i18n';
 import { interp } from '../i18n/interp';
@@ -14,11 +20,17 @@ interface Props {
   lang: string;
   /** Absolute or root-relative URL that deep-links to this tool in the editor. */
   editorHref: string;
-  /** When true, suppresses the "Start writing" CTA button at the bottom. */
+  /** When true, suppresses the "Start writing" CTA button (classic layout only). */
   hideCta?: boolean;
+  /** Island strings for the embedded editor (standalone platform pages). */
+  strings?: IslandStrings;
+  /** Locale tool-page slugs for the embedded editor's contextual links. */
+  toolSlugs?: Record<string, string>;
+  /** Full home editor URL for the cross-promo CTA (e.g. /en/character-counter/#workspace). */
+  homeHref?: string;
 }
 
-const { tool, lang, editorHref, hideCta = false } = Astro.props;
+const { tool, lang, editorHref, hideCta = false, strings, toolSlugs, homeHref } = Astro.props;
 
 const tStr = <T>(record: Record<string, T>): T => record[lang] ?? record[DEFAULT_LOCALE];
 const globalT = getTranslations(lang);
@@ -28,28 +40,99 @@ const { html: bodyHtml, sections } = prepareToolContent(tStr(tool.content), cano
 const lastUpdatedLine = interp(globalT.toolPage.lastUpdated, {
   date: formatLocaleDate(tool.lastUpdated, lang),
 });
+
+// Platforms whose editor can be embedded (everything except google-serp).
+const EMBEDDABLE = ['twitter', 'instagram', 'linkedin', 'facebook', 'sms', 'threads'] as const;
+type FocusPlatform = (typeof EMBEDDABLE)[number];
+const focus = (EMBEDDABLE as readonly string[]).includes(tool.id)
+  ? (tool.id as FocusPlatform)
+  : undefined;
+
+// Brand name for the {platform} slot in the cross-promo copy (not translated).
+const PLATFORM_LABEL: Record<string, string> = {
+  twitter: 'X',
+  instagram: 'Instagram',
+  linkedin: 'LinkedIn',
+  facebook: 'Facebook',
+  threads: 'Threads',
+  sms: 'SMS',
+};
+const platformLabel = PLATFORM_LABEL[tool.id] ?? '';
+
+// Switch to the standalone template only where THIS locale has its own intro +
+// faq (no English fallback) — otherwise a partly-translated page would mix
+// languages. Untranslated locales keep the classic layout until templated.
+const introText = tool.intro?.[lang] ?? '';
+const faqItems = tool.faq?.[lang] ?? [];
+
+// The locale-native faq block is the switch into the richer standalone template.
+const isStandalone = focus !== undefined && faqItems.length > 0;
+const crossPromo = globalT.toolPage.crossPromo;
 ---
 
-<section class="tool-page container-page">
-  <article class="tool-page__prose">
-    <header class="tool-page__head">
+{isStandalone ? (
+  <section class="tool-page container-page">
+    <header class="tool-page__prose tool-page__head">
       <h1 class="tool-page__title">{tStr(tool.titles)}</h1>
+      {introText && <p class="tool-page__lede">{introText}</p>}
       <OnThisPage label={globalT.toolPage.onThisPage} sections={sections} />
     </header>
 
-    <div class="tool-page__body" set:html={bodyHtml} />
+    {/* Live tool — scoped to this platform, full container width. */}
+    <div class="tool-page__tool">
+      <Dashboard client:load lang={lang} strings={strings!} toolSlugs={toolSlugs!} focus={focus} />
+    </div>
 
-    <p class="tool-page__updated">{lastUpdatedLine}</p>
+    <article class="tool-page__prose">
+      <div class="tool-page__body" set:html={bodyHtml} />
 
-    {!hideCta && (
-      <div class="tool-page__cta">
-        <a href={editorHref} class="tool-page__btn">
-          {globalT.hero.primary}
-        </a>
-      </div>
-    )}
-  </article>
-</section>
+      <section class="tool-page__faq" aria-label={globalT.faq.title}>
+        <h2 class="tool-page__faq-heading">{globalT.faq.title}</h2>
+        <div class="faq__list">
+          {faqItems.map((f) => (
+            <details class="faq__item">
+              <summary class="faq__q">
+                <span>{f.q}</span>
+                <span class="faq__chev" aria-hidden="true">+</span>
+              </summary>
+              <p class="faq__a">{f.a}</p>
+            </details>
+          ))}
+        </div>
+      </section>
+
+      <p class="tool-page__updated">{lastUpdatedLine}</p>
+
+      {/* Cross-promo: send users who need other platforms to the full editor. */}
+      <aside class="tool-page__xpromo">
+        <h2 class="tool-page__xpromo-heading">{crossPromo.heading}</h2>
+        <p class="tool-page__xpromo-text">{interp(crossPromo.text, { platform: platformLabel })}</p>
+        <a href={homeHref} class="tool-page__btn">{crossPromo.cta}</a>
+      </aside>
+    </article>
+  </section>
+) : (
+  <section class="tool-page container-page">
+    <article class="tool-page__prose">
+      <header class="tool-page__head">
+        <h1 class="tool-page__title">{tStr(tool.titles)}</h1>
+        <OnThisPage label={globalT.toolPage.onThisPage} sections={sections} />
+      </header>
+
+      <div class="tool-page__body" set:html={bodyHtml} />
+
+      <p class="tool-page__updated">{lastUpdatedLine}</p>
+
+      {!hideCta && (
+        <div class="tool-page__cta">
+          <a href={editorHref} class="tool-page__btn">
+            {globalT.hero.primary}
+          </a>
+        </div>
+      )}
+    </article>
+  </section>
+)}
 
 <style>
   .tool-page {
@@ -77,6 +160,20 @@ const lastUpdatedLine = interp(globalT.toolPage.lastUpdated, {
     line-height: 1.06;
     letter-spacing: -1.6px;
     color: var(--color-ink);
+  }
+
+  /* Intro lede above the embedded tool */
+  .tool-page__lede {
+    margin-top: 16px;
+    font-size: 18px;
+    line-height: 28px;
+    color: var(--color-body);
+  }
+
+  /* Embedded editor — breaks out of the narrow prose measure to full width */
+  .tool-page__tool {
+    scroll-margin-top: 80px;
+    margin: 8px 0 56px;
   }
 
   /* Prose body — same rhythm as the homepage SEO copy block */
@@ -154,6 +251,98 @@ const lastUpdatedLine = interp(globalT.toolPage.lastUpdated, {
   .tool-page__btn:active {
     transform: scale(0.955);
     opacity: 0.82;
+  }
+
+  /* ── FAQ accordion — identical look to the homepage FAQ ─────────────────── */
+  .tool-page__faq {
+    margin-top: 48px;
+  }
+
+  .tool-page__faq-heading {
+    font-size: 22px;
+    font-weight: 600;
+    line-height: 30px;
+    letter-spacing: -0.6px;
+    color: var(--color-ink);
+    margin-bottom: 20px;
+  }
+
+  .faq__list {
+    display: grid;
+    gap: 12px;
+  }
+
+  .faq__item {
+    border-radius: var(--radius-lg);
+    background: var(--color-canvas);
+    box-shadow: var(--shadow-e1);
+    overflow: hidden;
+  }
+
+  .faq__q {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    cursor: pointer;
+    padding: 18px 20px;
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--color-ink);
+    list-style: none;
+    transition: transform 100ms ease, background 0.15s ease;
+  }
+
+  .faq__q:active {
+    transform: scale(0.985);
+    background: var(--color-canvas-soft-2);
+  }
+
+  .faq__q::-webkit-details-marker {
+    display: none;
+  }
+
+  .faq__chev {
+    font-size: 20px;
+    color: var(--color-mute);
+    transition: transform 0.2s ease;
+    line-height: 1;
+  }
+
+  .faq__item[open] .faq__chev {
+    transform: rotate(45deg);
+  }
+
+  .faq__a {
+    padding: 0 20px 18px;
+    font-size: 15px;
+    line-height: 24px;
+    color: var(--color-body);
+  }
+
+  /* ── Cross-promo block (replaces the classic CTA on standalone pages) ────── */
+  .tool-page__xpromo {
+    margin-top: 48px;
+    padding-top: 32px;
+    border-top: 1px solid var(--color-hairline);
+  }
+
+  .tool-page__xpromo-heading {
+    font-size: 20px;
+    font-weight: 600;
+    letter-spacing: -0.6px;
+    color: var(--color-ink);
+  }
+
+  .tool-page__xpromo-text {
+    margin-top: 12px;
+    font-size: 16px;
+    line-height: 28px;
+    color: var(--color-body);
+  }
+
+  .tool-page__xpromo .tool-page__btn {
+    margin-top: 20px;
   }
 
   @media (max-width: 768px) {

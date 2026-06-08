@@ -56,6 +56,11 @@ export const fr: Translations = {
   toolPage: {
     onThisPage: 'Sur cette page',
     lastUpdated: 'Dernière mise à jour : {date}',
+    crossPromo: {
+      heading: 'Besoin de vérifier d\'autres plateformes ?',
+      text: 'PostTruncate ne se limite pas à {platform}. L\'éditeur complet de la page d\'accueil prévisualise votre publication sur LinkedIn, X, Instagram, Facebook, Threads et SMS en même temps — pour repérer le pli, la limite et les pièges d\'encodage de chaque plateforme en une seule fois. Écrivez une fois, vérifiez partout.',
+      cta: 'Ouvrir l\'éditeur complet',
+    },
   },
 
   images: {

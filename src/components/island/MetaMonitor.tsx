@@ -22,6 +22,8 @@ interface Props {
   facebookToolLinkHref?: string;
   /** When 'facebook', render the Facebook card above the Instagram card. */
   priority?: 'facebook';
+  /** Scoped platform pages: render only this network's card (both when unset). */
+  only?: 'instagram' | 'facebook';
 }
 
 const INSTAGRAM_DESKTOP_FOLD = 125;
@@ -41,7 +43,7 @@ function truncateForFeed(text: string, limit: number) {
  * Independent Instagram and Facebook monitors. Instagram owns caption preview
  * and hashtag concentration; Facebook owns feed preview and accessibility.
  */
-export function MetaMonitor({ text, lang, s, toolLinkHref, facebookToolLinkHref, priority }: Props) {
+export function MetaMonitor({ text, lang, s, toolLinkHref, facebookToolLinkHref, priority, only }: Props) {
   const m = s.meta;
   const nf = new Intl.NumberFormat(lang);
   const [instagramView, setInstagramView] = useState<FeedView>('mobile');
@@ -262,9 +264,13 @@ export function MetaMonitor({ text, lang, s, toolLinkHref, facebookToolLinkHref,
 
   return (
     <div class="flex flex-col gap-5">
-      {priority === 'facebook'
-        ? <>{facebookCard}{instagramCard}</>
-        : <>{instagramCard}{facebookCard}</>}
+      {only === 'instagram'
+        ? instagramCard
+        : only === 'facebook'
+          ? facebookCard
+          : priority === 'facebook'
+            ? <>{facebookCard}{instagramCard}</>
+            : <>{instagramCard}{facebookCard}</>}
     </div>
   );
 }

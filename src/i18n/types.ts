@@ -394,6 +394,12 @@ export interface Translations {
     onThisPage: string;
     /** "{date}" → locale-formatted date from tools.ts lastUpdated. */
     lastUpdated: string;
+    /** Cross-promo block on standalone platform pages → drives users to the full home editor. */
+    crossPromo: {
+      heading: string;
+      text: string;
+      cta: string;
+    };
   };
   /** Alt text for site images — logos, platform icons, etc. */
   images: {

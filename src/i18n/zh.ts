@@ -56,6 +56,11 @@ export const zh: Translations = {
   toolPage: {
     onThisPage: '本页内容',
     lastUpdated: '最后更新：{date}',
+    crossPromo: {
+      heading: '需要检查其他平台吗？',
+      text: 'PostTruncate 不只适用于 {platform}。主页上的完整编辑器可同时预览你的内容在 LinkedIn、X、Instagram、Facebook、Threads 和 SMS 上的效果——让你一次性发现每个平台的折叠点、字符上限和编码陷阱。写一次，处处检查。',
+      cta: '打开完整编辑器',
+    },
   },
 
   images: {

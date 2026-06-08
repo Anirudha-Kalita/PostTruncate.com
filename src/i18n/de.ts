@@ -57,6 +57,11 @@ export const de: Translations = {
   toolPage: {
     onThisPage: 'Auf dieser Seite',
     lastUpdated: 'Zuletzt aktualisiert: {date}',
+    crossPromo: {
+      heading: 'Andere Plattformen prüfen?',
+      text: 'PostTruncate ist nicht nur für {platform}. Der vollständige Editor auf der Startseite zeigt deinen Beitrag gleichzeitig für LinkedIn, X, Instagram, Facebook, Threads und SMS in der Vorschau — so erkennst du Fold, Limit und Codierungsfallen jeder Plattform in einem Durchgang. Einmal schreiben, überall prüfen.',
+      cta: 'Vollständigen Editor öffnen',
+    },
   },
 
   images: {
