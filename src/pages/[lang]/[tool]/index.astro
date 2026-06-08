@@ -119,16 +119,18 @@ const promoItems = isSerpPage
     strings={t.island}
     toolSlugs={toolSlugs}
     homeHref={homeHref}
-  />
-
-  {isSerpPage && translations && (
-    <>
-      <section class="serp-island container-page">
+  >
+    {isSerpPage && translations && (
+      <section slot="tool" class="serp-island">
         <div class="serp-island__inner">
           <SeoPreview client:load s={translations.island} />
         </div>
       </section>
+    )}
+  </ToolPageContent>
 
+  {isSerpPage && translations && (
+    <>
       <section class="serp-xpromo container-page">
         <h2 class="serp-xpromo__heading">{translations.serpPage.crossPromo.heading}</h2>
         <div class="serp-xpromo__grid">
@@ -148,10 +150,9 @@ const promoItems = isSerpPage
 </Layout>
 
 <style>
-  /* ── Embedded SERP tool ─────────────────────────────────────────────────── */
+  /* ── Embedded SERP tool — sits above the prose body, below the page header ── */
   .serp-island {
-    padding-top: 40px;
-    padding-bottom: 0;
+    padding-bottom: 48px;
   }
   .serp-island__inner {
     max-width: 48rem;

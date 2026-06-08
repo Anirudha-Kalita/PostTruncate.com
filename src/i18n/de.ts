@@ -511,6 +511,34 @@ export const de: Translations = {
         'Keine neuen Preise. Kein Wachstums-Hack. Nur eine Änderung am Onboarding-Ablauf, die eine einzige Entscheidung vom ersten Bildschirm entfernt hat.\n\n' +
         'Hier ist genau, was wir geändert haben, und die drei Dinge, die wir gemessen haben, bevor wir es für alle ausgerollt haben → https://posttruncate.com/blog/onboarding\n\n' +
         '#saas #productled #growth #startups',
+      samples: {
+        linkedin:
+          'Letzte Woche haben wir eine winzige Funktion veröffentlicht, die unsere Testversion-zu-Zahlung-Rate still und leise verdoppelt hat.\n\n' +
+          'Keine neuen Preise. Kein Wachstums-Hack. Nur eine Änderung am Onboarding-Ablauf, die eine einzige Entscheidung vom ersten Bildschirm entfernt hat.\n\n' +
+          'Hier ist genau, was wir geändert haben, und die drei Dinge, die wir gemessen haben, bevor wir es für alle ausgerollt haben → https://posttruncate.com/blog/onboarding\n\n' +
+          '#saas #productled #growth #startups',
+        twitter:
+          'Letzte Woche haben wir eine winzige Onboarding-Änderung veröffentlicht und unsere Testversion-zu-Zahlung-Rate hat sich verdoppelt.\n\n' +
+          'Keine neuen Preise. Kein Wachstums-Hack. Nur eine Entscheidung weniger auf dem ersten Bildschirm.\n\n' +
+          'Der ganze Bericht → https://posttruncate.com/blog/onboarding\n\n' +
+          '#buildinpublic #saas',
+        instagram:
+          'Eine winzige Änderung. Doppelte Ergebnisse. 🚀\n\n' +
+          'Letzte Woche haben wir eine einzige Entscheidung aus unserem Onboarding-Ablauf entfernt – und zugesehen, wie sich unsere Testversion-zu-Zahlung-Rate verdoppelt hat. Keine neuen Preise, keine Tricks. ✨\n\n' +
+          'Die komplette Aufschlüsselung (und die 3 Dinge, die wir gemessen haben) findet ihr in unserer Bio. 👀\n\n' +
+          '.\n.\n.\n' +
+          '#saas #startup #produktdesign #onboarding #wachstum #buildinpublic #gründer #techstartup',
+        facebook:
+          'Eine kurze Geschichte von letzter Woche 👇\n\n' +
+          'Wir haben eine kleine Änderung an unserem Onboarding veröffentlicht – einfach eine einzige Entscheidung vom allerersten Bildschirm entfernt – und unsere Testversion-zu-Zahlung-Rate hat sich verdoppelt. Keine neuen Preise, kein ausgefeilter Wachstums-Hack.\n\n' +
+          'Wir haben genau aufgeschrieben, was wir geändert haben und welche drei Dinge wir vor dem Rollout gemessen haben. Lest es und sagt uns, was ihr denkt → https://posttruncate.com/blog/onboarding',
+        threads:
+          'ok das ist irgendwie verrückt – letzte Woche haben wir EINE Entscheidung vom ersten Bildschirm unseres Onboardings entfernt und die Testversion-zu-Zahlung-Rate hat sich buchstäblich verdoppelt.\n\n' +
+          'keine neuen Preise. kein Wachstums-Hack. einfach weniger Reibung.\n\n' +
+          'hat sonst noch jemand so große Ergebnisse von einer so kleinen Änderung gesehen?',
+        sms:
+          'Hey! Kurz gesagt – die Onboarding-Anpassung von letzter Woche hat unsere Testversion-zu-Zahlung-Rate verdoppelt. Hier steht, was sich geändert hat und die 3 Dinge, die wir gemessen haben: https://posttruncate.com/blog/onboarding',
+      },
     },
     workspace: {
       eyebrow: 'Arbeitsbereich',

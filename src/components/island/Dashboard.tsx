@@ -132,7 +132,7 @@ export default function Dashboard({ lang, strings, toolSlugs, focus }: Props) {
         {!text && (
           <button
             type="button"
-            onClick={() => setText(strings.dashboard.sample)}
+            onClick={() => setText(focus ? strings.dashboard.samples[focus] : strings.dashboard.sample)}
             class="self-start rounded-pill border border-hairline bg-canvas px-3.5 py-2 text-[13px] font-medium text-body transition-[transform,color,background] duration-100 hover:bg-canvas-soft-2 hover:text-ink active:scale-[0.96] active:bg-canvas-soft-2"
           >
             {strings.dashboard.loadSample}

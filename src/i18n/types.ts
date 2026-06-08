@@ -119,8 +119,21 @@ export interface ErrorPageStrings {
 export interface IslandStrings {
   dashboard: {
     loadSample: string;
-    /** Demo post injected by "Load a sample"; URL kept verbatim. */
+    /** Demo post injected by "Load a sample" on the homepage; URL kept verbatim. */
     sample: string;
+    /**
+     * Platform-specific demo posts injected by "Load a sample" on the scoped
+     * tool pages. Each is written in that platform's native voice (SMS is short
+     * and link-light; LinkedIn is long-form; etc.). URLs kept verbatim.
+     */
+    samples: {
+      linkedin: string;
+      twitter: string;
+      instagram: string;
+      facebook: string;
+      threads: string;
+      sms: string;
+    };
   };
   workspace: {
     eyebrow: string;

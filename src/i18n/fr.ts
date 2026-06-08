@@ -510,6 +510,34 @@ export const fr: Translations = {
         'Aucune nouvelle tarification. Aucune astuce de croissance. Juste un changement dans le parcours d’intégration qui a supprimé une seule décision du premier écran.\n\n' +
         'Voici exactement ce que nous avons changé et les trois éléments que nous avons mesurés avant de le déployer à tous → https://posttruncate.com/blog/onboarding\n\n' +
         '#saas #productled #growth #startups',
+      samples: {
+        linkedin:
+          'La semaine dernière, nous avons livré une toute petite fonctionnalité qui a discrètement doublé notre taux de conversion d’essai en abonnement payant.\n\n' +
+          'Aucune nouvelle tarification. Aucune astuce de croissance. Juste un changement dans le parcours d’intégration qui a supprimé une seule décision du premier écran.\n\n' +
+          'Voici exactement ce que nous avons changé et les trois éléments que nous avons mesurés avant de le déployer à tous → https://posttruncate.com/blog/onboarding\n\n' +
+          '#saas #productled #growth #startups',
+        twitter:
+          'La semaine dernière, nous avons fait un tout petit changement d’intégration et notre taux d’essai en abonnement payant a doublé.\n\n' +
+          'Aucune nouvelle tarification. Aucune astuce de croissance. Juste une décision en moins sur le premier écran.\n\n' +
+          'L’analyse complète → https://posttruncate.com/blog/onboarding\n\n' +
+          '#buildinpublic #saas',
+        instagram:
+          'Un tout petit changement. Le double de résultats. 🚀\n\n' +
+          'La semaine dernière, nous avons supprimé une seule décision de notre parcours d’intégration — et vu notre taux d’essai en abonnement payant doubler. Aucune nouvelle tarification, aucune astuce. ✨\n\n' +
+          'L’analyse complète de ce que nous avons changé (et les 3 choses mesurées) est dans notre bio. 👀\n\n' +
+          '.\n.\n.\n' +
+          '#saas #startup #designproduit #onboarding #croissance #buildinpublic #entrepreneur #techstartup',
+        facebook:
+          'Une petite histoire de la semaine dernière 👇\n\n' +
+          'Nous avons livré un petit changement à notre intégration — juste supprimé une seule décision du tout premier écran — et notre taux d’essai en abonnement payant a doublé. Aucune nouvelle tarification, aucune astuce de croissance élaborée.\n\n' +
+          'Nous avons écrit exactement ce que nous avons changé et les trois choses que nous avons mesurées avant le déploiement. Lisez-le et dites-nous ce que vous en pensez → https://posttruncate.com/blog/onboarding',
+        threads:
+          'ok c’est assez dingue — la semaine dernière on a supprimé UNE décision du premier écran de notre intégration et le taux d’essai en abonnement payant a littéralement doublé.\n\n' +
+          'aucune nouvelle tarification. aucune astuce de croissance. juste moins de friction.\n\n' +
+          'quelqu’un d’autre a vu des résultats aussi grands pour un changement aussi petit ?',
+        sms:
+          'Salut ! Rapidement — l’ajustement d’intégration livré la semaine dernière a doublé notre taux d’essai en abonnement payant. On a écrit ce qui a changé + les 3 choses mesurées : https://posttruncate.com/blog/onboarding',
+      },
     },
     workspace: {
       eyebrow: 'Espace de travail',

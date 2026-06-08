@@ -510,6 +510,34 @@ export const pt: Translations = {
         'Sem novos preços. Sem truques de crescimento. Apenas uma alteração ao fluxo de integração que retirou uma única decisão do primeiro ecrã.\n\n' +
         'Aqui está exatamente o que mudámos e as três coisas que medimos antes de o disponibilizar a todos → https://posttruncate.com/blog/onboarding\n\n' +
         '#saas #productled #growth #startups',
+      samples: {
+        linkedin:
+          'Lançámos uma pequena funcionalidade na semana passada que duplicou discretamente a nossa taxa de conversão de avaliações em clientes pagantes.\n\n' +
+          'Sem novos preços. Sem truques de crescimento. Apenas uma alteração ao fluxo de integração que retirou uma única decisão do primeiro ecrã.\n\n' +
+          'Aqui está exatamente o que mudámos e as três coisas que medimos antes de o disponibilizar a todos → https://posttruncate.com/blog/onboarding\n\n' +
+          '#saas #productled #growth #startups',
+        twitter:
+          'Na semana passada fizemos uma pequena alteração na integração e a nossa taxa de avaliação para cliente pagante duplicou.\n\n' +
+          'Sem novos preços. Sem truques de crescimento. Apenas uma decisão a menos no primeiro ecrã.\n\n' +
+          'A análise completa → https://posttruncate.com/blog/onboarding\n\n' +
+          '#buildinpublic #saas',
+        instagram:
+          'Uma pequena alteração. O dobro dos resultados. 🚀\n\n' +
+          'Na semana passada retirámos uma única decisão do nosso fluxo de integração — e vimos a nossa taxa de avaliação para cliente pagante duplicar. Sem novos preços, sem truques. ✨\n\n' +
+          'A análise completa do que mudámos (e as 3 coisas que medimos) está na nossa bio. 👀\n\n' +
+          '.\n.\n.\n' +
+          '#saas #startup #designdeproduto #onboarding #crescimento #buildinpublic #empreendedor #techstartup',
+        facebook:
+          'Uma história rápida da semana passada 👇\n\n' +
+          'Fizemos uma pequena alteração na nossa integração — apenas retirámos uma única decisão do primeiro ecrã — e a nossa taxa de avaliação para cliente pagante duplicou. Sem novos preços, sem truques de crescimento elaborados.\n\n' +
+          'Escrevemos exatamente o que mudámos e as três coisas que medimos antes do lançamento. Leiam e digam-nos o que acham → https://posttruncate.com/blog/onboarding',
+        threads:
+          'ok isto é meio incrível — na semana passada retirámos UMA decisão do primeiro ecrã da nossa integração e a taxa de avaliação para cliente pagante literalmente duplicou.\n\n' +
+          'sem novos preços. sem truques de crescimento. apenas menos atrito.\n\n' +
+          'mais alguém já viu resultados tão grandes com uma alteração tão pequena?',
+        sms:
+          'Olá! Rapidamente — aquele ajuste de integração que lançámos na semana passada duplicou a nossa taxa de avaliação para cliente pagante. Escrevemos o que mudou + as 3 coisas que medimos: https://posttruncate.com/blog/onboarding',
+      },
     },
     workspace: {
       eyebrow: 'Espaço de trabalho',

@@ -508,6 +508,34 @@ export const zh: Translations = {
         '没有新的定价。没有增长黑客。只是对引导流程做了一处改动，从首屏移除了一个决定。\n\n' +
         '下面就是我们具体改了什么，以及在向所有人推出之前我们衡量的三件事 → https://posttruncate.com/blog/onboarding\n\n' +
         '#saas #productled #growth #startups',
+      samples: {
+        linkedin:
+          '上周我们上线了一个不起眼的小功能，悄悄地让我们的试用转付费率翻了一倍。\n\n' +
+          '没有新的定价。没有增长黑客。只是对引导流程做了一处改动，从首屏移除了一个决定。\n\n' +
+          '下面就是我们具体改了什么，以及在向所有人推出之前我们衡量的三件事 → https://posttruncate.com/blog/onboarding\n\n' +
+          '#saas #productled #growth #startups',
+        twitter:
+          '上周我们对引导流程做了一处小改动，试用转付费率就翻了一倍。\n\n' +
+          '没有新定价，没有增长黑客。只是在首屏少做了一个决定。\n\n' +
+          '完整复盘 → https://posttruncate.com/blog/onboarding\n\n' +
+          '#buildinpublic #saas',
+        instagram:
+          '一处小改动，结果翻倍。🚀\n\n' +
+          '上周我们从引导流程里移除了一个决定——然后眼看着试用转付费率翻了一倍。没有新定价，没有套路。✨\n\n' +
+          '我们改了什么（以及衡量的 3 件事）完整复盘见主页链接。👀\n\n' +
+          '.\n.\n.\n' +
+          '#saas #创业 #产品设计 #引导流程 #增长 #buildinpublic #创业者 #techstartup',
+        facebook:
+          '分享一个上周的小故事 👇\n\n' +
+          '我们对引导流程做了一处小改动——只是从首屏移除了一个决定——试用转付费率就翻了一倍。没有新定价，也没有花哨的增长黑客。\n\n' +
+          '我们把具体改了什么、以及推出前衡量的三件事都写了下来。看看，然后告诉我们你的想法 → https://posttruncate.com/blog/onboarding',
+        threads:
+          '这事儿挺离谱的——上周我们从引导流程的首屏移除了一个决定，试用转付费率真的就翻倍了。\n\n' +
+          '没有新定价。没有增长黑客。只是减少了一点摩擦。\n\n' +
+          '还有谁靠这么小的改动看到过这么大的效果？',
+        sms:
+          '嗨！简单说一句——上周那处引导流程的小调整让我们的试用转付费率翻了一倍。改了什么＋衡量的 3 件事都在这： https://posttruncate.com/blog/onboarding',
+      },
     },
     workspace: {
       eyebrow: '工作区',

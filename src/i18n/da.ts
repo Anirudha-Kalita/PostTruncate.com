@@ -510,6 +510,34 @@ export const da: Translations = {
         'Ingen ny prissætning. Intet vækst-hack. Bare én ændring i onboarding-flowet, der fjernede en enkelt beslutning fra den første skærm.\n\n' +
         'Her er præcis hvad vi ændrede, og de tre ting vi målte, før vi rullede det ud til alle → https://posttruncate.com/blog/onboarding\n\n' +
         '#saas #productled #growth #startups',
+      samples: {
+        linkedin:
+          'Vi lancerede en lillebitte funktion i sidste uge, der i det stille fordoblede vores trial-til-betalende-rate.\n\n' +
+          'Ingen ny prissætning. Intet vækst-hack. Bare én ændring i onboarding-flowet, der fjernede en enkelt beslutning fra den første skærm.\n\n' +
+          'Her er præcis hvad vi ændrede, og de tre ting vi målte, før vi rullede det ud til alle → https://posttruncate.com/blog/onboarding\n\n' +
+          '#saas #productled #growth #startups',
+        twitter:
+          'Vi lavede én lille onboarding-ændring i sidste uge, og vores trial-til-betalende-rate blev fordoblet.\n\n' +
+          'Ingen ny prissætning. Intet vækst-hack. Bare én beslutning mindre på den første skærm.\n\n' +
+          'Hele gennemgangen → https://posttruncate.com/blog/onboarding\n\n' +
+          '#buildinpublic #saas',
+        instagram:
+          'Én lille ændring. Dobbelt så gode resultater. 🚀\n\n' +
+          'I sidste uge fjernede vi en enkelt beslutning fra vores onboarding-flow — og så vores trial-til-betalende-rate blive fordoblet. Ingen ny prissætning, ingen tricks. ✨\n\n' +
+          'Hele gennemgangen af hvad vi ændrede (og de 3 ting vi målte) finder du i vores bio. 👀\n\n' +
+          '.\n.\n.\n' +
+          '#saas #startup #produktdesign #onboarding #vækst #buildinpublic #iværksætter #techstartup',
+        facebook:
+          'En hurtig historie fra sidste uge 👇\n\n' +
+          'Vi lavede en lille ændring i vores onboarding — fjernede bare en enkelt beslutning fra den allerførste skærm — og vores trial-til-betalende-rate blev fordoblet. Ingen ny prissætning, intet avanceret vækst-hack.\n\n' +
+          'Vi skrev præcis hvad vi ændrede, og de tre ting vi målte, før vi rullede det ud. Læs med, og fortæl os hvad du synes → https://posttruncate.com/blog/onboarding',
+        threads:
+          'ok det her er ret vildt — i sidste uge fjernede vi ÉN beslutning fra den første skærm i vores onboarding, og trial-til-betalende blev bogstaveligt talt fordoblet.\n\n' +
+          'ingen ny prissætning. intet vækst-hack. bare mindre friktion.\n\n' +
+          'er der andre, der har set så store resultater af så lille en ændring?',
+        sms:
+          'Hej! Kort og godt — den onboarding-justering vi lancerede i sidste uge fordoblede vores trial-til-betalende-rate. Vi skrev hvad der ændrede sig + de 3 ting vi målte: https://posttruncate.com/blog/onboarding',
+      },
     },
     workspace: {
       eyebrow: 'Arbejdsområde',

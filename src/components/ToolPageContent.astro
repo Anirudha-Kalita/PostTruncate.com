@@ -113,12 +113,15 @@ const crossPromo = globalT.toolPage.crossPromo;
   </section>
 ) : (
   <section class="tool-page container-page">
-    <article class="tool-page__prose">
-      <header class="tool-page__head">
-        <h1 class="tool-page__title">{tStr(tool.titles)}</h1>
-        <OnThisPage label={globalT.toolPage.onThisPage} sections={sections} />
-      </header>
+    <header class="tool-page__head tool-page__prose">
+      <h1 class="tool-page__title">{tStr(tool.titles)}</h1>
+      <OnThisPage label={globalT.toolPage.onThisPage} sections={sections} />
+    </header>
 
+    {/* Optional embedded tool, rendered above the prose body (e.g. google-serp). */}
+    <slot name="tool" />
+
+    <article class="tool-page__prose">
       <div class="tool-page__body" set:html={bodyHtml} />
 
       <p class="tool-page__updated">{lastUpdatedLine}</p>

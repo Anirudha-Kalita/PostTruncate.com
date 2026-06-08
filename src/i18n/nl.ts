@@ -510,6 +510,34 @@ export const nl: Translations = {
         'Geen nieuwe prijzen. Geen groeitruc. Gewoon één wijziging in de onboardingflow die één enkele beslissing van het eerste scherm haalde.\n\n' +
         'Hier is precies wat we hebben veranderd en de drie dingen die we hebben gemeten voordat we het voor iedereen uitrolden → https://posttruncate.com/blog/onboarding\n\n' +
         '#saas #productled #growth #startups',
+      samples: {
+        linkedin:
+          'Vorige week hebben we een piepkleine functie uitgebracht die ons percentage proef-naar-betaald stilletjes verdubbelde.\n\n' +
+          'Geen nieuwe prijzen. Geen groeitruc. Gewoon één wijziging in de onboardingflow die één enkele beslissing van het eerste scherm haalde.\n\n' +
+          'Hier is precies wat we hebben veranderd en de drie dingen die we hebben gemeten voordat we het voor iedereen uitrolden → https://posttruncate.com/blog/onboarding\n\n' +
+          '#saas #productled #growth #startups',
+        twitter:
+          'Vorige week hebben we één kleine onboardingwijziging uitgebracht en ons percentage proef-naar-betaald verdubbelde.\n\n' +
+          'Geen nieuwe prijzen. Geen groeitruc. Gewoon één beslissing minder op het eerste scherm.\n\n' +
+          'Het volledige verhaal → https://posttruncate.com/blog/onboarding\n\n' +
+          '#buildinpublic #saas',
+        instagram:
+          'Eén kleine wijziging. Dubbel zoveel resultaat. 🚀\n\n' +
+          'Vorige week haalden we één enkele beslissing uit onze onboardingflow — en zagen we ons percentage proef-naar-betaald verdubbelen. Geen nieuwe prijzen, geen trucjes. ✨\n\n' +
+          'De volledige uitleg van wat we veranderden (en de 3 dingen die we maten) staat in onze bio. 👀\n\n' +
+          '.\n.\n.\n' +
+          '#saas #startup #productontwerp #onboarding #groei #buildinpublic #ondernemer #techstartup',
+        facebook:
+          'Een kort verhaal van vorige week 👇\n\n' +
+          'We brachten een kleine wijziging uit aan onze onboarding — gewoon één enkele beslissing van het allereerste scherm gehaald — en ons percentage proef-naar-betaald verdubbelde. Geen nieuwe prijzen, geen ingewikkelde groeitruc.\n\n' +
+          'We schreven precies op wat we veranderden en de drie dingen die we maten voor de uitrol. Lees het en laat ons weten wat je ervan vindt → https://posttruncate.com/blog/onboarding',
+        threads:
+          'oké dit is best wild — vorige week haalden we ÉÉN beslissing van het eerste scherm van onze onboarding en proef-naar-betaald verdubbelde letterlijk.\n\n' +
+          'geen nieuwe prijzen. geen groeitruc. gewoon minder wrijving.\n\n' +
+          'heeft iemand anders zulke grote resultaten gezien van zo’n kleine wijziging?',
+        sms:
+          'Hé! Even kort — die onboardingaanpassing van vorige week verdubbelde ons percentage proef-naar-betaald. We schreven op wat er veranderde + de 3 dingen die we maten: https://posttruncate.com/blog/onboarding',
+      },
     },
     workspace: {
       eyebrow: 'Werkruimte',

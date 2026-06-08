@@ -510,6 +510,34 @@ export const es: Translations = {
         'Sin nuevos precios. Sin ningún truco de crecimiento. Solo un cambio en el flujo de incorporación que eliminó una única decisión de la primera pantalla.\n\n' +
         'Aquí tienes exactamente lo que cambiamos y las tres cosas que medimos antes de desplegarlo para todos → https://posttruncate.com/blog/onboarding\n\n' +
         '#saas #productled #growth #startups',
+      samples: {
+        linkedin:
+          'La semana pasada lanzamos una función diminuta que, sin hacer ruido, duplicó nuestra tasa de conversión de prueba a pago.\n\n' +
+          'Sin nuevos precios. Sin ningún truco de crecimiento. Solo un cambio en el flujo de incorporación que eliminó una única decisión de la primera pantalla.\n\n' +
+          'Aquí tienes exactamente lo que cambiamos y las tres cosas que medimos antes de desplegarlo para todos → https://posttruncate.com/blog/onboarding\n\n' +
+          '#saas #productled #growth #startups',
+        twitter:
+          'La semana pasada hicimos un cambio diminuto en la incorporación y nuestra tasa de prueba a pago se duplicó.\n\n' +
+          'Sin nuevos precios. Sin trucos de crecimiento. Solo una decisión menos en la primera pantalla.\n\n' +
+          'El análisis completo → https://posttruncate.com/blog/onboarding\n\n' +
+          '#buildinpublic #saas',
+        instagram:
+          'Un cambio diminuto. El doble de resultados. 🚀\n\n' +
+          'La semana pasada eliminamos una sola decisión de nuestro flujo de incorporación y vimos cómo nuestra tasa de prueba a pago se duplicaba. Sin nuevos precios, sin trucos. ✨\n\n' +
+          'El desglose completo de lo que cambiamos (y las 3 cosas que medimos) está en nuestra bio. 👀\n\n' +
+          '.\n.\n.\n' +
+          '#saas #startup #diseñodeproducto #onboarding #crecimiento #buildinpublic #emprendedor #techstartup',
+        facebook:
+          'Una historia rápida de la semana pasada 👇\n\n' +
+          'Hicimos un pequeño cambio en nuestra incorporación —solo eliminamos una decisión de la primera pantalla— y nuestra tasa de prueba a pago se duplicó. Sin nuevos precios, sin ningún truco de crecimiento elaborado.\n\n' +
+          'Escribimos exactamente lo que cambiamos y las tres cosas que medimos antes de lanzarlo. Léelo y dinos qué te parece → https://posttruncate.com/blog/onboarding',
+        threads:
+          'vale, esto es bastante increíble: la semana pasada eliminamos UNA decisión de la primera pantalla de nuestra incorporación y la tasa de prueba a pago literalmente se duplicó.\n\n' +
+          'sin nuevos precios. sin trucos de crecimiento. solo menos fricción.\n\n' +
+          '¿alguien más ha visto resultados tan grandes con un cambio tan pequeño?',
+        sms:
+          '¡Hola! Algo rápido: ese ajuste de incorporación que lanzamos la semana pasada duplicó nuestra tasa de prueba a pago. Escribimos qué cambió y las 3 cosas que medimos: https://posttruncate.com/blog/onboarding',
+      },
     },
     workspace: {
       eyebrow: 'Espacio de trabajo',

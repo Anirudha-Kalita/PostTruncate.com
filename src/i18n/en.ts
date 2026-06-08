@@ -510,6 +510,34 @@ export const en: Translations = {
         'No new pricing. No growth hack. Just one change to the onboarding flow that removed a single decision from the first screen.\n\n' +
         'Here’s exactly what we changed and the three things we measured before rolling it out to everyone → https://posttruncate.com/blog/onboarding\n\n' +
         '#saas #productled #growth #startups',
+      samples: {
+        linkedin:
+          'We shipped a tiny feature last week that quietly doubled our trial-to-paid rate.\n\n' +
+          'No new pricing. No growth hack. Just one change to the onboarding flow that removed a single decision from the first screen.\n\n' +
+          'Here’s exactly what we changed and the three things we measured before rolling it out to everyone → https://posttruncate.com/blog/onboarding\n\n' +
+          '#saas #productled #growth #startups',
+        twitter:
+          'We shipped one tiny onboarding change last week and our trial-to-paid rate doubled.\n\n' +
+          'No new pricing. No growth hack. Just one less decision on the first screen.\n\n' +
+          'Full write-up → https://posttruncate.com/blog/onboarding\n\n' +
+          '#buildinpublic #saas',
+        instagram:
+          'One tiny change. Double the results. 🚀\n\n' +
+          'Last week we removed a single decision from our onboarding flow — and watched our trial-to-paid rate double. No new pricing, no gimmicks. ✨\n\n' +
+          'Full breakdown of what we changed (and the 3 things we measured) is in our bio. 👀\n\n' +
+          '.\n.\n.\n' +
+          '#saas #startup #productdesign #onboarding #growthtips #buildinpublic #entrepreneur #techstartup',
+        facebook:
+          'Quick story from last week 👇\n\n' +
+          'We shipped one small change to our onboarding — just removed a single decision from the very first screen — and our trial-to-paid rate doubled. No new pricing, no fancy growth hack.\n\n' +
+          'We wrote up exactly what we changed and the three things we measured before rolling it out. Have a read and let us know what you think → https://posttruncate.com/blog/onboarding',
+        threads:
+          'ok this is kind of wild — we removed ONE decision from the first screen of our onboarding last week and trial-to-paid literally doubled.\n\n' +
+          'no new pricing. no growth hack. just less friction.\n\n' +
+          'anyone else seen results this big from a change this small?',
+        sms:
+          'Hey! Quick one — that onboarding tweak we shipped last week doubled our trial-to-paid rate. Wrote up what changed + the 3 things we measured: https://posttruncate.com/blog/onboarding',
+      },
     },
     workspace: {
       eyebrow: 'Workspace',

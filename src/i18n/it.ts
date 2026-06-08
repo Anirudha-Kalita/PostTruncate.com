@@ -510,6 +510,34 @@ export const it: Translations = {
         'Nessun nuovo prezzo. Nessun trucco di crescita. Solo una modifica al flusso di onboarding che ha tolto una singola decisione dalla prima schermata.\n\n' +
         'Ecco esattamente cosa abbiamo cambiato e le tre cose che abbiamo misurato prima di estenderlo a tutti → https://posttruncate.com/blog/onboarding\n\n' +
         '#saas #productled #growth #startups',
+      samples: {
+        linkedin:
+          'La settimana scorsa abbiamo rilasciato una piccola funzione che ha silenziosamente raddoppiato il nostro tasso di conversione da prova a pagamento.\n\n' +
+          'Nessun nuovo prezzo. Nessun trucco di crescita. Solo una modifica al flusso di onboarding che ha tolto una singola decisione dalla prima schermata.\n\n' +
+          'Ecco esattamente cosa abbiamo cambiato e le tre cose che abbiamo misurato prima di estenderlo a tutti → https://posttruncate.com/blog/onboarding\n\n' +
+          '#saas #productled #growth #startups',
+        twitter:
+          'La settimana scorsa abbiamo fatto una piccola modifica all’onboarding e il nostro tasso da prova a pagamento è raddoppiato.\n\n' +
+          'Nessun nuovo prezzo. Nessun trucco di crescita. Solo una decisione in meno sulla prima schermata.\n\n' +
+          'L’analisi completa → https://posttruncate.com/blog/onboarding\n\n' +
+          '#buildinpublic #saas',
+        instagram:
+          'Una piccola modifica. Il doppio dei risultati. 🚀\n\n' +
+          'La settimana scorsa abbiamo tolto una singola decisione dal nostro flusso di onboarding — e visto il nostro tasso da prova a pagamento raddoppiare. Nessun nuovo prezzo, nessun trucco. ✨\n\n' +
+          'L’analisi completa di cosa abbiamo cambiato (e le 3 cose che abbiamo misurato) è nella nostra bio. 👀\n\n' +
+          '.\n.\n.\n' +
+          '#saas #startup #designdiprodotto #onboarding #crescita #buildinpublic #imprenditore #techstartup',
+        facebook:
+          'Una storia veloce della settimana scorsa 👇\n\n' +
+          'Abbiamo rilasciato una piccola modifica al nostro onboarding — abbiamo solo tolto una singola decisione dalla primissima schermata — e il nostro tasso da prova a pagamento è raddoppiato. Nessun nuovo prezzo, nessun trucco di crescita elaborato.\n\n' +
+          'Abbiamo scritto esattamente cosa abbiamo cambiato e le tre cose che abbiamo misurato prima del rilascio. Leggetelo e diteci cosa ne pensate → https://posttruncate.com/blog/onboarding',
+        threads:
+          'ok questo è piuttosto pazzesco — la settimana scorsa abbiamo tolto UNA decisione dalla prima schermata del nostro onboarding e il tasso da prova a pagamento è letteralmente raddoppiato.\n\n' +
+          'nessun nuovo prezzo. nessun trucco di crescita. solo meno attrito.\n\n' +
+          'qualcun altro ha visto risultati così grandi da una modifica così piccola?',
+        sms:
+          'Ciao! In breve — quella modifica all’onboarding rilasciata la settimana scorsa ha raddoppiato il nostro tasso da prova a pagamento. Abbiamo scritto cosa è cambiato + le 3 cose che abbiamo misurato: https://posttruncate.com/blog/onboarding',
+      },
     },
     workspace: {
       eyebrow: 'Spazio di lavoro',
