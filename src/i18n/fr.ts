@@ -574,9 +574,15 @@ export const fr: Translations = {
         'Caractères invisibles détectés qui faussent les comptages et les lecteurs d’écran : {codes}. Nettoyez pour les supprimer.',
     },
     common: {
-      profileName: 'Votre nom',
-      handle: '@vous',
+      displayName: 'Votre nom',
+      handle: 'vous',
+      timestamp: '11 h',
       charsSuffix: '{n} caractères',
+      actions: {
+        like: 'J’aime',
+        comment: 'Commenter',
+        share: 'Partager',
+      },
     },
     sms: {
       eyebrow: 'SMS',
@@ -604,7 +610,8 @@ export const fr: Translations = {
       beforeFold: '{total} / {limit} avant le pli',
       postLimit: '{total} / {limit} limite de publication',
       seeMore: '…voir plus',
-      profileMeta: 'Fondateur · 1er · À l’instant',
+      headline: 'Fondateur et CEO',
+      connectionDegree: '3e',
       placeholder: 'Les premières lignes de votre publication apparaissent ici…',
       overLimitNote:
         'Les publications LinkedIn sont limitées à {limit} caractères. Raccourcissez de {excess} avant de publier.',
@@ -654,6 +661,7 @@ export const fr: Translations = {
       within: 'Confortablement sous la limite de 5 hashtags d’Instagram.',
       none: 'Aucun hashtag détecté pour l’instant.',
       a11yLabel: 'Accessibilité · polices fantaisie',
+      audiencePublic: 'Public',
       flagged: '{n} signalé(s)',
       flaggedNone: 'Aucun',
       fancyDetected: {

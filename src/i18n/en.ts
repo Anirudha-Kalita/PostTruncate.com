@@ -574,9 +574,15 @@ export const en: Translations = {
         'Found invisible characters that break counts and screen readers: {codes}. Sanitize to strip them.',
     },
     common: {
-      profileName: 'Your Name',
-      handle: '@you',
+      displayName: 'Your Name',
+      handle: 'you',
+      timestamp: '11h',
       charsSuffix: '{n} chars',
+      actions: {
+        like: 'Like',
+        comment: 'Comment',
+        share: 'Share',
+      },
     },
     sms: {
       eyebrow: 'SMS',
@@ -604,7 +610,8 @@ export const en: Translations = {
       beforeFold: '{total} / {limit} before fold',
       postLimit: '{total} / {limit} post limit',
       seeMore: '…see more',
-      profileMeta: 'Founder · 1st · Just now',
+      headline: 'Founder & CEO',
+      connectionDegree: '3rd',
       placeholder: 'Your post’s opening lines appear here…',
       overLimitNote:
         'LinkedIn posts cap at {limit} characters. Shorten by {excess} before publishing.',
@@ -654,6 +661,7 @@ export const en: Translations = {
       within: 'Comfortably within Instagram’s 5-hashtag limit.',
       none: 'No hashtags detected yet.',
       a11yLabel: 'Accessibility · fancy fonts',
+      audiencePublic: 'Public',
       flagged: '{n} flagged',
       flaggedNone: 'None',
       fancyDetected: {

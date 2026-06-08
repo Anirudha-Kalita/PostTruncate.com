@@ -574,9 +574,15 @@ export const nl: Translations = {
         'Onzichtbare tekens gevonden die tellingen en schermlezers verstoren: {codes}. Schoon op om ze te verwijderen.',
     },
     common: {
-      profileName: 'Jouw naam',
-      handle: '@jij',
+      displayName: 'Jouw naam',
+      handle: 'jij',
+      timestamp: '11 u',
       charsSuffix: '{n} tekens',
+      actions: {
+        like: 'Vind ik leuk',
+        comment: 'Reageren',
+        share: 'Delen',
+      },
     },
     sms: {
       eyebrow: 'SMS',
@@ -604,7 +610,8 @@ export const nl: Translations = {
       beforeFold: '{total} / {limit} vóór de vouw',
       postLimit: '{total} / {limit} berichtlimiet',
       seeMore: '…meer weergeven',
-      profileMeta: 'Oprichter · 1e · Zojuist',
+      headline: 'Oprichter & CEO',
+      connectionDegree: '3e',
       placeholder: 'De openingsregels van je bericht verschijnen hier…',
       overLimitNote:
         'LinkedIn-berichten zijn beperkt tot {limit} tekens. Kort met {excess} in voordat je publiceert.',
@@ -654,6 +661,7 @@ export const nl: Translations = {
       within: 'Ruim binnen de limiet van 5 hashtags van Instagram.',
       none: 'Nog geen hashtags gedetecteerd.',
       a11yLabel: 'Toegankelijkheid · fancy fonts',
+      audiencePublic: 'Openbaar',
       flagged: '{n} gemarkeerd',
       flaggedNone: 'Geen',
       fancyDetected: {

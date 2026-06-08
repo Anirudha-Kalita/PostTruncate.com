@@ -574,9 +574,15 @@ export const pt: Translations = {
         'Foram encontrados caracteres invisíveis que quebram as contagens e os leitores de ecrã: {codes}. Sanitize para os remover.',
     },
     common: {
-      profileName: 'O Seu Nome',
-      handle: '@você',
+      displayName: 'O Seu Nome',
+      handle: 'voce',
+      timestamp: '11 h',
       charsSuffix: '{n} caracteres',
+      actions: {
+        like: 'Gosto',
+        comment: 'Comentar',
+        share: 'Partilhar',
+      },
     },
     sms: {
       eyebrow: 'SMS',
@@ -604,7 +610,8 @@ export const pt: Translations = {
       beforeFold: '{total} / {limit} antes da dobra',
       postLimit: '{total} / {limit} limite da publicação',
       seeMore: '…ver mais',
-      profileMeta: 'Fundador · 1.º · Agora mesmo',
+      headline: 'Fundador e CEO',
+      connectionDegree: '3.º',
       placeholder: 'As primeiras linhas da sua publicação aparecem aqui…',
       overLimitNote:
         'As publicações do LinkedIn estão limitadas a {limit} caracteres. Encurte {excess} antes de publicar.',
@@ -654,6 +661,7 @@ export const pt: Translations = {
       within: 'Confortavelmente dentro do limite de 5 hashtags do Instagram.',
       none: 'Ainda não foram detetadas hashtags.',
       a11yLabel: 'Acessibilidade · tipos de letra decorativos',
+      audiencePublic: 'Público',
       flagged: '{n} assinalados',
       flaggedNone: 'Nenhum',
       fancyDetected: {

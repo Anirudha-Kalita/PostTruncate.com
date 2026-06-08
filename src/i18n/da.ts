@@ -574,9 +574,15 @@ export const da: Translations = {
         'Fandt usynlige tegn, der bryder tællinger og skærmlæsere: {codes}. Rens for at fjerne dem.',
     },
     common: {
-      profileName: 'Dit navn',
-      handle: '@dig',
+      displayName: 'Dit navn',
+      handle: 'dig',
+      timestamp: '11 t.',
       charsSuffix: '{n} tegn',
+      actions: {
+        like: 'Synes godt om',
+        comment: 'Kommentér',
+        share: 'Del',
+      },
     },
     sms: {
       eyebrow: 'SMS',
@@ -604,7 +610,8 @@ export const da: Translations = {
       beforeFold: '{total} / {limit} før folden',
       postLimit: '{total} / {limit} opslagets grænse',
       seeMore: '…se mere',
-      profileMeta: 'Stifter · 1. · Lige nu',
+      headline: 'Stifter & CEO',
+      connectionDegree: '3.',
       placeholder: 'Dit opslags indledende linjer vises her…',
       overLimitNote:
         'LinkedIn-opslag er begrænset til {limit} tegn. Forkort med {excess} før udgivelse.',
@@ -654,6 +661,7 @@ export const da: Translations = {
       within: 'Komfortabelt inden for Instagrams grænse på 5 hashtags.',
       none: 'Ingen hashtags registreret endnu.',
       a11yLabel: 'Tilgængelighed · fancy skrifttyper',
+      audiencePublic: 'Offentlig',
       flagged: '{n} markeret',
       flaggedNone: 'Ingen',
       fancyDetected: {

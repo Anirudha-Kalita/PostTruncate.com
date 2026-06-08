@@ -1,5 +1,6 @@
 /** @jsxImportSource preact */
 import type { ComponentChildren } from 'preact';
+import type { IslandStrings } from '../../i18n/types';
 
 // ──────────────────────────────────────────────────────────────────────────
 // Shared island primitives. Styled with the project's Tailwind v4 theme
@@ -209,6 +210,227 @@ export function ToolLink({ href, children }: ToolLinkProps) {
     >
       {children}
     </a>
+  );
+}
+
+// ──────────────────────────────────────────────────────────────────────────
+// Shared "preview author" model. A single identity shape every platform card
+// renders into its own chrome. Sourced from i18n defaults today (see
+// `previewAuthor`); the cards never construct it themselves, so the source can
+// later swap to live editor state without touching any card.
+// ──────────────────────────────────────────────────────────────────────────
+
+export interface PreviewAuthor {
+  /** Display name (e.g. "Your Name"). Instagram shows the handle instead. */
+  displayName: string;
+  /** Bare username with no leading "@" — cards prepend it where appropriate. */
+  handle: string;
+  /** Whether to show the verified tick. */
+  verified: boolean;
+  /** Neutral relative timestamp, e.g. "11h". */
+  timestamp: string;
+}
+
+/** Build the default mock author from the shared i18n `common` strings. */
+export function previewAuthor(common: IslandStrings['common']): PreviewAuthor {
+  return {
+    displayName: common.displayName,
+    handle: common.handle,
+    timestamp: common.timestamp,
+    verified: true,
+  };
+}
+
+interface AvatarProps {
+  /** Sizing utility pair, e.g. "h-10 w-10". */
+  size?: string;
+  /** Gradient utility classes for the disc fill. */
+  gradient?: string;
+  /** Monogram initial; omit for a plain gradient disc. */
+  initial?: string;
+}
+
+/**
+ * Neutral placeholder avatar — a gradient disc with an optional monogram.
+ * No photo and no real person/brand, by design.
+ */
+export function Avatar({
+  size = 'h-10 w-10',
+  gradient = 'from-grad-preview-start to-grad-preview-end',
+  initial,
+}: AvatarProps) {
+  return (
+    <span
+      class={`flex ${size} shrink-0 select-none items-center justify-center rounded-full bg-linear-to-br ${gradient} text-[13px] font-semibold text-on-primary`}
+      aria-hidden="true"
+    >
+      {initial}
+    </span>
+  );
+}
+
+/** First grapheme of a name, uppercased — used for the avatar monogram. */
+export function monogram(name: string): string {
+  return [...name.trim()][0]?.toUpperCase() ?? '';
+}
+
+interface VerifiedTickProps {
+  size?: number;
+  /** Color via a `text-*` utility (defaults to the link blue). */
+  class?: string;
+}
+
+/**
+ * Generic "verified" tick — a filled disc with a punched-out check. Deliberately
+ * a plain circle, not any platform's exact scalloped seal: recognizable, not a clone.
+ */
+export function VerifiedTick({ size = 15, class: cls = 'text-link' }: VerifiedTickProps) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" class={cls} fill="none" aria-hidden="true">
+      <circle cx="12" cy="12" r="10" fill="currentColor" />
+      <path
+        d="M16.4 9.2 10.7 14.9 7.6 11.8"
+        fill="none"
+        stroke="var(--color-canvas)"
+        stroke-width="2.2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+    </svg>
+  );
+}
+
+export type EngagementIcon = 'reply' | 'repost' | 'like' | 'views' | 'comment' | 'share' | 'thumbsUp';
+
+const ENGAGEMENT_PATHS: Record<EngagementIcon, ComponentChildren> = {
+  reply: <path d="M4 5h16v10H9l-5 4z" />,
+  repost: <path d="M5 8l3-3 3 3M8 5v8h8M19 16l-3 3-3-3M16 19v-8H8" />,
+  like: <path d="M12 19.2 4.6 12c-1.5-1.5-1.5-3.9 0-5.4 1.5-1.5 3.9-1.5 5.4 0l2 2 2-2c1.5-1.5 3.9-1.5 5.4 0 1.5 1.5 1.5 3.9 0 5.4Z" />,
+  views: <path d="M4 19V11M9 19V5M14 19v-6M19 19V8" />,
+  comment: <path d="M4 5h16v10H9l-5 4z" />,
+  share: <path d="M12 15V4M8 8l4-4 4 4M5 13v6h14v-6" />,
+  thumbsUp: <path d="M7 10v9H4v-9zM7 10l4-7c1.2 0 2 .9 2 2v3h5c1 0 1.7.9 1.5 1.9l-1.3 6c-.2.9-1 1.1-1.7 1.1H7" />,
+};
+
+interface EngagementProps {
+  icon: EngagementIcon;
+  size?: number;
+}
+
+/** Faint, stroked social-action glyph for a card's engagement row. */
+export function Engagement({ icon, size = 18 }: EngagementProps) {
+  return (
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="1.6"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      aria-hidden="true"
+    >
+      {ENGAGEMENT_PATHS[icon]}
+    </svg>
+  );
+}
+
+/** Horizontal "more options" (⋯) glyph for a post header's top-right corner. */
+export function MoreDots({ size = 16 }: { size?: number }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <circle cx="5" cy="12" r="1.6" />
+      <circle cx="12" cy="12" r="1.6" />
+      <circle cx="19" cy="12" r="1.6" />
+    </svg>
+  );
+}
+
+/** Small "public audience" globe for Facebook/LinkedIn post meta lines. */
+export function Globe({ size = 13 }: { size?: number }) {
+  return (
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="1.7"
+      aria-hidden="true"
+    >
+      <circle cx="12" cy="12" r="9" />
+      <path d="M3 12h18M12 3c2.6 2.5 2.6 15.5 0 18M12 3c-2.6 2.5-2.6 15.5 0 18" />
+    </svg>
+  );
+}
+
+interface PostCardProps {
+  /** "gutter" = avatar in a left column beside the body (X, Threads). "stacked"
+   *  = avatar beside the name only, body spanning full width below (FB, LinkedIn, IG). */
+  layout?: 'gutter' | 'stacked';
+  avatar: ComponentChildren;
+  /** Author identity block — name line(s) + meta. */
+  identity: ComponentChildren;
+  /** Top-right slot (⋯ menu or a brand chip). */
+  trailing?: ComponentChildren;
+  /** Body, engagement row, and tool annotations. */
+  children: ComponentChildren;
+  class?: string;
+}
+
+/**
+ * Shared feed-post scaffold. Centralizes the article shell and the two
+ * avatar/content arrangements every platform card draws into, so the platform
+ * components only supply their distinct chrome (identity, body, actions).
+ */
+export function PostCard({ layout = 'stacked', avatar, identity, trailing, children, class: extra = '' }: PostCardProps) {
+  const shell = `feed-phone rounded-md border border-hairline bg-canvas p-4 ${extra}`;
+
+  if (layout === 'gutter') {
+    return (
+      <article class={shell}>
+        <div class="flex gap-3">
+          {avatar}
+          <div class="min-w-0 flex-1">
+            <div class="flex items-start gap-1">
+              <div class="min-w-0 flex-1">{identity}</div>
+              {trailing && <div class="shrink-0 text-mute/60">{trailing}</div>}
+            </div>
+            {children}
+          </div>
+        </div>
+      </article>
+    );
+  }
+
+  return (
+    <article class={shell}>
+      <header class="flex items-start gap-3">
+        {avatar}
+        <div class="min-w-0 flex-1">{identity}</div>
+        {trailing && <div class="shrink-0 text-mute/60">{trailing}</div>}
+      </header>
+      {children}
+    </article>
+  );
+}
+
+interface ActionBarProps {
+  items: { icon: EngagementIcon; label: string }[];
+}
+
+/** Labeled engagement bar (icon + word) with a top divider — Facebook/LinkedIn. */
+export function ActionBar({ items }: ActionBarProps) {
+  return (
+    <div class="mt-3 flex items-center justify-around border-t border-hairline pt-2.5 text-mute">
+      {items.map((it) => (
+        <span class="flex items-center gap-1.5 text-[12px] font-medium">
+          <Engagement icon={it.icon} size={18} />
+          {it.label}
+        </span>
+      ))}
+    </div>
   );
 }
 

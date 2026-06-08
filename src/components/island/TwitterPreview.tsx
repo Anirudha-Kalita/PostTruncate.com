@@ -5,7 +5,21 @@ import {
   detectUrls,
   LIMITS,
 } from '../../lib/textTools';
-import { Card, CardHead, Badge, Meter, BrandLogo, ToolLink } from './ui';
+import {
+  Card,
+  CardHead,
+  Badge,
+  Meter,
+  BrandLogo,
+  ToolLink,
+  Avatar,
+  VerifiedTick,
+  Engagement,
+  MoreDots,
+  PostCard,
+  previewAuthor,
+  monogram,
+} from './ui';
 import { interp, plural } from '../../i18n/interp';
 import type { IslandStrings } from '../../i18n/types';
 
@@ -25,6 +39,8 @@ interface Props {
 export function TwitterPreview({ text, lang, s, toolLinkHref }: Props) {
   const tw = s.twitter;
   const nf = new Intl.NumberFormat(lang);
+  const author = previewAuthor(s.common);
+  const initial = monogram(author.displayName);
   const trimmed = text.trim();
   const weighted = weightedLength(trimmed);
   const urls = detectUrls(trimmed);
@@ -77,26 +93,43 @@ export function TwitterPreview({ text, lang, s, toolLinkHref }: Props) {
           </article>
         ) : (
           tweets.map((tweet, i) => (
-            <article class="feed-phone relative rounded-md border border-hairline bg-canvas p-4">
-              <header class="flex items-center gap-2.5">
-                <span class="h-8 w-8 shrink-0 rounded-full bg-linear-to-br from-grad-preview-start to-grad-preview-end" />
-                <div class="min-w-0 leading-tight">
-                  <span class="text-[13px] font-semibold text-ink">{s.common.profileName}</span>
-                  <span class="ml-1 text-[12px] text-mute">{s.common.handle}</span>
+            <PostCard
+              layout="gutter"
+              avatar={<Avatar size="h-10 w-10" initial={initial} />}
+              identity={
+                /* Name line: name · tick · @handle · timestamp */
+                <div class="flex items-center gap-1 text-[14px] leading-5">
+                  <span class="flex min-w-0 items-center gap-1">
+                    <span class="truncate font-semibold text-ink">{author.displayName}</span>
+                    {author.verified && <VerifiedTick size={15} class="shrink-0 text-link" />}
+                  </span>
+                  <span class="shrink-0 text-mute">@{author.handle}</span>
+                  <span class="shrink-0 text-mute" aria-hidden="true">·</span>
+                  <span class="shrink-0 text-mute">{author.timestamp}</span>
                 </div>
-              </header>
-              <p class="mt-2 whitespace-pre-wrap break-words text-[14px] leading-[21px] text-ink">
+              }
+              trailing={<MoreDots size={16} />}
+            >
+              <p class="mt-1 whitespace-pre-wrap break-words text-[14px] leading-[21px] text-ink">
                 {tweet}
               </p>
-              {isThread && (
-                <span class="absolute bottom-3 right-4 font-mono text-[11px] text-mute tabular-nums">
-                  {nf.format(i + 1)}/{nf.format(tweets.length)}
-                </span>
-              )}
-              <span class="mt-2 block font-mono text-[11px] text-mute/70 tabular-nums">
-                {interp(s.common.charsSuffix, { n: nf.format(weightedLength(tweet)) })}
-              </span>
-            </article>
+
+              {/* Faint engagement row — reply / repost / like / views. */}
+              <div class="mt-3 flex max-w-[300px] items-center justify-between text-mute/55">
+                <Engagement icon="reply" />
+                <Engagement icon="repost" />
+                <Engagement icon="like" />
+                <Engagement icon="views" />
+              </div>
+
+              {/* Tool annotations: per-tweet char weight + thread position. */}
+              <div class="mt-2 flex items-center justify-between font-mono text-[11px] text-mute/70 tabular-nums">
+                <span>{interp(s.common.charsSuffix, { n: nf.format(weightedLength(tweet)) })}</span>
+                {isThread && (
+                  <span>{nf.format(i + 1)}/{nf.format(tweets.length)}</span>
+                )}
+              </div>
+            </PostCard>
           ))
         )}
       </div>

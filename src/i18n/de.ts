@@ -575,9 +575,15 @@ export const de: Translations = {
         'Unsichtbare Zeichen gefunden, die Zählungen und Screenreader stören: {codes}. Bereinige, um sie zu entfernen.',
     },
     common: {
-      profileName: 'Dein Name',
-      handle: '@du',
+      displayName: 'Dein Name',
+      handle: 'du',
+      timestamp: '11 Std.',
       charsSuffix: '{n} Zeichen',
+      actions: {
+        like: 'Gefällt mir',
+        comment: 'Kommentieren',
+        share: 'Teilen',
+      },
     },
     sms: {
       eyebrow: 'SMS',
@@ -605,7 +611,8 @@ export const de: Translations = {
       beforeFold: '{total} / {limit} vor der Falz',
       postLimit: '{total} / {limit} Beitragslimit',
       seeMore: '…mehr anzeigen',
-      profileMeta: 'Gründer · 1. Grades · Gerade eben',
+      headline: 'Gründer & CEO',
+      connectionDegree: '3. Grades',
       placeholder: 'Die einleitenden Zeilen deines Beitrags erscheinen hier…',
       overLimitNote:
         'LinkedIn-Beiträge sind auf {limit} Zeichen begrenzt. Kürze vor dem Veröffentlichen um {excess}.',
@@ -655,6 +662,7 @@ export const de: Translations = {
       within: 'Bequem innerhalb des 5-Hashtag-Limits von Instagram.',
       none: 'Noch keine Hashtags erkannt.',
       a11yLabel: 'Barrierefreiheit · Fancy-Schriften',
+      audiencePublic: 'Öffentlich',
       flagged: '{n} markiert',
       flaggedNone: 'Keine',
       fancyDetected: {

@@ -169,10 +169,20 @@ export interface IslandStrings {
     hiddenWarning: string;
   };
   common: {
-    profileName: string;
+    /** Author display name shown in every preview card's mock post header. */
+    displayName: string;
+    /** Bare username (no leading "@"); cards prepend "@" where the platform uses it. */
     handle: string;
+    /** Neutral relative timestamp for the mock post header, e.g. "11h". */
+    timestamp: string;
     /** "{n} chars" under each tweet/post card. */
     charsSuffix: string;
+    /** Engagement-row action labels for the Facebook/LinkedIn mock posts. */
+    actions: {
+      like: string;
+      comment: string;
+      share: string;
+    };
   };
   sms: {
     eyebrow: string;
@@ -201,7 +211,10 @@ export interface IslandStrings {
     /** "{total} / {limit} post limit". */
     postLimit: string;
     seeMore: string;
-    profileMeta: string;
+    /** Author headline/subtitle under the name (e.g. "Founder & CEO"). */
+    headline: string;
+    /** Connection-degree chip shown after the name (e.g. "3rd"). */
+    connectionDegree: string;
     placeholder: string;
     /** "{limit}", "{excess}". */
     overLimitNote: string;
@@ -250,6 +263,8 @@ export interface IslandStrings {
     within: string;
     none: string;
     a11yLabel: string;
+    /** Facebook audience label shown after the timestamp (e.g. "Public"). */
+    audiencePublic: string;
     /** "{n} flagged". */
     flagged: string;
     flaggedNone: string;

@@ -572,9 +572,15 @@ export const zh: Translations = {
         '发现了会破坏计数和屏幕阅读器的不可见字符：{codes}。净化以将其剥除。',
     },
     common: {
-      profileName: '你的名字',
-      handle: '@you',
+      displayName: '你的名字',
+      handle: 'you',
+      timestamp: '11小时',
       charsSuffix: '{n} 个字符',
+      actions: {
+        like: '赞',
+        comment: '评论',
+        share: '分享',
+      },
     },
     sms: {
       eyebrow: '短信',
@@ -602,7 +608,8 @@ export const zh: Translations = {
       beforeFold: '折叠前 {total} / {limit}',
       postLimit: '{total} / {limit} 帖子上限',
       seeMore: '…查看更多',
-      profileMeta: '创始人 · 1度人脉 · 刚刚',
+      headline: '创始人兼 CEO',
+      connectionDegree: '3度人脉',
       placeholder: '你帖子的开头几行会显示在这里……',
       overLimitNote:
         'LinkedIn 帖子最多 {limit} 个字符。发布前请缩短 {excess}。',
@@ -652,6 +659,7 @@ export const zh: Translations = {
       within: '稳稳地在 Instagram 的 5 个话题标签限制之内。',
       none: '尚未检测到话题标签。',
       a11yLabel: '无障碍 · 花式字体',
+      audiencePublic: '公开',
       flagged: '已标记 {n} 个',
       flaggedNone: '无',
       fancyDetected: {

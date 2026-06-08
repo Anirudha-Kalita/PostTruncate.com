@@ -574,9 +574,15 @@ export const ja: Translations = {
         '文字数カウントやスクリーンリーダーを壊す不可視文字が見つかりました：{codes}。サニタイズで取り除けます。',
     },
     common: {
-      profileName: 'あなたの名前',
-      handle: '@you',
+      displayName: 'あなたの名前',
+      handle: 'you',
+      timestamp: '11時間',
       charsSuffix: '{n} 文字',
+      actions: {
+        like: 'いいね',
+        comment: 'コメント',
+        share: 'シェア',
+      },
     },
     sms: {
       eyebrow: 'ショートメッセージ',
@@ -604,7 +610,8 @@ export const ja: Translations = {
       beforeFold: '折りたたみまで {total} / {limit}',
       postLimit: '{total} / {limit} 投稿上限',
       seeMore: '…続きを見る',
-      profileMeta: '創業者 · 1次 · たった今',
+      headline: '創業者 & CEO',
+      connectionDegree: '3次',
       placeholder: '投稿の冒頭の数行がここに表示されます…',
       overLimitNote:
         'LinkedInの投稿は{limit}文字までです。公開前に{excess}短くしてください。',
@@ -654,6 +661,7 @@ export const ja: Translations = {
       within: 'Instagramの5個のハッシュタグの上限内に余裕で収まっています。',
       none: 'ハッシュタグはまだ検出されていません。',
       a11yLabel: 'アクセシビリティ · 装飾フォント',
+      audiencePublic: '公開',
       flagged: '{n} 件検出',
       flaggedNone: 'なし',
       fancyDetected: {

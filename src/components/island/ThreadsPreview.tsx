@@ -1,7 +1,21 @@
 /** @jsxImportSource preact */
 import { useState } from 'preact/hooks';
 import { charCount, detectUrls, LIMITS, sliceChars, splitThread } from '../../lib/textTools';
-import { Card, CardHead, Badge, Segmented, Meter, BrandLogo, ToolLink } from './ui';
+import {
+  Card,
+  CardHead,
+  Badge,
+  Segmented,
+  BrandLogo,
+  ToolLink,
+  Avatar,
+  VerifiedTick,
+  Engagement,
+  MoreDots,
+  PostCard,
+  previewAuthor,
+  monogram,
+} from './ui';
 import { interp, plural } from '../../i18n/interp';
 import type { IslandStrings } from '../../i18n/types';
 
@@ -25,6 +39,7 @@ const THREADS_MOBILE_FOLD = 250;
 export function ThreadsPreview({ text, lang, s, toolLinkHref }: Props) {
   const th = s.threads;
   const nf = new Intl.NumberFormat(lang);
+  const author = previewAuthor(s.common);
   const [view, setView] = useState<FeedView>('mobile');
   const trimmed = text.trim();
   const count = charCount(trimmed);
@@ -79,32 +94,50 @@ export function ThreadsPreview({ text, lang, s, toolLinkHref }: Props) {
           </article>
         ) : (
           posts.map((post, i) => (
-            <article
-              class={`feed-phone relative rounded-md border border-hairline bg-canvas p-4 ${
-                view === 'desktop' ? 'feed-phone--desktop' : ''
-              }`}
-            >
-              <header class="flex items-center gap-2.5">
-                <span class="h-8 w-8 shrink-0 rounded-full bg-linear-to-br from-grad-preview-start to-grad-ship-start" />
-                <div class="min-w-0 leading-tight">
-                  <span class="text-[13px] font-semibold text-ink">{s.common.profileName}</span>
-                  <span class="ml-1 text-[12px] text-mute">{s.common.handle}</span>
+            <PostCard
+              layout="gutter"
+              class={view === 'desktop' ? 'feed-phone--desktop' : ''}
+              avatar={
+                <Avatar
+                  size="h-9 w-9"
+                  gradient="from-grad-preview-start to-grad-ship-start"
+                  initial={monogram(author.handle)}
+                />
+              }
+              identity={
+                /* Threads: username + tick + timestamp (no separate display name). */
+                <div class="flex items-center gap-1 text-[14px] leading-5">
+                  <span class="flex min-w-0 items-center gap-1">
+                    <span class="truncate font-semibold text-ink">{author.handle}</span>
+                    {author.verified && <VerifiedTick size={14} class="shrink-0 text-link" />}
+                  </span>
+                  <span class="shrink-0 text-mute" aria-hidden="true">·</span>
+                  <span class="shrink-0 text-mute">{author.timestamp}</span>
                 </div>
-              </header>
+              }
+              trailing={<MoreDots size={16} />}
+            >
               <ThreadsPostText
                 post={post}
                 visualFold={visualFold}
                 seeMore={s.linkedin.seeMore}
               />
-              {isChain && (
-                <span class="absolute bottom-3 right-4 font-mono text-[11px] text-mute tabular-nums">
-                  {nf.format(i + 1)}/{nf.format(posts.length)}
-                </span>
-              )}
-              <span class="mt-2 block font-mono text-[11px] text-mute/70 tabular-nums">
-                {interp(s.common.charsSuffix, { n: nf.format(charCount(post)) })}
-              </span>
-            </article>
+
+              {/* Lighter-than-X engagement row: like / comment / repost / share. */}
+              <div class="mt-3 flex max-w-[230px] items-center justify-between text-mute/45">
+                <Engagement icon="like" size={17} />
+                <Engagement icon="comment" size={17} />
+                <Engagement icon="repost" size={17} />
+                <Engagement icon="share" size={17} />
+              </div>
+
+              <div class="mt-2 flex items-center justify-between font-mono text-[11px] text-mute/70 tabular-nums">
+                <span>{interp(s.common.charsSuffix, { n: nf.format(charCount(post)) })}</span>
+                {isChain && (
+                  <span>{nf.format(i + 1)}/{nf.format(posts.length)}</span>
+                )}
+              </div>
+            </PostCard>
           ))
         )}
       </div>

@@ -1,6 +1,22 @@
 /** @jsxImportSource preact */
 import { linkedInHook, charCount, LIMITS } from '../../lib/textTools';
-import { Card, CardHead, Badge, Segmented, Meter, BrandLogo, ToolLink } from './ui';
+import {
+  Card,
+  CardHead,
+  Badge,
+  Segmented,
+  Meter,
+  BrandLogo,
+  ToolLink,
+  Avatar,
+  VerifiedTick,
+  Globe,
+  ActionBar,
+  MoreDots,
+  PostCard,
+  previewAuthor,
+  monogram,
+} from './ui';
 import { interp } from '../../i18n/interp';
 import type { IslandStrings } from '../../i18n/types';
 
@@ -23,6 +39,7 @@ interface Props {
 export function LinkedInPreview({ text, view, setView, lang, s, toolLinkHref }: Props) {
   const l = s.linkedin;
   const nf = new Intl.NumberFormat(lang);
+  const author = previewAuthor(s.common);
   const limit = view === 'mobile' ? LIMITS.LINKEDIN_MOBILE : LIMITS.LINKEDIN_DESKTOP;
   const { hook, rest, truncated } = linkedInHook(text, limit);
   const total = charCount(text);
@@ -76,21 +93,36 @@ export function LinkedInPreview({ text, view, setView, lang, s, toolLinkHref }: 
 
       {/* Feed mockup */}
       <div class="p-4 sm:p-5">
-        <article
-          class={`feed-phone rounded-md border border-hairline bg-canvas p-4 ${
-            view === 'desktop' ? 'feed-phone--desktop' : ''
-          }`}
-        >
-          <header class="flex items-center gap-3">
-            <span class="h-10 w-10 shrink-0 rounded-full bg-linear-to-br from-grad-develop-start to-grad-preview-start" />
-            <div class="min-w-0">
-              <p class="truncate text-[14px] font-semibold text-ink">{s.common.profileName}</p>
-              <p class="truncate text-[12px] text-mute">
-                {l.profileMeta}
+        <PostCard
+          layout="stacked"
+          class={view === 'desktop' ? 'feed-phone--desktop' : ''}
+          avatar={
+            <Avatar
+              size="h-12 w-12"
+              gradient="from-grad-develop-start to-grad-preview-start"
+              initial={monogram(author.displayName)}
+            />
+          }
+          identity={
+            <div class="leading-tight">
+              {/* Name • connection degree */}
+              <div class="flex items-center gap-1">
+                <span class="truncate text-[14px] font-semibold text-ink">{author.displayName}</span>
+                {author.verified && <VerifiedTick size={14} class="shrink-0 text-link" />}
+                <span class="shrink-0 text-[12px] text-mute">• {l.connectionDegree}</span>
+              </div>
+              {/* Headline / subtitle */}
+              <p class="truncate text-[12px] text-mute">{l.headline}</p>
+              {/* Timestamp + public globe */}
+              <p class="mt-0.5 flex items-center gap-1 text-[12px] text-mute">
+                {author.timestamp}
+                <span aria-hidden="true">·</span>
+                <Globe size={12} />
               </p>
             </div>
-          </header>
-
+          }
+          trailing={<MoreDots size={16} />}
+        >
           <div class="mt-3 whitespace-pre-wrap break-words text-[14px] leading-[22px] text-ink">
             {text ? (
               <>
@@ -114,7 +146,16 @@ export function LinkedInPreview({ text, view, setView, lang, s, toolLinkHref }: 
               <span class="text-mute">{l.placeholder}</span>
             )}
           </div>
-        </article>
+
+          {/* Labeled reaction bar — Like / Comment / Share. */}
+          <ActionBar
+            items={[
+              { icon: 'thumbsUp', label: s.common.actions.like },
+              { icon: 'comment', label: s.common.actions.comment },
+              { icon: 'share', label: s.common.actions.share },
+            ]}
+          />
+        </PostCard>
 
         <p class="mt-3 text-[12px] leading-4 text-body">
           {isOverPostLimit

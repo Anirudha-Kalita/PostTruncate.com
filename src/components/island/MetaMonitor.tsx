@@ -8,7 +8,24 @@ import {
   sliceChars,
   LIMITS,
 } from '../../lib/textTools';
-import { Card, CardHead, Badge, Segmented, Meter, BrandLogo, ToolLink } from './ui';
+import {
+  Card,
+  CardHead,
+  Badge,
+  Segmented,
+  Meter,
+  BrandLogo,
+  ToolLink,
+  Avatar,
+  VerifiedTick,
+  Globe,
+  ActionBar,
+  Engagement,
+  MoreDots,
+  PostCard,
+  previewAuthor,
+  monogram,
+} from './ui';
 import { interp, plural } from '../../i18n/interp';
 import type { IslandStrings } from '../../i18n/types';
 
@@ -46,6 +63,7 @@ function truncateForFeed(text: string, limit: number) {
 export function MetaMonitor({ text, lang, s, toolLinkHref, facebookToolLinkHref, priority, only }: Props) {
   const m = s.meta;
   const nf = new Intl.NumberFormat(lang);
+  const author = previewAuthor(s.common);
   const [instagramView, setInstagramView] = useState<FeedView>('mobile');
   const [facebookView, setFacebookView] = useState<FeedView>('mobile');
   const hashtags = detectHashtags(text);
@@ -108,31 +126,39 @@ export function MetaMonitor({ text, lang, s, toolLinkHref, facebookToolLinkHref,
         </div>
 
         <div class="space-y-4 p-4 sm:p-5">
-          <article
-            class={`feed-phone rounded-md border border-hairline bg-canvas p-4 ${
-              instagramView === 'desktop' ? 'feed-phone--desktop' : ''
-            }`}
-          >
-            <header class="flex items-center justify-between gap-3">
-              <div class="flex min-w-0 items-center gap-2.5">
-                <span class="h-8 w-8 shrink-0 rounded-full bg-linear-to-br from-grad-preview-start to-grad-ship-start" />
-                <div class="min-w-0 leading-tight">
-                  <span class="text-[13px] font-semibold text-ink">{s.common.profileName}</span>
-                  <span class="ml-1 text-[12px] text-mute">{s.common.handle}</span>
-                </div>
+          <PostCard
+            layout="stacked"
+            class={instagramView === 'desktop' ? 'feed-phone--desktop' : ''}
+            avatar={
+              <Avatar
+                size="h-8 w-8"
+                gradient="from-grad-preview-start to-grad-ship-start"
+                initial={monogram(author.handle)}
+              />
+            }
+            identity={
+              /* Instagram: username + tick only — no separate display name. */
+              <div class="flex items-center gap-1 leading-tight">
+                <span class="truncate text-[13px] font-semibold text-ink">{author.handle}</span>
+                {author.verified && <VerifiedTick size={13} class="shrink-0 text-link" />}
               </div>
-              <span class="flex shrink-0 items-center gap-1.5 font-mono text-[11px] uppercase tracking-wide text-mute">
-                <BrandLogo brand="instagram" size={16} />
-                Instagram
-              </span>
-            </header>
+            }
+            trailing={<MoreDots size={16} />}
+          >
+            {/* Faint Instagram action row — like / comment / share. */}
+            <div class="mt-3 flex max-w-[110px] items-center justify-between text-mute/45">
+              <Engagement icon="like" size={20} />
+              <Engagement icon="comment" size={20} />
+              <Engagement icon="share" size={20} />
+            </div>
             <p class="mt-2 min-h-[42px] whitespace-pre-wrap break-words text-[14px] leading-[21px] text-ink">
+              <span class="font-semibold text-ink">{author.handle} </span>
               {instagramPreview.previewText}
               {instagramPreview.isTruncated && (
                 <span class="text-slate-400">{s.linkedin.seeMore}</span>
               )}
             </p>
-          </article>
+          </PostCard>
           {overCaptionLimit && (
             <p class="text-[12px] leading-4 text-error-deep">
               {interp(m.captionOver, {
@@ -204,31 +230,50 @@ export function MetaMonitor({ text, lang, s, toolLinkHref, facebookToolLinkHref,
         </div>
 
         <div class="space-y-4 p-4 sm:p-5">
-          <article
-            class={`feed-phone rounded-md border border-hairline bg-canvas p-4 ${
-              facebookView === 'desktop' ? 'feed-phone--desktop' : ''
-            }`}
-          >
-            <header class="flex items-center justify-between gap-3">
-              <div class="flex min-w-0 items-center gap-2.5">
-                <span class="h-8 w-8 shrink-0 rounded-full bg-linear-to-br from-grad-develop-start to-grad-preview-start" />
-                <div class="min-w-0 leading-tight">
-                  <span class="text-[13px] font-semibold text-ink">{s.common.profileName}</span>
-                  <span class="ml-1 text-[12px] text-mute">{s.common.handle}</span>
+          <PostCard
+            layout="stacked"
+            class={facebookView === 'desktop' ? 'feed-phone--desktop' : ''}
+            avatar={
+              <Avatar
+                size="h-10 w-10"
+                gradient="from-grad-develop-start to-grad-preview-start"
+                initial={monogram(author.displayName)}
+              />
+            }
+            identity={
+              <div class="leading-tight">
+                {/* Name + tick — Facebook shows no @handle. */}
+                <div class="flex items-center gap-1">
+                  <span class="truncate text-[14px] font-semibold text-ink">{author.displayName}</span>
+                  {author.verified && <VerifiedTick size={14} class="shrink-0 text-link" />}
                 </div>
+                {/* timestamp · 🌐 Public */}
+                <p class="mt-0.5 flex items-center gap-1 text-[12px] text-mute">
+                  {author.timestamp}
+                  <span aria-hidden="true">·</span>
+                  <Globe size={12} />
+                  {m.audiencePublic}
+                </p>
               </div>
-              <span class="flex shrink-0 items-center gap-1.5 font-mono text-[11px] uppercase tracking-wide text-mute">
-                <BrandLogo brand="facebook" size={16} />
-                Facebook
-              </span>
-            </header>
+            }
+            trailing={<MoreDots size={16} />}
+          >
             <p class="mt-2 min-h-[42px] whitespace-pre-wrap break-words text-[14px] leading-[21px] text-ink">
               {facebookPreview.previewText}
               {facebookPreview.isTruncated && (
                 <span class="text-slate-400"> {s.linkedin.seeMore}</span>
               )}
             </p>
-          </article>
+
+            {/* Labeled action bar — Like / Comment / Share. */}
+            <ActionBar
+              items={[
+                { icon: 'thumbsUp', label: s.common.actions.like },
+                { icon: 'comment', label: s.common.actions.comment },
+                { icon: 'share', label: s.common.actions.share },
+              ]}
+            />
+          </PostCard>
 
           <div
             class={`rounded-md border p-4 ${
