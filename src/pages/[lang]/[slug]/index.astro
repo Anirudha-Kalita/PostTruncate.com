@@ -2,7 +2,7 @@
 import Layout from '../../../layouts/Layout.astro';
 import Ad from '../../../components/Ad.astro';
 import Dashboard from '../../../components/island/Dashboard.tsx';
-import HomePageSchema from '../../../components/HomePageSchema.astro';
+import StructuredData from '../../../components/StructuredData.astro';
 import { getTranslations } from '../../../i18n';
 import { interp } from '../../../i18n/interp';
 import { LOCALES, getLocale } from '../../../i18n/config';
@@ -122,10 +122,11 @@ const howToSchema = {
 ---
 
 <Layout lang={lang} path="/" jsonLd={[howToSchema]}>
-  <HomePageSchema
+  <StructuredData
     slot="head"
-    toolName={locale.toolName}
-    canonicalUrl={pageUrl}
+    type="home"
+    name={locale.toolName}
+    url={pageUrl}
     description={t.seo.description}
     inLanguage={lang}
     faqItems={faqs}

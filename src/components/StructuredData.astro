@@ -1,0 +1,102 @@
+---
+// ──────────────────────────────────────────────────────────────────────────
+// Single source of truth for the site's JSON-LD structured data.
+//
+// Rendered into <head> via Layout's named "head" slot. Selects which schema
+// blocks to emit from the `type` prop so the shapes live in exactly one place:
+//
+//   type="home"     → SoftwareApplication + FAQPage
+//   type="platform" → SoftwareApplication + BreadcrumbList
+//
+// SoftwareApplication is emitted for both. FAQPage is derived from the same
+// t.faq.items the page renders (so schema and visible Q&A never diverge), and
+// BreadcrumbList from the page's own trail. WebSite + Organization remain in
+// Layout.astro (site-wide, every page).
+// ──────────────────────────────────────────────────────────────────────────
+import type { FaqEntry } from '../i18n/types';
+
+export type StructuredDataType = 'home' | 'platform';
+
+export interface BreadcrumbCrumb {
+  /** Visible name of this breadcrumb node. */
+  name: string;
+  /** Absolute URL the node links to. */
+  item: string;
+}
+
+interface Props {
+  /** Page archetype — selects which schema blocks render. */
+  type: StructuredDataType;
+  /** SoftwareApplication.name — the tool's localized name. */
+  name: string;
+  /** Canonical absolute URL of the current page. */
+  url: string;
+  /** Meta description, reused verbatim as the schema description. */
+  description: string;
+  /** BCP-47 language tag (e.g. "en", "ja"). */
+  inLanguage: string;
+  /** FAQ Q&A pairs — required when type="home". Source: t.faq.items. */
+  faqItems?: FaqEntry[];
+  /** Ordered breadcrumb trail — required when type="platform". */
+  breadcrumbs?: BreadcrumbCrumb[];
+}
+
+const {
+  type,
+  name,
+  url,
+  description,
+  inLanguage,
+  faqItems = [],
+  breadcrumbs = [],
+} = Astro.props;
+
+// ── SoftwareApplication — every page type ─────────────────────────────────
+const softwareApplication = {
+  '@context': 'https://schema.org',
+  '@type': 'SoftwareApplication',
+  name,
+  url,
+  description,
+  inLanguage,
+  applicationCategory: 'UtilityApplication',
+  operatingSystem: 'Any (browser-based)',
+  offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+};
+
+// ── FAQPage — home only, from the same Q&A the page renders ───────────────
+const faqPage =
+  type === 'home' && faqItems.length > 0
+    ? {
+        '@context': 'https://schema.org',
+        '@type': 'FAQPage',
+        mainEntity: faqItems.map((item) => ({
+          '@type': 'Question',
+          name: item.q,
+          acceptedAnswer: { '@type': 'Answer', text: item.a },
+        })),
+      }
+    : null;
+
+// ── BreadcrumbList — platform sub-pages only ──────────────────────────────
+const breadcrumbList =
+  type === 'platform' && breadcrumbs.length > 0
+    ? {
+        '@context': 'https://schema.org',
+        '@type': 'BreadcrumbList',
+        itemListElement: breadcrumbs.map((crumb, i) => ({
+          '@type': 'ListItem',
+          position: i + 1,
+          name: crumb.name,
+          item: crumb.item,
+        })),
+      }
+    : null;
+
+const blocks = [softwareApplication, faqPage, breadcrumbList].filter(Boolean);
+
+// Escape "</script>" / "<" injection vectors while keeping valid JSON.
+const stringify = (obj: unknown) => JSON.stringify(obj).replace(/</g, '\\u003c');
+---
+
+{blocks.map((block) => <script type="application/ld+json" set:html={stringify(block)} />)}

@@ -6,7 +6,7 @@ import { tools } from '../../../data/tools';
 import type { ToolDefinition } from '../../../data/tools';
 import { LOCALES, getLocale, DEFAULT_LOCALE } from '../../../i18n/config';
 import { getTranslations } from '../../../i18n';
-import { buildToolBreadcrumbList } from '../../../lib/toolBreadcrumbSchema';
+import StructuredData from '../../../components/StructuredData.astro';
 
 export function getStaticPaths() {
   const paths: {
@@ -52,35 +52,18 @@ const hreflangUrls = [
   },
 ];
 
-// JSON-LD: WebApplication + BreadcrumbList
 const locale = getLocale(lang);
 const t = getTranslations(lang);
 const editorHref = `/${lang}/${locale.slug}/?platform=${tool.id}#${tool.editorAnchor}`;
 const home = `/${lang}/${locale.slug}/`;
 
-const jsonLd = [
-  {
-    '@context': 'https://schema.org',
-    '@type': 'WebApplication',
-    name: tStr(tool.schemaName),
-    url: canonicalUrl,
-    inLanguage: lang,
-    applicationCategory: 'UtilityApplication',
-    operatingSystem: 'Web',
-    browserRequirements: 'Requires JavaScript',
-    description: tStr(tool.metaDescriptions),
-    offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
-  },
-  buildToolBreadcrumbList({
-    site,
-    lang,
-    localeSlug: locale.slug,
-    tool,
-    labels: {
-      home: t.breadcrumbs.home,
-      platformGuides: t.nav.links.guides,
-    },
-  }),
+// BreadcrumbList trail for this sub-tool page: Home → Platform Guides → tool.
+// Built here (not inside StructuredData) so the URLs stay tied to tool data.
+const homeUrl = new URL(`/${lang}/${locale.slug}/`, site).href;
+const breadcrumbs = [
+  { name: t.breadcrumbs.home, item: homeUrl },
+  { name: t.nav.links.guides, item: `${homeUrl}#platforms` },
+  { name: tStr(tool.schemaName), item: canonicalUrl },
 ];
 
 // SERP-page-specific data — only computed for the google-serp tool.
@@ -109,8 +92,16 @@ const promoItems = isSerpPage
   description={tStr(tool.metaDescriptions)}
   canonicalUrl={canonicalUrl}
   hreflangUrls={hreflangUrls}
-  jsonLd={jsonLd}
 >
+  <StructuredData
+    slot="head"
+    type="platform"
+    name={tStr(tool.schemaName)}
+    url={canonicalUrl}
+    description={tStr(tool.metaDescriptions)}
+    inLanguage={lang}
+    breadcrumbs={breadcrumbs}
+  />
   <ToolPageContent tool={tool} lang={lang} editorHref={editorHref} hideCta={isSerpPage} />
 
   {isSerpPage && translations && (
