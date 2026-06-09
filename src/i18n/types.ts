@@ -376,6 +376,44 @@ export interface IslandStrings {
       sms: string;
     };
   };
+  /**
+   * Hook Visibility panel — does the opening hook (and CTA) survive each
+   * platform's "…more" fold. Status pills + one-line reasons are keyed to the
+   * analyzer's `verdict` / `reasonCode`; platform names stay untranslated in
+   * markup, so the reason strings carry no platform token.
+   */
+  hook: {
+    /** Card header large title. */
+    eyebrow: string;
+    /** Card header subtitle (function label). */
+    title: string;
+    /** Status pill — verdict 'pass'. */
+    statusPass: string;
+    /** Status pill — verdict 'warn'. */
+    statusWarn: string;
+    /** Status pill — verdict 'fail'. */
+    statusFail: string;
+    /** Status pill — empty editor (neutral). */
+    statusIdle: string;
+    /** Reason line — reasonCode 'empty'. */
+    reasonEmpty: string;
+    /** Reason line — reasonCode 'fits'. */
+    reasonFits: string;
+    /** Reason line — reasonCode 'hook-cut'. */
+    reasonHookCut: string;
+    /** Reason line — reasonCode 'cta-below'. */
+    reasonCtaBelow: string;
+    /** Reason line — reasonCode 'hook-only'. */
+    reasonHookOnly: string;
+    /** Reason line — reasonCode 'hook-and-cta'. */
+    reasonHookAndCta: string;
+    /** Tiny label on the fold divider drawn inside each preview card. */
+    foldLabel: string;
+    /** Accessible description of the fold divider. */
+    foldAria: string;
+    /** Panel summary line. "{pass}" / "{total}" tokens. */
+    summary: string;
+  };
 }
 
 export interface Translations {

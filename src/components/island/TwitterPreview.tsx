@@ -1,4 +1,5 @@
 /** @jsxImportSource preact */
+import { Fragment } from 'preact';
 import {
   splitThread,
   weightedLength,
@@ -10,6 +11,7 @@ import {
   CardHead,
   Badge,
   Meter,
+  FoldMarker,
   BrandLogo,
   ToolLink,
   Avatar,
@@ -93,6 +95,7 @@ export function TwitterPreview({ text, lang, s, toolLinkHref }: Props) {
           </article>
         ) : (
           tweets.map((tweet, i) => (
+            <Fragment key={i}>
             <PostCard
               layout="gutter"
               avatar={<Avatar size="h-10 w-10" initial={initial} />}
@@ -130,6 +133,11 @@ export function TwitterPreview({ text, lang, s, toolLinkHref }: Props) {
                 )}
               </div>
             </PostCard>
+            {/* X cuts into a second tweet here — the effective fold. */}
+            {isThread && i === 0 && (
+              <FoldMarker label={s.hook.foldLabel} ariaLabel={s.hook.foldAria} />
+            )}
+            </Fragment>
           ))
         )}
       </div>

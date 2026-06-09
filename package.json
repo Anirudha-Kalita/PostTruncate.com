@@ -9,6 +9,7 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
+    "test:lib": "node --experimental-strip-types --import ./scripts/ts-resolve.mjs --test \"src/lib/**/*.test.ts\"",
     "astro": "astro"
   },
   "dependencies": {

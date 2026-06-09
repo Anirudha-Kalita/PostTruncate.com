@@ -711,6 +711,65 @@ export function linkedInHook(text: string, limit: number): HookSplit {
 }
 
 // ──────────────────────────────────────────────────────────────────────────
+// Per-platform "…more" fold points — single source of truth
+// ──────────────────────────────────────────────────────────────────────────
+
+export type FoldView = 'mobile' | 'desktop';
+
+/**
+ * The user-perceived character index at which each platform collapses a feed
+ * post behind a "…more" affordance, per viewport. LinkedIn and Threads reuse
+ * the published caps in LIMITS; Instagram/Facebook are observed feed cutoffs.
+ * Both the live previews and the hook-visibility analysis read from here so the
+ * numbers live in exactly one place. X/Twitter has no single-post fold — a post
+ * over the weighted cap is split into a thread instead — so it is handled
+ * separately by twitterFoldIndex / foldCharIndex below.
+ */
+export const FOLDS = {
+  linkedin: { mobile: LIMITS.LINKEDIN_MOBILE, desktop: LIMITS.LINKEDIN_DESKTOP },
+  instagram: { mobile: 125, desktop: 125 },
+  facebook: { mobile: 110, desktop: 480 },
+  threads: { mobile: 250, desktop: LIMITS.THREADS },
+} as const;
+
+/** Platforms the fold/hook analysis understands (X has no char fold of its own). */
+export type FoldPlatform = keyof typeof FOLDS | 'x';
+
+/**
+ * X/Twitter never shows a "…more" fold; instead a post past the weighted cap is
+ * split into a thread. The effective fold is therefore the grapheme index at
+ * which the weighted length (URLs counted as URL_WEIGHT) first exceeds the cap.
+ * Returns the full grapheme length when the post fits in a single tweet.
+ */
+export function twitterFoldIndex(text: string): number {
+  if (weightedLength(text) <= LIMITS.TWEET) return charCount(text);
+
+  const graphemes = splitGraphemes(text);
+  let acc = '';
+  for (let i = 0; i < graphemes.length; i++) {
+    const next = acc + graphemes[i];
+    if (weightedLength(next) > LIMITS.TWEET) return i;
+    acc = next;
+  }
+  return graphemes.length;
+}
+
+/**
+ * Effective fold index for a platform + viewport, in user-perceived characters,
+ * clamped to the text length so a short post (nothing hidden) reports its own
+ * end. This is the single fold resolver shared by the previews and the
+ * hook-visibility analysis — no caller hardcodes a limit.
+ */
+export function foldCharIndex(
+  text: string,
+  platform: FoldPlatform,
+  view: FoldView = 'mobile',
+): number {
+  if (platform === 'x') return twitterFoldIndex(text);
+  return Math.min(FOLDS[platform][view], charCount(text));
+}
+
+// ──────────────────────────────────────────────────────────────────────────
 // X / Twitter thread splitter
 // ──────────────────────────────────────────────────────────────────────────
 
@@ -735,7 +794,7 @@ function threadSuffixReserve(
  */
 export function splitThread(
   text: string,
-  limit = LIMITS.TWEET,
+  limit: number = LIMITS.TWEET,
   measure: (s: string) => number = weightedLength,
 ): string[] {
   const trimmed = text.trim();

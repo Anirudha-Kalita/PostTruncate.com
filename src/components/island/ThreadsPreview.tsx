@@ -1,11 +1,11 @@
 /** @jsxImportSource preact */
-import { useState } from 'preact/hooks';
-import { charCount, detectUrls, LIMITS, sliceChars, splitThread } from '../../lib/textTools';
+import { charCount, detectUrls, FOLDS, LIMITS, sliceChars, splitThread } from '../../lib/textTools';
 import {
   Card,
   CardHead,
   Badge,
   Segmented,
+  FoldMarker,
   BrandLogo,
   ToolLink,
   Avatar,
@@ -26,28 +26,26 @@ interface Props {
   lang: string;
   s: IslandStrings;
   toolLinkHref?: string;
+  /** Viewport state, lifted to Dashboard so the Hook Visibility panel can mirror it. */
+  view: FeedView;
+  setView: (v: FeedView) => void;
 }
-
-const THREADS_DESKTOP_FOLD = LIMITS.THREADS;
-const THREADS_MOBILE_FOLD = 250;
 
 /**
  * Threads (by Meta) preview. A single post caps at 500 characters. The
  * validator keeps that full allowance, while the mock mobile card visually
  * folds one-block posts behind a "... more" affordance.
  */
-export function ThreadsPreview({ text, lang, s, toolLinkHref }: Props) {
+export function ThreadsPreview({ text, lang, s, toolLinkHref, view, setView }: Props) {
   const th = s.threads;
   const nf = new Intl.NumberFormat(lang);
   const author = previewAuthor(s.common);
-  const [view, setView] = useState<FeedView>('mobile');
   const trimmed = text.trim();
   const count = charCount(trimmed);
   const urls = detectUrls(trimmed);
   const posts = trimmed ? splitThread(trimmed, LIMITS.THREADS, charCount) : [];
   const isChain = posts.length > 1;
-  const visualFold =
-    view === 'mobile' ? THREADS_MOBILE_FOLD : THREADS_DESKTOP_FOLD;
+  const visualFold = FOLDS.threads[view];
 
   return (
     <Card>
@@ -121,6 +119,8 @@ export function ThreadsPreview({ text, lang, s, toolLinkHref }: Props) {
                 post={post}
                 visualFold={visualFold}
                 seeMore={s.linkedin.seeMore}
+                foldLabel={s.hook.foldLabel}
+                foldAria={s.hook.foldAria}
               />
 
               {/* Lighter-than-X engagement row: like / comment / repost / share. */}
@@ -150,18 +150,27 @@ function ThreadsPostText({
   post,
   visualFold,
   seeMore,
+  foldLabel,
+  foldAria,
 }: {
   post: string;
   visualFold: number;
   seeMore: string;
+  foldLabel: string;
+  foldAria: string;
 }) {
   const shouldFold = charCount(post) > visualFold;
   const visible = shouldFold ? sliceChars(post, 0, visualFold) : post;
+  const hidden = shouldFold ? sliceChars(post, visualFold) : '';
 
   return (
     <p class="mt-2 whitespace-pre-wrap break-words text-[14px] leading-[21px] text-ink">
       {visible}
       {shouldFold && <span class="text-mute">{seeMore}</span>}
+      {shouldFold && <FoldMarker label={foldLabel} ariaLabel={foldAria} />}
+      {shouldFold && hidden && (
+        <span class="text-mute/45 line-through decoration-hairline-strong/40">{hidden}</span>
+      )}
     </p>
   );
 }

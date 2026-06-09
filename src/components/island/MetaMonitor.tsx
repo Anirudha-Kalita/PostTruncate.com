@@ -1,11 +1,11 @@
 /** @jsxImportSource preact */
-import { useState } from 'preact/hooks';
 import {
   detectHashtags,
   hasFancyUnicode,
   countFancyUnicode,
   charCount,
   sliceChars,
+  FOLDS,
   LIMITS,
 } from '../../lib/textTools';
 import {
@@ -14,6 +14,7 @@ import {
   Badge,
   Segmented,
   Meter,
+  FoldMarker,
   BrandLogo,
   ToolLink,
   Avatar,
@@ -41,18 +42,20 @@ interface Props {
   priority?: 'facebook';
   /** Scoped platform pages: render only this network's card (both when unset). */
   only?: 'instagram' | 'facebook';
+  /** Viewport state, lifted to Dashboard so the Hook Visibility panel mirrors it. */
+  instagramView: FeedView;
+  setInstagramView: (v: FeedView) => void;
+  facebookView: FeedView;
+  setFacebookView: (v: FeedView) => void;
 }
-
-const INSTAGRAM_DESKTOP_FOLD = 125;
-const INSTAGRAM_MOBILE_FOLD = 125;
-const FACEBOOK_DESKTOP_FOLD = 480;
-const FACEBOOK_MOBILE_FOLD = 110;
 
 function truncateForFeed(text: string, limit: number) {
   const count = charCount(text);
+  const truncated = count > limit;
   return {
-    isTruncated: count > limit,
-    previewText: count > limit ? sliceChars(text, 0, limit) : text,
+    isTruncated: truncated,
+    previewText: truncated ? sliceChars(text, 0, limit) : text,
+    hiddenText: truncated ? sliceChars(text, limit) : '',
   };
 }
 
@@ -60,12 +63,10 @@ function truncateForFeed(text: string, limit: number) {
  * Independent Instagram and Facebook monitors. Instagram owns caption preview
  * and hashtag concentration; Facebook owns feed preview and accessibility.
  */
-export function MetaMonitor({ text, lang, s, toolLinkHref, facebookToolLinkHref, priority, only }: Props) {
+export function MetaMonitor({ text, lang, s, toolLinkHref, facebookToolLinkHref, priority, only, instagramView, setInstagramView, facebookView, setFacebookView }: Props) {
   const m = s.meta;
   const nf = new Intl.NumberFormat(lang);
   const author = previewAuthor(s.common);
-  const [instagramView, setInstagramView] = useState<FeedView>('mobile');
-  const [facebookView, setFacebookView] = useState<FeedView>('mobile');
   const hashtags = detectHashtags(text);
   const tagCount = hashtags.length;
   const overTagLimit = tagCount > LIMITS.INSTAGRAM_HASHTAGS;
@@ -80,10 +81,8 @@ export function MetaMonitor({ text, lang, s, toolLinkHref, facebookToolLinkHref,
   const activeText = text.trim();
   const activeCount = charCount(activeText);
   const overCaptionLimit = activeCount > LIMITS.INSTAGRAM_CAPTION;
-  const instagramLimit =
-    instagramView === 'mobile' ? INSTAGRAM_MOBILE_FOLD : INSTAGRAM_DESKTOP_FOLD;
-  const facebookLimit =
-    facebookView === 'mobile' ? FACEBOOK_MOBILE_FOLD : FACEBOOK_DESKTOP_FOLD;
+  const instagramLimit = FOLDS.instagram[instagramView];
+  const facebookLimit = FOLDS.facebook[facebookView];
   const instagramPreview = truncateForFeed(activeText, instagramLimit);
   const facebookPreview = truncateForFeed(activeText, facebookLimit);
 
@@ -155,6 +154,14 @@ export function MetaMonitor({ text, lang, s, toolLinkHref, facebookToolLinkHref,
               {instagramPreview.previewText}
               {instagramPreview.isTruncated && (
                 <span class="text-slate-400">{s.linkedin.seeMore}</span>
+              )}
+              {instagramPreview.isTruncated && (
+                <FoldMarker label={s.hook.foldLabel} ariaLabel={s.hook.foldAria} />
+              )}
+              {instagramPreview.isTruncated && instagramPreview.hiddenText && (
+                <span class="text-mute/45 line-through decoration-hairline-strong/40">
+                  {instagramPreview.hiddenText}
+                </span>
               )}
             </p>
           </PostCard>
@@ -261,6 +268,14 @@ export function MetaMonitor({ text, lang, s, toolLinkHref, facebookToolLinkHref,
               {facebookPreview.previewText}
               {facebookPreview.isTruncated && (
                 <span class="text-slate-400"> {s.linkedin.seeMore}</span>
+              )}
+              {facebookPreview.isTruncated && (
+                <FoldMarker label={s.hook.foldLabel} ariaLabel={s.hook.foldAria} />
+              )}
+              {facebookPreview.isTruncated && facebookPreview.hiddenText && (
+                <span class="text-mute/45 line-through decoration-hairline-strong/40">
+                  {facebookPreview.hiddenText}
+                </span>
               )}
             </p>
 

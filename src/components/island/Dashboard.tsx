@@ -1,11 +1,14 @@
 /** @jsxImportSource preact */
 import { useEffect, useLayoutEffect, useState } from 'preact/hooks';
 import { Workspace } from './Workspace';
-import { LinkedInPreview, type LinkedInView } from './LinkedInPreview';
+import { LinkedInPreview } from './LinkedInPreview';
 import { TwitterPreview } from './TwitterPreview';
 import { ThreadsPreview } from './ThreadsPreview';
 import { MetaMonitor } from './MetaMonitor';
+import { HookVisibilityCard } from './HookVisibilityCard';
 import { KeywordMonitor } from './KeywordMonitor';
+import type { HookPlatform } from '../../lib/hookAnalysis';
+import type { FoldView } from '../../lib/textTools';
 import { SmsCounter } from './SmsCounter';
 import { ReadabilityCard } from './ReadabilityCard';
 import type { IslandStrings } from '../../i18n/types';
@@ -45,6 +48,30 @@ const PLATFORM_TO_CARD: Record<string, CardKey> = {
 
 const DEFAULT_ORDER: CardKey[] = ['linkedin', 'twitter', 'meta', 'threads'];
 
+/** Platforms whose preview card carries a Desktop/Mobile fold toggle. */
+type ViewablePlatform = 'linkedin' | 'instagram' | 'facebook' | 'threads';
+
+/**
+ * Per-platform viewport defaults — the single source of truth for which fold
+ * each preview shows. Shared with the Hook Visibility panel so toggling a card
+ * re-audits that platform's row against the same fold the user is viewing.
+ */
+const DEFAULT_VIEWS: Record<ViewablePlatform, FoldView> = {
+  linkedin: 'desktop',
+  instagram: 'mobile',
+  facebook: 'mobile',
+  threads: 'mobile',
+};
+
+/** Focus platform → the Hook Visibility row to scope to (undefined = not audited). */
+const FOCUS_TO_HOOK: Partial<Record<FocusPlatform, HookPlatform>> = {
+  linkedin: 'linkedin',
+  twitter: 'x',
+  instagram: 'instagram',
+  facebook: 'facebook',
+  threads: 'threads',
+};
+
 
 function readActiveDraft() {
   if (typeof window === 'undefined') return '';
@@ -66,7 +93,9 @@ function readActiveDraft() {
 export default function Dashboard({ lang, strings, toolSlugs, focus }: Props) {
   const [text, setText] = useState('');
   const [analysisText, setAnalysisText] = useState('');
-  const [view, setView] = useState<LinkedInView>('desktop');
+  const [views, setViews] = useState<Record<ViewablePlatform, FoldView>>(DEFAULT_VIEWS);
+  const setPlatformView = (p: ViewablePlatform, v: FoldView) =>
+    setViews((prev) => ({ ...prev, [p]: v }));
   const [isDraftLoaded, setIsDraftLoaded] = useState(false);
   const [cardOrder, setCardOrder] = useState<CardKey[]>(DEFAULT_ORDER);
   const [metaPriority, setMetaPriority] = useState<'facebook' | undefined>(undefined);
@@ -89,6 +118,10 @@ export default function Dashboard({ lang, strings, toolSlugs, focus }: Props) {
   const effectiveMetaPriority = focus === 'facebook' ? 'facebook' : metaPriority;
   // On the Instagram/Facebook pages the shared meta card shows only that network.
   const metaOnly = focus === 'instagram' || focus === 'facebook' ? focus : undefined;
+  // Hook Visibility: all four platforms on the homepage; the scoped row on a
+  // platform tool page (omitted on the Facebook/SMS pages it doesn't audit).
+  const hookOnly = focus ? FOCUS_TO_HOOK[focus] : undefined;
+  const showHookPanel = !focus || hookOnly !== undefined;
 
   useEffect(() => {
     const draft = readActiveDraft();
@@ -145,11 +178,14 @@ export default function Dashboard({ lang, strings, toolSlugs, focus }: Props) {
       {/* Right column — live platform matrix (a single card in scoped mode),
           followed on scoped pages by the readability + keyword cards. */}
       <div class="flex flex-col gap-5">
+        {showHookPanel && (
+          <HookVisibilityCard text={analysisText} lang={lang} s={strings} only={hookOnly} views={views} />
+        )}
         {rightOrder.map(key => {
-          if (key === 'linkedin') return <div id="platform-card-linkedin" key="lw"><LinkedInPreview key="linkedin" text={analysisText} view={view} setView={setView} lang={lang} s={strings} toolLinkHref={`/${lang}/${toolSlugs.linkedin}/`} /></div>;
+          if (key === 'linkedin') return <div id="platform-card-linkedin" key="lw"><LinkedInPreview key="linkedin" text={analysisText} view={views.linkedin} setView={(v) => setPlatformView('linkedin', v)} lang={lang} s={strings} toolLinkHref={`/${lang}/${toolSlugs.linkedin}/`} /></div>;
           if (key === 'twitter')  return <div id="platform-card-twitter"  key="tw"><TwitterPreview  key="twitter"  text={analysisText} lang={lang} s={strings} toolLinkHref={`/${lang}/${toolSlugs.twitter}/`} /></div>;
-          if (key === 'meta')     return <div id="platform-card-meta"     key="mw"><MetaMonitor     key="meta"     text={analysisText} lang={lang} s={strings} toolLinkHref={`/${lang}/${toolSlugs.instagram}/`} facebookToolLinkHref={`/${lang}/${toolSlugs.facebook}/`} priority={effectiveMetaPriority} only={metaOnly} /></div>;
-          if (key === 'threads')  return <div id="platform-card-threads"  key="thw"><ThreadsPreview  key="threads"  text={analysisText} lang={lang} s={strings} toolLinkHref={`/${lang}/${toolSlugs.threads}/`} /></div>;
+          if (key === 'meta')     return <div id="platform-card-meta"     key="mw"><MetaMonitor     key="meta"     text={analysisText} lang={lang} s={strings} toolLinkHref={`/${lang}/${toolSlugs.instagram}/`} facebookToolLinkHref={`/${lang}/${toolSlugs.facebook}/`} priority={effectiveMetaPriority} only={metaOnly} instagramView={views.instagram} setInstagramView={(v) => setPlatformView('instagram', v)} facebookView={views.facebook} setFacebookView={(v) => setPlatformView('facebook', v)} /></div>;
+          if (key === 'threads')  return <div id="platform-card-threads"  key="thw"><ThreadsPreview  key="threads"  text={analysisText} lang={lang} s={strings} toolLinkHref={`/${lang}/${toolSlugs.threads}/`} view={views.threads} setView={(v) => setPlatformView('threads', v)} /></div>;
         })}
         {focus === 'sms' && <SmsCounter text={analysisText} lang={lang} s={strings.sms} />}
         {focus && <ReadabilityCard text={analysisText} lang={lang} s={strings.readability} />}

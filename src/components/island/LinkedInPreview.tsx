@@ -6,6 +6,7 @@ import {
   Badge,
   Segmented,
   Meter,
+  FoldMarker,
   BrandLogo,
   ToolLink,
   Avatar,
@@ -134,6 +135,10 @@ export function LinkedInPreview({ text, view, setView, lang, s, toolLinkHref }: 
                   <span class="font-semibold text-mute" aria-label={l.seeMore}>
                     {l.seeMore}
                   </span>
+                )}
+                {/* Explicit fold line: everything below is hidden in-feed. */}
+                {truncated && (
+                  <FoldMarker label={s.hook.foldLabel} ariaLabel={s.hook.foldAria} />
                 )}
                 {/* Folded remainder, dimmed to show what readers must click for. */}
                 {truncated && rest && (

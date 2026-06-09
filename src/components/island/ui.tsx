@@ -39,14 +39,16 @@ interface BadgeProps {
   children: ComponentChildren;
   /** Show the leading status dot. */
   dot?: boolean;
+  /** Extra utility classes (e.g. width caps / wrapping for long-text chips). */
+  class?: string;
 }
 
-export function Badge({ tone, children, dot = true }: BadgeProps) {
+export function Badge({ tone, children, dot = true, class: extra = '' }: BadgeProps) {
   return (
     <span
-      class={`inline-flex items-center gap-1.5 rounded-pill px-2.5 py-1 text-[12px] font-medium leading-4 ${BADGE_TONE[tone]}`}
+      class={`inline-flex items-center gap-1.5 rounded-pill px-2.5 py-1 text-[12px] font-medium leading-4 ${BADGE_TONE[tone]} ${extra}`}
     >
-      {dot && <span class={`h-1.5 w-1.5 rounded-full ${DOT_TONE[tone]}`} />}
+      {dot && <span class={`h-1.5 w-1.5 shrink-0 rounded-full ${DOT_TONE[tone]}`} />}
       {children}
     </span>
   );
@@ -431,6 +433,81 @@ export function ActionBar({ items }: ActionBarProps) {
         </span>
       ))}
     </div>
+  );
+}
+
+// ──────────────────────────────────────────────────────────────────────────
+// Hook-visibility primitives: the fold divider drawn inside preview cards and
+// the pass/warn/fail status glyph. The status icons are drawn here from scratch
+// (a check, a bang, a cross) so they read as states, never as platform logos.
+// ──────────────────────────────────────────────────────────────────────────
+
+interface FoldMarkerProps {
+  /** Tiny label sitting on the line, e.g. "fold". */
+  label: string;
+  /** Accessible description announced to screen readers. */
+  ariaLabel: string;
+}
+
+/**
+ * A faint, labeled dashed rule marking exactly where a platform truncates a
+ * post behind "…more". Rendered as a block so it spans the post body at the
+ * fold boundary; the text above it survives, the text below is hidden in-feed.
+ */
+export function FoldMarker({ label, ariaLabel }: FoldMarkerProps) {
+  return (
+    <span
+      role="separator"
+      aria-label={ariaLabel}
+      class="my-1.5 flex w-full select-none items-center gap-2"
+    >
+      <span class="h-0 flex-1 border-t border-dashed border-warning/60" aria-hidden="true" />
+      <span class="font-mono text-[10px] font-medium uppercase tracking-wide text-warning-deep">
+        {label}
+      </span>
+      <span class="h-0 flex-1 border-t border-dashed border-warning/60" aria-hidden="true" />
+    </span>
+  );
+}
+
+export type HookStatus = 'pass' | 'warn' | 'fail';
+
+const HOOK_STATUS_PATH: Record<HookStatus, ComponentChildren> = {
+  // Check mark.
+  pass: <path d="M5 12.5 10 17.5 19 7" />,
+  // Exclamation (stem + dot).
+  warn: <path d="M12 6.5v7M12 17.2v.1" />,
+  // Cross.
+  fail: <path d="M7 7l10 10M17 7 7 17" />,
+};
+
+const HOOK_STATUS_COLOR: Record<HookStatus, string> = {
+  pass: 'text-cyan-deep',
+  warn: 'text-warning-deep',
+  fail: 'text-error-deep',
+};
+
+/**
+ * Pass/warn/fail status glyph for the Hook Visibility panel. Decorative — the
+ * adjacent text label carries the meaning, so this is aria-hidden and never the
+ * sole signal (icon + word + tone, not color alone).
+ */
+export function HookStatusIcon({ status, size = 18 }: { status: HookStatus; size?: number }) {
+  return (
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2.2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      class={HOOK_STATUS_COLOR[status]}
+      aria-hidden="true"
+    >
+      {HOOK_STATUS_PATH[status]}
+    </svg>
   );
 }
 
