@@ -5,7 +5,7 @@
 backend:
   name: github
   repo: Anirudha-Kalita/PostTruncate.com
-  branch: main
+  branch: master
   # OAuth is handled by the deployed Sveltia auth Worker. This is the Worker
   # BASE URL only — the "/callback" suffix lives on the GitHub OAuth app side,
   # NOT here. (No PUBLIC_ env var exists in this codebase, and config.yml is a
