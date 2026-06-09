@@ -174,8 +174,8 @@ interface CardHeadProps {
  */
 export function CardHead({ eyebrow, title, logo, children }: CardHeadProps) {
   return (
-    <header class="flex flex-wrap items-center justify-between gap-x-3 gap-y-2 border-b border-hairline px-4 py-3.5 sm:px-5 sm:py-4">
-      <div class="flex items-center gap-2.5">
+    <header class="flex items-center justify-between gap-x-3 border-b border-hairline px-4 py-3.5 sm:px-5 sm:py-4">
+      <div class="flex min-w-0 items-center gap-2.5">
         {logo && <span class="flex shrink-0 items-center">{logo}</span>}
         <div class="min-w-0">
           <h3 class="text-[18px] font-semibold leading-6 tracking-[-0.5px] text-ink sm:text-[20px]">
