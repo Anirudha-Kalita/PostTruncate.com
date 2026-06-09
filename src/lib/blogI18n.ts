@@ -1,0 +1,108 @@
+// ──────────────────────────────────────────────────────────────────────────
+// Blog chrome strings + helpers.
+//
+// Kept separate from the main `Translations` interface on purpose: the blog is
+// shipped English-first, so wiring its labels into all 10 locale dictionaries
+// now would be churn. This map has English filled in; the other 9 locales fall
+// back to English (via getBlogStrings) until a translator fills them, exactly
+// like the en-fallback pattern used across src/data/tools.ts.
+// ──────────────────────────────────────────────────────────────────────────
+import { getCollection, type CollectionEntry } from 'astro:content';
+import { DEFAULT_LOCALE } from '../i18n/config';
+
+/** Fixed URL segment for the section: /{lang}/blog/... — same across locales. */
+export const BLOG_SEGMENT = 'blog';
+
+export interface BlogStrings {
+  /** <title> of the blog index, e.g. "Blog — PostTruncate". */
+  indexTitle: string;
+  /** Meta description of the blog index. */
+  indexDescription: string;
+  /** H1 on the index page. */
+  indexHeading: string;
+  /** Sub-heading lede on the index page. */
+  indexLede: string;
+  /** Card link text, e.g. "Read article". */
+  readMore: string;
+  /** Inline label before the publish date, e.g. "Published". */
+  publishedLabel: string;
+  /** Inline label before the updated date, e.g. "Updated". */
+  updatedLabel: string;
+  /** Author byline connector, e.g. "By". */
+  byLabel: string;
+  /** Breadcrumb + back-link text to the index, e.g. "Blog". */
+  backToBlog: string;
+  /** Footer link label pointing at the section index, e.g. "Blog". */
+  footerLink: string;
+  /** Heading for the related-posts block on tool pages, e.g. "From the blog". */
+  relatedHeading: string;
+}
+
+// Only English is authored today. Add keys for 'de', 'es', … when translating.
+const BLOG_STRINGS: Record<string, BlogStrings> = {
+  en: {
+    indexTitle: 'Blog — Social Media Character Limits & Writing Guides',
+    indexDescription:
+      'Guides on character limits, post formatting, and writing better social media content for X, Instagram, LinkedIn, Facebook, Threads, and SMS.',
+    indexHeading: 'Learn',
+    indexLede:
+      'Practical guides to character limits, formatting, and writing posts that land on every platform.',
+    readMore: 'Read article',
+    publishedLabel: 'Published',
+    updatedLabel: 'Updated',
+    byLabel: 'By',
+    backToBlog: 'Blog',
+    footerLink: 'Blog',
+    relatedHeading: 'From the blog',
+  },
+};
+
+/** Resolve blog chrome strings for a locale, falling back to English. */
+export function getBlogStrings(lang: string): BlogStrings {
+  return BLOG_STRINGS[lang] ?? BLOG_STRINGS[DEFAULT_LOCALE];
+}
+
+/**
+ * Locale codes that have at least one published post. Drafts count only in
+ * `astro dev` — the same rule the blog routes use, so a locale's footer link
+ * appears exactly when its /[lang]/blog/ index is actually generated.
+ *
+ * Memoized: the Footer calls this on every page render, so without caching the
+ * collection would be re-read ~once per page. The module is shared across the
+ * SSG build, so one query serves the whole build.
+ */
+let blogLocalesCache: Promise<Set<string>> | null = null;
+export function getBlogLocales(): Promise<Set<string>> {
+  blogLocalesCache ??= getCollection('blog').then(
+    (posts) =>
+      new Set(
+        posts
+          .filter((p) => import.meta.env.DEV || !p.data.draft)
+          .map((p) => p.data.locale),
+      ),
+  );
+  return blogLocalesCache;
+}
+
+/**
+ * All published posts (drafts only in `astro dev`). Memoized: tool pages call
+ * this ~once per page to find related posts, so the collection is read once for
+ * the whole build. Callers filter by locale / relatedPlatform as needed.
+ */
+let publishedPostsCache: Promise<CollectionEntry<'blog'>[]> | null = null;
+export function getPublishedPosts(): Promise<CollectionEntry<'blog'>[]> {
+  publishedPostsCache ??= getCollection('blog').then((posts) =>
+    posts.filter((p) => import.meta.env.DEV || !p.data.draft),
+  );
+  return publishedPostsCache;
+}
+
+/** Locale-aware long date, e.g. "June 9, 2026" / "9. Juni 2026". */
+export function formatBlogDate(date: Date, lang: string): string {
+  return new Intl.DateTimeFormat(lang, { dateStyle: 'long' }).format(date);
+}
+
+/** ISO date-only (YYYY-MM-DD) for <time datetime> and schema fields. */
+export function isoDate(date: Date): string {
+  return date.toISOString().slice(0, 10);
+}

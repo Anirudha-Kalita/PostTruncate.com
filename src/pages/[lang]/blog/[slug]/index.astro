@@ -1,0 +1,336 @@
+---
+import { getCollection, render, type CollectionEntry } from 'astro:content';
+import Layout from '../../../../layouts/Layout.astro';
+import BlogStructuredData from '../../../../components/BlogStructuredData.astro';
+import { getLocale, DEFAULT_LOCALE } from '../../../../i18n/config';
+import { tools } from '../../../../data/tools';
+import {
+  BLOG_SEGMENT,
+  getBlogStrings,
+  formatBlogDate,
+  isoDate,
+} from '../../../../lib/blogI18n';
+
+type BlogEntry = CollectionEntry<'blog'>;
+
+// One static page per published post, at /{locale}/blog/{slug}/. Locales with
+// no posts emit nothing — the section grows file-by-file, English-first.
+export async function getStaticPaths() {
+  // Drafts render in `astro dev` but are dropped from production builds.
+  const posts = (await getCollection('blog')).filter(
+    (p) => import.meta.env.DEV || !p.data.draft,
+  );
+
+  // Guard: the `locale` field must match the containing folder so a misfiled
+  // post fails the build instead of shipping under the wrong language.
+  for (const p of posts) {
+    const folder = p.id.split('/')[0];
+    if (folder !== p.data.locale) {
+      throw new Error(
+        `Blog post "${p.id}" has locale "${p.data.locale}" but lives in /${folder}/. ` +
+          `Move the file or fix the frontmatter so they match.`,
+      );
+    }
+  }
+
+  // Group translations so each post can advertise its siblings via hreflang.
+  const byKey = new Map<string, BlogEntry[]>();
+  for (const p of posts) {
+    const group = byKey.get(p.data.translationKey) ?? [];
+    group.push(p);
+    byKey.set(p.data.translationKey, group);
+  }
+
+  const site = 'https://posttruncate.com';
+  const href = (locale: string, slug: string) =>
+    `${site}/${locale}/${BLOG_SEGMENT}/${slug}/`;
+
+  return posts.map((post) => {
+    const siblings = byKey.get(post.data.translationKey)!;
+
+    // hreflang: one entry per existing translation + x-default → English when a
+    // translation exists, otherwise this post itself. With English-only content
+    // this collapses to a clean self-reference, no dangling alternates.
+    const alternates = siblings.map((s) => ({
+      hreflang: s.data.locale,
+      href: href(s.data.locale, s.data.slug),
+    }));
+    const xDefault =
+      siblings.find((s) => s.data.locale === DEFAULT_LOCALE) ?? post;
+    alternates.push({
+      hreflang: 'x-default',
+      href: href(xDefault.data.locale, xDefault.data.slug),
+    });
+
+    return {
+      params: { lang: post.data.locale, slug: post.data.slug },
+      props: { post, hreflangUrls: alternates },
+    };
+  });
+}
+
+interface Props {
+  post: BlogEntry;
+  hreflangUrls: { hreflang: string; href: string }[];
+}
+
+const { post, hreflangUrls } = Astro.props as Props;
+const { data } = post;
+const lang = data.locale;
+
+const s = getBlogStrings(lang);
+const locale = getLocale(lang);
+const site = Astro.site ?? new URL('https://posttruncate.com');
+
+const canonicalUrl = new URL(`/${lang}/${BLOG_SEGMENT}/${data.slug}/`, site).href;
+const homeUrl = new URL(`/${lang}/${locale.slug}/`, site).href;
+const blogIndexUrl = new URL(`/${lang}/${BLOG_SEGMENT}/`, site).href;
+
+const published = isoDate(data.publishDate);
+const modified = isoDate(data.updatedDate ?? data.publishDate);
+const ogImageUrl = data.ogImage
+  ? new URL(data.ogImage, site).href
+  : undefined;
+
+// Cross-link to the matching platform tool page (when not the generic bucket).
+const relatedTool =
+  data.relatedPlatform && data.relatedPlatform !== 'general'
+    ? tools.find((tool) => tool.id === data.relatedPlatform)
+    : undefined;
+const relatedToolHref = relatedTool
+  ? `/${lang}/${relatedTool.slugs[lang] ?? relatedTool.slugs[DEFAULT_LOCALE]}/`
+  : undefined;
+const relatedToolName = relatedTool
+  ? relatedTool.schemaName[lang] ?? relatedTool.schemaName[DEFAULT_LOCALE]
+  : undefined;
+
+// Breadcrumb trail: Home → Blog → this post. Passed to BlogStructuredData,
+// which renders it as BreadcrumbList JSON-LD.
+const breadcrumbs = [
+  { name: locale.toolName, item: homeUrl },
+  { name: s.backToBlog, item: blogIndexUrl },
+  { name: data.title, item: canonicalUrl },
+];
+
+const { Content } = await render(post);
+---
+
+<Layout
+  lang={lang}
+  path={`/${BLOG_SEGMENT}/${data.slug}/`}
+  title={data.title}
+  description={data.description}
+  canonicalUrl={canonicalUrl}
+  hreflangUrls={hreflangUrls}
+  ogType="article"
+  ogImage={data.ogImage}
+  articlePublishedTime={published}
+  articleModifiedTime={modified}
+>
+  <BlogStructuredData
+    slot="head"
+    type="post"
+    url={canonicalUrl}
+    name={data.title}
+    description={data.description}
+    inLanguage={lang}
+    author={data.author}
+    datePublished={published}
+    dateModified={modified}
+    image={ogImageUrl}
+    breadcrumbs={breadcrumbs}
+  />
+  <link
+    slot="head"
+    rel="alternate"
+    type="application/rss+xml"
+    title={s.indexTitle}
+    href={`/${lang}/${BLOG_SEGMENT}/rss.xml`}
+  />
+  <article class="post container-page">
+    <nav class="post__crumbs" aria-label="Breadcrumb">
+      <a href={`/${lang}/${BLOG_SEGMENT}/`}>{s.backToBlog}</a>
+    </nav>
+
+    <header class="post__head">
+      <h1 class="post__title">{data.title}</h1>
+      <p class="post__meta">
+        <span>{s.byLabel} {data.author}</span>
+        <span aria-hidden="true">·</span>
+        <span>
+          {s.publishedLabel}
+          <time datetime={published}>{formatBlogDate(data.publishDate, lang)}</time>
+        </span>
+        {data.updatedDate && (
+          <>
+            <span aria-hidden="true">·</span>
+            <span>
+              {s.updatedLabel}
+              <time datetime={modified}>{formatBlogDate(data.updatedDate, lang)}</time>
+            </span>
+          </>
+        )}
+      </p>
+    </header>
+
+    <div class="post__body seo-prose">
+      <Content />
+    </div>
+
+    {relatedToolHref && relatedToolName && (
+      <p class="post__related">
+        <a href={relatedToolHref}>{relatedToolName} →</a>
+      </p>
+    )}
+  </article>
+</Layout>
+
+<style>
+  .post {
+    padding-top: 48px;
+    padding-bottom: 96px;
+    max-width: 56rem;
+  }
+  .post__crumbs {
+    font-size: 14px;
+    margin-bottom: 24px;
+  }
+  .post__crumbs a {
+    color: var(--color-body);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  .post__crumbs a:hover {
+    color: var(--color-ink);
+  }
+  .post__head {
+    margin-bottom: 32px;
+  }
+  .post__title {
+    font-size: clamp(30px, 5vw, 44px);
+    font-weight: 600;
+    line-height: 1.08;
+    letter-spacing: -1.6px;
+    color: var(--color-ink);
+  }
+  .post__meta {
+    margin-top: 16px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    font-size: 14px;
+    color: var(--color-mute);
+  }
+  /* Reuse the long-form prose rhythm used by the homepage SEO copy. */
+  .post__body {
+    margin-inline: 0;
+  }
+  .post__body :global(h2) {
+    margin-top: 40px;
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 32px;
+    letter-spacing: -0.7px;
+    color: var(--color-ink);
+  }
+  .post__body :global(h3) {
+    margin-top: 28px;
+    font-size: 19px;
+    font-weight: 600;
+    color: var(--color-ink);
+  }
+  .post__body :global(p),
+  .post__body :global(li) {
+    margin-top: 14px;
+    font-size: 17px;
+    line-height: 29px;
+    color: var(--color-body);
+  }
+  .post__body :global(ul),
+  .post__body :global(ol) {
+    margin-top: 14px;
+    padding-left: 24px;
+  }
+  .post__body :global(strong) {
+    font-weight: 600;
+    color: var(--color-ink);
+  }
+  .post__body :global(a) {
+    color: var(--color-ink);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  .post__body :global(em) {
+    font-style: italic;
+  }
+  /* Media-library images — full-measure, responsive. */
+  .post__body :global(img) {
+    display: block;
+    width: 100%;
+    height: auto;
+    margin-top: 24px;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-e1);
+  }
+  .post__body :global(blockquote) {
+    margin-top: 20px;
+    padding: 4px 0 4px 20px;
+    border-left: 3px solid var(--color-hairline-strong);
+    color: var(--color-mute);
+    font-style: italic;
+  }
+  .post__body :global(blockquote p:first-child) {
+    margin-top: 0;
+  }
+  /* Inline code; fenced blocks keep Shiki's own background via inline style. */
+  .post__body :global(code) {
+    font-family: var(--font-mono);
+    font-size: 0.9em;
+    background: var(--color-canvas-soft-2);
+    padding: 2px 6px;
+    border-radius: var(--radius-xs);
+  }
+  .post__body :global(pre) {
+    margin-top: 20px;
+    padding: 16px 20px;
+    border-radius: var(--radius-md);
+    overflow-x: auto;
+    font-size: 14px;
+    line-height: 1.6;
+  }
+  .post__body :global(pre code) {
+    background: none;
+    padding: 0;
+    font-size: inherit;
+  }
+  /* Responsive 16:9 video embed (output of remarkVideoEmbed). */
+  .post__body :global(.video-embed) {
+    position: relative;
+    margin-top: 24px;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-e2);
+    background: var(--color-canvas-soft-2);
+  }
+  .post__body :global(.video-embed__iframe) {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+  }
+  .post__related {
+    margin-top: 48px;
+    padding-top: 24px;
+    border-top: 1px solid var(--color-hairline);
+  }
+  .post__related a {
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--color-ink);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+</style>

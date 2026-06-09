@@ -1,0 +1,194 @@
+---
+import { getCollection, type CollectionEntry } from 'astro:content';
+import Layout from '../../../layouts/Layout.astro';
+import BlogStructuredData from '../../../components/BlogStructuredData.astro';
+import { getLocale, DEFAULT_LOCALE } from '../../../i18n/config';
+import {
+  BLOG_SEGMENT,
+  getBlogStrings,
+  formatBlogDate,
+  isoDate,
+} from '../../../lib/blogI18n';
+
+type BlogEntry = CollectionEntry<'blog'>;
+
+// One index per locale that has at least one published post. Empty locales
+// produce no index page — no thin "coming soon" pages for the 9 unwritten
+// languages until their content lands.
+export async function getStaticPaths() {
+  const posts = (await getCollection('blog')).filter(
+    (p) => import.meta.env.DEV || !p.data.draft,
+  );
+
+  // Bucket posts by locale, newest first within each.
+  const byLocale = new Map<string, BlogEntry[]>();
+  for (const p of posts) {
+    const group = byLocale.get(p.data.locale) ?? [];
+    group.push(p);
+    byLocale.set(p.data.locale, group);
+  }
+  for (const group of byLocale.values()) {
+    group.sort(
+      (a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf(),
+    );
+  }
+
+  const site = 'https://posttruncate.com';
+  // hreflang alternates: only locales that actually have an index page.
+  const localesWithPosts = [...byLocale.keys()];
+  const alternates = localesWithPosts.map((code) => ({
+    hreflang: code,
+    href: `${site}/${code}/${BLOG_SEGMENT}/`,
+  }));
+  const xDefaultLocale = localesWithPosts.includes(DEFAULT_LOCALE)
+    ? DEFAULT_LOCALE
+    : localesWithPosts[0];
+  if (xDefaultLocale) {
+    alternates.push({
+      hreflang: 'x-default',
+      href: `${site}/${xDefaultLocale}/${BLOG_SEGMENT}/`,
+    });
+  }
+
+  return localesWithPosts.map((code) => ({
+    params: { lang: code },
+    props: { posts: byLocale.get(code)!, hreflangUrls: alternates },
+  }));
+}
+
+interface Props {
+  posts: BlogEntry[];
+  hreflangUrls: { hreflang: string; href: string }[];
+}
+
+const { posts, hreflangUrls } = Astro.props as Props;
+const { lang } = Astro.params as { lang: string };
+
+const s = getBlogStrings(lang);
+const site = Astro.site ?? new URL('https://posttruncate.com');
+const canonicalUrl = new URL(`/${lang}/${BLOG_SEGMENT}/`, site).href;
+
+// Post list for the Blog JSON-LD, newest first (already sorted upstream).
+const schemaPosts = posts.map((p) => ({
+  headline: p.data.title,
+  description: p.data.description,
+  datePublished: isoDate(p.data.publishDate),
+  url: new URL(`/${lang}/${BLOG_SEGMENT}/${p.data.slug}/`, site).href,
+}));
+---
+
+<Layout
+  lang={lang}
+  path={`/${BLOG_SEGMENT}/`}
+  title={s.indexTitle}
+  description={s.indexDescription}
+  canonicalUrl={canonicalUrl}
+  hreflangUrls={hreflangUrls}
+>
+  <BlogStructuredData
+    slot="head"
+    type="index"
+    url={canonicalUrl}
+    name={s.indexHeading}
+    description={s.indexDescription}
+    inLanguage={lang}
+    posts={schemaPosts}
+  />
+  <link
+    slot="head"
+    rel="alternate"
+    type="application/rss+xml"
+    title={s.indexTitle}
+    href={`/${lang}/${BLOG_SEGMENT}/rss.xml`}
+  />
+  <section class="blog container-page">
+    <header class="blog__head">
+      <h1 class="blog__title">{s.indexHeading}</h1>
+      <p class="blog__lede">{s.indexLede}</p>
+    </header>
+
+    <ul class="blog__list">
+      {posts.map((p) => (
+        <li class="blog__item">
+          <a class="blog__card" href={`/${lang}/${BLOG_SEGMENT}/${p.data.slug}/`}>
+            <time class="blog__date" datetime={isoDate(p.data.publishDate)}>
+              {formatBlogDate(p.data.publishDate, lang)}
+            </time>
+            <h2 class="blog__card-title">{p.data.title}</h2>
+            <p class="blog__card-desc">{p.data.description}</p>
+            <span class="blog__more">{s.readMore} →</span>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </section>
+</Layout>
+
+<style>
+  .blog {
+    padding-top: 48px;
+    padding-bottom: 96px;
+    max-width: 56rem;
+  }
+  .blog__head {
+    margin-bottom: 40px;
+  }
+  .blog__title {
+    font-size: clamp(30px, 5vw, 44px);
+    font-weight: 600;
+    line-height: 1.08;
+    letter-spacing: -1.6px;
+    color: var(--color-ink);
+  }
+  .blog__lede {
+    margin-top: 16px;
+    max-width: 44rem;
+    font-size: 18px;
+    line-height: 28px;
+    color: var(--color-body);
+  }
+  .blog__list {
+    display: grid;
+    gap: 16px;
+  }
+  .blog__card {
+    display: block;
+    padding: 24px 28px;
+    border-radius: var(--radius-lg);
+    background: var(--color-canvas);
+    box-shadow: var(--shadow-e1);
+    border: 1px solid var(--color-hairline);
+    transition: box-shadow 0.15s ease, transform 100ms ease;
+  }
+  .blog__card:hover {
+    box-shadow: var(--shadow-e2);
+  }
+  .blog__card:active {
+    transform: scale(0.99);
+  }
+  .blog__date {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--color-mute);
+  }
+  .blog__card-title {
+    margin-top: 8px;
+    font-size: 22px;
+    font-weight: 600;
+    letter-spacing: -0.6px;
+    color: var(--color-ink);
+  }
+  .blog__card-desc {
+    margin-top: 8px;
+    font-size: 15px;
+    line-height: 24px;
+    color: var(--color-body);
+  }
+  .blog__more {
+    display: inline-block;
+    margin-top: 16px;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--color-ink);
+  }
+</style>

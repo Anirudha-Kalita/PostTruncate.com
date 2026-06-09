@@ -1,4 +1,6 @@
 import { execFileSync } from 'node:child_process';
+import { existsSync, readdirSync, readFileSync } from 'node:fs';
+import { join } from 'node:path';
 import { tools } from '../data/tools';
 import { LOCALES, DEFAULT_LOCALE } from '../i18n/config';
 import { toLastmodIso } from './contentDates';
@@ -33,6 +35,47 @@ export function buildToolLastmodByPath(): Map<string, string> {
     for (const locale of LOCALES) {
       const slug = tool.slugs[locale.code] ?? tool.slugs[DEFAULT_LOCALE];
       map.set(`/${locale.code}/${slug}/`, iso);
+    }
+  }
+  return map;
+}
+
+/**
+ * Map every published blog post pathname (/{locale}/blog/{slug}/) → lastmod ISO
+ * from its frontmatter (updatedDate, falling back to publishDate).
+ *
+ * astro.config.mjs runs before the content layer exists, so we can't use
+ * getCollection here — instead we read the Markdown files directly and parse
+ * the small set of frontmatter fields we need. Drafts are skipped.
+ */
+const BLOG_CONTENT_DIR = 'src/content/blog';
+
+function parseBlogFrontmatter(raw: string): Record<string, string> {
+  const match = raw.match(/^---\r?\n([\s\S]*?)\r?\n---/);
+  const fm: Record<string, string> = {};
+  if (!match) return fm;
+  for (const line of match[1].split(/\r?\n/)) {
+    const kv = line.match(/^(\w+):\s*(.*)$/);
+    if (kv) fm[kv[1]] = kv[2].trim().replace(/^["']|["']$/g, '');
+  }
+  return fm;
+}
+
+export function buildBlogLastmodByPath(): Map<string, string> {
+  const map = new Map<string, string>();
+  if (!existsSync(BLOG_CONTENT_DIR)) return map;
+
+  for (const entry of readdirSync(BLOG_CONTENT_DIR, { withFileTypes: true })) {
+    if (!entry.isDirectory()) continue; // each subfolder is a locale
+    const dir = join(BLOG_CONTENT_DIR, entry.name);
+    for (const file of readdirSync(dir)) {
+      if (!file.endsWith('.md')) continue;
+      const fm = parseBlogFrontmatter(readFileSync(join(dir, file), 'utf8'));
+      if (fm.draft === 'true') continue;
+      const locale = fm.locale || entry.name;
+      const date = fm.updatedDate || fm.publishDate;
+      if (!fm.slug || !date) continue;
+      map.set(`/${locale}/blog/${fm.slug}/`, toLastmodIso(date));
     }
   }
   return map;

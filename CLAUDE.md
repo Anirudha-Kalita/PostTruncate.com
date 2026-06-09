@@ -61,3 +61,8 @@ DESIGN.md             # Design system spec — read before touching styles
 - **NEVER run `git commit`, `git push`, or any git write/push command**
 - No backend; no environment variables (GA ID hardcoded in `layouts/Layout.astro`)
 - Node >=22.12.0 — do not downgrade dependencies
+
+### After any file edits
+
+- Always run 'npx astro sync' after modifying any source files, especially content collections, config, or component files. 
+

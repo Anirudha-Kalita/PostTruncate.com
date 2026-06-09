@@ -7,6 +7,7 @@ import { getLocale } from '../i18n/config';
 import { getTranslations } from '../i18n';
 import type { Translations } from '../i18n/types';
 import { tools } from '../data/tools';
+import { BLOG_SEGMENT, getBlogStrings, getBlogLocales } from '../lib/blogI18n';
 
 interface Props {
   lang: string;
@@ -21,6 +22,13 @@ const year = 2026;
 const locale = getLocale(lang);
 const images = getTranslations(lang).images;
 const home = `/${lang}/${locale.slug}/`;
+
+// Blog link — English-first, en-fallback label (same pattern as blogI18n.ts).
+// Only shown when this locale actually has a published post, mirroring the
+// "empty locales produce nothing" rule used by the blog routes themselves.
+const blogLink = (await getBlogLocales()).has(lang)
+  ? { label: getBlogStrings(lang).footerLink, href: `/${lang}/${BLOG_SEGMENT}/` }
+  : null;
 
 // Hrefs paired positionally with each column's translated labels. In-page
 // anchors resolve within the current language page, so they need no prefix.
@@ -45,13 +53,15 @@ const columnHrefs = {
 
 const columns = (
   ['tool', 'platforms', 'learn', 'legal'] as const
-).map((key) => ({
-  title: footer.columns[key].title,
-  links: footer.columns[key].links.map((label, i) => ({
+).map((key) => {
+  const links = footer.columns[key].links.map((label, i) => ({
     label,
     href: columnHrefs[key][i] ?? '#',
-  })),
-}));
+  }));
+  // The blog index lives under the "Learn" column when this locale has posts.
+  if (key === 'learn' && blogLink) links.push(blogLink);
+  return { title: footer.columns[key].title, links };
+});
 
 // Standalone (non-home) pages drop the in-page Tool/Platforms/Learn anchors
 // entirely — those sections only exist on the landing page. Only the Legal
@@ -129,6 +139,11 @@ const guidesLinks = tools.map((tool, i) => ({
               <a href={l.href} class="footer__link">{l.label}</a>
             ))}
           </nav>
+          {blogLink && (
+            <nav class="footer__link-row" aria-label={blogLink.label}>
+              <a href={blogLink.href} class="footer__link">{blogLink.label}</a>
+            </nav>
+          )}
         </div>
       </div>
     )

@@ -1,0 +1,144 @@
+---
+// ──────────────────────────────────────────────────────────────────────────
+// Reusable JSON-LD for the blog. The sibling StructuredData.astro owns the
+// tool/home schema (SoftwareApplication / FAQPage); this component owns the
+// blog shapes it doesn't cover, selected by `type`:
+//
+//   type="post"  → BlogPosting + BreadcrumbList
+//   type="index" → Blog (with its blogPost list)
+//
+// Meta tags (title, description, canonical, OG/Twitter, article times) are
+// emitted by Layout via its props — this component only adds structured data,
+// so the two never duplicate each other. Rendered through Layout's "head" slot.
+// ──────────────────────────────────────────────────────────────────────────
+const SITE = 'https://posttruncate.com';
+/** Site-wide social image used when a post has no ogImage of its own. */
+const DEFAULT_OG_IMAGE = `${SITE}/og.png`;
+
+export interface BlogCrumb {
+  /** Visible breadcrumb label. */
+  name: string;
+  /** Absolute URL the crumb links to. */
+  item: string;
+}
+
+export interface BlogIndexItem {
+  headline: string;
+  description: string;
+  /** ISO date-only (YYYY-MM-DD). */
+  datePublished: string;
+  /** Absolute URL of the post. */
+  url: string;
+}
+
+interface Props {
+  /** Which schema to emit. */
+  type: 'post' | 'index';
+  /** Canonical absolute URL of the page (post URL or blog index URL). */
+  url: string;
+  /** Post headline (type="post") or blog name (type="index"). */
+  name: string;
+  /** Meta description, reused verbatim as the schema description. */
+  description: string;
+  /** BCP-47 language tag (e.g. "en"). */
+  inLanguage: string;
+
+  // ── type="post" ──────────────────────────────────────────────────────
+  /** Author display name → Person. */
+  author?: string;
+  /** ISO date-only first-published date. */
+  datePublished?: string;
+  /** ISO date-only last-modified date (defaults to datePublished). */
+  dateModified?: string;
+  /** Absolute OG image URL; falls back to the site default when omitted. */
+  image?: string;
+  /** Ordered breadcrumb trail → BreadcrumbList. */
+  breadcrumbs?: BlogCrumb[];
+
+  // ── type="index" ─────────────────────────────────────────────────────
+  /** Listed posts, newest first → Blog.blogPost. */
+  posts?: BlogIndexItem[];
+}
+
+const {
+  type,
+  url,
+  name,
+  description,
+  inLanguage,
+  author,
+  datePublished,
+  dateModified,
+  image,
+  breadcrumbs = [],
+  posts = [],
+} = Astro.props;
+
+// Shared publisher node for every BlogPosting.
+const publisher = {
+  '@type': 'Organization',
+  name: 'PostTruncate',
+  logo: { '@type': 'ImageObject', url: `${SITE}/favicon-96x96.png` },
+};
+
+// ── BlogPosting — type="post" ─────────────────────────────────────────────
+const blogPosting =
+  type === 'post'
+    ? {
+        '@context': 'https://schema.org',
+        '@type': 'BlogPosting',
+        headline: name,
+        description,
+        inLanguage,
+        datePublished,
+        dateModified: dateModified ?? datePublished,
+        author: { '@type': 'Person', name: author },
+        publisher,
+        // ogImage with a site default fallback.
+        image: image ?? DEFAULT_OG_IMAGE,
+        mainEntityOfPage: { '@type': 'WebPage', '@id': url },
+      }
+    : null;
+
+// ── BreadcrumbList — type="post" ──────────────────────────────────────────
+const breadcrumbList =
+  type === 'post' && breadcrumbs.length > 0
+    ? {
+        '@context': 'https://schema.org',
+        '@type': 'BreadcrumbList',
+        itemListElement: breadcrumbs.map((crumb, i) => ({
+          '@type': 'ListItem',
+          position: i + 1,
+          name: crumb.name,
+          item: crumb.item,
+        })),
+      }
+    : null;
+
+// ── Blog — type="index" ───────────────────────────────────────────────────
+const blog =
+  type === 'index'
+    ? {
+        '@context': 'https://schema.org',
+        '@type': 'Blog',
+        name,
+        description,
+        inLanguage,
+        url,
+        blogPost: posts.map((p) => ({
+          '@type': 'BlogPosting',
+          headline: p.headline,
+          description: p.description,
+          datePublished: p.datePublished,
+          url: p.url,
+        })),
+      }
+    : null;
+
+const blocks = [blogPosting, breadcrumbList, blog].filter(Boolean);
+
+// Escape "</script>" / "<" injection vectors while keeping valid JSON.
+const stringify = (obj: unknown) => JSON.stringify(obj).replace(/</g, '\\u003c');
+---
+
+{blocks.map((block) => <script type="application/ld+json" set:html={stringify(block)} />)}

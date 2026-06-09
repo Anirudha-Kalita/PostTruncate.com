@@ -14,6 +14,7 @@ import { getTranslations } from '../i18n';
 import { interp } from '../i18n/interp';
 import { buildCanonicalSlugs, prepareToolContent } from '../lib/headingAnchors';
 import { formatLocaleDate } from '../lib/contentDates';
+import { BLOG_SEGMENT, getBlogStrings, getPublishedPosts } from '../lib/blogI18n';
 
 interface Props {
   tool: ToolDefinition;
@@ -68,6 +69,13 @@ const faqItems = tool.faq?.[lang] ?? [];
 // The locale-native faq block is the switch into the richer standalone template.
 const isStandalone = focus !== undefined && faqItems.length > 0;
 const crossPromo = globalT.toolPage.crossPromo;
+
+// Related blog posts for this platform, newest first. Only this locale's posts,
+// so untranslated locales (no posts yet) render nothing. English-only today.
+const blogStrings = getBlogStrings(lang);
+const relatedPosts = (await getPublishedPosts())
+  .filter((p) => p.data.locale === lang && p.data.relatedPlatform === tool.id)
+  .sort((a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf());
 ---
 
 {isStandalone ? (
@@ -85,6 +93,22 @@ const crossPromo = globalT.toolPage.crossPromo;
 
     <article class="tool-page__prose">
       <div class="tool-page__body" set:html={bodyHtml} />
+
+      {relatedPosts.length > 0 && (
+        <section class="tool-page__related" aria-label={blogStrings.relatedHeading}>
+          <h2 class="tool-page__related-heading">{blogStrings.relatedHeading}</h2>
+          <ul class="tool-page__related-list">
+            {relatedPosts.map((p) => (
+              <li>
+                <a class="tool-page__related-link" href={`/${lang}/${BLOG_SEGMENT}/${p.data.slug}/`}>
+                  <span class="tool-page__related-title">{p.data.title}</span>
+                  <span class="tool-page__related-desc">{p.data.description}</span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
 
       <section class="tool-page__faq" aria-label={globalT.faq.title}>
         <h2 class="tool-page__faq-heading">{globalT.faq.title}</h2>
@@ -123,6 +147,22 @@ const crossPromo = globalT.toolPage.crossPromo;
 
     <article class="tool-page__prose">
       <div class="tool-page__body" set:html={bodyHtml} />
+
+      {relatedPosts.length > 0 && (
+        <section class="tool-page__related" aria-label={blogStrings.relatedHeading}>
+          <h2 class="tool-page__related-heading">{blogStrings.relatedHeading}</h2>
+          <ul class="tool-page__related-list">
+            {relatedPosts.map((p) => (
+              <li>
+                <a class="tool-page__related-link" href={`/${lang}/${BLOG_SEGMENT}/${p.data.slug}/`}>
+                  <span class="tool-page__related-title">{p.data.title}</span>
+                  <span class="tool-page__related-desc">{p.data.description}</span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
 
       <p class="tool-page__updated">{lastUpdatedLine}</p>
 
@@ -320,6 +360,60 @@ const crossPromo = globalT.toolPage.crossPromo;
     padding: 0 20px 18px;
     font-size: 15px;
     line-height: 24px;
+    color: var(--color-body);
+  }
+
+  /* ── Related blog posts ─────────────────────────────────────────────────── */
+  .tool-page__related {
+    margin-top: 48px;
+    padding-top: 32px;
+    border-top: 1px solid var(--color-hairline);
+  }
+
+  .tool-page__related-heading {
+    font-size: 20px;
+    font-weight: 600;
+    letter-spacing: -0.6px;
+    color: var(--color-ink);
+    margin-bottom: 16px;
+  }
+
+  .tool-page__related-list {
+    display: grid;
+    gap: 12px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .tool-page__related-link {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 16px 18px;
+    border-radius: var(--radius-lg);
+    background: var(--color-canvas);
+    box-shadow: var(--shadow-e1);
+    transition: box-shadow 0.15s ease, transform 100ms ease;
+  }
+
+  .tool-page__related-link:hover {
+    box-shadow: var(--shadow-e2);
+  }
+
+  .tool-page__related-link:active {
+    transform: scale(0.99);
+  }
+
+  .tool-page__related-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--color-ink);
+  }
+
+  .tool-page__related-desc {
+    font-size: 14px;
+    line-height: 20px;
     color: var(--color-body);
   }
 

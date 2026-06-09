@@ -1,0 +1,28 @@
+---
+// Sveltia CMS entry point, served at /admin/ — deliberately OUTSIDE the [lang]
+// i18n routing (no locale prefix). It's a thin loader: the CMS is a client-side
+// SPA that reads its config from /admin/config.yml (a static file in public/).
+//
+// • noindex/nofollow so search engines never list the admin UI.
+// • Excluded from the sitemap via a filter rule in astro.config.mjs.
+// • No site Layout (no nav/footer) — the CMS owns the whole viewport.
+export const prerender = true;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>Content Manager · PostTruncate</title>
+  </head>
+  <body>
+    <!-- is:inline so Astro doesn't bundle/transform the external CMS module.
+         Sveltia auto-loads ./config.yml (i.e. /admin/config.yml). -->
+    <script
+      is:inline
+      type="module"
+      src="https://unpkg.com/@sveltia/cms/dist/sveltia-cms.js"></script>
+  </body>
+</html>

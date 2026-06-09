@@ -8,8 +8,10 @@ import { LOCALES, LOCALE_CODES, DEFAULT_LOCALE } from './src/i18n/config.ts';
 import { tools } from './src/data/tools.ts';
 import {
   buildToolLastmodByPath,
+  buildBlogLastmodByPath,
   resolveSitemapLastmod,
 } from './src/lib/sitemapLastmod.ts';
+import { remarkVideoEmbed } from './src/lib/remarkVideoEmbed.ts';
 
 // ── Build a reverse look-up: given a URL pathname, resolve the tool + locale
 //    so the serialize hook can emit the correct hreflang alternates even when
@@ -40,6 +42,8 @@ const homepageSlugs = new Set(LOCALES.map((l) => `/${l.code}/${l.slug}/`));
 
 // Per-URL lastmod: tool pages from tools.ts; static routes from git history.
 const toolLastmodByPath = buildToolLastmodByPath();
+// Blog post lastmod from each post's frontmatter (updatedDate ?? publishDate).
+const blogLastmodByPath = buildBlogLastmodByPath();
 
 // https://astro.build/config
 // Default static (SSG) output: informational copy + platform guides are
@@ -57,6 +61,11 @@ export default defineConfig({
       prefixDefaultLocale: true,
       redirectToDefaultLocale: false,
     },
+  },
+  // Blog (.md) authors embed video by pasting a YouTube/Vimeo URL on its own
+  // line; this remark plugin rewrites it to a responsive, lazy-loaded iframe.
+  markdown: {
+    remarkPlugins: [remarkVideoEmbed],
   },
   adapter: cloudflare(),
   integrations: [
@@ -88,6 +97,10 @@ export default defineConfig({
         if (pathname === '/') return false;
         if (/\/(404|500)\/?$/.test(pathname)) return false;
         if (/\/[a-z]{2}\/embed\/?$/.test(pathname)) return false;
+        // Drop the RSS feed endpoint — it's a feed, not an indexable page.
+        if (/\/blog\/rss\.xml$/.test(pathname)) return false;
+        // Drop the CMS admin entry — noindex, not a public page.
+        if (/^\/admin\/?$/.test(pathname)) return false;
         // Drop slug-nested /en/character-counter/about|contact|privacy|terms/
         if (/\/[a-z]{2}\/[^/]+\/(about|contact|privacy|terms)\/?$/.test(pathname)) return false;
         return true;
@@ -124,6 +137,14 @@ export default defineConfig({
           ];
           item.lastmod = resolveSitemapLastmod(pathname, toolLastmodByPath, homepageSlugs);
           item.priority = 1.0;
+          return item;
+        }
+
+        // ── Blog posts: lastmod from the post's frontmatter date ──
+        const blogLastmod = blogLastmodByPath.get(pathname);
+        if (blogLastmod) {
+          item.lastmod = blogLastmod;
+          item.priority = 0.7;
           return item;
         }
 
