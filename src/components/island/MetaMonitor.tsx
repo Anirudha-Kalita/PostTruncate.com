@@ -152,7 +152,6 @@ export function MetaMonitor({ text, lang, s, toolLinkHref, facebookToolLinkHref,
               <Engagement icon="share" size={20} />
             </div>
             <p class="mt-2 min-h-[42px] whitespace-pre-wrap break-words text-[14px] leading-[21px] text-ink">
-              <span class="font-semibold text-ink">{author.handle} </span>
               {instagramPreview.previewText}
               {instagramPreview.isTruncated && (
                 <span class="text-slate-400">{s.linkedin.seeMore}</span>
