@@ -81,6 +81,21 @@
   /* ── Container ─────────────────────────────────────────────────── */
   --max-width-page: 1200px;
   --max-width-page-wide: 1400px;
+
+  /* ── Layout rhythm (Phase 0 — additive) ────────────────────────────
+     Formalizes the page's de-facto 96/64/48/32 vertical scale and the
+     ad-hoc content measures (960px lists, 56rem prose, 760px stacks)
+     into named tokens. The --spacing-* names also surface as Tailwind
+     utilities (pt-section, gap-stack, …) for the islands. */
+  --spacing-section: 96px;
+  --spacing-section-sm: 64px;
+  --spacing-flow: 48px;
+  --spacing-flow-sm: 32px;
+  --spacing-stack: 20px;
+  --spacing-stack-sm: 12px;
+  --max-width-content: 960px;
+  --max-width-prose: 56rem;
+  --max-width-narrow: 760px;
 }
 
 /* ──────────────────────────────────────────────────────────────────────────

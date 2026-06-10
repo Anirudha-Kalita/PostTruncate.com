@@ -1,0 +1,335 @@
+---
+/**
+ * HeroPreviewCard — the hero's illustrative visual. A generic social-post
+ * card mid-truncation: placeholder header + body bars, the brand-blue
+ * "…see more" label, a dashed brand-blue fold line, and dimmed bars below
+ * the fold ("this content exists but is hidden"). Small platform-logo
+ * chips orbit the card in their real brand colors.
+ *
+ * Pure HTML/CSS/SVG — crisp on retina, dark mode rides the token swap.
+ * Decorative: exposed to assistive tech as one labelled image, never as
+ * individual placeholder bars.
+ */
+interface Props {
+  /** Translated "…see more" label (e.g. t.island.linkedin.seeMore). */
+  seeMoreLabel: string;
+  /** Concise description of the illustration for assistive tech. */
+  ariaLabel: string;
+}
+
+const { seeMoreLabel, ariaLabel } = Astro.props;
+
+// Brand logos as inline SVG path data (hand-built, Simple Icons-style
+// geometry — not fetched from platform sites). Instagram carries its own
+// gradient def with a hero-unique id so it can't collide with the guides
+// section's copy of the mark.
+const LOGOS = [
+  {
+    key: 'linkedin',
+    svg: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.34V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0z"/></svg>',
+  },
+  {
+    key: 'x',
+    svg: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>',
+  },
+  {
+    key: 'instagram',
+    svg: '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2.6" y="2.6" width="18.8" height="18.8" rx="5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="17.2" cy="6.8" r="1.2"/></svg>',
+  },
+  {
+    key: 'facebook',
+    svg: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M24 12.07C24 5.4 18.63 0 12 0S0 5.4 0 12.07c0 6.02 4.39 11.01 10.13 11.93v-8.44H7.08v-3.49h3.05V9.41c0-3.02 1.79-4.69 4.53-4.69 1.31 0 2.69.24 2.69.24v2.97h-1.51c-1.49 0-1.96.93-1.96 1.89v2.25h3.33l-.53 3.49h-2.8v8.44C19.61 23.08 24 18.09 24 12.07z"/></svg>',
+  },
+  {
+    key: 'threads',
+    svg: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12.186 24h-.007c-3.581-.024-6.334-1.205-8.184-3.509C2.35 18.44 1.5 15.586 1.472 12.01v-.017c.03-3.579.879-6.43 2.525-8.482C5.845 1.205 8.6.024 12.18 0h.014c2.746.02 5.043.725 6.826 2.098 1.677 1.291 2.858 3.13 3.509 5.467l-2.04.569c-1.104-3.96-3.898-5.984-8.304-6.015-2.91.022-5.11.936-6.54 2.717C4.307 6.504 3.616 8.914 3.589 12c.027 3.086.718 5.496 2.057 7.164 1.43 1.781 3.631 2.695 6.54 2.717 2.623-.02 4.358-.631 5.8-2.045 1.647-1.613 1.618-3.593 1.09-4.798-.31-.71-.873-1.3-1.634-1.75-.192 1.352-.622 2.446-1.284 3.272-.886 1.102-2.14 1.704-3.73 1.79-1.202.065-2.36-.218-3.259-.801-1.063-.689-1.685-1.74-1.752-2.964-.065-1.19.408-2.285 1.33-3.082.88-.76 2.119-1.207 3.583-1.291a13.853 13.853 0 0 1 3.02.142c-.126-.742-.375-1.332-.75-1.757-.513-.586-1.308-.883-2.359-.89h-.029c-.844 0-1.992.232-2.721 1.32L7.734 7.847c.98-1.454 2.568-2.256 4.478-2.256h.044c3.194.02 5.097 1.975 5.287 5.388.108.046.216.094.32.142 1.49.7 2.58 1.761 3.154 3.07.797 1.82.871 4.79-1.548 7.158-1.85 1.81-4.094 2.628-7.277 2.65Zm1.235-11.587c-.336 0-.679.01-1.024.029-1.838.103-2.978.95-2.913 2.122.063 1.235 1.435 1.81 2.756 1.737 1.211-.066 2.79-.534 3.058-3.71-.59-.124-1.215-.181-1.876-.181Z"/></svg>',
+  },
+  {
+    key: 'sms',
+    svg: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.5c-5 0-9 3.2-9 7.2 0 2.2 1.2 4.1 3.1 5.4L5 20.5l3.8-1.6c1 .3 2.1.4 3.2.4 5 0 9-3.2 9-7.1s-4-7.2-9-7.2z"/></svg>',
+  },
+] as const;
+
+// ── Orbit arc geometry ──────────────────────────────────────────────────
+// The badges sit on the right-hand arc of an invisible circle centered on
+// the card: a 150° sweep from near 12 o'clock, through 3, to near 6 — six
+// badges at equal 30° angular steps. Positions are computed with trig as
+// percentages of the card box (the .hpc__orbit overlay mirrors the card),
+// with the horizontal/vertical radii tuned so the arc hugs the card's
+// proportions and bulges just past its right edge.
+const ARC_START_DEG = -75;
+const ARC_STEP_DEG = 30;
+const ARC_RX = 60; // % of card width  → x extreme = 110% (just outside)
+const ARC_RY = 58; // % of card height → top/bottom badges float past edges
+
+const ARC = LOGOS.map((logo, i) => {
+  const a = ((ARC_START_DEG + i * ARC_STEP_DEG) * Math.PI) / 180;
+  return {
+    ...logo,
+    x: 50 + ARC_RX * Math.cos(a),
+    y: 50 + ARC_RY * Math.sin(a),
+  };
+});
+
+// Faint dashed guide tracing the same arc (drawn in the 100×100 card space).
+const ARC_PATH = `M ${ARC[0].x.toFixed(1)} ${ARC[0].y.toFixed(1)} A ${ARC_RX} ${ARC_RY} 0 0 1 ${ARC[ARC.length - 1].x.toFixed(1)} ${ARC[ARC.length - 1].y.toFixed(1)}`;
+---
+
+<div class="hpc" role="img" aria-label={ariaLabel}>
+  <!-- faint decorative accents: dashed swirl + dots, echoing the mockup -->
+  <svg class="hpc__swirl" viewBox="0 0 64 96" fill="none" aria-hidden="true">
+    <path
+      d="M56 6C24 18 8 40 16 62c6 17 26 24 40 18"
+      stroke="currentColor"
+      stroke-width="1.5"
+      stroke-dasharray="4 5"
+      stroke-linecap="round"></path>
+  </svg>
+  <span class="hpc__dot hpc__dot--1"></span>
+  <span class="hpc__dot hpc__dot--2"></span>
+
+  <!-- the post card -->
+  <div class="hpc__card">
+    <div class="hpc__head">
+      <span class="hpc__avatar"></span>
+      <span class="hpc__meta">
+        <span class="hpc__bar hpc__bar--name"></span>
+        <span class="hpc__bar hpc__bar--handle"></span>
+      </span>
+    </div>
+    <div class="hpc__body">
+      <span class="hpc__bar hpc__bar--w100"></span>
+      <span class="hpc__bar hpc__bar--w96"></span>
+      <span class="hpc__bar hpc__bar--w90"></span>
+      <span class="hpc__fold-line">
+        <span class="hpc__bar hpc__bar--w58"></span>
+        <span class="hpc__more">{seeMoreLabel}</span>
+      </span>
+      <span class="hpc__cut"></span>
+      <span class="hpc__bar hpc__bar--ghost hpc__bar--w92"></span>
+      <span class="hpc__bar hpc__bar--ghost hpc__bar--w55"></span>
+    </div>
+  </div>
+
+  <!-- orbiting platform badges — on the arc (desktop) or an even row
+       beneath the card (mobile). Placed after the card in the DOM so the
+       mobile flex row flows naturally below it. -->
+  <div class="hpc__orbit" aria-hidden="true">
+    <svg class="hpc__orbit-path" viewBox="0 0 100 100" preserveAspectRatio="none" fill="none">
+      <path
+        d={ARC_PATH}
+        stroke="currentColor"
+        stroke-width="1"
+        stroke-dasharray="3 5"
+        stroke-linecap="round"
+        vector-effect="non-scaling-stroke"></path>
+    </svg>
+    {ARC.map((l) => (
+      <span
+        class={`hpc__logo hpc__logo--${l.key}`}
+        style={`left: ${l.x.toFixed(2)}%; top: ${l.y.toFixed(2)}%;`}
+        set:html={l.svg}
+      />
+    ))}
+  </div>
+</div>
+
+<style>
+  .hpc {
+    position: relative;
+    width: min(100%, 480px);
+    margin-inline: auto;
+    /* breathing room for the arc: badges crest above, sweep past the
+       right edge, and dip below the card */
+    padding: 56px 72px 48px 24px;
+  }
+
+  /* ── Card ─────────────────────────────────────────────────────────── */
+  .hpc__card {
+    position: relative;
+    border-radius: var(--radius-xl);
+    background: var(--color-canvas);
+    box-shadow: var(--shadow-e3);
+    padding: 24px;
+    text-align: left;
+  }
+  .hpc__head {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .hpc__avatar {
+    flex-shrink: 0;
+    width: 40px;
+    height: 40px;
+    border-radius: var(--radius-pill);
+    background: var(--color-canvas-soft-2);
+    box-shadow: inset 0 0 0 1px var(--color-hairline);
+  }
+  .hpc__meta {
+    display: grid;
+    gap: 6px;
+  }
+
+  /* Placeholder "text" bars — never real words. */
+  .hpc__bar {
+    display: block;
+    height: 10px;
+    border-radius: var(--radius-pill);
+    background: var(--color-hairline-strong);
+    opacity: 0.5;
+  }
+  .hpc__bar--name   { width: 120px; }
+  .hpc__bar--handle { width: 80px; height: 9px; opacity: 0.28; }
+  .hpc__bar--w100 { width: 100%; }
+  .hpc__bar--w96  { width: 96%; }
+  .hpc__bar--w92  { width: 92%; }
+  .hpc__bar--w90  { width: 90%; }
+  .hpc__bar--w58  { width: 58%; }
+  .hpc__bar--w55  { width: 55%; }
+  /* Below-the-fold content: present, but clearly hidden from viewers. */
+  .hpc__bar--ghost { opacity: 0.18; }
+
+  .hpc__body {
+    display: grid;
+    gap: 12px;
+    margin-top: 18px;
+  }
+
+  /* ── The fold — the focal point ───────────────────────────────────── */
+  .hpc__fold-line {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .hpc__more {
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1;
+    color: var(--color-link);
+    white-space: nowrap;
+  }
+  .hpc__cut {
+    display: block;
+    border-top: 1.5px dashed var(--color-link);
+    margin-block: 2px;
+  }
+
+  /* ── Orbit layer — mirrors the card's box; badges sit at the trig-
+        computed arc points (inline left/top %), centered on each point. ── */
+  .hpc__orbit {
+    position: absolute;
+    inset: 56px 72px 48px 24px; /* = .hpc padding → same box as the card */
+    pointer-events: none;
+  }
+  .hpc__orbit-path {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+    color: var(--color-link);
+    opacity: 0.25;
+  }
+  .hpc__logo {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border-radius: var(--radius-pill);
+    color: #ffffff;
+    box-shadow: var(--shadow-e3);
+  }
+  .hpc__logo :global(svg) {
+    display: block;
+    width: 20px;
+    height: 20px;
+    fill: currentColor;
+  }
+  /* Brand badge fills — the one place platform color is appropriate. */
+  .hpc__logo--linkedin  { background: #0a66c2; }
+  .hpc__logo--x         { background: #000000; }
+  .hpc__logo--instagram {
+    background: linear-gradient(45deg, #feda75 0%, #fa7e1e 25%, #d62976 50%, #962fbf 75%, #4f5bd5 100%);
+  }
+  .hpc__logo--facebook  { background: #1877f2; }
+  .hpc__logo--threads   { background: #101010; }
+  .hpc__logo--sms       { background: #34c759; }
+
+  /* ── Faint accents (left gutter, like the mockup's dashed swirl) ──── */
+  .hpc__swirl {
+    position: absolute;
+    left: -10px;
+    top: 32%;
+    width: 64px;
+    color: var(--color-link);
+    opacity: 0.35;
+    pointer-events: none;
+  }
+  .hpc__dot {
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    border-radius: var(--radius-pill);
+    background: var(--color-link);
+    opacity: 0.25;
+  }
+  .hpc__dot--1 { top: 24%; left: 4px; }
+  .hpc__dot--2 { bottom: 10%; left: 30%; opacity: 0.18; }
+
+  /* ── Tablet/narrow — pull the arc in so it stays beside the card ──── */
+  @media (max-width: 700px) and (min-width: 521px) {
+    .hpc {
+      padding: 48px 60px 40px 16px;
+    }
+    .hpc__orbit {
+      inset: 48px 60px 40px 16px;
+    }
+    .hpc__logo {
+      width: 40px;
+      height: 40px;
+    }
+    .hpc__logo :global(svg) {
+      width: 18px;
+      height: 18px;
+    }
+  }
+
+  /* ── Mobile (stacked layout) — the vertical arc doesn't work, so the
+        badges collapse into one even horizontal row beneath the card.
+        left/top from the arc math are ignored once position is static. ── */
+  @media (max-width: 520px) {
+    .hpc {
+      padding: 16px 12px 0;
+    }
+    .hpc__card {
+      padding: 20px;
+    }
+    .hpc__orbit {
+      position: static;
+      inset: auto;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 12px;
+      margin-top: 16px;
+    }
+    .hpc__orbit-path {
+      display: none;
+    }
+    .hpc__logo {
+      position: static;
+      transform: none;
+      width: 38px;
+      height: 38px;
+    }
+    .hpc__logo :global(svg) {
+      width: 17px;
+      height: 17px;
+    }
+    .hpc__swirl { width: 48px; left: -6px; }
+  }
+</style>

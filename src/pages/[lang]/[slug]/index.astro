@@ -8,8 +8,8 @@ import { interp } from '../../../i18n/interp';
 import { LOCALES, getLocale } from '../../../i18n/config';
 import { tools } from '../../../data/tools';
 import PlatformBanner from '../../../components/PlatformBanner.astro';
-import TrustBar from '../../../components/TrustBar.astro';
 import HowItWorks from '../../../components/HowItWorks.astro';
+import HeroPreviewCard from '../../../components/HeroPreviewCard.astro';
 
 // One statically-rendered landing page per locale at the keyword-rich slug
 // (/en/character-counter/, /de/zeichenzaehler/, …). Slug values come from the
@@ -136,23 +136,34 @@ const howToSchema = {
     textTemplate={t.banner.text}
     closeLabel={t.banner.close}
   />
-  <!-- ── Hero ─────────────────────────────────────────────────────────── -->
+  <!-- ── Hero ──────────────────────────────────────────────────────────
+       Calm two-column hero. Left: H1 → lede → one primary CTA + one quiet
+       text link → muted trust line. Right: an illustrative post-preview
+       card showing text cut at the "…see more" fold, with small brand-logo
+       chips orbiting it. The visual is one labelled image for assistive
+       tech (role="img"); its strings reuse translated island labels so no
+       new i18n keys are needed. Stacks copy-first on mobile. -->
   <section class="hero">
     <div class="hero__mesh mesh-gradient" aria-hidden="true"></div>
     <div class="container-page hero__inner">
-      <p class="hero__eyebrow">{t.hero.eyebrow}</p>
-      <h1 class="hero__title">{t.hero.title}</h1>
-      <p class="hero__lede">{t.hero.lede}</p>
-      <div class="hero__cta">
-        <a href="#workspace" class="hero__primary">{t.hero.primary}</a>
-        <a href="#platforms" class="hero__secondary">{t.hero.secondary}</a>
-        <a href={`/${lang}/embed-widget/`} class="hero__tertiary">{t.embedWidget.homepageLinkLabel}</a>
+      <div class="hero__copy">
+        <h1 class="hero__title">{t.hero.title}</h1>
+        <p class="hero__lede">{t.hero.lede}</p>
+        <div class="hero__cta">
+          <a href="#workspace" class="hero__primary">{t.hero.primary}</a>
+          <a href="#platforms" class="hero__secondary">{t.hero.secondary}</a>
+        </div>
+        <p class="hero__trust">
+          100% free — no sign-up · Text never leaves your browser · 10+ platform limits covered
+        </p>
       </div>
+
+      <HeroPreviewCard
+        seeMoreLabel={t.island.linkedin.seeMore}
+        ariaLabel={t.island.hook.foldAria}
+      />
     </div>
   </section>
-
-  <!-- ── Trust bar ─────────────────────────────────────────────────────── -->
-  <TrustBar />
 
   <!-- ── Top leaderboard ad (reserved height → 0 CLS) ─────────────────── -->
   <div class="container-page mt-8">
@@ -358,95 +369,111 @@ const howToSchema = {
     position: absolute;
     inset: -40% 0 auto 0;
     height: 130%;
-    opacity: 0.16;
+    /* Toned down from 0.16 — the calm hero keeps the brand mesh as a
+       whisper rather than a wash. */
+    opacity: 0.08;
     filter: blur(8px);
     pointer-events: none;
   }
   .hero__inner {
     position: relative;
-    padding-top: 88px;
-    padding-bottom: 72px;
+    display: grid;
+    align-items: center;
+    gap: var(--spacing-flow);
+    padding-top: var(--spacing-section);
+    padding-bottom: var(--spacing-section);
+    /* Mobile-first: centered single column; the ≥1024px block below
+       switches to the two-column editorial layout. */
     text-align: center;
   }
-  .hero__eyebrow {
-    font-family: var(--font-mono);
-    font-size: 12px;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-    color: var(--color-mute);
-  }
   .hero__title {
-    margin: 16px auto 0;
-    max-width: 760px;
-    font-size: clamp(34px, 6vw, 56px);
+    margin-inline: auto;
+    max-width: var(--max-width-narrow);
+    font-size: clamp(34px, 4.8vw, 52px);
     font-weight: 600;
-    line-height: 1.02;
-    letter-spacing: -2.4px;
+    line-height: 1.04;
+    /* em-based so the signature tight tracking scales with the clamp. */
+    letter-spacing: -0.042em;
     color: var(--color-ink);
   }
   .hero__lede {
-    margin: 20px auto 0;
+    margin: 24px auto 0;
     max-width: 600px;
     font-size: 18px;
     line-height: 28px;
     color: var(--color-body);
   }
   .hero__cta {
-    margin-top: 32px;
+    margin-top: var(--spacing-flow-sm);
     display: flex;
     flex-wrap: wrap;
+    align-items: center;
     justify-content: center;
-    gap: 12px;
+    gap: 16px;
   }
-  .hero__primary,
-  .hero__secondary,
-  .hero__tertiary {
+  .hero__primary {
     display: inline-flex;
     align-items: center;
     height: 48px;
-    padding: 0 24px;
+    padding: 0 28px;
     border-radius: var(--radius-pill);
     font-size: 16px;
     font-weight: 500;
-    transition: transform 100ms ease, opacity 0.15s ease, background 0.15s ease,
-      box-shadow 0.15s ease;
-  }
-  .hero__primary {
-    background: var(--color-ink);
+    /* bg link / text on-primary flips to bright-blue + dark text in dark
+       mode automatically, keeping AA contrast in both themes. */
+    background: var(--color-link);
     color: var(--color-on-primary);
+    transition: transform 100ms ease, background 0.15s ease;
   }
   .hero__primary:hover {
-    opacity: 0.88;
+    background: var(--color-link-deep);
   }
   .hero__primary:active {
     transform: scale(0.955);
-    opacity: 0.82;
+  }
+  .hero__primary:focus-visible {
+    /* Global ring is link-blue — invisible against this blue pill. */
+    outline-color: var(--color-ink);
   }
   .hero__secondary {
-    background: var(--color-canvas);
-    color: var(--color-ink);
-    box-shadow: var(--shadow-e1);
+    display: inline-flex;
+    align-items: center;
+    height: 48px;
+    padding: 0 8px;
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--color-body);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    transition: transform 100ms ease, color 0.15s ease;
   }
   .hero__secondary:hover {
-    background: var(--color-canvas-soft-2);
-  }
-  .hero__secondary:active {
-    transform: scale(0.955);
-    box-shadow: var(--shadow-e1);
-    background: var(--color-canvas-soft-2);
-  }
-  .hero__tertiary {
-    background: transparent;
-    color: var(--color-body);
-    font-size: 14px;
-    height: 40px;
-    padding: 0 12px;
-  }
-  .hero__tertiary:hover {
     color: var(--color-ink);
   }
-  .hero__tertiary:active {
+  .hero__secondary:active {
     transform: scale(0.96);
+  }
+  .hero__trust {
+    margin-top: var(--spacing-stack);
+    font-size: 13px;
+    line-height: 20px;
+    color: var(--color-mute);
+  }
+
+  /* ── Two-column editorial layout — text left, preview card right ──── */
+  @media (min-width: 1024px) {
+    .hero__inner {
+      grid-template-columns: minmax(0, 1.08fr) minmax(0, 0.92fr);
+      gap: var(--spacing-section-sm);
+      text-align: left;
+    }
+    .hero__title,
+    .hero__lede {
+      margin-inline: 0;
+    }
+    .hero__cta {
+      justify-content: flex-start;
+    }
   }
 
   /* ── Workspace ──────────────────────────────────────────────────────── */
@@ -783,8 +810,8 @@ const howToSchema = {
      separated by a screenful of dead space on smaller viewports. */
   @media (max-width: 768px) {
     .hero__inner {
-      padding-top: 56px;
-      padding-bottom: 48px;
+      padding-top: var(--spacing-section-sm);
+      padding-bottom: var(--spacing-section-sm);
     }
     .workspace {
       padding-top: 36px;
@@ -838,8 +865,8 @@ const howToSchema = {
   :global(html[data-theme='dark']) .guide[data-brand='threads'] {
     --guide-brand: #ffffff;
   }
-  /* Bright mesh stops read as washed-out at 0.16 over near-black; lift them. */
+  /* Bright mesh stops need a lift over near-black, but stay a whisper. */
   :global(html[data-theme='dark']) .hero__mesh {
-    opacity: 0.3;
+    opacity: 0.16;
   }
 </style>
