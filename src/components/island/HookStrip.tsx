@@ -160,10 +160,7 @@ export function HookStrip({ text, lang, s, views, limitsHref }: Props) {
               <HookStatusIcon status={c.icon} size={13} />
               {c.label}
             </Badge>
-            <p class="text-[11px] leading-4 text-body">{c.reason}</p>
-            <p class="mt-auto font-mono text-[11px] leading-4 text-mute tabular-nums">
-              {interp(h.chars, { n: nf.format(total) })}
-            </p>
+            <p class="mt-auto text-[12px] leading-[18px] text-body">{c.reason}</p>
           </div>
         ))}
 
@@ -182,11 +179,8 @@ export function HookStrip({ text, lang, s, views, limitsHref }: Props) {
             <HookStatusIcon status={sms.parts > 1 ? 'warn' : 'pass'} size={13} />
             {interp(h.smsNeeded, { n: nf.format(Math.max(1, sms.parts)) })}
           </Badge>
-          <p class="text-[11px] leading-4 text-body">
+          <p class="mt-auto text-[12px] leading-[18px] text-body">
             {interp(h.perSms, { n: nf.format(sms.multipartLimit) })}
-          </p>
-          <p class="mt-auto font-mono text-[11px] leading-4 text-mute tabular-nums">
-            {interp(h.chars, { n: nf.format(total) })}
           </p>
         </div>
       </div>
