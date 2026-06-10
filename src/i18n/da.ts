@@ -572,6 +572,16 @@ export const da: Translations = {
       clear: 'Ryd editor',
       hiddenWarning:
         'Fandt usynlige tegn, der bryder tællinger og skærmlæsere: {codes}. Rens for at fjerne dem.',
+      statusLine: 'Realtidsanalyse er slået til',
+    },
+    previewPanel: {
+      title: 'Live platform-forhåndsvisning',
+      tabAria: '{platform}-forhåndsvisning',
+      compareAll: 'Sammenlign alle',
+    },
+    insights: {
+      title: 'Avanceret indsigt',
+      sub: 'Skriveanalyse, læsbarhed, nøgleord og mere',
     },
     common: {
       displayName: 'Dit navn',

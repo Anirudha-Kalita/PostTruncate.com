@@ -11,6 +11,8 @@ import type { HookPlatform } from '../../lib/hookAnalysis';
 import type { FoldView } from '../../lib/textTools';
 import { SmsCounter } from './SmsCounter';
 import { ReadabilityCard } from './ReadabilityCard';
+import { BrandLogo, type Brand } from './ui';
+import { interp } from '../../i18n/interp';
 import type { IslandStrings } from '../../i18n/types';
 
 /** Platforms a standalone tool page can scope the editor to. */
@@ -72,6 +74,20 @@ const FOCUS_TO_HOOK: Partial<Record<FocusPlatform, HookPlatform>> = {
   threads: 'threads',
 };
 
+/**
+ * Homepage single-preview switcher tabs, in display order. Brand names are
+ * proper nouns (never localized); `brand` keys into the shared BrandLogo
+ * glyphs, with SMS drawing its own bubble below.
+ */
+const PREVIEW_TABS: { id: FocusPlatform; name: string; brand?: Brand }[] = [
+  { id: 'linkedin', name: 'LinkedIn', brand: 'linkedin' },
+  { id: 'twitter', name: 'X', brand: 'x' },
+  { id: 'instagram', name: 'Instagram', brand: 'instagram' },
+  { id: 'facebook', name: 'Facebook', brand: 'facebook' },
+  { id: 'threads', name: 'Threads', brand: 'threads' },
+  { id: 'sms', name: 'SMS' },
+];
+
 
 function readActiveDraft() {
   if (typeof window === 'undefined') return '';
@@ -99,6 +115,25 @@ export default function Dashboard({ lang, strings, toolSlugs, focus }: Props) {
   const [isDraftLoaded, setIsDraftLoaded] = useState(false);
   const [cardOrder, setCardOrder] = useState<CardKey[]>(DEFAULT_ORDER);
   const [metaPriority, setMetaPriority] = useState<'facebook' | undefined>(undefined);
+  // Homepage preview switcher: which single platform renders, or compare-all.
+  // Pure display selection — every platform result is computed by the same
+  // existing components; this only chooses which one is mounted.
+  const [previewTab, setPreviewTab] = useState<FocusPlatform>('linkedin');
+  const [compare, setCompare] = useState(false);
+
+  /** Roving-tabindex arrow-key navigation for the platform tablist. */
+  const onTabKey = (e: KeyboardEvent, i: number) => {
+    let next = -1;
+    if (e.key === 'ArrowRight') next = (i + 1) % PREVIEW_TABS.length;
+    else if (e.key === 'ArrowLeft') next = (i - 1 + PREVIEW_TABS.length) % PREVIEW_TABS.length;
+    else if (e.key === 'Home') next = 0;
+    else if (e.key === 'End') next = PREVIEW_TABS.length - 1;
+    if (next < 0) return;
+    e.preventDefault();
+    setPreviewTab(PREVIEW_TABS[next].id);
+    setCompare(false);
+    document.getElementById(`platform-tab-${PREVIEW_TABS[next].id}`)?.focus();
+  };
 
   useLayoutEffect(() => {
     // Scoped pages pin their card via the `focus` prop, so the ?platform=
@@ -108,6 +143,7 @@ export default function Dashboard({ lang, strings, toolSlugs, focus }: Props) {
     if (platform && PLATFORM_TO_CARD[platform]) {
       const key = PLATFORM_TO_CARD[platform];
       setCardOrder([key, ...DEFAULT_ORDER.filter(k => k !== key)]);
+      setPreviewTab(platform as FocusPlatform);
       if (platform === 'facebook') setMetaPriority('facebook');
     }
   }, [focus]);
@@ -152,45 +188,211 @@ export default function Dashboard({ lang, strings, toolSlugs, focus }: Props) {
     return () => window.clearTimeout(id);
   }, [isDraftLoaded, text]);
 
+  // ── Scoped tool pages — original layout, byte-for-byte behavior ──────────
+  if (focus) {
+    return (
+      <div class="grid grid-cols-1 gap-5 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)]">
+        <div class="flex flex-col gap-5">
+          <Workspace text={text} setText={setText} lang={lang} s={strings} />
+
+          {!text && (
+            <button
+              type="button"
+              onClick={() => setText(strings.dashboard.samples[focus])}
+              class="self-start rounded-pill border border-transparent bg-link px-3.5 py-2 text-[13px] font-medium text-on-primary transition-[transform,background] duration-100 hover:bg-link-deep active:scale-[0.96]"
+            >
+              {strings.dashboard.loadSample}
+            </button>
+          )}
+        </div>
+
+        <div class="flex flex-col gap-5">
+          {showHookPanel && (
+            <HookVisibilityCard text={analysisText} lang={lang} s={strings} only={hookOnly} views={views} />
+          )}
+          {rightOrder.map(key => {
+            if (key === 'linkedin') return <div id="platform-card-linkedin" key="lw"><LinkedInPreview key="linkedin" text={analysisText} view={views.linkedin} setView={(v) => setPlatformView('linkedin', v)} lang={lang} s={strings} toolLinkHref={`/${lang}/${toolSlugs.linkedin}/`} /></div>;
+            if (key === 'twitter')  return <div id="platform-card-twitter"  key="tw"><TwitterPreview  key="twitter"  text={analysisText} lang={lang} s={strings} toolLinkHref={`/${lang}/${toolSlugs.twitter}/`} /></div>;
+            if (key === 'meta')     return <div id="platform-card-meta"     key="mw"><MetaMonitor     key="meta"     text={analysisText} lang={lang} s={strings} toolLinkHref={`/${lang}/${toolSlugs.instagram}/`} facebookToolLinkHref={`/${lang}/${toolSlugs.facebook}/`} priority={effectiveMetaPriority} only={metaOnly} instagramView={views.instagram} setInstagramView={(v) => setPlatformView('instagram', v)} facebookView={views.facebook} setFacebookView={(v) => setPlatformView('facebook', v)} /></div>;
+            if (key === 'threads')  return <div id="platform-card-threads"  key="thw"><ThreadsPreview  key="threads"  text={analysisText} lang={lang} s={strings} toolLinkHref={`/${lang}/${toolSlugs.threads}/`} view={views.threads} setView={(v) => setPlatformView('threads', v)} /></div>;
+          })}
+          {focus === 'sms' && <SmsCounter text={analysisText} lang={lang} s={strings.sms} />}
+          <ReadabilityCard text={analysisText} lang={lang} s={strings.readability} />
+          <KeywordMonitor text={analysisText} lang={lang} s={strings} />
+        </div>
+      </div>
+    );
+  }
+
+  // ── Homepage — one constrained container: editor left, single-platform
+  //    live preview right (tab-switched), with compare-all as the escape
+  //    hatch and the analysis cards collapsed beneath. ─────────────────────
   return (
-    <div class="grid grid-cols-1 gap-5 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)]">
-      {/* Left column — editor + engine. On scoped pages the platform/SMS card,
-          readability, and keyword cards all move to the right column, leaving
-          the editor uncluttered on the left. */}
-      <div class="flex flex-col gap-5">
-        <Workspace text={text} setText={setText} lang={lang} s={strings} />
-        {!focus && <SmsCounter text={analysisText} lang={lang} s={strings.sms} />}
-        {!focus && <ReadabilityCard text={analysisText} lang={lang} s={strings.readability} />}
+    <div>
+      <div class="rounded-xl bg-canvas p-4 shadow-e3 sm:p-6">
+        <div class="grid grid-cols-1 gap-5 lg:grid-cols-2 lg:gap-6">
+          {/* Left — "Write your post" */}
+          <div class="flex min-w-0 flex-col gap-4">
+            <Workspace text={text} setText={setText} lang={lang} s={strings} />
 
-        {!text && (
-          <button
-            type="button"
-            onClick={() => setText(focus ? strings.dashboard.samples[focus] : strings.dashboard.sample)}
-            class="self-start rounded-pill border border-hairline bg-canvas px-3.5 py-2 text-[13px] font-medium text-body transition-[transform,color,background] duration-100 hover:bg-canvas-soft-2 hover:text-ink active:scale-[0.96] active:bg-canvas-soft-2"
+            {!text && (
+              <button
+                type="button"
+                onClick={() => setText(strings.dashboard.sample)}
+                class="self-start rounded-pill border border-transparent bg-link px-3.5 py-2 text-[13px] font-medium text-on-primary transition-[transform,background] duration-100 hover:bg-link-deep active:scale-[0.96]"
+              >
+                {strings.dashboard.loadSample}
+              </button>
+            )}
+          </div>
+
+          {/* Right — "Live platform preview" */}
+          <div class="flex min-w-0 flex-col">
+            <h3 class="text-[16px] font-semibold leading-6 tracking-[-0.3px] text-ink">
+              {strings.previewPanel.title}
+            </h3>
+
+            {/* Platform selector: tablist left, compare-all right */}
+            <div class="mt-2.5 flex items-end gap-2 border-b border-hairline">
+              <div
+                role="tablist"
+                aria-label={strings.previewPanel.title}
+                class="flex min-w-0 flex-1 items-center gap-1 overflow-x-auto"
+              >
+                {PREVIEW_TABS.map((p, i) => {
+                  const active = !compare && previewTab === p.id;
+                  return (
+                    <button
+                      type="button"
+                      role="tab"
+                      id={`platform-tab-${p.id}`}
+                      aria-selected={active}
+                      aria-controls="platform-preview-panel"
+                      tabIndex={active || (compare && i === 0) ? 0 : -1}
+                      aria-label={interp(strings.previewPanel.tabAria, { platform: p.name })}
+                      onClick={() => { setPreviewTab(p.id); setCompare(false); }}
+                      onKeyDown={(e) => onTabKey(e, i)}
+                      class={`relative flex h-11 w-11 shrink-0 items-center justify-center transition-[background,opacity] duration-100 ${
+                        active ? 'opacity-100' : 'opacity-40 hover:bg-canvas-soft hover:opacity-80'
+                      }`}
+                    >
+                      {p.brand ? <BrandLogo brand={p.brand} size={20} /> : <SmsGlyph size={20} />}
+                      {active && (
+                        <span class="absolute inset-x-2 bottom-0 h-0.5 rounded-pill bg-link" aria-hidden="true" />
+                      )}
+                    </button>
+                  );
+                })}
+              </div>
+              <button
+                type="button"
+                aria-pressed={compare}
+                onClick={() => setCompare((c) => !c)}
+                class={`mb-2 inline-flex shrink-0 items-center gap-1.5 rounded-pill border px-3 py-1.5 text-[12px] font-medium transition-[transform,color,background,border-color] duration-100 active:scale-[0.96] ${
+                  compare
+                    ? 'border-link bg-link-bg-soft text-link-deep'
+                    : 'border-hairline bg-canvas text-body hover:bg-canvas-soft-2 hover:text-ink'
+                }`}
+              >
+                <GridIcon />
+                {strings.previewPanel.compareAll}
+              </button>
+            </div>
+
+            {/* Active preview panel — mounts the existing platform components */}
+            <div
+              id="platform-preview-panel"
+              role="tabpanel"
+              aria-labelledby={compare ? undefined : `platform-tab-${previewTab}`}
+              tabIndex={-1}
+              class="mt-4 flex flex-col gap-5"
+            >
+              {compare ? (
+                <>
+                  {cardOrder.map(key => {
+                    if (key === 'linkedin') return <div id="platform-card-linkedin" key="lw"><LinkedInPreview key="linkedin" text={analysisText} view={views.linkedin} setView={(v) => setPlatformView('linkedin', v)} lang={lang} s={strings} toolLinkHref={`/${lang}/${toolSlugs.linkedin}/`} /></div>;
+                    if (key === 'twitter')  return <div id="platform-card-twitter"  key="tw"><TwitterPreview  key="twitter"  text={analysisText} lang={lang} s={strings} toolLinkHref={`/${lang}/${toolSlugs.twitter}/`} /></div>;
+                    if (key === 'meta')     return <div id="platform-card-meta"     key="mw"><MetaMonitor     key="meta"     text={analysisText} lang={lang} s={strings} toolLinkHref={`/${lang}/${toolSlugs.instagram}/`} facebookToolLinkHref={`/${lang}/${toolSlugs.facebook}/`} priority={effectiveMetaPriority} instagramView={views.instagram} setInstagramView={(v) => setPlatformView('instagram', v)} facebookView={views.facebook} setFacebookView={(v) => setPlatformView('facebook', v)} /></div>;
+                    if (key === 'threads')  return <div id="platform-card-threads"  key="thw"><ThreadsPreview  key="threads"  text={analysisText} lang={lang} s={strings} toolLinkHref={`/${lang}/${toolSlugs.threads}/`} view={views.threads} setView={(v) => setPlatformView('threads', v)} /></div>;
+                  })}
+                  <SmsCounter text={analysisText} lang={lang} s={strings.sms} />
+                </>
+              ) : (
+                <>
+                  {previewTab === 'linkedin' && <div id="platform-card-linkedin"><LinkedInPreview text={analysisText} view={views.linkedin} setView={(v) => setPlatformView('linkedin', v)} lang={lang} s={strings} toolLinkHref={`/${lang}/${toolSlugs.linkedin}/`} /></div>}
+                  {previewTab === 'twitter' && <div id="platform-card-twitter"><TwitterPreview text={analysisText} lang={lang} s={strings} toolLinkHref={`/${lang}/${toolSlugs.twitter}/`} /></div>}
+                  {previewTab === 'instagram' && <div id="platform-card-meta"><MetaMonitor text={analysisText} lang={lang} s={strings} toolLinkHref={`/${lang}/${toolSlugs.instagram}/`} facebookToolLinkHref={`/${lang}/${toolSlugs.facebook}/`} only="instagram" instagramView={views.instagram} setInstagramView={(v) => setPlatformView('instagram', v)} facebookView={views.facebook} setFacebookView={(v) => setPlatformView('facebook', v)} /></div>}
+                  {previewTab === 'facebook' && <div id="platform-card-meta"><MetaMonitor text={analysisText} lang={lang} s={strings} toolLinkHref={`/${lang}/${toolSlugs.instagram}/`} facebookToolLinkHref={`/${lang}/${toolSlugs.facebook}/`} only="facebook" priority="facebook" instagramView={views.instagram} setInstagramView={(v) => setPlatformView('instagram', v)} facebookView={views.facebook} setFacebookView={(v) => setPlatformView('facebook', v)} /></div>}
+                  {previewTab === 'threads' && <div id="platform-card-threads"><ThreadsPreview text={analysisText} lang={lang} s={strings} toolLinkHref={`/${lang}/${toolSlugs.threads}/`} view={views.threads} setView={(v) => setPlatformView('threads', v)} /></div>}
+                  {previewTab === 'sms' && <SmsCounter text={analysisText} lang={lang} s={strings.sms} />}
+                </>
+              )}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Advanced insights — collapsed analysis drawer below the container */}
+      <details class="group mt-4 rounded-xl bg-canvas shadow-e2">
+        <summary class="flex cursor-pointer list-none items-center gap-3 px-4 py-4 transition-colors hover:bg-canvas-soft sm:px-6 [&::-webkit-details-marker]:hidden">
+          <InsightsIcon />
+          <span class="text-[15px] font-semibold leading-5 text-ink">{strings.insights.title}</span>
+          <span class="hidden min-w-0 truncate text-[13px] text-mute sm:inline">{strings.insights.sub}</span>
+          <svg
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+            class="ml-auto shrink-0 text-mute transition-transform duration-200 group-open:rotate-180"
           >
-            {strings.dashboard.loadSample}
-          </button>
-        )}
-
-        {!focus && <KeywordMonitor text={analysisText} lang={lang} s={strings} />}
-      </div>
-
-      {/* Right column — live platform matrix (a single card in scoped mode),
-          followed on scoped pages by the readability + keyword cards. */}
-      <div class="flex flex-col gap-5">
-        {showHookPanel && (
-          <HookVisibilityCard text={analysisText} lang={lang} s={strings} only={hookOnly} views={views} />
-        )}
-        {rightOrder.map(key => {
-          if (key === 'linkedin') return <div id="platform-card-linkedin" key="lw"><LinkedInPreview key="linkedin" text={analysisText} view={views.linkedin} setView={(v) => setPlatformView('linkedin', v)} lang={lang} s={strings} toolLinkHref={`/${lang}/${toolSlugs.linkedin}/`} /></div>;
-          if (key === 'twitter')  return <div id="platform-card-twitter"  key="tw"><TwitterPreview  key="twitter"  text={analysisText} lang={lang} s={strings} toolLinkHref={`/${lang}/${toolSlugs.twitter}/`} /></div>;
-          if (key === 'meta')     return <div id="platform-card-meta"     key="mw"><MetaMonitor     key="meta"     text={analysisText} lang={lang} s={strings} toolLinkHref={`/${lang}/${toolSlugs.instagram}/`} facebookToolLinkHref={`/${lang}/${toolSlugs.facebook}/`} priority={effectiveMetaPriority} only={metaOnly} instagramView={views.instagram} setInstagramView={(v) => setPlatformView('instagram', v)} facebookView={views.facebook} setFacebookView={(v) => setPlatformView('facebook', v)} /></div>;
-          if (key === 'threads')  return <div id="platform-card-threads"  key="thw"><ThreadsPreview  key="threads"  text={analysisText} lang={lang} s={strings} toolLinkHref={`/${lang}/${toolSlugs.threads}/`} view={views.threads} setView={(v) => setPlatformView('threads', v)} /></div>;
-        })}
-        {focus === 'sms' && <SmsCounter text={analysisText} lang={lang} s={strings.sms} />}
-        {focus && <ReadabilityCard text={analysisText} lang={lang} s={strings.readability} />}
-        {focus && <KeywordMonitor text={analysisText} lang={lang} s={strings} />}
-      </div>
+            <path d="m6 9 6 6 6-6" />
+          </svg>
+        </summary>
+        <div class="grid grid-cols-1 gap-5 border-t border-hairline p-4 sm:p-6 lg:grid-cols-2">
+          <div class="lg:col-span-2">
+            <HookVisibilityCard text={analysisText} lang={lang} s={strings} views={views} />
+          </div>
+          <ReadabilityCard text={analysisText} lang={lang} s={strings.readability} />
+          <KeywordMonitor text={analysisText} lang={lang} s={strings} />
+        </div>
+      </details>
     </div>
+  );
+}
+
+/** Green SMS bubble glyph for the preview switcher (no platform asset). */
+function SmsGlyph({ size = 20 }: { size?: number }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="#34C759" aria-hidden="true">
+      <path d="M12 3.5c-5 0-9 3.2-9 7.2 0 2.2 1.2 4.1 3.1 5.4L5 20.5l3.8-1.6c1 .3 2.1.4 3.2.4 5 0 9-3.2 9-7.1s-4-7.2-9-7.2z" />
+    </svg>
+  );
+}
+
+/** Small 2×2 grid glyph for the compare-all toggle. */
+function GridIcon() {
+  return (
+    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+      <rect x="3.5" y="3.5" width="7" height="7" rx="1.5" />
+      <rect x="13.5" y="3.5" width="7" height="7" rx="1.5" />
+      <rect x="3.5" y="13.5" width="7" height="7" rx="1.5" />
+      <rect x="13.5" y="13.5" width="7" height="7" rx="1.5" />
+    </svg>
+  );
+}
+
+/** Bar-chart glyph for the Advanced insights summary row. */
+function InsightsIcon() {
+  return (
+    <span class="flex h-8 w-8 shrink-0 items-center justify-center rounded-md bg-link-bg-soft text-link-deep">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+        <path d="M4 19V11M9 19V5M14 19v-6M19 19V8" />
+      </svg>
+    </span>
   );
 }

@@ -1,4 +1,5 @@
 /** @jsxImportSource preact */
+import { useEffect, useState } from 'preact/hooks';
 import {
   charCount,
   wordCount,
@@ -15,7 +16,7 @@ import {
   formatUppercase,
   stripEmojiAndSymbols,
 } from '../../lib/textTools';
-import { Card, CardHead, Stat, Badge } from './ui';
+import { Card, Stat, Badge } from './ui';
 import { interp, plural } from '../../i18n/interp';
 import type { IslandStrings } from '../../i18n/types';
 
@@ -39,8 +40,21 @@ export function Workspace({ text, setText, lang, s }: Props) {
   const w = s.workspace;
   const nf = new Intl.NumberFormat(lang);
   const words = wordCount(text);
+  const chars = charCount(text);
   const readingTime = estimatedDuration(words, READING_WORDS_PER_MINUTE, w.timers, nf);
   const speakingTime = estimatedDuration(words, SPEAKING_WORDS_PER_MINUTE, w.timers, nf);
+
+  // Screen-reader count announcements: update the live region only after
+  // typing pauses so it doesn't chatter on every keystroke.
+  const [announced, setAnnounced] = useState('');
+  useEffect(() => {
+    const id = window.setTimeout(() => {
+      setAnnounced(
+        `${nf.format(chars)} ${w.counters.characters} · ${nf.format(words)} ${w.counters.words}`,
+      );
+    }, 800);
+    return () => window.clearTimeout(id);
+  }, [chars, words]);
 
   const onClean = () => setText(cleanExcessSpace(text));
   const onSanitize = () => setText(sanitizeText(text).text);
@@ -60,17 +74,24 @@ export function Workspace({ text, setText, lang, s }: Props) {
 
   return (
     <Card class="flex flex-col">
-      <CardHead eyebrow={w.eyebrow} title={w.title}>
-        {hidden.count > 0 ? (
-          <Badge tone="warn">
-            {interp(plural(w.hiddenBadge, hidden.count), { n: hidden.count })}
-          </Badge>
-        ) : (
-          <Badge tone="neutral" dot={false}>{w.badgeEditor}</Badge>
-        )}
-      </CardHead>
+      {/* Header row: editor title left, live character/word counts right. */}
+      <header class="flex flex-wrap items-center justify-between gap-x-3 gap-y-1.5 border-b border-hairline px-4 py-3.5 sm:px-5">
+        <h3 class="text-[16px] font-semibold leading-6 tracking-[-0.3px] text-ink">
+          {w.title}
+        </h3>
+        <div class="flex items-center gap-2.5">
+          {hidden.count > 0 && (
+            <Badge tone="warn">
+              {interp(plural(w.hiddenBadge, hidden.count), { n: hidden.count })}
+            </Badge>
+          )}
+          <p class="font-mono text-[12px] leading-4 text-mute tabular-nums">
+            {w.counters.characters}: {nf.format(chars)} · {w.counters.words}: {nf.format(words)}
+          </p>
+        </div>
+      </header>
 
-      <div class="p-4 sm:p-5">
+      <div class="flex flex-col p-4 sm:p-5">
         <label for="post-input" class="sr-only">
           {w.title}
         </label>
@@ -81,47 +102,11 @@ export function Workspace({ text, setText, lang, s }: Props) {
           placeholder={w.placeholder}
           rows={12}
           spellcheck
-          class="block w-full resize-y rounded-md border border-hairline bg-canvas-soft px-4 py-3 text-[15px] leading-7 text-ink placeholder:text-mute focus:border-link focus:bg-canvas focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-link"
+          class="block w-full h-[360px] resize-none rounded-md border border-hairline bg-canvas-soft px-4 py-3 text-[15px] leading-7 text-ink placeholder:text-mute focus:border-link focus:bg-canvas focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-link"
         />
 
-        <div class="mt-3 rounded-md border border-hairline bg-canvas-soft p-2.5">
-          <p class="px-1 font-mono text-[11px] uppercase tracking-wide text-mute">
-            {w.formatterLabel}
-          </p>
-          <div class="mt-2 grid grid-cols-2 gap-2 sm:grid-cols-3">
-            {formatterActions.map((item) => (
-              <button
-                type="button"
-                onClick={item.action}
-                disabled={!text}
-                class="min-h-9 rounded-md border border-hairline bg-canvas px-2.5 py-2 text-center text-[12px] font-medium leading-4 text-ink transition-[transform,color,background,border-color] duration-100 hover:border-hairline-strong hover:bg-canvas-soft-2 active:scale-[0.955] active:bg-canvas-soft-2 disabled:cursor-not-allowed disabled:opacity-45 disabled:active:scale-100"
-              >
-                {item.label}
-              </button>
-            ))}
-          </div>
-        </div>
-
-        {/* Live meta counters */}
-        <div class="mt-4 grid grid-cols-2 gap-2.5 sm:grid-cols-4">
-          <Stat label={w.counters.characters} value={nf.format(charCount(text))} />
-          <Stat label={w.counters.words} value={nf.format(words)} />
-          <Stat label={w.counters.lines} value={nf.format(lineCount(text))} />
-          <Stat label={w.counters.paragraphs} value={nf.format(paragraphCount(text))} />
-        </div>
-
-        <div class="mt-2.5 grid grid-cols-1 gap-2.5 sm:grid-cols-2">
-          <TimerStat icon="book" label={w.timers.reading} value={readingTime} />
-          <TimerStat icon="microphone" label={w.timers.speaking} value={speakingTime} />
-        </div>
-      </div>
-
-      {/* Optimization engine */}
-      <div class="border-t border-hairline px-4 py-4 sm:px-5">
-        <p class="font-mono text-[11px] uppercase tracking-wide text-mute">
-          {w.engineLabel}
-        </p>
-        <div class="mt-3 flex flex-wrap gap-2">
+        {/* Action row — cleanup tools grouped left, destructive clear right. */}
+        <div class="mt-3 flex flex-wrap items-center gap-2">
           <button
             type="button"
             onClick={onClean}
@@ -160,6 +145,65 @@ export function Workspace({ text, setText, lang, s }: Props) {
             {warnAfter}
           </p>
         )}
+
+        {/* Status line + SR count announcements */}
+        <p class="mt-3 flex items-center gap-2 text-[12px] leading-4 text-mute">
+          <span class="h-2 w-2 shrink-0 rounded-full bg-cyan-deep" aria-hidden="true" />
+          {w.statusLine}
+        </p>
+        <p class="sr-only" role="status" aria-live="polite">
+          {announced}
+        </p>
+
+        {/* Collapsed toolkit: format actions + full counters + pacing timers.
+            Same controls and computations as before, regrouped behind one
+            disclosure so the default editor column stays calm. */}
+        <details class="group mt-4 rounded-md border border-hairline bg-canvas-soft">
+          <summary class="flex cursor-pointer list-none items-center justify-between gap-2 px-3.5 py-2.5 font-mono text-[11px] uppercase tracking-wide text-mute transition-colors hover:text-ink [&::-webkit-details-marker]:hidden">
+            {w.formatterLabel}
+            <svg
+              width="14"
+              height="14"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+              class="shrink-0 transition-transform duration-200 group-open:rotate-180"
+            >
+              <path d="m6 9 6 6 6-6" />
+            </svg>
+          </summary>
+          <div class="border-t border-hairline p-2.5">
+            <div class="grid grid-cols-2 gap-2 sm:grid-cols-3">
+              {formatterActions.map((item) => (
+                <button
+                  type="button"
+                  onClick={item.action}
+                  disabled={!text}
+                  class="min-h-9 rounded-md border border-hairline bg-canvas px-2.5 py-2 text-center text-[12px] font-medium leading-4 text-ink transition-[transform,color,background,border-color] duration-100 hover:border-hairline-strong hover:bg-canvas-soft-2 active:scale-[0.955] active:bg-canvas-soft-2 disabled:cursor-not-allowed disabled:opacity-45 disabled:active:scale-100"
+                >
+                  {item.label}
+                </button>
+              ))}
+            </div>
+
+            {/* Live meta counters */}
+            <div class="mt-3 grid grid-cols-2 gap-2.5 sm:grid-cols-4">
+              <Stat label={w.counters.characters} value={nf.format(chars)} />
+              <Stat label={w.counters.words} value={nf.format(words)} />
+              <Stat label={w.counters.lines} value={nf.format(lineCount(text))} />
+              <Stat label={w.counters.paragraphs} value={nf.format(paragraphCount(text))} />
+            </div>
+
+            <div class="mt-2.5 grid grid-cols-1 gap-2.5 sm:grid-cols-2">
+              <TimerStat icon="book" label={w.timers.reading} value={readingTime} />
+              <TimerStat icon="microphone" label={w.timers.speaking} value={speakingTime} />
+            </div>
+          </div>
+        </details>
       </div>
     </Card>
   );

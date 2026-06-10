@@ -572,6 +572,16 @@ export const ja: Translations = {
       clear: 'エディターをクリア',
       hiddenWarning:
         '文字数カウントやスクリーンリーダーを壊す不可視文字が見つかりました：{codes}。サニタイズで取り除けます。',
+      statusLine: 'リアルタイム分析が有効です',
+    },
+    previewPanel: {
+      title: 'プラットフォーム別ライブプレビュー',
+      tabAria: '{platform}のプレビュー',
+      compareAll: 'すべて比較',
+    },
+    insights: {
+      title: '高度な分析',
+      sub: '文章分析、読みやすさ、キーワードなど',
     },
     common: {
       displayName: 'あなたの名前',

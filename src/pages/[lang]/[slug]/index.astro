@@ -8,7 +8,6 @@ import { interp } from '../../../i18n/interp';
 import { LOCALES, getLocale } from '../../../i18n/config';
 import { tools } from '../../../data/tools';
 import PlatformBanner from '../../../components/PlatformBanner.astro';
-import HowItWorks from '../../../components/HowItWorks.astro';
 import HeroPreviewCard from '../../../components/HeroPreviewCard.astro';
 
 // One statically-rendered landing page per locale at the keyword-rich slug
@@ -105,23 +104,9 @@ const faqs = t.faq.items;
 const site = Astro.site ?? new URL('https://posttruncate.com');
 const pageUrl = new URL(`/${lang}/${locale.slug}/`, site).href;
 
-// HowTo JSON-LD built from the same i18n strings the visible section uses,
-// so schema and on-page content are guaranteed to match in every locale.
-const howToSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'HowTo',
-  name: `${locale.toolName} — ${t.howItWorks.heading}`,
-  inLanguage: lang,
-  step: t.howItWorks.steps.map((s, i) => ({
-    '@type': 'HowToStep',
-    position: i + 1,
-    name: s.name,
-    text: s.text,
-  })),
-};
 ---
 
-<Layout lang={lang} path="/" jsonLd={[howToSchema]}>
+<Layout lang={lang} path="/">
   <StructuredData
     slot="head"
     type="home"
@@ -171,15 +156,10 @@ const howToSchema = {
     </div>
   </section>
 
-  <!-- ── Top leaderboard ad (reserved height → 0 CLS) ─────────────────── -->
-  <div class="container-page mt-8">
-    <Ad variant="leaderboard" />
-  </div>
-
-  <!-- ── How it works ─────────────────────────────────────────────────── -->
-  <HowItWorks lang={lang} />
-
-  <!-- ── Interactive workspace (the island) ───────────────────────────── -->
+  <!-- ── Interactive workspace (the island) — the page's centerpiece,
+       directly under the hero. Container/position styling only: the island
+       itself (editor left, live previews right, stacking editor-first on
+       mobile) is untouched. -->
   <main id="workspace" class="container-page workspace">
     <div class="workspace__head">
       <h2 class="workspace__title">{t.workspace.title}</h2>
@@ -187,6 +167,11 @@ const howToSchema = {
     </div>
     <Dashboard client:load lang={lang} strings={t.island} toolSlugs={toolSlugs} />
   </main>
+
+  <!-- ── Top leaderboard ad (reserved height → 0 CLS) ─────────────────── -->
+  <div class="container-page mt-8">
+    <Ad variant="leaderboard" />
+  </div>
 
   <!-- ── Long-form SEO copy ───────────────────────────────────────────────
        Localized keyword body. Headings are plain text; paragraphs carry inline
@@ -504,23 +489,27 @@ const howToSchema = {
     }
   }
 
-  /* ── Workspace ──────────────────────────────────────────────────────── */
+  /* ── Workspace — the centerpiece container under the hero ───────────────
+     The island renders its own rounded panel; this section just constrains
+     and centers it (narrower than the 1400px page container, per mockup). */
   .workspace {
     scroll-margin-top: 80px;
-    padding-top: 48px;
+    padding-top: var(--spacing-flow);
+    max-width: var(--max-width-page);
   }
   .workspace__head {
-    margin-bottom: 24px;
+    margin-bottom: var(--spacing-stack);
+    text-align: center;
   }
   .workspace__title {
-    font-size: 24px;
+    font-size: 28px;
     font-weight: 600;
-    letter-spacing: -0.96px;
+    letter-spacing: -1px;
     color: var(--color-ink);
   }
   .workspace__sub {
     margin-top: 6px;
-    font-size: 14px;
+    font-size: 15px;
     color: var(--color-body);
   }
 
@@ -842,7 +831,7 @@ const howToSchema = {
       padding-bottom: var(--spacing-section-sm);
     }
     .workspace {
-      padding-top: 36px;
+      padding-top: var(--spacing-flow-sm);
     }
     .guides,
     .faq {

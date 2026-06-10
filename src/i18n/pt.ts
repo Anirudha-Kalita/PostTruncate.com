@@ -572,6 +572,16 @@ export const pt: Translations = {
       clear: 'Limpar editor',
       hiddenWarning:
         'Foram encontrados caracteres invisíveis que quebram as contagens e os leitores de ecrã: {codes}. Sanitize para os remover.',
+      statusLine: 'A análise em tempo real está ativa',
+    },
+    previewPanel: {
+      title: 'Pré-visualização ao vivo por plataforma',
+      tabAria: 'Pré-visualização do {platform}',
+      compareAll: 'Comparar todas',
+    },
+    insights: {
+      title: 'Insights avançados',
+      sub: 'Análise de escrita, legibilidade, palavras-chave e mais',
     },
     common: {
       displayName: 'O Seu Nome',

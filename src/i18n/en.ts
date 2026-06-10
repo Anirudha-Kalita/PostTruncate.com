@@ -572,6 +572,16 @@ export const en: Translations = {
       clear: 'Clear editor',
       hiddenWarning:
         'Found invisible characters that break counts and screen readers: {codes}. Sanitize to strip them.',
+      statusLine: 'Real-time analysis is on',
+    },
+    previewPanel: {
+      title: 'Live platform preview',
+      tabAria: '{platform} preview',
+      compareAll: 'Compare all',
+    },
+    insights: {
+      title: 'Advanced insights',
+      sub: 'Writing analysis, readability, keywords, and more',
     },
     common: {
       displayName: 'Your Name',

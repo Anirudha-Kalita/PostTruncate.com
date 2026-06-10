@@ -570,6 +570,16 @@ export const zh: Translations = {
       clear: '清空编辑器',
       hiddenWarning:
         '发现了会破坏计数和屏幕阅读器的不可见字符：{codes}。净化以将其剥除。',
+      statusLine: '实时分析已开启',
+    },
+    previewPanel: {
+      title: '平台实时预览',
+      tabAria: '{platform}预览',
+      compareAll: '全部对比',
+    },
+    insights: {
+      title: '高级分析',
+      sub: '写作分析、可读性、关键词等',
     },
     common: {
       displayName: '你的名字',

@@ -572,6 +572,16 @@ export const fr: Translations = {
       clear: 'Vider l’éditeur',
       hiddenWarning:
         'Caractères invisibles détectés qui faussent les comptages et les lecteurs d’écran : {codes}. Nettoyez pour les supprimer.',
+      statusLine: 'L’analyse en temps réel est active',
+    },
+    previewPanel: {
+      title: 'Aperçu en direct par plateforme',
+      tabAria: 'Aperçu {platform}',
+      compareAll: 'Tout comparer',
+    },
+    insights: {
+      title: 'Analyses avancées',
+      sub: 'Analyse d’écriture, lisibilité, mots-clés et plus',
     },
     common: {
       displayName: 'Votre nom',

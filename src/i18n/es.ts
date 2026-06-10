@@ -572,6 +572,16 @@ export const es: Translations = {
       clear: 'Vaciar el editor',
       hiddenWarning:
         'Se encontraron caracteres invisibles que rompen los recuentos y los lectores de pantalla: {codes}. Sanea para eliminarlos.',
+      statusLine: 'El análisis en tiempo real está activo',
+    },
+    previewPanel: {
+      title: 'Vista previa de plataformas en vivo',
+      tabAria: 'Vista previa de {platform}',
+      compareAll: 'Comparar todas',
+    },
+    insights: {
+      title: 'Análisis avanzado',
+      sub: 'Análisis de escritura, legibilidad, palabras clave y más',
     },
     common: {
       displayName: 'Tu nombre',

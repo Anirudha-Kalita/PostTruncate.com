@@ -572,6 +572,16 @@ export const nl: Translations = {
       clear: 'Editor wissen',
       hiddenWarning:
         'Onzichtbare tekens gevonden die tellingen en schermlezers verstoren: {codes}. Schoon op om ze te verwijderen.',
+      statusLine: 'Realtime analyse is actief',
+    },
+    previewPanel: {
+      title: 'Live platformvoorbeeld',
+      tabAria: '{platform}-voorbeeld',
+      compareAll: 'Alles vergelijken',
+    },
+    insights: {
+      title: 'Geavanceerde inzichten',
+      sub: 'Schrijfanalyse, leesbaarheid, zoekwoorden en meer',
     },
     common: {
       displayName: 'Jouw naam',

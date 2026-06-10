@@ -167,6 +167,22 @@ export interface IslandStrings {
     clear: string;
     /** "{codes}" → comma-joined code points. */
     hiddenWarning: string;
+    /** Status line under the editor actions, e.g. "Real-time analysis is on". */
+    statusLine: string;
+  };
+  /** Single-platform preview switcher (homepage workspace right column). */
+  previewPanel: {
+    /** Right-column heading, e.g. "Live platform preview". */
+    title: string;
+    /** Tab accessible name; "{platform}" → brand name. */
+    tabAria: string;
+    /** Toggle that switches to the all-platforms matrix view. */
+    compareAll: string;
+  };
+  /** Collapsed "Advanced insights" bar beneath the workspace container. */
+  insights: {
+    title: string;
+    sub: string;
   };
   common: {
     /** Author display name shown in every preview card's mock post header. */

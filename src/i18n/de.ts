@@ -573,6 +573,16 @@ export const de: Translations = {
       clear: 'Editor leeren',
       hiddenWarning:
         'Unsichtbare Zeichen gefunden, die Zählungen und Screenreader stören: {codes}. Bereinige, um sie zu entfernen.',
+      statusLine: 'Echtzeit-Analyse ist aktiv',
+    },
+    previewPanel: {
+      title: 'Live-Plattformvorschau',
+      tabAria: '{platform}-Vorschau',
+      compareAll: 'Alle vergleichen',
+    },
+    insights: {
+      title: 'Erweiterte Analysen',
+      sub: 'Schreibanalyse, Lesbarkeit, Keywords und mehr',
     },
     common: {
       displayName: 'Dein Name',

@@ -572,6 +572,16 @@ export const it: Translations = {
       clear: 'Svuota l’editor',
       hiddenWarning:
         'Trovati caratteri invisibili che mandano in tilt conteggi e screen reader: {codes}. Sanifica per eliminarli.',
+      statusLine: 'L’analisi in tempo reale è attiva',
+    },
+    previewPanel: {
+      title: 'Anteprima live per piattaforma',
+      tabAria: 'Anteprima {platform}',
+      compareAll: 'Confronta tutte',
+    },
+    insights: {
+      title: 'Approfondimenti avanzati',
+      sub: 'Analisi di scrittura, leggibilità, parole chiave e altro',
     },
     common: {
       displayName: 'Il tuo nome',
