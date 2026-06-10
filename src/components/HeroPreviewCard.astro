@@ -50,44 +50,28 @@ const LOGOS = [
   },
 ] as const;
 
-// ── Orbit arc geometry ──────────────────────────────────────────────────
-// The badges sit on the right-hand arc of an invisible circle centered on
-// the card: a 150° sweep from near 12 o'clock, through 3, to near 6 — six
-// badges at equal 30° angular steps. Positions are computed with trig as
-// percentages of the card box (the .hpc__orbit overlay mirrors the card),
-// with the horizontal/vertical radii tuned so the arc hugs the card's
-// proportions and bulges just past its right edge.
-const ARC_START_DEG = -75;
-const ARC_STEP_DEG = 30;
-const ARC_RX = 60; // % of card width  → x extreme = 110% (just outside)
-const ARC_RY = 58; // % of card height → top/bottom badges float past edges
+// ── Orbit geometry ──────────────────────────────────────────────────
+// The badges sit scattered around the card in a layout resembling the mockup.
+// Positions are computed as percentages of the card box (the .hpc__orbit overlay mirrors the card).
+const ORBIT_POSITIONS = [
+  { x: 90, y: -10 },  // linkedin
+  { x: 115, y: 12 },  // x
+  { x: 127, y: 45 },  // instagram
+  { x: 120, y: 75 },  // facebook
+  { x: 105, y: 102 },  // threads
+  { x: 85, y: 118 },  // sms
+];
 
 const ARC = LOGOS.map((logo, i) => {
-  const a = ((ARC_START_DEG + i * ARC_STEP_DEG) * Math.PI) / 180;
   return {
     ...logo,
-    x: 50 + ARC_RX * Math.cos(a),
-    y: 50 + ARC_RY * Math.sin(a),
+    x: ORBIT_POSITIONS[i].x,
+    y: ORBIT_POSITIONS[i].y,
   };
 });
-
-// Faint dashed guide tracing the same arc (drawn in the 100×100 card space).
-const ARC_PATH = `M ${ARC[0].x.toFixed(1)} ${ARC[0].y.toFixed(1)} A ${ARC_RX} ${ARC_RY} 0 0 1 ${ARC[ARC.length - 1].x.toFixed(1)} ${ARC[ARC.length - 1].y.toFixed(1)}`;
 ---
 
 <div class="hpc" role="img" aria-label={ariaLabel}>
-  <!-- faint decorative accents: dashed swirl + dots, echoing the mockup -->
-  <svg class="hpc__swirl" viewBox="0 0 64 96" fill="none" aria-hidden="true">
-    <path
-      d="M56 6C24 18 8 40 16 62c6 17 26 24 40 18"
-      stroke="currentColor"
-      stroke-width="1.5"
-      stroke-dasharray="4 5"
-      stroke-linecap="round"></path>
-  </svg>
-  <span class="hpc__dot hpc__dot--1"></span>
-  <span class="hpc__dot hpc__dot--2"></span>
-
   <!-- the post card -->
   <div class="hpc__card">
     <div class="hpc__head">
@@ -111,19 +95,40 @@ const ARC_PATH = `M ${ARC[0].x.toFixed(1)} ${ARC[0].y.toFixed(1)} A ${ARC_RX} ${
     </div>
   </div>
 
-  <!-- orbiting platform badges — on the arc (desktop) or an even row
+  <!-- orbiting platform badges — scattered around the card (desktop) or an even row
        beneath the card (mobile). Placed after the card in the DOM so the
        mobile flex row flows naturally below it. -->
   <div class="hpc__orbit" aria-hidden="true">
     <svg class="hpc__orbit-path" viewBox="0 0 100 100" preserveAspectRatio="none" fill="none">
+      <!-- Right curve -->
       <path
-        d={ARC_PATH}
+        d="M 100 -5 C 140 20 140 70 100 110"
         stroke="currentColor"
-        stroke-width="1"
-        stroke-dasharray="3 5"
+        stroke-width="1.2"
+        stroke-dasharray="3 6"
+        stroke-linecap="round"
+        vector-effect="non-scaling-stroke"></path>
+      <!-- Left curve -->
+      <path
+        d="M -5 85 C -40 65 -25 15 15 -5"
+        stroke="currentColor"
+        stroke-width="1.2"
+        stroke-dasharray="3 6"
         stroke-linecap="round"
         vector-effect="non-scaling-stroke"></path>
     </svg>
+    
+    <!-- Decals -->
+    <svg class="hpc__sparkle" viewBox="0 0 24 24" width="24" height="24" fill="var(--color-link)" style="position: absolute; top: -5%; right: -25%; opacity: 0.5;">
+      <path d="M12 0C12 6.6 17.4 12 24 12C17.4 12 12 17.4 12 24C12 17.4 6.6 12 0 12C6.6 12 12 6.6 12 0Z"/>
+    </svg>
+    <svg class="hpc__blob" viewBox="0 0 40 40" width="48" height="48" fill="var(--color-link)" style="position: absolute; top: 20%; left: -15%; opacity: 0.15; transform: rotate(15deg);">
+      <path d="M30 10C35 15 35 25 30 30C25 35 15 35 10 30C5 25 5 15 10 10C15 5 25 5 30 10Z"/>
+    </svg>
+    <svg class="hpc__triangle" viewBox="0 0 12 12" width="12" height="12" fill="var(--color-link)" style="position: absolute; top: 55%; left: -20%; opacity: 0.4; transform: rotate(-30deg);">
+      <polygon points="6,0 12,12 0,12"/>
+    </svg>
+
     {ARC.map((l) => (
       <span
         class={`hpc__logo hpc__logo--${l.key}`}
@@ -139,9 +144,8 @@ const ARC_PATH = `M ${ARC[0].x.toFixed(1)} ${ARC[0].y.toFixed(1)} A ${ARC_RX} ${
     position: relative;
     width: min(100%, 480px);
     margin-inline: auto;
-    /* breathing room for the arc: badges crest above, sweep past the
-       right edge, and dip below the card */
-    padding: 56px 72px 48px 24px;
+    /* padding to allow scattered decals and logos to overflow card */
+    padding: 64px 140px 80px 64px;
   }
 
   /* ── Card ─────────────────────────────────────────────────────────── */
@@ -215,11 +219,11 @@ const ARC_PATH = `M ${ARC[0].x.toFixed(1)} ${ARC[0].y.toFixed(1)} A ${ARC_RX} ${
     margin-block: 2px;
   }
 
-  /* ── Orbit layer — mirrors the card's box; badges sit at the trig-
-        computed arc points (inline left/top %), centered on each point. ── */
+  /* ── Orbit layer — mirrors the card's box; badges sit scattered 
+        (inline left/top %), centered on each point. ── */
   .hpc__orbit {
     position: absolute;
-    inset: 56px 72px 48px 24px; /* = .hpc padding → same box as the card */
+    inset: 64px 140px 80px 64px; /* = .hpc padding → same box as the card */
     pointer-events: none;
   }
   .hpc__orbit-path {
@@ -229,8 +233,9 @@ const ARC_PATH = `M ${ARC[0].x.toFixed(1)} ${ARC[0].y.toFixed(1)} A ${ARC_RX} ${
     height: 100%;
     overflow: visible;
     color: var(--color-link);
-    opacity: 0.25;
+    opacity: 0.35;
   }
+
   .hpc__logo {
     position: absolute;
     transform: translate(-50%, -50%);
@@ -259,34 +264,15 @@ const ARC_PATH = `M ${ARC[0].x.toFixed(1)} ${ARC[0].y.toFixed(1)} A ${ARC_RX} ${
   .hpc__logo--threads   { background: #101010; }
   .hpc__logo--sms       { background: #34c759; }
 
-  /* ── Faint accents (left gutter, like the mockup's dashed swirl) ──── */
-  .hpc__swirl {
-    position: absolute;
-    left: -10px;
-    top: 32%;
-    width: 64px;
-    color: var(--color-link);
-    opacity: 0.35;
-    pointer-events: none;
-  }
-  .hpc__dot {
-    position: absolute;
-    width: 6px;
-    height: 6px;
-    border-radius: var(--radius-pill);
-    background: var(--color-link);
-    opacity: 0.25;
-  }
-  .hpc__dot--1 { top: 24%; left: 4px; }
-  .hpc__dot--2 { bottom: 10%; left: 30%; opacity: 0.18; }
 
-  /* ── Tablet/narrow — pull the arc in so it stays beside the card ──── */
+
+  /* ── Tablet/narrow — pull the orbit in so it stays beside the card ──── */
   @media (max-width: 700px) and (min-width: 521px) {
     .hpc {
-      padding: 48px 60px 40px 16px;
+      padding: 64px 100px 64px 40px;
     }
     .hpc__orbit {
-      inset: 48px 60px 40px 16px;
+      inset: 64px 100px 64px 40px;
     }
     .hpc__logo {
       width: 40px;
@@ -298,9 +284,9 @@ const ARC_PATH = `M ${ARC[0].x.toFixed(1)} ${ARC[0].y.toFixed(1)} A ${ARC_RX} ${
     }
   }
 
-  /* ── Mobile (stacked layout) — the vertical arc doesn't work, so the
-        badges collapse into one even horizontal row beneath the card.
-        left/top from the arc math are ignored once position is static. ── */
+  /* ── Mobile (stacked layout) — the scattered layout doesn't fit well, so
+        the badges collapse into an even horizontal row beneath the card.
+        left/top percentages are ignored once position is static. ── */
   @media (max-width: 520px) {
     .hpc {
       padding: 16px 12px 0;
@@ -312,12 +298,16 @@ const ARC_PATH = `M ${ARC[0].x.toFixed(1)} ${ARC[0].y.toFixed(1)} A ${ARC_RX} ${
       position: static;
       inset: auto;
       display: flex;
+      flex-wrap: wrap;
       justify-content: center;
       align-items: center;
       gap: 12px;
-      margin-top: 16px;
+      margin-top: 24px;
     }
-    .hpc__orbit-path {
+    .hpc__orbit-path,
+    .hpc__sparkle,
+    .hpc__blob,
+    .hpc__triangle {
       display: none;
     }
     .hpc__logo {
@@ -330,6 +320,5 @@ const ARC_PATH = `M ${ARC[0].x.toFixed(1)} ${ARC[0].y.toFixed(1)} A ${ARC_RX} ${
       width: 17px;
       height: 17px;
     }
-    .hpc__swirl { width: 48px; left: -6px; }
   }
 </style>

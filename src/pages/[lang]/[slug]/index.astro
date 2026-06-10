@@ -147,6 +147,12 @@ const howToSchema = {
     <div class="hero__mesh mesh-gradient" aria-hidden="true"></div>
     <div class="container-page hero__inner">
       <div class="hero__copy">
+        <div class="hero__badge">
+          <svg viewBox="0 0 24 24" aria-hidden="true" width="14" height="14" fill="currentColor" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+          </svg>
+          <span>Real-time previews. No more guessing.</span>
+        </div>
         <h1 class="hero__title">{t.hero.title}</h1>
         <p class="hero__lede">{t.hero.lede}</p>
         <div class="hero__cta">
@@ -386,6 +392,27 @@ const howToSchema = {
        switches to the two-column editorial layout. */
     text-align: center;
   }
+  .hero__badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-inline: auto;
+    margin-bottom: 24px;
+    padding: 6px 16px;
+    border-radius: var(--radius-pill);
+    background: var(--color-link-bg-soft);
+    color: var(--color-link-deep);
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1;
+    letter-spacing: -0.2px;
+    white-space: nowrap;
+    box-shadow: 0 0 24px 2px rgba(0, 112, 243, 0.3);
+    border: 1px solid rgba(0, 112, 243, 0.1);
+  }
+  .hero__badge svg {
+    filter: drop-shadow(0 0 3px var(--color-link));
+  }
   .hero__title {
     margin-inline: auto;
     max-width: var(--max-width-narrow);
@@ -468,7 +495,8 @@ const howToSchema = {
       text-align: left;
     }
     .hero__title,
-    .hero__lede {
+    .hero__lede,
+    .hero__badge {
       margin-inline: 0;
     }
     .hero__cta {
