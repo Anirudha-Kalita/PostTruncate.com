@@ -212,13 +212,36 @@ export default function Dashboard({ lang, strings, toolSlugs, focus }: Props) {
           )}
           {rightOrder.map(key => {
             if (key === 'linkedin') return <div id="platform-card-linkedin" key="lw"><LinkedInPreview key="linkedin" text={analysisText} view={views.linkedin} setView={(v) => setPlatformView('linkedin', v)} lang={lang} s={strings} toolLinkHref={`/${lang}/${toolSlugs.linkedin}/`} /></div>;
-            if (key === 'twitter')  return <div id="platform-card-twitter"  key="tw"><TwitterPreview  key="twitter"  text={analysisText} lang={lang} s={strings} toolLinkHref={`/${lang}/${toolSlugs.twitter}/`} /></div>;
-            if (key === 'meta')     return <div id="platform-card-meta"     key="mw"><MetaMonitor     key="meta"     text={analysisText} lang={lang} s={strings} toolLinkHref={`/${lang}/${toolSlugs.instagram}/`} facebookToolLinkHref={`/${lang}/${toolSlugs.facebook}/`} priority={effectiveMetaPriority} only={metaOnly} instagramView={views.instagram} setInstagramView={(v) => setPlatformView('instagram', v)} facebookView={views.facebook} setFacebookView={(v) => setPlatformView('facebook', v)} /></div>;
-            if (key === 'threads')  return <div id="platform-card-threads"  key="thw"><ThreadsPreview  key="threads"  text={analysisText} lang={lang} s={strings} toolLinkHref={`/${lang}/${toolSlugs.threads}/`} view={views.threads} setView={(v) => setPlatformView('threads', v)} /></div>;
+            if (key === 'twitter') return <div id="platform-card-twitter" key="tw"><TwitterPreview key="twitter" text={analysisText} lang={lang} s={strings} toolLinkHref={`/${lang}/${toolSlugs.twitter}/`} /></div>;
+            if (key === 'meta') return <div id="platform-card-meta" key="mw"><MetaMonitor key="meta" text={analysisText} lang={lang} s={strings} toolLinkHref={`/${lang}/${toolSlugs.instagram}/`} facebookToolLinkHref={`/${lang}/${toolSlugs.facebook}/`} priority={effectiveMetaPriority} only={metaOnly} instagramView={views.instagram} setInstagramView={(v) => setPlatformView('instagram', v)} facebookView={views.facebook} setFacebookView={(v) => setPlatformView('facebook', v)} /></div>;
+            if (key === 'threads') return <div id="platform-card-threads" key="thw"><ThreadsPreview key="threads" text={analysisText} lang={lang} s={strings} toolLinkHref={`/${lang}/${toolSlugs.threads}/`} view={views.threads} setView={(v) => setPlatformView('threads', v)} /></div>;
           })}
           {focus === 'sms' && <SmsCounter text={analysisText} lang={lang} s={strings.sms} />}
-          <ReadabilityCard text={analysisText} lang={lang} s={strings.readability} />
-          <KeywordMonitor text={analysisText} lang={lang} s={strings} />
+          <details class="group rounded-xl bg-canvas shadow-e2">
+            <summary class="flex cursor-pointer list-none items-center gap-3 px-4 py-4 transition-colors hover:bg-canvas-soft sm:px-6 [&::-webkit-details-marker]:hidden">
+              <InsightsIcon />
+              <span class="text-[15px] font-semibold leading-5 text-ink">{strings.insights.title}</span>
+              <span class="hidden min-w-0 truncate text-[13px] text-mute sm:inline">Readability, Keywords density</span>
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+                class="ml-auto shrink-0 text-mute transition-transform duration-200 group-open:rotate-180"
+              >
+                <path d="m6 9 6 6 6-6" />
+              </svg>
+            </summary>
+            <div class="flex flex-col gap-5 border-t border-hairline p-4 sm:p-6">
+              <ReadabilityCard text={analysisText} lang={lang} s={strings.readability} />
+              <KeywordMonitor text={analysisText} lang={lang} s={strings} />
+            </div>
+          </details>
         </div>
       </div>
     );
@@ -272,9 +295,8 @@ export default function Dashboard({ lang, strings, toolSlugs, focus }: Props) {
                       aria-label={interp(strings.previewPanel.tabAria, { platform: p.name })}
                       onClick={() => { setPreviewTab(p.id); setCompare(false); }}
                       onKeyDown={(e) => onTabKey(e, i)}
-                      class={`relative flex h-11 w-11 shrink-0 items-center justify-center transition-[background,opacity] duration-100 ${
-                        active ? 'opacity-100' : 'opacity-40 hover:bg-canvas-soft hover:opacity-80'
-                      }`}
+                      class={`relative flex h-11 w-11 shrink-0 items-center justify-center transition-[background,opacity] duration-100 ${active ? 'opacity-100' : 'opacity-40 hover:bg-canvas-soft hover:opacity-80'
+                        }`}
                     >
                       {p.brand ? <BrandLogo brand={p.brand} size={20} /> : <SmsGlyph size={20} />}
                       {active && (
@@ -288,11 +310,10 @@ export default function Dashboard({ lang, strings, toolSlugs, focus }: Props) {
                 type="button"
                 aria-pressed={compare}
                 onClick={() => setCompare((c) => !c)}
-                class={`mb-2 inline-flex shrink-0 items-center gap-1.5 rounded-pill border px-3 py-1.5 text-[12px] font-medium transition-[transform,color,background,border-color] duration-100 active:scale-[0.96] ${
-                  compare
+                class={`mb-2 inline-flex shrink-0 items-center gap-1.5 rounded-pill border px-3 py-1.5 text-[12px] font-medium transition-[transform,color,background,border-color] duration-100 active:scale-[0.96] ${compare
                     ? 'border-link bg-link-bg-soft text-link-deep'
                     : 'border-hairline bg-canvas text-body hover:bg-canvas-soft-2 hover:text-ink'
-                }`}
+                  }`}
               >
                 <GridIcon />
                 {strings.previewPanel.compareAll}
@@ -311,9 +332,9 @@ export default function Dashboard({ lang, strings, toolSlugs, focus }: Props) {
                 <>
                   {cardOrder.map(key => {
                     if (key === 'linkedin') return <div id="platform-card-linkedin" key="lw"><LinkedInPreview key="linkedin" text={analysisText} view={views.linkedin} setView={(v) => setPlatformView('linkedin', v)} lang={lang} s={strings} toolLinkHref={`/${lang}/${toolSlugs.linkedin}/`} /></div>;
-                    if (key === 'twitter')  return <div id="platform-card-twitter"  key="tw"><TwitterPreview  key="twitter"  text={analysisText} lang={lang} s={strings} toolLinkHref={`/${lang}/${toolSlugs.twitter}/`} /></div>;
-                    if (key === 'meta')     return <div id="platform-card-meta"     key="mw"><MetaMonitor     key="meta"     text={analysisText} lang={lang} s={strings} toolLinkHref={`/${lang}/${toolSlugs.instagram}/`} facebookToolLinkHref={`/${lang}/${toolSlugs.facebook}/`} priority={effectiveMetaPriority} instagramView={views.instagram} setInstagramView={(v) => setPlatformView('instagram', v)} facebookView={views.facebook} setFacebookView={(v) => setPlatformView('facebook', v)} /></div>;
-                    if (key === 'threads')  return <div id="platform-card-threads"  key="thw"><ThreadsPreview  key="threads"  text={analysisText} lang={lang} s={strings} toolLinkHref={`/${lang}/${toolSlugs.threads}/`} view={views.threads} setView={(v) => setPlatformView('threads', v)} /></div>;
+                    if (key === 'twitter') return <div id="platform-card-twitter" key="tw"><TwitterPreview key="twitter" text={analysisText} lang={lang} s={strings} toolLinkHref={`/${lang}/${toolSlugs.twitter}/`} /></div>;
+                    if (key === 'meta') return <div id="platform-card-meta" key="mw"><MetaMonitor key="meta" text={analysisText} lang={lang} s={strings} toolLinkHref={`/${lang}/${toolSlugs.instagram}/`} facebookToolLinkHref={`/${lang}/${toolSlugs.facebook}/`} priority={effectiveMetaPriority} instagramView={views.instagram} setInstagramView={(v) => setPlatformView('instagram', v)} facebookView={views.facebook} setFacebookView={(v) => setPlatformView('facebook', v)} /></div>;
+                    if (key === 'threads') return <div id="platform-card-threads" key="thw"><ThreadsPreview key="threads" text={analysisText} lang={lang} s={strings} toolLinkHref={`/${lang}/${toolSlugs.threads}/`} view={views.threads} setView={(v) => setPlatformView('threads', v)} /></div>;
                   })}
                   <SmsCounter text={analysisText} lang={lang} s={strings.sms} />
                 </>
