@@ -96,24 +96,45 @@ export function ThreadsPreview({ text, lang, s, toolLinkHref, view, setView }: P
               layout="gutter"
               class={view === 'desktop' ? 'feed-phone--desktop' : ''}
               avatar={
-                <Avatar
-                  size="h-9 w-9"
-                  gradient="from-grad-preview-start to-grad-ship-start"
-                  initial={monogram(author.handle)}
-                />
-              }
-              identity={
-                /* Threads: username + tick + timestamp (no separate display name). */
-                <div class="flex items-center gap-1 text-[14px] leading-5">
-                  <span class="flex min-w-0 items-center gap-1">
-                    <span class="truncate font-semibold text-ink">{author.handle}</span>
-                    {author.verified && <VerifiedTick size={14} class="shrink-0 text-link" />}
-                  </span>
-                  <span class="shrink-0 text-mute" aria-hidden="true">·</span>
-                  <span class="shrink-0 text-mute">{author.timestamp}</span>
+                <div class="relative flex w-9 flex-col items-center self-stretch pb-1">
+                  <div class="relative z-10 shrink-0 bg-canvas">
+                    <Avatar
+                      size="h-9 w-9"
+                      gradient="from-grad-preview-start to-grad-ship-start"
+                      initial={monogram(author.handle)}
+                    />
+                    <div class="absolute -right-1 -bottom-1 flex h-[18px] w-[18px] items-center justify-center rounded-full bg-canvas">
+                      <div class="flex h-[13px] w-[13px] items-center justify-center rounded-full bg-ink text-canvas">
+                        <svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round">
+                          <path d="M12 4v16M4 12h16" />
+                        </svg>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  {/* The vertical thread line, absolutely positioned to stretch */}
+                  <div class="absolute top-[42px] bottom-[26px] w-[1.5px] rounded-full bg-hairline-strong" />
+                  
+                  {/* The 3 dots cluster, pushed to the bottom */}
+                  <div class="relative mt-auto h-[18px] w-[18px] shrink-0 bg-canvas opacity-40">
+                    <div class="absolute top-0 right-0 h-1 w-1 rounded-full bg-ink" />
+                    <div class="absolute bottom-1 left-0 h-[5px] w-[5px] rounded-full bg-ink" />
+                    <div class="absolute bottom-0 right-1.5 h-[3px] w-[3px] rounded-full bg-ink" />
+                  </div>
                 </div>
               }
-              trailing={<MoreDots size={16} />}
+              identity={
+                <div class="flex items-center gap-1 text-[15px] font-semibold leading-5 text-ink">
+                  <span class="truncate">{author.handle}</span>
+                  {author.verified && <VerifiedTick size={14} class="shrink-0 text-link" />}
+                </div>
+              }
+              trailing={
+                <div class="flex items-center gap-2.5 text-mute">
+                  <span class="text-[14px]">{author.timestamp}</span>
+                  <MoreDots size={18} />
+                </div>
+              }
             >
               <ThreadsPostText
                 post={post}
@@ -123,19 +144,28 @@ export function ThreadsPreview({ text, lang, s, toolLinkHref, view, setView }: P
                 foldAria={s.hook.foldAria}
               />
 
-              {/* Lighter-than-X engagement row: like / comment / repost / share. */}
-              <div class="mt-3 flex max-w-[230px] items-center justify-between text-mute/45">
-                <Engagement icon="like" size={17} />
-                <Engagement icon="comment" size={17} />
-                <Engagement icon="repost" size={17} />
-                <Engagement icon="share" size={17} />
+              {/* Native Threads engagement row: left aligned, tightly packed */}
+              <div class="mt-3 flex items-center gap-4 text-ink">
+                <Engagement icon="like" size={19} />
+                <Engagement icon="comment" size={19} />
+                <Engagement icon="repost" size={19} />
+                <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M22 2 11 13M22 2l-7 20-4-9-9-4 20-7z" />
+                </svg>
               </div>
 
-              <div class="mt-2 flex items-center justify-between font-mono text-[11px] text-mute/70 tabular-nums">
-                <span>{interp(s.common.charsSuffix, { n: nf.format(charCount(post)) })}</span>
-                {isChain && (
-                  <span>{nf.format(i + 1)}/{nf.format(posts.length)}</span>
-                )}
+              <div class="mt-2.5 flex items-center justify-between text-[14px] text-mute">
+                <div class="flex items-center gap-1.5">
+                  <span>123 replies</span>
+                  <span>·</span>
+                  <span>456 likes</span>
+                </div>
+                <div class="font-mono text-[11px] tabular-nums text-mute/70">
+                  <span>{interp(s.common.charsSuffix, { n: nf.format(charCount(post)) })}</span>
+                  {isChain && (
+                    <span class="ml-2">{nf.format(i + 1)}/{nf.format(posts.length)}</span>
+                  )}
+                </div>
               </div>
             </PostCard>
           ))

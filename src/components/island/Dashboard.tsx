@@ -277,11 +277,11 @@ export default function Dashboard({ lang, strings, toolSlugs, focus }: Props) {
             </h3>
 
             {/* Platform selector: tablist left, compare-all right */}
-            <div class="mt-2.5 flex items-end gap-2 border-b border-hairline">
+            <div class="mt-2.5 flex items-end gap-1 border-b border-hairline sm:gap-2">
               <div
                 role="tablist"
                 aria-label={strings.previewPanel.title}
-                class="flex min-w-0 flex-1 items-center gap-1 overflow-x-auto"
+                class="flex min-w-0 flex-1 items-center gap-0 overflow-x-auto sm:gap-1"
               >
                 {PREVIEW_TABS.map((p, i) => {
                   const active = !compare && previewTab === p.id;
@@ -296,7 +296,7 @@ export default function Dashboard({ lang, strings, toolSlugs, focus }: Props) {
                       aria-label={interp(strings.previewPanel.tabAria, { platform: p.name })}
                       onClick={() => { setPreviewTab(p.id); setCompare(false); }}
                       onKeyDown={(e) => onTabKey(e, i)}
-                      class={`relative flex h-11 w-11 shrink-0 items-center justify-center transition-[background,opacity] duration-100 ${active ? 'opacity-100' : 'opacity-40 hover:bg-canvas-soft hover:opacity-80'
+                      class={`relative flex h-10 w-10 shrink-0 items-center justify-center transition-[background,opacity] duration-100 sm:h-11 sm:w-11 ${active ? 'opacity-100' : 'opacity-40 hover:bg-canvas-soft hover:opacity-80'
                         }`}
                     >
                       {p.brand ? <BrandLogo brand={p.brand} size={20} /> : <SmsGlyph size={20} />}
@@ -311,13 +311,13 @@ export default function Dashboard({ lang, strings, toolSlugs, focus }: Props) {
                 type="button"
                 aria-pressed={compare}
                 onClick={() => setCompare((c) => !c)}
-                class={`mb-2 inline-flex shrink-0 items-center gap-1.5 rounded-pill border px-3 py-1.5 text-[12px] font-medium transition-[transform,color,background,border-color] duration-100 active:scale-[0.96] ${compare
+                class={`mb-2 inline-flex h-10 w-10 shrink-0 items-center justify-center gap-1.5 rounded-pill border p-0 text-[12px] font-medium transition-[transform,color,background,border-color] duration-100 active:scale-[0.96] sm:h-auto sm:w-auto sm:px-3 sm:py-1.5 ${compare
                     ? 'border-link bg-link-bg-soft text-link-deep'
                     : 'border-hairline bg-canvas text-body hover:bg-canvas-soft-2 hover:text-ink'
                   }`}
               >
-                <GridIcon />
-                {strings.previewPanel.compareAll}
+                <GridIcon class="h-[18px] w-[18px] sm:h-[13px] sm:w-[13px]" />
+                <span class="hidden sm:inline">{strings.previewPanel.compareAll}</span>
               </button>
             </div>
 
@@ -397,9 +397,9 @@ function SmsGlyph({ size = 20 }: { size?: number }) {
 }
 
 /** Small 2×2 grid glyph for the compare-all toggle. */
-function GridIcon() {
+function GridIcon({ class: cls = 'w-[13px] h-[13px]' }: { class?: string }) {
   return (
-    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true" class={cls}>
       <rect x="3.5" y="3.5" width="7" height="7" rx="1.5" />
       <rect x="13.5" y="3.5" width="7" height="7" rx="1.5" />
       <rect x="3.5" y="13.5" width="7" height="7" rx="1.5" />

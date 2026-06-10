@@ -105,6 +105,14 @@ export function Workspace({ text, setText, lang, s }: Props) {
           class="block w-full h-[360px] resize-none rounded-md border border-hairline bg-canvas-soft px-4 py-3 text-[15px] leading-7 text-ink placeholder:text-mute focus:border-link focus:bg-canvas focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-link"
         />
 
+        {/* Live meta counters */}
+        <div class="mt-3 grid grid-cols-2 gap-2.5 sm:grid-cols-4">
+          <Stat label={w.counters.characters} value={nf.format(chars)} />
+          <Stat label={w.counters.words} value={nf.format(words)} />
+          <Stat label={w.counters.lines} value={nf.format(lineCount(text))} />
+          <Stat label={w.counters.paragraphs} value={nf.format(paragraphCount(text))} />
+        </div>
+
         {/* Action row — cleanup tools grouped left, destructive clear right. */}
         <div class="mt-3 flex flex-wrap items-center gap-2">
           <button
@@ -188,14 +196,6 @@ export function Workspace({ text, setText, lang, s }: Props) {
                   {item.label}
                 </button>
               ))}
-            </div>
-
-            {/* Live meta counters */}
-            <div class="mt-3 grid grid-cols-2 gap-2.5 sm:grid-cols-4">
-              <Stat label={w.counters.characters} value={nf.format(chars)} />
-              <Stat label={w.counters.words} value={nf.format(words)} />
-              <Stat label={w.counters.lines} value={nf.format(lineCount(text))} />
-              <Stat label={w.counters.paragraphs} value={nf.format(paragraphCount(text))} />
             </div>
 
             <div class="mt-2.5 grid grid-cols-1 gap-2.5 sm:grid-cols-2">
