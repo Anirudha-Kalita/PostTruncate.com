@@ -33,6 +33,7 @@ export const fr: Translations = {
     lede: 'Écrivez une seule fois et regardez votre publication s’afficher dans les aperçus natifs de LinkedIn, X, Instagram et Facebook — lignes de pli, découpes en fils, limites de hashtags et avertissements d’accessibilité, le tout en direct pendant que vous écrivez.',
     primary: 'Commencer à écrire',
     secondary: 'Voir les limites des plateformes',
+    badge: 'Aperçus en temps réel. Plus de devinettes.',
   },
 
   howItWorks: {
@@ -582,6 +583,18 @@ export const fr: Translations = {
     insights: {
       title: 'Analyses avancées',
       sub: 'Analyse d’écriture, lisibilité, mots-clés et plus',
+      subScoped: 'Lisibilité, Densité des mots-clés',
+    },
+    hookStrip: {
+      heading: 'Voyez comment votre post se comporte partout',
+      viewAll: 'Voir toutes les limites par plateforme',
+      limitLabel: 'Limite : {n}',
+      perSms: '{n} par SMS',
+      survives: 'Accroche visible',
+      cut: 'Accroche coupée',
+      risk: 'Accroche à risque',
+      smsNeeded: '{n} SMS nécessaires',
+      chars: '{n} caractères',
     },
     common: {
       displayName: 'Votre nom',

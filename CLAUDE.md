@@ -56,6 +56,32 @@ DESIGN.md             # Design system spec — read before touching styles
 - Editor draft persists to `sessionStorage` (Dashboard.tsx)
 - Before changing any visual style, read `DESIGN.md`
 
+## Testing
+
+Layered pipeline — **run the cheapest layer that covers the change; escalate only when needed.** Do NOT default to browser screenshots for feature verification.
+
+| Layer | Command | Use it for | Speed |
+|---|---|---|---|
+| 0. Static | `npm run test:fast` | Typecheck (`astro check`) + lint. Catches most breakage. | ~seconds |
+| 1. Unit (Vitest) | `npm run test:unit` | Pure logic in `textTools.ts` (truncation, SMS GSM-7 segmentation, counts, hook/CTA/fold analysis). No browser. | ~ms |
+| 2. Component (Container API) | `npm run test:component` | Astro `.astro` render-to-string assertions (Nav, Footer, cards). No browser. | fast |
+| 3. Browser (Vitest Browser Mode) | `npm run test:browser` | Preact **islands** that need a real browser — `Dashboard.tsx`, `Workspace.tsx`, `*Preview.tsx`, platform selector, live counters. Real CSS/ResizeObserver. | fast-ish |
+| 4. E2E (Playwright) | `npm run test:e2e` | 1–2 critical user flows only. Run before deploys, not per-feature. | slow |
+
+### Testing conventions
+
+- **`textTools.ts` is the priority test target** — it's pure and DOM-free, so it belongs entirely in Layer 1 (Vitest unit). Every change to truncation, segmentation, or analysis logic must have/keep a unit test.
+- Preact islands need a **real browser** (Tailwind v4 tokens, CSS custom properties, `ResizeObserver`) — test them in Layer 3, not JSDOM, which renders these incorrectly.
+- Vitest config uses Astro's `getViteConfig()` helper so it picks up project settings. Browser Mode uses `vitest-browser-astro` + `@vitest/browser-playwright`, headless Chromium, shared context (requires Vitest 4.x).
+- Playwright E2E must include a console-listener fixture that **fails on Astro/Preact hydration-mismatch warnings** (islands hydrate `client:load`).
+- Keep tests co-located or under a `tests/` dir mirroring `src/`; name browser tests `*.browser.test.ts`.
+
+### Which layer after which change
+
+- Edited `textTools.ts` or i18n strings → `test:fast` + `test:unit`.
+- Edited a Preact island / preview / selector / live UI → also `test:browser`.
+- Structural/route change or pre-deploy → `test:e2e`.
+
 ## Constraints
 
 - **NEVER run `git commit`, `git push`, or any git write/push command**
@@ -64,5 +90,6 @@ DESIGN.md             # Design system spec — read before touching styles
 
 ### After any file edits
 
-- Always run 'npx astro sync' after modifying any source files, especially content collections, config, or component files. 
+- Always run 'npx astro sync' after modifying any source files, especially content collections, config, or component files.
+- After modifying source files, run `npm run test:fast` (typecheck + lint) before considering the change done. Escalate to `test:unit` / `test:browser` per the Testing table above based on what was touched. Do not jump straight to browser screenshots.
 

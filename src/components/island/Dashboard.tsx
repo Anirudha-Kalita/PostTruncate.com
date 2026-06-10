@@ -11,6 +11,7 @@ import type { HookPlatform } from '../../lib/hookAnalysis';
 import type { FoldView } from '../../lib/textTools';
 import { SmsCounter } from './SmsCounter';
 import { ReadabilityCard } from './ReadabilityCard';
+import { HookStrip } from './HookStrip';
 import { BrandLogo, type Brand } from './ui';
 import { interp } from '../../i18n/interp';
 import type { IslandStrings } from '../../i18n/types';
@@ -221,7 +222,7 @@ export default function Dashboard({ lang, strings, toolSlugs, focus }: Props) {
             <summary class="flex cursor-pointer list-none items-center gap-3 px-4 py-4 transition-colors hover:bg-canvas-soft sm:px-6 [&::-webkit-details-marker]:hidden">
               <InsightsIcon />
               <span class="text-[15px] font-semibold leading-5 text-ink">{strings.insights.title}</span>
-              <span class="hidden min-w-0 truncate text-[13px] text-mute sm:inline">Readability, Keywords density</span>
+              <span class="hidden min-w-0 truncate text-[13px] text-mute sm:inline">{strings.insights.subScoped}</span>
               <svg
                 width="16"
                 height="16"
@@ -353,6 +354,9 @@ export default function Dashboard({ lang, strings, toolSlugs, focus }: Props) {
         </div>
       </div>
 
+      {/* Hook visibility strip — per-platform verdicts, always visible */}
+      <HookStrip text={analysisText} lang={lang} s={strings} views={views} limitsHref="#platforms" />
+
       {/* Advanced insights — collapsed analysis drawer below the container */}
       <details class="group mt-4 rounded-xl bg-canvas shadow-e2">
         <summary class="flex cursor-pointer list-none items-center gap-3 px-4 py-4 transition-colors hover:bg-canvas-soft sm:px-6 [&::-webkit-details-marker]:hidden">
@@ -375,9 +379,6 @@ export default function Dashboard({ lang, strings, toolSlugs, focus }: Props) {
           </svg>
         </summary>
         <div class="grid grid-cols-1 gap-5 border-t border-hairline p-4 sm:p-6 lg:grid-cols-2">
-          <div class="lg:col-span-2">
-            <HookVisibilityCard text={analysisText} lang={lang} s={strings} views={views} />
-          </div>
           <ReadabilityCard text={analysisText} lang={lang} s={strings.readability} />
           <KeywordMonitor text={analysisText} lang={lang} s={strings} />
         </div>

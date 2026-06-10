@@ -511,6 +511,15 @@ export function HookStatusIcon({ status, size = 18 }: { status: HookStatus; size
   );
 }
 
+/** Green SMS bubble glyph — our own mark for the SMS channel, no platform asset. */
+export function SmsGlyph({ size = 20 }: { size?: number }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="#34C759" aria-hidden="true">
+      <path d="M12 3.5c-5 0-9 3.2-9 7.2 0 2.2 1.2 4.1 3.1 5.4L5 20.5l3.8-1.6c1 .3 2.1.4 3.2.4 5 0 9-3.2 9-7.1s-4-7.2-9-7.2z" />
+    </svg>
+  );
+}
+
 export type Brand = 'linkedin' | 'x' | 'instagram' | 'facebook' | 'threads';
 
 interface BrandLogoProps {

@@ -33,6 +33,7 @@ export const nl: Translations = {
     lede: 'Schrijf één keer en zie je bericht weergegeven in de native previews van LinkedIn, X, Instagram en Facebook — vouwregels, threadsplitsingen, hashtaglimieten en toegankelijkheidswaarschuwingen, allemaal live terwijl je typt.',
     primary: 'Begin met schrijven',
     secondary: 'Bekijk de platformlimieten',
+    badge: 'Real-time voorbeelden. Geen giswerk meer.',
   },
 
   howItWorks: {
@@ -582,6 +583,18 @@ export const nl: Translations = {
     insights: {
       title: 'Geavanceerde inzichten',
       sub: 'Schrijfanalyse, leesbaarheid, zoekwoorden en meer',
+      subScoped: 'Leesbaarheid, Trefwoorddichtheid',
+    },
+    hookStrip: {
+      heading: 'Zie hoe je post overal presteert',
+      viewAll: 'Bekijk alle platformlimieten',
+      limitLabel: '{n} limiet',
+      perSms: '{n} per sms',
+      survives: 'Hook blijft zichtbaar',
+      cut: 'Hook afgekapt',
+      risk: 'Hook in gevaar',
+      smsNeeded: '{n} sms nodig',
+      chars: '{n} tekens',
     },
     common: {
       displayName: 'Jouw naam',

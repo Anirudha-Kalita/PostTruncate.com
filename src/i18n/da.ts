@@ -33,6 +33,7 @@ export const da: Translations = {
     lede: 'Skriv én gang, og se dit opslag blive vist i ægte LinkedIn-, X-, Instagram- og Facebook-previews — foldlinjer, trådopdelinger, hashtag-grænser og tilgængelighedsadvarsler, alt sammen live mens du skriver.',
     primary: 'Begynd at skrive',
     secondary: 'Se platformsgrænser',
+    badge: 'Realtidsvisning. Slut med at gætte.',
   },
 
   howItWorks: {
@@ -582,6 +583,18 @@ export const da: Translations = {
     insights: {
       title: 'Avanceret indsigt',
       sub: 'Skriveanalyse, læsbarhed, nøgleord og mere',
+      subScoped: 'Læsbarhed, Søgeordstæthed',
+    },
+    hookStrip: {
+      heading: 'Se hvordan dit opslag klarer sig overalt',
+      viewAll: 'Se alle platformgrænser',
+      limitLabel: '{n} grænse',
+      perSms: '{n} pr. sms',
+      survives: 'Hooket overlever',
+      cut: 'Hooket skæres af',
+      risk: 'Hooket i fare',
+      smsNeeded: '{n} sms’er kræves',
+      chars: '{n} tegn',
     },
     common: {
       displayName: 'Dit navn',

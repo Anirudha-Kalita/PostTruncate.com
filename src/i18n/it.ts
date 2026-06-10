@@ -33,6 +33,7 @@ export const it: Translations = {
     lede: 'Scrivi una sola volta e guarda il tuo post nelle anteprime native di LinkedIn, X, Instagram e Facebook: righe della soglia, suddivisioni dei thread, limiti degli hashtag e avvisi di accessibilità, tutto in tempo reale mentre scrivi.',
     primary: 'Inizia a scrivere',
     secondary: 'Vedi i limiti delle piattaforme',
+    badge: 'Anteprime in tempo reale. Niente più supposizioni.',
   },
 
   howItWorks: {
@@ -582,6 +583,18 @@ export const it: Translations = {
     insights: {
       title: 'Approfondimenti avanzati',
       sub: 'Analisi di scrittura, leggibilità, parole chiave e altro',
+      subScoped: 'Leggibilità, Densità delle parole chiave',
+    },
+    hookStrip: {
+      heading: 'Guarda come rende il tuo post ovunque',
+      viewAll: 'Vedi tutti i limiti per piattaforma',
+      limitLabel: 'Limite: {n}',
+      perSms: '{n} per SMS',
+      survives: 'Hook visibile',
+      cut: 'Hook tagliato',
+      risk: 'Hook a rischio',
+      smsNeeded: '{n} SMS necessari',
+      chars: '{n} caratteri',
     },
     common: {
       displayName: 'Il tuo nome',

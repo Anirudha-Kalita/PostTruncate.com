@@ -183,6 +183,25 @@ export interface IslandStrings {
   insights: {
     title: string;
     sub: string;
+    subScoped: string;
+  };
+  /** Horizontal hook-visibility strip beneath the workspace container. */
+  hookStrip: {
+    heading: string;
+    /** "View all platform limits" link label (arrow appended in markup). */
+    viewAll: string;
+    /** "{n}" → formatted hard cap, e.g. "3,000 limit". */
+    limitLabel: string;
+    /** "{n}" → per-segment cap, e.g. "160 per SMS". */
+    perSms: string;
+    /** Verdict badges — icon + text, never color alone. */
+    survives: string;
+    cut: string;
+    risk: string;
+    /** "{n}" → live SMS segment count. */
+    smsNeeded: string;
+    /** "{n}" → live character count secondary line. */
+    chars: string;
   };
   common: {
     /** Author display name shown in every preview card's mock post header. */
@@ -457,6 +476,7 @@ export interface Translations {
     lede: string;
     primary: string;
     secondary: string;
+    badge: string;
   };
   /** Three-step "How it works" explainer on the homepage. Steps must match
       the visible card content exactly — used for both rendering and HowTo JSON-LD. */

@@ -33,6 +33,7 @@ export const ja: Translations = {
     lede: '一度書くだけで、LinkedIn、X、Instagram、Facebookのネイティブプレビューに投稿がそのまま表示されます。折りたたみ位置、スレッド分割、ハッシュタグの上限、アクセシビリティ警告まで、入力しながらリアルタイムで確認できます。',
     primary: '書き始める',
     secondary: 'プラットフォームの上限を見る',
+    badge: 'リアルタイムプレビュー。もう推測は不要です。',
   },
 
   howItWorks: {
@@ -582,6 +583,18 @@ export const ja: Translations = {
     insights: {
       title: '高度な分析',
       sub: '文章分析、読みやすさ、キーワードなど',
+      subScoped: '読みやすさ、キーワード密度',
+    },
+    hookStrip: {
+      heading: '各プラットフォームでの見え方をチェック',
+      viewAll: 'すべての文字数制限を見る',
+      limitLabel: '上限 {n}',
+      perSms: '1通あたり{n}文字',
+      survives: 'フックは表示される',
+      cut: 'フックが切れる',
+      risk: 'フックが危険',
+      smsNeeded: 'SMS {n}通',
+      chars: '{n}文字',
     },
     common: {
       displayName: 'あなたの名前',

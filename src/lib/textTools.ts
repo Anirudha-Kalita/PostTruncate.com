@@ -22,6 +22,8 @@ export const LIMITS = {
   INSTAGRAM_HASHTAGS: 5,
   /** Instagram's published caption character cap. */
   INSTAGRAM_CAPTION: 2200,
+  /** Facebook's published hard cap for a feed post. */
+  FACEBOOK_POST: 63206,
 } as const;
 
 export type SmsEncoding = 'GSM 7-bit' | 'Unicode';

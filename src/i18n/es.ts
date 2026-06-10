@@ -33,6 +33,7 @@ export const es: Translations = {
     lede: 'Escribe una vez y observa cómo se renderiza tu publicación en previsualizaciones nativas de LinkedIn, X, Instagram y Facebook: líneas del pliegue, divisiones de hilos, límites de hashtags y avisos de accesibilidad, todo en vivo mientras escribes.',
     primary: 'Empezar a escribir',
     secondary: 'Ver los límites de cada plataforma',
+    badge: 'Vistas previas en tiempo real. Se acabaron las conjeturas.',
   },
 
   howItWorks: {
@@ -582,6 +583,18 @@ export const es: Translations = {
     insights: {
       title: 'Análisis avanzado',
       sub: 'Análisis de escritura, legibilidad, palabras clave y más',
+      subScoped: 'Legibilidad, Densidad de palabras clave',
+    },
+    hookStrip: {
+      heading: 'Mira cómo rinde tu publicación en todas partes',
+      viewAll: 'Ver todos los límites por plataforma',
+      limitLabel: 'Límite: {n}',
+      perSms: '{n} por SMS',
+      survives: 'El gancho sobrevive',
+      cut: 'Gancho cortado',
+      risk: 'Gancho en riesgo',
+      smsNeeded: '{n} SMS necesarios',
+      chars: '{n} caracteres',
     },
     common: {
       displayName: 'Tu nombre',

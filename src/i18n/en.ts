@@ -33,6 +33,7 @@ export const en: Translations = {
     lede: 'Write once and watch your post render in native LinkedIn, X, Instagram, and Facebook previews — fold lines, thread splits, hashtag limits, and accessibility warnings, all live as you type.',
     primary: 'Start writing',
     secondary: 'See platform limits',
+    badge: 'Real-time previews. No more guessing.',
   },
 
   howItWorks: {
@@ -582,6 +583,18 @@ export const en: Translations = {
     insights: {
       title: 'Advanced insights',
       sub: 'Writing analysis, readability, keywords, and more',
+      subScoped: 'Readability, Keywords density',
+    },
+    hookStrip: {
+      heading: 'See how your post performs everywhere',
+      viewAll: 'View all platform limits',
+      limitLabel: '{n} limit',
+      perSms: '{n} per SMS',
+      survives: 'Hook survives',
+      cut: 'Hook cut off',
+      risk: 'Hook at risk',
+      smsNeeded: '{n} SMS needed',
+      chars: '{n} characters',
     },
     common: {
       displayName: 'Your Name',

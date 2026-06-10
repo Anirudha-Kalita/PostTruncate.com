@@ -33,6 +33,7 @@ export const pt: Translations = {
     lede: 'Escreva uma vez e veja a sua publicação a ser apresentada em pré-visualizações nativas do LinkedIn, X, Instagram e Facebook — linhas de dobra, divisões de threads, limites de hashtags e avisos de acessibilidade, tudo em tempo real à medida que escreve.',
     primary: 'Começar a escrever',
     secondary: 'Ver os limites das plataformas',
+    badge: 'Pré-visualizações em tempo real. Chega de adivinhação.',
   },
 
   howItWorks: {
@@ -582,6 +583,18 @@ export const pt: Translations = {
     insights: {
       title: 'Insights avançados',
       sub: 'Análise de escrita, legibilidade, palavras-chave e mais',
+      subScoped: 'Legibilidade, Densidade de palavras-chave',
+    },
+    hookStrip: {
+      heading: 'Veja como o seu post se comporta em todo o lado',
+      viewAll: 'Ver todos os limites por plataforma',
+      limitLabel: 'Limite: {n}',
+      perSms: '{n} por SMS',
+      survives: 'Gancho visível',
+      cut: 'Gancho cortado',
+      risk: 'Gancho em risco',
+      smsNeeded: '{n} SMS necessários',
+      chars: '{n} caracteres',
     },
     common: {
       displayName: 'O Seu Nome',

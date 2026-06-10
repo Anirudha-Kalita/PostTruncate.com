@@ -33,6 +33,7 @@ export const zh: Translations = {
     lede: '写一次，即可看到你的帖子在 LinkedIn、X、Instagram 和 Facebook 的原生预览中呈现的样子——折叠行、串文拆分、话题标签上限以及无障碍提醒，全部随你输入实时更新。',
     primary: '开始写作',
     secondary: '查看平台限制',
+    badge: '实时预览。不再需要猜测。',
   },
 
   howItWorks: {
@@ -580,6 +581,18 @@ export const zh: Translations = {
     insights: {
       title: '高级分析',
       sub: '写作分析、可读性、关键词等',
+      subScoped: '可读性，关键词密度',
+    },
+    hookStrip: {
+      heading: '查看帖子在各平台的表现',
+      viewAll: '查看所有平台限制',
+      limitLabel: '上限 {n}',
+      perSms: '每条 {n} 字符',
+      survives: '开头完整可见',
+      cut: '开头被截断',
+      risk: '开头有风险',
+      smsNeeded: '需要 {n} 条短信',
+      chars: '{n} 个字符',
     },
     common: {
       displayName: '你的名字',

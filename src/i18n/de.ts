@@ -34,6 +34,7 @@ export const de: Translations = {
     lede: 'Schreib einmal und beobachte, wie dein Beitrag in nativen Vorschauen von LinkedIn, X, Instagram und Facebook erscheint — Falz-Linien, Thread-Aufteilungen, Hashtag-Limits und Barrierefreiheits-Warnungen, alles live beim Tippen.',
     primary: 'Loslegen',
     secondary: 'Plattform-Limits ansehen',
+    badge: 'Echtzeit-Vorschau. Kein Rätselraten mehr.',
   },
 
   howItWorks: {
@@ -583,6 +584,18 @@ export const de: Translations = {
     insights: {
       title: 'Erweiterte Analysen',
       sub: 'Schreibanalyse, Lesbarkeit, Keywords und mehr',
+      subScoped: 'Lesbarkeit, Keyword-Dichte',
+    },
+    hookStrip: {
+      heading: 'So performt dein Post überall',
+      viewAll: 'Alle Plattform-Limits ansehen',
+      limitLabel: '{n} Limit',
+      perSms: '{n} pro SMS',
+      survives: 'Hook bleibt sichtbar',
+      cut: 'Hook abgeschnitten',
+      risk: 'Hook gefährdet',
+      smsNeeded: '{n} SMS nötig',
+      chars: '{n} Zeichen',
     },
     common: {
       displayName: 'Dein Name',
