@@ -28,6 +28,7 @@ interface Props {
   setText: (next: string) => void;
   lang: string;
   s: IslandStrings;
+  focus?: string;
 }
 
 /**
@@ -35,7 +36,7 @@ interface Props {
  * optimization engine actions. All transforms route through the pure helpers
  * in textTools so behaviour matches the previews exactly.
  */
-export function Workspace({ text, setText, lang, s }: Props) {
+export function Workspace({ text, setText, lang, s, focus }: Props) {
   const hidden = detectHiddenUnicode(text);
   const w = s.workspace;
   const nf = new Intl.NumberFormat(lang);
@@ -99,7 +100,7 @@ export function Workspace({ text, setText, lang, s }: Props) {
           id="post-input"
           value={text}
           onInput={(e) => setText((e.currentTarget as HTMLTextAreaElement).value)}
-          placeholder={w.placeholder}
+          placeholder={focus && w.placeholders && w.placeholders[focus as keyof typeof w.placeholders] ? w.placeholders[focus as keyof typeof w.placeholders] : w.placeholder}
           rows={12}
           spellcheck
           class="block w-full h-[360px] resize-none rounded-md border border-hairline bg-canvas-soft px-4 py-3 text-[15px] leading-7 text-ink placeholder:text-mute focus:border-link focus:bg-canvas focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-link"

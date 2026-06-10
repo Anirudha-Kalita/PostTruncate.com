@@ -75,6 +75,11 @@ export function HookStrip({ text, lang, s, views, limitsHref }: Props) {
       'cta-below': s.hook.reasonCtaBelow,
       'hook-only': s.hook.reasonHookOnly,
       'hook-and-cta': s.hook.reasonHookAndCta,
+      'x-fits': s.hook.xReasonFits,
+      'x-hook-cut': s.hook.xReasonHookCut,
+      'x-cta-below': s.hook.xReasonCtaBelow,
+      'x-hook-only': s.hook.xReasonHookOnly,
+      'x-hook-and-cta': s.hook.xReasonHookAndCta,
     }),
     [s.hook],
   );

@@ -194,7 +194,7 @@ export default function Dashboard({ lang, strings, toolSlugs, focus }: Props) {
     return (
       <div class="grid grid-cols-1 gap-5 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)]">
         <div class="flex flex-col gap-5">
-          <Workspace text={text} setText={setText} lang={lang} s={strings} />
+          <Workspace text={text} setText={setText} lang={lang} s={strings} focus={focus} />
 
           {!text && (
             <button

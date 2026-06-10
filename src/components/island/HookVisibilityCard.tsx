@@ -69,6 +69,11 @@ export function HookVisibilityCard({ text, lang, s, only, views }: Props) {
       'cta-below': h.reasonCtaBelow,
       'hook-only': h.reasonHookOnly,
       'hook-and-cta': h.reasonHookAndCta,
+      'x-fits': h.xReasonFits,
+      'x-hook-cut': h.xReasonHookCut,
+      'x-cta-below': h.xReasonCtaBelow,
+      'x-hook-only': h.xReasonHookOnly,
+      'x-hook-and-cta': h.xReasonHookAndCta,
     }),
     [h],
   );
@@ -95,7 +100,7 @@ export function HookVisibilityCard({ text, lang, s, only, views }: Props) {
   return (
     <Card>
       <CardHead eyebrow={h.eyebrow} title={h.title}>
-        {hasText && (
+        {hasText && !only && (
           <Badge
             tone={summaryTone}
             class="max-w-[190px] text-center leading-4 sm:max-w-none sm:text-left"

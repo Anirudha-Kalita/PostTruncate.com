@@ -66,7 +66,12 @@ export type HookReasonCode =
   | 'hook-cut'
   | 'cta-below'
   | 'hook-only'
-  | 'hook-and-cta';
+  | 'hook-and-cta'
+  | 'x-fits'
+  | 'x-hook-cut'
+  | 'x-cta-below'
+  | 'x-hook-only'
+  | 'x-hook-and-cta';
 
 export interface HookAnalysis {
   platform: HookPlatform;
@@ -212,6 +217,7 @@ export function analyzeHook(
   const ctaBelowFold = ctas.filter((c) => !c.aboveFold);
 
   const { verdict, reasonCode, reason } = decide({
+    platform,
     label,
     truncated,
     hookTruncatedMidword,
@@ -239,6 +245,7 @@ export function analyzeHook(
 }
 
 function decide(input: {
+  platform: HookPlatform;
   label: string;
   truncated: boolean;
   hookTruncatedMidword: boolean;
@@ -247,7 +254,8 @@ function decide(input: {
   hasCtaBelow: boolean;
   empty: boolean;
 }): { verdict: HookVerdict; reasonCode: HookReasonCode; reason: string } {
-  const { label } = input;
+  const { platform, label } = input;
+  const isX = platform === 'x';
 
   if (input.empty) {
     return { verdict: 'pass', reasonCode: 'empty', reason: 'Empty post — nothing to analyze.' };
@@ -256,8 +264,10 @@ function decide(input: {
   if (!input.truncated) {
     return {
       verdict: 'pass',
-      reasonCode: 'fits',
-      reason: `Your full post clears the fold on ${label} — nothing is hidden.`,
+      reasonCode: isX ? 'x-fits' : 'fits',
+      reason: isX 
+        ? `Your full post fits in a single tweet on ${label} — nothing is hidden.`
+        : `Your full post clears the fold on ${label} — nothing is hidden.`,
     };
   }
 
@@ -265,30 +275,38 @@ function decide(input: {
   if (input.hookTruncatedMidword) {
     return {
       verdict: 'fail',
-      reasonCode: 'hook-cut',
-      reason: `Your opening hook is cut off by the "…more" fold on ${label}.`,
+      reasonCode: isX ? 'x-hook-cut' : 'hook-cut',
+      reason: isX
+        ? `Your opening hook spills into the second tweet on ${label}.`
+        : `Your opening hook is cut off by the "…more" fold on ${label}.`,
     };
   }
 
   if (input.hasCta && !input.hasCtaAbove) {
     return {
-      verdict: 'warn',
-      reasonCode: 'cta-below',
-      reason: `Your CTA appears below the fold on ${label}.`,
+      verdict: isX ? 'pass' : 'warn',
+      reasonCode: isX ? 'x-cta-below' : 'cta-below',
+      reason: isX
+        ? `Your CTA appears in a threaded tweet on ${label}.`
+        : `Your CTA appears below the fold on ${label}.`,
     };
   }
 
   if (!input.hasCta) {
     return {
       verdict: 'pass',
-      reasonCode: 'hook-only',
-      reason: `Your hook clears the fold on ${label}; no CTA detected.`,
+      reasonCode: isX ? 'x-hook-only' : 'hook-only',
+      reason: isX
+        ? `Your hook fits in the first tweet on ${label}; no CTA detected.`
+        : `Your hook clears the fold on ${label}; no CTA detected.`,
     };
   }
 
   return {
     verdict: 'pass',
-    reasonCode: 'hook-and-cta',
-    reason: `Your hook and CTA both clear the fold on ${label}.`,
+    reasonCode: isX ? 'x-hook-and-cta' : 'hook-and-cta',
+    reason: isX
+      ? `Your hook and CTA both fit in the first tweet on ${label}.`
+      : `Your hook and CTA both clear the fold on ${label}.`,
   };
 }

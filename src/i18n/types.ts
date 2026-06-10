@@ -141,6 +141,14 @@ export interface IslandStrings {
     badgeEditor: string;
     hiddenBadge: Plural;
     placeholder: string;
+    placeholders: {
+      linkedin: string;
+      facebook: string;
+      instagram: string;
+      twitter: string;
+      threads: string;
+      sms: string;
+    };
     counters: {
       characters: string;
       words: string;
@@ -442,6 +450,12 @@ export interface IslandStrings {
     reasonHookOnly: string;
     /** Reason line — reasonCode 'hook-and-cta'. */
     reasonHookAndCta: string;
+    /** X specific reason codes */
+    xReasonFits: string;
+    xReasonHookCut: string;
+    xReasonCtaBelow: string;
+    xReasonHookOnly: string;
+    xReasonHookAndCta: string;
     /** Tiny label on the fold divider drawn inside each preview card. */
     foldLabel: string;
     /** Accessible description of the fold divider. */
