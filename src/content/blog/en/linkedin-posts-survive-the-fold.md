@@ -3,7 +3,7 @@ translationKey: ''
 title: "LinkedIn's 140-Character Fold: The Secret Every Marketer Must Know Now"
 description: Master LinkedIn post writing with our guide to the 140-character fold. Learn why optimized posts get 2-3x higher engagement and proven strategies to write them.
 publishDate: 2026-06-11
-updatedDate: ''
+updatedDate: 2026-06-11
 locale: en
 slug: linkedin-posts-survive-the-fold
 relatedPlatform: linkedin
