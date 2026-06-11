@@ -83,6 +83,11 @@ const guidesLinks = tools.map((tool, i) => ({
   label: footer.columns.guides.links[i],
   href: `/${lang}/${tool.slugs[lang] ?? tool.slugs['en']}/`,
 }));
+
+guidesLinks.push({
+  label: getTranslations(lang).nav.links.limits,
+  href: `/${lang}/platform-limits/`,
+});
 ---
 
 <footer class="footer" class:list={{ 'footer--compact': !isHome }}>
