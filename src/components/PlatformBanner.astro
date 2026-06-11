@@ -185,6 +185,8 @@ const { platforms, textTemplate, closeLabel } = Astro.props;
 
       // Wait for the Preact island to hydrate and render the card element,
       // then observe it — hide the banner once the user scrolls it into view.
+      // (Alias keeps the null-check narrowing visible inside the hoisted fn.)
+      const bannerEl = banner;
       function setupObserver(retries: number): void {
         const card = document.getElementById(data!.cardId);
         if (!card) {
@@ -194,7 +196,7 @@ const { platforms, textTemplate, closeLabel } = Astro.props;
         const obs = new IntersectionObserver(
           (entries) => {
             if (entries[0]?.isIntersecting) {
-              banner.hidden = true;
+              bannerEl.hidden = true;
               obs.disconnect();
             }
           },

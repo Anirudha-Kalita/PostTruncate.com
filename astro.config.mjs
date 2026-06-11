@@ -4,7 +4,7 @@ import preact from '@astrojs/preact';
 import cloudflare from '@astrojs/cloudflare';
 import sitemap from '@astrojs/sitemap';
 import tailwindcss from '@tailwindcss/vite';
-import { LOCALES, LOCALE_CODES, DEFAULT_LOCALE } from './src/i18n/config.ts';
+import { LOCALES, LOCALE_CODES, DEFAULT_LOCALE, getLocale } from './src/i18n/config.ts';
 import { tools } from './src/data/tools.ts';
 import {
   buildToolLastmodByPath,
@@ -20,7 +20,9 @@ import { remarkVideoEmbed } from './src/lib/remarkVideoEmbed.ts';
 //    slugToTool: Map<slug, ToolDefinition>  (every locale slug → its tool)
 //    toolHreflang: Map<toolId, { hreflang, href }[]>  (toolId → all alternates)
 const SITE = 'https://posttruncate.com';
+/** @type {Map<string, import('./src/data/tools.ts').ToolDefinition>} */
 const slugToTool = new Map();
+/** @type {Map<string, { hreflang: string, href: string }[]>} */
 const toolHreflang = new Map();
 
 for (const tool of tools) {
@@ -132,7 +134,7 @@ export default defineConfig({
             })),
             {
               lang: 'x-default',
-              url: `${SITE}/${DEFAULT_LOCALE}/${LOCALES.find((l) => l.code === DEFAULT_LOCALE).slug}/`,
+              url: `${SITE}/${DEFAULT_LOCALE}/${getLocale(DEFAULT_LOCALE).slug}/`,
             },
           ];
           item.lastmod = resolveSitemapLastmod(pathname, toolLastmodByPath, homepageSlugs);
@@ -148,10 +150,13 @@ export default defineConfig({
           return item;
         }
 
-        // Everything else (about, contact, privacy, terms, embed-widget)
-        // keeps the auto-generated hreflang from the i18n config.
+        // Everything else (faq, platform-limits, about, contact, privacy,
+        // terms, embed-widget) keeps the auto-generated hreflang from the
+        // i18n config.
         item.lastmod = resolveSitemapLastmod(pathname, toolLastmodByPath, homepageSlugs);
-        if (/\/(about|contact|privacy|terms)\/?$/.test(pathname)) {
+        if (/\/(faq|platform-limits)\/?$/.test(pathname)) {
+          item.priority = 0.7;
+        } else if (/\/(about|contact|privacy|terms)\/?$/.test(pathname)) {
           item.priority = 0.5;
         }
         return item;

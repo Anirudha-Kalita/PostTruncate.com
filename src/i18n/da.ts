@@ -18,7 +18,14 @@ export const da: Translations = {
   nav: {
     brandAria: 'PostTruncate hjem',
     homeAria: 'PostTruncate hjem',
-    links: { editor: 'Editor', guides: 'Platformguider', faq: 'FAQ', about: 'Om', contact: 'Kontakt' },
+    links: {
+      editor: 'Editor',
+      guides: 'Platformguider',
+      limits: 'Alle platformgrænser',
+      faq: 'FAQ',
+      about: 'Om',
+      contact: 'Kontakt',
+    },
     cta: 'Åbn editoren',
     themeToDark: 'Skift til mørkt tema',
     themeToLight: 'Skift til lyst tema',
@@ -187,7 +194,20 @@ export const da: Translations = {
   faq: {
     eyebrow: 'FAQ',
     title: 'Spørgsmål, besvaret.',
+    viewAll: 'Se alle FAQ',
     items: [
+      {
+        q: 'Hvad er trunkering af opslag?',
+        a: 'Trunkering er, når en platform skærer dit opslag af — enten ved at gemme alt efter den synlige fold bag et “…se mere”-link eller ved at afvise tegn ud over en hård grænse. PostTruncate viser dig præcis, hvor hver platform sætter snittet, live mens du skriver, så den vigtige del aldrig forsvinder under folden.',
+      },
+      {
+        q: 'Hvorfor trunkerer sociale medier opslag?',
+        a: 'Feeds er bygget til at blive skimmet, så platformene folder lange opslag sammen for at holde scrollet hurtigt og vise flere opslag på skærmen. Hver platform trækker grænsen forskelligt: LinkedIn folder ved cirka 140–210 tegn, Facebook ved cirka 110–480 afhængigt af enheden, Instagram omkring 125, og X håndhæver simpelthen en hård grænse på 280 tegn. Alt under folden ses kun af læsere, der aktivt trykker på “mere” — og det gør de fleste aldrig.',
+      },
+      {
+        q: 'Hvilke platforme understøtter PostTruncate?',
+        a: 'PostTruncate viser forhåndsvisninger for LinkedIn, X (Twitter), Threads, Instagram, Facebook og SMS — med live tegnoptælling, foldmarkeringer, trådopdeling og SMS-segmentberegning for hver. Der er også en Google SERP-forhåndsvisning til sidetitler og metabeskrivelser samt en gratis tæller-widget, du kan indlejre på dit eget websted.',
+      },
       {
         q: 'Hvor nøjagtige er tegngrænserne?',
         a: 'PostTruncate bruger hver platforms offentliggjorte og bredt observerede grænser — 280 for X, 210/140 for LinkedIn-folden, 5 hashtags for Instagram og en fast vægt på 23 tegn for links. Platforme justerer dem af og til, og gengivelsen varierer en smule fra enhed til enhed, så betragt previewene som et tæt estimat snarere end en pixelperfekt garanti.',
@@ -249,6 +269,59 @@ export const da: Translations = {
         a: 'Ikke altid. Standardbogstaver og -tal tæller hvert som ét tegn. Symboler fra den udvidede GSM-tabel — herunder eurotegnet (€), firkantede parenteser, krøllede parenteser og lodret streg | — tæller hvert som to tegn, selv om beskeden forbliver i GSM-7-tilstand. Emojis er anderledes: ét emoji tvinger hele beskeden til Unicode og reducerer grænsen pr. segment fra 160 til 70 tegn.',
       },
     ],
+  },
+
+  faqPage: {
+    title: 'FAQ — PostTruncate tegntæller & forhåndsvisninger',
+    description:
+      'Alle spørgsmål om PostTruncate, besvaret: platformenes tegngrænser, optælling af emojis og links, SMS-segmentering, privatliv og hvordan live-forhåndsvisningerne virker.',
+    eyebrow: 'FAQ',
+    heading: 'Ofte stillede spørgsmål',
+    lede: 'Alt om hvordan PostTruncate tæller, forhåndsviser og beskytter dine opslag — grupperet efter emne. Klik på et spørgsmål for at folde svaret ud.',
+    categories: {
+      about: 'Om værktøjet',
+      counting: 'Optælling & grænser',
+      cleanup: 'Oprydning & tilgængelighed',
+      insights: 'Indsigt & analyse',
+      privacy: 'Privatliv & data',
+      sms: 'SMS',
+    },
+  },
+
+  limitsPage: {
+    title: 'Tegngrænser på sociale medier 2026 — Komplet tabel',
+    description:
+      'Den komplette tabel over tegngrænser for LinkedIn, X (Twitter), Threads, Instagram, Facebook og SMS — hårde lofter, trunkeringsfolder og reglerne bag dem.',
+    eyebrow: 'Reference',
+    heading: 'Alle platformgrænser i én tabel',
+    lede: 'Hårde lofter, folder for synlig tekst og overløbsadfærd for hver platform, PostTruncate forhåndsviser. Tallene herunder er de samme konstanter, som live-editoren tjekker imod.',
+    table: {
+      caption: 'Tegngrænser og trunkeringspunkter pr. platform',
+      platform: 'Platform',
+      limit: 'Hård grænse',
+      foldMobile: 'Fold (mobil)',
+      foldDesktop: 'Fold (desktop)',
+      notes: 'Noter',
+    },
+    noFold: 'Ingen fold',
+    notes: {
+      linkedin: 'Tekst efter folden gemmes bag “…se mere”.',
+      twitter: 'Ingen fold — over {limit} tegn opdeles i en tråd; hvert link tæller som {url} tegn.',
+      threads: 'Links tæller fuldt ud; tekst over {limit} tegn fortsætter som nummererede svar.',
+      instagram: 'Billedteksten folder bag “mere”; hårdt loft på {hashtags} hashtags pr. opslag.',
+      facebook: 'Feedopslag klapper sammen bag “Se mere” længe før det tekniske loft.',
+      smsGsm: '{single} tegn i en enkelt besked; {multi} pr. segment, når den opdeles.',
+      smsUnicode: 'Én emoji eller ét ikke-GSM-tegn skifter hele beskeden til Unicode.',
+    },
+    rulesHeading: 'Trunkeringsregler, platform for platform',
+    rules: {
+      linkedin: 'LinkedIn tillader {limit} tegn pr. opslag, men folder feedvisningen efter cirka {mobile} tegn på mobil og {desktop} på desktop — resten gemmes bag “…se mere”. Linjeskift tæller med, og den første sætning bærer næsten alle klik: sæt krogen forrest og links under folden.',
+      twitter: 'X håndhæver et hårdt loft på {limit} tegn pr. opslag og viser slet ingen fold. Hver URL pakkes ind af t.co-forkorteren og koster altid {url} tegn uanset den reelle længde, og mange emojis vejer som to tegn. Længere udkast skal opdeles i en tråd — PostTruncate gør det automatisk ved ordgrænser.',
+      threads: 'Threads tillader {limit} tegn pr. opslag og tæller — i modsætning til X — links i deres fulde længde. På mobil folder feedet lange opslag ved cirka {mobile} tegn. Alt over loftet skal fortsætte som nummererede svar kædet under det første opslag.',
+      instagram: 'Instagram-billedtekster kan være op til {limit} tegn, men feedet viser kun cirka de første {mobile} før “mere”-linket. Den hårdere regel er hashtags: mere end {hashtags} i en billedtekst eller første kommentar, og opslaget kan fejle i det stille.',
+      facebook: 'Facebooks tekniske loft er {limit} tegn, men feedopslag klapper sammen bag “Se mere” ved cirka {mobile} tegn på mobil og {desktop} på desktop. Engagementet styrtdykker ved lange ubrudte blokke — den praktiske grænse er folden, ikke loftet.',
+      sms: 'En enkelt SMS rummer {gsmSingle} tegn i GSM 7-bit-kodning og falder til {gsmMulti} pr. segment, når beskeden opdeles. Enhver emoji eller ethvert ikke-GSM-tegn skifter hele beskeden til Unicode — {uniSingle} tegn pr. enkelt besked, {uniMulti} pr. segment — og nogle GSM-symboler (€, kantede parenteser, lodret streg) tæller som to.',
+    },
   },
 
   footer: {

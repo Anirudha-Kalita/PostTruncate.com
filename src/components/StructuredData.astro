@@ -5,13 +5,15 @@
 // Rendered into <head> via Layout's named "head" slot. Selects which schema
 // blocks to emit from the `type` prop so the shapes live in exactly one place:
 //
-//   type="home"     → SoftwareApplication + FAQPage
+//   type="home"     → SoftwareApplication
 //   type="platform" → SoftwareApplication + BreadcrumbList
 //
-// SoftwareApplication is emitted for both. FAQPage is derived from the same
-// t.faq.items the page renders (so schema and visible Q&A never diverge), and
-// BreadcrumbList from the page's own trail. WebSite + Organization remain in
-// Layout.astro (site-wide, every page).
+// SoftwareApplication is emitted for both. FAQPage is emitted only when a page
+// passes faqItems — platform tool pages pass their own tool.faq; the homepage
+// intentionally does NOT (the dedicated /[lang]/faq/ page owns the site-wide
+// FAQPage schema to avoid duplicate structured data). BreadcrumbList comes
+// from the page's own trail. WebSite + Organization remain in Layout.astro
+// (site-wide, every page).
 // ──────────────────────────────────────────────────────────────────────────
 import type { FaqEntry } from '../i18n/types';
 

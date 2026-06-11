@@ -18,7 +18,14 @@ export const zh: Translations = {
   nav: {
     brandAria: 'PostTruncate 首页',
     homeAria: 'PostTruncate 首页',
-    links: { editor: '编辑器', guides: '平台指南', faq: '常见问题', about: '关于', contact: '联系我们' },
+    links: {
+      editor: '编辑器',
+      guides: '平台指南',
+      limits: '所有平台限制',
+      faq: '常见问题',
+      about: '关于',
+      contact: '联系我们',
+    },
     cta: '打开编辑器',
     themeToDark: '切换到深色主题',
     themeToLight: '切换到浅色主题',
@@ -187,7 +194,20 @@ export const zh: Translations = {
   faq: {
     eyebrow: '常见问题',
     title: '问题，逐一解答。',
+    viewAll: '查看全部常见问题',
     items: [
+      {
+        q: '什么是帖子截断？',
+        a: '截断是指平台把你的帖子剪短——要么把可见折叠线之后的内容隐藏在“…查看更多”链接后面，要么直接拒绝超过硬性上限的字符。PostTruncate 会在你输入时实时显示每个平台的截断位置，确保重要内容永远不会消失在折叠线以下。',
+      },
+      {
+        q: '为什么社交平台要截断帖子？',
+        a: '信息流是为快速浏览设计的，平台会折叠长帖子以保持滚动流畅、在屏幕上展示更多内容。每个平台的分界线都不同：LinkedIn 在约 140–210 字符处折叠，Facebook 视设备在约 110–480 字符处折叠，Instagram 约 125 字符，而 X 则直接强制 280 字符的硬性上限。折叠线以下的内容只有主动点击“更多”的读者才能看到——而大多数读者从不点击。',
+      },
+      {
+        q: 'PostTruncate 支持哪些平台？',
+        a: 'PostTruncate 可预览 LinkedIn、X（Twitter）、Threads、Instagram、Facebook 和短信——每个平台都有实时字符统计、折叠线标记、推文串拆分和短信分段计算。还提供用于页面标题和元描述的 Google 搜索结果预览，以及可嵌入你自己网站的免费计数器小组件。',
+      },
       {
         q: '字符限制有多准确？',
         a: 'PostTruncate 采用各平台公布且被广泛验证的限制——X 为 280，LinkedIn 折叠为 210/140，Instagram 为 5 个话题标签，链接统一计为 23 个字符。平台偶尔会调整这些数值，渲染也会因设备而略有差异，因此请把预览当作接近的估算，而非像素级精确的保证。',
@@ -249,6 +269,59 @@ export const zh: Translations = {
         a: '不一定。标准字母和数字各算 1 个字符。GSM 扩展表中的符号——包括欧元符号（€）、方括号、花括号和竖线（|）——各算 2 个字符，即便消息仍保持在 GSM-7 模式下。表情符号则完全不同：添加一个表情符号会将整条消息强制切换为 Unicode，每段的字符上限从 160 个降至 70 个。',
       },
     ],
+  },
+
+  faqPage: {
+    title: '常见问题 — PostTruncate 字符计数器与帖子预览',
+    description:
+      '关于 PostTruncate 的所有问题解答：各平台字符限制、表情符号和链接的计数方式、短信分段、隐私，以及实时预览的工作原理。',
+    eyebrow: '常见问题',
+    heading: '常见问题',
+    lede: '关于 PostTruncate 如何统计、预览和保护你的帖子——按主题分组。点击任意问题即可展开答案。',
+    categories: {
+      about: '关于工具',
+      counting: '计数与限制',
+      cleanup: '清理与无障碍',
+      insights: '洞察与分析',
+      privacy: '隐私与数据',
+      sms: '短信',
+    },
+  },
+
+  limitsPage: {
+    title: '2026 社交媒体字符限制 — 完整平台对照表',
+    description:
+      'LinkedIn、X（Twitter）、Threads、Instagram、Facebook 和短信的完整字符限制表——硬性上限、截断折叠线及其背后的规则。',
+    eyebrow: '参考',
+    heading: '所有平台限制，一表览尽',
+    lede: 'PostTruncate 预览的每个平台的硬性上限、可见文本折叠线和超限行为。下表中的数字与实时编辑器校验所用的常量完全一致。',
+    table: {
+      caption: '按平台划分的字符限制与截断位置',
+      platform: '平台',
+      limit: '硬性上限',
+      foldMobile: '折叠线（移动端）',
+      foldDesktop: '折叠线（桌面端）',
+      notes: '备注',
+    },
+    noFold: '无折叠线',
+    notes: {
+      linkedin: '折叠线之后的文字隐藏在“…查看更多”后面。',
+      twitter: '无折叠线——超过 {limit} 字符将拆分为推文串；每个链接计为 {url} 字符。',
+      threads: '链接按全长计数；超过 {limit} 字符的内容将以编号回复的形式接续。',
+      instagram: '文案在“更多”后折叠；每帖最多 {hashtags} 个话题标签的硬性上限。',
+      facebook: '信息流帖子远在技术上限之前就会折叠在“查看更多”后面。',
+      smsGsm: '单条消息 {single} 字符；拆分后每段 {multi} 字符。',
+      smsUnicode: '一个表情符号或非 GSM 字符就会让整条消息切换为 Unicode。',
+    },
+    rulesHeading: '截断规则，逐平台详解',
+    rules: {
+      linkedin: 'LinkedIn 每帖允许 {limit} 字符，但信息流视图在移动端约 {mobile} 字符、桌面端约 {desktop} 字符处折叠——其余内容隐藏在“…查看更多”后面。换行也计入字符数，而第一句话承载了几乎全部点击，因此把钩子放在开头，把链接放到折叠线以下。',
+      twitter: 'X 强制每帖 {limit} 字符的硬性上限，且完全没有折叠线。每个 URL 都会被 t.co 短链接包装，无论实际多长都固定占用 {url} 字符，许多表情符号按两个字符计算。更长的草稿必须拆分为推文串——PostTruncate 会按单词边界自动拆分。',
+      threads: 'Threads 每帖允许 {limit} 字符，并且与 X 不同，链接按实际长度计数。在移动端，信息流会在约 {mobile} 字符处折叠长帖。超出上限的内容必须以编号回复的形式接在第一条帖子下方。',
+      instagram: 'Instagram 文案最长可达 {limit} 字符，但信息流只显示“更多”链接前的约 {mobile} 字符。更严格的规则是话题标签：文案或首条评论中超过 {hashtags} 个，帖子可能会静默发布失败。',
+      facebook: 'Facebook 的技术上限是 {limit} 字符，但信息流帖子在移动端约 {mobile} 字符、桌面端约 {desktop} 字符处就会折叠在“查看更多”后面。冗长的整块文字会让互动率骤降——实际的限制是折叠线，而不是上限。',
+      sms: '一条短信在 GSM 7 位编码下可容纳 {gsmSingle} 字符，拆分后每段降至 {gsmMulti} 字符。任何表情符号或非 GSM 字符都会让整条消息切换为 Unicode——单条 {uniSingle} 字符，每段 {uniMulti} 字符——而且部分 GSM 符号（€、方括号、竖线）按两个字符计算。',
+    },
   },
 
   footer: {

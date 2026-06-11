@@ -38,7 +38,7 @@ export interface SmsAnalysis {
   isGsm: boolean;
 }
 
-const SMS_LIMITS = {
+export const SMS_LIMITS = {
   GSM: {
     encoding: 'GSM 7-bit' as const,
     singlePart: 160,

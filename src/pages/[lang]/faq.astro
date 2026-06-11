@@ -1,0 +1,251 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getTranslations } from '../../i18n';
+import { LOCALE_CODES, getLocale } from '../../i18n/config';
+import { getFaqsByCategory, getFaqItems } from '../../data/faq';
+
+// One static FAQ page per locale (/en/faq/, /da/faq/, …). This page is the
+// canonical FAQ surface: it renders every question from the shared registry
+// (src/data/faq.ts + t.faq.items) and owns the site's FAQPage JSON-LD — the
+// homepage shows only a curated subset with no competing schema.
+export function getStaticPaths() {
+  return LOCALE_CODES.map((lang) => ({ params: { lang } }));
+}
+
+const { lang } = Astro.params as { lang: string };
+const t = getTranslations(lang);
+const locale = getLocale(lang);
+const home = `/${lang}/${locale.slug}/`;
+
+const groups = getFaqsByCategory(t);
+
+// FAQPage JSON-LD over the FULL question list (rendered via Layout's
+// faqSchema prop → FAQSchema.astro).
+const faqSchema = getFaqItems(t).map((item) => ({
+  question: item.q,
+  answerHtml: item.a,
+}));
+
+const site = Astro.site ?? new URL('https://posttruncate.com');
+const breadcrumbJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: t.breadcrumbs.home, item: new URL(home, site).href },
+    { '@type': 'ListItem', position: 2, name: t.faqPage.heading, item: new URL(`/${lang}/faq/`, site).href },
+  ],
+};
+---
+
+<Layout
+  lang={lang}
+  path="/faq/"
+  title={t.faqPage.title}
+  description={t.faqPage.description}
+  faqSchema={faqSchema}
+  jsonLd={[breadcrumbJsonLd]}
+>
+  <section class="page container-page">
+    <article class="page__prose">
+      <nav class="page__crumbs" aria-label={t.faqPage.heading}>
+        <a href={home}>{t.breadcrumbs.home}</a>
+        <span aria-hidden="true">/</span>
+        <span aria-current="page">{t.faqPage.heading}</span>
+      </nav>
+
+      <header class="page__head">
+        <p class="page__eyebrow">{t.faqPage.eyebrow}</p>
+        <h1 class="page__title">{t.faqPage.heading}</h1>
+        <p class="page__intro">{t.faqPage.lede}</p>
+      </header>
+
+      {
+        groups.map((group) => (
+          <section class="faq-group">
+            <h2 class="faq-group__title">{t.faqPage.categories[group.category]}</h2>
+            <div class="faq-group__list">
+              {group.items.map((f) => (
+                <details class="faq__item" id={f.id}>
+                  <summary class="faq__q">
+                    <span>{f.q}</span>
+                    <svg
+                      class="faq__chev"
+                      width="14"
+                      height="14"
+                      viewBox="0 0 10 10"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="1.5"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      aria-hidden="true"
+                    >
+                      <path d="M2.5 3.5 5 6.5 7.5 3.5" />
+                    </svg>
+                  </summary>
+                  <p class="faq__a">{f.a}</p>
+                </details>
+              ))}
+            </div>
+          </section>
+        ))
+      }
+
+      <p class="page__related">
+        <a href={`/${lang}/platform-limits/`}>{t.island.hookStrip.viewAll} →</a>
+      </p>
+
+      <p class="page__back">
+        <a href={home}>{t.pages.common.backHome}</a>
+      </p>
+    </article>
+  </section>
+</Layout>
+
+<style>
+  /* Page scaffold — mirrors Prose.astro so standalone pages stay uniform. */
+  .page {
+    scroll-margin-top: 80px;
+    padding-top: 64px;
+    padding-bottom: 24px;
+  }
+  .page__prose {
+    max-width: 48rem;
+    margin-inline: auto;
+  }
+  .page__crumbs {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 24px;
+    font-size: 13px;
+    color: var(--color-mute);
+  }
+  .page__crumbs a {
+    color: var(--color-body);
+    transition: color 0.15s ease;
+  }
+  .page__crumbs a:hover {
+    color: var(--color-ink);
+  }
+  .page__head {
+    margin-bottom: 8px;
+  }
+  .page__eyebrow {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--color-mute);
+  }
+  .page__title {
+    margin-top: 12px;
+    font-size: clamp(30px, 5vw, 40px);
+    font-weight: 600;
+    line-height: 1.08;
+    letter-spacing: -1.6px;
+    color: var(--color-ink);
+  }
+  .page__intro {
+    margin-top: 16px;
+    font-size: 18px;
+    line-height: 28px;
+    color: var(--color-body);
+  }
+
+  /* Category groups */
+  .faq-group {
+    margin-top: 40px;
+  }
+  .faq-group__title {
+    font-size: 22px;
+    font-weight: 600;
+    line-height: 30px;
+    letter-spacing: -0.6px;
+    color: var(--color-ink);
+  }
+  .faq-group__list {
+    margin-top: 16px;
+    display: grid;
+    gap: 12px;
+  }
+
+  /* Accordion rows — same visual language as the homepage FAQ section. */
+  .faq__item {
+    scroll-margin-top: 80px;
+    border-radius: var(--radius-lg);
+    background: var(--color-canvas);
+    box-shadow: var(--shadow-e1);
+    overflow: hidden;
+  }
+  .faq__q {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    cursor: pointer;
+    padding: 18px 20px;
+    font-size: 16px;
+    font-weight: 500;
+    text-align: left;
+    color: var(--color-ink);
+    list-style: none;
+    transition: transform 100ms ease, background 0.15s ease;
+  }
+  .faq__q:active {
+    transform: scale(0.985);
+    background: var(--color-canvas-soft-2);
+  }
+  .faq__q::-webkit-details-marker {
+    display: none;
+  }
+  .faq__chev {
+    flex-shrink: 0;
+    color: var(--color-mute);
+    transition: transform 0.2s ease;
+  }
+  .faq__item[open] .faq__chev {
+    transform: rotate(180deg);
+  }
+  .faq__a {
+    padding: 0 20px 18px;
+    font-size: 15px;
+    line-height: 24px;
+    color: var(--color-body);
+  }
+
+  .page__related {
+    margin-top: 40px;
+  }
+  .page__related a {
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--color-ink);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  .page__related a:hover {
+    opacity: 0.75;
+  }
+
+  .page__back {
+    margin-top: 48px;
+    padding-top: 24px;
+    border-top: 1px solid var(--color-hairline);
+  }
+  .page__back a {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--color-body);
+    transition: color 0.15s ease;
+  }
+  .page__back a:hover {
+    color: var(--color-ink);
+  }
+
+  @media (max-width: 768px) {
+    .page {
+      padding-top: 48px;
+    }
+  }
+</style>

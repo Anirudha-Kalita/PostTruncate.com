@@ -34,15 +34,21 @@ const blogLink = (await getBlogLocales()).has(lang)
 // anchors resolve within the current language page, so they need no prefix.
 // The legal column points at real standalone routes, which are locale-prefixed.
 const columnHrefs = {
-  tool: ['#workspace', '#platforms', '#workspace', '#workspace', `/${lang}/embed-widget/`],
+  tool: ['#workspace', `/${lang}/platform-limits/`, '#workspace', '#workspace', `/${lang}/embed-widget/`],
   platforms: [
-    '#linkedin-guide',
-    '#twitter-guide',
-    '#threads-guide',
-    '#instagram-guide',
-    '#facebook-guide',
+    `/${lang}/platform-limits/`,
+    `/${lang}/platform-limits/`,
+    `/${lang}/platform-limits/`,
+    `/${lang}/platform-limits/`,
+    `/${lang}/platform-limits/`,
   ],
-  learn: ['#platforms', '#faq', '#hook-guide', '#faq'],
+  learn: [
+    `/${lang}/platform-limits/`,
+    `/${lang}/faq/`,
+    '#hook-guide',
+    // "Accessibility" → the fancy-fonts accessibility answer on the FAQ page.
+    `/${lang}/faq/#fancy-fonts`,
+  ],
   legal: [
     `${home}privacy/`,
     `${home}terms/`,

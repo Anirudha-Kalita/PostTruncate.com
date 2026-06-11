@@ -475,7 +475,15 @@ export interface Translations {
   nav: {
     brandAria: string;
     homeAria: string;
-    links: { editor: string; guides: string; faq: string; about: string; contact: string };
+    links: {
+      editor: string;
+      guides: string;
+      /** "All platform limits" entry shown at the top of the guides dropdown. */
+      limits: string;
+      faq: string;
+      about: string;
+      contact: string;
+    };
     cta: string;
     themeToDark: string;
     themeToLight: string;
@@ -562,7 +570,84 @@ export interface Translations {
   faq: {
     eyebrow: string;
     title: string;
+    /** "View all FAQs" link under the homepage subset (arrow appended in markup). */
+    viewAll: string;
     items: FaqEntry[];
+  };
+  /**
+   * Dedicated /[lang]/faq/ page. The Q&A text itself stays in `faq.items`
+   * (single source of truth); these are only the page chrome strings.
+   * Category labels are keyed by the ids in src/data/faq.ts.
+   */
+  faqPage: {
+    /** Document <title>. */
+    title: string;
+    /** Meta description. */
+    description: string;
+    /** Mono eyebrow label above the H1. */
+    eyebrow: string;
+    /** Page <h1>. */
+    heading: string;
+    /** Lede paragraph under the heading. */
+    lede: string;
+    /** Category group headings, keyed by FaqCategoryId. */
+    categories: {
+      about: string;
+      counting: string;
+      cleanup: string;
+      insights: string;
+      privacy: string;
+      sms: string;
+    };
+  };
+  /**
+   * Dedicated /[lang]/platform-limits/ page: the full limits table plus
+   * per-platform truncation rules. All numbers are interpolated from
+   * textTools.ts constants — only labels and prose live here.
+   */
+  limitsPage: {
+    /** Document <title>. */
+    title: string;
+    /** Meta description. */
+    description: string;
+    /** Mono eyebrow label above the H1. */
+    eyebrow: string;
+    /** Page <h1>. */
+    heading: string;
+    /** Lede paragraph under the heading. */
+    lede: string;
+    /** Limits table column headers. */
+    table: {
+      caption: string;
+      platform: string;
+      limit: string;
+      foldMobile: string;
+      foldDesktop: string;
+      notes: string;
+    };
+    /** "—" cell substitute when a platform has no fold. */
+    noFold: string;
+    /** Short per-row notes. Numeric tokens are injected from textTools. */
+    notes: {
+      linkedin: string;
+      twitter: string;
+      threads: string;
+      instagram: string;
+      facebook: string;
+      smsGsm: string;
+      smsUnicode: string;
+    };
+    /** Heading above the detailed per-platform rule sections. */
+    rulesHeading: string;
+    /** One detailed truncation-rules paragraph per platform. */
+    rules: {
+      linkedin: string;
+      twitter: string;
+      threads: string;
+      instagram: string;
+      facebook: string;
+      sms: string;
+    };
   };
   footer: {
     homeAria: string;

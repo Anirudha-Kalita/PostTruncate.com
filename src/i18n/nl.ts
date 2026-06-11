@@ -18,7 +18,14 @@ export const nl: Translations = {
   nav: {
     brandAria: 'PostTruncate home',
     homeAria: 'PostTruncate home',
-    links: { editor: 'Editor', guides: 'Platformgidsen', faq: 'FAQ', about: 'Over', contact: 'Contact' },
+    links: {
+      editor: 'Editor',
+      guides: 'Platformgidsen',
+      limits: 'Alle platformlimieten',
+      faq: 'FAQ',
+      about: 'Over',
+      contact: 'Contact',
+    },
     cta: 'Open de editor',
     themeToDark: 'Schakel naar donker thema',
     themeToLight: 'Schakel naar licht thema',
@@ -187,7 +194,20 @@ export const nl: Translations = {
   faq: {
     eyebrow: 'FAQ',
     title: 'Vragen, beantwoord.',
+    viewAll: 'Bekijk alle FAQ’s',
     items: [
+      {
+        q: 'Wat is post-truncatie?',
+        a: 'Truncatie is wat er gebeurt wanneer een platform je bericht afkapt — alles voorbij de zichtbare vouw verdwijnt achter een “…meer”-link, of tekens boven een harde limiet worden simpelweg geweigerd. PostTruncate laat live tijdens het typen zien waar elk platform die knip zet, zodat het belangrijkste deel nooit onder de vouw verdwijnt.',
+      },
+      {
+        q: 'Waarom kappen sociale platforms berichten af?',
+        a: 'Feeds zijn gemaakt om te scannen, dus platforms klappen lange berichten in om het scrollen snel te houden en meer berichten op het scherm te passen. Elk platform legt de grens ergens anders: LinkedIn vouwt rond 140–210 tekens, Facebook rond 110–480 afhankelijk van het apparaat, Instagram rond 125, en X hanteert simpelweg een harde limiet van 280 tekens. Alles onder de vouw wordt alleen gezien door lezers die actief op “meer” tikken — en dat doen de meesten nooit.',
+      },
+      {
+        q: 'Welke platforms ondersteunt PostTruncate?',
+        a: 'PostTruncate toont previews voor LinkedIn, X (Twitter), Threads, Instagram, Facebook en sms — met live tekentelling, vouwmarkeringen, thread-splitsing en sms-segmentberekening voor elk. Er is ook een Google SERP-preview voor paginatitels en metabeschrijvingen, plus een gratis insluitbare teller-widget voor je eigen site.',
+      },
       {
         q: 'Hoe nauwkeurig zijn de tekenlimieten?',
         a: 'PostTruncate gebruikt de gepubliceerde en algemeen waargenomen limieten van elk platform — 280 voor X, 210/140 voor de LinkedIn-vouw, 5 hashtags voor Instagram en een vaste weging van 23 tekens voor links. Platforms passen deze af en toe aan en de weergave verschilt licht per apparaat, dus beschouw de previews als een nauwkeurige schatting in plaats van een pixelperfecte garantie.',
@@ -249,6 +269,59 @@ export const nl: Translations = {
         a: 'Niet altijd. Standaardletters en -cijfers tellen elk als één teken. Symbolen uit de uitgebreide GSM-tabel — waaronder het euroteken (€), vierkante haken, accolades en het pipe-symbool | — tellen elk als twee tekens, ook al blijft het bericht in GSM-7-modus. Emoji zijn anders: één emoji toevoegen dwingt het hele bericht naar Unicode, waardoor de limiet per segment van 160 naar 70 tekens daalt.',
       },
     ],
+  },
+
+  faqPage: {
+    title: 'FAQ — PostTruncate tekenteller & berichtpreviews',
+    description:
+      'Alle vragen over PostTruncate beantwoord: tekenlimieten per platform, het tellen van emoji’s en links, sms-segmentatie, privacy en hoe de live previews werken.',
+    eyebrow: 'FAQ',
+    heading: 'Veelgestelde vragen',
+    lede: 'Alles over hoe PostTruncate je berichten telt, previewt en beschermt — gegroepeerd per onderwerp. Klik op een vraag om het antwoord uit te klappen.',
+    categories: {
+      about: 'Over de tool',
+      counting: 'Tellen & limieten',
+      cleanup: 'Opschonen & toegankelijkheid',
+      insights: 'Inzichten & analyse',
+      privacy: 'Privacy & gegevens',
+      sms: 'Sms',
+    },
+  },
+
+  limitsPage: {
+    title: 'Tekenlimieten van sociale media 2026 — Volledige tabel',
+    description:
+      'De complete tekenlimiettabel voor LinkedIn, X (Twitter), Threads, Instagram, Facebook en sms — harde limieten, truncatievouwen en de regels erachter.',
+    eyebrow: 'Naslag',
+    heading: 'Elke platformlimiet, in één tabel',
+    lede: 'Harde limieten, vouwen voor zichtbare tekst en overloopgedrag voor elk platform dat PostTruncate previewt. De getallen hieronder zijn dezelfde constanten waar de live editor tegen controleert.',
+    table: {
+      caption: 'Tekenlimieten en truncatiepunten per platform',
+      platform: 'Platform',
+      limit: 'Harde limiet',
+      foldMobile: 'Vouw (mobiel)',
+      foldDesktop: 'Vouw (desktop)',
+      notes: 'Opmerkingen',
+    },
+    noFold: 'Geen vouw',
+    notes: {
+      linkedin: 'Tekst voorbij de vouw verdwijnt achter “…meer”.',
+      twitter: 'Geen vouw — boven {limit} tekens wordt gesplitst in een thread; elke link telt als {url} tekens.',
+      threads: 'Links tellen volledig mee; tekst boven {limit} tekens gaat verder als genummerde reacties.',
+      instagram: 'Het bijschrift vouwt achter “meer”; hard plafond van {hashtags} hashtags per bericht.',
+      facebook: 'Feedberichten klappen in achter “Meer weergeven”, ver vóór het technische plafond.',
+      smsGsm: '{single} tekens in één bericht; {multi} per segment zodra het splitst.',
+      smsUnicode: 'Eén emoji of niet-GSM-teken schakelt het hele bericht naar Unicode.',
+    },
+    rulesHeading: 'Truncatieregels, platform voor platform',
+    rules: {
+      linkedin: 'LinkedIn staat {limit} tekens per bericht toe, maar vouwt de feedweergave na ongeveer {mobile} tekens op mobiel en {desktop} op desktop — de rest verdwijnt achter “…meer”. Regeleinden tellen mee, en de eerste zin draagt vrijwel alle doorkliks: zet de hook vooraan en links onder de vouw.',
+      twitter: 'X hanteert een harde limiet van {limit} tekens per bericht en toont helemaal geen vouw. Elke URL wordt door de t.co-verkorter omhuld en kost altijd {url} tekens, ongeacht de echte lengte, en veel emoji wegen als twee tekens. Langere concepten moeten in een thread worden gesplitst — PostTruncate doet dat automatisch op woordgrenzen.',
+      threads: 'Threads staat {limit} tekens per bericht toe en telt links — anders dan X — in hun volledige lengte. Op mobiel vouwt de feed lange berichten rond {mobile} tekens. Alles boven het plafond moet verdergaan als genummerde reactieberichten onder het eerste.',
+      instagram: 'Instagram-bijschriften mogen {limit} tekens lang zijn, maar de feed toont slechts ongeveer de eerste {mobile} vóór de “meer”-link. De hardere regel zijn hashtags: meer dan {hashtags} in een bijschrift of eerste reactie en het bericht kan stilletjes niet gepubliceerd worden.',
+      facebook: 'Het technische plafond van Facebook is {limit} tekens, maar feedberichten klappen in achter “Meer weergeven” rond {mobile} tekens op mobiel en {desktop} op desktop. Engagement keldert bij lange ononderbroken blokken — de praktische limiet is de vouw, niet het plafond.',
+      sms: 'Eén sms bevat {gsmSingle} tekens in GSM 7-bit-codering, dalend naar {gsmMulti} per segment zodra het bericht splitst. Elke emoji of elk niet-GSM-teken schakelt het hele bericht naar Unicode — {uniSingle} tekens per enkel bericht, {uniMulti} per segment — en sommige GSM-symbolen (€, blokhaken, het pipe-teken) tellen als twee.',
+    },
   },
 
   footer: {

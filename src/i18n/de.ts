@@ -19,7 +19,14 @@ export const de: Translations = {
   nav: {
     brandAria: 'PostTruncate Startseite',
     homeAria: 'PostTruncate Startseite',
-    links: { editor: 'Editor', guides: 'Plattform-Leitfäden', faq: 'FAQ', about: 'Über uns', contact: 'Kontakt' },
+    links: {
+      editor: 'Editor',
+      guides: 'Plattform-Leitfäden',
+      limits: 'Alle Plattform-Limits',
+      faq: 'FAQ',
+      about: 'Über uns',
+      contact: 'Kontakt',
+    },
     cta: 'Editor öffnen',
     themeToDark: 'Zu dunklem Design wechseln',
     themeToLight: 'Zu hellem Design wechseln',
@@ -188,7 +195,20 @@ export const de: Translations = {
   faq: {
     eyebrow: 'FAQ',
     title: 'Fragen, beantwortet.',
+    viewAll: 'Alle FAQs ansehen',
     items: [
+      {
+        q: 'Was ist Post-Truncation (das Kürzen von Beiträgen)?',
+        a: 'Von Truncation spricht man, wenn eine Plattform deinen Beitrag abschneidet — entweder verschwindet alles unterhalb der sichtbaren Falz hinter einem „…mehr anzeigen“-Link, oder Zeichen über einem harten Limit werden gar nicht erst akzeptiert. PostTruncate zeigt dir live beim Schreiben, wo genau jede Plattform diesen Schnitt setzt, damit der wichtige Teil nie unter der Falz verschwindet.',
+      },
+      {
+        q: 'Warum kürzen soziale Netzwerke Beiträge?',
+        a: 'Feeds sind zum Überfliegen gebaut: Plattformen klappen lange Beiträge ein, damit das Scrollen schnell bleibt und mehr Beiträge auf den Bildschirm passen. Jede Plattform zieht die Grenze woanders — LinkedIn faltet bei etwa 140–210 Zeichen, Facebook je nach Gerät bei etwa 110–480, Instagram bei rund 125, und X setzt schlicht ein hartes Limit von 280 Zeichen. Was unter der Falz liegt, sehen nur Leser, die aktiv auf „mehr“ tippen — und das tun die wenigsten.',
+      },
+      {
+        q: 'Welche Plattformen unterstützt PostTruncate?',
+        a: 'PostTruncate zeigt Vorschauen für LinkedIn, X (Twitter), Threads, Instagram, Facebook und SMS — mit Live-Zeichenzählung, Falz-Markierungen, Thread-Aufteilung und SMS-Segmentberechnung. Dazu kommen eine Google-SERP-Vorschau für Seitentitel und Meta-Beschreibungen sowie ein kostenloses einbettbares Zähler-Widget für deine eigene Website.',
+      },
       {
         q: 'Wie genau sind die Zeichenlimits?',
         a: 'PostTruncate verwendet die veröffentlichten und weithin beobachteten Limits jeder Plattform — 280 für X, 210/140 für die LinkedIn-Falz, 5 Hashtags für Instagram und ein pauschales Gewicht von 23 Zeichen für Links. Plattformen passen diese gelegentlich an, und die Darstellung variiert je nach Gerät leicht, also behandle die Vorschauen als nahe Schätzung statt als pixelgenaue Garantie.',
@@ -250,6 +270,59 @@ export const de: Translations = {
         a: 'Nicht immer. Standardbuchstaben und -zahlen zählen je als ein Zeichen. Zeichen aus der erweiterten GSM-Tabelle — darunter das Euro-Zeichen (€), eckige Klammern, geschweifte Klammern und das Pipe-Symbol | — zählen je als zwei Zeichen, obwohl die Nachricht im GSM-7-Modus bleibt. Emojis sind ein Sonderfall: Eines davon zwingt die gesamte Nachricht in Unicode und reduziert das Limit pro Segment von 160 auf 70 Zeichen.',
       },
     ],
+  },
+
+  faqPage: {
+    title: 'FAQ — PostTruncate Zeichenzähler & Beitragsvorschauen',
+    description:
+      'Alle Fragen zu PostTruncate, beantwortet: Zeichenlimits der Plattformen, Zählung von Emojis und Links, SMS-Segmentierung, Datenschutz und wie die Live-Vorschauen funktionieren.',
+    eyebrow: 'FAQ',
+    heading: 'Häufig gestellte Fragen',
+    lede: 'Alles darüber, wie PostTruncate deine Beiträge zählt, in der Vorschau zeigt und schützt — nach Themen gruppiert. Klicke auf eine Frage, um die Antwort aufzuklappen.',
+    categories: {
+      about: 'Über das Tool',
+      counting: 'Zählung & Limits',
+      cleanup: 'Bereinigung & Barrierefreiheit',
+      insights: 'Analysen & Kennzahlen',
+      privacy: 'Datenschutz & Daten',
+      sms: 'SMS',
+    },
+  },
+
+  limitsPage: {
+    title: 'Zeichenlimits sozialer Netzwerke 2026 — Die komplette Tabelle',
+    description:
+      'Die vollständige Zeichenlimit-Tabelle für LinkedIn, X (Twitter), Threads, Instagram, Facebook und SMS — harte Obergrenzen, Kürzungs-Falze und die Regeln dahinter.',
+    eyebrow: 'Referenz',
+    heading: 'Alle Plattform-Limits in einer Tabelle',
+    lede: 'Harte Obergrenzen, Falze für sichtbaren Text und Überlauf-Verhalten für jede Plattform, die PostTruncate in der Vorschau zeigt. Die Zahlen unten sind dieselben Konstanten, gegen die der Live-Editor prüft.',
+    table: {
+      caption: 'Zeichenlimits und Kürzungspunkte nach Plattform',
+      platform: 'Plattform',
+      limit: 'Hartes Limit',
+      foldMobile: 'Falz (mobil)',
+      foldDesktop: 'Falz (Desktop)',
+      notes: 'Hinweise',
+    },
+    noFold: 'Keine Falz',
+    notes: {
+      linkedin: 'Text hinter der Falz verschwindet hinter „…mehr anzeigen“.',
+      twitter: 'Keine Falz — über {limit} Zeichen wird in einen Thread geteilt; jeder Link zählt als {url} Zeichen.',
+      threads: 'Links zählen in voller Länge; Text über {limit} Zeichen wird als nummerierte Antworten verkettet.',
+      instagram: 'Die Caption faltet hinter „mehr“; hartes Limit von {hashtags} Hashtags pro Beitrag.',
+      facebook: 'Feed-Beiträge klappen hinter „Mehr anzeigen“ ein — lange vor der technischen Obergrenze.',
+      smsGsm: '{single} Zeichen in einer einzelnen Nachricht; {multi} pro Segment, sobald sie geteilt wird.',
+      smsUnicode: 'Ein Emoji oder Nicht-GSM-Zeichen schaltet die ganze Nachricht auf Unicode um.',
+    },
+    rulesHeading: 'Kürzungsregeln, Plattform für Plattform',
+    rules: {
+      linkedin: 'LinkedIn erlaubt {limit} Zeichen pro Beitrag, faltet die Feed-Ansicht aber nach etwa {mobile} Zeichen auf Mobilgeräten und {desktop} am Desktop — der Rest verschwindet hinter „…mehr anzeigen“. Zeilenumbrüche zählen mit, und der erste Satz trägt fast die gesamte Klickrate: Hook nach vorn, Links unter die Falz.',
+      twitter: 'X erzwingt ein hartes Limit von {limit} Zeichen pro Beitrag und zeigt keinerlei Falz. Jede URL wird vom t.co-Kürzer umhüllt und kostet immer {url} Zeichen, egal wie lang sie wirklich ist; viele Emojis wiegen doppelt. Längere Entwürfe müssen in einen Thread geteilt werden — PostTruncate erledigt das automatisch an Wortgrenzen.',
+      threads: 'Threads erlaubt {limit} Zeichen pro Beitrag und zählt Links — anders als X — in voller Länge. Auf Mobilgeräten faltet der Feed lange Beiträge bei etwa {mobile} Zeichen. Alles über der Obergrenze muss als nummerierte Antwort-Posts unter dem ersten weitergehen.',
+      instagram: 'Instagram-Captions dürfen {limit} Zeichen lang sein, aber der Feed zeigt nur etwa die ersten {mobile} vor dem „mehr“-Link. Die härtere Regel sind Hashtags: mehr als {hashtags} in Caption oder erstem Kommentar, und der Beitrag kann stillschweigend nicht veröffentlicht werden.',
+      facebook: 'Facebooks technische Obergrenze liegt bei {limit} Zeichen, aber Feed-Beiträge klappen bei etwa {mobile} Zeichen mobil und {desktop} am Desktop hinter „Mehr anzeigen“ ein. Bei langen Textblöcken bricht das Engagement stark ein — das praktische Limit ist die Falz, nicht die Obergrenze.',
+      sms: 'Eine einzelne SMS fasst {gsmSingle} Zeichen in GSM-7-Bit-Kodierung; sobald die Nachricht geteilt wird, sinkt der Platz auf {gsmMulti} pro Segment. Jedes Emoji oder Nicht-GSM-Zeichen schaltet die gesamte Nachricht auf Unicode um — {uniSingle} Zeichen pro Einzelnachricht, {uniMulti} pro Segment — und einige GSM-Symbole (€, Klammern, der senkrechte Strich) zählen doppelt.',
+    },
   },
 
   footer: {

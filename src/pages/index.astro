@@ -140,7 +140,7 @@ const getGeoCountry = () => {
 
 const getGeoLocale = (): LocaleCode | undefined => {
   const country = getGeoCountry();
-  return COUNTRY_LOCALE[country];
+  return (COUNTRY_LOCALE as Record<string, LocaleCode>)[country];
 };
 
 const queryLocale = normalizeLocale(requestUrl.searchParams.get('lang'));

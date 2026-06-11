@@ -27,10 +27,13 @@ const home = `/${lang}/${current.slug}/`;
 const links = [
   { href: `${home}#workspace`, label: nav.links.editor },
   // "Platform Guides" is now a dropdown — handled separately below.
-  { href: `${home}#faq`, label: nav.links.faq },
+  { href: `/${lang}/faq/`, label: nav.links.faq },
   { href: `${home}about/`, label: nav.links.about },
   { href: `${home}contact/`, label: nav.links.contact },
 ];
+
+// Reference page surfaced at the top of the Platform Guides dropdown.
+const limitsLink = { href: `/${lang}/platform-limits/`, label: nav.links.limits };
 
 // Platform Guides dropdown items — URLs from tools.ts, labels from i18n.
 const PLATFORM_LOGOS: Record<string, string> = {
@@ -75,6 +78,11 @@ const guidesLinks = tools.map((tool, i) => {
         <div class="nav__guides-panel">
           <p class="nav__guides-heading">{nav.links.guides}</p>
           <ul class="nav__guides-list">
+            <li>
+              <a href={limitsLink.href} class="nav__guides-link nav__guides-link--all">
+                <span>{limitsLink.label}</span>
+              </a>
+            </li>
             {guidesLinks.map((gl) => (
               <li>
                 <a href={gl.href} class="nav__guides-link">
@@ -214,6 +222,9 @@ const guidesLinks = tools.map((tool, i) => {
                 </svg>
               </summary>
               <div class="nav__guides-mobile-panel">
+                <a href={limitsLink.href} class="nav__panel-link nav__guides-mobile-link nav__guides-mobile-link--all">
+                  <span>{limitsLink.label}</span>
+                </a>
                 {guidesLinks.map((gl) => (
                   <a href={gl.href} class="nav__panel-link nav__guides-mobile-link">
                     <img src={gl.logo} width="20" height="20" alt={gl.logoAlt} class="nav__guides-logo" loading="lazy" decoding="async" />
@@ -724,6 +735,13 @@ const guidesLinks = tools.map((tool, i) => {
     height: 20px;
     border-radius: 4px;
     display: block;
+  }
+  /* "All platform limits" reference row — separated from the brand rows. */
+  .nav__guides-link--all {
+    font-weight: 500;
+    border-bottom: 1px solid var(--color-hairline);
+    border-radius: var(--radius-md) var(--radius-md) 0 0;
+    margin-bottom: 4px;
   }
 
   /* ── Platform Guides mobile inline expand ───────────────────────────── */

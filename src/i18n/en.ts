@@ -18,7 +18,14 @@ export const en: Translations = {
   nav: {
     brandAria: 'PostTruncate home',
     homeAria: 'PostTruncate home',
-    links: { editor: 'Editor', guides: 'Platform Guides', faq: 'FAQ', about: 'About', contact: 'Contact' },
+    links: {
+      editor: 'Editor',
+      guides: 'Platform Guides',
+      limits: 'All platform limits',
+      faq: 'FAQ',
+      about: 'About',
+      contact: 'Contact',
+    },
     cta: 'Open the editor',
     themeToDark: 'Switch to dark theme',
     themeToLight: 'Switch to light theme',
@@ -187,7 +194,20 @@ export const en: Translations = {
   faq: {
     eyebrow: 'FAQ',
     title: 'Questions, answered.',
+    viewAll: 'View all FAQs',
     items: [
+      {
+        q: 'What is post truncation?',
+        a: 'Truncation is what happens when a platform cuts your post short — either hiding everything past a visual fold behind a "…see more" link, or rejecting characters beyond a hard limit. PostTruncate shows you exactly where each platform makes that cut, live, while you write, so the part that matters never disappears below the fold.',
+      },
+      {
+        q: 'Why do social media platforms truncate posts?',
+        a: 'Feeds are built for scanning, so platforms collapse long posts to keep scrolling fast and fit more posts on screen. Each platform draws the line differently: LinkedIn folds at roughly 140–210 characters, Facebook at about 110–480 depending on device, Instagram at around 125, and X simply enforces a hard 280-character cap. Anything past the fold is only seen by people who actively tap "more" — which most readers never do.',
+      },
+      {
+        q: 'Which platforms does PostTruncate support?',
+        a: 'PostTruncate previews LinkedIn, X (Twitter), Threads, Instagram, Facebook, and SMS — with live character counts, fold markers, thread splitting, and SMS segment math for each. There is also a Google SERP preview for page titles and meta descriptions, and a free embeddable counter widget for your own site.',
+      },
       {
         q: 'How accurate are the character limits?',
         a: 'PostTruncate counts against each platform’s published and widely-observed limits — 280 for X, 210/140 for the LinkedIn fold, 5 hashtags for Instagram, and a flat 23-character weight for links. Platforms occasionally adjust these, and rendering varies slightly by device, so treat the previews as a close estimate rather than a pixel-perfect guarantee.',
@@ -249,6 +269,59 @@ export const en: Translations = {
         a: 'Not always. Standard letters and numbers each count as one character. Symbols from the GSM extended table — including the Euro sign (€), square brackets, curly braces, and the pipe character | — count as two characters each, even though they keep the message in GSM 7-bit mode. Emoji are different: adding one forces the entire message into Unicode, which reduces the per-segment limit from 160 characters down to 70.',
       },
     ],
+  },
+
+  faqPage: {
+    title: 'FAQ — PostTruncate Character Counter & Post Previews',
+    description:
+      'Every question about PostTruncate, answered: platform character limits, emoji and link counting, SMS segmentation, privacy, and how the live previews work.',
+    eyebrow: 'FAQ',
+    heading: 'Frequently Asked Questions',
+    lede: 'Everything about how PostTruncate counts, previews, and protects your posts — grouped by topic. Click any question to expand the answer.',
+    categories: {
+      about: 'About the tool',
+      counting: 'Counting & limits',
+      cleanup: 'Cleanup & accessibility',
+      insights: 'Insights & analytics',
+      privacy: 'Privacy & data',
+      sms: 'SMS',
+    },
+  },
+
+  limitsPage: {
+    title: 'Social Media Character Limits 2026 — Full Platform Table',
+    description:
+      'The complete character-limit table for LinkedIn, X (Twitter), Threads, Instagram, Facebook, and SMS — hard caps, truncation folds, and the rules behind them.',
+    eyebrow: 'Reference',
+    heading: 'Every platform limit, in one table',
+    lede: 'Hard caps, visible-text folds, and overflow behavior for every platform PostTruncate previews. The numbers below are the same constants the live editor checks against.',
+    table: {
+      caption: 'Character limits and truncation points by platform',
+      platform: 'Platform',
+      limit: 'Hard limit',
+      foldMobile: 'Fold (mobile)',
+      foldDesktop: 'Fold (desktop)',
+      notes: 'Notes',
+    },
+    noFold: 'No fold',
+    notes: {
+      linkedin: 'Text past the fold hides behind “…see more”.',
+      twitter: 'No fold — over {limit} characters splits into a thread; every link counts as {url} characters.',
+      threads: 'Links count in full; copy past {limit} characters chains as numbered replies.',
+      instagram: 'Caption folds behind “more”; hard ceiling of {hashtags} hashtags per post.',
+      facebook: 'Feed posts collapse behind “See more” well before the technical cap.',
+      smsGsm: '{single} characters in a single message; {multi} per segment once it splits.',
+      smsUnicode: 'One emoji or non-GSM character switches the whole message to Unicode.',
+    },
+    rulesHeading: 'Truncation rules, platform by platform',
+    rules: {
+      linkedin: 'LinkedIn allows {limit} characters per post but folds the feed view after roughly {mobile} characters on mobile and {desktop} on desktop — everything else hides behind “…see more”. Line breaks count, and the first sentence carries almost all of the click-through, so front-load the hook and keep links below the fold.',
+      twitter: 'X enforces a hard {limit}-character cap per post and shows no fold at all. Every URL is wrapped by the t.co shortener and always costs {url} characters regardless of its real length, and many emoji weigh as two characters. Longer drafts must be split into a thread — PostTruncate does this automatically at word boundaries.',
+      threads: 'Threads allows {limit} characters per post and, unlike X, counts links at their full length. On mobile the feed folds long posts at about {mobile} characters. Anything past the cap has to continue as numbered reply posts chained under the first one.',
+      instagram: 'Instagram captions can run to {limit} characters, but the feed shows only about the first {mobile} before the “more” link. The stricter rule is hashtags: more than {hashtags} in a caption or first comment and the post can silently fail to publish.',
+      facebook: 'Facebook’s technical cap is {limit} characters, but feed posts collapse behind “See more” at roughly {mobile} characters on mobile and {desktop} on desktop. Engagement drops sharply on long unbroken blocks, so the practical limit is the fold, not the cap.',
+      sms: 'A single SMS holds {gsmSingle} characters in GSM 7-bit encoding, dropping to {gsmMulti} per segment once the message splits. Any emoji or non-GSM character switches the entire message to Unicode — {uniSingle} characters per single message, {uniMulti} per segment — and some GSM symbols (€, brackets, the pipe) count as two.',
+    },
   },
 
   footer: {

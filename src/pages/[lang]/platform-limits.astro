@@ -1,0 +1,421 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getTranslations } from '../../i18n';
+import { interp } from '../../i18n/interp';
+import { LOCALE_CODES, getLocale } from '../../i18n/config';
+import { LIMITS, FOLDS, SMS_LIMITS } from '../../lib/textTools';
+import { tools } from '../../data/tools';
+
+// One static reference page per locale (/en/platform-limits/, …): the full
+// character-limit table plus per-platform truncation rules. Every number is
+// interpolated from textTools.ts constants — the same values the live editor
+// checks against — so the page can never drift from the engine.
+export function getStaticPaths() {
+  return LOCALE_CODES.map((lang) => ({ params: { lang } }));
+}
+
+const { lang } = Astro.params as { lang: string };
+const t = getTranslations(lang);
+const locale = getLocale(lang);
+const home = `/${lang}/${locale.slug}/`;
+const nf = new Intl.NumberFormat(lang);
+
+// Per-tool localized URLs so each table row links to its dedicated tool page.
+const toolHref: Record<string, string> = {};
+for (const tool of tools) {
+  toolHref[tool.id] = `/${lang}/${tool.slugs[lang] ?? tool.slugs['en']}/`;
+}
+
+const L = t.limitsPage;
+
+// Brand names stay untranslated (site-wide convention).
+const rows = [
+  {
+    name: 'LinkedIn',
+    href: toolHref['linkedin'],
+    limit: nf.format(LIMITS.LINKEDIN_POST),
+    foldMobile: `~${nf.format(FOLDS.linkedin.mobile)}`,
+    foldDesktop: `~${nf.format(FOLDS.linkedin.desktop)}`,
+    note: L.notes.linkedin,
+  },
+  {
+    name: 'X (Twitter)',
+    href: toolHref['twitter'],
+    limit: nf.format(LIMITS.TWEET),
+    foldMobile: L.noFold,
+    foldDesktop: L.noFold,
+    note: interp(L.notes.twitter, { limit: nf.format(LIMITS.TWEET), url: nf.format(LIMITS.URL_WEIGHT) }),
+  },
+  {
+    name: 'Threads',
+    href: toolHref['threads'],
+    limit: nf.format(LIMITS.THREADS),
+    foldMobile: `~${nf.format(FOLDS.threads.mobile)}`,
+    foldDesktop: nf.format(FOLDS.threads.desktop),
+    note: interp(L.notes.threads, { limit: nf.format(LIMITS.THREADS) }),
+  },
+  {
+    name: 'Instagram',
+    href: toolHref['instagram'],
+    limit: nf.format(LIMITS.INSTAGRAM_CAPTION),
+    foldMobile: `~${nf.format(FOLDS.instagram.mobile)}`,
+    foldDesktop: `~${nf.format(FOLDS.instagram.desktop)}`,
+    note: interp(L.notes.instagram, { hashtags: nf.format(LIMITS.INSTAGRAM_HASHTAGS) }),
+  },
+  {
+    name: 'Facebook',
+    href: toolHref['facebook'],
+    limit: nf.format(LIMITS.FACEBOOK_POST),
+    foldMobile: `~${nf.format(FOLDS.facebook.mobile)}`,
+    foldDesktop: `~${nf.format(FOLDS.facebook.desktop)}`,
+    note: L.notes.facebook,
+  },
+  {
+    name: 'SMS (GSM 7-bit)',
+    href: toolHref['sms'],
+    limit: nf.format(SMS_LIMITS.GSM.singlePart),
+    foldMobile: L.noFold,
+    foldDesktop: L.noFold,
+    note: interp(L.notes.smsGsm, {
+      single: nf.format(SMS_LIMITS.GSM.singlePart),
+      multi: nf.format(SMS_LIMITS.GSM.multipart),
+    }),
+  },
+  {
+    name: 'SMS (Unicode)',
+    href: toolHref['sms'],
+    limit: nf.format(SMS_LIMITS.UNICODE.singlePart),
+    foldMobile: L.noFold,
+    foldDesktop: L.noFold,
+    note: L.notes.smsUnicode,
+  },
+];
+
+// Detailed truncation-rule sections, numbers injected from the same constants.
+const ruleSections = [
+  {
+    name: 'LinkedIn',
+    href: toolHref['linkedin'],
+    body: interp(L.rules.linkedin, {
+      limit: nf.format(LIMITS.LINKEDIN_POST),
+      mobile: nf.format(FOLDS.linkedin.mobile),
+      desktop: nf.format(FOLDS.linkedin.desktop),
+    }),
+  },
+  {
+    name: 'X (Twitter)',
+    href: toolHref['twitter'],
+    body: interp(L.rules.twitter, {
+      limit: nf.format(LIMITS.TWEET),
+      url: nf.format(LIMITS.URL_WEIGHT),
+    }),
+  },
+  {
+    name: 'Threads',
+    href: toolHref['threads'],
+    body: interp(L.rules.threads, {
+      limit: nf.format(LIMITS.THREADS),
+      mobile: nf.format(FOLDS.threads.mobile),
+    }),
+  },
+  {
+    name: 'Instagram',
+    href: toolHref['instagram'],
+    body: interp(L.rules.instagram, {
+      limit: nf.format(LIMITS.INSTAGRAM_CAPTION),
+      mobile: nf.format(FOLDS.instagram.mobile),
+      hashtags: nf.format(LIMITS.INSTAGRAM_HASHTAGS),
+    }),
+  },
+  {
+    name: 'Facebook',
+    href: toolHref['facebook'],
+    body: interp(L.rules.facebook, {
+      limit: nf.format(LIMITS.FACEBOOK_POST),
+      mobile: nf.format(FOLDS.facebook.mobile),
+      desktop: nf.format(FOLDS.facebook.desktop),
+    }),
+  },
+  {
+    name: 'SMS',
+    href: toolHref['sms'],
+    body: interp(L.rules.sms, {
+      gsmSingle: nf.format(SMS_LIMITS.GSM.singlePart),
+      gsmMulti: nf.format(SMS_LIMITS.GSM.multipart),
+      uniSingle: nf.format(SMS_LIMITS.UNICODE.singlePart),
+      uniMulti: nf.format(SMS_LIMITS.UNICODE.multipart),
+    }),
+  },
+];
+
+const site = Astro.site ?? new URL('https://posttruncate.com');
+const breadcrumbJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: t.breadcrumbs.home, item: new URL(home, site).href },
+    { '@type': 'ListItem', position: 2, name: L.heading, item: new URL(`/${lang}/platform-limits/`, site).href },
+  ],
+};
+---
+
+<Layout
+  lang={lang}
+  path="/platform-limits/"
+  title={L.title}
+  description={L.description}
+  jsonLd={[breadcrumbJsonLd]}
+>
+  <section class="page container-page">
+    <article class="page__prose">
+      <nav class="page__crumbs" aria-label={L.heading}>
+        <a href={home}>{t.breadcrumbs.home}</a>
+        <span aria-hidden="true">/</span>
+        <span aria-current="page">{L.heading}</span>
+      </nav>
+
+      <header class="page__head">
+        <p class="page__eyebrow">{L.eyebrow}</p>
+        <h1 class="page__title">{L.heading}</h1>
+        <p class="page__intro">{L.lede}</p>
+      </header>
+
+      <div class="limits__scroll">
+        <table class="limits__table">
+          <caption class="sr-only">{L.table.caption}</caption>
+          <thead>
+            <tr>
+              <th scope="col">{L.table.platform}</th>
+              <th scope="col">{L.table.limit}</th>
+              <th scope="col">{L.table.foldMobile}</th>
+              <th scope="col">{L.table.foldDesktop}</th>
+              <th scope="col">{L.table.notes}</th>
+            </tr>
+          </thead>
+          <tbody>
+            {
+              rows.map((r) => (
+                <tr>
+                  <th scope="row">
+                    <a href={r.href}>{r.name}</a>
+                  </th>
+                  <td class="limits__num">{r.limit}</td>
+                  <td class="limits__num">{r.foldMobile}</td>
+                  <td class="limits__num">{r.foldDesktop}</td>
+                  <td>{r.note}</td>
+                </tr>
+              ))
+            }
+          </tbody>
+        </table>
+      </div>
+
+      <h2 class="limits__rules-heading">{L.rulesHeading}</h2>
+      {
+        ruleSections.map((s) => (
+          <section class="limits__rule">
+            <h3>
+              <a href={s.href}>{s.name}</a>
+            </h3>
+            <p>{s.body}</p>
+          </section>
+        ))
+      }
+
+      <p class="page__related">
+        <a href={`/${lang}/faq/`}>{t.faq.viewAll} →</a>
+      </p>
+
+      <p class="page__back">
+        <a href={`${home}#workspace`}>{t.pages.common.backHome}</a>
+      </p>
+    </article>
+  </section>
+</Layout>
+
+<style>
+  /* Page scaffold — mirrors Prose.astro so standalone pages stay uniform. */
+  .page {
+    scroll-margin-top: 80px;
+    padding-top: 64px;
+    padding-bottom: 24px;
+  }
+  .page__prose {
+    max-width: 56rem;
+    margin-inline: auto;
+  }
+  .page__crumbs {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 24px;
+    font-size: 13px;
+    color: var(--color-mute);
+  }
+  .page__crumbs a {
+    color: var(--color-body);
+    transition: color 0.15s ease;
+  }
+  .page__crumbs a:hover {
+    color: var(--color-ink);
+  }
+  .page__head {
+    margin-bottom: 32px;
+  }
+  .page__eyebrow {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--color-mute);
+  }
+  .page__title {
+    margin-top: 12px;
+    font-size: clamp(30px, 5vw, 40px);
+    font-weight: 600;
+    line-height: 1.08;
+    letter-spacing: -1.6px;
+    color: var(--color-ink);
+  }
+  .page__intro {
+    margin-top: 16px;
+    font-size: 18px;
+    line-height: 28px;
+    color: var(--color-body);
+  }
+
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+  }
+
+  /* The limits table — horizontal scroll on narrow viewports. */
+  .limits__scroll {
+    overflow-x: auto;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-e1);
+    background: var(--color-canvas);
+  }
+  .limits__table {
+    width: 100%;
+    min-width: 640px;
+    border-collapse: collapse;
+    font-size: 14px;
+    line-height: 20px;
+  }
+  .limits__table thead th {
+    padding: 14px 16px;
+    text-align: left;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    font-weight: 500;
+    color: var(--color-mute);
+    border-bottom: 1px solid var(--color-hairline);
+    white-space: nowrap;
+  }
+  .limits__table tbody th,
+  .limits__table tbody td {
+    padding: 14px 16px;
+    text-align: left;
+    vertical-align: top;
+    border-bottom: 1px solid var(--color-hairline);
+    color: var(--color-body);
+  }
+  .limits__table tbody tr:last-child th,
+  .limits__table tbody tr:last-child td {
+    border-bottom: none;
+  }
+  .limits__table tbody th {
+    font-weight: 600;
+    color: var(--color-ink);
+    white-space: nowrap;
+  }
+  .limits__table tbody th a {
+    color: inherit;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    text-decoration-color: var(--color-hairline);
+    transition: text-decoration-color 0.15s ease;
+  }
+  .limits__table tbody th a:hover {
+    text-decoration-color: currentColor;
+  }
+  .limits__num {
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+  }
+
+  /* Detailed rule sections */
+  .limits__rules-heading {
+    margin-top: 48px;
+    font-size: 26px;
+    font-weight: 600;
+    line-height: 32px;
+    letter-spacing: -0.8px;
+    color: var(--color-ink);
+  }
+  .limits__rule {
+    margin-top: 28px;
+  }
+  .limits__rule h3 {
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 26px;
+    letter-spacing: -0.4px;
+    color: var(--color-ink);
+  }
+  .limits__rule h3 a {
+    color: inherit;
+    transition: opacity 0.15s ease;
+  }
+  .limits__rule h3 a:hover {
+    opacity: 0.75;
+  }
+  .limits__rule p {
+    margin-top: 10px;
+    font-size: 16px;
+    line-height: 28px;
+    color: var(--color-body);
+  }
+
+  .page__related {
+    margin-top: 40px;
+  }
+  .page__related a {
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--color-ink);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  .page__related a:hover {
+    opacity: 0.75;
+  }
+
+  .page__back {
+    margin-top: 48px;
+    padding-top: 24px;
+    border-top: 1px solid var(--color-hairline);
+  }
+  .page__back a {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--color-body);
+    transition: color 0.15s ease;
+  }
+  .page__back a:hover {
+    color: var(--color-ink);
+  }
+
+  @media (max-width: 768px) {
+    .page {
+      padding-top: 48px;
+    }
+  }
+</style>

@@ -33,7 +33,7 @@ const { tool, currentLang: lang } = Astro.props as {
 };
 
 // Locale-aware lookup with English fallback
-const tStr = <T>(record: Record<string, T>): T => record[lang] ?? record[DEFAULT_LOCALE];
+const tStr = <T,>(record: Record<string, T>): T => record[lang] ?? record[DEFAULT_LOCALE];
 
 const site = Astro.site ?? new URL('https://posttruncate.com');
 const toolSlug = tool.slugs[lang] ?? tool.slugs[DEFAULT_LOCALE];
@@ -62,7 +62,7 @@ const home = `/${lang}/${locale.slug}/`;
 const homeUrl = new URL(`/${lang}/${locale.slug}/`, site).href;
 const breadcrumbs = [
   { name: t.breadcrumbs.home, item: homeUrl },
-  { name: t.nav.links.guides, item: `${homeUrl}#platforms` },
+  { name: t.nav.links.guides, item: new URL(`/${lang}/platform-limits/`, site).href },
   { name: tStr(tool.schemaName), item: canonicalUrl },
 ];
 

@@ -33,7 +33,7 @@ interface Props {
 
 const { tool, lang, editorHref, hideCta = false, strings, toolSlugs, homeHref } = Astro.props;
 
-const tStr = <T>(record: Record<string, T>): T => record[lang] ?? record[DEFAULT_LOCALE];
+const tStr = <T,>(record: Record<string, T>): T => record[lang] ?? record[DEFAULT_LOCALE];
 const globalT = getTranslations(lang);
 
 const canonicalSlugs = buildCanonicalSlugs(tool.content[DEFAULT_LOCALE] ?? '');

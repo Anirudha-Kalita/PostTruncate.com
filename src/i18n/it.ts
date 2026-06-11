@@ -18,7 +18,14 @@ export const it: Translations = {
   nav: {
     brandAria: 'Home di PostTruncate',
     homeAria: 'Home di PostTruncate',
-    links: { editor: 'Editor', guides: 'Guide alle piattaforme', faq: 'FAQ', about: 'Chi siamo', contact: 'Contatti' },
+    links: {
+      editor: 'Editor',
+      guides: 'Guide alle piattaforme',
+      limits: 'Tutti i limiti delle piattaforme',
+      faq: 'FAQ',
+      about: 'Chi siamo',
+      contact: 'Contatti',
+    },
     cta: 'Apri l’editor',
     themeToDark: 'Passa al tema scuro',
     themeToLight: 'Passa al tema chiaro',
@@ -187,7 +194,20 @@ export const it: Translations = {
   faq: {
     eyebrow: 'FAQ',
     title: 'Domande, con risposta.',
+    viewAll: 'Vedi tutte le FAQ',
     items: [
+      {
+        q: 'Che cos’è il troncamento dei post?',
+        a: 'Il troncamento avviene quando una piattaforma taglia il tuo post: nasconde tutto ciò che supera la piega visiva dietro un link «…altro» oppure rifiuta i caratteri oltre un limite rigido. PostTruncate ti mostra esattamente dove ogni piattaforma effettua quel taglio, in tempo reale mentre scrivi, così la parte importante non sparisce mai sotto la piega.',
+      },
+      {
+        q: 'Perché i social network troncano i post?',
+        a: 'I feed sono fatti per essere scorsi, quindi le piattaforme comprimono i post lunghi per mantenere lo scorrimento veloce e mostrare più contenuti sullo schermo. Ogni piattaforma traccia la linea in un punto diverso: LinkedIn piega intorno ai 140–210 caratteri, Facebook tra 110 e 480 a seconda del dispositivo, Instagram attorno ai 125, e X impone semplicemente un tetto rigido di 280 caratteri. Ciò che resta sotto la piega lo vede solo chi tocca «altro» — e la maggior parte dei lettori non lo fa mai.',
+      },
+      {
+        q: 'Quali piattaforme supporta PostTruncate?',
+        a: 'PostTruncate offre anteprime per LinkedIn, X (Twitter), Threads, Instagram, Facebook e SMS — con conteggio caratteri in tempo reale, indicatori di piega, divisione in thread e calcolo dei segmenti SMS per ciascuna. Include anche un’anteprima della SERP di Google per titoli e meta description, e un widget contatore gratuito da incorporare nel tuo sito.',
+      },
       {
         q: 'Quanto sono accurati i limiti di caratteri?',
         a: 'PostTruncate usa i limiti pubblicati e ampiamente osservati di ogni piattaforma — 280 per X, 210/140 per la soglia di LinkedIn, 5 hashtag per Instagram e un peso fisso di 23 caratteri per i link. Le piattaforme li modificano di tanto in tanto e la resa varia leggermente da dispositivo a dispositivo, quindi considera le anteprime una stima approssimata piuttosto che una garanzia perfetta al pixel.',
@@ -249,6 +269,59 @@ export const it: Translations = {
         a: `Non sempre. Lettere e numeri standard contano ciascuno come un carattere. I simboli della tabella GSM estesa — tra cui il simbolo dell'euro (€), le parentesi quadre, le parentesi graffe e la barra verticale | — contano ciascuno come due caratteri, anche se il messaggio rimane in modalità GSM-7. Le emoji sono diverse: aggiungerne una forza l'intero messaggio in Unicode, riducendo il limite per segmento da 160 a 70 caratteri.`,
       },
     ],
+  },
+
+  faqPage: {
+    title: 'FAQ — Contatore di caratteri e anteprime PostTruncate',
+    description:
+      'Tutte le domande su PostTruncate, con risposta: limiti di caratteri per piattaforma, conteggio di emoji e link, segmentazione SMS, privacy e funzionamento delle anteprime in tempo reale.',
+    eyebrow: 'FAQ',
+    heading: 'Domande frequenti',
+    lede: 'Tutto su come PostTruncate conta, mostra in anteprima e protegge i tuoi post — raggruppato per argomento. Fai clic su una domanda per espandere la risposta.',
+    categories: {
+      about: 'Sullo strumento',
+      counting: 'Conteggio e limiti',
+      cleanup: 'Pulizia e accessibilità',
+      insights: 'Metriche e analisi',
+      privacy: 'Privacy e dati',
+      sms: 'SMS',
+    },
+  },
+
+  limitsPage: {
+    title: 'Limiti di caratteri dei social 2026 — Tabella completa',
+    description:
+      'La tabella completa dei limiti di caratteri per LinkedIn, X (Twitter), Threads, Instagram, Facebook e SMS — tetti rigidi, pieghe di troncamento e le regole che li governano.',
+    eyebrow: 'Riferimento',
+    heading: 'Tutti i limiti delle piattaforme, in una sola tabella',
+    lede: 'Tetti rigidi, pieghe del testo visibile e comportamento in caso di superamento per ogni piattaforma che PostTruncate mostra in anteprima. I numeri qui sotto sono le stesse costanti che l’editor verifica in tempo reale.',
+    table: {
+      caption: 'Limiti di caratteri e punti di troncamento per piattaforma',
+      platform: 'Piattaforma',
+      limit: 'Limite rigido',
+      foldMobile: 'Piega (mobile)',
+      foldDesktop: 'Piega (desktop)',
+      notes: 'Note',
+    },
+    noFold: 'Nessuna piega',
+    notes: {
+      linkedin: 'Il testo oltre la piega si nasconde dietro «…altro».',
+      twitter: 'Nessuna piega — oltre {limit} caratteri il post si divide in un thread; ogni link conta come {url} caratteri.',
+      threads: 'I link contano per intero; il testo oltre {limit} caratteri prosegue come risposte numerate.',
+      instagram: 'La didascalia si piega dietro «altro»; tetto rigido di {hashtags} hashtag per post.',
+      facebook: 'I post del feed si comprimono dietro «Altro» molto prima del tetto tecnico.',
+      smsGsm: '{single} caratteri in un singolo messaggio; {multi} per segmento quando si divide.',
+      smsUnicode: 'Un’emoji o un carattere non GSM trasforma l’intero messaggio in Unicode.',
+    },
+    rulesHeading: 'Regole di troncamento, piattaforma per piattaforma',
+    rules: {
+      linkedin: 'LinkedIn consente {limit} caratteri per post ma piega la vista del feed dopo circa {mobile} caratteri su mobile e {desktop} su desktop — il resto si nasconde dietro «…altro». Le interruzioni di riga contano, e la prima frase raccoglie quasi tutti i clic: metti il gancio all’inizio e i link sotto la piega.',
+      twitter: 'X impone un tetto rigido di {limit} caratteri per post e non mostra alcuna piega. Ogni URL viene avvolto dall’abbreviatore t.co e costa sempre {url} caratteri indipendentemente dalla lunghezza reale, e molte emoji pesano come due caratteri. Le bozze più lunghe vanno divise in thread — PostTruncate lo fa automaticamente ai confini di parola.',
+      threads: 'Threads consente {limit} caratteri per post e, a differenza di X, conta i link nella loro lunghezza completa. Su mobile il feed piega i post lunghi intorno ai {mobile} caratteri. Tutto ciò che supera il tetto deve proseguire come risposte numerate concatenate sotto il primo post.',
+      instagram: 'Le didascalie di Instagram possono arrivare a {limit} caratteri, ma il feed mostra solo i primi {mobile} circa prima del link «altro». La regola più dura riguarda gli hashtag: più di {hashtags} in una didascalia o nel primo commento e il post può fallire silenziosamente la pubblicazione.',
+      facebook: 'Il tetto tecnico di Facebook è di {limit} caratteri, ma i post del feed si comprimono dietro «Altro» intorno ai {mobile} caratteri su mobile e {desktop} su desktop. L’engagement crolla sui blocchi lunghi senza pause: il limite pratico è la piega, non il tetto.',
+      sms: 'Un singolo SMS contiene {gsmSingle} caratteri nella codifica GSM a 7 bit, che scendono a {gsmMulti} per segmento quando il messaggio si divide. Qualsiasi emoji o carattere non GSM converte l’intero messaggio in Unicode — {uniSingle} caratteri per messaggio singolo, {uniMulti} per segmento — e alcuni simboli GSM (€, parentesi quadre, la barra verticale) contano doppio.',
+    },
   },
 
   footer: {

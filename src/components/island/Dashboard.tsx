@@ -355,7 +355,7 @@ export default function Dashboard({ lang, strings, toolSlugs, focus }: Props) {
       </div>
 
       {/* Hook visibility strip — per-platform verdicts, always visible */}
-      <HookStrip text={analysisText} lang={lang} s={strings} views={views} limitsHref="#platforms" />
+      <HookStrip text={analysisText} lang={lang} s={strings} views={views} limitsHref={`/${lang}/platform-limits/`} />
 
       {/* Advanced insights — collapsed analysis drawer below the container */}
       <details class="group mt-4 rounded-xl bg-canvas shadow-e2">

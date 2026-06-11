@@ -18,7 +18,14 @@ export const fr: Translations = {
   nav: {
     brandAria: 'Accueil PostTruncate',
     homeAria: 'Accueil PostTruncate',
-    links: { editor: 'Éditeur', guides: 'Guides des plateformes', faq: 'FAQ', about: 'À propos', contact: 'Contact' },
+    links: {
+      editor: 'Éditeur',
+      guides: 'Guides des plateformes',
+      limits: 'Toutes les limites des plateformes',
+      faq: 'FAQ',
+      about: 'À propos',
+      contact: 'Contact',
+    },
     cta: 'Ouvrir l’éditeur',
     themeToDark: 'Passer au thème sombre',
     themeToLight: 'Passer au thème clair',
@@ -187,7 +194,20 @@ export const fr: Translations = {
   faq: {
     eyebrow: 'FAQ',
     title: 'Vos questions, nos réponses.',
+    viewAll: 'Voir toutes les FAQ',
     items: [
+      {
+        q: 'Qu’est-ce que la troncature des publications ?',
+        a: 'La troncature, c’est lorsqu’une plateforme coupe votre publication : soit tout ce qui dépasse le pli visuel est masqué derrière un lien « …voir plus », soit les caractères au-delà d’une limite stricte sont refusés. PostTruncate vous montre exactement où chaque plateforme effectue cette coupe, en direct pendant que vous écrivez, pour que l’essentiel ne disparaisse jamais sous le pli.',
+      },
+      {
+        q: 'Pourquoi les réseaux sociaux tronquent-ils les publications ?',
+        a: 'Les fils sont conçus pour être parcourus rapidement : les plateformes replient les publications longues pour garder un défilement fluide et afficher plus de contenus à l’écran. Chaque plateforme place la limite ailleurs — LinkedIn replie vers 140–210 caractères, Facebook entre 110 et 480 selon l’appareil, Instagram autour de 125, et X impose simplement un plafond strict de 280 caractères. Ce qui se trouve sous le pli n’est vu que par les lecteurs qui appuient sur « plus » — ce que la plupart ne font jamais.',
+      },
+      {
+        q: 'Quelles plateformes PostTruncate prend-il en charge ?',
+        a: 'PostTruncate prévisualise LinkedIn, X (Twitter), Threads, Instagram, Facebook et les SMS — avec compteur de caractères en direct, repères de pli, découpage en fils et calcul des segments SMS pour chacun. Il propose aussi un aperçu Google SERP pour les titres de page et méta-descriptions, ainsi qu’un widget compteur gratuit à intégrer sur votre propre site.',
+      },
       {
         q: 'Quelle est la précision des limites de caractères ?',
         a: 'PostTruncate utilise les limites publiées et largement observées de chaque plateforme — 280 pour X, 210/140 pour le pli LinkedIn, 5 hashtags pour Instagram, et un poids forfaitaire de 23 caractères pour les liens. Les plateformes les ajustent parfois, et le rendu varie légèrement selon l’appareil, alors considérez les aperçus comme une estimation proche plutôt qu’une garantie au pixel près.',
@@ -249,6 +269,59 @@ export const fr: Translations = {
         a: 'Pas toujours. Les lettres et chiffres standard comptent chacun pour un caractère. Les symboles de la table GSM étendue — comme le signe euro (€), les crochets, les accolades et la barre verticale | — comptent chacun pour deux caractères, même si le message reste en mode GSM-7. Les emojis sont différents : en ajouter un force tout le message en Unicode, ce qui ramène la limite par segment de 160 à 70 caractères.',
       },
     ],
+  },
+
+  faqPage: {
+    title: 'FAQ — Compteur de caractères et aperçus PostTruncate',
+    description:
+      'Toutes les questions sur PostTruncate : limites de caractères par plateforme, comptage des emojis et des liens, segmentation SMS, confidentialité et fonctionnement des aperçus en direct.',
+    eyebrow: 'FAQ',
+    heading: 'Foire aux questions',
+    lede: 'Tout sur la façon dont PostTruncate compte, prévisualise et protège vos publications — regroupé par thème. Cliquez sur une question pour afficher la réponse.',
+    categories: {
+      about: 'À propos de l’outil',
+      counting: 'Comptage et limites',
+      cleanup: 'Nettoyage et accessibilité',
+      insights: 'Statistiques et analyses',
+      privacy: 'Confidentialité et données',
+      sms: 'SMS',
+    },
+  },
+
+  limitsPage: {
+    title: 'Limites de caractères des réseaux sociaux 2026 — Tableau complet',
+    description:
+      'Le tableau complet des limites de caractères pour LinkedIn, X (Twitter), Threads, Instagram, Facebook et SMS — plafonds stricts, plis de troncature et les règles qui les régissent.',
+    eyebrow: 'Référence',
+    heading: 'Toutes les limites des plateformes, dans un seul tableau',
+    lede: 'Plafonds stricts, plis de texte visible et comportement de dépassement pour chaque plateforme prévisualisée par PostTruncate. Les chiffres ci-dessous sont les mêmes constantes que vérifie l’éditeur en direct.',
+    table: {
+      caption: 'Limites de caractères et points de troncature par plateforme',
+      platform: 'Plateforme',
+      limit: 'Plafond strict',
+      foldMobile: 'Pli (mobile)',
+      foldDesktop: 'Pli (ordinateur)',
+      notes: 'Remarques',
+    },
+    noFold: 'Pas de pli',
+    notes: {
+      linkedin: 'Le texte après le pli est masqué derrière « …voir plus ».',
+      twitter: 'Pas de pli — au-delà de {limit} caractères, la publication est découpée en fil ; chaque lien compte pour {url} caractères.',
+      threads: 'Les liens comptent en entier ; le texte au-delà de {limit} caractères se poursuit en réponses numérotées.',
+      instagram: 'La légende se replie derrière « plus » ; plafond strict de {hashtags} hashtags par publication.',
+      facebook: 'Les publications du fil se replient derrière « Voir plus » bien avant le plafond technique.',
+      smsGsm: '{single} caractères dans un message unique ; {multi} par segment dès qu’il se divise.',
+      smsUnicode: 'Un emoji ou caractère non GSM fait basculer tout le message en Unicode.',
+    },
+    rulesHeading: 'Règles de troncature, plateforme par plateforme',
+    rules: {
+      linkedin: 'LinkedIn autorise {limit} caractères par publication mais replie l’affichage du fil après environ {mobile} caractères sur mobile et {desktop} sur ordinateur — le reste est masqué derrière « …voir plus ». Les sauts de ligne comptent, et la première phrase concentre presque tous les clics : placez l’accroche en tête et les liens sous le pli.',
+      twitter: 'X impose un plafond strict de {limit} caractères par publication et n’affiche aucun pli. Chaque URL est enveloppée par le raccourcisseur t.co et coûte toujours {url} caractères quelle que soit sa longueur réelle, et de nombreux emojis pèsent deux caractères. Les brouillons plus longs doivent être découpés en fil — PostTruncate le fait automatiquement en respectant les mots.',
+      threads: 'Threads autorise {limit} caractères par publication et, contrairement à X, compte les liens dans leur longueur réelle. Sur mobile, le fil replie les publications longues vers {mobile} caractères. Tout dépassement doit se poursuivre en réponses numérotées enchaînées sous la première publication.',
+      instagram: 'Les légendes Instagram peuvent atteindre {limit} caractères, mais le fil n’affiche qu’environ les {mobile} premiers avant le lien « plus ». La règle la plus stricte concerne les hashtags : au-delà de {hashtags} dans une légende ou un premier commentaire, la publication peut échouer silencieusement.',
+      facebook: 'Le plafond technique de Facebook est de {limit} caractères, mais les publications du fil se replient derrière « Voir plus » vers {mobile} caractères sur mobile et {desktop} sur ordinateur. L’engagement chute fortement sur les longs blocs : la limite pratique, c’est le pli, pas le plafond.',
+      sms: 'Un SMS unique contient {gsmSingle} caractères en encodage GSM 7 bits, et tombe à {gsmMulti} par segment dès que le message se divise. Tout emoji ou caractère non GSM fait basculer le message entier en Unicode — {uniSingle} caractères par message unique, {uniMulti} par segment — et certains symboles GSM (€, crochets, barre verticale) comptent double.',
+    },
   },
 
   footer: {

@@ -18,7 +18,14 @@ export const es: Translations = {
   nav: {
     brandAria: 'Inicio de PostTruncate',
     homeAria: 'Inicio de PostTruncate',
-    links: { editor: 'Editor', guides: 'Guías de plataformas', faq: 'Preguntas frecuentes', about: 'Acerca de', contact: 'Contacto' },
+    links: {
+      editor: 'Editor',
+      guides: 'Guías de plataformas',
+      limits: 'Todos los límites de plataformas',
+      faq: 'Preguntas frecuentes',
+      about: 'Acerca de',
+      contact: 'Contacto',
+    },
     cta: 'Abrir el editor',
     themeToDark: 'Cambiar al tema oscuro',
     themeToLight: 'Cambiar al tema claro',
@@ -187,7 +194,20 @@ export const es: Translations = {
   faq: {
     eyebrow: 'Preguntas frecuentes',
     title: 'Preguntas, respondidas.',
+    viewAll: 'Ver todas las preguntas frecuentes',
     items: [
+      {
+        q: '¿Qué es el truncamiento de publicaciones?',
+        a: 'El truncamiento ocurre cuando una plataforma corta tu publicación: oculta todo lo que queda tras el pliegue visual detrás de un enlace «…ver más» o rechaza los caracteres que superan un límite estricto. PostTruncate te muestra exactamente dónde hace ese corte cada plataforma, en vivo y mientras escribes, para que la parte importante nunca desaparezca bajo el pliegue.',
+      },
+      {
+        q: '¿Por qué las redes sociales truncan las publicaciones?',
+        a: 'Los feeds están hechos para escanear, así que las plataformas colapsan las publicaciones largas para mantener el scroll rápido y mostrar más contenido en pantalla. Cada plataforma traza la línea en un punto distinto: LinkedIn pliega alrededor de los 140–210 caracteres, Facebook entre 110 y 480 según el dispositivo, Instagram cerca de los 125, y X simplemente impone un límite estricto de 280 caracteres. Lo que queda tras el pliegue solo lo ven quienes tocan «más», y la mayoría de los lectores nunca lo hace.',
+      },
+      {
+        q: '¿Qué plataformas admite PostTruncate?',
+        a: 'PostTruncate previsualiza LinkedIn, X (Twitter), Threads, Instagram, Facebook y SMS, con recuento de caracteres en vivo, marcadores de pliegue, división en hilos y cálculo de segmentos SMS para cada una. También incluye una vista previa de Google SERP para títulos y meta descripciones, y un widget contador gratuito para incrustar en tu propio sitio.',
+      },
       {
         q: '¿Qué tan precisos son los límites de caracteres?',
         a: 'PostTruncate usa los límites publicados y ampliamente observados de cada plataforma: 280 para X, 210/140 para el pliegue de LinkedIn, 5 hashtags para Instagram y un peso fijo de 23 caracteres para los enlaces. Las plataformas los ajustan de vez en cuando, y la renderización varía ligeramente según el dispositivo, así que toma las previsualizaciones como una estimación aproximada en lugar de una garantía perfecta al píxel.',
@@ -249,6 +269,59 @@ export const es: Translations = {
         a: 'No siempre. Las letras y los números estándar cuentan como un carácter cada uno. Los símbolos de la tabla extendida GSM — como el euro (€), los corchetes, las llaves y la barra vertical | — cuentan como dos caracteres cada uno, aunque el mensaje permanezca en modo GSM-7. Los emojis son distintos: añadir uno fuerza todo el mensaje a Unicode, lo que reduce el límite por segmento de 160 a 70 caracteres.',
       },
     ],
+  },
+
+  faqPage: {
+    title: 'Preguntas frecuentes — Contador de caracteres y vistas previas de PostTruncate',
+    description:
+      'Todas las preguntas sobre PostTruncate, respondidas: límites de caracteres por plataforma, recuento de emojis y enlaces, segmentación de SMS, privacidad y cómo funcionan las vistas previas en vivo.',
+    eyebrow: 'Preguntas frecuentes',
+    heading: 'Preguntas frecuentes',
+    lede: 'Todo sobre cómo PostTruncate cuenta, previsualiza y protege tus publicaciones, agrupado por tema. Haz clic en cualquier pregunta para ver la respuesta.',
+    categories: {
+      about: 'Sobre la herramienta',
+      counting: 'Recuento y límites',
+      cleanup: 'Limpieza y accesibilidad',
+      insights: 'Métricas y análisis',
+      privacy: 'Privacidad y datos',
+      sms: 'SMS',
+    },
+  },
+
+  limitsPage: {
+    title: 'Límites de caracteres en redes sociales 2026 — Tabla completa',
+    description:
+      'La tabla completa de límites de caracteres para LinkedIn, X (Twitter), Threads, Instagram, Facebook y SMS: topes estrictos, pliegues de truncamiento y las reglas detrás de ellos.',
+    eyebrow: 'Referencia',
+    heading: 'Todos los límites de plataformas, en una tabla',
+    lede: 'Topes estrictos, pliegues de texto visible y comportamiento de desbordamiento para cada plataforma que PostTruncate previsualiza. Los números de abajo son las mismas constantes que comprueba el editor en vivo.',
+    table: {
+      caption: 'Límites de caracteres y puntos de truncamiento por plataforma',
+      platform: 'Plataforma',
+      limit: 'Límite estricto',
+      foldMobile: 'Pliegue (móvil)',
+      foldDesktop: 'Pliegue (escritorio)',
+      notes: 'Notas',
+    },
+    noFold: 'Sin pliegue',
+    notes: {
+      linkedin: 'El texto tras el pliegue se oculta detrás de «…ver más».',
+      twitter: 'Sin pliegue: más de {limit} caracteres se divide en un hilo; cada enlace cuenta como {url} caracteres.',
+      threads: 'Los enlaces cuentan completos; el texto que supera {limit} caracteres continúa como respuestas numeradas.',
+      instagram: 'La descripción se pliega tras «más»; tope estricto de {hashtags} hashtags por publicación.',
+      facebook: 'Las publicaciones del feed se colapsan tras «Ver más» mucho antes del tope técnico.',
+      smsGsm: '{single} caracteres en un solo mensaje; {multi} por segmento cuando se divide.',
+      smsUnicode: 'Un emoji o carácter no GSM cambia todo el mensaje a Unicode.',
+    },
+    rulesHeading: 'Reglas de truncamiento, plataforma por plataforma',
+    rules: {
+      linkedin: 'LinkedIn permite {limit} caracteres por publicación, pero pliega la vista del feed tras unos {mobile} caracteres en móvil y {desktop} en escritorio: el resto se oculta tras «…ver más». Los saltos de línea cuentan, y la primera frase concentra casi todos los clics, así que coloca el gancho al principio y los enlaces bajo el pliegue.',
+      twitter: 'X impone un tope estricto de {limit} caracteres por publicación y no muestra ningún pliegue. Cada URL se envuelve con el acortador t.co y siempre cuesta {url} caracteres sin importar su longitud real, y muchos emojis pesan como dos caracteres. Los borradores más largos deben dividirse en un hilo; PostTruncate lo hace automáticamente respetando los límites de palabra.',
+      threads: 'Threads permite {limit} caracteres por publicación y, a diferencia de X, cuenta los enlaces con su longitud completa. En móvil, el feed pliega las publicaciones largas hacia los {mobile} caracteres. Todo lo que supere el tope debe continuar como respuestas numeradas encadenadas bajo la primera.',
+      instagram: 'Las descripciones de Instagram pueden llegar a {limit} caracteres, pero el feed solo muestra los primeros {mobile} aproximadamente antes del enlace «más». La regla más dura son los hashtags: más de {hashtags} en una descripción o primer comentario y la publicación puede fallar silenciosamente al publicarse.',
+      facebook: 'El tope técnico de Facebook es de {limit} caracteres, pero las publicaciones del feed se colapsan tras «Ver más» hacia los {mobile} caracteres en móvil y {desktop} en escritorio. La interacción cae en picado con bloques largos sin pausas, así que el límite práctico es el pliegue, no el tope.',
+      sms: 'Un SMS individual admite {gsmSingle} caracteres en codificación GSM de 7 bits, que bajan a {gsmMulti} por segmento cuando el mensaje se divide. Cualquier emoji o carácter no GSM cambia todo el mensaje a Unicode — {uniSingle} caracteres por mensaje único, {uniMulti} por segmento — y algunos símbolos GSM (€, corchetes, la barra vertical) cuentan como dos.',
+    },
   },
 
   footer: {
