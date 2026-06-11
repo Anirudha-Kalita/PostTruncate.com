@@ -576,6 +576,96 @@ export const da: Translations = {
     close: 'Luk',
   },
 
+  whyPostTruncate: {
+    eyebrow: 'HVORFOR POSTTRUNCATE?',
+    title: 'Skriv med selvtillid.<br/>Udgiv uden bekymringer.',
+    p1: 'Hver platform har forskellige tegngrænser og afkortningsregler. PostTruncate viser dig præcis, hvordan dit indhold vil se ud, før du trykker på udgiv.',
+    p2: 'Spar tid, øg engagementet og få hvert tegn til at tælle med forhåndsvisninger i realtid og smart indsigt.',
+    features: {
+      realTime: {
+        title: 'Forhåndsvisninger i realtid',
+        desc: 'Se øjeblikkeligt præcis, hvordan dit opslag vil se ud på tværs af mere end 6 platforme.',
+      },
+      insights: {
+        title: 'Smart indsigt',
+        desc: 'Få læsbarhedsscore, søgeordsanalyse og tips til indholdsoptimering.',
+      },
+      privacy: {
+        title: 'Privatliv først',
+        desc: 'Dit indhold bliver aldrig gemt eller delt. Alt forbliver privat.',
+      },
+    },
+  },
+
+  howTruncationWorks: {
+    eyebrow: 'HVORDAN AFKORTNING VIRKER',
+    description: 'Hver platform har unikke tegngrænser og visningsregler. Når dit indhold overstiger disse grænser, afkortes det med "..." eller "Se mere". PostTruncate simulerer præcis, hvordan dit opslag vil se ud.',
+    platforms: {
+      linkedin: { name: 'LinkedIn', desc: 'Viser ~220 tegn før "...se mere"' },
+      twitter: { name: 'X (Twitter)', desc: 'Viser ~125 tegn før afkortning (varierer efter enhed)' },
+      instagram: { name: 'Instagram', desc: 'Viser ~125 tegn, tryk på "mere" for at udvide' },
+      facebook: { name: 'Facebook', desc: 'Viser ~160 tegn før "...se mere"' },
+      threads: { name: 'Threads', desc: 'Svarer til Instagram med ~125 tegn før afkortning' },
+      sms: { name: 'SMS (GSM)', desc: '160 tegn pr. SMS til GSM, 70 til Unicode' },
+    },
+  },
+
+  platformCharacterLimits: {
+    eyebrow: "TEGNGRÆNSER PÅ PLATFORME",
+    headers: {
+      platform: "Platform",
+      characterLimit: "Tegngrænse",
+      shownInFeed: "Vises i feed",
+      bestPractice: "Bedste praksis",
+      notes: "Noter"
+    },
+    viewAll: "Se alle platformes grænser",
+    platforms: {
+      linkedin: {
+        name: "LinkedIn",
+        limit: "3,000",
+        shown: "~220 tegn",
+        bestPractice: "Hold hovedbudskabet tidligt",
+        notes: "Artikler understøtter op til 125.000 tegn"
+      },
+      twitter: {
+        name: "X (Twitter)",
+        limit: "280",
+        shown: "~125 tegn",
+        bestPractice: "Placer vigtig info først",
+        notes: "Links reducerer de tilgængelige tegn"
+      },
+      instagram: {
+        name: "Instagram-billedtekst",
+        limit: "2,200",
+        shown: "~125 tegn",
+        bestPractice: "Fang opmærksomheden tidligt, tilføj CTA",
+        notes: "Hashtags tæller med i grænsen"
+      },
+      facebook: {
+        name: "Facebook-opslag",
+        limit: "63,206",
+        shown: "~160 tegn",
+        bestPractice: "Hold det kort",
+        notes: "Billeder og links påvirker visningen"
+      },
+      threads: {
+        name: "Threads",
+        limit: "500",
+        shown: "~125 tegn",
+        bestPractice: "Kort & engagerende",
+        notes: "Metas tekstbaserede platform"
+      },
+      sms: {
+        name: "SMS (GSM)",
+        limit: "160",
+        shown: "160 pr. SMS",
+        bestPractice: "Hold under 160",
+        notes: "Længere tekster opdeles i flere SMS'er"
+      }
+    }
+  },
+
   island: {
     dashboard: {
       loadSample: 'Indlæs et eksempelopslag →',

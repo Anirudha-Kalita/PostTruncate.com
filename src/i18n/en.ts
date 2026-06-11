@@ -576,6 +576,96 @@ export const en: Translations = {
     close: 'Dismiss',
   },
 
+  whyPostTruncate: {
+    eyebrow: 'WHY POSTTRUNCATE?',
+    title: 'Write with confidence.<br/>Post without worries.',
+    p1: 'Every platform has different character limits and truncation rules. PostTruncate shows you exactly how your content will appear before you hit publish.',
+    p2: 'Save time, increase engagement, and make every character count with real-time previews and smart insights.',
+    features: {
+      realTime: {
+        title: 'Real-time Previews',
+        desc: 'See exactly how your post will appear across 6+ platforms instantly.',
+      },
+      insights: {
+        title: 'Smart Insights',
+        desc: 'Get readability scores, keyword analysis, and content optimization tips.',
+      },
+      privacy: {
+        title: 'Privacy First',
+        desc: 'Your content is never stored or shared. Everything stays private.',
+      },
+    },
+  },
+
+  howTruncationWorks: {
+    eyebrow: 'HOW TRUNCATION WORKS',
+    description: 'Each platform has unique character limits and display rules. When your content exceeds these limits, it gets truncated with "..." or "See more". PostTruncate simulates exactly how your post will appear after publishing.',
+    platforms: {
+      linkedin: { name: 'LinkedIn', desc: 'Shows ~220 chars before "...see more"' },
+      twitter: { name: 'X (Twitter)', desc: 'Shows ~125 chars before truncation (varies by device)' },
+      instagram: { name: 'Instagram', desc: 'Shows ~125 chars, tap "more" to expand' },
+      facebook: { name: 'Facebook', desc: 'Shows ~160 chars before "...see more"' },
+      threads: { name: 'Threads', desc: 'Similar to Instagram with ~125 chars before truncation' },
+      sms: { name: 'SMS (GSM)', desc: '160 chars per SMS for GSM, 70 for Unicode' },
+    },
+  },
+
+  platformCharacterLimits: {
+    eyebrow: "PLATFORM CHARACTER LIMITS",
+    headers: {
+      platform: "Platform",
+      characterLimit: "Character Limit",
+      shownInFeed: "Shown In Feed",
+      bestPractice: "Best Practice",
+      notes: "Notes"
+    },
+    viewAll: "View all platform limits",
+    platforms: {
+      linkedin: {
+        name: "LinkedIn",
+        limit: "3,000",
+        shown: "~220 characters",
+        bestPractice: "Keep key message early",
+        notes: "Articles support up to 125,000 characters"
+      },
+      twitter: {
+        name: "X (Twitter)",
+        limit: "280",
+        shown: "~125 characters",
+        bestPractice: "Front-load important info",
+        notes: "Links reduce available characters"
+      },
+      instagram: {
+        name: "Instagram Caption",
+        limit: "2,200",
+        shown: "~125 characters",
+        bestPractice: "Hook early, add CTA",
+        notes: "Hashtags count toward limit"
+      },
+      facebook: {
+        name: "Facebook Post",
+        limit: "63,206",
+        shown: "~160 characters",
+        bestPractice: "Keep it concise",
+        notes: "Images and links affect display"
+      },
+      threads: {
+        name: "Threads",
+        limit: "500",
+        shown: "~125 characters",
+        bestPractice: "Short & engaging",
+        notes: "Meta's text-based platform"
+      },
+      sms: {
+        name: "SMS (GSM)",
+        limit: "160",
+        shown: "160 per SMS",
+        bestPractice: "Keep under 160",
+        notes: "Longer texts split into multiple SMS"
+      }
+    }
+  },
+
   island: {
     dashboard: {
       loadSample: 'Load a sample post →',

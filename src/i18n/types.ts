@@ -744,5 +744,242 @@ export interface Translations {
     text: string;
     close: string;
   };
+  whyPostTruncate: {
+    eyebrow: string;
+    title: string;
+    p1: string;
+    p2: string;
+    features: {
+      linkedin: GuideEntry;
+      twitter: GuideEntry;
+      threads: GuideEntry;
+      instagram: GuideEntry;
+      facebook: GuideEntry;
+    };
+  };
+  hookband: {
+    eyebrow: string;
+    title: string;
+    body: string;
+  };
+  faq: {
+    eyebrow: string;
+    title: string;
+    /** "View all FAQs" link under the homepage subset (arrow appended in markup). */
+    viewAll: string;
+    items: FaqEntry[];
+  };
+  /**
+   * Dedicated /[lang]/faq/ page. The Q&A text itself stays in `faq.items`
+   * (single source of truth); these are only the page chrome strings.
+   * Category labels are keyed by the ids in src/data/faq.ts.
+   */
+  faqPage: {
+    /** Document <title>. */
+    title: string;
+    /** Meta description. */
+    description: string;
+    /** Mono eyebrow label above the H1. */
+    eyebrow: string;
+    /** Page <h1>. */
+    heading: string;
+    /** Lede paragraph under the heading. */
+    lede: string;
+    /** Category group headings, keyed by FaqCategoryId. */
+    categories: {
+      about: string;
+      counting: string;
+      cleanup: string;
+      insights: string;
+      privacy: string;
+      sms: string;
+    };
+  };
+  /**
+   * Dedicated /[lang]/platform-limits/ page: the full limits table plus
+   * per-platform truncation rules. All numbers are interpolated from
+   * textTools.ts constants — only labels and prose live here.
+   */
+  limitsPage: {
+    /** Document <title>. */
+    title: string;
+    /** Meta description. */
+    description: string;
+    /** Mono eyebrow label above the H1. */
+    eyebrow: string;
+    /** Page <h1>. */
+    heading: string;
+    /** Lede paragraph under the heading. */
+    lede: string;
+    /** Limits table column headers. */
+    table: {
+      caption: string;
+      platform: string;
+      limit: string;
+      foldMobile: string;
+      foldDesktop: string;
+      notes: string;
+    };
+    /** "—" cell substitute when a platform has no fold. */
+    noFold: string;
+    /** Short per-row notes. Numeric tokens are injected from textTools. */
+    notes: {
+      linkedin: string;
+      twitter: string;
+      threads: string;
+      instagram: string;
+      facebook: string;
+      smsGsm: string;
+      smsUnicode: string;
+    };
+    /** Heading above the detailed per-platform rule sections. */
+    rulesHeading: string;
+    /** One detailed truncation-rules paragraph per platform. */
+    rules: {
+      linkedin: string;
+      twitter: string;
+      threads: string;
+      instagram: string;
+      facebook: string;
+      sms: string;
+    };
+  };
+  footer: {
+    homeAria: string;
+    tag: string;
+    columns: {
+      tool: FooterColumn;
+      platforms: FooterColumn;
+      learn: FooterColumn;
+      legal: FooterColumn;
+      guides: FooterColumn;
+    };
+    /** "{year}". */
+    copyright: string;
+    disclaimer: string;
+  };
+  /**
+   * Standalone informational routes (/{lang}/privacy/, /terms/, /about/,
+   * /contact/). Each renders through the shared Layout as its own HTML page.
+   */
+  pages: {
+    /** Strings shared by every standalone page. */
+    common: {
+      /** "{date}" → the last-updated date for the legal pages. */
+      lastUpdated: string;
+      lastUpdatedDate: string;
+      backHome: string;
+    };
+    privacy: ContentPage;
+    terms: ContentPage;
+    about: ContentPage;
+    contact: ContactPage;
+  };
+  /**
+   * Error pages (404 / 500). Served as single root-level files for every
+   * language, so all locales' copy ships in the page and the visitor's
+   * language is selected client-side.
+   */
+  /**
+   * Copy for the embed-widget landing page at /[lang]/embed-widget/.
+   * Explains the embeddable character counter, shows a live preview, and
+   * lets visitors copy the one-line iframe snippet.
+   */
+  embedWidget: {
+    /** Document <title>. */
+    title: string;
+    /** Meta description. */
+    description: string;
+    /** Small mono eyebrow label (e.g. "Free embed"). */
+    eyebrow: string;
+    /** Page <h1>. */
+    heading: string;
+    /** Intro paragraph under the heading. */
+    lede: string;
+    /** Heading above the live iframe preview. */
+    previewLabel: string;
+    /** Copy-button default label. */
+    copyButton: string;
+    /** Copy-button label shown for 2 s after a successful copy. */
+    copiedButton: string;
+    /** Heading above the code snippet. */
+    codeLabel: string;
+    /** Heading above the three audience paragraphs. */
+    audienceHeading: string;
+    /** Paragraph addressed at bloggers / content creators. */
+    forBloggers: string;
+    /** Paragraph addressed at educators / course authors. */
+    forEducators: string;
+    /** Paragraph addressed at developers. */
+    forDevelopers: string;
+    /** Short link text used in the homepage hero (e.g. "Embed on your site →"). */
+    homepageLinkLabel: string;
+  };
+  errors: {
+    notFound: ErrorPageStrings;
+    serverError: ErrorPageStrings;
+  };
+  /** Cross-promotion section shown on the dedicated Google SERP tool page. */
+  serpPage: {
+    crossPromo: {
+      heading: string;
+      editorLink: string;
+      platforms: {
+        twitter:   { name: string; desc: string };
+        instagram: { name: string; desc: string };
+        linkedin:  { name: string; desc: string };
+        facebook:  { name: string; desc: string };
+        threads:   { name: string; desc: string };
+        sms:       { name: string; desc: string };
+      };
+    };
+  };
+  banner: {
+    /** "{platform}" token is replaced with the translated platform name. */
+    text: string;
+    close: string;
+  };
+  whyPostTruncate: {
+    eyebrow: string;
+    title: string;
+    p1: string;
+    p2: string;
+    features: {
+      realTime: { title: string; desc: string };
+      insights: { title: string; desc: string };
+      privacy: { title: string; desc: string };
+    };
+  };
+  howTruncationWorks: {
+    eyebrow: string;
+    description: string;
+    platforms: {
+      linkedin: { name: string; desc: string };
+      twitter: { name: string; desc: string };
+      instagram: { name: string; desc: string };
+      facebook: { name: string; desc: string };
+      threads: { name: string; desc: string };
+      sms: { name: string; desc: string };
+    };
+  };
+  platformCharacterLimits: {
+    eyebrow: string;
+    headers: {
+      platform: string;
+      characterLimit: string;
+      shownInFeed: string;
+      bestPractice: string;
+      notes: string;
+    };
+    platforms: {
+      linkedin: { name: string; limit: string; shown: string; bestPractice: string; notes: string };
+      twitter: { name: string; limit: string; shown: string; bestPractice: string; notes: string };
+      instagram: { name: string; limit: string; shown: string; bestPractice: string; notes: string };
+      facebook: { name: string; limit: string; shown: string; bestPractice: string; notes: string };
+      threads: { name: string; limit: string; shown: string; bestPractice: string; notes: string };
+      sms: { name: string; limit: string; shown: string; bestPractice: string; notes: string };
+    };
+    viewAll: string;
+  };
   island: IslandStrings;
 }

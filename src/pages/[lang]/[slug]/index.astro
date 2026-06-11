@@ -10,6 +10,9 @@ import { tools } from '../../../data/tools';
 import { getFeaturedFaqs } from '../../../data/faq';
 import PlatformBanner from '../../../components/PlatformBanner.astro';
 import HeroPreviewCard from '../../../components/HeroPreviewCard.astro';
+import WhyPostTruncate from '../../../components/WhyPostTruncate.astro';
+import HowTruncationWorks from '../../../components/HowTruncationWorks.astro';
+import PlatformCharacterLimits from '../../../components/PlatformCharacterLimits.astro';
 
 // One statically-rendered landing page per locale at the keyword-rich slug
 // (/en/character-counter/, /de/zeichenzaehler/, …). Slug values come from the
@@ -134,8 +137,12 @@ const pageUrl = new URL(`/${lang}/${locale.slug}/`, site).href;
     <Dashboard client:load lang={lang} strings={t.island} toolSlugs={toolSlugs} />
   </main>
 
+  <WhyPostTruncate s={t.whyPostTruncate} />
+  <HowTruncationWorks s={t.howTruncationWorks} lang={lang} />
+  <PlatformCharacterLimits s={t.platformCharacterLimits} lang={lang} />
+
   <!-- ── Top leaderboard ad (reserved height → 0 CLS) ─────────────────── -->
-  <div class="container-page mt-8">
+  <div class="container-page">
     <Ad variant="leaderboard" />
   </div>
 
@@ -596,7 +603,7 @@ const pageUrl = new URL(`/${lang}/${locale.slug}/`, site).href;
      Readable measure (~4xl), tokenised colours so dark mode is automatic. */
   .seo-copy {
     scroll-margin-top: 80px;
-    padding-top: 96px;
+    padding-top: 24px;
   }
   .seo-prose {
     max-width: 56rem;

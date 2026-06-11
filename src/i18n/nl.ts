@@ -576,6 +576,96 @@ export const nl: Translations = {
     close: 'Sluiten',
   },
 
+  whyPostTruncate: {
+    eyebrow: 'WAAROM POSTTRUNCATE?',
+    title: 'Schrijf met vertrouwen.<br/>Plaats zonder zorgen.',
+    p1: 'Elk platform heeft andere tekenlimieten en afkapregels. PostTruncate laat precies zien hoe je content eruitziet voordat je op publiceren klikt.',
+    p2: 'Bespaar tijd, verhoog de betrokkenheid en laat elk teken tellen met realtime voorbeelden en slimme inzichten.',
+    features: {
+      realTime: {
+        title: 'Realtime voorbeelden',
+        desc: 'Zie direct hoe je bericht er op meer dan 6 platforms uit zal zien.',
+      },
+      insights: {
+        title: 'Slimme inzichten',
+        desc: 'Krijg leesbaarheidsscores, trefwoordanalyses en tips voor contentoptimalisatie.',
+      },
+      privacy: {
+        title: 'Privacy voorop',
+        desc: 'Je content wordt nooit opgeslagen of gedeeld. Alles blijft privé.',
+      },
+    },
+  },
+
+  howTruncationWorks: {
+    eyebrow: 'HOE AFKAPPEN WERKT',
+    description: 'Elk platform heeft unieke tekenlimieten en weergave regels. Wanneer uw inhoud deze limieten overschrijdt, wordt deze afgekapt met "..." of "Meer weergeven". PostTruncate simuleert precies hoe uw post zal verschijnen.',
+    platforms: {
+      linkedin: { name: 'LinkedIn', desc: 'Toont ~220 tekens vóór "...meer weergeven"' },
+      twitter: { name: 'X (Twitter)', desc: 'Toont ~125 tekens vóór afkappen (varieert per apparaat)' },
+      instagram: { name: 'Instagram', desc: 'Toont ~125 tekens, tik op "meer" om uit te vouwen' },
+      facebook: { name: 'Facebook', desc: 'Toont ~160 tekens vóór "...meer weergeven"' },
+      threads: { name: 'Threads', desc: 'Vergelijkbaar met Instagram met ~125 tekens vóór afkappen' },
+      sms: { name: 'SMS (GSM)', desc: '160 tekens per SMS voor GSM, 70 voor Unicode' },
+    },
+  },
+
+  platformCharacterLimits: {
+    eyebrow: "TEKENLIMIETEN PER PLATFORM",
+    headers: {
+      platform: "Platform",
+      characterLimit: "Tekenlimiet",
+      shownInFeed: "Getoond in feed",
+      bestPractice: "Beste praktijken",
+      notes: "Opmerkingen"
+    },
+    viewAll: "Bekijk alle platformlimieten",
+    platforms: {
+      linkedin: {
+        name: "LinkedIn",
+        limit: "3,000",
+        shown: "~220 tekens",
+        bestPractice: "Houd de kernboodschap vooraan",
+        notes: "Artikelen ondersteunen tot 125.000 tekens"
+      },
+      twitter: {
+        name: "X (Twitter)",
+        limit: "280",
+        shown: "~125 tekens",
+        bestPractice: "Zet belangrijke info vooraan",
+        notes: "Links verminderen het aantal beschikbare tekens"
+      },
+      instagram: {
+        name: "Instagram-bijschrift",
+        limit: "2,200",
+        shown: "~125 tekens",
+        bestPractice: "Trek vroeg de aandacht, voeg CTA toe",
+        notes: "Hashtags tellen mee voor de limiet"
+      },
+      facebook: {
+        name: "Facebook-bericht",
+        limit: "63,206",
+        shown: "~160 tekens",
+        bestPractice: "Houd het beknopt",
+        notes: "Afbeeldingen en links beïnvloeden de weergave"
+      },
+      threads: {
+        name: "Threads",
+        limit: "500",
+        shown: "~125 tekens",
+        bestPractice: "Kort en boeiend",
+        notes: "Meta's op tekst gebaseerde platform"
+      },
+      sms: {
+        name: "SMS (GSM)",
+        limit: "160",
+        shown: "160 per SMS",
+        bestPractice: "Onder 160 houden",
+        notes: "Langere teksten worden opgesplitst in meerdere sms'jes"
+      }
+    }
+  },
+
   island: {
     dashboard: {
       loadSample: 'Laad een voorbeeldbericht →',

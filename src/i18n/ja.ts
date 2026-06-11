@@ -576,6 +576,96 @@ export const ja: Translations = {
     close: '閉じる',
   },
 
+  whyPostTruncate: {
+    eyebrow: 'POSTTRUNCATEが選ばれる理由',
+    title: '自信を持って書き、<br/>安心して投稿する。',
+    p1: '各プラットフォームには、それぞれ異なる文字数制限と切り捨てのルールがあります。PostTruncateを使えば、公開ボタンを押す前にコンテンツがどのように表示されるかを正確に確認できます。',
+    p2: 'リアルタイムのプレビューとスマートな分析により、時間を節約し、エンゲージメントを高め、すべての文字を最大限に活用します。',
+    features: {
+      realTime: {
+        title: 'リアルタイムプレビュー',
+        desc: '6つ以上のプラットフォームで投稿がどのように表示されるかを即座に確認できます。',
+      },
+      insights: {
+        title: 'スマートな分析',
+        desc: '可読性スコア、キーワード分析、コンテンツ最適化のヒントを取得します。',
+      },
+      privacy: {
+        title: 'プライバシー優先',
+        desc: 'コンテンツが保存されたり共有されたりすることはありません。すべてが非公開のままです。',
+      },
+    },
+  },
+
+  howTruncationWorks: {
+    eyebrow: '切り捨ての仕組み',
+    description: '各プラットフォームには固有の文字数制限と表示ルールがあります。コンテンツがこれらの制限を超えると、「...」や「さらに表示」で切り捨てられます。PostTruncateは投稿後どのように表示されるかを正確にシミュレートします。',
+    platforms: {
+      linkedin: { name: 'LinkedIn', desc: '「...さらに表示」の前に約220文字を表示' },
+      twitter: { name: 'X (Twitter)', desc: '切り捨て前に約125文字を表示（デバイスによって異なります）' },
+      instagram: { name: 'Instagram', desc: '約125文字を表示、「さらに表示」をタップで展開' },
+      facebook: { name: 'Facebook', desc: '「...さらに表示」の前に約160文字を表示' },
+      threads: { name: 'Threads', desc: 'Instagramと同様、切り捨て前に約125文字を表示' },
+      sms: { name: 'SMS (GSM)', desc: 'GSMでSMSごとに160文字、Unicodeで70文字' },
+    },
+  },
+
+  platformCharacterLimits: {
+    eyebrow: "プラットフォームの文字数制限",
+    headers: {
+      platform: "プラットフォーム",
+      characterLimit: "文字数制限",
+      shownInFeed: "フィードでの表示",
+      bestPractice: "ベストプラクティス",
+      notes: "備考"
+    },
+    viewAll: "すべてのプラットフォームの制限を見る",
+    platforms: {
+      linkedin: {
+        name: "LinkedIn",
+        limit: "3,000",
+        shown: "約220文字",
+        bestPractice: "重要なメッセージは最初に",
+        notes: "記事は最大125,000文字まで対応"
+      },
+      twitter: {
+        name: "X (Twitter)",
+        limit: "280",
+        shown: "約125文字",
+        bestPractice: "重要な情報を先頭に",
+        notes: "リンクは文字数を消費します"
+      },
+      instagram: {
+        name: "Instagramのキャプション",
+        limit: "2,200",
+        shown: "約125文字",
+        bestPractice: "早めに惹きつけ、CTAを追加",
+        notes: "ハッシュタグも制限に含まれます"
+      },
+      facebook: {
+        name: "Facebookの投稿",
+        limit: "63,206",
+        shown: "約160文字",
+        bestPractice: "簡潔に",
+        notes: "画像やリンクは表示に影響します"
+      },
+      threads: {
+        name: "Threads",
+        limit: "500",
+        shown: "約125文字",
+        bestPractice: "短く魅力的に",
+        notes: "Metaのテキストベースのプラットフォーム"
+      },
+      sms: {
+        name: "SMS (GSM)",
+        limit: "160",
+        shown: "1通あたり160",
+        bestPractice: "160文字未満に保つ",
+        notes: "長いテキストは複数のSMSに分割されます"
+      }
+    }
+  },
+
   island: {
     dashboard: {
       loadSample: 'サンプル投稿を読み込む →',

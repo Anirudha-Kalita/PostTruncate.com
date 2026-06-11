@@ -1,0 +1,220 @@
+---
+import type { Translations } from '../i18n/types';
+import { getTranslations } from '../i18n';
+import { interp } from '../i18n/interp';
+import { LIMITS, FOLDS, SMS_LIMITS } from '../lib/textTools';
+import { tools } from '../data/tools';
+
+interface Props {
+  s: Translations['platformCharacterLimits'];
+  lang: string;
+}
+
+const { s, lang } = Astro.props;
+const t = getTranslations(lang);
+const L = t.limitsPage;
+const nf = new Intl.NumberFormat(lang);
+
+const toolHref: Record<string, string> = {};
+for (const tool of tools) {
+  toolHref[tool.id] = `/${lang}/${tool.slugs[lang] ?? tool.slugs['en']}/`;
+}
+
+const rows = [
+  {
+    id: 'linkedin',
+    name: 'LinkedIn',
+    href: toolHref['linkedin'],
+    limit: nf.format(LIMITS.LINKEDIN_POST),
+    foldMobile: `~${nf.format(FOLDS.linkedin.mobile)}`,
+    foldDesktop: `~${nf.format(FOLDS.linkedin.desktop)}`,
+    note: L.notes.linkedin,
+  },
+  {
+    id: 'twitter',
+    name: 'X (Twitter)',
+    href: toolHref['twitter'],
+    limit: nf.format(LIMITS.TWEET),
+    foldMobile: L.noFold,
+    foldDesktop: L.noFold,
+    note: interp(L.notes.twitter, { limit: nf.format(LIMITS.TWEET), url: nf.format(LIMITS.URL_WEIGHT) }),
+  },
+  {
+    id: 'instagram',
+    name: 'Instagram',
+    href: toolHref['instagram'],
+    limit: nf.format(LIMITS.INSTAGRAM_CAPTION),
+    foldMobile: `~${nf.format(FOLDS.instagram.mobile)}`,
+    foldDesktop: `~${nf.format(FOLDS.instagram.desktop)}`,
+    note: interp(L.notes.instagram, { hashtags: nf.format(LIMITS.INSTAGRAM_HASHTAGS) }),
+  },
+  {
+    id: 'facebook',
+    name: 'Facebook',
+    href: toolHref['facebook'],
+    limit: nf.format(LIMITS.FACEBOOK_POST),
+    foldMobile: `~${nf.format(FOLDS.facebook.mobile)}`,
+    foldDesktop: `~${nf.format(FOLDS.facebook.desktop)}`,
+    note: L.notes.facebook,
+  },
+  {
+    id: 'threads',
+    name: 'Threads',
+    href: toolHref['threads'],
+    limit: nf.format(LIMITS.THREADS),
+    foldMobile: `~${nf.format(FOLDS.threads.mobile)}`,
+    foldDesktop: nf.format(FOLDS.threads.desktop),
+    note: interp(L.notes.threads, { limit: nf.format(LIMITS.THREADS) }),
+  },
+  {
+    id: 'sms',
+    name: 'SMS (GSM 7-bit)',
+    href: toolHref['sms'],
+    limit: nf.format(SMS_LIMITS.GSM.singlePart),
+    foldMobile: L.noFold,
+    foldDesktop: L.noFold,
+    note: interp(L.notes.smsGsm, {
+      single: nf.format(SMS_LIMITS.GSM.singlePart),
+      multi: nf.format(SMS_LIMITS.GSM.multipart),
+    }),
+  },
+  {
+    id: 'sms',
+    name: 'SMS (Unicode)',
+    href: toolHref['sms'],
+    limit: nf.format(SMS_LIMITS.UNICODE.singlePart),
+    foldMobile: L.noFold,
+    foldDesktop: L.noFold,
+    note: L.notes.smsUnicode,
+  },
+];
+---
+
+<section class="container-page limits-section">
+  <div class="limits-head">
+    <p class="section-eyebrow">{s.eyebrow}</p>
+  </div>
+
+  <div class="table-container">
+    <table class="limits-table">
+      <thead>
+        <tr>
+          <th>{L.table.platform}</th>
+          <th>{L.table.limit}</th>
+          <th>{L.table.foldMobile}</th>
+          <th>{L.table.foldDesktop}</th>
+          <th>{L.table.notes}</th>
+        </tr>
+      </thead>
+      <tbody>
+        {rows.map((r) => (
+          <tr>
+            <td class="platform-name">
+              <a href={r.href} class={`platform-link brand-${r.id}`}>{r.name}</a>
+            </td>
+            <td>{r.limit}</td>
+            <td class="text-mute">{r.foldMobile}</td>
+            <td class="text-mute">{r.foldDesktop}</td>
+            <td class="text-mute">{r.note}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+  
+  <div class="limits-footer">
+    <a href={`/${lang}/platform-limits/`} class="view-all-link">{s.viewAll} →</a>
+  </div>
+</section>
+
+<style>
+  .limits-section {
+    padding-top: 0px;
+    padding-bottom: 24px;
+  }
+  .limits-head {
+    margin-bottom: 24px;
+  }
+  .section-eyebrow {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--color-ink);
+    font-weight: 700;
+  }
+  .table-container {
+    overflow-x: auto;
+    border: 1px solid var(--color-border);
+    border-radius: 12px;
+    background: var(--color-canvas);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+  }
+  .limits-table {
+    width: 100%;
+    min-width: 800px;
+    border-collapse: collapse;
+    text-align: center;
+    font-size: 14px;
+  }
+  .limits-table th {
+    padding: 16px 20px;
+    font-weight: 600;
+    color: var(--color-ink);
+    background: rgba(0, 112, 243, 0.03);
+    border-bottom: 1px solid var(--color-border);
+  }
+  .limits-table td {
+    padding: 16px 20px;
+    color: var(--color-ink);
+    border-bottom: 1px solid var(--color-border);
+  }
+  .limits-table tr:last-child td {
+    border-bottom: none;
+  }
+  .platform-name {
+    font-weight: 600;
+  }
+  .platform-link {
+    color: inherit;
+    text-decoration: none;
+  }
+  .platform-link:hover {
+    text-decoration: underline;
+  }
+  .text-link {
+    color: var(--color-link);
+    text-decoration: none;
+  }
+  .text-link:hover {
+    text-decoration: underline;
+  }
+  .text-mute {
+    color: var(--color-body);
+  }
+  .limits-footer {
+    margin-top: 24px;
+    text-align: center;
+  }
+  .view-all-link {
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--color-link);
+    text-decoration: none;
+  }
+  .view-all-link:hover {
+    text-decoration: underline;
+  }
+  
+  .brand-linkedin { color: #0a66c2; }
+  .brand-instagram { color: #e1306c; }
+  .brand-facebook { color: #1877f2; }
+  .brand-sms { color: #25d366; }
+  .brand-twitter,
+  .brand-threads { color: var(--color-ink); }
+
+  /* Dark theme tweaks */
+  :global(html[data-theme='dark']) .limits-table th {
+    background: rgba(255, 255, 255, 0.02);
+  }
+</style>

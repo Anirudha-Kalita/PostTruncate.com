@@ -574,6 +574,96 @@ export const zh: Translations = {
     close: '关闭',
   },
 
+  whyPostTruncate: {
+    eyebrow: '为什么选择 POSTTRUNCATE？',
+    title: '自信地写作，<br/>无忧地发布。',
+    p1: '每个平台都有不同的字符限制和截断规则。PostTruncate 可以让您在点击发布之前准确看到内容的外观。',
+    p2: '通过实时预览和智能分析，节省时间、提高参与度，并充分利用每一个字符。',
+    features: {
+      realTime: {
+        title: '实时预览',
+        desc: '即时查看您的帖子在 6 个以上平台上的显示效果。',
+      },
+      insights: {
+        title: '智能分析',
+        desc: '获取可读性得分、关键词分析和内容优化提示。',
+      },
+      privacy: {
+        title: '隐私至上',
+        desc: '您的内容绝不会被存储或共享。一切都保持私密。',
+      },
+    },
+  },
+
+  howTruncationWorks: {
+    eyebrow: '截断如何工作',
+    description: '每个平台都有独特的字符限制和显示规则。当您的内容超过这些限制时，将用“...”或“查看更多”截断。PostTruncate 完全模拟您发布后帖子的外观。',
+    platforms: {
+      linkedin: { name: 'LinkedIn', desc: '在“...查看更多”之前显示 ~220 字符' },
+      twitter: { name: 'X (Twitter)', desc: '截断前显示 ~125 字符（因设备而异）' },
+      instagram: { name: 'Instagram', desc: '显示 ~125 字符，点击“更多”展开' },
+      facebook: { name: 'Facebook', desc: '在“...查看更多”之前显示 ~160 字符' },
+      threads: { name: 'Threads', desc: '类似于 Instagram，截断前 ~125 字符' },
+      sms: { name: 'SMS (GSM)', desc: 'GSM 每条短信 160 字符，Unicode 为 70 字符' },
+    },
+  },
+
+  platformCharacterLimits: {
+    eyebrow: "平台字符限制",
+    headers: {
+      platform: "平台",
+      characterLimit: "字符限制",
+      shownInFeed: "信息流中显示",
+      bestPractice: "最佳实践",
+      notes: "备注"
+    },
+    viewAll: "查看所有平台限制",
+    platforms: {
+      linkedin: {
+        name: "LinkedIn",
+        limit: "3,000",
+        shown: "约220字符",
+        bestPractice: "关键信息放在前面",
+        notes: "文章支持高达125,000字符"
+      },
+      twitter: {
+        name: "X (Twitter)",
+        limit: "280",
+        shown: "约125字符",
+        bestPractice: "重要信息前置",
+        notes: "链接会减少可用字符数"
+      },
+      instagram: {
+        name: "Instagram 标题",
+        limit: "2,200",
+        shown: "约125字符",
+        bestPractice: "尽早吸引眼球，添加 CTA",
+        notes: "标签计入字符限制"
+      },
+      facebook: {
+        name: "Facebook 帖子",
+        limit: "63,206",
+        shown: "约160字符",
+        bestPractice: "保持简洁",
+        notes: "图片和链接会影响显示"
+      },
+      threads: {
+        name: "Threads",
+        limit: "500",
+        shown: "约125字符",
+        bestPractice: "简短且吸引人",
+        notes: "Meta 的基于文本的平台"
+      },
+      sms: {
+        name: "SMS (GSM)",
+        limit: "160",
+        shown: "每条160字符",
+        bestPractice: "保持在160以内",
+        notes: "较长的文本将分为多条短信"
+      }
+    }
+  },
+
   island: {
     dashboard: {
       loadSample: '加载示例帖子 →',

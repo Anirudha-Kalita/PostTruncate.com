@@ -576,6 +576,96 @@ export const fr: Translations = {
     close: 'Fermer',
   },
 
+  whyPostTruncate: {
+    eyebrow: 'POURQUOI POSTTRUNCATE ?',
+    title: 'Écrivez avec confiance.<br/>Publiez sans soucis.',
+    p1: 'Chaque plateforme a des limites de caractères et des règles de troncature différentes. PostTruncate vous montre exactement comment votre contenu apparaîtra avant de le publier.',
+    p2: 'Gagnez du temps, augmentez l’engagement et optimisez chaque caractère avec des aperçus en temps réel et des analyses intelligentes.',
+    features: {
+      realTime: {
+        title: 'Aperçus en temps réel',
+        desc: 'Voyez instantanément comment votre publication apparaîtra sur plus de 6 plateformes.',
+      },
+      insights: {
+        title: 'Analyses intelligentes',
+        desc: 'Obtenez des scores de lisibilité, une analyse des mots-clés et des conseils d’optimisation de contenu.',
+      },
+      privacy: {
+        title: 'Confidentialité avant tout',
+        desc: 'Votre contenu n’est jamais stocké ou partagé. Tout reste privé.',
+      },
+    },
+  },
+
+  howTruncationWorks: {
+    eyebrow: 'COMMENT FONCTIONNE LA TRONCATURE',
+    description: 'Chaque plateforme a des limites de caractères et des règles d\'affichage uniques. Lorsque votre contenu dépasse ces limites, il est tronqué par "..." ou "Voir plus". PostTruncate simule exactement l\'apparence de votre publication.',
+    platforms: {
+      linkedin: { name: 'LinkedIn', desc: 'Affiche ~220 caractères avant "...voir plus"' },
+      twitter: { name: 'X (Twitter)', desc: 'Affiche ~125 caractères avant troncature (varie selon l\'appareil)' },
+      instagram: { name: 'Instagram', desc: 'Affiche ~125 caractères, touchez "plus" pour développer' },
+      facebook: { name: 'Facebook', desc: 'Affiche ~160 caractères avant "...voir plus"' },
+      threads: { name: 'Threads', desc: 'Similaire à Instagram avec ~125 caractères avant troncature' },
+      sms: { name: 'SMS (GSM)', desc: '160 caractères par SMS pour GSM, 70 pour Unicode' },
+    },
+  },
+
+  platformCharacterLimits: {
+    eyebrow: "LIMITES DE CARACTÈRES PAR PLATEFORME",
+    headers: {
+      platform: "Plateforme",
+      characterLimit: "Limite de caractères",
+      shownInFeed: "Affiché dans le flux",
+      bestPractice: "Bonnes pratiques",
+      notes: "Remarques"
+    },
+    viewAll: "Voir toutes les limites de plateformes",
+    platforms: {
+      linkedin: {
+        name: "LinkedIn",
+        limit: "3,000",
+        shown: "~220 caractères",
+        bestPractice: "Gardez le message clé au début",
+        notes: "Les articles supportent jusqu'à 125 000 caractères"
+      },
+      twitter: {
+        name: "X (Twitter)",
+        limit: "280",
+        shown: "~125 caractères",
+        bestPractice: "Mettez les infos importantes en avant",
+        notes: "Les liens réduisent les caractères disponibles"
+      },
+      instagram: {
+        name: "Légende Instagram",
+        limit: "2,200",
+        shown: "~125 caractères",
+        bestPractice: "Accrochez tôt, ajoutez un CTA",
+        notes: "Les hashtags comptent dans la limite"
+      },
+      facebook: {
+        name: "Publication Facebook",
+        limit: "63,206",
+        shown: "~160 caractères",
+        bestPractice: "Soyez concis",
+        notes: "Les images et les liens affectent l'affichage"
+      },
+      threads: {
+        name: "Threads",
+        limit: "500",
+        shown: "~125 caractères",
+        bestPractice: "Court et engageant",
+        notes: "Plateforme textuelle de Meta"
+      },
+      sms: {
+        name: "SMS (GSM)",
+        limit: "160",
+        shown: "160 par SMS",
+        bestPractice: "Rester sous 160",
+        notes: "Les textes plus longs sont divisés en plusieurs SMS"
+      }
+    }
+  },
+
   island: {
     dashboard: {
       loadSample: 'Charger un exemple de publication →',

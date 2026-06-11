@@ -577,6 +577,96 @@ export const de: Translations = {
     close: 'Schließen',
   },
 
+  whyPostTruncate: {
+    eyebrow: 'WARUM POSTTRUNCATE?',
+    title: 'Schreiben Sie mit Zuversicht.<br/>Posten Sie ohne Sorgen.',
+    p1: 'Jede Plattform hat unterschiedliche Zeichenlimits und Kürzungsregeln. PostTruncate zeigt Ihnen genau, wie Ihr Inhalt aussehen wird, bevor Sie auf Veröffentlichen klicken.',
+    p2: 'Sparen Sie Zeit, steigern Sie das Engagement und nutzen Sie jedes Zeichen durch Echtzeit-Vorschauen und intelligente Analysen.',
+    features: {
+      realTime: {
+        title: 'Echtzeit-Vorschau',
+        desc: 'Sehen Sie sofort, wie Ihr Beitrag auf über 6 Plattformen aussehen wird.',
+      },
+      insights: {
+        title: 'Intelligente Analysen',
+        desc: 'Erhalten Sie Lesbarkeitswerte, Keyword-Analysen und Tipps zur Inhaltsoptimierung.',
+      },
+      privacy: {
+        title: 'Privatsphäre zuerst',
+        desc: 'Ihre Inhalte werden niemals gespeichert oder geteilt. Alles bleibt privat.',
+      },
+    },
+  },
+
+  howTruncationWorks: {
+    eyebrow: 'WIE KÜRZUNGEN FUNKTIONIEREN',
+    description: 'Jede Plattform hat eigene Zeichenlimits und Anzeigeregeln. Wenn Ihr Inhalt diese Limits überschreitet, wird er mit "..." oder "Mehr anzeigen" gekürzt. PostTruncate simuliert genau, wie Ihr Beitrag aussehen wird.',
+    platforms: {
+      linkedin: { name: 'LinkedIn', desc: 'Zeigt ~220 Zeichen vor "...mehr anzeigen"' },
+      twitter: { name: 'X (Twitter)', desc: 'Zeigt ~125 Zeichen vor Kürzung (variiert je nach Gerät)' },
+      instagram: { name: 'Instagram', desc: 'Zeigt ~125 Zeichen, tippen Sie auf "mehr"' },
+      facebook: { name: 'Facebook', desc: 'Zeigt ~160 Zeichen vor "...mehr anzeigen"' },
+      threads: { name: 'Threads', desc: 'Ähnlich wie Instagram mit ~125 Zeichen vor Kürzung' },
+      sms: { name: 'SMS (GSM)', desc: '160 Zeichen pro SMS für GSM, 70 für Unicode' },
+    },
+  },
+
+  platformCharacterLimits: {
+    eyebrow: "ZEICHENLIMITS DER PLATTFORMEN",
+    headers: {
+      platform: "Plattform",
+      characterLimit: "Zeichenlimit",
+      shownInFeed: "Im Feed angezeigt",
+      bestPractice: "Bewährte Methoden",
+      notes: "Hinweise"
+    },
+    viewAll: "Alle Plattform-Limits ansehen",
+    platforms: {
+      linkedin: {
+        name: "LinkedIn",
+        limit: "3,000",
+        shown: "~220 Zeichen",
+        bestPractice: "Kernbotschaft an den Anfang setzen",
+        notes: "Artikel unterstützen bis zu 125.000 Zeichen"
+      },
+      twitter: {
+        name: "X (Twitter)",
+        limit: "280",
+        shown: "~125 Zeichen",
+        bestPractice: "Wichtige Infos nach vorn",
+        notes: "Links reduzieren verfügbare Zeichen"
+      },
+      instagram: {
+        name: "Instagram-Bildunterschrift",
+        limit: "2,200",
+        shown: "~125 Zeichen",
+        bestPractice: "Früh fesseln, CTA hinzufügen",
+        notes: "Hashtags zählen zum Limit"
+      },
+      facebook: {
+        name: "Facebook-Beitrag",
+        limit: "63,206",
+        shown: "~160 Zeichen",
+        bestPractice: "Kurz und bündig halten",
+        notes: "Bilder und Links beeinflussen die Anzeige"
+      },
+      threads: {
+        name: "Threads",
+        limit: "500",
+        shown: "~125 Zeichen",
+        bestPractice: "Kurz & ansprechend",
+        notes: "Metas textbasierte Plattform"
+      },
+      sms: {
+        name: "SMS (GSM)",
+        limit: "160",
+        shown: "160 pro SMS",
+        bestPractice: "Unter 160 halten",
+        notes: "Längere Texte werden in mehrere SMS aufgeteilt"
+      }
+    }
+  },
+
   island: {
     dashboard: {
       loadSample: 'Beispielbeitrag laden →',

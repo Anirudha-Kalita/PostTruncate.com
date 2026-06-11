@@ -43,7 +43,7 @@ collections:
       - { name: slug, label: Slug, widget: string, hint: 'Lowercase words separated by hyphens. Becomes the URL and the filename.', pattern: ['^[a-z0-9]+(?:-[a-z0-9]+)*$', 'Use lowercase kebab-case (a-z, 0-9, single hyphens).'] }
       # Hidden + dynamic default: auto-derived from the slug so it never has to
       # be filled while English-only, while satisfying the required schema field.
-      - { name: translationKey, label: Translation key, widget: hidden, default: '{{fields.slug}}' }
+      - { name: translationKey, label: Translation key, widget: hidden, default: '{{slug}}' }
       - { name: relatedPlatform, label: Related platform, widget: select, required: false, options: ['twitter', 'instagram', 'linkedin', 'facebook', 'sms', 'threads', 'general'] }
       - { name: author, label: Author, widget: string, default: 'PostTruncate Team' }
       - { name: draft, label: Draft, widget: boolean, default: false }
