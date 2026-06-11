@@ -33,6 +33,13 @@ export const RELATED_PLATFORMS = [
   'general',
 ] as const;
 
+// Sveltia serializes a CLEARED optional field as an empty string (e.g. you add
+// an `updatedDate`, save, then later remove it) rather than omitting the key.
+// Coerce '' / null to undefined BEFORE validation so an optional field that was
+// filled then cleared in the CMS never crashes the build — z.coerce.date() and
+// z.enum() both reject "" otherwise. Wrap every optional field with this.
+const blankToUndefined = (v: unknown) => (v === '' || v === null ? undefined : v);
+
 const blog = defineCollection({
   // Content Layer requires an explicit loader. Markdown only (no MDX
   // integration installed). Pattern is exactly `<locale>/<slug>.md` (one level
@@ -59,13 +66,13 @@ const blog = defineCollection({
      * author + date). Purely visual — distinct from `description`, which is the
      * SEO meta text — so the on-page subtitle and the SERP snippet can differ.
      */
-    subtitle: z.string().max(200).optional(),
+    subtitle: z.preprocess(blankToUndefined, z.string().max(200).optional()),
 
     // ── Dates (drive Article schema + sitemap lastmod) ──────────────────
     /** First publication date. Write `publishDate: 2026-06-09` in frontmatter. */
     publishDate: z.coerce.date(),
     /** Last substantive revision. Omit until the post is actually updated. */
-    updatedDate: z.coerce.date().optional(),
+    updatedDate: z.preprocess(blankToUndefined, z.coerce.date().optional()),
 
     // ── Locale + routing ────────────────────────────────────────────────
     /**
@@ -99,7 +106,7 @@ const blog = defineCollection({
 
     // ── Taxonomy ────────────────────────────────────────────────────────
     /** Optional platform association → cross-links to the matching tool page. */
-    relatedPlatform: z.enum(RELATED_PLATFORMS).optional(),
+    relatedPlatform: z.preprocess(blankToUndefined, z.enum(RELATED_PLATFORMS).optional()),
 
     // ── Authorship & state ──────────────────────────────────────────────
     /** Display name for the Article author (Person schema). */
@@ -113,7 +120,7 @@ const blog = defineCollection({
      * absolute URL. Resolved to an absolute URL at render; falls back to the
      * site-wide /og.png when omitted.
      */
-    ogImage: z.string().optional(),
+    ogImage: z.preprocess(blankToUndefined, z.string().optional()),
   })
   // Back-fill translationKey from slug when omitted or blank, so an empty
   // value (e.g. from a CMS hidden field) can never crash the build. Explicit,

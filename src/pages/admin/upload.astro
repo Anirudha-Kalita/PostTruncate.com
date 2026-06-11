@@ -1,13 +1,18 @@
 ---
 // ──────────────────────────────────────────────────────────────────────────
-// /admin/upload/ — local, client-side .md uploader for the blog collection.
+// /admin/upload/ — local, client-side blog authoring tool.
 //
-// 100% client-side (respects the no-backend rule): it parses a dropped/selected
-// .md file, validates the REQUIRED frontmatter fields against the `blog` schema
-// in src/content.config.ts, renders a live preview, and — only after you click
-// Save — writes <slug>.md straight into a folder you authorize via the browser
-// File System Access API (Chrome/Edge). A Download fallback covers other
-// browsers. Nothing is uploaded anywhere; the file lands on your own disk.
+// Two ways in, both 100% client-side (respects the no-backend rule):
+//   • Paste an article's HTML → "Format file" extracts title/description/date/
+//     author/hero/body into our frontmatter, converts the body HTML→Markdown,
+//     turns the FAQ into foldable <details> blocks, and downloads the hero
+//     image into public/og/. Unfound fields are left blank to fill manually.
+//   • Drop an already-formatted .md to validate/preview it.
+//
+// Then it validates the REQUIRED fields against the `blog` schema, previews the
+// post, and — after you click Save — writes the .md to src/content/blog/en/ and
+// the image to public/og/ via the File System Access API (Chrome/Edge). You
+// authorize your PROJECT ROOT once (the folder containing src/ and public/).
 //
 // noindex + outside the [lang] routing, same as the Sveltia /admin entry.
 // ──────────────────────────────────────────────────────────────────────────
@@ -20,7 +25,7 @@ export const prerender = true;
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="robots" content="noindex, nofollow" />
-    <title>Blog .md uploader · PostTruncate</title>
+    <title>Blog uploader · PostTruncate</title>
     <style>
       :root {
         --ink: #171717; --body: #4d4d4d; --mute: #6b6b6b;
@@ -46,9 +51,14 @@ export const prerender = true;
       button.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
       button.primary:disabled { opacity: 0.45; cursor: not-allowed; }
       .row { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
-      .drop { margin-top: 12px; border: 2px dashed var(--line); border-radius: var(--radius); padding: 28px; text-align: center; color: var(--mute); cursor: pointer; transition: border-color .15s, background .15s; }
+      .drop { margin-top: 12px; border: 2px dashed var(--line); border-radius: var(--radius); padding: 22px; text-align: center; color: var(--mute); cursor: pointer; transition: border-color .15s, background .15s; }
       .drop.drag { border-color: var(--accent); background: #eff6ff; }
       .drop input { display: none; }
+      textarea { width: 100%; font-family: var(--mono); font-size: 12.5px; line-height: 1.5; border: 1px solid var(--line); border-radius: 8px; padding: 10px 12px; resize: vertical; color: var(--ink); background: var(--bg); }
+      #html { min-height: 150px; }
+      #outContent { min-height: 300px; }
+      hr { border: 0; border-top: 1px solid var(--line); margin: 18px 0; }
+      .or { font-size: 12px; color: var(--mute); text-transform: uppercase; letter-spacing: .5px; }
       .status { font-size: 13px; margin-top: 10px; }
       .pill { display: inline-block; padding: 2px 8px; border-radius: 999px; font-size: 12px; font-weight: 600; }
       .pill.ok { background: var(--okbg); color: var(--ok); }
@@ -61,7 +71,6 @@ export const prerender = true;
       .checks .mark.pass { color: var(--ok); }
       .checks .mark.fail { color: var(--err); }
       .checks .mark.warn { color: #92400e; }
-      pre.code { background: #0f172a; color: #e2e8f0; padding: 14px 16px; border-radius: 10px; overflow:auto; font-family: var(--mono); font-size: 12.5px; line-height: 1.5; max-height: 320px; }
       .note { font-size: 12px; color: var(--mute); margin-top: 10px; }
       .hide { display: none !important; }
       /* Preview — approximates the article template (not byte-identical). */
@@ -76,44 +85,58 @@ export const prerender = true;
       .pv-body h2 { font-size: 20px; color: var(--ink); margin: 28px 0 0; }
       .pv-body h3 { font-size: 17px; color: var(--ink); margin: 22px 0 0; }
       .pv-body img { max-width: 100%; height: auto; border-radius: 8px; }
-      .pv-body pre { background: #0f172a; color:#e2e8f0; padding: 12px 14px; border-radius: 8px; overflow:auto; }
-      .pv-body code { font-family: var(--mono); font-size: .9em; }
+      .pv-body details { margin-top: 12px; border: 1px solid var(--line); border-radius: 8px; padding: 8px 12px; }
+      .pv-body summary { cursor: pointer; color: var(--ink); }
+      .pv-body table { border-collapse: collapse; margin-top: 14px; font-size: 14px; }
+      .pv-body th, .pv-body td { border: 1px solid var(--line); padding: 6px 10px; }
       .pv-body blockquote { border-left: 3px solid var(--line); margin: 14px 0 0; padding-left: 16px; color: var(--mute); font-style: italic; }
       .empty { color: var(--mute); font-size: 14px; }
     </style>
   </head>
   <body>
     <div class="wrap">
-      <h1>Blog .md uploader</h1>
+      <h1>Blog uploader</h1>
       <p class="lede">
-        Local authoring tool. Validates required frontmatter against the
-        <code>blog</code> schema, previews the post, then writes
-        <code>&lt;slug&gt;.md</code> into a folder you choose
-        (point it at <code>src/content/blog/en/</code>). Fully client-side — nothing leaves your machine.
+        Local authoring tool. Paste an article's HTML and click <strong>Format file</strong> — it
+        extracts what it can into our frontmatter, converts the body to Markdown, makes the FAQ
+        foldable, and downloads the hero image to <code>public/og/</code>. Anything it can't find is
+        left blank for you to fill in the editable output below. Fully client-side.
       </p>
 
       <div class="grid">
         <!-- LEFT: input + validation + output -->
         <div>
           <div class="card">
-            <span class="step">Step 1 — choose destination</span>
-            <h2>Folder to save into</h2>
+            <span class="step">Step 1 — authorize project root</span>
+            <h2>Project folder</h2>
             <div class="row">
-              <button id="pickDir" type="button">Choose folder…</button>
+              <button id="pickDir" type="button">Choose project root…</button>
               <span id="dirStatus" class="status empty">No folder selected</span>
             </div>
+            <p class="note">
+              Pick the repo root — the folder that contains <code>src/</code> and <code>public/</code>.
+              The <code>.md</code> is written to <code>src/content/blog/en/</code> and the image to
+              <code>public/og/</code>.
+            </p>
             <p id="fsaNote" class="note hide">
-              Your browser doesn't support saving to a folder (File System Access API).
-              Use Chrome or Edge, or use the <strong>Download</strong> button and move the file yourself.
+              Your browser doesn't support saving to a folder (File System Access API). Use Chrome or
+              Edge, or use the <strong>Download</strong> button and place the files yourself.
             </p>
           </div>
 
           <div class="card" style="margin-top:24px;">
-            <span class="step">Step 2 — drop your file</span>
-            <h2>Markdown file</h2>
+            <span class="step">Step 2 — provide content</span>
+            <h2>Paste article HTML</h2>
+            <textarea id="html" placeholder="Paste the article page's HTML here (View Source → copy), then click Format file…"></textarea>
+            <div class="row" style="margin-top:10px;">
+              <button id="format" type="button" class="primary">Format file</button>
+              <span id="formatStatus" class="status" style="margin:0;"></span>
+            </div>
+            <hr />
+            <span class="or">or drop an already-formatted .md</span>
             <label class="drop" id="drop">
               <input id="file" type="file" accept=".md,.markdown,text/markdown" />
-              <strong>Drop a .md file here</strong><br />or click to browse
+              <strong>Drop a .md file here</strong> · or click to browse
             </label>
             <div id="fileStatus" class="status"></div>
           </div>
@@ -122,16 +145,17 @@ export const prerender = true;
             <h2>Validation <span id="validBadge" class="pill"></span></h2>
             <ul class="checks" id="checks"></ul>
             <div class="row" style="margin-top:14px;">
-              <button id="autofix" type="button">Auto-fix missing fields</button>
-              <span class="note" style="margin:0;">Fills slug/date/locale/author/draft like the normalizer script.</span>
+              <button id="autofix" type="button">Auto-fill missing fields</button>
+              <span class="note" style="margin:0;">Fills slug/date/locale/author/draft with defaults.</span>
             </div>
           </div>
 
           <div class="card hide" id="outputCard" style="margin-top:24px;">
             <h2>File to be written — <span id="outName" style="font-family:var(--mono);"></span></h2>
-            <pre class="code" id="outContent"></pre>
+            <p class="note" style="margin-top:0;">Editable — fill any blank field, then Save.</p>
+            <textarea id="outContent" spellcheck="false"></textarea>
             <div class="row" style="margin-top:14px;">
-              <button id="save" type="button" class="primary" disabled>Save to folder</button>
+              <button id="save" type="button" class="primary" disabled>Save to project</button>
               <button id="download" type="button">Download .md</button>
               <span id="saveStatus" class="status"></span>
             </div>
@@ -143,10 +167,10 @@ export const prerender = true;
           <div class="card preview">
             <span class="step">Live preview</span>
             <h2 style="margin-bottom:16px;">Article preview</h2>
-            <div id="preview"><p class="empty">Drop a file to see the preview.</p></div>
+            <div id="preview"><p class="empty">Paste HTML or drop a .md to see the preview.</p></div>
             <p class="note">
-              Approximate. Build-time effects (YouTube/Vimeo → iframe, Shiki code colors)
-              don't run here — they appear only on the deployed page.
+              Approximate. Build-time effects (YouTube/Vimeo → iframe, Shiki code colors) don't run
+              here — they appear only on the deployed page.
             </p>
           </div>
         </div>
@@ -157,13 +181,15 @@ export const prerender = true;
     <script is:inline type="module">
       import YAML from 'https://cdn.jsdelivr.net/npm/yaml@2/+esm';
       import { marked } from 'https://cdn.jsdelivr.net/npm/marked@12/+esm';
+      import { Readability } from 'https://cdn.jsdelivr.net/npm/@mozilla/readability@0.5.0/+esm';
+      import TurndownService from 'https://cdn.jsdelivr.net/npm/turndown@7/+esm';
+      import { gfm } from 'https://cdn.jsdelivr.net/npm/turndown-plugin-gfm@1/+esm';
 
       // ── schema mirror (keep in sync with src/content.config.ts) ──────────
       const TITLE_MAX = 70, DESC_MAX = 180, SUBTITLE_MAX = 200;
       const RELATED = ['twitter','instagram','linkedin','facebook','sms','threads','general'];
       const SLUG_RE = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
       const LOCALE = 'en';
-      const DEFAULT_AUTHOR = 'PostTruncate Team';
 
       // ── tiny IndexedDB store for the directory handle (persist across reloads)
       const idb = {
@@ -179,13 +205,13 @@ export const prerender = true;
           const t = db.transaction('kv', 'readwrite').objectStore('kv').put(v, k); t.onsuccess = () => res(); t.onerror = () => rej(t.error); }); },
       };
 
-      // ── helpers (mirror scripts/normalize-blog-md.mjs) ───────────────────
+      // ── helpers ──────────────────────────────────────────────────────────
       const slugify = (input) => {
-        let s = String(input ?? '').replace(/\.md$/i, '')
+        let s = String(input ?? '').replace(/\.(md|markdown)$/i, '')
           .replace(/^\d{4}-\d{2}-\d{2}[-_]?/, '').toLowerCase()
           .replace(/['’`]/g, '').replace(/&/g, ' and ')
           .replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').replace(/-{2,}/g, '-');
-        return s || 'post';
+        return s.slice(0, 80) || 'post';
       };
       const firstH1 = (b) => { const m = b.match(/^#\s+(.+?)\s*$/m); return m ? m[1].trim() : null; };
       const stripLeadingH1 = (b) => b.replace(/^\s*#\s+.+?\s*(\r?\n)+/, '');
@@ -195,7 +221,7 @@ export const prerender = true;
           const t = line.trim();
           if (t.startsWith('```')) { fence = !fence; continue; }
           if (fence || !t) continue;
-          if (/^(#{1,6}\s|[-*+]\s|\d+\.\s|>|!\[|\|)/.test(t)) continue;
+          if (/^(#{1,6}\s|[-*+]\s|\d+\.\s|>|!\[|\||<)/.test(t)) continue;
           return t.replace(/!\[[^\]]*\]\([^)]*\)/g, '').replace(/\[([^\]]+)\]\([^)]*\)/g, '$1').replace(/[*_`#>]/g, '').trim();
         }
         return '';
@@ -208,11 +234,110 @@ export const prerender = true;
       };
       const toISO = (v) => { if (!v) return null; const d = v instanceof Date ? v : new Date(String(v)); return isNaN(d) ? null : d.toISOString().slice(0, 10); };
       const todayISO = () => new Date().toISOString().slice(0, 10);
+      const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 
       // ── state ─────────────────────────────────────────────────────────--
-      let state = { fm: null, body: '', fileName: '', dirHandle: null };
+      let state = { fm: null, body: '', _content: '', _slug: '', _heroUrl: '', dirHandle: null };
 
-      // ── parse / validate / build ─────────────────────────────────────────
+      // ── HTML → frontmatter + markdown (the "Format file" engine) ─────────
+      function metaContent(doc, sels) {
+        for (const s of sels) {
+          const el = doc.querySelector(s);
+          const v = el?.getAttribute('content') ?? el?.getAttribute('datetime') ?? el?.textContent;
+          if (v && v.trim()) return v.trim();
+        }
+        return '';
+      }
+      function detectPlatform(text) {
+        const t = ' ' + text.toLowerCase() + ' ';
+        let best = '', n = 0;
+        for (const p of RELATED) {
+          if (p === 'general') continue;
+          const c = (t.match(new RegExp('\\b' + p + '\\b', 'g')) || []).length;
+          if (c > n) { n = c; best = p; }
+        }
+        return n >= 3 ? best : '';
+      }
+      // Turn a "Frequently Asked Questions" section into foldable <details>.
+      function formatFaq(md) {
+        const lines = md.split('\n');
+        const faqIdx = lines.findIndex((l) => /^#{2,3}\s+.*(frequently asked questions|faqs?)\b/i.test(l.trim()));
+        if (faqIdx === -1) return md;
+        const before = lines.slice(0, faqIdx + 1);
+        const rest = lines.slice(faqIdx + 1);
+        let end = rest.findIndex((l) => /^##\s+/.test(l.trim()));
+        if (end === -1) end = rest.length;
+        const faq = rest.slice(0, end), after = rest.slice(end);
+        const blocks = []; let cur = null;
+        for (const l of faq) {
+          const m = l.match(/^#{3,4}\s+(.+?)\s*$/);
+          if (m) { if (cur) blocks.push(cur); cur = { q: m[1].trim(), a: [] }; }
+          else if (cur) cur.a.push(l);
+        }
+        if (cur) blocks.push(cur);
+        if (!blocks.length) return md;
+        const details = blocks.map((b) => {
+          const ansMd = b.a.join('\n').trim();
+          const ansHtml = ansMd ? marked.parse(ansMd).trim() : '';
+          return `</br><details><summary><b>${b.q}</b></summary>\n${ansHtml}\n</details>`;
+        }).join('\n\n');
+        return [...before, '', details, '', ...after].join('\n').replace(/\n{3,}/g, '\n\n').trim() + '\n';
+      }
+      function extractFromHtml(html) {
+        const doc = new DOMParser().parseFromString(html, 'text/html');
+        const title = metaContent(doc, ['meta[property="og:title"]', 'meta[name="twitter:title"]'])
+          || doc.querySelector('h1')?.textContent?.trim() || (doc.title || '').trim();
+        const description = metaContent(doc, ['meta[name="description"]', 'meta[property="og:description"]', 'meta[name="twitter:description"]']);
+        const ogImage = metaContent(doc, ['meta[property="og:image"]', 'meta[property="og:image:url"]', 'meta[name="twitter:image"]']);
+        const published = metaContent(doc, ['meta[property="article:published_time"]', 'meta[itemprop="datePublished"]', 'time[datetime]']);
+        const modified = metaContent(doc, ['meta[property="article:modified_time"]', 'meta[itemprop="dateModified"]']);
+        const author = metaContent(doc, ['meta[name="author"]', 'meta[property="article:author"]', 'meta[name="twitter:creator"]']);
+
+        // Main content via Readability (operates on a clone — it mutates the DOM).
+        let article = null;
+        try { article = new Readability(doc.cloneNode(true)).parse(); } catch (e) { /* fall through */ }
+        const contentHtml = article?.content
+          || doc.querySelector('article')?.innerHTML
+          || doc.body?.innerHTML || '';
+
+        // Hero: og:image, else the first <img> in the extracted content.
+        let heroUrl = ogImage;
+        if (!heroUrl) {
+          const cdoc = new DOMParser().parseFromString(contentHtml, 'text/html');
+          heroUrl = cdoc.querySelector('img')?.getAttribute('src') || '';
+        }
+
+        // HTML → Markdown (GFM for tables / strikethrough).
+        const td = new TurndownService({ headingStyle: 'atx', codeBlockStyle: 'fenced', bulletListMarker: '-', emDelimiter: '*' });
+        td.use(gfm);
+        // Drop the hero image from the body — it becomes the frontmatter ogImage.
+        if (heroUrl) td.addRule('dropHero', {
+          filter: (node) => node.nodeName === 'IMG' && node.getAttribute('src') === heroUrl,
+          replacement: () => '',
+        });
+        let body = td.turndown(contentHtml).trim();
+        if (firstH1(body)) body = stripLeadingH1(body).trim(); // title rendered separately
+        body = formatFaq(body);
+
+        const slug = title ? slugify(title) : '';
+        const fm = {
+          title: title || '',
+          subtitle: '',                                  // not reliably detectable → blank
+          description: description || article?.excerpt || '',
+          publishDate: toISO(published) || '',           // blank if not found
+          updatedDate: toISO(modified) || '',
+          locale: LOCALE,                                // convention
+          slug,
+          translationKey: slug,
+          relatedPlatform: detectPlatform(title + ' ' + body),
+          author: author || article?.byline || '',       // blank if not found
+          draft: true,                                   // convention — review first
+          ogImage: '',                                   // set after image download
+        };
+        return { fm, body, heroUrl };
+      }
+
+      // ── .md parse / validate / build ─────────────────────────────────────
       function parseFile(text) {
         const clean = text.replace(/^﻿/, '');
         const m = clean.match(/^---\r?\n([\s\S]*?)\r?\n---\r?\n?([\s\S]*)$/);
@@ -228,56 +353,52 @@ export const prerender = true;
         if (fm.__parseError) add('frontmatter', 'fail', 'YAML did not parse: ' + fm.__parseError);
 
         const title = (fm.title ?? '').toString().trim();
-        if (!title) add('title', 'fail', 'required — missing or empty');
+        if (!title) add('title', 'fail', 'required — fill it in');
         else if (title.length > TITLE_MAX) add('title', 'fail', `too long (${title.length} > ${TITLE_MAX})`);
         else add('title', 'pass', `${title.length}/${TITLE_MAX}`);
 
         const desc = (fm.description ?? '').toString().trim();
-        if (!desc) add('description', 'fail', 'required — missing or empty');
+        if (!desc) add('description', 'fail', 'required — fill it in');
         else if (desc.length > DESC_MAX) add('description', 'fail', `too long (${desc.length} > ${DESC_MAX})`);
         else add('description', 'pass', `${desc.length}/${DESC_MAX}`);
 
-        if (!toISO(fm.publishDate)) add('publishDate', 'fail', 'required — missing or not a date (use YYYY-MM-DD)');
+        if (!toISO(fm.publishDate)) add('publishDate', 'fail', 'required — fill YYYY-MM-DD');
         else add('publishDate', 'pass', toISO(fm.publishDate));
 
         const locale = (fm.locale ?? '').toString().trim();
-        if (!locale) add('locale', 'fail', 'required — must be "en"');
-        else if (locale !== LOCALE) add('locale', 'fail', `must be "en" for src/content/blog/en/ (got "${locale}")`);
+        if (locale !== LOCALE) add('locale', 'fail', `must be "en" (got "${locale}")`);
         else add('locale', 'pass', 'en');
 
         const slug = (fm.slug ?? '').toString().trim();
-        if (!slug) add('slug', 'fail', 'required — missing');
-        else if (!SLUG_RE.test(slug)) add('slug', 'fail', 'must be lowercase kebab-case (a-z, 0-9, single hyphens)');
+        if (!slug) add('slug', 'fail', 'required — fill it in');
+        else if (!SLUG_RE.test(slug)) add('slug', 'fail', 'must be lowercase kebab-case');
         else add('slug', 'pass', slug);
 
         const author = (fm.author ?? '').toString().trim();
-        if (!author) add('author', 'fail', 'required — missing or empty');
+        if (!author) add('author', 'fail', 'required — fill it in');
         else add('author', 'pass', author);
 
-        // optional
         if (fm.subtitle != null && String(fm.subtitle).length > SUBTITLE_MAX) add('subtitle', 'fail', `too long (> ${SUBTITLE_MAX})`);
         else if (fm.subtitle) add('subtitle', 'pass', 'optional');
-        if (fm.updatedDate != null && !toISO(fm.updatedDate)) add('updatedDate', 'warn', 'not a valid date — will be dropped');
-        if (fm.relatedPlatform != null && !RELATED.includes(fm.relatedPlatform)) add('relatedPlatform', 'warn', `"${fm.relatedPlatform}" not in enum — will be dropped`);
-        if (fm.draft != null && typeof fm.draft !== 'boolean') add('draft', 'warn', 'should be true/false');
+        if (fm.updatedDate != null && fm.updatedDate !== '' && !toISO(fm.updatedDate)) add('updatedDate', 'warn', 'not a valid date — will be dropped');
+        if (fm.relatedPlatform && !RELATED.includes(fm.relatedPlatform)) add('relatedPlatform', 'warn', `"${fm.relatedPlatform}" not in enum — will be dropped`);
+        if (fm.ogImage) add('ogImage', 'pass', String(fm.ogImage));
 
         const ok = checks.every((c) => c.level !== 'fail');
         return { ok, checks };
       }
 
-      function autofix(fm, body, fileName) {
+      function autofix(fm, body) {
         const f = { ...fm }; delete f.__parseError;
-        const h1 = firstH1(body);
         f.slug = SLUG_RE.test((f.slug ?? '').toString().trim()) ? f.slug.trim()
-          : slugify(f.slug || fileName.replace(/\.(md|markdown)$/i, ''));
-        if (!String(f.title ?? '').trim()) f.title = h1 || titleCase(f.slug);
+          : slugify(f.slug || f.title || 'post');
+        if (!String(f.title ?? '').trim()) f.title = titleCase(f.slug);
         f.title = clamp(f.title, TITLE_MAX);
-        if (!String(f.description ?? '').trim())
-          f.description = firstParagraph(h1 ? stripLeadingH1(body) : body) || f.title;
+        if (!String(f.description ?? '').trim()) f.description = firstParagraph(body) || f.title;
         f.description = clamp(f.description, DESC_MAX);
-        f.publishDate = toISO(f.publishDate) || toISO(f.date) || todayISO();
+        if (!toISO(f.publishDate)) f.publishDate = todayISO();
         f.locale = LOCALE;
-        if (!String(f.author ?? '').trim()) f.author = DEFAULT_AUTHOR;
+        if (!String(f.author ?? '').trim()) f.author = 'PostTruncate Team';
         if (typeof f.draft !== 'boolean') f.draft = true;
         if (!f.translationKey) f.translationKey = f.slug;
         return f;
@@ -285,21 +406,20 @@ export const prerender = true;
 
       function buildContent(fm, body) {
         const out = {};
-        out.title = String(fm.title);
+        out.title = String(fm.title ?? '');
         if (fm.subtitle) out.subtitle = clamp(String(fm.subtitle), SUBTITLE_MAX);
-        out.description = String(fm.description);
-        out.publishDate = toISO(fm.publishDate);
+        out.description = String(fm.description ?? '');
+        out.publishDate = toISO(fm.publishDate) ?? '';
         if (toISO(fm.updatedDate)) out.updatedDate = toISO(fm.updatedDate);
         out.locale = LOCALE;
-        out.slug = String(fm.slug);
-        out.translationKey = fm.translationKey ? String(fm.translationKey) : String(fm.slug);
+        out.slug = String(fm.slug ?? '');
+        out.translationKey = fm.translationKey ? String(fm.translationKey) : String(fm.slug ?? '');
         if (RELATED.includes(fm.relatedPlatform)) out.relatedPlatform = fm.relatedPlatform;
-        out.author = String(fm.author);
+        out.author = String(fm.author ?? '');
         out.draft = typeof fm.draft === 'boolean' ? fm.draft : true;
         if (fm.ogImage) out.ogImage = String(fm.ogImage);
         let y = YAML.stringify(out, { lineWidth: 0 });
         y = y.replace(/^(publishDate|updatedDate): "(\d{4}-\d{2}-\d{2})"$/gm, '$1: $2');
-        // strip a leading "# H1" so it doesn't duplicate the rendered title
         const cleanBody = firstH1(body) ? stripLeadingH1(body).trim() : body;
         return `---\n${y}---\n\n${cleanBody}\n`;
       }
@@ -310,20 +430,20 @@ export const prerender = true;
       function renderChecks(result) {
         $('validationCard').classList.remove('hide');
         const badge = $('validBadge');
-        badge.textContent = result.ok ? 'PASS' : 'FAIL';
+        badge.textContent = result.ok ? 'PASS' : 'FILL REQUIRED';
         badge.className = 'pill ' + (result.ok ? 'ok' : 'err');
         $('checks').innerHTML = result.checks.map((c) => `
           <li><span class="mark ${c.level}">${c.level === 'pass' ? '✓' : c.level === 'warn' ? '!' : '✗'}</span>
-          <span class="k">${c.k}</span><span>${c.msg}</span></li>`).join('');
+          <span class="k">${c.k}</span><span>${esc(c.msg)}</span></li>`).join('');
       }
 
       function renderPreview(fm, body) {
         const pv = $('preview');
         const cleanBody = firstH1(body) ? stripLeadingH1(body) : body;
-        const meta = `${fm.author ? 'By ' + esc(fm.author) : ''}${fm.author && fm.publishDate ? ' · ' : ''}${toISO(fm.publishDate) ? 'Published ' + toISO(fm.publishDate) : ''}`;
+        const meta = `${fm.author ? 'By ' + esc(fm.author) : ''}${fm.author && toISO(fm.publishDate) ? ' · ' : ''}${toISO(fm.publishDate) ? 'Published ' + toISO(fm.publishDate) : ''}`;
         const hero = fm.ogImage
           ? `<img class="pv-hero" src="${esc(fm.ogImage)}" alt="" onerror="this.classList.add('hide');this.nextElementSibling.classList.remove('hide');" />
-             <div class="pv-hero-missing hide">Hero image set to <code>${esc(fm.ogImage)}</code> — not found in this preview (it resolves after the file is in /public and deployed).</div>`
+             <div class="pv-hero-missing hide">Hero <code>${esc(fm.ogImage)}</code> — not visible here (resolves once it's in /public and deployed).</div>`
           : '';
         pv.innerHTML = `
           ${fm.draft ? '<span class="pv-draft">Draft</span><br>' : ''}
@@ -333,33 +453,63 @@ export const prerender = true;
           ${hero}
           <div class="pv-body">${marked.parse(cleanBody || '')}</div>`;
       }
-      const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 
-      function refresh() {
-        if (!state.fm) return;
-        const result = validate(state.fm);
-        renderChecks(result);
-        renderPreview(state.fm, state.body);
-        const content = buildContent(state.fm, state.body);
-        const slug = SLUG_RE.test(String(state.fm.slug ?? '')) ? state.fm.slug : slugify(state.fm.slug || state.fileName);
+      // Output textarea is the source of truth after generation. Re-derive
+      // validation/preview from it so manual edits (filling blanks) take effect.
+      function generate(fm, body) {
+        $('outContent').value = buildContent(fm, body);
         $('outputCard').classList.remove('hide');
-        $('outName').textContent = `${slug}.md`;
-        $('outContent').textContent = content;
-        $('save').disabled = !(result.ok && state.dirHandle);
-        state._content = content; state._slug = slug;
+        syncFromOutput();
       }
+      function syncFromOutput() {
+        const text = $('outContent').value;
+        const { fm, body } = parseFile(text);
+        state.fm = fm; state.body = body; state._content = text;
+        state._slug = SLUG_RE.test(String(fm.slug ?? '')) ? fm.slug : slugify(fm.slug || fm.title || 'post');
+        const result = validate(fm);
+        renderChecks(result);
+        renderPreview(fm, body);
+        $('outName').textContent = `${state._slug}.md`;
+        $('save').disabled = !(result.ok && state.dirHandle);
+      }
+      $('outContent').addEventListener('input', syncFromOutput);
 
-      // ── file intake ──────────────────────────────────────────────────────
+      // ── Format file (paste HTML) ─────────────────────────────────────────
+      $('format').addEventListener('click', async () => {
+        const html = $('html').value.trim();
+        const fs = $('formatStatus');
+        if (!html) { fs.textContent = 'Paste the article HTML first.'; return; }
+        fs.textContent = 'Extracting…';
+        let ex;
+        try { ex = extractFromHtml(html); }
+        catch (e) { fs.innerHTML = `<span class="pill err">Extract failed</span> ${esc(e.message)}`; return; }
+        state._heroUrl = ex.heroUrl || '';
+        generate(ex.fm, ex.body);
+
+        if (ex.heroUrl) {
+          fs.textContent = 'Downloading hero image…';
+          const res = await downloadHero(ex.heroUrl);
+          if (res.ok) {
+            const cur = parseFile($('outContent').value);
+            cur.fm.ogImage = '/og/' + res.filename;
+            generate(cur.fm, cur.body);
+            fs.innerHTML = `<span class="pill ok">Formatted</span> image → public/og/${esc(res.filename)}`;
+          } else {
+            fs.innerHTML = `<span class="pill ok">Formatted</span> — image not saved (${esc(res.reason)}). Source: <code>${esc(ex.heroUrl)}</code>`;
+          }
+        } else {
+          fs.innerHTML = `<span class="pill ok">Formatted</span> — no image found.`;
+        }
+      });
+
+      // ── .md drop ─────────────────────────────────────────────────────────
       async function ingest(file) {
         if (!file) return;
-        state.fileName = file.name;
         const text = await file.text();
         const { fm, body } = parseFile(text);
-        state.fm = fm; state.body = body;
         $('fileStatus').innerHTML = `Loaded <strong>${esc(file.name)}</strong> (${file.size} bytes)`;
-        refresh();
+        generate(fm, body);
       }
-
       $('file').addEventListener('change', (e) => ingest(e.target.files[0]));
       const drop = $('drop');
       ['dragenter', 'dragover'].forEach((ev) => drop.addEventListener(ev, (e) => { e.preventDefault(); drop.classList.add('drag'); }));
@@ -367,9 +517,8 @@ export const prerender = true;
       drop.addEventListener('drop', (e) => ingest(e.dataTransfer.files[0]));
 
       $('autofix').addEventListener('click', () => {
-        if (!state.fm) return;
-        state.fm = autofix(state.fm, state.body, state.fileName);
-        refresh();
+        const { fm, body } = parseFile($('outContent').value);
+        generate(autofix(fm, body), body);
       });
 
       // ── directory + save ─────────────────────────────────────────────────
@@ -378,49 +527,83 @@ export const prerender = true;
         if ((await handle.queryPermission(opts)) === 'granted') return true;
         return (await handle.requestPermission(opts)) === 'granted';
       }
+      async function getDirByPath(root, segs, create) {
+        let d = root;
+        for (const s of segs) d = await d.getDirectoryHandle(s, { create });
+        return d;
+      }
       function showDir() {
         $('dirStatus').textContent = state.dirHandle ? `📁 ${state.dirHandle.name}` : 'No folder selected';
         $('dirStatus').classList.toggle('empty', !state.dirHandle);
+      }
+
+      // Download the hero image bytes and write them into public/og/. Tries a
+      // direct fetch first; on CORS failure, falls back to a public proxy so
+      // images on hosts without CORS headers can still be saved locally.
+      async function downloadHero(url) {
+        if (!state.dirHandle) return { ok: false, reason: 'choose the project root first' };
+        if (!(await ensurePerm(state.dirHandle))) return { ok: false, reason: 'write permission denied' };
+        let blob = null;
+        try { const r = await fetch(url); if (r.ok) blob = await r.blob(); } catch (e) {}
+        if (!blob || !blob.type.startsWith('image/')) {
+          try {
+            const r = await fetch('https://api.allorigins.win/raw?url=' + encodeURIComponent(url));
+            if (r.ok) { const b = await r.blob(); if (b.type.startsWith('image/')) blob = b; }
+          } catch (e) {}
+        }
+        if (!blob) return { ok: false, reason: 'fetch blocked (CORS) — set ogImage manually' };
+        let ext = (blob.type.split('/')[1] || url.split(/[?#]/)[0].split('.').pop() || 'png').toLowerCase();
+        ext = ({ jpeg: 'jpg', 'svg+xml': 'svg' }[ext] || ext).replace(/[^a-z0-9]/g, '').slice(0, 4) || 'png';
+        const filename = `${state._slug || 'image'}.${ext}`;
+        try {
+          const ogDir = await getDirByPath(state.dirHandle, ['public', 'og'], true);
+          const fh = await ogDir.getFileHandle(filename, { create: true });
+          const w = await fh.createWritable(); await w.write(blob); await w.close();
+          return { ok: true, filename };
+        } catch (e) { return { ok: false, reason: 'write failed: ' + e.message }; }
       }
 
       if (!window.showDirectoryPicker) {
         $('fsaNote').classList.remove('hide');
         $('pickDir').disabled = true;
       } else {
-        // restore a previously authorized folder
-        idb.get('dir').then((h) => { if (h) { state.dirHandle = h; showDir(); refresh(); } }).catch(() => {});
+        idb.get('root').then((h) => { if (h) { state.dirHandle = h; showDir(); if (state.fm) syncFromOutput(); } }).catch(() => {});
       }
 
       $('pickDir').addEventListener('click', async () => {
         try {
-          const h = await window.showDirectoryPicker({ mode: 'readwrite', id: 'blog-en' });
-          state.dirHandle = h; await idb.set('dir', h).catch(() => {}); showDir(); refresh();
-        } catch (e) { /* user cancelled */ }
+          const h = await window.showDirectoryPicker({ mode: 'readwrite', id: 'project-root' });
+          state.dirHandle = h; await idb.set('root', h).catch(() => {}); showDir();
+          if (state.fm) syncFromOutput();
+        } catch (e) { /* cancelled */ }
       });
 
       $('save').addEventListener('click', async () => {
         const st = $('saveStatus');
-        if (!state.dirHandle) { st.textContent = 'Choose a folder first.'; return; }
+        if (!state.dirHandle) { st.textContent = 'Choose the project root first.'; return; }
         if (!(await ensurePerm(state.dirHandle))) { st.textContent = 'Write permission denied.'; return; }
         const name = `${state._slug}.md`;
+        let enDir;
+        try { enDir = await getDirByPath(state.dirHandle, ['src', 'content', 'blog', 'en'], false); }
+        catch (e) { st.innerHTML = `<span class="pill err">Wrong folder</span> couldn't find src/content/blog/en — did you pick the project root?`; return; }
         try {
-          try { await state.dirHandle.getFileHandle(name); if (!confirm(`${name} already exists. Overwrite?`)) { st.textContent = 'Cancelled.'; return; } } catch {}
-          const fh = await state.dirHandle.getFileHandle(name, { create: true });
-          const w = await fh.createWritable();
-          await w.write(state._content); await w.close();
-          st.innerHTML = `<span class="pill ok">Saved ${esc(name)}</span> — run <code>npx astro sync</code> &amp; build, then commit.`;
+          try { await enDir.getFileHandle(name); if (!confirm(`${name} already exists. Overwrite?`)) { st.textContent = 'Cancelled.'; return; } } catch {}
+          const fh = await enDir.getFileHandle(name, { create: true });
+          const w = await fh.createWritable(); await w.write($('outContent').value); await w.close();
+          st.innerHTML = `<span class="pill ok">Saved</span> src/content/blog/en/${esc(name)} — run <code>npx astro sync</code> &amp; build, then commit.`;
         } catch (e) { st.textContent = 'Save failed: ' + e.message; }
       });
 
       $('download').addEventListener('click', () => {
-        if (!state._content) return;
+        const content = $('outContent').value;
+        if (!content) return;
         const a = document.createElement('a');
-        a.href = URL.createObjectURL(new Blob([state._content], { type: 'text/markdown' }));
-        a.download = `${state._slug}.md`; a.click(); URL.revokeObjectURL(a.href);
+        a.href = URL.createObjectURL(new Blob([content], { type: 'text/markdown' }));
+        a.download = `${state._slug || 'post'}.md`; a.click(); URL.revokeObjectURL(a.href);
       });
 
       // expose pure fns for smoke-testing (harmless; dev convenience)
-      window.__mdUploader = { parseFile, validate, autofix, buildContent, slugify };
+      window.__mdUploader = { parseFile, validate, autofix, buildContent, slugify, extractFromHtml, formatFaq, detectPlatform };
     </script>
   </body>
 </html>

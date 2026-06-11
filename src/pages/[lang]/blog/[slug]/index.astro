@@ -268,6 +268,12 @@ const { Content } = await render(post);
     font-weight: 600;
     color: var(--color-ink);
   }
+  .post__body :global(h4) {
+    margin-top: 24px;
+    font-size: 17px;
+    font-weight: 600;
+    color: var(--color-ink);
+  }
   .post__body :global(p),
   .post__body :global(li) {
     margin-top: 14px;
@@ -275,14 +281,60 @@ const { Content } = await render(post);
     line-height: 29px;
     color: var(--color-body);
   }
+  /* Restore list markers — Tailwind's preflight resets ul/ol to list-style:none
+     globally, which strips bullets/numbers in published posts. */
   .post__body :global(ul),
   .post__body :global(ol) {
     margin-top: 14px;
     padding-left: 24px;
   }
-  .post__body :global(strong) {
+  .post__body :global(ul) {
+    list-style: disc outside;
+  }
+  .post__body :global(ol) {
+    list-style: decimal outside;
+  }
+  .post__body :global(ul ul) {
+    list-style-type: circle;
+  }
+  .post__body :global(ul ul ul) {
+    list-style-type: square;
+  }
+  .post__body :global(ol ol) {
+    list-style-type: lower-alpha;
+  }
+  .post__body :global(li) {
+    padding-left: 4px;
+  }
+  .post__body :global(li::marker) {
+    color: var(--color-mute);
+  }
+  /* Nested lists tighten up under their parent item. */
+  .post__body :global(li > ul),
+  .post__body :global(li > ol) {
+    margin-top: 6px;
+  }
+  .post__body :global(strong),
+  .post__body :global(b) {
     font-weight: 600;
     color: var(--color-ink);
+  }
+  /* Underline / strikethrough (Markdown ~~text~~ → <del>; raw <u>/<ins>). */
+  .post__body :global(u),
+  .post__body :global(ins) {
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+  .post__body :global(del),
+  .post__body :global(s) {
+    text-decoration: line-through;
+    color: var(--color-mute);
+  }
+  /* Thematic break (Markdown `---`). */
+  .post__body :global(hr) {
+    margin: 40px 0;
+    border: 0;
+    border-top: 1px solid var(--color-hairline);
   }
   .post__body :global(a) {
     color: var(--color-ink);
@@ -310,6 +362,63 @@ const { Content } = await render(post);
   }
   .post__body :global(blockquote p:first-child) {
     margin-top: 0;
+  }
+  /* GFM tables — hairline grid, shaded header, zebra rows (tokenised so the
+     grid stays visible in dark mode too). Markdown tables render bare <table>
+     with no borders otherwise. */
+  .post__body :global(table) {
+    width: 100%;
+    margin-top: 24px;
+    border-collapse: collapse;
+    font-size: 15px;
+    line-height: 22px;
+  }
+  .post__body :global(th),
+  .post__body :global(td) {
+    border: 1px solid var(--color-hairline);
+    padding: 10px 14px;
+    text-align: left;
+    vertical-align: top;
+  }
+  .post__body :global(thead th) {
+    background: var(--color-canvas-soft-2);
+    color: var(--color-ink);
+    font-weight: 600;
+  }
+  .post__body :global(tbody tr:nth-child(even)) {
+    background: var(--color-canvas-soft);
+  }
+  /* Foldable FAQ — the formatter emits <details><summary><b>Q</b></summary>…. */
+  .post__body :global(details) {
+    margin-top: 12px;
+    border: 1px solid var(--color-hairline);
+    border-radius: var(--radius-lg);
+    background: var(--color-canvas);
+    padding: 4px 18px;
+  }
+  .post__body :global(summary) {
+    cursor: pointer;
+    padding: 12px 0;
+    font-size: 17px;
+    color: var(--color-ink);
+    list-style: none;
+  }
+  .post__body :global(summary::-webkit-details-marker) {
+    display: none;
+  }
+  .post__body :global(summary::after) {
+    content: '+';
+    float: right;
+    font-size: 20px;
+    line-height: 1;
+    color: var(--color-mute);
+    transition: transform 0.2s ease;
+  }
+  .post__body :global(details[open] summary::after) {
+    transform: rotate(45deg);
+  }
+  .post__body :global(details > :not(summary)) {
+    margin-bottom: 12px;
   }
   /* Inline code; fenced blocks keep Shiki's own background via inline style. */
   .post__body :global(code) {
