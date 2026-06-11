@@ -9,7 +9,7 @@ slug: linkedin-posts-survive-the-fold
 relatedPlatform: linkedin
 author: PostTruncate Team
 draft: false
-ogImage: /og/linkedin-posts-survive-the-fold.png
+ogImage: /og/linkedin-posts-survive-the-fold.webp
 ---
 
 ## TL;DR
