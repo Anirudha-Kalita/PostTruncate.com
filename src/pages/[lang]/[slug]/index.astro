@@ -13,6 +13,12 @@ import HeroPreviewCard from '../../../components/HeroPreviewCard.astro';
 import WhyPostTruncate from '../../../components/WhyPostTruncate.astro';
 import HowTruncationWorks from '../../../components/HowTruncationWorks.astro';
 import PlatformCharacterLimits from '../../../components/PlatformCharacterLimits.astro';
+import BlogCardGrid from '../../../components/BlogCardGrid.astro';
+import {
+  BLOG_SEGMENT,
+  getBlogStrings,
+  getPublishedPosts,
+} from '../../../lib/blogI18n';
 
 // One statically-rendered landing page per locale at the keyword-rich slug
 // (/en/character-counter/, /de/zeichenzaehler/, …). Slug values come from the
@@ -71,6 +77,15 @@ const faqs = getFeaturedFaqs(t);
 // Canonical URL for this locale's keyword-rich homepage — passed to the schema.
 const site = Astro.site ?? new URL('https://posttruncate.com');
 const pageUrl = new URL(`/${lang}/${locale.slug}/`, site).href;
+
+// "Latest from the blog" row: this locale's 3 newest posts (English-first, so
+// untranslated locales have none and the section is skipped). Reuses the same
+// card as the blog index and platform pages.
+const blogStrings = getBlogStrings(lang);
+const latestPosts = (await getPublishedPosts())
+  .filter((p) => p.data.locale === lang)
+  .sort((a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf())
+  .slice(0, 3);
 
 ---
 
@@ -226,6 +241,22 @@ const pageUrl = new URL(`/${lang}/${locale.slug}/`, site).href;
       <a href={`/${lang}/faq/`}>{t.faq.viewAll} →</a>
     </p>
   </section>
+
+  <!-- ── Latest from the blog — same card as the index/platform pages.
+       Rendered only when this locale actually has posts. ─────────────────── -->
+  {latestPosts.length > 0 && (
+    <section class="latest container-page" aria-labelledby="latest-heading">
+      <header class="latest__head">
+        <h2 id="latest-heading" class="section-title">{blogStrings.latestHeading}</h2>
+      </header>
+      <div class="latest__grid">
+        <BlogCardGrid posts={latestPosts} lang={lang} readMoreLabel={blogStrings.readMore} />
+      </div>
+      <p class="latest__all">
+        <a href={`/${lang}/${BLOG_SEGMENT}/`}>{blogStrings.viewAll} →</a>
+      </p>
+    </section>
+  )}
 
   <!-- Re-scroll to URL hash after the Dashboard island finishes rendering.
        Problem: the Preact island (<astro-island>) is an empty shell in initial
@@ -596,6 +627,37 @@ const pageUrl = new URL(`/${lang}/${locale.slug}/`, site).href;
     text-underline-offset: 3px;
   }
   .faq__all a:hover {
+    opacity: 0.75;
+  }
+
+  /* ── Latest from the blog ───────────────────────────────────────────────
+     Card grid reused from the blog index; centered with the page measure. */
+  .latest {
+    scroll-margin-top: 80px;
+    padding-top: 96px;
+  }
+  .latest__head {
+    margin-bottom: 32px;
+    text-align: center;
+  }
+  /* The homepage row shows 3 posts — cap the width so they sit as a centered
+     3-up instead of small cards stranded in the wide page container. */
+  .latest__grid {
+    max-width: 56rem;
+    margin-inline: auto;
+  }
+  .latest__all {
+    margin-top: 32px;
+    text-align: center;
+  }
+  .latest__all a {
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--color-ink);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  .latest__all a:hover {
     opacity: 0.75;
   }
 

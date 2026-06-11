@@ -35,15 +35,21 @@ collections:
     format: yaml-frontmatter
     fields:
       - { name: title, label: Title, widget: string, pattern: ['^.{1,70}$', 'Keep the title to 70 characters or fewer.'] }
+      # Optional deck shown under the title in the article (above author + date).
+      # Visual only — separate from the SEO meta description below.
+      - { name: subtitle, label: Subtitle, widget: string, required: false, hint: 'Optional. Shown under the title, above the author and date.', pattern: ['^.{0,200}$', 'Keep the subtitle to 200 characters or fewer.'] }
       - { name: description, label: Meta description, widget: string, pattern: ['^.{1,180}$', 'Keep the description to 180 characters or fewer.'] }
       - { name: publishDate, label: Publish date, widget: datetime, date_format: 'YYYY-MM-DD', time_format: false, format: 'YYYY-MM-DD', picker_utc: true }
       - { name: updatedDate, label: Updated date, widget: datetime, required: false, date_format: 'YYYY-MM-DD', time_format: false, format: 'YYYY-MM-DD', picker_utc: true }
       # Hidden: English-only for now. Matches the locale folder (build guard).
       - { name: locale, label: Locale, widget: hidden, default: en }
       - { name: slug, label: Slug, widget: string, hint: 'Lowercase words separated by hyphens. Becomes the URL and the filename.', pattern: ['^[a-z0-9]+(?:-[a-z0-9]+)*$', 'Use lowercase kebab-case (a-z, 0-9, single hyphens).'] }
-      # Hidden + dynamic default: auto-derived from the slug so it never has to
-      # be filled while English-only, while satisfying the required schema field.
-      - { name: translationKey, label: Translation key, widget: hidden, default: '{{slug}}' }
+      # Hidden + dynamic default: auto-derived from the slug field so it never
+      # has to be filled while English-only. Sveltia resolves {{fields.slug}}
+      # against the sibling slug field at save time. As defense-in-depth, the
+      # Zod schema in src/content.config.ts also back-fills translationKey from
+      # slug if this ever serializes empty, so the build can't break either way.
+      - { name: translationKey, label: Translation key, widget: hidden, default: '{{fields.slug}}' }
       - { name: relatedPlatform, label: Related platform, widget: select, required: false, options: ['twitter', 'instagram', 'linkedin', 'facebook', 'sms', 'threads', 'general'] }
       - { name: author, label: Author, widget: string, default: 'PostTruncate Team' }
       - { name: draft, label: Draft, widget: boolean, default: false }

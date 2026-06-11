@@ -19,6 +19,7 @@ A locale with no files here produces **no** blog pages — that's intentional (E
 ---
 title: "Twitter (X) Character Limit: The Complete Guide"   # ≤70 chars, SERP title
 description: "How the 280-character limit works, links, threads, and tips."  # ≤180
+subtitle: "The deck shown under the title in the article."  # optional, ≤200
 publishDate: 2026-06-09
 updatedDate: 2026-06-20        # optional — omit until actually revised
 locale: en                     # MUST match the folder
@@ -82,3 +83,40 @@ change, confirm the build finished in the Cloudflare dashboard.
 > **Drafts:** the `Draft` toggle (frontmatter `draft: true`) hides a post from
 > the **production** build while keeping the file in the repo. It's separate from
 > the publish step above.
+
+---
+
+## Importing existing `.md` files (local tools)
+
+Two helpers for bringing raw Markdown into the collection. Both run **locally**
+and never deploy — they only prepare/validate files; you still commit via git or
+the CMS afterwards.
+
+### Single file — uploader at `/admin/upload/`
+
+A client-side page (best in Chrome/Edge — it uses the File System Access API).
+Run `npm run dev`, open <http://localhost:4321/admin/upload/> (also served at
+`https://posttruncate.com/admin/upload/`, noindex):
+
+1. **Choose folder** → point it at `src/content/blog/en/` (authorized once,
+   remembered across reloads).
+2. **Drop a `.md`** → it validates the required frontmatter against the schema,
+   shows a **live preview**, and offers **Auto-fix** to fill missing fields
+   (slug from filename, date→today, `locale: en`, `draft: true`, …).
+3. **Save to folder** writes `<slug>.md` straight into the folder (or
+   **Download .md** on browsers without the API).
+
+Then run `npx astro sync` and build, and commit the file.
+
+### A whole folder — `scripts/normalize-blog-md.mjs`
+
+For batch-importing many raw files at once:
+
+```bash
+node scripts/normalize-blog-md.mjs <inputDir> [outputDir]
+```
+
+It rewrites each file's frontmatter to match the schema (same defaults as the
+uploader), preserves the body, and writes the results to a **separate** output
+folder for review — it never touches `src/content/blog/`. Copy the ones you want
+into `src/content/blog/en/`, then `npx astro sync` + build + commit.

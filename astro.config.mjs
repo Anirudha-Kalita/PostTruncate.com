@@ -101,8 +101,8 @@ export default defineConfig({
         if (/\/[a-z]{2}\/embed\/?$/.test(pathname)) return false;
         // Drop the RSS feed endpoint — it's a feed, not an indexable page.
         if (/\/blog\/rss\.xml$/.test(pathname)) return false;
-        // Drop the CMS admin entry — noindex, not a public page.
-        if (/^\/admin\/?$/.test(pathname)) return false;
+        // Drop the CMS admin area (entry + tools like /admin/upload) — noindex.
+        if (/^\/admin(?:\/|$)/.test(pathname)) return false;
         // Drop slug-nested /en/character-counter/about|contact|privacy|terms/
         if (/\/[a-z]{2}\/[^/]+\/(about|contact|privacy|terms)\/?$/.test(pathname)) return false;
         return true;

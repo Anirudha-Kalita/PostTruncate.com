@@ -1,0 +1,115 @@
+---
+// Reusable blog article card — the single source of truth for how a post is
+// shown anywhere on the site (blog index, platform-page related posts, homepage
+// "Latest from the blog"). Whole card is one link; hero image as a 16:9
+// thumbnail (falls back to the site default), title + teaser clamped so cards
+// stay uniform, and a "read more" CTA pinned to the bottom.
+import type { CollectionEntry } from 'astro:content';
+import { BLOG_SEGMENT, formatBlogDate, isoDate } from '../lib/blogI18n';
+
+interface Props {
+  post: CollectionEntry<'blog'>;
+  lang: string;
+  /** Card CTA text, e.g. "Read article". */
+  readMoreLabel: string;
+}
+
+const { post, lang, readMoreLabel } = Astro.props;
+const { data } = post;
+const href = `/${lang}/${BLOG_SEGMENT}/${data.slug}/`;
+---
+
+<a class="article-card" href={href}>
+  <div class="article-card__thumb">
+    <img src={data.ogImage ?? '/og.png'} alt="" loading="lazy" decoding="async" />
+  </div>
+  <div class="article-card__body">
+    <time class="article-card__date" datetime={isoDate(data.publishDate)}>
+      {formatBlogDate(data.publishDate, lang)}
+    </time>
+    <h3 class="article-card__title">{data.title}</h3>
+    <p class="article-card__desc">{data.description}</p>
+    <span class="article-card__more">{readMoreLabel} →</span>
+  </div>
+</a>
+
+<style>
+  .article-card {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow: hidden;
+    border-radius: var(--radius-lg);
+    background: var(--color-canvas);
+    box-shadow: var(--shadow-e1);
+    border: 1px solid var(--color-hairline);
+    transition: box-shadow 0.15s ease, transform 100ms ease;
+  }
+  .article-card:hover {
+    box-shadow: var(--shadow-e2);
+  }
+  .article-card:hover .article-card__thumb img {
+    transform: scale(1.03);
+  }
+  .article-card:active {
+    transform: scale(0.99);
+  }
+  /* 16:9 thumbnail — DESIGN.md template-thumbnail convention, lazy-loaded. */
+  .article-card__thumb {
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    background: var(--color-canvas-soft-2);
+  }
+  .article-card__thumb img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.2s ease;
+  }
+  .article-card__body {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    padding: 16px 18px 18px;
+  }
+  .article-card__date {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--color-mute);
+  }
+  .article-card__title {
+    margin-top: 6px;
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 1.25;
+    letter-spacing: -0.4px;
+    color: var(--color-ink);
+    /* clamp to 2 lines so cards stay aligned */
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .article-card__desc {
+    margin-top: 6px;
+    font-size: 14px;
+    line-height: 22px;
+    color: var(--color-body);
+    /* clamp the teaser to 3 lines, then the "read more" link */
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .article-card__more {
+    display: inline-block;
+    margin-top: auto;
+    padding-top: 14px;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--color-ink);
+  }
+</style>

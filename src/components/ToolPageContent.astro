@@ -6,6 +6,7 @@
 //     → prose → FAQ accordion → cross-promo to the full home editor.
 //   • Classic (everything else, e.g. google-serp): heading → prose → CTA.
 import OnThisPage from './OnThisPage.astro';
+import BlogCardGrid from './BlogCardGrid.astro';
 import Dashboard from './island/Dashboard.tsx';
 import type { ToolDefinition } from '../data/tools';
 import type { IslandStrings } from '../i18n/types';
@@ -14,7 +15,7 @@ import { getTranslations } from '../i18n';
 import { interp } from '../i18n/interp';
 import { buildCanonicalSlugs, prepareToolContent } from '../lib/headingAnchors';
 import { formatLocaleDate } from '../lib/contentDates';
-import { BLOG_SEGMENT, getBlogStrings, getPublishedPosts } from '../lib/blogI18n';
+import { getBlogStrings, getPublishedPosts } from '../lib/blogI18n';
 
 interface Props {
   tool: ToolDefinition;
@@ -97,16 +98,7 @@ const relatedPosts = (await getPublishedPosts())
       {relatedPosts.length > 0 && (
         <section class="tool-page__related" aria-label={blogStrings.relatedHeading}>
           <h2 class="tool-page__related-heading">{blogStrings.relatedHeading}</h2>
-          <ul class="tool-page__related-list">
-            {relatedPosts.map((p) => (
-              <li>
-                <a class="tool-page__related-link" href={`/${lang}/${BLOG_SEGMENT}/${p.data.slug}/`}>
-                  <span class="tool-page__related-title">{p.data.title}</span>
-                  <span class="tool-page__related-desc">{p.data.description}</span>
-                </a>
-              </li>
-            ))}
-          </ul>
+          <BlogCardGrid posts={relatedPosts} lang={lang} readMoreLabel={blogStrings.readMore} />
         </section>
       )}
 
@@ -151,16 +143,7 @@ const relatedPosts = (await getPublishedPosts())
       {relatedPosts.length > 0 && (
         <section class="tool-page__related" aria-label={blogStrings.relatedHeading}>
           <h2 class="tool-page__related-heading">{blogStrings.relatedHeading}</h2>
-          <ul class="tool-page__related-list">
-            {relatedPosts.map((p) => (
-              <li>
-                <a class="tool-page__related-link" href={`/${lang}/${BLOG_SEGMENT}/${p.data.slug}/`}>
-                  <span class="tool-page__related-title">{p.data.title}</span>
-                  <span class="tool-page__related-desc">{p.data.description}</span>
-                </a>
-              </li>
-            ))}
-          </ul>
+          <BlogCardGrid posts={relatedPosts} lang={lang} readMoreLabel={blogStrings.readMore} />
         </section>
       )}
 
@@ -376,45 +359,6 @@ const relatedPosts = (await getPublishedPosts())
     letter-spacing: -0.6px;
     color: var(--color-ink);
     margin-bottom: 16px;
-  }
-
-  .tool-page__related-list {
-    display: grid;
-    gap: 12px;
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-
-  .tool-page__related-link {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-    padding: 16px 18px;
-    border-radius: var(--radius-lg);
-    background: var(--color-canvas);
-    box-shadow: var(--shadow-e1);
-    transition: box-shadow 0.15s ease, transform 100ms ease;
-  }
-
-  .tool-page__related-link:hover {
-    box-shadow: var(--shadow-e2);
-  }
-
-  .tool-page__related-link:active {
-    transform: scale(0.99);
-  }
-
-  .tool-page__related-title {
-    font-size: 16px;
-    font-weight: 600;
-    color: var(--color-ink);
-  }
-
-  .tool-page__related-desc {
-    font-size: 14px;
-    line-height: 20px;
-    color: var(--color-body);
   }
 
   /* ── Cross-promo block (replaces the classic CTA on standalone pages) ────── */

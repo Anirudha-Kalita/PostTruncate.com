@@ -36,6 +36,10 @@ export interface BlogStrings {
   footerLink: string;
   /** Heading for the related-posts block on tool pages, e.g. "From the blog". */
   relatedHeading: string;
+  /** Heading for the homepage "Latest from the blog" row. */
+  latestHeading: string;
+  /** Link text to the full blog index, e.g. "View all articles". */
+  viewAll: string;
 }
 
 // Only English is authored today. Add keys for 'de', 'es', … when translating.
@@ -54,6 +58,8 @@ const BLOG_STRINGS: Record<string, BlogStrings> = {
     backToBlog: 'Blog',
     footerLink: 'Blog',
     relatedHeading: 'From the blog',
+    latestHeading: 'Latest from the blog',
+    viewAll: 'View all articles',
   },
 };
 

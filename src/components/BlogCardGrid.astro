@@ -1,0 +1,40 @@
+---
+// Responsive grid of BlogPostCards. Reused by the blog index, platform-page
+// related posts, and the homepage "Latest from the blog" row so the card
+// layout stays identical everywhere. Caller supplies the section heading
+// (this only renders the grid itself).
+import type { CollectionEntry } from 'astro:content';
+import BlogPostCard from './BlogPostCard.astro';
+
+interface Props {
+  posts: CollectionEntry<'blog'>[];
+  lang: string;
+  /** Card CTA text, e.g. "Read article". */
+  readMoreLabel: string;
+}
+
+const { posts, lang, readMoreLabel } = Astro.props;
+---
+
+<ul class="article-card-grid">
+  {posts.map((post) => (
+    <li>
+      <BlogPostCard post={post} lang={lang} readMoreLabel={readMoreLabel} />
+    </li>
+  ))}
+</ul>
+
+<style>
+  .article-card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+    gap: 16px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  /* Stretch each card to fill its row so a 2/3-up grid stays flush. */
+  .article-card-grid > li {
+    display: flex;
+  }
+</style>

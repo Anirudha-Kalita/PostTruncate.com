@@ -154,6 +154,7 @@ const { Content } = await render(post);
 
     <header class="post__head">
       <h1 class="post__title">{data.title}</h1>
+      {data.subtitle && <p class="post__subtitle">{data.subtitle}</p>}
       <p class="post__meta">
         <span>{s.byLabel} {data.author}</span>
         <span aria-hidden="true">·</span>
@@ -172,6 +173,17 @@ const { Content } = await render(post);
         )}
       </p>
     </header>
+
+    {data.ogImage && (
+      <img
+        class="post__hero"
+        src={data.ogImage}
+        alt={data.title}
+        loading="eager"
+        fetchpriority="high"
+        decoding="async"
+      />
+    )}
 
     <div class="post__body seo-prose">
       <Content />
@@ -213,6 +225,13 @@ const { Content } = await render(post);
     letter-spacing: -1.6px;
     color: var(--color-ink);
   }
+  /* Deck/standfirst under the title — body-lg lead-paragraph token. */
+  .post__subtitle {
+    margin-top: 16px;
+    font-size: 18px;
+    line-height: 28px;
+    color: var(--color-body);
+  }
   .post__meta {
     margin-top: 16px;
     display: flex;
@@ -220,6 +239,16 @@ const { Content } = await render(post);
     gap: 8px;
     font-size: 14px;
     color: var(--color-mute);
+  }
+  /* Featured/hero image — the post's ogImage, shown above the body when set.
+     Mirrors the in-body image treatment (full-measure, rounded, soft shadow). */
+  .post__hero {
+    display: block;
+    width: 100%;
+    height: auto;
+    margin-bottom: 32px;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-e1);
   }
   /* Reuse the long-form prose rhythm used by the homepage SEO copy. */
   .post__body {

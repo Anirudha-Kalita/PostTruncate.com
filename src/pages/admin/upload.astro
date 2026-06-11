@@ -1,0 +1,426 @@
+---
+// ──────────────────────────────────────────────────────────────────────────
+// /admin/upload/ — local, client-side .md uploader for the blog collection.
+//
+// 100% client-side (respects the no-backend rule): it parses a dropped/selected
+// .md file, validates the REQUIRED frontmatter fields against the `blog` schema
+// in src/content.config.ts, renders a live preview, and — only after you click
+// Save — writes <slug>.md straight into a folder you authorize via the browser
+// File System Access API (Chrome/Edge). A Download fallback covers other
+// browsers. Nothing is uploaded anywhere; the file lands on your own disk.
+//
+// noindex + outside the [lang] routing, same as the Sveltia /admin entry.
+// ──────────────────────────────────────────────────────────────────────────
+export const prerender = true;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>Blog .md uploader · PostTruncate</title>
+    <style>
+      :root {
+        --ink: #171717; --body: #4d4d4d; --mute: #6b6b6b;
+        --line: #e5e5e5; --bg: #ffffff; --soft: #f6f6f6;
+        --ok: #166534; --okbg: #dcfce7; --err: #991b1b; --errbg: #fee2e2;
+        --accent: #2563eb;
+        --radius: 12px;
+        --mono: ui-monospace, "Geist Mono", SFMono-Regular, Menlo, monospace;
+        --sans: system-ui, -apple-system, "Geist", Segoe UI, Roboto, sans-serif;
+      }
+      * { box-sizing: border-box; }
+      body { margin: 0; font-family: var(--sans); color: var(--body); background: var(--soft); }
+      .wrap { max-width: 1100px; margin: 0 auto; padding: 32px 24px 80px; }
+      h1 { font-size: 28px; letter-spacing: -1px; color: var(--ink); margin: 0 0 4px; }
+      .lede { margin: 0 0 24px; color: var(--mute); font-size: 14px; }
+      .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; align-items: start; }
+      @media (max-width: 860px) { .grid { grid-template-columns: 1fr; } }
+      .card { background: var(--bg); border: 1px solid var(--line); border-radius: var(--radius); padding: 20px; }
+      .card h2 { font-size: 15px; color: var(--ink); margin: 0 0 12px; letter-spacing: -0.2px; }
+      .step { font-size: 12px; font-weight: 600; color: var(--accent); text-transform: uppercase; letter-spacing: 0.5px; }
+      button { font: inherit; font-weight: 500; border-radius: 8px; border: 1px solid var(--line); background: var(--bg); color: var(--ink); padding: 8px 14px; cursor: pointer; }
+      button:hover:not(:disabled) { background: var(--soft); }
+      button.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+      button.primary:disabled { opacity: 0.45; cursor: not-allowed; }
+      .row { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+      .drop { margin-top: 12px; border: 2px dashed var(--line); border-radius: var(--radius); padding: 28px; text-align: center; color: var(--mute); cursor: pointer; transition: border-color .15s, background .15s; }
+      .drop.drag { border-color: var(--accent); background: #eff6ff; }
+      .drop input { display: none; }
+      .status { font-size: 13px; margin-top: 10px; }
+      .pill { display: inline-block; padding: 2px 8px; border-radius: 999px; font-size: 12px; font-weight: 600; }
+      .pill.ok { background: var(--okbg); color: var(--ok); }
+      .pill.err { background: var(--errbg); color: var(--err); }
+      .checks { list-style: none; margin: 0; padding: 0; font-size: 13px; }
+      .checks li { display: flex; gap: 8px; padding: 6px 0; border-bottom: 1px solid var(--line); }
+      .checks li:last-child { border-bottom: 0; }
+      .checks .k { font-family: var(--mono); color: var(--ink); min-width: 130px; }
+      .checks .mark { font-weight: 700; }
+      .checks .mark.pass { color: var(--ok); }
+      .checks .mark.fail { color: var(--err); }
+      .checks .mark.warn { color: #92400e; }
+      pre.code { background: #0f172a; color: #e2e8f0; padding: 14px 16px; border-radius: 10px; overflow:auto; font-family: var(--mono); font-size: 12.5px; line-height: 1.5; max-height: 320px; }
+      .note { font-size: 12px; color: var(--mute); margin-top: 10px; }
+      .hide { display: none !important; }
+      /* Preview — approximates the article template (not byte-identical). */
+      .preview { background: var(--bg); }
+      .pv-draft { display:inline-block; background:#fef9c3; color:#854d0e; font-size:11px; font-weight:700; padding:2px 8px; border-radius:999px; margin-bottom:12px; text-transform:uppercase; letter-spacing:.5px; }
+      .pv-title { font-size: clamp(24px,4vw,34px); font-weight: 600; line-height: 1.1; letter-spacing: -1.2px; color: var(--ink); margin: 0; }
+      .pv-subtitle { font-size: 18px; line-height: 28px; color: var(--body); margin: 14px 0 0; }
+      .pv-meta { margin: 14px 0 0; font-size: 13px; color: var(--mute); }
+      .pv-hero { display:block; width:100%; height:auto; margin: 20px 0 0; border-radius: 12px; box-shadow: 0 1px 3px rgba(0,0,0,.12); }
+      .pv-hero-missing { margin-top:12px; font-size:12px; color:#92400e; background:#fef9c3; padding:8px 10px; border-radius:8px; }
+      .pv-body { margin-top: 24px; color: var(--body); font-size: 16px; line-height: 1.65; }
+      .pv-body h2 { font-size: 20px; color: var(--ink); margin: 28px 0 0; }
+      .pv-body h3 { font-size: 17px; color: var(--ink); margin: 22px 0 0; }
+      .pv-body img { max-width: 100%; height: auto; border-radius: 8px; }
+      .pv-body pre { background: #0f172a; color:#e2e8f0; padding: 12px 14px; border-radius: 8px; overflow:auto; }
+      .pv-body code { font-family: var(--mono); font-size: .9em; }
+      .pv-body blockquote { border-left: 3px solid var(--line); margin: 14px 0 0; padding-left: 16px; color: var(--mute); font-style: italic; }
+      .empty { color: var(--mute); font-size: 14px; }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <h1>Blog .md uploader</h1>
+      <p class="lede">
+        Local authoring tool. Validates required frontmatter against the
+        <code>blog</code> schema, previews the post, then writes
+        <code>&lt;slug&gt;.md</code> into a folder you choose
+        (point it at <code>src/content/blog/en/</code>). Fully client-side — nothing leaves your machine.
+      </p>
+
+      <div class="grid">
+        <!-- LEFT: input + validation + output -->
+        <div>
+          <div class="card">
+            <span class="step">Step 1 — choose destination</span>
+            <h2>Folder to save into</h2>
+            <div class="row">
+              <button id="pickDir" type="button">Choose folder…</button>
+              <span id="dirStatus" class="status empty">No folder selected</span>
+            </div>
+            <p id="fsaNote" class="note hide">
+              Your browser doesn't support saving to a folder (File System Access API).
+              Use Chrome or Edge, or use the <strong>Download</strong> button and move the file yourself.
+            </p>
+          </div>
+
+          <div class="card" style="margin-top:24px;">
+            <span class="step">Step 2 — drop your file</span>
+            <h2>Markdown file</h2>
+            <label class="drop" id="drop">
+              <input id="file" type="file" accept=".md,.markdown,text/markdown" />
+              <strong>Drop a .md file here</strong><br />or click to browse
+            </label>
+            <div id="fileStatus" class="status"></div>
+          </div>
+
+          <div class="card hide" id="validationCard" style="margin-top:24px;">
+            <h2>Validation <span id="validBadge" class="pill"></span></h2>
+            <ul class="checks" id="checks"></ul>
+            <div class="row" style="margin-top:14px;">
+              <button id="autofix" type="button">Auto-fix missing fields</button>
+              <span class="note" style="margin:0;">Fills slug/date/locale/author/draft like the normalizer script.</span>
+            </div>
+          </div>
+
+          <div class="card hide" id="outputCard" style="margin-top:24px;">
+            <h2>File to be written — <span id="outName" style="font-family:var(--mono);"></span></h2>
+            <pre class="code" id="outContent"></pre>
+            <div class="row" style="margin-top:14px;">
+              <button id="save" type="button" class="primary" disabled>Save to folder</button>
+              <button id="download" type="button">Download .md</button>
+              <span id="saveStatus" class="status"></span>
+            </div>
+          </div>
+        </div>
+
+        <!-- RIGHT: preview -->
+        <div>
+          <div class="card preview">
+            <span class="step">Live preview</span>
+            <h2 style="margin-bottom:16px;">Article preview</h2>
+            <div id="preview"><p class="empty">Drop a file to see the preview.</p></div>
+            <p class="note">
+              Approximate. Build-time effects (YouTube/Vimeo → iframe, Shiki code colors)
+              don't run here — they appear only on the deployed page.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- is:inline so Astro leaves the CDN ESM imports untouched, like /admin. -->
+    <script is:inline type="module">
+      import YAML from 'https://cdn.jsdelivr.net/npm/yaml@2/+esm';
+      import { marked } from 'https://cdn.jsdelivr.net/npm/marked@12/+esm';
+
+      // ── schema mirror (keep in sync with src/content.config.ts) ──────────
+      const TITLE_MAX = 70, DESC_MAX = 180, SUBTITLE_MAX = 200;
+      const RELATED = ['twitter','instagram','linkedin','facebook','sms','threads','general'];
+      const SLUG_RE = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
+      const LOCALE = 'en';
+      const DEFAULT_AUTHOR = 'PostTruncate Team';
+
+      // ── tiny IndexedDB store for the directory handle (persist across reloads)
+      const idb = {
+        db: null,
+        open() { return this.db ??= new Promise((res, rej) => {
+          const r = indexedDB.open('md-uploader', 1);
+          r.onupgradeneeded = () => r.result.createObjectStore('kv');
+          r.onsuccess = () => res(r.result); r.onerror = () => rej(r.error);
+        }); },
+        async get(k) { const db = await this.open(); return new Promise((res, rej) => {
+          const t = db.transaction('kv').objectStore('kv').get(k); t.onsuccess = () => res(t.result); t.onerror = () => rej(t.error); }); },
+        async set(k, v) { const db = await this.open(); return new Promise((res, rej) => {
+          const t = db.transaction('kv', 'readwrite').objectStore('kv').put(v, k); t.onsuccess = () => res(); t.onerror = () => rej(t.error); }); },
+      };
+
+      // ── helpers (mirror scripts/normalize-blog-md.mjs) ───────────────────
+      const slugify = (input) => {
+        let s = String(input ?? '').replace(/\.md$/i, '')
+          .replace(/^\d{4}-\d{2}-\d{2}[-_]?/, '').toLowerCase()
+          .replace(/['’`]/g, '').replace(/&/g, ' and ')
+          .replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').replace(/-{2,}/g, '-');
+        return s || 'post';
+      };
+      const firstH1 = (b) => { const m = b.match(/^#\s+(.+?)\s*$/m); return m ? m[1].trim() : null; };
+      const stripLeadingH1 = (b) => b.replace(/^\s*#\s+.+?\s*(\r?\n)+/, '');
+      const firstParagraph = (b) => {
+        let fence = false;
+        for (const line of b.split(/\r?\n/)) {
+          const t = line.trim();
+          if (t.startsWith('```')) { fence = !fence; continue; }
+          if (fence || !t) continue;
+          if (/^(#{1,6}\s|[-*+]\s|\d+\.\s|>|!\[|\|)/.test(t)) continue;
+          return t.replace(/!\[[^\]]*\]\([^)]*\)/g, '').replace(/\[([^\]]+)\]\([^)]*\)/g, '$1').replace(/[*_`#>]/g, '').trim();
+        }
+        return '';
+      };
+      const titleCase = (s) => s.split('-').map((w) => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
+      const clamp = (str, max) => {
+        const s = String(str).trim(); if (s.length <= max) return s;
+        const cut = s.slice(0, max - 1); const i = cut.lastIndexOf(' ');
+        return (i > max * 0.6 ? cut.slice(0, i) : cut).trimEnd() + '…';
+      };
+      const toISO = (v) => { if (!v) return null; const d = v instanceof Date ? v : new Date(String(v)); return isNaN(d) ? null : d.toISOString().slice(0, 10); };
+      const todayISO = () => new Date().toISOString().slice(0, 10);
+
+      // ── state ─────────────────────────────────────────────────────────--
+      let state = { fm: null, body: '', fileName: '', dirHandle: null };
+
+      // ── parse / validate / build ─────────────────────────────────────────
+      function parseFile(text) {
+        const clean = text.replace(/^﻿/, '');
+        const m = clean.match(/^---\r?\n([\s\S]*?)\r?\n---\r?\n?([\s\S]*)$/);
+        if (!m) return { fm: {}, body: clean.trim() };
+        let fm = {};
+        try { fm = YAML.parse(m[1]) ?? {}; } catch (e) { fm = { __parseError: e.message }; }
+        return { fm: (fm && typeof fm === 'object') ? fm : {}, body: m[2].trim() };
+      }
+
+      function validate(fm) {
+        const checks = [];
+        const add = (k, level, msg) => checks.push({ k, level, msg });
+        if (fm.__parseError) add('frontmatter', 'fail', 'YAML did not parse: ' + fm.__parseError);
+
+        const title = (fm.title ?? '').toString().trim();
+        if (!title) add('title', 'fail', 'required — missing or empty');
+        else if (title.length > TITLE_MAX) add('title', 'fail', `too long (${title.length} > ${TITLE_MAX})`);
+        else add('title', 'pass', `${title.length}/${TITLE_MAX}`);
+
+        const desc = (fm.description ?? '').toString().trim();
+        if (!desc) add('description', 'fail', 'required — missing or empty');
+        else if (desc.length > DESC_MAX) add('description', 'fail', `too long (${desc.length} > ${DESC_MAX})`);
+        else add('description', 'pass', `${desc.length}/${DESC_MAX}`);
+
+        if (!toISO(fm.publishDate)) add('publishDate', 'fail', 'required — missing or not a date (use YYYY-MM-DD)');
+        else add('publishDate', 'pass', toISO(fm.publishDate));
+
+        const locale = (fm.locale ?? '').toString().trim();
+        if (!locale) add('locale', 'fail', 'required — must be "en"');
+        else if (locale !== LOCALE) add('locale', 'fail', `must be "en" for src/content/blog/en/ (got "${locale}")`);
+        else add('locale', 'pass', 'en');
+
+        const slug = (fm.slug ?? '').toString().trim();
+        if (!slug) add('slug', 'fail', 'required — missing');
+        else if (!SLUG_RE.test(slug)) add('slug', 'fail', 'must be lowercase kebab-case (a-z, 0-9, single hyphens)');
+        else add('slug', 'pass', slug);
+
+        const author = (fm.author ?? '').toString().trim();
+        if (!author) add('author', 'fail', 'required — missing or empty');
+        else add('author', 'pass', author);
+
+        // optional
+        if (fm.subtitle != null && String(fm.subtitle).length > SUBTITLE_MAX) add('subtitle', 'fail', `too long (> ${SUBTITLE_MAX})`);
+        else if (fm.subtitle) add('subtitle', 'pass', 'optional');
+        if (fm.updatedDate != null && !toISO(fm.updatedDate)) add('updatedDate', 'warn', 'not a valid date — will be dropped');
+        if (fm.relatedPlatform != null && !RELATED.includes(fm.relatedPlatform)) add('relatedPlatform', 'warn', `"${fm.relatedPlatform}" not in enum — will be dropped`);
+        if (fm.draft != null && typeof fm.draft !== 'boolean') add('draft', 'warn', 'should be true/false');
+
+        const ok = checks.every((c) => c.level !== 'fail');
+        return { ok, checks };
+      }
+
+      function autofix(fm, body, fileName) {
+        const f = { ...fm }; delete f.__parseError;
+        const h1 = firstH1(body);
+        f.slug = SLUG_RE.test((f.slug ?? '').toString().trim()) ? f.slug.trim()
+          : slugify(f.slug || fileName.replace(/\.(md|markdown)$/i, ''));
+        if (!String(f.title ?? '').trim()) f.title = h1 || titleCase(f.slug);
+        f.title = clamp(f.title, TITLE_MAX);
+        if (!String(f.description ?? '').trim())
+          f.description = firstParagraph(h1 ? stripLeadingH1(body) : body) || f.title;
+        f.description = clamp(f.description, DESC_MAX);
+        f.publishDate = toISO(f.publishDate) || toISO(f.date) || todayISO();
+        f.locale = LOCALE;
+        if (!String(f.author ?? '').trim()) f.author = DEFAULT_AUTHOR;
+        if (typeof f.draft !== 'boolean') f.draft = true;
+        if (!f.translationKey) f.translationKey = f.slug;
+        return f;
+      }
+
+      function buildContent(fm, body) {
+        const out = {};
+        out.title = String(fm.title);
+        if (fm.subtitle) out.subtitle = clamp(String(fm.subtitle), SUBTITLE_MAX);
+        out.description = String(fm.description);
+        out.publishDate = toISO(fm.publishDate);
+        if (toISO(fm.updatedDate)) out.updatedDate = toISO(fm.updatedDate);
+        out.locale = LOCALE;
+        out.slug = String(fm.slug);
+        out.translationKey = fm.translationKey ? String(fm.translationKey) : String(fm.slug);
+        if (RELATED.includes(fm.relatedPlatform)) out.relatedPlatform = fm.relatedPlatform;
+        out.author = String(fm.author);
+        out.draft = typeof fm.draft === 'boolean' ? fm.draft : true;
+        if (fm.ogImage) out.ogImage = String(fm.ogImage);
+        let y = YAML.stringify(out, { lineWidth: 0 });
+        y = y.replace(/^(publishDate|updatedDate): "(\d{4}-\d{2}-\d{2})"$/gm, '$1: $2');
+        // strip a leading "# H1" so it doesn't duplicate the rendered title
+        const cleanBody = firstH1(body) ? stripLeadingH1(body).trim() : body;
+        return `---\n${y}---\n\n${cleanBody}\n`;
+      }
+
+      // ── render ────────────────────────────────────────────────────────--
+      const $ = (id) => document.getElementById(id);
+
+      function renderChecks(result) {
+        $('validationCard').classList.remove('hide');
+        const badge = $('validBadge');
+        badge.textContent = result.ok ? 'PASS' : 'FAIL';
+        badge.className = 'pill ' + (result.ok ? 'ok' : 'err');
+        $('checks').innerHTML = result.checks.map((c) => `
+          <li><span class="mark ${c.level}">${c.level === 'pass' ? '✓' : c.level === 'warn' ? '!' : '✗'}</span>
+          <span class="k">${c.k}</span><span>${c.msg}</span></li>`).join('');
+      }
+
+      function renderPreview(fm, body) {
+        const pv = $('preview');
+        const cleanBody = firstH1(body) ? stripLeadingH1(body) : body;
+        const meta = `${fm.author ? 'By ' + esc(fm.author) : ''}${fm.author && fm.publishDate ? ' · ' : ''}${toISO(fm.publishDate) ? 'Published ' + toISO(fm.publishDate) : ''}`;
+        const hero = fm.ogImage
+          ? `<img class="pv-hero" src="${esc(fm.ogImage)}" alt="" onerror="this.classList.add('hide');this.nextElementSibling.classList.remove('hide');" />
+             <div class="pv-hero-missing hide">Hero image set to <code>${esc(fm.ogImage)}</code> — not found in this preview (it resolves after the file is in /public and deployed).</div>`
+          : '';
+        pv.innerHTML = `
+          ${fm.draft ? '<span class="pv-draft">Draft</span><br>' : ''}
+          <h1 class="pv-title">${esc(fm.title || '(untitled)')}</h1>
+          ${fm.subtitle ? `<p class="pv-subtitle">${esc(fm.subtitle)}</p>` : ''}
+          ${meta ? `<p class="pv-meta">${meta}</p>` : ''}
+          ${hero}
+          <div class="pv-body">${marked.parse(cleanBody || '')}</div>`;
+      }
+      const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+
+      function refresh() {
+        if (!state.fm) return;
+        const result = validate(state.fm);
+        renderChecks(result);
+        renderPreview(state.fm, state.body);
+        const content = buildContent(state.fm, state.body);
+        const slug = SLUG_RE.test(String(state.fm.slug ?? '')) ? state.fm.slug : slugify(state.fm.slug || state.fileName);
+        $('outputCard').classList.remove('hide');
+        $('outName').textContent = `${slug}.md`;
+        $('outContent').textContent = content;
+        $('save').disabled = !(result.ok && state.dirHandle);
+        state._content = content; state._slug = slug;
+      }
+
+      // ── file intake ──────────────────────────────────────────────────────
+      async function ingest(file) {
+        if (!file) return;
+        state.fileName = file.name;
+        const text = await file.text();
+        const { fm, body } = parseFile(text);
+        state.fm = fm; state.body = body;
+        $('fileStatus').innerHTML = `Loaded <strong>${esc(file.name)}</strong> (${file.size} bytes)`;
+        refresh();
+      }
+
+      $('file').addEventListener('change', (e) => ingest(e.target.files[0]));
+      const drop = $('drop');
+      ['dragenter', 'dragover'].forEach((ev) => drop.addEventListener(ev, (e) => { e.preventDefault(); drop.classList.add('drag'); }));
+      ['dragleave', 'drop'].forEach((ev) => drop.addEventListener(ev, (e) => { e.preventDefault(); drop.classList.remove('drag'); }));
+      drop.addEventListener('drop', (e) => ingest(e.dataTransfer.files[0]));
+
+      $('autofix').addEventListener('click', () => {
+        if (!state.fm) return;
+        state.fm = autofix(state.fm, state.body, state.fileName);
+        refresh();
+      });
+
+      // ── directory + save ─────────────────────────────────────────────────
+      async function ensurePerm(handle) {
+        const opts = { mode: 'readwrite' };
+        if ((await handle.queryPermission(opts)) === 'granted') return true;
+        return (await handle.requestPermission(opts)) === 'granted';
+      }
+      function showDir() {
+        $('dirStatus').textContent = state.dirHandle ? `📁 ${state.dirHandle.name}` : 'No folder selected';
+        $('dirStatus').classList.toggle('empty', !state.dirHandle);
+      }
+
+      if (!window.showDirectoryPicker) {
+        $('fsaNote').classList.remove('hide');
+        $('pickDir').disabled = true;
+      } else {
+        // restore a previously authorized folder
+        idb.get('dir').then((h) => { if (h) { state.dirHandle = h; showDir(); refresh(); } }).catch(() => {});
+      }
+
+      $('pickDir').addEventListener('click', async () => {
+        try {
+          const h = await window.showDirectoryPicker({ mode: 'readwrite', id: 'blog-en' });
+          state.dirHandle = h; await idb.set('dir', h).catch(() => {}); showDir(); refresh();
+        } catch (e) { /* user cancelled */ }
+      });
+
+      $('save').addEventListener('click', async () => {
+        const st = $('saveStatus');
+        if (!state.dirHandle) { st.textContent = 'Choose a folder first.'; return; }
+        if (!(await ensurePerm(state.dirHandle))) { st.textContent = 'Write permission denied.'; return; }
+        const name = `${state._slug}.md`;
+        try {
+          try { await state.dirHandle.getFileHandle(name); if (!confirm(`${name} already exists. Overwrite?`)) { st.textContent = 'Cancelled.'; return; } } catch {}
+          const fh = await state.dirHandle.getFileHandle(name, { create: true });
+          const w = await fh.createWritable();
+          await w.write(state._content); await w.close();
+          st.innerHTML = `<span class="pill ok">Saved ${esc(name)}</span> — run <code>npx astro sync</code> &amp; build, then commit.`;
+        } catch (e) { st.textContent = 'Save failed: ' + e.message; }
+      });
+
+      $('download').addEventListener('click', () => {
+        if (!state._content) return;
+        const a = document.createElement('a');
+        a.href = URL.createObjectURL(new Blob([state._content], { type: 'text/markdown' }));
+        a.download = `${state._slug}.md`; a.click(); URL.revokeObjectURL(a.href);
+      });
+
+      // expose pure fns for smoke-testing (harmless; dev convenience)
+      window.__mdUploader = { parseFile, validate, autofix, buildContent, slugify };
+    </script>
+  </body>
+</html>

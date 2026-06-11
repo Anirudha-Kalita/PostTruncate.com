@@ -54,6 +54,12 @@ const blog = defineCollection({
     title: z.string().max(70),
     /** Meta description + OG/Twitter description. ≤160 chars recommended. */
     description: z.string().max(180),
+    /**
+     * Optional deck/standfirst shown under the <h1> in the article (above the
+     * author + date). Purely visual — distinct from `description`, which is the
+     * SEO meta text — so the on-page subtitle and the SERP snippet can differ.
+     */
+    subtitle: z.string().max(200).optional(),
 
     // ── Dates (drive Article schema + sitemap lastmod) ──────────────────
     /** First publication date. Write `publishDate: 2026-06-09` in frontmatter. */
@@ -81,9 +87,15 @@ const blog = defineCollection({
      * Stable key shared by every translation of the same logical post. Used to
      * emit hreflang alternates across locales. Reuse the SAME value in each
      * language's file (e.g. translationKey: "twitter-limit-guide" in both
-     * en/ and de/). Required so the cross-locale linking contract is explicit.
+     * en/ and de/) so the cross-locale linking contract is explicit.
+     *
+     * Optional INPUT, required-and-non-empty in EFFECT: the object-level
+     * transform below back-fills it from `slug` when omitted or blank (e.g.
+     * Sveltia's hidden field can serialize an empty string). Because every
+     * slug is unique and non-empty, the derived key is a stable, unique
+     * fallback; an explicit value (a shared translation key) always wins.
      */
-    translationKey: z.string().min(1),
+    translationKey: z.string().optional(),
 
     // ── Taxonomy ────────────────────────────────────────────────────────
     /** Optional platform association → cross-links to the matching tool page. */
@@ -102,7 +114,17 @@ const blog = defineCollection({
      * site-wide /og.png when omitted.
      */
     ogImage: z.string().optional(),
-  }),
+  })
+  // Back-fill translationKey from slug when omitted or blank, so an empty
+  // value (e.g. from a CMS hidden field) can never crash the build. Explicit,
+  // non-empty keys pass through untouched, so translations keep sharing one.
+  .transform((data) => ({
+    ...data,
+    translationKey:
+      data.translationKey && data.translationKey.trim().length > 0
+        ? data.translationKey
+        : data.slug,
+  })),
 });
 
 export const collections = { blog };

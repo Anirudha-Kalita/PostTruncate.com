@@ -3,12 +3,8 @@ import { getCollection, type CollectionEntry } from 'astro:content';
 import Layout from '../../../layouts/Layout.astro';
 import BlogStructuredData from '../../../components/BlogStructuredData.astro';
 import { getLocale, DEFAULT_LOCALE } from '../../../i18n/config';
-import {
-  BLOG_SEGMENT,
-  getBlogStrings,
-  formatBlogDate,
-  isoDate,
-} from '../../../lib/blogI18n';
+import BlogCardGrid from '../../../components/BlogCardGrid.astro';
+import { BLOG_SEGMENT, getBlogStrings, isoDate } from '../../../lib/blogI18n';
 
 type BlogEntry = CollectionEntry<'blog'>;
 
@@ -107,20 +103,7 @@ const schemaPosts = posts.map((p) => ({
       <p class="blog__lede">{s.indexLede}</p>
     </header>
 
-    <ul class="blog__list">
-      {posts.map((p) => (
-        <li class="blog__item">
-          <a class="blog__card" href={`/${lang}/${BLOG_SEGMENT}/${p.data.slug}/`}>
-            <time class="blog__date" datetime={isoDate(p.data.publishDate)}>
-              {formatBlogDate(p.data.publishDate, lang)}
-            </time>
-            <h2 class="blog__card-title">{p.data.title}</h2>
-            <p class="blog__card-desc">{p.data.description}</p>
-            <span class="blog__more">{s.readMore} →</span>
-          </a>
-        </li>
-      ))}
-    </ul>
+    <BlogCardGrid posts={posts} lang={lang} readMoreLabel={s.readMore} />
   </section>
 </Layout>
 
@@ -128,7 +111,8 @@ const schemaPosts = posts.map((p) => ({
   .blog {
     padding-top: 48px;
     padding-bottom: 96px;
-    max-width: 56rem;
+    /* Wide enough to land on a 4-up card grid (4 × 230px tracks + gaps). */
+    max-width: 72rem;
   }
   .blog__head {
     margin-bottom: 40px;
@@ -146,49 +130,5 @@ const schemaPosts = posts.map((p) => ({
     font-size: 18px;
     line-height: 28px;
     color: var(--color-body);
-  }
-  .blog__list {
-    display: grid;
-    gap: 16px;
-  }
-  .blog__card {
-    display: block;
-    padding: 24px 28px;
-    border-radius: var(--radius-lg);
-    background: var(--color-canvas);
-    box-shadow: var(--shadow-e1);
-    border: 1px solid var(--color-hairline);
-    transition: box-shadow 0.15s ease, transform 100ms ease;
-  }
-  .blog__card:hover {
-    box-shadow: var(--shadow-e2);
-  }
-  .blog__card:active {
-    transform: scale(0.99);
-  }
-  .blog__date {
-    font-family: var(--font-mono);
-    font-size: 12px;
-    color: var(--color-mute);
-  }
-  .blog__card-title {
-    margin-top: 8px;
-    font-size: 22px;
-    font-weight: 600;
-    letter-spacing: -0.6px;
-    color: var(--color-ink);
-  }
-  .blog__card-desc {
-    margin-top: 8px;
-    font-size: 15px;
-    line-height: 24px;
-    color: var(--color-body);
-  }
-  .blog__more {
-    display: inline-block;
-    margin-top: 16px;
-    font-size: 14px;
-    font-weight: 500;
-    color: var(--color-ink);
   }
 </style>

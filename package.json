@@ -9,6 +9,9 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
+    "typecheck": "astro check",
+    "lint": "node --experimental-strip-types --import ./scripts/ts-resolve.mjs scripts/check-i18n.mjs",
+    "test:fast": "npm run typecheck && npm run lint",
     "test:lib": "node --experimental-strip-types --import ./scripts/ts-resolve.mjs --test \"src/lib/**/*.test.ts\"",
     "astro": "astro"
   },
