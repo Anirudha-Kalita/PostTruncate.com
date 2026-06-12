@@ -25,7 +25,7 @@ Facebook will technically accept a post of [63,206 characters](/en/facebook-char
 
 The limits that actually affect reach operate well below the technical ceiling. There are three of them, and understanding all three changes how you write for the platform.
 
-![Facebook character limits that actually matter - showing engagement peak at 80 chars, mobile fold at 110, desktop fold at 480, and technical ceiling at 63,206](https://cdn-public.eesel.ai/102d4d12-73e2-42b6-a840-51f54108467a/3cdca590-a33f-4dc7-9ca5-5f55aaf59ca7/01ddee67d54c4c2fb93b0432bea3ec9c.png)
+![Facebook character limits that actually matter - showing engagement peak at 80 chars, mobile fold at 110, desktop fold at 480, and technical ceiling at 63,206](/og/facebook-2.webp)
 
 Facebook character limits that actually matter - showing engagement peak at 80 chars, mobile fold at 110, desktop fold at 480, and technical ceiling at 63,206
 
@@ -66,7 +66,7 @@ Posts that stay under the fold get full-text display in the feed with no interru
 
 The feed doesn't show posts chronologically. It ranks content by predicted engagement - and the ranking signals Facebook uses are not secret, even if the exact weights are.
 
-![What Facebook's algorithm boosts vs suppresses - comparison infographic](https://cdn-public.eesel.ai/102d4d12-73e2-42b6-a840-51f54108467a/3cdca590-a33f-4dc7-9ca5-5f55aaf59ca7/08fe7d4dc7f74a6f89d8640eeb10721e.png)
+![What Facebook's algorithm boosts vs suppresses - comparison infographic](/og/facebook.webp)
 
 What Facebook's algorithm boosts vs suppresses - comparison infographic
 
@@ -80,13 +80,13 @@ For video and reels, **completion rate** is the key signal. A 15-second reel tha
 
 Short posts that fit under the 480-character fold have lower friction and attract more initial engagement, which starts the algorithmic ranking loop. Posts under 80 characters see this effect at its strongest. [Conversational posts](/en/facebook-character-counter/) that invite genuine discussion (not bait) see higher comment rates. **Native video hosted directly on Facebook** gets preferential treatment over external links - keeping users on-platform is Meta's incentive.
 
-Posts from personal profiles consistently outrank business pages organically. This isn't accidental: Meta's 2018 algorithm shift explicitly prioritized "meaningful social interactions" from friends and family over brand content.
+Posts from personal profiles consistently outrank business pages organically. This isn't accidental: Meta's 2018 algorithm shift explicitly prioritised "meaningful social interactions" from friends and family over brand content.
 
 ### What suppresses reach
 
-The algorithm actively penalizes several patterns:
+The algorithm actively penalises several patterns:
 
-**Engagement bait** - posts that explicitly ask for likes, comments, or shares without offering genuine value ("like if you agree", "tag a friend who needs this") - are suppressed by up to 50% or more in reach. Facebook has been enforcing this since 2017 and it's only gotten stricter.
+**Engagement bait** - posts that explicitly ask for likes, comments, or shares without offering genuine value ("like if you agree", "tag a friend who needs this") - are suppressed by up to 50% or more in reach. Facebook has been enforcing this since 2017, and it's only gotten stricter.
 
 **Pseudo-Unicode fonts** are algorithmically treated as a spam signal. These are the "fancy" styled letters - bold, italic, decorative - that look formatted but are actually Unicode symbol characters, not real text. [PostTruncate detects these in real time](/en/facebook-character-counter/) and flags them before you publish. They're doubly harmful: beyond the reach penalty, screen readers used by blind and low-vision users render them as garbled nonsense. A post that looks bold and attention-grabbing to a sighted user may be completely inaccessible to a significant portion of your audience.
 
@@ -94,7 +94,7 @@ The algorithm actively penalizes several patterns:
 
 ## Facebook post types: a field guide
 
-![Facebook post types character limits comparison table](https://cdn-public.eesel.ai/102d4d12-73e2-42b6-a840-51f54108467a/3cdca590-a33f-4dc7-9ca5-5f55aaf59ca7/9898ab2ea02e49e2ba3a46ea37e357d7.png)
+![Facebook post types character limits comparison table](/og/9898ab2ea02e49e2ba3a46ea37e357d7.webp)
 
 Facebook post types character limits comparison table
 
@@ -118,7 +118,7 @@ Groups operate on a [different algorithmic model than the main feed](/en/platfor
 
 ### Business pages
 
-Pages face a structural disadvantage: organic reach from brand pages is lower than from personal profiles by design. Meta's algorithm explicitly favors friend-and-family content. Pages see better results combining organic posts (for community building and credibility) with paid amplification for reach. For organic page posts, the character optimization logic applies even more strongly - shorter, more engaging content is your best tool against algorithmic headwinds.
+Pages face a structural disadvantage: organic reach from brand pages is lower than from personal profiles by design. Meta's algorithm explicitly favours friend-and-family content. Pages see better results combining organic posts (for community building and credibility) with paid amplification for reach. For organic page posts, the character optimisation logic applies even more strongly - shorter, more engaging content is your best tool against algorithmic headwinds.
 
 ### Facebook Ads
 
@@ -128,9 +128,9 @@ Ads have tighter constraints than organic posts. The **headline limit is 40 char
 
 From practitioner research and platform data, a few things consistently separate high-reach posts from low-reach ones.
 
-**Front-load the value.** The first 80 characters are visible at a glance on every device. Put the most compelling, specific, or surprising element of your post right there - not as setup, not as context, but as the hook itself. A post that opens with "We reduced customer churn by 40% last quarter" outperforms one that opens with "I've been thinking about customer retention lately and wanted to share some thoughts." The latter wastes the visible fold on setup the reader doesn't yet care about.
+**Front-load the value.** The first 80 characters are visible at a glance on every device. Put the most compelling, specific, or surprising element of your post right there - not as setup, not as context, but as the hook itself. A post that opens with "We reduced customer churn by 40% last quarter" outperforms one that opens with "I've been thinking about customer retention lately and wanted to share some thoughts." The latter wastes the visible fold on setting up the reader, who doesn't yet care about it.
 
-**Use specificity, not vagueness.** Numbers and concrete claims perform measurably better than abstract ones. Compare: "Our process saves time" vs. "Our process cut reporting from 4 hours to 20 minutes." The second post gives readers something to react to. Vague claims require a "see more" tap to become meaningful; specific claims land at a glance.
+**Use specificity, not vagueness.** Numbers and concrete claims perform measurably better than abstract ones. Compare: "Our process saves time" vs "Our process cuts reporting from 4 hours to 20 minutes." The second post gives readers something to react to. Vague claims require a "see more" tap to become meaningful; specific claims land at a glance.
 
 **One idea per post.** Posts that try to make multiple points force readers to keep reading to understand what the post is actually about. A post with one clear, specific point can deliver it in 80 characters. Multi-point posts almost inevitably need the fold - and the fold costs engagement.
 
