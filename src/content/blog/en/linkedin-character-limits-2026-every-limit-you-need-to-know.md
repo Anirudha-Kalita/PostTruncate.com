@@ -41,7 +41,7 @@ Before the detail, here's the full table. Bookmark this, because it covers every
 | Job description | 15,000 | - |
 | Hashtag (per tag) | 30 chars | 3-5 per post is recommended |
 
-![LinkedIn character limits by feature type, showing the scale from 100-character company names to 100,000-character articles](https://cdn-public.eesel.ai/4d2026a4-c694-4b24-9d02-0906da98255c/f65b988d-9c62-4dd7-952e-8895647c62ab/dcaafd11ad73430f882b549f21e98a82.png)
+![LinkedIn character limits by feature type, showing the scale from 100-character company names to 100,000-character articles](/og/LinkedIn2.webp)
 
 LinkedIn character limits by feature type, showing the scale from 100-character company names to 100,000-character articles
 
@@ -59,7 +59,7 @@ The pattern shows up in community discussions constantly: writers put real thoug
 
 Posts where the main value is buried below the fold see **40-60% lower engagement** than posts that deliver their core message within the first 140 characters. The algorithm picks up on engagement in the first hour - likes, comments, early shares - and that window closes before most people have clicked "see more."
 
-![Side-by-side comparison of LinkedIn's mobile fold (~140 chars) versus desktop fold (~210 chars), showing where posts get cut on each device](https://cdn-public.eesel.ai/4d2026a4-c694-4b24-9d02-0906da98255c/f65b988d-9c62-4dd7-952e-8895647c62ab/3d1c29d9666944c68bddcf5d1da0fcd6.png)
+![Side-by-side comparison of LinkedIn's mobile fold (~140 chars) versus desktop fold (~210 chars), showing where posts get cut on each device](/og/LinkedIn-3.webp)
 
 Side-by-side comparison of LinkedIn's mobile fold (\~140 chars) versus desktop fold (\~210 chars), showing where posts get cut on each device
 
@@ -75,7 +75,7 @@ For a full breakdown of how to write posts that work within these constraints, s
 
 Your LinkedIn profile has multiple distinct character limits across different sections. None of them has folds in the same way posts do, but several have practical visibility windows that are shorter than the hard limit suggests.
 
-![LinkedIn profile layout with labeled character limits for each section - name, headline, and About field](https://cdn-public.eesel.ai/4d2026a4-c694-4b24-9d02-0906da98255c/f65b988d-9c62-4dd7-952e-8895647c62ab/773c4e51e1504ff88556c67b1d96278b.png)
+![LinkedIn profile layout with labeled character limits for each section - name, headline, and About field](/og/LinkedIn-4.webp)
 
 LinkedIn profile layout with labelled character limits for each section - name, headline, and About field
 
