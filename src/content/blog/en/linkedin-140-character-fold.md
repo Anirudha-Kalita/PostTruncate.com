@@ -6,7 +6,7 @@ description: Master LinkedIn post writing with our guide to the 140-character fo
 publishDate: 2026-06-11
 updatedDate: 2026-06-11
 locale: en
-slug: linkedin-140-character-fold
+slug: linkedin-posts-survive-the-fold
 relatedPlatform: linkedin
 author: PostTruncate Team
 draft: false

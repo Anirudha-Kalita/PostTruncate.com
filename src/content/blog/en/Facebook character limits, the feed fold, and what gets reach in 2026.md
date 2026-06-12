@@ -1,27 +1,21 @@
 ---
-title: "Facebook: character limits, the feed fold, and what gets reach in 2026"
-description: Facebook's real limits aren't the 63,206-character ceiling - they're the 480-char fold and the 80-char engagement peak. Here's what the platform actually rewards.
+translationKey: facebook-character-limits-the-feed-fold-and-what-gets-reach-in-2026
+title: 'Facebook: character limits, the feed fold, and what gets reach in 2026'
+subtitle: Facebook's real limits aren't the 63,206-character ceiling - they're the 480-char fold and the 80-char engagement peak. Here's what the platform actually rewards.
+description: 'Master Facebook in 2026: character limits by post type, how the feed fold works, and what actually drives reach - without paying for ads.'
 publishDate: 2026-06-12
+updatedDate: ''
 locale: en
 slug: facebook-character-limits-the-feed-fold-and-what-gets-reach-in-2026
-translationKey: facebook-character-limits-the-feed-fold-and-what-gets-reach-in-2026
 relatedPlatform: facebook
 author: PostTruncate Team
-draft: true
-ogImage: /og/facebook-character-limits-the-feed-fold-and-what-gets-reach-in-2026.png
+draft: false
+ogImage: /og/facebook-hero.webp
 ---
-
-Facebook's real limits aren't the 63,206-character ceiling - they're the 480-char fold and the 80-char engagement peak. Here's what the platform actually rewards.
-
-*June 12, 2026 · 11 min read*
-
-Illustration showing Facebook feed post character limit zones on mobile and desktop screens
-
-* * *
 
 ## TL;DR
 
-Facebook's 63,206-character limit is a red herring. The constraints that actually determine whether your post gets seen are: the **80-character engagement peak** (posts this short get [66% higher engagement](https://blog.hootsuite.com/ideal-social-media-post-length/)), the **110-character mobile fold** (what phone users see before scrolling), and the **480-character desktop fold** (where text collapses behind "See more"). Posts that avoid the fold get more reach because they remove friction. Reels and video now dominate the feed algorithmically. Pseudo-Unicode "fancy fonts" are silently suppressed. If you write for Facebook and care about reach, the character count that matters isn't 63,206 - it's 80.
+Facebook's 63,206-character limit is a red herring. The constraints that actually determine whether your post gets seen are: the **80-character engagement peak** (posts this short get [66% higher engagement](https://blog.hootsuite.com/ideal-social-media-post-length/)), the **110-character mobile fold** (what phone users see before scrolling), and the **480-character desktop fold** (where text collapses behind "See more"). Posts that avoid the fold get more reach because they remove friction. Reels and videos now dominate the feed algorithmically. Pseudo-Unicode "fancy fonts" are silently suppressed. If you write for Facebook and care about reach, the character count that matters isn't 63,206 - it's 80.
 
 Use [PostTruncate's free Facebook character counter](/en/facebook-character-counter/) to see exactly where your post folds on mobile and desktop before you publish.
 
@@ -31,7 +25,7 @@ Facebook will technically accept a post of [63,206 characters](/en/facebook-char
 
 The limits that actually affect reach operate well below the technical ceiling. There are three of them, and understanding all three changes how you write for the platform.
 
-![Facebook character limits that actually matter - showing engagement peak at 80 chars, mobile fold at 110, desktop fold at 480, and technical ceiling at 63,206](https://cdn-public.eesel.ai/102d4d12-73e2-42b6-a840-51f54108467a/3cdca590-a33f-4dc7-9ca5-5f55aaf59ca7/01ddee67d54c4c2fb93b0432bea3ec9c.png)
+![Facebook character limits that actually matter - showing engagement peak at 80 chars, mobile fold at 110, desktop fold at 480, and technical ceiling at 63,206](/og/facebook-2.webp)
 
 Facebook character limits that actually matter - showing engagement peak at 80 chars, mobile fold at 110, desktop fold at 480, and technical ceiling at 63,206
 
@@ -49,7 +43,7 @@ The mobile fold is the most overlooked constraint in Facebook content writing. W
 
 ### The 480-character desktop fold
 
-On desktop, Facebook collapses feed posts after roughly 480 characters with a "See more" link. Every additional tap required to read the full post is a drop-off opportunity. Mobile users scroll past collapsed posts without tapping. [PostTruncate's research](/en/facebook-character-counter/) shows that posts requiring expansion see measurably less engagement - the friction of one tap is genuinely enough to change reader behavior.
+On desktop, Facebook collapses feed posts after roughly 480 characters with a "See more" link. Every additional tap required to read the full post is a drop-off opportunity. Mobile users scroll past collapsed posts without tapping. [PostTruncate's research](/en/facebook-character-counter/) shows that posts requiring expansion see measurably less engagement - the friction of one tap is genuinely enough to change reader behaviour.
 
 Posts that stay under the fold get full-text display in the feed with no interruption. The reader absorbs the entire message before they've consciously chosen to engage, which is exactly when organic sharing happens most naturally.
 
@@ -58,8 +52,8 @@ Posts that stay under the fold get full-text display in the feed with no interru
 | Content type | Limit | Notes |
 | --- | --- | --- |
 | Feed post (engagement peak) | 80 chars | 66% higher engagement vs. longer posts |
-| Feed post (mobile fold) | ~110 chars | What phone users see before "See more" |
-| Feed post (desktop fold) | ~480 chars | Full text visible before truncation |
+| Feed post (mobile fold) | \~110 chars | What phone users see before "See more" |
+| Feed post (desktop fold) | \~480 chars | Full text visible before truncation |
 | Feed post (hard limit) | 63,206 chars | Technical ceiling; rarely relevant |
 | Comment | 8,000 chars | Per-comment |
 | Group post | 63,206 chars | Same as feed; different algorithm |
@@ -72,7 +66,7 @@ Posts that stay under the fold get full-text display in the feed with no interru
 
 The feed doesn't show posts chronologically. It ranks content by predicted engagement - and the ranking signals Facebook uses are not secret, even if the exact weights are.
 
-![What Facebook's algorithm boosts vs suppresses - comparison infographic](https://cdn-public.eesel.ai/102d4d12-73e2-42b6-a840-51f54108467a/3cdca590-a33f-4dc7-9ca5-5f55aaf59ca7/08fe7d4dc7f74a6f89d8640eeb10721e.png)
+![What Facebook's algorithm boosts vs suppresses - comparison infographic](/og/facebook.webp)
 
 What Facebook's algorithm boosts vs suppresses - comparison infographic
 
@@ -86,13 +80,13 @@ For video and reels, **completion rate** is the key signal. A 15-second reel tha
 
 Short posts that fit under the 480-character fold have lower friction and attract more initial engagement, which starts the algorithmic ranking loop. Posts under 80 characters see this effect at its strongest. [Conversational posts](/en/facebook-character-counter/) that invite genuine discussion (not bait) see higher comment rates. **Native video hosted directly on Facebook** gets preferential treatment over external links - keeping users on-platform is Meta's incentive.
 
-Posts from personal profiles consistently outrank business pages organically. This isn't accidental: Meta's 2018 algorithm shift explicitly prioritized "meaningful social interactions" from friends and family over brand content.
+Posts from personal profiles consistently outrank business pages organically. This isn't accidental: Meta's 2018 algorithm shift explicitly prioritised "meaningful social interactions" from friends and family over brand content.
 
 ### What suppresses reach
 
-The algorithm actively penalizes several patterns:
+The algorithm actively penalises several patterns:
 
-**Engagement bait** - posts that explicitly ask for likes, comments, or shares without offering genuine value ("like if you agree", "tag a friend who needs this") - are suppressed by up to 50% or more in reach. Facebook has been enforcing this since 2017 and it's only gotten stricter.
+**Engagement bait** - posts that explicitly ask for likes, comments, or shares without offering genuine value ("like if you agree", "tag a friend who needs this") - are suppressed by up to 50% or more in reach. Facebook has been enforcing this since 2017, and it's only gotten stricter.
 
 **Pseudo-Unicode fonts** are algorithmically treated as a spam signal. These are the "fancy" styled letters - bold, italic, decorative - that look formatted but are actually Unicode symbol characters, not real text. [PostTruncate detects these in real time](/en/facebook-character-counter/) and flags them before you publish. They're doubly harmful: beyond the reach penalty, screen readers used by blind and low-vision users render them as garbled nonsense. A post that looks bold and attention-grabbing to a sighted user may be completely inaccessible to a significant portion of your audience.
 
@@ -100,7 +94,7 @@ The algorithm actively penalizes several patterns:
 
 ## Facebook post types: a field guide
 
-![Facebook post types character limits comparison table](https://cdn-public.eesel.ai/102d4d12-73e2-42b6-a840-51f54108467a/3cdca590-a33f-4dc7-9ca5-5f55aaf59ca7/9898ab2ea02e49e2ba3a46ea37e357d7.png)
+![Facebook post types character limits comparison table](/og/9898ab2ea02e49e2ba3a46ea37e357d7.webp)
 
 Facebook post types character limits comparison table
 
@@ -124,7 +118,7 @@ Groups operate on a [different algorithmic model than the main feed](/en/platfor
 
 ### Business pages
 
-Pages face a structural disadvantage: organic reach from brand pages is lower than from personal profiles by design. Meta's algorithm explicitly favors friend-and-family content. Pages see better results combining organic posts (for community building and credibility) with paid amplification for reach. For organic page posts, the character optimization logic applies even more strongly - shorter, more engaging content is your best tool against algorithmic headwinds.
+Pages face a structural disadvantage: organic reach from brand pages is lower than from personal profiles by design. Meta's algorithm explicitly favours friend-and-family content. Pages see better results combining organic posts (for community building and credibility) with paid amplification for reach. For organic page posts, the character optimisation logic applies even more strongly - shorter, more engaging content is your best tool against algorithmic headwinds.
 
 ### Facebook Ads
 
@@ -134,9 +128,9 @@ Ads have tighter constraints than organic posts. The **headline limit is 40 char
 
 From practitioner research and platform data, a few things consistently separate high-reach posts from low-reach ones.
 
-**Front-load the value.** The first 80 characters are visible at a glance on every device. Put the most compelling, specific, or surprising element of your post right there - not as setup, not as context, but as the hook itself. A post that opens with "We reduced customer churn by 40% last quarter" outperforms one that opens with "I've been thinking about customer retention lately and wanted to share some thoughts." The latter wastes the visible fold on setup the reader doesn't yet care about.
+**Front-load the value.** The first 80 characters are visible at a glance on every device. Put the most compelling, specific, or surprising element of your post right there - not as setup, not as context, but as the hook itself. A post that opens with "We reduced customer churn by 40% last quarter" outperforms one that opens with "I've been thinking about customer retention lately and wanted to share some thoughts." The latter wastes the visible fold on setting up the reader, who doesn't yet care about it.
 
-**Use specificity, not vagueness.** Numbers and concrete claims perform measurably better than abstract ones. Compare: "Our process saves time" vs. "Our process cut reporting from 4 hours to 20 minutes." The second post gives readers something to react to. Vague claims require a "see more" tap to become meaningful; specific claims land at a glance.
+**Use specificity, not vagueness.** Numbers and concrete claims perform measurably better than abstract ones. Compare: "Our process saves time" vs "Our process cuts reporting from 4 hours to 20 minutes." The second post gives readers something to react to. Vague claims require a "see more" tap to become meaningful; specific claims land at a glance.
 
 **One idea per post.** Posts that try to make multiple points force readers to keep reading to understand what the post is actually about. A post with one clear, specific point can deliver it in 80 characters. Multi-point posts almost inevitably need the fold - and the fold costs engagement.
 
@@ -150,32 +144,32 @@ From practitioner research and platform data, a few things consistently separate
 
 ## PostTruncate for Facebook
 
-[PostTruncate's Facebook character counter](/en/facebook-character-counter/) is a free, browser-based tool that shows you exactly where your post folds - on both mobile (110 chars) and desktop (480 chars) - before you publish. Type your post, and the tool renders a live preview with fold markers, color-coded character count, and a real-time flag for pseudo-Unicode fonts that would suppress your reach.
+[PostTruncate's Facebook character counter](/en/facebook-character-counter/) is a free, browser-based tool that shows you exactly where your post folds - on both mobile (110 chars) and desktop (480 chars) - before you publish. Type your post, and the tool renders a live preview with fold markers, colour-coded character count, and a real-time flag for pseudo-Unicode fonts that would suppress your reach.
 
 PostTruncate Facebook character counter showing live fold markers on mobile and desktop, as taken from PostTruncate
 
+https://youtu.be/BHuYvt0OTRg
+
 Everything runs client-side - your text never leaves your browser, there's no account required, and the tool is completely free. PostTruncate covers all major platforms in one interface: Facebook, [LinkedIn](/en/linkedin-character-counter/), [X (Twitter)](/en/twitter-character-counter/), [Instagram](/en/instagram-character-counter/), [Threads](/en/threads-character-counter/), and [SMS](/en/sms-character-counter/) - so you can see how the same content performs across every channel before posting anywhere.
 
-* * *
-
-## Frequently Asked Questions
+## FAQ
 
 </br><details><summary><b>What is Facebook's character limit for posts in 2026?</b></summary>
-<p>Facebook&#39;s technical character ceiling is <a href="/en/facebook-character-counter/">63,206 characters</a> - far more than anyone should use. The real limit that determines reach is behavioral: the feed fold collapses text after roughly <strong>480 characters on desktop</strong> and <strong>110 characters on mobile</strong>. Posts under <strong>80 characters</strong> consistently see the highest engagement rates. Use <a href="/en/facebook-character-counter/">PostTruncate&#39;s Facebook character counter</a> to see exactly where your post folds in real time.</p>
+<p>Facebook's technical character ceiling is <a href="/en/facebook-character-counter/">63,206 characters</a> - far more than anyone should use. The real limit that determines reach is behavioural: the feed fold collapses text after roughly <strong>480 characters on desktop</strong> and <strong>110 characters on mobile</strong>. Posts under <strong>80 characters</strong> consistently see the highest engagement rates. Use <a href="/en/facebook-character-counter/">PostTruncate's Facebook character counter</a> to see exactly where your post folds in real time.</p>
 </details>
 
 </br><details><summary><b>What is the ideal length for a Facebook post?</b></summary>
-<p>Empirically, <strong>posts under 80 characters</strong> receive about <a href="https://blog.hootsuite.com/ideal-social-media-post-length/">66% higher engagement</a> than longer posts. If your message genuinely needs more space, keep the essential hook in the first 80 characters and expand below - but anything past the 480-character fold gets hidden behind a &#39;See more&#39; tap and receives measurably less reach. Check the fold before you publish with <a href="/en/facebook-character-counter/">PostTruncate</a>.</p>
+<p>Empirically, <strong>posts under 80 characters</strong> receive about <a href="https://blog.hootsuite.com/ideal-social-media-post-length/">66% higher engagement</a> than longer posts. If your message genuinely needs more space, keep the essential hook in the first 80 characters and expand below - but anything past the 480-character fold gets hidden behind a 'See more' tap and receives measurably less reach. Check the fold before you publish with <a href="/en/facebook-character-counter/">PostTruncate</a>.</p>
 </details>
 
 </br><details><summary><b>How does the Facebook algorithm decide what to show?</b></summary>
-<p>Facebook ranks posts by engagement signals: likes, comments (weighted more heavily), shares (weighted most heavily), and dwell time. <a href="/en/platform-limits/">Posts that stay under the 480-character fold</a> have lower friction and attract more initial engagement. Video and reels are increasingly prioritized. The algorithm actively suppresses engagement bait (posts that ask for likes/comments without value) and pseudo-Unicode fonts.</p>
+<p>Facebook ranks posts by engagement signals: likes, comments (weighted more heavily), shares (weighted most heavily), and dwell time. <a href="/en/platform-limits/">Posts that stay under the 480-character fold</a> have lower friction and attract more initial engagement. Videos and reels are increasingly prioritised. The algorithm actively suppresses engagement bait (posts that ask for likes/comments without value) and pseudo-Unicode fonts.</p>
 </details>
 
 </br><details><summary><b>Do emojis and links count toward Facebook's character limit?</b></summary>
-<p>Yes - <a href="/en/facebook-character-counter/">emojis count as single characters</a> in Facebook posts, and the full URL text counts too (Facebook generates a separate link preview card, but the raw text in your post still adds to your count). Use <a href="/en/facebook-character-counter/">PostTruncate&#39;s Facebook character counter</a> to track your running total in real time, including emoji and link characters.</p>
+<p>Yes - <a href="/en/facebook-character-counter/">emojis count as single characters</a> in Facebook posts, and the full URL text counts too (Facebook generates a separate link preview card, but the raw text in your post still adds to your count). Use <a href="/en/facebook-character-counter/">PostTruncate's Facebook character counter</a> to track your running total in real time, including emoji and link characters.</p>
 </details>
 
 </br><details><summary><b>What are pseudo-Unicode fonts and why does Facebook suppress them?</b></summary>
-<p>Pseudo-Unicode fonts are text styled to look bold, italic, or decorative using symbol characters rather than real letters - the kind you copy-paste from a &#39;fancy text generator.&#39; <a href="/en/facebook-character-counter/">Facebook&#39;s algorithm treats these as a spam signal</a> and silently suppresses the post&#39;s reach. They also render as garbled nonsense for screen readers used by blind and low-vision users. PostTruncate detects pseudo-Unicode characters in real time so you can fix them before publishing.</p>
+<p>Pseudo-Unicode fonts are text styled to look bold, italic, or decorative using symbol characters rather than real letters - the kind you copy-paste from a 'fancy text generator.' <a href="/en/facebook-character-counter/">Facebook's algorithm treats these as a spam signal</a> and silently suppresses the post's reach. They also render as garbled nonsense for screen readers used by blind and low-vision users. PostTruncate detects pseudo-Unicode characters in real time so you can fix them before publishing.</p>
 </details>
