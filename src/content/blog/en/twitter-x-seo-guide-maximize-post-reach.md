@@ -1,23 +1,21 @@
 ---
-title: "Twitter (X) SEO Guide: Maximize Post Reach"
-description: Master X (Twitter) SEO with tested strategies. Optimize character placement, keyword positioning, thread structure, and posting timing for maximum reach
+translationKey: twitter-x-seo-guide-maximize-post-reach
+title: 'Twitter (X) SEO Guide: Maximize Post Reach'
+subtitle: Master X (Twitter) SEO with tested strategies. Optimize character placement, keyword positioning, thread structure, and posting timing for maximum reach
+description: Master X (Twitter) SEO with tested strategies. Optimize character placement, keyword positioning, thread structure, and posting timing for maximum reach.
 publishDate: 2026-06-12
+updatedDate: ''
 locale: en
 slug: twitter-x-seo-guide-maximize-post-reach
-translationKey: twitter-x-seo-guide-maximize-post-reach
-relatedPlatform: threads
+relatedPlatform: twitter
 author: PostTruncate Team
-draft: true
+draft: false
 ogImage: /og/twitter-x-seo-guide-maximize-post-reach.png
 ---
 
 Master X (Twitter) SEO with tested strategies. Optimize character placement, keyword positioning, thread structure, and posting timing for maximum reach
 
-*June 11, 2026*
-
-* * *
-
-Twitter X SEO Guide: Maximize Post Reach
+_June 11, 2026_
 
 I've been posting on X for years, and there's a dirty secret nobody talks about: **most people are leaving reach on the table** because they don't understand how X actually distributes content. It's not magic. It's not the algorithm being broken. It's that creators ignore the basics-character limits, keyword placement, thread structure-that actually move the needle.
 
@@ -29,7 +27,7 @@ When you hit X's 280-character limit, something happens that most people don't r
 
 I tested this myself. A thread where I buried the value statement below 140 characters got half the engagement of one where I led with the insight. Same content. Different structure.
 
-Here's the thing: you need to know exactly where your content will cut off *before* you hit publish. That's where **[testing character placement matters](/en/twitter-character-counter/)**. Instead of guessing or hitting publish and hoping, you can see in real-time where your post folds on mobile, what actually shows in feeds, and where users hit "see more."
+Here's the thing: you need to know exactly where your content will cut off _before_ you hit publish. That's where [**testing character placement matters**](/en/twitter-character-counter/). Instead of guessing or hitting publish and hoping, you can see in real-time where your post folds on mobile, what actually shows in feeds, and where users hit "see more."
 
 When I started checking my character placement with a character counter before publishing, my average impressions jumped 30%. Not because I changed the words. Because I stopped wasting the critical first line.
 
@@ -70,7 +68,7 @@ Here's what actually works: post a strong standalone tweet. If you have more to 
 
 ## Timing and Frequency: The Pattern I Found
 
-I tracked my own posting patterns against engagement for six months. Posting more didn't help. Posting *when people were there* did.
+I tracked my own posting patterns against engagement for six months. Posting more didn't help. Posting _when people were there_ did.
 
 My findings:
 
@@ -78,7 +76,7 @@ My findings:
 -   **Consistency matters more than volume** - posting once a day at the same time beat posting 5 times randomly
 -   **Avoid the 3-11 PM ET ghost zone** - fewer active users, same reach potential wasted
 
-But here's the catch-your audience might have different peak times. If you're UK-based, your peak hours shift. Test your own data. Go into your X analytics and find when *your* posts get traction.
+But here's the catch-your audience might have different peak times. If you're UK-based, your peak hours shift. Test your own data. Go into your X analytics and find when _your_ posts get traction.
 
 I tested two weeks of evening-only posts versus my usual morning schedule. Evening posts got 70% fewer impressions. That's because my audience is mostly US-based, online in the morning.
 
