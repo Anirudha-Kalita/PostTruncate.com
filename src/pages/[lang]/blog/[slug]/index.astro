@@ -239,6 +239,78 @@ const { Content } = await render(post);
       <BlogCardGrid posts={relatedPosts} lang={lang} readMoreLabel={s.readMore} />
     </section>
   )}
+
+  {/* Comments — last, just above the footer. Cusdis (cloud) is lazy-loaded via
+      IntersectionObserver so it never blocks render/CWV; its theme follows the
+      site's light/dark toggle, and min-height reserves space to protect CLS.
+      Renders server-side as an empty container; the SDK loads client-side only. */}
+  <section class="post-comments container-page" aria-labelledby="comments-heading">
+    <h2 id="comments-heading" class="post-comments__heading">{s.commentsHeading}</h2>
+    <p class="post-comments__note">{s.commentsNote}</p>
+    <div
+      id="cusdis_thread"
+      class="post-comments__widget"
+      data-host="https://cusdis.com"
+      data-app-id="6e57c64d-ce95-4c61-9b08-3057cdb6c0e0"
+      data-page-id={data.slug}
+      data-page-url={canonicalUrl}
+      data-page-title={data.title}
+    >
+    </div>
+  </section>
+
+  <script>
+    // Lazy-load the Cusdis SDK only when the comments section nears the viewport
+    // (never on first render), then keep its theme in sync with the site's
+    // data-theme. Plain module script — Astro bundles + defers it, so no island
+    // runtime is needed and nothing blocks first paint.
+    (() => {
+      const el = document.getElementById('cusdis_thread');
+      if (!el) return;
+
+      const theme = () =>
+        document.documentElement.dataset.theme === 'dark' ? 'dark' : 'light';
+      el.setAttribute('data-theme', theme()); // set before the SDK reads it
+
+      let loaded = false;
+      const load = () => {
+        if (loaded) return;
+        loaded = true;
+
+        const s = document.createElement('script');
+        s.src = 'https://cusdis.com/js/cusdis.es.js';
+        s.async = true;
+        s.defer = true;
+        document.body.appendChild(s);
+
+        // Re-theme the widget when the user toggles the site theme.
+        const obs = new MutationObserver(() => {
+          const t = theme();
+          el.setAttribute('data-theme', t);
+          (window as any).CUSDIS?.setTheme?.(t);
+        });
+        obs.observe(document.documentElement, {
+          attributes: true,
+          attributeFilter: ['data-theme'],
+        });
+      };
+
+      if ('IntersectionObserver' in window) {
+        const io = new IntersectionObserver(
+          (entries) => {
+            if (entries.some((e) => e.isIntersecting)) {
+              io.disconnect();
+              load();
+            }
+          },
+          { rootMargin: '200px' },
+        );
+        io.observe(el);
+      } else {
+        load(); // very old browsers: just load it
+      }
+    })();
+  </script>
 </Layout>
 
 <style>
@@ -532,5 +604,35 @@ const { Content } = await render(post);
     line-height: 32px;
     letter-spacing: -0.7px;
     color: var(--color-ink);
+  }
+
+  /* Comments — last block before the footer. */
+  .post-comments {
+    max-width: 56rem;
+    padding-top: 48px;
+    padding-bottom: 48px;
+    border-top: 1px solid var(--color-hairline);
+  }
+  .post-comments__heading {
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 32px;
+    letter-spacing: -0.7px;
+    color: var(--color-ink);
+  }
+  .post-comments__note {
+    margin-top: 8px;
+    margin-bottom: 24px;
+    font-size: 14px;
+    line-height: 22px;
+    color: var(--color-mute);
+  }
+  /* Reserve vertical space so the page doesn't jump when the widget mounts. */
+  .post-comments__widget {
+    min-height: 380px;
+  }
+  /* Force the Cusdis iframe to be taller to prevent inner scrolling on the form */
+  .post-comments__widget :global(iframe) {
+    min-height: 380px !important;
   }
 </style>

@@ -46,6 +46,10 @@ export interface BlogStrings {
   morePostsHeading: string;
   /** Reading-time label with a {min} token, e.g. "{min} min read". */
   readingTime: string;
+  /** Heading above the comments section, e.g. "Join the discussion". */
+  commentsHeading: string;
+  /** Note setting expectations that comments are reviewed before appearing. */
+  commentsNote: string;
 }
 
 // Only English is authored today. Add keys for 'de', 'es', … when translating.
@@ -69,6 +73,9 @@ const BLOG_STRINGS: Record<string, BlogStrings> = {
     relatedPostsHeading: 'Related posts',
     morePostsHeading: 'More articles',
     readingTime: '{min} min read',
+    commentsHeading: 'Join the discussion',
+    commentsNote:
+      'Comments are reviewed before they appear, so yours won’t show up right away.',
   },
 };
 
