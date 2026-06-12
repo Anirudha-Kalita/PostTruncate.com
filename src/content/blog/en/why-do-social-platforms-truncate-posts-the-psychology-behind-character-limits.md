@@ -152,7 +152,7 @@ The [platform limits page](/en/platform-limits/) has every limit and fold point 
 
 Every character limit on social media is a legacy of a decision made with incomplete information and no market research. But the platforms that built on those legacies discovered something real: constraints shape behaviour, and the fold in particular exploits cognitive mechanisms that are as old as attention itself. Friedhelm Hillebrand didn't design the Zeigarnik effect. He just happened to stumble on a number that fits inside it.
 
-## Frequently Asked Questions
+## FAQ
 
 <details><summary><b>What is the difference between a hard character limit and a feed fold?</b></summary>
 <p>A <strong>hard limit</strong> is the maximum number of characters a platform will accept - post beyond it, and you can't publish. A <strong>feed fold</strong> (also called truncation) is where the platform hides your post behind a 'see more' link in the feed, even though it accepted more text. <a href="/en/platform-limits/">Facebook's hard limit is 63,206 characters</a>, but its mobile fold collapses posts at just 110 - so the practical writing limit is the fold, not the technical ceiling.</p>
