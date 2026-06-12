@@ -190,7 +190,7 @@ For [Twitter/X](/en/twitter-character-counter/) (280-character hard limit), [Fac
 
 https://youtu.be/3EJc5YJHBMI
 
-PostTruncate LinkedIn character counter showing real-time fold markers and character count
+<figure><figcaption>PostTruncate LinkedIn character counter showing real-time fold markers and character count</figcaption></figure>
 
 ## Frequently Asked Questions
 
