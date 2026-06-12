@@ -171,7 +171,7 @@ If optimising your LinkedIn posts for the fold sounds valuable but testing varia
 
 ***
 
-## Frequently Asked Questions
+## FAQ
 
 </br>
 <details>
