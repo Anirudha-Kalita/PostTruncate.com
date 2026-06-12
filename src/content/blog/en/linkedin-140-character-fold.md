@@ -9,7 +9,7 @@ locale: en
 slug: linkedin-posts-survive-the-fold
 relatedPlatform: linkedin
 author: PostTruncate Team
-draft: false
+draft: true
 ogImage: /og/linkedin-posts-survive-the-fold.webp
 ---
 
