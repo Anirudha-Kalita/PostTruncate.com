@@ -37,7 +37,7 @@ The question then was: is 160 enough? They had zero market research. So Hillebra
 
 He was right. But he had no idea how right, and in ways he couldn't have anticipated.
 
-![The 160-character family tree - showing how SMS (1985), Twitter 140 (2006), and Twitter 280 (2017) connect, as taken from PostTruncate](https://cdn-public.eesel.ai/4d2026a4-c694-4b24-9d02-0906da98255c/f65b988d-9c62-4dd7-952e-8895647c62ab/da00d42edee544b5ba979eb55636b135.png)
+![The 160-character family tree - showing how SMS (1985), Twitter 140 (2006), and Twitter 280 (2017) connect, as taken from PostTruncate](/og/whyDo-2.webp)
 
 The 160-character family tree - showing how SMS (1985), Twitter 140 (2006), and Twitter 280 (2017) connect, as taken from PostTruncate
 
@@ -83,7 +83,7 @@ Short-form content sidesteps this problem. A well-written tweet or LinkedIn post
 
 This is why short posts often outperform long ones on platforms designed for feed browsing - not because audiences are shallow, but because they're cognitively efficient. They're not choosing brevity; their brains are choosing it for them, unconsciously preferring content that resolves quickly and completely within the limits of attention.
 
-![Diagram showing the LinkedIn mobile fold at ~140 characters vs desktop fold at ~210 characters, illustrating how most audience members see less than you think, as taken from PostTruncate](https://cdn-public.eesel.ai/4d2026a4-c694-4b24-9d02-0906da98255c/f65b988d-9c62-4dd7-952e-8895647c62ab/80a60987cc384d4da612bb918afbaec4.png)
+![Diagram showing the LinkedIn mobile fold at ~140 characters vs desktop fold at ~210 characters, illustrating how most audience members see less than you think, as taken from PostTruncate](/og/whyDo-3.webp)
 
 Diagram showing the LinkedIn mobile fold at \~140 characters vs the desktop fold at \~210 characters, illustrating how most audience members see less than you think, as taken from PostTruncate
 
@@ -120,7 +120,7 @@ The researchers also flagged a structural risk: expanding limits "risks further 
 
 The takeaway isn't that limits are bad or that removing them is good. It's those limits that shape the distribution of who writes and how much - and that's a design choice with real social consequences. When platforms set character limits, they're not just engineering attention. They're engineering participation.
 
-![Bar chart showing character limits across major platforms - X at 280, Threads at 500, Instagram at 2200, LinkedIn at 3000, Facebook at 63206, as taken from PostTruncate](https://cdn-public.eesel.ai/4d2026a4-c694-4b24-9d02-0906da98255c/f65b988d-9c62-4dd7-952e-8895647c62ab/836254d77dd14be8a1cd5996ecde13fe.png)
+![Bar chart showing character limits across major platforms - X at 280, Threads at 500, Instagram at 2200, LinkedIn at 3000, Facebook at 63206, as taken from PostTruncate](/og/whyDo-4.webp)
 
 Bar chart showing character limits across major platforms - X at 280, Threads at 500, Instagram at 2200, LinkedIn at 3000, Facebook at 63206, as taken from PostTruncate
 
