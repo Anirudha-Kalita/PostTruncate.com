@@ -25,6 +25,7 @@
     "@fontsource-variable/geist-mono": "^5.2.8",
     "@tailwindcss/vite": "^4.3.0",
     "astro": "^6.4.3",
+    "cheerio": "^1.2.0",
     "preact": "^10.29.2",
     "tailwindcss": "^4.3.0",
     "typescript": "^6.0.3"

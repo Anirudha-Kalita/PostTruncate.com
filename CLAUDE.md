@@ -2,7 +2,10 @@
 
 Live site: https://posttruncate.com
 Browser-only social media post analyzer (LinkedIn, X/Twitter, Threads, Instagram/Facebook, SMS).
-No backend — all logic must remain client-side or static.
+No backend — all analysis logic must remain client-side or static. The ONE
+exception is `src/pages/api/improve.ts` (the Gemini-backed "AI Improve" rewrite):
+a single SSR route on the Cloudflare Worker that keeps the API key server-side
+and rate-limits via KV. Do not add other server routes without good reason.
 
 ## Tech Stack
 
@@ -85,7 +88,7 @@ Layered pipeline — **run the cheapest layer that covers the change; escalate o
 ## Constraints
 
 - **NEVER run `git commit`, `git push`, or any git write/push command**
-- No backend; no environment variables (GA ID hardcoded in `layouts/Layout.astro`)
+- No backend except `api/improve.ts`; GA ID hardcoded in `layouts/Layout.astro`. The only server secret/env is `GEMINI_API_KEY` (Worker secret + `.dev.vars` locally) plus the `AI_RATELIMIT` KV binding in `wrangler.jsonc`.
 - Node >=22.12.0 — do not downgrade dependencies
 
 ### After any file edits

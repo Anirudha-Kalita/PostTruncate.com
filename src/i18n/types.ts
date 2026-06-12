@@ -178,6 +178,46 @@ export interface IslandStrings {
     /** Status line under the editor actions, e.g. "Real-time analysis is on". */
     statusLine: string;
   };
+  /**
+   * "AI Improve" feature — button, tone picker, progress, and result/error
+   * states for the Gemini-backed rewrite. Tone keys mirror lib/aiImprove.ts.
+   */
+  aiImprove: {
+    /** Editor action button label. */
+    button: string;
+    /** Tone-picker popover heading. */
+    pickTone: string;
+    /** Short helper line under the heading. */
+    pickToneSub: string;
+    /** Tone option labels (keys match the Tone union). */
+    tones: {
+      professional: string;
+      casual: string;
+      marketing: string;
+      friendly: string;
+      concise: string;
+    };
+    /** Cancel button in the tone popover. */
+    cancel: string;
+    /** Progress-bar label while the rewrite is in flight. */
+    improving: string;
+    /** Revert button shown after a successful rewrite. */
+    undo: string;
+    /** Confirmation after Undo restores the previous text. */
+    reverted: string;
+    /** "{n} of {max} AI improvements left" — remaining-quota line. */
+    remaining: Plural;
+    /** Shown when the per-window quota is spent. "{time}" → e.g. "11h 59m". */
+    limitReached: string;
+    /** Generic failure (Gemini error / network). */
+    errorGeneric: string;
+    /** Editor is empty. */
+    errorEmpty: string;
+    /** Input exceeds the cap. "{max}" → character limit. */
+    errorTooLong: string;
+    /** Feature key not configured on the server. */
+    errorUnavailable: string;
+  };
   /** Single-platform preview switcher (homepage workspace right column). */
   previewPanel: {
     /** Right-column heading, e.g. "Live platform preview". */

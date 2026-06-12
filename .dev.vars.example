@@ -1,0 +1,4 @@
+# Local dev secrets for `npm run dev` (Cloudflare adapter reads .dev.vars).
+# Copy this file to `.dev.vars` (git-ignored) and fill in a real key.
+# In production this is set via: npx wrangler secret put GEMINI_API_KEY
+GEMINI_API_KEY=your-gemini-api-key-here

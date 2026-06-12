@@ -14,5 +14,14 @@
   "routes": [
     { "pattern": "posttruncate.com", "custom_domain": true },
     { "pattern": "www.posttruncate.com", "custom_domain": true }
+  ],
+  // KV namespace backing the /api/improve rate limiter (3 AI rewrites per
+  // visitor IP per 12h). Local dev (miniflare) emulates this automatically by
+  // binding name. For production, create the namespace once and paste its id:
+  //   npx wrangler kv namespace create AI_RATELIMIT
+  // The GEMINI_API_KEY is a *secret*, set with:
+  //   npx wrangler secret put GEMINI_API_KEY   (and .dev.vars for local dev)
+  "kv_namespaces": [
+    { "binding": "AI_RATELIMIT", "id": "1c6900843cb84f74971e30fc8070997d" }
   ]
 }

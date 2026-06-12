@@ -17,6 +17,7 @@ import {
   stripEmojiAndSymbols,
 } from '../../lib/textTools';
 import { Card, Stat, Badge } from './ui';
+import { AiImprove } from './AiImprove';
 import { interp, plural } from '../../i18n/interp';
 import type { IslandStrings } from '../../i18n/types';
 
@@ -146,6 +147,9 @@ export function Workspace({ text, setText, lang, s, focus }: Props) {
             {w.clear}
           </button>
         </div>
+
+        {/* AI Improve — Gemini-backed rewrite with a tone picker (server route). */}
+        <AiImprove text={text} setText={setText} s={s.aiImprove} />
 
         {hidden.count > 0 && (
           <p class="mt-3 text-[12px] leading-4 text-warning-deep">
