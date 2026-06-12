@@ -188,6 +188,8 @@ For [Twitter/X](/en/twitter-character-counter/) (280-character hard limit), [Fac
 
 [PostTruncate](/en/linkedin-character-counter/) is a free, browser-based character counter that shows LinkedIn's mobile and desktop fold markers live as you type - so you know exactly where "…see more" cuts your post before publishing. It handles all platforms in one workspace: [LinkedIn](/en/linkedin-character-counter/), [X/Twitter](/en/twitter-character-counter/), [Instagram](/en/instagram-character-counter/), [Facebook](/en/facebook-character-counter/), [Threads](/en/threads-character-counter/), and [SMS](/en/sms-character-counter/), plus a [Google SERP preview](/en/google-serp-preview/) for page titles and meta descriptions. Everything runs locally in your browser - no upload, no account, completely free. Bloggers and educators can also embed the counter widget directly on their own sites via a [free iframe embed](/en/embed-widget/).
 
+https://youtu.be/3EJc5YJHBMI
+
 PostTruncate LinkedIn character counter showing real-time fold markers and character count
 
 ## Frequently Asked Questions
