@@ -32,6 +32,7 @@ export const ja: Translations = {
     language: '言語',
     languageAria: '言語を選択',
     menuAria: 'ナビゲーションメニューを開閉',
+    backToTop: 'トップへ戻る',
   },
 
   hero: {

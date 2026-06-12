@@ -531,6 +531,8 @@ export interface Translations {
     language: string;
     languageAria: string;
     menuAria: string;
+    /** Accessible label for the floating back-to-top button. */
+    backToTop: string;
   };
   hero: {
     eyebrow: string;

@@ -8,6 +8,7 @@ import { getTranslations } from '../i18n';
 import { interp } from '../i18n/interp';
 import type { Translations } from '../i18n/types';
 import { tools } from '../data/tools';
+import { BLOG_SEGMENT, getBlogStrings, getBlogLocales } from '../lib/blogI18n';
 
 interface Props {
   /** Active locale code — drives the localized links and current-language UI. */
@@ -24,10 +25,18 @@ const t = getTranslations(lang);
 // resolve from any page — on a standalone route like /about/ a bare "#faq"
 // would point nowhere. About/Contact are real locale-prefixed routes.
 const home = `/${lang}/${current.slug}/`;
+
+// Blog link — shown only for locales that actually have a published index
+// (English-first, en-fallback label), mirroring the Footer's blog handling.
+const blogLink = (await getBlogLocales()).has(lang)
+  ? { href: `/${lang}/${BLOG_SEGMENT}/`, label: getBlogStrings(lang).footerLink }
+  : null;
+
 const links = [
   { href: `${home}#workspace`, label: nav.links.editor },
   // "Platform Guides" is now a dropdown — handled separately below.
   { href: `/${lang}/faq/`, label: nav.links.faq },
+  ...(blogLink ? [blogLink] : []),
   { href: `${home}about/`, label: nav.links.about },
   { href: `${home}contact/`, label: nav.links.contact },
 ];

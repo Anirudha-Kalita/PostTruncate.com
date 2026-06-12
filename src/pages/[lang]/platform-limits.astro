@@ -196,13 +196,13 @@ const breadcrumbJsonLd = {
             {
               rows.map((r) => (
                 <tr>
-                  <th scope="row">
+                  <th scope="row" data-label={L.table.platform}>
                     <a href={r.href}>{r.name}</a>
                   </th>
-                  <td class="limits__num">{r.limit}</td>
-                  <td class="limits__num">{r.foldMobile}</td>
-                  <td class="limits__num">{r.foldDesktop}</td>
-                  <td>{r.note}</td>
+                  <td class="limits__num" data-label={L.table.limit}>{r.limit}</td>
+                  <td class="limits__num" data-label={L.table.foldMobile}>{r.foldMobile}</td>
+                  <td class="limits__num" data-label={L.table.foldDesktop}>{r.foldDesktop}</td>
+                  <td data-label={L.table.notes}>{r.note}</td>
                 </tr>
               ))
             }
@@ -416,6 +416,72 @@ const breadcrumbJsonLd = {
   @media (max-width: 768px) {
     .page {
       padding-top: 48px;
+    }
+  }
+
+  /* Mobile: stack each row as a labelled card so the full table fits the
+     viewport without horizontal scrolling. */
+  @media (max-width: 640px) {
+    .limits__scroll {
+      overflow-x: visible;
+      box-shadow: none;
+      background: transparent;
+      border-radius: 0;
+    }
+    .limits__table {
+      min-width: 0;
+    }
+    .limits__table thead {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+    }
+    .limits__table,
+    .limits__table tbody,
+    .limits__table tr,
+    .limits__table tbody th,
+    .limits__table tbody td {
+      display: block;
+    }
+    .limits__table tr {
+      border: 1px solid var(--color-hairline);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-e1);
+      background: var(--color-canvas);
+      padding: 8px 16px;
+      margin-bottom: 16px;
+    }
+    .limits__table tbody th,
+    .limits__table tbody td {
+      padding: 10px 0;
+      border-bottom: 1px solid var(--color-hairline);
+      white-space: normal;
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .limits__table tbody tr td:last-child {
+      border-bottom: none;
+    }
+    .limits__table tbody th {
+      font-size: 16px;
+    }
+    .limits__table tbody td::before {
+      content: attr(data-label);
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      font-weight: 500;
+      color: var(--color-mute);
+      flex: 0 0 auto;
+      align-self: center;
+    }
+    .limits__num {
+      white-space: normal;
     }
   }
 </style>

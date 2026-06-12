@@ -32,6 +32,7 @@ export const it: Translations = {
     language: 'Lingua',
     languageAria: 'Seleziona la lingua',
     menuAria: 'Apri/chiudi il menu di navigazione',
+    backToTop: 'Torna su',
   },
 
   hero: {

@@ -32,6 +32,7 @@ export const nl: Translations = {
     language: 'Taal',
     languageAria: 'Selecteer taal',
     menuAria: 'Navigatiemenu in-/uitschakelen',
+    backToTop: 'Terug naar boven',
   },
 
   hero: {

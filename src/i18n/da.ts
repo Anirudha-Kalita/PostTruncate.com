@@ -32,6 +32,7 @@ export const da: Translations = {
     language: 'Sprog',
     languageAria: 'Vælg sprog',
     menuAria: 'Slå navigationsmenu til/fra',
+    backToTop: 'Tilbage til toppen',
   },
 
   hero: {

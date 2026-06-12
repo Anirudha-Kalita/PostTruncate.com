@@ -501,6 +501,21 @@ const { Content } = await render(post);
     vertical-align: top;
     min-width: 160px;
   }
+  /* Mobile: let table cells wrap and shrink so most tables fit the viewport
+     without horizontal scrolling (overflow-x stays as a fallback for very
+     wide tables). */
+  @media (max-width: 640px) {
+    .post__body :global(table) {
+      white-space: normal;
+      font-size: 14px;
+      line-height: 20px;
+    }
+    .post__body :global(th),
+    .post__body :global(td) {
+      padding: 8px 10px;
+      min-width: 0;
+    }
+  }
   .post__body :global(thead th) {
     background: var(--color-canvas-soft-2);
     color: var(--color-ink);

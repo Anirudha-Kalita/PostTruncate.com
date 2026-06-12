@@ -33,6 +33,7 @@ export const de: Translations = {
     language: 'Sprache',
     languageAria: 'Sprache auswählen',
     menuAria: 'Navigationsmenü umschalten',
+    backToTop: 'Nach oben',
   },
 
   hero: {

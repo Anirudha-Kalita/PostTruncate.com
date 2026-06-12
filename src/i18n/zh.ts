@@ -32,6 +32,7 @@ export const zh: Translations = {
     language: '语言',
     languageAria: '选择语言',
     menuAria: '切换导航菜单',
+    backToTop: '返回顶部',
   },
 
   hero: {

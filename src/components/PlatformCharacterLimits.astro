@@ -109,13 +109,13 @@ const rows = [
       <tbody>
         {rows.map((r) => (
           <tr>
-            <td class="platform-name">
+            <td class="platform-name" data-label={L.table.platform}>
               <a href={r.href} class={`platform-link brand-${r.id}`}>{r.name}</a>
             </td>
-            <td>{r.limit}</td>
-            <td class="text-mute">{r.foldMobile}</td>
-            <td class="text-mute">{r.foldDesktop}</td>
-            <td class="text-mute">{r.note}</td>
+            <td data-label={L.table.limit}>{r.limit}</td>
+            <td class="text-mute" data-label={L.table.foldMobile}>{r.foldMobile}</td>
+            <td class="text-mute" data-label={L.table.foldDesktop}>{r.foldDesktop}</td>
+            <td class="text-mute" data-label={L.table.notes}>{r.note}</td>
           </tr>
         ))}
       </tbody>
@@ -216,5 +216,66 @@ const rows = [
   /* Dark theme tweaks */
   :global(html[data-theme='dark']) .limits-table th {
     background: rgba(255, 255, 255, 0.02);
+  }
+
+  /* Mobile: drop the horizontal scroll and stack each row as a card with
+     inline labels, so all data fits the viewport width without scrolling. */
+  @media (max-width: 640px) {
+    .table-container {
+      overflow-x: visible;
+      border: none;
+      border-radius: 0;
+      background: transparent;
+      box-shadow: none;
+    }
+    .limits-table {
+      min-width: 0;
+      font-size: 14px;
+    }
+    .limits-table thead {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+    }
+    .limits-table,
+    .limits-table tbody,
+    .limits-table tr,
+    .limits-table td {
+      display: block;
+    }
+    .limits-table tr {
+      border: 1px solid var(--color-border);
+      border-radius: 12px;
+      background: var(--color-canvas);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+      padding: 8px 16px;
+      margin-bottom: 16px;
+    }
+    .limits-table tr:last-child {
+      margin-bottom: 0;
+    }
+    .limits-table td {
+      padding: 10px 0;
+      text-align: left;
+      border-bottom: 1px solid var(--color-border);
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .limits-table tr td:last-child {
+      border-bottom: none;
+    }
+    .limits-table td::before {
+      content: attr(data-label);
+      font-weight: 600;
+      color: var(--color-mute);
+      flex: 0 0 auto;
+    }
+    .limits-table td.platform-name {
+      font-size: 16px;
+    }
   }
 </style>
