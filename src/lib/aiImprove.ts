@@ -47,22 +47,30 @@ const TONE_INSTRUCTIONS: Record<Tone, string> = {
 };
 
 /**
- * Build the single-prompt instruction sent to Gemini. We pin the original
- * language, preserve hashtags / @mentions / URLs, and demand the rewritten post
- * only (no preamble, quotes, or commentary) so the response can be dropped
- * straight back into the editor.
+ * Build the single-prompt instruction sent to Gemini. The goal is a TONE change
+ * only — not a summary. We force the model to keep the original length and
+ * structure and to copy every hashtag / @mention / URL / emoji verbatim, so the
+ * rewrite drops straight back into the editor without losing content. The lone
+ * exception is the "concise" tone, which may tighten wording (but still keeps
+ * structure and all links/hashtags).
  */
 export function buildPrompt(tone: Tone, text: string): string {
+  const lengthRule =
+    tone === 'concise'
+      ? '- Tighten the wording so it reads more concisely, but keep every paragraph and line break and do not drop any point the post makes.'
+      : '- Keep roughly the SAME length and the SAME structure as the original: keep every paragraph and line break. Do NOT summarize, condense, merge paragraphs, or shorten the post.';
+
   return [
-    'You are an expert social-media copy editor. Rewrite the social media post below.',
+    'You are an expert social-media copy editor. Rewrite the social media post below to change ONLY its tone and voice — this is a rewrite, not a summary.',
     TONE_INSTRUCTIONS[tone],
     '',
     'Strict rules:',
     '- Reply with ONLY the rewritten post. No preamble, no explanation, no surrounding quotes.',
     '- Keep the SAME language as the original post.',
-    '- Preserve all #hashtags, @mentions, URLs and emoji intent.',
-    '- Do not invent facts, links, or statistics that are not in the original.',
-    '- Keep it roughly the same length unless the tone is "concise".',
+    lengthRule,
+    '- Copy every #hashtag, @mention, URL and emoji EXACTLY as written and keep them in their original positions. Never remove, rename, shorten, or relocate them.',
+    '- Do not invent facts, links, hashtags, or statistics that are not in the original.',
+    '- Only change wording and phrasing to match the requested tone.',
     '',
     'Original post:',
     '"""',
@@ -108,7 +116,10 @@ export function geminiUrl(apiKey: string): string {
 export function geminiBody(prompt: string): unknown {
   return {
     contents: [{ role: 'user', parts: [{ text: prompt }] }],
-    generationConfig: { temperature: 0.7, topP: 0.9, maxOutputTokens: 1024 },
+    // maxOutputTokens is generous so a near-max-length post (the input cap is
+    // MAX_INPUT_CHARS) is never truncated mid-rewrite. A short post still
+    // produces a short reply — this only raises the ceiling, not the length.
+    generationConfig: { temperature: 0.7, topP: 0.9, maxOutputTokens: 4096 },
   };
 }
 

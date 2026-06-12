@@ -37,6 +37,24 @@ test('buildPrompt differs per tone', () => {
   assert.notEqual(buildPrompt('professional', 'x'), buildPrompt('casual', 'x'));
 });
 
+test('non-concise prompts forbid summarizing and preserve length/links/hashtags', () => {
+  for (const tone of ['professional', 'casual', 'marketing', 'friendly'] as const) {
+    const p = buildPrompt(tone, 'x');
+    assert.match(p, /Do NOT summarize/, `${tone} should forbid summarizing`);
+    assert.match(p, /SAME length/, `${tone} should preserve length`);
+    assert.match(p, /#hashtag.*@mention.*URL.*emoji EXACTLY/, `${tone} should preserve links/hashtags`);
+    assert.match(p, /not a summary/);
+  }
+});
+
+test('concise prompt tightens wording but still preserves links/hashtags', () => {
+  const p = buildPrompt('concise', 'x');
+  assert.match(p, /more concisely/);
+  assert.match(p, /#hashtag.*@mention.*URL.*emoji EXACTLY/);
+  // Even concise must not be told to drop points or strip structure.
+  assert.match(p, /do not drop any point/);
+});
+
 // ── response parsing ─────────────────────────────────────────────────────────
 
 test('parseGeminiText pulls and trims the candidate text', () => {
