@@ -41,7 +41,7 @@ Before the detail, here's the full table. Bookmark this, because it covers every
 | Job description | 15,000 | - |
 | Hashtag (per tag) | 30 chars | 3-5 per post is recommended |
 
-![LinkedIn character limits by feature type, showing the scale from 100-character company names to 100,000-character articles](https://cdn-public.eesel.ai/4d2026a4-c694-4b24-9d02-0906da98255c/f65b988d-9c62-4dd7-952e-8895647c62ab/dcaafd11ad73430f882b549f21e98a82.png)
+![LinkedIn character limits by feature type, showing the scale from 100-character company names to 100,000-character articles](/og/LinkedIn2.webp)
 
 LinkedIn character limits by feature type, showing the scale from 100-character company names to 100,000-character articles
 
@@ -59,7 +59,7 @@ The pattern shows up in community discussions constantly: writers put real thoug
 
 Posts where the main value is buried below the fold see **40-60% lower engagement** than posts that deliver their core message within the first 140 characters. The algorithm picks up on engagement in the first hour - likes, comments, early shares - and that window closes before most people have clicked "see more."
 
-![Side-by-side comparison of LinkedIn's mobile fold (~140 chars) versus desktop fold (~210 chars), showing where posts get cut on each device](https://cdn-public.eesel.ai/4d2026a4-c694-4b24-9d02-0906da98255c/f65b988d-9c62-4dd7-952e-8895647c62ab/3d1c29d9666944c68bddcf5d1da0fcd6.png)
+![Side-by-side comparison of LinkedIn's mobile fold (~140 chars) versus desktop fold (~210 chars), showing where posts get cut on each device](/og/LinkedIn-3.webp)
 
 Side-by-side comparison of LinkedIn's mobile fold (\~140 chars) versus desktop fold (\~210 chars), showing where posts get cut on each device
 
@@ -75,7 +75,7 @@ For a full breakdown of how to write posts that work within these constraints, s
 
 Your LinkedIn profile has multiple distinct character limits across different sections. None of them has folds in the same way posts do, but several have practical visibility windows that are shorter than the hard limit suggests.
 
-![LinkedIn profile layout with labeled character limits for each section - name, headline, and About field](https://cdn-public.eesel.ai/4d2026a4-c694-4b24-9d02-0906da98255c/f65b988d-9c62-4dd7-952e-8895647c62ab/773c4e51e1504ff88556c67b1d96278b.png)
+![LinkedIn profile layout with labeled character limits for each section - name, headline, and About field](/og/LinkedIn-4.webp)
 
 LinkedIn profile layout with labelled character limits for each section - name, headline, and About field
 
@@ -190,23 +190,23 @@ For [Twitter/X](/en/twitter-character-counter/) (280-character hard limit), [Fac
 
 https://youtu.be/3EJc5YJHBMI
 
-PostTruncate LinkedIn character counter showing real-time fold markers and character count
+<figure><figcaption>PostTruncate LinkedIn character counter showing real-time fold markers and character count</figcaption></figure>
 
-## Frequently Asked Questions
+## FAQ
 
-</br><details><summary><b>What is the LinkedIn character limit for posts?</b></summary>
+<details><summary><b>What is the LinkedIn character limit for posts?</b></summary>
 <p>LinkedIn text posts are capped at <strong>3,000 characters</strong>. But the more important number is the feed fold: LinkedIn collapses posts after approximately <strong>140 characters on mobile</strong> and <strong>210 characters on desktop</strong>, hiding everything else behind a '…see more' link. Use <a href="/en/linkedin-character-counter/">PostTruncate's LinkedIn character counter</a> to see both fold lines live as you type.</p>
 </details>
 
-</br><details><summary><b>How long can a LinkedIn profile headline be?</b></summary>
+<details><summary><b>How long can a LinkedIn profile headline be?</b></summary>
 <p>Your LinkedIn headline - the line of text directly below your name - can be up to <strong>220 characters</strong>. In practice, most people keep it under 100-120 characters, since notifications and search result previews often show only the first 100 characters. Include your most searchable keywords first.</p>
 <p>LinkedIn comments share the same <strong>3,000-character hard limit</strong> as posts. The feed also applies the same fold: roughly <strong>140 characters on mobile</strong> before a '…see more' link collapses the rest. If you're leaving a substantive comment, front-load your main point in the first sentence.</p>
 </details>
 
-</br><details><summary><b>How long can a LinkedIn connection request note be?</b></summary>
+<details><summary><b>How long can a LinkedIn connection request note be?</b></summary>
 <p>A LinkedIn connection request note is limited to <strong>300 characters</strong>. Most connection requests that actually get accepted land at 50-100 characters - enough to personalise, not enough to write an essay. Skip the generic defaults: name how you know the person, or why the connection makes sense, in plain language.</p>
 </details>
 
-</br><details><summary><b>Is there a character limit for LinkedIn articles?</b></summary>
+<details><summary><b>Is there a character limit for LinkedIn articles?</b></summary>
 <p>LinkedIn articles support up to <strong>100,000 characters</strong> in the body - effectively unlimited for any reasonable blog post or thought-leadership piece. The article title is capped at <strong>255 characters</strong>, though keeping it under 80 helps with social sharing. The catch: articles get significantly less algorithmic reach than posts, so pair them with a short post that hooks readers into clicking.</p>
 </details>

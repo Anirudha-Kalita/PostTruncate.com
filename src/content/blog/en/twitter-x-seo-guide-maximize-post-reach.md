@@ -147,27 +147,27 @@ Before you hit publish, use this checklist:
 
 ## FAQ
 
-</br>
+
 <details>
 <summary><b> Does X use keywords like Google SEO?</b> </b></summary>
  Not exactly. X prioritizes keywords early in posts and uses them for discovery, but it's secondary to engagement signals (retweets, replies, likes). Think of keywords as a way to get in front of the right people-engagement is what makes them stay.
 </details>
-</br>
+
 <details>
 <summary><b>  How many times should I post per day?</b></summary>  
 A: I found once daily at a consistent time beat multiple posts scattered throughout the day. If you're building an audience, consistency matters more than volume. Post when your audience is actually there, not just to fill your feed.
 </details>
-</br>
+
 <details>
 <summary><b>  Should I use threads or single tweets?</b></summary>
 A: Single tweets with one focused idea beat threads in engagement rate, but threads beat single posts in total reach because they stay visible longer. Use threads for narrative or depth, not to cram more content. Keep them short-4-6 tweets maximum.
 </details>
-</br>
+
 <details>
 <summary><b> What's the best length for an X post?</b></summary>  
 A: I got the best engagement from posts between 100-200 characters-long enough to be substantive, short enough to fit the mobile fold. Anything over 250 characters needs to be worth reading (like a strong opinion or insight).
 </details>
-</br>
+
 <details>
 <summary><b>  How do I know when my audience is actually online?</b></summary> 
 A: Check X Analytics under your profile. Look at your top-performing posts and what time they were posted. Test one week at that time, track results, and compare to your other posting times.

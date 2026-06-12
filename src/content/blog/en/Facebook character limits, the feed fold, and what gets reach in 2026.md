@@ -146,30 +146,30 @@ From practitioner research and platform data, a few things consistently separate
 
 [PostTruncate's Facebook character counter](/en/facebook-character-counter/) is a free, browser-based tool that shows you exactly where your post folds - on both mobile (110 chars) and desktop (480 chars) - before you publish. Type your post, and the tool renders a live preview with fold markers, colour-coded character count, and a real-time flag for pseudo-Unicode fonts that would suppress your reach.
 
-PostTruncate Facebook character counter showing live fold markers on mobile and desktop, as taken from PostTruncate
-
 https://youtu.be/BHuYvt0OTRg
+
+<figure><figcaption>PostTruncate Facebook character counter showing live fold markers on mobile and desktop, as taken from PostTruncate</figcaption></figure>
 
 Everything runs client-side - your text never leaves your browser, there's no account required, and the tool is completely free. PostTruncate covers all major platforms in one interface: Facebook, [LinkedIn](/en/linkedin-character-counter/), [X (Twitter)](/en/twitter-character-counter/), [Instagram](/en/instagram-character-counter/), [Threads](/en/threads-character-counter/), and [SMS](/en/sms-character-counter/) - so you can see how the same content performs across every channel before posting anywhere.
 
 ## FAQ
 
-</br><details><summary><b>What is Facebook's character limit for posts in 2026?</b></summary>
+<details><summary><b>What is Facebook's character limit for posts in 2026?</b></summary>
 <p>Facebook's technical character ceiling is <a href="/en/facebook-character-counter/">63,206 characters</a> - far more than anyone should use. The real limit that determines reach is behavioural: the feed fold collapses text after roughly <strong>480 characters on desktop</strong> and <strong>110 characters on mobile</strong>. Posts under <strong>80 characters</strong> consistently see the highest engagement rates. Use <a href="/en/facebook-character-counter/">PostTruncate's Facebook character counter</a> to see exactly where your post folds in real time.</p>
 </details>
 
-</br><details><summary><b>What is the ideal length for a Facebook post?</b></summary>
+<details><summary><b>What is the ideal length for a Facebook post?</b></summary>
 <p>Empirically, <strong>posts under 80 characters</strong> receive about <a href="https://blog.hootsuite.com/ideal-social-media-post-length/">66% higher engagement</a> than longer posts. If your message genuinely needs more space, keep the essential hook in the first 80 characters and expand below - but anything past the 480-character fold gets hidden behind a 'See more' tap and receives measurably less reach. Check the fold before you publish with <a href="/en/facebook-character-counter/">PostTruncate</a>.</p>
 </details>
 
-</br><details><summary><b>How does the Facebook algorithm decide what to show?</b></summary>
+<details><summary><b>How does the Facebook algorithm decide what to show?</b></summary>
 <p>Facebook ranks posts by engagement signals: likes, comments (weighted more heavily), shares (weighted most heavily), and dwell time. <a href="/en/platform-limits/">Posts that stay under the 480-character fold</a> have lower friction and attract more initial engagement. Videos and reels are increasingly prioritised. The algorithm actively suppresses engagement bait (posts that ask for likes/comments without value) and pseudo-Unicode fonts.</p>
 </details>
 
-</br><details><summary><b>Do emojis and links count toward Facebook's character limit?</b></summary>
+<details><summary><b>Do emojis and links count toward Facebook's character limit?</b></summary>
 <p>Yes - <a href="/en/facebook-character-counter/">emojis count as single characters</a> in Facebook posts, and the full URL text counts too (Facebook generates a separate link preview card, but the raw text in your post still adds to your count). Use <a href="/en/facebook-character-counter/">PostTruncate's Facebook character counter</a> to track your running total in real time, including emoji and link characters.</p>
 </details>
 
-</br><details><summary><b>What are pseudo-Unicode fonts and why does Facebook suppress them?</b></summary>
+<details><summary><b>What are pseudo-Unicode fonts and why does Facebook suppress them?</b></summary>
 <p>Pseudo-Unicode fonts are text styled to look bold, italic, or decorative using symbol characters rather than real letters - the kind you copy-paste from a 'fancy text generator.' <a href="/en/facebook-character-counter/">Facebook's algorithm treats these as a spam signal</a> and silently suppresses the post's reach. They also render as garbled nonsense for screen readers used by blind and low-vision users. PostTruncate detects pseudo-Unicode characters in real time so you can fix them before publishing.</p>
 </details>
