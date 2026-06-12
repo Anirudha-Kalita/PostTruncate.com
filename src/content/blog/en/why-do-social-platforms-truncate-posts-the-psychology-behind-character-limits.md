@@ -45,9 +45,9 @@ The 160-character family tree - showing how SMS (1985), Twitter 140 (2006), and 
 
 When Twitter launched in 2006, co-founder Jack Dorsey and the team made a simple calculation: [SMS messages top out at 160 characters](https://time.com/4338227/twitter-changes-140-character-limit/), and if you want tweets to work via text message - which was the original distribution mechanism - you need to leave room for the sender's username. Twenty characters for the username, 140 for the tweet. That math gave Twitter its identity.
 
-What Twitter didn't anticipate was that the 140-character limit would become a cultural force. It made Twitter feel urgent, punchy, real-time in a way that blogs and forums didn't. It made brevity a craft. Whole genres of writing emerged around fitting a complete thought into 140 characters. And when Twitter doubled the limit to 280 in 2017, the reaction from long-time users was almost universally that something had been lost - even though they had more room.
+What Twitter didn't anticipate was that the 140-character limit would become a cultural force. It made Twitter feel urgent, punchy, and real-time in a way that blogs and forums didn't. It made brevity a craft. Whole genres of writing emerged around fitting a complete thought into 140 characters. And when Twitter doubled the limit to 280 in 2017, the reaction from long-time users was almost universally that something had been lost - even though they had more room.
 
-The interesting part of that 2017 change: Twitter found that posts closer to the 280-character limit got [more likes and replies per impression](https://twitter.com/Twitter/status/925498452909023232). More room didn't just mean more words. It meant writers could be more considered, add more context, make a tighter argument. The quality of content went up even as brevity nominally went down.
+The interesting part of that 2017 change: Twitter found that posts closer to the 280-character limit got [more likes and replies per impression](https://twitter.com/Twitter/status/925498452909023232). More room didn't just mean more words. It meant writers could be more considered, add more context, and make a tighter argument. The quality of content went up even as brevity nominally went down.
 
 That finding - that limits can improve quality by forcing precision, and that relaxing them also improves quality by allowing nuance - is the central paradox of character limits. There's no universally correct length. There's only the question of what the constraint is trying to accomplish.
 
@@ -67,9 +67,9 @@ In 1927, Soviet psychologist [Bluma Zeigarnik](https://mailrelay.com/en/glossary
 
 The Zeigarnik effect - the tendency to remember and fixate on unfinished tasks more than completed ones - is now one of the most replicated findings in cognitive psychology. And it is why "…see more" works.
 
-When your post is truncated mid-thought, you have created an open loop in the reader's brain. The sentence is unfinished. The story is incomplete. The argument hasn't landed yet. A reader who would have scrolled past a fully-visible post is now compelled - literally by the cognitive wiring of their own brain - to either close the loop by tapping, or carry the itch of incompleteness as they keep scrolling.
+When your post is truncated mid-thought, you have created an open loop in the reader's brain. The sentence is unfinished. The story is incomplete. The argument hasn't landed yet. A reader who would have scrolled past a fully visible post is now compelled - literally by the cognitive wiring of their own brain - to either close the loop by tapping or carry the itch of incompleteness as they keep scrolling.
 
-Platform designers didn't sit down and say "we'll deploy the Zeigarnik effect in our feed fold." But whether by instinct, testing, or accident, they landed on a mechanism that exploits it perfectly. The fold isn't just a display choice. It's a psychological trigger.
+Platform designers didn't sit down and say, "We'll deploy the Zeigarnik effect in our feed fold." But whether by instinct, testing, or accident, they landed on a mechanism that exploits it perfectly. The fold isn't just a display choice. It's a psychological trigger.
 
 > "The Zeigarnik Effect makes the unresolved content memorable, while curiosity makes it compelling." - [ImpulseBuyingPsychology.com](https://impulsebuyingpsychology.com/zeigarnik-effect/)
 
@@ -85,7 +85,7 @@ This is why short posts often outperform long ones on platforms designed for fee
 
 ![Diagram showing the LinkedIn mobile fold at ~140 characters vs desktop fold at ~210 characters, illustrating how most audience members see less than you think, as taken from PostTruncate](https://cdn-public.eesel.ai/4d2026a4-c694-4b24-9d02-0906da98255c/f65b988d-9c62-4dd7-952e-8895647c62ab/80a60987cc384d4da612bb918afbaec4.png)
 
-Diagram showing the LinkedIn mobile fold at \~140 characters vs desktop fold at \~210 characters, illustrating how most audience members see less than you think, as taken from PostTruncate
+Diagram showing the LinkedIn mobile fold at \~140 characters vs the desktop fold at \~210 characters, illustrating how most audience members see less than you think, as taken from PostTruncate
 
 ## Each platform made different choices - and for different reasons
 
@@ -100,7 +100,7 @@ The fascinating thing about the current landscape is that every major platform h
 | [Facebook](/en/facebook-character-counter/) | 63,206 | \~110 | \~480 |
 | [SMS (GSM)](/en/sms-character-counter/) | 160 | None | None |
 
-**X has no fold** - just a hard 280-character ceiling. The product bet is that limiting total length is enough; whatever you write, the reader sees all of it or scrolls past. This keeps X posts maximally punchy and penalizes anyone who writes prose that needs context.
+**X has no fold** - just a hard 280-character ceiling. The product bet is that limiting total length is enough; whatever you write, the reader sees all of it or scrolls past. This keeps X posts maximally punchy and penalises anyone who writes prose that needs context.
 
 **LinkedIn uses a small fold with a generous limit** - 3,000 characters behind a fold at [\~140 mobile and \~210 desktop](/en/linkedin-character-counter/). This is a conscious bet that professional content earns deeper reading - but only if the opening line is strong enough to earn the "see more" tap. The dual-fold structure (different on mobile and desktop) is something most LinkedIn guides ignore completely, and it's probably the most important thing to know about writing for the platform.
 
@@ -114,11 +114,11 @@ The fascinating thing about the current landscape is that every major platform h
 
 A 2025 study published in _Management Science_ - "[Too Long, Didn't Read? The Impact of Length Limits on Microblogging Engagement](https://pubsonline.informs.org/doi/10.1287/mnsc.2021.03629)" - ran a natural experiment on a major Chinese microblogging platform that rolled out character limit extensions in phases. The findings complicate the simple "shorter is better" narrative considerably.
 
-Extending the character limit significantly increased the total number of daily posts. But only from already-active users - less active users showed almost no change in posting behavior. And perhaps most importantly: longer posts received _more likes_, not fewer. The quality signal from readers went up when writers had more room.
+Extending the character limit significantly increased the total number of daily posts. But only from already-active users - less active users showed almost no change in posting behaviour. And perhaps most importantly, longer posts received _more likes_, not fewer. The quality signal from readers went up when writers had more room.
 
 The researchers also flagged a structural risk: expanding limits "risks further concentrating content generation from the vocal minority, thereby making the silent majority less visible on the platforms." More room to write means more power to people who were already writing a lot.
 
-The takeaway isn't that limits are bad or that removing them is good. It's that limits shape the distribution of who writes and how much - and that's a design choice with real social consequences. When platforms set character limits, they're not just engineering attention. They're engineering participation.
+The takeaway isn't that limits are bad or that removing them is good. It's those limits that shape the distribution of who writes and how much - and that's a design choice with real social consequences. When platforms set character limits, they're not just engineering attention. They're engineering participation.
 
 ![Bar chart showing character limits across major platforms - X at 280, Threads at 500, Instagram at 2200, LinkedIn at 3000, Facebook at 63206, as taken from PostTruncate](https://cdn-public.eesel.ai/4d2026a4-c694-4b24-9d02-0906da98255c/f65b988d-9c62-4dd7-952e-8895647c62ab/836254d77dd14be8a1cd5996ecde13fe.png)
 
@@ -134,11 +134,11 @@ Understanding the psychology behind character limits isn't just interesting hist
 
 **The Zeigarnik effect is something you can write toward.** An open loop - a question unanswered, a tension unresolved, a story started but not finished - doesn't just drive "see more" taps. It makes your post memorable even for readers who don't tap through. The incomplete thought stays with them. That's worth more than a complete thought they forget immediately.
 
-**Constraints genuinely improve writing.** This sounds obvious but the research bears it out: when the [Management Science study](https://pubsonline.informs.org/doi/10.1287/mnsc.2021.03629) found that longer posts got more likes, it wasn't because length was the variable - it's because having more room let writers construct better arguments. The same dynamic works in reverse: tight limits force you to cut until only the essential remains. Hillebrand was right. 160 characters really is perfectly sufficient for most thoughts - not because most thoughts are small, but because most thoughts can be compressed without losing their essence once you're forced to try.
+**Constraints genuinely improve writing.** This sounds obvious, but the research bears it out: when the [Management Science study](https://pubsonline.informs.org/doi/10.1287/mnsc.2021.03629) found that longer posts got more likes, it wasn't because length was the variable - it's because having more room let writers construct better arguments. The same dynamic works in reverse: tight limits force you to cut until only the essential remains. Hillebrand was right. 160 characters really is perfectly sufficient for most thoughts - not because most thoughts are small, but because most thoughts can be compressed without losing their essence once you're forced to try.
 
 ## PostTruncate
 
-If you've ever published a post only to discover that the line you thought was your hook was buried three lines below the fold - that frustration is exactly what [PostTruncate](/) is built to solve.
+If you've ever published a post only to discover that the line you thought was your hook was buried three lines below the fold, that frustration is exactly what [PostTruncate](/) is built to solve.
 
 PostTruncate is a free, browser-based character counter and live platform preview tool. As you type, it shows you exactly where each platform's fold falls - including the often-missed mobile/desktop split on LinkedIn. You can see your post rendered in native LinkedIn, X, Instagram, Facebook, Threads, and SMS previews simultaneously, with fold markers live in the text, thread splits calculated automatically, and SMS encoding detected in real time.
 
@@ -146,11 +146,11 @@ Everything runs in your browser. No account. No data uploaded. No server contact
 
 https://youtu.be/l2SXX1EftYs
 
-<figcaption>PostTruncate character counter tool showing live platform previews with fold markers, as taken from PostTruncate</figcaption>
+<figure><figcaption>PostTruncate character counter tool showing live platform previews with fold markers, as taken from PostTruncate</figcaption></figure>
 
 The [platform limits page](/en/platform-limits/) has every limit and fold point in one place if you need a quick reference. And if you write primarily for LinkedIn, the [LinkedIn character counter](/en/linkedin-character-counter/) tracks both fold lines simultaneously - the one most LinkedIn writers don't know about, and the one they do.
 
-Every character limit on social media is a legacy of a decision made with incomplete information and no market research. But the platforms that built on those legacies discovered something real: constraints shape behavior, and the fold in particular exploits cognitive mechanisms that are as old as attention itself. Friedhelm Hillebrand didn't design the Zeigarnik effect. He just happened to stumble on a number that fits inside it.
+Every character limit on social media is a legacy of a decision made with incomplete information and no market research. But the platforms that built on those legacies discovered something real: constraints shape behaviour, and the fold in particular exploits cognitive mechanisms that are as old as attention itself. Friedhelm Hillebrand didn't design the Zeigarnik effect. He just happened to stumble on a number that fits inside it.
 
 ## Frequently Asked Questions
 
