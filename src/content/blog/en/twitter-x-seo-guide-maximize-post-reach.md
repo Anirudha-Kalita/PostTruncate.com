@@ -10,7 +10,7 @@ slug: twitter-x-seo-guide-maximize-post-reach
 relatedPlatform: twitter
 author: PostTruncate Team
 draft: false
-ogImage: /og/twitter-x-seo-guide-maximize-post-reach.png
+ogImage: /og/twitter.png
 ---
 
 Master X (Twitter) SEO with tested strategies. Optimize character placement, keyword positioning, thread structure, and posting timing for maximum reach
