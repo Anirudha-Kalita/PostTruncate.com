@@ -107,16 +107,18 @@ export const prerender = true;
         <!-- LEFT: input + validation + output -->
         <div>
           <div class="card">
-            <span class="step">Step 1 — authorize project root</span>
-            <h2>Project folder</h2>
+            <span class="step">Step 1 — authorize a folder</span>
+            <h2>Destination folder</h2>
             <div class="row">
-              <button id="pickDir" type="button">Choose project root…</button>
+              <button id="pickDir" type="button">Choose folder…</button>
               <span id="dirStatus" class="status empty">No folder selected</span>
             </div>
             <p class="note">
-              Pick the repo root — the folder that contains <code>src/</code> and <code>public/</code>.
-              The <code>.md</code> is written to <code>src/content/blog/en/</code> and the image to
-              <code>public/og/</code>.
+              Pick either your <strong>project root</strong> (the folder with <code>src/</code> and
+              <code>public/</code>) or <code>src/content/blog/en</code> directly — the <code>.md</code>
+              saves to <code>blog/en/</code> either way. Saving the hero image to <code>public/og/</code>
+              needs the project root (the browser can't reach <code>public/</code> from inside
+              <code>blog/en</code>).
             </p>
             <p id="fsaNote" class="note hide">
               Your browser doesn't support saving to a folder (File System Access API). Use Chrome or
@@ -542,6 +544,31 @@ export const prerender = true;
         for (const s of segs) d = await d.getDirectoryHandle(s, { create });
         return d;
       }
+      // Resolve the blog/en posts dir from whatever the user authorized, keyed
+      // off the picked folder's name — so you can pick the project ROOT *or*
+      // src / content / blog / en (or anything in between) and the .md still
+      // lands in the right place. (File System Access can only descend, never
+      // go up, so the picked folder must be at or above blog/en.)
+      async function resolvePostsDir(root) {
+        const downTo = {
+          en: [],
+          blog: ['en'],
+          content: ['blog', 'en'],
+          src: ['content', 'blog', 'en'],
+        };
+        const segs = downTo[root.name] ?? ['src', 'content', 'blog', 'en'];
+        return getDirByPath(root, segs, false); // throws if the path isn't there
+      }
+      // Resolve public/og the same way. Returns null when it can't be reached
+      // from the picked folder (e.g. you picked blog/en — can't climb up to
+      // public/), so image auto-save degrades gracefully instead of erroring.
+      async function resolveOgDir(root, create) {
+        const downTo = { og: [], public: ['og'] };
+        const unreachable = ['en', 'blog', 'content', 'src'];
+        if (unreachable.includes(root.name)) return null;
+        const segs = downTo[root.name] ?? ['public', 'og'];
+        try { return await getDirByPath(root, segs, create); } catch { return null; }
+      }
       function showDir() {
         $('dirStatus').textContent = state.dirHandle ? `📁 ${state.dirHandle.name}` : 'No folder selected';
         $('dirStatus').classList.toggle('empty', !state.dirHandle);
@@ -566,7 +593,8 @@ export const prerender = true;
         ext = ({ jpeg: 'jpg', 'svg+xml': 'svg' }[ext] || ext).replace(/[^a-z0-9]/g, '').slice(0, 4) || 'png';
         const filename = `${state._slug || 'image'}.${ext}`;
         try {
-          const ogDir = await getDirByPath(state.dirHandle, ['public', 'og'], true);
+          const ogDir = await resolveOgDir(state.dirHandle, true);
+          if (!ogDir) return { ok: false, reason: 'public/og not reachable — authorize the project root to auto-save images' };
           const fh = await ogDir.getFileHandle(filename, { create: true });
           const w = await fh.createWritable(); await w.write(blob); await w.close();
           return { ok: true, filename };
@@ -594,8 +622,8 @@ export const prerender = true;
         if (!(await ensurePerm(state.dirHandle))) { st.textContent = 'Write permission denied.'; return; }
         const name = `${state._slug}.md`;
         let enDir;
-        try { enDir = await getDirByPath(state.dirHandle, ['src', 'content', 'blog', 'en'], false); }
-        catch (e) { st.innerHTML = `<span class="pill err">Wrong folder</span> couldn't find src/content/blog/en — did you pick the project root?`; return; }
+        try { enDir = await resolvePostsDir(state.dirHandle); }
+        catch (e) { st.innerHTML = `<span class="pill err">Wrong folder</span> couldn't find the blog/en folder — authorize your project root <em>or</em> src/content/blog/en.`; return; }
         try {
           try { await enDir.getFileHandle(name); if (!confirm(`${name} already exists. Overwrite?`)) { st.textContent = 'Cancelled.'; return; } } catch {}
           const fh = await enDir.getFileHandle(name, { create: true });
@@ -613,7 +641,7 @@ export const prerender = true;
       });
 
       // expose pure fns for smoke-testing (harmless; dev convenience)
-      window.__mdUploader = { parseFile, validate, autofix, buildContent, slugify, extractFromHtml, formatFaq, detectPlatform, rewriteSelfLinks };
+      window.__mdUploader = { parseFile, validate, autofix, buildContent, slugify, extractFromHtml, formatFaq, detectPlatform, rewriteSelfLinks, resolvePostsDir, resolveOgDir };
     </script>
   </body>
 </html>
