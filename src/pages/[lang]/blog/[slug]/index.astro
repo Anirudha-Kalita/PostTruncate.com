@@ -2,6 +2,7 @@
 import { getCollection, render, type CollectionEntry } from 'astro:content';
 import Layout from '../../../../layouts/Layout.astro';
 import BlogStructuredData from '../../../../components/BlogStructuredData.astro';
+import BlogCardGrid from '../../../../components/BlogCardGrid.astro';
 import { getLocale, DEFAULT_LOCALE } from '../../../../i18n/config';
 import { tools } from '../../../../data/tools';
 import {
@@ -62,9 +63,37 @@ export async function getStaticPaths() {
       href: href(xDefault.data.locale, xDefault.data.slug),
     });
 
+    // Related posts: same `relatedPlatform` first (newest), then fill remaining
+    // slots with the most recent other posts. Excludes this post and any draft;
+    // same locale only. Capped at 3 — the section hides itself when none exist.
+    const RELATED_LIMIT = 3;
+    const candidates = posts
+      .filter(
+        (p) =>
+          !p.data.draft &&
+          p.id !== post.id &&
+          p.data.locale === post.data.locale,
+      )
+      .sort((a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf());
+    const platform = post.data.relatedPlatform;
+    const samePlatform =
+      platform && platform !== 'general'
+        ? candidates.filter((p) => p.data.relatedPlatform === platform)
+        : [];
+    const sameIds = new Set(samePlatform.map((p) => p.id));
+    const relatedPosts = [
+      ...samePlatform,
+      ...candidates.filter((p) => !sameIds.has(p.id)),
+    ].slice(0, RELATED_LIMIT);
+
     return {
       params: { lang: post.data.locale, slug: post.data.slug },
-      props: { post, hreflangUrls: alternates },
+      props: {
+        post,
+        hreflangUrls: alternates,
+        relatedPosts,
+        relatedIsPlatform: samePlatform.length > 0,
+      },
     };
   });
 }
@@ -72,13 +101,19 @@ export async function getStaticPaths() {
 interface Props {
   post: BlogEntry;
   hreflangUrls: { hreflang: string; href: string }[];
+  relatedPosts: BlogEntry[];
+  relatedIsPlatform: boolean;
 }
 
-const { post, hreflangUrls } = Astro.props as Props;
+const { post, hreflangUrls, relatedPosts, relatedIsPlatform } =
+  Astro.props as Props;
 const { data } = post;
 const lang = data.locale;
 
 const s = getBlogStrings(lang);
+const relatedHeading = relatedIsPlatform
+  ? s.relatedPostsHeading
+  : s.morePostsHeading;
 const locale = getLocale(lang);
 const site = Astro.site ?? new URL('https://posttruncate.com');
 
@@ -195,6 +230,15 @@ const { Content } = await render(post);
       </p>
     )}
   </article>
+
+  {/* Related / more posts — after the article's CTA, before the footer.
+      Hidden entirely when there are no other published posts. */}
+  {relatedPosts.length > 0 && (
+    <section class="post-related-posts container-page" aria-labelledby="related-heading">
+      <h2 id="related-heading" class="post-related-posts__heading">{relatedHeading}</h2>
+      <BlogCardGrid posts={relatedPosts} lang={lang} readMoreLabel={s.readMore} />
+    </section>
+  )}
 </Layout>
 
 <style>
@@ -470,5 +514,23 @@ const { Content } = await render(post);
     color: var(--color-ink);
     text-decoration: underline;
     text-underline-offset: 3px;
+  }
+
+  /* Related / more posts — aligned to the article measure, divider on top,
+     breathing room before the footer. The card grid is responsive (row on
+     desktop, stacked on mobile) via the shared BlogCardGrid. */
+  .post-related-posts {
+    max-width: 56rem;
+    padding-top: 48px;
+    padding-bottom: 96px;
+    border-top: 1px solid var(--color-hairline);
+  }
+  .post-related-posts__heading {
+    margin-bottom: 24px;
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 32px;
+    letter-spacing: -0.7px;
+    color: var(--color-ink);
   }
 </style>

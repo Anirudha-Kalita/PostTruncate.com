@@ -5,7 +5,8 @@
 // thumbnail (falls back to the site default), title + teaser clamped so cards
 // stay uniform, and a "read more" CTA pinned to the bottom.
 import type { CollectionEntry } from 'astro:content';
-import { BLOG_SEGMENT, formatBlogDate, isoDate } from '../lib/blogI18n';
+import { BLOG_SEGMENT, formatBlogDate, getBlogStrings, isoDate } from '../lib/blogI18n';
+import { interp } from '../i18n/interp';
 
 interface Props {
   post: CollectionEntry<'blog'>;
@@ -17,6 +18,11 @@ interface Props {
 const { post, lang, readMoreLabel } = Astro.props;
 const { data } = post;
 const href = `/${lang}/${BLOG_SEGMENT}/${data.slug}/`;
+
+// Reading time from the raw body (~200 wpm), min 1, for the card meta line.
+const words = (post.body ?? '').trim().split(/\s+/).filter(Boolean).length;
+const minutes = Math.max(1, Math.round(words / 200));
+const readingTime = interp(getBlogStrings(lang).readingTime, { min: minutes });
 ---
 
 <a class="article-card" href={href}>
@@ -24,9 +30,10 @@ const href = `/${lang}/${BLOG_SEGMENT}/${data.slug}/`;
     <img src={data.ogImage ?? '/og.png'} alt="" loading="lazy" decoding="async" />
   </div>
   <div class="article-card__body">
-    <time class="article-card__date" datetime={isoDate(data.publishDate)}>
-      {formatBlogDate(data.publishDate, lang)}
-    </time>
+    <p class="article-card__date">
+      <time datetime={isoDate(data.publishDate)}>{formatBlogDate(data.publishDate, lang)}</time>
+      <span aria-hidden="true"> · </span>{readingTime}
+    </p>
     <h3 class="article-card__title">{data.title}</h3>
     <p class="article-card__desc">{data.description}</p>
     <span class="article-card__more">{readMoreLabel} →</span>

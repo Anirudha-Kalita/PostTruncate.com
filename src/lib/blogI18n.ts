@@ -40,6 +40,12 @@ export interface BlogStrings {
   latestHeading: string;
   /** Link text to the full blog index, e.g. "View all articles". */
   viewAll: string;
+  /** Post-footer heading when same-platform matches exist, e.g. "Related posts". */
+  relatedPostsHeading: string;
+  /** Post-footer heading when filled with recent posts, e.g. "More articles". */
+  morePostsHeading: string;
+  /** Reading-time label with a {min} token, e.g. "{min} min read". */
+  readingTime: string;
 }
 
 // Only English is authored today. Add keys for 'de', 'es', … when translating.
@@ -60,6 +66,9 @@ const BLOG_STRINGS: Record<string, BlogStrings> = {
     relatedHeading: 'From the blog',
     latestHeading: 'Latest from the blog',
     viewAll: 'View all articles',
+    relatedPostsHeading: 'Related posts',
+    morePostsHeading: 'More articles',
+    readingTime: '{min} min read',
   },
 };
 
