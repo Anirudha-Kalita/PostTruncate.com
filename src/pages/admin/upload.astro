@@ -248,6 +248,15 @@ export const prerender = true;
         }
         return '';
       }
+      // Normalize self-referential links to root-relative paths so a dev URL
+      // (http://localhost:4321/…) or the production origin baked into the source
+      // never ships in content. External links are untouched.
+      function rewriteSelfLinks(md) {
+        return md.replace(
+          /https?:\/\/(?:localhost|127\.0\.0\.1)(?::\d+)?|https?:\/\/(?:www\.)?posttruncate\.com/gi,
+          '',
+        );
+      }
       function detectPlatform(text) {
         const t = ' ' + text.toLowerCase() + ' ';
         let best = '', n = 0;
@@ -317,6 +326,7 @@ export const prerender = true;
         });
         let body = td.turndown(contentHtml).trim();
         if (firstH1(body)) body = stripLeadingH1(body).trim(); // title rendered separately
+        body = rewriteSelfLinks(body); // localhost / posttruncate.com → root-relative
         body = formatFaq(body);
 
         const slug = title ? slugify(title) : '';
@@ -603,7 +613,7 @@ export const prerender = true;
       });
 
       // expose pure fns for smoke-testing (harmless; dev convenience)
-      window.__mdUploader = { parseFile, validate, autofix, buildContent, slugify, extractFromHtml, formatFaq, detectPlatform };
+      window.__mdUploader = { parseFile, validate, autofix, buildContent, slugify, extractFromHtml, formatFaq, detectPlatform, rewriteSelfLinks };
     </script>
   </body>
 </html>

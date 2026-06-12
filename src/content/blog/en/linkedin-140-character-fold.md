@@ -142,7 +142,7 @@ The fix: use a character counter that visualises the actual fold. When you type 
 - Dual-fold markers showing where mobile and desktop readers see "see more"
 - Live preview updates as you edit
 
-[PostTruncate's LinkedIn character counter](http://localhost:4321/en/linkedin-character-counter/) is built specifically for this. It shows both folds live, so you can test your opening at 140 characters and optimise before publishing. No guessing, no publishing-and-checking-analytics later.
+[PostTruncate's LinkedIn character counter](/en/linkedin-character-counter/) is built specifically for this. It shows both folds live, so you can test your opening at 140 characters and optimise before publishing. No guessing, no publishing-and-checking-analytics later.
 
 With a real fold visualisation, optimising your post takes seconds: rewrite until your hook is solid at 140 characters, verify it reads well on desktop at 210, then publish.
 
@@ -165,7 +165,7 @@ The fold isn't a limitation on what you can say. It's a clarity constraint on ho
 
 ## Try PostTruncate
 
-If optimising your LinkedIn posts for the fold sounds valuable but testing variations manually sounds tedious, [PostTruncate](http://localhost:4321/en/linkedin-character-counter/) removes the guesswork. Paste or type your post, see both fold lines live, and optimise your opening in real-time. The tool covers 10+ platforms (X, Instagram, Facebook, Threads, SMS), but it's built to solve exactly this LinkedIn problem: predicting the fold before you publish.
+If optimising your LinkedIn posts for the fold sounds valuable but testing variations manually sounds tedious, [PostTruncate](/en/linkedin-character-counter/) removes the guesswork. Paste or type your post, see both fold lines live, and optimise your opening in real-time. The tool covers 10+ platforms (X, Instagram, Facebook, Threads, SMS), but it's built to solve exactly this LinkedIn problem: predicting the fold before you publish.
 
 100% free, no signup, all processing happens on your device.
 
@@ -195,7 +195,7 @@ If optimising your LinkedIn posts for the fold sounds valuable but testing varia
 <details>
 <summary><b>Can I test my opening before posting?</b></summary>
 
-<p>Yes. Use a <a href="http://localhost:4321/en/linkedin-character-counter/">character counter with real-time fold visualization</a> to see exactly how your post renders on both mobile and desktop. This lets you optimise your hook before publishing and test variations instantly.</p>
+<p>Yes. Use a <a href="/en/linkedin-character-counter/">character counter with real-time fold visualization</a> to see exactly how your post renders on both mobile and desktop. This lets you optimise your hook before publishing and test variations instantly.</p>
 </details>
 </br>
 <details>
