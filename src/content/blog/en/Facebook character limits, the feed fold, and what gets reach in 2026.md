@@ -148,8 +148,7 @@ From practitioner research and platform data, a few things consistently separate
 
 PostTruncate Facebook character counter showing live fold markers on mobile and desktop, as taken from PostTruncate
 
-
-src="https://youtu.be/BHuYvt0OTRg
+https://youtu.be/BHuYvt0OTRg
 
 Everything runs client-side - your text never leaves your browser, there's no account required, and the tool is completely free. PostTruncate covers all major platforms in one interface: Facebook, [LinkedIn](/en/linkedin-character-counter/), [X (Twitter)](/en/twitter-character-counter/), [Instagram](/en/instagram-character-counter/), [Threads](/en/threads-character-counter/), and [SMS](/en/sms-character-counter/) - so you can see how the same content performs across every channel before posting anywhere.
 
