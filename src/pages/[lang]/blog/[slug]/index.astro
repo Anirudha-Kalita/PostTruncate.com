@@ -483,11 +483,15 @@ const { Content } = await render(post);
      grid stays visible in dark mode too). Markdown tables render bare <table>
      with no borders otherwise. */
   .post__body :global(table) {
+    display: block;
     width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
     margin-top: 24px;
     border-collapse: collapse;
     font-size: 15px;
     line-height: 22px;
+    white-space: nowrap;
   }
   .post__body :global(th),
   .post__body :global(td) {
@@ -495,6 +499,7 @@ const { Content } = await render(post);
     padding: 10px 14px;
     text-align: left;
     vertical-align: top;
+    min-width: 160px;
   }
   .post__body :global(thead th) {
     background: var(--color-canvas-soft-2);

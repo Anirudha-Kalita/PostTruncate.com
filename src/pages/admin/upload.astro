@@ -87,8 +87,8 @@ export const prerender = true;
       .pv-body img { max-width: 100%; height: auto; border-radius: 8px; }
       .pv-body details { margin-top: 12px; border: 1px solid var(--line); border-radius: 8px; padding: 8px 12px; }
       .pv-body summary { cursor: pointer; color: var(--ink); }
-      .pv-body table { border-collapse: collapse; margin-top: 14px; font-size: 14px; }
-      .pv-body th, .pv-body td { border: 1px solid var(--line); padding: 6px 10px; }
+      .pv-body table { display: block; width: 100%; overflow-x: auto; border-collapse: collapse; margin-top: 14px; font-size: 14px; white-space: nowrap; }
+      .pv-body th, .pv-body td { border: 1px solid var(--line); padding: 6px 10px; min-width: 160px; }
       .pv-body blockquote { border-left: 3px solid var(--line); margin: 14px 0 0; padding-left: 16px; color: var(--mute); font-style: italic; }
       .empty { color: var(--mute); font-size: 14px; }
     </style>
