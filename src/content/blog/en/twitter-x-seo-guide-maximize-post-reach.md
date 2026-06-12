@@ -10,7 +10,7 @@ slug: twitter-x-seo-guide-maximize-post-reach
 relatedPlatform: twitter
 author: PostTruncate Team
 draft: false
-ogImage: /og/twitter.png
+ogImage: /og/twitter.webp
 ---
 
 Master X (Twitter) SEO with tested strategies. Optimize character placement, keyword positioning, thread structure, and posting timing for maximum reach
@@ -150,6 +150,7 @@ Before you hit publish, use this checklist:
 -   **Engagement plan** - will you respond in the first 2 hours?
 
 ## FAQ
+
 </br>
 <details>
 <summary><b> Does X use keywords like Google SEO?</b> </b></summary>
