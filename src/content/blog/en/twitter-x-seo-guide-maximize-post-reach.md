@@ -13,10 +13,6 @@ draft: false
 ogImage: /og/twitter.webp
 ---
 
-Master X (Twitter) SEO with tested strategies. Optimize character placement, keyword positioning, thread structure, and posting timing for maximum reach
-
-_June 11, 2026_
-
 I've been posting on X for years, and there's a dirty secret nobody talks about: **most people are leaving reach on the table** because they don't understand how X actually distributes content. It's not magic. It's not the algorithm being broken. It's that creators ignore the basics-character limits, keyword placement, thread structure-that actually move the needle.
 
 I tested these tactics across 200+ posts over three months. Some got 50 impressions. Some got 50,000. The difference wasn't luck. Here's what actually worked.
@@ -31,7 +27,7 @@ Here's the thing: you need to know exactly where your content will cut off _befo
 
 When I started checking my character placement with a character counter before publishing, my average impressions jumped 30%. Not because I changed the words. Because I stopped wasting the critical first line.
 
-![Character Placement Mobile Fold Infographic](https://cdn-public.eesel.ai/102d4d12-73e2-42b6-a840-51f54108467a/3cdca590-a33f-4dc7-9ca5-5f55aaf59ca7/c5a818937aa64bcb9f16ddfd57b5b5c9.png)
+![Character Placement Mobile Fold Infographic](/og/twitter-hero.webp)
 
 Character Placement Mobile Fold Infographic
 
@@ -80,7 +76,7 @@ But here's the catch-your audience might have different peak times. If you're UK
 
 I tested two weeks of evening-only posts versus my usual morning schedule. Evening posts got 70% fewer impressions. That's because my audience is mostly US-based, online in the morning.
 
-![Optimal Posting Times Timeline](https://cdn-public.eesel.ai/102d4d12-73e2-42b6-a840-51f54108467a/3cdca590-a33f-4dc7-9ca5-5f55aaf59ca7/88b885df53db4eb0937ac68ca9f30519.png)
+![Optimal Posting Times Timeline](/og/twitter-statistics.webp)
 
 Optimal Posting Times Timeline
 
@@ -98,7 +94,7 @@ Results:
 
 **The sweet spot was 0-1 hashtag with high relevance.** More hashtags don't amplify reach-they feel spammy and tank engagement rate.
 
-![Hashtag Strategy Engagement Comparison](https://cdn-public.eesel.ai/102d4d12-73e2-42b6-a840-51f54108467a/3cdca590-a33f-4dc7-9ca5-5f55aaf59ca7/e18ff094c0a64a82bae044a3ed008d76.png)
+![Hashtag Strategy Engagement Comparison](/og/twitter-bar-graph.webp)
 
 Hashtag Strategy Engagement Comparison
 
