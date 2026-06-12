@@ -146,7 +146,7 @@ Everything runs in your browser. No account. No data uploaded. No server contact
 
 https://youtu.be/l2SXX1EftYs
 
-PostTruncate character counter tool showing live platform previews with fold markers, as taken from PostTruncate
+<figcaption>PostTruncate character counter tool showing live platform previews with fold markers, as taken from PostTruncate</figcaption>
 
 The [platform limits page](/en/platform-limits/) has every limit and fold point in one place if you need a quick reference. And if you write primarily for LinkedIn, the [LinkedIn character counter](/en/linkedin-character-counter/) tracks both fold lines simultaneously - the one most LinkedIn writers don't know about, and the one they do.
 
