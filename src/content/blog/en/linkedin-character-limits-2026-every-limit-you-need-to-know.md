@@ -192,21 +192,21 @@ https://youtu.be/3EJc5YJHBMI
 
 <figure><figcaption>PostTruncate LinkedIn character counter showing real-time fold markers and character count</figcaption></figure>
 
-## Frequently Asked Questions
+## FAQ
 
-</br><details><summary><b>What is the LinkedIn character limit for posts?</b></summary>
+<details><summary><b>What is the LinkedIn character limit for posts?</b></summary>
 <p>LinkedIn text posts are capped at <strong>3,000 characters</strong>. But the more important number is the feed fold: LinkedIn collapses posts after approximately <strong>140 characters on mobile</strong> and <strong>210 characters on desktop</strong>, hiding everything else behind a '…see more' link. Use <a href="/en/linkedin-character-counter/">PostTruncate's LinkedIn character counter</a> to see both fold lines live as you type.</p>
 </details>
 
-</br><details><summary><b>How long can a LinkedIn profile headline be?</b></summary>
+<details><summary><b>How long can a LinkedIn profile headline be?</b></summary>
 <p>Your LinkedIn headline - the line of text directly below your name - can be up to <strong>220 characters</strong>. In practice, most people keep it under 100-120 characters, since notifications and search result previews often show only the first 100 characters. Include your most searchable keywords first.</p>
 <p>LinkedIn comments share the same <strong>3,000-character hard limit</strong> as posts. The feed also applies the same fold: roughly <strong>140 characters on mobile</strong> before a '…see more' link collapses the rest. If you're leaving a substantive comment, front-load your main point in the first sentence.</p>
 </details>
 
-</br><details><summary><b>How long can a LinkedIn connection request note be?</b></summary>
+<details><summary><b>How long can a LinkedIn connection request note be?</b></summary>
 <p>A LinkedIn connection request note is limited to <strong>300 characters</strong>. Most connection requests that actually get accepted land at 50-100 characters - enough to personalise, not enough to write an essay. Skip the generic defaults: name how you know the person, or why the connection makes sense, in plain language.</p>
 </details>
 
-</br><details><summary><b>Is there a character limit for LinkedIn articles?</b></summary>
+<details><summary><b>Is there a character limit for LinkedIn articles?</b></summary>
 <p>LinkedIn articles support up to <strong>100,000 characters</strong> in the body - effectively unlimited for any reasonable blog post or thought-leadership piece. The article title is capped at <strong>255 characters</strong>, though keeping it under 80 helps with social sharing. The catch: articles get significantly less algorithmic reach than posts, so pair them with a short post that hooks readers into clicking.</p>
 </details>
