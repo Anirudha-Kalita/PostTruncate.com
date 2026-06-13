@@ -97,8 +97,8 @@ guidesLinks.push({
       <div class="container-page footer__inner">
         <div class="footer__brand">
           <a href={home} class="footer__logo" aria-label={footer.homeAria}>
-            <img class="footer__mark" src="/favicon.svg" alt={images.logoAlt} width="20" height="20" />
-            <span>PostTruncate</span>
+            <img class="footer__logo-img footer__logo-img--light" src="/logo.png" alt={images.logoAlt} width="172" height="35" />
+            <img class="footer__logo-img footer__logo-img--dark" src="/logo-dark.png" alt={images.logoAlt} width="172" height="35" />
           </a>
           <p class="footer__tag">{footer.tag}</p>
         </div>
@@ -134,8 +134,8 @@ guidesLinks.push({
       <div class="container-page footer__inner footer__inner--compact">
         <div class="footer__brand">
           <a href={home} class="footer__logo" aria-label={footer.homeAria}>
-            <img class="footer__mark" src="/favicon.svg" alt={images.logoAlt} width="20" height="20" />
-            <span>PostTruncate</span>
+            <img class="footer__logo-img footer__logo-img--light" src="/logo.png" alt={images.logoAlt} width="172" height="35" />
+            <img class="footer__logo-img footer__logo-img--dark" src="/logo-dark.png" alt={images.logoAlt} width="172" height="35" />
           </a>
           <p class="footer__tag">{footer.tag}</p>
         </div>
@@ -205,10 +205,18 @@ guidesLinks.push({
     font-size: 16px;
     letter-spacing: -0.4px;
   }
-  .footer__mark {
-    width: 20px;
-    height: 20px;
-    border-radius: var(--radius-sm);
+  .footer__logo-img {
+    height: 35px;
+    width: auto;
+    display: block;
+  }
+  .footer__logo-img--dark {
+    display: none;
+  }
+  :global(html[data-theme='dark']) .footer__logo-img--light {
+    display: none;
+  }
+  :global(html[data-theme='dark']) .footer__logo-img--dark {
     display: block;
   }
   .footer__tag {
