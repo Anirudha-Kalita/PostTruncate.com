@@ -581,7 +581,7 @@ export const da: Translations = {
     eyebrow: 'HVORFOR POSTTRUNCATE?',
     title: 'Skriv med selvtillid.<br/>Udgiv uden bekymringer.',
     p1: 'Hver platform har forskellige tegngrænser og afkortningsregler. PostTruncate viser dig præcis, hvordan dit indhold vil se ud, før du trykker på udgiv.',
-    p2: 'Spar tid, øg engagementet og få hvert tegn til at tælle med forhåndsvisninger i realtid og smart indsigt.',
+    p2: 'Spar tid, øg engagementet og få hvert tegn til at tælle med forhåndsvisninger i realtid, smart indsigt og ét-klik AI-tonomskrivning.',
     features: {
       realTime: {
         title: 'Forhåndsvisninger i realtid',
@@ -594,6 +594,10 @@ export const da: Translations = {
       privacy: {
         title: 'Privatliv først',
         desc: 'Dit indhold bliver aldrig gemt eller delt. Alt forbliver privat.',
+      },
+      aiTone: {
+        title: 'AI-tonomskriver',
+        desc: 'Omskriv øjeblikkeligt dit opslag i en professionel, afslappet, venlig eller kortfattet tone med ét klik — drevet af AI.',
       },
     },
   },

@@ -581,7 +581,7 @@ export const en: Translations = {
     eyebrow: 'WHY POSTTRUNCATE?',
     title: 'Write with confidence.<br/>Post without worries.',
     p1: 'Every platform has different character limits and truncation rules. PostTruncate shows you exactly how your content will appear before you hit publish.',
-    p2: 'Save time, increase engagement, and make every character count with real-time previews and smart insights.',
+    p2: 'Save time, increase engagement, and make every character count with real-time previews, smart insights, and one-tap AI tone rewriting.',
     features: {
       realTime: {
         title: 'Real-time Previews',
@@ -594,6 +594,10 @@ export const en: Translations = {
       privacy: {
         title: 'Privacy First',
         desc: 'Your content is never stored or shared. Everything stays private.',
+      },
+      aiTone: {
+        title: 'AI Tone Rewriter',
+        desc: 'Instantly rewrite your post in a professional, casual, friendly, or concise tone with one tap — powered by AI.',
       },
     },
   },

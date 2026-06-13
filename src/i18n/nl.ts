@@ -1,4 +1,4 @@
-import type { Translations } from './types';
+﻿import type { Translations } from './types';
 
 // ──────────────────────────────────────────────────────────────────────────
 // Nederlands (nl) — machinaal gegenereerde vertaling. Deze tekst is nog niet
@@ -581,7 +581,7 @@ export const nl: Translations = {
     eyebrow: 'WAAROM POSTTRUNCATE?',
     title: 'Schrijf met vertrouwen.<br/>Plaats zonder zorgen.',
     p1: 'Elk platform heeft andere tekenlimieten en afkapregels. PostTruncate laat precies zien hoe je content eruitziet voordat je op publiceren klikt.',
-    p2: 'Bespaar tijd, verhoog de betrokkenheid en laat elk teken tellen met realtime voorbeelden en slimme inzichten.',
+    p2: 'Bespaar tijd, verhoog de betrokkenheid en laat elk teken tellen met realtime voorbeelden, slimme inzichten en AI-toonherschrijving met één klik.',
     features: {
       realTime: {
         title: 'Realtime voorbeelden',
@@ -594,6 +594,10 @@ export const nl: Translations = {
       privacy: {
         title: 'Privacy voorop',
         desc: 'Je content wordt nooit opgeslagen of gedeeld. Alles blijft privé.',
+      },
+      aiTone: {
+        title: 'AI-toonherschrijver',
+        desc: 'Herschrijf je bericht direct in een professionele, informele, vriendelijke of bondige toon met één klik — aangedreven door AI.',
       },
     },
   },

@@ -1,4 +1,4 @@
-import type { Translations } from './types';
+﻿import type { Translations } from './types';
 
 // ──────────────────────────────────────────────────────────────────────────
 // Traduction française — GÉNÉRÉE PAR MACHINE. À FAIRE RELIRE PAR UN HUMAIN
@@ -581,7 +581,7 @@ export const fr: Translations = {
     eyebrow: 'POURQUOI POSTTRUNCATE ?',
     title: 'Écrivez avec confiance.<br/>Publiez sans soucis.',
     p1: 'Chaque plateforme a des limites de caractères et des règles de troncature différentes. PostTruncate vous montre exactement comment votre contenu apparaîtra avant de le publier.',
-    p2: 'Gagnez du temps, augmentez l’engagement et optimisez chaque caractère avec des aperçus en temps réel et des analyses intelligentes.',
+    p2: 'Gagnez du temps, augmentez l’engagement et optimisez chaque caractère avec des aperçus en temps réel, des analyses intelligentes et la réécriture du ton par IA en un clic.',
     features: {
       realTime: {
         title: 'Aperçus en temps réel',
@@ -594,6 +594,10 @@ export const fr: Translations = {
       privacy: {
         title: 'Confidentialité avant tout',
         desc: 'Votre contenu n’est jamais stocké ou partagé. Tout reste privé.',
+      },
+      aiTone: {
+        title: 'Réécriture du ton par IA',
+        desc: 'Réécrivez instantanément votre publication dans un ton professionnel, décontracté, amical ou concis en un clic — propulsé par l’IA.',
       },
     },
   },

@@ -795,6 +795,7 @@ export interface Translations {
       realTime: { title: string; desc: string };
       insights: { title: string; desc: string };
       privacy: { title: string; desc: string };
+      aiTone: { title: string; desc: string };
     };
   };
   howTruncationWorks: {

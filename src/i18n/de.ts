@@ -582,7 +582,7 @@ export const de: Translations = {
     eyebrow: 'WARUM POSTTRUNCATE?',
     title: 'Schreiben Sie mit Zuversicht.<br/>Posten Sie ohne Sorgen.',
     p1: 'Jede Plattform hat unterschiedliche Zeichenlimits und Kürzungsregeln. PostTruncate zeigt Ihnen genau, wie Ihr Inhalt aussehen wird, bevor Sie auf Veröffentlichen klicken.',
-    p2: 'Sparen Sie Zeit, steigern Sie das Engagement und nutzen Sie jedes Zeichen durch Echtzeit-Vorschauen und intelligente Analysen.',
+    p2: 'Sparen Sie Zeit, steigern Sie das Engagement und nutzen Sie jedes Zeichen durch Echtzeit-Vorschauen, intelligente Analysen und KI-gestützte Ton-Umschreibung mit einem Klick.',
     features: {
       realTime: {
         title: 'Echtzeit-Vorschau',
@@ -595,6 +595,10 @@ export const de: Translations = {
       privacy: {
         title: 'Privatsphäre zuerst',
         desc: 'Ihre Inhalte werden niemals gespeichert oder geteilt. Alles bleibt privat.',
+      },
+      aiTone: {
+        title: 'KI-Ton-Umschreiber',
+        desc: 'Schreibe deinen Beitrag sofort in einem professionellen, lockeren, freundlichen oder prägnanten Ton mit einem Klick um — von KI unterstützt.',
       },
     },
   },

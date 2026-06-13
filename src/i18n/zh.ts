@@ -579,7 +579,7 @@ export const zh: Translations = {
     eyebrow: '为什么选择 POSTTRUNCATE？',
     title: '自信地写作，<br/>无忧地发布。',
     p1: '每个平台都有不同的字符限制和截断规则。PostTruncate 可以让您在点击发布之前准确看到内容的外观。',
-    p2: '通过实时预览和智能分析，节省时间、提高参与度，并充分利用每一个字符。',
+    p2: '节省时间，提升互动，利用实时预览、智能洞察和一键AI语调改写，让每个字符都发挥价值。',
     features: {
       realTime: {
         title: '实时预览',
@@ -592,6 +592,10 @@ export const zh: Translations = {
       privacy: {
         title: '隐私至上',
         desc: '您的内容绝不会被存储或共享。一切都保持私密。',
+      },
+      aiTone: {
+        title: 'AI语调改写器',
+        desc: '一键即可将内容改写为专业、轻松、友好或简洁语调 — AI驱动。',
       },
     },
   },

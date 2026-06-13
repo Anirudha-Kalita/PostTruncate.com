@@ -581,7 +581,7 @@ export const pt: Translations = {
     eyebrow: 'POR QUE POSTTRUNCATE?',
     title: 'Escreva com confiança.<br/>Publique sem preocupações.',
     p1: 'Cada plataforma tem diferentes limites de caracteres e regras de truncamento. PostTruncate mostra exatamente como seu conteúdo aparecerá antes de publicar.',
-    p2: 'Economize tempo, aumente o engajamento e faça cada caractere valer com visualizações em tempo real e insights inteligentes.',
+    p2: 'Economize tempo, aumente o engajamento e faça cada caractere valer com visualizações em tempo real, insights inteligentes e reescrita de tom com IA em um toque.',
     features: {
       realTime: {
         title: 'Visualizações em tempo real',
@@ -594,6 +594,10 @@ export const pt: Translations = {
       privacy: {
         title: 'Privacidade em primeiro lugar',
         desc: 'Seu conteúdo nunca é armazenado ou compartilhado. Tudo permanece privado.',
+      },
+      aiTone: {
+        title: 'Reescritor de Tom com IA',
+        desc: 'Reescreva instantaneamente sua publicação em um tom profissional, casual, amigável ou conciso com um toque — impulsionado por IA.',
       },
     },
   },

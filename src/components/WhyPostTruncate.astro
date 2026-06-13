@@ -47,6 +47,15 @@ const { s } = Astro.props;
         <h3 class="feature-title">{s.features.privacy.title}</h3>
         <p class="feature-desc">{s.features.privacy.desc}</p>
       </div>
+      <div class="feature-card">
+        <div class="feature-icon icon-amber">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M15 4V2" /><path d="M15 16v-2" /><path d="M8 9h2" /><path d="M20 9h2" /><path d="M17.8 11.8 19 13" /><path d="M15 9h0" /><path d="M17.8 6.2 19 5" /><path d="m3 21 9-9" /><path d="M12.2 6.2 11 5" />
+          </svg>
+        </div>
+        <h3 class="feature-title">{s.features.aiTone.title}</h3>
+        <p class="feature-desc">{s.features.aiTone.desc}</p>
+      </div>
     </div>
   </div>
 </section>
@@ -92,14 +101,13 @@ const { s } = Astro.props;
     margin-bottom: 16px;
   }
   .why-right {
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 28px;
   }
-  @media (min-width: 768px) {
+  @media (max-width: 480px) {
     .why-right {
-      flex-direction: row;
-      gap: 24px;
+      grid-template-columns: 1fr;
     }
   }
   .feature-card {
@@ -133,6 +141,10 @@ const { s } = Astro.props;
     background: #E8F8F0;
     color: #16A34A;
   }
+  .icon-amber {
+    background: #FFF3E0;
+    color: #EA6C00;
+  }
   :global(html[data-theme='dark']) .icon-blue {
     background: rgba(10, 102, 194, 0.2);
     color: #60A5FA;
@@ -144,6 +156,10 @@ const { s } = Astro.props;
   :global(html[data-theme='dark']) .icon-green {
     background: rgba(22, 163, 74, 0.2);
     color: #4ADE80;
+  }
+  :global(html[data-theme='dark']) .icon-amber {
+    background: rgba(234, 108, 0, 0.2);
+    color: #FBBF24;
   }
   .feature-title {
     font-size: 17px;

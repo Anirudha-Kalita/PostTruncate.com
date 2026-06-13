@@ -1,4 +1,4 @@
-import type { Translations } from './types';
+﻿import type { Translations } from './types';
 
 // ──────────────────────────────────────────────────────────────────────────
 // Italiano (it) — TRADUZIONE GENERATA AUTOMATICAMENTE.
@@ -581,7 +581,7 @@ export const it: Translations = {
     eyebrow: 'PERCHÉ POSTTRUNCATE?',
     title: 'Scrivi con sicurezza.<br/>Pubblica senza preoccupazioni.',
     p1: 'Ogni piattaforma ha limiti di caratteri e regole di troncamento diversi. PostTruncate ti mostra esattamente come apparirà il tuo contenuto prima di pubblicarlo.',
-    p2: 'Risparmia tempo, aumenta il coinvolgimento e dai valore a ogni carattere con anteprime in tempo reale e analisi intelligenti.',
+    p2: 'Risparmia tempo, aumenta il coinvolgimento e dai valore a ogni carattere con anteprime in tempo reale, analisi intelligenti e riscrittura del tono con IA in un clic.',
     features: {
       realTime: {
         title: 'Anteprime in tempo reale',
@@ -594,6 +594,10 @@ export const it: Translations = {
       privacy: {
         title: 'La privacy prima di tutto',
         desc: 'Il tuo contenuto non viene mai archiviato o condiviso. Tutto rimane privato.',
+      },
+      aiTone: {
+        title: 'Riscrittura del tono con IA',
+        desc: 'Riscrivi istantaneamente il tuo post in un tono professionale, informale, amichevole o conciso con un clic u2014 potenziato dallu2019IA.',
       },
     },
   },
