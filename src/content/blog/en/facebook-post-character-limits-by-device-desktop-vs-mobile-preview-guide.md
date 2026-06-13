@@ -54,7 +54,7 @@ I've tested this across different devices. iOS (iPhone) shows roughly 70-80 char
 
 The fold placement is intentional. Facebook wants you to write clickable, curiosity-generating hooks. Posts that end with "See more" clicks get prioritised by the algorithm. Posts that bore readers before the fold get buried.
 
-![Desktop vs mobile Facebook post preview showing 150 character visibility on desktop versus 80 characters on mobile before truncation](https://cdn-public.eesel.ai/3841c02d-c48b-43fd-8989-1ec2802cccb0/ee4e4af2-8354-44e5-9fde-c5a3e8a62eff/cf80e5a078634f8f97bf3b6ea114192c.png)
+![Desktop vs mobile Facebook post preview showing 150 character visibility on desktop versus 80 characters on mobile before truncation](/og/Facebook_article-2.webp)
 
 Desktop vs mobile Facebook post preview showing 150 character visibility on desktop versus 80 characters on mobile before truncation
 
@@ -72,7 +72,7 @@ After testing dozens of posts and analysing high-performing content across 2024-
 
 The framework works because it respects how people actually read Facebook. Mobile users are scrolling fast - one-handed, between notifications, distracted. Desktop users (fewer of them, but more engaged) will read a bit more. Write for mobile first; desktop readers get the full experience.
 
-![The 80-100-150 character framework for Facebook posts, showing mobile hook zone, primary message zone, and desktop detail zone](https://cdn-public.eesel.ai/3841c02d-c48b-43fd-8989-1ec2802cccb0/ee4e4af2-8354-44e5-9fde-c5a3e8a62eff/65ebb247de114f0896f7e8350fc63887.png)
+![The 80-100-150 character framework for Facebook posts, showing mobile hook zone, primary message zone, and desktop detail zone](/og/Facebook_article-3.webp)
 
 The 80-100-150 character framework for Facebook posts, showing mobile hook zone, primary message zone, and desktop detail zone
 
@@ -105,7 +105,7 @@ Images force the feed layout to expand vertically. Your text appears above the i
 
 Strategic line breaks can make your post easier to scan and can affect truncation. A line break after your hook keeps the hook visually distinct. Multiple line breaks after longer posts push important content further down. **Strategy**: One line break after your core message, then secondary details. This keeps the visual hierarchy clear.
 
-![How hashtags, links, and images affect Facebook post fold placement - showing text visibility reduced when elements are present](https://cdn-public.eesel.ai/3841c02d-c48b-43fd-8989-1ec2802cccb0/ee4e4af2-8354-44e5-9fde-c5a3e8a62eff/81b0e3862b764764a8faa1982036567b.png)
+![How hashtags, links, and images affect Facebook post fold placement - showing text visibility reduced when elements are present](/og/Facebook_article-4.webp)
 
 How hashtags, links, and images affect Facebook post fold placement - showing text visibility is reduced when elements are present
 
