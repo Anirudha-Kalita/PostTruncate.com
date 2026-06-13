@@ -781,6 +781,12 @@ export const it: Translations = {
         'Trovati caratteri invisibili che mandano in tilt conteggi e screen reader: {codes}. Sanifica per eliminarli.',
       statusLine: 'L’analisi in tempo reale è attiva',
     },
+    imageUpload: {
+      add: 'Aggiungi immagine',
+      replace: 'Sostituisci immagine',
+      remove: 'Rimuovi immagine',
+      hint: 'Solo anteprima — mai caricata né salvata. Si cancella al ricaricamento.',
+    },
     aiImprove: {
       button: 'Migliora con IA',
       pickTone: 'Migliora con IA',
@@ -810,6 +816,7 @@ export const it: Translations = {
       title: 'Anteprima live per piattaforma',
       tabAria: 'Anteprima {platform}',
       compareAll: 'Confronta tutte',
+      showHidden: 'Mostra testo nascosto',
     },
     insights: {
       title: 'Approfondimenti avanzati',

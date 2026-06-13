@@ -1,11 +1,12 @@
 /** @jsxImportSource preact */
-import { charCount, detectUrls, FOLDS, LIMITS, sliceChars, splitThread } from '../../lib/textTools';
+import { charCount, detectUrls, FOLDS, LIMITS, sliceChars, splitThread, IMAGE_RATIOS } from '../../lib/textTools';
 import {
   Card,
   CardHead,
   Badge,
   Segmented,
   FoldMarker,
+  FeedImage,
   BrandLogo,
   ToolLink,
   Avatar,
@@ -29,6 +30,10 @@ interface Props {
   /** Viewport state, lifted to Dashboard so the Hook Visibility panel can mirror it. */
   view: FeedView;
   setView: (v: FeedView) => void;
+  /** Object URL of the attached preview image, or null when none. */
+  image?: string | null;
+  /** When false, hide the dimmed below-the-fold remainder (show only "…more"). */
+  showFolded?: boolean;
 }
 
 /**
@@ -36,7 +41,7 @@ interface Props {
  * validator keeps that full allowance, while the mock mobile card visually
  * folds one-block posts behind a "... more" affordance.
  */
-export function ThreadsPreview({ text, lang, s, toolLinkHref, view, setView }: Props) {
+export function ThreadsPreview({ text, lang, s, toolLinkHref, view, setView, image, showFolded = true }: Props) {
   const th = s.threads;
   const nf = new Intl.NumberFormat(lang);
   const author = previewAuthor(s.common);
@@ -45,6 +50,9 @@ export function ThreadsPreview({ text, lang, s, toolLinkHref, view, setView }: P
   const urls = detectUrls(trimmed);
   const posts = trimmed ? splitThread(trimmed, LIMITS.THREADS, charCount) : [];
   const isChain = posts.length > 1;
+  // An image-only post is valid; render one empty post to carry it. The image
+  // attaches to the first post of a chain.
+  const displayPosts = posts.length === 0 && image ? [''] : posts;
   const visualFold = FOLDS.threads[view];
 
   return (
@@ -86,12 +94,12 @@ export function ThreadsPreview({ text, lang, s, toolLinkHref, view, setView }: P
       </div>
 
       <div class="space-y-3 p-4 sm:p-5">
-        {posts.length === 0 ? (
+        {displayPosts.length === 0 ? (
           <article class="rounded-md border border-hairline bg-canvas p-4 text-[14px] text-mute">
             {interp(th.placeholder, { limit: nf.format(LIMITS.THREADS) })}
           </article>
         ) : (
-          posts.map((post, i) => (
+          displayPosts.map((post, i) => (
             <PostCard
               layout="gutter"
               class={view === 'desktop' ? 'feed-phone--desktop' : ''}
@@ -142,7 +150,16 @@ export function ThreadsPreview({ text, lang, s, toolLinkHref, view, setView }: P
                 seeMore={s.linkedin.seeMore}
                 foldLabel={s.hook.foldLabel}
                 foldAria={s.hook.foldAria}
+                showFolded={showFolded}
               />
+
+              {/* Single image on the first post — Threads' rounded frame; tall
+                  portraits crop to 4:5, landscape/square show in full. */}
+              {image && i === 0 && (
+                <div class="mt-2 overflow-hidden rounded-xl border border-hairline">
+                  <FeedImage src={image} maxRatio={IMAGE_RATIOS.threads.max} />
+                </div>
+              )}
 
               {/* Native Threads engagement row: left aligned, tightly packed */}
               <div class="mt-3 flex items-center gap-4 text-ink">
@@ -182,12 +199,14 @@ function ThreadsPostText({
   seeMore,
   foldLabel,
   foldAria,
+  showFolded,
 }: {
   post: string;
   visualFold: number;
   seeMore: string;
   foldLabel: string;
   foldAria: string;
+  showFolded: boolean;
 }) {
   const shouldFold = charCount(post) > visualFold;
   const visible = shouldFold ? sliceChars(post, 0, visualFold) : post;
@@ -197,8 +216,8 @@ function ThreadsPostText({
     <p class="mt-2 whitespace-pre-wrap break-words text-[14px] leading-[21px] text-ink">
       {visible}
       {shouldFold && <span class="text-mute">{seeMore}</span>}
-      {shouldFold && <FoldMarker label={foldLabel} ariaLabel={foldAria} />}
-      {shouldFold && hidden && (
+      {shouldFold && showFolded && <FoldMarker label={foldLabel} ariaLabel={foldAria} />}
+      {shouldFold && showFolded && hidden && (
         <span class="text-mute/45 line-through decoration-hairline-strong/40">{hidden}</span>
       )}
     </p>

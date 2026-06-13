@@ -7,6 +7,7 @@ import {
   sliceChars,
   FOLDS,
   LIMITS,
+  IMAGE_RATIOS,
 } from '../../lib/textTools';
 import {
   Card,
@@ -15,6 +16,7 @@ import {
   Segmented,
   Meter,
   FoldMarker,
+  FeedImage,
   BrandLogo,
   ToolLink,
   Avatar,
@@ -47,6 +49,10 @@ interface Props {
   setInstagramView: (v: FeedView) => void;
   facebookView: FeedView;
   setFacebookView: (v: FeedView) => void;
+  /** Object URL of the attached preview image, or null when none. */
+  image?: string | null;
+  /** When false, hide the dimmed below-the-fold remainder (show only "…more"). */
+  showFolded?: boolean;
 }
 
 function truncateForFeed(text: string, limit: number) {
@@ -63,7 +69,7 @@ function truncateForFeed(text: string, limit: number) {
  * Independent Instagram and Facebook monitors. Instagram owns caption preview
  * and hashtag concentration; Facebook owns feed preview and accessibility.
  */
-export function MetaMonitor({ text, lang, s, toolLinkHref, facebookToolLinkHref, priority, only, instagramView, setInstagramView, facebookView, setFacebookView }: Props) {
+export function MetaMonitor({ text, lang, s, toolLinkHref, facebookToolLinkHref, priority, only, instagramView, setInstagramView, facebookView, setFacebookView, image, showFolded = true }: Props) {
   const m = s.meta;
   const nf = new Intl.NumberFormat(lang);
   const author = previewAuthor(s.common);
@@ -144,6 +150,13 @@ export function MetaMonitor({ text, lang, s, toolLinkHref, facebookToolLinkHref,
             }
             trailing={<MoreDots size={16} />}
           >
+            {/* Image-first: the photo is the hero, full-bleed below the header.
+                Instagram crops to its 1.91:1 → 3:4 band. */}
+            {image && (
+              <div class="-mx-4 mt-3">
+                <FeedImage src={image} minRatio={IMAGE_RATIOS.instagram.min} maxRatio={IMAGE_RATIOS.instagram.max} />
+              </div>
+            )}
             {/* Faint Instagram action row — like / comment / share. */}
             <div class="mt-3 flex max-w-[110px] items-center justify-between text-mute/45">
               <Engagement icon="like" size={20} />
@@ -155,10 +168,10 @@ export function MetaMonitor({ text, lang, s, toolLinkHref, facebookToolLinkHref,
               {instagramPreview.isTruncated && (
                 <span class="text-slate-400">{s.linkedin.seeMore}</span>
               )}
-              {instagramPreview.isTruncated && (
+              {instagramPreview.isTruncated && showFolded && (
                 <FoldMarker label={s.hook.foldLabel} ariaLabel={s.hook.foldAria} />
               )}
-              {instagramPreview.isTruncated && instagramPreview.hiddenText && (
+              {instagramPreview.isTruncated && showFolded && instagramPreview.hiddenText && (
                 <span class="text-mute/45 line-through decoration-hairline-strong/40">
                   {instagramPreview.hiddenText}
                 </span>
@@ -264,20 +277,30 @@ export function MetaMonitor({ text, lang, s, toolLinkHref, facebookToolLinkHref,
             }
             trailing={<MoreDots size={16} />}
           >
-            <p class="mt-2 min-h-[42px] whitespace-pre-wrap break-words text-[14px] leading-[21px] text-ink">
-              {facebookPreview.previewText}
-              {facebookPreview.isTruncated && (
-                <span class="text-slate-400"> {s.linkedin.seeMore}</span>
-              )}
-              {facebookPreview.isTruncated && (
-                <FoldMarker label={s.hook.foldLabel} ariaLabel={s.hook.foldAria} />
-              )}
-              {facebookPreview.isTruncated && facebookPreview.hiddenText && (
-                <span class="text-mute/45 line-through decoration-hairline-strong/40">
-                  {facebookPreview.hiddenText}
-                </span>
-              )}
-            </p>
+            {/* Caption sits above the photo. Skip it for image-only posts. */}
+            {(activeText !== '' || !image) && (
+              <p class="mt-2 min-h-[42px] whitespace-pre-wrap break-words text-[14px] leading-[21px] text-ink">
+                {facebookPreview.previewText}
+                {facebookPreview.isTruncated && (
+                  <span class="text-slate-400"> {s.linkedin.seeMore}</span>
+                )}
+                {facebookPreview.isTruncated && showFolded && (
+                  <FoldMarker label={s.hook.foldLabel} ariaLabel={s.hook.foldAria} />
+                )}
+                {facebookPreview.isTruncated && showFolded && facebookPreview.hiddenText && (
+                  <span class="text-mute/45 line-through decoration-hairline-strong/40">
+                    {facebookPreview.hiddenText}
+                  </span>
+                )}
+              </p>
+            )}
+
+            {/* Full-bleed image below the caption; tall portraits crop to 4:5. */}
+            {image && (
+              <div class="-mx-4 mt-3">
+                <FeedImage src={image} maxRatio={IMAGE_RATIOS.facebook.max} />
+              </div>
+            )}
 
             {/* Labeled action bar — Like / Comment / Share. */}
             <ActionBar

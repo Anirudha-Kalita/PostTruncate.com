@@ -781,6 +781,12 @@ export const nl: Translations = {
         'Onzichtbare tekens gevonden die tellingen en schermlezers verstoren: {codes}. Schoon op om ze te verwijderen.',
       statusLine: 'Realtime analyse is actief',
     },
+    imageUpload: {
+      add: 'Afbeelding toevoegen',
+      replace: 'Afbeelding vervangen',
+      remove: 'Afbeelding verwijderen',
+      hint: 'Alleen voorbeeld — wordt nooit geüpload of opgeslagen. Verdwijnt bij herladen.',
+    },
     aiImprove: {
       button: 'AI-verbetering',
       pickTone: 'Verbeteren met AI',
@@ -810,6 +816,7 @@ export const nl: Translations = {
       title: 'Live platformvoorbeeld',
       tabAria: '{platform}-voorbeeld',
       compareAll: 'Alles vergelijken',
+      showHidden: 'Verborgen tekst tonen',
     },
     insights: {
       title: 'Geavanceerde inzichten',

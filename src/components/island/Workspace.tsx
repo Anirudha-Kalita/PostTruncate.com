@@ -30,6 +30,10 @@ interface Props {
   lang: string;
   s: IslandStrings;
   focus?: string;
+  /** Object URL of the attached preview image, or null when none is attached. */
+  image?: string | null;
+  /** Hand a picked File (or null to clear) up to the Dashboard image state. */
+  onSelectImage?: (file: File | null) => void;
 }
 
 /**
@@ -37,9 +41,15 @@ interface Props {
  * optimization engine actions. All transforms route through the pure helpers
  * in textTools so behaviour matches the previews exactly.
  */
-export function Workspace({ text, setText, lang, s, focus }: Props) {
+export function Workspace({ text, setText, lang, s, focus, image, onSelectImage }: Props) {
   const hidden = detectHiddenUnicode(text);
   const w = s.workspace;
+  const img = s.imageUpload ?? {
+    add: 'Add image',
+    replace: 'Replace image',
+    remove: 'Remove image',
+    hint: 'Preview only — never uploaded or stored. Clears on reload.',
+  };
   const nf = new Intl.NumberFormat(lang);
   const words = wordCount(text);
   const chars = charCount(text);
@@ -106,6 +116,64 @@ export function Workspace({ text, setText, lang, s, focus }: Props) {
           spellcheck
           class="block w-full h-[360px] resize-none rounded-md border border-hairline bg-canvas-soft px-4 py-3 text-[15px] leading-7 text-ink placeholder:text-mute focus:border-link focus:bg-canvas focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-link"
         />
+
+        {/* Image attach — prominent, right under the editor. In-memory preview
+            only; the picked File is handed up to Dashboard state. */}
+        {onSelectImage && (
+          <div class="mt-3">
+            {image ? (
+              <div class="flex items-center gap-3 rounded-md border border-link/30 bg-link-bg-soft p-2.5">
+                <img
+                  src={image}
+                  alt=""
+                  class="h-14 w-14 shrink-0 rounded-md border border-hairline object-cover"
+                />
+                <div class="flex min-w-0 flex-1 items-center gap-2">
+                  <label class="inline-flex cursor-pointer items-center gap-1.5 rounded-pill border border-link bg-link px-3.5 py-2 text-[13px] font-semibold text-on-primary transition-[transform,background] duration-100 hover:bg-link-deep active:scale-[0.96]">
+                    <ImageIcon />
+                    {img.replace}
+                    <input
+                      type="file"
+                      accept="image/*"
+                      class="sr-only"
+                      onChange={(e) => {
+                        const input = e.currentTarget as HTMLInputElement;
+                        onSelectImage(input.files?.[0] ?? null);
+                        input.value = '';
+                      }}
+                    />
+                  </label>
+                  <button
+                    type="button"
+                    onClick={() => onSelectImage(null)}
+                    aria-label={img.remove}
+                    class="ml-auto inline-flex items-center gap-1.5 rounded-pill px-3.5 py-2 text-[13px] font-medium text-error transition-[transform,color,background] duration-100 hover:bg-error-soft active:scale-[0.96]"
+                  >
+                    {img.remove}
+                  </button>
+                </div>
+              </div>
+            ) : (
+              <label class="group flex cursor-pointer items-center justify-center gap-2 rounded-md border-2 border-dashed border-link/45 bg-link-bg-soft px-4 py-3 text-[14px] font-semibold text-link-deep transition-[transform,background,border-color] duration-100 hover:border-link hover:bg-canvas-soft-2 active:scale-[0.99]">
+                <span class="flex h-7 w-7 items-center justify-center rounded-full bg-link text-on-primary">
+                  <ImageIcon />
+                </span>
+                {img.add}
+                <input
+                  type="file"
+                  accept="image/*"
+                  class="sr-only"
+                  onChange={(e) => {
+                    const input = e.currentTarget as HTMLInputElement;
+                    onSelectImage(input.files?.[0] ?? null);
+                    input.value = '';
+                  }}
+                />
+              </label>
+            )}
+            <p class="mt-1.5 text-[12px] leading-4 text-mute">{img.hint}</p>
+          </div>
+        )}
 
         {/* Live meta counters */}
         <div class="mt-3 grid grid-cols-2 gap-2.5 sm:grid-cols-4">
@@ -235,6 +303,16 @@ function TimerStat({ icon, label, value }: TimerStatProps) {
         </div>
       </div>
     </div>
+  );
+}
+
+function ImageIcon() {
+  return (
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <rect x="3" y="3" width="18" height="18" rx="2" />
+      <circle cx="8.5" cy="8.5" r="1.5" />
+      <path d="m21 15-5-5L5 21" />
+    </svg>
   );
 }
 

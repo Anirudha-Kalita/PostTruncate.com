@@ -734,6 +734,43 @@ export const FOLDS = {
   threads: { mobile: 250, desktop: LIMITS.THREADS },
 } as const;
 
+/**
+ * Per-platform feed image crop bands, expressed as height ÷ width. A platform
+ * shows an image at its natural ratio only while that ratio sits inside the
+ * band; outside it the feed center-crops to the nearest bound. `min` is the
+ * widest allowed (landscape cap), `max` the tallest (portrait cap). `undefined`
+ * means "no bound on that side". Sourced from each platform's 2025/26 feed specs
+ * (see the previews) and shared so the numbers live in one place.
+ */
+export const IMAGE_RATIOS = {
+  // LinkedIn shows up to 4:5 (h/w 1.25) in full; landscape is unbounded.
+  linkedin: { min: undefined, max: 1.25 },
+  // X favors ~16:9; tall portraits crop near 4:5.
+  twitter: { min: undefined, max: 1.25 },
+  // Threads matches Instagram's 4:5 tall format; landscape unbounded.
+  threads: { min: undefined, max: 1.25 },
+  // Instagram's band: 1.91:1 landscape (h/w ≈ 0.524) to 3:4 tall (h/w ≈ 1.334).
+  instagram: { min: 0.524, max: 1.334 },
+  // Facebook caps tall portraits near 4:5; landscape unbounded.
+  facebook: { min: undefined, max: 1.25 },
+} as const;
+
+/**
+ * Clamp a natural image aspect ratio (height ÷ width) into a platform's allowed
+ * feed band. Pure and DOM-free: the `FeedImage` island measures the upload and
+ * defers the actual crop decision to this, so the rule is unit-testable. A
+ * non-finite or non-positive input falls back to 1 (treated as square).
+ */
+export function clampFeedRatio(
+  ratio: number,
+  band: { min?: number; max?: number },
+): number {
+  let r = Number.isFinite(ratio) && ratio > 0 ? ratio : 1;
+  if (band.min !== undefined) r = Math.max(r, band.min);
+  if (band.max !== undefined) r = Math.min(r, band.max);
+  return r;
+}
+
 /** Platforms the fold/hook analysis understands (X has no char fold of its own). */
 export type FoldPlatform = keyof typeof FOLDS | 'x';
 

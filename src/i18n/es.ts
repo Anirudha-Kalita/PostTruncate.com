@@ -781,6 +781,12 @@ export const es: Translations = {
         'Se encontraron caracteres invisibles que rompen los recuentos y los lectores de pantalla: {codes}. Sanea para eliminarlos.',
       statusLine: 'El análisis en tiempo real está activo',
     },
+    imageUpload: {
+      add: 'Añadir imagen',
+      replace: 'Reemplazar imagen',
+      remove: 'Quitar imagen',
+      hint: 'Solo vista previa: nunca se sube ni se guarda. Se borra al recargar.',
+    },
     aiImprove: {
       button: 'Mejorar con IA',
       pickTone: 'Mejorar con IA',
@@ -810,6 +816,7 @@ export const es: Translations = {
       title: 'Vista previa de plataformas en vivo',
       tabAria: 'Vista previa de {platform}',
       compareAll: 'Comparar todas',
+      showHidden: 'Mostrar texto oculto',
     },
     insights: {
       title: 'Análisis avanzado',

@@ -781,6 +781,12 @@ export const en: Translations = {
         'Found invisible characters that break counts and screen readers: {codes}. Sanitize to strip them.',
       statusLine: 'Real-time analysis is on',
     },
+    imageUpload: {
+      add: 'Add image',
+      replace: 'Replace image',
+      remove: 'Remove image',
+      hint: 'Preview only — never uploaded or stored. Clears on reload.',
+    },
     aiImprove: {
       button: 'AI Improve',
       pickTone: 'Improve with AI',
@@ -810,6 +816,7 @@ export const en: Translations = {
       title: 'Live platform preview',
       tabAria: '{platform} preview',
       compareAll: 'Compare all',
+      showHidden: 'Show hidden text',
     },
     insights: {
       title: 'Advanced insights',

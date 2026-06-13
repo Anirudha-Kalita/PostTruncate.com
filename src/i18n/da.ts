@@ -781,6 +781,12 @@ export const da: Translations = {
         'Fandt usynlige tegn, der bryder tællinger og skærmlæsere: {codes}. Rens for at fjerne dem.',
       statusLine: 'Realtidsanalyse er slået til',
     },
+    imageUpload: {
+      add: 'Tilføj billede',
+      replace: 'Erstat billede',
+      remove: 'Fjern billede',
+      hint: 'Kun forhåndsvisning — uploades eller gemmes aldrig. Ryddes ved genindlæsning.',
+    },
     aiImprove: {
       button: 'AI-forbedring',
       pickTone: 'Forbedr med AI',
@@ -810,6 +816,7 @@ export const da: Translations = {
       title: 'Live platform-forhåndsvisning',
       tabAria: '{platform}-forhåndsvisning',
       compareAll: 'Sammenlign alle',
+      showHidden: 'Vis skjult tekst',
     },
     insights: {
       title: 'Avanceret indsigt',

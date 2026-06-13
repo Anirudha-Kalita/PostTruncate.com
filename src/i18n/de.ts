@@ -782,6 +782,12 @@ export const de: Translations = {
         'Unsichtbare Zeichen gefunden, die Zählungen und Screenreader stören: {codes}. Bereinige, um sie zu entfernen.',
       statusLine: 'Echtzeit-Analyse ist aktiv',
     },
+    imageUpload: {
+      add: 'Bild hinzufügen',
+      replace: 'Bild ersetzen',
+      remove: 'Bild entfernen',
+      hint: 'Nur Vorschau – wird nie hochgeladen oder gespeichert. Beim Neuladen weg.',
+    },
     aiImprove: {
       button: 'KI-Verbesserung',
       pickTone: 'Mit KI verbessern',
@@ -811,6 +817,7 @@ export const de: Translations = {
       title: 'Live-Plattformvorschau',
       tabAria: '{platform}-Vorschau',
       compareAll: 'Alle vergleichen',
+      showHidden: 'Verborgenen Text anzeigen',
     },
     insights: {
       title: 'Erweiterte Analysen',

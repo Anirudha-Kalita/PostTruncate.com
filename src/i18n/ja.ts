@@ -781,6 +781,12 @@ export const ja: Translations = {
         '文字数カウントやスクリーンリーダーを壊す不可視文字が見つかりました：{codes}。サニタイズで取り除けます。',
       statusLine: 'リアルタイム分析が有効です',
     },
+    imageUpload: {
+      add: '画像を追加',
+      replace: '画像を置き換え',
+      remove: '画像を削除',
+      hint: 'プレビューのみ — アップロードも保存もされません。再読み込みで消えます。',
+    },
     aiImprove: {
       button: 'AIで改善',
       pickTone: 'AIで改善',
@@ -810,6 +816,7 @@ export const ja: Translations = {
       title: 'プラットフォーム別ライブプレビュー',
       tabAria: '{platform}のプレビュー',
       compareAll: 'すべて比較',
+      showHidden: '隠れたテキストを表示',
     },
     insights: {
       title: '高度な分析',

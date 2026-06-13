@@ -1,5 +1,5 @@
 /** @jsxImportSource preact */
-import { linkedInHook, charCount, LIMITS } from '../../lib/textTools';
+import { linkedInHook, charCount, LIMITS, IMAGE_RATIOS } from '../../lib/textTools';
 import {
   Card,
   CardHead,
@@ -7,6 +7,7 @@ import {
   Segmented,
   Meter,
   FoldMarker,
+  FeedImage,
   BrandLogo,
   ToolLink,
   Avatar,
@@ -30,6 +31,10 @@ interface Props {
   lang: string;
   s: IslandStrings;
   toolLinkHref?: string;
+  /** Object URL of the attached preview image, or null when none. */
+  image?: string | null;
+  /** When false, hide the dimmed below-the-fold remainder (show only "…more"). */
+  showFolded?: boolean;
 }
 
 /**
@@ -37,7 +42,7 @@ interface Props {
  * "…see more" fold (210 chars desktop / 140 mobile) and injects a non-clickable
  * bold "…see more" at the exact boundary when the post is truncated.
  */
-export function LinkedInPreview({ text, view, setView, lang, s, toolLinkHref }: Props) {
+export function LinkedInPreview({ text, view, setView, lang, s, toolLinkHref, image, showFolded = true }: Props) {
   const l = s.linkedin;
   const nf = new Intl.NumberFormat(lang);
   const author = previewAuthor(s.common);
@@ -137,20 +142,30 @@ export function LinkedInPreview({ text, view, setView, lang, s, toolLinkHref }: 
                   </span>
                 )}
                 {/* Explicit fold line: everything below is hidden in-feed. */}
-                {truncated && (
+                {truncated && showFolded && (
                   <FoldMarker label={s.hook.foldLabel} ariaLabel={s.hook.foldAria} />
                 )}
                 {/* Folded remainder, dimmed to show what readers must click for. */}
-                {truncated && rest && (
+                {truncated && showFolded && rest && (
                   <span class="text-mute/45 line-through decoration-hairline-strong/40">
                     {rest}
                   </span>
                 )}
               </>
             ) : (
-              <span class="text-mute">{l.placeholder}</span>
+              /* Image-only posts are valid on LinkedIn, so drop the placeholder
+                 prompt when an image carries the post. */
+              !image && <span class="text-mute">{l.placeholder}</span>
             )}
           </div>
+
+          {/* Full-bleed image — caption sits above, exactly as in-feed. LinkedIn
+              shows up to 4:5 (h/w 1.25) in full and crops taller uploads. */}
+          {image && (
+            <div class="-mx-4 mt-3">
+              <FeedImage src={image} maxRatio={IMAGE_RATIOS.linkedin.max} />
+            </div>
+          )}
 
           {/* Labeled reaction bar — Like / Comment / Share. */}
           <ActionBar

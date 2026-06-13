@@ -179,6 +179,21 @@ export interface IslandStrings {
     statusLine: string;
   };
   /**
+   * Image upload control in the editor (in-memory preview only — never stored,
+   * cleared on reload). Optional while rolling out; falls back to English when a
+   * locale has not yet translated it.
+   */
+  imageUpload?: {
+    /** Button label when no image is attached. */
+    add: string;
+    /** Button label when replacing an attached image. */
+    replace: string;
+    /** Remove-image button accessible label / tooltip. */
+    remove: string;
+    /** Helper line under the control. */
+    hint: string;
+  };
+  /**
    * "AI Improve" feature — button, tone picker, progress, and result/error
    * states for the Gemini-backed rewrite. Tone keys mirror lib/aiImprove.ts.
    */
@@ -226,6 +241,11 @@ export interface IslandStrings {
     tabAria: string;
     /** Toggle that switches to the all-platforms matrix view. */
     compareAll: string;
+    /**
+     * Switch label: when on (default), previews show the dimmed text that falls
+     * below each platform's "…more" fold; off hides it, leaving just "…more".
+     */
+    showHidden: string;
   };
   /** Collapsed "Advanced insights" bar beneath the workspace container. */
   insights: {

@@ -110,9 +110,24 @@ function readActiveDraft() {
 export default function Dashboard({ lang, strings, toolSlugs, focus }: Props) {
   const [text, setText] = useState('');
   const [analysisText, setAnalysisText] = useState('');
+  // In-memory only: an uploaded image is held as an object URL and never
+  // persisted. It is intentionally absent from sessionStorage, so a reload
+  // drops it and the user re-uploads. The URL is revoked on replace/unmount.
+  const [image, setImage] = useState<{ url: string; name: string } | null>(null);
+  const onSelectImage = (file: File | null) => {
+    setImage((prev) => {
+      if (prev) URL.revokeObjectURL(prev.url);
+      return file ? { url: URL.createObjectURL(file), name: file.name } : null;
+    });
+  };
   const [views, setViews] = useState<Record<ViewablePlatform, FoldView>>(DEFAULT_VIEWS);
   const setPlatformView = (p: ViewablePlatform, v: FoldView) =>
     setViews((prev) => ({ ...prev, [p]: v }));
+  const imageUrl = image?.url ?? null;
+  // When off (default), previews drop the dimmed below-the-fold remainder and
+  // show only the "…more" affordance — matching how the real feed looks. The
+  // user can switch it on to inspect exactly what gets hidden.
+  const [showFolded, setShowFolded] = useState(false);
   const [isDraftLoaded, setIsDraftLoaded] = useState(false);
   const [cardOrder, setCardOrder] = useState<CardKey[]>(DEFAULT_ORDER);
   const [metaPriority, setMetaPriority] = useState<'facebook' | undefined>(undefined);
@@ -189,12 +204,19 @@ export default function Dashboard({ lang, strings, toolSlugs, focus }: Props) {
     return () => window.clearTimeout(id);
   }, [isDraftLoaded, text]);
 
+  // Free the object URL when the image is swapped out or the island unmounts.
+  useEffect(() => {
+    return () => {
+      if (image) URL.revokeObjectURL(image.url);
+    };
+  }, [image]);
+
   // ── Scoped tool pages — original layout, byte-for-byte behavior ──────────
   if (focus) {
     return (
       <div class="grid grid-cols-1 gap-5 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)]">
         <div class="flex flex-col gap-5">
-          <Workspace text={text} setText={setText} lang={lang} s={strings} focus={focus} />
+          <Workspace text={text} setText={setText} lang={lang} s={strings} focus={focus} image={image?.url ?? null} onSelectImage={onSelectImage} />
 
           {!text && (
             <button
@@ -208,14 +230,20 @@ export default function Dashboard({ lang, strings, toolSlugs, focus }: Props) {
         </div>
 
         <div class="flex flex-col gap-5">
+          {/* X and SMS have no "…more" fold remainder, so the toggle is moot there. */}
+          {focus !== 'twitter' && focus !== 'sms' && (
+            <div class="flex justify-end">
+              <FoldToggle checked={showFolded} onChange={() => setShowFolded((v) => !v)} label={strings.previewPanel.showHidden} />
+            </div>
+          )}
           {showHookPanel && (
             <HookVisibilityCard text={analysisText} lang={lang} s={strings} only={hookOnly} views={views} />
           )}
           {rightOrder.map(key => {
-            if (key === 'linkedin') return <div id="platform-card-linkedin" key="lw"><LinkedInPreview key="linkedin" text={analysisText} view={views.linkedin} setView={(v) => setPlatformView('linkedin', v)} lang={lang} s={strings} toolLinkHref={`/${lang}/${toolSlugs.linkedin}/`} /></div>;
-            if (key === 'twitter') return <div id="platform-card-twitter" key="tw"><TwitterPreview key="twitter" text={analysisText} lang={lang} s={strings} toolLinkHref={`/${lang}/${toolSlugs.twitter}/`} /></div>;
-            if (key === 'meta') return <div id="platform-card-meta" key="mw"><MetaMonitor key="meta" text={analysisText} lang={lang} s={strings} toolLinkHref={`/${lang}/${toolSlugs.instagram}/`} facebookToolLinkHref={`/${lang}/${toolSlugs.facebook}/`} priority={effectiveMetaPriority} only={metaOnly} instagramView={views.instagram} setInstagramView={(v) => setPlatformView('instagram', v)} facebookView={views.facebook} setFacebookView={(v) => setPlatformView('facebook', v)} /></div>;
-            if (key === 'threads') return <div id="platform-card-threads" key="thw"><ThreadsPreview key="threads" text={analysisText} lang={lang} s={strings} toolLinkHref={`/${lang}/${toolSlugs.threads}/`} view={views.threads} setView={(v) => setPlatformView('threads', v)} /></div>;
+            if (key === 'linkedin') return <div id="platform-card-linkedin" key="lw"><LinkedInPreview key="linkedin" text={analysisText} view={views.linkedin} setView={(v) => setPlatformView('linkedin', v)} lang={lang} s={strings} toolLinkHref={`/${lang}/${toolSlugs.linkedin}/`} image={imageUrl} showFolded={showFolded} /></div>;
+            if (key === 'twitter') return <div id="platform-card-twitter" key="tw"><TwitterPreview key="twitter" text={analysisText} lang={lang} s={strings} toolLinkHref={`/${lang}/${toolSlugs.twitter}/`} image={imageUrl} /></div>;
+            if (key === 'meta') return <div id="platform-card-meta" key="mw"><MetaMonitor key="meta" text={analysisText} lang={lang} s={strings} toolLinkHref={`/${lang}/${toolSlugs.instagram}/`} facebookToolLinkHref={`/${lang}/${toolSlugs.facebook}/`} priority={effectiveMetaPriority} only={metaOnly} instagramView={views.instagram} setInstagramView={(v) => setPlatformView('instagram', v)} facebookView={views.facebook} setFacebookView={(v) => setPlatformView('facebook', v)} image={imageUrl} showFolded={showFolded} /></div>;
+            if (key === 'threads') return <div id="platform-card-threads" key="thw"><ThreadsPreview key="threads" text={analysisText} lang={lang} s={strings} toolLinkHref={`/${lang}/${toolSlugs.threads}/`} view={views.threads} setView={(v) => setPlatformView('threads', v)} image={imageUrl} showFolded={showFolded} /></div>;
           })}
           {focus === 'sms' && <SmsCounter text={analysisText} lang={lang} s={strings.sms} />}
           <details class="group rounded-xl bg-canvas shadow-e2">
@@ -257,7 +285,7 @@ export default function Dashboard({ lang, strings, toolSlugs, focus }: Props) {
         <div class="grid grid-cols-1 gap-5 lg:grid-cols-2 lg:gap-6">
           {/* Left — "Write your post" */}
           <div class="flex min-w-0 flex-col gap-4">
-            <Workspace text={text} setText={setText} lang={lang} s={strings} />
+            <Workspace text={text} setText={setText} lang={lang} s={strings} image={image?.url ?? null} onSelectImage={onSelectImage} />
 
             {!text && (
               <button
@@ -321,6 +349,11 @@ export default function Dashboard({ lang, strings, toolSlugs, focus }: Props) {
               </button>
             </div>
 
+            {/* Panel-level preference: show or hide the below-the-fold remainder. */}
+            <div class="mt-3 flex justify-end">
+              <FoldToggle checked={showFolded} onChange={() => setShowFolded((v) => !v)} label={strings.previewPanel.showHidden} />
+            </div>
+
             {/* Active preview panel — mounts the existing platform components */}
             <div
               id="platform-preview-panel"
@@ -332,20 +365,20 @@ export default function Dashboard({ lang, strings, toolSlugs, focus }: Props) {
               {compare ? (
                 <>
                   {cardOrder.map(key => {
-                    if (key === 'linkedin') return <div id="platform-card-linkedin" key="lw"><LinkedInPreview key="linkedin" text={analysisText} view={views.linkedin} setView={(v) => setPlatformView('linkedin', v)} lang={lang} s={strings} toolLinkHref={`/${lang}/${toolSlugs.linkedin}/`} /></div>;
-                    if (key === 'twitter') return <div id="platform-card-twitter" key="tw"><TwitterPreview key="twitter" text={analysisText} lang={lang} s={strings} toolLinkHref={`/${lang}/${toolSlugs.twitter}/`} /></div>;
-                    if (key === 'meta') return <div id="platform-card-meta" key="mw"><MetaMonitor key="meta" text={analysisText} lang={lang} s={strings} toolLinkHref={`/${lang}/${toolSlugs.instagram}/`} facebookToolLinkHref={`/${lang}/${toolSlugs.facebook}/`} priority={effectiveMetaPriority} instagramView={views.instagram} setInstagramView={(v) => setPlatformView('instagram', v)} facebookView={views.facebook} setFacebookView={(v) => setPlatformView('facebook', v)} /></div>;
-                    if (key === 'threads') return <div id="platform-card-threads" key="thw"><ThreadsPreview key="threads" text={analysisText} lang={lang} s={strings} toolLinkHref={`/${lang}/${toolSlugs.threads}/`} view={views.threads} setView={(v) => setPlatformView('threads', v)} /></div>;
+                    if (key === 'linkedin') return <div id="platform-card-linkedin" key="lw"><LinkedInPreview key="linkedin" text={analysisText} view={views.linkedin} setView={(v) => setPlatformView('linkedin', v)} lang={lang} s={strings} toolLinkHref={`/${lang}/${toolSlugs.linkedin}/`} image={imageUrl} showFolded={showFolded} /></div>;
+                    if (key === 'twitter') return <div id="platform-card-twitter" key="tw"><TwitterPreview key="twitter" text={analysisText} lang={lang} s={strings} toolLinkHref={`/${lang}/${toolSlugs.twitter}/`} image={imageUrl} /></div>;
+                    if (key === 'meta') return <div id="platform-card-meta" key="mw"><MetaMonitor key="meta" text={analysisText} lang={lang} s={strings} toolLinkHref={`/${lang}/${toolSlugs.instagram}/`} facebookToolLinkHref={`/${lang}/${toolSlugs.facebook}/`} priority={effectiveMetaPriority} instagramView={views.instagram} setInstagramView={(v) => setPlatformView('instagram', v)} facebookView={views.facebook} setFacebookView={(v) => setPlatformView('facebook', v)} image={imageUrl} showFolded={showFolded} /></div>;
+                    if (key === 'threads') return <div id="platform-card-threads" key="thw"><ThreadsPreview key="threads" text={analysisText} lang={lang} s={strings} toolLinkHref={`/${lang}/${toolSlugs.threads}/`} view={views.threads} setView={(v) => setPlatformView('threads', v)} image={imageUrl} showFolded={showFolded} /></div>;
                   })}
                   <SmsCounter text={analysisText} lang={lang} s={strings.sms} />
                 </>
               ) : (
                 <>
-                  {previewTab === 'linkedin' && <div id="platform-card-linkedin"><LinkedInPreview text={analysisText} view={views.linkedin} setView={(v) => setPlatformView('linkedin', v)} lang={lang} s={strings} toolLinkHref={`/${lang}/${toolSlugs.linkedin}/`} /></div>}
-                  {previewTab === 'twitter' && <div id="platform-card-twitter"><TwitterPreview text={analysisText} lang={lang} s={strings} toolLinkHref={`/${lang}/${toolSlugs.twitter}/`} /></div>}
-                  {previewTab === 'instagram' && <div id="platform-card-meta"><MetaMonitor text={analysisText} lang={lang} s={strings} toolLinkHref={`/${lang}/${toolSlugs.instagram}/`} facebookToolLinkHref={`/${lang}/${toolSlugs.facebook}/`} only="instagram" instagramView={views.instagram} setInstagramView={(v) => setPlatformView('instagram', v)} facebookView={views.facebook} setFacebookView={(v) => setPlatformView('facebook', v)} /></div>}
-                  {previewTab === 'facebook' && <div id="platform-card-meta"><MetaMonitor text={analysisText} lang={lang} s={strings} toolLinkHref={`/${lang}/${toolSlugs.instagram}/`} facebookToolLinkHref={`/${lang}/${toolSlugs.facebook}/`} only="facebook" priority="facebook" instagramView={views.instagram} setInstagramView={(v) => setPlatformView('instagram', v)} facebookView={views.facebook} setFacebookView={(v) => setPlatformView('facebook', v)} /></div>}
-                  {previewTab === 'threads' && <div id="platform-card-threads"><ThreadsPreview text={analysisText} lang={lang} s={strings} toolLinkHref={`/${lang}/${toolSlugs.threads}/`} view={views.threads} setView={(v) => setPlatformView('threads', v)} /></div>}
+                  {previewTab === 'linkedin' && <div id="platform-card-linkedin"><LinkedInPreview text={analysisText} view={views.linkedin} setView={(v) => setPlatformView('linkedin', v)} lang={lang} s={strings} toolLinkHref={`/${lang}/${toolSlugs.linkedin}/`} image={imageUrl} showFolded={showFolded} /></div>}
+                  {previewTab === 'twitter' && <div id="platform-card-twitter"><TwitterPreview text={analysisText} lang={lang} s={strings} toolLinkHref={`/${lang}/${toolSlugs.twitter}/`} image={imageUrl} /></div>}
+                  {previewTab === 'instagram' && <div id="platform-card-meta"><MetaMonitor text={analysisText} lang={lang} s={strings} toolLinkHref={`/${lang}/${toolSlugs.instagram}/`} facebookToolLinkHref={`/${lang}/${toolSlugs.facebook}/`} only="instagram" instagramView={views.instagram} setInstagramView={(v) => setPlatformView('instagram', v)} facebookView={views.facebook} setFacebookView={(v) => setPlatformView('facebook', v)} image={imageUrl} showFolded={showFolded} /></div>}
+                  {previewTab === 'facebook' && <div id="platform-card-meta"><MetaMonitor text={analysisText} lang={lang} s={strings} toolLinkHref={`/${lang}/${toolSlugs.instagram}/`} facebookToolLinkHref={`/${lang}/${toolSlugs.facebook}/`} only="facebook" priority="facebook" instagramView={views.instagram} setInstagramView={(v) => setPlatformView('instagram', v)} facebookView={views.facebook} setFacebookView={(v) => setPlatformView('facebook', v)} image={imageUrl} showFolded={showFolded} /></div>}
+                  {previewTab === 'threads' && <div id="platform-card-threads"><ThreadsPreview text={analysisText} lang={lang} s={strings} toolLinkHref={`/${lang}/${toolSlugs.threads}/`} view={views.threads} setView={(v) => setPlatformView('threads', v)} image={imageUrl} showFolded={showFolded} /></div>}
                   {previewTab === 'sms' && <SmsCounter text={analysisText} lang={lang} s={strings.sms} />}
                 </>
               )}
@@ -384,6 +417,27 @@ export default function Dashboard({ lang, strings, toolSlugs, focus }: Props) {
         </div>
       </details>
     </div>
+  );
+}
+
+/**
+ * Compact switch controlling whether previews render the dimmed below-the-fold
+ * remainder. A single panel-level preference shared by every foldable card.
+ */
+function FoldToggle({ checked, onChange, label }: { checked: boolean; onChange: () => void; label: string }) {
+  return (
+    <button
+      type="button"
+      role="switch"
+      aria-checked={checked}
+      onClick={onChange}
+      class="inline-flex items-center gap-2 text-[12px] font-medium text-body transition-colors hover:text-ink"
+    >
+      <span class={`relative h-4 w-7 shrink-0 rounded-pill transition-colors duration-150 ${checked ? 'bg-link' : 'bg-hairline-strong'}`}>
+        <span class={`absolute top-0.5 h-3 w-3 rounded-full bg-on-primary transition-[left] duration-150 ${checked ? 'left-3.5' : 'left-0.5'}`} />
+      </span>
+      {label}
+    </button>
   );
 }
 

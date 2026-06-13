@@ -779,6 +779,12 @@ export const zh: Translations = {
         '发现了会破坏计数和屏幕阅读器的不可见字符：{codes}。净化以将其剥除。',
       statusLine: '实时分析已开启',
     },
+    imageUpload: {
+      add: '添加图片',
+      replace: '替换图片',
+      remove: '移除图片',
+      hint: '仅用于预览 — 不会上传或保存。刷新后即清除。',
+    },
     aiImprove: {
       button: 'AI 优化',
       pickTone: '使用 AI 优化',
@@ -808,6 +814,7 @@ export const zh: Translations = {
       title: '平台实时预览',
       tabAria: '{platform}预览',
       compareAll: '全部对比',
+      showHidden: '显示被折叠的文字',
     },
     insights: {
       title: '高级分析',

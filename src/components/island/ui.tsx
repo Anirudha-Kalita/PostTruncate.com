@@ -1,5 +1,7 @@
 /** @jsxImportSource preact */
 import type { ComponentChildren } from 'preact';
+import { useState } from 'preact/hooks';
+import { clampFeedRatio } from '../../lib/textTools';
 import type { IslandStrings } from '../../i18n/types';
 
 // ──────────────────────────────────────────────────────────────────────────
@@ -364,6 +366,49 @@ export function Globe({ size = 13 }: { size?: number }) {
       <circle cx="12" cy="12" r="9" />
       <path d="M3 12h18M12 3c2.6 2.5 2.6 15.5 0 18M12 3c-2.6 2.5-2.6 15.5 0 18" />
     </svg>
+  );
+}
+
+interface FeedImageProps {
+  /** Object URL of the in-memory preview image. */
+  src: string;
+  /**
+   * Minimum rendered aspect ratio as height ÷ width. e.g. 1 forces at least a
+   * square (used by Instagram, which never shows landscape shorter than 1:1).
+   */
+  minRatio?: number;
+  /**
+   * Maximum rendered aspect ratio as height ÷ width. e.g. 1.25 caps a portrait
+   * at 4:5 (LinkedIn / Instagram); taller uploads are center-cropped to it.
+   */
+  maxRatio?: number;
+  /** Object-fit when the natural ratio is clamped (default "cover" = crop). */
+  fit?: 'cover' | 'contain';
+}
+
+/**
+ * A platform feed image. Measures the upload's natural dimensions on load and
+ * clamps the rendered aspect ratio into each platform's allowed band, so the
+ * preview crops exactly the way that platform would. Before the image loads it
+ * renders at natural height to avoid a reserved-space flash.
+ */
+export function FeedImage({ src, minRatio, maxRatio, fit = 'cover' }: FeedImageProps) {
+  const [ratio, setRatio] = useState<number | null>(null);
+
+  const onLoad = (e: Event) => {
+    const im = e.currentTarget as HTMLImageElement;
+    if (!im.naturalWidth) return;
+    setRatio(clampFeedRatio(im.naturalHeight / im.naturalWidth, { min: minRatio, max: maxRatio }));
+  };
+
+  return (
+    <img
+      src={src}
+      alt=""
+      onLoad={onLoad}
+      class={`block w-full bg-canvas-soft-2 ${fit === 'cover' ? 'object-cover' : 'object-contain'}`}
+      style={ratio !== null ? `aspect-ratio: 1 / ${ratio};` : undefined}
+    />
   );
 }
 

@@ -781,6 +781,12 @@ export const fr: Translations = {
         'Caractères invisibles détectés qui faussent les comptages et les lecteurs d’écran : {codes}. Nettoyez pour les supprimer.',
       statusLine: 'L’analyse en temps réel est active',
     },
+    imageUpload: {
+      add: 'Ajouter une image',
+      replace: 'Remplacer l’image',
+      remove: 'Supprimer l’image',
+      hint: 'Aperçu uniquement — jamais téléversé ni stocké. Disparaît au rechargement.',
+    },
     aiImprove: {
       button: 'Améliorer avec l’IA',
       pickTone: 'Améliorer avec l’IA',
@@ -810,6 +816,7 @@ export const fr: Translations = {
       title: 'Aperçu en direct par plateforme',
       tabAria: 'Aperçu {platform}',
       compareAll: 'Tout comparer',
+      showHidden: 'Afficher le texte masqué',
     },
     insights: {
       title: 'Analyses avancées',

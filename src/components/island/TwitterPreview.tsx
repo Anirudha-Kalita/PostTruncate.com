@@ -5,13 +5,14 @@ import {
   weightedLength,
   detectUrls,
   LIMITS,
+  IMAGE_RATIOS,
 } from '../../lib/textTools';
 import {
   Card,
   CardHead,
   Badge,
   Meter,
-  FoldMarker,
+  FeedImage,
   BrandLogo,
   ToolLink,
   Avatar,
@@ -30,6 +31,8 @@ interface Props {
   lang: string;
   s: IslandStrings;
   toolLinkHref?: string;
+  /** Object URL of the attached preview image, or null when none. */
+  image?: string | null;
 }
 
 /**
@@ -38,7 +41,7 @@ interface Props {
  * splits it into clean tweets — never mid-word — each tagged with an "n/total"
  * counter in the bottom-right corner.
  */
-export function TwitterPreview({ text, lang, s, toolLinkHref }: Props) {
+export function TwitterPreview({ text, lang, s, toolLinkHref, image }: Props) {
   const tw = s.twitter;
   const nf = new Intl.NumberFormat(lang);
   const author = previewAuthor(s.common);
@@ -48,6 +51,9 @@ export function TwitterPreview({ text, lang, s, toolLinkHref }: Props) {
   const urls = detectUrls(trimmed);
   const tweets = splitThread(trimmed);
   const isThread = tweets.length > 1;
+  // An image alone (no text) is still a valid post, so render one empty tweet
+  // to carry it. The image always attaches to the first tweet of a thread.
+  const displayTweets = tweets.length === 0 && image ? [''] : tweets;
 
   return (
     <Card>
@@ -89,12 +95,12 @@ export function TwitterPreview({ text, lang, s, toolLinkHref }: Props) {
       </div>
 
       <div class="space-y-3 p-4 sm:p-5">
-        {tweets.length === 0 ? (
+        {displayTweets.length === 0 ? (
           <article class="rounded-md border border-hairline bg-canvas p-4 text-[14px] text-mute">
             {interp(tw.placeholder, { limit: nf.format(LIMITS.TWEET) })}
           </article>
         ) : (
-          tweets.map((tweet, i) => (
+          displayTweets.map((tweet, i) => (
             <Fragment key={i}>
             <PostCard
               layout="gutter"
@@ -117,6 +123,14 @@ export function TwitterPreview({ text, lang, s, toolLinkHref }: Props) {
                 {tweet}
               </p>
 
+              {/* Single image rides the first tweet, in X's rounded 16:9-leaning
+                  frame. Wide/square show fully; tall portraits crop. */}
+              {image && i === 0 && (
+                <div class="mt-3 overflow-hidden rounded-2xl border border-hairline">
+                  <FeedImage src={image} maxRatio={IMAGE_RATIOS.twitter.max} />
+                </div>
+              )}
+
               {/* Faint engagement row — reply / repost / like / views. */}
               <div class="mt-3 flex max-w-[300px] items-center justify-between text-mute/55">
                 <Engagement icon="reply" />
@@ -133,10 +147,6 @@ export function TwitterPreview({ text, lang, s, toolLinkHref }: Props) {
                 )}
               </div>
             </PostCard>
-            {/* X cuts into a second tweet here — the effective fold. */}
-            {isThread && i === 0 && (
-              <FoldMarker label={s.hook.foldLabel} ariaLabel={s.hook.foldAria} />
-            )}
             </Fragment>
           ))
         )}
