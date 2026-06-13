@@ -43,7 +43,7 @@ Before the detail, here's the full table. Bookmark this, because it covers every
 
 ![LinkedIn character limits by feature type, showing the scale from 100-character company names to 100,000-character articles](/og/LinkedIn2.webp)
 
-LinkedIn character limits by feature type, showing the scale from 100-character company names to 100,000-character articles
+<p align="center"><span style="font-size: 12px; "><em>LinkedIn character limits by feature type, showing the scale from 100-character company names to 100,000-character articles</em></span></p>
 
 Now let's go through each area in depth, starting with the one that trips up the most people.
 
@@ -61,7 +61,7 @@ Posts where the main value is buried below the fold see **40-60% lower engagemen
 
 ![Side-by-side comparison of LinkedIn's mobile fold (~140 chars) versus desktop fold (~210 chars), showing where posts get cut on each device](/og/LinkedIn-3.webp)
 
-Side-by-side comparison of LinkedIn's mobile fold (\~140 chars) versus desktop fold (\~210 chars), showing where posts get cut on each device
+<p align="center"><span style="font-size: 12px; "><em>Side-by-side comparison of LinkedIn's mobile fold (\~140 chars) versus desktop fold (\~210 chars), showing where posts get cut on each device</em></span></p>
 
 The practical rule: write your first sentence as a complete, standalone statement. Not a teaser, not a preamble - a full thought that delivers real value. "We cut our onboarding drop-off by 40% by removing one field" works at 140 characters. "Here's something I've been thinking about lately…" does not.
 
@@ -77,7 +77,7 @@ Your LinkedIn profile has multiple distinct character limits across different se
 
 ![LinkedIn profile layout with labeled character limits for each section - name, headline, and About field](/og/LinkedIn-4.webp)
 
-LinkedIn profile layout with labelled character limits for each section - name, headline, and About field
+<p align="center"><span style="font-size: 12px; "><em>LinkedIn profile layout with labelled character limits for each section - name, headline, and About field</em></span></p>
 
 ### Headline (220 characters)
 
@@ -190,7 +190,7 @@ For [Twitter/X](/en/twitter-character-counter/) (280-character hard limit), [Fac
 
 https://youtu.be/3EJc5YJHBMI
 
-<figure><figcaption>PostTruncate LinkedIn character counter showing real-time fold markers and character count</figcaption></figure>
+<p align="center"><span style="font-size: 12px; "><em>PostTruncate LinkedIn character counter showing real-time fold markers and character count</em></span></p>
 
 ## FAQ
 
