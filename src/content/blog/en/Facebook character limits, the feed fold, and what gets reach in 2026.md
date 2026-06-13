@@ -27,7 +27,7 @@ The limits that actually affect reach operate well below the technical ceiling. 
 
 ![Facebook character limits that actually matter - showing engagement peak at 80 chars, mobile fold at 110, desktop fold at 480, and technical ceiling at 63,206](/og/facebook-2.webp)
 
-Facebook character limits that actually matter - showing engagement peak at 80 chars, mobile fold at 110, desktop fold at 480, and technical ceiling at 63,206
+<p align="center"><span style="font-size: 12px; "><em>Facebook character limits that actually matter - showing engagement peak at 80 chars, mobile fold at 110, desktop fold at 480, and technical ceiling at 63,206</em></span></p>
 
 ### The 80-character engagement peak
 
@@ -68,7 +68,7 @@ The feed doesn't show posts chronologically. It ranks content by predicted engag
 
 ![What Facebook's algorithm boosts vs suppresses - comparison infographic](/og/facebook.webp)
 
-What Facebook's algorithm boosts vs suppresses - comparison infographic
+<p align="center"><span style="font-size: 12px; "><em>What Facebook's algorithm boosts vs suppresses - comparison infographic</em></span></p>
 
 ### Primary ranking signals
 
@@ -96,7 +96,7 @@ The algorithm actively penalises several patterns:
 
 ![Facebook post types character limits comparison table](/og/9898ab2ea02e49e2ba3a46ea37e357d7.webp)
 
-Facebook post types character limits comparison table
+<p align="center"><span style="font-size: 12px; "><em>Facebook post types character limits comparison table</em></span></p>
 
 ### Feed posts
 
@@ -148,7 +148,7 @@ From practitioner research and platform data, a few things consistently separate
 
 https://youtu.be/BHuYvt0OTRg
 
-<figure><figcaption>PostTruncate Facebook character counter showing live fold markers on mobile and desktop, as taken from PostTruncate</figcaption></figure>
+<p align="center"><span style="font-size: 12px; "><em>PostTruncate Facebook character counter showing live fold markers on mobile and desktop, as taken from PostTruncate</em></span></p>
 
 Everything runs client-side - your text never leaves your browser, there's no account required, and the tool is completely free. PostTruncate covers all major platforms in one interface: Facebook, [LinkedIn](/en/linkedin-character-counter/), [X (Twitter)](/en/twitter-character-counter/), [Instagram](/en/instagram-character-counter/), [Threads](/en/threads-character-counter/), and [SMS](/en/sms-character-counter/) - so you can see how the same content performs across every channel before posting anywhere.
 
