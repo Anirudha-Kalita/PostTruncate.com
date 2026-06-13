@@ -38,7 +38,7 @@ export const pt: Translations = {
   hero: {
     eyebrow: 'Simulador de pré-visualização e truncagem para redes sociais',
     title: 'Veja exatamente onde cada plataforma corta o seu texto.',
-    lede: 'Escreva uma vez e veja a sua publicação a ser apresentada em pré-visualizações nativas do LinkedIn, X, Instagram e Facebook — linhas de dobra, divisões de threads, limites de hashtags e avisos de acessibilidade, tudo em tempo real à medida que escreve.',
+    lede: 'Escreva uma vez e veja a sua publicação a ser apresentada em pré-visualizações nativas do LinkedIn, X, Threads, Instagram e Facebook — com linhas de dobra, divisões de threads, limites de hashtags e avisos de acessibilidade em tempo real à medida que escreve, mais IA de um toque para melhorar a sua publicação na hora.',
     primary: 'Começar a escrever',
     secondary: 'Ver os limites das plataformas',
     badge: 'Pré-visualizações em tempo real. Chega de adivinhação.',

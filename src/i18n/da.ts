@@ -38,7 +38,7 @@ export const da: Translations = {
   hero: {
     eyebrow: 'Preview- og afkortningssimulator til sociale medier',
     title: 'Se præcis hvor hver platform klipper din tekst over.',
-    lede: 'Skriv én gang, og se dit opslag blive vist i ægte LinkedIn-, X-, Instagram- og Facebook-previews — foldlinjer, trådopdelinger, hashtag-grænser og tilgængelighedsadvarsler, alt sammen live mens du skriver.',
+    lede: 'Skriv én gang, og se dit opslag blive vist i ægte LinkedIn-, X-, Threads-, Instagram- og Facebook-previews — med foldlinjer, trådopdelinger, hashtag-grænser og tilgængelighedsadvarsler live mens du skriver, plus ét-klik AI til at forbedre dit opslag på stedet.',
     primary: 'Begynd at skrive',
     secondary: 'Se platformsgrænser',
     badge: 'Realtidsvisning. Slut med at gætte.',

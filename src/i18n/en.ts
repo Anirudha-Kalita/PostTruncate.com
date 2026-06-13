@@ -38,7 +38,7 @@ export const en: Translations = {
   hero: {
     eyebrow: 'Social preview & truncation simulator',
     title: 'See exactly where every platform cuts your text.',
-    lede: 'Write once and watch your post render in native LinkedIn, X, Instagram, and Facebook previews — fold lines, thread splits, hashtag limits, and accessibility warnings, all live as you type.',
+    lede: 'Write once and watch your post render in native LinkedIn, X, Threads, Instagram, and Facebook previews — with fold lines, thread splits, hashtag limits, and accessibility warnings live as you type, plus one-tap AI to improve your post on the spot.',
     primary: 'Start writing',
     secondary: 'See platform limits',
     badge: 'Real-time previews. No more guessing.',

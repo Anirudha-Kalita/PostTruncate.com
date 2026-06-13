@@ -38,7 +38,7 @@ export const fr: Translations = {
   hero: {
     eyebrow: 'Simulateur d’aperçu social et de troncature',
     title: 'Voyez exactement où chaque plateforme coupe votre texte.',
-    lede: 'Écrivez une seule fois et regardez votre publication s’afficher dans les aperçus natifs de LinkedIn, X, Instagram et Facebook — lignes de pli, découpes en fils, limites de hashtags et avertissements d’accessibilité, le tout en direct pendant que vous écrivez.',
+    lede: 'Écrivez une seule fois et regardez votre publication s’afficher dans les aperçus natifs de LinkedIn, X, Threads, Instagram et Facebook — avec des lignes de pli, des découpes en fils, des limites de hashtags et des avertissements d’accessibilité en direct pendant que vous écrivez, plus une IA en un clic pour améliorer votre publication sur le champ.',
     primary: 'Commencer à écrire',
     secondary: 'Voir les limites des plateformes',
     badge: 'Aperçus en temps réel. Plus de devinettes.',

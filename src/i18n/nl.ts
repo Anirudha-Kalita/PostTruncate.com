@@ -38,7 +38,7 @@ export const nl: Translations = {
   hero: {
     eyebrow: 'Social-preview- en afkapsimulator',
     title: 'Zie precies waar elk platform je tekst afkapt.',
-    lede: 'Schrijf één keer en zie je bericht weergegeven in de native previews van LinkedIn, X, Instagram en Facebook — vouwregels, threadsplitsingen, hashtaglimieten en toegankelijkheidswaarschuwingen, allemaal live terwijl je typt.',
+    lede: 'Schrijf één keer en zie je bericht weergegeven in de native previews van LinkedIn, X, Threads, Instagram en Facebook — met vouwregels, threadsplitsingen, hashtaglimieten en toegankelijkheidswaarschuwingen live terwijl je typt, plus één-tik AI om je bericht meteen te verbeteren.',
     primary: 'Begin met schrijven',
     secondary: 'Bekijk de platformlimieten',
     badge: 'Real-time voorbeelden. Geen giswerk meer.',

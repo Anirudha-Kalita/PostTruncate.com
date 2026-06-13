@@ -39,7 +39,7 @@ export const de: Translations = {
   hero: {
     eyebrow: 'Social-Vorschau & Abschneide-Simulator',
     title: 'Sieh genau, wo jede Plattform deinen Text abschneidet.',
-    lede: 'Schreib einmal und beobachte, wie dein Beitrag in nativen Vorschauen von LinkedIn, X, Instagram und Facebook erscheint — Falz-Linien, Thread-Aufteilungen, Hashtag-Limits und Barrierefreiheits-Warnungen, alles live beim Tippen.',
+    lede: 'Schreib einmal und beobachte, wie dein Beitrag in nativen Vorschauen von LinkedIn, X, Threads, Instagram und Facebook erscheint — mit Falz-Linien, Thread-Aufteilungen, Hashtag-Limits und Barrierefreiheits-Warnungen live beim Tippen, plus Ein-Tipp-KI zur sofortigen Verbesserung deines Beitrags.',
     primary: 'Loslegen',
     secondary: 'Plattform-Limits ansehen',
     badge: 'Echtzeit-Vorschau. Kein Rätselraten mehr.',

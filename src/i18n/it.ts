@@ -38,7 +38,7 @@ export const it: Translations = {
   hero: {
     eyebrow: 'Anteprima social e simulatore di troncamento',
     title: 'Scopri esattamente dove ogni piattaforma taglia il tuo testo.',
-    lede: 'Scrivi una sola volta e guarda il tuo post nelle anteprime native di LinkedIn, X, Instagram e Facebook: righe della soglia, suddivisioni dei thread, limiti degli hashtag e avvisi di accessibilità, tutto in tempo reale mentre scrivi.',
+    lede: 'Scrivi una sola volta e guarda il tuo post nelle anteprime native di LinkedIn, X, Threads, Instagram e Facebook: con righe della soglia, suddivisioni dei thread, limiti degli hashtag e avvisi di accessibilità in tempo reale mentre scrivi, più IA in un tocco per migliorare il tuo post sul momento.',
     primary: 'Inizia a scrivere',
     secondary: 'Vedi i limiti delle piattaforme',
     badge: 'Anteprime in tempo reale. Niente più supposizioni.',

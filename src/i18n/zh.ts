@@ -38,7 +38,7 @@ export const zh: Translations = {
   hero: {
     eyebrow: '社交预览与截断模拟器',
     title: '精准查看每个平台会在哪里截断你的文字。',
-    lede: '写一次，即可看到你的帖子在 LinkedIn、X、Instagram 和 Facebook 的原生预览中呈现的样子——折叠行、串文拆分、话题标签上限以及无障碍提醒，全部随你输入实时更新。',
+    lede: '写一次，即可看到你的帖子在 LinkedIn、X、Threads、Instagram 和 Facebook 的原生预览中呈现的样子——包括折叠行、串文拆分、话题标签上限以及无障碍提醒，全部随你输入实时更新，还可一键 AI 即时优化你的帖子。',
     primary: '开始写作',
     secondary: '查看平台限制',
     badge: '实时预览。不再需要猜测。',
