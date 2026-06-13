@@ -29,11 +29,11 @@ When I started checking my character placement with a character counter before p
 
 ![Character Placement Mobile Fold Infographic](/og/twitter-hero.webp)
 
-Character Placement Mobile Fold Infographic
+<p align="center"><span style="font-size: 12px; "><em>Character Placement Mobile Fold Infographic</em></span></p>
 
 ## Keyword Placement: The First 25 Characters Rule
 
-X's algorithm prioritizes keywords that appear early in your post. I tested this with identical posts-one with the keyword in the first sentence, one with it three tweets into a thread.
+X's algorithm prioritises keywords that appear early in your post. I tested this with identical posts-one with the keyword in the first sentence, one with it three tweets into a thread.
 
 The early-keyword version won by 40% every time.
 
@@ -78,7 +78,7 @@ I tested two weeks of evening-only posts versus my usual morning schedule. Eveni
 
 ![Optimal Posting Times Timeline](/og/twitter-statistics.webp)
 
-Optimal Posting Times Timeline
+<p align="center"><span style="font-size: 12px; "><em>Optimal Posting Times Timeline</em></span></p>
 
 I used to do what everyone recommends-cram 5-10 hashtags into every post. My engagement was mediocre.
 
@@ -96,7 +96,7 @@ Results:
 
 ![Hashtag Strategy Engagement Comparison](/og/twitter-bar-graph.webp)
 
-Hashtag Strategy Engagement Comparison
+<p align="center"><span style="font-size: 12px; "><em>Hashtag Strategy Engagement Comparison</em></span></p>
 
 My approach now:
 
@@ -146,7 +146,6 @@ Before you hit publish, use this checklist:
 -   **Engagement plan** - will you respond in the first 2 hours?
 
 ## FAQ
-
 
 <details>
 <summary><b> Does X use keywords like Google SEO?</b> </b></summary>
