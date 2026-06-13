@@ -667,6 +667,37 @@ export const nl: Translations = {
     }
   },
 
+  whoIsItFor: {
+      eyebrow: "VOOR WIE IS HET?",
+      title: "Perfect voor elke content creator",
+      roles: {
+          marketers: {
+              title: "Marketeers",
+              desc: "Optimaliseer campagnes, advertentieteksten en sociale posts voor maximaal bereik en betrokkenheid."
+          },
+          creators: {
+              title: "Creators",
+              desc: "Schrijf betere bijschriften en threads die meer likes, shares en saves krijgen."
+          },
+          agencies: {
+              title: "Bureaus",
+              desc: "Beheer meerdere klanten en zorg ervoor dat elke post perfect is geoptimaliseerd."
+          },
+          founders: {
+              title: "Oprichters",
+              desc: "Deel updates en bouw je merk op met duidelijke, impactvolle content."
+          }
+      }
+  },
+
+  ctaBanner: {
+    title: 'Klaar om je content te optimaliseren?',
+    body: 'Sluit je aan bij duizenden makers en marketeers die beter schrijven, slimmer posten en meer betrokkenheid krijgen.',
+    cta: 'Gratis beginnen met schrijven',
+    noCard: 'Geen creditcard nodig',
+    free: 'Voor altijd gratis',
+  },
+
   island: {
     dashboard: {
       loadSample: 'Laad een voorbeeldbericht →',

@@ -667,6 +667,37 @@ export const da: Translations = {
     }
   },
 
+  whoIsItFor: {
+      eyebrow: "HVEM ER DET TIL?",
+      title: "Perfekt til enhver indholdsskaber",
+      roles: {
+          marketers: {
+              title: "Markedsførere",
+              desc: "Optimer kampagner, annoncetekster og sociale opslag for maksimal rækkevidde og engagement."
+          },
+          creators: {
+              title: "Skabere",
+              desc: "Skriv bedre billedtekster og tråde, der får flere likes, delinger og gemmer."
+          },
+          agencies: {
+              title: "Bureauer",
+              desc: "Administrer flere kunder og sørg for, at hvert opslag er perfekt optimeret."
+          },
+          founders: {
+              title: "Stiftere",
+              desc: "Del opdateringer og opbyg dit brand med klart, virkningsfuldt indhold."
+          }
+      }
+  },
+
+  ctaBanner: {
+    title: 'Klar til at optimere dit indhold?',
+    body: 'Bliv en del af tusindvis af skabere og marketingfolk, der skriver bedre, poster smartere og får mere engagement.',
+    cta: 'Begynd at skrive gratis',
+    noCard: 'Intet kreditkort påkrævet',
+    free: 'Gratis for altid',
+  },
+
   island: {
     dashboard: {
       loadSample: 'Indlæs et eksempelopslag →',

@@ -93,6 +93,7 @@ Layered pipeline — **run the cheapest layer that covers the change; escalate o
 
 ### After any file edits
 
-- Always run 'npx astro sync' after modifying any source files, especially content collections, config, or component files.
+- After modifying source files, run `npx astro sync` to regenerate `.astro` types — especially for component, config, or content changes.
+- **For content collection / config / i18n changes that produce stale-cache errors, `astro sync` alone is NOT sufficient** — it does not regenerate a corrupted `.astro` cache. The correct recovery is `npm run clean && npx astro sync` (delete the cache FIRST, then sync). `npm run fresh` does this and boots the dev server in one command.
 - After modifying source files, run `npm run test:fast` (typecheck + lint) before considering the change done. Escalate to `test:unit` / `test:browser` per the Testing table above based on what was touched. Do not jump straight to browser screenshots.
 

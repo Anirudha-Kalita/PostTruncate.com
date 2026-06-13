@@ -13,6 +13,7 @@ import HeroPreviewCard from '../../../components/HeroPreviewCard.astro';
 import WhyPostTruncate from '../../../components/WhyPostTruncate.astro';
 import HowTruncationWorks from '../../../components/HowTruncationWorks.astro';
 import PlatformCharacterLimits from '../../../components/PlatformCharacterLimits.astro';
+import WhoIsItFor from '../../../components/WhoIsItFor.astro';
 import BlogCardGrid from '../../../components/BlogCardGrid.astro';
 import {
   BLOG_SEGMENT,
@@ -78,14 +79,15 @@ const faqs = getFeaturedFaqs(t);
 const site = Astro.site ?? new URL('https://posttruncate.com');
 const pageUrl = new URL(`/${lang}/${locale.slug}/`, site).href;
 
-// "Latest from the blog" row: this locale's 3 newest posts (English-first, so
-// untranslated locales have none and the section is skipped). Reuses the same
-// card as the blog index and platform pages.
+// "Latest from the blog" rail: this locale's newest posts (English-first, so
+// untranslated locales have none and the rail is skipped). Up to 4 fill the
+// paired FAQ+blog band as a tidy 2-column grid beside the FAQ list. Reuses the
+// same card as the blog index and platform pages.
 const blogStrings = getBlogStrings(lang);
 const latestPosts = (await getPublishedPosts())
   .filter((p) => p.data.locale === lang)
   .sort((a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf())
-  .slice(0, 3);
+  .slice(0, 4);
 
 ---
 
@@ -155,6 +157,7 @@ const latestPosts = (await getPublishedPosts())
   <WhyPostTruncate s={t.whyPostTruncate} />
   <HowTruncationWorks s={t.howTruncationWorks} lang={lang} />
   <PlatformCharacterLimits s={t.platformCharacterLimits} lang={lang} />
+  <WhoIsItFor s={t.whoIsItFor} />
 
   <!-- ── Top leaderboard ad (reserved height → 0 CLS) ─────────────────── -->
   <div class="container-page">
@@ -204,16 +207,69 @@ const latestPosts = (await getPublishedPosts())
     </div>
   </section>
 
-  <!-- ── FAQ — curated subset of the shared registry; the full list (and the
-       site's FAQPage JSON-LD) lives on the dedicated /faq page. ──────────── -->
-  <section id="faq" class="container-page faq">
-    <header class="faq__head">
-      <p class="section-eyebrow">{t.faq.eyebrow}</p>
-      <h2 class="section-title">{t.faq.title}</h2>
-    </header>
-    <div class="faq__list">
-      {
-        faqs.map((f) => (
+  {/* ── FAQ (+ Latest blog) ───────────────────────────────────────────────
+       Locales that have published posts (currently English) get the paired
+       two-column band: curated FAQ subset on the left, newest posts on the
+       right. Every other locale keeps the ORIGINAL centered FAQ-only section
+       (no blog rail) — same markup/styling as before the band was added. The
+       full FAQ list (and the site's FAQPage JSON-LD) lives on /[lang]/faq/. */}
+  {latestPosts.length > 0 ? (
+    <section id="faq" class="faqblog container-page">
+      <div class="faqblog__grid">
+        {/* FAQ column */}
+        <div class="faqblog__col">
+          <header class="faqblog__head">
+            <h2 class="faqblog__label">{t.faq.title}</h2>
+          </header>
+          <div class="faq__list faq__list--band">
+            {faqs.map((f) => (
+              <details class="faq__item faq__item--band">
+                <summary class="faq__q">
+                  <span>{f.q}</span>
+                  <svg
+                    class="faq__chev"
+                    width="14"
+                    height="14"
+                    viewBox="0 0 10 10"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true"
+                  >
+                    <path d="M2.5 3.5 5 6.5 7.5 3.5" />
+                  </svg>
+                </summary>
+                <p class="faq__a">{f.a}</p>
+              </details>
+            ))}
+          </div>
+          <p class="faqblog__all faqblog__all--center">
+            <a href={`/${lang}/faq/`}>{t.faq.viewAll} →</a>
+          </p>
+        </div>
+
+        {/* Blog column */}
+        <div class="faqblog__col" aria-labelledby="latest-heading">
+          <header class="faqblog__head faqblog__head--split">
+            <h2 id="latest-heading" class="faqblog__label">{blogStrings.latestHeading}</h2>
+            <a class="faqblog__viewall" href={`/${lang}/${BLOG_SEGMENT}/`}>{blogStrings.viewAll} →</a>
+          </header>
+          <div class="faqblog__articles">
+            <BlogCardGrid posts={latestPosts} lang={lang} readMoreLabel={blogStrings.readMore} />
+          </div>
+        </div>
+      </div>
+    </section>
+  ) : (
+    <section id="faq" class="container-page faq">
+      <header class="faq__head">
+        <p class="section-eyebrow">{t.faq.eyebrow}</p>
+        <h2 class="section-title">{t.faq.title}</h2>
+      </header>
+      <div class="faq__list">
+        {faqs.map((f) => (
           <details class="faq__item">
             <summary class="faq__q">
               <span>{f.q}</span>
@@ -234,29 +290,42 @@ const latestPosts = (await getPublishedPosts())
             </summary>
             <p class="faq__a">{f.a}</p>
           </details>
-        ))
-      }
-    </div>
-    <p class="faq__all">
-      <a href={`/${lang}/faq/`}>{t.faq.viewAll} →</a>
-    </p>
-  </section>
-
-  <!-- ── Latest from the blog — same card as the index/platform pages.
-       Rendered only when this locale actually has posts. ─────────────────── -->
-  {latestPosts.length > 0 && (
-    <section class="latest container-page" aria-labelledby="latest-heading">
-      <header class="latest__head">
-        <h2 id="latest-heading" class="section-title">{blogStrings.latestHeading}</h2>
-      </header>
-      <div class="latest__grid">
-        <BlogCardGrid posts={latestPosts} lang={lang} readMoreLabel={blogStrings.readMore} />
+        ))}
       </div>
-      <p class="latest__all">
-        <a href={`/${lang}/${BLOG_SEGMENT}/`}>{blogStrings.viewAll} →</a>
+      <p class="faq__all">
+        <a href={`/${lang}/faq/`}>{t.faq.viewAll} →</a>
       </p>
     </section>
   )}
+
+  <!-- ── Closing call-to-action banner — sits directly above the footer.
+       Icon + headline/lede on the left, primary CTA (scrolls back to the
+       editor) with a reassurance line on the right. Stacks on mobile. ─────── -->
+  <section class="container-page cta-banner-wrap">
+    <div class="cta-banner">
+      <div class="cta-banner__mesh mesh-gradient" aria-hidden="true"></div>
+      <div class="cta-banner__main">
+        <span class="cta-banner__icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 20h9" />
+            <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4 12.5-12.5z" />
+          </svg>
+        </span>
+        <div class="cta-banner__copy">
+          <h2 class="cta-banner__title">{t.ctaBanner.title}</h2>
+          <p class="cta-banner__body">{t.ctaBanner.body}</p>
+        </div>
+      </div>
+      <div class="cta-banner__action">
+        <a href="#workspace" class="cta-banner__cta">
+          {t.ctaBanner.cta}<span aria-hidden="true">→</span>
+        </a>
+        <p class="cta-banner__note">
+          {t.ctaBanner.noCard}<span aria-hidden="true"> · </span>{t.ctaBanner.free}
+        </p>
+      </div>
+    </div>
+  </section>
 
   <!-- Re-scroll to URL hash after the Dashboard island finishes rendering.
        Problem: the Preact island (<astro-island>) is an empty shell in initial
@@ -560,7 +629,30 @@ const latestPosts = (await getPublishedPosts())
     color: #d4d4d4;
   }
 
-  /* ── FAQ ────────────────────────────────────────────────────────────── */
+  /* ── FAQ + Latest blog band ──────────────────────────────────────────────
+     One section, two columns on desktop: the FAQ accordion (left) beside the
+     blog rail (right). When the locale has no posts the grid collapses to a
+     single centered FAQ column (`--solo`). */
+  .faqblog {
+    scroll-margin-top: 80px;
+    padding-top: 96px;
+  }
+  .faqblog__grid {
+    display: grid;
+    gap: 48px;
+  }
+  @media (min-width: 1024px) {
+    .faqblog__grid {
+      grid-template-columns: minmax(0, 0.82fr) minmax(0, 1.18fr);
+      gap: 56px;
+      align-items: start;
+    }
+  }
+  /* ── FAQ-only section (locales without blog posts) ──────────────────────
+     The ORIGINAL centered layout, kept verbatim so non-English homepages are
+     unchanged: eyebrow + section title, a 760px-wide accordion, ink "View all"
+     link. The paired band above reuses the same `.faq__*` accordion classes
+     and layers its band-specific look via the `--band` modifiers. */
   .faq {
     scroll-margin-top: 80px;
     padding-top: 96px;
@@ -569,17 +661,57 @@ const latestPosts = (await getPublishedPosts())
     margin-bottom: 32px;
     text-align: center;
   }
+
+  .faqblog__head {
+    margin-bottom: 20px;
+  }
+  .faqblog__head--split {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 16px;
+  }
+  .faqblog__label {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--color-ink);
+  }
+  .faqblog__viewall {
+    flex-shrink: 0;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--color-link);
+    white-space: nowrap;
+    transition: color 0.15s ease;
+  }
+  .faqblog__viewall:hover {
+    color: var(--color-link-deep);
+  }
+
+  /* FAQ accordion list — base = original centered section; the band scopes its
+     tighter spacing + hairline border via the `--band` modifiers. */
   .faq__list {
     display: grid;
     gap: 12px;
     max-width: 760px;
     margin-inline: auto;
   }
+  .faq__list--band {
+    max-width: none;
+    margin-inline: 0;
+    gap: 10px;
+  }
   .faq__item {
     border-radius: var(--radius-lg);
     background: var(--color-canvas);
     box-shadow: var(--shadow-e1);
     overflow: hidden;
+  }
+  .faq__item--band {
+    border: 1px solid var(--color-hairline);
   }
   .faq__q {
     display: flex;
@@ -615,6 +747,7 @@ const latestPosts = (await getPublishedPosts())
     line-height: 24px;
     color: var(--color-body);
   }
+  /* "View all FAQs" — original centered section link (ink, underlined). */
   .faq__all {
     margin-top: 24px;
     text-align: center;
@@ -629,43 +762,174 @@ const latestPosts = (await getPublishedPosts())
   .faq__all a:hover {
     opacity: 0.75;
   }
-
-  /* ── Latest from the blog ───────────────────────────────────────────────
-     Card grid reused from the blog index; centered with the page measure. */
-  .latest {
-    scroll-margin-top: 80px;
-    padding-top: 96px;
+  /* "View all FAQs" — band variant: centered, brand-blue like the blog rail's
+     "View all articles" link so the band reads as one unit. */
+  .faqblog__all {
+    margin-top: 24px;
   }
-  .latest__head {
-    margin-bottom: 32px;
+  .faqblog__all--center {
     text-align: center;
   }
-  /* The homepage row shows 3 posts — cap the width so they sit as a centered
-     3-up instead of small cards stranded in the wide page container. */
-  .latest__grid {
-    max-width: 56rem;
-    margin-inline: auto;
-  }
-  .latest__all {
-    margin-top: 32px;
-    text-align: center;
-  }
-  .latest__all a {
+  .faqblog__all a {
     font-size: 15px;
     font-weight: 500;
-    color: var(--color-ink);
-    text-decoration: underline;
-    text-underline-offset: 3px;
+    color: var(--color-link);
+    transition: color 0.15s ease;
   }
-  .latest__all a:hover {
-    opacity: 0.75;
+  .faqblog__all a:hover {
+    color: var(--color-link-deep);
+  }
+
+  /* ── Blog rail ───────────────────────────────────────────────────────────
+     Reuses the blog index card; pinned to a tidy 2-up grid so the rail sits
+     as a compact block beside the FAQ list rather than a single wide row. */
+  .faqblog__articles :global(.article-card-grid) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  @media (max-width: 560px) {
+    .faqblog__articles :global(.article-card-grid) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  /* ── Closing CTA banner ──────────────────────────────────────────────────
+     Wide, short slab above the footer. Soft brand-tinted gradient, icon +
+     copy left, primary CTA + reassurance line right; stacks on mobile. */
+  .cta-banner-wrap {
+    padding-top: 96px;
+    padding-bottom: 64px;
+  }
+  .cta-banner {
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 28px;
+    padding: 32px 40px;
+    border-radius: var(--radius-xl);
+    border: 1px solid var(--color-hairline);
+    background: linear-gradient(115deg, var(--color-link-bg-soft) 0%, var(--color-canvas) 65%);
+  }
+  /* Same brand mesh as the hero, kept to a whisper over the tint. */
+  .cta-banner__mesh {
+    position: absolute;
+    inset: -60% 0 auto 0;
+    height: 200%;
+    opacity: 0.1;
+    filter: blur(10px);
+    pointer-events: none;
+  }
+  .cta-banner__main {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    min-width: 0;
+  }
+  .cta-banner__icon {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background: var(--color-canvas);
+    color: var(--color-link);
+    box-shadow: 0 0 0 6px rgba(0, 112, 243, 0.06);
+  }
+  .cta-banner__title {
+    font-size: 26px;
+    font-weight: 600;
+    line-height: 1.12;
+    letter-spacing: -0.8px;
+    color: var(--color-ink);
+  }
+  .cta-banner__body {
+    margin-top: 8px;
+    max-width: 46ch;
+    font-size: 15px;
+    line-height: 22px;
+    color: var(--color-body);
+  }
+  .cta-banner__action {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    flex-shrink: 0;
+  }
+  .cta-banner__cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    height: 52px;
+    padding: 0 32px;
+    border-radius: var(--radius-pill);
+    font-size: 16px;
+    font-weight: 500;
+    white-space: nowrap;
+    background: var(--color-link);
+    color: var(--color-on-primary);
+    transition: transform 100ms ease, background 0.15s ease;
+  }
+  .cta-banner__cta:hover {
+    background: var(--color-link-deep);
+  }
+  .cta-banner__cta:active {
+    transform: scale(0.96);
+  }
+  .cta-banner__cta:focus-visible {
+    outline-color: var(--color-ink);
+  }
+  .cta-banner__note {
+    font-size: 13px;
+    color: var(--color-mute);
+    white-space: nowrap;
+  }
+
+  @media (max-width: 768px) {
+    .cta-banner-wrap {
+      padding-top: 64px;
+    }
+    .cta-banner {
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 28px 24px;
+    }
+    .cta-banner__action {
+      align-items: stretch;
+      width: 100%;
+    }
+    .cta-banner__cta {
+      justify-content: center;
+    }
+    .cta-banner__note {
+      text-align: center;
+      white-space: normal;
+    }
+  }
+  @media (max-width: 520px) {
+    .cta-banner__main {
+      gap: 18px;
+    }
+    .cta-banner__icon {
+      width: 52px;
+      height: 52px;
+    }
+    .cta-banner__title {
+      font-size: 22px;
+    }
   }
 
   /* ── Long-form SEO copy ─────────────────────────────────────────────────
      Readable measure (~4xl), tokenised colours so dark mode is automatic. */
   .seo-copy {
     scroll-margin-top: 80px;
-    padding-top: 24px;
+    padding-top: 96px;
   }
   .seo-prose {
     max-width: 56rem;
@@ -727,7 +991,8 @@ const latestPosts = (await getPublishedPosts())
       padding-top: var(--spacing-flow-sm);
     }
     .guides,
-    .faq {
+    .faq,
+    .faqblog {
       padding-top: 64px;
     }
     .hookband {

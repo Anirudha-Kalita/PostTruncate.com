@@ -665,6 +665,37 @@ export const zh: Translations = {
     }
   },
 
+  whoIsItFor: {
+      eyebrow: "适用人群",
+      title: "适合所有内容创作者",
+      roles: {
+          marketers: {
+              title: "营销人员",
+              desc: "优化广告活动、广告文案和社交帖子，实现覆盖面和互动率最大化。"
+          },
+          creators: {
+              title: "创作者",
+              desc: "撰写更优质的字幕和长文，获得更多点赞、分享和收藏。"
+          },
+          agencies: {
+              title: "代理机构",
+              desc: "管理多个客户并确保每篇帖子都得到完美优化。"
+          },
+          founders: {
+              title: "创始人",
+              desc: "通过清晰、有影响力的内容分享动态并打造您的品牌。"
+          }
+      }
+  },
+
+  ctaBanner: {
+    title: '准备好优化您的内容了吗？',
+    body: '加入成千上万写得更好、发布更聪明、获得更多互动的创作者和营销人员。',
+    cta: '免费开始写作',
+    noCard: '无需信用卡',
+    free: '永久免费',
+  },
+
   island: {
     dashboard: {
       loadSample: '加载示例帖子 →',

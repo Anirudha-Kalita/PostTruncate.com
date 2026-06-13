@@ -1,0 +1,191 @@
+---
+import type { Translations } from '../i18n/types';
+
+interface Props {
+  s: Translations['whoIsItFor'];
+}
+
+const { s } = Astro.props;
+---
+<section class="container-page who-is-it-for-section">
+  <div class="who-head">
+    <p class="section-eyebrow">{s.eyebrow}</p>
+    <h2 class="section-title">{s.title}</h2>
+  </div>
+  
+  <div class="who-grid">
+    <!-- Marketers -->
+    <div class="feature-card">
+      <div class="feature-icon icon-blue">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M3 3v18h18" />
+          <rect x="7" y="14" width="4" height="7" rx="1" />
+          <rect x="15" y="7" width="4" height="14" rx="1" />
+          <path d="M3 14l6-6 4 3 8-7" />
+        </svg>
+      </div>
+      <div>
+        <h3 class="feature-title">{s.roles.marketers.title}</h3>
+        <p class="feature-desc">{s.roles.marketers.desc}</p>
+      </div>
+    </div>
+
+    <!-- Creators -->
+    <div class="feature-card">
+      <div class="feature-icon icon-purple">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+          <circle cx="9" cy="7" r="4"></circle>
+          <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+          <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+        </svg>
+      </div>
+      <div>
+        <h3 class="feature-title">{s.roles.creators.title}</h3>
+        <p class="feature-desc">{s.roles.creators.desc}</p>
+      </div>
+    </div>
+
+    <!-- Agencies -->
+    <div class="feature-card">
+      <div class="feature-icon icon-darkblue">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+          <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+        </svg>
+      </div>
+      <div>
+        <h3 class="feature-title">{s.roles.agencies.title}</h3>
+        <p class="feature-desc">{s.roles.agencies.desc}</p>
+      </div>
+    </div>
+
+    <!-- Founders -->
+    <div class="feature-card">
+      <div class="feature-icon icon-green">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"></path>
+          <path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"></path>
+          <path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"></path>
+          <path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"></path>
+        </svg>
+      </div>
+      <div>
+        <h3 class="feature-title">{s.roles.founders.title}</h3>
+        <p class="feature-desc">{s.roles.founders.desc}</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .who-is-it-for-section {
+    padding-top: 96px;
+    padding-bottom: 0px;
+    scroll-margin-top: 80px;
+  }
+  .who-head {
+    margin-bottom: 48px;
+  }
+  .section-eyebrow {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--color-mute);
+    margin-bottom: 12px;
+    font-weight: 600;
+  }
+  .section-title {
+    font-size: 32px;
+    font-weight: 600;
+    line-height: 40px;
+    letter-spacing: -1.28px;
+    color: var(--color-ink);
+  }
+  .who-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+  @media (min-width: 640px) {
+    .who-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 40px;
+    }
+  }
+  @media (min-width: 1024px) {
+    .who-grid {
+      grid-template-columns: repeat(4, 1fr);
+      gap: 32px;
+    }
+  }
+  .feature-card {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    flex: 1;
+  }
+  @media (min-width: 640px) and (max-width: 1023px) {
+    .feature-card {
+      flex-direction: row;
+      gap: 20px;
+    }
+  }
+  .feature-icon {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .feature-icon svg {
+    width: 28px;
+    height: 28px;
+  }
+  .icon-blue {
+    background: #E8F2FF;
+    color: #0A66C2;
+  }
+  .icon-purple {
+    background: #F4E8FF;
+    color: #9333EA;
+  }
+  .icon-darkblue {
+    background: #EAF0F6;
+    color: #2563EB;
+  }
+  .icon-green {
+    background: #E8F8F0;
+    color: #16A34A;
+  }
+  :global(html[data-theme='dark']) .icon-blue {
+    background: rgba(10, 102, 194, 0.2);
+    color: #60A5FA;
+  }
+  :global(html[data-theme='dark']) .icon-purple {
+    background: rgba(147, 51, 234, 0.2);
+    color: #C084FC;
+  }
+  :global(html[data-theme='dark']) .icon-darkblue {
+    background: rgba(37, 99, 235, 0.2);
+    color: #60A5FA;
+  }
+  :global(html[data-theme='dark']) .icon-green {
+    background: rgba(22, 163, 74, 0.2);
+    color: #4ADE80;
+  }
+  .feature-title {
+    font-size: 17px;
+    font-weight: 600;
+    color: var(--color-ink);
+    margin-bottom: 8px;
+  }
+  .feature-desc {
+    font-size: 15px;
+    line-height: 24px;
+    color: var(--color-body);
+  }
+</style>

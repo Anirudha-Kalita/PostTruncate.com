@@ -667,6 +667,37 @@ export const en: Translations = {
     }
   },
 
+  whoIsItFor: {
+      eyebrow: "WHO IS IT FOR?",
+      title: "Perfect for every content creator",
+      roles: {
+          marketers: {
+              title: "Marketers",
+              desc: "Optimize campaigns, ad copy, and social posts for maximum reach and engagement."
+          },
+          creators: {
+              title: "Creators",
+              desc: "Write better captions and threads that get more likes, shares, and saves."
+          },
+          agencies: {
+              title: "Agencies",
+              desc: "Manage multiple clients and ensure every post is perfectly optimized."
+          },
+          founders: {
+              title: "Founders",
+              desc: "Share updates and build your brand with clear, impactful content."
+          }
+      }
+  },
+
+  ctaBanner: {
+    title: 'Ready to optimize your content?',
+    body: 'Join thousands of creators and marketers who write better, post smarter, and get more engagement.',
+    cta: 'Start Writing Free',
+    noCard: 'No credit card required',
+    free: 'Free forever',
+  },
+
   island: {
     dashboard: {
       loadSample: 'Load a sample post →',

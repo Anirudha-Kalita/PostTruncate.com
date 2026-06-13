@@ -667,6 +667,37 @@ export const pt: Translations = {
     }
   },
 
+  whoIsItFor: {
+      eyebrow: "PARA QUEM É?",
+      title: "Perfeito para todos os criadores de conteúdo",
+      roles: {
+          marketers: {
+              title: "Marketers",
+              desc: "Otimize campanhas, textos publicitários e posts sociais para maximizar o alcance e o engajamento."
+          },
+          creators: {
+              title: "Criadores",
+              desc: "Escreva legendas e threads melhores que obtenham mais curtidas, compartilhamentos e salvamentos."
+          },
+          agencies: {
+              title: "Agências",
+              desc: "Gerencie vários clientes e garanta que cada postagem seja perfeitamente otimizada."
+          },
+          founders: {
+              title: "Fundadores",
+              desc: "Compartilhe atualizações e construa sua marca com conteúdo claro e impactante."
+          }
+      }
+  },
+
+  ctaBanner: {
+    title: 'Pronto para otimizar o seu conteúdo?',
+    body: 'Junte-se a milhares de criadores e profissionais de marketing que escrevem melhor, publicam de forma mais inteligente e obtêm mais engajamento.',
+    cta: 'Comece a escrever grátis',
+    noCard: 'Não é necessário cartão de crédito',
+    free: 'Grátis para sempre',
+  },
+
   island: {
     dashboard: {
       loadSample: 'Carregar uma publicação de exemplo →',

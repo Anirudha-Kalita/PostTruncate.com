@@ -510,7 +510,7 @@ export const it: Translations = {
       },
       altHeading: 'Preferisci l’email?',
       altBody:
-        "",
+        'Puoi contattarci in qualsiasi momento a {email}. Leggiamo ogni messaggio e rispondiamo il più rapidamente possibile.',
     },
   },
 
@@ -665,6 +665,37 @@ export const it: Translations = {
         notes: "I testi più lunghi vengono divisi in più SMS"
       }
     }
+  },
+
+  whoIsItFor: {
+      eyebrow: "PER CHI È?",
+      title: "Perfetto per ogni creatore di contenuti",
+      roles: {
+          marketers: {
+              title: "Marketer",
+              desc: "Ottimizza campagne, testi pubblicitari e post social per massimizzare la portata e il coinvolgimento."
+          },
+          creators: {
+              title: "Creator",
+              desc: "Scrivi didascalie e thread migliori che ottengano più mi piace, condivisioni e salvataggi."
+          },
+          agencies: {
+              title: "Agenzie",
+              desc: "Gestisci più clienti e assicurati che ogni post sia perfettamente ottimizzato."
+          },
+          founders: {
+              title: "Fondatori",
+              desc: "Condividi aggiornamenti e costruisci il tuo marchio con contenuti chiari e di impatto."
+          }
+      }
+  },
+
+  ctaBanner: {
+    title: 'Pronto a ottimizzare i tuoi contenuti?',
+    body: 'Unisciti a migliaia di creator e marketer che scrivono meglio, pubblicano in modo più intelligente e ottengono più engagement.',
+    cta: 'Inizia a scrivere gratis',
+    noCard: 'Nessuna carta di credito richiesta',
+    free: 'Gratis per sempre',
   },
 
   island: {
