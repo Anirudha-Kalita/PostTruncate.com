@@ -21,7 +21,7 @@ You have 1,200 words of insight, and X gives you 280 characters. The tools that 
 
 Most creators don't lose engagement because of the 280-character limit. They lose it because of how they respond to it.
 
-The manual approach looks like this: write a draft in Google Docs, count characters, find a break point somewhere before 280, copy the first chunk into X, add the second tweet, repeat ten times, try to remember to number them, post at 11pm when your audience is asleep. By tweet 4, you've forgotten what the thread was actually about.
+The manual approach looks like this: write a draft in Google Docs, count characters, find a break point somewhere before 280, copy the first chunk into X, add the second tweet, repeat ten times, try to remember to number them, post at 11 pm when your audience is asleep. By tweet 4, you've forgotten what the thread was actually about.
 
 The result is threads where each tweet cuts off mid-thought, numbered inconsistently, with random line breaks where the word count happened to hit the limit. Engagement drops because readers can't tell if the next tweet is worth clicking.
 
@@ -33,27 +33,27 @@ The mechanics are simpler than you might think.
 
 A thread splitter reads your full text, identifies natural break points - ideally sentence endings, not mid-clause cuts - and divides the content into chunks that each stay under 280 characters. The good ones account for X's weighted character system (so your emoji-heavy tweets don't get miscounted), add numbering automatically (1/5, 2/5, etc.), and show you a preview of each tweet before you commit.
 
-![How a thread splitter turns one long post into a numbered tweet series, as taken from PostTruncate](https://cdn-public.eesel.ai/3841c02d-c48b-43fd-8989-1ec2802cccb0/ee4e4af2-8354-44e5-9fde-c5a3e8a62eff/a7320a4fe3ed4fe98b8da1ede77b62e2.png)
+![How a thread splitter turns one long post into a numbered tweet series, as taken from PostTruncate](/og/Twitter_Article_2.png)
 
 How a thread splitter turns one long post into a numbered tweet series, as taken from PostTruncate
 
-The difference between a good and bad splitter comes down to one thing: whether it breaks at word or sentence boundaries. A splitter that cuts mid-sentence produces threads that read like they got hit by a lawnmower. A splitter that respects sentence structure produces threads where each tweet feels complete.
+The difference between a good and bad splitter comes down to one thing: whether it breaks at word or sentence boundaries. A splitter that cuts mid-sentence produces threads that read as if they got hit by a lawnmower. A splitter that respects sentence structure produces threads where each tweet feels complete.
 
-Most of the tools that existed three years ago are now dead. ThreadCreator (which ran under ThreadStart.io) shut down explicitly citing X's API pricing changes - the costs exceeded revenue after the 2023 price hike. TweetDuck's domain is currently for sale on GoDaddy at $2,995. The ecosystem thinned out significantly.
+Most of the tools that existed three years ago are now dead. ThreadCreator (which ran under ThreadStart.io) shut down, explicitly citing X's API pricing changes - the costs exceeded revenue after the 2023 price hike. TweetDuck's domain is currently for sale on GoDaddy at $2,995. The ecosystem thinned out significantly.
 
-What's left is a smaller group of tools that either survived by expanding beyond X-only features, or avoided API dependency entirely.
+What's left is a smaller group of tools that either survived by expanding beyond X-only features or avoided API dependency entirely.
 
 ## PostTruncate's free thread splitter
 
 PostTruncate's [Twitter character counter](/en/twitter-character-counter) has a built-in thread splitter that's easy to miss because it doesn't announce itself - it activates automatically when your text exceeds 280 characters.
 
-![PostTruncate's Twitter character counter tool in action, as taken from PostTruncate](https://cdn-public.eesel.ai/3841c02d-c48b-43fd-8989-1ec2802cccb0/ee4e4af2-8354-44e5-9fde-c5a3e8a62eff/a651b2d5d2f74ff38f1b5b464e4b7af1.png)
+![PostTruncate's Twitter character counter tool in action, as taken from PostTruncate](/og/Twitter_Article_3.png)
 
 PostTruncate's Twitter character counter tool in action, as taken from PostTruncate
 
 Paste in any length of text. The tool does three things at once: counts characters using X's real weighted system (accounting for link costs, emoji weight, CJK character doubling), shows you a live tweet preview of how the first 280 characters look in the X feed, and splits the overflow into numbered thread tweets at word boundaries.
 
-The weighted length indicator is the part that matters most if you're writing emoji-heavy content or including links. A post with three emoji and one URL can be significantly over 280 characters even when it looks short - PostTruncate's counter shows the weighted count in real time so you see the overage before it's a problem.
+The weighted length indicator is the part that matters most if you're writing emoji-heavy content or including links. A post with three emojis and one URL can be significantly over 280 characters even when it looks short - PostTruncate's counter shows the weighted count in real time, so you see the overage before it's a problem.
 
 Everything runs client-side. Your text never leaves your browser. There's no account, no tracking, no paywall. The tool is fully [privacy-first by design](/en/about) - which makes it the only thread splitter you can use with sensitive drafts without worrying about where your content goes.
 
@@ -63,9 +63,9 @@ What it doesn't do: PostTruncate doesn't post to X for you. It's a formatter and
 
 ## Typefully
 
-[Typefully](https://typefully.com/) is the tool to reach for when splitting isn't enough - when you also want to schedule, analyze performance, and write with AI assistance.
+[Typefully](https://typefully.com/) is the tool to reach for when splitting isn't enough - when you also want to schedule, analyse performance, and write with AI assistance.
 
-![Typefully's writing and scheduling interface, as taken from Typefully](https://cdn-public.eesel.ai/3841c02d-c48b-43fd-8989-1ec2802cccb0/ee4e4af2-8354-44e5-9fde-c5a3e8a62eff/47ff0d6db1424fea821b929f307c5ed5.png)
+![Typefully's writing and scheduling interface, as taken from Typefully](/og/Twitter_Article_4.png)
 
 Typefully's writing and scheduling interface, as taken from Typefully
 
@@ -83,7 +83,7 @@ Typefully supports X, LinkedIn, Bluesky, Threads, and Mastodon from one interfac
 | Pro | $16/mo per social set | 1,000 | X analytics, AI writing, unlimited media |
 | Business | $89/mo per social set | 1,500 | Team collaboration, Slack notifications |
 
-The "per social set" pricing model means costs scale with the number of brand accounts, not team size. Business plan includes unlimited users, which matters for content teams where multiple people need access to the same account.
+The "per social set" pricing model means costs scale with the number of brand accounts, not team size. The business plan includes unlimited users, which matters for content teams where multiple people need access to the same account.
 
 One honest limitation: the free tier's 15-post cap runs out fast for active creators. If you're posting daily threads, the Pro tier at $16/month is effectively the entry point.
 
@@ -93,19 +93,19 @@ One honest limitation: the free tier's 15-post cap runs out fast for active crea
 
 [Chirr App](https://getchirrapp.com/) has been purpose-built for Twitter threads since 2017 - that's nine years of iterating on exactly this problem, which shows in the details.
 
-![Chirr App's thread editor, as taken from Chirr App](https://cdn-public.eesel.ai/3841c02d-c48b-43fd-8989-1ec2802cccb0/ee4e4af2-8354-44e5-9fde-c5a3e8a62eff/3c5bb3c5cc0d42edb56f2dfd4d8fcfdf.png)
+![Chirr App's thread editor, as taken from Chirr App](/og/Twitter_Article_5.png)
 
 Chirr App's thread editor, as taken from Chirr App
 
-The core feature is automatic text splitting with an intelligent algorithm that makes threads readable, not just technically under the character limit. More than 34,000 people have trusted it since launch, including notably Andrew Chen (then at a16z), who mentioned using it in a tweet: _"My process, so far, is pretty simple. I open up getchirrapp.com and force myself to look at an empty box until I start putting ideas down."_
+The core feature is automatic text splitting with an intelligent algorithm that makes threads readable, not just technically, under the character limit. More than 34,000 people have trusted it since launch, including notably Andrew Chen (then at a16z), who mentioned using it in a tweet: _"My process, so far, is pretty simple. I open up getchirrapp.com and force myself to look at an empty box until I start putting ideas down."_
 
 Chirr App includes scheduling, draft saving, cross-posting to LinkedIn and Mastodon, image/video/GIF support, and analytics. The UX is thread-specific in a way that general social schedulers aren't - the editor is designed around the rhythm of writing a thread, not adapted from a single-post interface.
 
 There's a free tier. The paid upgrade adds scheduling in advance, analytics, and team features - though exact pricing wasn't publicly listed at the time of writing (the upgrade page shows a contact-for-pricing flow for some tiers).
 
-**Our take:** Chirr App is the choice for anyone whose entire X strategy is threads. The longevity is a trust signal - this isn't a tool that'll be gone next year because of API pricing changes, as it survived the 2023 crunch that killed ThreadCreator and others. Compared to Typefully, the narrower focus on threads means a more opinionated editor experience, which some creators prefer.
+**Our take:** Chirr App is the choice for anyone whose entire X strategy is threads. Longevity is a trust signal - this isn't a tool that'll be gone next year because of API pricing changes, as it survived the 2023 crunch that killed ThreadCreator and others. Compared to Typefully, the narrower focus on threads means a more opinionated editor experience, which some creators prefer.
 
-![Comparison of PostTruncate, Typefully, and Chirr App for X thread splitting, as taken from PostTruncate](https://cdn-public.eesel.ai/3841c02d-c48b-43fd-8989-1ec2802cccb0/ee4e4af2-8354-44e5-9fde-c5a3e8a62eff/cf6249f7bb8442f0bbfa30a64748dd79.png)
+![Comparison of PostTruncate, Typefully, and Chirr App for X thread splitting, as taken from PostTruncate](/og/Twitter_Article_6.png)
 
 Comparison of PostTruncate, Typefully, and Chirr App for X thread splitting, as taken from PostTruncate
 
@@ -113,7 +113,7 @@ The choice comes down to what you need beyond the split itself.
 
 **Use PostTruncate if:** You want to check and format a thread quickly without creating an account. You have sensitive content you don't want uploaded to a third-party server. You want the most accurate character counting (weighted, link-aware, emoji-aware) before you split. You can copy-paste individual tweets manually or into a scheduler of your choice.
 
-**Use Typefully if:** You need scheduling, multi-platform publishing, and analytics in one tool. You're a content team and need collaboration features. You want AI-assisted writing that learns your voice. You're posting across X, LinkedIn, and Bluesky and want one calendar for all of it.
+**Use Typefully if:** You need scheduling, multi-platformthosepublishing, and analytics in one tool. You're a content team and need collaboration features. You want AI-assisted writing that learns your voice. You're posting across X, LinkedIn, and Bluesky and want one calendar for all of it.
 
 **Use Chirr App if:** You live in threads - this is your primary format on X and you want an editor built specifically for that workflow. You want the thread-first UX without a general social media tool around it.
 
@@ -135,15 +135,15 @@ A thread splitter produces a properly formatted thread. It doesn't produce a wel
 
 The most common mistake with threads: treating them as a single essay that got chopped up. Each tweet in a thread should be able to stand alone as a complete thought. If tweet 3 only makes sense because of what tweet 2 said, you've written a paragraph and forced it into a thread shape.
 
-![The anatomy of a high-performing X thread: hook, depth, and a strong closer, as taken from PostTruncate](https://cdn-public.eesel.ai/3841c02d-c48b-43fd-8989-1ec2802cccb0/ee4e4af2-8354-44e5-9fde-c5a3e8a62eff/52061e2a26314b6d842f340cb699c7dc.png)
+![The anatomy of a high-performing X thread: hook, depth, and a strong closer, as taken from PostTruncate](/og/Twitter_Article_7.png)
 
 The anatomy of a high-performing X thread: hook, depth, and a strong closer, as taken from PostTruncate
 
 Based on PostTruncate's [X SEO research](/en/blog/twitter-x-seo-guide-maximize-post-reach/) - testing 200+ posts over three months - a few patterns hold consistently:
 
-**The opening tweet is everything.** The first tweet is the only one most people see before deciding whether to click "show this thread." Place the hook and the keyword in the first 140 characters (the mobile fold). Posts that buried the value statement below 140 characters got half the engagement of ones that led with the insight.
+**The opening tweet is everything.** The first tweet is the only one most people see before deciding whether to click "show this thread." Place the hook and the keyword in the first 140 characters (the mobile fold). Posts that buried the value statement below 140 characters got half the engagement of those that led with the insight.
 
-**Four to six tweets is the sweet spot.** Single focused tweets beat threads by 35% in engagement rate. But threads beat single tweets in total reach because they stay on the timeline longer. Four to six tweets threads capture enough depth to justify the format without losing people by tweet 7. When testing showed that engagement on tweet 5 was already half what tweet 1 got, that's a signal to wrap up.
+**Four to six tweets are**, **the sweet spot.** Single-focused tweets beat threads by 35% in engagement rate. But threads beat single tweets in total reach because they stay on the timeline longer. Four to six tweet threads capture enough depth to justify the format without losing people by tweet 7. When testing showed that engagement on tweet 5 was already half what tweet 1 got, that's a signal to wrap up.
 
 **Each tweet needs a point.** Not a transitional sentence. Not a cliffhanger designed to make people click through. An actual piece of insight or value that stands alone. The threading format is for narrative depth, not for padding a single idea across twelve tweets.
 
@@ -153,13 +153,13 @@ Before publishing, run your thread through a [character counter](/en/character-c
 
 ## Try PostTruncate
 
-PostTruncate's [Twitter character counter](/en/twitter-character-counter) is the fastest way to see exactly how your long post splits into a thread - no account, no data uploaded, no cost. Paste your draft and the thread splitter activates automatically when you cross 280 characters, showing numbered tweets broken at sentence boundaries and accounting for X's real weighted character system.
+PostTruncate's [Twitter character counter](/en/twitter-character-counter) is the fastest way to see exactly how your long post splits into a thread - no account, no data uploaded, no cost. Paste your draft, and the thread splitter activates automatically when you cross 280 characters, showing numbered tweets broken at sentence boundaries and accounting for X's real weighted character system.
 
 If you're also writing for LinkedIn, Facebook, or other platforms, the [main character counter](/en/character-counter) shows simultaneous previews for all of them - including where each platform cuts off your text with their mobile folds. The [platform limits reference](/en/platform-limits) is worth bookmarking if you're regularly posting across multiple channels.
 
-For more on X reach strategy once your threads are properly formatted, the [PostTruncate X SEO guide](/en/blog/twitter-x-seo-guide-maximize-post-reach/) covers keyword placement, thread length testing, and timing - all from direct testing rather than recycled best-practices content. And if LinkedIn is part of your content mix, the [guide to surviving the LinkedIn feed fold](/en/blog/linkedin-posts-survive-the-fold/) covers the same invisible-truncation problem for that platform.
+For more on X reach strategy, once your threads are properly formatted, the [PostTruncate X SEO guide](/en/blog/twitter-x-seo-guide-maximize-post-reach/) covers keyword placement, thread length testing, and timing - all from direct testing rather than recycled best-practices content. And if LinkedIn is part of your content mix, the [guide to surviving the LinkedIn feed fold](/en/blog/linkedin-posts-survive-the-fold/) covers the same invisible-truncation problem for that platform.
 
-## Frequently Asked Questions
+## FAQ
 
 <details><summary><b>What is the best free tool to automatically split long tweets into a thread?</b></summary>
 <p><a href="/en/twitter-character-counter">PostTruncate's Twitter character counter</a> includes a built-in thread splitter that's completely free with no login required. Paste your text, and it automatically breaks your post into numbered tweets at sentence boundaries. For scheduling on top of splitting, <a href="https://typefully.com/">Typefully's free tier</a> allows 15 posts per month.</p>
