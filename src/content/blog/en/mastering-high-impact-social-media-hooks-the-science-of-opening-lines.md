@@ -45,7 +45,7 @@ Here's what the fold actually looks like across platforms, according to [PostTru
 
 The number that should alarm you is Facebook's mobile fold: 110 characters. That's not much longer than a tweet. On a platform where people write casual multi-paragraph posts, the first 110 characters carry the entire weight of whether anyone engages.
 
-![Platform fold points comparison showing mobile fold vs full character limits across LinkedIn, X, Instagram, Facebook, and Threads](https://cdn-public.eesel.ai/51040ccf-3f79-454f-a639-9dce24a8f7ed/7a9af904-e184-4a32-87f0-7c3146b62273/bdbde08b7be343bc89d5f8147648e5d7.png)
+![Platform fold points comparison showing mobile fold vs full character limits across LinkedIn, X, Instagram, Facebook, and Threads](/og/Mastering_socia_media_hooks_2.webp)
 
 Platform fold points comparison showing mobile fold vs full character limits across LinkedIn, X, Instagram, Facebook, and Threads
 
@@ -59,7 +59,7 @@ So what actually makes someone stop?
 
 The answer isn't stylistic. It's neurological.
 
-![The four psychological principles behind high-impact social media hooks: Zeigarnik Effect, Pattern Interrupt, Curiosity Gap, and Negativity Bias](https://cdn-public.eesel.ai/51040ccf-3f79-454f-a639-9dce24a8f7ed/7a9af904-e184-4a32-87f0-7c3146b62273/23a4529b25f14064a0e3baa4394fc6f4.png)
+![The four psychological principles behind high-impact social media hooks: Zeigarnik Effect, Pattern Interrupt, Curiosity Gap, and Negativity Bias](/og/Mastering_socia_media_hooks_3.webp)
 
 The four psychological principles behind high-impact social media hooks: Zeigarnik Effect, Pattern Interrupt, Curiosity Gap, and Negativity Bias
 
@@ -119,7 +119,7 @@ Before getting into the formulas, it's worth naming what the best hooks have in 
 
 These seven formulas account for the vast majority of high-performing social posts I've seen and tested. They're grounded in the psychological principles above, and each one is designed to be adapted to your voice and topic - not copy-pasted.
 
-![7 hook formula types: Curiosity Gap, Counter-narrative, Credibility, Fear, Story, Bold Data, and Emotion - with example opening lines for each](https://cdn-public.eesel.ai/51040ccf-3f79-454f-a639-9dce24a8f7ed/7a9af904-e184-4a32-87f0-7c3146b62273/d1d1123296794478a576403c42b6b1b7.png)
+![7 hook formula types: Curiosity Gap, Counter-narrative, Credibility, Fear, Story, Bold Data, and Emotion - with example opening lines for each](/og/Mastering_socia_media_hooks_4.webp)
 
 7 hook formula types: Curiosity Gap, Counter-narrative, Credibility, Fear, Story, Bold Data, and Emotion - with example opening lines for each
 
@@ -269,7 +269,7 @@ I've made all of these. The list exists because I've seen smart writers - people
 
 **Hedging the edge off.** "This might vary by audience, but in some cases, there could be value in considering..." No one reads past this. Confident posts get read. Hedged posts get skipped. Even if the underlying insight is good, burying it in qualifications signals that the author isn't sure it's worth reading.
 
-**Optimising**polarising **for desktop when your audience is on mobile.** The fold is different on desktop and mobile for most platforms. If you write a hook for the desktop experience and don't check how it looks on mobile, you're probably losing most of your audience. This is the most common and most fixable mistake.
+**Optimising** Optimising polarising**for desktop when your audience is on mobile.** The fold is different on desktop and mobile for most platforms. If you write a hook for the desktop experience and don't check how it looks on mobile, you're probably losing most of your audience. This is the most common and most fixable mistake.
 
 **Using the same formula until it stops working.** [Soar's research on social media hook psychology](https://www.soarwithus.co/blog/the-science-of-hooks-how-to-use-psychology-to-capture-your-audiences-attention) makes the point clearly: once a hook pattern becomes familiar, the audience becomes immune. The "unpopular opinion:" prefix dominated LinkedIn for about two years; now it triggers immediate scepticism. Formulas age. Rotate them.
 
@@ -283,7 +283,7 @@ A post that reads clearly in a Google Doc might look completely different in a L
 
 [PostTruncate's character counter](/en/character-counter/) solves this. You paste your text into the editor, and it renders real-time previews for LinkedIn, X, Instagram, Facebook, Threads, and SMS - each with the exact fold line marked. You can see precisely which characters are visible before "see more" on each platform, and adjust your hook until it lands in the visible window.
 
-![PostTruncate character counter showing real-time platform previews with fold line indicators for LinkedIn, X, Instagram, and other social platforms](https://cdn-public.eesel.ai/51040ccf-3f79-454f-a639-9dce24a8f7ed/7a9af904-e184-4a32-87f0-7c3146b62273/0583d9e3c3104cc7a9d64e5b5917b932.png)
+![PostTruncate character counter showing real-time platform previews with fold line indicators for LinkedIn, X, Instagram, and other social platforms](/og/Mastering_socia_media_hooks_5%20%281%29.webp)
 
 PostTruncate character counter showing real-time platform previews with fold line indicators for LinkedIn, X, Instagram, and other social platforms
 
@@ -298,7 +298,7 @@ The tool runs entirely client-side. Your text never leaves the browser. There's 
 
 For writers who produce content at scale, this changes the workflow. Instead of publishing and then checking how the post looks in the actual feed, you check before publishing. The hook you write is the hook your audience sees - not a post-hoc discovery that half your opening line got cut.
 
-![PostTruncate platform limits reference showing complete character limits and fold points for all major social platforms](https://cdn-public.eesel.ai/51040ccf-3f79-454f-a639-9dce24a8f7ed/7a9af904-e184-4a32-87f0-7c3146b62273/8db96c55fbdb491fb78ac88dd2559c41.png)
+![PostTruncate platform limits reference showing complete character limits and fold points for all major social platforms](/og/Mastering_socia_media_hooks_6.webp)
 
 PostTruncate platform limits reference showing complete character limits and fold points for all major social platforms
 
