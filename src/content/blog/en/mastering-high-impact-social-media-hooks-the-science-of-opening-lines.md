@@ -47,7 +47,7 @@ The number that should alarm you is Facebook's mobile fold: 110 characters. That
 
 ![Platform fold points comparison showing mobile fold vs full character limits across LinkedIn, X, Instagram, Facebook, and Threads](/og/Mastering_socia_media_hooks_2.webp)
 
-Platform fold points comparison showing mobile fold vs full character limits across LinkedIn, X, Instagram, Facebook, and Threads
+<p align="center"><span style="font-size: 12px; "><em>Platform fold points comparison showing mobile fold vs full character limits across LinkedIn, X, Instagram, Facebook, and Threads</em></span></p>
 
 LinkedIn is almost as brutal. The [LinkedIn character limits guide](/en/blog/linkedin-character-limits-2026/) breaks this down in detail: on mobile, readers see roughly 140 characters before the "see more" fold. On desktop, you get a little more - around 210 characters. But most LinkedIn traffic comes from mobile. You're writing for 140 characters, whether you like it or not.
 
@@ -285,7 +285,7 @@ A post that reads clearly in a Google Doc might look completely different in a L
 
 ![PostTruncate character counter showing real-time platform previews with fold line indicators for LinkedIn, X, Instagram, and other social platforms](/og/Mastering_socia_media_hooks_5%20%281%29.webp)
 
-PostTruncate character counter showing real-time platform previews with fold line indicators for LinkedIn, X, Instagram, and other social platforms
+<p align="center"><span style="font-size: 12px; "><em>PostTruncate character counter showing real-time platform previews with fold line indicators for LinkedIn, X, Instagram, and other social platforms</em></span></p>
 
 What makes this actually useful for hook testing:
 
