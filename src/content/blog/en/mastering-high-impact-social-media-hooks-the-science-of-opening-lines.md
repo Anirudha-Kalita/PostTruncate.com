@@ -61,7 +61,7 @@ The answer isn't stylistic. It's neurological.
 
 ![The four psychological principles behind high-impact social media hooks: Zeigarnik Effect, Pattern Interrupt, Curiosity Gap, and Negativity Bias](/og/Mastering_socia_media_hooks_3.webp)
 
-The four psychological principles behind high-impact social media hooks: Zeigarnik Effect, Pattern Interrupt, Curiosity Gap, and Negativity Bias
+<p align="center"><span style="font-size: 12px; "><em>The four psychological principles behind high-impact social media hooks: Zeigarnik Effect, Pattern Interrupt, Curiosity Gap, and Negativity Bias</em></span></p>
 
 ### The Zeigarnik Effect: the open loop
 
@@ -121,7 +121,7 @@ These seven formulas account for the vast majority of high-performing social pos
 
 ![7 hook formula types: Curiosity Gap, Counter-narrative, Credibility, Fear, Story, Bold Data, and Emotion - with example opening lines for each](/og/Mastering_socia_media_hooks_4.webp)
 
-7 hook formula types: Curiosity Gap, Counter-narrative, Credibility, Fear, Story, Bold Data, and Emotion - with example opening lines for each
+<p align="center"><span style="font-size: 12px; "><em>7 hook formula types: Curiosity Gap, Counter-narrative, Credibility, Fear, Story, Bold Data, and Emotion - with example opening lines for each</em></span></p>
 
 ### 1. The curiosity gap
 
@@ -300,7 +300,7 @@ For writers who produce content at scale, this changes the workflow. Instead of 
 
 ![PostTruncate platform limits reference showing complete character limits and fold points for all major social platforms](/og/Mastering_socia_media_hooks_6.webp)
 
-PostTruncate platform limits reference showing complete character limits and fold points for all major social platforms
+<p align="center"><span style="font-size: 12px; "><em>PostTruncate platform limits reference showing complete character limits and fold points for all major social platforms</em></span></p>
 
 The [platform limits reference page](/en/platform-limits/) also gives you the full breakdown if you want to internalise the numbers: every character limit, every fold point, every platform quirk in one place.
 
