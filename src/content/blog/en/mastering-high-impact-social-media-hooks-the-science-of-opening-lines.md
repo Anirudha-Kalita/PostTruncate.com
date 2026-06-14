@@ -1,28 +1,21 @@
 ---
-title: "Mastering High-Impact Social Media Hooks: The Science of Opening Lines"
-description: Learn the psychology behind high-impact social media hooks and the exact formulas that stop the scroll - before your opening line disappears behind a fold.
-publishDate: 2026-06-13
-locale: en
-slug: mastering-high-impact-social-media-hooks-the-science-of-opening-lines
 translationKey: mastering-high-impact-social-media-hooks-the-science-of-opening-lines
-relatedPlatform: linkedin
+title: 'Mastering High-Impact Social Media Hooks: The Science of Opening Lines'
+subtitle: Learn the psychology behind high-impact social media hooks and the exact formulas that stop the scroll - before your opening line disappears behind a fold.
+description: Discover the psychology of scroll-stopping social media hooks, 7 proven formulas, and how to ensure your opening line survives every platform's fold point.
+publishDate: 2026-06-13
+updatedDate: ''
+locale: en
+slug: high-impact-social-media-hooks
+relatedPlatform: general
 author: PostTruncate Team
-draft: true
+draft: false
+ogImage: /og/Mastering_socia_media_hooks_hero.png
 ---
-
-Learn the psychology behind high-impact social media hooks and the exact formulas that stop the scroll - before your opening line disappears behind a fold.
-
-*June 13, 2026 · 15 min read*
-
-Flat editorial illustration showing a smartphone feed with a highlighted social media hook opening line and hook formula cards floating around it
-
-* * *
 
 ## TL;DR
 
 A social media hook isn't just a good opening line - it's a survival mechanism. Every major platform collapses your post behind a "see more" fold after 110 to 210 characters on mobile. If your hook doesn't hook within that window, nobody reads the rest. The psychology is clear: the brain stops scrolling for curiosity gaps, pattern interrupts, negative framing, and unresolved loops (the Zeigarnik Effect). The formulas that work - curiosity, counter-narrative, credibility, fear, story, data, emotion - are grounded in how attention actually works. Before you post anything, run it through a preview tool so you can see exactly where your opening line gets cut. [PostTruncate's character counter](/en/character-counter/) shows you the fold line on every platform in real time, for free. Write the hook. Check the fold. Post with confidence.
-
-* * *
 
 I've managed social content long enough to develop one stubborn opinion: most posts don't fail because the writing is bad. They fail because the first sentence wasn't built to survive.
 
@@ -44,19 +37,19 @@ Here's what the fold actually looks like across platforms, according to [PostTru
 
 | Platform | Mobile fold | Full character limit |
 | --- | --- | --- |
-| LinkedIn | ~140 characters | 3,000 |
+| LinkedIn | \~140 characters | 3,000 |
 | X/Twitter | 280 (hard limit, no fold) | 280 |
-| Instagram | ~125 characters | 2,200 |
-| Facebook | ~110 characters (mobile) | 63,206 |
-| Threads | ~250 characters | 500 |
+| Instagram | \~125 characters | 2,200 |
+| Facebook | \~110 characters (mobile) | 63,206 |
+| Threads | \~250 characters | 500 |
 
-The number that should alarm you is Facebook's mobile fold: 110 characters. That's not much longer than a tweet. On a platform where people write casual multi-paragraph posts, the first 110 characters are carrying the entire weight of whether anyone engages.
+The number that should alarm you is Facebook's mobile fold: 110 characters. That's not much longer than a tweet. On a platform where people write casual multi-paragraph posts, the first 110 characters carry the entire weight of whether anyone engages.
 
-![Platform fold points comparison showing mobile fold vs full character limits across LinkedIn, X, Instagram, Facebook, and Threads](https://cdn-public.eesel.ai/51040ccf-3f79-454f-a639-9dce24a8f7ed/7a9af904-e184-4a32-87f0-7c3146b62273/bdbde08b7be343bc89d5f8147648e5d7.png)
+![Platform fold points comparison showing mobile fold vs full character limits across LinkedIn, X, Instagram, Facebook, and Threads](/og/Mastering_socia_media_hooks_2.webp)
 
-Platform fold points comparison showing mobile fold vs full character limits across LinkedIn, X, Instagram, Facebook, and Threads
+<p align="center"><span style="font-size: 12px; "><em>Platform fold points comparison showing mobile fold vs full character limits across LinkedIn, X, Instagram, Facebook, and Threads</em></span></p>
 
-LinkedIn is almost as brutal. The [LinkedIn character limits guide](/en/blog/linkedin-character-limits-2026/) breaks this down in detail: on mobile, readers see roughly 140 characters before the "see more" fold. On desktop, you get a little more - around 210 characters. But most LinkedIn traffic comes from mobile. You're writing for 140 characters whether you like it or not.
+LinkedIn is almost as brutal. The [LinkedIn character limits guide](/en/blog/linkedin-character-limits-2026/) breaks this down in detail: on mobile, readers see roughly 140 characters before the "see more" fold. On desktop, you get a little more - around 210 characters. But most LinkedIn traffic comes from mobile. You're writing for 140 characters, whether you like it or not.
 
 This is the context in which hook writing actually happens. Not the polished "write a strong opener" advice that floats around content marketing blogs. The real constraint is: write something so compelling in 110-140 characters that a person who has been mindlessly scrolling for the last 20 minutes feels compelled to tap "see more."
 
@@ -66,25 +59,25 @@ So what actually makes someone stop?
 
 The answer isn't stylistic. It's neurological.
 
-![The four psychological principles behind high-impact social media hooks: Zeigarnik Effect, Pattern Interrupt, Curiosity Gap, and Negativity Bias](https://cdn-public.eesel.ai/51040ccf-3f79-454f-a639-9dce24a8f7ed/7a9af904-e184-4a32-87f0-7c3146b62273/23a4529b25f14064a0e3baa4394fc6f4.png)
+![The four psychological principles behind high-impact social media hooks: Zeigarnik Effect, Pattern Interrupt, Curiosity Gap, and Negativity Bias](/og/Mastering_socia_media_hooks_3.webp)
 
-The four psychological principles behind high-impact social media hooks: Zeigarnik Effect, Pattern Interrupt, Curiosity Gap, and Negativity Bias
+<p align="center"><span style="font-size: 12px; "><em>The four psychological principles behind high-impact social media hooks: Zeigarnik Effect, Pattern Interrupt, Curiosity Gap, and Negativity Bias</em></span></p>
 
 ### The Zeigarnik Effect: the open loop
 
-Soviet psychologist Bluma Zeigarnik discovered something strange in the 1920s while watching waiters in a Vienna café. They could remember every detail of an incomplete order - table number, specific requests, modifications. But the moment the bill was paid and the order was closed, that memory vanished. The brain, she hypothesized, retains incomplete tasks because they create cognitive tension the mind wants to resolve.
+Soviet psychologist Bluma Zeigarnik discovered something strange in the 1920s while watching waiters in a Vienna café. They could remember every detail of an incomplete order - table number, specific requests, modifications. But the moment the bill was paid and the order was closed, that memory vanished. The brain, she hypothesised, retains incomplete tasks because they create cognitive tension the mind wants to resolve.
 
 This principle - now called the [Zeigarnik Effect](https://medium.com/@ruchakher/unfinished-addictive-how-the-zeigarnik-effect-hooks-us-on-social-media-9305c4eca3cd) - is the most powerful psychological lever in hook writing. An open loop creates discomfort. The reader's brain becomes uncomfortable with an unresolved question, an incomplete story, a missing piece of information. The only way to resolve that tension is to keep reading.
 
 This is why "I tried posting every day for 30 days" performs worse than "I tried posting every day for 30 days. Here's what nobody warns you about." The second version opens a loop. The reader now has an itch they need to scratch.
 
-Netflix weaponized this exact mechanism at scale in 2012 when they introduced [post-play](https://medium.com/@ruchakher/unfinished-addictive-how-the-zeigarnik-effect-hooks-us-on-social-media-9305c4eca3cd) - auto-advancing to the next episode before the viewer made a conscious choice to continue. Before post-play, you had to decide to keep watching. After, you had to decide to stop. That subtle inversion led to binge-watching becoming a cultural norm. By 2023, nearly 70% of viewers watch multiple episodes in a single sitting.
+Netflix weaponised this exact mechanism at scale in 2012 when they introduced [post-play](https://medium.com/@ruchakher/unfinished-addictive-how-the-zeigarnik-effect-hooks-us-on-social-media-9305c4eca3cd) - auto-advancing to the next episode before the viewer made a conscious choice to continue. Before post-play, you had to decide to keep watching. After that, you had to decide to stop. That subtle inversion led to binge-watching becoming a cultural norm. By 2023, nearly 70% of viewers will watch multiple episodes in a single sitting.
 
 Your hook is doing the same thing, on a smaller scale, in a feed.
 
 ### Pattern interrupts: breaking autopilot
 
-Scroll behavior is autopilot behavior. Your thumbs are moving, your eyes are skimming, your brain has largely disengaged. You're not really reading; you're pattern-matching. Text that looks like text gets skipped. Familiar formats get skipped. Anything the brain has seen 50 times before gets skipped.
+Scroll behaviour is autopilot behaviour. Your thumbs are moving, your eyes are skimming, your brain has largely disengaged. You're not really reading; you're pattern-matching. Text that looks like text gets skipped. Familiar formats get skipped. Anything the brain has seen 50 times before gets skipped.
 
 A pattern interrupt forces the autopilot off. It's a disruption that demands cognitive resources - a contradiction, an unexpected structure, an unusual claim, a sentence that doesn't end where you expect it to.
 
@@ -96,7 +89,7 @@ The best textual pattern interrupts are structural: a one-word opening sentence,
 
 Humans evolved to notice threats. Negative stimuli - problems, warnings, failures, losses - get processed faster and remembered longer than positive ones. [According to VeryWell Mind's research on cognitive biases](https://www.verywellmind.com/negative-bias-4589618), we tend to focus more on negative information as we try to make sense of the world, a bias that influences decision-making, attention, and thinking patterns.
 
-In social media terms: "7 things that will tank your LinkedIn reach" will almost always outperform "7 tips to grow on LinkedIn." The threat framing catches the eye before the brain has time to be skeptical.
+In social media terms, "7 things that will tank your LinkedIn reach" will almost always outperform "7 tips to grow on LinkedIn." The threat framing catches the eye before the brain has time to be sceptical.
 
 The technique is to use negativity to stop the scroll, then pivot the content positively. The hook leads with the problem; the post delivers the solution.
 
@@ -106,13 +99,13 @@ A curiosity gap is a hook that promises information without delivering it yet. I
 
 [Buffer identifies this as one of the six core techniques](https://buffer.com/resources/social-media-hooks/) for writing effective social hooks: present an intriguing concept without fully exploring it, delay the reveal for several paragraphs, let the curiosity carry the reader through.
 
-The key word is "relevant." A curiosity gap only works if the reader cares about what's on the other side of the gap. "I tried something unprecedented with AI" is vague enough to lose most readers. "I tested 200 LinkedIn posts to find the one phrase that 3x'd my engagement" is specific enough that the right reader can't scroll past.
+The keyword is "relevant." A curiosity gap only works if the reader cares about what's on the other side of the gap. "I tried something unprecedented with AI" is vague enough to lose most readers. "I tested 200 LinkedIn posts to find the one phrase that 3x'd my engagement" is specific enough that the right reader can't scroll past.
 
 ## The anatomy of a high-impact hook
 
-Before getting into the formulas, it's worth naming what the best hooks have in common at a structural level. After analyzing a lot of posts - and testing hooks in my own content over the past several years - I keep coming back to the same five characteristics:
+Before getting into the formulas, it's worth naming what the best hooks have in common at a structural level. After analysing a lot of posts - and testing hooks in my own content over the past several years - I keep coming back to the same five characteristics:
 
-**Specificity.** "I analyzed 1,000 viral posts" beats "viral content is important." Real numbers, real examples, real outcomes. Specificity is a credibility signal. It tells the reader that the author actually did the work, rather than summarizing something they vaguely recall reading.
+**Specificity.** "I analysed 1,000 viral posts" beats "viral content is important." Real numbers, real examples, real outcomes. Specificity is a credibility signal. It tells the reader that the author actually did the work, rather than summarising something they vaguely recall reading.
 
 **A clear promise.** Every hook is implicitly a contract. You promise something - information, entertainment, utility, connection - and the reader decides whether it's worth their time. The promise doesn't need to be explicit, but it needs to be present. The reader should be able to answer "what do I get if I keep reading?" in one sentence.
 
@@ -126,15 +119,15 @@ Before getting into the formulas, it's worth naming what the best hooks have in 
 
 These seven formulas account for the vast majority of high-performing social posts I've seen and tested. They're grounded in the psychological principles above, and each one is designed to be adapted to your voice and topic - not copy-pasted.
 
-![7 hook formula types: Curiosity Gap, Counter-narrative, Credibility, Fear, Story, Bold Data, and Emotion - with example opening lines for each](https://cdn-public.eesel.ai/51040ccf-3f79-454f-a639-9dce24a8f7ed/7a9af904-e184-4a32-87f0-7c3146b62273/d1d1123296794478a576403c42b6b1b7.png)
+![7 hook formula types: Curiosity Gap, Counter-narrative, Credibility, Fear, Story, Bold Data, and Emotion - with example opening lines for each](/og/Mastering_socia_media_hooks_4.webp)
 
-7 hook formula types: Curiosity Gap, Counter-narrative, Credibility, Fear, Story, Bold Data, and Emotion - with example opening lines for each
+<p align="center"><span style="font-size: 12px; "><em>7 hook formula types: Curiosity Gap, Counter-narrative, Credibility, Fear, Story, Bold Data, and Emotion - with example opening lines for each</em></span></p>
 
-### 1\. The curiosity gap
+### 1. The curiosity gap
 
-*The pattern:* Promise something specific without revealing it yet.
+_The pattern:_ Promise something specific without revealing it yet.
 
-*Examples:*
+_Examples:_
 
 -   "I tested the same LinkedIn post with two different opening sentences. The results surprised me."
 -   "Most creators don't lose engagement because of the 280-character limit. They lose it because of this."
@@ -142,65 +135,65 @@ These seven formulas account for the vast majority of high-performing social pos
 
 The curiosity gap is the most broadly applicable formula because it works across every platform and every topic. The trap is being too vague. "I discovered something surprising" is not a curiosity gap - it's a teaser with nothing behind it. Name the domain. Make the promise specific enough that the reader knows what they're being curious about.
 
-### 2\. The counter-narrative
+### 2. The counter-narrative
 
-*The pattern:* Challenge a conventional wisdom your audience holds.
+_The pattern:_ Challenge a conventional wisdom your audience holds.
 
-*Examples:*
+_Examples:_
 
 -   "Stop writing longer posts if you want more LinkedIn reach."
 -   "Your hook isn't the problem. Your second sentence is."
 -   "More hashtags won't help you. Here's what actually moves the needle."
 
-[Neal O'Grady, who has analyzed thousands of viral posts](https://www.nealsnewsletter.com/p/10-ways-to-hook-people-with-examples), identifies this as one of the most reliable hook types: the counter-narrative challenges what the reader already believes, triggering the pattern interrupt and making it impossible to keep scrolling without reading your argument.
+[Neal O'Grady, who has analysed thousands of viral posts](https://www.nealsnewsletter.com/p/10-ways-to-hook-people-with-examples), identifies this as one of the most reliable hook types: the counter-narrative challenges what the reader already believes, triggering the pattern interrupt and making it impossible to keep scrolling without reading your argument.
 
 The counter-narrative only works if you can back it up. An unsupported counterintuitive claim reads as clickbait. An unsupported claim followed by a compelling argument reads as genuine insight.
 
-### 3\. Credibility and effort
+### 3. Credibility and effort
 
-*The pattern:* Establish why you're the right person to say this.
+_The pattern:_ Establish why you're the right person to say this.
 
-*Examples:*
+_Examples:_
 
 -   "After managing social for 12 brands over 10 years, I've spotted the same mistake everywhere."
--   "I analyzed 200+ posts, tracked every variable, and found the one thing that actually mattered."
+-   "I analysed 200+ posts, tracked every variable, and found the one thing that actually mattered."
 -   "I've written 3,000 LinkedIn posts. Here's what I wish I'd known on day one."
 
-[Buffer classifies this into two credibility sub-types](https://buffer.com/resources/social-media-hooks/): your own experience and accomplishments, or the effort you put into research ("I analyzed 1,000 viral posts"). Both work for different reasons. The personal credibility hook works because authority builds trust. The effort credibility hook works because it signals the reader is about to get something synthesized - that someone did the work so they don't have to.
+[Buffer classifies this into two credibility sub-types](https://buffer.com/resources/social-media-hooks/): your own experience and accomplishments, or the effort you put into research ("I analysed 1,000 viral posts"). Both work for different reasons. The personal credibility hook works because authority builds trust. The effort credibility hook works because it signals the reader is about to get something synthesised - that someone did the work so they don't have to.
 
-### 4\. The fear hook
+### 4. The fear hook
 
-*The pattern:* Lead with what could go wrong, then pivot to the solution.
+_The pattern:_ Lead with what could go wrong, then pivot to the solution.
 
-*Examples:*
+_Examples:_
 
--   "Your hook is getting cut at character 140 on mobile LinkedIn and you don't know it."
+-   "Your hook is getting cut at character 140 on mobile LinkedIn, and you don't know it."
 -   "Most LinkedIn posts are written for desktop. 78% of LinkedIn users are on mobile."
 -   "You're spending 45 minutes on posts that disappear before anyone reads the first full sentence."
 
-[Hootsuite's analysis of social media hooks](https://blog.hootsuite.com/social-media-hooks/) identifies fear-based opening strategies as among the most effective at stopping scrolls. The key is specificity - abstract fear ("your content might be underperforming") is weaker than specific, concrete fear ("your hook is dying at character 140 and you don't know it").
+[Hootsuite's analysis of social media hooks](https://blog.hootsuite.com/social-media-hooks/) identifies fear-based opening strategies as among the most effective at stopping scrolls. The key is specificity - abstract fear ("your content might be underperforming") is weaker than specific, concrete fear ("your hook is dying at character 140, and you don't know it").
 
-### 5\. The story lead
+### 5. The story lead
 
-*The pattern:* Start with a specific moment, result, or narrative opening.
+_The pattern:_ Start with a specific moment, result, or narrative opening.
 
-*Examples:*
+_Examples:_
 
 -   "I went from 12 likes to 2,400 shares on one post. The only thing I changed was the first sentence."
--   "Three months ago my LinkedIn posts were getting 200 impressions. This month: 34,000. Here's the full breakdown."
+-   "Three months ago, my LinkedIn posts were getting 200 impressions. This month: 34,000. Here's the full breakdown."
 -   "I watched a post go viral for someone else's content. It was my hook, copied word-for-word, no credit."
 
-Story hooks work because humans process narratives differently than information. [We've been wired for stories for over 30,000 years](https://www.soarwithus.co/blog/the-science-of-hooks-how-to-use-psychology-to-capture-your-audiences-attention) - our brains actively seek narrative arcs, look for resolution, and invest emotionally in ongoing situations. The story hook gets the reader invested before they've consciously decided to keep reading.
+Story hooks work because humans process narratives differently from information. [We've been wired for stories for over 30,000 years](https://www.soarwithus.co/blog/the-science-of-hooks-how-to-use-psychology-to-capture-your-audiences-attention) - our brains actively seek narrative arcs, look for resolution, and invest emotionally in ongoing situations. The story hook gets the reader invested before they've consciously decided to keep reading.
 
 The strongest story hooks start with the result, not the beginning. Lead with the ending - the number, the outcome, the surprising consequence - then walk back through how you got there.
 
-### 6\. Bold data
+### 6. Bold data
 
-*The pattern:* Open with a concrete, specific number that challenges expectations.
+_The pattern:_ Open with a concrete, specific number that challenges expectations.
 
-*Examples:*
+_Examples:_
 
--   "LinkedIn mobile folds your post at ~140 characters. Your full post is invisible to most readers."
+-   "LinkedIn mobile folds your post at \~140 characters. Your full post is invisible to most readers."
 -   "94% of your audience will never see past the fold if the first two sentences don't earn the tap."
 -   "X link previews cost 23 characters via t.co - regardless of the actual URL length."
 
@@ -208,14 +201,14 @@ Specific numbers carry disproportionate weight because they signal research. "Ma
 
 [Buffer notes](https://buffer.com/resources/social-media-hooks/) that specificity hooks - using concrete details rather than generic claims - are among the most reliable because they immediately differentiate the post from the generic noise in the feed.
 
-### 7\. The emotion hook
+### 7. The emotion hook
 
-*The pattern:* Trigger an emotional response - relatability, frustration, pride, nostalgia - in the opening.
+_The pattern:_ Trigger an emotional response - relatability, frustration, pride, nostalgia - in the opening.
 
-*Examples:*
+_Examples:_
 
 -   "You work too hard on your posts for them to disappear behind a 'see more' before anyone reads your point."
--   "There's nothing more demoralizing than spending an hour on a LinkedIn post and getting 11 impressions."
+-   "There's nothing more demoralising than spending an hour on a LinkedIn post and getting 11 impressions."
 -   "The first time I got 10,000 impressions on LinkedIn, I didn't know what I'd done differently. That felt worse than low engagement."
 
 Emotion hooks don't require data or authority. They require resonance - a line the reader feels rather than thinks. [A 2019 Journal of Marketing study](https://truefitmarketing.com/the-power-of-humor-in-marketing/) found that ads triggering an emotional response were 30% more likely to be remembered than neutral ones. The emotion doesn't have to be positive. Frustration, recognition, vindication - all of them work.
@@ -226,7 +219,7 @@ The formulas above apply across all platforms, but how you deploy them changes s
 
 ### LinkedIn
 
-LinkedIn's audience skews professional and older, and the content norms reward insight, experience, and direct opinions. The credibility hook and counter-narrative formula perform particularly well here. [LinkedIn's mobile fold at ~140 characters](/en/blog/linkedin-character-limits-2026/) means your hook needs to be tight - ideally one sentence, occasionally two short ones.
+LinkedIn's audience skews professional and older, and the content norms reward insight, experience, and direct opinions. The credibility hook and counter-narrative formula perform particularly well here. [LinkedIn's mobile fold at \~140 characters](/en/blog/linkedin-character-limits-2026/) means your hook needs to be tight - ideally one sentence, occasionally two short ones.
 
 What works:
 
@@ -252,15 +245,15 @@ For threads, the first tweet is the hook for the entire thread. If you're thread
 
 Instagram caption hooks need to do something unusual: stop someone who's primarily looking at a visual. The image gets the initial stop; the caption either adds depth or gets skipped entirely.
 
-With Instagram's [~125 character mobile fold](/en/platform-limits/), the first line of a caption needs to either tease the story behind the image or make a standalone point sharp enough to earn the "more" tap. Curiosity gaps and story leads work particularly well here because they add narrative context to a visual the reader has already processed.
+With Instagram's [\~125-character mobile fold](/en/platform-limits/), the first line of a caption needs to either tease the story behind the image or make a standalone point sharp enough to earn the "more" tap. Curiosity gaps and story leads work particularly well here because they add narrative context to a visual the reader has already processed.
 
 Carousel posts on Instagram are their own hook format: the first slide is effectively the hook for the whole carousel. A data statement, a bold question, or a contrarian visual claim all perform well as carousel openers.
 
 ### Threads
 
-Threads has a more casual, self-aware tone than LinkedIn - closer to early Twitter than professional publishing. [The 500-character limit with a ~250 character mobile fold](/en/platform-limits/) gives you more working space than LinkedIn's mobile fold, but the platform's culture rewards directness and wit over corporate polish.
+Threads has a more casual, self-aware tone than LinkedIn - closer to early Twitter than professional publishing. [The 500-character limit with a \~250-character mobile fold](/en/platform-limits/) gives you more working space than LinkedIn's mobile fold, but the platform's culture rewards directness and wit over corporate polish.
 
-Counter-narrative and emotion hooks perform well here. Story leads work, but they need to move faster than they might on LinkedIn. Threads' algorithm rewards engagement, so the hook should be polarizing enough to generate either agreement or disagreement - neutral content vanishes.
+Counter-narrative and emotion hooks perform well here. Story leads work, but they need to move faster than they might on LinkedIn. Threads' algorithm rewards engagement, so the hook should be polarising enough to generate either agreement or disagreement - neutral content vanishes.
 
 ### Facebook
 
@@ -276,9 +269,9 @@ I've made all of these. The list exists because I've seen smart writers - people
 
 **Hedging the edge off.** "This might vary by audience, but in some cases, there could be value in considering..." No one reads past this. Confident posts get read. Hedged posts get skipped. Even if the underlying insight is good, burying it in qualifications signals that the author isn't sure it's worth reading.
 
-**Optimizing for desktop when your audience is on mobile.** The fold is different on desktop and mobile for most platforms. If you write a hook for the desktop experience and don't check how it looks on mobile, you're probably losing most of your audience. This is the most common and most fixable mistake.
+**Optimising** Optimising polarising**for desktop when your audience is on mobile.** The fold is different on desktop and mobile for most platforms. If you write a hook for the desktop experience and don't check how it looks on mobile, you're probably losing most of your audience. This is the most common and most fixable mistake.
 
-**Using the same formula until it stops working.** [Soar's research on social media hook psychology](https://www.soarwithus.co/blog/the-science-of-hooks-how-to-use-psychology-to-capture-your-audiences-attention) makes the point clearly: once a hook pattern becomes familiar, the audience becomes immune. The "unpopular opinion:" prefix dominated LinkedIn for about two years; now it triggers immediate skepticism. Formulas age. Rotate them.
+**Using the same formula until it stops working.** [Soar's research on social media hook psychology](https://www.soarwithus.co/blog/the-science-of-hooks-how-to-use-psychology-to-capture-your-audiences-attention) makes the point clearly: once a hook pattern becomes familiar, the audience becomes immune. The "unpopular opinion:" prefix dominated LinkedIn for about two years; now it triggers immediate scepticism. Formulas age. Rotate them.
 
 **Writing a hook that overpromises.** A hook that promises "the one thing that will 10x your LinkedIn reach" needs to deliver something genuinely surprising in the post. If the content is good-but-not-transformative, the mismatch kills trust faster than weak content alone. The hook sets the expectation; the content either meets it or breaks it.
 
@@ -288,11 +281,11 @@ The single most reliable improvement I've made to my hook-writing process is che
 
 A post that reads clearly in a Google Doc might look completely different in a LinkedIn feed on mobile. A thread-ready X post might look seamless in my draft and reveal an awkward line break in the actual preview. A hook that I think lands at 130 characters might actually be getting cut at 110 on Facebook mobile.
 
-[PostTruncate's character counter](/en/character-counter/) solves this. You paste your text into the editor and it renders real-time previews for LinkedIn, X, Instagram, Facebook, Threads, and SMS - each with the exact fold line marked. You can see precisely which characters are visible before "see more" on each platform, and adjust your hook until it lands in the visible window.
+[PostTruncate's character counter](/en/character-counter/) solves this. You paste your text into the editor, and it renders real-time previews for LinkedIn, X, Instagram, Facebook, Threads, and SMS - each with the exact fold line marked. You can see precisely which characters are visible before "see more" on each platform, and adjust your hook until it lands in the visible window.
 
-![PostTruncate character counter showing real-time platform previews with fold line indicators for LinkedIn, X, Instagram, and other social platforms](https://cdn-public.eesel.ai/51040ccf-3f79-454f-a639-9dce24a8f7ed/7a9af904-e184-4a32-87f0-7c3146b62273/0583d9e3c3104cc7a9d64e5b5917b932.png)
+![PostTruncate character counter showing real-time platform previews with fold line indicators for LinkedIn, X, Instagram, and other social platforms](/og/Mastering_socia_media_hooks_5%20%281%29.webp)
 
-PostTruncate character counter showing real-time platform previews with fold line indicators for LinkedIn, X, Instagram, and other social platforms
+<p align="center"><span style="font-size: 12px; "><em>PostTruncate character counter showing real-time platform previews with fold line indicators for LinkedIn, X, Instagram, and other social platforms</em></span></p>
 
 What makes this actually useful for hook testing:
 
@@ -305,11 +298,11 @@ The tool runs entirely client-side. Your text never leaves the browser. There's 
 
 For writers who produce content at scale, this changes the workflow. Instead of publishing and then checking how the post looks in the actual feed, you check before publishing. The hook you write is the hook your audience sees - not a post-hoc discovery that half your opening line got cut.
 
-![PostTruncate platform limits reference showing complete character limits and fold points for all major social platforms](https://cdn-public.eesel.ai/51040ccf-3f79-454f-a639-9dce24a8f7ed/7a9af904-e184-4a32-87f0-7c3146b62273/8db96c55fbdb491fb78ac88dd2559c41.png)
+![PostTruncate platform limits reference showing complete character limits and fold points for all major social platforms](/og/Mastering_socia_media_hooks_6.webp)
 
-PostTruncate platform limits reference showing complete character limits and fold points for all major social platforms
+<p align="center"><span style="font-size: 12px; "><em>PostTruncate platform limits reference showing complete character limits and fold points for all major social platforms</em></span></p>
 
-The [platform limits reference page](/en/platform-limits/) also gives you the full breakdown if you want to internalize the numbers: every character limit, every fold point, every platform quirk in one place.
+The [platform limits reference page](/en/platform-limits/) also gives you the full breakdown if you want to internalise the numbers: every character limit, every fold point, every platform quirk in one place.
 
 ## Try PostTruncate
 
@@ -319,20 +312,18 @@ If there's one thing this post is trying to land, it's this: a good hook that ge
 
 The best hook you've ever written is worth nothing if it never gets read.
 
-* * *
+## FAQs
 
-## Frequently Asked Questions
-
-</br><details><summary><b>What is a social media hook and why does it matter?</b></summary>
-<p>A social media hook is the opening line or first 1-3 sentences of a post that determines whether someone keeps reading or scrolls past. It matters because most platforms collapse your text behind a &#39;see more&#39; button after just 110-210 characters - if your hook doesn&#39;t land in that window, the rest of your post is invisible. <a href="/en/character-counter/">Use a character counter tool</a> to see exactly where your post gets cut on each platform.</p>
-<p>It depends on the platform. On X/Twitter, your entire post is effectively the hook - you have 280 characters. On LinkedIn, the mobile fold hits at around 140 characters, so your hook needs to pull people in within that window. Instagram collapses captions after roughly 125 characters on mobile. For a full breakdown of every platform&#39;s fold point, check <a href="/en/platform-limits/">PostTruncate&#39;s platform limits reference</a>.</p>
-<p>The seven formulas that consistently perform are: the Curiosity Gap (&#39;I analyzed 200+ posts - the #1 pattern surprised me&#39;), Counter-narrative (&#39;Stop doing X if you want Y&#39;), Credibility (&#39;After 10 years in social…&#39;), Fear (&#39;Your hook is dying before anyone reads it&#39;), Story lead (&#39;I went from 12 likes to 2,400 shares on one post&#39;), Bold Data (&#39;94% of LinkedIn posts collapse before the reader sees your point&#39;), and Emotion (&#39;You work too hard for your content to disappear&#39;). The key is matching the formula to your platform and audience.</p>
+<details><summary><b>What is a social media hook and why does it matter?</b></summary>
+<p>A social media hook is the opening line or first 1-3 sentences of a post that determines whether someone keeps reading or scrolls past. It matters because most platforms collapse your text behind a 'see more' button after just 110-210 characters - if your hook doesn't land in that window, the rest of your post is invisible. <a href="/en/character-counter/">Use a character counter tool</a> to see exactly where your post gets cut on each platform.</p>
+<p>It depends on the platform. On X/Twitter, your entire post is effectively the hook - you have 280 characters. On LinkedIn, the mobile fold hits at around 140 characters, so your hook needs to pull people in within that window. Instagram collapses captions after roughly 125 characters on mobile. For a full breakdown of every platform's fold point, check <a href="/en/platform-limits/">PostTruncate's platform limits reference</a>.</p>
+<p>The seven formulas that consistently perform are: the Curiosity Gap ('I analyzed 200+ posts - the #1 pattern surprised me'), Counter-narrative ('Stop doing X if you want Y'), Credibility ('After 10 years in social…'), Fear ('Your hook is dying before anyone reads it'), Story lead ('I went from 12 likes to 2,400 shares on one post'), Bold Data ('94% of LinkedIn posts collapse before the reader sees your point'), and Emotion ('You work too hard for your content to disappear'). The key is matching the formula to your platform and audience.</p>
 </details>
 
-</br><details><summary><b>What is the Zeigarnik Effect and how does it apply to social media hooks?</b></summary>
-<p>The Zeigarnik Effect - discovered by Soviet psychologist Bluma Zeigarnik in the 1920s - is the brain&#39;s tendency to remember incomplete tasks more vividly than completed ones. In social media, this means leaving a question unanswered or a story mid-way creates cognitive tension that compels readers to keep scrolling. The best hooks open a loop the reader&#39;s brain desperately wants to close. This is why &#39;I tried this for 30 days...&#39; outperforms &#39;Here are my results from 30 days of testing.&#39;</p>
+<details><summary><b>What is the Zeigarnik Effect and how does it apply to social media hooks?</b></summary>
+<p>The Zeigarnik Effect - discovered by Soviet psychologist Bluma Zeigarnik in the 1920s - is the brain's tendency to remember incomplete tasks more vividly than completed ones. In social media, this means leaving a question unanswered or a story mid-way creates cognitive tension that compels readers to keep scrolling. The best hooks open a loop the reader's brain desperately wants to close. This is why 'I tried this for 30 days...' outperforms 'Here are my results from 30 days of testing.'</p>
 </details>
 
-</br><details><summary><b>How can I test whether my hook will survive a platform's fold before posting?</b></summary>
-<p>The most reliable way is to use <a href="/en/character-counter/">PostTruncate&#39;s free character counter</a>, which shows real-time previews of how your post will appear on LinkedIn, X, Instagram, Facebook, Threads, and SMS - with exact fold line markers. You can see at a glance whether your hook fits before the &#39;see more&#39; collapse, and adjust the opening line until it lands in the visible window. No account required, runs entirely in your browser.</p>
+<details><summary><b>How can I test whether my hook will survive a platform's fold before posting?</b></summary>
+<p>The most reliable way is to use <a href="/en/character-counter/">PostTruncate's free character counter</a>, which shows real-time previews of how your post will appear on LinkedIn, X, Instagram, Facebook, Threads, and SMS - with exact fold line markers. You can see at a glance whether your hook fits before the 'see more' collapse, and adjust the opening line until it lands in the visible window. No account required, runs entirely in your browser.</p>
 </details>

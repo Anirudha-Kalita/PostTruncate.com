@@ -145,7 +145,7 @@ Before you hit publish, use this checklist:
 -   **0-1 relevant hashtag** - less is more
 -   **Engagement plan** - will you respond in the first 2 hours?
 
-## FAQ
+## FAQs
 
 <details>
 <summary><b> Does X use keywords like Google SEO?</b> </b></summary>

@@ -192,7 +192,7 @@ https://youtu.be/3EJc5YJHBMI
 
 <p align="center"><span style="font-size: 12px; "><em>PostTruncate LinkedIn character counter showing real-time fold markers and character count</em></span></p>
 
-## FAQ
+## FAQs
 
 <details><summary><b>What is the LinkedIn character limit for posts?</b></summary>
 <p>LinkedIn text posts are capped at <strong>3,000 characters</strong>. But the more important number is the feed fold: LinkedIn collapses posts after approximately <strong>140 characters on mobile</strong> and <strong>210 characters on desktop</strong>, hiding everything else behind a '…see more' link. Use <a href="/en/linkedin-character-counter/">PostTruncate's LinkedIn character counter</a> to see both fold lines live as you type.</p>

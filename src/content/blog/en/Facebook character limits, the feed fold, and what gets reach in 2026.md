@@ -152,7 +152,7 @@ https://youtu.be/BHuYvt0OTRg
 
 Everything runs client-side - your text never leaves your browser, there's no account required, and the tool is completely free. PostTruncate covers all major platforms in one interface: Facebook, [LinkedIn](/en/linkedin-character-counter/), [X (Twitter)](/en/twitter-character-counter/), [Instagram](/en/instagram-character-counter/), [Threads](/en/threads-character-counter/), and [SMS](/en/sms-character-counter/) - so you can see how the same content performs across every channel before posting anywhere.
 
-## FAQ
+## FAQs
 
 <details><summary><b>What is Facebook's character limit for posts in 2026?</b></summary>
 <p>Facebook's technical character ceiling is <a href="/en/facebook-character-counter/">63,206 characters</a> - far more than anyone should use. The real limit that determines reach is behavioural: the feed fold collapses text after roughly <strong>480 characters on desktop</strong> and <strong>110 characters on mobile</strong>. Posts under <strong>80 characters</strong> consistently see the highest engagement rates. Use <a href="/en/facebook-character-counter/">PostTruncate's Facebook character counter</a> to see exactly where your post folds in real time.</p>
