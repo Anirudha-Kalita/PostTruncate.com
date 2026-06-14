@@ -159,7 +159,7 @@ If you're also writing for LinkedIn, Facebook, or other platforms, the [main cha
 
 For more on X reach strategy, once your threads are properly formatted, the [PostTruncate X SEO guide](/en/blog/twitter-x-seo-guide-maximize-post-reach/) covers keyword placement, thread length testing, and timing - all from direct testing rather than recycled best-practices content. And if LinkedIn is part of your content mix, the [guide to surviving the LinkedIn feed fold](/en/blog/linkedin-posts-survive-the-fold/) covers the same invisible-truncation problem for that platform.
 
-## FAQ
+## FAQs
 
 <details><summary><b>What is the best free tool to automatically split long tweets into a thread?</b></summary>
 <p><a href="/en/twitter-character-counter">PostTruncate's Twitter character counter</a> includes a built-in thread splitter that's completely free with no login required. Paste your text, and it automatically breaks your post into numbered tweets at sentence boundaries. For scheduling on top of splitting, <a href="https://typefully.com/">Typefully's free tier</a> allows 15 posts per month.</p>
