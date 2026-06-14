@@ -39,7 +39,7 @@ He was right. But he had no idea how right, and in ways he couldn't have anticip
 
 ![The 160-character family tree - showing how SMS (1985), Twitter 140 (2006), and Twitter 280 (2017) connect, as taken from PostTruncate](/og/whyDo-2.webp)
 
-The 160-character family tree - showing how SMS (1985), Twitter 140 (2006), and Twitter 280 (2017) connect, as taken from PostTruncate
+<p align="center"><span style="font-size: 12px; "><em>The 160-character family tree - showing how SMS (1985), Twitter 140 (2006), and Twitter 280 (2017) connect</em></span></p>
 
 ## How 160 became 140 became everything
 
@@ -85,7 +85,7 @@ This is why short posts often outperform long ones on platforms designed for fee
 
 ![Diagram showing the LinkedIn mobile fold at ~140 characters vs desktop fold at ~210 characters, illustrating how most audience members see less than you think, as taken from PostTruncate](/og/whyDo-3.webp)
 
-Diagram showing the LinkedIn mobile fold at \~140 characters vs the desktop fold at \~210 characters, illustrating how most audience members see less than you think, as taken from PostTruncate
+<p align="center"><span style="font-size: 12px; "><em>Diagram showing the LinkedIn mobile fold at \~140 characters vs the desktop fold at \~210 characters, illustrating how most audience members see less than you think</em></span></p>
 
 ## Each platform made different choices - and for different reasons
 
@@ -122,7 +122,7 @@ The takeaway isn't that limits are bad or that removing them is good. It's those
 
 ![Bar chart showing character limits across major platforms - X at 280, Threads at 500, Instagram at 2200, LinkedIn at 3000, Facebook at 63206, as taken from PostTruncate](/og/whyDo-4.webp)
 
-Bar chart showing character limits across major platforms - X at 280, Threads at 500, Instagram at 2200, LinkedIn at 3000, Facebook at 63206, as taken from PostTruncate
+<p align="center"><span style="font-size: 12px; "><em>Bar chart showing character limits across major platforms - X at 280, Threads at 500, Instagram at 2200, LinkedIn at 3000, Facebook at 63206</em></span></p>
 
 ## Why this matters for how you write
 
@@ -146,7 +146,7 @@ Everything runs in your browser. No account. No data uploaded. No server contact
 
 https://youtu.be/l2SXX1EftYs
 
-<figure><figcaption>PostTruncate character counter tool showing live platform previews with fold markers, as taken from PostTruncate</figcaption></figure>
+<p align="center"><span style="font-size: 12px; "><em>PostTruncate character counter tool showing live platform previews with fold markers, as taken from PostTruncate</em></span></p>
 
 The [platform limits page](/en/platform-limits/) has every limit and fold point in one place if you need a quick reference. And if you write primarily for LinkedIn, the [LinkedIn character counter](/en/linkedin-character-counter/) tracks both fold lines simultaneously - the one most LinkedIn writers don't know about, and the one they do.
 

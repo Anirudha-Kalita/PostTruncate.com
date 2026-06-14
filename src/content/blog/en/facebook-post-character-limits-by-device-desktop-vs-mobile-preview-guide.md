@@ -56,7 +56,7 @@ The fold placement is intentional. Facebook wants you to write clickable, curios
 
 ![Desktop vs mobile Facebook post preview showing 150 character visibility on desktop versus 80 characters on mobile before truncation](/og/Facebook_article-2.webp)
 
-Desktop vs mobile Facebook post preview showing 150 character visibility on desktop versus 80 characters on mobile before truncation
+<p align="center"><span style="font-size: 12px; "><em>Desktop vs mobile Facebook post preview showing 150 character visibility on desktop versus 80 characters on mobile before truncation</em></span></p>
 
 ## The 80-100-150 Framework: Where to Write For
 
@@ -74,7 +74,7 @@ The framework works because it respects how people actually read Facebook. Mobil
 
 ![The 80-100-150 character framework for Facebook posts, showing mobile hook zone, primary message zone, and desktop detail zone](/og/Facebook_article-3.webp)
 
-The 80-100-150 character framework for Facebook posts, showing mobile hook zone, primary message zone, and desktop detail zone
+<p align="center"><span style="font-size: 12px; "><em>The 80-100-150 character framework for Facebook posts, showing mobile hook zone, primary message zone, and desktop detail zone</em></span></p>
 
 ## Why Device Differences Exist
 
@@ -107,7 +107,7 @@ Strategic line breaks can make your post easier to scan and can affect truncatio
 
 ![How hashtags, links, and images affect Facebook post fold placement - showing text visibility reduced when elements are present](/og/Facebook_article-4.webp)
 
-How hashtags, links, and images affect Facebook post fold placement - showing text visibility is reduced when elements are present
+<p align="center"><span style="font-size: 12px; "><em>How hashtags, links, and images affect Facebook post fold placement - showing text visibility is reduced when elements are present</em></span></p>
 
 ## Testing Your Post Across Devices
 

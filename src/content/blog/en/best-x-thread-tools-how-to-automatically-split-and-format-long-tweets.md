@@ -35,7 +35,7 @@ A thread splitter reads your full text, identifies natural break points - ideall
 
 ![How a thread splitter turns one long post into a numbered tweet series, as taken from PostTruncate](/og/Twitter_Article_2.png)
 
-How a thread splitter turns one long post into a numbered tweet series, as taken from PostTruncate
+<p align="center"><span style="font-size: 12px; "><em>How a thread splitter turns one long post into a numbered tweet series, as taken from PostTruncate</em></span></p>
 
 The difference between a good and bad splitter comes down to one thing: whether it breaks at word or sentence boundaries. A splitter that cuts mid-sentence produces threads that read as if they got hit by a lawnmower. A splitter that respects sentence structure produces threads where each tweet feels complete.
 
@@ -49,7 +49,7 @@ PostTruncate's [Twitter character counter](/en/twitter-character-counter) has a 
 
 ![PostTruncate's Twitter character counter tool in action, as taken from PostTruncate](/og/Twitter_Article_3.png)
 
-PostTruncate's Twitter character counter tool in action, as taken from PostTruncate
+<p align="center"><span style="font-size: 12px; "><em>PostTruncate's Twitter character counter tool in action, as taken from PostTruncate</em></span></p>
 
 Paste in any length of text. The tool does three things at once: counts characters using X's real weighted system (accounting for link costs, emoji weight, CJK character doubling), shows you a live tweet preview of how the first 280 characters look in the X feed, and splits the overflow into numbered thread tweets at word boundaries.
 
@@ -67,7 +67,7 @@ What it doesn't do: PostTruncate doesn't post to X for you. It's a formatter and
 
 ![Typefully's writing and scheduling interface, as taken from Typefully](/og/Twitter_Article_4.png)
 
-Typefully's writing and scheduling interface, as taken from Typefully
+<p align="center"><span style="font-size: 12px; "><em>Typefully's writing and scheduling interface, as taken from Typefully</em></span></p>
 
 The thread creation flow is purpose-built: write in a distraction-free editor, see a pixel-perfect preview of how your thread renders on X, and schedule it to post at the right time. Auto-numbering handles the 1/5 formatting automatically. The AI writing assistant (available from the $16/month Pro plan) learns your voice and can rewrite, expand, or sharpen individual tweets in the thread.
 
@@ -95,7 +95,7 @@ One honest limitation: the free tier's 15-post cap runs out fast for active crea
 
 ![Chirr App's thread editor, as taken from Chirr App](/og/Twitter_Article_5.png)
 
-Chirr App's thread editor, as taken from Chirr App
+<p align="center"><span style="font-size: 12px; "><em>Chirr App's thread editor, as taken from Chirr App</em></span></p>
 
 The core feature is automatic text splitting with an intelligent algorithm that makes threads readable, not just technically, under the character limit. More than 34,000 people have trusted it since launch, including notably Andrew Chen (then at a16z), who mentioned using it in a tweet: _"My process, so far, is pretty simple. I open up getchirrapp.com and force myself to look at an empty box until I start putting ideas down."_
 
@@ -107,7 +107,7 @@ There's a free tier. The paid upgrade adds scheduling in advance, analytics, and
 
 ![Comparison of PostTruncate, Typefully, and Chirr App for X thread splitting, as taken from PostTruncate](/og/Twitter_Article_6.png)
 
-Comparison of PostTruncate, Typefully, and Chirr App for X thread splitting, as taken from PostTruncate
+<p align="center"><span style="font-size: 12px; "><em>Comparison of PostTruncate, Typefully, and Chirr App for X thread splitting, as taken from PostTruncate</em></span></p>
 
 The choice comes down to what you need beyond the split itself.
 
@@ -137,7 +137,7 @@ The most common mistake with threads: treating them as a single essay that got c
 
 ![The anatomy of a high-performing X thread: hook, depth, and a strong closer, as taken from PostTruncate](/og/Twitter_Article_7.png)
 
-The anatomy of a high-performing X thread: hook, depth, and a strong closer, as taken from PostTruncate
+<p align="center"><span style="font-size: 12px; "><em>The anatomy of a high-performing X thread: hook, depth, and a strong closer, as taken from PostTruncate</em></span></p>
 
 Based on PostTruncate's [X SEO research](/en/blog/twitter-x-seo-guide-maximize-post-reach/) - testing 200+ posts over three months - a few patterns hold consistently:
 
