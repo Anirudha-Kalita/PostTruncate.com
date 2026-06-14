@@ -17,8 +17,6 @@ ogImage: /og/Mastering_socia_media_hooks_hero.png
 
 A social media hook isn't just a good opening line - it's a survival mechanism. Every major platform collapses your post behind a "see more" fold after 110 to 210 characters on mobile. If your hook doesn't hook within that window, nobody reads the rest. The psychology is clear: the brain stops scrolling for curiosity gaps, pattern interrupts, negative framing, and unresolved loops (the Zeigarnik Effect). The formulas that work - curiosity, counter-narrative, credibility, fear, story, data, emotion - are grounded in how attention actually works. Before you post anything, run it through a preview tool so you can see exactly where your opening line gets cut. [PostTruncate's character counter](/en/character-counter/) shows you the fold line on every platform in real time, for free. Write the hook. Check the fold. Post with confidence.
 
-* \* \*
-
 I've managed social content long enough to develop one stubborn opinion: most posts don't fail because the writing is bad. They fail because the first sentence wasn't built to survive.
 
 Here's what I mean. You spend 45 minutes crafting a LinkedIn post - sharpen the insight, layer in the data, land the advice. You hit publish. And then, nothing. Fourteen impressions. Two likes, both from people who work with you.
