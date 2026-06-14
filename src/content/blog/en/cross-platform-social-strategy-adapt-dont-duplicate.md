@@ -23,7 +23,7 @@ You have 1,200 words of insight to share. X gives you 280 characters. LinkedIn l
 
 The instinct is to post one version everywhere and let the platform algorithm sort it out. That approach tanks engagement because each platform's audience shows up expecting platform-appropriate content, not a generic broadcast. A thoughtful LinkedIn article gets scrolled past on TikTok. A 30-second TikTok trend you adapted doesn't make sense for your B2B audience on X.
 
-The platforms themselves engineered this problem on purpose. Character limits, feed algorithms, and content formats aren't accidents-they're deliberate constraints that shape how communication works on each platform. Respect those constraints and you win. Fight them by copy-pasting, and your content gets buried.
+The platforms themselves engineered this problem on purpose. Character limits, feed algorithms, and content formats aren't accidents-they're deliberate constraints that shape how communication works on each platform. Respect those constraints, and you win. Fight them by copy-pasting, and your content gets buried.
 
 ## The Core Principle: One Message, Multiple Executions
 
@@ -36,9 +36,9 @@ Original insight: "Most social posts fail not because of bad writing, but becaus
 -   **LinkedIn version** (1,200 words, professional tone): Deep-dive into platform fold psychology, how each platform's feed design shapes engagement, why knowing your platform's specific character limits matters, research-backed tactics
 -   **X thread version** (5-6 tweets): Snappy takes on the insight, questions that invite replies, data points that surprise, conversational tone
 -   **Instagram caption** (visual-first): Behind-the-scenes story of noticing the pattern, 1-2 emotional hooks, call to action driving engagement or saves
--   **TikTok version** (15-30 seconds): Authentic commentary, surprising data point, trend-aware format, humor if it lands naturally
+-   **TikTok version** (15-30 seconds): Authentic commentary, surprising data point, trend-aware format, humour if it lands naturally
 
-All are saying the same thing. None of them are word-for-word copies. Each respects what works on its platform.
+All are saying the same thing. None of them is a word-for-word copy. Each respects what works on its platform.
 
 ## Platform-Specific Strategies
 
@@ -55,16 +55,16 @@ LinkedIn's algorithm and audience expect original thinking, not promotional fluf
 **What works:**
 
 -   Personal stories that connect to professional lessons ("I spent three weeks fixing this, here's what I learned")
--   Original research or testing (even if it's just 200 posts you analyzed)
+-   Original research or testing (even if it's just 200 posts you analysed)
 -   Specific numbers and concrete examples, not abstract claims
--   Contrarian takes that challenge conventional wisdom
+-   Contrarian takes that challenge to conventional wisdom
 -   Responses to industry trends and news
 
 **What doesn't:**
 
 -   Copy-pasting your company's marketing copy
 -   Generic motivational quotes
--   Asking people to click an external link (LinkedIn favors native engagement)
+-   Asking people to click an external link (LinkedIn favours native engagement)
 -   Overly polished corporate speak
 
 **Tone:** Professional but personable. You're a human with experience, not a brand.
@@ -88,16 +88,16 @@ X is the platform for hot takes, live reactions, and threads exploring ideas.
 
 **Tone:** Conversational, sharp, opinionated. The character limit (280 characters) forces clarity.
 
-**Important:** X's character counting includes weighted characters-links cost exactly 23 characters via t.co URL wrapping, emoji count as 2 characters, CJK characters (Chinese, Japanese, Korean) cost double. This means a post that looks like 270 characters in your notes app might already be over 280 when X counts it. Tools like [Posttruncate's X thread splitter](/en/blog/best-x-thread-tools-how-to-automatically-split-and-format-long-tweets/) account for this automatically so you're not guessing at where threads break. The tool also auto-splits long threads at word boundaries (not mid-sentence), which keeps your ideas intact and makes threads easier to follow.
+**Important:** X's character counting includes weighted characters-links cost exactly 23 characters via t.co URL wrapping, emoji count as 2 characters, CJK characters (Chinese, Japanese, Korean) cost double. This means a post that looks like 270 characters in your notes app might already be over 280 when X counts it. Tools like [Posttruncate's X thread splitter](/en/blog/best-x-thread-tools-how-to-automatically-split-and-format-long-tweets/) account for this automatically, so you're not guessing at where threads break. The tool also auto-splits long threads at word boundaries (not mid-sentence), which keeps your ideas intact and makes threads easier to follow.
 
-Thread splitting is one of the biggest differentiators in X strategy. A single tweet that loses engagement because it's truncated can sometimes perform 10x better when split thoughtfully into a 3-5 tweet thread. The format signals a deeper idea, algorithms reward long engagement (people reading multiple tweets), and the structure forces you to write the hook stronger since readers have to decide whether to expand each thread.
+Thread splitting is one of the biggest differentiators in X strategy. A single tweet that loses engagement because it's truncated can sometimes perform 10x better when split thoughtfully into a 3-5 tweet thread. The format signals a deeper idea: algorithms reward long engagement (people reading multiple tweets), and the structure forces you to write the hook stronger since readers have to decide whether to expand each thread.
 
-Instagram's feed prioritizes high-quality images and video (especially Reels). Text is secondary, but your caption still matters for hook and engagement.
+Instagram's feed prioritises high-quality images and video (especially Reels). Text is secondary, but your caption still matters for hook and engagement.
 
 **What works:**
 
 -   High-quality, visually consistent imagery (the single biggest factor)
--   Reels over static posts (Instagram prioritizes video, giving Reels 30%+ more reach than static)
+-   Reels over static posts (Instagram prioritises video, giving Reels 30%+ more reach than static)
 -   Behind-the-scenes authenticity and relatability (these often outperform polished content)
 -   Carousel posts that tell a story across multiple images (the swipe mechanic keeps people engaged)
 -   Captions that open with a hook (the first line appears before "See More," so lead with what makes someone want to tap in)
@@ -107,7 +107,7 @@ Instagram's feed prioritizes high-quality images and video (especially Reels). T
 
 -   Low-quality screenshots or phone captures (unless that's intentional authenticity you've committed to)
 -   Links in captions (Instagram doesn't auto-link, so mention link-in-bio with a clear CTA)
--   Pure text posts (Instagram isn't Twitter, audiences arrive for visual content)
+-   Pure text posts (Instagram isn't Twitter; audiences arrive for visual content)
 -   Generic engagement bait ("like and comment to enter!")
 
 **Tone:** Conversational, authentic, visual storytelling. Less polished than LinkedIn, more curated than TikTok. Your brand voice should feel like a person, not a brand account.
@@ -133,7 +133,7 @@ TikTok's algorithm rewards fresh, trending content and authentic personality ove
 -   Hashtag overload
 -   Ignoring trends entirely
 
-**Tone:** Real, conversational, self-aware. Lean into humor if it's authentic to you.
+**Tone:** Real, conversational, self-aware. Lean into humour if it's authentic to you.
 
 ## The Adaptation Workflow That Actually Works
 
@@ -141,7 +141,7 @@ Instead of creating 8 separate posts from scratch, use this framework:
 
 ![6-step adaptation workflow from Create Once through Break Down, Adapt Multiple Times, Distribute, Engage, and Measure, with arrows showing progression and branching](https://cdn-public.eesel.ai/51040ccf-3f79-454f-a639-9dce24a8f7ed/7a9af904-e184-4a32-87f0-7c3146b62273/83581bc8659b4ef189cf6017afe8572c.png)
 
-6-step adaptation workflow from Create Once through Break Down, Adapt Multiple Times, Distribute, Engage, and Measure, with arrows showing progression and branching
+6-step adaptation workflow from Create Once through Breakdown, Adapt Multiple Times, Distribute, Engage, and Measure, with arrows showing progression and branching
 
 **Step 1: Create Once** - Develop one core piece of content. Could be a blog post, a deep insight, research data, a story, a strong opinion. Invest time in this one piece.
 
@@ -161,7 +161,7 @@ Instead of creating 8 separate posts from scratch, use this framework:
 
 **Step 4: Distribute** - Use a scheduling tool (Buffer, Later, HubSpot), but paste custom copy for each platform, not the same caption everywhere.
 
-**Step 5: Engage** - Monitor comments on each platform and respond. Engagement often matters more than the original post performance.
+**Step 5: Engage** - Monitor comments on each platform and respond. Engagement often matters more than the original post's performance.
 
 **Step 6: Measure** - Track metrics separately by platform. What works on LinkedIn might flop on X. Use this data to adjust future adaptations.
 
@@ -200,13 +200,13 @@ You don't need to reinvent this workflow from scratch. The right tools cut adapt
 **Preview tools** like [Posttruncate](/) let you write once and see exactly how your post will render on each platform-crucial for catching truncation points before they tank your engagement. LinkedIn's mobile fold (different on desktop vs mobile), X's 280-character hard limit, Instagram's "See More" collapse-they're all invisible until you preview. The tool also handles weighted character counting automatically, so you're not doing mental math about emoji costs or link wrapper lengths. You paste your post, and you instantly see:
 
 -   Exactly where each platform will truncate
--   How many characters you have left before the fold
+-   How many characters do you have left before the fold
 -   Platform-specific character costs (links, emoji, CJK characters)
 -   Thread split suggestions for platforms that support them
 
 That visual feedback alone saves hours of trial-and-error publishing.
 
-**Scheduling tools** (Buffer, Later, HubSpot Social, Metricool) batch your posts and let you schedule across platforms. The key is customizing the copy for each platform rather than using the tool's "post to all" feature. Some of these tools actually integrate with preview tools now, so you can draft and preview in one place before scheduling.
+**Scheduling tools** (Buffer, Later, HubSpot Social, Metricool) batch your posts and let you schedule across platforms. The key is customising the copy for each platform rather than using the tool's "post to all" feature. Some of these tools actually integrate with preview tools now, so you can draft and preview in one place before scheduling.
 
 **Repurposing templates** - Build simple markdown or Google Docs templates for each platform so you're not starting blank each time. A template might be:
 
@@ -219,14 +219,14 @@ Templates reduce decision fatigue and make batch adaptation something you can do
 ## Common Pitfalls (And How to Avoid Them)
 
 **Pitfall 1: Copy-Paste Across All Platforms**  
-The engagement difference is stark. Adapted posts outperform generic cross-posts by 3-5x. The moment you hit "post to all," you've optimized for zero platforms instead of three. Don't do it.
+The engagement difference is stark. Adapted posts outperform generic cross-posts by 3-5x. The moment you hit "post to all," you've optimised for zero platforms instead of three. Don't do it.
 
 **Pitfall 2: Ignoring Platform-Specific Character Limits**  
 X's 280-character limit isn't a suggestion. LinkedIn's mobile fold at \~140 characters on first-time view isn't optional. Instagram's "See More" collapse affects how many people see your full caption. Learn these constraints and design around them. Use [Posttruncate](/en/platform-limits/) as a reference if you're not sure.
 
 ![How one core message branches into four different adapted posts-LinkedIn version longer and professional, X version snappy and conversational, Instagram version visual-first with minimal text, TikTok version authentic and short](https://cdn-public.eesel.ai/51040ccf-3f79-454f-a639-9dce24a8f7ed/7a9af904-e184-4a32-87f0-7c3146b62273/cb2dbc653ce743c0bc82417db7405cef.png)
 
-How one core message branches into four different adapted posts-LinkedIn version longer and professional, X version snappy and conversational, Instagram version visual-first with minimal text, TikTok version authentic and short
+How one core message branches into four different adapted posts: LinkedIn version longer and professional, X version snappy and conversational, Instagram version visual-first with minimal text, TikTok version authentic and short
 
 **Pitfall 3: Creating for Platforms Where Your Audience Doesn't Live**  
 Not everyone needs to be on every platform. Start by identifying where your audience actually spends time. Create quality content on your core platforms instead of spreading thin across eight platforms where barely anyone you care about exists.
@@ -235,7 +235,7 @@ Not everyone needs to be on every platform. Start by identifying where your audi
 Algorithms notice. Audiences notice. One platform done well beats eight done sporadically. Pick 2-3 platforms you'll commit to, then expand.
 
 **Pitfall 5: Measuring Everything by One Metric**  
-LinkedIn success might be professional relationships and shares. X success might be replies and quote-tweets. Instagram success might be saves and shares. TikTok success might be comments and re-watches. Each platform's culture rewards different behaviors. Don't judge platform performance by the same yardstick.
+LinkedIn success might be professional relationships and shares. X success might be replies and quote-tweets. Instagram success might be saves and shares. TikTok success might be comments and re-watches. Each platform's culture rewards different behaviours. Don't judge platform performance by the same yardstick.
 
 ## Try Posttruncate
 
@@ -245,14 +245,11 @@ Paste your post into their workspace, and you instantly see live previews of how
 
 It's free, no sign-up required, and your text never leaves your browser (runs entirely client-side). When you're adapting posts across platforms, seeing the real preview before you publish beats guessing every time.
 
-
 ## FAQs
-
-## Frequently Asked Questions
 
 <details><summary><b>Can I use the same post across all platforms?</b></summary>
 
-<p>Not really. You can reuse the core message and data, but each platform rewards platform-specific adaptation. A LinkedIn post that works won't land the same way on X or TikTok-audiences have different expectations, and each platform's algorithm favors different content types. One study found adapted posts get 3-5x more engagement than generic cross-posts. Start with one strong idea, then rewrite it for each platform's culture and constraints.</p></details>
+<p>Not really. You can reuse the core message and data, but each platform rewards platform-specific adaptation. A LinkedIn post that works won't land the same way on X or TikTok-audiences have different expectations, and each platform's algorithm favours different content types. One study found adapted posts get 3-5x more engagement than generic cross-posts. Start with one strong idea, then rewrite it for each platform's culture and constraints.</p></details>
 
 <details><summary><b>How much time does cross-platform strategy actually take?</b></summary>
 
