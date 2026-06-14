@@ -158,7 +158,7 @@ You get real-time previews of how your post renders on both devices, fold marker
 
 No signup required. No tracking. Everything runs in your browser. [Test your next post](/en/facebook-character-counter/) and see how many characters you've actually got before the fold.
 
-## Frequently Asked Questions
+## FAQs
 
 <details><summary><b>What's the exact character limit for Facebook posts?</b></summary>
 <p>Facebook officially accepts up to 63,206 characters, but that's useless - nobody reads past the fold. The real limits that determine reach are <strong>80 characters on mobile, 150 characters on desktop</strong>. Test it yourself with the <a href="/en/facebook-character-counter/">Facebook character counter</a>, which shows the fold markers live.</p>
