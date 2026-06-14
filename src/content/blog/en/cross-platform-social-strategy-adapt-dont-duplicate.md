@@ -44,7 +44,7 @@ All are saying the same thing. None of them is a word-for-word copy. Each respec
 
 Not all platforms are created equal. Understanding what each platform _wants_ from content is the difference between being ignored and being seen.
 
-![Platform comparison grid showing LinkedIn (professional, long-form), X/Twitter (snappy, conversational), Instagram (visual-first), and TikTok (authentic, short) with their distinct characteristics and best practices](/og/Cross_platform_1.png)
+![Platform comparison grid showing LinkedIn (professional, long-form), X/Twitter (snappy, conversational), Instagram (visual-first), and TikTok (authentic, short) with their distinct characteristics and best practices](/og/Cross_platform_1.webp)
 
 <p align="center"><span style="font-size: 12px; "><em>Platform comparison grid showing LinkedIn (professional, long-form), X/Twitter (snappy, conversational), Instagram (visual-first), and TikTok (authentic, short) with their distinct characteristics and best practices</em></span></p>
 
@@ -139,7 +139,7 @@ TikTok's algorithm rewards fresh, trending content and authentic personality ove
 
 Instead of creating 8 separate posts from scratch, use this framework:
 
-![6-step adaptation workflow from Create Once through Break Down, Adapt Multiple Times, Distribute, Engage, and Measure, with arrows showing progression and branching](/og/Cross_platform_2.png)
+![6-step adaptation workflow from Create Once through Break Down, Adapt Multiple Times, Distribute, Engage, and Measure, with arrows showing progression and branching](/og/Cross_platform_2.webp)
 
 <p align="center"><span style="font-size: 12px; "><em>6-step adaptation workflow from Create Once through Breakdown, Adapt Multiple Times, Distribute, Engage, and Measure, with arrows showing progression and branching</em></span></p>
 
@@ -224,7 +224,7 @@ The engagement difference is stark. Adapted posts outperform generic cross-posts
 **Pitfall 2: Ignoring Platform-Specific Character Limits**  
 X's 280-character limit isn't a suggestion. LinkedIn's mobile fold at \~140 characters on first-time view isn't optional. Instagram's "See More" collapse affects how many people see your full caption. Learn these constraints and design around them. Use [Posttruncate](/en/platform-limits/) as a reference if you're not sure.
 
-![How one core message branches into four different adapted posts-LinkedIn version longer and professional, X version snappy and conversational, Instagram version visual-first with minimal text, TikTok version authentic and short](/og/Cross_platform_3.png)
+![How one core message branches into four different adapted posts-LinkedIn version longer and professional, X version snappy and conversational, Instagram version visual-first with minimal text, TikTok version authentic and short](/og/Cross_platform_3.webp)
 
 <p align="center"><span style="font-size: 12px; "><em>How one core message branches into four different adapted posts: LinkedIn version longer and professional, X version snappy and conversational, Instagram version visual-first with minimal text, TikTok version authentic and short</em></span></p>
 
