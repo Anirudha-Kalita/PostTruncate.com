@@ -1,5 +1,5 @@
 /** @jsxImportSource preact */
-import { useEffect, useState } from 'preact/hooks';
+import { useEffect, useRef, useState } from 'preact/hooks';
 import {
   charCount,
   wordCount,
@@ -72,6 +72,30 @@ export function Workspace({ text, setText, lang, s, focus, image, onSelectImage 
   const onSanitize = () => setText(sanitizeText(text).text);
   const onClear = () => setText('');
 
+  // After an AI rewrite lands, pull the user's eye back to the editor: scroll it
+  // into view (so mobile jumps up from the button below), focus it, and flash a
+  // highlighted border for 5s. The highlight is React/Preact state — not a manual
+  // class — so the controlled textarea's re-render on new text doesn't wipe it.
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
+  const [highlight, setHighlight] = useState(false);
+  const highlightTimer = useRef<number | undefined>(undefined);
+  const onImproved = () => {
+    const el = textareaRef.current;
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      el.focus({ preventScroll: true });
+    }
+    setHighlight(true);
+    if (highlightTimer.current) window.clearTimeout(highlightTimer.current);
+    highlightTimer.current = window.setTimeout(() => setHighlight(false), 5000);
+  };
+  useEffect(
+    () => () => {
+      if (highlightTimer.current) window.clearTimeout(highlightTimer.current);
+    },
+    [],
+  );
+
   const formatterActions = [
     { label: w.uppercase, action: () => setText(formatUppercase(text)) },
     { label: w.lowercase, action: () => setText(formatLowercase(text)) },
@@ -107,15 +131,22 @@ export function Workspace({ text, setText, lang, s, focus, image, onSelectImage 
         <label for="post-input" class="sr-only">
           {w.title}
         </label>
-        <textarea
-          id="post-input"
-          value={text}
-          onInput={(e) => setText((e.currentTarget as HTMLTextAreaElement).value)}
-          placeholder={focus && w.placeholders && w.placeholders[focus as keyof typeof w.placeholders] ? w.placeholders[focus as keyof typeof w.placeholders] : w.placeholder}
-          rows={12}
-          spellcheck
-          class="block w-full h-[360px] resize-none rounded-md border border-hairline bg-canvas-soft px-4 py-3 text-[15px] leading-7 text-ink placeholder:text-mute focus:border-link focus:bg-canvas focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-link"
-        />
+        {/* Relative wrapper anchors the AI Improve floating action button to the
+            editor's bottom-left corner. */}
+        <div class="relative">
+          <textarea
+            ref={textareaRef}
+            id="post-input"
+            value={text}
+            onInput={(e) => setText((e.currentTarget as HTMLTextAreaElement).value)}
+            placeholder={focus && w.placeholders && w.placeholders[focus as keyof typeof w.placeholders] ? w.placeholders[focus as keyof typeof w.placeholders] : w.placeholder}
+            rows={12}
+            spellcheck
+            class={`block w-full h-[360px] resize-none rounded-md border bg-canvas-soft px-4 pt-3 pb-16 text-[15px] leading-7 text-ink placeholder:text-mute transition-[border-color,box-shadow] duration-300 focus:border-link focus:bg-canvas focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-link ${highlight ? 'border-link ring-4 ring-link/30' : 'border-hairline'}`}
+          />
+          {/* AI Improve — Gemini-backed rewrite, as a floating action button. */}
+          <AiImprove text={text} setText={setText} s={s.aiImprove} onImproved={onImproved} />
+        </div>
 
         {/* Image attach — prominent, right under the editor. In-memory preview
             only; the picked File is handed up to Dashboard state. */}
@@ -215,9 +246,6 @@ export function Workspace({ text, setText, lang, s, focus, image, onSelectImage 
             {w.clear}
           </button>
         </div>
-
-        {/* AI Improve — Gemini-backed rewrite with a tone picker (server route). */}
-        <AiImprove text={text} setText={setText} s={s.aiImprove} />
 
         {hidden.count > 0 && (
           <p class="mt-3 text-[12px] leading-4 text-warning-deep">
