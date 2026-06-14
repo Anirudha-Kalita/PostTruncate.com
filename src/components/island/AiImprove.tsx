@@ -123,18 +123,18 @@ export function AiImprove({ text, setText, s, onImproved }: Props) {
         />
       )}
 
-      {/* FAB cluster — pinned to the editor's bottom-left corner. */}
-      <div class="absolute bottom-3 left-3 z-20">
+      {/* FAB cluster — pinned to the editor's bottom-right corner. */}
+      <div class="absolute bottom-3 right-3 z-20">
         {/* Tone speed-dial: round buttons fanning out along a quarter-circle arc
-            from the FAB (up → right), the way a corner FAB reads best. Positions
-            are computed on the arc; the tone name is a hover tooltip + a11y label.
+            from the FAB (up → left), the way a bottom-right corner FAB reads best.
+            Positions are computed on the arc; each button carries a label pill.
             The FAB centre sits at (24,24) within this 48px cluster. */}
         {open && (
           <div role="menu" aria-label={s.pickTone} class="absolute inset-0">
             {TONES.map((tone, i) => {
               const angle = ((90 - (i * 90) / (TONES.length - 1)) * Math.PI) / 180;
               const radius = 168;
-              const cx = 24 + radius * Math.cos(angle);
+              const cx = 24 - radius * Math.cos(angle);
               const cy = 24 - radius * Math.sin(angle);
               return (
                 <button
@@ -186,7 +186,7 @@ export function AiImprove({ text, setText, s, onImproved }: Props) {
 
       {/* Undo + remaining quota, to the right of the FAB after a rewrite. */}
       {status === 'done' && prevText.current !== null && (
-        <div class="absolute bottom-3 left-16 z-20 flex items-center gap-2">
+        <div class="absolute bottom-3 right-16 z-20 flex items-center gap-2">
           <button
             type="button"
             onClick={undo}
@@ -205,12 +205,12 @@ export function AiImprove({ text, setText, s, onImproved }: Props) {
 
       {/* Error / informational toast, to the right of the FAB. */}
       {status === 'error' && message && (
-        <p class="absolute bottom-3 left-16 z-20 max-w-[68%] rounded-pill bg-error-soft px-3 py-1.5 text-[12px] font-medium text-error shadow-e1">
+        <p class="absolute bottom-3 right-16 z-20 max-w-[68%] rounded-pill bg-error-soft px-3 py-1.5 text-[12px] font-medium text-error shadow-e1">
           {message}
         </p>
       )}
       {status === 'idle' && message && (
-        <p class="absolute bottom-3 left-16 z-20 max-w-[68%] rounded-pill bg-canvas px-3 py-1.5 text-[12px] text-mute shadow-e1">
+        <p class="absolute bottom-3 right-16 z-20 max-w-[68%] rounded-pill bg-canvas px-3 py-1.5 text-[12px] text-mute shadow-e1">
           {message}
         </p>
       )}
