@@ -57,9 +57,15 @@ export function AiImprove({ text, setText, s, onImproved }: Props) {
   const [maxUses, setMaxUses] = useState(3);
   // Snapshot of the text before the last successful rewrite, for Undo.
   const prevText = useRef<string | null>(null);
+  // The editor text the current status UI (Undo / toast) belongs to. Once the
+  // editor moves away from this — cleared or edited — that UI is stale.
+  const shownForText = useRef<string | null>(null);
 
   const busy = status === 'loading';
   const hasText = text.trim().length > 0;
+  // Auto-hide the Undo button / toast as soon as the editor text diverges from
+  // the result it relates to (e.g. the user clears or retypes the editor).
+  const statusForCurrentText = shownForText.current !== null && text === shownForText.current;
 
   async function improve(tone: Tone) {
     setOpen(false);
@@ -89,11 +95,13 @@ export function AiImprove({ text, setText, s, onImproved }: Props) {
           }),
         );
         if (typeof data.remaining === 'number') setRemaining(data.remaining);
+        shownForText.current = text;
         return;
       }
 
       prevText.current = text;
       setText(data.improved);
+      shownForText.current = data.improved;
       if (typeof data.remaining === 'number') setRemaining(data.remaining);
       setStatus('done');
       setMessage('');
@@ -101,15 +109,18 @@ export function AiImprove({ text, setText, s, onImproved }: Props) {
     } catch {
       setStatus('error');
       setMessage(s.errorGeneric);
+      shownForText.current = text;
     }
   }
 
   function undo() {
     if (prevText.current === null) return;
-    setText(prevText.current);
+    const restored = prevText.current;
+    setText(restored);
     prevText.current = null;
     setStatus('idle');
     setMessage(s.reverted);
+    shownForText.current = restored;
   }
 
   return (
@@ -185,7 +196,7 @@ export function AiImprove({ text, setText, s, onImproved }: Props) {
       </div>
 
       {/* Undo + remaining quota, to the right of the FAB after a rewrite. */}
-      {status === 'done' && prevText.current !== null && (
+      {status === 'done' && prevText.current !== null && statusForCurrentText && (
         <div class="absolute bottom-3 right-16 z-20 flex items-center gap-2">
           <button
             type="button"
@@ -204,12 +215,12 @@ export function AiImprove({ text, setText, s, onImproved }: Props) {
       )}
 
       {/* Error / informational toast, to the right of the FAB. */}
-      {status === 'error' && message && (
+      {status === 'error' && message && statusForCurrentText && (
         <p class="absolute bottom-3 right-16 z-20 max-w-[68%] rounded-pill bg-error-soft px-3 py-1.5 text-[12px] font-medium text-error shadow-e1">
           {message}
         </p>
       )}
-      {status === 'idle' && message && (
+      {status === 'idle' && message && statusForCurrentText && (
         <p class="absolute bottom-3 right-16 z-20 max-w-[68%] rounded-pill bg-canvas px-3 py-1.5 text-[12px] text-mute shadow-e1">
           {message}
         </p>
