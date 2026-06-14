@@ -42,6 +42,7 @@ export const da: Translations = {
     primary: 'Begynd at skrive',
     secondary: 'Se platformsgrænser',
     badge: 'Realtidsvisning. Slut med at gætte.',
+    trust: '100 % gratis — ingen tilmelding · Din tekst forlader aldrig browseren · Over 10 platformsgrænser dækket',
   },
 
   howItWorks: {

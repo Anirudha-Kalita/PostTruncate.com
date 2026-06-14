@@ -561,6 +561,8 @@ export interface Translations {
     primary: string;
     secondary: string;
     badge: string;
+    /** Muted reassurance line under the hero CTAs (free · private · coverage). */
+    trust: string;
   };
   /** Three-step "How it works" explainer on the homepage. Steps must match
       the visible card content exactly — used for both rendering and HowTo JSON-LD. */

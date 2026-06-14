@@ -42,6 +42,7 @@ export const ja: Translations = {
     primary: '書き始める',
     secondary: 'プラットフォームの上限を見る',
     badge: 'リアルタイムプレビュー。もう推測は不要です。',
+    trust: '100%無料 — 登録不要 · テキストはブラウザの外に出ません · 10以上のプラットフォーム制限に対応',
   },
 
   howItWorks: {

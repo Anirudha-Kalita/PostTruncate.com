@@ -43,6 +43,7 @@ export const de: Translations = {
     primary: 'Loslegen',
     secondary: 'Plattform-Limits ansehen',
     badge: 'Echtzeit-Vorschau. Kein Rätselraten mehr.',
+    trust: '100 % kostenlos — keine Anmeldung · Dein Text verlässt nie den Browser · Über 10 Plattform-Limits abgedeckt',
   },
 
   howItWorks: {

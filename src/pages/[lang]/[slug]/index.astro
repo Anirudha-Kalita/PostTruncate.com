@@ -130,9 +130,7 @@ const latestPosts = (await getPublishedPosts())
           <a href="#workspace" class="hero__primary">{t.hero.primary}</a>
           <a href={`/${lang}/platform-limits/`} class="hero__secondary">{t.hero.secondary}</a>
         </div>
-        <p class="hero__trust">
-          100% free — no sign-up · Text never leaves your browser · 10+ platform limits covered
-        </p>
+        <p class="hero__trust">{t.hero.trust}</p>
       </div>
 
       <HeroPreviewCard
@@ -219,7 +217,7 @@ const latestPosts = (await getPublishedPosts())
         {/* FAQ column */}
         <div class="faqblog__col">
           <header class="faqblog__head">
-            <h2 class="faqblog__label">{t.faq.title}</h2>
+            <h2 class="faqblog__label">{t.faq.eyebrow}</h2>
           </header>
           <div class="faq__list faq__list--band">
             {faqs.map((f) => (
@@ -667,11 +665,15 @@ const latestPosts = (await getPublishedPosts())
     justify-content: space-between;
     gap: 16px;
   }
+  /* Shared by both column headers (FAQ + "Latest from the blog") so they stay
+     the same size. Bumped up from a micro-label to give the band real heading
+     presence alongside the page's other sections. */
   .faqblog__label {
     font-family: var(--font-mono);
-    font-size: 13px;
+    font-size: 20px;
+    line-height: 1.2;
     font-weight: 600;
-    letter-spacing: 0.04em;
+    letter-spacing: 0.02em;
     text-transform: uppercase;
     color: var(--color-ink);
   }

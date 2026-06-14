@@ -42,6 +42,7 @@ export const es: Translations = {
     primary: 'Empezar a escribir',
     secondary: 'Ver los límites de cada plataforma',
     badge: 'Vistas previas en tiempo real. Se acabaron las conjeturas.',
+    trust: '100 % gratis — sin registro · Tu texto nunca sale del navegador · Más de 10 límites de plataformas',
   },
 
   howItWorks: {

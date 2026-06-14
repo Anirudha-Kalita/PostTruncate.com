@@ -42,6 +42,7 @@ export const zh: Translations = {
     primary: '开始写作',
     secondary: '查看平台限制',
     badge: '实时预览。不再需要猜测。',
+    trust: '100% 免费 — 无需注册 · 文本绝不离开浏览器 · 覆盖 10+ 个平台限制',
   },
 
   howItWorks: {

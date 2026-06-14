@@ -42,6 +42,7 @@ export const nl: Translations = {
     primary: 'Begin met schrijven',
     secondary: 'Bekijk de platformlimieten',
     badge: 'Real-time voorbeelden. Geen giswerk meer.',
+    trust: '100% gratis — geen aanmelding · Je tekst verlaat nooit je browser · Meer dan 10 platformlimieten gedekt',
   },
 
   howItWorks: {

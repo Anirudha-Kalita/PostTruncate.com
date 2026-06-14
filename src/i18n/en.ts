@@ -42,6 +42,7 @@ export const en: Translations = {
     primary: 'Start writing',
     secondary: 'See platform limits',
     badge: 'Real-time previews. No more guessing.',
+    trust: '100% free — no sign-up · Text never leaves your browser · 10+ platform limits covered',
   },
 
   howItWorks: {
@@ -816,7 +817,7 @@ export const en: Translations = {
       title: 'Live platform preview',
       tabAria: '{platform} preview',
       compareAll: 'Compare all',
-      showHidden: 'Show hidden text',
+      showHidden: 'Show folded text',
     },
     insights: {
       title: 'Advanced insights',

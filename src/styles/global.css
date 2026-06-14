@@ -29,7 +29,10 @@
 
   /* ── Brand / accent ────────────────────────────────────────────── */
   --color-primary: #171717;
-  --color-link: #0070f3;
+  /* Slightly deeper than the classic #0070f3 so white text on the primary
+     pill clears WCAG AA with headroom (~5.3:1, was ~4.56:1 — right at the
+     4.5 line). Also lifts every inline link's contrast in light mode. */
+  --color-link: #0066e0;
   --color-link-deep: #0761d1;
   --color-link-bg-soft: #d3e5ff;
   --color-cyan: #50e3c2;
