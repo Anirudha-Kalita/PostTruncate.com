@@ -87,8 +87,14 @@ const relatedPosts = (await getPublishedPosts())
       <OnThisPage label={globalT.toolPage.onThisPage} sections={sections} />
     </header>
 
-    {/* Live tool — scoped to this platform, full container width. */}
+    {/* Live tool — scoped to this platform, with workspace heading matching the homepage. */}
     <div class="tool-page__tool">
+      <div class="tool-page__workspace-head">
+        <h2 class="tool-page__workspace-title">
+          {platformLabel ? `Your ${platformLabel} live workspace` : globalT.workspace.title}
+        </h2>
+        <p class="tool-page__workspace-sub">{globalT.workspace.sub}</p>
+      </div>
       <Dashboard client:load lang={lang} strings={strings!} toolSlugs={toolSlugs!} focus={focus} />
     </div>
 
@@ -196,10 +202,29 @@ const relatedPosts = (await getPublishedPosts())
     color: var(--color-body);
   }
 
-  /* Embedded editor — breaks out of the narrow prose measure to full width */
+  /* Embedded editor — constrained to the same width as the homepage workspace
+     (--max-width-page = 1200px) and centered, matching the home editor exactly. */
   .tool-page__tool {
     scroll-margin-top: 80px;
-    margin: 8px 0 56px;
+    margin: 8px auto 56px;
+    max-width: var(--max-width-page);
+  }
+
+  /* Workspace heading block above the embedded tool — mirrors the homepage style. */
+  .tool-page__workspace-head {
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  .tool-page__workspace-title {
+    font-size: 28px;
+    font-weight: 600;
+    letter-spacing: -1px;
+    color: var(--color-ink);
+  }
+  .tool-page__workspace-sub {
+    margin-top: 6px;
+    font-size: 15px;
+    color: var(--color-body);
   }
 
   /* Prose body — same rhythm as the homepage SEO copy block */
