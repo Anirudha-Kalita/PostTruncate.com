@@ -69,7 +69,7 @@ const faqItems = tool.faq?.[lang] ?? [];
 
 // The locale-native faq block is the switch into the richer standalone template.
 const isStandalone = focus !== undefined && faqItems.length > 0;
-const crossPromo = globalT.toolPage.crossPromo;
+const cta = globalT.toolPage.cta;
 
 // Related blog posts for this platform, newest first. Only this locale's posts,
 // so untranslated locales (no posts yet) render nothing. English-only today.
@@ -125,11 +125,11 @@ const relatedPosts = (await getPublishedPosts())
 
       <p class="tool-page__updated">{lastUpdatedLine}</p>
 
-      {/* Cross-promo: send users who need other platforms to the full editor. */}
+      {/* CTA: give context then send users to the full home editor. */}
       <aside class="tool-page__xpromo">
-        <h2 class="tool-page__xpromo-heading">{crossPromo.heading}</h2>
-        <p class="tool-page__xpromo-text">{interp(crossPromo.text, { platform: platformLabel })}</p>
-        <a href={homeHref} class="tool-page__btn">{crossPromo.cta}</a>
+        <h2 class="tool-page__cta-heading">{cta.heading}</h2>
+        <p class="tool-page__cta-blurb">{cta.blurb}</p>
+        <a href={homeHref} class="tool-page__btn tool-page__cta-btn">{cta.button}</a>
       </aside>
     </article>
   </section>
@@ -157,8 +157,10 @@ const relatedPosts = (await getPublishedPosts())
 
       {!hideCta && (
         <div class="tool-page__cta">
-          <a href={editorHref} class="tool-page__btn">
-            {globalT.hero.primary}
+          <h2 class="tool-page__cta-heading">{cta.heading}</h2>
+          <p class="tool-page__cta-blurb">{cta.blurb}</p>
+          <a href={editorHref} class="tool-page__btn tool-page__cta-btn">
+            {cta.button}
           </a>
         </div>
       )}
@@ -280,6 +282,26 @@ const relatedPosts = (await getPublishedPosts())
     margin-top: 24px;
     padding-top: 32px;
     border-top: 1px solid var(--color-hairline);
+  }
+
+  .tool-page__cta-heading {
+    font-size: 22px;
+    font-weight: 600;
+    line-height: 30px;
+    letter-spacing: -0.6px;
+    color: var(--color-ink);
+  }
+
+  .tool-page__cta-blurb {
+    margin-top: 12px;
+    font-size: 16px;
+    line-height: 28px;
+    color: var(--color-body);
+    max-width: 44rem;
+  }
+
+  .tool-page__cta-btn {
+    margin-top: 20px;
   }
 
   .tool-page__btn {

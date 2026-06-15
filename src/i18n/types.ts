@@ -691,6 +691,18 @@ export interface Translations {
       text: string;
       cta: string;
     };
+    /**
+     * CTA block on calculator/utility tool pages and classic-layout platform pages.
+     * Shown above the "Start writing" button to give users context before clicking.
+     */
+    cta: {
+      /** Section heading above the button, e.g. "Ready to check your post?" */
+      heading: string;
+      /** One-sentence marketing blurb explaining what clicking the button unlocks. */
+      blurb: string;
+      /** Button label. */
+      button: string;
+    };
   };
   /** Alt text for site images — logos, platform icons, etc. */
   images: {

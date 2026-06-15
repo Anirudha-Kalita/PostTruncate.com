@@ -72,6 +72,11 @@ export const ja: Translations = {
       text: 'PostTruncateは{platform}だけのものではありません。ホームページの全機能エディターなら、LinkedIn、X、Instagram、Facebook、Threads、SMSへの表示を同時にプレビューでき、各プラットフォームの折り返し・文字数制限・エンコードの落とし穴を一度に把握できます。一度書けば、どこでも確認。',
       cta: '全機能エディターを開く',
     },
+    cta: {
+      heading: 'あなたの投稿が実際にどう見えるか確認する準備はできましたか？',
+      blurb: '下書きをPostTruncateエディターに貼り付けると、LinkedIn、X、Instagram、Facebook、Threads、SMSのライブプレビューを即座に確認できます。フォールドライン、スレッド分割、文字数制限の警告がリアルタイムで更新されます。無料・即時・データはブラウザの外に出ません。',
+      button: '書き始める — 無料です',
+    },
   },
 
   images: {

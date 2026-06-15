@@ -72,6 +72,11 @@ export const da: Translations = {
       text: 'PostTruncate er ikke kun til {platform}. Den fulde editor på forsiden forhåndsviser dit opslag på LinkedIn, X, Instagram, Facebook, Threads og SMS på én gang — så du fanger hver platforms fold, grænse og kodningsfælder i ét gennemløb. Skriv det én gang, tjek det overalt.',
       cta: 'Åbn den fulde editor',
     },
+    cta: {
+      heading: 'Klar til at se, hvordan dit opslag faktisk ser ud?',
+      blurb: 'Indsæt dit udkast i PostTruncate-editoren og se øjeblikkeligt live-forhåndsvisninger for LinkedIn, X, Instagram, Facebook, Threads og SMS — med foldlinjer, tråd-opdeling og grænseadvarsler, der opdateres mens du skriver. Gratis, øjeblikkeligt og intet forlader din browser.',
+      button: 'Begynd at skrive — det er gratis',
+    },
   },
 
   images: {

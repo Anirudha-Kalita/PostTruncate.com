@@ -1,4 +1,4 @@
-﻿import type { Translations } from './types';
+import type { Translations } from './types';
 
 // ──────────────────────────────────────────────────────────────────────────
 // Nederlands (nl) — machinaal gegenereerde vertaling. Deze tekst is nog niet
@@ -71,6 +71,11 @@ export const nl: Translations = {
       heading: 'Andere platforms controleren?',
       text: 'PostTruncate is niet alleen voor {platform}. De volledige editor op de homepage toont je bericht tegelijk voor LinkedIn, X, Instagram, Facebook, Threads en SMS — zodat je de vouw, limiet en coderingsvalkuilen van elk platform in één keer opmerkt. Schrijf het één keer, controleer het overal.',
       cta: 'Open de volledige editor',
+    },
+    cta: {
+      heading: 'Klaar om te zien hoe je bericht er écht uitziet?',
+      blurb: 'Plak je concept in de PostTruncate-editor en bekijk direct live-previews voor LinkedIn, X, Instagram, Facebook, Threads en SMS — met vouwlijnen, thread-splits en limietwaarschuwingen die bijwerken terwijl je typt. Gratis, direct en niets verlaat je browser.',
+      button: 'Begin met schrijven — het is gratis',
     },
   },
 

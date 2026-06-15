@@ -72,6 +72,11 @@ export const es: Translations = {
       text: 'PostTruncate no es solo para {platform}. El editor completo de la página de inicio previsualiza tu publicación en LinkedIn, X, Instagram, Facebook, Threads y SMS a la vez, para que detectes el corte, el límite y los problemas de codificación de cada plataforma de una sola pasada. Escríbelo una vez y compruébalo en todas partes.',
       cta: 'Abrir el editor completo',
     },
+    cta: {
+      heading: '¿Listo para ver cómo queda realmente tu publicación?',
+      blurb: 'Pega tu borrador en el editor de PostTruncate y ve al instante vistas previas en vivo para LinkedIn, X, Instagram, Facebook, Threads y SMS — con líneas de corte, divisiones de hilo y avisos de límite actualizándose mientras escribes. Gratis, instantáneo y nada sale de tu navegador.',
+      button: 'Empieza a escribir — es gratis',
+    },
   },
 
   images: {
