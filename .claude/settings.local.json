@@ -30,6 +30,11 @@
       "Bash(curl -s -o /dev/null -w \"status=%{http_code}\\\\n\" https://www.posttruncate.com/)",
       "Bash(python -c \"import sys,json; d=json.load\\(sys.stdin\\); print\\('success=',d.get\\('success'\\)\\); print\\('errors=',d.get\\('errors'\\)\\); print\\('result=',d.get\\('result'\\)\\)\")",
       "Bash(curl -s https://posttruncate.com/sitemap-0.xml)"
+    ],
+	"deny": [
+      "*(**/node_modules/**)",
+      "*(**/.astro/**)",
+      "*(**/dist/**)"
     ]
   }
 }

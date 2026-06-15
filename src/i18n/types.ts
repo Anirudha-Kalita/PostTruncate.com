@@ -523,6 +523,76 @@ export interface IslandStrings {
     /** Panel summary line. "{pass}" / "{total}" tokens. */
     summary: string;
   };
+  /**
+   * Standalone utility calculators served under /[lang]/tools/. Each tool's
+   * island UI strings live in its own sub-object keyed by the calculator id.
+   */
+  calculators: {
+    /** "Words to Pages" page-count estimator. */
+    wordsPerPage: {
+      /** Card header large title. */
+      eyebrow: string;
+      /** Card header subtitle (function label). */
+      title: string;
+      /** Badge — no input yet. */
+      badgeIdle: string;
+      /** Badge — a result is shown. */
+      badgeResult: string;
+      /** Accessible label for the input-mode segmented control. */
+      modeAria: string;
+      /** Segmented option — paste/type text. */
+      modeText: string;
+      /** Segmented option — enter a raw word count. */
+      modeCount: string;
+      /** Textarea placeholder for the paste-text mode. */
+      placeholder: string;
+      /** Label for the numeric word-count input. */
+      wordsLabel: string;
+      /** Placeholder for the numeric word-count input. */
+      wordsPlaceholder: string;
+      /** Font-size selector label. */
+      fontSizeLabel: string;
+      /** Line-spacing selector label. */
+      spacingLabel: string;
+      /** Spacing option — single. */
+      spacingSingle: string;
+      /** Spacing option — 1.5 lines. */
+      spacingOneAndHalf: string;
+      /** Spacing option — double. */
+      spacingDouble: string;
+      /** Stat tile label — estimated pages. */
+      pagesLabel: string;
+      /** Stat tile label — word count. */
+      wordsStatLabel: string;
+      /** Caption under the result. "{n}" → words-per-page for the current setting. */
+      perPageNote: string;
+      /** Heading above the quick-reference table. */
+      referenceHeading: string;
+      /** Reference table column — words. */
+      refWordsCol: string;
+      /** Reference table column — pages. */
+      refPagesCol: string;
+      /** Font-family selector label. */
+      fontLabel: string;
+      /** Page-size selector label (A4 / Letter / Legal). */
+      pageFormatLabel: string;
+      /** Margins group label. */
+      marginsLabel: string;
+      /** Margin input labels. */
+      marginTop: string;
+      marginRight: string;
+      marginBottom: string;
+      marginLeft: string;
+      /** Units selector label. */
+      unitsLabel: string;
+      /** Unit option — inches. */
+      unitInch: string;
+      /** Unit option — centimeters. */
+      unitCm: string;
+      /** Print button label. */
+      printButton: string;
+    };
+  };
 }
 
 export interface Translations {
@@ -540,6 +610,8 @@ export interface Translations {
       guides: string;
       /** "All platform limits" entry shown at the top of the guides dropdown. */
       limits: string;
+      /** "Tools" dropdown label — the utility/calculator suite. */
+      tools: string;
       faq: string;
       about: string;
       contact: string;

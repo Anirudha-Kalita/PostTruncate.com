@@ -8,6 +8,7 @@ import { getTranslations } from '../i18n';
 import { interp } from '../i18n/interp';
 import type { Translations } from '../i18n/types';
 import { tools } from '../data/tools';
+import { calculators } from '../data/calculators';
 import { BLOG_SEGMENT, getBlogStrings, getBlogLocales } from '../lib/blogI18n';
 
 interface Props {
@@ -63,6 +64,13 @@ const guidesLinks = tools.map((tool, i) => {
     logo: PLATFORM_LOGOS[tool.id] ?? '/logos/google-serp.svg',
   };
 });
+
+// Tools dropdown items — utility calculators. Labels come from each tool's
+// localized schemaName (not a positional i18n array), URLs from calculators.ts.
+const toolsLinks = calculators.map((tool) => ({
+  label: tool.schemaName[lang] ?? tool.schemaName['en'],
+  href: `/${lang}/tools/${tool.slugs[lang] ?? tool.slugs['en']}/`,
+}));
 ---
 
 <header class="nav">
@@ -97,6 +105,28 @@ const guidesLinks = tools.map((tool, i) => {
                 <a href={gl.href} class="nav__guides-link">
                   <img src={gl.logo} width="20" height="20" alt={gl.logoAlt} class="nav__guides-logo" loading="lazy" decoding="async" />
                   <span>{gl.label}</span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </details>
+
+      {/* Tools dropdown (utility calculators) */}
+      <details class="nav__guides nav__tools" id="nav-tools-desktop">
+        <summary class="nav__link nav__guides-toggle">
+          {nav.links.tools}
+          <svg class="nav__guides-chevron" width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M2.5 3.5 5 6.5 7.5 3.5" />
+          </svg>
+        </summary>
+        <div class="nav__guides-panel">
+          <p class="nav__guides-heading">{nav.links.tools}</p>
+          <ul class="nav__guides-list">
+            {toolsLinks.map((tl) => (
+              <li>
+                <a href={tl.href} class="nav__guides-link">
+                  <span>{tl.label}</span>
                 </a>
               </li>
             ))}
@@ -243,6 +273,23 @@ const guidesLinks = tools.map((tool, i) => {
               </div>
             </details>
 
+            {/* Tools — inline expand */}
+            <details class="nav__guides-mobile nav__tools-mobile" id="nav-tools-mobile">
+              <summary class="nav__panel-link nav__guides-mobile-toggle">
+                {nav.links.tools}
+                <svg class="nav__guides-chevron" width="12" height="12" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M2.5 3.5 5 6.5 7.5 3.5" />
+                </svg>
+              </summary>
+              <div class="nav__guides-mobile-panel">
+                {toolsLinks.map((tl) => (
+                  <a href={tl.href} class="nav__panel-link nav__guides-mobile-link">
+                    <span>{tl.label}</span>
+                  </a>
+                ))}
+              </div>
+            </details>
+
             {/* Remaining links (FAQ, About, Contact) */}
             {links.slice(1).map((l) => <a href={l.href} class="nav__panel-link">{l.label}</a>)}
 
@@ -336,16 +383,16 @@ const guidesLinks = tools.map((tool, i) => {
       for (const d of disclosures) d.removeAttribute('open');
   });
 
-  // ── Guides dropdown: open on hover (desktop) ───────────────────────────
-  const guidesDesktop = document.querySelector<HTMLDetailsElement>('.nav__guides');
-  if (guidesDesktop) {
+  // ── Desktop dropdowns (Guides + Tools): open on hover ──────────────────
+  const hoverMenus = document.querySelectorAll<HTMLDetailsElement>('.nav__guides');
+  for (const menu of hoverMenus) {
     let hoverTimeout: ReturnType<typeof setTimeout> | undefined;
-    guidesDesktop.addEventListener('mouseenter', () => {
+    menu.addEventListener('mouseenter', () => {
       clearTimeout(hoverTimeout);
-      guidesDesktop.setAttribute('open', '');
+      menu.setAttribute('open', '');
     });
-    guidesDesktop.addEventListener('mouseleave', () => {
-      hoverTimeout = setTimeout(() => guidesDesktop.removeAttribute('open'), 150);
+    menu.addEventListener('mouseleave', () => {
+      hoverTimeout = setTimeout(() => menu.removeAttribute('open'), 150);
     });
   }
 

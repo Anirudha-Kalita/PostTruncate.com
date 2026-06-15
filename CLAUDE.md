@@ -97,3 +97,47 @@ Layered pipeline — **run the cheapest layer that covers the change; escalate o
 - **For content collection / config / i18n changes that produce stale-cache errors, `astro sync` alone is NOT sufficient** — it does not regenerate a corrupted `.astro` cache. The correct recovery is `npm run clean && npx astro sync` (delete the cache FIRST, then sync). `npm run fresh` does this and boots the dev server in one command.
 - After modifying source files, run `npm run test:fast` (typecheck + lint) before considering the change done. Escalate to `test:unit` / `test:browser` per the Testing table above based on what was touched. Do not jump straight to browser screenshots.
 
+## Dev Server & Screenshots
+
+When taking screenshots to verify UI changes, follow this exact procedure. Do not improvise around it.
+
+### Preferred: screenshot the production build (most stable)
+Use this whenever you only need to verify appearance (no HMR needed):
+
+1. `lsof -ti:4321 | xargs kill -9 2>/dev/null || true`
+2. `npm run build` — fix any build errors before proceeding.
+3. `npm run preview > /tmp/preview.log 2>&1 &`
+4. `npx wait-on http://localhost:4321 -t 30000`
+5. Take the screenshot.
+
+The preview build does no Vite dep optimization, no HMR, and no mid-compile reloads, so it avoids black screens and the `optimizeDeps` re-bundling that kills in-flight requests.
+
+### Fallback: dev server (only if you genuinely need HMR)
+1. `lsof -ti:4321 | xargs kill -9 2>/dev/null || true` — always clear the port first; never assume a previous server is still up or already gone.
+2. `npm run dev > /tmp/dev.log 2>&1 &` — always detached with logs, never foreground.
+3. `npx wait-on http://localhost:4321 -t 30000` — wait for readiness; never use a fixed `sleep`.
+4. Warm-up hit so Vite finishes optimizing deps before the real screenshot:
+   `curl -s http://localhost:4321/the-island-page > /dev/null && sleep 1`
+   (Replace with whichever page has the Preact island being tested.)
+5. Take the screenshot.
+
+### If you get a black screen or a failed/killed request
+- `cat /tmp/dev.log` (or `/tmp/preview.log`) and look for Vite/Astro compile errors or an `optimizeDeps` re-bundle line before retrying.
+- If the log shows dependency re-optimization fired (e.g. `preact/devtools` → reload), it settled after that reload — just retry the screenshot once. Do not restart the server.
+
+### Rules
+- One server at a time. Kill the port before every start.
+- Never start the dev server in the foreground (it blocks the session).
+- Never `sleep` and hope; always `wait-on` the actual URL.
+- Don't assume a backgrounded server is still running across tool calls — verify via the log file.
+
+### Config to prevent mid-session re-optimization
+Ensure these are set in `astro.config.mjs` so deps are bundled at startup, not discovered lazily:
+
+```js
+vite: {
+  optimizeDeps: {
+    include: ['preact', 'preact/hooks', 'preact/devtools', 'preact/compat', 'preact/jsx-runtime'],
+  },
+},
+```

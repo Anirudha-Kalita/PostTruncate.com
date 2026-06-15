@@ -204,6 +204,151 @@ export function paragraphCount(text: string): number {
 }
 
 // ──────────────────────────────────────────────────────────────────────────
+// Words-per-page estimation. Pure, DOM-free helper backing the
+// "how many pages is N words" calculator tool. Baselines follow the common
+// convention where a 12pt single-spaced page holds ~500 words, so 1,000 words
+// ≈ 2 pages single-spaced and ≈ 4 pages double-spaced.
+// ──────────────────────────────────────────────────────────────────────────
+
+export type PageFontSize = 10 | 11 | 12 | 14;
+export type PageSpacing = 'single' | 'oneAndHalf' | 'double';
+
+/** Words that fit on one single-spaced page at each common font size. */
+const SINGLE_SPACED_WPP: Record<PageFontSize, number> = {
+  10: 600,
+  11: 550,
+  12: 500,
+  14: 430,
+};
+
+/** Line-spacing multiplier applied to the single-spaced baseline. */
+const SPACING_FACTOR: Record<PageSpacing, number> = {
+  single: 1,
+  oneAndHalf: 2 / 3,
+  double: 0.5,
+};
+
+export interface PageEstimateOptions {
+  /** Point size of the body font (default 12). */
+  fontSize?: PageFontSize;
+  /** Line spacing (default "single"). */
+  spacing?: PageSpacing;
+}
+
+export interface PageEstimate {
+  /** Words assumed to fit on one page for the chosen settings. */
+  wordsPerPage: number;
+  /** Fractional page count (e.g. 1.5). Always >= 0. */
+  pages: number;
+}
+
+/**
+ * Estimate document pages from a word count for the chosen font size + line
+ * spacing. Unknown/negative word counts are treated as 0.
+ */
+export function wordsToPages(words: number, opts: PageEstimateOptions = {}): PageEstimate {
+  const fontSize = opts.fontSize ?? 12;
+  const spacing = opts.spacing ?? 'single';
+  const wordsPerPage = Math.round(SINGLE_SPACED_WPP[fontSize] * SPACING_FACTOR[spacing]);
+  const safeWords = Number.isFinite(words) && words > 0 ? words : 0;
+  return { wordsPerPage, pages: safeWords / wordsPerPage };
+}
+
+// ──────────────────────────────────────────────────────────────────────────
+// Richer, layout-aware page estimate. Models the actual usable text area:
+// page size − margins, divided by font-driven line height and characters per
+// line, then converted to words. Calibrated so the default (12pt Arial,
+// single-spaced, A4, 1in margins) lands near the ~500-words-per-page rule.
+// ──────────────────────────────────────────────────────────────────────────
+
+export type PageFont = 'arial' | 'times' | 'calibri' | 'verdana' | 'georgia' | 'courier';
+export type PageFormat = 'a4' | 'letter' | 'legal';
+export type PageUnit = 'inch' | 'cm';
+
+/** Physical page sizes in inches (width × height). */
+const PAGE_SIZES_IN: Record<PageFormat, { w: number; h: number }> = {
+  a4: { w: 8.27, h: 11.69 },
+  letter: { w: 8.5, h: 11 },
+  legal: { w: 8.5, h: 14 },
+};
+
+/** Average glyph advance width as a fraction of the em (font size), per font. */
+const FONT_CHAR_EM: Record<PageFont, number> = {
+  arial: 0.5,
+  times: 0.45,
+  calibri: 0.47,
+  verdana: 0.58,
+  georgia: 0.5,
+  courier: 0.6,
+};
+
+/** Line-height multiplier for each spacing setting (single ≈ 1.2 × font). */
+const SPACING_LEADING: Record<PageSpacing, number> = {
+  single: 1,
+  oneAndHalf: 1.5,
+  double: 2,
+};
+
+const AVG_CHARS_PER_WORD = 7; // ~5–6 letters + a trailing space
+const SINGLE_LINE_LEADING = 1.2; // single-spaced line box ≈ 1.2 × font size
+const CM_PER_INCH = 2.54;
+
+export interface PageMargins {
+  top: number;
+  right: number;
+  bottom: number;
+  left: number;
+}
+
+export interface DocumentPageOptions {
+  font?: PageFont;
+  /** Body font size in points. */
+  fontSize?: number;
+  spacing?: PageSpacing;
+  format?: PageFormat;
+  unit?: PageUnit;
+  /** Margins expressed in `unit` (default 1 on every side). */
+  margins?: PageMargins;
+}
+
+/**
+ * Estimate document pages from a word count using the full page layout: page
+ * size minus margins, font width, and line spacing. Pure and DOM-free.
+ * Unknown/negative word counts are treated as 0; wordsPerPage is always ≥ 1.
+ */
+export function estimateDocumentPages(
+  words: number,
+  opts: DocumentPageOptions = {},
+): PageEstimate {
+  const font = opts.font ?? 'arial';
+  const fontSize = opts.fontSize && opts.fontSize > 0 ? opts.fontSize : 12;
+  const spacing = opts.spacing ?? 'single';
+  const format = opts.format ?? 'a4';
+  const unit = opts.unit ?? 'inch';
+  const m = opts.margins ?? { top: 1, right: 1, bottom: 1, left: 1 };
+
+  const toInch = (v: number) => {
+    const n = Number.isFinite(v) && v > 0 ? v : 0;
+    return unit === 'cm' ? n / CM_PER_INCH : n;
+  };
+
+  const page = PAGE_SIZES_IN[format];
+  const usableW = Math.max(0, page.w - toInch(m.left) - toInch(m.right));
+  const usableH = Math.max(0, page.h - toInch(m.top) - toInch(m.bottom));
+
+  const charWidthIn = (fontSize * FONT_CHAR_EM[font]) / 72;
+  const lineHeightIn = (fontSize * SINGLE_LINE_LEADING * SPACING_LEADING[spacing]) / 72;
+
+  const charsPerLine = charWidthIn > 0 ? Math.floor(usableW / charWidthIn) : 0;
+  const linesPerPage = lineHeightIn > 0 ? Math.floor(usableH / lineHeightIn) : 0;
+  const wordsPerLine = charsPerLine / AVG_CHARS_PER_WORD;
+  const wordsPerPage = Math.max(1, Math.round(linesPerPage * wordsPerLine));
+
+  const safeWords = Number.isFinite(words) && words > 0 ? words : 0;
+  return { wordsPerPage, pages: safeWords / wordsPerPage };
+}
+
+// ──────────────────────────────────────────────────────────────────────────
 // URL detection
 // ──────────────────────────────────────────────────────────────────────────
 
