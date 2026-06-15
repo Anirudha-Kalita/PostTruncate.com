@@ -1,7 +1,7 @@
 /** @jsxImportSource preact */
 import type { ComponentChildren } from 'preact';
 import { useMemo, useState } from 'preact/hooks';
-import { Card, CardHead, Stat, Badge, type Tone } from './ui';
+import { Card, CardHead, Stat, Badge, ClearButton, type Tone } from './ui';
 import { interp } from '../../i18n/interp';
 import {
   wordCount,
@@ -170,7 +170,7 @@ export function WordsPerPageCalculator({ s, lang }: Props) {
         <div
           role="group"
           aria-label={c.modeAria}
-          class="grid grid-cols-2 gap-1 rounded-lg border border-hairline bg-canvas-soft p-1"
+          class="grid grid-cols-2 gap-1 rounded-lg border border-hairline bg-canvas-soft-2 p-1"
         >
           {(
             [
@@ -185,7 +185,7 @@ export function WordsPerPageCalculator({ s, lang }: Props) {
                 aria-pressed={active}
                 onClick={() => setMode(opt.value)}
                 class={`rounded-md px-3 py-2 text-[14px] font-medium transition-colors ${
-                  active ? 'bg-canvas text-ink shadow-e1' : 'text-body hover:text-ink'
+                  active ? 'bg-canvas text-ink shadow-e2' : 'text-mute hover:text-ink'
                 }`}
               >
                 {opt.label}
@@ -216,6 +216,15 @@ export function WordsPerPageCalculator({ s, lang }: Props) {
             />
           </Field>
         )}
+
+        <ClearButton
+          label={s.calculators.clear}
+          disabled={!text && !count}
+          onClick={() => {
+            setText('');
+            setCount('');
+          }}
+        />
 
         {/* Document settings — font, size, spacing, page size */}
         <div class="grid grid-cols-2 gap-3 sm:grid-cols-4">

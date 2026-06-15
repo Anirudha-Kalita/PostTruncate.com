@@ -1,7 +1,7 @@
 /** @jsxImportSource preact */
 import type { ComponentChildren } from 'preact';
 import { useMemo, useState } from 'preact/hooks';
-import { Card, CardHead, Stat, Badge, type Tone } from './ui';
+import { Card, CardHead, Stat, Badge, ClearButton, type Tone } from './ui';
 import { wordCount, estimatedDuration, type DurationCopy } from '../../lib/textTools';
 import type { IslandStrings } from '../../i18n/types';
 
@@ -71,7 +71,7 @@ export function ReadingTimeCalculator({ s, lang }: Props) {
         <div
           role="group"
           aria-label={c.modeAria}
-          class="grid grid-cols-2 gap-1 rounded-lg border border-hairline bg-canvas-soft p-1"
+          class="grid grid-cols-2 gap-1 rounded-lg border border-hairline bg-canvas-soft-2 p-1"
         >
           {(
             [
@@ -86,7 +86,7 @@ export function ReadingTimeCalculator({ s, lang }: Props) {
                 aria-pressed={active}
                 onClick={() => setMode(opt.value)}
                 class={`rounded-md px-3 py-2 text-[14px] font-medium transition-colors ${
-                  active ? 'bg-canvas text-ink shadow-e1' : 'text-body hover:text-ink'
+                  active ? 'bg-canvas text-ink shadow-e2' : 'text-mute hover:text-ink'
                 }`}
               >
                 {opt.label}
@@ -117,6 +117,15 @@ export function ReadingTimeCalculator({ s, lang }: Props) {
             />
           </Field>
         )}
+
+        <ClearButton
+          label={s.calculators.clear}
+          disabled={!text && !count}
+          onClick={() => {
+            setText('');
+            setCount('');
+          }}
+        />
 
         {/* Speed selectors */}
         <div class="grid grid-cols-1 gap-3 sm:grid-cols-2">

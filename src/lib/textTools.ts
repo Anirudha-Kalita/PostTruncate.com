@@ -145,6 +145,45 @@ export function charCount(text: string): number {
   return splitGraphemes(text).length;
 }
 
+// ──────────────────────────────────────────────────────────────────────────
+// Byte counting across the common Unicode encodings. Pure and DOM-free
+// (TextEncoder is a Web/Node global, not a DOM API). Backs the byte-counter /
+// UTF-8 byte calculator tool.
+// ──────────────────────────────────────────────────────────────────────────
+
+export interface ByteCounts {
+  /** UTF-8 bytes (1–4 per code point; ASCII = 1, most emoji = 4). */
+  utf8: number;
+  /** UTF-16 bytes (2 per code unit; 4 for astral chars via surrogate pairs). */
+  utf16: number;
+  /** UTF-32 bytes (always 4 per code point). */
+  utf32: number;
+  /** Unicode code points (astral chars count once). */
+  codePoints: number;
+  /** User-perceived characters (grapheme clusters). */
+  graphemes: number;
+}
+
+const UTF8_ENCODER = typeof TextEncoder !== 'undefined' ? new TextEncoder() : null;
+
+/** Byte sizes of `text` in UTF-8 / UTF-16 / UTF-32, plus code-point and grapheme counts. */
+export function byteCounts(text: string): ByteCounts {
+  // UTF-8: exact via TextEncoder; fall back to a manual sum if unavailable.
+  const utf8 = UTF8_ENCODER
+    ? UTF8_ENCODER.encode(text).length
+    : (() => {
+        let n = 0;
+        for (const ch of text) {
+          const cp = ch.codePointAt(0) ?? 0;
+          n += cp <= 0x7f ? 1 : cp <= 0x7ff ? 2 : cp <= 0xffff ? 3 : 4;
+        }
+        return n;
+      })();
+  const utf16 = text.length * 2; // JS strings are UTF-16; .length = code units
+  const codePoints = [...text].length; // iterates by code point
+  return { utf8, utf16, utf32: codePoints * 4, codePoints, graphemes: charCount(text) };
+}
+
 /** Slice by user-perceived characters without breaking emoji/combining marks. */
 export function sliceChars(text: string, start: number, end?: number): string {
   return splitGraphemes(text).slice(start, end).join('');

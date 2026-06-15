@@ -623,6 +623,24 @@ export interface IslandStrings {
       refReadingCol: string;
       refSpeakingCol: string;
     };
+    /** "Byte Counter" — UTF-8 / UTF-16 / UTF-32 byte calculator. */
+    byteCounter: {
+      eyebrow: string;
+      title: string;
+      badgeIdle: string;
+      badgeResult: string;
+      placeholder: string;
+      /** Stat tile labels (each includes its "bytes" unit where relevant). */
+      utf8Label: string;
+      utf16Label: string;
+      utf32Label: string;
+      charactersLabel: string;
+      codePointsLabel: string;
+      /** One-line explainer about UTF-8 variable width. */
+      note: string;
+    };
+    /** Shared "Clear" button label for the calculator text inputs. */
+    clear: string;
   };
 }
 

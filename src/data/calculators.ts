@@ -609,4 +609,221 @@ export const calculators: ToolDefinition[] = [
       ],
     },
   },
+  {
+    id: 'byte-counter',
+    editorAnchor: 'workspace',
+    lastUpdated: '2026-06-14',
+    platformLimits: 'UTF-8 1–4 bytes/char; UTF-16 2–4 bytes; UTF-32 4 bytes',
+
+    slugs: {
+      en: 'byte-counter',
+      es: 'contador-de-bytes',
+      de: 'byte-zaehler',
+      fr: 'compteur-octets',
+      pt: 'contador-de-bytes',
+      it: 'contatore-byte',
+      nl: 'byte-teller',
+      ja: 'baito-kaunta',
+      zh: 'zi-jie-ji-shu-qi',
+      da: 'byte-taeller',
+    },
+
+    schemaName: {
+      en: 'Byte Counter',
+      es: 'Contador de Bytes',
+      de: 'Byte-Zähler',
+      fr: 'Compteur d’Octets',
+      pt: 'Contador de Bytes',
+      it: 'Contatore di Byte',
+      nl: 'Byte-teller',
+      ja: 'バイト数カウンター',
+      zh: '字节计数器',
+      da: 'Byte-tæller',
+    },
+
+    titles: {
+      en: 'Byte Counter — UTF-8, UTF-16 & UTF-32 Byte Calculator',
+      es: 'Contador de Bytes — Calculadora de bytes UTF-8, UTF-16 y UTF-32',
+      de: 'Byte-Zähler — UTF-8-, UTF-16- und UTF-32-Byte-Rechner',
+      fr: 'Compteur d’Octets — Calculateur d’octets UTF-8, UTF-16 et UTF-32',
+      pt: 'Contador de Bytes — Calculadora de bytes UTF-8, UTF-16 e UTF-32',
+      it: 'Contatore di Byte — Calcolatore di byte UTF-8, UTF-16 e UTF-32',
+      nl: 'Byte-teller — UTF-8-, UTF-16- en UTF-32-byte-calculator',
+      ja: 'バイト数カウンター — UTF-8・UTF-16・UTF-32 バイト計算ツール',
+      zh: '字节计数器 — UTF-8、UTF-16 与 UTF-32 字节计算器',
+      da: 'Byte-tæller — UTF-8-, UTF-16- og UTF-32-byte-beregner',
+    },
+
+    metaDescriptions: {
+      en: 'Free byte counter for developers. Paste text to see its exact size in UTF-8, UTF-16, and UTF-32 bytes, plus character and Unicode code-point counts.',
+      es: 'Contador de bytes gratuito para desarrolladores. Pega texto y mira su tamaño exacto en bytes UTF-8, UTF-16 y UTF-32, además de caracteres y puntos de código Unicode.',
+      de: 'Kostenloser Byte-Zähler für Entwickler. Text einfügen und die exakte Größe in UTF-8-, UTF-16- und UTF-32-Bytes sowie Zeichen- und Unicode-Codepoint-Anzahl sehen.',
+      fr: 'Compteur d’octets gratuit pour les développeurs. Collez du texte pour voir sa taille exacte en octets UTF-8, UTF-16 et UTF-32, plus les caractères et points de code Unicode.',
+      pt: 'Contador de bytes gratuito para programadores. Cole texto para ver o tamanho exato em bytes UTF-8, UTF-16 e UTF-32, além de caracteres e pontos de código Unicode.',
+      it: 'Contatore di byte gratuito per sviluppatori. Incolla il testo per vederne la dimensione esatta in byte UTF-8, UTF-16 e UTF-32, oltre a caratteri e code point Unicode.',
+      nl: 'Gratis byte-teller voor ontwikkelaars. Plak tekst om de exacte grootte in UTF-8-, UTF-16- en UTF-32-bytes te zien, plus tekens en Unicode-codepunten.',
+      ja: '開発者向けの無料バイト数カウンター。テキストを貼り付けると、UTF-8・UTF-16・UTF-32 の正確なバイト数に加え、文字数と Unicode コードポイント数がわかります。',
+      zh: '面向开发者的免费字节计数器。粘贴文本即可查看其在 UTF-8、UTF-16 和 UTF-32 下的精确字节大小，以及字符数和 Unicode 码点数。',
+      da: 'Gratis byte-tæller til udviklere. Indsæt tekst for at se den nøjagtige størrelse i UTF-8-, UTF-16- og UTF-32-bytes plus tegn og Unicode-kodepunkter.',
+    },
+
+    intro: {
+      en: 'Need the exact byte size of a string? Paste any text below to see its length in UTF-8, UTF-16, and UTF-32 bytes alongside character and code-point counts.',
+      es: '¿Necesitas el tamaño exacto en bytes de una cadena? Pega cualquier texto abajo para ver su longitud en bytes UTF-8, UTF-16 y UTF-32 junto con los caracteres y puntos de código.',
+      de: 'Du brauchst die exakte Byte-Größe eines Strings? Füge unten beliebigen Text ein, um seine Länge in UTF-8-, UTF-16- und UTF-32-Bytes samt Zeichen- und Codepoint-Anzahl zu sehen.',
+      fr: 'Besoin de la taille exacte en octets d’une chaîne ? Collez n’importe quel texte ci-dessous pour voir sa longueur en octets UTF-8, UTF-16 et UTF-32 ainsi que les caractères et points de code.',
+      pt: 'Precisa do tamanho exato em bytes de uma string? Cole qualquer texto abaixo para ver o comprimento em bytes UTF-8, UTF-16 e UTF-32 junto com caracteres e pontos de código.',
+      it: 'Ti serve la dimensione esatta in byte di una stringa? Incolla qualsiasi testo qui sotto per vederne la lunghezza in byte UTF-8, UTF-16 e UTF-32 insieme a caratteri e code point.',
+      nl: 'Heb je de exacte byte-grootte van een string nodig? Plak hieronder een tekst om de lengte in UTF-8-, UTF-16- en UTF-32-bytes te zien, samen met tekens en codepunten.',
+      ja: '文字列の正確なバイトサイズが必要ですか？下に任意のテキストを貼り付けると、UTF-8・UTF-16・UTF-32 のバイト長と、文字数・コードポイント数を確認できます。',
+      zh: '需要字符串的精确字节大小？在下方粘贴任意文本，即可查看其 UTF-8、UTF-16 和 UTF-32 字节长度，以及字符数和码点数。',
+      da: 'Har du brug for den nøjagtige byte-størrelse af en streng? Indsæt en hvilken som helst tekst nedenfor for at se længden i UTF-8-, UTF-16- og UTF-32-bytes sammen med tegn og kodepunkter.',
+    },
+
+    content: {
+      en: `<h2>How many bytes is your text?</h2>
+<p>Characters and bytes are not the same thing. A string’s <strong>byte size</strong> depends on the encoding: <strong>UTF-8</strong> uses one byte for ASCII and up to four for emoji, <strong>UTF-16</strong> uses two or four, and <strong>UTF-32</strong> always uses four per code point. Paste your text above and this tool reports all three at once, so you know exactly how much space a string occupies.</p>
+<h2>Why byte size matters</h2>
+<p>Byte limits show up everywhere developers work: database column sizes (<strong>VARCHAR</strong> is often measured in bytes), HTTP headers and cookies, JSON payload budgets, SMS segments, QR codes, and API field caps. A 20-character string can be 20 bytes or 80 bytes depending on the script, so counting characters alone can silently blow a limit. UTF-8 is the default for the web, JSON, and most databases.</p>
+<h2>Characters, code points, and bytes</h2>
+<p>This tool separates three different counts. <strong>Characters</strong> are grapheme clusters — what a reader perceives as one symbol, including emoji built from several code points. <strong>Code points</strong> are individual Unicode scalar values. <strong>Bytes</strong> are the encoded storage size. An emoji like 👍 is one character, one code point, and four UTF-8 bytes; a flag emoji is one character but two code points and eight UTF-8 bytes.</p>
+<h2>Private and instant</h2>
+<p>Everything is computed in your browser using the standard TextEncoder, so the counts match exactly what your server or database will store. Nothing you paste is uploaded, which makes it safe for tokens, keys, and other sensitive strings. Edit the text and every figure updates live.</p>`,
+      es: `<h2>¿Cuántos bytes ocupa tu texto?</h2>
+<p>Caracteres y bytes no son lo mismo. El <strong>tamaño en bytes</strong> de una cadena depende de la codificación: <strong>UTF-8</strong> usa un byte para ASCII y hasta cuatro para emojis, <strong>UTF-16</strong> usa dos o cuatro, y <strong>UTF-32</strong> siempre usa cuatro por punto de código. Pega tu texto arriba y esta herramienta muestra las tres a la vez, para que sepas exactamente cuánto espacio ocupa una cadena.</p>
+<h2>Por qué importa el tamaño en bytes</h2>
+<p>Los límites de bytes aparecen por todas partes: tamaños de columnas de base de datos (<strong>VARCHAR</strong> suele medirse en bytes), cabeceras HTTP y cookies, presupuestos de JSON, segmentos SMS, códigos QR y límites de campos de API. Una cadena de 20 caracteres puede ocupar 20 u 80 bytes según el alfabeto, así que contar solo caracteres puede superar un límite sin avisar. UTF-8 es el valor por defecto en la web, JSON y la mayoría de bases de datos.</p>
+<h2>Caracteres, puntos de código y bytes</h2>
+<p>Esta herramienta separa tres recuentos distintos. Los <strong>caracteres</strong> son grupos de grafemas, lo que el lector percibe como un símbolo, incluidos los emojis formados por varios puntos de código. Los <strong>puntos de código</strong> son valores escalares Unicode individuales. Los <strong>bytes</strong> son el tamaño de almacenamiento codificado. Un emoji como 👍 es un carácter, un punto de código y cuatro bytes UTF-8; un emoji de bandera es un carácter pero dos puntos de código y ocho bytes UTF-8.</p>
+<h2>Privado e instantáneo</h2>
+<p>Todo se calcula en tu navegador con el TextEncoder estándar, así que los recuentos coinciden exactamente con lo que guardará tu servidor o base de datos. Nada de lo que pegues se sube, por lo que es seguro para tokens, claves y otras cadenas sensibles. Edita el texto y cada cifra se actualiza al instante.</p>`,
+      de: `<h2>Wie viele Bytes hat dein Text?</h2>
+<p>Zeichen und Bytes sind nicht dasselbe. Die <strong>Byte-Größe</strong> eines Strings hängt von der Kodierung ab: <strong>UTF-8</strong> nutzt ein Byte für ASCII und bis zu vier für Emojis, <strong>UTF-16</strong> zwei oder vier und <strong>UTF-32</strong> immer vier pro Codepoint. Füge deinen Text oben ein, und dieses Tool zeigt alle drei gleichzeitig, damit du genau weißt, wie viel Platz ein String belegt.</p>
+<h2>Warum die Byte-Größe wichtig ist</h2>
+<p>Byte-Limits begegnen Entwicklern überall: Datenbankspalten (<strong>VARCHAR</strong> wird oft in Bytes gemessen), HTTP-Header und Cookies, JSON-Budgets, SMS-Segmente, QR-Codes und API-Feldgrenzen. Ein 20-Zeichen-String kann je nach Schrift 20 oder 80 Bytes haben, daher kann das bloße Zählen von Zeichen ein Limit unbemerkt sprengen. UTF-8 ist der Standard im Web, in JSON und in den meisten Datenbanken.</p>
+<h2>Zeichen, Codepoints und Bytes</h2>
+<p>Dieses Tool trennt drei verschiedene Zählungen. <strong>Zeichen</strong> sind Graphem-Cluster – was der Leser als ein Symbol wahrnimmt, einschließlich Emojis aus mehreren Codepoints. <strong>Codepoints</strong> sind einzelne Unicode-Skalarwerte. <strong>Bytes</strong> sind die kodierte Speichergröße. Ein Emoji wie 👍 ist ein Zeichen, ein Codepoint und vier UTF-8-Bytes; ein Flaggen-Emoji ist ein Zeichen, aber zwei Codepoints und acht UTF-8-Bytes.</p>
+<h2>Privat und sofort</h2>
+<p>Alles wird mit dem Standard-TextEncoder in deinem Browser berechnet, sodass die Zählungen genau dem entsprechen, was dein Server oder deine Datenbank speichert. Nichts, was du einfügst, wird hochgeladen – sicher für Tokens, Schlüssel und andere sensible Strings. Bearbeite den Text, und jede Zahl aktualisiert sich live.</p>`,
+      fr: `<h2>Combien d’octets fait votre texte ?</h2>
+<p>Les caractères et les octets ne sont pas la même chose. La <strong>taille en octets</strong> d’une chaîne dépend de l’encodage : <strong>UTF-8</strong> utilise un octet pour l’ASCII et jusqu’à quatre pour les emojis, <strong>UTF-16</strong> deux ou quatre, et <strong>UTF-32</strong> toujours quatre par point de code. Collez votre texte ci-dessus et cet outil affiche les trois à la fois, pour savoir exactement l’espace qu’occupe une chaîne.</p>
+<h2>Pourquoi la taille en octets compte</h2>
+<p>Les limites d’octets sont partout : tailles de colonnes de base de données (<strong>VARCHAR</strong> se mesure souvent en octets), en-têtes HTTP et cookies, budgets JSON, segments SMS, codes QR et limites de champs d’API. Une chaîne de 20 caractères peut faire 20 ou 80 octets selon l’écriture ; compter seulement les caractères peut donc dépasser une limite sans prévenir. UTF-8 est la valeur par défaut du web, de JSON et de la plupart des bases de données.</p>
+<h2>Caractères, points de code et octets</h2>
+<p>Cet outil distingue trois comptes différents. Les <strong>caractères</strong> sont des grappes de graphèmes — ce que le lecteur perçoit comme un symbole, y compris les emojis composés de plusieurs points de code. Les <strong>points de code</strong> sont des valeurs scalaires Unicode individuelles. Les <strong>octets</strong> sont la taille de stockage encodée. Un emoji comme 👍 est un caractère, un point de code et quatre octets UTF-8 ; un emoji de drapeau est un caractère mais deux points de code et huit octets UTF-8.</p>
+<h2>Privé et instantané</h2>
+<p>Tout est calculé dans votre navigateur avec le TextEncoder standard, donc les comptes correspondent exactement à ce que votre serveur ou base de données stockera. Rien de ce que vous collez n’est envoyé, ce qui le rend sûr pour les jetons, les clés et autres chaînes sensibles. Modifiez le texte et chaque chiffre se met à jour en direct.</p>`,
+      pt: `<h2>Quantos bytes tem o seu texto?</h2>
+<p>Caracteres e bytes não são a mesma coisa. O <strong>tamanho em bytes</strong> de uma string depende da codificação: o <strong>UTF-8</strong> usa um byte para ASCII e até quatro para emojis, o <strong>UTF-16</strong> usa dois ou quatro, e o <strong>UTF-32</strong> usa sempre quatro por ponto de código. Cole o seu texto acima e esta ferramenta mostra os três ao mesmo tempo, para saber exatamente quanto espaço uma string ocupa.</p>
+<h2>Por que o tamanho em bytes importa</h2>
+<p>Os limites de bytes aparecem em todo o lado: tamanhos de colunas de base de dados (<strong>VARCHAR</strong> é muitas vezes medido em bytes), cabeçalhos HTTP e cookies, orçamentos de JSON, segmentos SMS, códigos QR e limites de campos de API. Uma string de 20 caracteres pode ter 20 ou 80 bytes consoante o alfabeto, por isso contar apenas caracteres pode ultrapassar um limite sem aviso. O UTF-8 é o padrão na web, no JSON e na maioria das bases de dados.</p>
+<h2>Caracteres, pontos de código e bytes</h2>
+<p>Esta ferramenta separa três contagens diferentes. Os <strong>caracteres</strong> são grupos de grafemas — o que o leitor perceciona como um símbolo, incluindo emojis compostos por vários pontos de código. Os <strong>pontos de código</strong> são valores escalares Unicode individuais. Os <strong>bytes</strong> são o tamanho de armazenamento codificado. Um emoji como 👍 é um caractere, um ponto de código e quatro bytes UTF-8; um emoji de bandeira é um caractere, mas dois pontos de código e oito bytes UTF-8.</p>
+<h2>Privado e instantâneo</h2>
+<p>Tudo é calculado no seu navegador com o TextEncoder padrão, por isso as contagens correspondem exatamente ao que o seu servidor ou base de dados vai guardar. Nada do que colar é enviado, o que o torna seguro para tokens, chaves e outras strings sensíveis. Edite o texto e cada número atualiza-se ao vivo.</p>`,
+      it: `<h2>Quanti byte occupa il tuo testo?</h2>
+<p>Caratteri e byte non sono la stessa cosa. La <strong>dimensione in byte</strong> di una stringa dipende dalla codifica: <strong>UTF-8</strong> usa un byte per l’ASCII e fino a quattro per le emoji, <strong>UTF-16</strong> due o quattro, e <strong>UTF-32</strong> sempre quattro per code point. Incolla il testo sopra e questo strumento mostra tutti e tre contemporaneamente, così sai esattamente quanto spazio occupa una stringa.</p>
+<h2>Perché la dimensione in byte conta</h2>
+<p>I limiti di byte sono ovunque: dimensioni delle colonne dei database (<strong>VARCHAR</strong> è spesso misurato in byte), header HTTP e cookie, budget JSON, segmenti SMS, codici QR e limiti dei campi API. Una stringa di 20 caratteri può occupare 20 o 80 byte a seconda dell’alfabeto, quindi contare solo i caratteri può sforare un limite senza preavviso. UTF-8 è il valore predefinito per il web, JSON e la maggior parte dei database.</p>
+<h2>Caratteri, code point e byte</h2>
+<p>Questo strumento distingue tre conteggi diversi. I <strong>caratteri</strong> sono cluster di grafemi — ciò che il lettore percepisce come un simbolo, comprese le emoji composte da più code point. I <strong>code point</strong> sono singoli valori scalari Unicode. I <strong>byte</strong> sono la dimensione di archiviazione codificata. Un’emoji come 👍 è un carattere, un code point e quattro byte UTF-8; un’emoji bandiera è un carattere ma due code point e otto byte UTF-8.</p>
+<h2>Privato e istantaneo</h2>
+<p>Tutto viene calcolato nel tuo browser con il TextEncoder standard, quindi i conteggi corrispondono esattamente a ciò che il server o il database memorizzerà. Nulla di ciò che incolli viene caricato, il che lo rende sicuro per token, chiavi e altre stringhe sensibili. Modifica il testo e ogni cifra si aggiorna in tempo reale.</p>`,
+      nl: `<h2>Hoeveel bytes is je tekst?</h2>
+<p>Tekens en bytes zijn niet hetzelfde. De <strong>byte-grootte</strong> van een string hangt af van de codering: <strong>UTF-8</strong> gebruikt één byte voor ASCII en tot vier voor emoji, <strong>UTF-16</strong> twee of vier, en <strong>UTF-32</strong> altijd vier per codepunt. Plak je tekst hierboven en deze tool toont alle drie tegelijk, zodat je precies weet hoeveel ruimte een string inneemt.</p>
+<h2>Waarom byte-grootte uitmaakt</h2>
+<p>Byte-limieten kom je overal tegen: databasekolommen (<strong>VARCHAR</strong> wordt vaak in bytes gemeten), HTTP-headers en cookies, JSON-budgetten, sms-segmenten, QR-codes en API-veldlimieten. Een string van 20 tekens kan 20 of 80 bytes zijn afhankelijk van het schrift, dus alleen tekens tellen kan ongemerkt een limiet overschrijden. UTF-8 is de standaard voor het web, JSON en de meeste databases.</p>
+<h2>Tekens, codepunten en bytes</h2>
+<p>Deze tool onderscheidt drie verschillende tellingen. <strong>Tekens</strong> zijn grafeemclusters — wat een lezer als één symbool ziet, inclusief emoji die uit meerdere codepunten bestaan. <strong>Codepunten</strong> zijn losse Unicode-scalairwaarden. <strong>Bytes</strong> zijn de gecodeerde opslaggrootte. Een emoji als 👍 is één teken, één codepunt en vier UTF-8-bytes; een vlagemoji is één teken maar twee codepunten en acht UTF-8-bytes.</p>
+<h2>Privé en direct</h2>
+<p>Alles wordt in je browser berekend met de standaard TextEncoder, dus de tellingen komen exact overeen met wat je server of database opslaat. Niets van wat je plakt wordt geüpload, wat het veilig maakt voor tokens, sleutels en andere gevoelige strings. Bewerk de tekst en elk getal werkt live bij.</p>`,
+      ja: `<h2>あなたのテキストは何バイト？</h2>
+<p>文字とバイトは同じではありません。文字列の<strong>バイトサイズ</strong>はエンコーディングで変わります。<strong>UTF-8</strong> は ASCII に1バイト、絵文字には最大4バイト、<strong>UTF-16</strong> は2または4バイト、<strong>UTF-32</strong> はコードポイントごとに常に4バイトです。上にテキストを貼り付けると、本ツールが3つすべてを同時に表示し、文字列が占める容量が正確にわかります。</p>
+<h2>バイトサイズが重要な理由</h2>
+<p>バイト制限は開発のあらゆる場面に現れます。データベースの列サイズ（<strong>VARCHAR</strong> はしばしばバイト単位）、HTTP ヘッダーや Cookie、JSON のサイズ、SMS セグメント、QR コード、API のフィールド上限などです。20文字の文字列でも文字種によって20バイトにも80バイトにもなり、文字だけ数えると気づかぬうちに上限を超えることがあります。UTF-8 は Web・JSON・多くのデータベースの既定です。</p>
+<h2>文字・コードポイント・バイト</h2>
+<p>本ツールは3つの異なるカウントを区別します。<strong>文字</strong>は書記素クラスター、つまり読者が1つの記号として認識するもので、複数のコードポイントから成る絵文字も含みます。<strong>コードポイント</strong>は個々の Unicode スカラー値です。<strong>バイト</strong>は符号化された保存サイズです。👍 のような絵文字は1文字・1コードポイント・4 UTF-8 バイト、旗の絵文字は1文字でも2コードポイント・8 UTF-8 バイトです。</p>
+<h2>プライベートで即時</h2>
+<p>すべて標準の TextEncoder を使ってブラウザー内で計算するため、カウントはサーバーやデータベースが保存する内容と完全に一致します。貼り付けた内容はアップロードされないので、トークンやキーなどの機密文字列にも安全です。テキストを編集すると、すべての数値がリアルタイムで更新されます。</p>`,
+      zh: `<h2>你的文本有多少字节？</h2>
+<p>字符和字节并不相同。字符串的<strong>字节大小</strong>取决于编码：<strong>UTF-8</strong> 对 ASCII 使用 1 字节，对表情符号最多 4 字节；<strong>UTF-16</strong> 使用 2 或 4 字节；<strong>UTF-32</strong> 每个码点始终 4 字节。在上方粘贴文本，本工具会同时显示这三者，让你确切知道字符串占用多少空间。</p>
+<h2>为什么字节大小很重要</h2>
+<p>字节限制无处不在：数据库列大小（<strong>VARCHAR</strong> 常以字节计）、HTTP 头与 Cookie、JSON 负载预算、短信分段、二维码以及 API 字段上限。一个 20 字符的字符串，依字符集不同可能是 20 字节或 80 字节，因此只数字符可能在不知不觉中超限。UTF-8 是 Web、JSON 和多数数据库的默认编码。</p>
+<h2>字符、码点与字节</h2>
+<p>本工具区分三种不同的计数。<strong>字符</strong>是字素簇——读者眼中的一个符号，包括由多个码点组成的表情符号。<strong>码点</strong>是单个 Unicode 标量值。<strong>字节</strong>是编码后的存储大小。像 👍 这样的表情是 1 个字符、1 个码点、4 个 UTF-8 字节；旗帜表情是 1 个字符，但有 2 个码点、8 个 UTF-8 字节。</p>
+<h2>私密且即时</h2>
+<p>一切都使用标准的 TextEncoder 在你的浏览器中计算，因此计数与服务器或数据库实际存储的完全一致。你粘贴的内容不会被上传，因此对令牌、密钥等敏感字符串也很安全。编辑文本，每个数字都会实时更新。</p>`,
+      da: `<h2>Hvor mange bytes er din tekst?</h2>
+<p>Tegn og bytes er ikke det samme. En strengs <strong>byte-størrelse</strong> afhænger af kodningen: <strong>UTF-8</strong> bruger én byte til ASCII og op til fire til emojis, <strong>UTF-16</strong> to eller fire, og <strong>UTF-32</strong> altid fire pr. kodepunkt. Indsæt din tekst ovenfor, og dette værktøj viser alle tre på én gang, så du ved præcis, hvor meget plads en streng fylder.</p>
+<h2>Hvorfor byte-størrelse betyder noget</h2>
+<p>Byte-grænser dukker op overalt: databasekolonner (<strong>VARCHAR</strong> måles ofte i bytes), HTTP-headere og cookies, JSON-budgetter, SMS-segmenter, QR-koder og API-feltgrænser. En streng på 20 tegn kan være 20 eller 80 bytes afhængigt af skriftsystemet, så det at tælle tegn alene kan overskride en grænse uden varsel. UTF-8 er standarden på nettet, i JSON og i de fleste databaser.</p>
+<h2>Tegn, kodepunkter og bytes</h2>
+<p>Dette værktøj adskiller tre forskellige tællinger. <strong>Tegn</strong> er grafemklynger — det, læseren opfatter som ét symbol, inklusive emojis sammensat af flere kodepunkter. <strong>Kodepunkter</strong> er enkelte Unicode-skalarværdier. <strong>Bytes</strong> er den kodede lagringsstørrelse. En emoji som 👍 er ét tegn, ét kodepunkt og fire UTF-8-bytes; en flag-emoji er ét tegn, men to kodepunkter og otte UTF-8-bytes.</p>
+<h2>Privat og øjeblikkeligt</h2>
+<p>Alt beregnes i din browser med den standardiserede TextEncoder, så tællingerne svarer nøjagtigt til det, din server eller database gemmer. Intet af det, du indsætter, uploades, hvilket gør det sikkert til tokens, nøgler og andre følsomme strenge. Rediger teksten, og hvert tal opdateres live.</p>`,
+    },
+
+    faq: {
+      en: [
+        { q: 'How many bytes is one character in UTF-8?', a: 'Between 1 and 4. ASCII letters and digits are 1 byte, accented Latin and Greek/Cyrillic are 2, most Chinese/Japanese/Korean characters are 3, and emoji and rarer symbols are 4.' },
+        { q: 'What is the difference between characters, code points, and bytes?', a: 'A character (grapheme) is what you see as one symbol; a code point is one Unicode scalar value; bytes are the encoded size. A single emoji can be 1 character, 1 code point, and 4 UTF-8 bytes — and emoji built from several code points use even more.' },
+        { q: 'Which encoding should I count for a database?', a: 'Usually UTF-8, the default for the web, JSON, and most modern databases. Check whether your column length is defined in bytes or characters — UTF-8 multibyte characters can exceed a byte-based limit.' },
+        { q: 'Is my text sent to a server?', a: 'No. Byte counting runs entirely in your browser with the standard TextEncoder, so it is safe for API keys, tokens, and other sensitive strings.' },
+      ],
+      es: [
+        { q: '¿Cuántos bytes ocupa un carácter en UTF-8?', a: 'Entre 1 y 4. Las letras y dígitos ASCII ocupan 1 byte, el latín acentuado y el griego/cirílico 2, la mayoría de los caracteres chinos/japoneses/coreanos 3, y los emojis y símbolos poco comunes 4.' },
+        { q: '¿Cuál es la diferencia entre caracteres, puntos de código y bytes?', a: 'Un carácter (grafema) es lo que ves como un símbolo; un punto de código es un valor escalar Unicode; los bytes son el tamaño codificado. Un solo emoji puede ser 1 carácter, 1 punto de código y 4 bytes UTF-8, y los emojis formados por varios puntos de código usan aún más.' },
+        { q: '¿Qué codificación debo contar para una base de datos?', a: 'Normalmente UTF-8, el valor por defecto de la web, JSON y la mayoría de bases de datos modernas. Comprueba si la longitud de tu columna se define en bytes o en caracteres: los caracteres multibyte de UTF-8 pueden superar un límite basado en bytes.' },
+        { q: '¿Se envía mi texto a un servidor?', a: 'No. El conteo de bytes se realiza por completo en tu navegador con el TextEncoder estándar, por lo que es seguro para claves de API, tokens y otras cadenas sensibles.' },
+      ],
+      de: [
+        { q: 'Wie viele Bytes hat ein Zeichen in UTF-8?', a: 'Zwischen 1 und 4. ASCII-Buchstaben und -Ziffern sind 1 Byte, akzentuiertes Latein sowie Griechisch/Kyrillisch 2, die meisten chinesischen/japanischen/koreanischen Zeichen 3 und Emojis sowie seltenere Symbole 4.' },
+        { q: 'Was ist der Unterschied zwischen Zeichen, Codepoints und Bytes?', a: 'Ein Zeichen (Graphem) ist, was du als ein Symbol siehst; ein Codepoint ist ein Unicode-Skalarwert; Bytes sind die kodierte Größe. Ein einzelnes Emoji kann 1 Zeichen, 1 Codepoint und 4 UTF-8-Bytes sein – aus mehreren Codepoints zusammengesetzte Emojis brauchen noch mehr.' },
+        { q: 'Welche Kodierung sollte ich für eine Datenbank zählen?', a: 'Meist UTF-8, der Standard für Web, JSON und die meisten modernen Datenbanken. Prüfe, ob deine Spaltenlänge in Bytes oder Zeichen definiert ist – UTF-8-Mehrbyte-Zeichen können ein byte-basiertes Limit überschreiten.' },
+        { q: 'Wird mein Text an einen Server gesendet?', a: 'Nein. Die Byte-Zählung läuft vollständig in deinem Browser mit dem Standard-TextEncoder, daher ist sie sicher für API-Schlüssel, Tokens und andere sensible Strings.' },
+      ],
+      fr: [
+        { q: 'Combien d’octets fait un caractère en UTF-8 ?', a: 'Entre 1 et 4. Les lettres et chiffres ASCII font 1 octet, le latin accentué et le grec/cyrillique 2, la plupart des caractères chinois/japonais/coréens 3, et les emojis et symboles rares 4.' },
+        { q: 'Quelle est la différence entre caractères, points de code et octets ?', a: 'Un caractère (graphème) est ce que vous voyez comme un symbole ; un point de code est une valeur scalaire Unicode ; les octets sont la taille encodée. Un seul emoji peut être 1 caractère, 1 point de code et 4 octets UTF-8 — et les emojis composés de plusieurs points de code en utilisent davantage.' },
+        { q: 'Quel encodage compter pour une base de données ?', a: 'Généralement UTF-8, la valeur par défaut du web, de JSON et de la plupart des bases de données modernes. Vérifiez si la longueur de votre colonne est définie en octets ou en caractères : les caractères multioctets UTF-8 peuvent dépasser une limite en octets.' },
+        { q: 'Mon texte est-il envoyé à un serveur ?', a: 'Non. Le comptage d’octets s’effectue entièrement dans votre navigateur avec le TextEncoder standard, ce qui le rend sûr pour les clés d’API, les jetons et autres chaînes sensibles.' },
+      ],
+      pt: [
+        { q: 'Quantos bytes tem um caractere em UTF-8?', a: 'Entre 1 e 4. Letras e dígitos ASCII têm 1 byte, latim acentuado e grego/cirílico 2, a maioria dos caracteres chineses/japoneses/coreanos 3, e os emojis e símbolos raros 4.' },
+        { q: 'Qual é a diferença entre caracteres, pontos de código e bytes?', a: 'Um caractere (grafema) é o que vê como um símbolo; um ponto de código é um valor escalar Unicode; os bytes são o tamanho codificado. Um único emoji pode ser 1 caractere, 1 ponto de código e 4 bytes UTF-8 — e emojis compostos por vários pontos de código usam ainda mais.' },
+        { q: 'Que codificação devo contar para uma base de dados?', a: 'Normalmente UTF-8, o padrão da web, do JSON e da maioria das bases de dados modernas. Verifique se o comprimento da coluna é definido em bytes ou caracteres — caracteres multibyte UTF-8 podem exceder um limite baseado em bytes.' },
+        { q: 'O meu texto é enviado para um servidor?', a: 'Não. A contagem de bytes é feita inteiramente no seu navegador com o TextEncoder padrão, por isso é segura para chaves de API, tokens e outras strings sensíveis.' },
+      ],
+      it: [
+        { q: 'Quanti byte occupa un carattere in UTF-8?', a: 'Tra 1 e 4. Lettere e cifre ASCII occupano 1 byte, il latino accentato e il greco/cirillico 2, la maggior parte dei caratteri cinesi/giapponesi/coreani 3, ed emoji e simboli rari 4.' },
+        { q: 'Qual è la differenza tra caratteri, code point e byte?', a: 'Un carattere (grafema) è ciò che vedi come un simbolo; un code point è un valore scalare Unicode; i byte sono la dimensione codificata. Una singola emoji può essere 1 carattere, 1 code point e 4 byte UTF-8 — e le emoji composte da più code point ne usano ancora di più.' },
+        { q: 'Quale codifica devo contare per un database?', a: 'Di solito UTF-8, il valore predefinito per il web, JSON e la maggior parte dei database moderni. Verifica se la lunghezza della colonna è definita in byte o in caratteri: i caratteri multibyte UTF-8 possono superare un limite basato sui byte.' },
+        { q: 'Il mio testo viene inviato a un server?', a: 'No. Il conteggio dei byte avviene interamente nel tuo browser con il TextEncoder standard, quindi è sicuro per chiavi API, token e altre stringhe sensibili.' },
+      ],
+      nl: [
+        { q: 'Hoeveel bytes is één teken in UTF-8?', a: 'Tussen 1 en 4. ASCII-letters en -cijfers zijn 1 byte, Latijn met accenten en Grieks/Cyrillisch 2, de meeste Chinese/Japanse/Koreaanse tekens 3, en emoji en zeldzamere symbolen 4.' },
+        { q: 'Wat is het verschil tussen tekens, codepunten en bytes?', a: 'Een teken (grafeem) is wat je als één symbool ziet; een codepunt is één Unicode-scalairwaarde; bytes zijn de gecodeerde grootte. Eén emoji kan 1 teken, 1 codepunt en 4 UTF-8-bytes zijn — en emoji uit meerdere codepunten gebruiken er nog meer.' },
+        { q: 'Welke codering moet ik tellen voor een database?', a: 'Meestal UTF-8, de standaard voor het web, JSON en de meeste moderne databases. Controleer of je kolomlengte in bytes of tekens is gedefinieerd — UTF-8-multibyte-tekens kunnen een byte-gebaseerde limiet overschrijden.' },
+        { q: 'Wordt mijn tekst naar een server gestuurd?', a: 'Nee. Het tellen van bytes gebeurt volledig in je browser met de standaard TextEncoder, dus het is veilig voor API-sleutels, tokens en andere gevoelige strings.' },
+      ],
+      ja: [
+        { q: 'UTF-8 で1文字は何バイト？', a: '1〜4バイトです。ASCII の英数字は1、アクセント付きラテンやギリシャ/キリルは2、多くの中国語・日本語・韓国語の文字は3、絵文字や珍しい記号は4バイトです。' },
+        { q: '文字・コードポイント・バイトの違いは？', a: '文字（書記素）は1つの記号として見えるもの、コードポイントは1つの Unicode スカラー値、バイトは符号化サイズです。1つの絵文字が1文字・1コードポイント・4 UTF-8 バイトになることもあり、複数コードポイントの絵文字はさらに多くなります。' },
+        { q: 'データベースにはどのエンコーディングを数えるべき？', a: '通常は UTF-8 で、Web・JSON・多くの最新データベースの既定です。列の長さがバイト単位か文字単位かを確認してください。UTF-8 のマルチバイト文字はバイト基準の上限を超えることがあります。' },
+        { q: 'テキストはサーバーに送信されますか？', a: 'いいえ。バイト数の計算は標準の TextEncoder でブラウザー内のみで行われるため、API キーやトークンなどの機密文字列にも安全です。' },
+      ],
+      zh: [
+        { q: 'UTF-8 中一个字符是多少字节？', a: '1 到 4 字节。ASCII 字母和数字为 1 字节，带重音的拉丁字符及希腊/西里尔字符为 2 字节，多数中日韩字符为 3 字节，表情符号和较少见的符号为 4 字节。' },
+        { q: '字符、码点和字节有什么区别？', a: '字符（字素）是你看到的一个符号；码点是单个 Unicode 标量值；字节是编码后的大小。一个表情可能是 1 个字符、1 个码点、4 个 UTF-8 字节——由多个码点组成的表情会用得更多。' },
+        { q: '数据库应当统计哪种编码？', a: '通常是 UTF-8，它是 Web、JSON 和多数现代数据库的默认编码。请检查你的列长度是按字节还是按字符定义——UTF-8 多字节字符可能超过按字节计的限制。' },
+        { q: '我的文本会被发送到服务器吗？', a: '不会。字节统计完全在你的浏览器中使用标准 TextEncoder 进行，因此对 API 密钥、令牌等敏感字符串也很安全。' },
+      ],
+      da: [
+        { q: 'Hvor mange bytes er ét tegn i UTF-8?', a: 'Mellem 1 og 4. ASCII-bogstaver og -tal er 1 byte, accentueret latin samt græsk/kyrillisk 2, de fleste kinesiske/japanske/koreanske tegn 3, og emojis og sjældnere symboler 4.' },
+        { q: 'Hvad er forskellen på tegn, kodepunkter og bytes?', a: 'Et tegn (grafem) er det, du ser som ét symbol; et kodepunkt er én Unicode-skalarværdi; bytes er den kodede størrelse. En enkelt emoji kan være 1 tegn, 1 kodepunkt og 4 UTF-8-bytes — og emojis sammensat af flere kodepunkter bruger endnu mere.' },
+        { q: 'Hvilken kodning skal jeg tælle til en database?', a: 'Som regel UTF-8, standarden for nettet, JSON og de fleste moderne databaser. Tjek, om din kolonnelængde er defineret i bytes eller tegn — UTF-8-multibyte-tegn kan overskride en byte-baseret grænse.' },
+        { q: 'Bliver min tekst sendt til en server?', a: 'Nej. Byte-tællingen kører helt i din browser med den standardiserede TextEncoder, så den er sikker til API-nøgler, tokens og andre følsomme strenge.' },
+      ],
+    },
+  },
 ];
