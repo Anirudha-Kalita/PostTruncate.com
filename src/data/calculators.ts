@@ -29,6 +29,22 @@ export const calculators: ToolDefinition[] = [
     platformLimits:
       'Single-spaced 12pt ≈ 500 words/page; double-spaced 12pt ≈ 250 words/page',
 
+    related: {
+      id: 'reading-time',
+      blurb: {
+        en: 'Once you know how many pages your text fills, find out how long it takes to read or present. Our reading time calculator estimates silent reading and out-loud speaking duration at any pace.',
+        es: 'Cuando ya sepas cuántas páginas ocupa tu texto, descubre cuánto se tarda en leerlo o exponerlo. Nuestra calculadora de tiempo de lectura estima la lectura silenciosa y el tiempo de habla a cualquier ritmo.',
+        de: 'Wenn du weißt, wie viele Seiten dein Text füllt, finde heraus, wie lange das Lesen oder Vortragen dauert. Unser Lesezeit-Rechner schätzt stille Lese- und laute Sprechzeit in jedem Tempo.',
+        fr: 'Une fois que vous savez combien de pages occupe votre texte, découvrez le temps nécessaire pour le lire ou le présenter. Notre calculateur de temps de lecture estime la lecture silencieuse et la diction à voix haute à tout rythme.',
+        pt: 'Depois de saber quantas páginas o seu texto ocupa, descubra quanto tempo leva a lê-lo ou apresentá-lo. A nossa calculadora de tempo de leitura estima a leitura silenciosa e a fala em voz alta a qualquer ritmo.',
+        it: 'Una volta che sai quante pagine occupa il tuo testo, scopri quanto tempo serve per leggerlo o presentarlo. Il nostro calcolatore del tempo di lettura stima la lettura silenziosa e l’esposizione a voce alta a qualsiasi ritmo.',
+        nl: 'Als je weet hoeveel pagina’s je tekst vult, ontdek dan hoelang het duurt om hem te lezen of te presenteren. Onze leestijd-calculator schat stille leestijd en spreektijd hardop in elk tempo.',
+        ja: 'テキストが何ページになるか分かったら、次は読む・話すのにかかる時間も確認しましょう。読了時間計算ツールが、任意のペースでの黙読時間と音読時間を見積もります。',
+        zh: '知道文本占多少页之后，再看看读完或讲完需要多久。我们的阅读时间计算器可按任意速度估算默读时间和朗读时间。',
+        da: 'Når du ved, hvor mange sider din tekst fylder, kan du finde ud af, hvor lang tid det tager at læse eller fremlægge den. Vores læsetid-beregner estimerer stille læsetid og taletid højt i ethvert tempo.',
+      },
+    },
+
     slugs: {
       en: 'words-per-page-calculator',
       es: 'calculadora-palabras-por-pagina',
@@ -357,6 +373,239 @@ export const calculators: ToolDefinition[] = [
           q: 'Virker det med dobbelt linjeafstand?',
           a: 'Ja. Skift linjeafstanden til 1,5 eller dobbelt, og både hovedestimatet og oversigtstabellen opdateres med det samme.',
         },
+      ],
+    },
+  },
+  {
+    id: 'reading-time',
+    editorAnchor: 'workspace',
+    lastUpdated: '2026-06-14',
+    platformLimits: 'Silent reading ~238 wpm; reading aloud ~130 wpm',
+
+    related: {
+      id: 'words-per-page',
+      blurb: {
+        en: 'Planning a document rather than a talk? See how many printed pages your word count fills at any font, size, spacing, and margins with our words-to-pages calculator.',
+        es: '¿Planificas un documento en lugar de una charla? Comprueba cuántas páginas impresas ocupa tu número de palabras con cualquier fuente, tamaño, interlineado y márgenes con nuestra calculadora de palabras por página.',
+        de: 'Planst du ein Dokument statt eines Vortrags? Sieh mit unserem Wörter-pro-Seite-Rechner, wie viele gedruckte Seiten deine Wortzahl bei beliebiger Schrift, Größe, Abstand und Rändern füllt.',
+        fr: 'Vous préparez un document plutôt qu’un discours ? Voyez combien de pages imprimées votre nombre de mots occupe selon la police, la taille, l’interligne et les marges avec notre calculateur de mots par page.',
+        pt: 'Está a planear um documento em vez de uma palestra? Veja quantas páginas impressas o seu número de palavras ocupa com qualquer fonte, tamanho, espaçamento e margens com a nossa calculadora de palavras por página.',
+        it: 'Stai pianificando un documento anziché un discorso? Scopri quante pagine stampate occupa il tuo numero di parole con qualsiasi carattere, dimensione, interlinea e margini con il nostro calcolatore di parole per pagina.',
+        nl: 'Plan je een document in plaats van een toespraak? Bekijk hoeveel gedrukte pagina’s je aantal woorden vult bij elk lettertype, grootte, regelafstand en marges met onze woorden-per-pagina-calculator.',
+        ja: 'スピーチではなく書類を準備していますか？単語数が任意のフォント・サイズ・行間・余白で何ページになるかを、単語数→ページ数の計算ツールで確認できます。',
+        zh: '要做的是文档而不是演讲？用我们的字数转页数计算器，看看你的字数在任意字体、字号、行距和页边距下会占多少打印页。',
+        da: 'Planlægger du et dokument frem for en tale? Se, hvor mange trykte sider dit ordtal fylder ved enhver skrifttype, størrelse, linjeafstand og margener med vores ord-per-side-beregner.',
+      },
+    },
+
+    slugs: {
+      en: 'reading-time-calculator',
+      es: 'calculadora-tiempo-lectura',
+      de: 'lesezeit-rechner',
+      fr: 'calculateur-temps-lecture',
+      pt: 'calculadora-tempo-leitura',
+      it: 'calcolatore-tempo-lettura',
+      nl: 'leestijd-calculator',
+      ja: 'dokuryo-jikan-keisan',
+      zh: 'yue-du-shi-jian-ji-suan',
+      da: 'laesetid-beregner',
+    },
+
+    schemaName: {
+      en: 'Reading Time Calculator',
+      es: 'Calculadora de Tiempo de Lectura',
+      de: 'Lesezeit-Rechner',
+      fr: 'Calculateur de Temps de Lecture',
+      pt: 'Calculadora de Tempo de Leitura',
+      it: 'Calcolatore del Tempo di Lettura',
+      nl: 'Leestijd-calculator',
+      ja: '読了時間計算ツール',
+      zh: '阅读时间计算器',
+      da: 'Læsetid-beregner',
+    },
+
+    titles: {
+      en: 'Reading Time Calculator — How Long to Read or Speak Your Text',
+      es: 'Calculadora de Tiempo de Lectura — Cuánto se tarda en leer o decir tu texto',
+      de: 'Lesezeit-Rechner — Wie lange dauert Lesen oder Sprechen deines Textes',
+      fr: 'Calculateur de Temps de Lecture — Durée pour lire ou dire votre texte',
+      pt: 'Calculadora de Tempo de Leitura — Quanto tempo para ler ou falar o seu texto',
+      it: 'Calcolatore del Tempo di Lettura — Quanto tempo per leggere o pronunciare il testo',
+      nl: 'Leestijd-calculator — Hoelang om je tekst te lezen of uit te spreken',
+      ja: '読了時間計算ツール — テキストの読了・発話時間がわかる',
+      zh: '阅读时间计算器 — 阅读或朗读文本需要多久',
+      da: 'Læsetid-beregner — Hvor lang tid at læse eller tale din tekst',
+    },
+
+    metaDescriptions: {
+      en: 'Free reading time calculator. Paste text or enter a word count to estimate silent reading time and out-loud speaking time at slow, average, or fast pace.',
+      es: 'Calculadora de tiempo de lectura gratuita. Pega texto o indica el número de palabras para estimar el tiempo de lectura y de habla a ritmo lento, medio o rápido.',
+      de: 'Kostenloser Lesezeit-Rechner. Text einfügen oder Wortzahl eingeben, um Lese- und Sprechzeit bei langsamem, mittlerem oder schnellem Tempo zu schätzen.',
+      fr: 'Calculateur de temps de lecture gratuit. Collez du texte ou saisissez un nombre de mots pour estimer le temps de lecture et de parole (lent, moyen, rapide).',
+      pt: 'Calculadora de tempo de leitura gratuita. Cole texto ou indique o número de palavras para estimar o tempo de leitura e de fala em ritmo lento, médio ou rápido.',
+      it: 'Calcolatore del tempo di lettura gratuito. Incolla il testo o inserisci il numero di parole per stimare il tempo di lettura e di parlato (lento, medio, veloce).',
+      nl: 'Gratis leestijd-calculator. Plak tekst of voer een aantal woorden in om de lees- en spreektijd te schatten bij langzaam, gemiddeld of snel tempo.',
+      ja: '無料の読了時間計算ツール。テキストを貼り付けるか単語数を入力し、遅い・標準・速いペースでの読了時間と発話時間を見積もれます。',
+      zh: '免费的阅读时间计算器。粘贴文本或输入字数，即可按慢速、中速或快速估算默读时间与朗读时间。',
+      da: 'Gratis læsetid-beregner. Indsæt tekst eller indtast et ordtal for at estimere læse- og taletid ved langsomt, middel eller hurtigt tempo.',
+    },
+
+    intro: {
+      en: 'How long will your article, speech, or script take? Paste your text or enter a word count below to estimate silent reading time and spoken delivery time at your chosen pace.',
+      es: '¿Cuánto tardará tu artículo, discurso o guion? Pega tu texto o introduce un número de palabras abajo para estimar el tiempo de lectura silenciosa y el de exposición en voz alta al ritmo que elijas.',
+      de: 'Wie lange dauert dein Artikel, deine Rede oder dein Skript? Füge deinen Text ein oder gib eine Wortzahl ein, um die stille Lesezeit und die Sprechzeit im gewählten Tempo zu schätzen.',
+      fr: 'Combien de temps prendra votre article, discours ou script ? Collez votre texte ou saisissez un nombre de mots ci-dessous pour estimer le temps de lecture silencieuse et de diction à voix haute au rythme choisi.',
+      pt: 'Quanto tempo levará o seu artigo, discurso ou guião? Cole o seu texto ou insira um número de palavras abaixo para estimar o tempo de leitura silenciosa e de fala em voz alta ao ritmo que escolher.',
+      it: 'Quanto durerà il tuo articolo, discorso o copione? Incolla il testo o inserisci un numero di parole qui sotto per stimare il tempo di lettura silenziosa e di esposizione a voce alta al ritmo scelto.',
+      nl: 'Hoelang duurt je artikel, toespraak of script? Plak je tekst of voer een aantal woorden in om de stille leestijd en de spreektijd hardop in je gekozen tempo te schatten.',
+      ja: '記事・スピーチ・台本はどれくらいかかる？下にテキストを貼り付けるか単語数を入力すると、選んだペースでの黙読時間と音読時間を見積もれます。',
+      zh: '你的文章、演讲或脚本需要多久？在下方粘贴文本或输入字数，即可按所选速度估算默读时间和朗读时间。',
+      da: 'Hvor lang tid tager din artikel, tale eller manuskript? Indsæt din tekst eller indtast et ordtal nedenfor for at estimere stille læsetid og taletid højt i det valgte tempo.',
+    },
+
+    content: {
+      en: `<h2>How long does it take to read your text?</h2>
+<p>Reading time depends on two things: the <strong>number of words</strong> and the <strong>reading speed</strong>. Most adults read silently at about <strong>238 words per minute</strong>, so a 1,000-word article takes roughly four minutes to read. Reading aloud is slower — a comfortable speaking pace is around <strong>130 words per minute</strong>, so the same 1,000 words take closer to eight minutes to say out loud.</p>
+<h2>Reading speed vs. speaking speed</h2>
+<p>Silent reading is much faster than speech because your eyes can skim and skip, while your mouth has to pronounce every word. This calculator lets you pick <strong>slow, average, or fast</strong> for each: reading ranges from about 150 wpm (careful study) to 320 wpm (skimming), while speaking ranges from a deliberate 110 wpm to a brisk 160 wpm. Match the setting to your audience — a podcast or keynote runs slower than a quick voice note.</p>
+<h2>How the estimate is calculated</h2>
+<p>The tool counts the words in your text, divides by the chosen words-per-minute rate, and formats the result in minutes and seconds. Paste a full draft or just type a word count if you already know it. Everything runs in your browser, so your text is never uploaded — useful for unpublished scripts, manuscripts, or confidential material.</p>
+<h2>Who uses a reading time calculator?</h2>
+<p>Bloggers add a “5 min read” label to set expectations, speakers and presenters check whether a script fits a time slot, teachers estimate how long a passage will take a class, podcasters and video creators plan episode length, and students gauge study time. Adjust the speed presets to match the real audience and the estimate becomes a dependable planning number.</p>`,
+      es: `<h2>¿Cuánto se tarda en leer tu texto?</h2>
+<p>El tiempo de lectura depende de dos factores: el <strong>número de palabras</strong> y la <strong>velocidad de lectura</strong>. La mayoría de los adultos leen en silencio a unas <strong>238 palabras por minuto</strong>, así que un artículo de 1000 palabras se lee en unos cuatro minutos. Leer en voz alta es más lento: un ritmo cómodo ronda las <strong>130 palabras por minuto</strong>, por lo que esas mismas 1000 palabras tardan cerca de ocho minutos en decirse.</p>
+<h2>Velocidad de lectura frente a velocidad de habla</h2>
+<p>La lectura silenciosa es mucho más rápida que el habla porque los ojos pueden saltar y ojear, mientras que la boca debe pronunciar cada palabra. Esta calculadora te permite elegir <strong>lenta, media o rápida</strong> para cada una: la lectura va de unas 150 ppm (estudio atento) a 320 ppm (lectura rápida), y el habla de 110 ppm pausadas a 160 ppm ágiles. Ajusta el valor a tu público: un pódcast o una conferencia van más despacio que una nota de voz.</p>
+<h2>Cómo se calcula la estimación</h2>
+<p>La herramienta cuenta las palabras de tu texto, las divide entre la velocidad elegida en palabras por minuto y muestra el resultado en minutos y segundos. Pega un borrador completo o escribe solo el número de palabras si ya lo conoces. Todo funciona en tu navegador, así que tu texto nunca se sube: ideal para guiones inéditos, manuscritos o material confidencial.</p>
+<h2>¿Quién usa una calculadora de tiempo de lectura?</h2>
+<p>Los blogueros añaden una etiqueta de «5 min de lectura» para anticipar la duración, los ponentes comprueban si un guion cabe en su franja, los docentes estiman cuánto tardará la clase en un texto, los pódcasters y creadores de vídeo planifican la duración del episodio y los estudiantes calculan el tiempo de estudio. Ajusta los presets de velocidad a tu público real y la estimación se convierte en un número fiable para planificar.</p>`,
+      de: `<h2>Wie lange dauert das Lesen deines Textes?</h2>
+<p>Die Lesezeit hängt von zwei Dingen ab: der <strong>Wortzahl</strong> und der <strong>Lesegeschwindigkeit</strong>. Die meisten Erwachsenen lesen still etwa <strong>238 Wörter pro Minute</strong>, ein Artikel mit 1000 Wörtern dauert also rund vier Minuten. Lautes Lesen ist langsamer – ein angenehmes Sprechtempo liegt bei etwa <strong>130 Wörtern pro Minute</strong>, dieselben 1000 Wörter brauchen also fast acht Minuten zum Vorlesen.</p>
+<h2>Lesegeschwindigkeit vs. Sprechgeschwindigkeit</h2>
+<p>Stilles Lesen ist viel schneller als Sprechen, weil die Augen überfliegen und überspringen können, während der Mund jedes Wort aussprechen muss. Mit diesem Rechner wählst du für beides <strong>langsam, mittel oder schnell</strong>: Lesen reicht von etwa 150 WpM (gründliches Studium) bis 320 WpM (Überfliegen), Sprechen von bedächtigen 110 WpM bis flotten 160 WpM. Passe die Einstellung an dein Publikum an – ein Podcast oder Vortrag läuft langsamer als eine kurze Sprachnachricht.</p>
+<h2>Wie die Schätzung berechnet wird</h2>
+<p>Das Tool zählt die Wörter deines Textes, teilt sie durch die gewählte Wörter-pro-Minute-Rate und zeigt das Ergebnis in Minuten und Sekunden. Füge einen ganzen Entwurf ein oder gib einfach eine Wortzahl ein, wenn du sie kennst. Alles läuft in deinem Browser, dein Text wird nie hochgeladen – praktisch für unveröffentlichte Skripte, Manuskripte oder vertrauliches Material.</p>
+<h2>Wer nutzt einen Lesezeit-Rechner?</h2>
+<p>Blogger fügen ein „5 Min. Lesezeit“-Label hinzu, Vortragende prüfen, ob ein Skript in ein Zeitfenster passt, Lehrkräfte schätzen, wie lange eine Klasse für einen Text braucht, Podcaster und Videoproduzenten planen die Episodenlänge und Studierende kalkulieren ihre Lernzeit. Passe die Geschwindigkeits-Presets an das echte Publikum an, und die Schätzung wird zu einer verlässlichen Planungsgröße.</p>`,
+      fr: `<h2>Combien de temps pour lire votre texte ?</h2>
+<p>Le temps de lecture dépend de deux éléments : le <strong>nombre de mots</strong> et la <strong>vitesse de lecture</strong>. La plupart des adultes lisent en silence à environ <strong>238 mots par minute</strong> ; un article de 1000 mots se lit donc en quatre minutes environ. Lire à voix haute est plus lent : un débit confortable tourne autour de <strong>130 mots par minute</strong>, si bien que ces mêmes 1000 mots prennent près de huit minutes à prononcer.</p>
+<h2>Vitesse de lecture et vitesse de parole</h2>
+<p>La lecture silencieuse est bien plus rapide que la parole, car les yeux peuvent survoler et sauter des mots alors que la bouche doit tout prononcer. Ce calculateur vous laisse choisir <strong>lente, moyenne ou rapide</strong> pour chacune : la lecture va d’environ 150 mpm (étude attentive) à 320 mpm (survol), la parole de 110 mpm posées à 160 mpm enlevées. Adaptez le réglage à votre public : un podcast ou une conférence est plus lent qu’un court message vocal.</p>
+<h2>Comment l’estimation est calculée</h2>
+<p>L’outil compte les mots de votre texte, les divise par la cadence choisie en mots par minute et affiche le résultat en minutes et secondes. Collez un brouillon complet ou saisissez simplement un nombre de mots si vous le connaissez. Tout fonctionne dans votre navigateur : votre texte n’est jamais envoyé — pratique pour des scripts inédits, des manuscrits ou des documents confidentiels.</p>
+<h2>Qui utilise un calculateur de temps de lecture ?</h2>
+<p>Les blogueurs ajoutent une mention « 5 min de lecture », les orateurs vérifient qu’un script tient dans un créneau, les enseignants estiment le temps qu’une classe mettra sur un passage, les podcasteurs et vidéastes planifient la durée d’un épisode, et les étudiants évaluent leur temps de révision. Réglez les préréglages de vitesse selon le public réel et l’estimation devient un repère de planification fiable.</p>`,
+      pt: `<h2>Quanto tempo se leva a ler o seu texto?</h2>
+<p>O tempo de leitura depende de dois fatores: o <strong>número de palavras</strong> e a <strong>velocidade de leitura</strong>. A maioria dos adultos lê em silêncio a cerca de <strong>238 palavras por minuto</strong>, por isso um artigo de 1000 palavras lê-se em cerca de quatro minutos. Ler em voz alta é mais lento — um ritmo confortável ronda as <strong>130 palavras por minuto</strong>, pelo que as mesmas 1000 palavras demoram perto de oito minutos a dizer.</p>
+<h2>Velocidade de leitura vs. velocidade de fala</h2>
+<p>A leitura silenciosa é muito mais rápida do que a fala porque os olhos podem saltar e percorrer, enquanto a boca tem de pronunciar cada palavra. Esta calculadora permite escolher <strong>lenta, média ou rápida</strong> para cada uma: a leitura vai de cerca de 150 ppm (estudo atento) a 320 ppm (leitura rápida), e a fala de 110 ppm pausadas a 160 ppm ágeis. Ajuste a definição ao seu público — um podcast ou palestra é mais lento do que uma nota de voz.</p>
+<h2>Como a estimativa é calculada</h2>
+<p>A ferramenta conta as palavras do seu texto, divide pela cadência escolhida em palavras por minuto e apresenta o resultado em minutos e segundos. Cole um rascunho completo ou escreva apenas o número de palavras, se já o souber. Tudo corre no seu navegador, por isso o seu texto nunca é enviado — útil para guiões inéditos, manuscritos ou material confidencial.</p>
+<h2>Quem usa uma calculadora de tempo de leitura?</h2>
+<p>Os bloguistas acrescentam uma etiqueta de «5 min de leitura», os oradores verificam se um guião cabe no tempo, os professores estimam quanto tempo a turma levará num texto, os podcasters e criadores de vídeo planeiam a duração do episódio e os estudantes calculam o tempo de estudo. Ajuste as predefinições de velocidade ao público real e a estimativa torna-se um número fiável para planear.</p>`,
+      it: `<h2>Quanto tempo serve per leggere il tuo testo?</h2>
+<p>Il tempo di lettura dipende da due fattori: il <strong>numero di parole</strong> e la <strong>velocità di lettura</strong>. La maggior parte degli adulti legge in silenzio a circa <strong>238 parole al minuto</strong>, quindi un articolo di 1000 parole si legge in circa quattro minuti. Leggere ad alta voce è più lento: un ritmo comodo è intorno alle <strong>130 parole al minuto</strong>, perciò le stesse 1000 parole richiedono quasi otto minuti per essere pronunciate.</p>
+<h2>Velocità di lettura e velocità di parlato</h2>
+<p>La lettura silenziosa è molto più rapida del parlato perché gli occhi possono scorrere e saltare, mentre la bocca deve pronunciare ogni parola. Questo calcolatore ti permette di scegliere <strong>lenta, media o veloce</strong> per ciascuna: la lettura va da circa 150 ppm (studio attento) a 320 ppm (scorrimento), il parlato da 110 ppm pacate a 160 ppm spedite. Adatta l’impostazione al tuo pubblico: un podcast o una conferenza vanno più lenti di un breve messaggio vocale.</p>
+<h2>Come viene calcolata la stima</h2>
+<p>Lo strumento conta le parole del testo, le divide per la cadenza scelta in parole al minuto e mostra il risultato in minuti e secondi. Incolla una bozza completa o digita solo il numero di parole se lo conosci già. Tutto avviene nel tuo browser, quindi il testo non viene mai caricato: utile per copioni inediti, manoscritti o materiale riservato.</p>
+<h2>Chi usa un calcolatore del tempo di lettura?</h2>
+<p>I blogger aggiungono un’etichetta «5 min di lettura», i relatori verificano se un copione rientra in uno slot, gli insegnanti stimano quanto impiegherà la classe su un brano, podcaster e videomaker pianificano la durata dell’episodio e gli studenti calcolano il tempo di studio. Adatta i preset di velocità al pubblico reale e la stima diventa un riferimento affidabile per pianificare.</p>`,
+      nl: `<h2>Hoelang duurt het om je tekst te lezen?</h2>
+<p>De leestijd hangt af van twee dingen: het <strong>aantal woorden</strong> en de <strong>leessnelheid</strong>. De meeste volwassenen lezen stil ongeveer <strong>238 woorden per minuut</strong>, dus een artikel van 1000 woorden lees je in zo’n vier minuten. Hardop lezen is langzamer — een prettig spreektempo ligt rond <strong>130 woorden per minuut</strong>, dus diezelfde 1000 woorden duren bijna acht minuten om uit te spreken.</p>
+<h2>Leessnelheid versus spreeksnelheid</h2>
+<p>Stil lezen is veel sneller dan spreken, omdat je ogen kunnen scannen en overslaan, terwijl je mond elk woord moet uitspreken. Met deze calculator kies je voor beide <strong>langzaam, gemiddeld of snel</strong>: lezen loopt van ongeveer 150 wpm (aandachtig studeren) tot 320 wpm (scannen), spreken van bedaarde 110 wpm tot vlotte 160 wpm. Stem de instelling af op je publiek — een podcast of lezing gaat langzamer dan een korte spraaknotitie.</p>
+<h2>Hoe de schatting wordt berekend</h2>
+<p>De tool telt de woorden in je tekst, deelt door de gekozen woorden-per-minuut en toont het resultaat in minuten en seconden. Plak een volledig concept of typ alleen een aantal woorden als je dat al weet. Alles draait in je browser, dus je tekst wordt nooit geüpload — handig voor ongepubliceerde scripts, manuscripten of vertrouwelijk materiaal.</p>
+<h2>Wie gebruikt een leestijd-calculator?</h2>
+<p>Bloggers zetten er een “5 min leestijd”-label bij, sprekers controleren of een script in een tijdslot past, docenten schatten hoelang een klas over een tekst doet, podcasters en videomakers plannen de afleveringsduur en studenten bepalen hun studietijd. Stem de snelheidspresets af op het echte publiek en de schatting wordt een betrouwbaar planningsgetal.</p>`,
+      ja: `<h2>テキストを読むのにどれくらいかかる？</h2>
+<p>読了時間は2つで決まります。<strong>単語数</strong>と<strong>読む速さ</strong>です。多くの大人は黙読で約<strong>毎分238語</strong>読むため、1000語の記事は約4分で読めます。音読はもっと遅く、無理のない発話ペースは約<strong>毎分130語</strong>なので、同じ1000語を声に出すと8分近くかかります。</p>
+<h2>読む速さと話す速さ</h2>
+<p>黙読は話すよりずっと速いです。目は飛ばし読みできますが、口はすべての語を発音しなければならないからです。本ツールではそれぞれ<strong>遅い・標準・速い</strong>を選べます。読みは約150語/分（精読）から320語/分（流し読み）、話しは110語/分のゆっくりから160語/分のテンポよくまで。聴き手に合わせて設定してください。ポッドキャストや講演はボイスメモより遅くなります。</p>
+<h2>見積もりの計算方法</h2>
+<p>本ツールはテキストの単語数を数え、選んだ毎分の語数で割り、分と秒で結果を表示します。下書き全体を貼り付けても、すでに分かっていれば単語数だけ入力してもかまいません。すべてブラウザー内で動作するため、テキストがアップロードされることはなく、未公開の台本・原稿・機密資料にも安心です。</p>
+<h2>誰が読了時間計算ツールを使う？</h2>
+<p>ブロガーは「5分で読めます」と表示し、登壇者は台本が枠に収まるか確認し、教師は本文にクラスがどれだけかかるか見積もり、ポッドキャスターや動画制作者はエピソードの長さを計画し、学生は学習時間を把握します。速度プリセットを実際の聴き手に合わせれば、見積もりは信頼できる計画値になります。</p>`,
+      zh: `<h2>读完你的文本需要多久？</h2>
+<p>阅读时间取决于两点：<strong>字数</strong>和<strong>阅读速度</strong>。多数成年人默读约<strong>每分钟 238 词</strong>，因此 1000 词的文章约需四分钟读完。朗读更慢——舒适的朗读速度约为<strong>每分钟 130 词</strong>，同样的 1000 词读出来需要将近八分钟。</p>
+<h2>阅读速度与朗读速度</h2>
+<p>默读比朗读快得多，因为眼睛可以略读和跳读，而嘴必须念出每个词。本计算器允许你为两者分别选择<strong>慢、中、快</strong>：阅读约从 150 词/分（精读）到 320 词/分（略读），朗读约从 110 词/分（从容）到 160 词/分（轻快）。根据受众调整设置——播客或演讲会比一条语音消息更慢。</p>
+<h2>估算如何计算</h2>
+<p>本工具统计文本字数，除以所选的每分钟词数，并以分钟和秒显示结果。可以粘贴完整草稿，也可以在已知字数时直接输入数字。一切都在你的浏览器中运行，文本绝不会被上传——适合未发布的脚本、手稿或机密资料。</p>
+<h2>谁会用到阅读时间计算器？</h2>
+<p>博主会加上“阅读 5 分钟”的标签，演讲者会检查脚本是否符合时段，教师会估算课堂阅读一段文字需要多久，播客和视频创作者会规划单集时长，学生会估算学习时间。把速度预设调整为真实受众，估算就成为可靠的规划数字。</p>`,
+      da: `<h2>Hvor lang tid tager det at læse din tekst?</h2>
+<p>Læsetiden afhænger af to ting: <strong>antallet af ord</strong> og <strong>læsehastigheden</strong>. De fleste voksne læser stille omkring <strong>238 ord i minuttet</strong>, så en artikel på 1000 ord tager cirka fire minutter at læse. At læse højt er langsommere – et behageligt taletempo ligger omkring <strong>130 ord i minuttet</strong>, så de samme 1000 ord tager næsten otte minutter at sige.</p>
+<h2>Læsehastighed kontra talehastighed</h2>
+<p>Stille læsning er meget hurtigere end tale, fordi øjnene kan skimme og springe over, mens munden skal udtale hvert ord. Denne beregner lader dig vælge <strong>langsom, middel eller hurtig</strong> for hver: læsning går fra omkring 150 ord/min (grundig læsning) til 320 ord/min (skimning), og tale fra rolige 110 ord/min til raske 160 ord/min. Tilpas indstillingen til dit publikum – en podcast eller et foredrag er langsommere end en kort talebesked.</p>
+<h2>Sådan beregnes estimatet</h2>
+<p>Værktøjet tæller ordene i din tekst, dividerer med den valgte ord-per-minut-hastighed og viser resultatet i minutter og sekunder. Indsæt et helt udkast, eller skriv blot et ordtal, hvis du allerede kender det. Alt kører i din browser, så din tekst bliver aldrig uploadet – nyttigt til uudgivne manuskripter eller fortroligt materiale.</p>
+<h2>Hvem bruger en læsetid-beregner?</h2>
+<p>Bloggere tilføjer et “5 min læsning”-mærke, talere tjekker, om et manuskript passer ind i et tidsrum, lærere estimerer, hvor længe en klasse er om et tekststykke, podcastere og videoskabere planlægger episodelængde, og studerende vurderer studietid. Tilpas hastighedsindstillingerne til det reelle publikum, og estimatet bliver et pålideligt planlægningstal.</p>`,
+    },
+
+    faq: {
+      en: [
+        { q: 'How is reading time calculated?', a: 'Word count divided by reading speed. This tool defaults to 238 words per minute for silent reading and 130 for speaking aloud, and you can switch each to slow, average, or fast.' },
+        { q: 'What is the average reading speed?', a: 'Around 238 words per minute for silent adult reading. Careful study is slower (~150 wpm) and skimming is faster (~320 wpm). Reading aloud is much slower, about 130 wpm.' },
+        { q: 'How long does it take to read 1,000 words?', a: 'About 4 minutes silently at an average pace, or roughly 8 minutes read aloud at a normal speaking speed. Use the speed selectors above to match your situation.' },
+        { q: 'Is my text uploaded anywhere?', a: 'No. The calculation runs entirely in your browser — nothing you paste is sent to a server, so it is safe for drafts, scripts, and private documents.' },
+      ],
+      es: [
+        { q: '¿Cómo se calcula el tiempo de lectura?', a: 'Dividiendo el número de palabras entre la velocidad de lectura. Esta herramienta usa por defecto 238 palabras por minuto para la lectura silenciosa y 130 para hablar en voz alta, y puedes cambiar cada una a lenta, media o rápida.' },
+        { q: '¿Cuál es la velocidad de lectura media?', a: 'Unas 238 palabras por minuto en lectura silenciosa adulta. El estudio atento es más lento (~150 ppm) y ojear es más rápido (~320 ppm). Leer en voz alta es mucho más lento, unas 130 ppm.' },
+        { q: '¿Cuánto se tarda en leer 1000 palabras?', a: 'Unos 4 minutos en silencio a ritmo medio, o cerca de 8 minutos en voz alta a una velocidad de habla normal. Usa los selectores de velocidad de arriba para ajustarlo a tu caso.' },
+        { q: '¿Se sube mi texto a algún sitio?', a: 'No. El cálculo se realiza por completo en tu navegador: nada de lo que pegues se envía a un servidor, por lo que es seguro para borradores, guiones y documentos privados.' },
+      ],
+      de: [
+        { q: 'Wie wird die Lesezeit berechnet?', a: 'Wortzahl geteilt durch die Lesegeschwindigkeit. Standardmäßig nutzt das Tool 238 Wörter pro Minute für stilles Lesen und 130 fürs laute Sprechen; beides lässt sich auf langsam, mittel oder schnell stellen.' },
+        { q: 'Was ist die durchschnittliche Lesegeschwindigkeit?', a: 'Etwa 238 Wörter pro Minute beim stillen Lesen Erwachsener. Gründliches Studium ist langsamer (~150 WpM), Überfliegen schneller (~320 WpM). Lautes Lesen ist mit etwa 130 WpM deutlich langsamer.' },
+        { q: 'Wie lange dauert das Lesen von 1000 Wörtern?', a: 'Etwa 4 Minuten still bei mittlerem Tempo oder rund 8 Minuten laut vorgelesen bei normaler Sprechgeschwindigkeit. Nutze die Geschwindigkeitsauswahl oben für deinen Fall.' },
+        { q: 'Wird mein Text irgendwo hochgeladen?', a: 'Nein. Die Berechnung läuft vollständig in deinem Browser – nichts, was du einfügst, wird an einen Server gesendet. Sicher für Entwürfe, Skripte und private Dokumente.' },
+      ],
+      fr: [
+        { q: 'Comment le temps de lecture est-il calculé ?', a: 'Le nombre de mots divisé par la vitesse de lecture. Par défaut, l’outil utilise 238 mots par minute pour la lecture silencieuse et 130 pour la lecture à voix haute, et vous pouvez régler chacune sur lente, moyenne ou rapide.' },
+        { q: 'Quelle est la vitesse de lecture moyenne ?', a: 'Environ 238 mots par minute en lecture silencieuse chez l’adulte. L’étude attentive est plus lente (~150 mpm) et le survol plus rapide (~320 mpm). Lire à voix haute est bien plus lent, environ 130 mpm.' },
+        { q: 'Combien de temps pour lire 1000 mots ?', a: 'Environ 4 minutes en silence à un rythme moyen, ou près de 8 minutes à voix haute à une vitesse de parole normale. Utilisez les sélecteurs de vitesse ci-dessus selon votre situation.' },
+        { q: 'Mon texte est-il envoyé quelque part ?', a: 'Non. Le calcul s’effectue entièrement dans votre navigateur : rien de ce que vous collez n’est envoyé à un serveur, ce qui le rend sûr pour les brouillons, scripts et documents privés.' },
+      ],
+      pt: [
+        { q: 'Como é calculado o tempo de leitura?', a: 'Número de palavras a dividir pela velocidade de leitura. Por predefinição, a ferramenta usa 238 palavras por minuto para leitura silenciosa e 130 para falar em voz alta, e pode mudar cada uma para lenta, média ou rápida.' },
+        { q: 'Qual é a velocidade de leitura média?', a: 'Cerca de 238 palavras por minuto na leitura silenciosa de adultos. O estudo atento é mais lento (~150 ppm) e percorrer é mais rápido (~320 ppm). Ler em voz alta é muito mais lento, cerca de 130 ppm.' },
+        { q: 'Quanto tempo leva a ler 1000 palavras?', a: 'Cerca de 4 minutos em silêncio a ritmo médio, ou perto de 8 minutos em voz alta a uma velocidade de fala normal. Use os seletores de velocidade acima para o seu caso.' },
+        { q: 'O meu texto é enviado para algum lado?', a: 'Não. O cálculo é feito inteiramente no seu navegador — nada do que colar é enviado para um servidor, por isso é seguro para rascunhos, guiões e documentos privados.' },
+      ],
+      it: [
+        { q: 'Come si calcola il tempo di lettura?', a: 'Numero di parole diviso per la velocità di lettura. Per impostazione predefinita lo strumento usa 238 parole al minuto per la lettura silenziosa e 130 per la lettura ad alta voce, e puoi impostare ciascuna su lenta, media o veloce.' },
+        { q: 'Qual è la velocità di lettura media?', a: 'Circa 238 parole al minuto nella lettura silenziosa di un adulto. Lo studio attento è più lento (~150 ppm) e lo scorrimento più veloce (~320 ppm). Leggere ad alta voce è molto più lento, circa 130 ppm.' },
+        { q: 'Quanto tempo serve per leggere 1000 parole?', a: 'Circa 4 minuti in silenzio a ritmo medio, o quasi 8 minuti ad alta voce a una velocità di parlato normale. Usa i selettori di velocità qui sopra per il tuo caso.' },
+        { q: 'Il mio testo viene caricato da qualche parte?', a: 'No. Il calcolo avviene interamente nel tuo browser: nulla di ciò che incolli viene inviato a un server, quindi è sicuro per bozze, copioni e documenti privati.' },
+      ],
+      nl: [
+        { q: 'Hoe wordt de leestijd berekend?', a: 'Aantal woorden gedeeld door de leessnelheid. De tool gebruikt standaard 238 woorden per minuut voor stil lezen en 130 voor hardop spreken, en je kunt beide op langzaam, gemiddeld of snel zetten.' },
+        { q: 'Wat is de gemiddelde leessnelheid?', a: 'Ongeveer 238 woorden per minuut bij stil lezen door volwassenen. Aandachtig studeren is langzamer (~150 wpm) en scannen sneller (~320 wpm). Hardop lezen is veel langzamer, ongeveer 130 wpm.' },
+        { q: 'Hoelang duurt het om 1000 woorden te lezen?', a: 'Ongeveer 4 minuten stil op een gemiddeld tempo, of bijna 8 minuten hardop op een normale spreeksnelheid. Gebruik de snelheidskiezers hierboven voor jouw situatie.' },
+        { q: 'Wordt mijn tekst ergens geüpload?', a: 'Nee. De berekening draait volledig in je browser — niets van wat je plakt wordt naar een server gestuurd, dus het is veilig voor concepten, scripts en privédocumenten.' },
+      ],
+      ja: [
+        { q: '読了時間はどう計算しますか？', a: '単語数を読む速さで割ります。本ツールは既定で黙読を毎分238語、音読を130語としており、それぞれ遅い・標準・速いに切り替えられます。' },
+        { q: '平均的な読む速さは？', a: '大人の黙読で毎分約238語です。精読はより遅く（約150語/分）、流し読みはより速い（約320語/分）です。音読は約130語/分とずっと遅くなります。' },
+        { q: '1000語を読むのにどれくらい？', a: '標準ペースの黙読で約4分、通常の発話速度の音読で約8分です。上の速度セレクターで状況に合わせてください。' },
+        { q: 'テキストはどこかにアップロードされますか？', a: 'いいえ。計算はすべてブラウザー内で行われ、貼り付けた内容はサーバーに送信されません。下書き・台本・非公開の文書でも安全です。' },
+      ],
+      zh: [
+        { q: '阅读时间如何计算？', a: '用字数除以阅读速度。本工具默认默读每分钟 238 词、朗读每分钟 130 词，且每项都可切换为慢、中或快。' },
+        { q: '平均阅读速度是多少？', a: '成人默读约每分钟 238 词。精读更慢（约 150 词/分），略读更快（约 320 词/分）。朗读慢得多，约每分钟 130 词。' },
+        { q: '读 1000 词需要多久？', a: '中速默读约 4 分钟，正常朗读速度约 8 分钟。可用上方的速度选择器匹配你的情况。' },
+        { q: '我的文本会被上传吗？', a: '不会。计算完全在你的浏览器中进行——你粘贴的任何内容都不会发送到服务器，因此适合草稿、脚本和私密文档。' },
+      ],
+      da: [
+        { q: 'Hvordan beregnes læsetiden?', a: 'Antal ord divideret med læsehastigheden. Værktøjet bruger som standard 238 ord i minuttet til stille læsning og 130 til at læse højt, og du kan sætte hver til langsom, middel eller hurtig.' },
+        { q: 'Hvad er den gennemsnitlige læsehastighed?', a: 'Omkring 238 ord i minuttet ved stille læsning hos voksne. Grundig læsning er langsommere (~150 ord/min) og skimning hurtigere (~320 ord/min). At læse højt er meget langsommere, omkring 130 ord/min.' },
+        { q: 'Hvor lang tid tager det at læse 1000 ord?', a: 'Cirka 4 minutter stille ved middeltempo eller omkring 8 minutter højt ved normal talehastighed. Brug hastighedsvælgerne ovenfor til din situation.' },
+        { q: 'Bliver min tekst uploadet nogen steder?', a: 'Nej. Beregningen kører helt i din browser – intet af det, du indsætter, sendes til en server, så det er sikkert til udkast, manuskripter og private dokumenter.' },
       ],
     },
   },

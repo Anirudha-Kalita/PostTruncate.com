@@ -36,6 +36,12 @@ export interface ToolDefinition {
   schemaName: Record<string, string>;
   /** Plain English description of platform character/word limits — used as a shared reference when authoring content. Not rendered directly. */
   platformLimits: string;
+  /**
+   * Optional cross-promo to a sibling tool (used by the calculator pages):
+   * the related tool's `id` plus a locale-keyed promo blurb. The link label and
+   * URL are resolved at render time from the related tool's schemaName + slug.
+   */
+  related?: { id: string; blurb: Record<string, string> };
 }
 
 export const tools: ToolDefinition[] = [

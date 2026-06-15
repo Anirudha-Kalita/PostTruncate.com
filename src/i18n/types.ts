@@ -592,6 +592,37 @@ export interface IslandStrings {
       /** Print button label. */
       printButton: string;
     };
+    /** "Reading & Speaking Time" estimator. Reuses workspace.timers for the
+     *  duration copy (min/sec) and the Reading/Speaking labels. */
+    readingTime: {
+      eyebrow: string;
+      title: string;
+      badgeIdle: string;
+      badgeResult: string;
+      modeAria: string;
+      modeText: string;
+      modeCount: string;
+      placeholder: string;
+      wordsLabel: string;
+      wordsPlaceholder: string;
+      /** Reading-speed selector label. */
+      readingSpeedLabel: string;
+      /** Speaking-speed selector label. */
+      speakingSpeedLabel: string;
+      /** Speed preset labels. */
+      speedSlow: string;
+      speedAverage: string;
+      speedFast: string;
+      /** Words-per-minute abbreviation (e.g. "wpm"). */
+      wpmShort: string;
+      /** Word-count stat tile label. */
+      wordsStatLabel: string;
+      /** Reference table heading + columns. */
+      referenceHeading: string;
+      refWordsCol: string;
+      refReadingCol: string;
+      refSpeakingCol: string;
+    };
   };
 }
 

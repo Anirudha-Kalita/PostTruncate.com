@@ -7,6 +7,7 @@
 // the platform Dashboard or platform cross-promo.
 import OnThisPage from './OnThisPage.astro';
 import type { ToolDefinition } from '../data/tools';
+import { calculators } from '../data/calculators';
 import { DEFAULT_LOCALE } from '../i18n/config';
 import { getTranslations } from '../i18n';
 import { interp } from '../i18n/interp';
@@ -33,6 +34,19 @@ const lastUpdatedLine = interp(globalT.toolPage.lastUpdated, {
 
 const introText = tool.intro?.[lang] ?? tool.intro?.[DEFAULT_LOCALE] ?? '';
 const faqItems = tool.faq?.[lang] ?? tool.faq?.[DEFAULT_LOCALE] ?? [];
+
+// Cross-promo to a sibling calculator. The blurb is authored per tool; the link
+// label + URL are resolved from the related tool's localized schemaName + slug.
+const relatedTool = tool.related ? calculators.find((t) => t.id === tool.related!.id) : undefined;
+const relatedHref = relatedTool
+  ? `/${lang}/tools/${relatedTool.slugs[lang] ?? relatedTool.slugs[DEFAULT_LOCALE]}/`
+  : undefined;
+const relatedLabel = relatedTool
+  ? relatedTool.schemaName[lang] ?? relatedTool.schemaName[DEFAULT_LOCALE]
+  : undefined;
+const relatedBlurb = tool.related
+  ? tool.related.blurb[lang] ?? tool.related.blurb[DEFAULT_LOCALE]
+  : undefined;
 ---
 
 <section class="tool-page container-page">
@@ -65,6 +79,16 @@ const faqItems = tool.faq?.[lang] ?? tool.faq?.[DEFAULT_LOCALE] ?? [];
           ))}
         </div>
       </section>
+    )}
+
+    {relatedTool && relatedHref && (
+      <aside class="tool-page__crosslink">
+        <p class="tool-page__crosslink-text">{relatedBlurb}</p>
+        <a href={relatedHref} class="tool-page__crosslink-link">
+          <span>{relatedLabel}</span>
+          <span class="tool-page__crosslink-arrow" aria-hidden="true">→</span>
+        </a>
+      </aside>
     )}
 
     <p class="tool-page__updated">{lastUpdatedLine}</p>
@@ -259,6 +283,44 @@ const faqItems = tool.faq?.[lang] ?? tool.faq?.[DEFAULT_LOCALE] ?? [];
     font-size: 15px;
     line-height: 24px;
     color: var(--color-body);
+  }
+
+  /* ── Cross-promo to a sibling calculator ────────────────────────────────── */
+  .tool-page__crosslink {
+    margin-top: 48px;
+    padding: 24px;
+    border-radius: var(--radius-lg);
+    background: var(--color-canvas-soft);
+    border: 1px solid var(--color-hairline);
+  }
+
+  .tool-page__crosslink-text {
+    font-size: 16px;
+    line-height: 26px;
+    color: var(--color-body);
+  }
+
+  .tool-page__crosslink-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 12px;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--color-link);
+    transition: color 0.15s ease;
+  }
+
+  .tool-page__crosslink-link:hover {
+    color: var(--color-link-deep);
+  }
+
+  .tool-page__crosslink-arrow {
+    transition: transform 0.15s ease;
+  }
+
+  .tool-page__crosslink-link:hover .tool-page__crosslink-arrow {
+    transform: translateX(3px);
   }
 
   @media (max-width: 768px) {
