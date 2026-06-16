@@ -242,6 +242,26 @@ export function paragraphCount(text: string): number {
   return blocks.length;
 }
 
+/**
+ * Sentences = chunks ended by sentence-final punctuation (Latin . ! ? … and the
+ * CJK 。！？), plus any trailing text with no terminator. Runs like "?!" or "..."
+ * count once. A terminator only counts when followed by whitespace or end-of-
+ * text, so decimals (3.14) don't inflate the count — abbreviations (U.S.A.)
+ * remain an inherent estimate. Empty input is 0.
+ */
+export function sentenceCount(text: string): number {
+  const trimmed = text.trim();
+  if (!trimmed) return 0;
+  // Latin terminators count only before whitespace/end (so "3.14" isn't split);
+  // CJK terminators (。！？) count anywhere, since CJK text has no spaces between
+  // sentences.
+  const endings = trimmed.match(/[.!?…]+(?=\s|$)|[。！？]+/gu);
+  const count = endings ? endings.length : 0;
+  // Trailing text after the last terminator (or none at all) is still a sentence.
+  const hasTrailing = !/[.!?…。！？]\s*$/u.test(trimmed);
+  return count + (hasTrailing ? 1 : 0) || 1;
+}
+
 // ──────────────────────────────────────────────────────────────────────────
 // Words-per-page estimation. Pure, DOM-free helper backing the
 // "how many pages is N words" calculator tool. Baselines follow the common

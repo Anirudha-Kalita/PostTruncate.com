@@ -688,6 +688,19 @@ export interface IslandStrings {
         about: string;
       };
     };
+    /** "Sentence & paragraph counter". Reuses workspace.counters for the
+     *  words / characters / paragraphs labels; only adds the sentence chrome. */
+    sentenceCounter: {
+      eyebrow: string;
+      title: string;
+      badgeIdle: string;
+      badgeResult: string;
+      placeholder: string;
+      /** Stat tile label for the sentence count. */
+      sentencesLabel: string;
+      /** One-line note that the sentence count is an estimate. */
+      note: string;
+    };
     /** Shared "Clear" button label for the calculator text inputs. */
     clear: string;
   };

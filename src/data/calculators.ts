@@ -2562,4 +2562,221 @@ export const calculators: ToolDefinition[] = [
       ],
     },
   },
+  {
+    id: 'sentence-counter',
+    editorAnchor: 'workspace',
+    lastUpdated: '2026-06-14',
+    platformLimits: 'Sentences end at . ! ? … and 。！？; paragraphs split on blank lines',
+
+    slugs: {
+      en: 'sentence-counter',
+      es: 'contador-de-frases',
+      de: 'satzzaehler',
+      fr: 'compteur-de-phrases',
+      pt: 'contador-de-frases',
+      it: 'contatore-di-frasi',
+      nl: 'zinnenteller',
+      ja: 'bun-kazu-kaunta',
+      zh: 'ju-zi-ji-shu',
+      da: 'saetningstaeller',
+    },
+
+    schemaName: {
+      en: 'Sentence & Paragraph Counter',
+      es: 'Contador de Frases y Párrafos',
+      de: 'Satz- & Absatzzähler',
+      fr: 'Compteur de Phrases et de Paragraphes',
+      pt: 'Contador de Frases e Parágrafos',
+      it: 'Contatore di Frasi e Paragrafi',
+      nl: 'Zinnen- en Alineateller',
+      ja: '文・段落カウンター',
+      zh: '句子和段落计数器',
+      da: 'Sætnings- & Afsnitstæller',
+    },
+
+    titles: {
+      en: 'Sentence Counter — Count Sentences & Paragraphs Online',
+      es: 'Contador de Frases — Cuenta frases y párrafos en línea',
+      de: 'Satzzähler — Sätze & Absätze online zählen',
+      fr: 'Compteur de Phrases — Comptez phrases et paragraphes en ligne',
+      pt: 'Contador de Frases — Conte frases e parágrafos online',
+      it: 'Contatore di Frasi — Conta frasi e paragrafi online',
+      nl: 'Zinnenteller — Tel zinnen en alinea’s online',
+      ja: '文カウンター — 文と段落をオンラインで数える',
+      zh: '句子计数器 — 在线统计句子和段落',
+      da: 'Sætningstæller — Tæl sætninger og afsnit online',
+    },
+
+    metaDescriptions: {
+      en: 'Free sentence and paragraph counter. Paste text to count sentences, paragraphs, words, and characters live as you type.',
+      es: 'Contador de frases y párrafos gratuito. Pega texto para contar frases, párrafos, palabras y caracteres en vivo mientras escribes.',
+      de: 'Kostenloser Satz- und Absatzzähler. Text einfügen, um Sätze, Absätze, Wörter und Zeichen live beim Tippen zu zählen.',
+      fr: 'Compteur de phrases et de paragraphes gratuit. Collez du texte pour compter phrases, paragraphes, mots et caractères en direct.',
+      pt: 'Contador de frases e parágrafos gratuito. Cole texto para contar frases, parágrafos, palavras e caracteres ao vivo enquanto escreve.',
+      it: 'Contatore di frasi e paragrafi gratuito. Incolla testo per contare frasi, paragrafi, parole e caratteri in tempo reale.',
+      nl: 'Gratis zinnen- en alineateller. Plak tekst om zinnen, alinea’s, woorden en tekens live te tellen tijdens het typen.',
+      ja: '無料の文・段落カウンター。テキストを貼り付けると、文・段落・単語・文字数をリアルタイムで数えます。',
+      zh: '免费的句子和段落计数器。粘贴文本即可在输入时实时统计句子、段落、字数和字符数。',
+      da: 'Gratis sætnings- og afsnitstæller. Indsæt tekst for at tælle sætninger, afsnit, ord og tegn live, mens du skriver.',
+    },
+
+    intro: {
+      en: 'Count the sentences and paragraphs in any text — plus words and characters — instantly. Paste your text below and the counts update live as you type.',
+      es: 'Cuenta al instante las frases y los párrafos de cualquier texto, además de palabras y caracteres. Pega tu texto abajo y los recuentos se actualizan en vivo mientras escribes.',
+      de: 'Zähle Sätze und Absätze in einem beliebigen Text – plus Wörter und Zeichen – sofort. Füge deinen Text unten ein, und die Zähler aktualisieren sich live beim Tippen.',
+      fr: 'Comptez instantanément les phrases et les paragraphes de n’importe quel texte, ainsi que les mots et les caractères. Collez votre texte ci-dessous : les compteurs se mettent à jour en direct.',
+      pt: 'Conte instantaneamente as frases e os parágrafos de qualquer texto, além de palavras e caracteres. Cole o seu texto abaixo e os contadores atualizam-se ao vivo enquanto escreve.',
+      it: 'Conta all’istante frasi e paragrafi di qualsiasi testo, oltre a parole e caratteri. Incolla il testo qui sotto e i contatori si aggiornano in tempo reale mentre scrivi.',
+      nl: 'Tel direct de zinnen en alinea’s in een tekst — plus woorden en tekens. Plak je tekst hieronder en de tellers werken live bij tijdens het typen.',
+      ja: '任意のテキストの文と段落を、単語数・文字数とあわせて即座に数えます。下にテキストを貼り付けると、入力中にカウントがリアルタイムで更新されます。',
+      zh: '即时统计任意文本的句子和段落，以及字数和字符数。在下方粘贴文本，计数会在你输入时实时更新。',
+      da: 'Tæl øjeblikkeligt sætninger og afsnit i en hvilken som helst tekst — plus ord og tegn. Indsæt din tekst nedenfor, og tællerne opdateres live, mens du skriver.',
+    },
+
+    content: {
+      en: `<h2>How sentences and paragraphs are counted</h2>
+<p>A <strong>sentence</strong> ends with terminating punctuation — a period, question mark, or exclamation mark (and the equivalents in other scripts). A <strong>paragraph</strong> is a block of text separated from the next by a blank line. This tool counts both as you type, alongside word and character totals, so you can see the structure of your writing at a glance.</p>
+<h2>Why count sentences and paragraphs?</h2>
+<p>Sentence and paragraph counts are a quick proxy for readability. Long, run-on sentences and giant paragraphs are harder to read, while a healthy mix of shorter sentences and well-spaced paragraphs keeps readers moving. Writers use these counts to meet assignment structures, trim overlong paragraphs for the web, and check that an essay or article flows in digestible chunks.</p>
+<h2>What counts as a sentence</h2>
+<p>The counter treats <strong>. ! ?</strong> and ellipses as sentence endings, and recognizes the CJK terminators 。！？ for Chinese, Japanese, and Korean text. To avoid false splits, a period followed by a digit (like 3.14) isn’t treated as a sentence end. Abbreviations such as “U.S.A.” can still nudge the count, so treat the sentence total as a close estimate rather than an exact parse.</p>
+<h2>Private and instant</h2>
+<p>Paste an essay, article, or any block of text to see its sentences, paragraphs, words, and characters update live. Everything runs in your browser, so nothing you type is uploaded — safe for drafts and unpublished work. Use the counts to tighten structure before you publish.</p>`,
+      es: `<h2>Cómo se cuentan las frases y los párrafos</h2>
+<p>Una <strong>frase</strong> termina con puntuación de cierre: un punto, un signo de interrogación o de exclamación (y sus equivalentes en otros sistemas de escritura). Un <strong>párrafo</strong> es un bloque de texto separado del siguiente por una línea en blanco. Esta herramienta cuenta ambos mientras escribes, junto con el total de palabras y caracteres, para que veas la estructura de tu texto de un vistazo.</p>
+<h2>¿Por qué contar frases y párrafos?</h2>
+<p>El recuento de frases y párrafos es un indicador rápido de legibilidad. Las frases largas e interminables y los párrafos enormes cuestan más de leer, mientras que una buena mezcla de frases cortas y párrafos bien espaciados mantiene al lector avanzando. Quien escribe usa estos recuentos para cumplir estructuras de trabajos, recortar párrafos demasiado largos para la web y comprobar que un ensayo o artículo fluye en bloques digeribles.</p>
+<h2>Qué cuenta como una frase</h2>
+<p>El contador trata <strong>. ! ?</strong> y los puntos suspensivos como finales de frase, y reconoce los terminadores CJK 。！？ para textos en chino, japonés y coreano. Para evitar divisiones falsas, un punto seguido de un dígito (como 3,14) no se considera fin de frase. Las abreviaturas como «EE. UU.» pueden alterar ligeramente el recuento, así que trata el total de frases como una estimación cercana, no como un análisis exacto.</p>
+<h2>Privado e instantáneo</h2>
+<p>Pega un ensayo, un artículo o cualquier bloque de texto para ver sus frases, párrafos, palabras y caracteres actualizándose en vivo. Todo funciona en tu navegador, así que nada de lo que escribas se sube: seguro para borradores y trabajos sin publicar. Usa los recuentos para afinar la estructura antes de publicar.</p>`,
+      de: `<h2>Wie Sätze und Absätze gezählt werden</h2>
+<p>Ein <strong>Satz</strong> endet mit Schlusszeichen – Punkt, Frage- oder Ausrufezeichen (und den Entsprechungen in anderen Schriften). Ein <strong>Absatz</strong> ist ein Textblock, der durch eine Leerzeile vom nächsten getrennt ist. Dieses Tool zählt beide beim Tippen, zusammen mit Wort- und Zeichenzahl, sodass du die Struktur deines Textes auf einen Blick siehst.</p>
+<h2>Warum Sätze und Absätze zählen?</h2>
+<p>Satz- und Absatzzahlen sind ein schneller Indikator für Lesbarkeit. Lange Schachtelsätze und riesige Absätze sind schwerer zu lesen, während eine gesunde Mischung aus kürzeren Sätzen und gut gegliederten Absätzen die Leser im Fluss hält. Schreibende nutzen diese Zahlen, um Vorgaben zu erfüllen, zu lange Absätze fürs Web zu kürzen und zu prüfen, ob ein Aufsatz oder Artikel in verdaulichen Häppchen fließt.</p>
+<h2>Was als Satz zählt</h2>
+<p>Der Zähler behandelt <strong>. ! ?</strong> und Auslassungspunkte als Satzenden und erkennt die CJK-Schlusszeichen 。！？ für chinesische, japanische und koreanische Texte. Um falsche Trennungen zu vermeiden, gilt ein Punkt vor einer Ziffer (wie 3,14) nicht als Satzende. Abkürzungen wie „z. B.“ können die Zahl dennoch verschieben, betrachte das Satzergebnis also als nahe Schätzung statt als exakte Analyse.</p>
+<h2>Privat und sofort</h2>
+<p>Füge einen Aufsatz, Artikel oder beliebigen Textblock ein, um Sätze, Absätze, Wörter und Zeichen live zu sehen. Alles läuft in deinem Browser, also wird nichts hochgeladen – sicher für Entwürfe und unveröffentlichte Arbeiten. Nutze die Zahlen, um die Struktur vor dem Veröffentlichen zu straffen.</p>`,
+      fr: `<h2>Comment les phrases et les paragraphes sont comptés</h2>
+<p>Une <strong>phrase</strong> se termine par une ponctuation finale — point, point d’interrogation ou d’exclamation (et leurs équivalents dans d’autres écritures). Un <strong>paragraphe</strong> est un bloc de texte séparé du suivant par une ligne vide. Cet outil compte les deux pendant que vous tapez, avec les totaux de mots et de caractères, pour voir la structure de votre texte d’un coup d’œil.</p>
+<h2>Pourquoi compter phrases et paragraphes ?</h2>
+<p>Le nombre de phrases et de paragraphes est un indicateur rapide de lisibilité. Les phrases longues et interminables et les paragraphes gigantesques sont plus difficiles à lire, tandis qu’un bon mélange de phrases courtes et de paragraphes bien aérés garde le lecteur en mouvement. Les rédacteurs s’en servent pour respecter une structure imposée, raccourcir des paragraphes trop longs pour le web et vérifier qu’un texte s’enchaîne en blocs digestes.</p>
+<h2>Ce qui compte comme une phrase</h2>
+<p>Le compteur considère <strong>. ! ?</strong> et les points de suspension comme des fins de phrase, et reconnaît les terminateurs CJK 。！？ pour les textes chinois, japonais et coréens. Pour éviter les fausses coupures, un point suivi d’un chiffre (comme 3,14) n’est pas traité comme une fin de phrase. Des abréviations comme « M. » peuvent tout de même décaler le total : considérez le nombre de phrases comme une estimation proche plutôt qu’une analyse exacte.</p>
+<h2>Privé et instantané</h2>
+<p>Collez une dissertation, un article ou n’importe quel bloc de texte pour voir ses phrases, paragraphes, mots et caractères se mettre à jour en direct. Tout fonctionne dans votre navigateur : rien de ce que vous tapez n’est envoyé — sûr pour les brouillons et les travaux non publiés. Servez-vous des compteurs pour resserrer la structure avant de publier.</p>`,
+      pt: `<h2>Como as frases e os parágrafos são contados</h2>
+<p>Uma <strong>frase</strong> termina com pontuação de fecho — ponto, ponto de interrogação ou de exclamação (e os equivalentes noutros sistemas de escrita). Um <strong>parágrafo</strong> é um bloco de texto separado do seguinte por uma linha em branco. Esta ferramenta conta ambos enquanto escreve, juntamente com o total de palavras e caracteres, para que veja a estrutura do seu texto num relance.</p>
+<h2>Porquê contar frases e parágrafos?</h2>
+<p>A contagem de frases e parágrafos é um indicador rápido de legibilidade. Frases longas e intermináveis e parágrafos enormes são mais difíceis de ler, enquanto uma boa mistura de frases curtas e parágrafos bem espaçados mantém o leitor a avançar. Quem escreve usa estas contagens para cumprir estruturas de trabalhos, encurtar parágrafos demasiado longos para a web e verificar se um ensaio ou artigo flui em blocos digeríveis.</p>
+<h2>O que conta como uma frase</h2>
+<p>O contador trata <strong>. ! ?</strong> e as reticências como fins de frase e reconhece os terminadores CJK 。！？ para textos em chinês, japonês e coreano. Para evitar divisões falsas, um ponto seguido de um dígito (como 3,14) não é tratado como fim de frase. Abreviaturas como «EUA» podem ainda assim alterar a contagem, por isso trate o total de frases como uma estimativa aproximada e não como uma análise exata.</p>
+<h2>Privado e instantâneo</h2>
+<p>Cole um ensaio, um artigo ou qualquer bloco de texto para ver as suas frases, parágrafos, palavras e caracteres a atualizar ao vivo. Tudo corre no seu navegador, por isso nada do que escrever é enviado — seguro para rascunhos e trabalhos não publicados. Use as contagens para apertar a estrutura antes de publicar.</p>`,
+      it: `<h2>Come si contano frasi e paragrafi</h2>
+<p>Una <strong>frase</strong> termina con punteggiatura di chiusura — punto, punto interrogativo o esclamativo (e gli equivalenti in altre scritture). Un <strong>paragrafo</strong> è un blocco di testo separato dal successivo da una riga vuota. Questo strumento conta entrambi mentre scrivi, insieme ai totali di parole e caratteri, così vedi la struttura del tuo testo a colpo d’occhio.</p>
+<h2>Perché contare frasi e paragrafi?</h2>
+<p>Il conteggio di frasi e paragrafi è un rapido indicatore di leggibilità. Frasi lunghe e interminabili e paragrafi enormi sono più difficili da leggere, mentre un buon mix di frasi brevi e paragrafi ben distanziati tiene il lettore in movimento. Chi scrive usa questi conteggi per rispettare strutture assegnate, accorciare paragrafi troppo lunghi per il web e verificare che un saggio o un articolo scorra in blocchi digeribili.</p>
+<h2>Cosa conta come frase</h2>
+<p>Il contatore considera <strong>. ! ?</strong> e i puntini di sospensione come fine frase e riconosce i terminatori CJK 。！？ per i testi in cinese, giapponese e coreano. Per evitare divisioni errate, un punto seguito da una cifra (come 3,14) non è trattato come fine frase. Abbreviazioni come «ecc.» possono comunque alterare il totale, quindi considera il conteggio delle frasi come una stima vicina e non un’analisi esatta.</p>
+<h2>Privato e istantaneo</h2>
+<p>Incolla un saggio, un articolo o qualsiasi blocco di testo per vedere frasi, paragrafi, parole e caratteri aggiornarsi in tempo reale. Tutto avviene nel tuo browser, quindi nulla di ciò che scrivi viene caricato — sicuro per bozze e lavori non pubblicati. Usa i conteggi per stringere la struttura prima di pubblicare.</p>`,
+      nl: `<h2>Hoe zinnen en alinea’s worden geteld</h2>
+<p>Een <strong>zin</strong> eindigt met afsluitende interpunctie — een punt, vraagteken of uitroepteken (en de equivalenten in andere schriften). Een <strong>alinea</strong> is een tekstblok dat door een lege regel van het volgende is gescheiden. Deze tool telt beide terwijl je typt, samen met de woord- en tekentotalen, zodat je de structuur van je tekst in één oogopslag ziet.</p>
+<h2>Waarom zinnen en alinea’s tellen?</h2>
+<p>Het aantal zinnen en alinea’s is een snelle indicator voor leesbaarheid. Lange, aaneengeregen zinnen en gigantische alinea’s zijn moeilijker te lezen, terwijl een goede mix van kortere zinnen en goed verdeelde alinea’s de lezer in beweging houdt. Schrijvers gebruiken deze tellingen om aan een opdrachtstructuur te voldoen, te lange alinea’s voor het web in te korten en te controleren of een essay of artikel in verteerbare stukken loopt.</p>
+<h2>Wat telt als een zin</h2>
+<p>De teller behandelt <strong>. ! ?</strong> en weglatingstekens als zinseindes en herkent de CJK-terminators 。！？ voor Chinese, Japanse en Koreaanse tekst. Om valse splitsingen te voorkomen, wordt een punt gevolgd door een cijfer (zoals 3,14) niet als zinseinde gezien. Afkortingen zoals “bijv.” kunnen het totaal toch verschuiven, dus beschouw het aantal zinnen als een nauwkeurige schatting in plaats van een exacte ontleding.</p>
+<h2>Privé en direct</h2>
+<p>Plak een essay, artikel of willekeurig tekstblok om de zinnen, alinea’s, woorden en tekens live te zien bijwerken. Alles draait in je browser, dus niets van wat je typt wordt geüpload — veilig voor concepten en ongepubliceerd werk. Gebruik de tellingen om de structuur aan te scherpen voordat je publiceert.</p>`,
+      ja: `<h2>文と段落の数え方</h2>
+<p><strong>文</strong>は終止符（ピリオド・疑問符・感嘆符、他の文字体系の相当記号を含む）で終わります。<strong>段落</strong>は空行で次と区切られたテキストのまとまりです。本ツールは入力中に両方を、単語数・文字数とあわせて数えるので、文章の構造をひと目で把握できます。</p>
+<h2>なぜ文と段落を数えるのか</h2>
+<p>文と段落の数は読みやすさの手早い目安です。長くだらだら続く文や巨大な段落は読みにくく、短めの文とほどよく区切られた段落の組み合わせは読者を前に進めます。書き手はこれらの数を使って、課題の構成を満たし、ウェブ向けに長すぎる段落を削り、エッセイや記事が読みやすいまとまりで流れているかを確認します。</p>
+<h2>何を文として数えるか</h2>
+<p>本カウンターは <strong>. ! ?</strong> と三点リーダーを文末として扱い、中国語・日本語・韓国語の終止符 。！？ も認識します。誤分割を避けるため、数字の前のピリオド（3.14 など）は文末とみなしません。「U.S.A.」のような略語は数を少し動かすことがあるため、文の合計は厳密な解析ではなく近い目安と考えてください。</p>
+<h2>プライベートで即時</h2>
+<p>エッセイ・記事・任意のテキストを貼り付けると、文・段落・単語・文字数がリアルタイムで更新されます。すべてブラウザー内で動作するため、入力内容はアップロードされません。下書きや未公開の作業にも安全です。公開前に構造を引き締めるのに役立ててください。</p>`,
+      zh: `<h2>句子和段落如何统计</h2>
+<p><strong>句子</strong>以结束标点收尾——句号、问号或感叹号（以及其他文字体系中的对应符号）。<strong>段落</strong>是以空行与下一段隔开的一块文本。本工具在你输入时同时统计两者，并附带字数和字符数，让你一眼看清文章结构。</p>
+<h2>为什么要统计句子和段落？</h2>
+<p>句子和段落数是衡量可读性的快捷指标。又长又绕的句子和巨大的段落更难阅读，而短句与分布得当的段落相结合，能让读者不断往下读。写作者用这些数字来满足作业结构、为网页精简过长的段落，并检查文章是否以易消化的小块流畅展开。</p>
+<h2>什么算作一个句子</h2>
+<p>计数器把 <strong>. ! ?</strong> 和省略号视为句子结束，并识别中日韩的结束符 。！？。为避免错误切分，数字前的句点（如 3.14）不算作句子结束。像 “U.S.A.” 这样的缩写仍可能略微改变计数，因此请把句子总数当作接近的估算，而非精确解析。</p>
+<h2>私密且即时</h2>
+<p>粘贴论文、文章或任意一段文本，即可看到其句子、段落、字数和字符数实时更新。一切都在你的浏览器中运行，因此你输入的内容不会被上传——适合草稿和未发布的作品。在发布前用这些计数来收紧结构。</p>`,
+      da: `<h2>Sådan tælles sætninger og afsnit</h2>
+<p>En <strong>sætning</strong> slutter med afsluttende tegnsætning — punktum, spørgsmålstegn eller udråbstegn (og tilsvarende i andre skriftsystemer). Et <strong>afsnit</strong> er en tekstblok, der er adskilt fra den næste med en tom linje. Dette værktøj tæller begge, mens du skriver, sammen med ord- og tegntotaler, så du kan se strukturen i din tekst med det samme.</p>
+<h2>Hvorfor tælle sætninger og afsnit?</h2>
+<p>Antal sætninger og afsnit er en hurtig indikator for læsbarhed. Lange, snørklede sætninger og kæmpe afsnit er sværere at læse, mens en sund blanding af kortere sætninger og veldelte afsnit holder læseren i bevægelse. Skribenter bruger disse tal til at opfylde en opgavestruktur, skære for lange afsnit ned til webben og tjekke, at et essay eller en artikel flyder i fordøjelige bidder.</p>
+<h2>Hvad tæller som en sætning</h2>
+<p>Tælleren behandler <strong>. ! ?</strong> og ellipser som sætningsafslutninger og genkender CJK-afslutningstegnene 。！？ for kinesisk, japansk og koreansk tekst. For at undgå falske opdelinger behandles et punktum efterfulgt af et ciffer (som 3,14) ikke som en sætningsafslutning. Forkortelser som »osv.« kan stadig rykke tallet, så betragt sætningstotalen som et tæt skøn snarere end en præcis analyse.</p>
+<h2>Privat og øjeblikkeligt</h2>
+<p>Indsæt et essay, en artikel eller en hvilken som helst tekstblok for at se dens sætninger, afsnit, ord og tegn opdatere live. Alt kører i din browser, så intet af det, du skriver, uploades — sikkert til udkast og upubliceret arbejde. Brug tællingerne til at stramme strukturen, før du udgiver.</p>`,
+    },
+
+    faq: {
+      en: [
+        { q: 'How does the tool count sentences?', a: 'It counts text that ends in sentence punctuation — . ! ? and ellipses, plus the CJK terminators 。！？. A period before a digit (like 3.14) isn’t counted, so decimals don’t inflate the total.' },
+        { q: 'How are paragraphs counted?', a: 'A paragraph is a block of text separated from the next by a blank line (one or more empty lines). Single line breaks within a block don’t start a new paragraph.' },
+        { q: 'Why might the sentence count look slightly off?', a: 'Abbreviations like “U.S.A.” or “Dr.” end in a period and can be read as sentence ends, so the count is a close estimate. Plain prose counts very accurately.' },
+        { q: 'Is my text uploaded anywhere?', a: 'No. Counting runs entirely in your browser — nothing you type is sent to a server, so your drafts stay private.' },
+      ],
+      es: [
+        { q: '¿Cómo cuenta las frases la herramienta?', a: 'Cuenta el texto que termina en puntuación de frase: . ! ? y puntos suspensivos, además de los terminadores CJK 。！？. Un punto antes de un dígito (como 3,14) no se cuenta, así que los decimales no inflan el total.' },
+        { q: '¿Cómo se cuentan los párrafos?', a: 'Un párrafo es un bloque de texto separado del siguiente por una línea en blanco (una o más líneas vacías). Los saltos de línea simples dentro de un bloque no inician un párrafo nuevo.' },
+        { q: '¿Por qué el recuento de frases puede verse algo desajustado?', a: 'Las abreviaturas como «EE. UU.» o «Dr.» terminan en punto y pueden leerse como fin de frase, así que el recuento es una estimación cercana. La prosa normal se cuenta con mucha precisión.' },
+        { q: '¿Se sube mi texto a algún sitio?', a: 'No. El conteo se realiza por completo en tu navegador: nada de lo que escribas se envía a un servidor, así que tus borradores son privados.' },
+      ],
+      de: [
+        { q: 'Wie zählt das Tool Sätze?', a: 'Es zählt Text, der mit Satzzeichen endet – . ! ? und Auslassungspunkte sowie die CJK-Schlusszeichen 。！？. Ein Punkt vor einer Ziffer (wie 3,14) zählt nicht, sodass Dezimalzahlen das Ergebnis nicht aufblähen.' },
+        { q: 'Wie werden Absätze gezählt?', a: 'Ein Absatz ist ein Textblock, der durch eine Leerzeile (eine oder mehrere leere Zeilen) vom nächsten getrennt ist. Einzelne Zeilenumbrüche innerhalb eines Blocks beginnen keinen neuen Absatz.' },
+        { q: 'Warum kann die Satzanzahl leicht abweichen?', a: 'Abkürzungen wie „z. B.“ oder „Dr.“ enden auf einen Punkt und können als Satzende gelesen werden, daher ist die Zahl eine nahe Schätzung. Normale Prosa wird sehr genau gezählt.' },
+        { q: 'Wird mein Text irgendwo hochgeladen?', a: 'Nein. Das Zählen läuft vollständig in deinem Browser – nichts, was du tippst, wird an einen Server gesendet, deine Entwürfe bleiben privat.' },
+      ],
+      fr: [
+        { q: 'Comment l’outil compte-t-il les phrases ?', a: 'Il compte le texte qui se termine par une ponctuation de phrase — . ! ? et points de suspension, plus les terminateurs CJK 。！？. Un point devant un chiffre (comme 3,14) n’est pas compté, donc les décimales ne gonflent pas le total.' },
+        { q: 'Comment les paragraphes sont-ils comptés ?', a: 'Un paragraphe est un bloc de texte séparé du suivant par une ligne vide (une ou plusieurs lignes vides). Les simples sauts de ligne au sein d’un bloc ne commencent pas un nouveau paragraphe.' },
+        { q: 'Pourquoi le nombre de phrases peut-il sembler légèrement faux ?', a: 'Les abréviations comme « M. » ou « etc. » se terminent par un point et peuvent être lues comme des fins de phrase, donc le nombre est une estimation proche. La prose ordinaire est comptée très précisément.' },
+        { q: 'Mon texte est-il envoyé quelque part ?', a: 'Non. Le comptage se fait entièrement dans votre navigateur — rien de ce que vous tapez n’est envoyé à un serveur, vos brouillons restent privés.' },
+      ],
+      pt: [
+        { q: 'Como é que a ferramenta conta as frases?', a: 'Conta o texto que termina em pontuação de frase — . ! ? e reticências, além dos terminadores CJK 。！？. Um ponto antes de um dígito (como 3,14) não é contado, por isso os decimais não inflacionam o total.' },
+        { q: 'Como são contados os parágrafos?', a: 'Um parágrafo é um bloco de texto separado do seguinte por uma linha em branco (uma ou mais linhas vazias). Quebras de linha simples dentro de um bloco não iniciam um novo parágrafo.' },
+        { q: 'Porque é que a contagem de frases pode parecer ligeiramente errada?', a: 'Abreviaturas como «EUA» ou «Dr.» terminam em ponto e podem ser lidas como fim de frase, por isso a contagem é uma estimativa aproximada. A prosa simples é contada com muita precisão.' },
+        { q: 'O meu texto é enviado para algum lado?', a: 'Não. A contagem é feita inteiramente no seu navegador — nada do que escrever é enviado para um servidor, por isso os seus rascunhos permanecem privados.' },
+      ],
+      it: [
+        { q: 'Come conta le frasi lo strumento?', a: 'Conta il testo che termina con punteggiatura di frase — . ! ? e puntini di sospensione, oltre ai terminatori CJK 。！？. Un punto prima di una cifra (come 3,14) non viene contato, quindi i decimali non gonfiano il totale.' },
+        { q: 'Come vengono contati i paragrafi?', a: 'Un paragrafo è un blocco di testo separato dal successivo da una riga vuota (una o più righe vuote). I singoli a capo all’interno di un blocco non iniziano un nuovo paragrafo.' },
+        { q: 'Perché il conteggio delle frasi può sembrare leggermente impreciso?', a: 'Abbreviazioni come «ecc.» o «Dott.» finiscono con un punto e possono essere lette come fine frase, quindi il conteggio è una stima vicina. La prosa normale viene contata con grande precisione.' },
+        { q: 'Il mio testo viene caricato da qualche parte?', a: 'No. Il conteggio avviene interamente nel tuo browser — nulla di ciò che scrivi viene inviato a un server, quindi le tue bozze restano private.' },
+      ],
+      nl: [
+        { q: 'Hoe telt de tool zinnen?', a: 'Het telt tekst die eindigt op zinsinterpunctie — . ! ? en weglatingstekens, plus de CJK-terminators 。！？. Een punt voor een cijfer (zoals 3,14) telt niet, dus decimalen blazen het totaal niet op.' },
+        { q: 'Hoe worden alinea’s geteld?', a: 'Een alinea is een tekstblok dat door een lege regel (een of meer lege regels) van het volgende is gescheiden. Enkele regeleinden binnen een blok beginnen geen nieuwe alinea.' },
+        { q: 'Waarom kan het aantal zinnen iets afwijken?', a: 'Afkortingen zoals “bijv.” of “dhr.” eindigen op een punt en kunnen als zinseinde worden gelezen, dus de telling is een nauwkeurige schatting. Gewone tekst wordt zeer precies geteld.' },
+        { q: 'Wordt mijn tekst ergens geüpload?', a: 'Nee. Het tellen gebeurt volledig in je browser — niets van wat je typt wordt naar een server gestuurd, dus je concepten blijven privé.' },
+      ],
+      ja: [
+        { q: 'このツールはどうやって文を数えますか？', a: '文末の記号で終わるテキストを数えます。. ! ? と三点リーダー、さらに CJK の終止符 。！？ です。数字の前のピリオド（3.14 など）は数えないため、小数で総数が膨らみません。' },
+        { q: '段落はどう数えますか？', a: '段落は空行（1行以上の空行）で次と区切られたテキストのまとまりです。まとまり内の単なる改行は新しい段落になりません。' },
+        { q: '文の数が少しずれるのはなぜ？', a: '「U.S.A.」や「Dr.」などの略語はピリオドで終わり、文末と読まれることがあるため、数は近い目安です。普通の文章は非常に正確に数えられます。' },
+        { q: 'テキストはどこかにアップロードされますか？', a: 'いいえ。カウントはすべてブラウザー内で行われ、入力内容はサーバーに送信されません。下書きは非公開のままです。' },
+      ],
+      zh: [
+        { q: '工具如何统计句子？', a: '它统计以句子标点结尾的文本——. ! ? 和省略号，以及中日韩结束符 。！？。数字前的句点（如 3.14）不计入，因此小数不会让总数虚高。' },
+        { q: '段落如何统计？', a: '段落是以空行（一行或多行空行）与下一段隔开的一块文本。一块文本内部的单个换行不会开始新段落。' },
+        { q: '为什么句子数看起来略有偏差？', a: '像 “U.S.A.” 或 “Dr.” 这样的缩写以句点结尾，可能被读作句子结束，因此计数是接近的估算。普通文章的统计非常准确。' },
+        { q: '我的文本会被上传吗？', a: '不会。统计完全在你的浏览器中进行——你输入的内容不会发送到服务器，因此草稿保持私密。' },
+      ],
+      da: [
+        { q: 'Hvordan tæller værktøjet sætninger?', a: 'Det tæller tekst, der slutter med sætningstegn — . ! ? og ellipser, plus CJK-afslutningstegnene 。！？. Et punktum før et ciffer (som 3,14) tælles ikke, så decimaltal puster ikke totalen op.' },
+        { q: 'Hvordan tælles afsnit?', a: 'Et afsnit er en tekstblok, der er adskilt fra den næste med en tom linje (en eller flere tomme linjer). Enkelte linjeskift inde i en blok starter ikke et nyt afsnit.' },
+        { q: 'Hvorfor kan sætningstallet se en smule forkert ud?', a: 'Forkortelser som »osv.« eller »hr.« slutter med et punktum og kan læses som sætningsafslutninger, så tallet er et tæt skøn. Almindelig prosa tælles meget præcist.' },
+        { q: 'Bliver min tekst uploadet nogen steder?', a: 'Nej. Optællingen kører helt i din browser — intet af det, du skriver, sendes til en server, så dine udkast forbliver private.' },
+      ],
+    },
+  },
 ];
