@@ -43,7 +43,7 @@ That's not a rounding error. It's a 56% reduction in capacity per segment.
 
 ![GSM-7 vs Unicode SMS encoding comparison: 160 characters per segment vs 70 characters per segment, with common Unicode triggers shown, as taken from PostTruncate.com](/og/sms-2.webp)
 
-<p align="center"><span style="font-size: 12px; "><em>GSM-7 vs Unicode SMS encoding comparison: 160 characters per segment vs 70 characters per segment, with common Unicode triggers shown, as taken from PostTruncate.com</em></span></p>
+<p align="center"><span style="font-size: 12px; "><em>GSM-7 vs Unicode SMS encoding comparison: 160 characters per segment vs 70 characters per segment, with common Unicode triggers shown</em></span></p>
 
 There's also an overhead cost when messages are split across segments. In GSM-7 multipart messages, 7 characters per segment are reserved for headers - so your usable characters drop from 160 to 153 per segment. In Unicode multipart messages, it's 3 characters reserved, leaving you 67 usable per segment instead of 70. A message that's slightly over one segment doesn't just cost 2x - the capacity change applies retroactively to the first segment too.
 
