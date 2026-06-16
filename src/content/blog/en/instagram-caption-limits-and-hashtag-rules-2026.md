@@ -1,22 +1,25 @@
 ---
+translationKey: instagram-caption-limits-and-hashtag-rules-2026
 title: Instagram Caption Limits & Hashtag Rules 2026
-description: The exact 2026 limits for Instagram captions, hashtags, and account tags-plus why the 125-character fold matters more than the 2,200-character ceiling.
+subtitle: The exact 2026 limits for Instagram captions, hashtags, and account tags-plus why the 125-character fold matters more than the 2,200-character ceiling.
+description: Instagram captions cap at 2,200 characters in 2026, but the feed folds at just 125. Get the exact limits for captions, hashtags, and tags and preview your post before it goes live
 publishDate: 2026-06-16
+updatedDate: ''
 locale: en
 slug: instagram-caption-limits-and-hashtag-rules-2026
-translationKey: instagram-caption-limits-and-hashtag-rules-2026
 relatedPlatform: instagram
 author: PostTruncate Team
-draft: true
+draft: false
+ogImage: /og/Instagram_caption_limt.webp
 ---
 
 The exact 2026 limits for Instagram captions, hashtags, and account tags-plus why the 125-character fold matters more than the 2,200-character ceiling.
 
-*June 16, 2026 · 8 min read*
+_June 16, 2026 · 8 min read_
 
 Instagram caption limits and formatting rules infographic for 2026
 
-* * *
+* \* \*
 
 ## TL;DR
 
@@ -132,26 +135,24 @@ It's free, privacy-first (nothing uploads), and runs entirely in your browser. D
 
 Head over to PostTruncate and try the [Instagram character counter](/en/instagram-character-counter/) right now. Paste a caption you've been struggling with, watch the fold preview update in real time, and see exactly what your audience will read before they tap "more."
 
-* * *
+## FAQs
 
-## Frequently Asked Questions
-
-</br><details><summary><b>What is Instagram's caption character limit in 2026?</b></summary>
-<p>Instagram captions can hold up to <strong>2,200 characters</strong> - enough for a short essay or detailed product description. Going over the limit blocks the caption, so you&#39;ll know before you publish. Every character counts: emojis, spaces, line breaks, everything.</p>
+<details><summary><b>What is Instagram's caption character limit in 2026?</b></summary>
+<p>Instagram captions can hold up to <strong>2,200 characters</strong> - enough for a short essay or detailed product description. Going over the limit blocks the caption, so you'll know before you publish. Every character counts: emojis, spaces, line breaks, everything.</p>
 </details>
 
-</br><details><summary><b>Why does Instagram show '...more' and hide my caption?</b></summary>
+<details><summary><b>Why does Instagram show '...more' and hide my caption?</b></summary>
 <p>Instagram collapses captions after roughly <strong>125 characters</strong> in the feed - everything after that hides behind a tap. This fold is where most creators lose readers. The hook, the CTA, the reason someone should tap &quot;more&quot;-all have to land in that first 125 characters, or your audience never sees it.</p>
 </details>
 
-</br><details><summary><b>How many hashtags should I use on Instagram?</b></summary>
-<p>You can technically add up to 30 hashtags, but the practical safe ceiling is <strong>5 highly relevant tags</strong>. More than that looks spammy and can trigger Instagram&#39;s spam filters, causing silent suppression where your post appears to publish but reaches almost no one. Quality over quantity always wins.</p>
+<details><summary><b>How many hashtags should I use on Instagram?</b></summary>
+<p>You can technically add up to 30 hashtags, but the practical safe ceiling is <strong>5 highly relevant tags</strong>. More than that looks spammy and can trigger Instagram's spam filters, causing silent suppression where your post appears to publish but reaches almost no one. Quality over quantity always wins.</p>
 </details>
 
-</br><details><summary><b>Do emojis and line breaks count toward Instagram's character limit?</b></summary>
-<p>Yes, completely. Emojis, spaces, and every single line break count as characters against the 2,200 limit. Line breaks eat space especially fast when you&#39;re structuring a multi-paragraph caption, so count them if you&#39;re running close to the ceiling.</p>
+<details><summary><b>Do emojis and line breaks count toward Instagram's character limit?</b></summary>
+<p>Yes, completely. Emojis, spaces, and every single line break count as characters against the 2,200 limit. Line breaks eat space especially fast when you're structuring a multi-paragraph caption, so count them if you're running close to the ceiling.</p>
 </details>
 
-</br><details><summary><b>How do I avoid hitting Instagram's limits and formatting errors?</b></summary>
-<p>Use a real-time caption preview tool like <a href="/en/instagram-character-counter/">PostTruncate&#39;s Instagram caption counter</a> that shows exactly where the fold falls, flags hashtag counts, and tracks characters as you type. Draft once, see what Instagram actually shows, and publish with confidence-no copying to the app to check.</p>
+<details><summary><b>How do I avoid hitting Instagram's limits and formatting errors?</b></summary>
+<p>Use a real-time caption preview tool like <a href="/en/instagram-character-counter/">PostTruncate's Instagram caption counter</a> that shows exactly where the fold falls, flags hashtag counts, and tracks characters as you type. Draft once, see what Instagram actually shows, and publish with confidence-no copying to the app to check.</p>
 </details>
