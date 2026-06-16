@@ -47,9 +47,9 @@ While the caption can run to 2,200 characters, the Instagram feed collapses your
 
 This is where most captions fail.
 
-![Instagram caption character limits: 2,200-character hard limit with 125-character feed fold](https://cdn-public.eesel.ai/d0ef1208-a55a-4fed-9b3d-2a88576b1b5c/a1e20d38-2672-4626-8172-59812cbf411d/a1e09337ad9b41ecb17b0274e78bfd75.png)
+![Instagram caption character limits: 2,200-character hard limit with 125-character feed fold](/og/Instagram_Caption_1.webp)
 
-Instagram caption character limits: 2,200-character hard limit with 125-character feed fold
+<p align="center"><span style="font-size: 12px; "><em>Instagram caption character limits: 2,200-character hard limit with 125-character feed fold</em></span></p>
 
 Your reader opens the feed, sees an image, and reads maybe the first line of your caption before deciding whether to engage. If your hook - the reason they should care, the promise, the curiosity - isn't in those first 125 characters, they skip it. They don't tap "more." They don't read the rest of what you wrote.
 
@@ -63,9 +63,9 @@ Here's where it gets spiky.
 
 Instagram's documented maximum is [30 hashtags per post](/en/instagram-character-counter/). But there's a far more dangerous undocumented threshold: posts with more than roughly 5 hashtags can fail to publish without any error message at all.
 
-![Instagram hashtag limits: 5 hashtags (safe) vs 30 hashtags (risky silent suppression)](https://cdn-public.eesel.ai/d0ef1208-a55a-4fed-9b3d-2a88576b1b5c/a1e20d38-2672-4626-8172-59812cbf411d/6fdaf9d489434cd486d8459e3a7b1dea.png)
+![Instagram hashtag limits: 5 hashtags (safe) vs 30 hashtags (risky silent suppression)](/og/Instagram_Caption_2.webp)
 
-Instagram hashtag limits: 5 hashtags (safe) vs 30 hashtags (risky silent suppression)
+<p align="center"><span style="font-size: 12px; "><em>Instagram hashtag limits: 5 hashtags (safe) vs 30 hashtags (risky silent suppression)</em></span></p>
 
 Instagram's spam filters treat heavy hashtag stacking as inauthentic behavior. In the current algorithm climate, many accounts report silent suppression - the post appears to publish, it's in their profile, but it reaches almost nobody. No notification, no explanation, just... silence.
 
