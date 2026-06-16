@@ -41,9 +41,9 @@ The moment any character outside that set appears in your message, the whole thi
 
 That's not a rounding error. It's a 56% reduction in capacity per segment.
 
-![GSM-7 vs Unicode SMS encoding comparison: 160 characters per segment vs 70 characters per segment, with common Unicode triggers shown, as taken from PostTruncate.com](https://cdn-public.eesel.ai/d0ef1208-a55a-4fed-9b3d-2a88576b1b5c/a1e20d38-2672-4626-8172-59812cbf411d/e4f88aed2df34bddaf548688714e3d00.png)
+![GSM-7 vs Unicode SMS encoding comparison: 160 characters per segment vs 70 characters per segment, with common Unicode triggers shown, as taken from PostTruncate.com](/og/sms-2.webp)
 
-GSM-7 vs Unicode SMS encoding comparison: 160 characters per segment vs 70 characters per segment, with common Unicode triggers shown, as taken from PostTruncate.com
+<p align="center"><span style="font-size: 12px; "><em>GSM-7 vs Unicode SMS encoding comparison: 160 characters per segment vs 70 characters per segment, with common Unicode triggers shown</em></span></p>
 
 There's also an overhead cost when messages are split across segments. In GSM-7 multipart messages, 7 characters per segment are reserved for headers - so your usable characters drop from 160 to 153 per segment. In Unicode multipart messages, it's 3 characters reserved, leaving you 67 usable per segment instead of 70. A message that's slightly over one segment doesn't just cost 2x - the capacity change applies retroactively to the first segment too.
 
@@ -81,9 +81,9 @@ The emoji cost you $160.
 
 Alternatively, consider a slightly longer message: 250 characters, no emoji, clean GSM-7. That's 2 segments (160 + 90). Total: $160. Add smart quotes from a Word paste, and you've switched to Unicode. That same 250 characters now requires 4 segments (67 + 67 + 67 + 49). Total: $320. Your budget estimate was wrong by 100%.
 
-![SMS campaign cost comparison: 10,000 messages at GSM-7 vs Unicode encoding, showing 2x to 3x cost increase from encoding switch](https://cdn-public.eesel.ai/d0ef1208-a55a-4fed-9b3d-2a88576b1b5c/a1e20d38-2672-4626-8172-59812cbf411d/d12cb39bc08c47d0867b8e908b37f102.png)
+![SMS campaign cost comparison: 10,000 messages at GSM-7 vs Unicode encoding, showing 2x to 3x cost increase from encoding switch](/og/sms-3.webp)
 
-SMS campaign cost comparison: 10,000 messages at GSM-7 vs Unicode encoding, showing a 2x to 3x cost increase from the encoding switch
+<p align="center"><span style="font-size: 12px; "><em>SMS campaign cost comparison: 10,000 messages at GSM-7 vs Unicode encoding, showing a 2x to 3x cost increase from the encoding switch</em></span></p>
 
 Scale that to a larger list. A 500,000-message holiday campaign where copy was pasted from a Word doc - smart quotes throughout - switching from 2 segments to 4 is the difference between $8,000 and $16,000. I've seen marketing teams genuinely believe there was a billing error when this happened. There wasn't. There just wasn't a check.
 
@@ -99,9 +99,9 @@ Both applications use curly (typographic) quotes by default. When you type `"` i
 
 The typical workflow that causes this: a copywriter drafts the SMS template in Google Docs, passes it through review, and a campaign manager pastes the approved copy into the SMS platform. The curly quotes survive the paste invisibly. The message looks correct in the platform preview. It ships as Unicode.
 
-There's no malfunction here. Every piece of software did what it was designed to do. But the result is a campaign that costs twice what it was supposed to, discovered when the invoice arrives.
+There's no malfunction here. Every piece of software did what it was designed to do. But the result is a campaign that costs twice what it was supposed to, as discovered when the invoice arrives.
 
-A similar trap exists with em dashes. Marketing copy often uses them for rhythm: "Flash sale - this weekend only." That em dash (-) is a Unicode character. Replacing it with a hyphen-hyphen (--) or a plain hyphen (-) keeps you in GSM-7. Most copywriters don't know this distinction exists.
+A similar trap exists with em dashes. Marketing copy often uses them for rhythm: "Flash sale - this weekend only." That em dash (-) is a Unicode character; replacing it with a hyphen-hyphen (--) or a plain hyphen (-) keeps you in GSM-7. Most copywriters don't know this distinction exists.
 
 ## What your SMS platform probably isn't telling you
 
@@ -119,23 +119,21 @@ The fix is straightforward: check your encoding before you send, not after.
 
 [PostTruncate's SMS segment calculator](/en/sms-character-counter) does this in real time. Paste or type your message, and it immediately shows you whether you're in GSM-7 or Unicode mode, how many segments the message will consume, and exactly where the segment boundaries fall. If a character has triggered Unicode, it flags which one.
 
-PostTruncate SMS character counter showing real-time encoding detection and segment calculation
-
 There's also a one-click Emoji Stripper in the format toolkit. If your copy came in from Docs or Word and you want to clean it before sending, strip everything at once and check the segment count again.
 
 The [PostTruncate platform limits page](/en/platform-limits/) has a full reference table for both SMS encoding modes - segment capacities, extended character behaviour, multipart header overhead - in one place if you want to bookmark it for your team.
 
 Everything runs in the browser. No sign-up, no upload, no account required. Your copy stays on your device.
 
-![3-step workflow: write SMS copy, paste into encoding detector, then review and fix before sending - preventing billing surprises](https://cdn-public.eesel.ai/d0ef1208-a55a-4fed-9b3d-2a88576b1b5c/a1e20d38-2672-4626-8172-59812cbf411d/f262a38bd4944300909bb89a3a85d2c2.png)
+![3-step workflow: write SMS copy, paste into encoding detector, then review and fix before sending - preventing billing surprises](/og/sms-4.webp)
 
-3-step workflow: write SMS copy, paste into encoding detector, then review and fix before sending - preventing billing surprises
+<p align="center"><span style="font-size: 12px; "><em>3-step workflow: write SMS copy, paste into encoding detector, then review and fix before sending - preventing billing surprises</em></span></p>
 
 A few practical habits worth building into your SMS workflow:
 
 -   **Check the segment count for every new campaign template.** Not just the character count - the segment count. They're different numbers, and the segment count is the one on your invoice.
 -   **Never paste directly from Word or Docs into your SMS platform.** Paste into a plain-text editor first (Notepad, TextEdit in plain-text mode, VS Code), then copy again. Or paste into [PostTruncate's SMS tool](/en/sms-character-counter) and strip any characters that don't belong.
--   **Decide deliberately whether an** ,**emoji is worth the cost.** Emoji absolutely works in SMS marketing - the performance data is real. But a blanket "add emoji for engagement" policy without encoding awareness is a budget decision made without the relevant information. A 3x cost multiplier changes the ROI math considerably. Know the number before you commit.
+-   **Decide deliberately whether an** **emoji is worth the cost.** Emoji absolutely works in SMS marketing - the performance data is real. But a blanket "add emoji for engagement" policy without encoding awareness is a budget decision made without the relevant information. A 3x cost multiplier changes the ROI math considerably. Know the number before you commit.
 -   **Build encoding checks into your A/B testing.** If you're testing an emoji variant against a plain-text variant, you're testing two different cost structures. Make sure your cost-per-result math accounts for that.
 
 ## Try PostTruncate
@@ -144,7 +142,9 @@ I built [PostTruncate](/) as a solo developer because I kept running into the ex
 
 It's completely free, covers [10+ platforms](/en/platform-limits/) including SMS, LinkedIn, X, Instagram, Facebook, and Threads, and runs entirely in your browser without storing your copy anywhere. No account, no paywall, no catch.
 
-PostTruncate SMS character counter - free, browser-based encoding detection and segment calculator, as taken from PostTruncate.com
+![PostTruncate SMS character counter - free, browser-based encoding detection and segment calculator](/og/PostTruncate-SMS%20character%20counter.webp)
+
+<p align="center"><span style="font-size: 12px; "><em>PostTruncate SMS character counter - free, browser-based encoding detection and segment calculator</em></span></p>
 
 Before your next SMS broadcast goes out, paste the copy into [PostTruncate's SMS encoding checker](/en/sms-character-counter). If you're in Unicode when you expected GSM-7, you'll see it before it ships - and you'll have the option to fix it.
 
