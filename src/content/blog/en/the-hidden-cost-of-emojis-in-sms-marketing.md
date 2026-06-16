@@ -10,6 +10,7 @@ slug: the-hidden-cost-of-emojis-in-sms-marketing
 relatedPlatform: sms
 author: PostTruncate Team
 draft: false
+ogImage: /og/sms.webp
 ---
 
 ## TL;DR
@@ -48,7 +49,7 @@ There's also an overhead cost when messages are split across segments. In GSM-7 
 
 ### The extended GSM-7 trap
 
-Worth calling out separately: even within the GSM-7 character set, a handful of characters count as 2 characters each. The Euro sign (€), square brackets ([ and ]), curly braces ({ and }), backslash (\), pipe (|), tilde (\~), and caret (^) are all in the GSM-7 extended table. Including any of them eats double the character budget without switching to Unicode. It's a smaller gotcha, but it's real. A price point like "Get €50 off" costs 2 extra characters before you've typed anything else.
+Worth calling out separately: even within the GSM-7 character set, a handful of characters count as 2 characters each. The Euro sign (€), square brackets ([ and ]), curly braces ({ and }), backslash (), pipe (|), tilde (\~), and caret (^) are all in the GSM-7 extended table. Including any of them eats double the character budget without switching to Unicode. It's a smaller gotcha, but it's real. A price point like "Get €50 off" costs 2 extra characters before you've typed anything else.
 
 ### What flips the switch
 
