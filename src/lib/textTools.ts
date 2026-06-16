@@ -430,6 +430,11 @@ function isEmojiCluster(text: string): boolean {
   );
 }
 
+/** Count emoji as grapheme clusters — a ZWJ family or flag counts as one. */
+export function emojiCount(text: string): number {
+  return splitGraphemes(text).filter(isEmojiCluster).length;
+}
+
 function isWideCodePoint(cp: number): boolean {
   return (
     (cp >= 0x1100 && cp <= 0x11ff) || // Hangul Jamo

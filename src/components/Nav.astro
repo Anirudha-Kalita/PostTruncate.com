@@ -9,6 +9,7 @@ import { interp } from '../i18n/interp';
 import type { Translations } from '../i18n/types';
 import { tools } from '../data/tools';
 import { calculators } from '../data/calculators';
+import { PLATFORM_COUNTERS } from '../data/platformCounters';
 import { BLOG_SEGMENT, getBlogStrings, getBlogLocales } from '../lib/blogI18n';
 
 interface Props {
@@ -65,12 +66,15 @@ const guidesLinks = tools.map((tool, i) => {
   };
 });
 
-// Tools dropdown items — utility calculators. Labels come from each tool's
-// localized schemaName (not a positional i18n array), URLs from calculators.ts.
-const toolsLinks = calculators.map((tool) => ({
+// Calculator pages split into two dropdowns: generic text "Tools" and the
+// per-platform "Character Counters" (those whose id is a PLATFORM_COUNTERS key).
+// Labels come from each tool's localized schemaName; URLs from calculators.ts.
+const calcLink = (tool: (typeof calculators)[number]) => ({
   label: tool.schemaName[lang] ?? tool.schemaName['en'],
   href: `/${lang}/tools/${tool.slugs[lang] ?? tool.slugs['en']}/`,
-}));
+});
+const toolsLinks = calculators.filter((tool) => !PLATFORM_COUNTERS[tool.id]).map(calcLink);
+const counterLinks = calculators.filter((tool) => PLATFORM_COUNTERS[tool.id]).map(calcLink);
 ---
 
 <header class="nav">
@@ -127,6 +131,28 @@ const toolsLinks = calculators.map((tool) => ({
               <li>
                 <a href={tl.href} class="nav__guides-link">
                   <span>{tl.label}</span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </details>
+
+      {/* Character Counters dropdown (per-platform counters) */}
+      <details class="nav__guides nav__tools" id="nav-counters-desktop">
+        <summary class="nav__link nav__guides-toggle">
+          {nav.links.counters}
+          <svg class="nav__guides-chevron" width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M2.5 3.5 5 6.5 7.5 3.5" />
+          </svg>
+        </summary>
+        <div class="nav__guides-panel">
+          <p class="nav__guides-heading">{nav.links.counters}</p>
+          <ul class="nav__guides-list">
+            {counterLinks.map((cl) => (
+              <li>
+                <a href={cl.href} class="nav__guides-link">
+                  <span>{cl.label}</span>
                 </a>
               </li>
             ))}
@@ -285,6 +311,23 @@ const toolsLinks = calculators.map((tool) => ({
                 {toolsLinks.map((tl) => (
                   <a href={tl.href} class="nav__panel-link nav__guides-mobile-link">
                     <span>{tl.label}</span>
+                  </a>
+                ))}
+              </div>
+            </details>
+
+            {/* Character Counters — inline expand */}
+            <details class="nav__guides-mobile nav__tools-mobile" id="nav-counters-mobile">
+              <summary class="nav__panel-link nav__guides-mobile-toggle">
+                {nav.links.counters}
+                <svg class="nav__guides-chevron" width="12" height="12" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M2.5 3.5 5 6.5 7.5 3.5" />
+                </svg>
+              </summary>
+              <div class="nav__guides-mobile-panel">
+                {counterLinks.map((cl) => (
+                  <a href={cl.href} class="nav__panel-link nav__guides-mobile-link">
+                    <span>{cl.label}</span>
                   </a>
                 ))}
               </div>

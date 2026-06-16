@@ -5,6 +5,9 @@ import StructuredData from '../../../../components/StructuredData.astro';
 import WordsPerPageCalculator from '../../../../components/island/WordsPerPageCalculator.tsx';
 import ReadingTimeCalculator from '../../../../components/island/ReadingTimeCalculator.tsx';
 import ByteCounterCalculator from '../../../../components/island/ByteCounterCalculator.tsx';
+import EmojiDetector from '../../../../components/island/EmojiDetector.tsx';
+import PlatformCounter from '../../../../components/island/PlatformCounter.tsx';
+import { PLATFORM_COUNTERS } from '../../../../data/platformCounters';
 import { calculators } from '../../../../data/calculators';
 import type { ToolDefinition } from '../../../../data/tools';
 import { LOCALES, getLocale, DEFAULT_LOCALE } from '../../../../i18n/config';
@@ -96,6 +99,12 @@ const faqItems = tool.faq?.[lang];
     )}
     {tool.id === 'byte-counter' && (
       <ByteCounterCalculator client:load s={t.island} lang={lang} />
+    )}
+    {tool.id === 'emoji-counter' && (
+      <EmojiDetector client:load s={t.island} lang={lang} />
+    )}
+    {PLATFORM_COUNTERS[tool.id] && (
+      <PlatformCounter client:load platform={tool.id} s={t.island} lang={lang} />
     )}
   </CalculatorPageContent>
 </Layout>

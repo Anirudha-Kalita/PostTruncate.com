@@ -639,6 +639,55 @@ export interface IslandStrings {
       /** One-line explainer about UTF-8 variable width. */
       note: string;
     };
+    /** "Emoji counter & invisible/zero-width character detector". The hidden-char
+     *  warning reuses workspace.hiddenWarning ({codes}). */
+    emojiDetector: {
+      eyebrow: string;
+      title: string;
+      badgeIdle: string;
+      badgeClean: string;
+      badgeWarn: string;
+      placeholder: string;
+      emojiLabel: string;
+      charactersLabel: string;
+      hiddenLabel: string;
+      /** Note shown when no hidden characters are present. */
+      cleanNote: string;
+      /** Button that strips hidden characters. */
+      removeButton: string;
+      /** Confirmation after removal. "{n}" → number removed. */
+      removedNote: string;
+      /** One-line explainer about invisible characters. */
+      note: string;
+    };
+    /** Shared strings for the platform character-counter tools (YouTube, TikTok,
+     *  Pinterest, Reddit, Bluesky, Discord, WhatsApp). Brand names stay in the
+     *  config (untranslated); these are the chrome + field labels. */
+    platformCounter: {
+      /** Function-label subtitle under the platform name. */
+      title: string;
+      badgeIdle: string;
+      badgeSafe: string;
+      badgeOver: string;
+      placeholder: string;
+      /** "{n} / {limit}" caption per field. */
+      counter: string;
+      /** "{n}" characters remaining. */
+      remaining: string;
+      /** "{n}" characters over the limit. */
+      over: string;
+      /** Field labels, keyed to CounterFieldKey in platformCounters.ts. */
+      fields: {
+        title: string;
+        description: string;
+        caption: string;
+        bio: string;
+        post: string;
+        message: string;
+        status: string;
+        about: string;
+      };
+    };
     /** Shared "Clear" button label for the calculator text inputs. */
     clear: string;
   };
@@ -661,6 +710,8 @@ export interface Translations {
       limits: string;
       /** "Tools" dropdown label — the utility/calculator suite. */
       tools: string;
+      /** "Character Counters" dropdown label — the per-platform counters. */
+      counters: string;
       faq: string;
       about: string;
       contact: string;

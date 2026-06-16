@@ -1,5 +1,6 @@
 ---
-// Four-column footer. Mono-caps eyebrow labels, body-sm link rows. All copy is
+// Column footer used on every route (Tools · Learn · Legal · Platform Guides ·
+// Character Counters). Mono-caps eyebrow labels, body-sm link rows. All copy is
 // localized via the `footer` dictionary; link labels come from the dictionary
 // while their hrefs (anchors + the locale-prefixed home) are wired here.
 import { interp } from '../i18n/interp';
@@ -8,13 +9,14 @@ import { getTranslations } from '../i18n';
 import type { Translations } from '../i18n/types';
 import { tools } from '../data/tools';
 import { calculators } from '../data/calculators';
+import { PLATFORM_COUNTERS } from '../data/platformCounters';
 import { BLOG_SEGMENT, getBlogStrings, getBlogLocales } from '../lib/blogI18n';
 
 interface Props {
   lang: string;
   footer: Translations['footer'];
-  /** Show the in-page "Tool" column only on the landing page; its anchors
-      (#workspace, #platforms) don't exist on standalone routes. */
+  /** Tightens the top margin on the landing page (its content sits closer to
+      the footer). The footer's columns are identical on every route. */
   isHome?: boolean;
 }
 
@@ -31,22 +33,16 @@ const blogLink = (await getBlogLocales()).has(lang)
   ? { label: getBlogStrings(lang).footerLink, href: `/${lang}/${BLOG_SEGMENT}/` }
   : null;
 
-// Hrefs paired positionally with each column's translated labels. In-page
-// anchors resolve within the current language page, so they need no prefix.
-// The legal column points at real standalone routes, which are locale-prefixed.
+// Hrefs paired positionally with each column's translated labels. Anchors are
+// home-prefixed so they resolve from every route; the legal column points at
+// real standalone routes, which are locale-prefixed.
 const columnHrefs = {
-  tool: ['#workspace', `/${lang}/platform-limits/`, '#workspace', '#workspace', `/${lang}/embed-widget/`],
-  platforms: [
-    `/${lang}/platform-limits/`,
-    `/${lang}/platform-limits/`,
-    `/${lang}/platform-limits/`,
-    `/${lang}/platform-limits/`,
-    `/${lang}/platform-limits/`,
-  ],
   learn: [
     `/${lang}/platform-limits/`,
     `/${lang}/faq/`,
-    '#hook-guide',
+    // Absolute (home-prefixed) so the in-page hook-guide anchor resolves from
+    // every route, not just the landing page where that section lives.
+    `${home}#hook-guide`,
     // "Accessibility" → the fancy-fonts accessibility answer on the FAQ page.
     `/${lang}/faq/#fancy-fonts`,
   ],
@@ -59,7 +55,7 @@ const columnHrefs = {
 };
 
 const columns = (
-  ['tool', 'platforms', 'learn', 'legal'] as const
+  ['learn', 'legal'] as const
 ).map((key) => {
   const links = footer.columns[key].links.map((label, i) => ({
     label,
@@ -69,14 +65,6 @@ const columns = (
   if (key === 'learn' && blogLink) links.push(blogLink);
   return { title: footer.columns[key].title, links };
 });
-
-// Standalone (non-home) pages drop the in-page Tool/Platforms/Learn anchors
-// entirely — those sections only exist on the landing page. Only the Legal
-// links carry over, laid out as a single balanced row beside the brand.
-const legalLinks = footer.columns.legal.links.map((label, i) => ({
-  label,
-  href: columnHrefs.legal[i] ?? '#',
-}));
 
 // Platform Guides column: URLs come from tools.ts (single source of truth);
 // display labels come from the locale's footer.columns.guides.links array.
@@ -90,99 +78,86 @@ guidesLinks.push({
   href: `/${lang}/platform-limits/`,
 });
 
-// Tools column/row: utility calculators. Labels from each tool's localized
-// schemaName; URLs from calculators.ts (single source of truth).
+// Calculators split into two columns the same way the nav does — generic
+// "Tools" vs. per-platform "Character Counters" (ids in PLATFORM_COUNTERS).
+// Tool labels come from each calculator's localized schemaName.
 const toolsTitle = getTranslations(lang).nav.links.tools;
-const toolsLinks = calculators.map((tool) => ({
-  label: tool.schemaName[lang] ?? tool.schemaName['en'],
-  href: `/${lang}/tools/${tool.slugs[lang] ?? tool.slugs['en']}/`,
-}));
+const countersTitle = getTranslations(lang).nav.links.counters;
+const homeToolsLinks = calculators
+  .filter((tool) => !PLATFORM_COUNTERS[tool.id])
+  .map((tool) => ({
+    label: tool.schemaName[lang] ?? tool.schemaName['en'],
+    href: `/${lang}/tools/${tool.slugs[lang] ?? tool.slugs['en']}/`,
+  }));
+// Counter labels use just the bare platform name (e.g. "YouTube", "TikTok")
+// from PLATFORM_COUNTERS.brand — the "Character Counter" suffix in schemaName
+// is redundant under a column already titled "Character Counters".
+const homeCounterLinks = calculators
+  .filter((tool) => PLATFORM_COUNTERS[tool.id])
+  .map((tool) => ({
+    label: PLATFORM_COUNTERS[tool.id].brand,
+    href: `/${lang}/tools/${tool.slugs[lang] ?? tool.slugs['en']}/`,
+  }));
 ---
 
-<footer class="footer" class:list={{ 'footer--compact': !isHome, 'footer--home': isHome }}>
+<footer class="footer" class:list={{ 'footer--home': isHome }}>
   <div class="footer__mesh mesh-gradient" aria-hidden="true"></div>
-  {
-    isHome ? (
-      <div class="container-page footer__inner">
-        <div class="footer__brand">
-          <a href={home} class="footer__logo" aria-label={footer.homeAria}>
-            <img class="footer__logo-img footer__logo-img--light" src="/logo.png" alt={images.logoAlt} width="172" height="35" />
-            <img class="footer__logo-img footer__logo-img--dark" src="/logo-dark.png" alt={images.logoAlt} width="172" height="35" />
-          </a>
-          <p class="footer__tag">{footer.tag}</p>
-        </div>
+  <div class="container-page footer__inner">
+    <div class="footer__brand">
+      <a href={home} class="footer__logo" aria-label={footer.homeAria}>
+        <img class="footer__logo-img footer__logo-img--light" src="/logo.png" alt={images.logoAlt} width="172" height="35" />
+        <img class="footer__logo-img footer__logo-img--dark" src="/logo-dark.png" alt={images.logoAlt} width="172" height="35" />
+      </a>
+      <p class="footer__tag">{footer.tag}</p>
+    </div>
 
-        <div class="footer__cols">
-          {columns.map((col) => (
-            <div class="footer__col">
-              <p class="footer__eyebrow">{col.title}</p>
-              <ul class="footer__list">
-                {col.links.map((l) => (
-                  <li>
-                    <a href={l.href} class="footer__link">
-                      {l.label}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </div>
+    <div class="footer__cols">
+      <div class="footer__col">
+        <p class="footer__eyebrow">{toolsTitle}</p>
+        <ul class="footer__list">
+          {homeToolsLinks.map((l) => (
+            <li>
+              <a href={l.href} class="footer__link">{l.label}</a>
+            </li>
           ))}
-          <div class="footer__col">
-            <p class="footer__eyebrow">{footer.columns.guides.title}</p>
-            <ul class="footer__list">
-              {guidesLinks.map((l) => (
-                <li>
-                  <a href={l.href} class="footer__link">{l.label}</a>
-                </li>
-              ))}
-            </ul>
-          </div>
-          <div class="footer__col">
-            <p class="footer__eyebrow">{toolsTitle}</p>
-            <ul class="footer__list">
-              {toolsLinks.map((l) => (
-                <li>
-                  <a href={l.href} class="footer__link">{l.label}</a>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
+        </ul>
       </div>
-    ) : (
-      <div class="container-page footer__inner footer__inner--compact">
-        <div class="footer__brand">
-          <a href={home} class="footer__logo" aria-label={footer.homeAria}>
-            <img class="footer__logo-img footer__logo-img--light" src="/logo.png" alt={images.logoAlt} width="172" height="35" />
-            <img class="footer__logo-img footer__logo-img--dark" src="/logo-dark.png" alt={images.logoAlt} width="172" height="35" />
-          </a>
-          <p class="footer__tag">{footer.tag}</p>
+      {columns.map((col) => (
+        <div class="footer__col">
+          <p class="footer__eyebrow">{col.title}</p>
+          <ul class="footer__list">
+            {col.links.map((l) => (
+              <li>
+                <a href={l.href} class="footer__link">
+                  {l.label}
+                </a>
+              </li>
+            ))}
+          </ul>
         </div>
-        <div class="footer__link-groups">
-          <nav class="footer__link-row" aria-label={footer.columns.legal.title}>
-            {legalLinks.map((l) => (
+      ))}
+      <div class="footer__col">
+        <p class="footer__eyebrow">{footer.columns.guides.title}</p>
+        <ul class="footer__list">
+          {guidesLinks.map((l) => (
+            <li>
               <a href={l.href} class="footer__link">{l.label}</a>
-            ))}
-          </nav>
-          <nav class="footer__link-row" aria-label={footer.columns.guides.title}>
-            {guidesLinks.map((l) => (
-              <a href={l.href} class="footer__link">{l.label}</a>
-            ))}
-          </nav>
-          <nav class="footer__link-row" aria-label={toolsTitle}>
-            {toolsLinks.map((l) => (
-              <a href={l.href} class="footer__link">{l.label}</a>
-            ))}
-          </nav>
-          {blogLink && (
-            <nav class="footer__link-row" aria-label={blogLink.label}>
-              <a href={blogLink.href} class="footer__link">{blogLink.label}</a>
-            </nav>
-          )}
-        </div>
+            </li>
+          ))}
+        </ul>
       </div>
-    )
-  }
+      <div class="footer__col">
+        <p class="footer__eyebrow">{countersTitle}</p>
+        <ul class="footer__list">
+          {homeCounterLinks.map((l) => (
+            <li>
+              <a href={l.href} class="footer__link">{l.label}</a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  </div>
 
   <div class="container-page footer__bar">
     <p>{interp(footer.copyright, { year })}</p>
@@ -252,10 +227,17 @@ const toolsLinks = calculators.map((tool) => ({
     letter-spacing: -0.28px;
   }
 
+  /* Mobile: multi-column flow rather than a row-based grid. A 2-col grid sized
+     each row to its tallest cell, so a short column (e.g. Legal) sitting beside
+     a tall one (Platform Guides) left a dead gap before the next row. Multicol
+     packs each block directly under the previous one, so there's no gap. */
   .footer__cols {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 32px;
+    columns: 2;
+    column-gap: 32px;
+  }
+  .footer__col {
+    break-inside: avoid;
+    margin-bottom: 32px;
   }
   .footer__eyebrow {
     font-family: var(--font-mono);
@@ -300,38 +282,25 @@ const toolsLinks = calculators.map((tool) => ({
     max-width: 420px;
   }
 
-  /* Compact layout for standalone pages: brand left, two horizontal link rows right. */
-  .footer__inner--compact {
-    padding-top: 48px;
-    padding-bottom: 40px;
-  }
-
-  /* Two stacked rows of inline links — Legal on top, Guides below. */
-  .footer__link-groups {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: 14px;
-  }
-  .footer__link-row {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px 20px;
-    align-items: center;
-  }
-
   @media (min-width: 720px) {
     .footer__inner {
       grid-template-columns: 1.2fr 2fr;
     }
+    /* Wider viewports: revert to an aligned grid (multicol props are inert on a
+       grid container). All columns share a baseline, so no row-gap problem. */
     .footer__cols {
+      display: grid;
       grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+    }
+    .footer__col {
+      margin-bottom: 0;
     }
   }
 
   @media (min-width: 1100px) {
     .footer__cols {
-      grid-template-columns: repeat(6, 1fr);
+      grid-template-columns: repeat(5, 1fr);
     }
   }
 </style>
