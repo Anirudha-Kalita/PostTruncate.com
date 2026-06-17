@@ -118,7 +118,7 @@ The fastest way to apply this in practice is to check both views before hitting 
 
 I built [PostTruncate's Instagram caption preview tool](/en/instagram-character-counter/) specifically to solve this. Paste your caption in, and you see the live fold point update in real time as you type - you can toggle between the home feed view (125-char fold) and the Reels tab view (55-60-char fold) to check exactly what's visible in each context, before you publish.
 
-![](/og/Screenshot_17-6-2026_161937_posttruncate.com.webp)to 
+![](/og/Screenshot_17-6-2026_161937_posttruncate.com.webp)
 
 <p align="center"><span style="font-size: 12px; "><em>PostTruncate Instagram character counter in action, showing live fold preview for feed and Reels tab views</em></span></p>
 
