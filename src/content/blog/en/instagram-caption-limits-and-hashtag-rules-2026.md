@@ -13,14 +13,6 @@ draft: false
 ogImage: /og/Instagram_caption_limt.webp
 ---
 
-The exact 2026 limits for Instagram captions, hashtags, and account tags-plus why the 125-character fold matters more than the 2,200-character ceiling.
-
-_June 16, 2026 · 8 min read_
-
-Instagram caption limits and formatting rules infographic for 2026
-
-* \* \*
-
 ## TL;DR
 
 Instagram captions max out at **2,200 characters**, but the feed folds at roughly **125 characters** - so your hook either lands before the fold or disappears. The 5-hashtag rule is unwritten but rigorously enforced; posts with more risk silent suppression. Use a real-time caption preview tool to see exactly what survives the fold before you publish.
