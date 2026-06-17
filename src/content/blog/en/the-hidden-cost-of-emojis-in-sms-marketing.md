@@ -142,7 +142,7 @@ I built [PostTruncate](/) as a solo developer because I kept running into the ex
 
 It's completely free, covers [10+ platforms](/en/platform-limits/) including SMS, LinkedIn, X, Instagram, Facebook, and Threads, and runs entirely in your browser without storing your copy anywhere. No account, no paywall, no catch.
 
-![PostTruncate SMS character counter - free, browser-based encoding detection and segment calculator](/og/PostTruncate-SMS%20character%20counter.webp)
+![PostTruncate SMS character counter - free, browser-based encoding detection and segment calculator](/og/PostTruncate_SMS.webp)
 
 <p align="center"><span style="font-size: 12px; "><em>PostTruncate SMS character counter - free, browser-based encoding detection and segment calculator</em></span></p>
 
