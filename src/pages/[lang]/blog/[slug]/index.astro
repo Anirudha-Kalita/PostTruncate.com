@@ -5,6 +5,7 @@ import BlogStructuredData from '../../../../components/BlogStructuredData.astro'
 import BlogCardGrid from '../../../../components/BlogCardGrid.astro';
 import { getLocale, DEFAULT_LOCALE } from '../../../../i18n/config';
 import { tools } from '../../../../data/tools';
+import { calculators } from '../../../../data/calculators';
 import {
   BLOG_SEGMENT,
   getBlogStrings,
@@ -127,13 +128,21 @@ const ogImageUrl = data.ogImage
   ? new URL(data.ogImage, site).href
   : undefined;
 
-// Cross-link to the matching platform tool page (when not the generic bucket).
-const relatedTool =
+// Cross-link to the matching tool page (when not the generic bucket). Platform
+// guides live at /[lang]/<slug>/; the Tools suite (SMS, Google SERP, …) lives
+// under /[lang]/tools/<slug>/, so resolve the right namespace per source array.
+const relatedPlatformTool =
   data.relatedPlatform && data.relatedPlatform !== 'general'
     ? tools.find((tool) => tool.id === data.relatedPlatform)
     : undefined;
+const relatedCalcTool =
+  data.relatedPlatform && data.relatedPlatform !== 'general' && !relatedPlatformTool
+    ? calculators.find((tool) => tool.id === data.relatedPlatform)
+    : undefined;
+const relatedTool = relatedPlatformTool ?? relatedCalcTool;
+const relatedToolPrefix = relatedCalcTool ? 'tools/' : '';
 const relatedToolHref = relatedTool
-  ? `/${lang}/${relatedTool.slugs[lang] ?? relatedTool.slugs[DEFAULT_LOCALE]}/`
+  ? `/${lang}/${relatedToolPrefix}${relatedTool.slugs[lang] ?? relatedTool.slugs[DEFAULT_LOCALE]}/`
   : undefined;
 const relatedToolName = relatedTool
   ? relatedTool.schemaName[lang] ?? relatedTool.schemaName[DEFAULT_LOCALE]

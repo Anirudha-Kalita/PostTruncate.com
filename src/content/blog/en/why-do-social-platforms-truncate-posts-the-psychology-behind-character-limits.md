@@ -98,7 +98,7 @@ The fascinating thing about the current landscape is that every major platform h
 | [Instagram](/en/instagram-character-counter/) | 2,200 | \~125 | \~125 |
 | [LinkedIn](/en/linkedin-character-counter/) | 3,000 | \~140 | \~210 |
 | [Facebook](/en/facebook-character-counter/) | 63,206 | \~110 | \~480 |
-| [SMS (GSM)](/en/sms-character-counter/) | 160 | None | None |
+| [SMS (GSM)](/en/tools/sms-character-counter/) | 160 | None | None |
 
 **X has no fold** - just a hard 280-character ceiling. The product bet is that limiting total length is enough; whatever you write, the reader sees all of it or scrolls past. This keeps X posts maximally punchy and penalises anyone who writes prose that needs context.
 

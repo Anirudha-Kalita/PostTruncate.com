@@ -4,6 +4,7 @@ import { getTranslations } from '../i18n';
 import { interp } from '../i18n/interp';
 import { LIMITS, FOLDS, SMS_LIMITS } from '../lib/textTools';
 import { tools } from '../data/tools';
+import { calculators } from '../data/calculators';
 
 interface Props {
   s: Translations['platformCharacterLimits'];
@@ -18,6 +19,10 @@ const nf = new Intl.NumberFormat(lang);
 const toolHref: Record<string, string> = {};
 for (const tool of tools) {
   toolHref[tool.id] = `/${lang}/${tool.slugs[lang] ?? tool.slugs['en']}/`;
+}
+// SMS and Google SERP moved to the Tools suite (/[lang]/tools/<slug>/).
+for (const calc of calculators) {
+  toolHref[calc.id] = `/${lang}/tools/${calc.slugs[lang] ?? calc.slugs['en']}/`;
 }
 
 const rows = [

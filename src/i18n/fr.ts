@@ -371,9 +371,7 @@ export const fr: Translations = {
           'Instagram',
           'LinkedIn',
           'Facebook',
-          'SMS',
           'Threads',
-          'Aperçu SERP Google',
         ],
       },
     },
@@ -565,20 +563,6 @@ export const fr: Translations = {
     },
   },
 
-  serpPage: {
-    crossPromo: {
-      heading: 'Vérifiez aussi vos limites sur les réseaux sociaux',
-      editorLink: `Ou ouvrir l\'éditeur complet PostTruncate →`,
-      platforms: {
-        twitter:   { name: 'X / Twitter',  desc: '280 caract. par tweet · les liens comptent comme 23' },
-        instagram: { name: 'Instagram',    desc: '2 200 caract. de légende · limite de 30 hashtags' },
-        linkedin:  { name: 'LinkedIn',     desc: '3 000 caract. · pliage bureau à 210 caract.' },
-        facebook:  { name: 'Facebook',     desc: '63 206 caract. · pliage fil à 480 caract.' },
-        threads:   { name: 'Threads',      desc: '500 caract. par publication Threads' },
-        sms:       { name: 'SMS',          desc: '160 GSM · 70 Unicode caract. par SMS' },
-      },
-    },
-  },
 
   banner: {
     text: 'Votre aperçu {platform} est ci-dessous',
@@ -854,6 +838,7 @@ export const fr: Translations = {
       },
     },
     sms: {
+      placeholder: 'Saisissez ou collez votre SMS ici : vous verrez son encodage (GSM-7 ou Unicode), le nombre de caractères en direct et le nombre de segments envoyés.',
       eyebrow: 'SMS',
       title: 'Compteur global de caractères',
       characterCount: 'Nombre de caractères',

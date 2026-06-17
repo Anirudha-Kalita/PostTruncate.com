@@ -8,6 +8,8 @@ import ByteCounterCalculator from '../../../../components/island/ByteCounterCalc
 import EmojiDetector from '../../../../components/island/EmojiDetector.tsx';
 import PlatformCounter from '../../../../components/island/PlatformCounter.tsx';
 import SentenceCounter from '../../../../components/island/SentenceCounter.tsx';
+import SmsCounterCalculator from '../../../../components/island/SmsCounterCalculator.tsx';
+import { SeoPreview } from '../../../../components/island/SeoPreview.tsx';
 import { PLATFORM_COUNTERS } from '../../../../data/platformCounters';
 import { calculators } from '../../../../data/calculators';
 import type { ToolDefinition } from '../../../../data/tools';
@@ -109,6 +111,12 @@ const faqItems = tool.faq?.[lang];
     )}
     {tool.id === 'sentence-counter' && (
       <SentenceCounter client:load s={t.island} lang={lang} />
+    )}
+    {tool.id === 'sms' && (
+      <SmsCounterCalculator client:load s={t.island} lang={lang} />
+    )}
+    {tool.id === 'google-serp' && (
+      <SeoPreview client:load s={t.island} />
     )}
   </CalculatorPageContent>
 </Layout>

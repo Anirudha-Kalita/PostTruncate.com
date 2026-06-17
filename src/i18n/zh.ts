@@ -371,9 +371,7 @@ export const zh: Translations = {
           'Instagram',
           'LinkedIn',
           'Facebook',
-          'SMS',
           'Threads',
-          'Google SERP 预览',
         ],
       },
     },
@@ -563,20 +561,6 @@ export const zh: Translations = {
     },
   },
 
-  serpPage: {
-    crossPromo: {
-      heading: '同时检查您的社交媒体限制',
-      editorLink: '或打开完整的 PostTruncate 编辑器 →',
-      platforms: {
-        twitter:   { name: 'X / Twitter',  desc: '每条推文280字符·链接计为23字符' },
-        instagram: { name: 'Instagram',    desc: '图片说明2,200字符·标签上限30个' },
-        linkedin:  { name: 'LinkedIn',     desc: '3,000字符·桌面端折叠210字符' },
-        facebook:  { name: 'Facebook',     desc: '帖子63,206字符·动态折叠480字符' },
-        threads:   { name: 'Threads',      desc: '每条Threads帖子500字符' },
-        sms:       { name: 'SMS',          desc: 'GSM 160字符·Unicode 70字符/条' },
-      },
-    },
-  },
 
   banner: {
     text: '{platform}的预览在下方',
@@ -852,6 +836,7 @@ export const zh: Translations = {
       },
     },
     sms: {
+      placeholder: '在此输入或粘贴你的短信内容——即可看到它的编码（GSM-7 或 Unicode）、实时字符数，以及将分成几条短信发送。',
       eyebrow: '短信',
       title: '全球短信字符计数器',
       characterCount: '字符数',

@@ -7,6 +7,7 @@ import { getTranslations } from '../../../i18n';
 import { interp } from '../../../i18n/interp';
 import { LOCALES, getLocale } from '../../../i18n/config';
 import { tools } from '../../../data/tools';
+import { calculators } from '../../../data/calculators';
 import { getFeaturedFaqs } from '../../../data/faq';
 import PlatformBanner from '../../../components/PlatformBanner.astro';
 import HeroPreviewCard from '../../../components/HeroPreviewCard.astro';
@@ -39,6 +40,8 @@ for (const tool of tools) {
 }
 
 // Build a per-tool { href, label } lookup used by seoCopy and guide card links.
+// Platform guides live at /[lang]/<slug>/; Tools (SMS, Google SERP, …) live
+// at /[lang]/tools/<slug>/ — so we build from both registries.
 const toolLinks: Record<string, { href: string; label: string }> = {};
 for (const tool of tools) {
   const slug = toolSlugs[tool.id];
@@ -46,6 +49,15 @@ for (const tool of tools) {
     toolLinks[tool.id] = {
       href: `/${lang}/${slug}/`,
       label: tool.schemaName[lang] ?? tool.schemaName['en'],
+    };
+  }
+}
+for (const calc of calculators) {
+  const slug = calc.slugs[lang] ?? calc.slugs['en'];
+  if (slug) {
+    toolLinks[calc.id] = {
+      href: `/${lang}/tools/${slug}/`,
+      label: calc.schemaName[lang] ?? calc.schemaName['en'],
     };
   }
 }

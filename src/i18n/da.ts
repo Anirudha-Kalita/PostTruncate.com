@@ -371,9 +371,7 @@ export const da: Translations = {
           'Instagram',
           'LinkedIn',
           'Facebook',
-          'SMS',
           'Threads',
-          'Google SERP-forhåndsvisning',
         ],
       },
     },
@@ -565,20 +563,6 @@ export const da: Translations = {
     },
   },
 
-  serpPage: {
-    crossPromo: {
-      heading: 'Tjek også dine sociale medie-grænser',
-      editorLink: 'Eller åbn den fulde PostTruncate-editor →',
-      platforms: {
-        twitter:   { name: 'X / Twitter',  desc: '280 tegn pr. tweet · links tæller som 23' },
-        instagram: { name: 'Instagram',    desc: '2.200 tegn billedtekst · 30 hashtag-grænse' },
-        linkedin:  { name: 'LinkedIn',     desc: '3.000 tegn · desktop fold ved 210' },
-        facebook:  { name: 'Facebook',     desc: '63.206 tegn · feed fold ved 480' },
-        threads:   { name: 'Threads',      desc: '500 tegn pr. Threads indlæg' },
-        sms:       { name: 'SMS',          desc: '160 GSM · 70 Unicode tegn pr. SMS' },
-      },
-    },
-  },
 
   banner: {
     text: 'Din {platform}-forhåndsvisning er nedenfor',
@@ -854,6 +838,7 @@ export const da: Translations = {
       },
     },
     sms: {
+      placeholder: 'Skriv eller indsæt din SMS-besked her – du ser dens kodning (GSM-7 eller Unicode), tegnantallet i realtid, og hvor mange segmenter den sender.',
       eyebrow: 'SMS',
       title: 'Global tegntæller',
       characterCount: 'Antal tegn',

@@ -2779,4 +2779,577 @@ export const calculators: ToolDefinition[] = [
       ],
     },
   },
+  {
+    id: 'sms',
+    editorAnchor: 'workspace',
+    lastUpdated: '2026-05-15',
+    platformLimits:
+      '160 characters per segment in GSM-7 encoding, 70 characters per segment in Unicode encoding, multipart GSM reduces to 153 chars per segment, multipart Unicode reduces to 67 chars per segment, GSM extended characters (€ [ ] { } |) count as 2 characters each',
+
+    slugs: {
+      en: 'sms-character-counter',
+      es: 'contador-sms',
+      de: 'sms-zeichenzaehler',
+      fr: 'compteur-sms',
+      pt: 'contador-sms',
+      it: 'contatore-sms',
+      nl: 'sms-tekenteller',
+      ja: 'sms-moji-kaunta',
+      zh: 'sms-zi-fu-ji-shu',
+      da: 'sms-tegntaeller',
+    },
+
+    schemaName: {
+      en: 'SMS Character Counter',
+      es: 'Contador de Caracteres SMS',
+      de: 'SMS-Zeichenzähler',
+      fr: 'Compteur de Caractères SMS',
+      pt: 'Contador de Caracteres SMS',
+      it: 'Contatore di Caratteri SMS',
+      nl: 'SMS-tekenteller',
+      ja: 'SMS 文字数カウンター',
+      zh: 'SMS 字符计数器',
+      da: 'SMS-tegntæller',
+    },
+
+    titles: {
+      en: 'SMS Character Counter — Free GSM-7 & Segment Calculator',
+      es: 'Contador de Caracteres SMS — Calculadora gratis de GSM-7 y segmentos',
+      de: 'SMS-Zeichenzähler — Kostenloser GSM-7- und Segment-Rechner',
+      fr: 'Compteur de Caractères SMS — Calculateur GSM-7 et segments gratuit',
+      pt: 'Contador de Caracteres SMS — Calculadora grátis de GSM-7 e segmentos',
+      it: 'Contatore Caratteri SMS — Calcolatore gratis di GSM-7 e segmenti',
+      nl: 'SMS-tekenteller — Gratis GSM-7- en segmentcalculator',
+      ja: 'SMS文字数カウンター — GSM-7とセグメント数を無料計算',
+      zh: 'SMS字符计数器 — 免费GSM-7与短信段数计算器',
+      da: 'SMS-tegntæller — Gratis GSM-7- og segmentberegner',
+    },
+
+    metaDescriptions: {
+      en: 'Free SMS character counter. See your encoding (GSM-7 or Unicode), live segment count, and why one emoji cuts your limit from 160 to 70 characters per segment.',
+      es: 'Contador de caracteres SMS gratis. Comprueba la codificación (GSM-7 o Unicode), el número de segmentos en vivo y por qué un emoji reduce tu límite de 160 a 70 caracteres por segmento.',
+      de: 'Kostenloser SMS-Zeichenzähler. Sieh die Codierung (GSM-7 oder Unicode), die Segmentanzahl live und warum ein Emoji dein Limit von 160 auf 70 Zeichen pro Segment senkt.',
+      fr: 'Compteur de caractères SMS gratuit. Voyez votre encodage (GSM-7 ou Unicode), le nombre de segments en direct et pourquoi un emoji réduit votre limite de 160 à 70 caractères par segment.',
+      pt: 'Contador de caracteres SMS gratuito. Veja a codificação (GSM-7 ou Unicode), a contagem de segmentos ao vivo e por que um emoji reduz seu limite de 160 para 70 caracteres por segmento.',
+      it: 'Contatore di caratteri SMS gratuito. Vedi la codifica (GSM-7 o Unicode), il conteggio dei segmenti in tempo reale e perché una emoji riduce il limite da 160 a 70 caratteri per segmento.',
+      nl: 'Gratis SMS-tekenteller. Zie je codering (GSM-7 of Unicode), het live segmentaantal en waarom één emoji je limiet van 160 naar 70 tekens per segment verlaagt.',
+      ja: '無料のSMS文字数カウンター。エンコード（GSM-7またはUnicode）、リアルタイムのセグメント数、絵文字1つで上限が1セグメント160文字から70文字に下がる理由を確認。',
+      zh: '免费SMS字符计数器。查看编码（GSM-7或Unicode）、实时短信段数，以及为何一个表情符号会让每段上限从160降至70字符。',
+      da: 'Gratis SMS-tegntæller. Se din kodning (GSM-7 eller Unicode), live segmentantal, og hvorfor én emoji sænker din grænse fra 160 til 70 tegn pr. segment.',
+    },
+
+    intro: {
+      en: "Check your text message before you send — the counter below shows your encoding (GSM-7 or Unicode), the live segment count, and exactly when one character tips you into a second message.",
+      es: "Revisa tu mensaje de texto antes de enviarlo: el contador de abajo muestra tu codificación (GSM-7 o Unicode), el número de segmentos en vivo y exactamente cuándo un carácter te empuja a un segundo mensaje.",
+      de: "Prüfe deine SMS vor dem Senden — der Zähler unten zeigt deine Codierung (GSM-7 oder Unicode), die Segmentanzahl live und genau, wann ein einzelnes Zeichen dich in eine zweite Nachricht kippt.",
+      fr: "Vérifiez votre SMS avant de l’envoyer : le compteur ci-dessous indique votre encodage (GSM-7 ou Unicode), le nombre de segments en direct et exactement quand un caractère vous fait basculer dans un second message.",
+      pt: "Confira sua mensagem de texto antes de enviar: o contador abaixo mostra sua codificação (GSM-7 ou Unicode), a contagem de segmentos ao vivo e exatamente quando um caractere empurra você para uma segunda mensagem.",
+      it: "Controlla il tuo SMS prima di inviarlo: il contatore qui sotto mostra la tua codifica (GSM-7 o Unicode), il conteggio dei segmenti in tempo reale ed esattamente quando un carattere ti fa passare a un secondo messaggio.",
+      nl: "Controleer je sms voordat je verstuurt — de teller hieronder toont je codering (GSM-7 of Unicode), het live segmentaantal en precies wanneer één teken je naar een tweede bericht duwt.",
+      ja: "送信する前にSMSをチェック。下のカウンターは、エンコード（GSM-7またはUnicode）、リアルタイムのセグメント数、そして1文字でいつ2通目に切り替わるかを正確に表示します。",
+      zh: "发送前检查你的短信：下方计数器显示你的编码（GSM-7 或 Unicode）、实时短信段数，以及一个字符究竟会在何时把你推入第二条短信。",
+      da: "Tjek din sms, før du sender — tælleren nedenfor viser din kodning (GSM-7 eller Unicode), segmentantallet live og præcis hvornår ét tegn tipper dig over i en anden besked.",
+    },
+
+    faq: {
+      en: [
+        {
+          q: 'How many characters fit in one SMS?',
+          a: '160 characters in standard GSM-7 encoding. Add a single emoji or other non-GSM character and the whole message switches to Unicode, which holds only 70 characters per segment.',
+        },
+        {
+          q: 'Why did my message split into two?',
+          a: 'When your text exceeds one segment, it is sent as multiple parts with a small header, dropping the usable space to 153 characters per part in GSM-7 (or 67 in Unicode). The counter above shows the split point live.',
+        },
+        {
+          q: 'Which characters force Unicode mode?',
+          a: 'Emojis, most non-Latin scripts, and curly "smart" quotes. A few GSM "extended" characters like €, {, }, [, ], and | stay in GSM-7 but count as two characters each.',
+        },
+        {
+          q: 'Do spaces and line breaks count in an SMS?',
+          a: 'Yes — every space and line break is one character (or two for an extended-table character), and they count toward the per-segment limit exactly like letters do.',
+        },
+      ],
+      es: [
+        { q: "¿Cuántos caracteres caben en un SMS?", a: "160 caracteres en la codificación estándar GSM-7. Añade un solo emoji u otro carácter que no sea GSM y todo el mensaje cambia a Unicode, que solo admite 70 caracteres por segmento." },
+        { q: "¿Por qué se dividió mi mensaje en dos?", a: "Cuando tu texto supera un segmento, se envía en varias partes con una pequeña cabecera, lo que reduce el espacio útil a 153 caracteres por parte en GSM-7 (o 67 en Unicode). El contador de arriba muestra el punto de división en vivo." },
+        { q: "¿Qué caracteres fuerzan el modo Unicode?", a: "Los emojis, la mayoría de los alfabetos no latinos y las comillas «tipográficas». Algunos caracteres «extendidos» de GSM como €, {, }, [, ] y | siguen en GSM-7, pero cuentan como dos caracteres cada uno." },
+        { q: "¿Los espacios y los saltos de línea cuentan en un SMS?", a: "Sí: cada espacio y salto de línea es un carácter (o dos si es un carácter de la tabla extendida), y cuentan para el límite por segmento igual que las letras." },
+      ],
+      de: [
+        { q: "Wie viele Zeichen passen in eine SMS?", a: "160 Zeichen in der Standard-Codierung GSM-7. Füge ein einziges Emoji oder anderes Nicht-GSM-Zeichen hinzu, und die ganze Nachricht wechselt zu Unicode, das nur 70 Zeichen pro Segment fasst." },
+        { q: "Warum wurde meine Nachricht in zwei geteilt?", a: "Überschreitet dein Text ein Segment, wird er als mehrere Teile mit einem kleinen Header gesendet, wodurch der nutzbare Platz auf 153 Zeichen pro Teil in GSM-7 (oder 67 in Unicode) sinkt. Der Zähler oben zeigt den Teilungspunkt live." },
+        { q: "Welche Zeichen erzwingen den Unicode-Modus?", a: "Emojis, die meisten nicht-lateinischen Schriften und typografische „Smart“-Anführungszeichen. Einige „erweiterte“ GSM-Zeichen wie €, {, }, [, ] und | bleiben in GSM-7, zählen aber je zwei Zeichen." },
+        { q: "Zählen Leerzeichen und Zeilenumbrüche in einer SMS?", a: "Ja — jedes Leerzeichen und jeder Zeilenumbruch ist ein Zeichen (oder zwei bei einem Zeichen der erweiterten Tabelle) und zählt genau wie Buchstaben zum Limit pro Segment." },
+      ],
+      fr: [
+        { q: "Combien de caractères tiennent dans un SMS ?", a: "160 caractères dans l’encodage standard GSM-7. Ajoutez un seul émoji ou un autre caractère non-GSM et tout le message bascule en Unicode, qui ne contient que 70 caractères par segment." },
+        { q: "Pourquoi mon message s’est-il divisé en deux ?", a: "Quand votre texte dépasse un segment, il est envoyé en plusieurs parties avec un petit en-tête, ce qui réduit l’espace utile à 153 caractères par partie en GSM-7 (ou 67 en Unicode). Le compteur ci-dessus montre le point de coupure en direct." },
+        { q: "Quels caractères forcent le mode Unicode ?", a: "Les émojis, la plupart des écritures non latines et les guillemets « typographiques ». Quelques caractères « étendus » du GSM comme €, {, }, [, ] et | restent en GSM-7 mais comptent pour deux caractères chacun." },
+        { q: "Les espaces et les sauts de ligne comptent-ils dans un SMS ?", a: "Oui — chaque espace et chaque saut de ligne est un caractère (ou deux pour un caractère de la table étendue), et ils comptent dans la limite par segment exactement comme les lettres." },
+      ],
+      pt: [
+        { q: "Quantos caracteres cabem em um SMS?", a: "160 caracteres na codificação padrão GSM-7. Adicione um único emoji ou outro caractere não-GSM e a mensagem inteira muda para Unicode, que comporta apenas 70 caracteres por segmento." },
+        { q: "Por que minha mensagem foi dividida em duas?", a: "Quando seu texto excede um segmento, ele é enviado em várias partes com um pequeno cabeçalho, reduzindo o espaço útil para 153 caracteres por parte em GSM-7 (ou 67 em Unicode). O contador acima mostra o ponto de divisão ao vivo." },
+        { q: "Quais caracteres forçam o modo Unicode?", a: "Emojis, a maioria dos alfabetos não latinos e as aspas «tipográficas». Alguns caracteres «estendidos» do GSM como €, {, }, [, ] e | permanecem em GSM-7, mas contam como dois caracteres cada." },
+        { q: "Espaços e quebras de linha contam em um SMS?", a: "Sim — cada espaço e quebra de linha é um caractere (ou dois para um caractere da tabela estendida), e contam para o limite por segmento exatamente como as letras." },
+      ],
+      it: [
+        { q: "Quanti caratteri stanno in un SMS?", a: "160 caratteri nella codifica standard GSM-7. Aggiungi una sola emoji o un altro carattere non-GSM e l’intero messaggio passa a Unicode, che contiene solo 70 caratteri per segmento." },
+        { q: "Perché il mio messaggio si è diviso in due?", a: "Quando il testo supera un segmento, viene inviato in più parti con una piccola intestazione, riducendo lo spazio utile a 153 caratteri per parte in GSM-7 (o 67 in Unicode). Il contatore qui sopra mostra il punto di divisione in tempo reale." },
+        { q: "Quali caratteri forzano la modalità Unicode?", a: "Le emoji, la maggior parte degli alfabeti non latini e le virgolette «tipografiche». Alcuni caratteri «estesi» del GSM come €, {, }, [, ] e | restano in GSM-7 ma contano due caratteri ciascuno." },
+        { q: "Gli spazi e gli a capo contano in un SMS?", a: "Sì — ogni spazio e a capo è un carattere (o due per un carattere della tabella estesa), e contano per il limite per segmento esattamente come le lettere." },
+      ],
+      nl: [
+        { q: "Hoeveel tekens passen in één sms?", a: "160 tekens in de standaard GSM-7-codering. Voeg één emoji of ander niet-GSM-teken toe en het hele bericht schakelt over naar Unicode, dat slechts 70 tekens per segment bevat." },
+        { q: "Waarom werd mijn bericht in tweeën gesplitst?", a: "Als je tekst één segment overschrijdt, wordt die in meerdere delen met een kleine header verzonden, waardoor de bruikbare ruimte daalt naar 153 tekens per deel in GSM-7 (of 67 in Unicode). De teller hierboven toont het splitspunt live." },
+        { q: "Welke tekens forceren de Unicode-modus?", a: "Emoji, de meeste niet-Latijnse schriften en ‘slimme’ typografische aanhalingstekens. Een paar ‘uitgebreide’ GSM-tekens zoals €, {, }, [, ] en | blijven in GSM-7, maar tellen elk als twee tekens." },
+        { q: "Tellen spaties en regeleinden mee in een sms?", a: "Ja — elke spatie en elk regeleinde is één teken (of twee voor een teken uit de uitgebreide tabel), en ze tellen mee voor de limiet per segment, net als letters." },
+      ],
+      ja: [
+        { q: "1通のSMSには何文字入りますか？", a: "標準のGSM-7エンコードで160文字です。絵文字やGSM以外の文字を1つでも加えると、メッセージ全体がUnicodeに切り替わり、1セグメントあたり70文字しか入らなくなります。" },
+        { q: "なぜメッセージが2通に分かれたのですか？", a: "テキストが1セグメントを超えると、小さなヘッダー付きの複数パートとして送信され、使える文字数が1パートあたりGSM-7で153文字（Unicodeで67文字）に下がります。上のカウンターが分割点をリアルタイムで表示します。" },
+        { q: "どの文字がUnicodeモードを強制しますか？", a: "絵文字、ほとんどの非ラテン文字、そして丸い「スマート」引用符です。€、{、}、[、]、| などGSMの「拡張」文字はGSM-7のままですが、それぞれ2文字としてカウントされます。" },
+        { q: "スペースや改行はSMSでカウントされますか？", a: "はい。スペースや改行はそれぞれ1文字（拡張テーブルの文字なら2文字）で、文字と同じようにセグメントごとの上限にカウントされます。" },
+      ],
+      zh: [
+        { q: "一条短信能放多少字符？", a: "标准 GSM-7 编码下为 160 字符。只要加入一个表情符号或其他非 GSM 字符，整条短信就会切换到 Unicode，每段仅能容纳 70 字符。" },
+        { q: "为什么我的短信被拆成了两条？", a: "当文本超过一段时，会以带小标头的多段形式发送，使每段可用空间在 GSM-7 下降至 153 字符（Unicode 下为 67 字符）。上方计数器会实时显示拆分点。" },
+        { q: "哪些字符会强制进入 Unicode 模式？", a: "表情符号、大多数非拉丁文字，以及弯引号（“智能”引号）。少数 GSM“扩展”字符如 €、{、}、[、] 和 | 仍属 GSM-7，但每个计为两个字符。" },
+        { q: "空格和换行会计入短信吗？", a: "会——每个空格和换行都是一个字符（扩展表字符则为两个），它们与字母一样计入每段的上限。" },
+      ],
+      da: [
+        { q: "Hvor mange tegn er der plads til i én sms?", a: "160 tegn i standardkodningen GSM-7. Tilføj en enkelt emoji eller et andet ikke-GSM-tegn, og hele beskeden skifter til Unicode, der kun rummer 70 tegn pr. segment." },
+        { q: "Hvorfor blev min besked delt i to?", a: "Når din tekst overskrider ét segment, sendes den som flere dele med et lille header, hvilket sænker den brugbare plads til 153 tegn pr. del i GSM-7 (eller 67 i Unicode). Tælleren ovenfor viser delepunktet live." },
+        { q: "Hvilke tegn fremtvinger Unicode-tilstand?", a: "Emoji, de fleste ikke-latinske skrifter og krøllede „smarte“ anførselstegn. Et par „udvidede“ GSM-tegn som €, {, }, [, ] og | bliver i GSM-7, men tæller som to tegn hver." },
+        { q: "Tæller mellemrum og linjeskift med i en sms?", a: "Ja — hvert mellemrum og linjeskift er ét tegn (eller to for et tegn fra den udvidede tabel), og de tæller med i grænsen pr. segment præcis som bogstaver." },
+      ],
+    },
+
+    content: {
+      en: `<h2>The two SMS encodings that control your character limit</h2>
+<p>Most people assume an SMS holds 160 characters. That's true — but only for messages that use <strong>GSM-7 encoding</strong>. GSM-7 is the character set that covers standard Latin letters, digits, punctuation, and a handful of common symbols. When every character in your message belongs to this set, the 160-character limit applies and a single message costs exactly one SMS credit.</p>
+<p>The moment your message contains a character outside GSM-7 — most commonly an emoji, a curly quotation mark, or a letter with an uncommon accent — the entire message is automatically re-encoded in <strong>Unicode (UCS-2)</strong>. Unicode supports virtually every character humans have ever written, but it uses more data per character. The consequence is immediate: <strong>your per-segment limit drops from 160 characters to 70</strong>. A message you believed was comfortably under the limit can suddenly become two or three paid segments.</p>
+<p>PostTruncate's <strong>SMS character counter</strong> detects the encoding of your message in real time, displays whether you're in GSM-7 or Unicode mode, and shows the current segment count so you always know exactly what you're sending — and what it will cost.</p>
+
+<h2>The emoji trap: one character, half the limit</h2>
+<p>This is the most common and most expensive SMS mistake. You draft a professional message, add a thumbs-up emoji at the end as an afterthought, and instantly transform a single-segment message into a two-segment message — doubling your SMS cost for every recipient.</p>
+<p><strong>Every emoji forces the entire message into Unicode mode</strong>, not just the part after the emoji. A 155-character message with one emoji at position 156 doesn't cost one SMS — it costs three (155 characters ÷ 67 Unicode multipart characters per segment). The same applies to curly quotes (" "), em dashes (—), and any character not in the GSM-7 alphabet.</p>
+<p>PostTruncate flags the exact character that triggered Unicode mode, so you can decide whether to remove it or accept the additional segments with full awareness of the cost.</p>
+
+<h2>Multipart messages: the hidden per-segment cost</h2>
+<p>When a message exceeds one segment, the carrier network must break it into multiple parts and reassemble them on the recipient's device. This reassembly requires a small <strong>header in each segment</strong> — 7 bytes for GSM-7 and 3 bytes for Unicode — which reduces the usable characters per part.</p>
+<p>In practice: a single GSM-7 message holds <strong>160 characters</strong>, but a two-part GSM-7 message holds only <strong>153 characters per segment</strong> (306 total). A single Unicode message holds <strong>70 characters</strong>, and a two-part Unicode message holds only <strong>67 per segment</strong> (134 total). Going even slightly over 160 (or 70) characters doesn't just add one segment — it also recalculates the capacity of all previous segments.</p>
+<p>This is why a 161-character GSM-7 message doesn't cost "160 + 1". It costs two segments of 153, giving you 306 total characters but charging for two SMS credits. PostTruncate shows real-time segment boundaries so you never accidentally cross a threshold without noticing.</p>
+
+<h2>GSM extended characters: the double-cost symbols</h2>
+<p>Within GSM-7, there is a small set of characters that occupy the <strong>extended character table</strong>: <strong>€ [ ] { } \\ | ~</strong> and the caret <strong>^</strong>. Each of these counts as <strong>two characters</strong> in your SMS budget, not one. A message containing four euro signs has effectively used 8 characters from the GSM-7 limit, not 4.</p>
+<p>This surprises developers and marketers equally. A promotional message like "Save €10 on your next order [terms apply]" uses 48 visible characters but consumes 52 GSM-7 character slots — the €, [, and ] each cost 2. PostTruncate counts extended characters at their true two-slot weight, so the number you see is the number that matters for billing.</p>`,
+
+      es: `<h2>Las dos codificaciones SMS que controlan tu límite de caracteres</h2>
+<p>La mayoría de las personas asume que un SMS tiene 160 caracteres. Es cierto, pero solo para los mensajes que usan la codificación <strong>GSM-7</strong>. GSM-7 es el conjunto de caracteres que incluye letras latinas estándar, dígitos, puntuación y algunos símbolos comunes. Cuando todos los caracteres de tu mensaje pertenecen a este conjunto, se aplica el límite de 160 caracteres y un único mensaje cuesta exactamente un crédito SMS.</p>
+<p>En el momento en que tu mensaje contiene un carácter fuera de GSM-7 —normalmente un emoji, una comilla tipográfica o una letra con un acento poco común— todo el mensaje se recodifica automáticamente en <strong>Unicode (UCS-2)</strong>. Unicode admite prácticamente todos los caracteres que los seres humanos hayan escrito, pero usa más datos por carácter. La consecuencia es inmediata: <strong>tu límite por segmento cae de 160 a 70 caracteres</strong>. Un mensaje que creías que estaba cómodamente dentro del límite puede convertirse de repente en dos o tres segmentos de pago.</p>
+<p>El <strong>contador de caracteres SMS</strong> de PostTruncate detecta la codificación de tu mensaje en tiempo real, muestra si estás en modo GSM-7 o Unicode, e indica el número de segmentos actual para que siempre sepas exactamente qué estás enviando.</p>
+
+<h2>La trampa del emoji: un carácter, la mitad del límite</h2>
+<p>Este es el error SMS más común y más costoso. Redactas un mensaje profesional, añades un emoji de pulgar arriba al final como ocurrencia de último momento y, de repente, conviertes un mensaje de un segmento en uno de dos segmentos, duplicando el coste de SMS por cada destinatario.</p>
+<p><strong>Cada emoji fuerza todo el mensaje al modo Unicode</strong>, no solo la parte posterior al emoji. Un mensaje de 155 caracteres con un emoji en la posición 156 no cuesta un SMS, sino tres (155 caracteres ÷ 67 caracteres Unicode multiparte por segmento). Lo mismo ocurre con las comillas tipográficas (" "), las rayas (—) y cualquier carácter que no esté en el alfabeto GSM-7.</p>
+
+<h2>Mensajes de múltiples partes: el coste oculto por segmento</h2>
+<p>Cuando un mensaje supera un segmento, la red del operador debe dividirlo en varias partes y reensamblarlas en el dispositivo del destinatario. Este reensamblaje requiere un pequeño <strong>encabezado en cada segmento</strong> —7 bytes para GSM-7 y 3 bytes para Unicode— que reduce los caracteres utilizables por parte.</p>
+<p>En la práctica: un mensaje GSM-7 de un solo segmento tiene <strong>160 caracteres</strong>, pero un mensaje GSM-7 de dos partes solo tiene <strong>153 caracteres por segmento</strong> (306 en total). Un mensaje Unicode tiene <strong>70 caracteres</strong>, y uno de dos partes solo <strong>67 por segmento</strong> (134 en total). Superar ligeramente los 160 (o 70) caracteres no solo añade un segmento, también recalcula la capacidad de todos los segmentos anteriores.</p>
+
+<h2>Caracteres extendidos GSM: los símbolos de doble coste</h2>
+<p>Dentro de GSM-7 hay un pequeño conjunto de caracteres que ocupan la <strong>tabla de caracteres extendida</strong>: <strong>€ [ ] { } \\ | ~</strong> y el acento circunflejo <strong>^</strong>. Cada uno de estos cuenta como <strong>dos caracteres</strong> en tu presupuesto de SMS. Un mensaje que contiene cuatro signos de euro ha usado efectivamente 8 caracteres del límite GSM-7, no 4.</p>
+<p>PostTruncate cuenta los caracteres extendidos con su verdadero peso de dos posiciones, de modo que el número que ves es el que importa para la facturación.</p>`,
+
+      de: `<h2>Die zwei SMS-Kodierungen, die dein Zeichenlimit bestimmen</h2>
+<p>Die meisten Menschen gehen davon aus, dass eine SMS 160 Zeichen fasst. Das stimmt — aber nur für Nachrichten, die <strong>GSM-7-Kodierung</strong> verwenden. GSM-7 ist der Zeichensatz, der Standard-Lateinbuchstaben, Ziffern, Satzzeichen und eine Handvoll gängiger Symbole abdeckt. Wenn jedes Zeichen deiner Nachricht zu diesem Set gehört, gilt das 160-Zeichen-Limit, und eine einzelne Nachricht kostet genau ein SMS-Guthaben.</p>
+<p>Sobald deine Nachricht ein Zeichen außerhalb von GSM-7 enthält — am häufigsten ein Emoji, ein typografisches Anführungszeichen oder ein Buchstabe mit einem ungewöhnlichen Akzent — wird die gesamte Nachricht automatisch in <strong>Unicode (UCS-2)</strong> umkodiert. Unicode unterstützt nahezu alle Zeichen, die Menschen je geschrieben haben, benötigt aber mehr Datenspeicher pro Zeichen. Die Folge ist unmittelbar: <strong>Dein Limit pro Segment sinkt von 160 auf 70 Zeichen</strong>. Eine Nachricht, die du für gut innerhalb des Limits gehalten hast, kann plötzlich zu zwei oder drei kostenpflichtigen Segmenten werden.</p>
+<p>PostTruncates <strong>SMS-Zeichenzähler</strong> erkennt die Kodierung deiner Nachricht in Echtzeit, zeigt an, ob du im GSM-7- oder Unicode-Modus bist, und gibt die aktuelle Segmentanzahl aus, damit du immer genau weißt, was du sendest — und was es kostet.</p>
+
+<h2>Die Emoji-Falle: ein Zeichen, die halbe Kapazität</h2>
+<p>Das ist der häufigste und teuerste SMS-Fehler. Du verfasst eine professionelle Nachricht, fügst am Ende als Nachgedanken ein Daumen-hoch-Emoji hinzu — und verwandelst damit sofort eine Einzel-Segment-Nachricht in eine Zwei-Segment-Nachricht, was die SMS-Kosten für jeden Empfänger verdoppelt.</p>
+<p><strong>Jedes Emoji zwingt die gesamte Nachricht in den Unicode-Modus</strong>, nicht nur den Teil nach dem Emoji. Eine 155-Zeichen-Nachricht mit einem Emoji an Position 156 kostet nicht eine SMS — sondern drei (155 Zeichen ÷ 67 Unicode-Multipart-Zeichen pro Segment). Dasselbe gilt für typografische Anführungszeichen (" "), Gedankenstriche (—) und jedes Zeichen, das nicht im GSM-7-Alphabet enthalten ist.</p>
+
+<h2>Mehrteilige Nachrichten: die versteckten Kosten pro Segment</h2>
+<p>Wenn eine Nachricht ein Segment überschreitet, muss das Mobilfunknetz sie in mehrere Teile aufteilen und beim Empfänger wieder zusammensetzen. Dieses Zusammensetzen erfordert einen kleinen <strong>Header in jedem Segment</strong> — 7 Byte für GSM-7 und 3 Byte für Unicode — der die nutzbaren Zeichen pro Teil reduziert.</p>
+<p>In der Praxis: Eine einzelne GSM-7-Nachricht fasst <strong>160 Zeichen</strong>, eine zweiteilige GSM-7-Nachricht jedoch nur <strong>153 Zeichen pro Segment</strong> (306 insgesamt). Eine einzelne Unicode-Nachricht fasst <strong>70 Zeichen</strong>, eine zweiteilige nur <strong>67 pro Segment</strong> (134 insgesamt). Nur geringfügig über 160 (oder 70) Zeichen zu gehen, fügt nicht nur ein Segment hinzu — es berechnet auch die Kapazität aller vorherigen Segmente neu.</p>
+
+<h2>Erweiterte GSM-Zeichen: die Doppelkosten-Symbole</h2>
+<p>Innerhalb von GSM-7 gibt es eine kleine Gruppe von Zeichen, die zur <strong>erweiterten Zeichentabelle</strong> gehören: <strong>€ [ ] { } \\ | ~</strong> und das Zirkumflex <strong>^</strong>. Jedes davon zählt als <strong>zwei Zeichen</strong> in deinem SMS-Budget, nicht als eines. Eine Nachricht mit vier Euro-Zeichen hat effektiv 8 Zeichen des GSM-7-Limits verbraucht, nicht 4.</p>
+<p>PostTruncate zählt erweiterte Zeichen mit ihrem tatsächlichen Gewicht von zwei Slots, sodass die angezeigte Zahl die ist, die für die Abrechnung zählt.</p>`,
+
+      fr: `<h2>Les deux encodages SMS qui contrôlent votre limite de caractères</h2>
+<p>La plupart des gens supposent qu'un SMS contient 160 caractères. C'est vrai — mais uniquement pour les messages utilisant l'encodage <strong>GSM-7</strong>. GSM-7 est le jeu de caractères couvrant les lettres latines standard, les chiffres, la ponctuation et une poignée de symboles courants. Lorsque chaque caractère de votre message appartient à cet ensemble, la limite de 160 caractères s'applique et un seul message coûte exactement un crédit SMS.</p>
+<p>Dès que votre message contient un caractère hors GSM-7 — le plus souvent un emoji, un guillemet typographique ou une lettre avec un accent inhabituel — le message entier est automatiquement ré-encodé en <strong>Unicode (UCS-2)</strong>. Unicode prend en charge pratiquement tous les caractères que les humains ont jamais écrits, mais utilise plus de données par caractère. La conséquence est immédiate : <strong>votre limite par segment passe de 160 à 70 caractères</strong>. Un message que vous pensiez être confortablement dans les limites peut soudainement devenir deux ou trois segments payants.</p>
+<p>Le <strong>compteur de caractères SMS</strong> de PostTruncate détecte l'encodage de votre message en temps réel, affiche si vous êtes en mode GSM-7 ou Unicode, et indique le nombre de segments actuel pour que vous sachiez toujours exactement ce que vous envoyez.</p>
+
+<h2>Le piège de l'emoji : un caractère, la moitié de la limite</h2>
+<p>C'est l'erreur SMS la plus courante et la plus coûteuse. Vous rédigez un message professionnel, ajoutez un emoji pouce levé à la fin comme une pensée de dernière minute, et transformez instantanément un message à un segment en un message à deux segments — doublant votre coût SMS par destinataire.</p>
+<p><strong>Chaque emoji force l'intégralité du message en mode Unicode</strong>, pas seulement la partie après l'emoji. Un message de 155 caractères avec un emoji à la position 156 ne coûte pas un SMS — il en coûte trois (155 caractères ÷ 67 caractères Unicode multipart par segment). Il en va de même pour les guillemets typographiques (" "), les tirets cadratins (—) et tout caractère absent de l'alphabet GSM-7.</p>
+
+<h2>Messages en plusieurs parties : le coût caché par segment</h2>
+<p>Lorsqu'un message dépasse un segment, le réseau de l'opérateur doit le diviser en plusieurs parties et les réassembler sur l'appareil du destinataire. Ce réassemblage nécessite un petit <strong>en-tête dans chaque segment</strong> — 7 octets pour GSM-7 et 3 octets pour Unicode — ce qui réduit les caractères utilisables par partie.</p>
+<p>En pratique : un seul message GSM-7 contient <strong>160 caractères</strong>, mais un message GSM-7 en deux parties n'en contient que <strong>153 par segment</strong> (306 au total). Un seul message Unicode contient <strong>70 caractères</strong>, et un message en deux parties seulement <strong>67 par segment</strong> (134 au total). Dépasser légèrement 160 (ou 70) caractères n'ajoute pas seulement un segment — cela recalcule aussi la capacité de tous les segments précédents.</p>
+
+<h2>Caractères étendus GSM : les symboles à double coût</h2>
+<p>Dans GSM-7, il existe un petit ensemble de caractères appartenant à la <strong>table des caractères étendus</strong> : <strong>€ [ ] { } \\ | ~</strong> et le caret <strong>^</strong>. Chacun d'eux compte comme <strong>deux caractères</strong> dans votre budget SMS. Un message contenant quatre signes euro a effectivement utilisé 8 caractères de la limite GSM-7, pas 4.</p>
+<p>PostTruncate compte les caractères étendus à leur vrai poids de deux emplacements, de sorte que le nombre affiché est celui qui compte pour la facturation.</p>`,
+
+      pt: `<h2>As duas codificações de SMS que controlam seu limite de caracteres</h2>
+<p>A maioria das pessoas assume que um SMS cabe 160 caracteres. Isso é verdade — mas apenas para mensagens que usam a codificação <strong>GSM-7</strong>. GSM-7 é o conjunto de caracteres que cobre letras latinas padrão, dígitos, pontuação e alguns símbolos comuns. Quando todos os caracteres da sua mensagem pertencem a esse conjunto, o limite de 160 caracteres se aplica e uma única mensagem custa exatamente um crédito de SMS.</p>
+<p>No momento em que sua mensagem contém um caractere fora do GSM-7 — mais comumente um emoji, uma aspas tipográfica ou uma letra com acento incomum — toda a mensagem é automaticamente recodificada em <strong>Unicode (UCS-2)</strong>. O Unicode suporta praticamente todos os caracteres que os seres humanos já escreveram, mas usa mais dados por caractere. A consequência é imediata: <strong>seu limite por segmento cai de 160 para 70 caracteres</strong>. Uma mensagem que você acreditava estar confortavelmente dentro do limite pode de repente se tornar dois ou três segmentos pagos.</p>
+<p>O <strong>contador de caracteres SMS</strong> do PostTruncate detecta a codificação da sua mensagem em tempo real, exibe se você está no modo GSM-7 ou Unicode e mostra o número atual de segmentos para que você sempre saiba exatamente o que está enviando.</p>
+
+<h2>A armadilha do emoji: um caractere, metade do limite</h2>
+<p>Este é o erro de SMS mais comum e mais caro. Você elabora uma mensagem profissional, adiciona um emoji de polegar para cima no final como um pensamento de última hora e, de repente, transforma uma mensagem de um segmento em uma de dois segmentos — dobrando o custo de SMS para cada destinatário.</p>
+<p><strong>Cada emoji força toda a mensagem para o modo Unicode</strong>, não apenas a parte após o emoji. Uma mensagem de 155 caracteres com um emoji na posição 156 não custa um SMS — custa três (155 caracteres ÷ 67 caracteres Unicode multiparte por segmento). O mesmo vale para aspas tipográficas (" "), travessões (—) e qualquer caractere que não esteja no alfabeto GSM-7.</p>
+
+<h2>Mensagens multipartes: o custo oculto por segmento</h2>
+<p>Quando uma mensagem excede um segmento, a rede da operadora deve dividi-la em várias partes e remontá-las no dispositivo do destinatário. Essa remontagem requer um pequeno <strong>cabeçalho em cada segmento</strong> — 7 bytes para GSM-7 e 3 bytes para Unicode — que reduz os caracteres utilizáveis por parte.</p>
+<p>Na prática: uma única mensagem GSM-7 comporta <strong>160 caracteres</strong>, mas uma mensagem GSM-7 de duas partes comporta apenas <strong>153 caracteres por segmento</strong> (306 no total). Uma única mensagem Unicode comporta <strong>70 caracteres</strong>, e uma de duas partes apenas <strong>67 por segmento</strong> (134 no total). Ultrapassar ligeiramente os 160 (ou 70) caracteres não apenas adiciona um segmento — também recalcula a capacidade de todos os segmentos anteriores.</p>
+
+<h2>Caracteres estendidos do GSM: os símbolos de custo duplo</h2>
+<p>Dentro do GSM-7, há um pequeno conjunto de caracteres que pertencem à <strong>tabela de caracteres estendida</strong>: <strong>€ [ ] { } \\ | ~</strong> e o circunflexo <strong>^</strong>. Cada um deles conta como <strong>dois caracteres</strong> no seu orçamento de SMS. Uma mensagem com quatro sinais de euro efetivamente usou 8 caracteres do limite GSM-7, não 4.</p>
+<p>O PostTruncate conta os caracteres estendidos com seu verdadeiro peso de dois slots, de modo que o número exibido é o que importa para a cobrança.</p>`,
+
+      it: `<h2>Le due codifiche SMS che controllano il tuo limite di caratteri</h2>
+<p>La maggior parte delle persone dà per scontato che un SMS contenga 160 caratteri. È vero — ma solo per i messaggi che usano la codifica <strong>GSM-7</strong>. GSM-7 è il set di caratteri che copre le lettere latine standard, le cifre, la punteggiatura e una manciata di simboli comuni. Quando ogni carattere del tuo messaggio appartiene a questo set, si applica il limite di 160 caratteri e un singolo messaggio costa esattamente un credito SMS.</p>
+<p>Nel momento in cui il tuo messaggio contiene un carattere fuori da GSM-7 — il più delle volte una emoji, una virgoletta tipografica o una lettera con un accento insolito — l'intero messaggio viene automaticamente ricodificato in <strong>Unicode (UCS-2)</strong>. Unicode supporta praticamente tutti i caratteri che gli esseri umani abbiano mai scritto, ma utilizza più dati per carattere. La conseguenza è immediata: <strong>il tuo limite per segmento scende da 160 a 70 caratteri</strong>. Un messaggio che credevi fosse comodamente entro il limite può diventare improvvisamente due o tre segmenti a pagamento.</p>
+<p>Il <strong>contatore di caratteri SMS</strong> di PostTruncate rileva la codifica del tuo messaggio in tempo reale, mostra se sei in modalità GSM-7 o Unicode e indica il numero di segmenti attuale, così sai sempre esattamente cosa stai inviando.</p>
+
+<h2>La trappola delle emoji: un carattere, la metà del limite</h2>
+<p>Questo è l'errore SMS più comune e più costoso. Scrivi un messaggio professionale, aggiungi una emoji pollice su alla fine come ripensamento e trasformi istantaneamente un messaggio a un segmento in uno a due segmenti — raddoppiando il costo SMS per ogni destinatario.</p>
+<p><strong>Ogni emoji forza l'intero messaggio in modalità Unicode</strong>, non solo la parte dopo la emoji. Un messaggio di 155 caratteri con una emoji in posizione 156 non costa un SMS — ne costa tre (155 caratteri ÷ 67 caratteri Unicode multipart per segmento). Lo stesso vale per le virgolette tipografiche (" "), i trattini em (—) e qualsiasi carattere non presente nell'alfabeto GSM-7.</p>
+
+<h2>Messaggi in più parti: il costo nascosto per segmento</h2>
+<p>Quando un messaggio supera un segmento, la rete dell'operatore deve dividerlo in più parti e riassemblarle sul dispositivo del destinatario. Questo riassemblaggio richiede una piccola <strong>intestazione in ogni segmento</strong> — 7 byte per GSM-7 e 3 byte per Unicode — che riduce i caratteri utilizzabili per parte.</p>
+<p>In pratica: un singolo messaggio GSM-7 contiene <strong>160 caratteri</strong>, ma un messaggio GSM-7 in due parti contiene solo <strong>153 caratteri per segmento</strong> (306 in totale). Un singolo messaggio Unicode contiene <strong>70 caratteri</strong>, e uno in due parti solo <strong>67 per segmento</strong> (134 in totale). Superare di poco i 160 (o 70) caratteri non aggiunge solo un segmento — ricalcola anche la capacità di tutti i segmenti precedenti.</p>
+
+<h2>Caratteri estesi GSM: i simboli a doppio costo</h2>
+<p>All'interno di GSM-7 esiste un piccolo insieme di caratteri che appartengono alla <strong>tabella dei caratteri estesi</strong>: <strong>€ [ ] { } \\ | ~</strong> e il caret <strong>^</strong>. Ognuno di questi conta come <strong>due caratteri</strong> nel tuo budget SMS. Un messaggio che contiene quattro segni euro ha effettivamente usato 8 caratteri del limite GSM-7, non 4.</p>
+<p>PostTruncate conta i caratteri estesi al loro vero peso di due slot, in modo che il numero visualizzato sia quello che conta per la fatturazione.</p>`,
+
+      nl: `<h2>De twee sms-coderingen die je tekenlimiet bepalen</h2>
+<p>De meeste mensen gaan ervan uit dat een sms 160 tekens bevat. Dat klopt — maar alleen voor berichten die gebruikmaken van <strong>GSM-7-codering</strong>. GSM-7 is de tekenset die standaard Latijnse letters, cijfers, leestekens en een handvol veelgebruikte symbolen dekt. Wanneer elk teken in je bericht tot deze set behoort, geldt de limiet van 160 tekens en kost een enkel bericht precies één sms-tegoed.</p>
+<p>Zodra je bericht een teken bevat buiten GSM-7 — het vaakst een emoji, een typografisch aanhalingsteken of een letter met een ongebruikelijk accent — wordt het volledige bericht automatisch hergecodeerd naar <strong>Unicode (UCS-2)</strong>. Unicode ondersteunt vrijwel elk teken dat mensen ooit hebben geschreven, maar gebruikt meer data per teken. Het gevolg is onmiddellijk: <strong>je limiet per segment daalt van 160 naar 70 tekens</strong>. Een bericht waarvan je dacht dat het ruimschoots binnen de limiet viel, kan plotseling twee of drie betaalde segmenten worden.</p>
+<p>PostTruncates <strong>sms-tekenteller</strong> detecteert de codering van je bericht in real time, toont of je in GSM-7- of Unicode-modus bent, en geeft het huidige segmentaantal weer zodat je altijd precies weet wat je verstuurt.</p>
+
+<h2>De emoji-val: één teken, de helft van de limiet</h2>
+<p>Dit is de meest voorkomende en duurste sms-fout. Je schrijft een professioneel bericht, voegt als nagedachte aan het einde een duim-omhoog-emoji toe, en transformeert daarmee onmiddellijk een bericht van één segment in een bericht van twee segmenten — waarmee je de sms-kosten per ontvanger verdubbelt.</p>
+<p><strong>Elke emoji dwingt het volledige bericht naar Unicode-modus</strong>, niet alleen het deel na de emoji. Een bericht van 155 tekens met één emoji op positie 156 kost niet één sms — het kost er drie (155 tekens ÷ 67 Unicode-multiparttekens per segment). Hetzelfde geldt voor typografische aanhalingstekens (" "), gedachtestreepjes (—) en elk teken dat niet in het GSM-7-alfabet staat.</p>
+
+<h2>Meerdelige berichten: de verborgen kosten per segment</h2>
+<p>Wanneer een bericht één segment overschrijdt, moet het netwerk van de provider het in meerdere delen splitsen en op het apparaat van de ontvanger weer samenvoegen. Dit samenvoegen vereist een kleine <strong>header in elk segment</strong> — 7 bytes voor GSM-7 en 3 bytes voor Unicode — waardoor de bruikbare tekens per deel worden verminderd.</p>
+<p>In de praktijk: een enkel GSM-7-bericht bevat <strong>160 tekens</strong>, maar een tweedelig GSM-7-bericht bevat slechts <strong>153 tekens per segment</strong> (306 in totaal). Een enkel Unicode-bericht bevat <strong>70 tekens</strong>, en een tweedelig bericht slechts <strong>67 per segment</strong> (134 in totaal). Iets boven de 160 (of 70) tekens gaan voegt niet alleen een segment toe — het herberekent ook de capaciteit van alle voorgaande segmenten.</p>
+
+<h2>Uitgebreide GSM-tekens: de symbolen met dubbele kosten</h2>
+<p>Binnen GSM-7 bestaat er een kleine set tekens die tot de <strong>uitgebreide tekentabel</strong> behoren: <strong>€ [ ] { } \\ | ~</strong> en het dakje <strong>^</strong>. Elk van deze telt als <strong>twee tekens</strong> in je sms-budget, niet als één. Een bericht met vier eurotekens heeft effectief 8 tekens van de GSM-7-limiet verbruikt, niet 4.</p>
+<p>PostTruncate telt uitgebreide tekens op hun werkelijke gewicht van twee slots, zodat het weergegeven aantal het getal is dat telt voor de facturering.</p>`,
+
+      ja: `<h2>文字制限を決める2つのSMSエンコーディング</h2>
+<p>ほとんどの人はSMSが160文字まで送れると思っています。それは正しいですが、<strong>GSM-7エンコーディング</strong>を使うメッセージに限った話です。GSM-7は標準的なラテン文字、数字、句読点、一般的な記号をカバーする文字セットです。メッセージのすべての文字がこのセットに属している場合、160文字の制限が適用され、1通のメッセージは正確に1SMSクレジットを消費します。</p>
+<p>メッセージにGSM-7外の文字が含まれた瞬間——最もよくあるのは絵文字、カーリークオーテーションマーク、珍しいアクセント付きの文字——メッセージ全体が自動的に<strong>Unicode（UCS-2）</strong>で再エンコードされます。Unicodeは人類が書いたほぼすべての文字をサポートしますが、1文字あたりのデータ使用量が多くなります。結果はすぐに現れます。<strong>1セグメントあたりの制限が160文字から70文字に下がります</strong>。制限内に余裕があると思っていたメッセージが、突然2〜3セグメントの有料送信になることがあります。</p>
+<p>PostTruncateの<strong>SMS文字数カウンター</strong>はメッセージのエンコーディングをリアルタイムで検出し、GSM-7モードかUnicodeモードかを表示し、現在のセグメント数を示します。送信前に正確な内容と料金を把握できます。</p>
+
+<h2>絵文字の罠：1文字で制限が半分に</h2>
+<p>これはSMSで最もよくある、そして最もコストがかかるミスです。プロフェッショナルなメッセージを作成し、思いつきで最後に👍の絵文字を追加した瞬間、1セグメントのメッセージが2セグメントになり、すべての受信者へのSMSコストが2倍になります。</p>
+<p><strong>絵文字はメッセージ全体をUnicodeモードに強制します</strong>——絵文字より後の部分だけでなく、メッセージ全体です。156文字目に絵文字がある155文字のメッセージは1通のSMSでは送れません——3通分かかります（155文字 ÷ Unicodeマルチパートの67文字/セグメント）。カーリークオート（" "）、ダッシュ（—）、GSM-7アルファベットにない文字でも同じことが起きます。</p>
+
+<h2>マルチパートメッセージ：隠れたセグメントあたりのコスト</h2>
+<p>メッセージが1セグメントを超えると、キャリアネットワークはそれを複数の部分に分割し、受信者のデバイスで再組み立てする必要があります。この再組み立てには各セグメントに小さな<strong>ヘッダー</strong>が必要です——GSM-7では7バイト、Unicodeでは3バイト——これにより各部分で使用できる文字数が減ります。</p>
+<p>具体的には：GSM-7の1セグメントメッセージは<strong>160文字</strong>ですが、2パートのGSM-7メッセージは<strong>1セグメントあたり153文字</strong>（合計306文字）になります。Unicodeの1セグメントは<strong>70文字</strong>で、2パートでは<strong>1セグメントあたり67文字</strong>（合計134文字）です。160文字（または70文字）をほんの少し超えるだけで、セグメントが1つ増えるだけでなく、すべての既存セグメントの容量も再計算されます。</p>
+
+<h2>GSM拡張文字：2スロット消費する記号</h2>
+<p>GSM-7の中に、<strong>拡張文字テーブル</strong>に属する小さな文字セットがあります。<strong>€ [ ] { } \\ | ~</strong>とキャレット<strong>^</strong>です。これらはSMSの文字数カウントで<strong>それぞれ2文字分</strong>として数えられます。ユーロ記号が4つあるメッセージは、4文字ではなく8文字をGSM-7の制限から消費したことになります。</p>
+<p>PostTruncateは拡張文字を正確に2スロット分の重みでカウントするため、表示される文字数は請求に直結する正確な数値です。</p>`,
+
+      zh: `<h2>决定字符限制的两种短信编码方式</h2>
+<p>大多数人以为短信能发160个字符。这是对的——但仅限于使用<strong>GSM-7编码</strong>的消息。GSM-7是覆盖标准拉丁字母、数字、标点符号和少量常见符号的字符集。当消息中所有字符都属于这个字符集时，160字符的限制生效，一条短信恰好消耗一个短信套餐额度。</p>
+<p>一旦消息包含GSM-7以外的字符——最常见的是表情符号、弯引号或带有不常见重音符号的字母——整条消息会自动以<strong>Unicode（UCS-2）</strong>重新编码。Unicode支持人类有史以来书写的几乎所有字符，但每个字符消耗更多数据。结果立竿见影：<strong>每段字符上限从160个降至70个</strong>。你以为安全在限制范围内的消息，可能突然变成两三个付费短信段。</p>
+<p>PostTruncate的<strong>SMS字符计数器</strong>实时检测消息的编码方式，显示当前处于GSM-7模式还是Unicode模式，并实时显示短信段数，让你在发送前始终清楚地知道发送内容和费用。</p>
+
+<h2>表情符号陷阱：一个字符，限制减半</h2>
+<p>这是最常见也是最昂贵的短信错误。你起草了一条专业消息，临时在末尾加了一个👍表情，瞬间将一段短信变成两段——对每位接收者的短信成本翻倍。</p>
+<p><strong>每个表情符号都会将整条消息强制切换到Unicode模式</strong>——不只是表情符号之后的部分，而是整条消息。一条156位置带有一个表情符号的155字符消息，不是1条短信的费用——而是3条（155字符 ÷ Unicode多段每段67字符）。弯引号（" "）、破折号（—）以及任何不在GSM-7字母表中的字符都会触发相同情况。</p>
+
+<h2>多段短信：隐藏的每段费用</h2>
+<p>当消息超过一段时，运营商网络必须将其拆分为多个部分，并在接收方设备上重新组装。这一重组过程需要在每段中添加一个小型<strong>信息头</strong>——GSM-7为7字节，Unicode为3字节——这减少了每部分可用的字符数。</p>
+<p>实际效果：单段GSM-7消息容纳<strong>160个字符</strong>，但两段GSM-7消息每段只能容纳<strong>153个字符</strong>（共306个）。单段Unicode消息容纳<strong>70个字符</strong>，两段则每段只有<strong>67个字符</strong>（共134个）。略微超过160个（或70个）字符，不只是增加一段——还会重新计算所有已有段的容量。</p>
+
+<h2>GSM扩展字符：消耗双倍槽位的符号</h2>
+<p>GSM-7中有一小组字符属于<strong>扩展字符表</strong>：<strong>€ [ ] { } \\ | ~</strong>以及脱字符<strong>^</strong>。这些字符在短信额度计算中各占<strong>两个字符</strong>，而非一个。包含四个欧元符号的消息，实际上消耗了GSM-7限制中的8个字符槽位，而非4个。</p>
+<p>PostTruncate以真实的双槽位权重计算扩展字符，因此显示的数字正是计费所依据的数字。</p>`,
+
+      da: `<h2>De to SMS-kodningsmetoder der styrer din tegngrænse</h2>
+<p>De fleste antager, at en SMS rummer 160 tegn. Det passer — men kun for beskeder der bruger <strong>GSM-7-kodning</strong>. GSM-7 er det tegnsæt der dækker standard latinske bogstaver, tal, tegnsætning og en håndfuld almindelige symboler. Når hvert tegn i din besked tilhører dette sæt, gælder grænsen på 160 tegn, og en enkelt besked koster præcis én SMS-kredit.</p>
+<p>I det øjeblik din besked indeholder et tegn uden for GSM-7 — oftest en emoji, et typografisk anførselstegn eller et bogstav med en usædvanlig accent — omsættes hele beskeden automatisk til <strong>Unicode (UCS-2)</strong>. Unicode understøtter stort set alle tegn mennesker nogensinde har skrevet, men bruger mere data per tegn. Konsekvensen er øjeblikkelig: <strong>din per-segment-grænse falder fra 160 til 70 tegn</strong>. En besked du troede var godt inden for grænsen, kan pludselig blive to eller tre betalte segmenter.</p>
+<p>PostTruncates <strong>SMS-tegntæller</strong> registrerer kodningen af din besked i realtid, viser om du er i GSM-7- eller Unicode-tilstand, og angiver det aktuelle segmentantal så du altid ved præcis, hvad du sender.</p>
+
+<h2>Emoji-fælden: ét tegn, halvt grænsen</h2>
+<p>Dette er den mest almindelige og dyreste SMS-fejl. Du udarbejder en professionel besked, tilføjer en tommelfinger-op-emoji til sidst som en eftertanke, og forvandler øjeblikkeligt en enkeltsegment-besked til en tosegment-besked — og fordobler din SMS-pris pr. modtager.</p>
+<p><strong>Enhver emoji tvinger hele beskeden til Unicode-tilstand</strong> — ikke kun den del der følger efter emojien. En besked på 155 tegn med én emoji på position 156 koster ikke én SMS — den koster tre (155 tegn ÷ 67 Unicode-multipart-tegn per segment). Det samme gælder for typografiske anførselstegn (" "), tankestreger (—) og ethvert tegn der ikke er i GSM-7-alfabetet.</p>
+
+<h2>Flerdelede beskeder: den skjulte pris per segment</h2>
+<p>Når en besked overstiger ét segment, skal operatørnetværket dele den i flere dele og samle den igen på modtagerens enhed. Denne samling kræver en lille <strong>header i hvert segment</strong> — 7 bytes for GSM-7 og 3 bytes for Unicode — som reducerer de anvendelige tegn per del.</p>
+<p>I praksis: en enkelt GSM-7-besked rummer <strong>160 tegn</strong>, men en todelt GSM-7-besked rummer kun <strong>153 tegn per segment</strong> (306 i alt). En enkelt Unicode-besked rummer <strong>70 tegn</strong>, og en todelt kun <strong>67 per segment</strong> (134 i alt). At gå bare lidt over 160 (eller 70) tegn tilføjer ikke kun ét segment — det genberegner også kapaciteten for alle tidligere segmenter.</p>
+
+<h2>Udvidede GSM-tegn: symbolerne med dobbeltomkostning</h2>
+<p>Inden for GSM-7 findes der et lille sæt tegn der hører til den <strong>udvidede tegntabel</strong>: <strong>€ [ ] { } \\ | ~</strong> og cirkumflekset <strong>^</strong>. Hvert af disse tæller som <strong>to tegn</strong> i dit SMS-budget, ikke ét. En besked der indeholder fire euro-tegn, har effektivt brugt 8 tegn af GSM-7-grænsen, ikke 4.</p>
+<p>PostTruncate tæller udvidede tegn til deres sande vægt på to slots, så det viste antal er det tal der betyder noget for opkrævningen.</p>`,
+    },
+  },
+  {
+    id: 'google-serp',
+    editorAnchor: 'workspace',
+    lastUpdated: '2026-06-05',
+    platformLimits:
+      'Page title: 60 characters before Google truncates in search results (~600px pixel width), meta description: 155 characters before truncation in search snippets',
+
+    slugs: {
+      en: 'google-serp-preview',
+      es: 'simulador-serp-google',
+      de: 'google-serp-vorschau',
+      fr: 'apercu-serp-google',
+      pt: 'simulador-serp-google',
+      it: 'anteprima-serp-google',
+      nl: 'google-serp-voorbeeld',
+      ja: 'google-serp-pureza',
+      zh: 'google-serp-mo-ni-qi',
+      da: 'google-serp-forhaandsvisning',
+    },
+
+    schemaName: {
+      en: 'Google SERP Preview Tool',
+      es: 'Simulador SERP de Google',
+      de: 'Google SERP Vorschau-Tool',
+      fr: 'Outil d\'aperçu SERP Google',
+      pt: 'Simulador SERP do Google',
+      it: 'Strumento di Anteprima SERP Google',
+      nl: 'Google SERP Voorbeeld Tool',
+      ja: 'Google SERPプレビューツール',
+      zh: 'Google SERP 预览工具',
+      da: 'Google SERP Forhåndsvisningsværktøj',
+    },
+
+    titles: {
+      en: 'Google SERP Preview — Free Title Tag & Meta Description Checker',
+      es: 'Simulador SERP de Google — Comprueba title tag y meta descripción gratis',
+      de: 'Google SERP Vorschau — Title Tag und Meta Description kostenlos prüfen',
+      fr: 'Aperçu SERP Google — Vérifiez title tag et meta description gratuitement',
+      pt: 'Simulador SERP do Google — Verifique title tag e meta description grátis',
+      it: 'Anteprima SERP Google — Controlla title tag e meta description gratis',
+      nl: 'Google SERP Voorbeeld — Controleer title tag en meta description gratis',
+      ja: 'Google SERPプレビュー — タイトルタグとメタディスクリプションを無料チェック',
+      zh: 'Google SERP预览 — 免费检查标题标签与元描述',
+      da: 'Google SERP Forhåndsvisning — Tjek title tag og meta description gratis',
+    },
+
+    metaDescriptions: {
+      en: 'Free Google SERP preview tool. Check your title tag stays under 60 chars and meta description under 155, and see exactly how your page looks in Google search.',
+      es: 'Simulador SERP de Google gratis. Comprueba que tu title tag no supere los 60 caracteres y la meta descripción los 155, y mira cómo aparecerá tu página en Google.',
+      de: 'Kostenloses Google SERP Vorschau-Tool. Prüfe ob dein Title Tag unter 60 Zeichen und deine Meta Description unter 155 bleibt, und sieh wie deine Seite in Google erscheint.',
+      fr: 'Outil d\'aperçu SERP Google gratuit. Vérifiez que votre title tag reste sous 60 caractères et la meta description sous 155, et voyez comment votre page apparaît dans Google.',
+      pt: 'Simulador SERP do Google gratuito. Verifique se o title tag fica abaixo de 60 caracteres e a meta description abaixo de 155, e veja como sua página aparece no Google.',
+      it: 'Strumento di anteprima SERP Google gratuito. Controlla che il title tag resti sotto i 60 caratteri e la meta description sotto i 155, e guarda come appare la tua pagina su Google.',
+      nl: 'Gratis Google SERP voorbeeld tool. Controleer of je title tag onder 60 tekens en je meta description onder 155 blijft, en zie hoe je pagina in Google verschijnt.',
+      ja: '無料のGoogle SERPプレビューツール。タイトルタグが60文字以内、メタディスクリプションが155文字以内かを確認し、ページがGoogle検索でどう表示されるかを正確にプレビュー。',
+      zh: '免费Google SERP预览工具。检查标题标签是否在60字符以内、元描述是否在155字符以内，并查看页面在Google搜索中的显示效果。',
+      da: 'Gratis Google SERP forhåndsvisningsværktøj. Tjek at dit title tag holder sig under 60 tegn og meta description under 155, og se hvordan din side vises i Google.',
+    },
+
+    content: {
+      en: `<h2>Why the title tag character limit decides your click-through rate</h2>
+<p>Your page's title tag is the single most visible element in a Google search result — the blue headline that users read before deciding whether to click. Google displays titles up to roughly <strong>600 pixels wide</strong>, which translates to approximately <strong>60 characters</strong> for average-weight Latin text. Beyond that, the title is cut off with an ellipsis and the end of your message disappears.</p>
+<p>Truncated titles consistently underperform complete ones. When a user can't read the full title, they lose the context that would have made them click. Worse, if the keyword that matches their search query is positioned toward the end of a long title, it may be the exact word that gets cut — eliminating the relevance signal that would have earned the click.</p>
+<p>PostTruncate's <strong>Google SERP preview tool</strong> shows your title in a live Google-style snippet as you type. The preview updates instantly, so you can see whether your title fits cleanly or trails off with "…" before you publish the page.</p>
+
+<h2>Meta description length: 155 characters and the truncation risk</h2>
+<p>The meta description is the grey body text beneath the title in a Google search snippet. It doesn't directly affect rankings, but it has a significant impact on <strong>click-through rate</strong> — the proportion of users who see your result and choose to visit your page. A well-written meta description tells the user exactly what they'll find on your page and why it's worth their click.</p>
+<p>Google truncates meta descriptions at approximately <strong>155 characters</strong> on desktop (shorter on mobile). A description that runs to 200 characters may look complete in your CMS, but in the actual search result it ends mid-sentence — cutting off the call to action, the key benefit statement, or the specific detail that would have differentiated your result from competitors.</p>
+<p>PostTruncate's <strong>meta description length checker</strong> counts your characters in real time and previews the description exactly as it will appear in a Google snippet, including the truncation point if you go over.</p>
+
+<h2>How Google actually decides what to show in snippets</h2>
+<p>Google doesn't always use your meta description verbatim. When the search query matches a passage on your page more closely than your meta description, Google may replace your description with an extracted snippet from the page body. This is not something you can fully control, but you can influence it. <strong>A meta description that reads like natural search intent — answering the query directly — is more likely to be preserved by Google</strong> than a generic marketing tagline.</p>
+<p>The same principle applies to titles. If your title tag is too generic or too long, Google may rewrite it entirely. Keeping your title specific, under 60 characters, and front-loaded with the primary keyword gives Google less reason to override it.</p>
+
+<h2>The pixel-width nuance: why character count isn't the full story</h2>
+<p>Google measures title width in pixels, not characters. A title composed entirely of narrow letters like "i", "l", and "t" can fit more characters than a title using wide letters like "W", "M", and "m". PostTruncate tracks both character count and estimated pixel width simultaneously, flagging titles that are safe on character count but may still truncate due to wide characters. This is the same calculation Google uses — not a generic approximation.</p>
+
+<h2>Write once, preview before you publish</h2>
+<p>Most SEO writers draft in a CMS or spreadsheet, switch to a separate SERP preview tool, copy the text, check, adjust, then paste back. PostTruncate integrates the <strong>live SERP preview</strong> directly into the writing editor, so the entire workflow happens in one place. Type your title and description, see the Google snippet update in real time, confirm it looks right, and copy it to your CMS — no tab switching required.</p>`,
+
+      es: `<h2>Por qué el límite de caracteres del title tag decide tu tasa de clics</h2>
+<p>El title tag de tu página es el elemento más visible en un resultado de búsqueda de Google: el titular azul que los usuarios leen antes de decidir si hacen clic. Google muestra títulos de hasta aproximadamente <strong>600 píxeles de ancho</strong>, lo que equivale a unos <strong>60 caracteres</strong> para texto latino de peso medio. A partir de ahí, el título se corta con puntos suspensivos y el final de tu mensaje desaparece.</p>
+<p>Los títulos truncados tienen un rendimiento consistentemente inferior a los completos. Cuando un usuario no puede leer el título completo, pierde el contexto que le habría llevado a hacer clic. Lo que es peor, si la palabra clave que coincide con su búsqueda está hacia el final de un título largo, puede ser exactamente la palabra que se corte, eliminando la señal de relevancia que habría ganado el clic.</p>
+<p>El <strong>simulador SERP de Google</strong> de PostTruncate muestra tu título en un fragmento de estilo Google en tiempo real mientras escribes. La vista previa se actualiza al instante, para que veas si tu título encaja limpiamente o se corta con "…" antes de publicar la página.</p>
+
+<h2>Longitud de la meta descripción: 155 caracteres y el riesgo de truncamiento</h2>
+<p>La meta descripción es el texto gris bajo el título en un fragmento de búsqueda de Google. No afecta directamente al posicionamiento, pero tiene un impacto significativo en la <strong>tasa de clics</strong>. Una meta descripción bien escrita dice al usuario exactamente qué encontrará en tu página y por qué vale la pena su clic.</p>
+<p>Google trunca las meta descripciones a aproximadamente <strong>155 caracteres</strong> en escritorio (menos en móvil). Una descripción de 200 caracteres puede parecer completa en tu CMS, pero en el resultado de búsqueda real termina a mitad de frase, cortando la llamada a la acción, el beneficio clave o el detalle específico que habría diferenciado tu resultado del de los competidores.</p>
+<p>El <strong>comprobador de longitud de meta descripción</strong> de PostTruncate cuenta tus caracteres en tiempo real y muestra la descripción exactamente como aparecerá en un fragmento de Google, incluyendo el punto de truncamiento si te excedes.</p>
+
+<h2>Cómo decide realmente Google lo que muestra en los fragmentos</h2>
+<p>Google no siempre usa tu meta descripción tal cual. Cuando la consulta de búsqueda coincide más con un pasaje de tu página que con tu meta descripción, Google puede sustituirla por un fragmento extraído del cuerpo de la página. <strong>Una meta descripción que responde directamente a la consulta tiene más probabilidades de ser conservada por Google</strong> que un tagline de marketing genérico.</p>
+
+<h2>El matiz del ancho en píxeles: por qué el recuento de caracteres no lo es todo</h2>
+<p>Google mide el ancho del título en píxeles, no en caracteres. Un título compuesto principalmente de letras estrechas puede admitir más caracteres que uno con letras anchas. PostTruncate rastrea tanto el recuento de caracteres como el ancho estimado en píxeles simultáneamente, marcando los títulos que son seguros en recuento de caracteres pero que aún podrían truncarse por letras anchas.</p>
+
+<h2>Escribe una vez, previsualiza antes de publicar</h2>
+<p>PostTruncate integra la <strong>vista previa SERP en vivo</strong> directamente en el editor de escritura. Escribe tu título y descripción, observa cómo se actualiza el fragmento de Google en tiempo real, confirma que se ve bien y cópialo a tu CMS, sin cambiar de pestaña.</p>`,
+
+      de: `<h2>Warum das Zeichen-Limit des Title Tags deine Klickrate bestimmt</h2>
+<p>Der Title Tag deiner Seite ist das sichtbarste Element in einem Google-Suchergebnis — die blaue Überschrift, die Nutzerinnen und Nutzer lesen, bevor sie entscheiden, ob sie klicken. Google zeigt Titel bis zu einer Breite von etwa <strong>600 Pixeln</strong> an, was ungefähr <strong>60 Zeichen</strong> für lateinischen Text mit Durchschnittsbreite entspricht. Darüber hinaus wird der Titel mit einem Auslassungszeichen abgeschnitten.</p>
+<p>Abgeschnittene Titel performen konsequent schlechter als vollständige. Wenn Nutzerinnen und Nutzer den vollständigen Titel nicht lesen können, fehlt ihnen der Kontext, der sie zum Klicken bewogen hätte. Noch schlimmer: Wenn das Keyword, das ihrer Suchanfrage entspricht, am Ende eines langen Titels steht, kann es genau das Wort sein, das wegfällt — und damit das Relevanzsignal, das den Klick verdient hätte.</p>
+<p>PostTruncates <strong>Google SERP Vorschau-Tool</strong> zeigt deinen Titel in einem Live-Google-Snippet-Stil während du tippst. Die Vorschau aktualisiert sich sofort, sodass du siehst, ob dein Titel sauber passt oder mit „…" endet, bevor du die Seite veröffentlichst.</p>
+
+<h2>Meta Description-Länge: 155 Zeichen und das Abschneidungsrisiko</h2>
+<p>Die Meta Description ist der graue Fließtext unter dem Titel in einem Google-Suchergebnis. Sie beeinflusst das Ranking nicht direkt, hat aber einen erheblichen Einfluss auf die <strong>Klickrate</strong>. Eine gut formulierte Meta Description sagt Nutzenden genau, was sie auf deiner Seite finden werden und warum es ihren Klick wert ist.</p>
+<p>Google schneidet Meta Descriptions bei ungefähr <strong>155 Zeichen</strong> auf dem Desktop ab (kürzer auf Mobilgeräten). Eine Beschreibung mit 200 Zeichen mag in deinem CMS vollständig aussehen, endet im tatsächlichen Suchergebnis aber mitten im Satz — und schneidet damit den Call-to-Action, die Kernbotschaft oder das spezifische Detail ab, das dein Ergebnis von Wettbewerbern unterschieden hätte.</p>
+<p>PostTruncates <strong>Meta Description Längenchecker</strong> zählt deine Zeichen in Echtzeit und zeigt die Beschreibung genau so in der Vorschau, wie sie in einem Google-Snippet erscheinen wird, einschließlich des Abschneidepunkts wenn du das Limit überschreitest.</p>
+
+<h2>Wie Google wirklich entscheidet, was in Snippets angezeigt wird</h2>
+<p>Google verwendet deine Meta Description nicht immer wörtlich. Wenn die Suchanfrage besser zu einem Textpassage auf deiner Seite passt als zu deiner Meta Description, kann Google sie durch einen extrahierten Snippet aus dem Seiteninhalt ersetzen. <strong>Eine Meta Description, die wie eine natürliche Suchanfrage klingt — die Anfrage direkt beantwortet — wird von Google eher beibehalten</strong> als ein generischer Marketing-Slogan.</p>
+
+<h2>Die Pixel-Breiten-Nuance: Warum Zeichenanzahl nicht alles ist</h2>
+<p>Google misst die Titelbreite in Pixeln, nicht in Zeichen. Ein Titel aus überwiegend schmalen Buchstaben kann mehr Zeichen aufnehmen als einer mit breiten Buchstaben. PostTruncate verfolgt gleichzeitig Zeichenzahl und geschätzte Pixelbreite und kennzeichnet Titel, die beim Zeichencount sicher sind, aber durch breite Zeichen noch immer abgeschnitten werden könnten.</p>
+
+<h2>Einmal schreiben, vor der Veröffentlichung prüfen</h2>
+<p>PostTruncate integriert die <strong>Live-SERP-Vorschau</strong> direkt in den Schreibeditor. Tippe Titel und Beschreibung ein, sieh das Google-Snippet in Echtzeit, bestätige das Ergebnis und kopiere es in dein CMS — ohne Tabs wechseln zu müssen.</p>`,
+
+      fr: `<h2>Pourquoi la limite de caractères du title tag détermine votre taux de clics</h2>
+<p>Le title tag de votre page est l'élément le plus visible dans un résultat de recherche Google — le titre bleu que les utilisateurs lisent avant de décider de cliquer. Google affiche les titres jusqu'à environ <strong>600 pixels de large</strong>, ce qui correspond à environ <strong>60 caractères</strong> pour du texte latin de poids moyen. Au-delà, le titre est tronqué avec des points de suspension.</p>
+<p>Les titres tronqués sous-performent systématiquement par rapport aux titres complets. Quand un utilisateur ne peut pas lire le titre entier, il perd le contexte qui l'aurait incité à cliquer. Pire encore, si le mot-clé correspondant à sa recherche se trouve vers la fin d'un long titre, c'est peut-être exactement le mot qui sera coupé — supprimant le signal de pertinence qui aurait décroché le clic.</p>
+<p>L'<strong>outil d'aperçu SERP Google</strong> de PostTruncate affiche votre titre dans un extrait de style Google en temps réel pendant que vous tapez. L'aperçu se met à jour instantanément, pour que vous voyiez si votre titre s'intègre proprement ou se termine par "…" avant de publier la page.</p>
+
+<h2>Longueur de la méta description : 155 caractères et le risque de troncature</h2>
+<p>La méta description est le texte gris sous le titre dans un extrait de recherche Google. Elle n'affecte pas directement le classement, mais a un impact significatif sur le <strong>taux de clics</strong>. Une méta description bien rédigée dit précisément à l'utilisateur ce qu'il trouvera sur votre page et pourquoi ça vaut son clic.</p>
+<p>Google tronque les méta descriptions à environ <strong>155 caractères</strong> sur bureau (moins sur mobile). Une description de 200 caractères peut sembler complète dans votre CMS, mais dans le résultat de recherche réel, elle se termine en milieu de phrase — coupant l'appel à l'action, le bénéfice clé ou le détail spécifique qui aurait différencié votre résultat de ceux des concurrents.</p>
+<p>Le <strong>vérificateur de longueur de méta description</strong> de PostTruncate compte vos caractères en temps réel et affiche la description exactement telle qu'elle apparaîtra dans un extrait Google, y compris le point de troncature si vous dépassez la limite.</p>
+
+<h2>Comment Google décide réellement ce qui s'affiche dans les extraits</h2>
+<p>Google n'utilise pas toujours votre méta description telle quelle. Quand la requête de recherche correspond mieux à un passage de votre page qu'à votre méta description, Google peut la remplacer par un extrait tiré du corps de la page. <strong>Une méta description qui ressemble à une intention de recherche naturelle — répondant directement à la requête — a plus de chances d'être conservée par Google</strong> qu'un slogan marketing générique.</p>
+
+<h2>La nuance de la largeur en pixels : pourquoi le nombre de caractères ne suffit pas</h2>
+<p>Google mesure la largeur du titre en pixels, pas en caractères. Un titre composé principalement de lettres étroites peut accueillir plus de caractères qu'un titre avec des lettres larges. PostTruncate suit simultanément le nombre de caractères et la largeur estimée en pixels, signalant les titres qui sont sûrs en nombre de caractères mais qui pourraient encore être tronqués en raison de lettres larges.</p>
+
+<h2>Rédigez une fois, prévisualisez avant de publier</h2>
+<p>PostTruncate intègre l'<strong>aperçu SERP en direct</strong> directement dans l'éditeur de rédaction. Tapez votre titre et votre description, regardez l'extrait Google se mettre à jour en temps réel, confirmez le résultat et copiez-le dans votre CMS — sans changer d'onglet.</p>`,
+
+      pt: `<h2>Por que o limite de caracteres do title tag decide sua taxa de cliques</h2>
+<p>O title tag da sua página é o elemento mais visível em um resultado de busca do Google — o título azul que os usuários leem antes de decidir clicar. O Google exibe títulos de até aproximadamente <strong>600 pixels de largura</strong>, o que equivale a cerca de <strong>60 caracteres</strong> para texto latino de peso médio. Além disso, o título é cortado com reticências.</p>
+<p>Títulos truncados consistentemente têm desempenho inferior aos completos. Quando um usuário não consegue ler o título completo, perde o contexto que o teria levado a clicar. Pior ainda, se a palavra-chave que corresponde à busca estiver no final de um título longo, pode ser exatamente a palavra que é cortada — eliminando o sinal de relevância que teria conquistado o clique.</p>
+<p>A <strong>ferramenta de simulação SERP do Google</strong> do PostTruncate exibe seu título em um snippet no estilo Google em tempo real enquanto você digita. A visualização é atualizada instantaneamente, para que você veja se seu título se encaixa com clareza ou termina com "…" antes de publicar a página.</p>
+
+<h2>Comprimento da meta description: 155 caracteres e o risco de truncamento</h2>
+<p>A meta description é o texto cinza abaixo do título em um snippet de busca do Google. Ela não afeta diretamente o ranking, mas tem um impacto significativo na <strong>taxa de cliques</strong>. Uma meta description bem escrita diz ao usuário exatamente o que encontrará na sua página e por que vale o clique.</p>
+<p>O Google trunca as meta descriptions em aproximadamente <strong>155 caracteres</strong> no desktop (menos no mobile). Uma descrição de 200 caracteres pode parecer completa no seu CMS, mas no resultado de busca real termina no meio de uma frase — cortando a chamada para ação, o benefício principal ou o detalhe específico que diferenciaria seu resultado dos concorrentes.</p>
+<p>O <strong>verificador de comprimento de meta description</strong> do PostTruncate conta seus caracteres em tempo real e exibe a descrição exatamente como aparecerá em um snippet do Google, incluindo o ponto de truncamento se você ultrapassar o limite.</p>
+
+<h2>Como o Google decide o que mostrar nos snippets</h2>
+<p>O Google nem sempre usa sua meta description literalmente. Quando a consulta de busca corresponde melhor a um trecho da sua página do que à sua meta description, o Google pode substituí-la por um snippet extraído do corpo da página. <strong>Uma meta description que soa como intenção de busca natural — respondendo diretamente à consulta — tem mais chances de ser preservada pelo Google</strong> do que um slogan de marketing genérico.</p>
+
+<h2>A nuance da largura em pixels: por que a contagem de caracteres não é tudo</h2>
+<p>O Google mede a largura do título em pixels, não em caracteres. Um título composto principalmente de letras estreitas pode caber mais caracteres do que um com letras largas. O PostTruncate rastreia simultaneamente a contagem de caracteres e a largura estimada em pixels, sinalizando títulos que estão seguros na contagem de caracteres, mas que ainda podem ser truncados devido a letras largas.</p>
+
+<h2>Escreva uma vez, visualize antes de publicar</h2>
+<p>O PostTruncate integra a <strong>visualização SERP ao vivo</strong> diretamente no editor de escrita. Digite seu título e descrição, veja o snippet do Google atualizar em tempo real, confirme que está correto e copie para o seu CMS — sem trocar de aba.</p>`,
+
+      it: `<h2>Perché il limite di caratteri del title tag determina il tuo tasso di clic</h2>
+<p>Il title tag della tua pagina è l'elemento più visibile in un risultato di ricerca Google — il titolo blu che gli utenti leggono prima di decidere se cliccare. Google mostra i titoli fino a circa <strong>600 pixel di larghezza</strong>, equivalente a circa <strong>60 caratteri</strong> per testo latino di peso medio. Oltre questo limite, il titolo viene tagliato con i puntini di sospensione.</p>
+<p>I titoli troncati performano sistematicamente peggio di quelli completi. Quando un utente non riesce a leggere il titolo per intero, perde il contesto che lo avrebbe spinto a cliccare. Peggio ancora, se la parola chiave che corrisponde alla sua ricerca si trova verso la fine di un titolo lungo, potrebbe essere esattamente la parola che viene tagliata — eliminando il segnale di rilevanza che avrebbe guadagnato il clic.</p>
+<p>Lo <strong>strumento di anteprima SERP Google</strong> di PostTruncate mostra il tuo titolo in uno snippet in stile Google in tempo reale mentre scrivi. L'anteprima si aggiorna all'istante, così puoi vedere se il tuo titolo si adatta perfettamente o finisce con "…" prima di pubblicare la pagina.</p>
+
+<h2>Lunghezza della meta description: 155 caratteri e il rischio di troncatura</h2>
+<p>La meta description è il testo grigio sotto il titolo in uno snippet di ricerca Google. Non influisce direttamente sul posizionamento, ma ha un impatto significativo sul <strong>tasso di clic</strong>. Una meta description ben scritta dice all'utente esattamente cosa troverà sulla tua pagina e perché vale il suo clic.</p>
+<p>Google tronca le meta description a circa <strong>155 caratteri</strong> su desktop (meno su mobile). Una descrizione di 200 caratteri può sembrare completa nel tuo CMS, ma nel risultato di ricerca reale finisce a metà frase — tagliando la call to action, il beneficio principale o il dettaglio specifico che avrebbe differenziato il tuo risultato dai concorrenti.</p>
+<p>Il <strong>controllore della lunghezza della meta description</strong> di PostTruncate conta i tuoi caratteri in tempo reale e mostra la descrizione esattamente come apparirà in uno snippet Google, incluso il punto di troncatura se superi il limite.</p>
+
+<h2>Come Google decide davvero cosa mostrare negli snippet</h2>
+<p>Google non utilizza sempre la tua meta description alla lettera. Quando la query di ricerca corrisponde meglio a un passaggio della tua pagina che alla tua meta description, Google può sostituirla con uno snippet estratto dal corpo della pagina. <strong>Una meta description che assomiglia a un'intenzione di ricerca naturale — rispondendo direttamente alla query — ha più probabilità di essere mantenuta da Google</strong> rispetto a uno slogan di marketing generico.</p>
+
+<h2>La sfumatura della larghezza in pixel: perché il conteggio dei caratteri non basta</h2>
+<p>Google misura la larghezza del titolo in pixel, non in caratteri. Un titolo composto principalmente da lettere strette può contenere più caratteri di uno con lettere larghe. PostTruncate tiene traccia simultaneamente del conteggio dei caratteri e della larghezza stimata in pixel, segnalando i titoli che sono sicuri nel conteggio ma che potrebbero comunque essere troncati a causa di caratteri larghi.</p>
+
+<h2>Scrivi una volta, visualizza prima di pubblicare</h2>
+<p>PostTruncate integra l'<strong>anteprima SERP live</strong> direttamente nell'editor di scrittura. Digita titolo e descrizione, guarda lo snippet Google aggiornarsi in tempo reale, conferma il risultato e copialo nel tuo CMS — senza cambiare scheda.</p>`,
+
+      nl: `<h2>Waarom de tekenlimiet van de title tag je klikfrequentie bepaalt</h2>
+<p>De title tag van je pagina is het meest zichtbare element in een Google-zoekresultaat — de blauwe kop die gebruikers lezen voordat ze beslissen of ze klikken. Google geeft titels weer tot ongeveer <strong>600 pixels breed</strong>, wat neerkomt op ruwweg <strong>60 tekens</strong> voor Latijnse tekst van gemiddeld gewicht. Daarboven wordt de titel afgekapt met een ellips.</p>
+<p>Afgekapte titels presteren consequent slechter dan volledige. Wanneer een gebruiker de volledige titel niet kan lezen, mist hij de context die hem zou hebben aangezet tot klikken. Erger nog: als het zoekwoord dat overeenkomt met zijn zoekopdracht aan het einde van een lange titel staat, kan het precies het woord zijn dat wegvalt — waardoor het relevantiesignaal verdwijnt dat de klik had verdiend.</p>
+<p>PostTruncates <strong>Google SERP voorbeeld tool</strong> toont je titel in een live Google-stijl snippet terwijl je typt. De voorvertoning wordt direct bijgewerkt, zodat je kunt zien of je titel netjes past of eindigt met "…" voordat je de pagina publiceert.</p>
+
+<h2>Lengte van de meta description: 155 tekens en het afkaprisico</h2>
+<p>De meta description is de grijze bodytekst onder de titel in een Google-zoekresultaatfragment. Het beïnvloedt het ranking niet direct, maar heeft een aanzienlijke impact op de <strong>klikfrequentie</strong>. Een goed geschreven meta description vertelt de gebruiker precies wat hij op je pagina zal vinden en waarom het zijn klik waard is.</p>
+<p>Google kapt meta descriptions af bij ongeveer <strong>155 tekens</strong> op desktop (korter op mobiel). Een beschrijving van 200 tekens kan er in je CMS compleet uitzien, maar in het daadwerkelijke zoekresultaat eindigt het halverwege een zin — waarbij de call-to-action, de kernboodschap of het specifieke detail wordt afgeknipt dat jouw resultaat had onderscheiden van concurrenten.</p>
+<p>PostTruncates <strong>meta description lengte checker</strong> telt je tekens in real time en toont de beschrijving precies zoals die in een Google-fragment zal verschijnen, inclusief het afkappunt als je over de limiet gaat.</p>
+
+<h2>Hoe Google echt beslist wat er in snippets staat</h2>
+<p>Google gebruikt je meta description niet altijd letterlijk. Wanneer de zoekopdracht beter overeenkomt met een passage op je pagina dan met je meta description, kan Google die vervangen door een geëxtraheerd fragment uit de paginatekst. <strong>Een meta description die klinkt als een natuurlijke zoekintentie — die de vraag direct beantwoordt — heeft meer kans door Google bewaard te worden</strong> dan een generieke marketingslogan.</p>
+
+<h2>De pixelbreedtenuance: waarom tekentelling niet alles is</h2>
+<p>Google meet titelbreedtes in pixels, niet in tekens. Een titel van voornamelijk smalle letters kan meer tekens bevatten dan een titel met brede letters. PostTruncate houdt gelijktijdig tekentelling en geschatte pixelbreedte bij, en markeert titels die veilig zijn qua tekentelling maar mogelijk toch worden afgeknipt door brede tekens.</p>
+
+<h2>Schrijf één keer, bekijk voor publicatie</h2>
+<p>PostTruncate integreert de <strong>live SERP-voorvertoning</strong> direct in de schrijfeditor. Typ je titel en beschrijving, zie het Google-snippet in real time bijwerken, bevestig dat het er goed uitziet en kopieer het naar je CMS — zonder van tabblad te wisselen.</p>`,
+
+      ja: `<h2>タイトルタグの文字数制限がクリック率を左右する理由</h2>
+<p>ページのタイトルタグはGoogleの検索結果で最も目に入る要素です——ユーザーがクリックするかどうかを判断する前に読む青いヘッドラインです。Googleは約<strong>600ピクセル幅</strong>のタイトルを表示します。これは平均的なラテン文字テキストで約<strong>60文字</strong>に相当します。それを超えると、タイトルは省略記号で切り取られ、メッセージの末尾が消えてしまいます。</p>
+<p>切り取られたタイトルは完全なタイトルよりも一貫してパフォーマンスが低下します。ユーザーがタイトル全体を読めないと、クリックを後押しするはずだったコンテキストが失われます。さらに悪いことに、検索クエリに一致するキーワードが長いタイトルの末尾に配置されていると、そのキーワードが切り取られる可能性があります——クリックを獲得するはずだった関連性シグナルが消えてしまうのです。</p>
+<p>PostTruncateの<strong>Google SERPプレビューツール</strong>は入力中にGoogleスタイルのスニペットでタイトルをリアルタイム表示します。プレビューは即座に更新されるため、ページを公開する前にタイトルがきれいに収まるか、「…」で終わるかを確認できます。</p>
+
+<h2>メタディスクリプションの長さ：155文字と切り捨てリスク</h2>
+<p>メタディスクリプションはGoogleの検索スニペットでタイトルの下に表示されるグレーの本文テキストです。ランキングに直接影響しませんが、<strong>クリック率</strong>——検索結果を見てページを訪問することを選ぶユーザーの割合——に大きな影響を与えます。良く書かれたメタディスクリプションはユーザーにそのページで何が見つかるか、なぜクリックする価値があるかを正確に伝えます。</p>
+<p>Googleはデスクトップでメタディスクリプションを約<strong>155文字</strong>で切り捨てます（モバイルではさらに短い）。200文字の説明はCMSでは完全に見えても、実際の検索結果では文の途中で終わり、競合との差別化ポイントとなるはずだった行動喚起、主要なベネフィット、または具体的な詳細が切り取られます。</p>
+<p>PostTruncateの<strong>メタディスクリプション文字数チェッカー</strong>はリアルタイムで文字数をカウントし、Googleスニペットでの実際の表示をプレビューします。制限を超えた場合は切り捨てポイントも表示します。</p>
+
+<h2>Googleがスニペットに何を表示するかを実際に決める仕組み</h2>
+<p>Googleは常にメタディスクリプションをそのまま使用するわけではありません。検索クエリがメタディスクリプションよりもページ内のある文章と一致する場合、Googleはページ本文から抽出したスニペットで置き換えることがあります。<strong>自然な検索意図のように読めるメタディスクリプション——クエリに直接答えるもの——は、一般的なマーケティングのタグラインよりもGoogleに保持される可能性が高い</strong>のです。</p>
+
+<h2>ピクセル幅の細かい話：文字数だけでは不十分な理由</h2>
+<p>Googleはタイトルの幅を文字数ではなくピクセルで測定します。「i」「l」「t」などの細い文字で構成されたタイトルは、「W」「M」「m」などの幅広い文字のタイトルより多くの文字を収められます。PostTruncateは文字数と推定ピクセル幅を同時に追跡し、文字数では安全でも幅広い文字のために切り捨てられる可能性があるタイトルにフラグを立てます。</p>
+
+<h2>一度書いて、公開前にプレビューする</h2>
+<p>PostTruncateは<strong>ライブSERPプレビュー</strong>をライティングエディターに直接統合しています。タイトルと説明を入力し、Googleスニペットがリアルタイムで更新されるのを確認し、正しく見えることを確認してCMSにコピーするまで、タブを切り替える必要がありません。</p>`,
+
+      zh: `<h2>为什么标题标签的字符限制决定了你的点击率</h2>
+<p>页面的标题标签是Google搜索结果中最显眼的元素——用户在决定是否点击之前会先阅读这个蓝色标题。Google展示的标题最宽约<strong>600像素</strong>，对于平均字重的拉丁文字约对应<strong>60个字符</strong>。超出这个范围，标题就会被省略号截断，你的信息末尾就此消失。</p>
+<p>被截断的标题始终比完整标题表现差。当用户无法读到完整标题时，就失去了原本能驱使他们点击的上下文信息。更糟糕的是，如果与搜索词匹配的关键词位于长标题的末尾，那被截断的很可能正是那个词——带走了本该赢得点击的相关性信号。</p>
+<p>PostTruncate的<strong>Google SERP预览工具</strong>在你输入时实时以Google风格的摘要显示你的标题。预览即时更新，让你在发布页面前就能看清标题是否整洁呈现，还是以"…"收尾。</p>
+
+<h2>元描述长度：155个字符与截断风险</h2>
+<p>元描述是Google搜索摘要中标题下方的灰色正文文字。它不直接影响排名，但对<strong>点击率</strong>有显著影响——即看到你的结果后选择访问页面的用户比例。写得好的元描述会精确告诉用户页面上有什么，以及为什么值得点击。</p>
+<p>Google在桌面端将元描述截断至约<strong>155个字符</strong>（移动端更短）。一段200字符的描述在你的CMS里看起来完整，但在实际搜索结果中却半句而止——行动号召、核心价值主张或本能让你从竞争对手中脱颖而出的具体细节就此消失。</p>
+<p>PostTruncate的<strong>元描述长度检查器</strong>实时计算字符数，并精确预览描述在Google摘要中的显示效果，超出限制时还会显示截断点。</p>
+
+<h2>Google实际上如何决定摘要中显示什么</h2>
+<p>Google并不总是原封不动地使用你的元描述。当搜索查询与页面正文某段内容的匹配度高于元描述时，Google可能会用从页面正文提取的片段来替换。<strong>读起来像自然搜索意图的元描述——直接回答查询——比通用的营销口号更有可能被Google保留</strong>。</p>
+
+<h2>像素宽度的细微差别：为什么字符数并非全部</h2>
+<p>Google以像素而非字符数衡量标题宽度。由"i""l""t"等细字母构成的标题比含有"W""M""m"等宽字母的标题能容纳更多字符。PostTruncate同时追踪字符数和估算的像素宽度，标记那些字符数安全但可能因宽字符而被截断的标题。</p>
+
+<h2>写一次，发布前预览</h2>
+<p>PostTruncate将<strong>实时SERP预览</strong>直接集成到写作编辑器中。输入标题和描述，看Google摘要实时更新，确认效果满意后复制到CMS——无需切换标签页。</p>`,
+
+      da: `<h2>Hvorfor title tag-tegn­grænsen bestemmer din klikrate</h2>
+<p>Din sides title tag er det mest synlige element i et Google-søgeresultat — den blå overskrift som brugere læser, inden de beslutter om de vil klikke. Google viser titler op til ca. <strong>600 pixels brede</strong>, svarende til omtrent <strong>60 tegn</strong> for latinsk tekst af gennemsnitsvægt. Ud over det afkortes titlen med en ellipse, og slutningen af dit budskab forsvinder.</p>
+<p>Afkortede titler klarer sig konsekvent dårligere end komplette. Når en bruger ikke kan læse den fulde titel, mister de den kontekst der ville have fået dem til at klikke. Endnu værre: Hvis det nøgleord der matcher deres søgning er placeret mod slutningen af en lang titel, kan det være præcis det ord der skæres væk — og dermed forsvinder det relevanssignal der ville have fortjent klikket.</p>
+<p>PostTruncates <strong>Google SERP forhåndsvisningsværktøj</strong> viser din titel i et live Google-stil-uddrag mens du skriver. Forhåndsvisningen opdateres øjeblikkeligt, så du kan se om din titel passer rent eller slutter med "…" inden du publicerer siden.</p>
+
+<h2>Meta description-længde: 155 tegn og afkorteringsrisikoen</h2>
+<p>Meta description er den grå brødtekst under titlen i et Google-søgeresultatuddrag. Det påvirker ikke rangordning direkte, men har en betydelig indvirkning på <strong>klikraten</strong>. En velskrevet meta description fortæller brugeren præcis hvad de vil finde på din side og hvorfor det er deres klik værd.</p>
+<p>Google afkorter meta descriptions ved ca. <strong>155 tegn</strong> på desktop (kortere på mobil). En beskrivelse på 200 tegn kan se komplet ud i dit CMS, men i det faktiske søgeresultat slutter den midt i en sætning — og klipper den call to action, det centrale budskab eller det specifikke detalje der ville have adskilt dit resultat fra konkurrenternes.</p>
+<p>PostTruncates <strong>meta description-længdekontrol</strong> tæller dine tegn i realtid og viser beskrivelsen præcis som den vil fremstå i et Google-uddrag, inklusiv afkorteringspunktet hvis du overskrider grænsen.</p>
+
+<h2>Hvordan Google faktisk beslutter hvad der vises i uddrag</h2>
+<p>Google bruger ikke altid din meta description ordret. Når søgeforespørgslen matcher et afsnit på din side bedre end din meta description, kan Google erstatte den med et uddrag fra sidens indhold. <strong>En meta description der lyder som naturlig søgeintention — der besvarer forespørgslen direkte — har større sandsynlighed for at blive bevaret af Google</strong> end et generisk markedsføringsslogan.</p>
+
+<h2>Pixel-bredde-nuancen: hvorfor tegntælling ikke er det hele</h2>
+<p>Google måler titelbredde i pixels, ikke i tegn. En titel sammensat af smalle bogstaver kan rumme flere tegn end en med brede bogstaver. PostTruncate sporer samtidig tegntælling og estimeret pixelbredde og markerer titler der er sikre på tegntælling men stadig kan blive afkortet på grund af brede tegn.</p>
+
+<h2>Skriv én gang, forhåndsvis inden publicering</h2>
+<p>PostTruncate integrerer <strong>live SERP-forhåndsvisning</strong> direkte i skrivereditoren. Skriv din titel og beskrivelse, se Google-uddraget opdatere sig i realtid, bekræft at det ser rigtigt ud, og kopiér det til dit CMS — uden at skifte faner.</p>`,
+    },
+  },
 ];

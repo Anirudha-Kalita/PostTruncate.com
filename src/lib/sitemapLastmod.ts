@@ -2,6 +2,7 @@ import { execFileSync } from 'node:child_process';
 import { existsSync, readdirSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { tools } from '../data/tools';
+import { calculators } from '../data/calculators';
 import { LOCALES, DEFAULT_LOCALE } from '../i18n/config';
 import { toLastmodIso } from './contentDates';
 
@@ -27,14 +28,23 @@ export function gitLastMod(relPath: string): string | undefined {
   return iso;
 }
 
-/** Map every /[lang]/[tool-slug]/ pathname → lastmod ISO from tools.ts. */
+/** Map every /[lang]/[tool-slug]/ and /[lang]/tools/[slug]/ pathname → lastmod ISO. */
 export function buildToolLastmodByPath(): Map<string, string> {
   const map = new Map<string, string>();
+  // Platform guides live at /[lang]/<slug>/
   for (const tool of tools) {
     const iso = toLastmodIso(tool.lastUpdated);
     for (const locale of LOCALES) {
       const slug = tool.slugs[locale.code] ?? tool.slugs[DEFAULT_LOCALE];
       map.set(`/${locale.code}/${slug}/`, iso);
+    }
+  }
+  // Tools suite (SMS, Google SERP, calculators, …) lives at /[lang]/tools/<slug>/
+  for (const calc of calculators) {
+    const iso = toLastmodIso(calc.lastUpdated);
+    for (const locale of LOCALES) {
+      const slug = calc.slugs[locale.code] ?? calc.slugs[DEFAULT_LOCALE];
+      map.set(`/${locale.code}/tools/${slug}/`, iso);
     }
   }
   return map;

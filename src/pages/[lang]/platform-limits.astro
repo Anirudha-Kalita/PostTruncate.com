@@ -5,6 +5,7 @@ import { interp } from '../../i18n/interp';
 import { LOCALE_CODES, getLocale } from '../../i18n/config';
 import { LIMITS, FOLDS, SMS_LIMITS } from '../../lib/textTools';
 import { tools } from '../../data/tools';
+import { calculators } from '../../data/calculators';
 
 // One static reference page per locale (/en/platform-limits/, …): the full
 // character-limit table plus per-platform truncation rules. Every number is
@@ -21,9 +22,14 @@ const home = `/${lang}/${locale.slug}/`;
 const nf = new Intl.NumberFormat(lang);
 
 // Per-tool localized URLs so each table row links to its dedicated tool page.
+// Platform guides live at /[lang]/<slug>/; Tools (SMS, Google SERP, …) live
+// at /[lang]/tools/<slug>/ — so we build from both registries.
 const toolHref: Record<string, string> = {};
 for (const tool of tools) {
   toolHref[tool.id] = `/${lang}/${tool.slugs[lang] ?? tool.slugs['en']}/`;
+}
+for (const calc of calculators) {
+  toolHref[calc.id] = `/${lang}/tools/${calc.slugs[lang] ?? calc.slugs['en']}/`;
 }
 
 const L = t.limitsPage;

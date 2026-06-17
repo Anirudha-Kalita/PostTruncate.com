@@ -147,7 +147,7 @@ LinkedIn's native publishing platform (Articles) is where the platform's charact
 
 **Article body: 100,000 characters.** This is roughly 15,000-20,000 words - more than enough for any blog post, deep-dive analysis, or long-form guide. Unlike feed posts, line breaks and formatting don't count toward the article limit.
 
-**Article title: 255 characters.** Keep it under 80 characters for clean social sharing and search visibility - the same logic that applies to [Google SERP titles](/en/google-serp-preview/).
+**Article title: 255 characters.** Keep it under 80 characters for clean social sharing and search visibility - the same logic that applies to [Google SERP titles](/en/tools/google-serp-preview/).
 
 The catch: articles receive significantly less algorithmic reach than posts. LinkedIn surfaces posts heavily in the feed; articles require readers to actively visit your profile or click a link. The strategy that works: write a short, tight post with a compelling hook and a link to the article. The post gets reach; the article provides depth for the readers who click.
 
@@ -182,11 +182,11 @@ The limits that create problems are the small ones:
 
 Knowing these numbers doesn't guarantee better content. But knowing where your audience will stop reading is the one constraint worth optimising for before every post.
 
-For [Twitter/X](/en/twitter-character-counter/) (280-character hard limit), [Facebook](/en/facebook-character-counter/) (63,206 characters with a \~110-char mobile fold), [Instagram](/en/instagram-character-counter/) (2,200 characters with a \~125-char fold), [Threads](/en/threads-character-counter/) (500 characters), and [SMS](/en/sms-character-counter/) (160 GSM characters), see the [full platform limits table](/en/platform-limits/).
+For [Twitter/X](/en/twitter-character-counter/) (280-character hard limit), [Facebook](/en/facebook-character-counter/) (63,206 characters with a \~110-char mobile fold), [Instagram](/en/instagram-character-counter/) (2,200 characters with a \~125-char fold), [Threads](/en/threads-character-counter/) (500 characters), and [SMS](/en/tools/sms-character-counter/) (160 GSM characters), see the [full platform limits table](/en/platform-limits/).
 
 ## Try PostTruncate
 
-[PostTruncate](/en/linkedin-character-counter/) is a free, browser-based character counter that shows LinkedIn's mobile and desktop fold markers live as you type - so you know exactly where "…see more" cuts your post before publishing. It handles all platforms in one workspace: [LinkedIn](/en/linkedin-character-counter/), [X/Twitter](/en/twitter-character-counter/), [Instagram](/en/instagram-character-counter/), [Facebook](/en/facebook-character-counter/), [Threads](/en/threads-character-counter/), and [SMS](/en/sms-character-counter/), plus a [Google SERP preview](/en/google-serp-preview/) for page titles and meta descriptions. Everything runs locally in your browser - no upload, no account, completely free. Bloggers and educators can also embed the counter widget directly on their own sites via a [free iframe embed](/en/embed-widget/).
+[PostTruncate](/en/linkedin-character-counter/) is a free, browser-based character counter that shows LinkedIn's mobile and desktop fold markers live as you type - so you know exactly where "…see more" cuts your post before publishing. It handles all platforms in one workspace: [LinkedIn](/en/linkedin-character-counter/), [X/Twitter](/en/twitter-character-counter/), [Instagram](/en/instagram-character-counter/), [Facebook](/en/facebook-character-counter/), [Threads](/en/threads-character-counter/), and [SMS](/en/tools/sms-character-counter/), plus a [Google SERP preview](/en/tools/google-serp-preview/) for page titles and meta descriptions. Everything runs locally in your browser - no upload, no account, completely free. Bloggers and educators can also embed the counter widget directly on their own sites via a [free iframe embed](/en/embed-widget/).
 
 https://youtu.be/3EJc5YJHBMI
 

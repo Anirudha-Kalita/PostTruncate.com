@@ -15,7 +15,7 @@ ogImage: /og/sms.webp
 
 ## TL;DR
 
-SMS billing is per-segment, not per-message. GSM-7 encoding gives you 160 characters per segment; Unicode cuts that to 70. A single emoji, curly quote, or em dash anywhere in your message flips the entire thing to Unicode automatically. On a 10,000-message blast, that switch can push your cost from $80 to $240 before you've noticed anything has changed. Most SMS platforms don't warn you. Before your next broadcast, paste your copy into [PostTruncate's free SMS segment calculator](/en/sms-character-counter) - it flags the exact character causing the problem and shows you the true segment count in real time.
+SMS billing is per-segment, not per-message. GSM-7 encoding gives you 160 characters per segment; Unicode cuts that to 70. A single emoji, curly quote, or em dash anywhere in your message flips the entire thing to Unicode automatically. On a 10,000-message blast, that switch can push your cost from $80 to $240 before you've noticed anything has changed. Most SMS platforms don't warn you. Before your next broadcast, paste your copy into [PostTruncate's free SMS segment calculator](/en/tools/sms-character-counter) - it flags the exact character causing the problem and shows you the true segment count in real time.
 
 ## The "one small change" that doubled a campaign budget
 
@@ -117,7 +117,7 @@ This is a gap in the tooling, not a mystery of physics. Encoding detection is no
 
 The fix is straightforward: check your encoding before you send, not after.
 
-[PostTruncate's SMS segment calculator](/en/sms-character-counter) does this in real time. Paste or type your message, and it immediately shows you whether you're in GSM-7 or Unicode mode, how many segments the message will consume, and exactly where the segment boundaries fall. If a character has triggered Unicode, it flags which one.
+[PostTruncate's SMS segment calculator](/en/tools/sms-character-counter) does this in real time. Paste or type your message, and it immediately shows you whether you're in GSM-7 or Unicode mode, how many segments the message will consume, and exactly where the segment boundaries fall. If a character has triggered Unicode, it flags which one.
 
 There's also a one-click Emoji Stripper in the format toolkit. If your copy came in from Docs or Word and you want to clean it before sending, strip everything at once and check the segment count again.
 
@@ -132,7 +132,7 @@ Everything runs in the browser. No sign-up, no upload, no account required. Your
 A few practical habits worth building into your SMS workflow:
 
 -   **Check the segment count for every new campaign template.** Not just the character count - the segment count. They're different numbers, and the segment count is the one on your invoice.
--   **Never paste directly from Word or Docs into your SMS platform.** Paste into a plain-text editor first (Notepad, TextEdit in plain-text mode, VS Code), then copy again. Or paste into [PostTruncate's SMS tool](/en/sms-character-counter) and strip any characters that don't belong.
+-   **Never paste directly from Word or Docs into your SMS platform.** Paste into a plain-text editor first (Notepad, TextEdit in plain-text mode, VS Code), then copy again. Or paste into [PostTruncate's SMS tool](/en/tools/sms-character-counter) and strip any characters that don't belong.
 -   **Decide deliberately whether an** **emoji is worth the cost.** Emoji absolutely works in SMS marketing - the performance data is real. But a blanket "add emoji for engagement" policy without encoding awareness is a budget decision made without the relevant information. A 3x cost multiplier changes the ROI math considerably. Know the number before you commit.
 -   **Build encoding checks into your A/B testing.** If you're testing an emoji variant against a plain-text variant, you're testing two different cost structures. Make sure your cost-per-result math accounts for that.
 
@@ -146,14 +146,14 @@ It's completely free, covers [10+ platforms](/en/platform-limits/) including SMS
 
 <p align="center"><span style="font-size: 12px; "><em>PostTruncate SMS character counter - free, browser-based encoding detection and segment calculator</em></span></p>
 
-Before your next SMS broadcast goes out, paste the copy into [PostTruncate's SMS encoding checker](/en/sms-character-counter). If you're in Unicode when you expected GSM-7, you'll see it before it ships - and you'll have the option to fix it.
+Before your next SMS broadcast goes out, paste the copy into [PostTruncate's SMS encoding checker](/en/tools/sms-character-counter). If you're in Unicode when you expected GSM-7, you'll see it before it ships - and you'll have the option to fix it.
 
 The check takes 10 seconds. The alternative is reading it on the invoice.
 
 ## FAQs
 
 <details><summary><b>What is the difference between GSM-7 and Unicode SMS encoding?</b></summary>
-<p>GSM-7 is the standard SMS encoding that supports 160 characters per message segment, covering basic Latin letters, digits, and common punctuation. Unicode (UCS-2) supports any character - emoji, accented letters, smart quotes, non-Latin scripts - but cuts the per-segment limit to just 70 characters. The critical catch: if a single non-GSM character appears anywhere in a message, the entire message switches to Unicode automatically. You can check which encoding your message uses with the <a href="/en/sms-character-counter">PostTruncate SMS segment calculator</a>.</p>
+<p>GSM-7 is the standard SMS encoding that supports 160 characters per message segment, covering basic Latin letters, digits, and common punctuation. Unicode (UCS-2) supports any character - emoji, accented letters, smart quotes, non-Latin scripts - but cuts the per-segment limit to just 70 characters. The critical catch: if a single non-GSM character appears anywhere in a message, the entire message switches to Unicode automatically. You can check which encoding your message uses with the <a href="/en/tools/sms-character-counter">PostTruncate SMS segment calculator</a>.</p>
 </details>
 
 <details><summary><b>How much can an emoji actually increase my SMS marketing costs?</b></summary>
@@ -165,9 +165,9 @@ The check takes 10 seconds. The alternative is reading it on the invoice.
 </details>
 
 <details><summary><b>Does my SMS platform warn me when encoding switches to Unicode?</b></summary>
-<p>Most don't. Platforms like Twilio and Africa's Talking do show encoding status in their builders, but many white-label SMS platforms, ESPs, and marketing tools apply encoding silently. You see the message preview; you don't see which encoding it's using or how many segments it will consume. This is exactly why checking your copy with a dedicated <a href="/en/sms-character-counter">SMS encoding detector</a> before hitting send is so important.</p>
+<p>Most don't. Platforms like Twilio and Africa's Talking do show encoding status in their builders, but many white-label SMS platforms, ESPs, and marketing tools apply encoding silently. You see the message preview; you don't see which encoding it's using or how many segments it will consume. This is exactly why checking your copy with a dedicated <a href="/en/tools/sms-character-counter">SMS encoding detector</a> before hitting send is so important.</p>
 </details>
 
 <details><summary><b>Is there a free tool to check SMS character count and encoding before sending?</b></summary>
-<p>Yes. <a href="/en/sms-character-counter">PostTruncate's SMS character counter</a> is completely free, requires no sign-up, and runs entirely in your browser. It detects your message encoding in real time (GSM-7 or Unicode), shows you exactly where segment boundaries fall, flags the specific character that triggered Unicode encoding, and even includes a one-click Emoji Stripper so you can clean up copy that came in from Word or Docs before it ships.</p>
+<p>Yes. <a href="/en/tools/sms-character-counter">PostTruncate's SMS character counter</a> is completely free, requires no sign-up, and runs entirely in your browser. It detects your message encoding in real time (GSM-7 or Unicode), shows you exactly where segment boundaries fall, flags the specific character that triggered Unicode encoding, and even includes a one-click Emoji Stripper so you can clean up copy that came in from Word or Docs before it ships.</p>
 </details>

@@ -6,6 +6,7 @@ import sitemap from '@astrojs/sitemap';
 import tailwindcss from '@tailwindcss/vite';
 import { LOCALES, LOCALE_CODES, DEFAULT_LOCALE, getLocale } from './src/i18n/config.ts';
 import { tools } from './src/data/tools.ts';
+import { calculators } from './src/data/calculators.ts';
 import {
   buildToolLastmodByPath,
   buildBlogLastmodByPath,
@@ -25,18 +26,27 @@ const slugToTool = new Map();
 /** @type {Map<string, { hreflang: string, href: string }[]>} */
 const toolHreflang = new Map();
 
-for (const tool of tools) {
-  const alternates = LOCALE_CODES.map((code) => {
-    const slug = tool.slugs[code] ?? tool.slugs[DEFAULT_LOCALE];
-    slugToTool.set(`/${code}/${slug}/`, tool);
-    return { hreflang: code, href: `${SITE}/${code}/${slug}/` };
-  });
-  // x-default points to the English variant per Google best practice.
-  alternates.push({
-    hreflang: 'x-default',
-    href: `${SITE}/${DEFAULT_LOCALE}/${tool.slugs[DEFAULT_LOCALE]}/`,
-  });
-  toolHreflang.set(tool.id, alternates);
+// Platform guides live at /[lang]/<slug>/; the Tools suite (calculators, SMS,
+// Google SERP, …) lives under /[lang]/tools/<slug>/. Register both so the
+// serialize hook injects correct per-locale hreflang for every tool page.
+const toolGroups = [
+  { list: tools, prefix: '' },
+  { list: calculators, prefix: 'tools/' },
+];
+for (const { list, prefix } of toolGroups) {
+  for (const tool of list) {
+    const alternates = LOCALE_CODES.map((code) => {
+      const slug = tool.slugs[code] ?? tool.slugs[DEFAULT_LOCALE];
+      slugToTool.set(`/${code}/${prefix}${slug}/`, tool);
+      return { hreflang: code, href: `${SITE}/${code}/${prefix}${slug}/` };
+    });
+    // x-default points to the English variant per Google best practice.
+    alternates.push({
+      hreflang: 'x-default',
+      href: `${SITE}/${DEFAULT_LOCALE}/${prefix}${tool.slugs[DEFAULT_LOCALE]}/`,
+    });
+    toolHreflang.set(tool.id, alternates);
+  }
 }
 
 // Locale-homepage slug look-up: /en/character-counter/ etc.

@@ -300,6 +300,8 @@ export interface IslandStrings {
     partsValue: string;
     gsmNote: string;
     unicodeNote: string;
+    /** Textarea prompt on the standalone SMS counter tool page. */
+    placeholder: string;
   };
   linkedin: {
     title: string;
@@ -986,20 +988,6 @@ export interface Translations {
     serverError: ErrorPageStrings;
   };
   /** Cross-promotion section shown on the dedicated Google SERP tool page. */
-  serpPage: {
-    crossPromo: {
-      heading: string;
-      editorLink: string;
-      platforms: {
-        twitter:   { name: string; desc: string };
-        instagram: { name: string; desc: string };
-        linkedin:  { name: string; desc: string };
-        facebook:  { name: string; desc: string };
-        threads:   { name: string; desc: string };
-        sms:       { name: string; desc: string };
-      };
-    };
-  };
   banner: {
     /** "{platform}" token is replaced with the translated platform name. */
     text: string;
