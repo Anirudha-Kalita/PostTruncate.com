@@ -31,7 +31,7 @@ Instagram Reels exist in two distinct rendering environments, and each has its o
 
 **The Reels tab** is a different environment entirely. Here, Instagram uses a full-screen vertical video format - the same visual grammar as TikTok - and the caption overlays a much smaller area at the bottom of the frame. As a result, [Instagram truncates Reels tab captions at just 55-60 characters](https://bundle.social/blog/instagram-character-limits-guide) before the "See more" button kicks in.
 
-![Side-by-side comparison of Instagram Reels caption cutoff: Home Feed shows 125 characters, Reels Tab shows only 55-60 characters, as taken from PostTruncate](https://cdn-public.eesel.ai/d07a3874-3dba-4cf7-a6cb-abb11f4a2baf/6599a1e2-662e-47bc-add2-53982ad37afc/0d032b4a506142ecb1fe8776f1f4e588.png)
+![Side-by-side comparison of Instagram Reels caption cutoff: Home Feed shows 125 characters, Reels Tab shows only 55-60 characters, as taken from PostTruncate](/og/Instagram_Reels_1.webp)
 
 <p align="center"><span style="font-size: 12px; "><em>Side-by-side comparison of Instagram Reels caption cutoff: Home Feed shows 125 characters, Reels Tab shows only 55-60 characters</em></span></p>
 
@@ -57,7 +57,7 @@ The Reels tab is a full-bleed, edge-to-edge vertical video experience. There is 
 
 The Reels tab is also where much of Instagram's algorithmic discovery happens - [cold-audience viewers are specifically sent to the Reels tab surface](https://www.socialmediaexaminer.com/instagram-reels-what-marketers-need-to-know/), not the home feed. This is the audience you're trying to reach with growth content, and they're hitting your caption at its most aggressive cutoff.
 
-![Caption character limits infographic: the 50-character safe zone, the feed-only zone from 51-125 characters, and the hidden zone beyond 125 characters, as taken from PostTruncate](https://cdn-public.eesel.ai/d07a3874-3dba-4cf7-a6cb-abb11f4a2baf/6599a1e2-662e-47bc-add2-53982ad37afc/4efee9d4f9d14d98a454d883fe304fe2.png)
+![Caption character limits infographic: the 50-character safe zone, the feed-only zone from 51-125 characters, and the hidden zone beyond 125 characters, as taken from PostTruncate](/og/Instagram_Reels_2.webp)
 
 <p align="center"><span style="font-size: 12px; "><em>Caption character limits infographic: the 50-character safe zone, the feed-only zone from 51-125 characters, and the hidden zone beyond 125 characters</em></span></p>
 
@@ -93,7 +93,7 @@ Rewritten with the 50-character micro-hook strategy:
 
 The first 44 characters tell the viewer exactly what they're getting. The rest supports and expands, but the value prop is already delivered. In the Reels tab, it reads clean.
 
-![Before/after comparison showing Instagram Reels caption rewritten with the 50-character micro-hook strategy, as taken from PostTruncate](https://cdn-public.eesel.ai/d07a3874-3dba-4cf7-a6cb-abb11f4a2baf/6599a1e2-662e-47bc-add2-53982ad37afc/9434d9d5f2614cc4aead1d857deebfdd.png)
+![Before/after comparison showing Instagram Reels caption rewritten with the 50-character micro-hook strategy, as taken from PostTruncate](/og/Instagram_Reels_3.webp)
 
 <p align="center"><span style="font-size: 12px; "><em>Before/after comparison showing Instagram Reels caption rewritten with the 50-character micro-hook strategy</em></span></p>
 
@@ -105,7 +105,7 @@ Here's the framework I use when writing Reels captions for cross-surface perform
 One sharp line that works as a complete, standalone hook. This is what cold-audience Reels tab viewers will see. Think of it as a subject line for your video. Keep it tight, lead with curiosity or specificity, avoid setup - start with the payoff.
 
 **Layer 2: The feed extension (51-125 chars)**  
-This is visible to home feed viewers but not Reels tab viewers. Use it to add context, expand the hook, or address the most likely follow-up question a feed viewer would have. This layer is for your existing audience, who already trust you enough to read past the first line.
+This is visible to home feed viewers but not to Reels tab viewers. Use it to add context, expand the hook, or address the most likely follow-up question a feed viewer would have. This layer is for your existing audience, who already trust you enough to read past the first line.
 
 **Layer 3: The full caption (125-2,200 chars)**  
 Visible only to viewers who actively tap "more." This is where you can go deep: full explanations, numbered tips, links to resources, hashtags, full CTAs. It rewards the most engaged viewers without front-loading cognitive weight on cold audiences.
@@ -118,9 +118,7 @@ The fastest way to apply this in practice is to check both views before hitting 
 
 I built [PostTruncate's Instagram caption preview tool](/en/instagram-character-counter/) specifically to solve this. Paste your caption in, and you see the live fold point update in real time as you type - you can toggle between the home feed view (125-char fold) and the Reels tab view (55-60-char fold) to check exactly what's visible in each context, before you publish.
 
-![](/og/Screenshot_17-6-2026_161937_posttruncate.com.webp)
-
-50- 55
+![](/og/Screenshot_17-6-2026_161937_posttruncate.com.webp)to 
 
 <p align="center"><span style="font-size: 12px; "><em>PostTruncate Instagram character counter in action, showing live fold preview for feed and Reels tab views</em></span></p>
 
