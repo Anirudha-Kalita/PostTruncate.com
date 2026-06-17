@@ -35,7 +35,6 @@ const blogLink = (await getBlogLocales()).has(lang)
   : null;
 
 const links = [
-  { href: `${home}#workspace`, label: nav.links.editor },
   // "Platform Guides" is now a dropdown — handled separately below.
   { href: `/${lang}/faq/`, label: nav.links.faq },
   ...(blogLink ? [blogLink] : []),
@@ -83,9 +82,6 @@ const counterLinks = calculators.filter((tool) => PLATFORM_COUNTERS[tool.id]).ma
     </a>
 
     <nav class="nav__links" aria-label="Primary">
-      {/* First link (Editor) */}
-      <a href={links[0].href} class="nav__link">{links[0].label}</a>
-
       {/* Platform Guides dropdown */}
       <details class="nav__guides" id="nav-guides-desktop">
         <summary class="nav__link nav__guides-toggle">
@@ -159,7 +155,7 @@ const counterLinks = calculators.filter((tool) => PLATFORM_COUNTERS[tool.id]).ma
       </details>
 
       {/* Remaining links (FAQ, About, Contact) */}
-      {links.slice(1).map((l) => <a href={l.href} class="nav__link">{l.label}</a>)}
+      {links.map((l) => <a href={l.href} class="nav__link">{l.label}</a>)}
     </nav>
 
     <div class="nav__actions">
@@ -273,9 +269,6 @@ const counterLinks = calculators.filter((tool) => PLATFORM_COUNTERS[tool.id]).ma
         </summary>
         <div class="nav__panel">
           <nav class="nav__panel-links" aria-label="Primary mobile">
-            {/* First link (Editor) */}
-            <a href={links[0].href} class="nav__panel-link">{links[0].label}</a>
-
             {/* Platform Guides — inline expand */}
             <details class="nav__guides-mobile" id="nav-guides-mobile">
               <summary class="nav__panel-link nav__guides-mobile-toggle">
@@ -332,7 +325,7 @@ const counterLinks = calculators.filter((tool) => PLATFORM_COUNTERS[tool.id]).ma
             </details>
 
             {/* Remaining links (FAQ, About, Contact) */}
-            {links.slice(1).map((l) => <a href={l.href} class="nav__panel-link">{l.label}</a>)}
+            {links.map((l) => <a href={l.href} class="nav__panel-link">{l.label}</a>)}
 
             {/* Language — inline expand. On mobile the top-bar switcher is
                 hidden (it overflowed narrow viewports), so language lives here. */}

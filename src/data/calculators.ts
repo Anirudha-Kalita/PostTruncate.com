@@ -2813,16 +2813,16 @@ export const calculators: ToolDefinition[] = [
     },
 
     titles: {
-      en: 'SMS Character Counter — Free GSM-7 & Segment Calculator',
-      es: 'Contador de Caracteres SMS — Calculadora gratis de GSM-7 y segmentos',
-      de: 'SMS-Zeichenzähler — Kostenloser GSM-7- und Segment-Rechner',
-      fr: 'Compteur de Caractères SMS — Calculateur GSM-7 et segments gratuit',
-      pt: 'Contador de Caracteres SMS — Calculadora grátis de GSM-7 e segmentos',
-      it: 'Contatore Caratteri SMS — Calcolatore gratis di GSM-7 e segmenti',
-      nl: 'SMS-tekenteller — Gratis GSM-7- en segmentcalculator',
-      ja: 'SMS文字数カウンター — GSM-7とセグメント数を無料計算',
-      zh: 'SMS字符计数器 — 免费GSM-7与短信段数计算器',
-      da: 'SMS-tegntæller — Gratis GSM-7- og segmentberegner',
+      en: 'SMS Character Counter — Free GSM-7, Unicode & Segment Calculator',
+      es: 'Contador de Caracteres SMS — Calculadora gratis de GSM-7, Unicode y segmentos',
+      de: 'SMS-Zeichenzähler — Kostenloser GSM-7-, Unicode- und Segment-Rechner',
+      fr: 'Compteur de Caractères SMS — Calculateur GSM-7, Unicode et segments gratuit',
+      pt: 'Contador de Caracteres SMS — Calculadora grátis de GSM-7, Unicode e segmentos',
+      it: 'Contatore Caratteri SMS — Calcolatore gratis di GSM-7, Unicode e segmenti',
+      nl: 'SMS-tekenteller — Gratis GSM-7-, Unicode- en segmentcalculator',
+      ja: 'SMS文字数カウンター — GSM-7、Unicodeとセグメント数を無料計算',
+      zh: 'SMS字符计数器 — 免费GSM-7、Unicode与短信段数计算器',
+      da: 'SMS-tegntæller — Gratis GSM-7-, Unicode- og segmentberegner',
     },
 
     metaDescriptions: {

@@ -80,13 +80,12 @@ const FOCUS_TO_HOOK: Partial<Record<FocusPlatform, HookPlatform>> = {
  * proper nouns (never localized); `brand` keys into the shared BrandLogo
  * glyphs, with SMS drawing its own bubble below.
  */
-const PREVIEW_TABS: { id: FocusPlatform; name: string; brand?: Brand }[] = [
+const PREVIEW_TABS: { id: FocusPlatform; name: string; brand: Brand }[] = [
   { id: 'linkedin', name: 'LinkedIn', brand: 'linkedin' },
   { id: 'twitter', name: 'X', brand: 'x' },
   { id: 'instagram', name: 'Instagram', brand: 'instagram' },
   { id: 'facebook', name: 'Facebook', brand: 'facebook' },
   { id: 'threads', name: 'Threads', brand: 'threads' },
-  { id: 'sms', name: 'SMS' },
 ];
 
 
@@ -327,7 +326,7 @@ export default function Dashboard({ lang, strings, toolSlugs, focus }: Props) {
                       class={`relative flex h-10 w-10 shrink-0 items-center justify-center transition-[background,opacity] duration-100 sm:h-11 sm:w-11 ${active ? 'opacity-100' : 'opacity-40 hover:bg-canvas-soft hover:opacity-80'
                         }`}
                     >
-                      {p.brand ? <BrandLogo brand={p.brand} size={20} /> : <SmsGlyph size={20} />}
+                      {p.brand && <BrandLogo brand={p.brand} size={20} />}
                       {active && (
                         <span class="absolute inset-x-2 bottom-0 h-0.5 rounded-pill bg-link" aria-hidden="true" />
                       )}
@@ -370,7 +369,6 @@ export default function Dashboard({ lang, strings, toolSlugs, focus }: Props) {
                     if (key === 'meta') return <div id="platform-card-meta" key="mw"><MetaMonitor key="meta" text={analysisText} lang={lang} s={strings} toolLinkHref={`/${lang}/${toolSlugs.instagram}/`} facebookToolLinkHref={`/${lang}/${toolSlugs.facebook}/`} priority={effectiveMetaPriority} instagramView={views.instagram} setInstagramView={(v) => setPlatformView('instagram', v)} facebookView={views.facebook} setFacebookView={(v) => setPlatformView('facebook', v)} image={imageUrl} showFolded={showFolded} /></div>;
                     if (key === 'threads') return <div id="platform-card-threads" key="thw"><ThreadsPreview key="threads" text={analysisText} lang={lang} s={strings} toolLinkHref={`/${lang}/${toolSlugs.threads}/`} view={views.threads} setView={(v) => setPlatformView('threads', v)} image={imageUrl} showFolded={showFolded} /></div>;
                   })}
-                  <SmsCounter text={analysisText} lang={lang} s={strings.sms} />
                 </>
               ) : (
                 <>
@@ -379,7 +377,6 @@ export default function Dashboard({ lang, strings, toolSlugs, focus }: Props) {
                   {previewTab === 'instagram' && <div id="platform-card-meta"><MetaMonitor text={analysisText} lang={lang} s={strings} toolLinkHref={`/${lang}/${toolSlugs.instagram}/`} facebookToolLinkHref={`/${lang}/${toolSlugs.facebook}/`} only="instagram" instagramView={views.instagram} setInstagramView={(v) => setPlatformView('instagram', v)} facebookView={views.facebook} setFacebookView={(v) => setPlatformView('facebook', v)} image={imageUrl} showFolded={showFolded} /></div>}
                   {previewTab === 'facebook' && <div id="platform-card-meta"><MetaMonitor text={analysisText} lang={lang} s={strings} toolLinkHref={`/${lang}/${toolSlugs.instagram}/`} facebookToolLinkHref={`/${lang}/${toolSlugs.facebook}/`} only="facebook" priority="facebook" instagramView={views.instagram} setInstagramView={(v) => setPlatformView('instagram', v)} facebookView={views.facebook} setFacebookView={(v) => setPlatformView('facebook', v)} image={imageUrl} showFolded={showFolded} /></div>}
                   {previewTab === 'threads' && <div id="platform-card-threads"><ThreadsPreview text={analysisText} lang={lang} s={strings} toolLinkHref={`/${lang}/${toolSlugs.threads}/`} view={views.threads} setView={(v) => setPlatformView('threads', v)} image={imageUrl} showFolded={showFolded} /></div>}
-                  {previewTab === 'sms' && <SmsCounter text={analysisText} lang={lang} s={strings.sms} />}
                 </>
               )}
             </div>
@@ -441,14 +438,6 @@ function FoldToggle({ checked, onChange, label }: { checked: boolean; onChange: 
   );
 }
 
-/** Green SMS bubble glyph for the preview switcher (no platform asset). */
-function SmsGlyph({ size = 20 }: { size?: number }) {
-  return (
-    <svg width={size} height={size} viewBox="0 0 24 24" fill="#34C759" aria-hidden="true">
-      <path d="M12 3.5c-5 0-9 3.2-9 7.2 0 2.2 1.2 4.1 3.1 5.4L5 20.5l3.8-1.6c1 .3 2.1.4 3.2.4 5 0 9-3.2 9-7.1s-4-7.2-9-7.2z" />
-    </svg>
-  );
-}
 
 /** Small 2×2 grid glyph for the compare-all toggle. */
 function GridIcon({ class: cls = 'w-[13px] h-[13px]' }: { class?: string }) {
