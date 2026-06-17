@@ -29,7 +29,7 @@ Instagram Reels exist in two distinct rendering environments, and each has its o
 
 **The home feed** behaves like a regular post. The caption sits below the video, and Instagram shows approximately 125 characters before collapsing the rest behind a "more" tap. This is the number most Instagram guides reference, and it's the one creators optimise for.
 
-**The Reels tab** is a different environment entirely. Here, Instagram uses a full-screen vertical video format - the same visual grammar as TikTok - and the caption overlays a much smaller area at the bottom of the frame. As a result, [Instagram truncates Reels tab captions at just 55-60 characters](https://bundle.social/blog/instagram-character-limits-guide) before the "See more" button kicks in.
+**The Reels tab** is a different environment entirely. Here, Instagram uses a full-screen vertical video format - the same visual grammar as TikTok - and the caption overlays a much smaller area at the bottom of the frame. As a result, Instagram truncates Reels tab captions at just 55-60 characters before the "See more" button kicks in.
 
 ![Side-by-side comparison of Instagram Reels caption cutoff: Home Feed shows 125 characters, Reels Tab shows only 55-60 characters, as taken from PostTruncate](/og/Instagram_Reels_1.webp)
 
