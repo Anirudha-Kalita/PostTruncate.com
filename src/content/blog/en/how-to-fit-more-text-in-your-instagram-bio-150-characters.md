@@ -15,7 +15,7 @@ ogImage: /og/Instagram.webp
 
 ## TL;DR
 
-Instagram's [150-character bio limit](/en/platform-limits/) is non-negotiable. But most bios waste 5 to 15 of those characters on things no visitor ever reads: trailing spaces, invisible line-break characters, or a URL sitting in the bio text when it should be in the dedicated link field. Eliminate that invisible overhead, and you have enough room for an extra line of real content. Draft your bio in [PostTruncate's Instagram character counter](/en/character-counter) to see exactly where every character is going before you paste to Instagram.
+Instagram's [150-character bio limit](/en/platform-limits/) is non-negotiable. But most bios waste 5 to 15 of those characters on things no visitor ever reads: trailing spaces, invisible line-break characters, or a URL sitting in the bio text when it should be in the dedicated link field. Eliminate that invisible overhead, and you have enough room for an extra line of real content. Draft your bio in [PostTruncate's Instagram character counter](/en/instagram-character-counter) to see exactly where every character is going before you paste to Instagram.
 
 ## The 150-character wall
 
@@ -31,7 +31,7 @@ The biggest source of wasted characters in an Instagram bio isn't the words you 
 
 ### Trailing spaces and line breaks
 
-End a line with "content creator " (note the space after "creator") and that space costs you one character. In a bio with three lines, three trailing spaces burn three characters: enough for "NYC" or "2026" or one short tag.
+End a line with "content creator " (note the space after "creator"), and that space costs you one character. In a bio with three lines, three trailing spaces burn three characters: enough for "NYC" or "2026" or one short tag.
 
 Line breaks are characters too. Each manual break you create counts toward your 150. The trouble starts when you draft in Google Docs, Notes, or a messaging app and then paste into Instagram. Those apps sometimes insert additional formatting characters alongside the visible newline. A paragraph break in Docs can be pasted as a newline plus a carriage return. That's two characters where you expected one, and Instagram counts both.
 
@@ -39,7 +39,7 @@ Line breaks are characters too. Each manual break you create counts toward your 
 
 Some creators add [invisible Unicode characters](https://invisibletextpro.com/invisible-text-on-instagram/) like the Hangul Filler or zero-width space to create visual spacing without a visible glyph. This is a formatting aesthetic trick, not a storage trick. Those characters still count toward your 150-character budget. [As of 2026](https://invisibletextpro.com/invisible-text-on-instagram/), Instagram allows 1-2 invisible characters per section before triggering spam filters, but 5 or more gets a bio flagged. Every invisible character you add quietly shrinks the space you have for text that communicates something.
 
-![Where your 150 characters actually go - infographic showing how invisible trailing spaces and hidden line-break characters consume character budget without any visible content, as generated for PostTruncate](https://cdn-public.eesel.ai/d07a3874-3dba-4cf7-a6cb-abb11f4a2baf/6599a1e2-662e-47bc-add2-53982ad37afc/18a6aa909e8648689434e3d8e03c8148.png)
+![Where your 150 characters actually go - infographic showing how invisible trailing spaces and hidden line-break characters consume character budget without any visible content, as generated for PostTruncate](/og/Instagram_bio_2.webp)
 
 <p align="center"><span style="font-size: 12px; "><em>Where your 150 characters actually go - infographic showing how invisible trailing spaces and hidden line-break characters consume character budget without any visible content</em></span></p>
 
@@ -57,7 +57,7 @@ Compound emojis behave differently. A flag emoji (🇺🇸) is built from two Re
 
 Why does this matter? If you draft in a tool that measures bytes rather than graphemes, your count diverges from what Instagram will actually measure. A bio that your tool shows as 142 characters might paste at 149 in Instagram because the tool over-counted compound emoji byte weight.
 
-![Not all emojis cost the same - infographic comparing character weight of a simple smiley emoji (1 character), a flag emoji (1 grapheme cluster, more bytes), and a family emoji with modifiers, as generated for PostTruncate](https://cdn-public.eesel.ai/d07a3874-3dba-4cf7-a6cb-abb11f4a2baf/6599a1e2-662e-47bc-add2-53982ad37afc/24ad8a634dce42bab682282f3ce3db69.png)
+![Not all emojis cost the same - infographic comparing character weight of a simple smiley emoji (1 character), a flag emoji (1 grapheme cluster, more bytes), and a family emoji with modifiers, as generated for PostTruncate](/og/Instagram_bio_3.webp)
 
 <p align="center"><span style="font-size: 12px; "><em>Not all emojis cost the same - infographic comparing character weight of a simple smiley emoji (1 character), a flag emoji (1 grapheme cluster, more bytes), and a family emoji with modifiers</em></span></p>
 
@@ -105,7 +105,7 @@ Weekly tips ↓
 
 URL moved to the link field. Trailing space removed. All 148 characters are visible and doing real work. One full extra line of content appeared without changing the hard limit.
 
-![Before and after Instagram bio optimization - two phone screens side by side, showing a bio with URL in the text field and trailing spaces vs. the same bio with URL in the dedicated link field and all 150 characters used for visible content, as generated for PostTruncate](https://cdn-public.eesel.ai/d07a3874-3dba-4cf7-a6cb-abb11f4a2baf/6599a1e2-662e-47bc-add2-53982ad37afc/64784615583d462db89940f57857dedd.png)
+![Before and after Instagram bio optimization - two phone screens side by side, showing a bio with URL in the text field and trailing spaces vs. the same bio with URL in the dedicated link field and all 150 characters used for visible content, as generated for PostTruncate](/og/Instagram_bio_4.webp)
 
 <p align="center"><span style="font-size: 12px; "><em>Before and after Instagram bio optimisation - two phone screens side by side, showing a bio with URL in the text field and trailing spaces vs. the same bio with URL in the dedicated link field and all 150 characters used for visible content</em></span></p>
 
@@ -115,13 +115,13 @@ Instagram's bio editor doesn't show you invisible characters. It doesn't warn yo
 
 The fix is to draft your bio in an environment that counts every character accurately, including the ones that don't render, and then paste the clean result to Instagram.
 
-I built [PostTruncate.com](/) as a developer who kept running into exactly this kind of silent character count problem across different platforms. The [Instagram character counter](/en/character-counter) runs entirely in your browser - no sign-up, nothing uploaded, no data stored - and gives you a live count using grapheme cluster counting that matches Instagram's behaviour. It surfaces invisible characters so you can strip them before they cost you anything. And it's free.
+I built [PostTruncate.com](/) as a developer who kept running into exactly this kind of silent character count problem across different platforms. The , runs entirely in your browser - no sign-up, nothing uploaded, no data stored - and gives you a live count using grapheme cluster counting that matches Instagram's behaviour. It surfaces invisible characters so you can strip them before they cost you anything. And it's free.
 
 PostTruncate character counter tool - animated screenshot showing real-time character counting for social media posts, as taken from PostTruncate.com
 
 The workflow that actually works:
 
-1.  Open [PostTruncate's Instagram character counter](/en/character-counter) in a new tab
+1.  Open [PostTruncate's Instagram character counter](/en/instagram-character-counter) in a new tab
 2.  Draft or paste your bio text
 3.  Watch the live count update as you type
 4.  Remove any invisible characters or trailing spaces from the tool surfaces
@@ -133,7 +133,7 @@ For more on how Instagram handles characters in captions (which have their own s
 
 ## Try PostTruncate
 
-[PostTruncate](/) is a free, browser-based character counter built for social media writers who need an accurate count before they publish. The [Instagram character counter](/en/character-counter) uses grapheme cluster counting that matches Instagram's own measurement, surfaces invisible characters that eat into your bio budget, and runs entirely client-side - nothing gets uploaded or stored. If you're updating your bio or writing it from scratch, draft it here first, clean it up, then paste it to Instagram. That's the workflow that gets you to 150 characters of real content every time.
+[PostTruncate](/) is a free, browser-based character counter built for social media writers who need an accurate count before they publish. The [Instagram character counter](/en/instagram-character-counter) uses grapheme cluster counting that matches Instagram's own measurement, surfaces invisible characters that eat into your bio budget, and runs entirely client-side - nothing gets uploaded or stored. If you're updating your bio or writing it from scratch, draft it here first, clean it up, then paste it to Instagram. That's the workflow that gets you to 150 characters of real content every time.
 
 ## FAQs
 
