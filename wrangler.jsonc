@@ -5,6 +5,10 @@
   // Put durable, rebuild-safe settings HERE, not in the generated file.
   "name": "posttruncate-com",
   "compatibility_date": "2026-04-15",
+  
+  // Tells Cloudflare Pages exactly where to find your built assets
+  "pages_build_output_dir": "./dist",
+
   // Serve the Worker at both the apex and the www hostname. custom_domain:true
   // tells Cloudflare to manage the DNS record + edge certificate for each
   // hostname and point it at this Worker (this is preferred over raw
