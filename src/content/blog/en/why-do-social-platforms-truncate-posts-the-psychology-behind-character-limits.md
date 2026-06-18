@@ -8,6 +8,7 @@ updatedDate: ''
 locale: en
 slug: why-do-social-platforms-truncate-posts
 relatedPlatform: general
+category: copywriting-strategy
 author: PostTruncate Team
 draft: false
 ogImage: /og/why_plateforms_limit_charecters.webp

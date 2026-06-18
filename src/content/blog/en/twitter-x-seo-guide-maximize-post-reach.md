@@ -8,6 +8,7 @@ updatedDate: ''
 locale: en
 slug: twitter-x-seo-guide-maximize-post-reach
 relatedPlatform: twitter
+category: twitter-x
 author: PostTruncate Team
 draft: false
 ogImage: /og/twitter.webp

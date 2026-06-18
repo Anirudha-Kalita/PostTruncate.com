@@ -8,6 +8,7 @@ updatedDate: ''
 locale: en
 slug: instagram-caption-limits-and-hashtag-rules-2026
 relatedPlatform: instagram
+category: instagram
 author: PostTruncate Team
 draft: false
 ogImage: /og/Instagram_caption_limt.webp

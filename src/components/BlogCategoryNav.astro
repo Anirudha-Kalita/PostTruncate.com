@@ -1,0 +1,67 @@
+---
+// Horizontally scrollable category pill navigation for the blog index page.
+// Renders real <a> links (full link equity) to each category hub that has at
+// least one published post. Empty categories are excluded upstream.
+
+interface Props {
+  categories: { name: string; href: string }[];
+}
+
+const { categories } = Astro.props;
+---
+
+<nav class="blog-cat-nav" aria-label="Blog categories">
+  <ul class="blog-cat-nav__list">
+    {categories.map(({ name, href }) => (
+      <li>
+        <a class="blog-cat-nav__pill" href={href}>{name}</a>
+      </li>
+    ))}
+  </ul>
+</nav>
+
+<style>
+  .blog-cat-nav {
+    margin-bottom: 32px;
+  }
+  .blog-cat-nav__list {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 8px;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    /* Hide scrollbar (subtle, content still scrollable) */
+    scrollbar-width: none;
+  }
+  .blog-cat-nav__list::-webkit-scrollbar {
+    display: none;
+  }
+  .blog-cat-nav__pill {
+    display: inline-flex;
+    align-items: center;
+    white-space: nowrap;
+    padding: 0 16px;
+    height: 34px;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1;
+    color: var(--color-body);
+    border: 1px solid var(--color-hairline);
+    border-radius: 64px;
+    background: transparent;
+    text-decoration: none;
+    transition: border-color 0.15s ease, color 0.15s ease, background 0.15s ease;
+  }
+  .blog-cat-nav__pill:hover {
+    color: var(--color-ink);
+    border-color: var(--color-ink);
+    background: var(--color-canvas-soft);
+  }
+  .blog-cat-nav__pill:focus-visible {
+    outline: 2px solid var(--color-ink);
+    outline-offset: 2px;
+  }
+</style>

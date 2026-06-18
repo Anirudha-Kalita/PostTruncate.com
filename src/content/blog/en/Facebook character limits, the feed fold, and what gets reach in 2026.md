@@ -8,6 +8,7 @@ updatedDate: ''
 locale: en
 slug: facebook-character-limits-the-feed-fold-and-what-gets-reach-in-2026
 relatedPlatform: facebook
+category: facebook
 author: PostTruncate Team
 draft: false
 ogImage: /og/facebook-hero.webp

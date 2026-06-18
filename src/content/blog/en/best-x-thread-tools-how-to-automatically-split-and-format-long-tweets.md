@@ -8,6 +8,7 @@ updatedDate: ''
 locale: en
 slug: best-x-thread-tools-how-to-automatically-split-and-format-long-tweets
 relatedPlatform: twitter
+category: twitter-x
 author: PostTruncate Team
 draft: false
 ogImage: /og/twitter_Hero.webp

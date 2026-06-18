@@ -10,6 +10,7 @@ import { calculators } from './src/data/calculators.ts';
 import {
   buildToolLastmodByPath,
   buildBlogLastmodByPath,
+  buildBlogListingLastmodByPath,
   resolveSitemapLastmod,
 } from './src/lib/sitemapLastmod.ts';
 import { remarkVideoEmbed } from './src/lib/remarkVideoEmbed.ts';
@@ -56,6 +57,9 @@ const homepageSlugs = new Set(LOCALES.map((l) => `/${l.code}/${l.slug}/`));
 const toolLastmodByPath = buildToolLastmodByPath();
 // Blog post lastmod from each post's frontmatter (updatedDate ?? publishDate).
 const blogLastmodByPath = buildBlogLastmodByPath();
+// Paginated blog listings (locale index + category hubs, pages 1..N) →
+// lastmod + priority, page counts derived from the same pageSize as the routes.
+const blogListingByPath = buildBlogListingLastmodByPath();
 
 // https://astro.build/config
 // Default static (SSG) output: informational copy + platform guides are
@@ -157,6 +161,18 @@ export default defineConfig({
         if (blogLastmod) {
           item.lastmod = blogLastmod;
           item.priority = 0.7;
+          return item;
+        }
+
+        // ── Blog listings (locale index + category hubs, paginated) ──
+        // Covers /{lang}/blog/, /{lang}/blog/N/, /{lang}/blog/{cat}/, and
+        // /{lang}/blog/{cat}/N/. lastmod tracks the newest post in the listing;
+        // priority favours page 1. Posts are already handled above, so only the
+        // listing pages reach here.
+        const blogListing = blogListingByPath.get(pathname);
+        if (blogListing) {
+          item.lastmod = blogListing.lastmod;
+          item.priority = blogListing.priority;
           return item;
         }
 

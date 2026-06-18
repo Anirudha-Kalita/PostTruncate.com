@@ -8,6 +8,7 @@ updatedDate: ''
 locale: en
 slug: facebook-post-character-limits-by-device-type
 relatedPlatform: facebook
+category: facebook
 author: PostTruncate Team
 draft: false
 ogImage: /og/Facebook_New_Article_Hero.webp

@@ -8,6 +8,7 @@ updatedDate: ''
 locale: en
 slug: high-impact-social-media-hooks
 relatedPlatform: general
+category: copywriting-strategy
 author: PostTruncate Team
 draft: false
 ogImage: /og/Mastering_socia_media_hooks_hero.png

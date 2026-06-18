@@ -4,8 +4,9 @@
 // tool/home schema (SoftwareApplication / FAQPage); this component owns the
 // blog shapes it doesn't cover, selected by `type`:
 //
-//   type="post"  → BlogPosting + BreadcrumbList
-//   type="index" → Blog (with its blogPost list)
+//   type="post"       → BlogPosting + BreadcrumbList
+//   type="index"      → Blog (with its blogPost list)
+//   type="collection" → CollectionPage (with its post ItemList) + BreadcrumbList
 //
 // Meta tags (title, description, canonical, OG/Twitter, article times) are
 // emitted by Layout via its props — this component only adds structured data,
@@ -33,10 +34,10 @@ export interface BlogIndexItem {
 
 interface Props {
   /** Which schema to emit. */
-  type: 'post' | 'index';
-  /** Canonical absolute URL of the page (post URL or blog index URL). */
+  type: 'post' | 'index' | 'collection';
+  /** Canonical absolute URL of the page (post URL or blog/category index URL). */
   url: string;
-  /** Post headline (type="post") or blog name (type="index"). */
+  /** Post headline (type="post") or blog/category name (type="index"/"collection"). */
   name: string;
   /** Meta description, reused verbatim as the schema description. */
   description: string;
@@ -52,11 +53,11 @@ interface Props {
   dateModified?: string;
   /** Absolute OG image URL; falls back to the site default when omitted. */
   image?: string;
-  /** Ordered breadcrumb trail → BreadcrumbList. */
+  /** Ordered breadcrumb trail → BreadcrumbList (type="post" and "collection"). */
   breadcrumbs?: BlogCrumb[];
 
-  // ── type="index" ─────────────────────────────────────────────────────
-  /** Listed posts, newest first → Blog.blogPost. */
+  // ── type="index" / "collection" ──────────────────────────────────────
+  /** Listed posts, newest first → Blog.blogPost / CollectionPage ItemList. */
   posts?: BlogIndexItem[];
 }
 
@@ -100,9 +101,9 @@ const blogPosting =
       }
     : null;
 
-// ── BreadcrumbList — type="post" ──────────────────────────────────────────
+// ── BreadcrumbList — type="post" / "collection" ──────────────────────────
 const breadcrumbList =
-  type === 'post' && breadcrumbs.length > 0
+  (type === 'post' || type === 'collection') && breadcrumbs.length > 0
     ? {
         '@context': 'https://schema.org',
         '@type': 'BreadcrumbList',
@@ -135,7 +136,29 @@ const blog =
       }
     : null;
 
-const blocks = [blogPosting, breadcrumbList, blog].filter(Boolean);
+// ── CollectionPage — type="collection" ────────────────────────────────────
+const collectionPage =
+  type === 'collection'
+    ? {
+        '@context': 'https://schema.org',
+        '@type': 'CollectionPage',
+        name,
+        description,
+        inLanguage,
+        url,
+        mainEntity: {
+          '@type': 'ItemList',
+          itemListElement: posts.map((p, i) => ({
+            '@type': 'ListItem',
+            position: i + 1,
+            url: p.url,
+            name: p.headline,
+          })),
+        },
+      }
+    : null;
+
+const blocks = [blogPosting, breadcrumbList, blog, collectionPage].filter(Boolean);
 
 // Escape "</script>" / "<" injection vectors while keeping valid JSON.
 const stringify = (obj: unknown) => JSON.stringify(obj).replace(/</g, '\\u003c');

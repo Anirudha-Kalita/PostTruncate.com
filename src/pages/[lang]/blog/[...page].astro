@@ -1,0 +1,203 @@
+---
+import { getCollection, type CollectionEntry } from 'astro:content';
+import type { GetStaticPaths, Page } from 'astro';
+import Layout from '../../../layouts/Layout.astro';
+import BlogStructuredData from '../../../components/BlogStructuredData.astro';
+import { DEFAULT_LOCALE } from '../../../i18n/config';
+import BlogCardGrid from '../../../components/BlogCardGrid.astro';
+import BlogCategoryNav from '../../../components/BlogCategoryNav.astro';
+import BlogPagination from '../../../components/BlogPagination.astro';
+import { BLOG_SEGMENT, getBlogStrings, isoDate } from '../../../lib/blogI18n';
+import {
+  blogCategories,
+  getCategorySlug,
+  getCategoryName,
+} from '../../../data/blogCategories';
+
+type BlogEntry = CollectionEntry<'blog'>;
+type NavCategory = { name: string; href: string };
+
+// One paginated index per locale that has at least one published post. Page 1
+// lives at /{lang}/blog/, pages 2+ at /{lang}/blog/2/ (Astro's rest-param
+// paginate() output). Empty locales produce no pages — no thin "coming soon"
+// pages for the 9 unwritten languages until their content lands.
+export const getStaticPaths = (async ({ paginate }) => {
+  // 12 posts per page. Declared inside getStaticPaths because Astro evaluates
+  // this function in isolation — module-scope frontmatter consts aren't visible.
+  const PAGE_SIZE = 12;
+  const posts = (await getCollection('blog')).filter(
+    (p) => import.meta.env.DEV || !p.data.draft,
+  );
+
+  // Bucket posts by locale, newest first within each.
+  const byLocale = new Map<string, BlogEntry[]>();
+  for (const p of posts) {
+    const group = byLocale.get(p.data.locale) ?? [];
+    group.push(p);
+    byLocale.set(p.data.locale, group);
+  }
+  for (const group of byLocale.values()) {
+    group.sort(
+      (a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf(),
+    );
+  }
+
+  const site = 'https://posttruncate.com';
+  // hreflang alternates: only locales that actually have an index page. These
+  // are page-1 hrefs; the page maps them to the current page number for N>1.
+  const localesWithPosts = [...byLocale.keys()];
+  const alternates = localesWithPosts.map((code) => ({
+    hreflang: code,
+    href: `${site}/${code}/${BLOG_SEGMENT}/`,
+  }));
+  const xDefaultLocale = localesWithPosts.includes(DEFAULT_LOCALE)
+    ? DEFAULT_LOCALE
+    : localesWithPosts[0];
+  if (xDefaultLocale) {
+    alternates.push({
+      hreflang: 'x-default',
+      href: `${site}/${xDefaultLocale}/${BLOG_SEGMENT}/`,
+    });
+  }
+
+  // Paginate each locale's posts independently, attaching the locale param and
+  // the shared per-locale props (hreflang + the full category nav, which must
+  // reflect every category in the locale, not just the current page's slice).
+  return localesWithPosts.flatMap((code) => {
+    const localePosts = byLocale.get(code)!;
+
+    const categoriesWithPosts = new Set(localePosts.map((p) => p.data.category));
+    const navCategories: NavCategory[] = blogCategories
+      .filter((cat) => categoriesWithPosts.has(cat.id))
+      .map((cat) => ({
+        name: getCategoryName(cat, code),
+        href: `/${code}/${BLOG_SEGMENT}/${getCategorySlug(cat, code)}/`,
+      }));
+
+    return paginate(localePosts, {
+      pageSize: PAGE_SIZE,
+      params: { lang: code },
+      props: { hreflangUrls: alternates, navCategories },
+    });
+  });
+}) satisfies GetStaticPaths;
+
+interface Props {
+  page: Page<BlogEntry>;
+  hreflangUrls: { hreflang: string; href: string }[];
+  navCategories: NavCategory[];
+}
+
+const { page, hreflangUrls, navCategories } = Astro.props as Props;
+const { lang } = Astro.params as { lang: string };
+
+const s = getBlogStrings(lang);
+const site = Astro.site ?? new URL('https://posttruncate.com');
+
+const { currentPage, lastPage, data: posts } = page;
+const basePath = `/${lang}/${BLOG_SEGMENT}/`;
+
+// Per-page pathname: page 1 is the bare section base, pages 2+ append "N/".
+const pagePath = (n: number) => (n <= 1 ? basePath : `${basePath}${n}/`);
+const canonicalUrl = new URL(pagePath(currentPage), site).href;
+
+// "Page N" title suffix for N>1 keeps page 1 as the clean section title.
+const pageTitle =
+  currentPage > 1 ? `${s.indexTitle} — Page ${currentPage}` : s.indexTitle;
+
+// hreflang per page number: pages 2+ map to the same page number in other
+// locales (English-first keeps the list short). Base hrefs end with "/".
+const pageHreflangUrls = hreflangUrls.map((a) => ({
+  hreflang: a.hreflang,
+  href: currentPage > 1 ? `${a.href}${currentPage}/` : a.href,
+}));
+
+// rel=prev / rel=next absolute URLs for the <head> (crawl hints).
+const prevUrl = currentPage > 1 ? new URL(pagePath(currentPage - 1), site).href : null;
+const nextUrl =
+  currentPage < lastPage ? new URL(pagePath(currentPage + 1), site).href : null;
+
+// JSON-LD lists only THIS page's posts, scoped to the current page URL.
+const schemaPosts = posts.map((p) => ({
+  headline: p.data.title,
+  description: p.data.description,
+  datePublished: isoDate(p.data.publishDate),
+  url: new URL(`/${lang}/${BLOG_SEGMENT}/${p.data.slug}/`, site).href,
+}));
+---
+
+<Layout
+  lang={lang}
+  path={`/${BLOG_SEGMENT}/`}
+  title={pageTitle}
+  description={s.indexDescription}
+  canonicalUrl={canonicalUrl}
+  hreflangUrls={pageHreflangUrls}
+>
+  <BlogStructuredData
+    slot="head"
+    type="index"
+    url={canonicalUrl}
+    name={s.indexHeading}
+    description={s.indexDescription}
+    inLanguage={lang}
+    posts={schemaPosts}
+  />
+  {prevUrl && <link slot="head" rel="prev" href={prevUrl} />}
+  {nextUrl && <link slot="head" rel="next" href={nextUrl} />}
+  <link
+    slot="head"
+    rel="alternate"
+    type="application/rss+xml"
+    title={s.indexTitle}
+    href={`/${lang}/${BLOG_SEGMENT}/rss.xml`}
+  />
+  <section class="blog container-page">
+    <header class="blog__head">
+      <h1 class="blog__title">{s.indexHeading}</h1>
+      <p class="blog__lede">{s.indexLede}</p>
+    </header>
+
+    {navCategories.length > 0 && (
+      <BlogCategoryNav categories={navCategories} />
+    )}
+
+    <BlogCardGrid posts={posts} lang={lang} readMoreLabel={s.readMore} />
+
+    <BlogPagination
+      currentPage={currentPage}
+      lastPage={lastPage}
+      basePath={basePath}
+      prevLabel={s.paginationPrev}
+      nextLabel={s.paginationNext}
+      navLabel={s.paginationNavLabel}
+      statusTemplate={s.paginationStatus}
+    />
+  </section>
+</Layout>
+
+<style>
+  .blog {
+    padding-top: 48px;
+    padding-bottom: 96px;
+    /* Wide enough to land on a 4-up card grid (4 × 230px tracks + gaps). */
+    max-width: 72rem;
+  }
+  .blog__head {
+    margin-bottom: 40px;
+  }
+  .blog__title {
+    font-size: clamp(30px, 5vw, 44px);
+    font-weight: 600;
+    line-height: 1.08;
+    letter-spacing: -1.6px;
+    color: var(--color-ink);
+  }
+  .blog__lede {
+    margin-top: 16px;
+    max-width: 44rem;
+    font-size: 18px;
+    line-height: 28px;
+    color: var(--color-body);
+  }
+</style>

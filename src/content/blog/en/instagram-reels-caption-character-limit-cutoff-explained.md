@@ -6,6 +6,7 @@ locale: en
 slug: instagram-reels-caption-character-limit-cutoff-explained
 translationKey: instagram-reels-caption-character-limit-cutoff-explained
 relatedPlatform: instagram
+category: instagram
 author: PostTruncate Team
 draft: true
 ---

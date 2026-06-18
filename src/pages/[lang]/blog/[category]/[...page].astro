@@ -1,0 +1,245 @@
+---
+import { getCollection, type CollectionEntry } from 'astro:content';
+import type { GetStaticPaths, Page } from 'astro';
+import Layout from '../../../../layouts/Layout.astro';
+import BlogStructuredData from '../../../../components/BlogStructuredData.astro';
+import BlogCardGrid from '../../../../components/BlogCardGrid.astro';
+import BlogPagination from '../../../../components/BlogPagination.astro';
+import { getLocale, DEFAULT_LOCALE } from '../../../../i18n/config';
+import { BLOG_SEGMENT, getBlogStrings, isoDate } from '../../../../lib/blogI18n';
+import {
+  getCategoryById,
+  getCategorySlug,
+  getCategoryName,
+  getCategoryDescription,
+  getCategoryMetaTitle,
+  getCategoryMetaDescription,
+} from '../../../../data/blogCategories';
+
+type BlogEntry = CollectionEntry<'blog'>;
+
+// One paginated category hub per (locale, category) that has at least one
+// published post. Page 1 lives at /{lang}/blog/{category}/, pages 2+ at
+// /{lang}/blog/{category}/2/. Categories with zero published posts emit no
+// page — no thin/empty hubs. The [category] param is the category SLUG
+// (resolved via the registry), so it never collides with the sibling [slug]
+// post route (disjoint slug spaces); the rest [...page] only adds numeric
+// page segments on top of a known category slug.
+export const getStaticPaths = (async ({ paginate }) => {
+  // 12 posts per page. Declared inside getStaticPaths because Astro evaluates
+  // this function in isolation — module-scope frontmatter consts aren't visible.
+  const PAGE_SIZE = 12;
+  const posts = (await getCollection('blog')).filter(
+    (p) => import.meta.env.DEV || !p.data.draft,
+  );
+
+  // Bucket posts by category id → locale → posts.
+  const byCategory = new Map<string, Map<string, BlogEntry[]>>();
+  for (const p of posts) {
+    const catId = p.data.category;
+    let byLocale = byCategory.get(catId);
+    if (!byLocale) {
+      byLocale = new Map<string, BlogEntry[]>();
+      byCategory.set(catId, byLocale);
+    }
+    const group = byLocale.get(p.data.locale) ?? [];
+    group.push(p);
+    byLocale.set(p.data.locale, group);
+  }
+
+  const site = 'https://posttruncate.com';
+  const paths = [...byCategory].flatMap(([catId, byLocale]) => {
+    const category = getCategoryById(catId);
+    if (!category) return []; // unknown id — schema enum already guards this
+
+    // hreflang alternates: only locales that have posts in THIS category. These
+    // are page-1 hrefs; the page maps them to the current page number for N>1.
+    const localesWithPosts = [...byLocale.keys()];
+    const alternates = localesWithPosts.map((code) => ({
+      hreflang: code,
+      href: `${site}/${code}/${BLOG_SEGMENT}/${getCategorySlug(category, code)}/`,
+    }));
+    const xDefaultLocale = localesWithPosts.includes(DEFAULT_LOCALE)
+      ? DEFAULT_LOCALE
+      : localesWithPosts[0];
+    if (xDefaultLocale) {
+      alternates.push({
+        hreflang: 'x-default',
+        href: `${site}/${xDefaultLocale}/${BLOG_SEGMENT}/${getCategorySlug(category, xDefaultLocale)}/`,
+      });
+    }
+
+    return localesWithPosts.flatMap((code) => {
+      const group = byLocale
+        .get(code)!
+        .slice()
+        .sort(
+          (a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf(),
+        );
+      return paginate(group, {
+        pageSize: PAGE_SIZE,
+        params: { lang: code, category: getCategorySlug(category, code) },
+        props: { categoryId: catId, hreflangUrls: alternates },
+      });
+    });
+  });
+
+  return paths;
+}) satisfies GetStaticPaths;
+
+interface Props {
+  categoryId: string;
+  page: Page<BlogEntry>;
+  hreflangUrls: { hreflang: string; href: string }[];
+}
+
+const { categoryId, page, hreflangUrls } = Astro.props as Props;
+const { lang } = Astro.params as { lang: string };
+
+const category = getCategoryById(categoryId)!;
+const name = getCategoryName(category, lang);
+const description = getCategoryDescription(category, lang);
+const metaTitle = getCategoryMetaTitle(category, lang);
+const metaDescription = getCategoryMetaDescription(category, lang);
+const categorySlug = getCategorySlug(category, lang);
+
+const s = getBlogStrings(lang);
+const locale = getLocale(lang);
+const site = Astro.site ?? new URL('https://posttruncate.com');
+
+const { currentPage, lastPage, data: posts } = page;
+const basePath = `/${lang}/${BLOG_SEGMENT}/${categorySlug}/`;
+
+// Per-page pathname: page 1 is the bare category base, pages 2+ append "N/".
+const pagePath = (n: number) => (n <= 1 ? basePath : `${basePath}${n}/`);
+const canonicalUrl = new URL(pagePath(currentPage), site).href;
+const homeUrl = new URL(`/${lang}/${locale.slug}/`, site).href;
+const blogIndexUrl = new URL(`/${lang}/${BLOG_SEGMENT}/`, site).href;
+
+// "Page N" title suffix for N>1 keeps page 1 as the clean category title.
+const pageTitle = currentPage > 1 ? `${metaTitle} — Page ${currentPage}` : metaTitle;
+
+// hreflang per page number: pages 2+ map to the same page number in other
+// locales (English-first keeps the list short). Base hrefs end with "/".
+const pageHreflangUrls = hreflangUrls.map((a) => ({
+  hreflang: a.hreflang,
+  href: currentPage > 1 ? `${a.href}${currentPage}/` : a.href,
+}));
+
+// rel=prev / rel=next absolute URLs for the <head> (crawl hints).
+const prevUrl = currentPage > 1 ? new URL(pagePath(currentPage - 1), site).href : null;
+const nextUrl =
+  currentPage < lastPage ? new URL(pagePath(currentPage + 1), site).href : null;
+
+// Posts for the CollectionPage JSON-LD, scoped to THIS page, current URL.
+const schemaPosts = posts.map((p) => ({
+  headline: p.data.title,
+  description: p.data.description,
+  datePublished: isoDate(p.data.publishDate),
+  url: new URL(`/${lang}/${BLOG_SEGMENT}/${p.data.slug}/`, site).href,
+}));
+
+// Breadcrumb trail: Home → Blog → Category. Rendered as BreadcrumbList JSON-LD.
+// Always points the category crumb at page 1 (the canonical hub entry).
+const breadcrumbs = [
+  { name: locale.toolName, item: homeUrl },
+  { name: s.backToBlog, item: blogIndexUrl },
+  { name, item: new URL(basePath, site).href },
+];
+---
+
+<Layout
+  lang={lang}
+  path={`/${BLOG_SEGMENT}/${categorySlug}/`}
+  title={pageTitle}
+  description={metaDescription}
+  canonicalUrl={canonicalUrl}
+  hreflangUrls={pageHreflangUrls}
+>
+  <BlogStructuredData
+    slot="head"
+    type="collection"
+    url={canonicalUrl}
+    name={name}
+    description={metaDescription}
+    inLanguage={lang}
+    posts={schemaPosts}
+    breadcrumbs={breadcrumbs}
+  />
+  {prevUrl && <link slot="head" rel="prev" href={prevUrl} />}
+  {nextUrl && <link slot="head" rel="next" href={nextUrl} />}
+  <link
+    slot="head"
+    rel="alternate"
+    type="application/rss+xml"
+    title={s.indexTitle}
+    href={`/${lang}/${BLOG_SEGMENT}/rss.xml`}
+  />
+  <section class="blog container-page">
+    <nav class="blog__crumbs" aria-label="Breadcrumb">
+      <a href={`/${lang}/${BLOG_SEGMENT}/`}>{s.backToBlog}</a>
+      <span aria-hidden="true">→</span>
+      <span aria-current="page">{name}</span>
+    </nav>
+
+    <header class="blog__head">
+      <h1 class="blog__title">{name}</h1>
+      <p class="blog__lede">{description}</p>
+    </header>
+
+    <BlogCardGrid posts={posts} lang={lang} readMoreLabel={s.readMore} />
+
+    <BlogPagination
+      currentPage={currentPage}
+      lastPage={lastPage}
+      basePath={basePath}
+      prevLabel={s.paginationPrev}
+      nextLabel={s.paginationNext}
+      navLabel={s.paginationNavLabel}
+      statusTemplate={s.paginationStatus}
+    />
+  </section>
+</Layout>
+
+<style>
+  .blog {
+    padding-top: 48px;
+    padding-bottom: 96px;
+    /* Wide enough to land on a 4-up card grid (4 × 230px tracks + gaps). */
+    max-width: 72rem;
+  }
+  .blog__crumbs {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 24px;
+    font-size: 14px;
+    color: var(--color-mute);
+  }
+  .blog__crumbs a {
+    color: var(--color-body);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  .blog__crumbs a:hover {
+    color: var(--color-ink);
+  }
+  .blog__head {
+    margin-bottom: 40px;
+  }
+  .blog__title {
+    font-size: clamp(30px, 5vw, 44px);
+    font-weight: 600;
+    line-height: 1.08;
+    letter-spacing: -1.6px;
+    color: var(--color-ink);
+  }
+  .blog__lede {
+    margin-top: 16px;
+    max-width: 44rem;
+    font-size: 18px;
+    line-height: 28px;
+    color: var(--color-body);
+  }
+</style>

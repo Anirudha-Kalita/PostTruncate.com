@@ -12,6 +12,11 @@ import {
   formatBlogDate,
   isoDate,
 } from '../../../../lib/blogI18n';
+import {
+  getCategoryById,
+  getCategorySlug,
+  getCategoryName,
+} from '../../../../data/blogCategories';
 
 type BlogEntry = CollectionEntry<'blog'>;
 
@@ -148,11 +153,19 @@ const relatedToolName = relatedTool
   ? relatedTool.schemaName[lang] ?? relatedTool.schemaName[DEFAULT_LOCALE]
   : undefined;
 
-// Breadcrumb trail: Home → Blog → this post. Passed to BlogStructuredData,
-// which renders it as BreadcrumbList JSON-LD.
+// Breadcrumb trail: Home → Blog → Category → this post. Passed to
+// BlogStructuredData, which renders it as BreadcrumbList JSON-LD.
+const category = getCategoryById(data.category);
+const categoryName = category ? getCategoryName(category, lang) : '';
+const categorySlug = category ? getCategorySlug(category, lang) : '';
+const categoryUrl = category
+  ? new URL(`/${lang}/${BLOG_SEGMENT}/${categorySlug}/`, site).href
+  : '';
+
 const breadcrumbs = [
   { name: locale.toolName, item: homeUrl },
   { name: s.backToBlog, item: blogIndexUrl },
+  ...(category ? [{ name: categoryName, item: categoryUrl }] : []),
   { name: data.title, item: canonicalUrl },
 ];
 
@@ -194,9 +207,20 @@ const { Content } = await render(post);
   <article class="post container-page">
     <nav class="post__crumbs" aria-label="Breadcrumb">
       <a href={`/${lang}/${BLOG_SEGMENT}/`}>{s.backToBlog}</a>
+      {category && (
+        <>
+          <span aria-hidden="true">→</span>
+          <a href={`/${lang}/${BLOG_SEGMENT}/${categorySlug}/`}>{categoryName}</a>
+        </>
+      )}
     </nav>
 
     <header class="post__head">
+      {category && (
+        <a class="post__category-badge" href={`/${lang}/${BLOG_SEGMENT}/${categorySlug}/`}>
+          {categoryName}
+        </a>
+      )}
       <h1 class="post__title">{data.title}</h1>
       {data.subtitle && <p class="post__subtitle">{data.subtitle}</p>}
       <p class="post__meta">
@@ -329,8 +353,13 @@ const { Content } = await render(post);
     max-width: 56rem;
   }
   .post__crumbs {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
     font-size: 14px;
     margin-bottom: 24px;
+    color: var(--color-mute);
   }
   .post__crumbs a {
     color: var(--color-body);
@@ -339,6 +368,23 @@ const { Content } = await render(post);
   }
   .post__crumbs a:hover {
     color: var(--color-ink);
+  }
+  .post__category-badge {
+    display: inline-block;
+    margin-bottom: 12px;
+    padding: 2px 8px;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 20px;
+    color: var(--color-body);
+    background: var(--color-canvas-soft);
+    border-radius: 9999px;
+    text-decoration: none;
+    transition: background 0.15s ease, color 0.15s ease;
+  }
+  .post__category-badge:hover {
+    color: var(--color-ink);
+    background: var(--color-canvas-soft-2);
   }
   .post__head {
     margin-bottom: 32px;

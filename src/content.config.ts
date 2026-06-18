@@ -19,6 +19,7 @@
 import { defineCollection, z } from 'astro:content';
 import { glob } from 'astro/loaders';
 import { LOCALE_CODES } from './i18n/config';
+import { BLOG_CATEGORY_IDS } from './data/blogCategories';
 
 // Platforms a post can be cross-linked to. Values mirror the ids in
 // src/data/tools.ts so a post can deep-link to the matching tool page/editor
@@ -105,6 +106,13 @@ const blog = defineCollection({
     translationKey: z.string().optional(),
 
     // ── Taxonomy ────────────────────────────────────────────────────────
+    /**
+     * Required blog category. Determines which hub page at
+     * /{lang}/blog/{category-slug}/ this post appears on. Value is a category
+     * `id` from src/data/blogCategories.ts (the enum is derived from that
+     * registry so the two can never drift apart).
+     */
+    category: z.enum(BLOG_CATEGORY_IDS),
     /** Optional platform association → cross-links to the matching tool page. */
     relatedPlatform: z.preprocess(blankToUndefined, z.enum(RELATED_PLATFORMS).optional()),
 

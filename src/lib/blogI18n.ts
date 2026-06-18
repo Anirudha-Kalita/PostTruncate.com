@@ -50,6 +50,14 @@ export interface BlogStrings {
   commentsHeading: string;
   /** Note setting expectations that comments are reviewed before appearing. */
   commentsNote: string;
+  /** Pagination: previous-page link label, e.g. "Previous". */
+  paginationPrev: string;
+  /** Pagination: next-page link label, e.g. "Next". */
+  paginationNext: string;
+  /** Pagination: aria-label for the pagination <nav>, e.g. "Blog pagination". */
+  paginationNavLabel: string;
+  /** Pagination: status template with {current} and {total} tokens. */
+  paginationStatus: string;
 }
 
 // Only English is authored today. Add keys for 'de', 'es', … when translating.
@@ -76,6 +84,10 @@ const BLOG_STRINGS: Record<string, BlogStrings> = {
     commentsHeading: 'Join the discussion',
     commentsNote:
       'Comments are reviewed before they appear, so yours won’t show up right away.',
+    paginationPrev: 'Previous',
+    paginationNext: 'Next',
+    paginationNavLabel: 'Blog pagination',
+    paginationStatus: 'Page {current} of {total}',
   },
 };
 

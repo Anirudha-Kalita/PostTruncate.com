@@ -8,6 +8,7 @@ updatedDate: ''
 locale: en
 slug: linkedin-character-limits-2026
 relatedPlatform: linkedin
+category: linkedin
 author: PostTruncate Team
 draft: false
 ogImage: /og/LinedIn-hero.webp

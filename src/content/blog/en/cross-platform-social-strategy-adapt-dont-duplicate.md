@@ -8,6 +8,7 @@ updatedDate: ''
 locale: en
 slug: cross-platform-social-strategy-2026
 relatedPlatform: general
+category: copywriting-strategy
 author: PostTruncate Team
 draft: false
 ogImage: /og/Crossplateform_hero.png

@@ -8,6 +8,7 @@ updatedDate: ''
 locale: en
 slug: the-hidden-cost-of-emojis-in-sms-marketing
 relatedPlatform: sms
+category: sms-marketing
 author: PostTruncate Team
 draft: false
 ogImage: /og/sms.webp

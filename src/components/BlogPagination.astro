@@ -1,0 +1,194 @@
+---
+// ──────────────────────────────────────────────────────────────────────────
+// Numbered, crawlable pagination control for the blog index + category hubs.
+//
+// Renders real <a href> links for every page number (plus Prev/Next), so the
+// whole archive is reachable without JavaScript and search engines can follow
+// the chain from page 1 onward. The compact page-number window (with ellipses)
+// comes from the pure helper in src/lib/pagination.ts.
+//
+// URL scheme: page 1 lives at the section base (e.g. /en/blog/), pages 2+ at
+// /en/blog/2/ — matching Astro's rest-param paginate() output. `basePath` is
+// the page-1 path (with trailing slash); page N is `${basePath}${N}/`.
+//
+// Renders nothing when there's a single page (lastPage === 1).
+// ──────────────────────────────────────────────────────────────────────────
+import { getPaginationRange } from '../lib/pagination';
+
+interface Props {
+  /** 1-based index of the page being rendered. */
+  currentPage: number;
+  /** Total number of pages. */
+  lastPage: number;
+  /** Path of page 1, trailing slash included, e.g. "/en/blog/". */
+  basePath: string;
+  /** Previous-link label, e.g. "Previous". */
+  prevLabel: string;
+  /** Next-link label, e.g. "Next". */
+  nextLabel: string;
+  /** aria-label for the <nav>, e.g. "Blog pagination". */
+  navLabel: string;
+  /** Status template with {current} / {total} tokens. */
+  statusTemplate: string;
+}
+
+const {
+  currentPage,
+  lastPage,
+  basePath,
+  prevLabel,
+  nextLabel,
+  navLabel,
+  statusTemplate,
+} = Astro.props;
+
+/** Page N's pathname: page 1 is the bare base, pages 2+ append "N/". */
+const pageHref = (n: number) => (n <= 1 ? basePath : `${basePath}${n}/`);
+
+const items = getPaginationRange(currentPage, lastPage);
+const hasPrev = currentPage > 1;
+const hasNext = currentPage < lastPage;
+
+// Visually-hidden status text ("Page 2 of 5") for screen readers.
+const statusText = statusTemplate
+  .replace('{current}', String(currentPage))
+  .replace('{total}', String(lastPage));
+---
+
+{
+  lastPage > 1 && (
+    <nav class="blog-pagination" aria-label={navLabel}>
+      <p class="blog-pagination__status">{statusText}</p>
+      <ul class="blog-pagination__list">
+        <li>
+          {hasPrev ? (
+            <a class="blog-pagination__step" rel="prev" href={pageHref(currentPage - 1)}>
+              <span aria-hidden="true">←</span> {prevLabel}
+            </a>
+          ) : (
+            <span class="blog-pagination__step is-disabled" aria-hidden="true">
+              <span>←</span> {prevLabel}
+            </span>
+          )}
+        </li>
+
+        {items.map((item) =>
+          item === 'ellipsis' ? (
+            <li class="blog-pagination__ellipsis" aria-hidden="true">
+              …
+            </li>
+          ) : (
+            <li>
+              <a
+                class="blog-pagination__num"
+                href={pageHref(item)}
+                aria-current={item === currentPage ? 'page' : undefined}
+                aria-label={`${statusTemplate
+                  .replace('{current}', String(item))
+                  .replace('{total}', String(lastPage))}`}
+              >
+                {item}
+              </a>
+            </li>
+          ),
+        )}
+
+        <li>
+          {hasNext ? (
+            <a class="blog-pagination__step" rel="next" href={pageHref(currentPage + 1)}>
+              {nextLabel} <span aria-hidden="true">→</span>
+            </a>
+          ) : (
+            <span class="blog-pagination__step is-disabled" aria-hidden="true">
+              {nextLabel} <span>→</span>
+            </span>
+          )}
+        </li>
+      </ul>
+    </nav>
+  )
+}
+
+<style>
+  .blog-pagination {
+    margin-top: 48px;
+  }
+  /* Screen-reader-only status; visually hidden but announced. */
+  .blog-pagination__status {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+  .blog-pagination__list {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+  .blog-pagination__num,
+  .blog-pagination__step {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    white-space: nowrap;
+    padding: 0 14px;
+    height: 38px;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1;
+    color: var(--color-body);
+    border: 1px solid var(--color-hairline);
+    border-radius: 64px;
+    background: transparent;
+    text-decoration: none;
+    transition: border-color 0.15s ease, color 0.15s ease, background 0.15s ease;
+  }
+  .blog-pagination__num {
+    min-width: 38px;
+    justify-content: center;
+  }
+  .blog-pagination__num:hover,
+  .blog-pagination__step:hover {
+    color: var(--color-ink);
+    border-color: var(--color-ink);
+    background: var(--color-canvas-soft);
+  }
+  .blog-pagination__num:focus-visible,
+  .blog-pagination__step:focus-visible {
+    outline: 2px solid var(--color-ink);
+    outline-offset: 2px;
+  }
+  /* Active page: filled, non-interactive emphasis. */
+  .blog-pagination__num[aria-current='page'] {
+    color: var(--color-canvas);
+    background: var(--color-ink);
+    border-color: var(--color-ink);
+    cursor: default;
+  }
+  /* Disabled Prev/Next at the chain ends. */
+  .blog-pagination__step.is-disabled {
+    color: var(--color-mute);
+    border-color: var(--color-hairline);
+    opacity: 0.5;
+    cursor: default;
+  }
+  .blog-pagination__ellipsis {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 38px;
+    height: 38px;
+    color: var(--color-mute);
+    user-select: none;
+  }
+</style>

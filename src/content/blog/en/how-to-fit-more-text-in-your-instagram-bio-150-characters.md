@@ -8,6 +8,7 @@ updatedDate: ''
 locale: en
 slug: how-to-fit-more-text-in-your-instagram-bio-150-characters
 relatedPlatform: instagram
+category: instagram
 author: PostTruncate Team
 draft: false
 ogImage: /og/Instagram.webp

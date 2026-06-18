@@ -51,6 +51,20 @@ collections:
       # slug if this ever serializes empty, so the build can't break either way.
       - { name: translationKey, label: Translation key, widget: hidden, default: '{{fields.slug}}' }
       - { name: relatedPlatform, label: Related platform, widget: select, required: false, options: ['twitter', 'instagram', 'linkedin', 'facebook', 'sms', 'threads', 'general'] }
+      - name: category
+        label: Category
+        widget: select
+        hint: 'Assign this post to one blog category. Determines which category hub page it appears on.'
+        options:
+          - { label: 'Twitter / X', value: twitter-x }
+          - { label: 'LinkedIn', value: linkedin }
+          - { label: 'Instagram', value: instagram }
+          - { label: 'Facebook', value: facebook }
+          - { label: 'Threads', value: threads }
+          - { label: 'SMS Marketing', value: sms-marketing }
+          - { label: 'SEO & SERP', value: seo-serp }
+          - { label: 'Copywriting & Strategy', value: copywriting-strategy }
+          - { label: 'Tools & Automation', value: tools-automation }
       - { name: author, label: Author, widget: string, default: 'PostTruncate Team' }
       - { name: draft, label: Draft, widget: boolean, default: false }
       - { name: ogImage, label: Social image, widget: image, required: false, hint: 'Optional. Falls back to the site default (/og.png).' }

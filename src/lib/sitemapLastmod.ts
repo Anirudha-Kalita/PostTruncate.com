@@ -3,6 +3,7 @@ import { existsSync, readdirSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { tools } from '../data/tools';
 import { calculators } from '../data/calculators';
+import { blogCategories, getCategorySlug } from '../data/blogCategories';
 import { LOCALES, DEFAULT_LOCALE } from '../i18n/config';
 import { toLastmodIso } from './contentDates';
 
@@ -88,6 +89,105 @@ export function buildBlogLastmodByPath(): Map<string, string> {
       map.set(`/${locale}/blog/${fm.slug}/`, toLastmodIso(date));
     }
   }
+  return map;
+}
+
+/** Posts per paginated listing page — must match the blog routes' pageSize. */
+const BLOG_PAGE_SIZE = 12;
+
+/** Sitemap metadata for one paginated blog listing URL. */
+export interface BlogListingSitemapEntry {
+  /** lastmod ISO timestamp. */
+  lastmod: string;
+  /** Sitemap priority for this page. */
+  priority: number;
+}
+
+/**
+ * Map every paginated blog listing URL → its sitemap lastmod + priority.
+ *
+ * Covers both the locale index (/{locale}/blog/, /{locale}/blog/2/, …) and the
+ * per-category hubs (/{locale}/blog/{category-slug}/, …/2/, …). Page 1 lives at
+ * the bare base; pages 2+ append "N/", mirroring the routes' rest-param
+ * paginate() output. The page count per listing is derived the same way the
+ * route does — ceil(postCount / pageSize) — so the sitemap can never list a
+ * paginated URL the build didn't emit (or omit one it did).
+ *
+ * lastmod is the newest post date in that listing (per locale, or per
+ * locale+category), matching the freshness of the content shown. Priority
+ * favours page 1 (the canonical listing entry) over deeper pages.
+ *
+ * astro.config.mjs runs before the content layer exists, so we read the
+ * Markdown frontmatter directly here rather than via getCollection. Drafts are
+ * skipped — the same rule the routes apply in production.
+ */
+export function buildBlogListingLastmodByPath(): Map<string, BlogListingSitemapEntry> {
+  const map = new Map<string, BlogListingSitemapEntry>();
+  if (!existsSync(BLOG_CONTENT_DIR)) return map;
+
+  // Per-locale and per-(locale, category) tallies: post count + newest date.
+  const localeStats = new Map<string, { count: number; newest: string }>();
+  const categoryStats = new Map<string, { count: number; newest: string }>();
+
+  const tally = (
+    stats: Map<string, { count: number; newest: string }>,
+    key: string,
+    date: string,
+  ) => {
+    const existing = stats.get(key);
+    if (!existing) {
+      stats.set(key, { count: 1, newest: date });
+    } else {
+      existing.count += 1;
+      if (date > existing.newest) existing.newest = date;
+    }
+  };
+
+  for (const entry of readdirSync(BLOG_CONTENT_DIR, { withFileTypes: true })) {
+    if (!entry.isDirectory()) continue; // each subfolder is a locale
+    const dir = join(BLOG_CONTENT_DIR, entry.name);
+    for (const file of readdirSync(dir)) {
+      if (!file.endsWith('.md')) continue;
+      const fm = parseBlogFrontmatter(readFileSync(join(dir, file), 'utf8'));
+      if (fm.draft === 'true') continue;
+      const locale = fm.locale || entry.name;
+      const date = fm.updatedDate || fm.publishDate;
+      if (!date) continue;
+      tally(localeStats, locale, date);
+      if (fm.category) tally(categoryStats, `${locale}::${fm.category}`, date);
+    }
+  }
+
+  /** Emit page 1..lastPage entries for one listing base path. */
+  const addPages = (
+    base: string,
+    count: number,
+    newest: string,
+    page1Priority: number,
+    deepPriority: number,
+  ) => {
+    const lastPage = Math.max(1, Math.ceil(count / BLOG_PAGE_SIZE));
+    const lastmod = toLastmodIso(newest);
+    for (let p = 1; p <= lastPage; p++) {
+      const path = p === 1 ? base : `${base}${p}/`;
+      map.set(path, { lastmod, priority: p === 1 ? page1Priority : deepPriority });
+    }
+  };
+
+  // Locale index listings: /{locale}/blog/ + /{locale}/blog/N/.
+  for (const [locale, { count, newest }] of localeStats) {
+    addPages(`/${locale}/blog/`, count, newest, 0.7, 0.4);
+  }
+
+  // Category hub listings: /{locale}/blog/{slug}/ + /{locale}/blog/{slug}/N/.
+  for (const [key, { count, newest }] of categoryStats) {
+    const [locale, catId] = key.split('::');
+    const cat = blogCategories.find((c) => c.id === catId);
+    if (!cat) continue;
+    const slug = getCategorySlug(cat, locale);
+    addPages(`/${locale}/blog/${slug}/`, count, newest, 0.6, 0.4);
+  }
+
   return map;
 }
 
