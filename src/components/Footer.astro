@@ -105,10 +105,10 @@ const homeCounterLinks = calculators
 // Character Counters column) so they stay compact in the narrow footer column.
 const adPreviewsTitle = getTranslations(lang).nav.links.adPreviews;
 const AD_PREVIEW_SHORT_LABELS: Record<string, string> = {
-  'facebook-ads': 'Facebook',
-  'google-ads': 'Google',
-  'instagram-ads': 'Instagram',
-  'tiktok-ads': 'TikTok',
+  'facebook-ads': 'Facebook Ads',
+  'google-ads': 'Google Ads',
+  'instagram-ads': 'Instagram Ads',
+  'tiktok-ads': 'TikTok Ads',
 };
 const homeAdPreviewLinks = adPreviews.map((tool) => ({
   label: AD_PREVIEW_SHORT_LABELS[tool.id] ?? tool.schemaName[lang] ?? tool.schemaName['en'],
