@@ -36,7 +36,7 @@ Here's where the two formats diverge in ways that matter for your reach:
 
 The engagement math is stark: tapping is friction. It's not a dealbreaker, but it's a measurable drop-off compared to a post that lives fully in the feed. A scrolling user will read a 500-character post with zero additional effort; the same user will tap into a text attachment only if the preview (that first line) is compulsively clickable.
 
-![Threads post formats side-by-side: 500-character feed post fully visible in scroll, 10,000-character text attachment requiring tap-to-expand](https://cdn-public.eesel.ai/f3b1aa0e-752d-4335-a7f6-4099a1cbc27a/510628ab-d7c0-4616-a17e-d81d82ba9826/53485bdea9d74b1eac46d926fd260872.png)
+![Threads post formats side-by-side: 500-character feed post fully visible in scroll, 10,000-character text attachment requiring tap-to-expand](/og/Threads_post_500_limit_1.webp)
 
 <p align="center"><span style="font-size: 12px; "><em>Threads post formats side-by-side: 500-character feed post fully visible in scroll, 10,000-character text attachment requiring tap-to-expand</em></span></p>
 
@@ -64,7 +64,7 @@ On X, every link is collapsed to exactly 23 characters via the t.co shortener. A
 
 Paste a 75-character URL into Threads, and you've just burned 75 of your 500 characters - not 23. Add two links, and you might have 350 characters left for actual words. Writers who habitually draft on X first get surprised constantly: "This fit on X, why is it overflowing on Threads?"
 
-![Comparison: URL counting on X (23 characters flat) vs Threads (full URL length)](https://cdn-public.eesel.ai/f3b1aa0e-752d-4335-a7f6-4099a1cbc27a/510628ab-d7c0-4616-a17e-d81d82ba9826/dd7b494b55e4406d8282abce99d9888f.png)
+![Comparison: URL counting on X (23 characters flat) vs Threads (full URL length)](/og/Threads_post_500_limit_2.webp)
 
 <p align="center"><span style="font-size: 12px; "><em>Comparison: URL counting on X (23 characters flat) vs Threads (full URL length)</em></span></p>
 
@@ -85,7 +85,7 @@ If you're writing something between 500 and 2,000 characters, you have a real ch
 
 The honest take: the threaded approach usually wins for reach. But if your audience is there for depth and patience, the text attachment can perform well too. The difference is in what you're optimising for - feed impression share, or time-on-page with engaged readers.
 
-![Decision tree: 500 characters? Use feed post. Longer? Thread it (500-2000 chars) or attach it (2000+ chars)](https://cdn-public.eesel.ai/f3b1aa0e-752d-4335-a7f6-4099a1cbc27a/510628ab-d7c0-4616-a17e-d81d82ba9826/f7e0ba1938db49849644c411ccf51b86.png)
+![Decision tree: 500 characters? Use feed post. Longer? Thread it (500-2000 chars) or attach it (2000+ chars)](/og/Threads_post_500_limit_3.webp)
 
 <p align="center"><span style="font-size: 12px; "><em>Decision tree: 500 characters? Use feed post. Longer? Thread it (500-2000 chars) or attach it (2000+ chars)</em></span></p>
 
