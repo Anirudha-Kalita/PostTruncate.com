@@ -65,6 +65,7 @@ collections:
           - { label: 'SEO & SERP', value: seo-serp }
           - { label: 'Copywriting & Strategy', value: copywriting-strategy }
           - { label: 'Tools & Automation', value: tools-automation }
+          - { label: 'TikTok', value: tiktok }
       - { name: author, label: Author, widget: string, default: 'PostTruncate Team' }
       - { name: draft, label: Draft, widget: boolean, default: false }
       - { name: ogImage, label: Social image, widget: image, required: false, hint: 'Optional. Falls back to the site default (/og.png).' }

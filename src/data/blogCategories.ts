@@ -142,6 +142,18 @@ export const blogCategories: BlogCategory[] = [
       en: 'Supercharge your content workflow and development process with our deep dives into marketing tools and automation strategies. Managing multiple platforms requires smart automation, but formatting errors often slip through when cross-posting. Here, we review and compare the best thread splitters, character counters, social media schedulers, and API tools available for modern creators. Additionally, we share exclusive behind-the-scenes engineering insights from building PostTruncate, detailing how solo developers can build lightweight, high-performance, client-side utilities that solve real-world formatting headaches without breaking the bank or sacrificing user privacy.',
     },
   },
+  {
+    id: 'tiktok',
+    slug: { en: 'tiktok' },
+    name: { en: 'TikTok' },
+    metaTitle: { en: 'TikTok Text Formatting & Conciseness Guides | PostTruncate' },
+    metaDescription: {
+      en: 'Master the art of concise TikTok text. Learn formatting best practices, manage character limits, and optimize your video captions for maximum engagement.',
+    },
+    description: {
+      en: 'Master the TikTok algorithm with our ultimate guides to video caption formatting and platform SEO. While TikTok is a video-first platform, your caption is the secret engine driving your discoverability. In this hub, we break down exactly how to leverage TikTok\'s 2,200-character limit without overwhelming your viewers. Learn how to write punchy first-line hooks before the text truncates behind the "more" button, strategically space your hashtags, and seamlessly integrate SEO keywords to rank higher in TikTok\'s search results. Stop guessing how your text will look on screen—learn the exact formatting strategies that turn casual viewers into dedicated followers.',
+    },
+  },
 ];
 
 /**
