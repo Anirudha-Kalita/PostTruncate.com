@@ -5,6 +5,7 @@
   // Put durable, rebuild-safe settings HERE, not in the generated file.
   "name": "posttruncate-com",
   "compatibility_date": "2026-04-15",
+  "compatibility_flags": [ "nodejs_compat" ],
   
   // Explicitly tell Cloudflare Workers where the generated Astro server script and static assets are
   "main": "./dist/_worker.js/index.js",
