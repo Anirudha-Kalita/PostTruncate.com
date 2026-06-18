@@ -1,5 +1,4 @@
 ---
-translationKey: how-many-links-can-you-put-in-a-threads-post
 title: How Many Links Can You Put in a Threads Post?
 subtitle: Threads enforces a strict 5-link maximum per post. Here's what triggers the error, who it hurts most, and exactly how to work around it.
 description: Threads enforces a strict 5-link maximum per post. Here's what triggers the error, who it hurts most, and exactly how to work around it.
