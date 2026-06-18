@@ -1,7 +1,11 @@
 ---
-// Horizontally scrollable category pill navigation for the blog index page.
-// Renders real <a> links (full link equity) to each category hub that has at
-// least one published post. Empty categories are excluded upstream.
+// Category pill navigation for the blog index page. Renders real <a> links
+// (full link equity) to each category hub that has at least one published
+// post. Empty categories are excluded upstream.
+//
+// Desktop (≥1024px): a single scrollable row. Tablet/mobile (≤1023px): the
+// pills wrap onto multiple lines so every category stays visible and tappable
+// without a clipped horizontal scroll.
 
 interface Props {
   categories: { name: string; href: string }[];
@@ -63,5 +67,20 @@ const { categories } = Astro.props;
   .blog-cat-nav__pill:focus-visible {
     outline: 2px solid var(--color-ink);
     outline-offset: 2px;
+  }
+
+  /* Tablet + mobile: wrap pills onto multiple rows instead of a single
+     horizontally-scrolling row that clips at the container edge. Larger tap
+     targets and row spacing make them comfortable to hit on touch screens. */
+  @media (max-width: 1023px) {
+    .blog-cat-nav__list {
+      flex-wrap: wrap;
+      overflow-x: visible;
+      gap: 10px;
+    }
+    .blog-cat-nav__pill {
+      height: 38px;
+      padding: 0 18px;
+    }
   }
 </style>
