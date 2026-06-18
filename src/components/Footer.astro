@@ -101,17 +101,31 @@ const homeCounterLinks = calculators
   }));
 
 // Ad Previews column — mirrors the "Tools" column. Title from nav.links; URLs
-// from adPreviews.ts. Labels are shortened to the bare platform brand (like the
-// Character Counters column) so they stay compact in the narrow footer column.
+// from adPreviews.ts. Labels are the bare platform brand plus the localized
+// word for "Ads" (order and connector vary by language); brand names stay
+// untranslated, like the Character Counters column.
 const adPreviewsTitle = getTranslations(lang).nav.links.adPreviews;
-const AD_PREVIEW_SHORT_LABELS: Record<string, string> = {
-  'facebook-ads': 'Facebook Ads',
-  'google-ads': 'Google Ads',
-  'instagram-ads': 'Instagram Ads',
-  'tiktok-ads': 'TikTok Ads',
+const AD_PREVIEW_BRANDS: Record<string, string> = {
+  'facebook-ads': 'Facebook',
+  'google-ads': 'Google',
+  'instagram-ads': 'Instagram',
+  'tiktok-ads': 'TikTok',
 };
+const adsLabel: Record<string, (brand: string) => string> = {
+  en: (b) => `${b} Ads`,
+  es: (b) => `Anuncios de ${b}`,
+  de: (b) => `${b} Anzeigen`,
+  fr: (b) => `Annonces ${b}`,
+  pt: (b) => `Anúncios do ${b}`,
+  it: (b) => `Annunci ${b}`,
+  nl: (b) => `${b}-advertenties`,
+  ja: (b) => `${b}広告`,
+  zh: (b) => `${b} 广告`,
+  da: (b) => `${b}-annoncer`,
+};
+const fmtAds = adsLabel[lang] ?? adsLabel.en;
 const homeAdPreviewLinks = adPreviews.map((tool) => ({
-  label: AD_PREVIEW_SHORT_LABELS[tool.id] ?? tool.schemaName[lang] ?? tool.schemaName['en'],
+  label: fmtAds(AD_PREVIEW_BRANDS[tool.id] ?? tool.schemaName['en']),
   href: `/${lang}/ad-previews/${tool.slugs[lang] ?? tool.slugs['en']}/`,
 }));
 ---

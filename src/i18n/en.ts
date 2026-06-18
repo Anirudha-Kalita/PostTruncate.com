@@ -696,6 +696,41 @@ export const en: Translations = {
   },
 
   island: {
+    adPreviews: {
+      fields: {
+        headline: 'Headline',
+        primary: 'Primary text',
+        description: 'Description',
+        headlineN: 'Headline {n}',
+      },
+      placeholders: {
+        headline: 'Your headline',
+        primary: 'Write your primary text…',
+        description: 'Add a short description',
+      },
+      counter: '{n} / {limit}',
+      over: '{n} over',
+      previewLabel: 'Live preview',
+      deviceAria: 'Choose preview device',
+      mobile: 'Mobile',
+      desktop: 'Desktop',
+      modeAria: 'Choose placement',
+      feed: 'Feed',
+      reels: 'Reels',
+      safeZoneLabel: 'Safe zones',
+      safeZoneHint: 'Shaded bands show where the interface covers your creative. Keep important text out of them.',
+      safeZoneTag: 'Safe zone',
+      reelsTooShort: 'Aim for {min}–{max} characters so the caption reads cleanly over the video.',
+      media: {
+        add: 'Add media',
+        replace: 'Replace media',
+        remove: 'Remove media',
+        hint: 'Previewed in your browser only — never uploaded or stored.',
+      },
+      badgeFits: 'Fits',
+      badgeTruncated: 'Truncated',
+      sponsored: 'Sponsored',
+    },
     dashboard: {
       loadSample: 'Load a sample post →',
       sample:

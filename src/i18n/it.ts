@@ -24,7 +24,7 @@ export const it: Translations = {
       limits: 'Tutti i limiti delle piattaforme',
       tools: 'Strumenti',
       counters: 'Contatori di caratteri',
-      adPreviews: 'Ad Previews',
+      adPreviews: 'Anteprime annunci',
       faq: 'FAQ',
       about: 'Chi siamo',
       contact: 'Contatti',
@@ -696,6 +696,41 @@ export const it: Translations = {
   },
 
   island: {
+    adPreviews: {
+      fields: {
+        headline: 'Titolo',
+        primary: 'Testo principale',
+        description: 'Descrizione',
+        headlineN: 'Titolo {n}',
+      },
+      placeholders: {
+        headline: 'Il tuo titolo',
+        primary: 'Scrivi il tuo testo principale…',
+        description: 'Aggiungi una breve descrizione',
+      },
+      counter: '{n} / {limit}',
+      over: '{n} in più',
+      previewLabel: 'Anteprima dal vivo',
+      deviceAria: 'Scegli il dispositivo di anteprima',
+      mobile: 'Mobile',
+      desktop: 'Desktop',
+      modeAria: 'Scegli il posizionamento',
+      feed: 'Feed',
+      reels: 'Reels',
+      safeZoneLabel: 'Zone sicure',
+      safeZoneHint: 'Le bande ombreggiate mostrano dove l’interfaccia copre la tua creatività. Tieni il testo importante fuori da esse.',
+      safeZoneTag: 'Zona sicura',
+      reelsTooShort: 'Punta a {min}–{max} caratteri così la didascalia si legge bene sopra il video.',
+      media: {
+        add: 'Aggiungi contenuto',
+        replace: 'Sostituisci contenuto',
+        remove: 'Rimuovi contenuto',
+        hint: 'Visualizzato in anteprima solo nel tuo browser — mai caricato o memorizzato.',
+      },
+      badgeFits: 'Ci sta',
+      badgeTruncated: 'Troncato',
+      sponsored: 'Sponsorizzato',
+    },
     dashboard: {
       loadSample: 'Carica un post di esempio →',
       sample:

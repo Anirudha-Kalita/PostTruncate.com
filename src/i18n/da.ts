@@ -24,7 +24,7 @@ export const da: Translations = {
       limits: 'Alle platformgrænser',
       tools: 'Værktøjer',
       counters: 'Tegntællere',
-      adPreviews: 'Ad Previews',
+      adPreviews: 'Annonceforhåndsvisninger',
       faq: 'FAQ',
       about: 'Om',
       contact: 'Kontakt',
@@ -696,6 +696,41 @@ export const da: Translations = {
   },
 
   island: {
+    adPreviews: {
+      fields: {
+        headline: 'Overskrift',
+        primary: 'Primær tekst',
+        description: 'Beskrivelse',
+        headlineN: 'Overskrift {n}',
+      },
+      placeholders: {
+        headline: 'Din overskrift',
+        primary: 'Skriv din primære tekst…',
+        description: 'Tilføj en kort beskrivelse',
+      },
+      counter: '{n} / {limit}',
+      over: '{n} for meget',
+      previewLabel: 'Live forhåndsvisning',
+      deviceAria: 'Vælg forhåndsvisningsenhed',
+      mobile: 'Mobil',
+      desktop: 'Desktop',
+      modeAria: 'Vælg placering',
+      feed: 'Feed',
+      reels: 'Reels',
+      safeZoneLabel: 'Sikre zoner',
+      safeZoneHint: 'Skraverede bånd viser, hvor brugerfladen dækker dit kreative. Hold vigtig tekst uden for dem.',
+      safeZoneTag: 'Sikker zone',
+      reelsTooShort: 'Sigt efter {min}–{max} tegn, så billedteksten læses rent over videoen.',
+      media: {
+        add: 'Tilføj medie',
+        replace: 'Erstat medie',
+        remove: 'Fjern medie',
+        hint: 'Forhåndsvises kun i din browser — uploades eller gemmes aldrig.',
+      },
+      badgeFits: 'Passer',
+      badgeTruncated: 'Afskåret',
+      sponsored: 'Sponsoreret',
+    },
     dashboard: {
       loadSample: 'Indlæs et eksempelopslag →',
       sample:

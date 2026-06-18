@@ -24,7 +24,7 @@ export const zh: Translations = {
       limits: '所有平台限制',
       tools: '工具',
       counters: '字符计数器',
-      adPreviews: 'Ad Previews',
+      adPreviews: '广告预览',
       faq: '常见问题',
       about: '关于',
       contact: '联系我们',
@@ -694,6 +694,41 @@ export const zh: Translations = {
   },
 
   island: {
+    adPreviews: {
+      fields: {
+        headline: '标题',
+        primary: '主文案',
+        description: '描述',
+        headlineN: '标题 {n}',
+      },
+      placeholders: {
+        headline: '你的标题',
+        primary: '输入你的主文案…',
+        description: '添加简短描述',
+      },
+      counter: '{n} / {limit}',
+      over: '超出 {n}',
+      previewLabel: '实时预览',
+      deviceAria: '选择预览设备',
+      mobile: '移动端',
+      desktop: '桌面端',
+      modeAria: '选择版位',
+      feed: '信息流',
+      reels: 'Reels',
+      safeZoneLabel: '安全区',
+      safeZoneHint: '阴影色带显示界面遮挡素材的位置。请把重要文字放在其外。',
+      safeZoneTag: '安全区',
+      reelsTooShort: '目标 {min}–{max} 字符，让文案在视频上清晰易读。',
+      media: {
+        add: '添加媒体',
+        replace: '替换媒体',
+        remove: '移除媒体',
+        hint: '仅在你的浏览器中预览——绝不上传或存储。',
+      },
+      badgeFits: '合适',
+      badgeTruncated: '已截断',
+      sponsored: '赞助',
+    },
     dashboard: {
       loadSample: '加载示例帖子 →',
       sample:

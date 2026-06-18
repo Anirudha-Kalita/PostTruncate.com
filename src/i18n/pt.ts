@@ -24,7 +24,7 @@ export const pt: Translations = {
       limits: 'Todos os limites das plataformas',
       tools: 'Ferramentas',
       counters: 'Contadores de caracteres',
-      adPreviews: 'Ad Previews',
+      adPreviews: 'Pré-visualizações de anúncios',
       faq: 'FAQ',
       about: 'Sobre',
       contact: 'Contacto',
@@ -696,6 +696,41 @@ export const pt: Translations = {
   },
 
   island: {
+    adPreviews: {
+      fields: {
+        headline: 'Título',
+        primary: 'Texto principal',
+        description: 'Descrição',
+        headlineN: 'Título {n}',
+      },
+      placeholders: {
+        headline: 'O seu título',
+        primary: 'Escreva o seu texto principal…',
+        description: 'Adicione uma descrição curta',
+      },
+      counter: '{n} / {limit}',
+      over: '{n} a mais',
+      previewLabel: 'Pré-visualização ao vivo',
+      deviceAria: 'Escolher dispositivo de pré-visualização',
+      mobile: 'Telemóvel',
+      desktop: 'Computador',
+      modeAria: 'Escolher posicionamento',
+      feed: 'Feed',
+      reels: 'Reels',
+      safeZoneLabel: 'Zonas seguras',
+      safeZoneHint: 'As faixas sombreadas mostram onde a interface cobre o seu criativo. Mantenha o texto importante fora delas.',
+      safeZoneTag: 'Zona segura',
+      reelsTooShort: 'Aponte para {min}–{max} caracteres para que a legenda se leia bem sobre o vídeo.',
+      media: {
+        add: 'Adicionar conteúdo',
+        replace: 'Substituir conteúdo',
+        remove: 'Remover conteúdo',
+        hint: 'Pré-visualizado apenas no seu navegador — nunca carregado nem armazenado.',
+      },
+      badgeFits: 'Cabe',
+      badgeTruncated: 'Truncado',
+      sponsored: 'Patrocinado',
+    },
     dashboard: {
       loadSample: 'Carregar uma publicação de exemplo →',
       sample:

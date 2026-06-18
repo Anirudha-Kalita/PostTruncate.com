@@ -25,7 +25,7 @@ export const de: Translations = {
       limits: 'Alle Plattform-Limits',
       tools: 'Tools',
       counters: 'Zeichenzähler',
-      adPreviews: 'Ad Previews',
+      adPreviews: 'Anzeigenvorschau',
       faq: 'FAQ',
       about: 'Über uns',
       contact: 'Kontakt',
@@ -697,6 +697,41 @@ export const de: Translations = {
   },
 
   island: {
+    adPreviews: {
+      fields: {
+        headline: 'Titel',
+        primary: 'Primärtext',
+        description: 'Beschreibung',
+        headlineN: 'Titel {n}',
+      },
+      placeholders: {
+        headline: 'Dein Titel',
+        primary: 'Schreibe deinen Primärtext…',
+        description: 'Füge eine kurze Beschreibung hinzu',
+      },
+      counter: '{n} / {limit}',
+      over: '{n} darüber',
+      previewLabel: 'Live-Vorschau',
+      deviceAria: 'Vorschaugerät wählen',
+      mobile: 'Mobil',
+      desktop: 'Desktop',
+      modeAria: 'Platzierung wählen',
+      feed: 'Feed',
+      reels: 'Reels',
+      safeZoneLabel: 'Sicherheitszonen',
+      safeZoneHint: 'Schattierte Bänder zeigen, wo die Oberfläche dein Creative verdeckt. Halte wichtigen Text fern davon.',
+      safeZoneTag: 'Sicherheitszone',
+      reelsTooShort: 'Ziele auf {min}–{max} Zeichen, damit die Bildunterschrift sauber über dem Video lesbar ist.',
+      media: {
+        add: 'Medien hinzufügen',
+        replace: 'Medien ersetzen',
+        remove: 'Medien entfernen',
+        hint: 'Nur in deinem Browser als Vorschau — nie hochgeladen oder gespeichert.',
+      },
+      badgeFits: 'Passt',
+      badgeTruncated: 'Gekürzt',
+      sponsored: 'Gesponsert',
+    },
     dashboard: {
       loadSample: 'Beispielbeitrag laden →',
       sample:

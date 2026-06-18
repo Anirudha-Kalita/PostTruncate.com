@@ -24,7 +24,7 @@ export const ja: Translations = {
       limits: 'すべてのプラットフォーム制限',
       tools: 'ツール',
       counters: '文字数カウンター',
-      adPreviews: 'Ad Previews',
+      adPreviews: '広告プレビュー',
       faq: 'よくある質問',
       about: '概要',
       contact: 'お問い合わせ',
@@ -696,6 +696,41 @@ export const ja: Translations = {
   },
 
   island: {
+    adPreviews: {
+      fields: {
+        headline: '見出し',
+        primary: '主要テキスト',
+        description: '説明',
+        headlineN: '見出し {n}',
+      },
+      placeholders: {
+        headline: '見出しを入力',
+        primary: '主要テキストを入力…',
+        description: '短い説明を追加',
+      },
+      counter: '{n} / {limit}',
+      over: '{n} 超過',
+      previewLabel: 'ライブプレビュー',
+      deviceAria: 'プレビュー端末を選択',
+      mobile: 'モバイル',
+      desktop: 'デスクトップ',
+      modeAria: '配置を選択',
+      feed: 'フィード',
+      reels: 'リール',
+      safeZoneLabel: 'セーフゾーン',
+      safeZoneHint: '網掛けの帯は、インターフェースがクリエイティブを覆う場所を示します。重要なテキストはそこから外してください。',
+      safeZoneTag: 'セーフゾーン',
+      reelsTooShort: 'キャプションが動画の上できれいに読めるよう、{min}〜{max}文字を目安にしてください。',
+      media: {
+        add: 'メディアを追加',
+        replace: 'メディアを置き換え',
+        remove: 'メディアを削除',
+        hint: 'ブラウザー内でのみプレビューされ、アップロードも保存もされません。',
+      },
+      badgeFits: '収まる',
+      badgeTruncated: '切り捨て',
+      sponsored: '広告',
+    },
     dashboard: {
       loadSample: 'サンプル投稿を読み込む →',
       sample:

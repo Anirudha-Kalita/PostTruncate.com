@@ -24,7 +24,7 @@ export const nl: Translations = {
       limits: 'Alle platformlimieten',
       tools: 'Tools',
       counters: 'Tekentellers',
-      adPreviews: 'Ad Previews',
+      adPreviews: 'Advertentievoorbeelden',
       faq: 'FAQ',
       about: 'Over',
       contact: 'Contact',
@@ -696,6 +696,41 @@ export const nl: Translations = {
   },
 
   island: {
+    adPreviews: {
+      fields: {
+        headline: 'Kop',
+        primary: 'Primaire tekst',
+        description: 'Beschrijving',
+        headlineN: 'Kop {n}',
+      },
+      placeholders: {
+        headline: 'Je kop',
+        primary: 'Schrijf je primaire tekst…',
+        description: 'Voeg een korte beschrijving toe',
+      },
+      counter: '{n} / {limit}',
+      over: '{n} te veel',
+      previewLabel: 'Live voorbeeld',
+      deviceAria: 'Kies voorbeeldapparaat',
+      mobile: 'Mobiel',
+      desktop: 'Desktop',
+      modeAria: 'Kies plaatsing',
+      feed: 'Feed',
+      reels: 'Reels',
+      safeZoneLabel: 'Veilige zones',
+      safeZoneHint: 'Gearceerde banden tonen waar de interface je creatie bedekt. Houd belangrijke tekst er buiten.',
+      safeZoneTag: 'Veilige zone',
+      reelsTooShort: 'Streef naar {min}–{max} tekens zodat het bijschrift goed leesbaar is over de video.',
+      media: {
+        add: 'Media toevoegen',
+        replace: 'Media vervangen',
+        remove: 'Media verwijderen',
+        hint: 'Alleen in je browser bekeken — nooit geüpload of opgeslagen.',
+      },
+      badgeFits: 'Past',
+      badgeTruncated: 'Afgekapt',
+      sponsored: 'Gesponsord',
+    },
     dashboard: {
       loadSample: 'Laad een voorbeeldbericht →',
       sample:
