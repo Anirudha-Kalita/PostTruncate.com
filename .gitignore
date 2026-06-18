@@ -4,6 +4,9 @@ dist/
 # generated types
 .astro/
 
+# generated responsive image variants + manifest (rebuilt by prebuild)
+public/og/optimized/
+
 # dependencies
 node_modules/
 

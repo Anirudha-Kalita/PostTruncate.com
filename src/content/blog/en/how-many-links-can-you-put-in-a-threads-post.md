@@ -5,6 +5,7 @@ publishDate: 2026-06-18
 locale: en
 slug: how-many-links-can-you-put-in-a-threads-post
 translationKey: how-many-links-can-you-put-in-a-threads-post
+category: threads
 relatedPlatform: threads
 author: PostTruncate Team
 draft: true

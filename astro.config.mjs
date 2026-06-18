@@ -14,6 +14,7 @@ import {
   resolveSitemapLastmod,
 } from './src/lib/sitemapLastmod.ts';
 import { remarkVideoEmbed } from './src/lib/remarkVideoEmbed.ts';
+import { rehypeResponsiveImages } from './src/lib/rehypeResponsiveImages.ts';
 
 // ── Build a reverse look-up: given a URL pathname, resolve the tool + locale
 //    so the serialize hook can emit the correct hreflang alternates even when
@@ -80,8 +81,11 @@ export default defineConfig({
   },
   // Blog (.md) authors embed video by pasting a YouTube/Vimeo URL on its own
   // line; this remark plugin rewrites it to a responsive, lazy-loaded iframe.
+  // The rehype plugin rewrites in-body /og/ images into responsive WebP srcset
+  // markup using the build-time image manifest.
   markdown: {
     remarkPlugins: [remarkVideoEmbed],
+    rehypePlugins: [rehypeResponsiveImages],
   },
   adapter: cloudflare(),
   integrations: [

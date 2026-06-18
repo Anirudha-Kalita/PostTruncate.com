@@ -3,6 +3,7 @@ import { getCollection, render, type CollectionEntry } from 'astro:content';
 import Layout from '../../../../layouts/Layout.astro';
 import BlogStructuredData from '../../../../components/BlogStructuredData.astro';
 import BlogCardGrid from '../../../../components/BlogCardGrid.astro';
+import ResponsiveImage from '../../../../components/ResponsiveImage.astro';
 import { getLocale, DEFAULT_LOCALE } from '../../../../i18n/config';
 import { tools } from '../../../../data/tools';
 import { calculators } from '../../../../data/calculators';
@@ -243,10 +244,11 @@ const { Content } = await render(post);
     </header>
 
     {data.ogImage && (
-      <img
+      <ResponsiveImage
         class="post__hero"
         src={data.ogImage}
         alt={data.title}
+        sizes="(max-width: 896px) 100vw, 896px"
         loading="eager"
         fetchpriority="high"
         decoding="async"

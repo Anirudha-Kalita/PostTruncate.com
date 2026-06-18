@@ -1,0 +1,63 @@
+---
+// Shared responsive <img>: looks the src up in the build-time image manifest
+// and, when found, emits a WebP srcset/sizes plus intrinsic width/height (for
+// CLS) with src pointing at the largest variant — so the original is never
+// requested even when the path still says .png. When there's no manifest entry
+// (SVG/GIF, unknown image, or the optimizer hasn't run) it degrades to a plain
+// <img src>. Used by the blog hero and post cards; the in-body markdown images
+// are handled by the parallel rehype plugin.
+import { buildSrcset } from '../lib/responsiveImage';
+import { getVariants } from '../lib/imageManifest';
+
+interface Props {
+  /** Referenced image path, e.g. "/og/foo.webp" or "/og/foo.png". */
+  src: string;
+  alt: string;
+  /** Responsive `sizes` hint for the surface (hero/body/card). */
+  sizes: string;
+  /** Pass-through class for the emitted <img>. */
+  class?: string;
+  loading?: 'lazy' | 'eager';
+  fetchpriority?: 'high' | 'low' | 'auto';
+  decoding?: 'async' | 'sync' | 'auto';
+}
+
+const {
+  src,
+  alt,
+  sizes,
+  class: className,
+  loading = 'lazy',
+  fetchpriority,
+  decoding = 'async',
+} = Astro.props;
+
+const data = getVariants(src);
+const largest = data?.variants.at(-1);
+---
+
+{
+  data && largest ? (
+    <img
+      src={largest.url}
+      srcset={buildSrcset(data.variants)}
+      sizes={sizes}
+      width={data.width}
+      height={data.height}
+      alt={alt}
+      class={className}
+      loading={loading}
+      fetchpriority={fetchpriority}
+      decoding={decoding}
+    />
+  ) : (
+    <img
+      src={src}
+      alt={alt}
+      class={className}
+      loading={loading}
+      fetchpriority={fetchpriority}
+      decoding={decoding}
+    />
+  )
+}

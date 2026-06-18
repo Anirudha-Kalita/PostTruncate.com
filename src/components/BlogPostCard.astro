@@ -7,6 +7,7 @@
 import type { CollectionEntry } from 'astro:content';
 import { BLOG_SEGMENT, formatBlogDate, getBlogStrings, isoDate } from '../lib/blogI18n';
 import { interp } from '../i18n/interp';
+import ResponsiveImage from './ResponsiveImage.astro';
 
 interface Props {
   post: CollectionEntry<'blog'>;
@@ -27,7 +28,13 @@ const readingTime = interp(getBlogStrings(lang).readingTime, { min: minutes });
 
 <a class="article-card" href={href}>
   <div class="article-card__thumb">
-    <img src={data.ogImage ?? '/og.png'} alt="" loading="lazy" decoding="async" />
+    <ResponsiveImage
+      src={data.ogImage ?? '/og.png'}
+      alt=""
+      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 240px"
+      loading="lazy"
+      decoding="async"
+    />
   </div>
   <div class="article-card__body">
     <p class="article-card__date">
