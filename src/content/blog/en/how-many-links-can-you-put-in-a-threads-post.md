@@ -34,7 +34,7 @@ As of December 22, 2025, [Meta's official Threads API documentation](https://dev
 
 > "The number of links is restricted to 5 or less. Starting December 22, 2025, Threads posts containing more than 5 links will fail to post during the media creation step with the error code: `THREADS_API__LINK_LIMIT_EXCEEDED`."
 
-![The Threads 5-link rule: how links are counted and where the block triggers, as taken from Meta's developer documentation](https://cdn-public.eesel.ai/f3b1aa0e-752d-4335-a7f6-4099a1cbc27a/510628ab-d7c0-4616-a17e-d81d82ba9826/076c6bcef5e64ffea99beddd27a64c3c.png)
+![The Threads 5-link rule: how links are counted and where the block triggers, as taken from Meta's developer documentation](/og/Threads_Link_capacity_1.webp)
 
 <p align="center"><span style="font-size: 12px; "><em>The Threads 5-link rule: how links are counted and where the block triggers, as taken from Meta's developer documentation</em></span></p>
 
@@ -68,7 +68,7 @@ For all of these, the 5-link limit is not an edge case. It's a regular constrain
 
 The cleanest workaround for lists that genuinely need more than 5 links: **split the post into a thread**. Each individual post in a Threads thread carries its own 5-link budget. A three-post thread can hold 15 unique links total.
 
-![Multi-post thread strategy: distributing links across Posts 1, 2, and 3 with decreasing reach at each step](https://cdn-public.eesel.ai/f3b1aa0e-752d-4335-a7f6-4099a1cbc27a/510628ab-d7c0-4616-a17e-d81d82ba9826/82fc8ec415b34d4b82d22851e73e43a9.png)
+![Multi-post thread strategy: distributing links across Posts 1, 2, and 3 with decreasing reach at each step](/og/Threads_Link_capacity_2.webp)
 
 <p align="center"><span style="font-size: 12px; "><em>Multi-post thread strategy: distributing links across Posts 1, 2, and 3 with decreasing reach at each step</em></span></p>
 
@@ -108,6 +108,8 @@ The Threads app doesn't show you a link count. You write, you tap publish, and i
 
 That's a workable feedback loop for casual posts. For a 30-minute affiliate roundup, it's painful - and unnecessary.
 
+![](/og/Screenshot_18-6-2026_16937_posttruncate.com.webp)
+
 <p align="center"><span style="font-size: 12px; "><em>PostTruncate Threads character counter showing real-time URL tallying and character count before publishing</em></span></p>
 
 The [PostTruncate Threads character counter](/en/threads-character-counter/) tallies both your character count and your URL count as you type. You can see at a glance whether you're at 3 links, 5 links, or 7 - before you ever open the Threads app. The editor also applies correct per-platform link counting, so the character budget it shows you reflects the actual rules Threads uses: full URL length, not the 23-character t.co shortening that X applies.
@@ -118,7 +120,7 @@ A few things this changes in practice:
 -   You get **accurate character counts** for each post in the chain. Threads folds the feed view at around 250 characters on mobile. The editor shows you where that fold falls so your Post 1 hook survives it.
 -   The **chain splitter** automatically divides overflow content into 500-character segments, breaking at sentence boundaries. If your affiliate roundup runs long, you can see the full thread shape before committing to it.
 
-![PostTruncate link-counting flow: safe drafting path versus the blocked path when links exceed 5](https://cdn-public.eesel.ai/f3b1aa0e-752d-4335-a7f6-4099a1cbc27a/510628ab-d7c0-4616-a17e-d81d82ba9826/5ad1fd8c4f554790874c47bb90f4296c.png)
+![PostTruncate link-counting flow: safe drafting path versus the blocked path when links exceed 5](/og/Threads_Link_capacity_4.webp)
 
 <p align="center"><span style="font-size: 12px; "><em>PostTruncate link-counting flow: safe drafting path versus the blocked path when links exceed 5</em></span></p>
 
