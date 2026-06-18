@@ -1,0 +1,438 @@
+---
+// ──────────────────────────────────────────────────────────────────────────
+// /admin/category/ — local, client-side "add a blog category" tool.
+//
+// Adding a category touches two files (kept in sync by hand otherwise):
+//   • src/data/blogCategories.ts — the registry. The Zod enum in
+//     src/content.config.ts derives from it automatically (BLOG_CATEGORY_IDS),
+//     so no third edit is needed there.
+//   • public/admin/config.yml — the Sveltia CMS category dropdown (a hardcoded
+//     options list that does NOT read the registry).
+//
+// This page fills out both. After you authorize your PROJECT ROOT once (the
+// folder containing src/ and public/), clicking "Add category" inserts the new
+// entry into both files via the File System Access API (Chrome/Edge). For
+// other browsers, copy the generated snippets and paste them yourself — the
+// page shows exactly what goes where.
+//
+// noindex + outside the [lang] routing, same as /admin and /admin/upload.
+// Excluded from the sitemap by the ^/admin filter rule in astro.config.mjs.
+// ──────────────────────────────────────────────────────────────────────────
+export const prerender = true;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>Add blog category · PostTruncate</title>
+    <style>
+      :root {
+        --ink: #171717; --body: #4d4d4d; --mute: #6b6b6b;
+        --line: #e5e5e5; --bg: #ffffff; --soft: #f6f6f6;
+        --ok: #166534; --okbg: #dcfce7; --err: #991b1b; --errbg: #fee2e2;
+        --warn: #92400e; --warnbg: #fef9c3;
+        --accent: #2563eb;
+        --radius: 12px;
+        --mono: ui-monospace, "Geist Mono", SFMono-Regular, Menlo, monospace;
+        --sans: system-ui, -apple-system, "Geist", Segoe UI, Roboto, sans-serif;
+      }
+      * { box-sizing: border-box; }
+      body { margin: 0; font-family: var(--sans); color: var(--body); background: var(--soft); }
+      .wrap { max-width: 1100px; margin: 0 auto; padding: 32px 24px 80px; }
+      h1 { font-size: 28px; letter-spacing: -1px; color: var(--ink); margin: 0 0 4px; }
+      .lede { margin: 0 0 24px; color: var(--mute); font-size: 14px; max-width: 70ch; }
+      .lede code { font-family: var(--mono); font-size: 12.5px; background: var(--bg); padding: 1px 5px; border-radius: 5px; border: 1px solid var(--line); }
+      .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; align-items: start; }
+      @media (max-width: 860px) { .grid { grid-template-columns: 1fr; } }
+      .card { background: var(--bg); border: 1px solid var(--line); border-radius: var(--radius); padding: 20px; }
+      .card + .card { margin-top: 24px; }
+      .card h2 { font-size: 15px; color: var(--ink); margin: 0 0 12px; letter-spacing: -0.2px; }
+      .step { font-size: 12px; font-weight: 600; color: var(--accent); text-transform: uppercase; letter-spacing: 0.5px; }
+      button { font: inherit; font-weight: 500; border-radius: 8px; border: 1px solid var(--line); background: var(--bg); color: var(--ink); padding: 8px 14px; cursor: pointer; }
+      button:hover:not(:disabled) { background: var(--soft); }
+      button.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+      button.primary:disabled { opacity: 0.45; cursor: not-allowed; }
+      .row { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+      .field { margin-top: 14px; }
+      .field:first-child { margin-top: 0; }
+      .field label { display: block; font-size: 13px; font-weight: 600; color: var(--ink); margin-bottom: 5px; }
+      .field .hint { font-weight: 400; color: var(--mute); }
+      input[type="text"], textarea {
+        width: 100%; font-family: var(--sans); font-size: 14px; line-height: 1.5;
+        border: 1px solid var(--line); border-radius: 8px; padding: 9px 11px;
+        color: var(--ink); background: var(--bg);
+      }
+      input.mono { font-family: var(--mono); font-size: 13px; }
+      textarea { resize: vertical; min-height: 64px; }
+      #f_description { min-height: 130px; }
+      input:focus, textarea:focus { outline: 2px solid var(--accent); outline-offset: 0; border-color: var(--accent); }
+      .counter { float: right; font-size: 11px; font-weight: 500; color: var(--mute); }
+      .counter.over { color: var(--err); }
+      .counter.warn { color: var(--warn); }
+      .err-msg { font-size: 12px; color: var(--err); margin-top: 4px; min-height: 0; }
+      pre { font-family: var(--mono); font-size: 12px; line-height: 1.5; background: #0f1115; color: #e6e6e6; border-radius: 8px; padding: 12px 14px; overflow-x: auto; margin: 8px 0 0; }
+      .filehdr { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-top: 16px; }
+      .filehdr:first-child { margin-top: 0; }
+      .filehdr code { font-family: var(--mono); font-size: 12px; color: var(--ink); }
+      .status { font-size: 13px; margin-top: 10px; }
+      .status.empty { color: var(--mute); }
+      .pill { display: inline-block; padding: 2px 8px; border-radius: 999px; font-size: 12px; font-weight: 600; }
+      .pill.ok { background: var(--okbg); color: var(--ok); }
+      .pill.err { background: var(--errbg); color: var(--err); }
+      .pill.warn { background: var(--warnbg); color: var(--warn); }
+      .note { font-size: 12px; color: var(--mute); margin-top: 10px; }
+      .note code { font-family: var(--mono); }
+      .hide { display: none !important; }
+      ul.next { font-size: 13px; color: var(--body); margin: 8px 0 0; padding-left: 18px; }
+      ul.next li { margin: 4px 0; }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <h1>Add blog category</h1>
+      <p class="lede">
+        Local tool. Fill the form, then click <strong>Add category</strong> — it writes the new entry
+        into <code>src/data/blogCategories.ts</code> (the registry; the build's Zod enum derives from
+        it) and adds the matching dropdown option to <code>public/admin/config.yml</code> (the Sveltia
+        CMS). Fully client-side via the File System Access API. On browsers without it, copy the
+        generated snippets below and paste them yourself.
+      </p>
+
+      <div class="grid">
+        <!-- LEFT: folder auth + form -->
+        <div>
+          <div class="card">
+            <span class="step">Step 1 — authorize the project</span>
+            <h2>Project folder</h2>
+            <div class="row">
+              <button id="pickDir" type="button">Choose folder…</button>
+              <span id="dirStatus" class="status empty">No folder selected</span>
+            </div>
+            <p class="note">
+              Pick your <strong>project root</strong> — the folder containing <code>src/</code> and
+              <code>public/</code>. Needed so the tool can edit both
+              <code>src/data/blogCategories.ts</code> and <code>public/admin/config.yml</code>.
+            </p>
+            <p id="fsaNote" class="note hide">
+              Your browser can't write to a folder (no File System Access API). Use Chrome or Edge, or
+              copy the snippets on the right and paste them into the two files yourself.
+            </p>
+          </div>
+
+          <div class="card">
+            <span class="step">Step 2 — describe the category</span>
+            <h2>Category details</h2>
+
+            <div class="field">
+              <label for="f_name">Display name</label>
+              <input id="f_name" type="text" placeholder="e.g. YouTube" autocomplete="off" />
+              <div class="err-msg" id="e_name"></div>
+            </div>
+
+            <div class="field">
+              <label for="f_id">ID <span class="hint">— stable key, never change after publish. Lowercase kebab-case.</span></label>
+              <input id="f_id" class="mono" type="text" placeholder="e.g. youtube" autocomplete="off" />
+              <div class="err-msg" id="e_id"></div>
+            </div>
+
+            <div class="field">
+              <label for="f_slug">URL slug <span class="hint">— becomes /en/blog/&lt;slug&gt;/</span></label>
+              <input id="f_slug" class="mono" type="text" placeholder="e.g. youtube" autocomplete="off" />
+              <div class="err-msg" id="e_slug"></div>
+            </div>
+
+            <div class="field">
+              <label for="f_metaTitle"><span class="counter" id="c_metaTitle"></span>Meta title <span class="hint">— page &lt;title&gt; for the hub</span></label>
+              <input id="f_metaTitle" type="text" placeholder="e.g. YouTube Formatting Guides & Limits — PostTruncate Blog" autocomplete="off" />
+              <div class="err-msg" id="e_metaTitle"></div>
+            </div>
+
+            <div class="field">
+              <label for="f_metaDescription"><span class="counter" id="c_metaDescription"></span>Meta description <span class="hint">— ≤160 chars recommended</span></label>
+              <textarea id="f_metaDescription" placeholder="Short SEO description shown in search results."></textarea>
+              <div class="err-msg" id="e_metaDescription"></div>
+            </div>
+
+            <div class="field">
+              <label for="f_description"><span class="counter" id="c_description"></span>Hub description <span class="hint">— long paragraph rendered on the hub page</span></label>
+              <textarea id="f_description" placeholder="Longer intro paragraph shown at the top of the category hub page."></textarea>
+              <div class="err-msg" id="e_description"></div>
+            </div>
+
+            <div class="row" style="margin-top:18px;">
+              <button id="add" type="button" class="primary" disabled>Add category</button>
+              <span id="addStatus" class="status" style="margin:0;"></span>
+            </div>
+          </div>
+        </div>
+
+        <!-- RIGHT: generated snippets + result -->
+        <div>
+          <div class="card">
+            <span class="step">Generated snippets</span>
+            <h2>What will be written</h2>
+
+            <div class="filehdr">
+              <code>src/data/blogCategories.ts</code>
+              <button id="copyReg" type="button">Copy</button>
+            </div>
+            <pre id="snipReg">…</pre>
+
+            <div class="filehdr">
+              <code>public/admin/config.yml</code>
+              <button id="copyCfg" type="button">Copy</button>
+            </div>
+            <pre id="snipCfg">…</pre>
+
+            <p class="note">
+              The registry entry is appended to the <code>blogCategories</code> array; the option line
+              is added to the <code>category</code> field's <code>options</code> list.
+            </p>
+          </div>
+
+          <div class="card hide" id="doneCard">
+            <h2>Done <span class="pill ok">written</span></h2>
+            <ul class="next">
+              <li>Commit and deploy so the hosted CMS at <code>/admin/upload</code> shows the new option (it loads the live <code>config.yml</code>).</li>
+              <li>The hub page at <code>/en/blog/&lt;slug&gt;/</code> builds automatically once a published post uses this category.</li>
+              <li>It paginates at 12 posts per page, just like the main blog and the other hubs.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script is:inline type="module">
+      const $ = (id) => document.getElementById(id);
+
+      // ── schema mirror (keep in sync with src/data/blogCategories.ts) ──────
+      const ID_RE = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
+      const METADESC_SOFT_MAX = 160;
+      const METATITLE_SOFT_MAX = 70;
+
+      let dirHandle = null;
+      // Tracks whether the user has hand-edited id/slug, so we stop auto-filling
+      // them from the name once they take manual control.
+      const touched = { id: false, slug: false };
+
+      // ── helpers ───────────────────────────────────────────────────────────
+      const slugify = (input) =>
+        String(input ?? '')
+          .toLowerCase()
+          .replace(/['’`]/g, '')
+          .replace(/&/g, ' and ')
+          .replace(/[^a-z0-9]+/g, '-')
+          .replace(/^-+|-+$/g, '')
+          .replace(/-{2,}/g, '-')
+          .slice(0, 60);
+
+      const collapse = (s) => String(s ?? '').replace(/\s+/g, ' ').trim();
+      // Single-quoted TS string literal.
+      const tq = (s) => "'" + collapse(s).replace(/\\/g, '\\\\').replace(/'/g, "\\'") + "'";
+      // Single-quoted YAML scalar ('' escapes an inner quote).
+      const yq = (s) => "'" + collapse(s).replace(/'/g, "''") + "'";
+      const reEsc = (s) => String(s).replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+
+      const fields = () => ({
+        name: collapse($('f_name').value),
+        id: $('f_id').value.trim(),
+        slug: $('f_slug').value.trim(),
+        metaTitle: collapse($('f_metaTitle').value),
+        metaDescription: collapse($('f_metaDescription').value),
+        description: collapse($('f_description').value),
+      });
+
+      // ── snippet builders ────────────────────────────────────────────────
+      function buildRegistryEntry(f) {
+        return [
+          '  {',
+          `    id: ${tq(f.id || 'category-id')},`,
+          `    slug: { en: ${tq(f.slug || f.id || 'category-slug')} },`,
+          `    name: { en: ${tq(f.name || 'Category Name')} },`,
+          `    metaTitle: { en: ${tq(f.metaTitle || '')} },`,
+          '    metaDescription: {',
+          `      en: ${tq(f.metaDescription || '')},`,
+          '    },',
+          '    description: {',
+          `      en: ${tq(f.description || '')},`,
+          '    },',
+          '  },',
+        ].join('\n');
+      }
+
+      function buildConfigOption(f) {
+        return `- { label: ${yq(f.name || 'Category Name')}, value: ${f.id || 'category-id'} }`;
+      }
+
+      // ── pure file transforms (also unit-friendly) ─────────────────────────
+      function detectEol(src) {
+        return src.includes('\r\n') ? '\r\n' : '\n';
+      }
+
+      function insertIntoRegistry(src, entryText) {
+        const marker = 'export const blogCategories: BlogCategory[] = [';
+        const start = src.indexOf(marker);
+        if (start === -1) throw new Error('Could not find the blogCategories array in blogCategories.ts.');
+        const eol = detectEol(src);
+        const closeIdx = src.indexOf(eol + '];', start);
+        if (closeIdx === -1) throw new Error('Could not find the end of the blogCategories array.');
+        const block = entryText.split('\n').join(eol);
+        return src.slice(0, closeIdx) + eol + block + src.slice(closeIdx);
+      }
+
+      function insertIntoConfig(src, optionLine) {
+        const eol = detectEol(src);
+        const lines = src.split(/\r?\n/);
+        const catIdx = lines.findIndex((l) => /name:\s*category\s*$/.test(l));
+        if (catIdx === -1) throw new Error('Could not find the category field in config.yml.');
+        let optIdx = -1;
+        for (let i = catIdx + 1; i < lines.length; i++) {
+          if (/^\s*options:\s*$/.test(lines[i])) { optIdx = i; break; }
+          if (/^\s*-\s+(\{?\s*)?name:/.test(lines[i])) break; // hit the next field first
+        }
+        if (optIdx === -1) throw new Error('Could not find the category options list.');
+        let last = -1;
+        let indent = null;
+        const optRe = /^(\s*)-\s*\{\s*label:/;
+        for (let i = optIdx + 1; i < lines.length; i++) {
+          const m = lines[i].match(optRe);
+          if (m) { last = i; indent = m[1]; continue; }
+          if (lines[i].trim() === '') continue;
+          break;
+        }
+        if (last === -1 || indent === null) throw new Error('Could not find existing category options.');
+        lines.splice(last + 1, 0, indent + optionLine);
+        return lines.join(eol);
+      }
+
+      // ── validation ────────────────────────────────────────────────────────
+      function validate(f) {
+        const errs = {};
+        if (!f.name) errs.name = 'Display name is required.';
+        if (!f.id) errs.id = 'ID is required.';
+        else if (!ID_RE.test(f.id)) errs.id = 'Lowercase kebab-case only (a-z, 0-9, single hyphens).';
+        if (!f.slug) errs.slug = 'Slug is required.';
+        else if (!ID_RE.test(f.slug)) errs.slug = 'Lowercase kebab-case only (a-z, 0-9, single hyphens).';
+        if (!f.metaTitle) errs.metaTitle = 'Meta title is required.';
+        if (!f.metaDescription) errs.metaDescription = 'Meta description is required.';
+        if (!f.description) errs.description = 'Hub description is required.';
+        return errs;
+      }
+
+      function counter(el, len, max) {
+        el.textContent = `${len}/${max}`;
+        el.classList.toggle('over', len > max);
+      }
+
+      // ── render ──────────────────────────────────────────────────────────--
+      function render() {
+        const f = fields();
+        $('snipReg').textContent = buildRegistryEntry(f);
+        $('snipCfg').textContent = buildConfigOption(f);
+
+        counter($('c_metaTitle'), f.metaTitle.length, METATITLE_SOFT_MAX);
+        counter($('c_metaDescription'), f.metaDescription.length, METADESC_SOFT_MAX);
+        $('c_description').textContent = `${f.description.length} chars`;
+
+        const errs = validate(f);
+        for (const k of ['name', 'id', 'slug', 'metaTitle', 'metaDescription', 'description']) {
+          $('e_' + k).textContent = errs[k] || '';
+        }
+        const valid = Object.keys(errs).length === 0;
+        $('add').disabled = !(valid && dirHandle);
+        return { f, valid };
+      }
+
+      // Auto-derive id + slug from the name until the user edits them directly.
+      $('f_name').addEventListener('input', () => {
+        const s = slugify($('f_name').value);
+        if (!touched.id) $('f_id').value = s;
+        if (!touched.slug) $('f_slug').value = s;
+        render();
+      });
+      $('f_id').addEventListener('input', () => { touched.id = true; render(); });
+      $('f_slug').addEventListener('input', () => { touched.slug = true; render(); });
+      ['f_metaTitle', 'f_metaDescription', 'f_description'].forEach((id) =>
+        $(id).addEventListener('input', render),
+      );
+
+      // ── File System Access ────────────────────────────────────────────────
+      const hasFSA = typeof window.showDirectoryPicker === 'function';
+      if (!hasFSA) $('fsaNote').classList.remove('hide');
+
+      async function fileHandle(root, segments, create = false) {
+        let dir = root;
+        for (let i = 0; i < segments.length - 1; i++) {
+          dir = await dir.getDirectoryHandle(segments[i], { create });
+        }
+        return dir.getFileHandle(segments[segments.length - 1], { create });
+      }
+      const readText = async (h) => (await h.getFile()).text();
+      async function writeText(h, text) {
+        const w = await h.createWritable();
+        await w.write(text);
+        await w.close();
+      }
+
+      $('pickDir').addEventListener('click', async () => {
+        if (!hasFSA) return;
+        try {
+          dirHandle = await window.showDirectoryPicker({ id: 'pt-root', mode: 'readwrite' });
+          $('dirStatus').textContent = `Folder: ${dirHandle.name}`;
+          $('dirStatus').classList.remove('empty');
+        } catch (e) {
+          // user dismissed the picker — ignore
+        }
+        render();
+      });
+
+      $('add').addEventListener('click', async () => {
+        const { f, valid } = render();
+        const status = $('addStatus');
+        if (!valid || !dirHandle) return;
+
+        status.textContent = 'Writing…';
+        try {
+          const regH = await fileHandle(dirHandle, ['src', 'data', 'blogCategories.ts']);
+          const cfgH = await fileHandle(dirHandle, ['public', 'admin', 'config.yml']);
+          const regSrc = await readText(regH);
+          const cfgSrc = await readText(cfgH);
+
+          // Duplicate guards — id is the stable key in both files.
+          if (new RegExp(`\\bid:\\s*'${reEsc(f.id)}'`).test(regSrc))
+            throw new Error(`A category with id "${f.id}" already exists in the registry.`);
+          if (new RegExp(`value:\\s*${reEsc(f.id)}\\s*}`).test(cfgSrc))
+            throw new Error(`The CMS dropdown already has an option with value "${f.id}".`);
+
+          // Compute both edits first; only write once both succeed.
+          const newReg = insertIntoRegistry(regSrc, buildRegistryEntry(f));
+          const newCfg = insertIntoConfig(cfgSrc, buildConfigOption(f));
+          await writeText(regH, newReg);
+          await writeText(cfgH, newCfg);
+
+          status.innerHTML = `<span class="pill ok">Added "${f.name}"</span> wrote both files.`;
+          $('doneCard').classList.remove('hide');
+        } catch (e) {
+          status.innerHTML = `<span class="pill err">Failed</span> ${e.message}`;
+        }
+      });
+
+      // Copy buttons (work regardless of File System Access support).
+      const copy = async (text, btn) => {
+        try {
+          await navigator.clipboard.writeText(text);
+          const old = btn.textContent;
+          btn.textContent = 'Copied';
+          setTimeout(() => (btn.textContent = old), 1200);
+        } catch (e) { /* clipboard blocked — ignore */ }
+      };
+      $('copyReg').addEventListener('click', (e) => copy($('snipReg').textContent, e.target));
+      $('copyCfg').addEventListener('click', (e) => copy($('snipCfg').textContent, e.target));
+
+      render();
+    </script>
+  </body>
+</html>
