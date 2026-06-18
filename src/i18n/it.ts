@@ -24,6 +24,7 @@ export const it: Translations = {
       limits: 'Tutti i limiti delle piattaforme',
       tools: 'Strumenti',
       counters: 'Contatori di caratteri',
+      adPreviews: 'Ad Previews',
       faq: 'FAQ',
       about: 'Chi siamo',
       contact: 'Contatti',

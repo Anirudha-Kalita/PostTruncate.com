@@ -24,6 +24,7 @@ export const zh: Translations = {
       limits: '所有平台限制',
       tools: '工具',
       counters: '字符计数器',
+      adPreviews: 'Ad Previews',
       faq: '常见问题',
       about: '关于',
       contact: '联系我们',

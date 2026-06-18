@@ -2,12 +2,14 @@
 import { useState } from 'preact/hooks';
 import { Card, CardHead, Meter, Badge, type Tone } from './ui';
 import { interp } from '../../i18n/interp';
+import { font, measureTextWidth, truncateToWidth } from '../../lib/canvasText';
 import type { IslandStrings } from '../../i18n/types';
 
 const TITLE_CHAR_LIMIT = 60;
 const DESC_CHAR_LIMIT = 155;
 const TITLE_PIXEL_MAX = 600;
-const AVG_CHAR_PX = 8;
+/** Google renders the SERP title in ~20px Arial; measure against that. */
+const TITLE_FONT = font(20, 'Arial');
 
 interface Props {
   s: IslandStrings;
@@ -20,7 +22,9 @@ export function SeoPreview({ s }: Props) {
 
   const titleChars = pageTitle.length;
   const descChars = metaDesc.length;
-  const titlePx = Math.round(titleChars * AVG_CHAR_PX);
+  // True rendered pixel width via the canvas helper (SSR-safe fallback inside),
+  // replacing the old AVG_CHAR_PX estimate so the clip matches Google exactly.
+  const titlePx = Math.round(measureTextWidth(pageTitle, TITLE_FONT));
 
   const titleCharOver = titleChars > TITLE_CHAR_LIMIT;
   const titlePixelOver = titlePx > TITLE_PIXEL_MAX;
@@ -58,8 +62,9 @@ export function SeoPreview({ s }: Props) {
 
   const rawTitle = pageTitle || sp.titlePlaceholder;
   const rawDesc = metaDesc || sp.descPlaceholder;
-  const displayTitle =
-    rawTitle.length > TITLE_CHAR_LIMIT ? rawTitle.slice(0, TITLE_CHAR_LIMIT) + '…' : rawTitle;
+  // Display title clips by true pixel width (Google's real behaviour) rather
+  // than a fixed character count; the char counter/limit below is unchanged.
+  const displayTitle = truncateToWidth(rawTitle, TITLE_PIXEL_MAX, TITLE_FONT).text;
   const displayDesc =
     rawDesc.length > DESC_CHAR_LIMIT ? rawDesc.slice(0, DESC_CHAR_LIMIT) + '…' : rawDesc;
 

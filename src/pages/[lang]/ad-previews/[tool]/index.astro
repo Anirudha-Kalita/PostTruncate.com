@@ -1,0 +1,98 @@
+---
+import Layout from '../../../../layouts/Layout.astro';
+import AdPreviewPageContent from '../../../../components/AdPreviewPageContent.astro';
+import StructuredData from '../../../../components/StructuredData.astro';
+import { AdSimulator } from '../../../../components/island/AdSimulator.tsx';
+import { adPreviews } from '../../../../data/adPreviews';
+import type { ToolDefinition } from '../../../../data/tools';
+import type { AdPlatform } from '../../../../data/adPlatformConfig';
+import { LOCALES, getLocale, DEFAULT_LOCALE } from '../../../../i18n/config';
+import { getTranslations } from '../../../../i18n';
+
+export function getStaticPaths() {
+  const paths: {
+    params: { lang: string; tool: string };
+    props: { tool: ToolDefinition; currentLang: string };
+  }[] = [];
+
+  for (const tool of adPreviews) {
+    for (const locale of LOCALES) {
+      const slug = tool.slugs[locale.code] ?? tool.slugs[DEFAULT_LOCALE];
+      paths.push({
+        params: { lang: locale.code, tool: slug },
+        props: { tool, currentLang: locale.code },
+      });
+    }
+  }
+
+  return paths;
+}
+
+const { tool, currentLang: lang } = Astro.props as {
+  tool: ToolDefinition;
+  currentLang: string;
+};
+
+const tStr = <T,>(record: Record<string, T>): T => record[lang] ?? record[DEFAULT_LOCALE];
+
+const site = Astro.site ?? new URL('https://posttruncate.com');
+const toolSlug = tool.slugs[lang] ?? tool.slugs[DEFAULT_LOCALE];
+const canonicalUrl = new URL(`/${lang}/ad-previews/${toolSlug}/`, site).href;
+
+// One hreflang entry per locale, each pointing at that locale's own slug;
+// x-default resolves to the English URL per Google best practice.
+const hreflangUrls = [
+  ...LOCALES.map((l) => {
+    const slug = tool.slugs[l.code] ?? tool.slugs[DEFAULT_LOCALE];
+    return { hreflang: l.code, href: new URL(`/${l.code}/ad-previews/${slug}/`, site).href };
+  }),
+  {
+    hreflang: 'x-default',
+    href: new URL(`/${DEFAULT_LOCALE}/ad-previews/${tool.slugs[DEFAULT_LOCALE]}/`, site).href,
+  },
+];
+
+const locale = getLocale(lang);
+const t = getTranslations(lang);
+const home = `/${lang}/${locale.slug}/`;
+const homeHref = `${home}#workspace`;
+
+const breadcrumbs = [
+  { name: t.breadcrumbs.home, item: new URL(home, site).href },
+  { name: tStr(tool.schemaName), item: canonicalUrl },
+];
+
+const faqItems = tool.faq?.[lang];
+
+// Map the registry tool id to the simulator platform key.
+const PLATFORM_BY_ID: Record<string, AdPlatform> = {
+  'facebook-ads': 'facebook',
+  'google-ads': 'google',
+  'instagram-ads': 'instagram',
+  'tiktok-ads': 'tiktok',
+};
+const platform = PLATFORM_BY_ID[tool.id];
+---
+
+<Layout
+  lang={lang}
+  path="/ad-previews/"
+  title={tStr(tool.titles)}
+  description={tStr(tool.metaDescriptions)}
+  canonicalUrl={canonicalUrl}
+  hreflangUrls={hreflangUrls}
+>
+  <StructuredData
+    slot="head"
+    type="platform"
+    name={tStr(tool.schemaName)}
+    url={canonicalUrl}
+    description={tStr(tool.metaDescriptions)}
+    inLanguage={lang}
+    breadcrumbs={breadcrumbs}
+    faqItems={faqItems}
+  />
+  <AdPreviewPageContent tool={tool} lang={lang} homeHref={homeHref}>
+    {platform && <AdSimulator client:load platform={platform} s={t.island} lang={lang} />}
+  </AdPreviewPageContent>
+</Layout>

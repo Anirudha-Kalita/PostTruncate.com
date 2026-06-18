@@ -24,6 +24,7 @@ export const ja: Translations = {
       limits: 'すべてのプラットフォーム制限',
       tools: 'ツール',
       counters: '文字数カウンター',
+      adPreviews: 'Ad Previews',
       faq: 'よくある質問',
       about: '概要',
       contact: 'お問い合わせ',

@@ -7,6 +7,7 @@ import tailwindcss from '@tailwindcss/vite';
 import { LOCALES, LOCALE_CODES, DEFAULT_LOCALE, getLocale } from './src/i18n/config.ts';
 import { tools } from './src/data/tools.ts';
 import { calculators } from './src/data/calculators.ts';
+import { adPreviews } from './src/data/adPreviews.ts';
 import {
   buildToolLastmodByPath,
   buildBlogLastmodByPath,
@@ -34,6 +35,7 @@ const toolHreflang = new Map();
 const toolGroups = [
   { list: tools, prefix: '' },
   { list: calculators, prefix: 'tools/' },
+  { list: adPreviews, prefix: 'ad-previews/' },
 ];
 for (const { list, prefix } of toolGroups) {
   for (const tool of list) {

@@ -24,6 +24,7 @@ export const nl: Translations = {
       limits: 'Alle platformlimieten',
       tools: 'Tools',
       counters: 'Tekentellers',
+      adPreviews: 'Ad Previews',
       faq: 'FAQ',
       about: 'Over',
       contact: 'Contact',

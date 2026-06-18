@@ -24,6 +24,7 @@ export const da: Translations = {
       limits: 'Alle platformgrænser',
       tools: 'Værktøjer',
       counters: 'Tegntællere',
+      adPreviews: 'Ad Previews',
       faq: 'FAQ',
       about: 'Om',
       contact: 'Kontakt',

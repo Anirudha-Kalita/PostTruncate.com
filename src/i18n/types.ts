@@ -112,6 +112,68 @@ export interface ErrorPageStrings {
 }
 
 /**
+ * Shared UI copy for the Ad Previews & Simulators islands (Google RSA,
+ * Facebook Feed, Instagram Feed/Reels, TikTok). English-first: the canonical
+ * values live in src/i18n/adPreviewStrings.ts and are consumed via an
+ * en-fallback getter, so this is never required in a locale dictionary.
+ * "{n}" / "{limit}" tokens are filled by interp().
+ */
+export interface AdPreviewStrings {
+  /** Shared input field labels. */
+  fields: {
+    headline: string;
+    primary: string;
+    description: string;
+    /** Google RSA: one headline slot label, "{n}" → slot number. */
+    headlineN: string;
+  };
+  /** Shared input placeholders. */
+  placeholders: {
+    headline: string;
+    primary: string;
+    description: string;
+  };
+  /** "{n} / {limit}" character-counter caption shared by all fields. */
+  counter: string;
+  /** "{n} over" — over-limit caption fragment. */
+  over: string;
+  /** Section label above the live preview column. */
+  previewLabel: string;
+  /** Accessible label for the Mobile/Desktop segmented control. */
+  deviceAria: string;
+  mobile: string;
+  desktop: string;
+  /** Accessible label for the Feed/Reels segmented control (Instagram). */
+  modeAria: string;
+  feed: string;
+  reels: string;
+  /** Safe-zone overlay toggle. */
+  safeZoneLabel: string;
+  /** Helper line shown when the safe-zone overlay is on. */
+  safeZoneHint: string;
+  /** Caption on each translucent safe-zone band. */
+  safeZoneTag: string;
+  /** Reels caption is below the comfortable floor. "{min}" / "{max}" tokens. */
+  reelsTooShort: string;
+  /** In-browser media upload control (in-memory only, never stored). */
+  media: {
+    /** Button label when no media is attached. */
+    add: string;
+    /** Button label when replacing attached media. */
+    replace: string;
+    /** Remove-media button accessible label. */
+    remove: string;
+    /** Helper line under the control. */
+    hint: string;
+  };
+  /** Badge labels for the preview state. */
+  badgeFits: string;
+  badgeTruncated: string;
+  /** Mock brand row label, e.g. "Sponsored". */
+  sponsored: string;
+}
+
+/**
  * Strings consumed by the Preact islands. Split out from the rest because this
  * sub-object — and only this sub-object — is serialized into the client island
  * props, so it must stay free of any server-only values.
@@ -193,6 +255,14 @@ export interface IslandStrings {
     /** Helper line under the control. */
     hint: string;
   };
+  /**
+   * Ad Previews & Simulators silo (/[lang]/ad-previews/). Optional and
+   * English-first while rolling out: this sub-object is intentionally absent
+   * from every locale dictionary, so the islands consume it through an
+   * en-fallback getter (see src/i18n/adPreviewStrings.ts) and the strict i18n
+   * parity lint stays green. Brand names stay untranslated in markup.
+   */
+  adPreviews?: AdPreviewStrings;
   /**
    * "AI Improve" feature — button, tone picker, progress, and result/error
    * states for the Gemini-backed rewrite. Tone keys mirror lib/aiImprove.ts.
@@ -727,6 +797,8 @@ export interface Translations {
       tools: string;
       /** "Character Counters" dropdown label — the per-platform counters. */
       counters: string;
+      /** "Ad Previews" link — the ad preview & simulator silo. */
+      adPreviews: string;
       faq: string;
       about: string;
       contact: string;

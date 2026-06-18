@@ -1,0 +1,296 @@
+---
+// Shared body for the Ad Previews silo pages (/[lang]/ad-previews/<slug>/).
+//
+// Layout: intro lede → on-this-page jump nav → embedded live simulator island
+// (the default <slot>) → keyword prose → FAQ accordion → last-updated → CTA
+// back to the home editor. Mirrors CalculatorPageContent.astro, minus the
+// sibling-calculator cross-promo.
+import OnThisPage from './OnThisPage.astro';
+import type { ToolDefinition } from '../data/tools';
+import { DEFAULT_LOCALE } from '../i18n/config';
+import { getTranslations } from '../i18n';
+import { interp } from '../i18n/interp';
+import { buildCanonicalSlugs, prepareToolContent } from '../lib/headingAnchors';
+import { formatLocaleDate } from '../lib/contentDates';
+
+interface Props {
+  tool: ToolDefinition;
+  lang: string;
+  /** Full home editor URL for the closing CTA (e.g. /en/character-counter/#workspace). */
+  homeHref: string;
+}
+
+const { tool, lang, homeHref } = Astro.props;
+
+const tStr = <T,>(record: Record<string, T>): T => record[lang] ?? record[DEFAULT_LOCALE];
+const globalT = getTranslations(lang);
+
+const canonicalSlugs = buildCanonicalSlugs(tool.content[DEFAULT_LOCALE] ?? '');
+const { html: bodyHtml, sections } = prepareToolContent(tStr(tool.content), canonicalSlugs);
+const lastUpdatedLine = interp(globalT.toolPage.lastUpdated, {
+  date: formatLocaleDate(tool.lastUpdated, lang),
+});
+
+const introText = tool.intro?.[lang] ?? tool.intro?.[DEFAULT_LOCALE] ?? '';
+const faqItems = tool.faq?.[lang] ?? tool.faq?.[DEFAULT_LOCALE] ?? [];
+const cta = globalT.toolPage.cta;
+---
+
+<section class="tool-page container-page">
+  <header class="tool-page__prose tool-page__head">
+    <h1 class="tool-page__title">{tStr(tool.titles)}</h1>
+    {introText && <p class="tool-page__lede">{introText}</p>}
+    <OnThisPage label={globalT.toolPage.onThisPage} sections={sections} />
+  </header>
+
+  {/* Live simulator island, supplied by the route via the default slot. */}
+  <div class="tool-page__tool tool-page__tool--wide">
+    <slot />
+  </div>
+
+  <article class="tool-page__prose">
+    <div class="tool-page__body" set:html={bodyHtml} />
+
+    {faqItems.length > 0 && (
+      <section class="tool-page__faq" aria-label={globalT.faq.title}>
+        <h2 class="tool-page__faq-heading">{globalT.faq.title}</h2>
+        <div class="faq__list">
+          {faqItems.map((f) => (
+            <details class="faq__item">
+              <summary class="faq__q">
+                <span>{f.q}</span>
+                <span class="faq__chev" aria-hidden="true">+</span>
+              </summary>
+              <p class="faq__a">{f.a}</p>
+            </details>
+          ))}
+        </div>
+      </section>
+    )}
+
+    <p class="tool-page__updated">{lastUpdatedLine}</p>
+
+    <div class="tool-page__cta">
+      <h2 class="tool-page__cta-heading">{cta.heading}</h2>
+      <p class="tool-page__cta-blurb">{cta.blurb}</p>
+      <a href={homeHref} class="tool-page__btn tool-page__cta-btn">{cta.button}</a>
+    </div>
+  </article>
+</section>
+
+<style>
+  .tool-page {
+    scroll-margin-top: 80px;
+    padding-top: 64px;
+    padding-bottom: 64px;
+  }
+
+  .tool-page__prose {
+    max-width: 48rem;
+    margin-inline: auto;
+  }
+
+  .tool-page__head {
+    margin-bottom: 32px;
+  }
+
+  .tool-page__head :global(.on-page) {
+    margin-top: 20px;
+  }
+
+  .tool-page__title {
+    font-size: clamp(30px, 5vw, 44px);
+    font-weight: 600;
+    line-height: 1.06;
+    letter-spacing: -1.6px;
+    color: var(--color-ink);
+  }
+
+  .tool-page__lede {
+    margin-top: 16px;
+    font-size: 18px;
+    line-height: 28px;
+    color: var(--color-body);
+  }
+
+  /* Embedded simulator — the dual-column shell needs more room than the prose
+     measure, so the wide variant widens to the page container. */
+  .tool-page__tool {
+    scroll-margin-top: 80px;
+    margin: 8px auto 56px;
+    max-width: 48rem;
+  }
+
+  .tool-page__tool--wide {
+    max-width: 64rem;
+  }
+
+  .tool-page__body :global(h2) {
+    scroll-margin-top: 80px;
+    margin-top: 40px;
+    font-size: 22px;
+    font-weight: 600;
+    line-height: 30px;
+    letter-spacing: -0.6px;
+    color: var(--color-ink);
+  }
+
+  .tool-page__body :global(h2:first-child) {
+    margin-top: 0;
+  }
+
+  .tool-page__body :global(p) {
+    margin-top: 14px;
+    font-size: 16px;
+    line-height: 28px;
+    color: var(--color-body);
+  }
+
+  .tool-page__body :global(strong) {
+    font-weight: 600;
+    color: var(--color-ink);
+  }
+
+  .tool-page__body :global(ul),
+  .tool-page__body :global(ol) {
+    margin-top: 14px;
+    padding-left: 1.5rem;
+    font-size: 16px;
+    line-height: 28px;
+    color: var(--color-body);
+  }
+
+  .tool-page__body :global(li) {
+    margin-top: 6px;
+  }
+
+  .tool-page__updated {
+    margin-top: 32px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--color-mute);
+  }
+
+  .tool-page__cta {
+    margin-top: 24px;
+    padding-top: 32px;
+    border-top: 1px solid var(--color-hairline);
+  }
+
+  .tool-page__cta-heading {
+    font-size: 22px;
+    font-weight: 600;
+    line-height: 30px;
+    letter-spacing: -0.6px;
+    color: var(--color-ink);
+  }
+
+  .tool-page__cta-blurb {
+    margin-top: 12px;
+    font-size: 16px;
+    line-height: 28px;
+    color: var(--color-body);
+    max-width: 44rem;
+  }
+
+  .tool-page__cta-btn {
+    margin-top: 20px;
+  }
+
+  .tool-page__btn {
+    display: inline-flex;
+    align-items: center;
+    height: 48px;
+    padding: 0 24px;
+    border-radius: var(--radius-pill);
+    background: var(--color-ink);
+    color: var(--color-on-primary);
+    font-size: 16px;
+    font-weight: 500;
+    transition: opacity 0.15s ease, transform 100ms ease;
+  }
+
+  .tool-page__btn:hover {
+    opacity: 0.88;
+  }
+
+  .tool-page__btn:active {
+    transform: scale(0.955);
+    opacity: 0.82;
+  }
+
+  .tool-page__faq {
+    margin-top: 48px;
+  }
+
+  .tool-page__faq-heading {
+    font-size: 22px;
+    font-weight: 600;
+    line-height: 30px;
+    letter-spacing: -0.6px;
+    color: var(--color-ink);
+    margin-bottom: 20px;
+  }
+
+  .faq__list {
+    display: grid;
+    gap: 12px;
+  }
+
+  .faq__item {
+    border-radius: var(--radius-lg);
+    background: var(--color-canvas);
+    box-shadow: var(--shadow-e1);
+    overflow: hidden;
+  }
+
+  .faq__q {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    cursor: pointer;
+    padding: 18px 20px;
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--color-ink);
+    list-style: none;
+    transition: transform 100ms ease, background 0.15s ease;
+  }
+
+  .faq__q:active {
+    transform: scale(0.985);
+    background: var(--color-canvas-soft-2);
+  }
+
+  .faq__q::-webkit-details-marker {
+    display: none;
+  }
+
+  .faq__chev {
+    font-size: 20px;
+    color: var(--color-mute);
+    transition: transform 0.2s ease;
+    line-height: 1;
+  }
+
+  .faq__item[open] .faq__chev {
+    transform: rotate(45deg);
+  }
+
+  .faq__a {
+    padding: 0 20px 18px;
+    font-size: 15px;
+    line-height: 24px;
+    color: var(--color-body);
+  }
+
+  @media (max-width: 768px) {
+    .tool-page {
+      padding-top: 48px;
+      padding-bottom: 48px;
+    }
+  }
+</style>
