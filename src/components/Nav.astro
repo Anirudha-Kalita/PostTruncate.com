@@ -533,17 +533,22 @@ const adPreviewLinks = adPreviews.map((tool) => ({
     position: sticky;
     top: 0;
     z-index: 50;
-    height: 64px;
+    min-height: 64px;
     background: color-mix(in srgb, var(--color-canvas) 80%, transparent);
     backdrop-filter: saturate(180%) blur(12px);
     border-bottom: 1px solid var(--color-hairline);
   }
+  /* min-height (not a fixed height) so that on locales with longer link text the
+     center nav links can wrap onto a second row and the bar grows taller rather
+     than overflowing. padding-block keeps the wrapped rows off the edges; a
+     single row still sits at the original 64px (border-box). */
   .nav__inner {
-    height: 64px;
+    min-height: 64px;
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 24px;
+    padding-block: 8px;
   }
 
   .nav__brand {
@@ -574,6 +579,10 @@ const adPreviewLinks = adPreviews.map((tool) => ({
   .nav__links {
     display: none;
     align-items: center;
+    justify-content: center;
+    /* Wrap to a second row when the links don't fit one line (longer non-English
+       labels) instead of overflowing into the actions cluster. */
+    flex-wrap: wrap;
     gap: 4px;
   }
   .nav__link {
@@ -582,6 +591,8 @@ const adPreviewLinks = adPreviews.map((tool) => ({
     color: var(--color-body);
     font-size: 14px;
     letter-spacing: -0.28px;
+    /* Keep each item intact so wrapping happens between items, not mid-label. */
+    white-space: nowrap;
     transition: color 0.15s ease, background 0.15s ease;
   }
   .nav__link:hover {
@@ -863,6 +874,7 @@ const adPreviewLinks = adPreviews.map((tool) => ({
     gap: 4px;
     cursor: pointer;
     list-style: none;
+    white-space: nowrap;
   }
   .nav__guides-toggle::-webkit-details-marker {
     display: none;
