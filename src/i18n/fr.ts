@@ -507,7 +507,7 @@ export const fr: Translations = {
         {
           heading: 'Comment il reste précis',
           paragraphs: [
-            'Les limites des plateformes changent sans grand préavis. Je les vérifie en comparant avec la façon dont chaque plateforme rend réellement les publications et je mets à jour les guides ici quand quelque chose change. Vous avez trouvé quelque chose d’obsolète ? La page de contact me parvient directement.',
+            'Les limites des plateformes changent sans grand préavis. Je les vérifie en comparant avec la façon dont chaque plateforme rend réellement les publications et je mets à jour les guides ici quand quelque chose change. Vous avez trouvé quelque chose d’obsolète ? La <a href="../contact/"><strong>page de contact</strong></a> me parvient directement.',
           ],
         },
         {

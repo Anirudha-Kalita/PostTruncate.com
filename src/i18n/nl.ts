@@ -507,7 +507,7 @@ export const nl: Translations = {
         {
           heading: 'Hoe het accuraat blijft',
           paragraphs: [
-            'Platformlimieten veranderen zonder veel aankondiging. Ik controleer ze aan de hand van hoe elk platform berichten daadwerkelijk weergeeft en werk de gidsen hier bij wanneer er iets verandert. Iets verouderds gevonden? De contactpagina komt rechtstreeks bij mij terecht.',
+            'Platformlimieten veranderen zonder veel aankondiging. Ik controleer ze aan de hand van hoe elk platform berichten daadwerkelijk weergeeft en werk de gidsen hier bij wanneer er iets verandert. Iets verouderds gevonden? De <a href="../contact/"><strong>contactpagina</strong></a> komt rechtstreeks bij mij terecht.',
           ],
         },
         {

@@ -507,7 +507,7 @@ export const pt: Translations = {
         {
           heading: 'Como se mantém rigoroso',
           paragraphs: [
-            'Os limites das plataformas mudam sem grande aviso. Verifico-os comparando com a forma como cada plataforma apresenta de facto as publicações e atualizo os guias aqui sempre que algo muda. Encontrou algo desatualizado? A página de contacto chega diretamente a mim.',
+            'Os limites das plataformas mudam sem grande aviso. Verifico-os comparando com a forma como cada plataforma apresenta de facto as publicações e atualizo os guias aqui sempre que algo muda. Encontrou algo desatualizado? A <a href="../contact/"><strong>página de contacto</strong></a> chega diretamente a mim.',
           ],
         },
         {

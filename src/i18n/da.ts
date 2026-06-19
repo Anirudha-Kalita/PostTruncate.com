@@ -507,7 +507,7 @@ export const da: Translations = {
         {
           heading: 'Sådan forbliver det præcist',
           paragraphs: [
-            'Platformgrænser ændrer sig uden meget varsel. Jeg tjekker dem mod, hvordan hver platform faktisk gengiver opslag, og opdaterer guiderne her, når noget ændrer sig. Fandt noget forældet? Kontaktsiden går direkte til mig.',
+            'Platformgrænser ændrer sig uden meget varsel. Jeg tjekker dem mod, hvordan hver platform faktisk gengiver opslag, og opdaterer guiderne her, når noget ændrer sig. Fandt noget forældet? <a href="../contact/"><strong>Kontaktsiden</strong></a> går direkte til mig.',
           ],
         },
         {

@@ -507,7 +507,7 @@ export const en: Translations = {
         {
           heading: 'How it stays accurate',
           paragraphs: [
-            'Platform limits shift without much notice. I check them against how each platform actually renders posts and update the guides here when something changes. Found something out of date? The contact page goes straight to me.',
+            'Platform limits shift without much notice. I check them against how each platform actually renders posts and update the guides here when something changes. Found something out of date? The <a href="../contact/"><strong>contact page</strong></a> goes straight to me.',
           ],
         },
         {

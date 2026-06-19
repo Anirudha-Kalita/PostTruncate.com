@@ -508,7 +508,7 @@ export const de: Translations = {
         {
           heading: 'Wie es aktuell bleibt',
           paragraphs: [
-            'Plattform-Limits ändern sich ohne viel Vorankündigung. Ich prüfe sie daran, wie jede Plattform Beiträge tatsächlich rendert, und aktualisiere die Leitfäden hier, wenn sich etwas ändert. Etwas Veraltetes entdeckt? Die Kontaktseite geht direkt zu mir.',
+            'Plattform-Limits ändern sich ohne viel Vorankündigung. Ich prüfe sie daran, wie jede Plattform Beiträge tatsächlich rendert, und aktualisiere die Leitfäden hier, wenn sich etwas ändert. Etwas Veraltetes entdeckt? Die <a href="../contact/"><strong>Kontaktseite</strong></a> geht direkt zu mir.',
           ],
         },
         {

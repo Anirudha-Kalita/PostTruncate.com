@@ -507,7 +507,7 @@ export const it: Translations = {
         {
           heading: 'Come rimane aggiornato',
           paragraphs: [
-            'I limiti delle piattaforme cambiano senza molto preavviso. Li verifico confrontandoli con il modo in cui ogni piattaforma renderizza realmente i post e aggiorno le guide qui quando qualcosa cambia. Hai trovato qualcosa di obsoleto? La pagina contatti arriva direttamente a me.',
+            'I limiti delle piattaforme cambiano senza molto preavviso. Li verifico confrontandoli con il modo in cui ogni piattaforma renderizza realmente i post e aggiorno le guide qui quando qualcosa cambia. Hai trovato qualcosa di obsoleto? La <a href="../contact/"><strong>pagina contatti</strong></a> arriva direttamente a me.',
           ],
         },
         {

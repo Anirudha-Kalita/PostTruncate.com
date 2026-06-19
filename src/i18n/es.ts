@@ -507,7 +507,7 @@ export const es: Translations = {
         {
           heading: 'Cómo se mantiene preciso',
           paragraphs: [
-            'Los límites de las plataformas cambian sin mucho aviso. Los verifico comparándolos con cómo cada plataforma renderiza las publicaciones realmente y actualizo las guías aquí cuando algo cambia. ¿Encontraste algo desactualizado? La página de contacto va directamente a mí.',
+            'Los límites de las plataformas cambian sin mucho aviso. Los verifico comparándolos con cómo cada plataforma renderiza las publicaciones realmente y actualizo las guías aquí cuando algo cambia. ¿Encontraste algo desactualizado? La <a href="../contact/"><strong>página de contacto</strong></a> va directamente a mí.',
           ],
         },
         {
