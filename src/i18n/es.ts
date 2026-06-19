@@ -36,6 +36,14 @@ export const es: Translations = {
     languageAria: 'Seleccionar idioma',
     menuAria: 'Mostrar u ocultar el menú de navegación',
     backToTop: 'Volver arriba',
+    bookmarkToast: {
+      heading: '¿Te ha resultado útil?',
+      desktopBody: 'Pulsa {shortcut} para guardar esta página y encontrarla al instante.',
+      mobileBody: 'Guarda esta herramienta para tenerla a un toque la próxima vez.',
+      mobileButton: 'Guardar o compartir esta página',
+      copied: '¡Enlace copiado!',
+      close: 'Cerrar',
+    },
   },
 
   hero: {

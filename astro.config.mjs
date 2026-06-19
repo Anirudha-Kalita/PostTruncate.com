@@ -196,6 +196,10 @@ export default defineConfig({
     }),
   ],
   vite: {
-    plugins: [tailwindcss()],
+    // @tailwindcss/vite is typed against the project's Vite (v8), but Astro
+    // bundles its own Vite (v6); the two Plugin types differ structurally
+    // (the `hotUpdate` hook's `this`), so the plugin is rejected at compile
+    // time even though it works at runtime. Cast away the version skew.
+    plugins: [/** @type {any} */ (tailwindcss())],
   },
 });

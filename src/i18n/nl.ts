@@ -36,6 +36,14 @@ export const nl: Translations = {
     languageAria: 'Selecteer taal',
     menuAria: 'Navigatiemenu in-/uitschakelen',
     backToTop: 'Terug naar boven',
+    bookmarkToast: {
+      heading: 'Was dit nuttig?',
+      desktopBody: 'Druk op {shortcut} om deze pagina op te slaan en hem zo terug te vinden.',
+      mobileBody: 'Bewaar deze tool zodat hij de volgende keer met één tik klaarstaat.',
+      mobileButton: 'Deze pagina opslaan of delen',
+      copied: 'Link gekopieerd!',
+      close: 'Sluiten',
+    },
   },
 
   hero: {

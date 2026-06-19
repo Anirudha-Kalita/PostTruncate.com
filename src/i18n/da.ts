@@ -36,6 +36,14 @@ export const da: Translations = {
     languageAria: 'Vælg sprog',
     menuAria: 'Slå navigationsmenu til/fra',
     backToTop: 'Tilbage til toppen',
+    bookmarkToast: {
+      heading: 'Var det nyttigt?',
+      desktopBody: 'Tryk på {shortcut} for at gemme denne side, så du hurtigt finder den igen.',
+      mobileBody: 'Gem dette værktøj, så det er ét tryk væk næste gang.',
+      mobileButton: 'Gem eller del denne side',
+      copied: 'Link kopieret!',
+      close: 'Luk',
+    },
   },
 
   hero: {

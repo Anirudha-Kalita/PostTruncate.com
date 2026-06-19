@@ -36,6 +36,14 @@ export const en: Translations = {
     languageAria: 'Select language',
     menuAria: 'Toggle navigation menu',
     backToTop: 'Back to top',
+    bookmarkToast: {
+      heading: 'Found this useful?',
+      desktopBody: 'Press {shortcut} to bookmark this page and find it again in a flash.',
+      mobileBody: 'Save this tool so it’s one tap away next time.',
+      mobileButton: 'Save or Share this page',
+      copied: 'Link copied!',
+      close: 'Dismiss',
+    },
   },
 
   hero: {

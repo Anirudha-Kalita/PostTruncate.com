@@ -37,6 +37,14 @@ export const de: Translations = {
     languageAria: 'Sprache auswählen',
     menuAria: 'Navigationsmenü umschalten',
     backToTop: 'Nach oben',
+    bookmarkToast: {
+      heading: 'War das hilfreich?',
+      desktopBody: 'Drücke {shortcut}, um diese Seite zu speichern und sie sofort wiederzufinden.',
+      mobileBody: 'Speichere dieses Tool, damit es beim nächsten Mal nur einen Tipp entfernt ist.',
+      mobileButton: 'Seite speichern oder teilen',
+      copied: 'Link kopiert!',
+      close: 'Schließen',
+    },
   },
 
   hero: {

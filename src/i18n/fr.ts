@@ -36,6 +36,14 @@ export const fr: Translations = {
     languageAria: 'Sélectionner la langue',
     menuAria: 'Afficher ou masquer le menu de navigation',
     backToTop: 'Haut de page',
+    bookmarkToast: {
+      heading: 'Cet outil vous a été utile ?',
+      desktopBody: 'Appuyez sur {shortcut} pour ajouter cette page à vos favoris et la retrouver en un instant.',
+      mobileBody: 'Enregistrez cet outil pour l’avoir à portée de main la prochaine fois.',
+      mobileButton: 'Enregistrer ou partager cette page',
+      copied: 'Lien copié !',
+      close: 'Fermer',
+    },
   },
 
   hero: {

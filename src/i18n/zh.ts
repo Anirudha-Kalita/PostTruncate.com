@@ -36,6 +36,14 @@ export const zh: Translations = {
     languageAria: '选择语言',
     menuAria: '切换导航菜单',
     backToTop: '返回顶部',
+    bookmarkToast: {
+      heading: '觉得有用吗？',
+      desktopBody: '按 {shortcut} 将此页加入书签，下次一键找到。',
+      mobileBody: '保存这个工具，下次轻点即可打开。',
+      mobileButton: '保存或分享此页面',
+      copied: '链接已复制！',
+      close: '关闭',
+    },
   },
 
   hero: {

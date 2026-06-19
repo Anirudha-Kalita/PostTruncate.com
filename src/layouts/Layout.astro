@@ -243,6 +243,162 @@ const canonical = canonicalOverride ?? localeHref(lang);
       </svg>
     </button>
 
+    {/* Bookmark / save nudge — fixed slide-in toast shown once per visitor
+        (localStorage-gated). Desktop: exit-intent. Mobile: time delay. The
+        element is always in the DOM but visibility-hidden, so it never causes
+        layout shift (CLS). Strings come from the active locale. */}
+    <aside
+      class="bk-toast"
+      role="dialog"
+      aria-live="polite"
+      aria-label={t.nav.bookmarkToast.heading}
+    >
+      <button type="button" class="bk-toast__close" aria-label={t.nav.bookmarkToast.close}>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M18 6 6 18M6 6l12 12" />
+        </svg>
+      </button>
+      <div class="bk-toast__icon" aria-hidden="true">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z" />
+        </svg>
+      </div>
+      <div class="bk-toast__body">
+        <p class="bk-toast__heading">{t.nav.bookmarkToast.heading}</p>
+        {/* Desktop: the {shortcut} token is replaced client-side with the
+            OS-correct keys wrapped in a <kbd> — so it's left empty here and
+            filled from data-tpl by the script. */}
+        <p
+          class="bk-toast__text bk-toast__text--desktop"
+          data-tpl={t.nav.bookmarkToast.desktopBody}
+        ></p>
+        {/* Mobile: a share/copy action button. */}
+        <div class="bk-toast__mobile">
+          <p class="bk-toast__text">{t.nav.bookmarkToast.mobileBody}</p>
+          <button
+            type="button"
+            class="bk-toast__share"
+            data-copied={t.nav.bookmarkToast.copied}
+          >
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <circle cx="18" cy="5" r="3" /><circle cx="6" cy="12" r="3" /><circle cx="18" cy="19" r="3" />
+              <path d="M8.59 13.51l6.83 3.98M15.41 6.51l-6.82 3.98" />
+            </svg>
+            <span class="bk-toast__share-label">{t.nav.bookmarkToast.mobileButton}</span>
+          </button>
+        </div>
+      </div>
+    </aside>
+
+    <script>
+      // ── Bookmark / save nudge ─────────────────────────────────────────────
+      // Shown at most once per visitor. Desktop fires on exit-intent (cursor
+      // leaves the top of the viewport); mobile (no fine pointer) fires after a
+      // delay. Either path sets the localStorage flag the first time it shows,
+      // so it never reappears on later visits or reloads.
+      (() => {
+        const toast = document.querySelector<HTMLElement>('.bk-toast');
+        if (!toast) return;
+
+        const STORAGE_KEY = 'pt_bookmark_nudge_seen';
+        const MOBILE_DELAY = 60_000; // 60s
+
+        let seen = false;
+        try {
+          seen = localStorage.getItem(STORAGE_KEY) === '1';
+        } catch {}
+        if (seen) return; // already shown once — do nothing this session
+
+        // Desktop = a device with a precise, hovering pointer (i.e. a mouse).
+        // Everything else (touch) takes the mobile path.
+        const isDesktop = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+        toast.classList.add(isDesktop ? 'bk-toast--desktop' : 'bk-toast--mobile');
+
+        // Fill the desktop body, swapping {shortcut} for an OS-correct <kbd>.
+        if (isDesktop) {
+          const textEl = toast.querySelector<HTMLElement>('.bk-toast__text--desktop');
+          const tpl = textEl?.dataset.tpl ?? '';
+          if (textEl && tpl) {
+            const isMac = /Mac|iPhone|iPad|iPod/i.test(navigator.platform || navigator.userAgent);
+            const kbd = document.createElement('kbd');
+            kbd.className = 'bk-toast__kbd';
+            kbd.textContent = isMac ? '⌘ + D' : 'Ctrl + D';
+            const [before, after] = tpl.split('{shortcut}');
+            textEl.append(document.createTextNode(before ?? ''), kbd, document.createTextNode(after ?? ''));
+          }
+        }
+
+        const markSeen = () => {
+          try {
+            localStorage.setItem(STORAGE_KEY, '1');
+          } catch {}
+        };
+
+        let shown = false;
+        const show = () => {
+          if (shown) return;
+          shown = true;
+          markSeen(); // "triggered" counts as seen — never show again
+          cleanup();
+          // rAF so the transition runs from the hidden state.
+          requestAnimationFrame(() => toast.classList.add('is-visible'));
+        };
+
+        const hide = () => {
+          toast.classList.remove('is-visible');
+          markSeen();
+        };
+
+        // ── Triggers ──────────────────────────────────────────────────────
+        let mobileTimer: ReturnType<typeof setTimeout> | undefined;
+        const onMouseOut = (e: MouseEvent) => {
+          // Cursor left the document through the top edge.
+          if (!e.relatedTarget && e.clientY <= 0) show();
+        };
+
+        const cleanup = () => {
+          document.removeEventListener('mouseout', onMouseOut);
+          if (mobileTimer) clearTimeout(mobileTimer);
+        };
+
+        if (isDesktop) {
+          document.addEventListener('mouseout', onMouseOut);
+        } else {
+          mobileTimer = setTimeout(show, MOBILE_DELAY);
+        }
+
+        // ── Interactions ──────────────────────────────────────────────────
+        toast
+          .querySelector<HTMLButtonElement>('.bk-toast__close')
+          ?.addEventListener('click', hide);
+
+        const shareBtn = toast.querySelector<HTMLButtonElement>('.bk-toast__share');
+        shareBtn?.addEventListener('click', async () => {
+          markSeen();
+          const url = window.location.href;
+          const shareData = { title: document.title, url };
+          if (navigator.share) {
+            try {
+              await navigator.share(shareData);
+            } catch {
+              /* user cancelled — leave the toast as-is */
+            }
+            return;
+          }
+          // Fallback: copy the link and confirm in the button label.
+          try {
+            await navigator.clipboard.writeText(url);
+            const label = shareBtn.querySelector('.bk-toast__share-label');
+            const copied = shareBtn.dataset.copied;
+            if (label && copied) label.textContent = copied;
+            shareBtn.classList.add('is-copied');
+          } catch {
+            /* clipboard blocked — no-op */
+          }
+        });
+      })();
+    </script>
+
     <script>
       const btn = document.querySelector<HTMLButtonElement>('.to-top');
       if (btn) {
@@ -316,6 +472,174 @@ const canonical = canonicalOverride ?? localeHref(lang);
     .to-top {
       right: 28px;
       bottom: 28px;
+    }
+  }
+
+  /* ── Bookmark / save nudge toast ───────────────────────────────────────
+     Fixed-position (never in flow → zero CLS). Hidden via visibility +
+     opacity + an off-screen transform; revealed by .is-visible. The device
+     class (--desktop / --mobile) is added by the script and drives both
+     placement and which body variant is shown. */
+  .bk-toast {
+    position: fixed;
+    z-index: 60;
+    visibility: hidden;
+    opacity: 0;
+    pointer-events: none;
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 16px;
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--color-hairline);
+    background: var(--color-canvas);
+    color: var(--color-ink);
+    box-shadow: var(--shadow-e5);
+    transition: opacity 0.3s ease, transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+      visibility 0.35s;
+  }
+  .bk-toast.is-visible {
+    visibility: visible;
+    opacity: 1;
+    transform: none;
+    pointer-events: auto;
+  }
+
+  /* Desktop: compact card that slides in from the top-right. Sits below the
+     64px sticky nav so it never covers the logo/links. */
+  .bk-toast--desktop {
+    right: 24px;
+    top: 80px;
+    width: min(360px, calc(100vw - 48px));
+    transform: translateX(28px) translateY(-8px);
+  }
+  /* Mobile: full-width bar that slides down from the top-center. */
+  .bk-toast--mobile {
+    left: 16px;
+    right: 16px;
+    top: 80px;
+    transform: translateY(calc(-100% - 96px));
+  }
+
+  /* Body-variant switching, keyed off the device class. */
+  .bk-toast__mobile {
+    display: none;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .bk-toast--mobile .bk-toast__text--desktop {
+    display: none;
+  }
+  .bk-toast--mobile .bk-toast__mobile {
+    display: flex;
+  }
+  .bk-toast--desktop .bk-toast__mobile {
+    display: none;
+  }
+
+  .bk-toast__icon {
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: var(--radius-md);
+    background: var(--color-link-bg-soft);
+    color: var(--color-link);
+  }
+
+  .bk-toast__body {
+    min-width: 0;
+    flex: 1;
+    padding-right: 20px; /* clear the close button */
+  }
+  .bk-toast__heading {
+    margin: 0 0 4px;
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: -0.28px;
+    color: var(--color-ink);
+  }
+  .bk-toast__text {
+    margin: 0;
+    font-size: 13.5px;
+    line-height: 1.45;
+    color: var(--color-body);
+  }
+  .bk-toast__kbd {
+    display: inline-block;
+    padding: 1px 7px;
+    margin: 0 1px;
+    border: 1px solid var(--color-hairline-strong);
+    border-bottom-width: 2px;
+    border-radius: var(--radius-sm);
+    background: var(--color-canvas-soft-2);
+    color: var(--color-ink);
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 500;
+    white-space: nowrap;
+  }
+
+  .bk-toast__close {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    border: none;
+    border-radius: var(--radius-md);
+    background: transparent;
+    color: var(--color-mute);
+    cursor: pointer;
+    transition: background 0.15s ease, color 0.15s ease;
+  }
+  .bk-toast__close:hover {
+    background: var(--color-canvas-soft-2);
+    color: var(--color-ink);
+  }
+
+  .bk-toast__share {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    height: 42px;
+    padding: 0 16px;
+    border: none;
+    border-radius: var(--radius-pill);
+    background-color: var(--color-link);
+    color: var(--color-on-primary);
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: -0.28px;
+    cursor: pointer;
+    transition: transform 100ms ease, background-color 0.15s ease, opacity 0.15s ease;
+  }
+  .bk-toast__share:hover {
+    background-color: var(--color-link-deep);
+  }
+  .bk-toast__share:active {
+    transform: scale(0.97);
+    opacity: 0.9;
+  }
+  .bk-toast__share.is-copied {
+    background-color: var(--color-success);
+  }
+
+  /* Honor reduced-motion: fade only, no slide. */
+  @media (prefers-reduced-motion: reduce) {
+    .bk-toast {
+      transition: opacity 0.2s ease, visibility 0.2s;
+    }
+    .bk-toast--desktop,
+    .bk-toast--mobile {
+      transform: none;
     }
   }
 </style>

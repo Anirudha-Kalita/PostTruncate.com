@@ -36,6 +36,14 @@ export const ja: Translations = {
     languageAria: '言語を選択',
     menuAria: 'ナビゲーションメニューを開閉',
     backToTop: 'トップへ戻る',
+    bookmarkToast: {
+      heading: 'お役に立ちましたか？',
+      desktopBody: '{shortcut} を押すと、このページをブックマークしてすぐに見つけられます。',
+      mobileBody: 'このツールを保存しておけば、次回はワンタップで開けます。',
+      mobileButton: 'このページを保存・共有',
+      copied: 'リンクをコピーしました！',
+      close: '閉じる',
+    },
   },
 
   hero: {

@@ -834,6 +834,26 @@ export interface Translations {
     menuAria: string;
     /** Accessible label for the floating back-to-top button. */
     backToTop: string;
+    /**
+     * "Bookmark / save this page" slide-in toast. Shown once per visitor
+     * (localStorage-gated): on desktop via exit-intent, on mobile after a
+     * delay. Desktop nudges the native bookmark shortcut; mobile offers a
+     * Web Share / copy-link button.
+     */
+    bookmarkToast: {
+      /** Small heading line, e.g. "Found this useful?". */
+      heading: string;
+      /** Desktop body. "{shortcut}" → the OS bookmark shortcut (Ctrl+D / ⌘D). */
+      desktopBody: string;
+      /** Mobile body line above the share button. */
+      mobileBody: string;
+      /** Mobile action button — triggers navigator.share / copy fallback. */
+      mobileButton: string;
+      /** Mobile button label after the copy-link fallback succeeds. */
+      copied: string;
+      /** Accessible label for the dismiss "×" button. */
+      close: string;
+    };
   };
   hero: {
     eyebrow: string;
