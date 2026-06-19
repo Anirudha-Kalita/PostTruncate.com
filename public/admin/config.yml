@@ -66,7 +66,17 @@ collections:
           - { label: 'Copywriting & Strategy', value: copywriting-strategy }
           - { label: 'Tools & Automation', value: tools-automation }
           - { label: 'TikTok', value: tiktok }
-      - { name: author, label: Author, widget: string, default: 'Anirudha' }
+      # Author is a select so the value is always an exact match. Choosing
+      # "Anirudha" makes the published article show the circular author photo
+      # and a byline that links to the localized About page (see the
+      # isSiteAuthor logic in src/pages/[lang]/blog/[slug]/index.astro).
+      - name: author
+        label: Author
+        widget: select
+        default: Anirudha
+        hint: 'Select the author. "Anirudha" shows the author photo and links the byline to the About page.'
+        options:
+          - Anirudha
       - { name: draft, label: Draft, widget: boolean, default: false }
       - { name: ogImage, label: Social image, widget: image, required: false, hint: 'Optional. Falls back to the site default (/og.png).' }
       # Rich-text body. `editor_components: [image, code-block]` give the media-
