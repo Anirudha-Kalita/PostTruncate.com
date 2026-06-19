@@ -710,7 +710,7 @@ export const en: Translations = {
 
   ctaBanner: {
     title: 'Ready to optimize your content?',
-    body: 'Join thousands of creators and marketers who write better, post smarter, and get more engagement.',
+    body: 'Check your post before LinkedIn, X, or Instagram cuts it for you.',
     cta: 'Start Writing Free',
     noCard: 'No credit card required',
     free: 'Free forever',
