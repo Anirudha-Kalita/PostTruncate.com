@@ -31,6 +31,7 @@ export const RELATED_PLATFORMS = [
   'facebook',
   'sms',
   'threads',
+  'tiktok',
   'general',
 ] as const;
 

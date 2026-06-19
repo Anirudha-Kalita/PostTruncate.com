@@ -5,7 +5,8 @@ publishDate: 2026-06-19
 locale: en
 slug: tiktok-captions-2-200-chars-100-visible-2026-seo
 translationKey: tiktok-captions-2-200-chars-100-visible-2026-seo
-relatedPlatform: instagram
+relatedPlatform: tiktok
+category: tiktok
 author: PostTruncate Team
 draft: true
 ---

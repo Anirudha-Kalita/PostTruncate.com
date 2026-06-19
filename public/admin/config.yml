@@ -50,7 +50,7 @@ collections:
       # Zod schema in src/content.config.ts also back-fills translationKey from
       # slug if this ever serializes empty, so the build can't break either way.
       - { name: translationKey, label: Translation key, widget: hidden, default: '{{fields.slug}}' }
-      - { name: relatedPlatform, label: Related platform, widget: select, required: false, options: ['twitter', 'instagram', 'linkedin', 'facebook', 'sms', 'threads', 'general'] }
+      - { name: relatedPlatform, label: Related platform, widget: select, required: false, options: ['twitter', 'instagram', 'linkedin', 'facebook', 'sms', 'threads', 'tiktok', 'general'] }
       - name: category
         label: Category
         widget: select
