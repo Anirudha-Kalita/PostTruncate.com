@@ -30,8 +30,10 @@ interface Props {
   /** Viewport state, lifted to Dashboard so the Hook Visibility panel can mirror it. */
   view: FeedView;
   setView: (v: FeedView) => void;
-  /** Object URL of the attached preview image, or null when none. */
+  /** Object URL of the attached preview media, or null when none. */
   image?: string | null;
+  /** Whether the attached media is an image (default) or a video. */
+  mediaKind?: 'image' | 'video';
   /** When false, hide the dimmed below-the-fold remainder (show only "…more"). */
   showFolded?: boolean;
 }
@@ -41,7 +43,7 @@ interface Props {
  * validator keeps that full allowance, while the mock mobile card visually
  * folds one-block posts behind a "... more" affordance.
  */
-export function ThreadsPreview({ text, lang, s, toolLinkHref, view, setView, image, showFolded = true }: Props) {
+export function ThreadsPreview({ text, lang, s, toolLinkHref, view, setView, image, mediaKind = 'image', showFolded = true }: Props) {
   const th = s.threads;
   const nf = new Intl.NumberFormat(lang);
   const author = previewAuthor(s.common);
@@ -157,7 +159,7 @@ export function ThreadsPreview({ text, lang, s, toolLinkHref, view, setView, ima
                   portraits crop to 4:5, landscape/square show in full. */}
               {image && i === 0 && (
                 <div class="mt-2 overflow-hidden rounded-xl border border-hairline">
-                  <FeedImage src={image} maxRatio={IMAGE_RATIOS.threads.max} />
+                  <FeedImage src={image} kind={mediaKind} maxRatio={IMAGE_RATIOS.threads.max} />
                 </div>
               )}
 

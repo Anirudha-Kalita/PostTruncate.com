@@ -810,9 +810,9 @@ export const ja: Translations = {
       statusLine: 'リアルタイム分析が有効です',
     },
     imageUpload: {
-      add: '画像を追加',
-      replace: '画像を置き換え',
-      remove: '画像を削除',
+      add: 'メディアを追加',
+      replace: 'メディアを置き換え',
+      remove: 'メディアを削除',
       hint: 'プレビューのみ — アップロードも保存もされません。再読み込みで消えます。',
     },
     aiImprove: {

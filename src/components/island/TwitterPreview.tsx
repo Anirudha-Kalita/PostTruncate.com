@@ -31,8 +31,10 @@ interface Props {
   lang: string;
   s: IslandStrings;
   toolLinkHref?: string;
-  /** Object URL of the attached preview image, or null when none. */
+  /** Object URL of the attached preview media, or null when none. */
   image?: string | null;
+  /** Whether the attached media is an image (default) or a video. */
+  mediaKind?: 'image' | 'video';
 }
 
 /**
@@ -41,7 +43,7 @@ interface Props {
  * splits it into clean tweets — never mid-word — each tagged with an "n/total"
  * counter in the bottom-right corner.
  */
-export function TwitterPreview({ text, lang, s, toolLinkHref, image }: Props) {
+export function TwitterPreview({ text, lang, s, toolLinkHref, image, mediaKind = 'image' }: Props) {
   const tw = s.twitter;
   const nf = new Intl.NumberFormat(lang);
   const author = previewAuthor(s.common);
@@ -127,7 +129,7 @@ export function TwitterPreview({ text, lang, s, toolLinkHref, image }: Props) {
                   frame. Wide/square show fully; tall portraits crop. */}
               {image && i === 0 && (
                 <div class="mt-3 overflow-hidden rounded-2xl border border-hairline">
-                  <FeedImage src={image} maxRatio={IMAGE_RATIOS.twitter.max} />
+                  <FeedImage src={image} kind={mediaKind} maxRatio={IMAGE_RATIOS.twitter.max} />
                 </div>
               )}
 

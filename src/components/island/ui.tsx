@@ -1,6 +1,6 @@
 /** @jsxImportSource preact */
 import type { ComponentChildren } from 'preact';
-import { useState } from 'preact/hooks';
+import { useRef, useState } from 'preact/hooks';
 import { clampFeedRatio } from '../../lib/textTools';
 import type { IslandStrings } from '../../i18n/types';
 
@@ -395,8 +395,10 @@ export function Globe({ size = 13 }: { size?: number }) {
 }
 
 interface FeedImageProps {
-  /** Object URL of the in-memory preview image. */
+  /** Object URL of the in-memory preview media (image or video). */
   src: string;
+  /** Whether the attached media is an image (default) or a video. */
+  kind?: 'image' | 'video';
   /**
    * Minimum rendered aspect ratio as height ÷ width. e.g. 1 forces at least a
    * square (used by Instagram, which never shows landscape shorter than 1:1).
@@ -412,13 +414,60 @@ interface FeedImageProps {
 }
 
 /**
- * A platform feed image. Measures the upload's natural dimensions on load and
- * clamps the rendered aspect ratio into each platform's allowed band, so the
- * preview crops exactly the way that platform would. Before the image loads it
- * renders at natural height to avoid a reserved-space flash.
+ * A platform feed image or video. Measures the upload's natural dimensions on
+ * load and clamps the rendered aspect ratio into each platform's allowed band,
+ * so the preview crops exactly the way that platform would. Before the media
+ * loads it renders at natural height to avoid a reserved-space flash.
  */
-export function FeedImage({ src, minRatio, maxRatio, fit = 'cover' }: FeedImageProps) {
+export function FeedImage({ src, kind = 'image', minRatio, maxRatio, fit = 'cover' }: FeedImageProps) {
   const [ratio, setRatio] = useState<number | null>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
+  // Once playback has started we hand off to the native controls; before that
+  // we show a centered play button over the poster frame, like every social
+  // feed renders a video in-line.
+  const [started, setStarted] = useState(false);
+
+  const fitClass = fit === 'cover' ? 'object-cover' : 'object-contain';
+  const style = ratio !== null ? `aspect-ratio: 1 / ${ratio};` : undefined;
+
+  if (kind === 'video') {
+    const onMeta = (e: Event) => {
+      const v = e.currentTarget as HTMLVideoElement;
+      if (!v.videoWidth) return;
+      setRatio(clampFeedRatio(v.videoHeight / v.videoWidth, { min: minRatio, max: maxRatio }));
+    };
+
+    return (
+      <div class="relative">
+        <video
+          ref={videoRef}
+          src={src}
+          onLoadedMetadata={onMeta}
+          onPlay={() => setStarted(true)}
+          controls={started}
+          muted
+          playsInline
+          preload="metadata"
+          class={`block w-full bg-canvas-soft-2 ${fitClass}`}
+          style={style}
+        />
+        {!started && (
+          <button
+            type="button"
+            aria-label="Play video"
+            onClick={() => videoRef.current?.play()}
+            class="group absolute inset-0 flex items-center justify-center bg-black/5 transition-colors hover:bg-black/10 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+          >
+            <span class="flex h-14 w-14 items-center justify-center rounded-full bg-black/55 shadow-lg backdrop-blur-sm transition-transform duration-100 group-hover:scale-105">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="white" aria-hidden="true" class="ml-0.5">
+                <path d="M8 5.14v13.72a1 1 0 0 0 1.54.84l10.79-6.86a1 1 0 0 0 0-1.68L9.54 4.3A1 1 0 0 0 8 5.14z" />
+              </svg>
+            </span>
+          </button>
+        )}
+      </div>
+    );
+  }
 
   const onLoad = (e: Event) => {
     const im = e.currentTarget as HTMLImageElement;
@@ -431,8 +480,8 @@ export function FeedImage({ src, minRatio, maxRatio, fit = 'cover' }: FeedImageP
       src={src}
       alt=""
       onLoad={onLoad}
-      class={`block w-full bg-canvas-soft-2 ${fit === 'cover' ? 'object-cover' : 'object-contain'}`}
-      style={ratio !== null ? `aspect-ratio: 1 / ${ratio};` : undefined}
+      class={`block w-full bg-canvas-soft-2 ${fitClass}`}
+      style={style}
     />
   );
 }

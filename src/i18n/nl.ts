@@ -810,9 +810,9 @@ export const nl: Translations = {
       statusLine: 'Realtime analyse is actief',
     },
     imageUpload: {
-      add: 'Afbeelding toevoegen',
-      replace: 'Afbeelding vervangen',
-      remove: 'Afbeelding verwijderen',
+      add: 'Media toevoegen',
+      replace: 'Media vervangen',
+      remove: 'Media verwijderen',
       hint: 'Alleen voorbeeld — wordt nooit geüpload of opgeslagen. Verdwijnt bij herladen.',
     },
     aiImprove: {

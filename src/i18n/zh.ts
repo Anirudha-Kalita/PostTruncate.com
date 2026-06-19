@@ -808,9 +808,9 @@ export const zh: Translations = {
       statusLine: '实时分析已开启',
     },
     imageUpload: {
-      add: '添加图片',
-      replace: '替换图片',
-      remove: '移除图片',
+      add: '添加媒体',
+      replace: '替换媒体',
+      remove: '移除媒体',
       hint: '仅用于预览 — 不会上传或保存。刷新后即清除。',
     },
     aiImprove: {

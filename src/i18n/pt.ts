@@ -810,9 +810,9 @@ export const pt: Translations = {
       statusLine: 'A análise em tempo real está ativa',
     },
     imageUpload: {
-      add: 'Adicionar imagem',
-      replace: 'Substituir imagem',
-      remove: 'Remover imagem',
+      add: 'Adicionar mídia',
+      replace: 'Substituir mídia',
+      remove: 'Remover mídia',
       hint: 'Apenas pré-visualização — nunca enviada nem armazenada. Some ao recarregar.',
     },
     aiImprove: {

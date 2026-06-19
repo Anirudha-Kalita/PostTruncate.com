@@ -810,9 +810,9 @@ export const es: Translations = {
       statusLine: 'El análisis en tiempo real está activo',
     },
     imageUpload: {
-      add: 'Añadir imagen',
-      replace: 'Reemplazar imagen',
-      remove: 'Quitar imagen',
+      add: 'Añadir contenido',
+      replace: 'Reemplazar contenido',
+      remove: 'Quitar contenido',
       hint: 'Solo vista previa: nunca se sube ni se guarda. Se borra al recargar.',
     },
     aiImprove: {

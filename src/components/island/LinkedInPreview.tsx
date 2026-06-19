@@ -31,8 +31,10 @@ interface Props {
   lang: string;
   s: IslandStrings;
   toolLinkHref?: string;
-  /** Object URL of the attached preview image, or null when none. */
+  /** Object URL of the attached preview media, or null when none. */
   image?: string | null;
+  /** Whether the attached media is an image (default) or a video. */
+  mediaKind?: 'image' | 'video';
   /** When false, hide the dimmed below-the-fold remainder (show only "…more"). */
   showFolded?: boolean;
 }
@@ -42,7 +44,7 @@ interface Props {
  * "…see more" fold (210 chars desktop / 140 mobile) and injects a non-clickable
  * bold "…see more" at the exact boundary when the post is truncated.
  */
-export function LinkedInPreview({ text, view, setView, lang, s, toolLinkHref, image, showFolded = true }: Props) {
+export function LinkedInPreview({ text, view, setView, lang, s, toolLinkHref, image, mediaKind = 'image', showFolded = true }: Props) {
   const l = s.linkedin;
   const nf = new Intl.NumberFormat(lang);
   const author = previewAuthor(s.common);
@@ -163,7 +165,7 @@ export function LinkedInPreview({ text, view, setView, lang, s, toolLinkHref, im
               shows up to 4:5 (h/w 1.25) in full and crops taller uploads. */}
           {image && (
             <div class="-mx-4 mt-3">
-              <FeedImage src={image} maxRatio={IMAGE_RATIOS.linkedin.max} />
+              <FeedImage src={image} kind={mediaKind} maxRatio={IMAGE_RATIOS.linkedin.max} />
             </div>
           )}
 

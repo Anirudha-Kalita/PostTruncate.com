@@ -30,8 +30,10 @@ interface Props {
   lang: string;
   s: IslandStrings;
   focus?: string;
-  /** Object URL of the attached preview image, or null when none is attached. */
+  /** Object URL of the attached preview media, or null when none is attached. */
   image?: string | null;
+  /** Whether the attached media is an image (default) or a video. */
+  mediaKind?: 'image' | 'video';
   /** Hand a picked File (or null to clear) up to the Dashboard image state. */
   onSelectImage?: (file: File | null) => void;
 }
@@ -41,13 +43,13 @@ interface Props {
  * optimization engine actions. All transforms route through the pure helpers
  * in textTools so behaviour matches the previews exactly.
  */
-export function Workspace({ text, setText, lang, s, focus, image, onSelectImage }: Props) {
+export function Workspace({ text, setText, lang, s, focus, image, mediaKind = 'image', onSelectImage }: Props) {
   const hidden = detectHiddenUnicode(text);
   const w = s.workspace;
   const img = s.imageUpload ?? {
-    add: 'Add image',
-    replace: 'Replace image',
-    remove: 'Remove image',
+    add: 'Add media',
+    replace: 'Replace media',
+    remove: 'Remove media',
     hint: 'Preview only — never uploaded or stored. Clears on reload.',
   };
   const nf = new Intl.NumberFormat(lang);
@@ -148,24 +150,34 @@ export function Workspace({ text, setText, lang, s, focus, image, onSelectImage 
           <AiImprove text={text} setText={setText} s={s.aiImprove} onImproved={onImproved} />
         </div>
 
-        {/* Image attach — prominent, right under the editor. In-memory preview
+        {/* Media attach — prominent, right under the editor. In-memory preview
             only; the picked File is handed up to Dashboard state. */}
         {onSelectImage && (
           <div class="mt-3">
             {image ? (
               <div class="flex items-center gap-3 rounded-md border border-link/30 bg-link-bg-soft p-2.5">
-                <img
-                  src={image}
-                  alt=""
-                  class="h-14 w-14 shrink-0 rounded-md border border-hairline object-cover"
-                />
+                {mediaKind === 'video' ? (
+                  <video
+                    src={image}
+                    muted
+                    playsInline
+                    preload="metadata"
+                    class="h-14 w-14 shrink-0 rounded-md border border-hairline object-cover"
+                  />
+                ) : (
+                  <img
+                    src={image}
+                    alt=""
+                    class="h-14 w-14 shrink-0 rounded-md border border-hairline object-cover"
+                  />
+                )}
                 <div class="flex min-w-0 flex-1 items-center gap-2">
                   <label class="inline-flex cursor-pointer items-center gap-1.5 rounded-pill border border-link bg-link px-3.5 py-2 text-[13px] font-semibold text-on-primary transition-[transform,background] duration-100 hover:bg-link-deep active:scale-[0.96]">
-                    <ImageIcon />
+                    <MediaIcon />
                     {img.replace}
                     <input
                       type="file"
-                      accept="image/*"
+                      accept="image/*,video/*"
                       class="sr-only"
                       onChange={(e) => {
                         const input = e.currentTarget as HTMLInputElement;
@@ -187,12 +199,12 @@ export function Workspace({ text, setText, lang, s, focus, image, onSelectImage 
             ) : (
               <label class="group flex cursor-pointer items-center justify-center gap-2 rounded-md border-2 border-dashed border-link/45 bg-link-bg-soft px-4 py-3 text-[14px] font-semibold text-link-deep transition-[transform,background,border-color] duration-100 hover:border-link hover:bg-canvas-soft-2 active:scale-[0.99]">
                 <span class="flex h-7 w-7 items-center justify-center rounded-full bg-link text-on-primary">
-                  <ImageIcon />
+                  <MediaIcon />
                 </span>
                 {img.add}
                 <input
                   type="file"
-                  accept="image/*"
+                  accept="image/*,video/*"
                   class="sr-only"
                   onChange={(e) => {
                     const input = e.currentTarget as HTMLInputElement;
@@ -334,7 +346,7 @@ function TimerStat({ icon, label, value }: TimerStatProps) {
   );
 }
 
-function ImageIcon() {
+function MediaIcon() {
   return (
     <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
       <rect x="3" y="3" width="18" height="18" rx="2" />

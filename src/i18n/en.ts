@@ -810,9 +810,9 @@ export const en: Translations = {
       statusLine: 'Real-time analysis is on',
     },
     imageUpload: {
-      add: 'Add image',
-      replace: 'Replace image',
-      remove: 'Remove image',
+      add: 'Add media',
+      replace: 'Replace media',
+      remove: 'Remove media',
       hint: 'Preview only — never uploaded or stored. Clears on reload.',
     },
     aiImprove: {

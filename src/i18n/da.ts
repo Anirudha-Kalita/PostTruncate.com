@@ -810,9 +810,9 @@ export const da: Translations = {
       statusLine: 'Realtidsanalyse er slået til',
     },
     imageUpload: {
-      add: 'Tilføj billede',
-      replace: 'Erstat billede',
-      remove: 'Fjern billede',
+      add: 'Tilføj medie',
+      replace: 'Erstat medie',
+      remove: 'Fjern medie',
       hint: 'Kun forhåndsvisning — uploades eller gemmes aldrig. Ryddes ved genindlæsning.',
     },
     aiImprove: {

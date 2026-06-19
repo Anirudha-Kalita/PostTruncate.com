@@ -49,8 +49,10 @@ interface Props {
   setInstagramView: (v: FeedView) => void;
   facebookView: FeedView;
   setFacebookView: (v: FeedView) => void;
-  /** Object URL of the attached preview image, or null when none. */
+  /** Object URL of the attached preview media, or null when none. */
   image?: string | null;
+  /** Whether the attached media is an image (default) or a video. */
+  mediaKind?: 'image' | 'video';
   /** When false, hide the dimmed below-the-fold remainder (show only "…more"). */
   showFolded?: boolean;
 }
@@ -69,7 +71,7 @@ function truncateForFeed(text: string, limit: number) {
  * Independent Instagram and Facebook monitors. Instagram owns caption preview
  * and hashtag concentration; Facebook owns feed preview and accessibility.
  */
-export function MetaMonitor({ text, lang, s, toolLinkHref, facebookToolLinkHref, priority, only, instagramView, setInstagramView, facebookView, setFacebookView, image, showFolded = true }: Props) {
+export function MetaMonitor({ text, lang, s, toolLinkHref, facebookToolLinkHref, priority, only, instagramView, setInstagramView, facebookView, setFacebookView, image, mediaKind = 'image', showFolded = true }: Props) {
   const m = s.meta;
   const nf = new Intl.NumberFormat(lang);
   const author = previewAuthor(s.common);
@@ -154,7 +156,7 @@ export function MetaMonitor({ text, lang, s, toolLinkHref, facebookToolLinkHref,
                 Instagram crops to its 1.91:1 → 3:4 band. */}
             {image && (
               <div class="-mx-4 mt-3">
-                <FeedImage src={image} minRatio={IMAGE_RATIOS.instagram.min} maxRatio={IMAGE_RATIOS.instagram.max} />
+                <FeedImage src={image} kind={mediaKind} minRatio={IMAGE_RATIOS.instagram.min} maxRatio={IMAGE_RATIOS.instagram.max} />
               </div>
             )}
             {/* Faint Instagram action row — like / comment / share. */}
@@ -298,7 +300,7 @@ export function MetaMonitor({ text, lang, s, toolLinkHref, facebookToolLinkHref,
             {/* Full-bleed image below the caption; tall portraits crop to 4:5. */}
             {image && (
               <div class="-mx-4 mt-3">
-                <FeedImage src={image} maxRatio={IMAGE_RATIOS.facebook.max} />
+                <FeedImage src={image} kind={mediaKind} maxRatio={IMAGE_RATIOS.facebook.max} />
               </div>
             )}
 

@@ -811,9 +811,9 @@ export const de: Translations = {
       statusLine: 'Echtzeit-Analyse ist aktiv',
     },
     imageUpload: {
-      add: 'Bild hinzufügen',
-      replace: 'Bild ersetzen',
-      remove: 'Bild entfernen',
+      add: 'Medien hinzufügen',
+      replace: 'Medien ersetzen',
+      remove: 'Medien entfernen',
       hint: 'Nur Vorschau – wird nie hochgeladen oder gespeichert. Beim Neuladen weg.',
     },
     aiImprove: {
