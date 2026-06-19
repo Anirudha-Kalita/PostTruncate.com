@@ -213,7 +213,7 @@ export const da: Translations = {
 
   faq: {
     eyebrow: 'FAQ',
-    title: 'Spørgsmål, besvaret.',
+    title: 'Ofte stillede spørgsmål',
     viewAll: 'Se alle FAQ',
     items: [
       {

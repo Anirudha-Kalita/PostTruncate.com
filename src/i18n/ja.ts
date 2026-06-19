@@ -213,7 +213,7 @@ export const ja: Translations = {
 
   faq: {
     eyebrow: 'よくある質問',
-    title: '疑問にお答えします。',
+    title: 'よくある質問',
     viewAll: 'すべてのFAQを見る',
     items: [
       {

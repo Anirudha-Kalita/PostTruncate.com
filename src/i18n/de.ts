@@ -214,7 +214,7 @@ export const de: Translations = {
 
   faq: {
     eyebrow: 'FAQ',
-    title: 'Fragen, beantwortet.',
+    title: 'Häufig gestellte Fragen',
     viewAll: 'Alle FAQs ansehen',
     items: [
       {

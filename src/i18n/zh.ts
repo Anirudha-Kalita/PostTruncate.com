@@ -213,7 +213,7 @@ export const zh: Translations = {
 
   faq: {
     eyebrow: '常见问题',
-    title: '问题，逐一解答。',
+    title: '常见问题',
     viewAll: '查看全部常见问题',
     items: [
       {

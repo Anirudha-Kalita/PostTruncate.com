@@ -213,7 +213,7 @@ export const nl: Translations = {
 
   faq: {
     eyebrow: 'FAQ',
-    title: 'Vragen, beantwoord.',
+    title: 'Veelgestelde vragen',
     viewAll: 'Bekijk alle FAQ’s',
     items: [
       {

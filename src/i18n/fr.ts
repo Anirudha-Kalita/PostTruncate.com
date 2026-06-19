@@ -213,7 +213,7 @@ export const fr: Translations = {
 
   faq: {
     eyebrow: 'FAQ',
-    title: 'Vos questions, nos réponses.',
+    title: 'Foire aux questions',
     viewAll: 'Voir toutes les FAQ',
     items: [
       {
