@@ -84,6 +84,7 @@ export const pt: Translations = {
   images: {
     logoAlt: 'Logotipo PostTruncate',
     platformLogo: 'Logotipo do {platform}',
+    authorAlt: 'Anirudha, programador do PostTruncate',
   },
 
   breadcrumbs: {
@@ -497,9 +498,16 @@ export const pt: Translations = {
           ],
         },
         {
-          heading: 'Porque a criámos',
+          heading: 'Porque o criei',
           paragraphs: [
-            'A maioria dos contadores de caracteres dá-lhe apenas um número. Os criadores precisam de mais do que isso — precisam de saber <strong>onde</strong> o texto é cortado em cada rede, porque é aí que o gancho vive ou morre. Quisemos um único espaço de trabalho que simulasse todas as plataformas em simultâneo, funcionasse instantaneamente e respeitasse por completo a sua privacidade.',
+            'Sou o Anirudha, um programador independente sediado na Índia, com um MCA pela Dibrugarh University, no Assam. Como a maioria das pessoas que publicam com regularidade, cansei-me de descobrir, depois de publicar, que metade da minha publicação no LinkedIn estava escondida atrás de «ver mais», ou que um tweet que pensava caber se tinha dividido silenciosamente numa thread.',
+            'A maioria dos contadores de caracteres dá-lhe apenas um número. Os criadores precisam de mais do que isso — precisam de saber exatamente onde o texto é cortado em cada rede, porque é aí que o gancho vive ou morre. Por isso criei um único espaço de trabalho que simula todas as plataformas em simultâneo, funciona instantaneamente e respeita por completo a sua privacidade.',
+          ],
+        },
+        {
+          heading: 'Como se mantém rigoroso',
+          paragraphs: [
+            'Os limites das plataformas mudam sem grande aviso. Verifico-os comparando com a forma como cada plataforma apresenta de facto as publicações e atualizo os guias aqui sempre que algo muda. Encontrou algo desatualizado? A página de contacto chega diretamente a mim.',
           ],
         },
         {

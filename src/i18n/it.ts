@@ -84,6 +84,7 @@ export const it: Translations = {
   images: {
     logoAlt: 'Logo PostTruncate',
     platformLogo: 'Logo {platform}',
+    authorAlt: 'Anirudha, sviluppatore di PostTruncate',
   },
 
   breadcrumbs: {
@@ -483,29 +484,36 @@ export const it: Translations = {
     },
 
     about: {
-      title: 'Informazioni su PostTruncate',
+      title: 'Chi siamo — PostTruncate',
       description:
-        'PostTruncate è uno strumento gratuito e attento alla privacy che mostra ai creator esattamente dove ogni piattaforma social taglia il loro testo — prima di premere pubblica.',
+        'PostTruncate è uno strumento gratuito e orientato alla privacy che mostra ai creator esattamente dove ogni piattaforma social tronca il loro testo, prima di pubblicare.',
       intro:
-        'PostTruncate esiste per un motivo: la prima riga del tuo post è l’unica riga che la maggior parte delle persone legge, e ogni piattaforma la taglia in un punto diverso. Noi rendiamo visibili quei limiti invisibili.',
+        'PostTruncate esiste per un solo motivo: la prima riga del tuo post è l\u2019unica che la maggior parte delle persone legge, e ogni piattaforma la taglia in un posto diverso. Rendiamo visibili questi limiti invisibili.',
       sections: [
         {
           heading: 'Cosa fa',
           paragraphs: [
-            'Scrivi o incolla una bozza una sola volta, e PostTruncate la mostra nel modo in cui <strong>LinkedIn, X, Threads, Instagram e Facebook</strong> la renderanno davvero — la soglia “…altro”, la suddivisione del thread a 280 caratteri, il peso dei link a 23 caratteri, il tetto dei 5 hashtag. Vedi esattamente cosa sopravvive sopra la soglia prima di decidere di pubblicare.',
-            'Individua inoltre i problemi silenziosi che riducono la tua portata: i caratteri invisibili a larghezza zero che mandano in tilt conteggi e screen reader, e i “font fantasiosi” pseudo-Unicode che sembrano stilizzati ma sono illeggibili per le tecnologie assistive.',
+            'Scrivi o incolla una bozza una sola volta e PostTruncate la renderizza esattamente come faranno <strong>LinkedIn, X, Threads, Instagram e Facebook</strong> \u2014 il taglio \u00ab\u2026vedi altro\u00bb, la divisione in thread a 280 caratteri, la ponderazione dei link a 23 caratteri, il limite di 5 hashtag. Vedi esattamente cosa sopravvive sopra il taglio prima di impegnarti a pubblicare.',
+            'Rileva anche i problemi silenziosi che riducono la tua portata: caratteri invisibili a larghezza zero che rompono i contatori e gli screen reader, e \u00abcaratteri decorativi\u00bb pseudo-Unicode che sembrano stilizzati ma sono illeggibili per le tecnologie assistive.',
           ],
         },
         {
-          heading: 'Perché l’abbiamo creato',
+          heading: 'Perché l\u2019ho creato',
           paragraphs: [
-            'La maggior parte dei contatori di caratteri ti dà un solo numero. I creator hanno bisogno di più di questo: hanno bisogno di sapere <strong>dove</strong> il testo viene tagliato su ogni rete, perché è lì che il gancio vive o muore. Volevamo un unico spazio di lavoro che simulasse ogni piattaforma in una volta sola, funzionasse all’istante e rispettasse completamente la tua privacy.',
+            'Sono Anirudha, uno sviluppatore indipendente con base in India, con un MCA dell\u2019Università di Dibrugarh, in Assam. Come la maggior parte delle persone che pubblicano regolarmente, mi sono stancato di scoprire dopo la pubblicazione che metà del mio post LinkedIn era nascosta dietro \u00abvedi altro\u00bb, o che un tweet che credevo adatto si era silenziosamente diviso in un thread.',
+            'La maggior parte dei contatori di caratteri ti dà un solo numero. I creator hanno bisogno di più: devono sapere esattamente dove il testo viene tagliato su ogni rete, perché è lì che l\u2019hook vive o muore. Così ho creato uno spazio di lavoro unico che simula ogni piattaforma in una volta sola, funziona istantaneamente e rispetta completamente la tua privacy.',
           ],
         },
         {
-          heading: 'Costruito con la privacy al primo posto',
+          heading: 'Come rimane aggiornato',
           paragraphs: [
-            'Tutto gira nel tuo browser. Il tuo testo non viene mai caricato, non ci sono account e lo strumento è gratuito da usare. È sostenuto da annunci discreti in spazi riservati che non spostano mai il layout. Leggi tutti i dettagli nella nostra <a href="../privacy/"><strong>Informativa sulla privacy</strong></a>.',
+            'I limiti delle piattaforme cambiano senza molto preavviso. Li verifico confrontandoli con il modo in cui ogni piattaforma renderizza realmente i post e aggiorno le guide qui quando qualcosa cambia. Hai trovato qualcosa di obsoleto? La pagina contatti arriva direttamente a me.',
+          ],
+        },
+        {
+          heading: 'Progettato con la privacy al primo posto',
+          paragraphs: [
+            'Tutto funziona nel tuo browser. Il tuo testo non viene mai caricato, non ci sono account e lo strumento è gratuito. È supportato da annunci discreti in spazi riservati che non spostano mai il layout. Leggi tutti i dettagli nella nostra <a href="../privacy/"><strong>Informativa sulla privacy</strong></a>.',
           ],
         },
       ],

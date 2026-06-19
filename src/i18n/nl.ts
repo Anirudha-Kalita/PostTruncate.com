@@ -84,6 +84,7 @@ export const nl: Translations = {
   images: {
     logoAlt: 'PostTruncate-logo',
     platformLogo: '{platform}-logo',
+    authorAlt: 'Anirudha, ontwikkelaar van PostTruncate',
   },
 
   breadcrumbs: {
@@ -485,27 +486,34 @@ export const nl: Translations = {
     about: {
       title: 'Over PostTruncate',
       description:
-        'PostTruncate is een gratis, privacy-first tool die creators precies laat zien waar elk social platform hun tekst afkapt — voordat ze op plaatsen drukken.',
+        'PostTruncate is een gratis, privacygerichte tool die makers precies laat zien waar elk sociaal platform hun tekst afkapt — voordat ze publiceren.',
       intro:
-        'PostTruncate bestaat om één reden: de eerste regel van je bericht is de enige regel die de meeste mensen lezen, en elk platform kapt die op een andere plek af. Wij maken die onzichtbare limieten zichtbaar.',
+        'PostTruncate bestaat om één reden: de eerste regel van je bericht is de enige die de meeste mensen lezen, en elk platform kapt hem op een andere plek af. Wij maken die onzichtbare limieten zichtbaar.',
       sections: [
         {
           heading: 'Wat het doet',
           paragraphs: [
-            'Schrijf of plak één keer een concept en PostTruncate geeft het weer zoals <strong>LinkedIn, X, Threads, Instagram en Facebook</strong> dat echt zullen doen — de “…meer weergeven”-vouw, de threadsplitsing bij 280 tekens, de linkweging van 23 tekens, het plafond van 5 hashtags. Je ziet precies wat boven de vouw overleeft voordat je besluit te publiceren.',
-            'Het spoort ook de stille problemen op die je bereik verkleinen: onzichtbare nulbreedte-tekens die tellingen en schermlezers verstoren, en pseudo-Unicode-“fancy fonts” die er opgemaakt uitzien maar onleesbaar zijn voor hulptechnologie.',
+            'Schrijf of plak een concept één keer, en PostTruncate geeft het weer zoals <strong>LinkedIn, X, Threads, Instagram en Facebook</strong> dat daadwerkelijk doen — de \u201e\u2026meer weergeven\u201d-vouw, de threadsplitsing bij 280 tekens, de weging van 23 tekens per link, het plafond van 5 hashtags. Je ziet precies wat boven de vouw overleeft voordat je je vastlegt op publiceren.',
+            'Het signaleert ook de stille problemen die je bereik verkleinen: onzichtbare tekens met nulbreedte die tellingen en schermlezers verstoren, en pseudo-Unicode \u201esierlettertypen\u201d die opgemaakt lijken maar onleesbaar zijn voor hulptechnologie.',
           ],
         },
         {
-          heading: 'Waarom we het hebben gebouwd',
+          heading: 'Waarom ik het heb gebouwd',
           paragraphs: [
-            'De meeste tekentellers geven je één getal. Creators hebben meer nodig — ze moeten weten <strong>waar</strong> de tekst op elk netwerk wordt afgekapt, want dat is waar de hook leeft of sterft. We wilden één werkruimte die elk platform tegelijk simuleert, direct werkt en je privacy volledig respecteert.',
+            'Ik ben Anirudha, een soloontwikkelaar uit India met een MCA van de Dibrugarh University in Assam. Net als de meeste mensen die regelmatig posten, was ik het zat om pas na het publiceren te ontdekken dat de helft van mijn LinkedIn-bericht verborgen zat achter \u201emeer weergeven\u201d, of dat een tweet waarvan ik dacht dat hij paste stilletjes was opgesplitst in een thread.',
+            'De meeste tekentellers geven je één getal. Makers hebben meer nodig — ze moeten precies weten waar de tekst op elk netwerk wordt afgekapt, want daar leeft of sterft de hook. Dus bouwde ik één werkruimte die elk platform tegelijk simuleert, direct werkt en je privacy volledig respecteert.',
           ],
         },
         {
-          heading: 'Privacy-first gebouwd',
+          heading: 'Hoe het accuraat blijft',
           paragraphs: [
-            'Alles draait in je browser. Je tekst wordt nooit geüpload, er zijn geen accounts en de tool is gratis te gebruiken. Hij wordt ondersteund door onopvallende advertenties op gereserveerde plekken die de lay-out nooit verschuiven. Lees alle details in ons <a href="../privacy/"><strong>Privacybeleid</strong></a>.',
+            'Platformlimieten veranderen zonder veel aankondiging. Ik controleer ze aan de hand van hoe elk platform berichten daadwerkelijk weergeeft en werk de gidsen hier bij wanneer er iets verandert. Iets verouderds gevonden? De contactpagina komt rechtstreeks bij mij terecht.',
+          ],
+        },
+        {
+          heading: 'Gebouwd met privacy voorop',
+          paragraphs: [
+            'Alles draait in je browser. Je tekst wordt nooit geüpload, er zijn geen accounts en de tool is gratis te gebruiken. Het wordt ondersteund door onopvallende advertenties in gereserveerde ruimtes die de lay-out nooit verschuiven. Lees alle details in ons <a href="../privacy/"><strong>Privacybeleid</strong></a>.',
           ],
         },
       ],

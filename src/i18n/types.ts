@@ -888,6 +888,8 @@ export interface Translations {
     logoAlt: string;
     /** "{platform}" → localized platform name, e.g. "X / Twitter logo". */
     platformLogo: string;
+    /** Alt text for the circular author photo on the About page. */
+    authorAlt: string;
   };
   /** Labels for BreadcrumbList JSON-LD on tool sub-pages. */
   breadcrumbs: {

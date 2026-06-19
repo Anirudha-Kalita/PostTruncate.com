@@ -134,6 +134,14 @@ const ogImageUrl = data.ogImage
   ? new URL(data.ogImage, site).href
   : undefined;
 
+// Byline: map the legacy "PostTruncate Team" placeholder to the site author.
+// Older posts keep whatever author they stored; only the team default remaps.
+// When the author is the site owner, the name links to the localized About
+// page and shows the circular avatar; guest authors stay plain text.
+const authorName = data.author === 'PostTruncate Team' ? 'Anirudha' : data.author;
+const isSiteAuthor = authorName === 'Anirudha';
+const authorAboutUrl = `/${lang}/${locale.slug}/about/`;
+
 // Cross-link to the matching tool page (when not the generic bucket). Platform
 // guides live at /[lang]/<slug>/; the Tools suite (SMS, Google SERP, …) lives
 // under /[lang]/tools/<slug>/, so resolve the right namespace per source array.
@@ -192,7 +200,7 @@ const { Content } = await render(post);
     name={data.title}
     description={data.description}
     inLanguage={lang}
-    author={data.author}
+    author={authorName}
     datePublished={published}
     dateModified={modified}
     image={ogImageUrl}
@@ -225,7 +233,22 @@ const { Content } = await render(post);
       <h1 class="post__title">{data.title}</h1>
       {data.subtitle && <p class="post__subtitle">{data.subtitle}</p>}
       <p class="post__meta">
-        <span>{s.byLabel} {data.author}</span>
+        {isSiteAuthor ? (
+          <a class="post__byline" href={authorAboutUrl}>
+            <img
+              class="post__byline-avatar"
+              src="/author-anirudha.webp"
+              alt=""
+              width="24"
+              height="24"
+              loading="lazy"
+              decoding="async"
+            />
+            <span>{s.byLabel} {authorName}</span>
+          </a>
+        ) : (
+          <span>{s.byLabel} {authorName}</span>
+        )}
         <span aria-hidden="true">·</span>
         <span>
           {s.publishedLabel}
@@ -412,6 +435,26 @@ const { Content } = await render(post);
     gap: 8px;
     font-size: 14px;
     color: var(--color-mute);
+  }
+  /* Author byline — small circular avatar + name linking to the About page.
+     Uses theme tokens so it stays correct in light and dark mode. */
+  .post__byline {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--color-mute);
+    text-decoration: none;
+    transition: color 0.15s ease;
+  }
+  .post__byline:hover {
+    color: var(--color-ink);
+  }
+  .post__byline-avatar {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
   }
   /* Featured/hero image — the post's ogImage, shown above the body when set.
      Mirrors the in-body image treatment (full-measure, rounded, soft shadow). */

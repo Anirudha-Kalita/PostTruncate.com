@@ -84,6 +84,7 @@ export const es: Translations = {
   images: {
     logoAlt: 'Logotipo de PostTruncate',
     platformLogo: 'Logotipo de {platform}',
+    authorAlt: 'Anirudha, desarrollador de PostTruncate',
   },
 
   breadcrumbs: {
@@ -483,29 +484,36 @@ export const es: Translations = {
     },
 
     about: {
-      title: 'Acerca de PostTruncate',
+      title: 'Sobre PostTruncate',
       description:
-        'PostTruncate es una herramienta gratuita y centrada en la privacidad que muestra a los creadores exactamente dónde cada plataforma social corta su texto, antes de pulsar publicar.',
+        'PostTruncate es una herramienta gratuita y orientada a la privacidad que muestra a los creadores exactamente dónde cada plataforma social corta su texto, antes de publicar.',
       intro:
-        'PostTruncate existe por una razón: la primera línea de tu publicación es la única que lee la mayoría de la gente, y cada plataforma la corta en un lugar diferente. Nosotros hacemos visibles esos límites invisibles.',
+        'PostTruncate existe por una razón: la primera línea de tu publicación es la única que lee la mayoría de las personas, y cada plataforma la corta en un lugar diferente. Hacemos visibles esos límites invisibles.',
       sections: [
         {
           heading: 'Qué hace',
           paragraphs: [
-            'Escribe o pega un borrador una vez, y PostTruncate lo renderiza tal como lo harán realmente <strong>LinkedIn, X, Threads, Instagram y Facebook</strong>: el pliegue «…ver más», la división de hilos de 280 caracteres, el peso de 23 caracteres de los enlaces, el tope de 5 hashtags. Ves exactamente qué sobrevive por encima del pliegue antes de comprometerte a publicar.',
-            'También detecta los problemas silenciosos que reducen tu alcance: los caracteres invisibles de ancho cero que rompen los recuentos y los lectores de pantalla, y las «fuentes elegantes» de pseudo-Unicode que parecen estilizadas pero son ilegibles para la tecnología de asistencia.',
+            'Escribe o pega un borrador una vez, y PostTruncate lo renderiza tal como lo harán realmente <strong>LinkedIn, X, Threads, Instagram y Facebook</strong>: el pliegue \u00ab\u2026ver m\u00e1s\u00bb, la división de hilos a 280 caracteres, el peso de 23 caracteres de los enlaces, el tope de 5 hashtags. Ves exactamente qué sobrevive por encima del pliegue antes de comprometerte a publicar.',
+            'También detecta los problemas silenciosos que reducen tu alcance: caracteres invisibles de ancho cero que rompen los contadores y los lectores de pantalla, y \u00abfuentes decorativas\u00bb de pseudo-Unicode que parecen estilizadas pero son ilegibles para la tecnología de asistencia.',
           ],
         },
         {
-          heading: 'Por qué lo construimos',
+          heading: 'Por qué lo construí',
           paragraphs: [
-            'La mayoría de los contadores de caracteres te dan un solo número. Los creadores necesitan más que eso: necesitan saber <strong>dónde</strong> se corta el texto en cada red, porque ahí es donde el gancho vive o muere. Queríamos un único espacio de trabajo que simule todas las plataformas a la vez, se ejecute al instante y respete tu privacidad por completo.',
+            'Soy Anirudha, un desarrollador independiente de India con una maestría en Ciencias de la Computación (MCA) de la Universidad de Dibrugarh, Assam. Como la mayoría de las personas que publican con regularidad, me cansé de descubrir después de publicar que la mitad de mi publicación de LinkedIn estaba oculta tras \u00abver m\u00e1s\u00bb, o que un tweet que creía que encajaba se había dividido silenciosamente en un hilo.',
+            'La mayoría de los contadores de caracteres te dan un solo número. Los creadores necesitan más: necesitan saber exactamente dónde se corta el texto en cada red, porque ahí es donde el gancho vive o muere. Así que construí un espacio de trabajo que simula cada plataforma a la vez, funciona al instante y respeta tu privacidad por completo.',
+          ],
+        },
+        {
+          heading: 'Cómo se mantiene preciso',
+          paragraphs: [
+            'Los límites de las plataformas cambian sin mucho aviso. Los verifico comparándolos con cómo cada plataforma renderiza las publicaciones realmente y actualizo las guías aquí cuando algo cambia. ¿Encontraste algo desactualizado? La página de contacto va directamente a mí.',
           ],
         },
         {
           heading: 'Construido con la privacidad como prioridad',
           paragraphs: [
-            'Todo se ejecuta en tu navegador. Tu texto nunca se sube, no hay cuentas y la herramienta es gratuita. Se financia con anuncios discretos en espacios reservados que nunca desplazan el diseño. Lee todos los detalles en nuestra <a href="../privacy/"><strong>Política de privacidad</strong></a>.',
+            'Todo funciona en tu navegador. Tu texto nunca se sube, no hay cuentas y la herramienta es gratuita. Está respaldada por anuncios discretos en espacios reservados que nunca desplazan el diseño. Lee todos los detalles en nuestra <a href="../privacy/"><strong>Política de privacidad</strong></a>.',
           ],
         },
       ],

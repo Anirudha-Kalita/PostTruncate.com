@@ -84,6 +84,7 @@ export const en: Translations = {
   images: {
     logoAlt: 'PostTruncate logo',
     platformLogo: '{platform} logo',
+    authorAlt: 'Anirudha, developer of PostTruncate',
   },
 
   breadcrumbs: {
@@ -497,9 +498,16 @@ export const en: Translations = {
           ],
         },
         {
-          heading: 'Why we built it',
+          heading: 'Why I built it',
           paragraphs: [
-            'Most character counters tell you a single number. Creators need more than that — they need to know <strong>where</strong> the text gets cut on each network, because that’s where the hook lives or dies. We wanted one workspace that simulates every platform at once, runs instantly, and respects your privacy completely.',
+            "I’m Anirudha, a solo developer based in India with an MCA from Dibrugarh University, Assam. Like most people who post regularly, I got tired of finding out after publishing that half my LinkedIn post was hidden behind “see more,” or that a tweet I thought fit had silently split into a thread.",
+            'Most character counters tell you a single number. Creators need more than that — they need to know exactly where the text gets cut on each network, because that’s where the hook lives or dies. So I built one workspace that simulates every platform at once, runs instantly, and respects your privacy completely.',
+          ],
+        },
+        {
+          heading: 'How it stays accurate',
+          paragraphs: [
+            'Platform limits shift without much notice. I check them against how each platform actually renders posts and update the guides here when something changes. Found something out of date? The contact page goes straight to me.',
           ],
         },
         {

@@ -21,7 +21,7 @@
 //   • description  ← frontmatter description/excerpt/summary → first paragraph
 //   • publishDate  ← frontmatter date → file mtime → today (YYYY-MM-DD)
 //   • locale       ← "en"   (this collection folder is en/)
-//   • author       ← frontmatter author → "PostTruncate Team"
+//   • author       ← frontmatter author → "Anirudha"
 //   • draft        ← true   (forced, so you review before publishing)
 //   • translationKey ← slug
 // Optional fields (subtitle, updatedDate, relatedPlatform, ogImage) are carried
@@ -38,7 +38,7 @@ const SUBTITLE_MAX = 200;
 const RELATED_PLATFORMS = ['twitter', 'instagram', 'linkedin', 'facebook', 'sms', 'threads', 'general'];
 const SLUG_RE = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 const LOCALE = 'en';
-const DEFAULT_AUTHOR = 'PostTruncate Team';
+const DEFAULT_AUTHOR = 'Anirudha';
 
 // ── args ───────────────────────────────────────────────────────────────────
 const [, , inDirArg, outDirArg] = process.argv;

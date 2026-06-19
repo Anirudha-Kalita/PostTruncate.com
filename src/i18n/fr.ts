@@ -84,6 +84,7 @@ export const fr: Translations = {
   images: {
     logoAlt: 'Logo PostTruncate',
     platformLogo: 'Logo {platform}',
+    authorAlt: 'Anirudha, développeur de PostTruncate',
   },
 
   breadcrumbs: {
@@ -485,27 +486,34 @@ export const fr: Translations = {
     about: {
       title: 'À propos de PostTruncate',
       description:
-        'PostTruncate est un outil gratuit et respectueux de la vie privée qui montre aux créateurs exactement où chaque plateforme sociale coupe leur texte — avant qu’ils ne publient.',
+        'PostTruncate est un outil gratuit axé sur la confidentialité qui montre aux créateurs exactement où chaque plateforme sociale coupe leur texte — avant de publier.',
       intro:
-        'PostTruncate existe pour une seule raison : la première ligne de votre publication est la seule que la plupart des gens lisent, et chaque plateforme la coupe à un endroit différent. Nous rendons visibles ces limites invisibles.',
+        'PostTruncate existe pour une seule raison : la première ligne de votre publication est la seule que la plupart des gens lisent, et chaque plateforme la coupe à un endroit différent. Nous rendons ces limites invisibles visibles.',
       sections: [
         {
           heading: 'Ce qu’il fait',
           paragraphs: [
-            'Écrivez ou collez un brouillon une seule fois, et PostTruncate l’affiche tel que <strong>LinkedIn, X, Threads, Instagram et Facebook</strong> le feront réellement — le pli « …voir plus », la découpe en fil à 280 caractères, la pondération des liens à 23 caractères, le plafond de 5 hashtags. Vous voyez exactement ce qui survit au-dessus du pli avant de vous engager à publier.',
-            'Il repère aussi les problèmes discrets qui réduisent votre portée : les caractères invisibles de largeur nulle qui faussent les décomptes et les lecteurs d’écran, et les « polices fantaisie » en pseudo-Unicode qui paraissent stylisées mais sont illisibles pour les technologies d’assistance.',
+            'Rédigez ou collez un brouillon une seule fois, et PostTruncate le rend tel que <strong>LinkedIn, X, Threads, Instagram et Facebook</strong> le feront réellement — le repli «…voir plus», la division en fils à 280 caractères, la pondération des liens à 23 caractères, le plafond de 5 hashtags. Vous voyez exactement ce qui survit au-dessus du repli avant de vous engager à publier.',
+            'Il détecte aussi les problèmes silencieux qui réduisent votre portée : les caractères invisibles à largeur nulle qui faussent les comptages et les lecteurs d’écran, et les «polices décoratives» pseudo-Unicode qui semblent stylisées mais sont illisibles pour les technologies d’assistance.',
           ],
         },
         {
-          heading: 'Pourquoi nous l’avons créé',
+          heading: 'Pourquoi je l’ai créé',
           paragraphs: [
-            'La plupart des compteurs de caractères vous donnent un seul chiffre. Les créateurs ont besoin de plus que cela — ils doivent savoir <strong>où</strong> le texte est coupé sur chaque réseau, car c’est là que l’accroche vit ou meurt. Nous voulions un seul espace de travail qui simule toutes les plateformes à la fois, s’exécute instantanément et respecte totalement votre vie privée.',
+            'Je suis Anirudha, un développeur indépendant basé en Inde, titulaire d’un MCA de l’Université de Dibrugarh, en Assam. Comme la plupart des personnes qui publient régulièrement, j’en avais assez de découvrir après publication que la moitié de mon article LinkedIn était cachée derrière «voir plus», ou qu’un tweet que je croyais adapté s’était silencieusement divisé en fil.',
+            'La plupart des compteurs de caractères vous donnent un seul chiffre. Les créateurs ont besoin de plus : ils doivent savoir exactement où le texte est coupé sur chaque réseau, car c’est là que l’accroche vit ou meurt. J’ai donc créé un espace de travail unique qui simule chaque plateforme à la fois, fonctionne instantanément et respecte entièrement votre vie privée.',
           ],
         },
         {
-          heading: 'Conçu selon le principe de confidentialité avant tout',
+          heading: 'Comment il reste précis',
           paragraphs: [
-            'Tout s’exécute dans votre navigateur. Votre texte n’est jamais téléversé, il n’y a aucun compte, et l’outil est gratuit. Il est financé par des publicités discrètes dans des espaces réservés qui ne décalent jamais la mise en page. Lisez tous les détails dans notre <a href="../privacy/"><strong>Politique de confidentialité</strong></a>.',
+            'Les limites des plateformes changent sans grand préavis. Je les vérifie en comparant avec la façon dont chaque plateforme rend réellement les publications et je mets à jour les guides ici quand quelque chose change. Vous avez trouvé quelque chose d’obsolète ? La page de contact me parvient directement.',
+          ],
+        },
+        {
+          heading: 'Conçu en priorité pour la confidentialité',
+          paragraphs: [
+            'Tout fonctionne dans votre navigateur. Votre texte n’est jamais téléversé, il n’y a pas de comptes, et l’outil est gratuit. Il est financé par des publicités discrètes dans des espaces réservés qui ne déplacent jamais la mise en page. Lisez tous les détails dans notre <a href="../privacy/"><strong>Politique de confidentialité</strong></a>.',
           ],
         },
       ],

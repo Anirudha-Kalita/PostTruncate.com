@@ -1,4 +1,4 @@
-import type { Translations } from './types';
+﻿import type { Translations } from './types';
 
 // ──────────────────────────────────────────────────────────────────────────
 // German (de) — MACHINE-GENERATED TRANSLATION. Needs human review before
@@ -85,6 +85,7 @@ export const de: Translations = {
   images: {
     logoAlt: 'PostTruncate-Logo',
     platformLogo: '{platform}-Logo',
+    authorAlt: 'Anirudha, Entwickler von PostTruncate',
   },
 
   breadcrumbs: {
@@ -493,14 +494,21 @@ export const de: Translations = {
         {
           heading: 'Was es tut',
           paragraphs: [
-            'Schreib oder füge einen Entwurf einmal ein, und PostTruncate stellt ihn so dar, wie <strong>LinkedIn, X, Threads, Instagram und Facebook</strong> es tatsächlich tun werden — die „…mehr anzeigen“-Falz, die 280-Zeichen-Thread-Aufteilung, die 23-Zeichen-Link-Gewichtung, die 5-Hashtag-Obergrenze. Du siehst genau, was über der Falz überlebt, bevor du dich zur Veröffentlichung entscheidest.',
-            'Es erkennt auch die stillen Probleme, die deine Reichweite schrumpfen lassen: unsichtbare nullbreite Zeichen, die Zählungen und Screenreader stören, und pseudo-Unicode-„Fancy-Schriften“, die gestaltet aussehen, aber für assistive Technik unlesbar sind.',
+            'Schreib oder füge einen Entwurf einmal ein, und PostTruncate stellt ihn so dar, wie <strong>LinkedIn, X, Threads, Instagram und Facebook</strong> es tatsächlich tun werden — die \u201e\u2026mehr anzeigen\u201c-Falz, die 280-Zeichen-Thread-Aufteilung, die 23-Zeichen-Link-Gewichtung, die 5-Hashtag-Obergrenze. Du siehst genau, was über der Falz überlebt, bevor du dich zur Veröffentlichung entscheidest.',
+            'Es erkennt auch die stillen Probleme, die deine Reichweite schrumpfen lassen: unsichtbare nullbreite Zeichen, die Zählungen und Screenreader stören, und pseudo-Unicode-\u201eFancy-Schriften\u201c, die gestaltet aussehen, aber für assistive Technik unlesbar sind.',
           ],
         },
         {
-          heading: 'Warum wir es gebaut haben',
+          heading: 'Warum ich es gebaut habe',
           paragraphs: [
-            'Die meisten Zeichenzähler nennen dir eine einzige Zahl. Creator brauchen mehr als das — sie müssen wissen, <strong>wo</strong> der Text in jedem Netzwerk abgeschnitten wird, denn dort lebt oder stirbt der Aufhänger. Wir wollten einen Arbeitsbereich, der jede Plattform auf einmal simuliert, sofort läuft und deine Privatsphäre vollständig respektiert.',
+            'Ich bin Anirudha, ein Einzelentwickler aus Indien mit einem MCA-Abschluss der Dibrugarh University, Assam. Wie die meisten Menschen, die regelmäßig posten, wurde ich es leid, erst nach dem Veröffentlichen festzustellen, dass die Hälfte meines LinkedIn-Beitrags hinter \u201emehr anzeigen\u201c verschwunden war oder dass ein Tweet, der zu passen schien, sich stillschweigend in einen Thread aufgeteilt hatte.',
+            'Die meisten Zeichenzähler nennen dir eine einzige Zahl. Creator brauchen mehr — sie müssen genau wissen, wo der Text in jedem Netzwerk abgeschnitten wird, denn dort lebt oder stirbt der Aufhänger. Also baute ich einen Arbeitsbereich, der jede Plattform auf einmal simuliert, sofort läuft und deine Privatsphäre vollständig respektiert.',
+          ],
+        },
+        {
+          heading: 'Wie es aktuell bleibt',
+          paragraphs: [
+            'Plattform-Limits ändern sich ohne viel Vorankündigung. Ich prüfe sie daran, wie jede Plattform Beiträge tatsächlich rendert, und aktualisiere die Leitfäden hier, wenn sich etwas ändert. Etwas Veraltetes entdeckt? Die Kontaktseite geht direkt zu mir.',
           ],
         },
         {

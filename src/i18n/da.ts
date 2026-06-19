@@ -1,4 +1,4 @@
-import type { Translations } from './types';
+﻿import type { Translations } from './types';
 
 // ──────────────────────────────────────────────────────────────────────────
 // Dansk — maskinoversættelse. Skal gennemgås af et menneske før lancering.
@@ -84,6 +84,7 @@ export const da: Translations = {
   images: {
     logoAlt: 'PostTruncate-logo',
     platformLogo: '{platform}-logo',
+    authorAlt: 'Anirudha, udvikler af PostTruncate',
   },
 
   breadcrumbs: {
@@ -485,27 +486,34 @@ export const da: Translations = {
     about: {
       title: 'Om PostTruncate',
       description:
-        'PostTruncate er et gratis værktøj med privatliv først, der viser skabere præcis, hvor hver social platform klipper deres tekst over — før de trykker på publicer.',
+        'PostTruncate er et gratis, privatlivsorienteret værktøj, der viser skabere præcis, hvor enhver social platform afskærer deres tekst — inden de trykker på del.',
       intro:
-        'PostTruncate findes af én grund: den første linje i dit opslag er den eneste linje, de fleste læser, og hver platform klipper den over et forskelligt sted. Vi gør de usynlige grænser synlige.',
+        'PostTruncate eksisterer af én grund: den første linje i dit opslag er den eneste linje, de fleste læser, og enhver platform afskærer den et andet sted. Vi gør de usynlige grænser synlige.',
       sections: [
         {
           heading: 'Hvad det gør',
           paragraphs: [
-            'Skriv eller indsæt et udkast én gang, og PostTruncate gengiver det, som <strong>LinkedIn, X, Threads, Instagram og Facebook</strong> rent faktisk vil — “…se mere”-folden, trådopdelingen ved 280 tegn, link-vægtningen på 23 tegn, hashtag-loftet på 5. Du ser præcis, hvad der overlever over folden, før du forpligter dig til at publicere.',
-            'Det fanger også de stille problemer, der skrumper din rækkevidde: usynlige nulbredde-tegn, der bryder tællinger og skærmlæsere, og pseudo-Unicode-“fancy skrifttyper”, der ser stiliserede ud, men er ulæselige for hjælpeteknologi.',
+            'Skriv eller indsæt et udkast én gang, og PostTruncate gengiver det, som <strong>LinkedIn, X, Threads, Instagram og Facebook</strong> rent faktisk vil — \u201e\u2026se mere\u201c-folden, trådopdelingen ved 280 tegn, link-vægtningen på 23 tegn, hashtag-loftet på 5. Du ser præcis, hvad der overlever over folden, før du forpligter dig til at publicere.',
+            'Det fanger også de stille problemer, der skrumper din rækkevidde: usynlige nul-bredde-tegn, der bryder tæller og skærmlæsere, og pseudo-Unicode-\u201esmarte skrifttyper\u201c, der ser stilede ud, men er ulæselige for hjælpeteknologi.',
           ],
         },
         {
-          heading: 'Hvorfor vi byggede det',
+          heading: 'Hvorfor jeg byggede det',
           paragraphs: [
-            'De fleste tegntællere giver dig blot ét tal. Skabere har brug for mere end det — de har brug for at vide, <strong>hvor</strong> teksten bliver klippet over på hvert netværk, for det er der, hooken lever eller dør. Vi ville have ét arbejdsområde, der simulerer alle platforme på én gang, kører øjeblikkeligt og respekterer dit privatliv fuldstændigt.',
+            'Jeg er Anirudha, en solo-udvikler fra Indien med en MCA fra Dibrugarh University, Assam. Som de fleste, der poster regelmæssigt, blev jeg træt af at opdage efter publicering, at halvdelen af mit LinkedIn-opslag var skjult bag \u201ese mere\u201c, eller at et tweet, jeg troede passede, lydløst var splittet til en tråd.',
+            'De fleste tegnoptællere giver dig ét tal. Skabere har brug for mere — de skal vide præcis, hvor teksten skæres i hvert netværk, for det er der, krogen lever eller dør. Så jeg byggede ét arbejdsrum, der simulerer hver platform på én gang, kører øjeblikkeligt og respekterer dit privatliv fuldt ud.',
           ],
         },
         {
-          heading: 'Bygget med privatliv først',
+          heading: 'Sådan forbliver det præcist',
           paragraphs: [
-            'Alt kører i din browser. Din tekst bliver aldrig uploadet, der er ingen konti, og værktøjet er gratis at bruge. Det finansieres af diskrete annoncer i reserverede felter, der aldrig forskyder layoutet. Læs alle detaljer i vores <a href="../privacy/"><strong>privatlivspolitik</strong></a>.',
+            'Platformgrænser ændrer sig uden meget varsel. Jeg tjekker dem mod, hvordan hver platform faktisk gengiver opslag, og opdaterer guiderne her, når noget ændrer sig. Fandt noget forældet? Kontaktsiden går direkte til mig.',
+          ],
+        },
+        {
+          heading: 'Bygget med privatlivets fred i fokus',
+          paragraphs: [
+            'Alt kører i din browser. Din tekst uploades aldrig, der er ingen konti, og værktøjet er gratis at bruge. Det er understøttet af diskrete annoncer i reserverede pladser, der aldrig forskyver layoutet. Læs de fulde detaljer i vores <a href="../privacy/"><strong>Privatlivspolitik</strong></a>.',
           ],
         },
       ],
