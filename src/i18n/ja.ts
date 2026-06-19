@@ -192,6 +192,16 @@ export const ja: Translations = {
           ['装飾フォント', 'スクリーンリーダーで読めない'],
         ],
       },
+      tiktok: {
+        name: 'TikTok',
+        tag: 'キャプションの折り返し',
+        body: 'TikTokのキャプションは最大2,200文字で、絵文字やハッシュタグも上限に算入されます。ただしフィードは動画を最優先します。キャプションの冒頭だけを表示し、残りは最初の改行または約100文字のうち早いほうで「…続きを見る」の後ろに折りたたみます。フックを1行に収めて先頭に置けば、折り返しを越えて表示されます。PostTruncateは1文字ずつリアルタイムでカウントし、9:16のリール上でキャプションが折りたたまれる位置を正確に示します。',
+        facts: [
+          ['キャプション上限', '2,200文字'],
+          ['「…続き」の折り返し', '約100文字／1行目'],
+          ['動画フレーム', '9:16（1080×1920）'],
+        ],
+      },
     },
   },
 
@@ -320,6 +330,7 @@ export const ja: Translations = {
       threads: 'リンクは全長でカウント。{limit}文字を超えた分は番号付きの返信として連結されます。',
       instagram: 'キャプションは「もっと見る」で折りたたみ。ハッシュタグは1投稿につき{hashtags}個が上限。',
       facebook: 'フィード投稿は技術的上限よりはるかに手前で「もっと見る」に折りたたまれます。',
+      tiktok: 'キャプションは最初の改行または約100文字で「…続きを見る」の後ろに折りたたまれます。絵文字とハッシュタグもカウントされます。',
       smsGsm: '単一メッセージで{single}文字。分割されると1セグメントあたり{multi}文字。',
       smsUnicode: '絵文字や非GSM文字が1つでもあると、メッセージ全体がUnicodeに切り替わります。',
     },
@@ -331,6 +342,7 @@ export const ja: Translations = {
       instagram: 'Instagramのキャプションは{limit}文字まで書けますが、フィードに表示されるのは「もっと見る」リンクの前の約{mobile}文字だけです。より厳しいのはハッシュタグのルールで、キャプションや最初のコメントに{hashtags}個を超えて入れると、投稿が静かに失敗することがあります。',
       facebook: 'Facebookの技術的上限は{limit}文字ですが、フィード投稿はモバイルで約{mobile}文字、デスクトップで約{desktop}文字で「もっと見る」に折りたたまれます。長い文章の塊はエンゲージメントが急落するため、実用上の制限は上限ではなくフォールドです。',
       sms: 'SMS 1通はGSM 7ビットエンコーディングで{gsmSingle}文字まで入り、分割されると1セグメントあたり{gsmMulti}文字に減ります。絵文字や非GSM文字が1つでも入るとメッセージ全体がUnicodeに切り替わり、単一メッセージで{uniSingle}文字、1セグメントあたり{uniMulti}文字になります。また一部のGSM記号(€、角括弧、パイプ)は2文字分としてカウントされます。',
+      tiktok: 'TikTokはキャプション1件につき{limit}文字まで許可し、絵文字とハッシュタグもそのままカウントされます。動画が画面いっぱいに表示されるため、フィードは最初の改行または約{fold}文字のうち早いほうでキャプションを「…続きを見る」の後ろに折りたたみます。つまり最初の1行が、ほとんどの視聴者が読むすべてです。動画フレームは全画面の縦型9:16（1080×1920）です。',
     },
   },
 
@@ -373,6 +385,7 @@ export const ja: Translations = {
           'LinkedIn',
           'Facebook',
           'Threads',
+          'TikTok',
         ],
       },
     },
@@ -604,6 +617,7 @@ export const ja: Translations = {
       instagram: { name: 'Instagram', desc: '約125文字を表示、「さらに表示」をタップで展開' },
       facebook: { name: 'Facebook', desc: '「...さらに表示」の前に約160文字を表示' },
       threads: { name: 'Threads', desc: 'Instagramと同様、切り捨て前に約125文字を表示' },
+      tiktok: { name: 'TikTok', desc: '約100文字または最初の改行で折りたたまれます' },
       sms: { name: 'SMS (GSM)', desc: 'GSMでSMSごとに160文字、Unicodeで70文字' },
     },
   },
@@ -653,6 +667,13 @@ export const ja: Translations = {
         shown: "約125文字",
         bestPractice: "短く魅力的に",
         notes: "Metaのテキストベースのプラットフォーム"
+      },
+      tiktok: {
+        name: "TikTok",
+        limit: "2,200",
+        shown: "約100文字",
+        bestPractice: "フックを1行目に",
+        notes: "絵文字とハッシュタグもカウント。最初の改行で折りたたみ"
       },
       sms: {
         name: "SMS (GSM)",
@@ -765,6 +786,8 @@ export const ja: Translations = {
           'こんな小さな変更でこれだけの結果が出た人、ほかにいる？',
         sms:
           'お疲れさまです！手短に — 先週のオンボーディングの調整で、トライアルから有料への転換率が倍になりました。何を変えたか＋計測した3項目はこちら： https://posttruncate.com/blog/onboarding',
+        tiktok:
+          'オンボーディングの小さな変更ひとつで、トライアルから有料への転換率が2倍に 🤯\n\n新しい価格設定なし、グロースハックなし——最初の画面から決定をひとつ取り除いただけ。変更内容の詳細と計測した3つの指標はプロフィールのリンクから 👀\n\n#saas #startup #buildinpublic #growthtips #producttok',
       },
     },
     workspace: {
@@ -780,6 +803,7 @@ export const ja: Translations = {
         twitter: "投稿の入力を開始してください。下書きを貼り付け、リンクやハッシュタグをいくつか追加して、右側のX (Twitter)でライブプレビューが更新されるのを確認してください...",
         threads: "投稿の入力を開始してください。下書きを貼り付け、リンクやハッシュタグをいくつか追加して、右側のThreadsでライブプレビューが更新されるのを確認してください...",
         sms: "投稿の入力を開始してください。下書きを貼り付け、リンクやハッシュタグをいくつか追加して、右側のSMSでライブプレビューが更新されるのを確認してください...",
+        tiktok: 'キャプションを入力しましょう。フックから始めてハッシュタグをいくつか加えると、右側で9:16のリール上にTikTokプレビューが更新されます…',
       },
       counters: {
         characters: '文字数',
@@ -936,6 +960,19 @@ export const ja: Translations = {
       placeholder:
         'Threadsのプレビューがここに表示されます。{limit} 文字を超えると、番号付きの連続投稿に連結されます。',
     },
+    tiktok: {
+      title: 'TikTokプレビュー',
+      badgeIdle: '入力を開始',
+      badgeSingle: '1つのキャプションに収まる',
+      badgeOver: 'キャプション上限を超過',
+      links: { one: '{n}件のリンク', other: '{n}件のリンク' },
+      charLength: 'キャプションの文字数',
+      seeMore: '…続きを見る',
+      mediaHint: '9:16の動画または画像を追加',
+      safeZones: 'セーフゾーン',
+      lineBreakHint: '改行すると「…続きを見る」が早く始まります',
+      placeholder: 'キャプションのプレビューがここに表示されます（最大{limit}文字）。',
+    },
     meta: {
       title: '書式モニター',
       badgeNeedsFix: '修正が必要',
@@ -1025,6 +1062,7 @@ export const ja: Translations = {
       instagram: 'Instagramの文字数制限について →',
       facebook: 'Facebookの文字数制限について →',
       threads: 'Threadsの文字数制限について →',
+      tiktok: 'TikTokのキャプション上限について →',
     },
     embed: {
       placeholder: '文字を入力して文字数をカウント…',

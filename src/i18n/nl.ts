@@ -192,6 +192,16 @@ export const nl: Translations = {
           ['Fancy fonts', 'Breken schermlezers'],
         ],
       },
+      tiktok: {
+        name: 'TikTok',
+        tag: 'Bijschrift-vouw',
+        body: 'TikTok-bijschriften lopen tot 2.200 tekens, waarbij emoji en hashtags meetellen voor de limiet. Maar de feed zet de video voorop: hij toont alleen het begin van je bijschrift en vouwt de rest achter “…meer” in bij het eerste regeleinde of ongeveer 100 tekens, wat het eerst komt. Begin met je hook op één regel zodat die overleeft. PostTruncate telt elk teken live en markeert precies waar het bijschrift invouwt over een 9:16-reel.',
+        facts: [
+          ['Bijschriftlimiet', '2.200 tekens'],
+          ['“…meer”-vouw', '~100 t. / 1e regel'],
+          ['Videoframe', '9:16 (1080×1920)'],
+        ],
+      },
     },
   },
 
@@ -320,6 +330,7 @@ export const nl: Translations = {
       threads: 'Links tellen volledig mee; tekst boven {limit} tekens gaat verder als genummerde reacties.',
       instagram: 'Het bijschrift vouwt achter “meer”; hard plafond van {hashtags} hashtags per bericht.',
       facebook: 'Feedberichten klappen in achter “Meer weergeven”, ver vóór het technische plafond.',
+      tiktok: 'Het bijschrift vouwt achter “…meer” in bij het eerste regeleinde of ~100 tekens; emoji en hashtags tellen mee.',
       smsGsm: '{single} tekens in één bericht; {multi} per segment zodra het splitst.',
       smsUnicode: 'Eén emoji of niet-GSM-teken schakelt het hele bericht naar Unicode.',
     },
@@ -331,6 +342,7 @@ export const nl: Translations = {
       instagram: 'Instagram-bijschriften mogen {limit} tekens lang zijn, maar de feed toont slechts ongeveer de eerste {mobile} vóór de “meer”-link. De hardere regel zijn hashtags: meer dan {hashtags} in een bijschrift of eerste reactie en het bericht kan stilletjes niet gepubliceerd worden.',
       facebook: 'Het technische plafond van Facebook is {limit} tekens, maar feedberichten klappen in achter “Meer weergeven” rond {mobile} tekens op mobiel en {desktop} op desktop. Engagement keldert bij lange ononderbroken blokken — de praktische limiet is de vouw, niet het plafond.',
       sms: 'Eén sms bevat {gsmSingle} tekens in GSM 7-bit-codering, dalend naar {gsmMulti} per segment zodra het bericht splitst. Elke emoji of elk niet-GSM-teken schakelt het hele bericht naar Unicode — {uniSingle} tekens per enkel bericht, {uniMulti} per segment — en sommige GSM-symbolen (€, blokhaken, het pipe-teken) tellen als twee.',
+      tiktok: 'TikTok staat {limit} tekens per bijschrift toe, waarbij emoji en hashtags volledig meetellen. Omdat de video het scherm vult, vouwt de feed het bijschrift achter “…meer” in bij het eerste regeleinde of ongeveer {fold} tekens — wat het eerst komt — dus de eerste regel is alles wat de meeste kijkers lezen. Het videoframe is fullscreen verticaal 9:16 (1080×1920).',
     },
   },
 
@@ -373,6 +385,7 @@ export const nl: Translations = {
           'LinkedIn',
           'Facebook',
           'Threads',
+          'TikTok',
         ],
       },
     },
@@ -604,6 +617,7 @@ export const nl: Translations = {
       instagram: { name: 'Instagram', desc: 'Toont ~125 tekens, tik op "meer" om uit te vouwen' },
       facebook: { name: 'Facebook', desc: 'Toont ~160 tekens vóór "...meer weergeven"' },
       threads: { name: 'Threads', desc: 'Vergelijkbaar met Instagram met ~125 tekens vóór afkappen' },
+      tiktok: { name: 'TikTok', desc: 'Vouwt in bij ~100 tekens of het eerste regeleinde' },
       sms: { name: 'SMS (GSM)', desc: '160 tekens per SMS voor GSM, 70 voor Unicode' },
     },
   },
@@ -653,6 +667,13 @@ export const nl: Translations = {
         shown: "~125 tekens",
         bestPractice: "Kort en boeiend",
         notes: "Meta's op tekst gebaseerde platform"
+      },
+      tiktok: {
+        name: "TikTok",
+        limit: "2,200",
+        shown: "~100 tekens",
+        bestPractice: "Hook op de eerste regel",
+        notes: "Emoji en hashtags tellen mee; vouwt in bij het eerste regeleinde"
       },
       sms: {
         name: "SMS (GSM)",
@@ -765,6 +786,8 @@ export const nl: Translations = {
           'heeft iemand anders zulke grote resultaten gezien van zo’n kleine wijziging?',
         sms:
           'Hé! Even kort — die onboardingaanpassing van vorige week verdubbelde ons percentage proef-naar-betaald. We schreven op wat er veranderde + de 3 dingen die we maten: https://posttruncate.com/blog/onboarding',
+        tiktok:
+          'één kleine onboarding-aanpassing verdubbelde onze trial-naar-betaald-ratio 🤯\n\ngeen nieuwe prijzen, geen growth hack — we haalden gewoon één beslissing van het allereerste scherm. de volledige uitleg van wat we veranderden en de 3 dingen die we maten staan in onze bio 👀\n\n#saas #startup #buildinpublic #growthtips #producttok',
       },
     },
     workspace: {
@@ -780,6 +803,7 @@ export const nl: Translations = {
         twitter: "Begin met het typen van je bericht. Plak een concept, voeg wat links en hashtags toe en zie hoe de live preview wordt bijgewerkt in X (Twitter) aan de rechterkant...",
         threads: "Begin met het typen van je bericht. Plak een concept, voeg wat links en hashtags toe en zie hoe de live preview wordt bijgewerkt in Threads aan de rechterkant...",
         sms: "Begin met het typen van je bericht. Plak een concept, voeg wat links en hashtags toe en zie hoe de live preview wordt bijgewerkt in SMS aan de rechterkant...",
+        tiktok: 'Begin je bijschrift te typen. Start met je hook, voeg een paar hashtags toe en zie je TikTok-voorbeeld rechts bijwerken over een 9:16-reel…',
       },
       counters: {
         characters: 'Tekens',
@@ -936,6 +960,19 @@ export const nl: Translations = {
       placeholder:
         'Je Threads-preview verschijnt hier. Ga voorbij {limit} tekens en hij wordt aaneengeschakeld tot een genummerde berichtenreeks.',
     },
+    tiktok: {
+      title: 'TikTok-voorbeeld',
+      badgeIdle: 'Begin met typen',
+      badgeSingle: 'Past in één bijschrift',
+      badgeOver: 'Boven de bijschriftlimiet',
+      links: { one: '{n} link', other: '{n} links' },
+      charLength: 'Bijschriftlengte',
+      seeMore: '…meer',
+      mediaHint: 'Voeg een 9:16-video of -afbeelding toe',
+      safeZones: 'Veilige zones',
+      lineBreakHint: 'Een regeleinde activeert “…meer” eerder',
+      placeholder: 'Je bijschriftvoorbeeld verschijnt hier (tot {limit} tekens).',
+    },
     meta: {
       title: 'Opmaakmonitor',
       badgeNeedsFix: 'Heeft een fix nodig',
@@ -1025,6 +1062,7 @@ export const nl: Translations = {
       instagram: 'Meer over Instagram-tekenlimieten →',
       facebook: 'Meer over Facebook-tekenlimieten →',
       threads: 'Meer over Threads-tekenlimieten →',
+      tiktok: 'Lees over TikTok-bijschriftlimieten →',
     },
     embed: {
       placeholder: 'Begin te typen om tekens te tellen…',

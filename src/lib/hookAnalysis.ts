@@ -111,6 +111,7 @@ const PLATFORM_LABEL: Record<HookPlatform, string> = {
   instagram: 'Instagram',
   facebook: 'Facebook',
   threads: 'Threads',
+  tiktok: 'TikTok',
   x: 'X',
 };
 

@@ -2,7 +2,6 @@
 import { useMemo } from 'preact/hooks';
 import { analyzeHook, type HookPlatform, type HookReasonCode } from '../../lib/hookAnalysis';
 import {
-  analyzeSms,
   charCount,
   weightedLength,
   FOLDS,
@@ -15,7 +14,6 @@ import {
   Badge,
   BrandLogo,
   HookStatusIcon,
-  SmsGlyph,
   type Brand,
   type HookStatus,
   type Tone,
@@ -47,6 +45,7 @@ const STRIP: { platform: HookPlatform; brand: Brand; name: string; limit: number
   { platform: 'instagram', brand: 'instagram', name: 'Instagram', limit: LIMITS.INSTAGRAM_CAPTION },
   { platform: 'facebook', brand: 'facebook', name: 'Facebook', limit: LIMITS.FACEBOOK_POST },
   { platform: 'threads', brand: 'threads', name: 'Threads', limit: LIMITS.THREADS },
+  { platform: 'tiktok', brand: 'tiktok', name: 'TikTok', limit: LIMITS.TIKTOK_CAPTION },
 ];
 
 /**
@@ -122,10 +121,6 @@ export function HookStrip({ text, lang, s, views, limitsHref }: Props) {
     [text, total, views, reasonText, h],
   );
 
-  // SMS card — segmentation, not a fold verdict.
-  const sms = analyzeSms(text);
-  const smsTone: Tone = sms.parts > 1 ? 'warn' : 'safe';
-
   return (
     <section class="mt-4 rounded-xl bg-canvas p-4 shadow-e2 sm:p-5">
       <div class="flex flex-wrap items-baseline justify-between gap-2">
@@ -163,26 +158,6 @@ export function HookStrip({ text, lang, s, views, limitsHref }: Props) {
             <p class="mt-auto text-[12px] leading-[18px] text-body">{c.reason}</p>
           </div>
         ))}
-
-        {/* SMS — live segmentation from the shared analyzeSms engine. */}
-        <div class="flex min-w-0 flex-col items-center gap-2.5 rounded-lg border border-hairline bg-canvas-soft p-3.5 text-center sm:min-w-40 sm:flex-1">
-          <div class="flex items-center gap-2">
-            <SmsGlyph size={20} />
-            <div class="text-left">
-              <div class="text-[13px] font-semibold leading-4 text-ink">SMS ({sms.encoding})</div>
-              <div class="mt-0.5 text-[11px] leading-3.5 text-mute tabular-nums">
-                {interp(h.perSms, { n: nf.format(sms.singlePartLimit) })}
-              </div>
-            </div>
-          </div>
-          <Badge tone={smsTone} dot={false}>
-            <HookStatusIcon status={sms.parts > 1 ? 'warn' : 'pass'} size={13} />
-            {interp(h.smsNeeded, { n: nf.format(Math.max(1, sms.parts)) })}
-          </Badge>
-          <p class="mt-auto text-[12px] leading-[18px] text-body">
-            {interp(h.perSms, { n: nf.format(sms.multipartLimit) })}
-          </p>
-        </div>
       </div>
     </section>
   );

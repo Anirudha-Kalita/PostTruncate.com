@@ -193,6 +193,16 @@ export const de: Translations = {
           ['Fancy-Schriften', 'Stören Screenreader'],
         ],
       },
+      tiktok: {
+        name: 'TikTok',
+        tag: 'Untertitel-Falz',
+        body: 'TikTok-Untertitel fassen bis zu 2.200 Zeichen, wobei Emojis und Hashtags zum Limit zählen. Doch der Feed stellt das Video voran: Er zeigt nur den Anfang deines Untertitels und klappt den Rest hinter „…mehr“ ein — beim ersten Zeilenumbruch oder etwa 100 Zeichen, je nachdem was zuerst kommt. Beginne mit deinem Hook in einer einzigen Zeile, damit er überlebt. PostTruncate zählt jedes Zeichen live und markiert genau, wo der Untertitel über einem 9:16-Reel einklappt.',
+        facts: [
+          ['Untertitel-Limit', '2.200 Zeichen'],
+          ['„…mehr“-Falz', '~100 Z. / 1. Zeile'],
+          ['Videoformat', '9:16 (1080×1920)'],
+        ],
+      },
     },
   },
 
@@ -321,6 +331,7 @@ export const de: Translations = {
       threads: 'Links zählen in voller Länge; Text über {limit} Zeichen wird als nummerierte Antworten verkettet.',
       instagram: 'Die Caption faltet hinter „mehr“; hartes Limit von {hashtags} Hashtags pro Beitrag.',
       facebook: 'Feed-Beiträge klappen hinter „Mehr anzeigen“ ein — lange vor der technischen Obergrenze.',
+      tiktok: 'Der Untertitel klappt hinter „…mehr“ beim ersten Zeilenumbruch oder ~100 Zeichen ein; Emojis und Hashtags zählen.',
       smsGsm: '{single} Zeichen in einer einzelnen Nachricht; {multi} pro Segment, sobald sie geteilt wird.',
       smsUnicode: 'Ein Emoji oder Nicht-GSM-Zeichen schaltet die ganze Nachricht auf Unicode um.',
     },
@@ -332,6 +343,7 @@ export const de: Translations = {
       instagram: 'Instagram-Captions dürfen {limit} Zeichen lang sein, aber der Feed zeigt nur etwa die ersten {mobile} vor dem „mehr“-Link. Die härtere Regel sind Hashtags: mehr als {hashtags} in Caption oder erstem Kommentar, und der Beitrag kann stillschweigend nicht veröffentlicht werden.',
       facebook: 'Facebooks technische Obergrenze liegt bei {limit} Zeichen, aber Feed-Beiträge klappen bei etwa {mobile} Zeichen mobil und {desktop} am Desktop hinter „Mehr anzeigen“ ein. Bei langen Textblöcken bricht das Engagement stark ein — das praktische Limit ist die Falz, nicht die Obergrenze.',
       sms: 'Eine einzelne SMS fasst {gsmSingle} Zeichen in GSM-7-Bit-Kodierung; sobald die Nachricht geteilt wird, sinkt der Platz auf {gsmMulti} pro Segment. Jedes Emoji oder Nicht-GSM-Zeichen schaltet die gesamte Nachricht auf Unicode um — {uniSingle} Zeichen pro Einzelnachricht, {uniMulti} pro Segment — und einige GSM-Symbole (€, Klammern, der senkrechte Strich) zählen doppelt.',
+      tiktok: 'TikTok erlaubt {limit} Zeichen pro Untertitel, wobei Emojis und Hashtags voll zählen. Da das Video den Bildschirm füllt, klappt der Feed den Untertitel hinter „…mehr“ ein — beim ersten Zeilenumbruch oder etwa {fold} Zeichen, je nachdem was zuerst kommt — sodass die erste Zeile alles ist, was die meisten lesen. Das Videoformat ist vollbild-vertikal 9:16 (1080×1920).',
     },
   },
 
@@ -374,6 +386,7 @@ export const de: Translations = {
           'LinkedIn',
           'Facebook',
           'Threads',
+          'TikTok',
         ],
       },
     },
@@ -605,6 +618,7 @@ export const de: Translations = {
       instagram: { name: 'Instagram', desc: 'Zeigt ~125 Zeichen, tippen Sie auf "mehr"' },
       facebook: { name: 'Facebook', desc: 'Zeigt ~160 Zeichen vor "...mehr anzeigen"' },
       threads: { name: 'Threads', desc: 'Ähnlich wie Instagram mit ~125 Zeichen vor Kürzung' },
+      tiktok: { name: 'TikTok', desc: 'Klappt bei ~100 Zeichen oder dem ersten Zeilenumbruch ein' },
       sms: { name: 'SMS (GSM)', desc: '160 Zeichen pro SMS für GSM, 70 für Unicode' },
     },
   },
@@ -654,6 +668,13 @@ export const de: Translations = {
         shown: "~125 Zeichen",
         bestPractice: "Kurz & ansprechend",
         notes: "Metas textbasierte Plattform"
+      },
+      tiktok: {
+        name: "TikTok",
+        limit: "2,200",
+        shown: "~100 Zeichen",
+        bestPractice: "Hook in der ersten Zeile",
+        notes: "Emojis und Hashtags zählen; klappt beim ersten Zeilenumbruch ein"
       },
       sms: {
         name: "SMS (GSM)",
@@ -766,6 +787,8 @@ export const de: Translations = {
           'hat sonst noch jemand so große Ergebnisse von einer so kleinen Änderung gesehen?',
         sms:
           'Hey! Kurz gesagt – die Onboarding-Anpassung von letzter Woche hat unsere Testversion-zu-Zahlung-Rate verdoppelt. Hier steht, was sich geändert hat und die 3 Dinge, die wir gemessen haben: https://posttruncate.com/blog/onboarding',
+        tiktok:
+          'eine winzige Onboarding-Änderung hat unsere Trial-to-Paid-Rate verdoppelt 🤯\n\nkeine neuen Preise, kein Growth Hack — wir haben nur eine Entscheidung vom allerersten Bildschirm entfernt. die komplette Aufschlüsselung und die 3 Dinge, die wir gemessen haben, stehen in unserer Bio 👀\n\n#saas #startup #buildinpublic #growthtips #producttok',
       },
     },
     workspace: {
@@ -781,6 +804,7 @@ export const de: Translations = {
         twitter: "Beginnen Sie mit der Eingabe Ihres Beitrags. Fügen Sie einen Entwurf ein, fügen Sie ein paar Links und Hashtags hinzu und sehen Sie zu, wie sich die Live-Vorschau in X (Twitter) auf der rechten Seite aktualisiert...",
         threads: "Beginnen Sie mit der Eingabe Ihres Beitrags. Fügen Sie einen Entwurf ein, fügen Sie ein paar Links und Hashtags hinzu und sehen Sie zu, wie sich die Live-Vorschau in Threads auf der rechten Seite aktualisiert...",
         sms: "Beginnen Sie mit der Eingabe Ihres Beitrags. Fügen Sie einen Entwurf ein, fügen Sie ein paar Links und Hashtags hinzu und sehen Sie zu, wie sich die Live-Vorschau in SMS auf der rechten Seite aktualisiert...",
+        tiktok: 'Beginne deinen Untertitel zu tippen. Starte mit deinem Hook, füge ein paar Hashtags hinzu und sieh, wie deine TikTok-Vorschau rechts über einem 9:16-Reel aktualisiert wird…',
       },
       counters: {
         characters: 'Zeichen',
@@ -937,6 +961,19 @@ export const de: Translations = {
       placeholder:
         'Deine Threads-Vorschau erscheint hier. Geh über {limit} Zeichen und sie verkettet sich zu einer nummerierten Beitragsfolge.',
     },
+    tiktok: {
+      title: 'TikTok-Vorschau',
+      badgeIdle: 'Tippe los',
+      badgeSingle: 'Passt in einen Untertitel',
+      badgeOver: 'Über dem Untertitel-Limit',
+      links: { one: '{n} Link', other: '{n} Links' },
+      charLength: 'Untertitel-Länge',
+      seeMore: '…mehr',
+      mediaHint: 'Füge ein 9:16-Video oder -Bild hinzu',
+      safeZones: 'Sicherheitszonen',
+      lineBreakHint: 'Ein Zeilenumbruch löst „…mehr“ früher aus',
+      placeholder: 'Deine Untertitel-Vorschau erscheint hier (bis zu {limit} Zeichen).',
+    },
     meta: {
       title: 'Formatierungs-Monitor',
       badgeNeedsFix: 'Braucht eine Korrektur',
@@ -1026,6 +1063,7 @@ export const de: Translations = {
       instagram: 'Mehr über Instagram-Zeichenlimits erfahren →',
       facebook: 'Mehr über Facebook-Zeichenlimits erfahren →',
       threads: 'Mehr über Threads-Zeichenlimits erfahren →',
+      tiktok: 'Erfahre mehr über TikTok-Untertitel-Limits →',
     },
     embed: {
       placeholder: 'Tippe, um Zeichen zu zählen…',

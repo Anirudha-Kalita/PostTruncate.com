@@ -192,6 +192,16 @@ export const en: Translations = {
           ['Fancy fonts', 'Break screen readers'],
         ],
       },
+      tiktok: {
+        name: 'TikTok',
+        tag: 'Caption fold',
+        body: 'TikTok captions run up to 2,200 characters, with emojis and hashtags all counting toward the cap. But the feed puts the video first: it shows only the opening of your caption and collapses the rest behind “…more” at the first line break or about 100 characters, whichever comes first. Lead with your hook on a single line so it survives. PostTruncate counts every character live and marks exactly where the caption folds over a 9:16 reel.',
+        facts: [
+          ['Caption cap', '2,200 characters'],
+          ['“…more” fold', '~100 chars / first line'],
+          ['Video frame', '9:16 (1080×1920)'],
+        ],
+      },
     },
   },
 
@@ -320,6 +330,7 @@ export const en: Translations = {
       threads: 'Links count in full; copy past {limit} characters chains as numbered replies.',
       instagram: 'Caption folds behind “more”; hard ceiling of {hashtags} hashtags per post.',
       facebook: 'Feed posts collapse behind “See more” well before the technical cap.',
+      tiktok: 'Caption folds behind “…more” at the first line break or ~100 characters; emojis and hashtags count.',
       smsGsm: '{single} characters in a single message; {multi} per segment once it splits.',
       smsUnicode: 'One emoji or non-GSM character switches the whole message to Unicode.',
     },
@@ -330,6 +341,7 @@ export const en: Translations = {
       threads: 'Threads allows {limit} characters per post and, unlike X, counts links at their full length. On mobile the feed folds long posts at about {mobile} characters. Anything past the cap has to continue as numbered reply posts chained under the first one.',
       instagram: 'Instagram captions can run to {limit} characters, but the feed shows only about the first {mobile} before the “more” link. The stricter rule is hashtags: more than {hashtags} in a caption or first comment and the post can silently fail to publish.',
       facebook: 'Facebook’s technical cap is {limit} characters, but feed posts collapse behind “See more” at roughly {mobile} characters on mobile and {desktop} on desktop. Engagement drops sharply on long unbroken blocks, so the practical limit is the fold, not the cap.',
+      tiktok: 'TikTok allows {limit} characters per caption, with emojis and hashtags counting in full. Because the video fills the screen, the feed collapses the caption behind “…more” at the first line break or about {fold} characters — whichever comes first — so the opening line is all most viewers read. The video frame is full-screen vertical 9:16 (1080×1920).',
       sms: 'A single SMS holds {gsmSingle} characters in GSM 7-bit encoding, dropping to {gsmMulti} per segment once the message splits. Any emoji or non-GSM character switches the entire message to Unicode — {uniSingle} characters per single message, {uniMulti} per segment — and some GSM symbols (€, brackets, the pipe) count as two.',
     },
   },
@@ -373,6 +385,7 @@ export const en: Translations = {
           'LinkedIn',
           'Facebook',
           'Threads',
+          'TikTok',
         ],
       },
     },
@@ -604,6 +617,7 @@ export const en: Translations = {
       instagram: { name: 'Instagram', desc: 'Shows ~125 chars, tap "more" to expand' },
       facebook: { name: 'Facebook', desc: 'Shows ~160 chars before "...see more"' },
       threads: { name: 'Threads', desc: 'Similar to Instagram with ~125 chars before truncation' },
+      tiktok: { name: 'TikTok', desc: 'Folds at ~100 chars or the first line break' },
       sms: { name: 'SMS (GSM)', desc: '160 chars per SMS for GSM, 70 for Unicode' },
     },
   },
@@ -653,6 +667,13 @@ export const en: Translations = {
         shown: "~125 characters",
         bestPractice: "Short & engaging",
         notes: "Meta's text-based platform"
+      },
+      tiktok: {
+        name: "TikTok",
+        limit: "2,200",
+        shown: "~100 characters",
+        bestPractice: "Hook on the first line",
+        notes: "Emojis and hashtags count; folds at first line break"
       },
       sms: {
         name: "SMS (GSM)",
@@ -763,6 +784,10 @@ export const en: Translations = {
           'ok this is kind of wild — we removed ONE decision from the first screen of our onboarding last week and trial-to-paid literally doubled.\n\n' +
           'no new pricing. no growth hack. just less friction.\n\n' +
           'anyone else seen results this big from a change this small?',
+        tiktok:
+          'one tiny onboarding change doubled our trial-to-paid rate 🤯\n\n' +
+          'no new pricing, no growth hack — we just removed a single decision from the very first screen. full breakdown of what we changed and the 3 things we measured is in our bio 👀\n\n' +
+          '#saas #startup #buildinpublic #growthtips #producttok',
         sms:
           'Hey! Quick one — that onboarding tweak we shipped last week doubled our trial-to-paid rate. Wrote up what changed + the 3 things we measured: https://posttruncate.com/blog/onboarding',
       },
@@ -779,6 +804,7 @@ export const en: Translations = {
         instagram: "Start typing your post. Paste a draft, drop in a few links and hashtags, and watch your post's live preview update in Instagram on the right…",
         twitter: "Start typing your post. Paste a draft, drop in a few links and hashtags, and watch your post's live preview update in X (Twitter) on the right…",
         threads: "Start typing your post. Paste a draft, drop in a few links and hashtags, and watch your post's live preview update in Threads on the right…",
+        tiktok: "Start typing your caption. Lead with your hook, add a few hashtags, and watch your TikTok preview update over a 9:16 reel on the right…",
         sms: "Start typing your post. Paste a draft, drop in a few links and hashtags, and watch your post's live preview update in SMS on the right…",
       },
       counters: {
@@ -936,6 +962,19 @@ export const en: Translations = {
       placeholder:
         'Your Threads preview appears here. Go past {limit} characters and it chains into a numbered post sequence.',
     },
+    tiktok: {
+      title: 'TikTok preview',
+      badgeIdle: 'Start typing',
+      badgeSingle: 'Fits in one caption',
+      badgeOver: 'Over caption limit',
+      links: { one: '{n} link', other: '{n} links' },
+      charLength: 'Caption length',
+      seeMore: '…more',
+      mediaHint: 'Add a 9:16 video or image',
+      safeZones: 'Safe zones',
+      lineBreakHint: 'A line break triggers “…more” early',
+      placeholder: 'Your caption preview appears here (up to {limit} characters).',
+    },
     meta: {
       title: 'Formatting monitor',
       badgeNeedsFix: 'Needs a fix',
@@ -1025,6 +1064,7 @@ export const en: Translations = {
       instagram: 'Learn about Instagram character limits →',
       facebook: 'Learn about Facebook character limits →',
       threads: 'Learn about Threads character limits →',
+      tiktok: 'Learn about TikTok caption limits →',
     },
     embed: {
       placeholder: 'Start typing to count characters…',

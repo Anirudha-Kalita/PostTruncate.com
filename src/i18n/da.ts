@@ -192,6 +192,16 @@ export const da: Translations = {
           ['Fancy skrifttyper', 'Bryder skærmlæsere'],
         ],
       },
+      tiktok: {
+        name: 'TikTok',
+        tag: 'Billedtekst-fold',
+        body: 'TikTok-billedtekster kan rumme op til 2.200 tegn, hvor emoji og hashtags tæller med i grænsen. Men feedet sætter videoen først: det viser kun begyndelsen af din billedtekst og folder resten bag “…mere” ved det første linjeskift eller omkring 100 tegn, alt efter hvad der kommer først. Start med din krog på én linje, så den overlever. PostTruncate tæller hvert tegn live og markerer præcis, hvor billedteksten foldes over en 9:16-reel.',
+        facts: [
+          ['Billedtekst-grænse', '2.200 tegn'],
+          ['“…mere”-fold', '~100 tegn / 1. linje'],
+          ['Videoformat', '9:16 (1080×1920)'],
+        ],
+      },
     },
   },
 
@@ -320,6 +330,7 @@ export const da: Translations = {
       threads: 'Links tæller fuldt ud; tekst over {limit} tegn fortsætter som nummererede svar.',
       instagram: 'Billedteksten folder bag “mere”; hårdt loft på {hashtags} hashtags pr. opslag.',
       facebook: 'Feedopslag klapper sammen bag “Se mere” længe før det tekniske loft.',
+      tiktok: 'Billedteksten foldes bag “…mere” ved det første linjeskift eller ~100 tegn; emoji og hashtags tæller med.',
       smsGsm: '{single} tegn i en enkelt besked; {multi} pr. segment, når den opdeles.',
       smsUnicode: 'Én emoji eller ét ikke-GSM-tegn skifter hele beskeden til Unicode.',
     },
@@ -331,6 +342,7 @@ export const da: Translations = {
       instagram: 'Instagram-billedtekster kan være op til {limit} tegn, men feedet viser kun cirka de første {mobile} før “mere”-linket. Den hårdere regel er hashtags: mere end {hashtags} i en billedtekst eller første kommentar, og opslaget kan fejle i det stille.',
       facebook: 'Facebooks tekniske loft er {limit} tegn, men feedopslag klapper sammen bag “Se mere” ved cirka {mobile} tegn på mobil og {desktop} på desktop. Engagementet styrtdykker ved lange ubrudte blokke — den praktiske grænse er folden, ikke loftet.',
       sms: 'En enkelt SMS rummer {gsmSingle} tegn i GSM 7-bit-kodning og falder til {gsmMulti} pr. segment, når beskeden opdeles. Enhver emoji eller ethvert ikke-GSM-tegn skifter hele beskeden til Unicode — {uniSingle} tegn pr. enkelt besked, {uniMulti} pr. segment — og nogle GSM-symboler (€, kantede parenteser, lodret streg) tæller som to.',
+      tiktok: 'TikTok tillader {limit} tegn pr. billedtekst, hvor emoji og hashtags tæller fuldt med. Fordi videoen fylder skærmen, folder feedet billedteksten bag “…mere” ved det første linjeskift eller omkring {fold} tegn — alt efter hvad der kommer først — så den første linje er alt, de fleste seere læser. Videoformatet er fuldskærm lodret 9:16 (1080×1920).',
     },
   },
 
@@ -373,6 +385,7 @@ export const da: Translations = {
           'LinkedIn',
           'Facebook',
           'Threads',
+          'TikTok',
         ],
       },
     },
@@ -604,6 +617,7 @@ export const da: Translations = {
       instagram: { name: 'Instagram', desc: 'Viser ~125 tegn, tryk på "mere" for at udvide' },
       facebook: { name: 'Facebook', desc: 'Viser ~160 tegn før "...se mere"' },
       threads: { name: 'Threads', desc: 'Svarer til Instagram med ~125 tegn før afkortning' },
+      tiktok: { name: 'TikTok', desc: 'Foldes ved ~100 tegn eller det første linjeskift' },
       sms: { name: 'SMS (GSM)', desc: '160 tegn pr. SMS til GSM, 70 til Unicode' },
     },
   },
@@ -653,6 +667,13 @@ export const da: Translations = {
         shown: "~125 tegn",
         bestPractice: "Kort & engagerende",
         notes: "Metas tekstbaserede platform"
+      },
+      tiktok: {
+        name: "TikTok",
+        limit: "2,200",
+        shown: "~100 tegn",
+        bestPractice: "Krog på den første linje",
+        notes: "Emoji og hashtags tæller med; foldes ved det første linjeskift"
       },
       sms: {
         name: "SMS (GSM)",
@@ -765,6 +786,8 @@ export const da: Translations = {
           'er der andre, der har set så store resultater af så lille en ændring?',
         sms:
           'Hej! Kort og godt — den onboarding-justering vi lancerede i sidste uge fordoblede vores trial-til-betalende-rate. Vi skrev hvad der ændrede sig + de 3 ting vi målte: https://posttruncate.com/blog/onboarding',
+        tiktok:
+          'en lille onboarding-ændring fordoblede vores trial-til-betalt-rate 🤯\n\ningen nye priser, intet growth hack — vi fjernede bare én beslutning fra den allerførste skærm. hele gennemgangen af, hvad vi ændrede, og de 3 ting, vi målte, er i vores bio 👀\n\n#saas #startup #buildinpublic #growthtips #producttok',
       },
     },
     workspace: {
@@ -780,6 +803,7 @@ export const da: Translations = {
         twitter: "Begynd at skrive dit indlæg. Indsæt en kladde, tilføj et par links og hashtags, og se din live forhåndsvisning opdatere i X (Twitter) til højre...",
         threads: "Begynd at skrive dit indlæg. Indsæt en kladde, tilføj et par links og hashtags, og se din live forhåndsvisning opdatere i Threads til højre...",
         sms: "Begynd at skrive dit indlæg. Indsæt en kladde, tilføj et par links og hashtags, og se din live forhåndsvisning opdatere i SMS til højre...",
+        tiktok: 'Begynd at skrive din billedtekst. Start med din krog, tilføj et par hashtags, og se din TikTok-forhåndsvisning opdatere over en 9:16-reel til højre…',
       },
       counters: {
         characters: 'Tegn',
@@ -936,6 +960,19 @@ export const da: Translations = {
       placeholder:
         'Dit Threads-preview vises her. Gå forbi {limit} tegn, og det kædes sammen i en nummereret opslagssekvens.',
     },
+    tiktok: {
+      title: 'TikTok-forhåndsvisning',
+      badgeIdle: 'Begynd at skrive',
+      badgeSingle: 'Kan være i én billedtekst',
+      badgeOver: 'Over billedtekst-grænsen',
+      links: { one: '{n} link', other: '{n} links' },
+      charLength: 'Billedtekst-længde',
+      seeMore: '…mere',
+      mediaHint: 'Tilføj en 9:16-video eller -billede',
+      safeZones: 'Sikkerhedszoner',
+      lineBreakHint: 'Et linjeskift udløser “…mere” tidligere',
+      placeholder: 'Din forhåndsvisning af billedteksten vises her (op til {limit} tegn).',
+    },
     meta: {
       title: 'Formateringsmonitor',
       badgeNeedsFix: 'Skal rettes',
@@ -1025,6 +1062,7 @@ export const da: Translations = {
       instagram: 'Lær om Instagrams tegngrænser →',
       facebook: 'Lær om Facebooks tegngrænser →',
       threads: `Lær om Threads\' tegngrænser →`,
+      tiktok: 'Læs om TikToks billedtekst-grænser →',
     },
     embed: {
       placeholder: 'Begynd at skrive for at tælle tegn…',

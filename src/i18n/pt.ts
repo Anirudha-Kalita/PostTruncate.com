@@ -192,6 +192,16 @@ export const pt: Translations = {
           ['Tipos de letra decorativos', 'Quebram os leitores de ecrã'],
         ],
       },
+      tiktok: {
+        name: 'TikTok',
+        tag: 'Dobra da legenda',
+        body: 'As legendas do TikTok comportam até 2.200 caracteres, com emojis e hashtags contando para o limite. Mas o feed prioriza o vídeo: mostra apenas o início da sua legenda e dobra o resto atrás de “…mais” na primeira quebra de linha ou por volta de 100 caracteres, o que vier primeiro. Comece pelo seu gancho em uma única linha para que ele sobreviva. O PostTruncate conta cada caractere ao vivo e marca exatamente onde a legenda dobra sobre um reel 9:16.',
+        facts: [
+          ['Limite de legenda', '2.200 caracteres'],
+          ['Dobra “…mais”', '~100 car. / 1.ª linha'],
+          ['Quadro de vídeo', '9:16 (1080×1920)'],
+        ],
+      },
     },
   },
 
@@ -320,6 +330,7 @@ export const pt: Translations = {
       threads: 'Os links contam por inteiro; o texto além de {limit} caracteres continua como respostas numeradas.',
       instagram: 'A legenda dobra atrás de «mais»; teto rígido de {hashtags} hashtags por publicação.',
       facebook: 'As publicações do feed recolhem atrás de «Ver mais» muito antes do limite técnico.',
+      tiktok: 'A legenda dobra atrás de “…mais” na primeira quebra de linha ou ~100 caracteres; emojis e hashtags contam.',
       smsGsm: '{single} caracteres numa única mensagem; {multi} por segmento quando se divide.',
       smsUnicode: 'Um emoji ou caráter não GSM muda toda a mensagem para Unicode.',
     },
@@ -331,6 +342,7 @@ export const pt: Translations = {
       instagram: 'As legendas do Instagram podem chegar aos {limit} caracteres, mas o feed mostra apenas cerca dos primeiros {mobile} antes do link «mais». A regra mais dura são os hashtags: mais de {hashtags} numa legenda ou primeiro comentário e a publicação pode falhar silenciosamente.',
       facebook: 'O teto técnico do Facebook é de {limit} caracteres, mas as publicações do feed recolhem atrás de «Ver mais» por volta dos {mobile} caracteres no móvel e {desktop} no desktop. A interação cai a pique em blocos longos sem pausas — o limite prático é a dobra, não o teto.',
       sms: 'Um único SMS comporta {gsmSingle} caracteres na codificação GSM de 7 bits, caindo para {gsmMulti} por segmento quando a mensagem se divide. Qualquer emoji ou caráter não GSM muda a mensagem inteira para Unicode — {uniSingle} caracteres por mensagem única, {uniMulti} por segmento — e alguns símbolos GSM (€, parênteses retos, a barra vertical) contam como dois.',
+      tiktok: 'O TikTok permite {limit} caracteres por legenda, com emojis e hashtags contando por inteiro. Como o vídeo preenche a tela, o feed dobra a legenda atrás de “…mais” na primeira quebra de linha ou por volta de {fold} caracteres — o que vier primeiro — então a primeira linha é tudo o que a maioria lê. O quadro de vídeo é vertical em tela cheia 9:16 (1080×1920).',
     },
   },
 
@@ -373,6 +385,7 @@ export const pt: Translations = {
           'LinkedIn',
           'Facebook',
           'Threads',
+          'TikTok',
         ],
       },
     },
@@ -604,6 +617,7 @@ export const pt: Translations = {
       instagram: { name: 'Instagram', desc: 'Mostra ~125 caracteres, toque em "mais" para expandir' },
       facebook: { name: 'Facebook', desc: 'Mostra ~160 caracteres antes de "...ver mais"' },
       threads: { name: 'Threads', desc: 'Semelhante ao Instagram com ~125 caracteres antes do truncamento' },
+      tiktok: { name: 'TikTok', desc: 'Dobra em ~100 caracteres ou na primeira quebra de linha' },
       sms: { name: 'SMS (GSM)', desc: '160 caracteres por SMS para GSM, 70 para Unicode' },
     },
   },
@@ -653,6 +667,13 @@ export const pt: Translations = {
         shown: "~125 caracteres",
         bestPractice: "Curto e envolvente",
         notes: "Plataforma baseada em texto da Meta"
+      },
+      tiktok: {
+        name: "TikTok",
+        limit: "2,200",
+        shown: "~100 caracteres",
+        bestPractice: "Gancho na primeira linha",
+        notes: "Emojis e hashtags contam; dobra na primeira quebra de linha"
       },
       sms: {
         name: "SMS (GSM)",
@@ -765,6 +786,8 @@ export const pt: Translations = {
           'mais alguém já viu resultados tão grandes com uma alteração tão pequena?',
         sms:
           'Olá! Rapidamente — aquele ajuste de integração que lançámos na semana passada duplicou a nossa taxa de avaliação para cliente pagante. Escrevemos o que mudou + as 3 coisas que medimos: https://posttruncate.com/blog/onboarding',
+        tiktok:
+          'uma pequena mudança no onboarding dobrou nossa taxa de teste para pago 🤯\n\nsem preços novos, sem growth hack — só removemos uma decisão da primeiríssima tela. o detalhamento completo do que mudamos e as 3 coisas que medimos estão na nossa bio 👀\n\n#saas #startup #buildinpublic #growthtips #producttok',
       },
     },
     workspace: {
@@ -780,6 +803,7 @@ export const pt: Translations = {
         twitter: "Comece a digitar seu post. Cole um rascunho, adicione alguns links e hashtags, e veja a visualização ao vivo ser atualizada no X (Twitter) à direita...",
         threads: "Comece a digitar seu post. Cole um rascunho, adicione alguns links e hashtags, e veja a visualização ao vivo ser atualizada no Threads à direita...",
         sms: "Comece a digitar seu post. Cole um rascunho, adicione alguns links e hashtags, e veja a visualização ao vivo ser atualizada no SMS à direita...",
+        tiktok: 'Comece a escrever sua legenda. Comece pelo seu gancho, adicione alguns hashtags e veja sua prévia do TikTok atualizar sobre um reel 9:16 à direita…',
       },
       counters: {
         characters: 'Caracteres',
@@ -936,6 +960,19 @@ export const pt: Translations = {
       placeholder:
         'A sua pré-visualização do Threads aparece aqui. Passe dos {limit} caracteres e encadeia-se numa sequência numerada de publicações.',
     },
+    tiktok: {
+      title: 'Prévia do TikTok',
+      badgeIdle: 'Comece a digitar',
+      badgeSingle: 'Cabe em uma legenda',
+      badgeOver: 'Acima do limite da legenda',
+      links: { one: '{n} link', other: '{n} links' },
+      charLength: 'Comprimento da legenda',
+      seeMore: '…mais',
+      mediaHint: 'Adicione um vídeo ou imagem 9:16',
+      safeZones: 'Zonas seguras',
+      lineBreakHint: 'Uma quebra de linha aciona “…mais” mais cedo',
+      placeholder: 'Sua prévia da legenda aparece aqui (até {limit} caracteres).',
+    },
     meta: {
       title: 'Monitor de formatação',
       badgeNeedsFix: 'Precisa de correção',
@@ -1025,6 +1062,7 @@ export const pt: Translations = {
       instagram: 'Saiba mais sobre os limites de caracteres do Instagram →',
       facebook: 'Saiba mais sobre os limites de caracteres do Facebook →',
       threads: 'Saiba mais sobre os limites de caracteres do Threads →',
+      tiktok: 'Saiba mais sobre os limites de legenda do TikTok →',
     },
     embed: {
       placeholder: 'Comece a escrever para contar caracteres…',

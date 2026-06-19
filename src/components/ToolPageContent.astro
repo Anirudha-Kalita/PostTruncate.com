@@ -43,12 +43,20 @@ const lastUpdatedLine = interp(globalT.toolPage.lastUpdated, {
   date: formatLocaleDate(tool.lastUpdated, lang),
 });
 
-// Platforms whose editor can be embedded as a standalone platform page.
-const EMBEDDABLE = ['twitter', 'instagram', 'linkedin', 'facebook', 'threads'] as const;
-type FocusPlatform = (typeof EMBEDDABLE)[number];
-const focus = (EMBEDDABLE as readonly string[]).includes(tool.id)
-  ? (tool.id as FocusPlatform)
-  : undefined;
+// Platforms whose editor can be embedded as a standalone platform page. Most
+// tools use their id directly as the Dashboard `focus` key; TikTok's guide uses
+// a distinct id (`tiktok-guide`) to avoid colliding with the legacy tiktok
+// calculator, so it maps to the `tiktok` focus key here.
+type FocusPlatform = 'twitter' | 'instagram' | 'linkedin' | 'facebook' | 'threads' | 'tiktok';
+const FOCUS_BY_TOOL_ID: Record<string, FocusPlatform> = {
+  twitter: 'twitter',
+  instagram: 'instagram',
+  linkedin: 'linkedin',
+  facebook: 'facebook',
+  threads: 'threads',
+  'tiktok-guide': 'tiktok',
+};
+const focus = FOCUS_BY_TOOL_ID[tool.id];
 
 // Brand name for the {platform} slot in the cross-promo copy (not translated).
 const PLATFORM_LABEL: Record<string, string> = {
@@ -57,6 +65,7 @@ const PLATFORM_LABEL: Record<string, string> = {
   linkedin: 'LinkedIn',
   facebook: 'Facebook',
   threads: 'Threads',
+  'tiktok-guide': 'TikTok',
 };
 const platformLabel = PLATFORM_LABEL[tool.id] ?? '';
 

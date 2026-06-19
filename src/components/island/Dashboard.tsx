@@ -4,6 +4,7 @@ import { Workspace } from './Workspace';
 import { LinkedInPreview } from './LinkedInPreview';
 import { TwitterPreview } from './TwitterPreview';
 import { ThreadsPreview } from './ThreadsPreview';
+import { TikTokPreview } from './TikTokPreview';
 import { MetaMonitor } from './MetaMonitor';
 import { HookVisibilityCard } from './HookVisibilityCard';
 import { KeywordMonitor } from './KeywordMonitor';
@@ -17,7 +18,7 @@ import { interp } from '../../i18n/interp';
 import type { IslandStrings } from '../../i18n/types';
 
 /** Platforms a standalone tool page can scope the editor to. */
-type FocusPlatform = 'linkedin' | 'twitter' | 'instagram' | 'facebook' | 'threads' | 'sms';
+type FocusPlatform = 'linkedin' | 'twitter' | 'instagram' | 'facebook' | 'threads' | 'tiktok' | 'sms';
 
 interface Props {
   /** Active locale — used for locale-aware number formatting in the previews. */
@@ -39,7 +40,7 @@ const DRAFT_STORAGE_KEY = 'post_truncate_active_draft';
 const ANALYSIS_DEBOUNCE_MS = 80;
 const STORAGE_DEBOUNCE_MS = 250;
 
-type CardKey = 'linkedin' | 'twitter' | 'meta' | 'threads';
+type CardKey = 'linkedin' | 'twitter' | 'meta' | 'threads' | 'tiktok';
 
 const PLATFORM_TO_CARD: Record<string, CardKey> = {
   linkedin: 'linkedin',
@@ -47,12 +48,13 @@ const PLATFORM_TO_CARD: Record<string, CardKey> = {
   instagram: 'meta',
   facebook: 'meta',
   threads: 'threads',
+  tiktok: 'tiktok',
 };
 
-const DEFAULT_ORDER: CardKey[] = ['linkedin', 'twitter', 'meta', 'threads'];
+const DEFAULT_ORDER: CardKey[] = ['linkedin', 'twitter', 'meta', 'threads', 'tiktok'];
 
 /** Platforms whose preview card carries a Desktop/Mobile fold toggle. */
-type ViewablePlatform = 'linkedin' | 'instagram' | 'facebook' | 'threads';
+type ViewablePlatform = 'linkedin' | 'instagram' | 'facebook' | 'threads' | 'tiktok';
 
 /**
  * Per-platform viewport defaults — the single source of truth for which fold
@@ -64,6 +66,7 @@ const DEFAULT_VIEWS: Record<ViewablePlatform, FoldView> = {
   instagram: 'mobile',
   facebook: 'mobile',
   threads: 'mobile',
+  tiktok: 'mobile',
 };
 
 /** Focus platform → the Hook Visibility row to scope to (undefined = not audited). */
@@ -73,6 +76,7 @@ const FOCUS_TO_HOOK: Partial<Record<FocusPlatform, HookPlatform>> = {
   instagram: 'instagram',
   facebook: 'facebook',
   threads: 'threads',
+  tiktok: 'tiktok',
 };
 
 /**
@@ -86,6 +90,7 @@ const PREVIEW_TABS: { id: FocusPlatform; name: string; brand: Brand }[] = [
   { id: 'instagram', name: 'Instagram', brand: 'instagram' },
   { id: 'facebook', name: 'Facebook', brand: 'facebook' },
   { id: 'threads', name: 'Threads', brand: 'threads' },
+  { id: 'tiktok', name: 'TikTok', brand: 'tiktok' },
 ];
 
 
@@ -246,6 +251,7 @@ export default function Dashboard({ lang, strings, toolSlugs, focus }: Props) {
             if (key === 'twitter') return <div id="platform-card-twitter" key="tw"><TwitterPreview key="twitter" text={analysisText} lang={lang} s={strings} toolLinkHref={`/${lang}/${toolSlugs.twitter}/`} image={imageUrl} mediaKind={mediaKind} /></div>;
             if (key === 'meta') return <div id="platform-card-meta" key="mw"><MetaMonitor key="meta" text={analysisText} lang={lang} s={strings} toolLinkHref={`/${lang}/${toolSlugs.instagram}/`} facebookToolLinkHref={`/${lang}/${toolSlugs.facebook}/`} priority={effectiveMetaPriority} only={metaOnly} instagramView={views.instagram} setInstagramView={(v) => setPlatformView('instagram', v)} facebookView={views.facebook} setFacebookView={(v) => setPlatformView('facebook', v)} image={imageUrl} mediaKind={mediaKind} showFolded={showFolded} /></div>;
             if (key === 'threads') return <div id="platform-card-threads" key="thw"><ThreadsPreview key="threads" text={analysisText} lang={lang} s={strings} toolLinkHref={`/${lang}/${toolSlugs.threads}/`} view={views.threads} setView={(v) => setPlatformView('threads', v)} image={imageUrl} mediaKind={mediaKind} showFolded={showFolded} /></div>;
+            if (key === 'tiktok') return <div id="platform-card-tiktok" key="ttw"><TikTokPreview key="tiktok" text={analysisText} lang={lang} s={strings} toolLinkHref={`/${lang}/${toolSlugs['tiktok-guide']}/`} view={views.tiktok} setView={(v) => setPlatformView('tiktok', v)} image={imageUrl} mediaKind={mediaKind} showFolded={showFolded} /></div>;
           })}
           {focus === 'sms' && <SmsCounter text={analysisText} lang={lang} s={strings.sms} />}
           <details class="group rounded-xl bg-canvas shadow-e2">
@@ -371,6 +377,7 @@ export default function Dashboard({ lang, strings, toolSlugs, focus }: Props) {
                     if (key === 'twitter') return <div id="platform-card-twitter" key="tw"><TwitterPreview key="twitter" text={analysisText} lang={lang} s={strings} toolLinkHref={`/${lang}/${toolSlugs.twitter}/`} image={imageUrl} mediaKind={mediaKind} /></div>;
                     if (key === 'meta') return <div id="platform-card-meta" key="mw"><MetaMonitor key="meta" text={analysisText} lang={lang} s={strings} toolLinkHref={`/${lang}/${toolSlugs.instagram}/`} facebookToolLinkHref={`/${lang}/${toolSlugs.facebook}/`} priority={effectiveMetaPriority} instagramView={views.instagram} setInstagramView={(v) => setPlatformView('instagram', v)} facebookView={views.facebook} setFacebookView={(v) => setPlatformView('facebook', v)} image={imageUrl} mediaKind={mediaKind} showFolded={showFolded} /></div>;
                     if (key === 'threads') return <div id="platform-card-threads" key="thw"><ThreadsPreview key="threads" text={analysisText} lang={lang} s={strings} toolLinkHref={`/${lang}/${toolSlugs.threads}/`} view={views.threads} setView={(v) => setPlatformView('threads', v)} image={imageUrl} mediaKind={mediaKind} showFolded={showFolded} /></div>;
+                    if (key === 'tiktok') return <div id="platform-card-tiktok" key="ttw"><TikTokPreview key="tiktok" text={analysisText} lang={lang} s={strings} toolLinkHref={`/${lang}/${toolSlugs['tiktok-guide']}/`} view={views.tiktok} setView={(v) => setPlatformView('tiktok', v)} image={imageUrl} mediaKind={mediaKind} showFolded={showFolded} /></div>;
                   })}
                 </>
               ) : (
@@ -380,6 +387,7 @@ export default function Dashboard({ lang, strings, toolSlugs, focus }: Props) {
                   {previewTab === 'instagram' && <div id="platform-card-meta"><MetaMonitor text={analysisText} lang={lang} s={strings} toolLinkHref={`/${lang}/${toolSlugs.instagram}/`} facebookToolLinkHref={`/${lang}/${toolSlugs.facebook}/`} only="instagram" instagramView={views.instagram} setInstagramView={(v) => setPlatformView('instagram', v)} facebookView={views.facebook} setFacebookView={(v) => setPlatformView('facebook', v)} image={imageUrl} mediaKind={mediaKind} showFolded={showFolded} /></div>}
                   {previewTab === 'facebook' && <div id="platform-card-meta"><MetaMonitor text={analysisText} lang={lang} s={strings} toolLinkHref={`/${lang}/${toolSlugs.instagram}/`} facebookToolLinkHref={`/${lang}/${toolSlugs.facebook}/`} only="facebook" priority="facebook" instagramView={views.instagram} setInstagramView={(v) => setPlatformView('instagram', v)} facebookView={views.facebook} setFacebookView={(v) => setPlatformView('facebook', v)} image={imageUrl} mediaKind={mediaKind} showFolded={showFolded} /></div>}
                   {previewTab === 'threads' && <div id="platform-card-threads"><ThreadsPreview text={analysisText} lang={lang} s={strings} toolLinkHref={`/${lang}/${toolSlugs.threads}/`} view={views.threads} setView={(v) => setPlatformView('threads', v)} image={imageUrl} mediaKind={mediaKind} showFolded={showFolded} /></div>}
+                  {previewTab === 'tiktok' && <div id="platform-card-tiktok"><TikTokPreview text={analysisText} lang={lang} s={strings} toolLinkHref={`/${lang}/${toolSlugs['tiktok-guide']}/`} view={views.tiktok} setView={(v) => setPlatformView('tiktok', v)} image={imageUrl} mediaKind={mediaKind} showFolded={showFolded} /></div>}
                 </>
               )}
             </div>

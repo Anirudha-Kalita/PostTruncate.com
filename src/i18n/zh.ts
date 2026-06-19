@@ -192,6 +192,16 @@ export const zh: Translations = {
           ['花式字体', '破坏屏幕阅读器'],
         ],
       },
+      tiktok: {
+        name: 'TikTok',
+        tag: '文案折叠',
+        body: 'TikTok 文案最多 2,200 个字符，表情符号和话题标签都计入上限。但信息流以视频为先：它只显示文案开头，并在首个换行或约 100 个字符（以先到者为准）处把其余内容折叠在「…更多」之后。把钩子放在一行内并置于开头，它就能越过折叠显示。PostTruncate 实时逐字计数，并在 9:16 竖屏上精确标出文案折叠的位置。',
+        facts: [
+          ['文案上限', '2,200 个字符'],
+          ['「…更多」折叠', '约100字符／首行'],
+          ['视频画幅', '9:16（1080×1920）'],
+        ],
+      },
     },
   },
 
@@ -320,6 +330,7 @@ export const zh: Translations = {
       threads: '链接按全长计数；超过 {limit} 字符的内容将以编号回复的形式接续。',
       instagram: '文案在“更多”后折叠；每帖最多 {hashtags} 个话题标签的硬性上限。',
       facebook: '信息流帖子远在技术上限之前就会折叠在“查看更多”后面。',
+      tiktok: '文案在首个换行或约 100 个字符处折叠于「…更多」之后；表情符号和话题标签都计数。',
       smsGsm: '单条消息 {single} 字符；拆分后每段 {multi} 字符。',
       smsUnicode: '一个表情符号或非 GSM 字符就会让整条消息切换为 Unicode。',
     },
@@ -331,6 +342,7 @@ export const zh: Translations = {
       instagram: 'Instagram 文案最长可达 {limit} 字符，但信息流只显示“更多”链接前的约 {mobile} 字符。更严格的规则是话题标签：文案或首条评论中超过 {hashtags} 个，帖子可能会静默发布失败。',
       facebook: 'Facebook 的技术上限是 {limit} 字符，但信息流帖子在移动端约 {mobile} 字符、桌面端约 {desktop} 字符处就会折叠在“查看更多”后面。冗长的整块文字会让互动率骤降——实际的限制是折叠线，而不是上限。',
       sms: '一条短信在 GSM 7 位编码下可容纳 {gsmSingle} 字符，拆分后每段降至 {gsmMulti} 字符。任何表情符号或非 GSM 字符都会让整条消息切换为 Unicode——单条 {uniSingle} 字符，每段 {uniMulti} 字符——而且部分 GSM 符号（€、方括号、竖线）按两个字符计算。',
+      tiktok: 'TikTok 每条文案允许 {limit} 个字符，表情符号和话题标签按完整长度计入。由于视频铺满屏幕，信息流会在首个换行或约 {fold} 个字符（以先到者为准）处把文案折叠在「…更多」之后，因此第一行就是大多数观众所能读到的全部。视频画幅为全屏竖版 9:16（1080×1920）。',
     },
   },
 
@@ -373,6 +385,7 @@ export const zh: Translations = {
           'LinkedIn',
           'Facebook',
           'Threads',
+          'TikTok',
         ],
       },
     },
@@ -602,6 +615,7 @@ export const zh: Translations = {
       instagram: { name: 'Instagram', desc: '显示 ~125 字符，点击“更多”展开' },
       facebook: { name: 'Facebook', desc: '在“...查看更多”之前显示 ~160 字符' },
       threads: { name: 'Threads', desc: '类似于 Instagram，截断前 ~125 字符' },
+      tiktok: { name: 'TikTok', desc: '在约 100 个字符或首个换行处折叠' },
       sms: { name: 'SMS (GSM)', desc: 'GSM 每条短信 160 字符，Unicode 为 70 字符' },
     },
   },
@@ -651,6 +665,13 @@ export const zh: Translations = {
         shown: "约125字符",
         bestPractice: "简短且吸引人",
         notes: "Meta 的基于文本的平台"
+      },
+      tiktok: {
+        name: "TikTok",
+        limit: "2,200",
+        shown: "约100个字符",
+        bestPractice: "把钩子放在第一行",
+        notes: "表情符号和话题标签计数；在首个换行处折叠"
       },
       sms: {
         name: "SMS (GSM)",
@@ -763,6 +784,8 @@ export const zh: Translations = {
           '还有谁靠这么小的改动看到过这么大的效果？',
         sms:
           '嗨！简单说一句——上周那处引导流程的小调整让我们的试用转付费率翻了一倍。改了什么＋衡量的 3 件事都在这： https://posttruncate.com/blog/onboarding',
+        tiktok:
+          '一个小小的引导流程改动，让我们的试用转付费率翻了一倍 🤯\n\n没有新定价，没有增长黑客——我们只是从第一屏移除了一个决策。我们改了什么、以及上线前测量的 3 项指标，完整拆解都在主页简介里 👀\n\n#saas #startup #buildinpublic #growthtips #producttok',
       },
     },
     workspace: {
@@ -778,6 +801,7 @@ export const zh: Translations = {
         twitter: "开始输入您的帖子。粘贴草稿，添加一些链接和标签，然后在右侧查看 X (Twitter) 中的实时预览更新...",
         threads: "开始输入您的帖子。粘贴草稿，添加一些链接和标签，然后在右侧查看 Threads 中的实时预览更新...",
         sms: "开始输入您的帖子。粘贴草稿，添加一些链接和标签，然后在右侧查看 SMS 中的实时预览更新...",
+        tiktok: '开始输入你的文案。先写钩子，加上几个话题标签，右侧的 TikTok 预览会在 9:16 竖屏上实时更新…',
       },
       counters: {
         characters: '字符',
@@ -934,6 +958,19 @@ export const zh: Translations = {
       placeholder:
         '你的 Threads 预览会显示在这里。超过 {limit} 个字符，它会串联成一段编号的帖子序列。',
     },
+    tiktok: {
+      title: 'TikTok 预览',
+      badgeIdle: '开始输入',
+      badgeSingle: '可放入一条文案',
+      badgeOver: '超出文案上限',
+      links: { one: '{n} 个链接', other: '{n} 个链接' },
+      charLength: '文案长度',
+      seeMore: '…更多',
+      mediaHint: '添加 9:16 视频或图片',
+      safeZones: '安全区',
+      lineBreakHint: '换行会更早触发「…更多」',
+      placeholder: '你的文案预览将显示在这里（最多 {limit} 个字符）。',
+    },
     meta: {
       title: '格式监测器',
       badgeNeedsFix: '需要修正',
@@ -1023,6 +1060,7 @@ export const zh: Translations = {
       instagram: '了解Instagram字符限制 →',
       facebook: '了解Facebook字符限制 →',
       threads: '了解Threads字符限制 →',
+      tiktok: '了解 TikTok 文案限制 →',
     },
     embed: {
       placeholder: '开始输入以统计字符数…',

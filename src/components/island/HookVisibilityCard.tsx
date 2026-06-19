@@ -36,6 +36,7 @@ const PANEL_PLATFORMS: { platform: HookPlatform; brand: Brand; name: string }[] 
   { platform: 'facebook', brand: 'facebook', name: 'Facebook' },
   { platform: 'x', brand: 'x', name: 'X' },
   { platform: 'threads', brand: 'threads', name: 'Threads' },
+  { platform: 'tiktok', brand: 'tiktok', name: 'TikTok' },
 ];
 
 const VERDICT_TO_STATUS: Record<'pass' | 'warn' | 'fail', HookStatus> = {

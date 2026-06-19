@@ -48,10 +48,12 @@ test('non-finite or non-positive input falls back to square (1)', () => {
   assert.equal(clampFeedRatio(NaN, { min: 1.5 }), 1.5);
 });
 
-test('every platform band is well-formed (min < max when both set)', () => {
+test('every platform band is well-formed (min <= max when both set)', () => {
+  // A locked band (TikTok: 9:16 only) sets min === max; a ranged band keeps
+  // min < max. Either is well-formed — an inverted band (min > max) is not.
   for (const band of Object.values(IMAGE_RATIOS)) {
     if (band.min !== undefined && band.max !== undefined) {
-      assert.ok(band.min < band.max);
+      assert.ok(band.min <= band.max);
     }
   }
 });

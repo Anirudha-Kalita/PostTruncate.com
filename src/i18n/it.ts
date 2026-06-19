@@ -192,6 +192,16 @@ export const it: Translations = {
           ['Font fantasiosi', 'Bloccano gli screen reader'],
         ],
       },
+      tiktok: {
+        name: 'TikTok',
+        tag: 'Piega della didascalia',
+        body: 'Le didascalie di TikTok arrivano fino a 2.200 caratteri, con emoji e hashtag che contano nel totale. Ma il feed mette il video al primo posto: mostra solo l’inizio della didascalia e piega il resto dietro “…altro” al primo a capo o intorno ai 100 caratteri, a seconda di cosa viene prima. Inizia con il tuo gancio su una sola riga perché sopravviva. PostTruncate conta ogni carattere in tempo reale e segna esattamente dove la didascalia si piega su un reel 9:16.',
+        facts: [
+          ['Limite didascalia', '2.200 caratteri'],
+          ['Piega “…altro”', '~100 car. / 1ª riga'],
+          ['Formato video', '9:16 (1080×1920)'],
+        ],
+      },
     },
   },
 
@@ -320,6 +330,7 @@ export const it: Translations = {
       threads: 'I link contano per intero; il testo oltre {limit} caratteri prosegue come risposte numerate.',
       instagram: 'La didascalia si piega dietro «altro»; tetto rigido di {hashtags} hashtag per post.',
       facebook: 'I post del feed si comprimono dietro «Altro» molto prima del tetto tecnico.',
+      tiktok: 'La didascalia si piega dietro “…altro” al primo a capo o ~100 caratteri; emoji e hashtag contano.',
       smsGsm: '{single} caratteri in un singolo messaggio; {multi} per segmento quando si divide.',
       smsUnicode: 'Un’emoji o un carattere non GSM trasforma l’intero messaggio in Unicode.',
     },
@@ -331,6 +342,7 @@ export const it: Translations = {
       instagram: 'Le didascalie di Instagram possono arrivare a {limit} caratteri, ma il feed mostra solo i primi {mobile} circa prima del link «altro». La regola più dura riguarda gli hashtag: più di {hashtags} in una didascalia o nel primo commento e il post può fallire silenziosamente la pubblicazione.',
       facebook: 'Il tetto tecnico di Facebook è di {limit} caratteri, ma i post del feed si comprimono dietro «Altro» intorno ai {mobile} caratteri su mobile e {desktop} su desktop. L’engagement crolla sui blocchi lunghi senza pause: il limite pratico è la piega, non il tetto.',
       sms: 'Un singolo SMS contiene {gsmSingle} caratteri nella codifica GSM a 7 bit, che scendono a {gsmMulti} per segmento quando il messaggio si divide. Qualsiasi emoji o carattere non GSM converte l’intero messaggio in Unicode — {uniSingle} caratteri per messaggio singolo, {uniMulti} per segmento — e alcuni simboli GSM (€, parentesi quadre, la barra verticale) contano doppio.',
+      tiktok: 'TikTok consente {limit} caratteri per didascalia, con emoji e hashtag che contano per intero. Poiché il video riempie lo schermo, il feed piega la didascalia dietro “…altro” al primo a capo o intorno ai {fold} caratteri — a seconda di cosa viene prima — quindi la prima riga è tutto ciò che la maggior parte legge. Il formato video è verticale a schermo intero 9:16 (1080×1920).',
     },
   },
 
@@ -373,6 +385,7 @@ export const it: Translations = {
           'LinkedIn',
           'Facebook',
           'Threads',
+          'TikTok',
         ],
       },
     },
@@ -604,6 +617,7 @@ export const it: Translations = {
       instagram: { name: 'Instagram', desc: 'Mostra ~125 caratteri, tocca "altro" per espandere' },
       facebook: { name: 'Facebook', desc: 'Mostra ~160 caratteri prima di "...altro"' },
       threads: { name: 'Threads', desc: 'Simile a Instagram con ~125 caratteri prima del troncamento' },
+      tiktok: { name: 'TikTok', desc: 'Si piega a ~100 caratteri o al primo a capo' },
       sms: { name: 'SMS (GSM)', desc: '160 caratteri per SMS per GSM, 70 per Unicode' },
     },
   },
@@ -653,6 +667,13 @@ export const it: Translations = {
         shown: "~125 caratteri",
         bestPractice: "Breve e coinvolgente",
         notes: "La piattaforma basata su testo di Meta"
+      },
+      tiktok: {
+        name: "TikTok",
+        limit: "2,200",
+        shown: "~100 caratteri",
+        bestPractice: "Gancio sulla prima riga",
+        notes: "Emoji e hashtag contano; si piega al primo a capo"
       },
       sms: {
         name: "SMS (GSM)",
@@ -765,6 +786,8 @@ export const it: Translations = {
           'qualcun altro ha visto risultati così grandi da una modifica così piccola?',
         sms:
           'Ciao! In breve — quella modifica all’onboarding rilasciata la settimana scorsa ha raddoppiato il nostro tasso da prova a pagamento. Abbiamo scritto cosa è cambiato + le 3 cose che abbiamo misurato: https://posttruncate.com/blog/onboarding',
+        tiktok:
+          'una piccola modifica all’onboarding ha raddoppiato il nostro tasso da prova a pagamento 🤯\n\nnessun nuovo prezzo, nessun growth hack — abbiamo solo tolto una decisione dalla primissima schermata. l’analisi completa di cosa abbiamo cambiato e le 3 cose che abbiamo misurato sono nella nostra bio 👀\n\n#saas #startup #buildinpublic #growthtips #producttok',
       },
     },
     workspace: {
@@ -780,6 +803,7 @@ export const it: Translations = {
         twitter: "Inizia a digitare il tuo post. Incolla una bozza, aggiungi alcuni link e hashtag e guarda l'anteprima in tempo reale aggiornarsi in X (Twitter) sulla destra...",
         threads: "Inizia a digitare il tuo post. Incolla una bozza, aggiungi alcuni link e hashtag e guarda l'anteprima in tempo reale aggiornarsi in Threads sulla destra...",
         sms: "Inizia a digitare il tuo post. Incolla una bozza, aggiungi alcuni link e hashtag e guarda l'anteprima in tempo reale aggiornarsi in SMS sulla destra...",
+        tiktok: 'Inizia a scrivere la didascalia. Parti dal tuo gancio, aggiungi qualche hashtag e guarda la tua anteprima TikTok aggiornarsi su un reel 9:16 a destra…',
       },
       counters: {
         characters: 'Caratteri',
@@ -936,6 +960,19 @@ export const it: Translations = {
       placeholder:
         'L’anteprima di Threads appare qui. Supera i {limit} caratteri e si concatena in una sequenza di post numerati.',
     },
+    tiktok: {
+      title: 'Anteprima TikTok',
+      badgeIdle: 'Inizia a scrivere',
+      badgeSingle: 'Sta in una didascalia',
+      badgeOver: 'Oltre il limite della didascalia',
+      links: { one: '{n} link', other: '{n} link' },
+      charLength: 'Lunghezza didascalia',
+      seeMore: '…altro',
+      mediaHint: 'Aggiungi un video o un’immagine 9:16',
+      safeZones: 'Zone di sicurezza',
+      lineBreakHint: 'Un a capo attiva “…altro” prima',
+      placeholder: 'L’anteprima della didascalia appare qui (fino a {limit} caratteri).',
+    },
     meta: {
       title: 'Monitor di formattazione',
       badgeNeedsFix: 'Da correggere',
@@ -1025,6 +1062,7 @@ export const it: Translations = {
       instagram: 'Scopri i limiti di caratteri di Instagram →',
       facebook: 'Scopri i limiti di caratteri di Facebook →',
       threads: 'Scopri i limiti di caratteri di Threads →',
+      tiktok: 'Scopri i limiti delle didascalie TikTok →',
     },
     embed: {
       placeholder: 'Inizia a digitare per contare i caratteri…',

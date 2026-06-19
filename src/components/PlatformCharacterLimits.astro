@@ -72,6 +72,15 @@ const rows = [
     note: interp(L.notes.threads, { limit: nf.format(LIMITS.THREADS) }),
   },
   {
+    id: 'tiktok',
+    name: 'TikTok',
+    href: toolHref['tiktok-guide'],
+    limit: nf.format(LIMITS.TIKTOK_CAPTION),
+    foldMobile: `~${nf.format(FOLDS.tiktok.mobile)}`,
+    foldDesktop: `~${nf.format(FOLDS.tiktok.desktop)}`,
+    note: L.notes.tiktok,
+  },
+  {
     id: 'sms',
     name: 'SMS (GSM 7-bit)',
     href: toolHref['sms'],
@@ -216,7 +225,8 @@ const rows = [
   .brand-facebook { color: #1877f2; }
   .brand-sms { color: #25d366; }
   .brand-twitter,
-  .brand-threads { color: var(--color-ink); }
+  .brand-threads,
+  .brand-tiktok { color: var(--color-ink); }
 
   /* Dark theme tweaks */
   :global(html[data-theme='dark']) .limits-table th {

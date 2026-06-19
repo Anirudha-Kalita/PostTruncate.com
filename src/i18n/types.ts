@@ -194,6 +194,7 @@ export interface IslandStrings {
       instagram: string;
       facebook: string;
       threads: string;
+      tiktok: string;
       sms: string;
     };
   };
@@ -209,6 +210,7 @@ export interface IslandStrings {
       instagram: string;
       twitter: string;
       threads: string;
+      tiktok: string;
       sms: string;
     };
     counters: {
@@ -422,6 +424,25 @@ export interface IslandStrings {
     /** "{limit}". */
     placeholder: string;
   };
+  tiktok: {
+    title: string;
+    badgeIdle: string;
+    badgeSingle: string;
+    badgeOver: string;
+    /** "{n}" links. */
+    links: Plural;
+    charLength: string;
+    /** "…more" affordance label. */
+    seeMore: string;
+    /** Empty-media hint inside the 9:16 frame. */
+    mediaHint: string;
+    /** Safe-zone overlay toggle label. */
+    safeZones: string;
+    /** Hint shown when a line break triggers the fold early. */
+    lineBreakHint: string;
+    /** "{limit}". */
+    placeholder: string;
+  };
   meta: {
     title: string;
     badgeNeedsFix: string;
@@ -530,6 +551,7 @@ export interface IslandStrings {
     instagram: string;
     facebook: string;
     threads: string;
+    tiktok: string;
   };
   /** Strings for the stripped-down embeddable widget at /[lang]/embed/. */
   embed: {
@@ -895,6 +917,7 @@ export interface Translations {
       threads: GuideEntry;
       instagram: GuideEntry;
       facebook: GuideEntry;
+      tiktok: GuideEntry;
     };
   };
   hookband: {
@@ -969,6 +992,7 @@ export interface Translations {
       threads: string;
       instagram: string;
       facebook: string;
+      tiktok: string;
       smsGsm: string;
       smsUnicode: string;
     };
@@ -981,6 +1005,7 @@ export interface Translations {
       threads: string;
       instagram: string;
       facebook: string;
+      tiktok: string;
       sms: string;
     };
   };
@@ -1086,6 +1111,7 @@ export interface Translations {
       instagram: { name: string; desc: string };
       facebook: { name: string; desc: string };
       threads: { name: string; desc: string };
+      tiktok: { name: string; desc: string };
       sms: { name: string; desc: string };
     };
   };
@@ -1104,6 +1130,7 @@ export interface Translations {
       instagram: { name: string; limit: string; shown: string; bestPractice: string; notes: string };
       facebook: { name: string; limit: string; shown: string; bestPractice: string; notes: string };
       threads: { name: string; limit: string; shown: string; bestPractice: string; notes: string };
+      tiktok: { name: string; limit: string; shown: string; bestPractice: string; notes: string };
       sms: { name: string; limit: string; shown: string; bestPractice: string; notes: string };
     };
     viewAll: string;

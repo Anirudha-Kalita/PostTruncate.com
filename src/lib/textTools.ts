@@ -24,6 +24,10 @@ export const LIMITS = {
   INSTAGRAM_CAPTION: 2200,
   /** Facebook's published hard cap for a feed post. */
   FACEBOOK_POST: 63206,
+  /** TikTok video-caption cap (emojis and hashtags count). */
+  TIKTOK_CAPTION: 2200,
+  /** TikTok organic caption "…more" fold (≈1 line). */
+  TIKTOK_FOLD: 100,
 } as const;
 
 export type SmsEncoding = 'GSM 7-bit' | 'Unicode';
@@ -941,6 +945,7 @@ export const FOLDS = {
   instagram: { mobile: 125, desktop: 125 },
   facebook: { mobile: 110, desktop: 480 },
   threads: { mobile: 250, desktop: LIMITS.THREADS },
+  tiktok: { mobile: LIMITS.TIKTOK_FOLD, desktop: LIMITS.TIKTOK_FOLD },
 } as const;
 
 /**
@@ -962,6 +967,8 @@ export const IMAGE_RATIOS = {
   instagram: { min: 0.524, max: 1.334 },
   // Facebook caps tall portraits near 4:5; landscape unbounded.
   facebook: { min: undefined, max: 1.25 },
+  // TikTok is full-screen 9:16 vertical; lock the frame to that ratio.
+  tiktok: { min: 1.778, max: 1.778 },
 } as const;
 
 /**
@@ -1000,6 +1007,17 @@ export function twitterFoldIndex(text: string): number {
     acc = next;
   }
   return graphemes.length;
+}
+
+/**
+ * TikTok collapses an organic caption behind "…more" at the first line break
+ * OR ~100 characters, whichever comes first — it prioritizes the video canvas
+ * over text. Returns the grapheme index where the visible caption is cut.
+ */
+export function tiktokFoldIndex(text: string): number {
+  const br = /\r\n|\r|\n/.exec(text);
+  const brIndex = br ? charCount(text.slice(0, br.index)) : Infinity;
+  return Math.min(LIMITS.TIKTOK_FOLD, brIndex, charCount(text));
 }
 
 /**

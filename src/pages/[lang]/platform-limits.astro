@@ -77,6 +77,14 @@ const rows = [
     note: L.notes.facebook,
   },
   {
+    name: 'TikTok',
+    href: toolHref['tiktok-guide'],
+    limit: nf.format(LIMITS.TIKTOK_CAPTION),
+    foldMobile: `~${nf.format(FOLDS.tiktok.mobile)}`,
+    foldDesktop: `~${nf.format(FOLDS.tiktok.desktop)}`,
+    note: L.notes.tiktok,
+  },
+  {
     name: 'SMS (GSM 7-bit)',
     href: toolHref['sms'],
     limit: nf.format(SMS_LIMITS.GSM.singlePart),
@@ -140,6 +148,14 @@ const ruleSections = [
       limit: nf.format(LIMITS.FACEBOOK_POST),
       mobile: nf.format(FOLDS.facebook.mobile),
       desktop: nf.format(FOLDS.facebook.desktop),
+    }),
+  },
+  {
+    name: 'TikTok',
+    href: toolHref['tiktok-guide'],
+    body: interp(L.rules.tiktok, {
+      limit: nf.format(LIMITS.TIKTOK_CAPTION),
+      fold: nf.format(FOLDS.tiktok.mobile),
     }),
   },
   {
