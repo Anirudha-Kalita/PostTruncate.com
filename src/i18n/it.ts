@@ -71,12 +71,12 @@ export const it: Translations = {
     lastUpdated: 'Ultimo aggiornamento: {date}',
     crossPromo: {
       heading: 'Devi controllare altre piattaforme?',
-      text: 'PostTruncate non è solo per {platform}. L\'editor completo nella home page mostra l\'anteprima del tuo post su LinkedIn, X, Instagram, Facebook, Threads e SMS contemporaneamente — così individui la soglia, il limite e le insidie di codifica di ogni piattaforma in un\'unica volta. Scrivilo una volta, controllalo ovunque.',
+      text: 'PostTruncate non è solo per {platform}. L\'editor completo nella home page mostra l\'anteprima del tuo post su LinkedIn, X, Instagram, Facebook, Threads e TikTok contemporaneamente — così individui la soglia, il limite e le insidie di codifica di ogni piattaforma in un\'unica volta. Scrivilo una volta, controllalo ovunque.',
       cta: 'Apri l\'editor completo',
     },
     cta: {
       heading: 'Pronto a vedere com\'è davvero il tuo post?',
-      blurb: 'Incolla la tua bozza nell\'editor di PostTruncate e visualizza istantaneamente anteprime live per LinkedIn, X, Instagram, Facebook, Threads e SMS — con linee di piega, divisioni dei thread e avvisi di limite che si aggiornano mentre scrivi. Gratuito, istantaneo e nulla lascia il tuo browser.',
+      blurb: 'Incolla la tua bozza nell\'editor di PostTruncate e visualizza istantaneamente anteprime live per LinkedIn, X, Instagram, Facebook, Threads e TikTok — con linee di piega, divisioni dei thread e avvisi di limite che si aggiornano mentre scrivi. Gratuito, istantaneo e nulla lascia il tuo browser.',
       button: 'Inizia a scrivere — è gratis',
     },
   },

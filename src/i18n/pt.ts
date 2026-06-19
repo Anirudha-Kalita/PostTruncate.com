@@ -71,12 +71,12 @@ export const pt: Translations = {
     lastUpdated: 'Última atualização: {date}',
     crossPromo: {
       heading: 'Precisa verificar outras plataformas?',
-      text: 'O PostTruncate não é só para {platform}. O editor completo na página inicial pré-visualiza sua publicação no LinkedIn, X, Instagram, Facebook, Threads e SMS ao mesmo tempo — para você identificar o corte, o limite e as armadilhas de codificação de cada plataforma de uma só vez. Escreva uma vez, verifique em todos os lugares.',
+      text: 'O PostTruncate não é só para {platform}. O editor completo na página inicial pré-visualiza sua publicação no LinkedIn, X, Instagram, Facebook, Threads e TikTok ao mesmo tempo — para você identificar o corte, o limite e as armadilhas de codificação de cada plataforma de uma só vez. Escreva uma vez, verifique em todos os lugares.',
       cta: 'Abrir o editor completo',
     },
     cta: {
       heading: 'Pronto para ver como sua publicação realmente aparece?',
-      blurb: 'Cole seu rascunho no editor do PostTruncate e veja instantaneamente pré-visualizações ao vivo para LinkedIn, X, Instagram, Facebook, Threads e SMS — com linhas de corte, divisões de thread e avisos de limite atualizando enquanto você digita. Gratuito, instantâneo e nada sai do seu navegador.',
+      blurb: 'Cole seu rascunho no editor do PostTruncate e veja instantaneamente pré-visualizações ao vivo para LinkedIn, X, Instagram, Facebook, Threads e TikTok — com linhas de corte, divisões de thread e avisos de limite atualizando enquanto você digita. Gratuito, instantâneo e nada sai do seu navegador.',
       button: 'Comece a escrever — é gratuito',
     },
   },

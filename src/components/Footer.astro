@@ -90,6 +90,11 @@ const homeToolsLinks = calculators
     label: tool.schemaName[lang] ?? tool.schemaName['en'],
     href: `/${lang}/tools/${tool.slugs[lang] ?? tool.slugs['en']}/`,
   }));
+
+homeToolsLinks.push({
+  label: footer.columns.tool.links[4],
+  href: `/${lang}/embed-widget/`,
+});
 // Counter labels use just the bare platform name (e.g. "YouTube", "TikTok")
 // from PLATFORM_COUNTERS.brand — the "Character Counter" suffix in schemaName
 // is redundant under a column already titled "Character Counters".

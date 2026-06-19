@@ -71,12 +71,12 @@ export const fr: Translations = {
     lastUpdated: 'Dernière mise à jour : {date}',
     crossPromo: {
       heading: 'Besoin de vérifier d\'autres plateformes ?',
-      text: 'PostTruncate ne se limite pas à {platform}. L\'éditeur complet de la page d\'accueil prévisualise votre publication sur LinkedIn, X, Instagram, Facebook, Threads et SMS en même temps — pour repérer le pli, la limite et les pièges d\'encodage de chaque plateforme en une seule fois. Écrivez une fois, vérifiez partout.',
+      text: 'PostTruncate ne se limite pas à {platform}. L\'éditeur complet de la page d\'accueil prévisualise votre publication sur LinkedIn, X, Instagram, Facebook, Threads et TikTok en même temps — pour repérer le pli, la limite et les pièges d\'encodage de chaque plateforme en une seule fois. Écrivez une fois, vérifiez partout.',
       cta: 'Ouvrir l\'éditeur complet',
     },
     cta: {
       heading: 'Prêt à voir à quoi ressemble vraiment votre publication ?',
-      blurb: 'Collez votre brouillon dans l\'éditeur PostTruncate et visualisez instantanément des aperçus en direct pour LinkedIn, X, Instagram, Facebook, Threads et SMS — avec les lignes de pli, les découpages de fil et les avertissements de limite mis à jour au fil de la frappe. Gratuit, instantané et rien ne quitte votre navigateur.',
+      blurb: 'Collez votre brouillon dans l\'éditeur PostTruncate et visualisez instantanément des aperçus en direct pour LinkedIn, X, Instagram, Facebook, Threads et TikTok — avec les lignes de pli, les découpages de fil et les avertissements de limite mis à jour au fil de la frappe. Gratuit, instantané et rien ne quitte votre navigateur.',
       button: 'Commencer à écrire — c\'est gratuit',
     },
   },

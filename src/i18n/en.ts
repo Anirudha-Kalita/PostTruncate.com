@@ -71,12 +71,12 @@ export const en: Translations = {
     lastUpdated: 'Last updated: {date}',
     crossPromo: {
       heading: 'Need to check other platforms?',
-      text: "PostTruncate isn't just for {platform}. The full editor on the home page previews your post against LinkedIn, X, Instagram, Facebook, Threads, and SMS all at once — so you catch every platform's fold, limit, and encoding trap in one pass. Write it once, check it everywhere.",
+      text: "PostTruncate isn't just for {platform}. The full editor on the home page previews your post against LinkedIn, X, Instagram, Facebook, Threads, and TikTok all at once — so you catch every platform's fold, limit, and encoding trap in one pass. Write it once, check it everywhere.",
       cta: 'Open the full editor',
     },
     cta: {
       heading: 'Ready to see how your post really looks?',
-      blurb: 'Paste your draft into the PostTruncate editor and instantly see live previews across LinkedIn, X, Instagram, Facebook, Threads, and SMS — with fold lines, thread splits, and limit warnings updating as you type. Free, instant, and nothing ever leaves your browser.',
+      blurb: 'Paste your draft into the PostTruncate editor and instantly see live previews across LinkedIn, X, Instagram, Facebook, Threads, and TikTok — with fold lines, thread splits, and limit warnings updating as you type. Free, instant, and nothing ever leaves your browser.',
       button: 'Start writing — it\'s free',
     },
   },

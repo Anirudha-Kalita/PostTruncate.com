@@ -71,12 +71,12 @@ export const zh: Translations = {
     lastUpdated: '最后更新：{date}',
     crossPromo: {
       heading: '需要检查其他平台吗？',
-      text: 'PostTruncate 不只适用于 {platform}。主页上的完整编辑器可同时预览你的内容在 LinkedIn、X、Instagram、Facebook、Threads 和 SMS 上的效果——让你一次性发现每个平台的折叠点、字符上限和编码陷阱。写一次，处处检查。',
+      text: 'PostTruncate 不只适用于 {platform}。主页上的完整编辑器可同时预览你的内容在 LinkedIn、X、Instagram、Facebook、Threads 和 TikTok 上的效果——让你一次性发现每个平台的折叠点、字符上限和编码陷阱。写一次，处处检查。',
       cta: '打开完整编辑器',
     },
     cta: {
       heading: '准备好看看你的帖子真实呈现效果了吗？',
-      blurb: '将草稿粘贴到 PostTruncate 编辑器中，即可立即查看 LinkedIn、X、Instagram、Facebook、Threads 和 SMS 的实时预览——折叠线、话题串分割和字数限制提示会随输入实时更新。完全免费、即时呈现，且所有内容均不离开你的浏览器。',
+      blurb: '将草稿粘贴到 PostTruncate 编辑器中，即可立即查看 LinkedIn、X、Instagram、Facebook、Threads 和 TikTok 的实时预览——折叠线、话题串分割和字数限制提示会随输入实时更新。完全免费、即时呈现，且所有内容均不离开你的浏览器。',
       button: '开始写作——完全免费',
     },
   },
