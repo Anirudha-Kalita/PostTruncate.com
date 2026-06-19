@@ -5,8 +5,10 @@
 // Two ways in, both 100% client-side (respects the no-backend rule):
 //   • Paste an article's HTML → "Format file" extracts title/description/date/
 //     author/hero/body into our frontmatter, converts the body HTML→Markdown,
-//     turns the FAQ into foldable <details> blocks, and downloads the hero
-//     image into public/og/. Unfound fields are left blank to fill manually.
+//     turns the FAQ into foldable <details> blocks, and downloads EVERY image
+//     (hero + in-body, including remote/CDN sources) into public/og/, repointing
+//     the markdown at the local /og/ copies so the build resizes + WebP-converts
+//     them. Unfound fields are left blank to fill manually.
 //   • Drop an already-formatted .md to validate/preview it.
 //
 // Then it validates the REQUIRED fields against the `blog` schema, previews the
@@ -99,8 +101,10 @@ export const prerender = true;
       <p class="lede">
         Local authoring tool. Paste an article's HTML and click <strong>Format file</strong> — it
         extracts what it can into our frontmatter, converts the body to Markdown, makes the FAQ
-        foldable, and downloads the hero image to <code>public/og/</code>. Anything it can't find is
-        left blank for you to fill in the editable output below. Fully client-side.
+        foldable, and downloads every image — hero <em>and</em> in-body, including remote/CDN ones —
+        into <code>public/og/</code>, repointing the markdown at the local copies so the build
+        resizes and converts them to WebP. Anything it can't find is left blank for you to fill in
+        the editable output below. Fully client-side.
       </p>
 
       <div class="grid">
@@ -498,6 +502,15 @@ export const prerender = true;
         state._heroUrl = ex.heroUrl || '';
         generate(ex.fm, ex.body);
 
+        // Saving any image locally needs the project root authorized first.
+        if (!state.dirHandle) {
+          fs.innerHTML = `<span class="pill ok">Formatted</span> — authorize the project root (Step 1) to auto-save images into <code>public/og/</code>, then click Format again. Image URLs left as-is for now.`;
+          return;
+        }
+
+        const notes = [];
+
+        // 1) Hero image → public/og, recorded as the frontmatter ogImage.
         if (ex.heroUrl) {
           fs.textContent = 'Downloading hero image…';
           const res = await downloadHero(ex.heroUrl);
@@ -505,13 +518,26 @@ export const prerender = true;
             const cur = parseFile($('outContent').value);
             cur.fm.ogImage = '/og/' + res.filename;
             generate(cur.fm, cur.body);
-            fs.innerHTML = `<span class="pill ok">Formatted</span> image → public/og/${esc(res.filename)}`;
+            notes.push(`hero → og/${esc(res.filename)}`);
           } else {
-            fs.innerHTML = `<span class="pill ok">Formatted</span> — image not saved (${esc(res.reason)}). Source: <code>${esc(ex.heroUrl)}</code>`;
+            notes.push(`hero not saved (${esc(res.reason)})`);
           }
-        } else {
-          fs.innerHTML = `<span class="pill ok">Formatted</span> — no image found.`;
         }
+
+        // 2) In-body images (incl. remote/CDN) → public/og, repointing the
+        //    markdown at the local copies so the build converts them to WebP.
+        fs.textContent = 'Downloading in-body images…';
+        const cur = parseFile($('outContent').value);
+        const imgs = await localizeBodyImages(cur.body, state._slug);
+        if (imgs.saved || imgs.failed) {
+          generate(cur.fm, imgs.body);
+          notes.push(
+            `${imgs.saved} body image(s) → og/` +
+              (imgs.failed ? ` · ${imgs.failed} failed (URL kept)` : ''),
+          );
+        }
+
+        fs.innerHTML = `<span class="pill ok">Formatted</span> ${notes.length ? notes.join(' · ') : 'no images found'}`;
       });
 
       // ── .md drop ─────────────────────────────────────────────────────────
@@ -574,10 +600,19 @@ export const prerender = true;
         $('dirStatus').classList.toggle('empty', !state.dirHandle);
       }
 
-      // Download the hero image bytes and write them into public/og/. Tries a
-      // direct fetch first; on CORS failure, falls back to a public proxy so
-      // images on hosts without CORS headers can still be saved locally.
-      async function downloadHero(url) {
+      // Make a base filename safe for public/og (mirrors the build pipeline's
+      // own sanitizer): URL- and srcset-safe characters only.
+      const sanitizeImgBase = (s) =>
+        String(s || 'image').toLowerCase().replace(/[^a-z0-9._-]+/g, '-')
+          .replace(/^[-.]+|[-.]+$/g, '') || 'image';
+
+      // Fetch an image's bytes and write them into public/og/ as <base>.<ext>.
+      // Tries a direct fetch first; on CORS failure, falls back to a public
+      // proxy so images on hosts without CORS headers can still be saved. The
+      // file keeps its ORIGINAL format (PNG/JPG/WebP) — the BUILD step
+      // (npm run build → optimize-images) is what resizes it and converts it to
+      // WebP. Shared by the hero and the in-body image savers.
+      async function saveImageToOg(url, base) {
         if (!state.dirHandle) return { ok: false, reason: 'choose the project root first' };
         if (!(await ensurePerm(state.dirHandle))) return { ok: false, reason: 'write permission denied' };
         let blob = null;
@@ -588,10 +623,10 @@ export const prerender = true;
             if (r.ok) { const b = await r.blob(); if (b.type.startsWith('image/')) blob = b; }
           } catch (e) {}
         }
-        if (!blob) return { ok: false, reason: 'fetch blocked (CORS) — set ogImage manually' };
+        if (!blob) return { ok: false, reason: 'fetch blocked (CORS)' };
         let ext = (blob.type.split('/')[1] || url.split(/[?#]/)[0].split('.').pop() || 'png').toLowerCase();
         ext = ({ jpeg: 'jpg', 'svg+xml': 'svg' }[ext] || ext).replace(/[^a-z0-9]/g, '').slice(0, 4) || 'png';
-        const filename = `${state._slug || 'image'}.${ext}`;
+        const filename = `${sanitizeImgBase(base)}.${ext}`;
         try {
           const ogDir = await resolveOgDir(state.dirHandle, true);
           if (!ogDir) return { ok: false, reason: 'public/og not reachable — authorize the project root to auto-save images' };
@@ -599,6 +634,51 @@ export const prerender = true;
           const w = await fh.createWritable(); await w.write(blob); await w.close();
           return { ok: true, filename };
         } catch (e) { return { ok: false, reason: 'write failed: ' + e.message }; }
+      }
+
+      // Hero image → public/og/<slug>.<ext>.
+      async function downloadHero(url) {
+        return saveImageToOg(url, state._slug || 'image');
+      }
+
+      // Pull every image URL out of the markdown body — both Markdown
+      // ![alt](url) and raw <img src="…"> (the FAQ block / pasted HTML can carry
+      // either). Returns unique URLs in first-seen order.
+      function collectBodyImageUrls(md) {
+        const urls = new Set();
+        const mdRe = /!\[[^\]]*\]\(\s*<?([^()\s>]+)>?(?:\s+["'][^)]*)?\s*\)/g;
+        const htmlRe = /<img\b[^>]*?\bsrc\s*=\s*["']([^"']+)["']/gi;
+        let m;
+        while ((m = mdRe.exec(md))) urls.add(m[1]);
+        while ((m = htmlRe.exec(md))) urls.add(m[1]);
+        return [...urls];
+      }
+
+      // An absolute http(s) image we should pull local. Already-local paths
+      // (/og/… and other root-relative) and data: URIs are left untouched.
+      const isRemoteImage = (url) => /^https?:\/\//i.test(url);
+
+      // Download every remote in-body image into public/og/ and repoint the
+      // markdown at the local /og/<file> copy, so the build pipeline resizes and
+      // WebP-converts it. Identical URLs are fetched once and reused; failures
+      // keep their original URL. Returns { body, saved, failed }.
+      async function localizeBodyImages(md, slug) {
+        const urls = collectBodyImageUrls(md).filter(isRemoteImage);
+        if (!urls.length) return { body: md, saved: 0, failed: 0 };
+        let out = md, saved = 0, failed = 0;
+        const seen = new Map();
+        for (const url of urls) {
+          let local = seen.get(url);
+          if (!local) {
+            const res = await saveImageToOg(url, `${slug || 'image'}-${saved + 1}`);
+            if (!res.ok) { failed++; continue; }
+            local = '/og/' + res.filename;
+            seen.set(url, local);
+            saved++;
+          }
+          out = out.split(url).join(local); // replace every occurrence (literal)
+        }
+        return { body: out, saved, failed };
       }
 
       if (!window.showDirectoryPicker) {
@@ -641,7 +721,7 @@ export const prerender = true;
       });
 
       // expose pure fns for smoke-testing (harmless; dev convenience)
-      window.__mdUploader = { parseFile, validate, autofix, buildContent, slugify, extractFromHtml, formatFaq, detectPlatform, rewriteSelfLinks, resolvePostsDir, resolveOgDir };
+      window.__mdUploader = { parseFile, validate, autofix, buildContent, slugify, extractFromHtml, formatFaq, detectPlatform, rewriteSelfLinks, resolvePostsDir, resolveOgDir, collectBodyImageUrls, isRemoteImage, sanitizeImgBase };
     </script>
   </body>
 </html>
