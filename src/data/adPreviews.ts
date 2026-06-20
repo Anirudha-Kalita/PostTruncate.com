@@ -17,7 +17,7 @@
 // silo is structurally ready for all 10 locales while shipping English copy.
 // ──────────────────────────────────────────────────────────────────────────
 
-import type { ToolDefinition } from './tools';
+import type { ToolDefinition } from './tools.ts';
 
 export const adPreviews: ToolDefinition[] = [
   {

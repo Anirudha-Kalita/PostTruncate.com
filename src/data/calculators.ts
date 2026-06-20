@@ -19,7 +19,7 @@
 //    the shared ToolDefinition interface.
 // ──────────────────────────────────────────────────────────────────────────
 
-import type { ToolDefinition } from './tools';
+import type { ToolDefinition } from './tools.ts';
 
 export const calculators: ToolDefinition[] = [
   {

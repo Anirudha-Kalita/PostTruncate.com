@@ -16,7 +16,7 @@
 // option to public/admin/config.yml.
 // ──────────────────────────────────────────────────────────────────────────
 
-import { DEFAULT_LOCALE } from '../i18n/config';
+import { DEFAULT_LOCALE } from '../i18n/config.ts';
 
 export interface BlogCategory {
   /** Stable machine id stored in post frontmatter. Never change after publish. */

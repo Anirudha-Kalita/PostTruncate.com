@@ -1,11 +1,11 @@
 import { execFileSync } from 'node:child_process';
 import { existsSync, readdirSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
-import { tools } from '../data/tools';
-import { calculators } from '../data/calculators';
-import { blogCategories, getCategorySlug } from '../data/blogCategories';
-import { LOCALES, DEFAULT_LOCALE } from '../i18n/config';
-import { toLastmodIso } from './contentDates';
+import { tools } from '../data/tools.ts';
+import { calculators } from '../data/calculators.ts';
+import { blogCategories, getCategorySlug } from '../data/blogCategories.ts';
+import { LOCALES, DEFAULT_LOCALE } from '../i18n/config.ts';
+import { toLastmodIso } from './contentDates.ts';
 
 /** Fallback when git history is unavailable (e.g. shallow CI clone). */
 const CONTENT_FALLBACK_ISO = '2026-06-01T00:00:00.000Z';

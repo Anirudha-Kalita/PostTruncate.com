@@ -14,7 +14,7 @@
 // ──────────────────────────────────────────────────────────────────────────
 import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
-import { resolveVariants, buildSrcset, type ImageManifest } from './responsiveImage';
+import { resolveVariants, buildSrcset, type ImageManifest } from './responsiveImage.ts';
 
 /** Responsive `sizes` for in-body images — matches the article measure. */
 const IN_BODY_SIZES = '(max-width: 896px) 100vw, 896px';

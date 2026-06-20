@@ -43,7 +43,12 @@ export const prerender = true;
       .wrap { max-width: 1100px; margin: 0 auto; padding: 32px 24px 80px; }
       h1 { font-size: 28px; letter-spacing: -1px; color: var(--ink); margin: 0 0 4px; }
       .lede { margin: 0 0 24px; color: var(--mute); font-size: 14px; }
-      .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; align-items: start; }
+      /* minmax(0, …) (not the default minmax(auto, …)) + min-width:0 keep both
+         columns locked at 50/50 even when the formatted preview holds wide
+         content (long URLs, tables, code) — wide content scrolls/wraps within
+         its own column instead of stretching the track and skewing the left. */
+      .grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 24px; align-items: start; }
+      .grid > * { min-width: 0; }
       @media (max-width: 860px) { .grid { grid-template-columns: 1fr; } }
       .card { background: var(--bg); border: 1px solid var(--line); border-radius: var(--radius); padding: 20px; }
       .card h2 { font-size: 15px; color: var(--ink); margin: 0 0 12px; letter-spacing: -0.2px; }
@@ -83,7 +88,7 @@ export const prerender = true;
       .pv-meta { margin: 14px 0 0; font-size: 13px; color: var(--mute); }
       .pv-hero { display:block; width:100%; height:auto; margin: 20px 0 0; border-radius: 12px; box-shadow: 0 1px 3px rgba(0,0,0,.12); }
       .pv-hero-missing { margin-top:12px; font-size:12px; color:#92400e; background:#fef9c3; padding:8px 10px; border-radius:8px; }
-      .pv-body { margin-top: 24px; color: var(--body); font-size: 16px; line-height: 1.65; }
+      .pv-body { margin-top: 24px; color: var(--body); font-size: 16px; line-height: 1.65; overflow-wrap: break-word; }
       .pv-body h2 { font-size: 20px; color: var(--ink); margin: 28px 0 0; }
       .pv-body h3 { font-size: 17px; color: var(--ink); margin: 22px 0 0; }
       .pv-body img { max-width: 100%; height: auto; border-radius: 8px; }
@@ -158,7 +163,7 @@ export const prerender = true;
 
           <div class="card hide" id="outputCard" style="margin-top:24px;">
             <h2>File to be written — <span id="outName" style="font-family:var(--mono);"></span></h2>
-            <p class="note" style="margin-top:0;">Editable — fill any blank field, then Save.</p>
+            <p class="note" style="margin-top:0;">Editable — fill any blank field, then Save. On Save, any remaining remote/CDN images are downloaded into <code>public/og/</code> and the paths rewritten to <code>/og/…</code> automatically.</p>
             <textarea id="outContent" spellcheck="false"></textarea>
             <div class="row" style="margin-top:14px;">
               <button id="save" type="button" class="primary" disabled>Save to project</button>
@@ -681,6 +686,43 @@ export const prerender = true;
         return { body: out, saved, failed };
       }
 
+      // Pull EVERY remote image referenced by a raw .md string — the frontmatter
+      // ogImage (hero) plus all in-body images — into public/og/ and rewrite the
+      // content to local /og/ paths. Operates on the raw text (literal URL → path
+      // swaps) so the author's frontmatter/body formatting is otherwise
+      // untouched. Idempotent: re-running finds no remote URLs left. This is the
+      // save-time safety net so a saved post never ships an external image URL.
+      // Returns { content, saved, failed }.
+      // `onProgress(done, total)` — if given, called as each image STARTS
+      // downloading, so callers can render a live "image 2 of 5" counter.
+      async function localizeContentImages(content, onProgress) {
+        const { fm } = parseFile(content);
+        const slug = SLUG_RE.test(String(fm.slug ?? ''))
+          ? fm.slug
+          : (state._slug || slugify(fm.slug || fm.title || 'post'));
+        const heroUrl =
+          typeof fm.ogImage === 'string' && isRemoteImage(fm.ogImage) ? fm.ogImage : null;
+        // Hero first (named -hero), then unique body images (named -1, -2, …).
+        const bodyUrls = collectBodyImageUrls(content)
+          .filter(isRemoteImage)
+          .filter((u) => u !== heroUrl);
+        const ordered = [...(heroUrl ? [heroUrl] : []), ...new Set(bodyUrls)];
+        if (!ordered.length) return { content, saved: 0, failed: 0 };
+
+        const total = ordered.length;
+        let out = content, saved = 0, failed = 0, n = 0, done = 0;
+        for (const url of ordered) {
+          done++;
+          if (typeof onProgress === 'function') onProgress(done, total);
+          const base = url === heroUrl ? `${slug}-hero` : `${slug}-${++n}`;
+          const res = await saveImageToOg(url, base);
+          if (!res.ok) { failed++; continue; }
+          out = out.split(url).join('/og/' + res.filename); // every occurrence
+          saved++;
+        }
+        return { content: out, saved, failed };
+      }
+
       if (!window.showDirectoryPicker) {
         $('fsaNote').classList.remove('hide');
         $('pickDir').disabled = true;
@@ -700,6 +742,24 @@ export const prerender = true;
         const st = $('saveStatus');
         if (!state.dirHandle) { st.textContent = 'Choose the project root first.'; return; }
         if (!(await ensurePerm(state.dirHandle))) { st.textContent = 'Write permission denied.'; return; }
+
+        // Safety net: before writing, pull any remaining remote/CDN images
+        // (hero + in-body) into public/og/ and rewrite the content to /og/
+        // paths — so the saved .md never ships an external image URL and the
+        // build can optimize every image. No-op when there's nothing remote.
+        let imgNote = '';
+        try {
+          st.textContent = 'Checking for remote images…';
+          const r = await localizeContentImages($('outContent').value, (done, total) => {
+            st.textContent = `Downloading image ${done} of ${total}…`;
+          });
+          if (r.saved || r.failed) {
+            $('outContent').value = r.content;
+            syncFromOutput(); // refresh preview/validation/state from rewritten content
+            imgNote = ` · ${r.saved} image(s) → og/${r.failed ? `, ${r.failed} failed (URL kept)` : ''}`;
+          }
+        } catch (e) { /* non-fatal — save the content as-is */ }
+
         const name = `${state._slug}.md`;
         let enDir;
         try { enDir = await resolvePostsDir(state.dirHandle); }
@@ -708,7 +768,7 @@ export const prerender = true;
           try { await enDir.getFileHandle(name); if (!confirm(`${name} already exists. Overwrite?`)) { st.textContent = 'Cancelled.'; return; } } catch {}
           const fh = await enDir.getFileHandle(name, { create: true });
           const w = await fh.createWritable(); await w.write($('outContent').value); await w.close();
-          st.innerHTML = `<span class="pill ok">Saved</span> src/content/blog/en/${esc(name)} — run <code>npx astro sync</code> &amp; build, then commit.`;
+          st.innerHTML = `<span class="pill ok">Saved</span> src/content/blog/en/${esc(name)}${imgNote} — run <code>npx astro sync</code> &amp; build, then commit.`;
         } catch (e) { st.textContent = 'Save failed: ' + e.message; }
       });
 
@@ -721,7 +781,7 @@ export const prerender = true;
       });
 
       // expose pure fns for smoke-testing (harmless; dev convenience)
-      window.__mdUploader = { parseFile, validate, autofix, buildContent, slugify, extractFromHtml, formatFaq, detectPlatform, rewriteSelfLinks, resolvePostsDir, resolveOgDir, collectBodyImageUrls, isRemoteImage, sanitizeImgBase };
+      window.__mdUploader = { parseFile, validate, autofix, buildContent, slugify, extractFromHtml, formatFaq, detectPlatform, rewriteSelfLinks, resolvePostsDir, resolveOgDir, collectBodyImageUrls, isRemoteImage, sanitizeImgBase, localizeContentImages };
     </script>
   </body>
 </html>

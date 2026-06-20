@@ -30,7 +30,7 @@ The jump from 150 to 2,200 characters didn't happen by accident. TikTok needed r
 
 But here's what most creators don't realise: **the fold hasn't budged.** Since 2022, the first \~100 characters (or the text before your first line break) are all that show without clicking "more." Everything beyond that is hidden. This creates the fundamental TikTok caption paradox: you have 2,200 characters, but only 100 are visible.
 
-![TikTok Search Interface: captions are now searchable content with discovery and ranking indicators](https://cdn-public.eesel.ai/292ab4fb-3aae-4502-b530-00d5efdf2828/3d8e1a8a-bb3f-4c99-9719-fdd425bc973c/c7d553e5e45a45dcb84901e15e20b951.png)
+![TikTok Search Interface: captions are now searchable content with discovery and ranking indicators](/og/tiktok-captions-1.png)
 
 <p align="center"><span style="font-size: 12px; "><em>TikTok Search Interface: captions are now searchable content with discovery and ranking indicators</em></span></p>
 
@@ -99,7 +99,7 @@ Here's a real example (in outline form):
 
 **Total: 2,050 characters of purposeful content.**
 
-![Side-by-side comparison: 150-character joke caption vs. 2,200-character SEO-optimized caption with keyword tracking](https://cdn-public.eesel.ai/292ab4fb-3aae-4502-b530-00d5efdf2828/3d8e1a8a-bb3f-4c99-9719-fdd425bc973c/cd98f3591e14403a9bfbdc6d6206af5e.png)
+![Side-by-side comparison: 150-character joke caption vs. 2,200-character SEO-optimized caption with keyword tracking](/og/tiktok-captions-2.png)
 
 <p align="center"><span style="font-size: 12px; "><em>Side-by-side comparison: 150-character joke caption vs. 2,200-character SEO-optimized caption with keyword tracking</em></span></p>
 
@@ -107,7 +107,7 @@ Here's a real example (in outline form):
 
 Writing a 2,200-character caption that works above and below the fold requires visibility: you need to know exactly where your caption truncates, what keywords you're hitting, and whether your tone lands the right way.
 
-![Mobile TikTok caption fold visualization: first 100 characters visible, remaining content hidden behind …more button](https://cdn-public.eesel.ai/292ab4fb-3aae-4502-b530-00d5efdf2828/3d8e1a8a-bb3f-4c99-9719-fdd425bc973c/4848f832ccc64d6f8f93a8a14ed0e9d8.png)
+![Mobile TikTok caption fold visualization: first 100 characters visible, remaining content hidden behind …more button](/og/tiktok-captions-3.png)
 
 <p align="center"><span style="font-size: 12px; "><em>Mobile TikTok caption fold visualisation: first 100 characters visible, remaining content hidden behind …more button</em></span></p>
 

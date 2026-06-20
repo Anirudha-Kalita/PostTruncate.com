@@ -34,7 +34,7 @@ When you create a non-Spark in-feed ad through TikTok Ads Manager, the descripti
 
 That 2,200-character idea you had in your head? It doesn't exist in native ads. You get 100 characters. That's your entire written message.
 
-![Organic vs. in-feed ad text limit comparison: 2,200 characters for organic posts, 100-character hard cap for native ads - same visible fold, completely different ceiling](https://cdn-public.eesel.ai/292ab4fb-3aae-4502-b530-00d5efdf2828/3d8e1a8a-bb3f-4c99-9719-fdd425bc973c/b5e7799d650e4fa8bc483fe10864f2a9.png)
+![Organic vs. in-feed ad text limit comparison: 2,200 characters for organic posts, 100-character hard cap for native ads - same visible fold, completely different ceiling](/og/tiktok-in-feed-ad-1.png)
 
 <p align="center"><span style="font-size: 12px; "><em>Organic vs. in-feed ad text limit comparison: 2,200 characters for organic posts, 100-character hard cap for native ads - same visible fold, completely different ceiling</em></span></p>
 
@@ -54,7 +54,7 @@ This means:
 
 The practical consequence is brutal: **your ad description is often only 1 to 3 visible lines for the average viewer scrolling through their feed.** If your primary CTA, price, discount code, or value proposition isn't in those lines, it doesn't exist as far as most of your audience is concerned.
 
-![TikTok in-feed ad safe zone diagram: the first 50-70 characters are always visible (primary hook zone), characters 70-100 are conditionally visible, and anything past the fold is hidden behind See more](https://cdn-public.eesel.ai/292ab4fb-3aae-4502-b530-00d5efdf2828/3d8e1a8a-bb3f-4c99-9719-fdd425bc973c/ace14d9c3c0540d384a29be87d53b305.png)
+![TikTok in-feed ad safe zone diagram: the first 50-70 characters are always visible (primary hook zone), characters 70-100 are conditionally visible, and anything past the fold is hidden behind See more](/og/tiktok-in-feed-ad-2.png)
 
 <p align="center"><span style="font-size: 12px; "><em>TikTok in-feed ad safe zone diagram: the first 50-70 characters are always visible (primary hook zone), characters 70-100 are conditionally visible, and anything past the fold is hidden behind See more</em></span></p>
 
@@ -120,7 +120,7 @@ Nothing is uploaded or stored - the preview runs entirely in your browser. No ac
 
 I built this because I kept running into the same frustration: you shouldn't need to spend $100 to discover that your discount code is invisible. The simulator is the pre-flight check that runs before the money leaves your account.
 
-![The 4-step TikTok ad copy pre-flight workflow: write your copy, paste into the simulator, check the 100-character fold, then launch with confidence](https://cdn-public.eesel.ai/292ab4fb-3aae-4502-b530-00d5efdf2828/3d8e1a8a-bb3f-4c99-9719-fdd425bc973c/3f5009762ed046b29c865cd456fc2048.png)
+![The 4-step TikTok ad copy pre-flight workflow: write your copy, paste into the simulator, check the 100-character fold, then launch with confidence](/og/tiktok-in-feed-ad-3.png)
 
 <p align="center"><span style="font-size: 12px; "><em>The 4-step TikTok ad copy pre-flight workflow: write your copy, paste into the simulator, check the 100-character fold, then launch with confidence</em></span></p>
 
