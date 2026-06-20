@@ -1,39 +1,34 @@
 ---
+translationKey: how-to-write-google-ads-descriptions-under-90-characters
 title: How to Write Google Ads Descriptions Under 90 Characters
+subtitle: 90 characters is a brutal limit. Here's the formula PPC copywriters use to fit a value prop, social proof, and CTA without the last-minute panic rewrite.
 description: 90 characters is a brutal limit. Here's the formula PPC copywriters use to fit a value prop, social proof, and CTA without the last-minute panic rewrite.
 publishDate: 2026-06-20
+updatedDate: ''
 locale: en
 slug: how-to-write-google-ads-descriptions-under-90-characters
-translationKey: how-to-write-google-ads-descriptions-under-90-characters
-category: copywriting-strategy
+relatedPlatform: general
+category: seo-serp
 author: PostTruncate Team
-draft: true
+draft: false
 ogImage: /og/how-to-write-google-ads-descriptions-under-90-characters.png
 ---
 
-90 characters is a brutal limit. Here's the formula PPC copywriters use to fit a value prop, social proof, and CTA without the last-minute panic rewrite.
-
-*June 20, 2026 · 10 min read*
-
-A pixel-accurate Google Ads preview showing a 90-character description counter in PostTruncate
-
-* * *
-
 ## TL;DR
 
-Google Ads description fields are capped at 90 characters each - that's roughly one medium sentence, and it has to carry your value prop, a trust signal, and a call to action simultaneously. Generic filler phrases like "a wide range of comprehensive solutions" burn 40+ characters and move the click rate in exactly the wrong direction. The formula that works: \[Value Prop, 30-45 chars\] + \[Social Proof, 20-30 chars\] + \[CTA verb, 10-20 chars\]. Draft against a live counter - not inside the Google Ads dashboard - so you never have to mangle good copy in a panic. [PostTruncate's free Google Ads simulator](/en/ad-previews/google-ads/) enforces the 90-character cap, renders a pixel-accurate preview, and even measures headline pixel width the way Google's actual renderer does.
+Google Ads description fields are capped at 90 characters each - that's roughly one medium sentence, and it has to carry your value prop, a trust signal, and a call to action simultaneously. Generic filler phrases like "a wide range of comprehensive solutions" burn 40+ characters and move the click rate in exactly the wrong direction. The formula that works: \[Value Prop, 30-45 chars] + [Social Proof, 20-30 chars] + [CTA verb, 10-20 chars]. Draft against a live counter - not inside the Google Ads dashboard - so you never have to mangle good copy in a panic. [PostTruncate's free Google Ads simulator](/en/ad-previews/google-ads/) enforces the 90-character cap, renders a pixel-accurate preview, and even measures headline pixel width the way Google's actual renderer does.
 
 ## The 94-character panic - and why I built a better way to draft
 
 I'll give you the short version of the most embarrassing thing that happened to me during a client campaign last year.
 
-I'd spent a solid 20 minutes crafting what I was genuinely proud of: a tight, punchy description that opened with a specific ROI claim, dropped a star rating, and ended with a clean action verb. I pasted it into the Google Ads dashboard, clicked save - and got the error.
+I'd spent a solid 20 minutes crafting what I was genuinely proud of: a tight, punchy description that opened with a specific ROI claim, dropped a star rating, and ended with a clean action verb. I pasted it into the Google Ads dashboard, clicked save, and got the error.
 
 94 characters.
 
 Four characters over the limit, deep inside the live editor with the client watching. What followed was the worst kind of copywriting: frantic deletions, grammar-wrecking compromises, a final line that read like a refrigerator manual. The original was gone.
 
-That experience is why I built the [Google Ads Preview tool on PostTruncate.com](/en/ad-previews/google-ads/). If you draft your descriptions *there* first - where the counter is live and the limit is enforced before you ever touch the real dashboard - that panic never happens.
+That experience is why I built the [Google Ads Preview tool on PostTruncate.com](/en/ad-previews/google-ads/). If you draft your descriptions _there_ first - where the counter is live, and the limit is enforced before you ever touch the real dashboard - that panic never happens.
 
 But before we get to the tool, let's talk about why writing Google Ads descriptions well is genuinely hard, and what the formulas are that actually fit.
 
@@ -57,13 +52,13 @@ That's three distinct persuasive jobs in roughly the same space as a tweet. And 
 
 When you have 3,000 characters - the LinkedIn post limit, for example - filler phrases are annoying but survivable. At 90 characters, they're fatal.
 
-Take a phrase like "a wide range of comprehensive marketing solutions for businesses of all sizes." That's 74 characters - 82% of your entire description budget - and it has communicated exactly zero specific things. No outcome. No number. No reason to click.
+Take a phrase like "a wide range of comprehensive marketing solutions for businesses of all sizes." That's 74 characters - 82% of your entire description budget -, and it has communicated exactly zero specific things. No outcome. No number. No reason to click.
 
 ![Comparison of a filler-heavy Google Ads description versus a power-word description showing the difference in character efficiency and simulated CTR](/og/how-to-write-google-ads-descriptions-under-90-characters-1.png)
 
-Comparison of a filler-heavy Google Ads description versus a power-word description showing the difference in character efficiency and simulated CTR
+<p align="center"><span style="font-size: 12px; "><em>Comparison of a filler-heavy Google Ads description versus a power-word description showing the difference in character efficiency and simulated CTR</em></span></p>
 
-The failure mode has a pattern: filler words fill space with the *feeling* of substance while delivering none. Here are the phrases that should trigger an immediate delete in a 90-character field:
+The failure mode has a pattern: filler words fill space with the _feeling_ of substance while delivering none. Here are the phrases that should trigger an immediate delete in a 90-character field:
 
 -   **"wide range of"** (14 chars) - says nothing specific. Replace with the actual thing.
 -   **"comprehensive solutions"** (23 chars) - a $0 trust signal. Replace with a real number.
@@ -71,13 +66,13 @@ The failure mode has a pattern: filler words fill space with the *feeling* of su
 -   **"we offer"** or **"we provide"** - the opener nobody asked for. Start with the outcome.
 -   **"today's fast-paced world"** - this is 24 characters of 2012 SEO content. Delete immediately.
 
-The reframe is simple: every character is a slot you're either spending on something a searcher cares about, or burning. At 90 characters, the cost of waste is very visible.
+The reframe is simple: every character is a slot you're either spending on something a searcher cares about or burning. At 90 characters, the cost of waste is very visible.
 
 ## The 90-character formula
 
 This is the structure that fits everything without the panic.
 
-**\[Value Prop\] + \[Social Proof\] + \[CTA\]**
+**[Value Prop] + [Social Proof] + [CTA]**
 
 Each segment has a natural character budget:
 
@@ -92,7 +87,7 @@ The formula isn't prescriptive about punctuation or joining words - you can use 
 
 ![The 90-character Google Ads description formula infographic showing a horizontal bar divided into three color-coded segments: Value Prop in blue, Social Proof in gray, CTA in light blue - with character counts labeled per segment](/og/how-to-write-google-ads-descriptions-under-90-characters-2.png)
 
-The 90-character Google Ads description formula infographic showing a horizontal bar divided into three color-coded segments: Value Prop in blue, Social Proof in gray, CTA in light blue - with character counts labeled per segment
+<p align="center"><span style="font-size: 12px; "><em>he 90-character Google Ads description formula infographic showing a horizontal bar divided into three colour-coded segments: Value Prop in blue, Social Proof in grey, CTA in light blue - with character counts labelled per segment</em></span></p>
 
 ## Formula in action: real examples with character counts
 
@@ -130,7 +125,7 @@ Here are four descriptions built on the same formula across different verticals.
 -   CTA: "Get the plan." - 13 chars
 -   Total: **87 chars** ✓
 
-Notice that none of these examples are at 90. That's intentional: leaving 3-5 characters of room means you can adjust a word or swap a number without triggering the limit. Think of 87 as your practical ceiling, not 90.
+Notice that none of these examples is at 90. That's intentional: leaving 3-5 characters of room means you can adjust a word or swap a number without triggering the limit. Think of 87 as your practical ceiling, not 90.
 
 ### Writing the value prop under 45 characters
 
@@ -149,7 +144,7 @@ Social proof is where copy usually bloats, because writers try to include everyt
 -   "G2 Leader, 3 years running." - 27 chars
 -   "As seen in Forbes." - 18 chars
 
-If you don't have a review count or a recognizable trust badge yet, a guarantee works just as well. "Money-back guarantee" is 20 characters and carries a conversion lift that most review scores can't match.
+If you don't have a review count or a recognisable trust badge yet, a guarantee works just as well. "Money-back guarantee" is 20 characters and carries a conversion lift that most review scores can't match.
 
 ## One thing most guides miss: pixel width, not just character count
 
@@ -159,7 +154,7 @@ The 30-character headline limit is only half the constraint. Google renders head
 
 The width issue doesn't affect descriptions directly (they don't appear in the same pixel-constrained header row), but it does affect the overall ad structure: if your Headline 3 consistently gets dropped because it's physically too wide, you lose the third slot entirely even if you're under 30 characters.
 
-A 28-character all-caps headline can be physically wider than a 30-character lowercase one. "MAXIMIZE YOUR PAID ROI" (22 chars) takes up more horizontal pixels than "maximize your paid roi now" (26 chars).
+A 28-character all-caps headline can be physically wider than a 30-character lowercase one. "MAXIMIZE YOUR PAID ROI" (22 chars) takes up more horizontal pixels than "maximise your paid roi now" (26 chars).
 
 PostTruncate's [Google Ads Preview tool](/en/ad-previews/google-ads/) measures this using an HTML5 canvas - the same engine a browser uses to paint text in Arial - so you can see exactly when a headline would overflow the container and get dropped. It's the only free tool I've found that handles this correctly rather than trusting the raw character count.
 
@@ -173,7 +168,7 @@ The workflow that eliminates the 94-character panic entirely:
 
 ![PostTruncate draft-here-paste-there workflow diagram showing three steps: draft in PostTruncate with live counter, hit the limit safely before going live, paste into Google Ads with zero rewrites needed](/og/how-to-write-google-ads-descriptions-under-90-characters-3.png)
 
-PostTruncate draft-here-paste-there workflow diagram showing three steps: draft in PostTruncate with live counter, hit the limit safely before going live, paste into Google Ads with zero rewrites needed
+<p align="center"><span style="font-size: 12px; "><em>PostTruncate draft-here-paste-there workflow diagram showing three steps: draft in PostTruncate with live counter, hit the limit safely before going live, paste into Google Ads with zero rewrites needed</em></span></p>
 
 The difference between this and drafting directly in Google Ads isn't just the panic avoidance. It's that you're doing creative work in a neutral environment where you're not staring at the save button. When the stakes feel lower, the copy gets better.
 
@@ -183,9 +178,9 @@ Here's what the workspace looks like in practice:
 
 ![PostTruncate Google Ads character counter workspace showing real-time ad preview with 90-character limit](/og/how-to-write-google-ads-descriptions-under-90-characters-4.png)
 
-PostTruncate Google Ads character counter workspace showing real-time ad preview with 90-character limit
+<p align="center"><span style="font-size: 12px; "><em>PostTruncate Google Ads character counter workspace showing real-time ad preview with 90-character limit</em></span></p>
 
-*PostTruncate's Google Ads simulator, as taken from [PostTruncate](/en/ad-previews/google-ads/)*
+_PostTruncate's Google Ads simulator, as taken from_ [_PostTruncate_](/en/ad-previews/google-ads/)
 
 Everything runs in the browser. Your ad copy never leaves your device - no account, no upload, no server processing. The tool is supported by non-intrusive ads in reserved spaces that don't shift the layout while you're working.
 
@@ -201,26 +196,24 @@ It's free, runs entirely in your browser, and requires no sign-up.
 
 If you're writing your next batch of RSA descriptions - or if you've got a set that needs tightening against the 90-character formula - [draft them in PostTruncate](/en/ad-previews/google-ads/) first. You'll paste them into Google Ads knowing they're ready.
 
-* * *
+## FAQs
 
-## Frequently Asked Questions
-
-</br><details><summary><b>What is the character limit for Google Ads descriptions?</b></summary>
+<details><summary><b>What is the character limit for Google Ads descriptions?</b></summary>
 <p>Each description in a Responsive Search Ad (RSA) is capped at exactly 90 characters, including spaces and punctuation. You can write up to 4 descriptions per RSA, and Google will display up to 2 at once in any combination. Draft all four - and check each one - using the <a href="/en/ad-previews/google-ads/">PostTruncate Google Ads preview tool</a>, which enforces the 90-character cap live as you type.</p>
 </details>
 
-</br><details><summary><b>How do I fit a value prop, social proof, and CTA in 90 characters?</b></summary>
-<p>Use the 90-character formula: [Value Prop] (30-45 chars) + [Social Proof] (20-30 chars) + [CTA verb] (10-20 chars). For example: &quot;Automate PPC reports in 60 sec. 1,200+ agencies trust us. Start free.&quot; - that&#39;s 70 characters and hits all three. The key is choosing power words that carry weight without filler. The <a href="/en/character-counter/#workspace">PostTruncate character counter</a> shows your live count as you draft, so you&#39;re never guessing.</p>
+<details><summary><b>How do I fit a value prop, social proof, and CTA in 90 characters?</b></summary>
+<p>Use the 90-character formula: [Value Prop] (30-45 chars) + [Social Proof] (20-30 chars) + [CTA verb] (10-20 chars). For example: &quot; Automate PPC reports in 60 sec. 1,200+ agencies trust us. Start free.&quot; - that's 70 characters and hits all three. The key is choosing power words that carry weight without filler. The <a href="/en/character-counter/#workspace">PostTruncate character counter</a> shows your live count as you draft, so you're never guessing.</p>
 </details>
 
-</br><details><summary><b>What happens if my Google Ads description is over 90 characters?</b></summary>
-<p>Google Ads simply won&#39;t accept it - the field rejects any description that exceeds 90 characters. The problem is that the live Google Ads editor doesn&#39;t warn you as you type; it only flags the error when you try to save. This forces a frantic, mid-session rewrite that usually destroys carefully-crafted copy. Drafting in <a href="/en/ad-previews/google-ads/">PostTruncate&#39;s Google Ads simulator</a> first means you hit the wall there - safely - not in the live dashboard.</p>
+<details><summary><b>What happens if my Google Ads description is over 90 characters?</b></summary>
+<p>Google Ads simply won't accept it - the field rejects any description that exceeds 90 characters. The problem is that the live Google Ads editor doesn't warn you as you type; it only flags the error when you try to save. This forces a frantic, mid-session rewrite that usually destroys carefully crafted copy. Drafting in <a href="/en/ad-previews/google-ads/">PostTruncate's Google Ads simulator</a> first means you hit the wall there - safely - not in the live dashboard.</p>
 </details>
 
-</br><details><summary><b>What's the difference between headlines and descriptions in Google Ads?</b></summary>
-<p>Headlines (up to 30 characters each, up to 15 per RSA) appear at the top of the ad as the clickable title row. Descriptions (up to 90 characters each, up to 4 per RSA) appear below and carry most of the persuasive work - your benefit, your proof, your call to action. Google shows up to 3 headlines and 2 descriptions simultaneously, mixing and matching automatically. Both have firm character caps, and both benefit from previewing in <a href="/en/ad-previews/google-ads/">PostTruncate&#39;s pixel-accurate simulator</a> before you go live.</p>
+<details><summary><b>What's the difference between headlines and descriptions in Google Ads?</b></summary>
+<p>Headlines (up to 30 characters each, up to 15 per RSA) appear at the top of the ad as the clickable title row. Descriptions (up to 90 characters each, up to 4 per RSA) appear below and carry most of the persuasive work - your benefit, your proof, your call to action. Google shows up to 3 headlines and 2 descriptions simultaneously, mixing and matching automatically. Both have firm character caps, and both benefit from previewing in <a href="/en/ad-previews/google-ads/">PostTruncate's pixel-accurate simulator</a> before you go live.</p>
 </details>
 
-</br><details><summary><b>Is PostTruncate's Google Ads preview tool free?</b></summary>
-<p>Yes, completely free - no sign-up, no install, no credit card. The <a href="/en/ad-previews/google-ads/">Google Ads Preview tool on PostTruncate</a> enforces the 30-character headline cap and 90-character description cap live as you type, measures pixel width using an HTML5 canvas (so you can see exactly when a headline overflows the ~600px desktop container), and renders a real ad preview. Everything runs in your browser - nothing is uploaded or stored.</p>
+<details><summary><b>Is PostTruncate's Google Ads preview tool free?</b></summary>
+<p>Yes, completely free - no sign-up, no install, no credit card. The <a href="/en/ad-previews/google-ads/">Google Ads Preview tool on PostTruncate</a> enforces the 30-character headline cap and 90-character description cap live as you type, measures pixel width using an HTML5 canvas (so you can see exactly when a headline overflows the \~600px desktop container), and renders a real ad preview. Everything runs in your browser - nothing is uploaded or stored.</p>
 </details>
