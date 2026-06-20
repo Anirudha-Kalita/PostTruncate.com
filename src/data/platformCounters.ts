@@ -41,7 +41,7 @@ export const PLATFORM_COUNTERS: Record<string, PlatformCounterConfig> = {
   tiktok: {
     brand: 'TikTok',
     fields: [
-      { key: 'caption', limit: 2200 },
+      { key: 'caption', limit: 4000 },
       { key: 'bio', limit: 80 },
     ],
   },

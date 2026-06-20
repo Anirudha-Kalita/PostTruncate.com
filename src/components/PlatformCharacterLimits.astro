@@ -51,7 +51,10 @@ const rows = [
     limit: nf.format(LIMITS.INSTAGRAM_CAPTION),
     foldMobile: `~${nf.format(FOLDS.instagram.mobile)}`,
     foldDesktop: `~${nf.format(FOLDS.instagram.desktop)}`,
-    note: interp(L.notes.instagram, { hashtags: nf.format(LIMITS.INSTAGRAM_HASHTAGS) }),
+    note: interp(L.notes.instagram, {
+      hashtags: nf.format(LIMITS.INSTAGRAM_HASHTAGS_RECOMMENDED),
+      hashtagMax: nf.format(LIMITS.INSTAGRAM_HASHTAGS_MAX),
+    }),
   },
   {
     id: 'facebook',
@@ -75,7 +78,7 @@ const rows = [
     id: 'tiktok',
     name: 'TikTok',
     href: toolHref['tiktok-guide'],
-    limit: nf.format(LIMITS.TIKTOK_CAPTION),
+    limit: nf.format(LIMITS.TIKTOK_CAPTION_MAX),
     foldMobile: `~${nf.format(FOLDS.tiktok.mobile)}`,
     foldDesktop: `~${nf.format(FOLDS.tiktok.desktop)}`,
     note: L.notes.tiktok,

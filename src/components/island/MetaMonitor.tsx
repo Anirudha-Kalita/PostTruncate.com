@@ -77,11 +77,12 @@ export function MetaMonitor({ text, lang, s, toolLinkHref, facebookToolLinkHref,
   const author = previewAuthor(s.common);
   const hashtags = detectHashtags(text);
   const tagCount = hashtags.length;
-  const overTagLimit = tagCount > LIMITS.INSTAGRAM_HASHTAGS;
-  const tagTone =
-    overTagLimit || tagCount >= LIMITS.INSTAGRAM_HASHTAGS - 1
-      ? overTagLimit ? 'danger' : 'warn'
-      : 'safe';
+  // Two-tier: 30 is the hard cap (post won't publish); past the recommended ~5
+  // it still posts but reads as spam, so it warns rather than errors.
+  const overHardLimit = tagCount > LIMITS.INSTAGRAM_HASHTAGS_MAX;
+  const aboveRecommended =
+    !overHardLimit && tagCount > LIMITS.INSTAGRAM_HASHTAGS_RECOMMENDED;
+  const tagTone = overHardLimit ? 'danger' : aboveRecommended ? 'warn' : 'safe';
 
   const fancy = hasFancyUnicode(text);
   const fancyN = countFancyUnicode(text);
@@ -191,24 +192,32 @@ export function MetaMonitor({ text, lang, s, toolLinkHref, facebookToolLinkHref,
 
           <div class="rounded-md border border-hairline bg-canvas p-4">
             <Meter
-              value={Math.min(tagCount, LIMITS.INSTAGRAM_HASHTAGS)}
-              max={LIMITS.INSTAGRAM_HASHTAGS}
+              value={Math.min(tagCount, LIMITS.INSTAGRAM_HASHTAGS_MAX)}
+              max={LIMITS.INSTAGRAM_HASHTAGS_MAX}
               tone={tagTone}
               label={m.hashtagLabel}
-              caption={`${nf.format(tagCount)} / ${nf.format(LIMITS.INSTAGRAM_HASHTAGS)}`}
+              caption={`${nf.format(tagCount)} / ${nf.format(LIMITS.INSTAGRAM_HASHTAGS_MAX)}`}
             />
             <p class="mt-2.5 text-[12px] leading-4 text-body">
-              {overTagLimit ? (
+              {overHardLimit ? (
                 <span class="text-error-deep">
                   {interp(m.over, {
-                    limit: nf.format(LIMITS.INSTAGRAM_HASHTAGS),
-                    excess: nf.format(tagCount - LIMITS.INSTAGRAM_HASHTAGS),
+                    limit: nf.format(LIMITS.INSTAGRAM_HASHTAGS_MAX),
+                    excess: nf.format(tagCount - LIMITS.INSTAGRAM_HASHTAGS_MAX),
                   })}
                 </span>
-              ) : tagCount >= LIMITS.INSTAGRAM_HASHTAGS - 1 ? (
-                m.approaching
+              ) : aboveRecommended ? (
+                <span class="text-warning-deep">
+                  {interp(m.approaching, {
+                    n: nf.format(tagCount),
+                    recommended: nf.format(LIMITS.INSTAGRAM_HASHTAGS_RECOMMENDED),
+                    max: nf.format(LIMITS.INSTAGRAM_HASHTAGS_MAX),
+                  })}
+                </span>
               ) : tagCount > 0 ? (
-                m.within
+                interp(m.within, {
+                  recommended: nf.format(LIMITS.INSTAGRAM_HASHTAGS_RECOMMENDED),
+                })
               ) : (
                 m.none
               )}

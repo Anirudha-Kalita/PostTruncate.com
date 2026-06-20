@@ -133,7 +133,7 @@ export const en: Translations = {
         heading: 'Instagram and Facebook character limits',
         paragraphs: [
           'Instagram caps captions at 2,200 characters, but only shows roughly the first 125 before hiding the rest behind a “more” link. PostTruncate tracks exactly where that cutoff falls so your opening line — the part visible in the feed — says what you actually need it to say.',
-          'The dashboard also monitors <strong>hashtag count</strong> in real time. Instagram silently fails to publish posts that exceed 5 hashtags, so a live warning fires before you hit that wall. Spaces are always counted, matching Instagram’s own behavior.',
+          'The dashboard also monitors <strong>hashtag count</strong> in real time. Instagram allows up to 30 hashtags before a post fails to publish, but ~5 is the recommended sweet spot — more reads as spam — so the live meter warns past 5 and flags the 30 hard cap. Spaces are always counted, matching Instagram’s own behavior.',
         ],
       },
       {
@@ -184,10 +184,10 @@ export const en: Translations = {
       instagram: {
         name: 'Instagram',
         tag: 'Hashtag ceiling',
-        body: 'Instagram captions run up to 2,200 characters but only show about the first 125 before a "more" link. The harder rule is hashtags: more than 5 in a single caption or comment and the post silently fails to publish. Stacking dozens of low-intent tags also reads as spam. Keep your tags tight and relevant, and watch the live meter so you never trip the 5-tag wall.',
+        body: 'Instagram captions run up to 2,200 characters but only show about the first 125 before a "more" link. For hashtags, the hard cap is 30 across the caption and first comment — past that the post fails to publish. But ~5 is the recommended sweet spot; stacking dozens of low-intent tags reads as spam. Keep your tags tight and relevant, and watch the live meter, which warns past 5 and flags the 30 hard cap.',
         facts: [
           ['Caption cap', '2,200 characters'],
-          ['Hashtag hard limit', '5 tags'],
+          ['Hashtags', '~5 recommended / 30 hard cap'],
           ['Caption preview', '~125 characters'],
         ],
       },
@@ -204,9 +204,9 @@ export const en: Translations = {
       tiktok: {
         name: 'TikTok',
         tag: 'Caption fold',
-        body: 'TikTok captions run up to 2,200 characters, with emojis and hashtags all counting toward the cap. But the feed puts the video first: it shows only the opening of your caption and collapses the rest behind “…more” at the first line break or about 100 characters, whichever comes first. Lead with your hook on a single line so it survives. PostTruncate counts every character live and marks exactly where the caption folds over a 9:16 reel.',
+        body: 'TikTok captions run up to 4,000 characters when you post natively, with emojis and hashtags all counting toward the cap — but the TikTok API and schedulers (Buffer, Hootsuite, Later) still cap captions at 2,200, so that’s the safe ceiling if you don’t post by hand. Either way the feed puts the video first: it shows only the opening of your caption and collapses the rest behind “…more” at the first line break or about 100 characters, whichever comes first. Lead with your hook on a single line so it survives. PostTruncate counts every character live and marks exactly where the caption folds over a 9:16 reel.',
         facts: [
-          ['Caption cap', '2,200 characters'],
+          ['Caption cap', '4,000 native / 2,200 via API'],
           ['“…more” fold', '~100 chars / first line'],
           ['Video frame', '9:16 (1080×1920)'],
         ],
@@ -239,7 +239,7 @@ export const en: Translations = {
       },
       {
         q: 'How accurate are the character limits?',
-        a: 'PostTruncate counts against each platform’s published and widely-observed limits — 280 for X, 210/140 for the LinkedIn fold, 5 hashtags for Instagram, and a flat 23-character weight for links. Platforms occasionally adjust these, and rendering varies slightly by device, so treat the previews as a close estimate rather than a pixel-perfect guarantee.',
+        a: 'PostTruncate counts against each platform’s published and widely-observed limits — 280 for X, 210/140 for the LinkedIn fold, a recommended ~5 hashtags (30 hard cap) for Instagram, and a flat 23-character weight for links. Platforms occasionally adjust these, and rendering varies slightly by device, so treat the previews as a close estimate rather than a pixel-perfect guarantee.',
       },
       {
         q: 'Do spaces and punctuation count as characters?',
@@ -337,7 +337,7 @@ export const en: Translations = {
       linkedin: 'Text past the fold hides behind “…see more”.',
       twitter: 'No fold — over {limit} characters splits into a thread; every link counts as {url} characters.',
       threads: 'Links count in full; copy past {limit} characters chains as numbered replies.',
-      instagram: 'Caption folds behind “more”; hard ceiling of {hashtags} hashtags per post.',
+      instagram: 'Caption folds behind “more”; aim for ~{hashtags} hashtags (hard cap {hashtagMax}).',
       facebook: 'Feed posts collapse behind “See more” well before the technical cap.',
       tiktok: 'Caption folds behind “…more” at the first line break or ~100 characters; emojis and hashtags count.',
       smsGsm: '{single} characters in a single message; {multi} per segment once it splits.',
@@ -348,9 +348,9 @@ export const en: Translations = {
       linkedin: 'LinkedIn allows {limit} characters per post but folds the feed view after roughly {mobile} characters on mobile and {desktop} on desktop — everything else hides behind “…see more”. Line breaks count, and the first sentence carries almost all of the click-through, so front-load the hook and keep links below the fold.',
       twitter: 'X enforces a hard {limit}-character cap per post and shows no fold at all. Every URL is wrapped by the t.co shortener and always costs {url} characters regardless of its real length, and many emoji weigh as two characters. Longer drafts must be split into a thread — PostTruncate does this automatically at word boundaries.',
       threads: 'Threads allows {limit} characters per post and, unlike X, counts links at their full length. On mobile the feed folds long posts at about {mobile} characters. Anything past the cap has to continue as numbered reply posts chained under the first one.',
-      instagram: 'Instagram captions can run to {limit} characters, but the feed shows only about the first {mobile} before the “more” link. The stricter rule is hashtags: more than {hashtags} in a caption or first comment and the post can silently fail to publish.',
+      instagram: 'Instagram captions can run to {limit} characters, but the feed shows only about the first {mobile} before the “more” link. For hashtags, ~{hashtags} is the recommended sweet spot — going higher still posts but reads as spam. The hard cap is {hashtagMax} (caption plus first comment); past it the post fails to publish.',
       facebook: 'Facebook’s technical cap is {limit} characters, but feed posts collapse behind “See more” at roughly {mobile} characters on mobile and {desktop} on desktop. Engagement drops sharply on long unbroken blocks, so the practical limit is the fold, not the cap.',
-      tiktok: 'TikTok allows {limit} characters per caption, with emojis and hashtags counting in full. Because the video fills the screen, the feed collapses the caption behind “…more” at the first line break or about {fold} characters — whichever comes first — so the opening line is all most viewers read. The video frame is full-screen vertical 9:16 (1080×1920).',
+      tiktok: 'TikTok allows {limit} characters per caption when you post natively in the app, with emojis and hashtags counting in full — but the TikTok API and third-party schedulers (Buffer, Hootsuite, Later) still cap captions at {safe}, so stay under that if you don’t publish by hand. Because the video fills the screen, the feed collapses the caption behind “…more” at the first line break or about {fold} characters — whichever comes first — so the opening line is all most viewers read. The video frame is full-screen vertical 9:16 (1080×1920).',
       sms: 'A single SMS holds {gsmSingle} characters in GSM 7-bit encoding, dropping to {gsmMulti} per segment once the message splits. Any emoji or non-GSM character switches the entire message to Unicode — {uniSingle} characters per single message, {uniMulti} per segment — and some GSM symbols (€, brackets, the pipe) count as two.',
     },
   },
@@ -501,7 +501,7 @@ export const en: Translations = {
         {
           heading: 'What it does',
           paragraphs: [
-            'Write or paste a draft once, and PostTruncate renders it the way <strong>LinkedIn, X, Threads, Instagram, and Facebook</strong> actually will — the “…see more” fold, the 280-character thread split, the 23-character link weighting, the 5-hashtag ceiling. You see exactly what survives above the fold before you commit to publishing.',
+            'Write or paste a draft once, and PostTruncate renders it the way <strong>LinkedIn, X, Threads, Instagram, and Facebook</strong> actually will — the “…see more” fold, the 280-character thread split, the 23-character link weighting, the recommended ~5-hashtag mark and 30 hard cap. You see exactly what survives above the fold before you commit to publishing.',
             'It also catches the quiet problems that shrink your reach: invisible zero-width characters that break counts and screen readers, and pseudo-Unicode “fancy fonts” that look styled but are unreadable to assistive tech.',
           ],
         },
@@ -686,10 +686,10 @@ export const en: Translations = {
       },
       tiktok: {
         name: "TikTok",
-        limit: "2,200",
+        limit: "4,000",
         shown: "~100 characters",
         bestPractice: "Hook on the first line",
-        notes: "Emojis and hashtags count; folds at first line break"
+        notes: "4,000 native; API/schedulers cap at 2,200; folds at first line break"
       },
       sms: {
         name: "SMS (GSM)",
@@ -982,7 +982,9 @@ export const en: Translations = {
       title: 'TikTok preview',
       badgeIdle: 'Start typing',
       badgeSingle: 'Fits in one caption',
-      badgeOver: 'Over caption limit',
+      badgeOverSafe: 'Past safe limit',
+      badgeOver: 'Over the 4,000 cap',
+      apiCapHint: 'Posts natively, but the TikTok API and schedulers (Buffer, Hootsuite, Later) cap captions at {safe} characters.',
       links: { one: '{n} link', other: '{n} links' },
       charLength: 'Caption length',
       seeMore: '…more',
@@ -1000,10 +1002,10 @@ export const en: Translations = {
       captionOver:
         'Instagram captions cap at {limit} characters. Shorten by {excess} before publishing.',
       hashtagLabel: 'Hashtag concentration',
-      over: 'Over Instagram’s hard limit of {limit} hashtags — the caption will fail to post. Remove {excess}.',
+      over: 'Over Instagram’s hard cap of {limit} hashtags — the post won’t publish. Remove {excess}.',
       approaching:
-        'Approaching the 5-tag ceiling. Trim to your highest-intent tags.',
-      within: 'Comfortably within Instagram’s 5-hashtag limit.',
+        '{n} hashtags — above the recommended {recommended}. Still posts (the hard cap is {max}), but tighten for reach.',
+      within: 'Within the recommended {recommended} hashtags.',
       none: 'No hashtags detected yet.',
       a11yLabel: 'Accessibility · fancy fonts',
       audiencePublic: 'Public',

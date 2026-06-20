@@ -133,7 +133,7 @@ export const nl: Translations = {
         heading: 'Tekenlimits op Instagram en Facebook',
         paragraphs: [
           'Instagram staat tot 2.200 tekens toe in een bijschrift, maar toont slechts de eerste 125 of zo voordat de rest achter een link verdwijnt. PostTruncate geeft precies aan waar die grens valt, zodat de eerste zichtbare regel in de feed altijd de regel is die je wilt overbrengen.',
-          'Het dashboard houdt ook het <strong>aantal hashtags</strong> realtime bij. Instagram plaatst berichten met meer dan 5 hashtags stilletjes niet, daarom verschijnt er een waarschuwing voor je die grens bereikt. Spaties worden altijd meegeteld, net als het platform zelf doet.',
+          'Het dashboard houdt ook het <strong>aantal hashtags</strong> realtime bij. Instagram staat tot 30 hashtags toe voordat een bericht mislukt, maar ~5 is het aanbevolen ideaal — meer leest als spam —, dus de meter waarschuwt boven 5 en markeert de harde limiet van 30. Spaties worden altijd meegeteld, net als het platform zelf doet.',
         ],
       },
       {
@@ -184,10 +184,10 @@ export const nl: Translations = {
       instagram: {
         name: 'Instagram',
         tag: 'Hashtagplafond',
-        body: 'Instagram-bijschriften kunnen tot 2.200 tekens lang zijn, maar tonen slechts ongeveer de eerste 125 vóór een "meer"-link. De hardere regel zijn hashtags: meer dan 5 in één bijschrift of reactie en het bericht wordt stilletjes niet gepubliceerd. Tientallen tags met lage intentie op elkaar stapelen leest bovendien als spam. Houd je tags strak en relevant en let op de live meter zodat je nooit tegen de muur van 5 tags aanloopt.',
+        body: 'Instagram-bijschriften kunnen tot 2.200 tekens lang zijn, maar tonen slechts ongeveer de eerste 125 vóór een "meer"-link. Voor hashtags is de harde limiet 30 (bijschrift plus eerste reactie); daarboven wordt het bericht niet geplaatst. Maar ~5 is het aanbevolen ideaal; tientallen tags met lage intentie stapelen leest als spam. Houd je tags strak en relevant en let op de live meter, die boven 5 waarschuwt en de harde limiet van 30 markeert.',
         facts: [
           ['Bijschriftlimiet', '2.200 tekens'],
-          ['Harde hashtaglimiet', '5 tags'],
+          ['Hashtags', '~5 aanbevolen / 30 hard'],
           ['Bijschriftpreview', '~125 tekens'],
         ],
       },
@@ -204,9 +204,9 @@ export const nl: Translations = {
       tiktok: {
         name: 'TikTok',
         tag: 'Bijschrift-vouw',
-        body: 'TikTok-bijschriften lopen tot 2.200 tekens, waarbij emoji en hashtags meetellen voor de limiet. Maar de feed zet de video voorop: hij toont alleen het begin van je bijschrift en vouwt de rest achter “…meer” in bij het eerste regeleinde of ongeveer 100 tekens, wat het eerst komt. Begin met je hook op één regel zodat die overleeft. PostTruncate telt elk teken live en markeert precies waar het bijschrift invouwt over een 9:16-reel.',
+        body: 'TikTok-bijschriften lopen bij native plaatsen tot 4.000 tekens, waarbij emoji en hashtags meetellen voor de limiet — maar de TikTok-API en planners (Buffer, Hootsuite, Later) limiteren het bijschrift op 2.200, dus dat is de veilige grens als je niet handmatig plaatst. Maar de feed zet de video voorop: hij toont alleen het begin van je bijschrift en vouwt de rest achter “…meer” in bij het eerste regeleinde of ongeveer 100 tekens, wat het eerst komt. Begin met je hook op één regel zodat die overleeft. PostTruncate telt elk teken live en markeert precies waar het bijschrift invouwt over een 9:16-reel.',
         facts: [
-          ['Bijschriftlimiet', '2.200 tekens'],
+          ['Bijschriftlimiet', '4.000 native / 2.200 API'],
           ['“…meer”-vouw', '~100 t. / 1e regel'],
           ['Videoframe', '9:16 (1080×1920)'],
         ],
@@ -239,7 +239,7 @@ export const nl: Translations = {
       },
       {
         q: 'Hoe nauwkeurig zijn de tekenlimieten?',
-        a: 'PostTruncate gebruikt de gepubliceerde en algemeen waargenomen limieten van elk platform — 280 voor X, 210/140 voor de LinkedIn-vouw, 5 hashtags voor Instagram en een vaste weging van 23 tekens voor links. Platforms passen deze af en toe aan en de weergave verschilt licht per apparaat, dus beschouw de previews als een nauwkeurige schatting in plaats van een pixelperfecte garantie.',
+        a: 'PostTruncate gebruikt de gepubliceerde en algemeen waargenomen limieten van elk platform — 280 voor X, 210/140 voor de LinkedIn-vouw, ~5 aanbevolen hashtags (harde limiet 30) voor Instagram en een vaste weging van 23 tekens voor links. Platforms passen deze af en toe aan en de weergave verschilt licht per apparaat, dus beschouw de previews als een nauwkeurige schatting in plaats van een pixelperfecte garantie.',
       },
       {
         q: 'Tellen spaties en leestekens mee als tekens?',
@@ -337,7 +337,7 @@ export const nl: Translations = {
       linkedin: 'Tekst voorbij de vouw verdwijnt achter “…meer”.',
       twitter: 'Geen vouw — boven {limit} tekens wordt gesplitst in een thread; elke link telt als {url} tekens.',
       threads: 'Links tellen volledig mee; tekst boven {limit} tekens gaat verder als genummerde reacties.',
-      instagram: 'Het bijschrift vouwt achter “meer”; hard plafond van {hashtags} hashtags per bericht.',
+      instagram: 'Het bijschrift vouwt achter “meer”; mik op ~{hashtags} hashtags (harde limiet {hashtagMax}).',
       facebook: 'Feedberichten klappen in achter “Meer weergeven”, ver vóór het technische plafond.',
       tiktok: 'Het bijschrift vouwt achter “…meer” in bij het eerste regeleinde of ~100 tekens; emoji en hashtags tellen mee.',
       smsGsm: '{single} tekens in één bericht; {multi} per segment zodra het splitst.',
@@ -348,10 +348,10 @@ export const nl: Translations = {
       linkedin: 'LinkedIn staat {limit} tekens per bericht toe, maar vouwt de feedweergave na ongeveer {mobile} tekens op mobiel en {desktop} op desktop — de rest verdwijnt achter “…meer”. Regeleinden tellen mee, en de eerste zin draagt vrijwel alle doorkliks: zet de hook vooraan en links onder de vouw.',
       twitter: 'X hanteert een harde limiet van {limit} tekens per bericht en toont helemaal geen vouw. Elke URL wordt door de t.co-verkorter omhuld en kost altijd {url} tekens, ongeacht de echte lengte, en veel emoji wegen als twee tekens. Langere concepten moeten in een thread worden gesplitst — PostTruncate doet dat automatisch op woordgrenzen.',
       threads: 'Threads staat {limit} tekens per bericht toe en telt links — anders dan X — in hun volledige lengte. Op mobiel vouwt de feed lange berichten rond {mobile} tekens. Alles boven het plafond moet verdergaan als genummerde reactieberichten onder het eerste.',
-      instagram: 'Instagram-bijschriften mogen {limit} tekens lang zijn, maar de feed toont slechts ongeveer de eerste {mobile} vóór de “meer”-link. De hardere regel zijn hashtags: meer dan {hashtags} in een bijschrift of eerste reactie en het bericht kan stilletjes niet gepubliceerd worden.',
+      instagram: 'Instagram-bijschriften mogen {limit} tekens lang zijn, maar de feed toont slechts ongeveer de eerste {mobile} vóór de “meer”-link. Voor hashtags is ~{hashtags} het aanbevolen ideaal — meer wordt nog steeds geplaatst maar leest als spam. De harde limiet is {hashtagMax} (bijschrift plus eerste reactie); daarboven wordt het bericht niet geplaatst.',
       facebook: 'Het technische plafond van Facebook is {limit} tekens, maar feedberichten klappen in achter “Meer weergeven” rond {mobile} tekens op mobiel en {desktop} op desktop. Engagement keldert bij lange ononderbroken blokken — de praktische limiet is de vouw, niet het plafond.',
       sms: 'Eén sms bevat {gsmSingle} tekens in GSM 7-bit-codering, dalend naar {gsmMulti} per segment zodra het bericht splitst. Elke emoji of elk niet-GSM-teken schakelt het hele bericht naar Unicode — {uniSingle} tekens per enkel bericht, {uniMulti} per segment — en sommige GSM-symbolen (€, blokhaken, het pipe-teken) tellen als twee.',
-      tiktok: 'TikTok staat {limit} tekens per bijschrift toe, waarbij emoji en hashtags volledig meetellen. Omdat de video het scherm vult, vouwt de feed het bijschrift achter “…meer” in bij het eerste regeleinde of ongeveer {fold} tekens — wat het eerst komt — dus de eerste regel is alles wat de meeste kijkers lezen. Het videoframe is fullscreen verticaal 9:16 (1080×1920).',
+      tiktok: 'TikTok staat {limit} tekens per bijschrift toe bij native plaatsen, maar de API en planners limiteren op {safe}; emoji en hashtags tellen volledig mee. Omdat de video het scherm vult, vouwt de feed het bijschrift achter “…meer” in bij het eerste regeleinde of ongeveer {fold} tekens — wat het eerst komt — dus de eerste regel is alles wat de meeste kijkers lezen. Het videoframe is fullscreen verticaal 9:16 (1080×1920).',
     },
   },
 
@@ -501,7 +501,7 @@ export const nl: Translations = {
         {
           heading: 'Wat het doet',
           paragraphs: [
-            'Schrijf of plak een concept één keer, en PostTruncate geeft het weer zoals <strong>LinkedIn, X, Threads, Instagram en Facebook</strong> dat daadwerkelijk doen — de \u201e\u2026meer weergeven\u201d-vouw, de threadsplitsing bij 280 tekens, de weging van 23 tekens per link, het plafond van 5 hashtags. Je ziet precies wat boven de vouw overleeft voordat je je vastlegt op publiceren.',
+            'Schrijf of plak een concept één keer, en PostTruncate geeft het weer zoals <strong>LinkedIn, X, Threads, Instagram en Facebook</strong> dat daadwerkelijk doen — de \u201e\u2026meer weergeven\u201d-vouw, de threadsplitsing bij 280 tekens, de weging van 23 tekens per link, het aanbevolen niveau van ~5 hashtags en de harde limiet van 30. Je ziet precies wat boven de vouw overleeft voordat je je vastlegt op publiceren.',
             'Het signaleert ook de stille problemen die je bereik verkleinen: onzichtbare tekens met nulbreedte die tellingen en schermlezers verstoren, en pseudo-Unicode \u201esierlettertypen\u201d die opgemaakt lijken maar onleesbaar zijn voor hulptechnologie.',
           ],
         },
@@ -686,7 +686,7 @@ export const nl: Translations = {
       },
       tiktok: {
         name: "TikTok",
-        limit: "2,200",
+        limit: "4,000",
         shown: "~100 tekens",
         bestPractice: "Hook op de eerste regel",
         notes: "Emoji en hashtags tellen mee; vouwt in bij het eerste regeleinde"
@@ -980,7 +980,9 @@ export const nl: Translations = {
       title: 'TikTok-voorbeeld',
       badgeIdle: 'Begin met typen',
       badgeSingle: 'Past in één bijschrift',
-      badgeOver: 'Boven de bijschriftlimiet',
+      badgeOverSafe: 'Boven de veilige limiet',
+      badgeOver: 'Boven de 4.000-limiet',
+      apiCapHint: 'Wordt native geplaatst, maar de TikTok-API en planners (Buffer, Hootsuite, Later) limiteren het bijschrift op {safe} tekens.',
       links: { one: '{n} link', other: '{n} links' },
       charLength: 'Bijschriftlengte',
       seeMore: '…meer',
@@ -1000,8 +1002,8 @@ export const nl: Translations = {
       hashtagLabel: 'Hashtagconcentratie',
       over: 'Over de harde limiet van Instagram van {limit} hashtags — het bijschrift kan niet worden geplaatst. Verwijder {excess}.',
       approaching:
-        'Je nadert het plafond van 5 tags. Beperk je tot je tags met de hoogste intentie.',
-      within: 'Ruim binnen de limiet van 5 hashtags van Instagram.',
+        '{n} hashtags — boven de aanbevolen {recommended}. Wordt nog steeds geplaatst (harde limiet {max}), maar beperk voor meer bereik.',
+      within: 'Binnen de aanbevolen {recommended} hashtags.',
       none: 'Nog geen hashtags gedetecteerd.',
       a11yLabel: 'Toegankelijkheid · fancy fonts',
       audiencePublic: 'Openbaar',

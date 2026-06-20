@@ -133,7 +133,7 @@ export const it: Translations = {
         heading: 'Limiti di caratteri su Instagram e Facebook',
         paragraphs: [
           'Instagram consente fino a 2 200 caratteri in una didascalia, ma ne mostra solo i primi 125 circa prima di nascondere il resto dietro un link «altro». PostTruncate indica esattamente dove cade quel taglio, in modo che la prima riga visibile nel feed sia sempre quella che conta.',
-          'Il pannello monitora anche il <strong>numero di hashtag</strong> in tempo reale. Instagram non pubblica silenziosamente i post che superano i 5 hashtag, quindi viene mostrato un avviso prima di raggiungere quel limite. Gli spazi vengono sempre conteggiati, in linea con il comportamento della piattaforma.',
+          'Il pannello monitora anche il <strong>numero di hashtag</strong> in tempo reale. Instagram consente fino a 30 hashtag prima che un post fallisca, ma ~5 è il valore ideale consigliato — oltre sembra spam —, quindi il contatore avvisa oltre i 5 e segnala il limite massimo di 30. Gli spazi vengono sempre conteggiati, in linea con il comportamento della piattaforma.',
         ],
       },
       {
@@ -184,10 +184,10 @@ export const it: Translations = {
       instagram: {
         name: 'Instagram',
         tag: 'Tetto degli hashtag',
-        body: 'Le didascalie di Instagram arrivano fino a 2.200 caratteri ma ne mostrano solo i primi 125 circa prima di un link "altro". La regola più rigida riguarda gli hashtag: più di 5 in una singola didascalia o commento e il post fallisce silenziosamente la pubblicazione. Anche accumulare decine di tag a bassa intenzione viene letto come spam. Tieni i tag essenziali e pertinenti, e tieni d’occhio il contatore in tempo reale per non sbattere mai contro il muro dei 5 tag.',
+        body: 'Le didascalie di Instagram arrivano fino a 2.200 caratteri ma ne mostrano solo i primi 125 circa prima di un link "altro". Per gli hashtag, il limite massimo è 30 (didascalia più primo commento); oltre, il post non si pubblica. Ma ~5 è il valore ideale consigliato; accumulare decine di tag a bassa intenzione sembra spam. Tieni i tag essenziali e pertinenti, e tieni d’occhio il contatore in tempo reale, che avvisa oltre i 5 e segnala il limite di 30.',
         facts: [
           ['Limite didascalia', '2.200 caratteri'],
-          ['Limite rigido hashtag', '5 tag'],
+          ['Hashtag', '~5 consigliati / 30 massimo'],
           ['Anteprima didascalia', '~125 caratteri'],
         ],
       },
@@ -204,9 +204,9 @@ export const it: Translations = {
       tiktok: {
         name: 'TikTok',
         tag: 'Piega della didascalia',
-        body: 'Le didascalie di TikTok arrivano fino a 2.200 caratteri, con emoji e hashtag che contano nel totale. Ma il feed mette il video al primo posto: mostra solo l’inizio della didascalia e piega il resto dietro “…altro” al primo a capo o intorno ai 100 caratteri, a seconda di cosa viene prima. Inizia con il tuo gancio su una sola riga perché sopravviva. PostTruncate conta ogni carattere in tempo reale e segna esattamente dove la didascalia si piega su un reel 9:16.',
+        body: 'Le didascalie di TikTok arrivano fino a 4.000 caratteri pubblicando nativamente, con emoji e hashtag che contano nel totale — ma l’API di TikTok e gli scheduler (Buffer, Hootsuite, Later) limitano la didascalia a 2.200, quindi è quello il limite sicuro se non pubblichi a mano. Ma il feed mette il video al primo posto: mostra solo l’inizio della didascalia e piega il resto dietro “…altro” al primo a capo o intorno ai 100 caratteri, a seconda di cosa viene prima. Inizia con il tuo gancio su una sola riga perché sopravviva. PostTruncate conta ogni carattere in tempo reale e segna esattamente dove la didascalia si piega su un reel 9:16.',
         facts: [
-          ['Limite didascalia', '2.200 caratteri'],
+          ['Limite didascalia', '4.000 nativo / 2.200 API'],
           ['Piega “…altro”', '~100 car. / 1ª riga'],
           ['Formato video', '9:16 (1080×1920)'],
         ],
@@ -239,7 +239,7 @@ export const it: Translations = {
       },
       {
         q: 'Quanto sono accurati i limiti di caratteri?',
-        a: 'PostTruncate usa i limiti pubblicati e ampiamente osservati di ogni piattaforma — 280 per X, 210/140 per la soglia di LinkedIn, 5 hashtag per Instagram e un peso fisso di 23 caratteri per i link. Le piattaforme li modificano di tanto in tanto e la resa varia leggermente da dispositivo a dispositivo, quindi considera le anteprime una stima approssimata piuttosto che una garanzia perfetta al pixel.',
+        a: 'PostTruncate usa i limiti pubblicati e ampiamente osservati di ogni piattaforma — 280 per X, 210/140 per la soglia di LinkedIn, ~5 hashtag consigliati (limite massimo 30) per Instagram e un peso fisso di 23 caratteri per i link. Le piattaforme li modificano di tanto in tanto e la resa varia leggermente da dispositivo a dispositivo, quindi considera le anteprime una stima approssimata piuttosto che una garanzia perfetta al pixel.',
       },
       {
         q: 'Spazi e punteggiatura contano come caratteri?',
@@ -337,7 +337,7 @@ export const it: Translations = {
       linkedin: 'Il testo oltre la piega si nasconde dietro «…altro».',
       twitter: 'Nessuna piega — oltre {limit} caratteri il post si divide in un thread; ogni link conta come {url} caratteri.',
       threads: 'I link contano per intero; il testo oltre {limit} caratteri prosegue come risposte numerate.',
-      instagram: 'La didascalia si piega dietro «altro»; tetto rigido di {hashtags} hashtag per post.',
+      instagram: 'La didascalia si piega dietro «altro»; punta a ~{hashtags} hashtag (limite massimo {hashtagMax}).',
       facebook: 'I post del feed si comprimono dietro «Altro» molto prima del tetto tecnico.',
       tiktok: 'La didascalia si piega dietro “…altro” al primo a capo o ~100 caratteri; emoji e hashtag contano.',
       smsGsm: '{single} caratteri in un singolo messaggio; {multi} per segmento quando si divide.',
@@ -348,10 +348,10 @@ export const it: Translations = {
       linkedin: 'LinkedIn consente {limit} caratteri per post ma piega la vista del feed dopo circa {mobile} caratteri su mobile e {desktop} su desktop — il resto si nasconde dietro «…altro». Le interruzioni di riga contano, e la prima frase raccoglie quasi tutti i clic: metti il gancio all’inizio e i link sotto la piega.',
       twitter: 'X impone un tetto rigido di {limit} caratteri per post e non mostra alcuna piega. Ogni URL viene avvolto dall’abbreviatore t.co e costa sempre {url} caratteri indipendentemente dalla lunghezza reale, e molte emoji pesano come due caratteri. Le bozze più lunghe vanno divise in thread — PostTruncate lo fa automaticamente ai confini di parola.',
       threads: 'Threads consente {limit} caratteri per post e, a differenza di X, conta i link nella loro lunghezza completa. Su mobile il feed piega i post lunghi intorno ai {mobile} caratteri. Tutto ciò che supera il tetto deve proseguire come risposte numerate concatenate sotto il primo post.',
-      instagram: 'Le didascalie di Instagram possono arrivare a {limit} caratteri, ma il feed mostra solo i primi {mobile} circa prima del link «altro». La regola più dura riguarda gli hashtag: più di {hashtags} in una didascalia o nel primo commento e il post può fallire silenziosamente la pubblicazione.',
+      instagram: 'Le didascalie di Instagram possono arrivare a {limit} caratteri, ma il feed mostra solo i primi {mobile} circa prima del link «altro». Per gli hashtag, ~{hashtags} è il valore ideale consigliato — oltre, il post si pubblica comunque ma sembra spam. Il limite massimo è {hashtagMax} (didascalia più primo commento); superandolo il post non si pubblica.',
       facebook: 'Il tetto tecnico di Facebook è di {limit} caratteri, ma i post del feed si comprimono dietro «Altro» intorno ai {mobile} caratteri su mobile e {desktop} su desktop. L’engagement crolla sui blocchi lunghi senza pause: il limite pratico è la piega, non il tetto.',
       sms: 'Un singolo SMS contiene {gsmSingle} caratteri nella codifica GSM a 7 bit, che scendono a {gsmMulti} per segmento quando il messaggio si divide. Qualsiasi emoji o carattere non GSM converte l’intero messaggio in Unicode — {uniSingle} caratteri per messaggio singolo, {uniMulti} per segmento — e alcuni simboli GSM (€, parentesi quadre, la barra verticale) contano doppio.',
-      tiktok: 'TikTok consente {limit} caratteri per didascalia, con emoji e hashtag che contano per intero. Poiché il video riempie lo schermo, il feed piega la didascalia dietro “…altro” al primo a capo o intorno ai {fold} caratteri — a seconda di cosa viene prima — quindi la prima riga è tutto ciò che la maggior parte legge. Il formato video è verticale a schermo intero 9:16 (1080×1920).',
+      tiktok: 'TikTok consente {limit} caratteri per didascalia pubblicando nativamente, ma l’API e gli scheduler si fermano a {safe}; emoji e hashtag contano per intero. Poiché il video riempie lo schermo, il feed piega la didascalia dietro “…altro” al primo a capo o intorno ai {fold} caratteri — a seconda di cosa viene prima — quindi la prima riga è tutto ciò che la maggior parte legge. Il formato video è verticale a schermo intero 9:16 (1080×1920).',
     },
   },
 
@@ -501,7 +501,7 @@ export const it: Translations = {
         {
           heading: 'Cosa fa',
           paragraphs: [
-            'Scrivi o incolla una bozza una sola volta e PostTruncate la renderizza esattamente come faranno <strong>LinkedIn, X, Threads, Instagram e Facebook</strong> \u2014 il taglio \u00ab\u2026vedi altro\u00bb, la divisione in thread a 280 caratteri, la ponderazione dei link a 23 caratteri, il limite di 5 hashtag. Vedi esattamente cosa sopravvive sopra il taglio prima di impegnarti a pubblicare.',
+            'Scrivi o incolla una bozza una sola volta e PostTruncate la renderizza esattamente come faranno <strong>LinkedIn, X, Threads, Instagram e Facebook</strong> \u2014 il taglio \u00ab\u2026vedi altro\u00bb, la divisione in thread a 280 caratteri, la ponderazione dei link a 23 caratteri, il valore consigliato di ~5 hashtag e il limite massimo di 30. Vedi esattamente cosa sopravvive sopra il taglio prima di impegnarti a pubblicare.',
             'Rileva anche i problemi silenziosi che riducono la tua portata: caratteri invisibili a larghezza zero che rompono i contatori e gli screen reader, e \u00abcaratteri decorativi\u00bb pseudo-Unicode che sembrano stilizzati ma sono illeggibili per le tecnologie assistive.',
           ],
         },
@@ -686,7 +686,7 @@ export const it: Translations = {
       },
       tiktok: {
         name: "TikTok",
-        limit: "2,200",
+        limit: "4,000",
         shown: "~100 caratteri",
         bestPractice: "Gancio sulla prima riga",
         notes: "Emoji e hashtag contano; si piega al primo a capo"
@@ -980,7 +980,9 @@ export const it: Translations = {
       title: 'Anteprima TikTok',
       badgeIdle: 'Inizia a scrivere',
       badgeSingle: 'Sta in una didascalia',
-      badgeOver: 'Oltre il limite della didascalia',
+      badgeOverSafe: 'Oltre il limite sicuro',
+      badgeOver: 'Oltre il limite di 4.000',
+      apiCapHint: 'Si pubblica nativamente, ma l’API di TikTok e gli scheduler (Buffer, Hootsuite, Later) limitano la didascalia a {safe} caratteri.',
       links: { one: '{n} link', other: '{n} link' },
       charLength: 'Lunghezza didascalia',
       seeMore: '…altro',
@@ -1000,8 +1002,8 @@ export const it: Translations = {
       hashtagLabel: 'Concentrazione di hashtag',
       over: 'Oltre il limite rigido di {limit} hashtag di Instagram — la didascalia non riuscirà a pubblicarsi. Rimuovine {excess}.',
       approaching:
-        'Ti stai avvicinando al tetto dei 5 tag. Riduci ai tag con la massima intenzione.',
-      within: 'Comodamente entro il limite di 5 hashtag di Instagram.',
+        '{n} hashtag — oltre i {recommended} consigliati. Si pubblica comunque (limite massimo {max}), ma riducili per più portata.',
+      within: 'Entro i {recommended} hashtag consigliati.',
       none: 'Nessun hashtag rilevato finora.',
       a11yLabel: 'Accessibilità · font fantasiosi',
       audiencePublic: 'Pubblico',

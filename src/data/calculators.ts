@@ -1264,7 +1264,7 @@ export const calculators: ToolDefinition[] = [
     id: 'tiktok',
     editorAnchor: 'workspace',
     lastUpdated: '2026-06-14',
-    platformLimits: 'TikTok caption 2,200 chars; bio 80 chars',
+    platformLimits: 'TikTok caption 4,000 chars (2,200 via API/schedulers); bio 80 chars',
 
     slugs: {
       en: 'tiktok-character-counter',
@@ -1306,16 +1306,16 @@ export const calculators: ToolDefinition[] = [
     },
 
     metaDescriptions: {
-      en: 'Free TikTok character counter. Check your video caption against the 2,200-character limit and bio against 80 characters, live as you type.',
-      es: 'Contador de caracteres de TikTok gratuito. Comprueba la descripción de tu vídeo frente al límite de 2200 caracteres y la biografía frente a 80, en vivo.',
-      de: 'Kostenloser TikTok-Zeichenzähler. Prüfe deine Videobeschreibung gegen das 2.200-Zeichen-Limit und die Bio gegen 80 Zeichen – live beim Tippen.',
-      fr: 'Compteur de caractères TikTok gratuit. Vérifiez la légende de votre vidéo (limite de 2 200 caractères) et la bio (80 caractères) en direct.',
-      pt: 'Contador de caracteres do TikTok gratuito. Verifique a legenda do vídeo face ao limite de 2200 caracteres e a biografia face a 80, ao vivo.',
-      it: 'Contatore di caratteri TikTok gratuito. Controlla la didascalia del video sul limite di 2.200 caratteri e la bio su 80, in tempo reale.',
-      nl: 'Gratis TikTok-tekenteller. Controleer je videobijschrift tegen de limiet van 2.200 tekens en je bio tegen 80 tekens, live tijdens het typen.',
-      ja: '無料の TikTok 文字数カウンター。動画キャプションを2,200文字、自己紹介を80文字の上限に対してリアルタイムでチェックできます。',
-      zh: '免费的 TikTok 字符计数器。在你输入时实时检查视频文案是否在 2,200 字符以内、简介是否在 80 字符以内。',
-      da: 'Gratis TikTok-tegntæller. Tjek din videobeskrivelse mod grænsen på 2.200 tegn og bioen mod 80 tegn, live mens du skriver.',
+      en: 'Free TikTok character counter. Check your video caption against TikTok’s 4,000-character limit (the API and schedulers cap at 2,200) and bio against 80 characters, live as you type.',
+      es: 'Contador de caracteres de TikTok gratuito. Comprueba la descripción de tu vídeo frente al límite de 4000 caracteres (la API y los programadores limitan a 2200) y la biografía frente a 80, en vivo.',
+      de: 'Kostenloser TikTok-Zeichenzähler. Prüfe deine Videobeschreibung gegen das 4.000-Zeichen-Limit (API/Scheduler: 2.200) und die Bio gegen 80 Zeichen – live beim Tippen.',
+      fr: 'Compteur de caractères TikTok gratuit. Vérifiez la légende de votre vidéo (limite de 4 000 caractères ; l’API plafonne à 2 200) et la bio (80 caractères) en direct.',
+      pt: 'Contador de caracteres do TikTok gratuito. Verifique a legenda do vídeo face ao limite de 4000 caracteres (a API limita a 2200) e a biografia face a 80, ao vivo.',
+      it: 'Contatore di caratteri TikTok gratuito. Controlla la didascalia del video sul limite di 4.000 caratteri (l’API si ferma a 2.200) e la bio su 80, in tempo reale.',
+      nl: 'Gratis TikTok-tekenteller. Controleer je videobijschrift tegen de limiet van 4.000 tekens (API/planners: 2.200) en je bio tegen 80 tekens, live tijdens het typen.',
+      ja: '無料の TikTok 文字数カウンター。動画キャプションを4,000文字の上限（API やスケジューラーは2,200文字）、自己紹介を80文字に対してリアルタイムでチェックできます。',
+      zh: '免费的 TikTok 字符计数器。在你输入时实时检查视频文案是否在 4,000 字符以内（API 和排程工具上限为 2,200）、简介是否在 80 字符以内。',
+      da: 'Gratis TikTok-tegntæller. Tjek din videobeskrivelse mod grænsen på 4.000 tegn (API/planlæggere: 2.200) og bioen mod 80 tegn, live mens du skriver.',
     },
 
     intro: {
@@ -1333,81 +1333,81 @@ export const calculators: ToolDefinition[] = [
 
     content: {
       en: `<h2>TikTok character limits</h2>
-<p>TikTok allows up to <strong>2,200 characters</strong> in a video caption and just <strong>80 characters</strong> in your profile bio. Hashtags, @mentions, and emoji all count toward the caption limit, and because hashtags are essential for reach, every character matters. This tool counts your caption and bio live so you can fit your hook, hashtags, and call to action without getting cut off.</p>
+<p>TikTok allows up to <strong>4,000 characters</strong> in a video caption when you post natively in the app — though the TikTok API and schedulers (Buffer, Hootsuite, Later) still cap captions at <strong>2,200</strong>, so that’s the safe ceiling if you don’t post by hand — and just <strong>80 characters</strong> in your profile bio. Hashtags, @mentions, and emoji all count toward the caption limit, and because hashtags are essential for reach, every character matters. This tool counts your caption and bio live so you can fit your hook, hashtags, and call to action without getting cut off.</p>
 <h2>Writing a caption that performs</h2>
-<p>Even with 2,200 characters, the feed shows only the first line or two before “…more.” Lead with a hook or question, then add context and hashtags below. Place your most important words and a few targeted hashtags early. Captions that invite a comment — a question or a bold claim — tend to earn the replies that boost a video in the algorithm.</p>
+<p>Even with thousands of characters, the feed shows only the first line or two before “…more.” Lead with a hook or question, then add context and hashtags below. Place your most important words and a few targeted hashtags early. Captions that invite a comment — a question or a bold claim — tend to earn the replies that boost a video in the algorithm.</p>
 <h2>Making the most of an 80-character bio</h2>
 <p>The bio is tiny, so every character has to work. Say what you do and who it’s for, add one clear call to action or link cue, and use line breaks or a single emoji to add structure. Because 80 characters fills up fast — especially with emoji, which count too — the live counter helps you trim to the essentials.</p>
 <h2>Private and instant</h2>
 <p>Type or paste your caption and bio to see exactly how many characters each uses and how much room is left. Everything runs in your browser, so nothing you type is uploaded. Adjust until both sit within TikTok’s limits, then copy them across.</p>`,
       es: `<h2>Límites de caracteres de TikTok</h2>
-<p>TikTok permite hasta <strong>2200 caracteres</strong> en la descripción de un vídeo y solo <strong>80 caracteres</strong> en la biografía del perfil. Los hashtags, las @menciones y los emojis cuentan para el límite de la descripción y, como los hashtags son esenciales para el alcance, cada carácter importa. Esta herramienta cuenta tu descripción y tu biografía en vivo para que quepan tu gancho, tus hashtags y tu llamada a la acción sin cortes.</p>
+<p>TikTok permite hasta <strong>4000 caracteres</strong> en la descripción de un vídeo al publicar desde la app —aunque la API y los programadores (Buffer, Hootsuite, Later) limitan la descripción a <strong>2200</strong>, así que ese es el límite seguro si no publicas a mano— y solo <strong>80 caracteres</strong> en la biografía del perfil. Los hashtags, las @menciones y los emojis cuentan para el límite de la descripción y, como los hashtags son esenciales para el alcance, cada carácter importa. Esta herramienta cuenta tu descripción y tu biografía en vivo para que quepan tu gancho, tus hashtags y tu llamada a la acción sin cortes.</p>
 <h2>Escribir una descripción que funcione</h2>
-<p>Aunque dispones de 2200 caracteres, el feed solo muestra la primera línea o dos antes del «…más». Empieza con un gancho o una pregunta y añade contexto y hashtags debajo. Coloca tus palabras más importantes y algunos hashtags específicos al principio. Las descripciones que invitan a comentar —una pregunta o una afirmación atrevida— suelen ganar las respuestas que impulsan un vídeo en el algoritmo.</p>
+<p>Aunque dispones de miles de caracteres, el feed solo muestra la primera línea o dos antes del «…más». Empieza con un gancho o una pregunta y añade contexto y hashtags debajo. Coloca tus palabras más importantes y algunos hashtags específicos al principio. Las descripciones que invitan a comentar —una pregunta o una afirmación atrevida— suelen ganar las respuestas que impulsan un vídeo en el algoritmo.</p>
 <h2>Aprovechar al máximo 80 caracteres de biografía</h2>
 <p>La biografía es diminuta, así que cada carácter tiene que trabajar. Di qué haces y para quién, añade una llamada a la acción clara o una pista de enlace, y usa saltos de línea o un solo emoji para dar estructura. Como 80 caracteres se llenan rápido —sobre todo con emojis, que también cuentan—, el contador en vivo te ayuda a reducir a lo esencial.</p>
 <h2>Privado e instantáneo</h2>
 <p>Escribe o pega tu descripción y tu biografía para ver exactamente cuántos caracteres usa cada una y cuánto espacio queda. Todo funciona en tu navegador, así que nada de lo que escribas se sube. Ajusta hasta que ambas queden dentro de los límites de TikTok y cópialas.</p>`,
       de: `<h2>TikTok-Zeichenlimits</h2>
-<p>TikTok erlaubt bis zu <strong>2.200 Zeichen</strong> in einer Videobeschreibung und nur <strong>80 Zeichen</strong> in der Profil-Bio. Hashtags, @Erwähnungen und Emojis zählen alle zum Beschreibungslimit, und da Hashtags für die Reichweite entscheidend sind, zählt jedes Zeichen. Dieses Tool zählt Beschreibung und Bio live, damit Hook, Hashtags und Call-to-Action ohne Abschneiden passen.</p>
+<p>TikTok erlaubt bis zu <strong>4.000 Zeichen</strong> in einer Videobeschreibung beim nativen Posten in der App – die TikTok-API und Scheduler (Buffer, Hootsuite, Later) begrenzen die Beschreibung jedoch weiterhin auf <strong>2.200</strong>, das ist also die sichere Grenze, wenn du nicht manuell postest – und nur <strong>80 Zeichen</strong> in der Profil-Bio. Hashtags, @Erwähnungen und Emojis zählen alle zum Beschreibungslimit, und da Hashtags für die Reichweite entscheidend sind, zählt jedes Zeichen. Dieses Tool zählt Beschreibung und Bio live, damit Hook, Hashtags und Call-to-Action ohne Abschneiden passen.</p>
 <h2>Eine Beschreibung schreiben, die performt</h2>
-<p>Trotz 2.200 Zeichen zeigt der Feed nur die erste Zeile oder zwei vor „…mehr“. Beginne mit einem Hook oder einer Frage und ergänze Kontext und Hashtags darunter. Platziere deine wichtigsten Wörter und ein paar gezielte Hashtags früh. Beschreibungen, die zum Kommentieren einladen – eine Frage oder eine kühne Aussage – erhalten eher die Antworten, die ein Video im Algorithmus pushen.</p>
+<p>Trotz Tausender Zeichen zeigt der Feed nur die erste Zeile oder zwei vor „…mehr“. Beginne mit einem Hook oder einer Frage und ergänze Kontext und Hashtags darunter. Platziere deine wichtigsten Wörter und ein paar gezielte Hashtags früh. Beschreibungen, die zum Kommentieren einladen – eine Frage oder eine kühne Aussage – erhalten eher die Antworten, die ein Video im Algorithmus pushen.</p>
 <h2>80 Zeichen Bio optimal nutzen</h2>
 <p>Die Bio ist winzig, also muss jedes Zeichen arbeiten. Sag, was du tust und für wen, füge einen klaren Call-to-Action oder Link-Hinweis hinzu und nutze Zeilenumbrüche oder ein einzelnes Emoji für Struktur. Da 80 Zeichen schnell voll sind – besonders mit Emojis, die ebenfalls zählen –, hilft der Live-Zähler beim Kürzen aufs Wesentliche.</p>
 <h2>Privat und sofort</h2>
 <p>Tippe oder füge Beschreibung und Bio ein, um genau zu sehen, wie viele Zeichen jede nutzt und wie viel Platz bleibt. Alles läuft in deinem Browser, also wird nichts hochgeladen. Passe an, bis beide in TikToks Limits passen, und kopiere sie hinüber.</p>`,
       fr: `<h2>Limites de caractères TikTok</h2>
-<p>TikTok autorise jusqu’à <strong>2 200 caractères</strong> dans la légende d’une vidéo et seulement <strong>80 caractères</strong> dans la bio du profil. Les hashtags, les @mentions et les emojis comptent tous dans la limite de légende, et comme les hashtags sont essentiels à la portée, chaque caractère compte. Cet outil compte votre légende et votre bio en direct pour faire tenir votre accroche, vos hashtags et votre appel à l’action sans coupure.</p>
+<p>TikTok autorise jusqu’à <strong>4 000 caractères</strong> dans la légende d’une vidéo lors d’une publication native dans l’app — l’API TikTok et les planificateurs (Buffer, Hootsuite, Later) plafonnent toutefois la légende à <strong>2 200</strong>, c’est donc la limite sûre si vous ne publiez pas à la main — et seulement <strong>80 caractères</strong> dans la bio du profil. Les hashtags, les @mentions et les emojis comptent tous dans la limite de légende, et comme les hashtags sont essentiels à la portée, chaque caractère compte. Cet outil compte votre légende et votre bio en direct pour faire tenir votre accroche, vos hashtags et votre appel à l’action sans coupure.</p>
 <h2>Écrire une légende performante</h2>
-<p>Même avec 2 200 caractères, le fil n’affiche que la première ligne ou deux avant « …plus ». Commencez par une accroche ou une question, puis ajoutez le contexte et les hashtags en dessous. Placez vos mots les plus importants et quelques hashtags ciblés tôt. Les légendes qui invitent à commenter — une question ou une affirmation audacieuse — obtiennent davantage les réponses qui propulsent une vidéo dans l’algorithme.</p>
+<p>Même avec des milliers de caractères, le fil n’affiche que la première ligne ou deux avant « …plus ». Commencez par une accroche ou une question, puis ajoutez le contexte et les hashtags en dessous. Placez vos mots les plus importants et quelques hashtags ciblés tôt. Les légendes qui invitent à commenter — une question ou une affirmation audacieuse — obtiennent davantage les réponses qui propulsent une vidéo dans l’algorithme.</p>
 <h2>Tirer parti d’une bio de 80 caractères</h2>
 <p>La bio est minuscule, donc chaque caractère doit travailler. Dites ce que vous faites et pour qui, ajoutez un appel à l’action clair ou un indice de lien, et utilisez des sauts de ligne ou un seul emoji pour structurer. Comme 80 caractères se remplissent vite — surtout avec les emojis, qui comptent aussi —, le compteur en direct vous aide à réduire à l’essentiel.</p>
 <h2>Privé et instantané</h2>
 <p>Tapez ou collez votre légende et votre bio pour voir exactement combien de caractères chacune utilise et l’espace restant. Tout fonctionne dans votre navigateur : rien de ce que vous tapez n’est envoyé. Ajustez jusqu’à ce que les deux tiennent dans les limites de TikTok, puis copiez-les.</p>`,
       pt: `<h2>Limites de caracteres do TikTok</h2>
-<p>O TikTok permite até <strong>2200 caracteres</strong> na legenda de um vídeo e apenas <strong>80 caracteres</strong> na biografia do perfil. Os hashtags, as @menções e os emojis contam todos para o limite da legenda e, como os hashtags são essenciais para o alcance, cada caractere importa. Esta ferramenta conta a sua legenda e a sua biografia ao vivo para que caibam o gancho, os hashtags e a chamada à ação sem cortes.</p>
+<p>O TikTok permite até <strong>4000 caracteres</strong> na legenda de um vídeo ao publicar na app — embora a API do TikTok e os agendadores (Buffer, Hootsuite, Later) ainda limitem a legenda a <strong>2200</strong>, por isso esse é o limite seguro se não publicar à mão — e apenas <strong>80 caracteres</strong> na biografia do perfil. Os hashtags, as @menções e os emojis contam todos para o limite da legenda e, como os hashtags são essenciais para o alcance, cada caractere importa. Esta ferramenta conta a sua legenda e a sua biografia ao vivo para que caibam o gancho, os hashtags e a chamada à ação sem cortes.</p>
 <h2>Escrever uma legenda que funciona</h2>
-<p>Mesmo com 2200 caracteres, o feed mostra apenas a primeira linha ou duas antes do «…mais». Comece com um gancho ou uma pergunta e acrescente contexto e hashtags abaixo. Coloque as suas palavras mais importantes e alguns hashtags específicos no início. As legendas que convidam a comentar — uma pergunta ou uma afirmação ousada — tendem a ganhar as respostas que impulsionam um vídeo no algoritmo.</p>
+<p>Mesmo com milhares de caracteres, o feed mostra apenas a primeira linha ou duas antes do «…mais». Comece com um gancho ou uma pergunta e acrescente contexto e hashtags abaixo. Coloque as suas palavras mais importantes e alguns hashtags específicos no início. As legendas que convidam a comentar — uma pergunta ou uma afirmação ousada — tendem a ganhar as respostas que impulsionam um vídeo no algoritmo.</p>
 <h2>Aproveitar ao máximo 80 caracteres de biografia</h2>
 <p>A biografia é minúscula, por isso cada caractere tem de trabalhar. Diga o que faz e para quem, acrescente uma chamada à ação clara ou uma indicação de ligação, e use quebras de linha ou um único emoji para dar estrutura. Como 80 caracteres se enchem depressa — sobretudo com emojis, que também contam —, o contador ao vivo ajuda-o a cortar para o essencial.</p>
 <h2>Privado e instantâneo</h2>
 <p>Escreva ou cole a sua legenda e biografia para ver exatamente quantos caracteres cada uma usa e quanto espaço resta. Tudo corre no seu navegador, por isso nada do que escrever é enviado. Ajuste até ambas ficarem dentro dos limites do TikTok e copie-as.</p>`,
       it: `<h2>Limiti di caratteri di TikTok</h2>
-<p>TikTok consente fino a <strong>2.200 caratteri</strong> nella didascalia di un video e solo <strong>80 caratteri</strong> nella bio del profilo. Hashtag, @menzioni ed emoji contano tutti nel limite della didascalia e, poiché gli hashtag sono essenziali per la portata, ogni carattere conta. Questo strumento conta didascalia e bio in tempo reale così da far stare gancio, hashtag e call to action senza tagli.</p>
+<p>TikTok consente fino a <strong>4.000 caratteri</strong> nella didascalia di un video pubblicando nativamente dall’app — l’API di TikTok e gli scheduler (Buffer, Hootsuite, Later) limitano però la didascalia a <strong>2.200</strong>, quindi è quello il limite sicuro se non pubblichi a mano — e solo <strong>80 caratteri</strong> nella bio del profilo. Hashtag, @menzioni ed emoji contano tutti nel limite della didascalia e, poiché gli hashtag sono essenziali per la portata, ogni carattere conta. Questo strumento conta didascalia e bio in tempo reale così da far stare gancio, hashtag e call to action senza tagli.</p>
 <h2>Scrivere una didascalia che funziona</h2>
-<p>Anche con 2.200 caratteri, il feed mostra solo la prima riga o due prima di «…altro». Inizia con un gancio o una domanda, poi aggiungi contesto e hashtag sotto. Metti le parole più importanti e qualche hashtag mirato all’inizio. Le didascalie che invitano a commentare — una domanda o un’affermazione audace — tendono a ottenere le risposte che spingono un video nell’algoritmo.</p>
+<p>Anche con migliaia di caratteri, il feed mostra solo la prima riga o due prima di «…altro». Inizia con un gancio o una domanda, poi aggiungi contesto e hashtag sotto. Metti le parole più importanti e qualche hashtag mirato all’inizio. Le didascalie che invitano a commentare — una domanda o un’affermazione audace — tendono a ottenere le risposte che spingono un video nell’algoritmo.</p>
 <h2>Sfruttare al meglio 80 caratteri di bio</h2>
 <p>La bio è minuscola, quindi ogni carattere deve lavorare. Di’ cosa fai e per chi, aggiungi una call to action chiara o un indizio di link e usa interruzioni di riga o una sola emoji per dare struttura. Poiché 80 caratteri si riempiono in fretta — soprattutto con le emoji, che contano anch’esse — il contatore in tempo reale ti aiuta a ridurre all’essenziale.</p>
 <h2>Privato e istantaneo</h2>
 <p>Scrivi o incolla didascalia e bio per vedere esattamente quanti caratteri usa ciascuna e quanto spazio resta. Tutto avviene nel tuo browser, quindi nulla di ciò che scrivi viene caricato. Regola finché entrambe rientrano nei limiti di TikTok, poi copiale.</p>`,
       nl: `<h2>TikTok-tekenlimieten</h2>
-<p>TikTok staat tot <strong>2.200 tekens</strong> toe in een videobijschrift en slechts <strong>80 tekens</strong> in je profielbio. Hashtags, @vermeldingen en emoji tellen allemaal mee voor de bijschriftlimiet, en omdat hashtags essentieel zijn voor bereik, telt elk teken. Deze tool telt je bijschrift en bio live, zodat je hook, hashtags en call to action passen zonder afgekapt te worden.</p>
+<p>TikTok staat tot <strong>4.000 tekens</strong> toe in een videobijschrift wanneer je native in de app plaatst — al limiteren de TikTok-API en planners (Buffer, Hootsuite, Later) het bijschrift nog steeds op <strong>2.200</strong>, dus dat is de veilige grens als je niet handmatig plaatst — en slechts <strong>80 tekens</strong> in je profielbio. Hashtags, @vermeldingen en emoji tellen allemaal mee voor de bijschriftlimiet, en omdat hashtags essentieel zijn voor bereik, telt elk teken. Deze tool telt je bijschrift en bio live, zodat je hook, hashtags en call to action passen zonder afgekapt te worden.</p>
 <h2>Een bijschrift schrijven dat presteert</h2>
-<p>Zelfs met 2.200 tekens toont de feed maar de eerste regel of twee vóór “…meer”. Begin met een hook of een vraag en voeg context en hashtags daaronder toe. Zet je belangrijkste woorden en een paar gerichte hashtags vooraan. Bijschriften die uitnodigen tot reageren — een vraag of een gedurfde stelling — krijgen vaker de reacties die een video in het algoritme stuwen.</p>
+<p>Zelfs met duizenden tekens toont de feed maar de eerste regel of twee vóór “…meer”. Begin met een hook of een vraag en voeg context en hashtags daaronder toe. Zet je belangrijkste woorden en een paar gerichte hashtags vooraan. Bijschriften die uitnodigen tot reageren — een vraag of een gedurfde stelling — krijgen vaker de reacties die een video in het algoritme stuwen.</p>
 <h2>Haal alles uit 80 tekens bio</h2>
 <p>De bio is piepklein, dus elk teken moet werken. Zeg wat je doet en voor wie, voeg één duidelijke call to action of linkhint toe en gebruik regeleinden of één emoji voor structuur. Omdat 80 tekens snel vol zitten — zeker met emoji, die ook meetellen — helpt de live teller je terug te brengen tot de essentie.</p>
 <h2>Privé en direct</h2>
 <p>Typ of plak je bijschrift en bio om precies te zien hoeveel tekens elk gebruikt en hoeveel ruimte er over is. Alles draait in je browser, dus niets van wat je typt wordt geüpload. Pas aan tot beide binnen TikToks limieten passen en kopieer ze.</p>`,
       ja: `<h2>TikTok の文字数制限</h2>
-<p>TikTok は動画の<strong>キャプションに最大2,200文字</strong>、プロフィールの<strong>自己紹介に80文字</strong>まで使えます。ハッシュタグ・@メンション・絵文字はすべてキャプションの上限に数えられ、ハッシュタグはリーチに不可欠なので一文字一文字が重要です。本ツールはキャプションと自己紹介をリアルタイムで数え、フック・ハッシュタグ・行動喚起が切れずに収まるようにします。</p>
+<p>TikTok はアプリから直接投稿する場合、動画の<strong>キャプションに最大4,000文字</strong>使えます。ただし TikTok の API やスケジューラー（Buffer、Hootsuite、Later）はキャプションを<strong>2,200文字</strong>までに制限するため、手動で投稿しないなら2,200が安全な上限です。プロフィールの<strong>自己紹介は80文字</strong>まで。ハッシュタグ・@メンション・絵文字はすべてキャプションの上限に数えられ、ハッシュタグはリーチに不可欠なので一文字一文字が重要です。本ツールはキャプションと自己紹介をリアルタイムで数え、フック・ハッシュタグ・行動喚起が切れずに収まるようにします。</p>
 <h2>成果の出るキャプションの書き方</h2>
-<p>2,200文字使えても、フィードでは「…もっと見る」の前に最初の1〜2行しか表示されません。フックや質問で始め、その下に文脈とハッシュタグを加えましょう。最も重要な言葉と狙ったハッシュタグを前に置きます。コメントを誘うキャプション（質問や大胆な主張）は、動画をアルゴリズムで押し上げる返信を得やすくなります。</p>
+<p>数千文字使えても、フィードでは「…もっと見る」の前に最初の1〜2行しか表示されません。フックや質問で始め、その下に文脈とハッシュタグを加えましょう。最も重要な言葉と狙ったハッシュタグを前に置きます。コメントを誘うキャプション（質問や大胆な主張）は、動画をアルゴリズムで押し上げる返信を得やすくなります。</p>
 <h2>80文字の自己紹介を活かす</h2>
 <p>自己紹介はごく短いので、一文字も無駄にできません。何をする人で誰のためかを述べ、明確な行動喚起やリンクの手がかりを加え、改行や絵文字1つで構造を作りましょう。絵文字も数えられるため80文字はすぐ埋まります。ライブカウンターが要点への絞り込みを助けます。</p>
 <h2>プライベートで即時</h2>
 <p>キャプションと自己紹介を入力または貼り付けると、それぞれの使用文字数と残り容量が正確にわかります。すべてブラウザー内で動作するため、入力内容はアップロードされません。両方が TikTok の上限内に収まるよう調整してコピーしましょう。</p>`,
       zh: `<h2>TikTok 字符限制</h2>
-<p>TikTok 视频<strong>文案最多 2,200 个字符</strong>，个人资料<strong>简介仅 80 个字符</strong>。话题标签、@提及和表情符号都计入文案上限，而话题标签对触达至关重要，因此每个字符都很关键。本工具实时统计你的文案和简介，让钩子、标签和行动号召都能完整放下而不被截断。</p>
+<p>在应用内原生发布时，TikTok 视频<strong>文案最多 4,000 个字符</strong>——不过 TikTok 的 API 和排程工具（Buffer、Hootsuite、Later）仍将文案上限定为 <strong>2,200</strong>，所以如果你不手动发布，2,200 才是安全上限——个人资料<strong>简介仅 80 个字符</strong>。话题标签、@提及和表情符号都计入文案上限，而话题标签对触达至关重要，因此每个字符都很关键。本工具实时统计你的文案和简介，让钩子、标签和行动号召都能完整放下而不被截断。</p>
 <h2>写出有效的文案</h2>
-<p>即使有 2,200 个字符，信息流在“…更多”之前也只显示一两行。先用钩子或提问开头，再在下方补充背景和标签。把最重要的词和几个精准标签放在前面。邀请评论的文案——一个问题或大胆的论断——往往能获得把视频推上算法的回复。</p>
+<p>即使有数千个字符，信息流在“…更多”之前也只显示一两行。先用钩子或提问开头，再在下方补充背景和标签。把最重要的词和几个精准标签放在前面。邀请评论的文案——一个问题或大胆的论断——往往能获得把视频推上算法的回复。</p>
 <h2>用好 80 字符的简介</h2>
 <p>简介非常短，所以每个字符都要发挥作用。说明你做什么、面向谁，加入一个清晰的行动号召或链接提示，并用换行或一个表情来制造结构。由于 80 个字符很快用完——尤其加上同样计数的表情——实时计数器能帮你精简到要点。</p>
 <h2>私密且即时</h2>
 <p>输入或粘贴你的文案和简介，即可准确看到各自使用了多少字符、还剩多少空间。一切都在你的浏览器中运行，因此你输入的内容不会被上传。调整到两者都在 TikTok 限制内，然后复制过去。</p>`,
       da: `<h2>TikTok-tegngrænser</h2>
-<p>TikTok tillader op til <strong>2.200 tegn</strong> i en videobeskrivelse og kun <strong>80 tegn</strong> i profilens bio. Hashtags, @omtaler og emojis tæller alle med i beskrivelsesgrænsen, og da hashtags er afgørende for rækkevidde, tæller hvert tegn. Dette værktøj tæller din beskrivelse og bio live, så krog, hashtags og call to action kan være der uden at blive afkortet.</p>
+<p>TikTok tillader op til <strong>4.000 tegn</strong> i en videobeskrivelse, når du poster native i appen — men TikToks API og planlæggere (Buffer, Hootsuite, Later) sætter stadig grænsen for beskrivelsen ved <strong>2.200</strong>, så det er den sikre grænse, hvis du ikke poster manuelt — og kun <strong>80 tegn</strong> i profilens bio. Hashtags, @omtaler og emojis tæller alle med i beskrivelsesgrænsen, og da hashtags er afgørende for rækkevidde, tæller hvert tegn. Dette værktøj tæller din beskrivelse og bio live, så krog, hashtags og call to action kan være der uden at blive afkortet.</p>
 <h2>Skriv en beskrivelse, der virker</h2>
-<p>Selv med 2.200 tegn viser feedet kun den første linje eller to før “…mere”. Start med en krog eller et spørgsmål, og tilføj kontekst og hashtags nedenunder. Placer dine vigtigste ord og et par målrettede hashtags tidligt. Beskrivelser, der inviterer til en kommentar — et spørgsmål eller en dristig påstand — får oftere de svar, der skubber en video op i algoritmen.</p>
+<p>Selv med tusindvis af tegn viser feedet kun den første linje eller to før “…mere”. Start med en krog eller et spørgsmål, og tilføj kontekst og hashtags nedenunder. Placer dine vigtigste ord og et par målrettede hashtags tidligt. Beskrivelser, der inviterer til en kommentar — et spørgsmål eller en dristig påstand — får oftere de svar, der skubber en video op i algoritmen.</p>
 <h2>Få mest muligt ud af 80 tegns bio</h2>
 <p>Bioen er lillebitte, så hvert tegn skal arbejde. Sig, hvad du laver og for hvem, tilføj én klar call to action eller et link-hint, og brug linjeskift eller en enkelt emoji til struktur. Da 80 tegn fyldes hurtigt — især med emojis, der også tæller — hjælper live-tælleren dig med at skære ind til det væsentlige.</p>
 <h2>Privat og øjeblikkeligt</h2>
@@ -1416,63 +1416,63 @@ export const calculators: ToolDefinition[] = [
 
     faq: {
       en: [
-        { q: 'What is the TikTok caption character limit?', a: '2,200 characters, including hashtags, @mentions, and emoji. Only the first line or two show before “…more,” so put your hook first.' },
+        { q: 'What is the TikTok caption character limit?', a: '4,000 characters when you post natively in the app (the TikTok API and most schedulers still cap captions at 2,200), including hashtags, @mentions, and emoji. Only the first line or two show before “…more,” so put your hook first.' },
         { q: 'What is the TikTok bio character limit?', a: '80 characters. It’s short, so lead with what you do and one call to action; emoji count toward the 80.' },
-        { q: 'Do hashtags and emoji count in the caption?', a: 'Yes. Hashtags, @mentions, links, and emoji all count toward the 2,200-character caption limit. This counter counts them exactly as TikTok does.' },
+        { q: 'Do hashtags and emoji count in the caption?', a: 'Yes. Hashtags, @mentions, links, and emoji all count toward the caption limit (4,000 native, 2,200 via the API/schedulers). This counter counts them exactly as TikTok does.' },
         { q: 'Is my caption uploaded anywhere?', a: 'No. Counting runs entirely in your browser — nothing you type is sent to a server, so your drafts stay private.' },
       ],
       es: [
-        { q: '¿Cuál es el límite de caracteres de la descripción de TikTok?', a: '2200 caracteres, incluidos hashtags, @menciones y emojis. Solo se ven la primera línea o dos antes del «…más», así que pon tu gancho primero.' },
+        { q: '¿Cuál es el límite de caracteres de la descripción de TikTok?', a: '4000 caracteres al publicar desde la app (la API y la mayoría de los programadores limitan a 2200), incluidos hashtags, @menciones y emojis. Solo se ven la primera línea o dos antes del «…más», así que pon tu gancho primero.' },
         { q: '¿Cuál es el límite de caracteres de la biografía de TikTok?', a: '80 caracteres. Es corta, así que empieza con lo que haces y una llamada a la acción; los emojis cuentan para los 80.' },
-        { q: '¿Los hashtags y emojis cuentan en la descripción?', a: 'Sí. Los hashtags, las @menciones, los enlaces y los emojis cuentan para el límite de 2200 caracteres. Este contador los cuenta exactamente como TikTok.' },
+        { q: '¿Los hashtags y emojis cuentan en la descripción?', a: 'Sí. Los hashtags, las @menciones, los enlaces y los emojis cuentan para el límite de la descripción (4000 nativo, 2200 vía API). Este contador los cuenta exactamente como TikTok.' },
         { q: '¿Se sube mi descripción a algún sitio?', a: 'No. El conteo se realiza por completo en tu navegador: nada de lo que escribas se envía a un servidor, así que tus borradores son privados.' },
       ],
       de: [
-        { q: 'Wie viele Zeichen darf eine TikTok-Beschreibung haben?', a: '2.200 Zeichen, inklusive Hashtags, @Erwähnungen und Emojis. Nur die erste Zeile oder zwei erscheinen vor „…mehr“, setze deinen Hook also nach vorn.' },
+        { q: 'Wie viele Zeichen darf eine TikTok-Beschreibung haben?', a: '4.000 Zeichen beim nativen Posten in der App (die API und die meisten Scheduler begrenzen auf 2.200), inklusive Hashtags, @Erwähnungen und Emojis. Nur die erste Zeile oder zwei erscheinen vor „…mehr“, setze deinen Hook also nach vorn.' },
         { q: 'Wie viele Zeichen darf die TikTok-Bio haben?', a: '80 Zeichen. Sie ist kurz, beginne also mit dem, was du tust, und einem Call-to-Action; Emojis zählen zu den 80.' },
-        { q: 'Zählen Hashtags und Emojis in der Beschreibung?', a: 'Ja. Hashtags, @Erwähnungen, Links und Emojis zählen alle zum 2.200-Zeichen-Limit. Dieser Zähler zählt sie genau wie TikTok.' },
+        { q: 'Zählen Hashtags und Emojis in der Beschreibung?', a: 'Ja. Hashtags, @Erwähnungen, Links und Emojis zählen alle zum Beschreibungslimit (4.000 nativ, 2.200 über die API). Dieser Zähler zählt sie genau wie TikTok.' },
         { q: 'Wird meine Beschreibung irgendwo hochgeladen?', a: 'Nein. Das Zählen läuft vollständig in deinem Browser – nichts, was du tippst, wird an einen Server gesendet, deine Entwürfe bleiben privat.' },
       ],
       fr: [
-        { q: 'Quelle est la limite de caractères de la légende TikTok ?', a: '2 200 caractères, hashtags, @mentions et emojis compris. Seules la première ligne ou deux s’affichent avant « …plus », alors mettez votre accroche en premier.' },
+        { q: 'Quelle est la limite de caractères de la légende TikTok ?', a: '4 000 caractères en publiant nativement dans l’app (l’API et la plupart des planificateurs plafonnent à 2 200), hashtags, @mentions et emojis compris. Seules la première ligne ou deux s’affichent avant « …plus », alors mettez votre accroche en premier.' },
         { q: 'Quelle est la limite de caractères de la bio TikTok ?', a: '80 caractères. Elle est courte : commencez par ce que vous faites et un appel à l’action ; les emojis comptent dans les 80.' },
-        { q: 'Les hashtags et emojis comptent-ils dans la légende ?', a: 'Oui. Les hashtags, @mentions, liens et emojis comptent tous dans la limite de 2 200 caractères. Ce compteur les compte exactement comme TikTok.' },
+        { q: 'Les hashtags et emojis comptent-ils dans la légende ?', a: 'Oui. Les hashtags, @mentions, liens et emojis comptent tous dans la limite de légende (4 000 en natif, 2 200 via l’API). Ce compteur les compte exactement comme TikTok.' },
         { q: 'Ma légende est-elle envoyée quelque part ?', a: 'Non. Le comptage se fait entièrement dans votre navigateur — rien de ce que vous tapez n’est envoyé à un serveur, vos brouillons restent privés.' },
       ],
       pt: [
-        { q: 'Qual é o limite de caracteres da legenda do TikTok?', a: '2200 caracteres, incluindo hashtags, @menções e emojis. Apenas a primeira linha ou duas aparecem antes do «…mais», por isso ponha o gancho primeiro.' },
+        { q: 'Qual é o limite de caracteres da legenda do TikTok?', a: '4000 caracteres ao publicar na app (a API e a maioria dos agendadores limitam a 2200), incluindo hashtags, @menções e emojis. Apenas a primeira linha ou duas aparecem antes do «…mais», por isso ponha o gancho primeiro.' },
         { q: 'Qual é o limite de caracteres da biografia do TikTok?', a: '80 caracteres. É curta, por isso comece com o que faz e uma chamada à ação; os emojis contam para os 80.' },
-        { q: 'Os hashtags e emojis contam na legenda?', a: 'Sim. Os hashtags, @menções, ligações e emojis contam todos para o limite de 2200 caracteres. Este contador conta-os exatamente como o TikTok.' },
+        { q: 'Os hashtags e emojis contam na legenda?', a: 'Sim. Os hashtags, @menções, ligações e emojis contam todos para o limite da legenda (4000 nativo, 2200 via API). Este contador conta-os exatamente como o TikTok.' },
         { q: 'A minha legenda é enviada para algum lado?', a: 'Não. A contagem é feita inteiramente no seu navegador — nada do que escrever é enviado para um servidor, por isso os seus rascunhos permanecem privados.' },
       ],
       it: [
-        { q: 'Qual è il limite di caratteri della didascalia TikTok?', a: '2.200 caratteri, inclusi hashtag, @menzioni ed emoji. Solo la prima riga o due compaiono prima di «…altro», quindi metti il gancio per primo.' },
+        { q: 'Qual è il limite di caratteri della didascalia TikTok?', a: '4.000 caratteri pubblicando nativamente dall’app (l’API e la maggior parte degli scheduler si fermano a 2.200), inclusi hashtag, @menzioni ed emoji. Solo la prima riga o due compaiono prima di «…altro», quindi metti il gancio per primo.' },
         { q: 'Qual è il limite di caratteri della bio TikTok?', a: '80 caratteri. È corta, quindi inizia con cosa fai e una call to action; le emoji contano nei 80.' },
-        { q: 'Hashtag ed emoji contano nella didascalia?', a: 'Sì. Hashtag, @menzioni, link ed emoji contano tutti nel limite di 2.200 caratteri. Questo contatore li conta esattamente come TikTok.' },
+        { q: 'Hashtag ed emoji contano nella didascalia?', a: 'Sì. Hashtag, @menzioni, link ed emoji contano tutti nel limite della didascalia (4.000 nativo, 2.200 via API). Questo contatore li conta esattamente come TikTok.' },
         { q: 'La mia didascalia viene caricata da qualche parte?', a: 'No. Il conteggio avviene interamente nel tuo browser — nulla di ciò che scrivi viene inviato a un server, quindi le tue bozze restano private.' },
       ],
       nl: [
-        { q: 'Wat is de tekenlimiet voor een TikTok-bijschrift?', a: '2.200 tekens, inclusief hashtags, @vermeldingen en emoji. Alleen de eerste regel of twee zijn zichtbaar vóór “…meer”, dus zet je hook vooraan.' },
+        { q: 'Wat is de tekenlimiet voor een TikTok-bijschrift?', a: '4.000 tekens bij native plaatsen in de app (de API en de meeste planners limiteren op 2.200), inclusief hashtags, @vermeldingen en emoji. Alleen de eerste regel of twee zijn zichtbaar vóór “…meer”, dus zet je hook vooraan.' },
         { q: 'Wat is de tekenlimiet voor de TikTok-bio?', a: '80 tekens. Hij is kort, dus begin met wat je doet en één call to action; emoji tellen mee voor de 80.' },
-        { q: 'Tellen hashtags en emoji mee in het bijschrift?', a: 'Ja. Hashtags, @vermeldingen, links en emoji tellen allemaal mee voor de limiet van 2.200 tekens. Deze teller telt ze precies zoals TikTok dat doet.' },
+        { q: 'Tellen hashtags en emoji mee in het bijschrift?', a: 'Ja. Hashtags, @vermeldingen, links en emoji tellen allemaal mee voor de bijschriftlimiet (4.000 native, 2.200 via de API). Deze teller telt ze precies zoals TikTok dat doet.' },
         { q: 'Wordt mijn bijschrift ergens geüpload?', a: 'Nee. Het tellen gebeurt volledig in je browser — niets van wat je typt wordt naar een server gestuurd, dus je concepten blijven privé.' },
       ],
       ja: [
-        { q: 'TikTok のキャプションの文字数上限は？', a: '2,200文字（ハッシュタグ・@メンション・絵文字を含む）。「…もっと見る」の前は最初の1〜2行だけ表示されるので、フックを先頭に。' },
+        { q: 'TikTok のキャプションの文字数上限は？', a: 'アプリから直接投稿する場合は4,000文字（API やほとんどのスケジューラーは2,200文字まで）。ハッシュタグ・@メンション・絵文字を含みます。「…もっと見る」の前は最初の1〜2行だけ表示されるので、フックを先頭に。' },
         { q: 'TikTok の自己紹介の文字数上限は？', a: '80文字です。短いので、何をするかと行動喚起から始めましょう。絵文字も80に数えられます。' },
-        { q: 'ハッシュタグや絵文字はキャプションに数えられますか？', a: 'はい。ハッシュタグ・@メンション・リンク・絵文字はすべて2,200文字の上限に数えられます。本カウンターは TikTok と同じように数えます。' },
+        { q: 'ハッシュタグや絵文字はキャプションに数えられますか？', a: 'はい。ハッシュタグ・@メンション・リンク・絵文字はすべてキャプションの上限（ネイティブ4,000文字、API経由は2,200文字）に数えられます。本カウンターは TikTok と同じように数えます。' },
         { q: 'キャプションはどこかにアップロードされますか？', a: 'いいえ。カウントはすべてブラウザー内で行われ、入力内容はサーバーに送信されません。下書きは非公開のままです。' },
       ],
       zh: [
-        { q: 'TikTok 文案的字符上限是多少？', a: '2,200 个字符，包含话题标签、@提及和表情符号。“…更多”之前只显示一两行，所以把钩子放在最前面。' },
+        { q: 'TikTok 文案的字符上限是多少？', a: '在应用内原生发布时为 4,000 个字符（API 和大多数排程工具上限为 2,200），包含话题标签、@提及和表情符号。“…更多”之前只显示一两行，所以把钩子放在最前面。' },
         { q: 'TikTok 简介的字符上限是多少？', a: '80 个字符。它很短，所以先写你做什么和一个行动号召；表情符号计入这 80 个。' },
-        { q: '话题标签和表情计入文案吗？', a: '计入。话题标签、@提及、链接和表情都计入 2,200 字符的文案上限。本计数器与 TikTok 的计法完全一致。' },
+        { q: '话题标签和表情计入文案吗？', a: '计入。话题标签、@提及、链接和表情都计入文案上限（原生 4,000，API 为 2,200）。本计数器与 TikTok 的计法完全一致。' },
         { q: '我的文案会被上传吗？', a: '不会。统计完全在你的浏览器中进行——你输入的内容不会发送到服务器，因此草稿保持私密。' },
       ],
       da: [
-        { q: 'Hvad er tegngrænsen for en TikTok-beskrivelse?', a: '2.200 tegn, inklusive hashtags, @omtaler og emojis. Kun den første linje eller to vises før “…mere”, så sæt din krog først.' },
+        { q: 'Hvad er tegngrænsen for en TikTok-beskrivelse?', a: '4.000 tegn ved native opslag i appen (API og de fleste planlæggere sætter grænsen ved 2.200), inklusive hashtags, @omtaler og emojis. Kun den første linje eller to vises før “…mere”, så sæt din krog først.' },
         { q: 'Hvad er tegngrænsen for TikTok-bioen?', a: '80 tegn. Den er kort, så start med, hvad du laver, og én call to action; emojis tæller med i de 80.' },
-        { q: 'Tæller hashtags og emojis med i beskrivelsen?', a: 'Ja. Hashtags, @omtaler, links og emojis tæller alle med i grænsen på 2.200 tegn. Denne tæller tæller dem præcis som TikTok.' },
+        { q: 'Tæller hashtags og emojis med i beskrivelsen?', a: 'Ja. Hashtags, @omtaler, links og emojis tæller alle med i beskrivelsesgrænsen (4.000 native, 2.200 via API). Denne tæller tæller dem præcis som TikTok.' },
         { q: 'Bliver min beskrivelse uploadet nogen steder?', a: 'Nej. Optællingen kører helt i din browser — intet af det, du skriver, sendes til en server, så dine udkast forbliver private.' },
       ],
     },

@@ -428,7 +428,11 @@ export interface IslandStrings {
     title: string;
     badgeIdle: string;
     badgeSingle: string;
+    /** Warn badge: caption is past the 2,200 API/scheduler safe ceiling. */
+    badgeOverSafe: string;
     badgeOver: string;
+    /** "{safe}". Note shown in the 2,200–4,000 native-only zone. */
+    apiCapHint: string;
     /** "{n}" links. */
     links: Plural;
     charLength: string;

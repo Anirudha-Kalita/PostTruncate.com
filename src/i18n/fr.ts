@@ -133,7 +133,7 @@ export const fr: Translations = {
         heading: 'Limites de caractères sur Instagram et Facebook',
         paragraphs: [
           'Instagram autorise jusqu’à 2 200 caractères dans une légende, mais n’affiche que les 125 premiers environ avant de masquer le reste derrière un lien « plus ». PostTruncate indique exactement où tombe cette coupure, afin que la première ligne visible dans le fil soit toujours celle qui compte.',
-          'Le tableau de bord surveille également le <strong>nombre de hashtags</strong> en temps réel. Instagram ne publie silencieusement pas les posts dépassant 5 hashtags, donc une alerte s’affiche avant d’atteindre cette limite. Les espaces sont toujours comptabilisés, conformément au comportement de la plateforme.',
+          'Le tableau de bord surveille également le <strong>nombre de hashtags</strong> en temps réel. Instagram autorise jusqu’à 30 hashtags avant qu’un post n’échoue, mais ~5 est le nombre idéal recommandé — au-delà, cela ressemble à du spam —, donc le compteur alerte au-delà de 5 et signale le plafond de 30. Les espaces sont toujours comptabilisés, conformément au comportement de la plateforme.',
         ],
       },
       {
@@ -184,10 +184,10 @@ export const fr: Translations = {
       instagram: {
         name: 'Instagram',
         tag: 'Plafond de hashtags',
-        body: 'Les légendes Instagram peuvent atteindre 2 200 caractères mais n’en affichent qu’environ 125 avant un lien « plus ». La règle la plus stricte concerne les hashtags : au-delà de 5 dans une même légende ou un même commentaire, la publication échoue silencieusement. Empiler des dizaines de tags à faible intention passe aussi pour du spam. Gardez vos tags concis et pertinents, et surveillez le compteur en direct pour ne jamais heurter le mur des 5 tags.',
+        body: 'Les légendes Instagram peuvent atteindre 2 200 caractères mais n’en affichent qu’environ 125 avant un lien « plus ». Pour les hashtags, le plafond strict est 30 (légende et premier commentaire) ; au-delà, la publication échoue. Mais ~5 est le nombre idéal recommandé ; empiler des dizaines de tags passe pour du spam. Gardez vos tags concis et pertinents, et surveillez le compteur en direct, qui alerte au-delà de 5 et signale le plafond de 30.',
         facts: [
           ['Limite de légende', '2 200 caractères'],
-          ['Limite stricte de hashtags', '5 tags'],
+          ['Hashtags', '~5 recommandé / 30 plafond'],
           ['Aperçu de légende', '~125 caractères'],
         ],
       },
@@ -204,9 +204,9 @@ export const fr: Translations = {
       tiktok: {
         name: 'TikTok',
         tag: 'Pli de la légende',
-        body: 'Les légendes TikTok peuvent atteindre 2 200 caractères, émojis et hashtags compris dans le total. Mais le fil met la vidéo en avant : il n’affiche que le début de votre légende et replie le reste derrière « …plus » au premier saut de ligne ou vers 100 caractères, selon ce qui vient en premier. Commencez par votre accroche sur une seule ligne pour qu’elle survive. PostTruncate compte chaque caractère en direct et marque précisément où la légende se replie sur un reel 9:16.',
+        body: 'Les légendes TikTok peuvent atteindre 4 000 caractères en publiant nativement, émojis et hashtags compris dans le total — mais l’API TikTok et les planificateurs (Buffer, Hootsuite, Later) plafonnent la légende à 2 200, c’est donc la limite sûre si vous ne publiez pas à la main. Mais le fil met la vidéo en avant : il n’affiche que le début de votre légende et replie le reste derrière « …plus » au premier saut de ligne ou vers 100 caractères, selon ce qui vient en premier. Commencez par votre accroche sur une seule ligne pour qu’elle survive. PostTruncate compte chaque caractère en direct et marque précisément où la légende se replie sur un reel 9:16.',
         facts: [
-          ['Limite de légende', '2 200 caractères'],
+          ['Limite de légende', '4 000 natif / 2 200 API'],
           ['Pli « …plus »', '~100 car. / 1re ligne'],
           ['Cadre vidéo', '9:16 (1080×1920)'],
         ],
@@ -239,7 +239,7 @@ export const fr: Translations = {
       },
       {
         q: 'Quelle est la précision des limites de caractères ?',
-        a: 'PostTruncate utilise les limites publiées et largement observées de chaque plateforme — 280 pour X, 210/140 pour le pli LinkedIn, 5 hashtags pour Instagram, et un poids forfaitaire de 23 caractères pour les liens. Les plateformes les ajustent parfois, et le rendu varie légèrement selon l’appareil, alors considérez les aperçus comme une estimation proche plutôt qu’une garantie au pixel près.',
+        a: 'PostTruncate utilise les limites publiées et largement observées de chaque plateforme — 280 pour X, 210/140 pour le pli LinkedIn, ~5 hashtags recommandés (plafond de 30) pour Instagram, et un poids forfaitaire de 23 caractères pour les liens. Les plateformes les ajustent parfois, et le rendu varie légèrement selon l’appareil, alors considérez les aperçus comme une estimation proche plutôt qu’une garantie au pixel près.',
       },
       {
         q: 'Les espaces et la ponctuation comptent-ils comme des caractères ?',
@@ -337,7 +337,7 @@ export const fr: Translations = {
       linkedin: 'Le texte après le pli est masqué derrière « …voir plus ».',
       twitter: 'Pas de pli — au-delà de {limit} caractères, la publication est découpée en fil ; chaque lien compte pour {url} caractères.',
       threads: 'Les liens comptent en entier ; le texte au-delà de {limit} caractères se poursuit en réponses numérotées.',
-      instagram: 'La légende se replie derrière « plus » ; plafond strict de {hashtags} hashtags par publication.',
+      instagram: 'La légende se replie derrière « plus » ; visez ~{hashtags} hashtags (plafond {hashtagMax}).',
       facebook: 'Les publications du fil se replient derrière « Voir plus » bien avant le plafond technique.',
       tiktok: 'La légende se replie derrière « …plus » au premier saut de ligne ou ~100 caractères ; émojis et hashtags comptent.',
       smsGsm: '{single} caractères dans un message unique ; {multi} par segment dès qu’il se divise.',
@@ -348,10 +348,10 @@ export const fr: Translations = {
       linkedin: 'LinkedIn autorise {limit} caractères par publication mais replie l’affichage du fil après environ {mobile} caractères sur mobile et {desktop} sur ordinateur — le reste est masqué derrière « …voir plus ». Les sauts de ligne comptent, et la première phrase concentre presque tous les clics : placez l’accroche en tête et les liens sous le pli.',
       twitter: 'X impose un plafond strict de {limit} caractères par publication et n’affiche aucun pli. Chaque URL est enveloppée par le raccourcisseur t.co et coûte toujours {url} caractères quelle que soit sa longueur réelle, et de nombreux emojis pèsent deux caractères. Les brouillons plus longs doivent être découpés en fil — PostTruncate le fait automatiquement en respectant les mots.',
       threads: 'Threads autorise {limit} caractères par publication et, contrairement à X, compte les liens dans leur longueur réelle. Sur mobile, le fil replie les publications longues vers {mobile} caractères. Tout dépassement doit se poursuivre en réponses numérotées enchaînées sous la première publication.',
-      instagram: 'Les légendes Instagram peuvent atteindre {limit} caractères, mais le fil n’affiche qu’environ les {mobile} premiers avant le lien « plus ». La règle la plus stricte concerne les hashtags : au-delà de {hashtags} dans une légende ou un premier commentaire, la publication peut échouer silencieusement.',
+      instagram: 'Les légendes Instagram peuvent atteindre {limit} caractères, mais le fil n’affiche qu’environ les {mobile} premiers avant le lien « plus ». Pour les hashtags, ~{hashtags} est le nombre idéal recommandé — au-delà, la publication passe quand même mais ressemble à du spam. Le plafond strict est {hashtagMax} (légende et premier commentaire) ; au-delà, la publication échoue.',
       facebook: 'Le plafond technique de Facebook est de {limit} caractères, mais les publications du fil se replient derrière « Voir plus » vers {mobile} caractères sur mobile et {desktop} sur ordinateur. L’engagement chute fortement sur les longs blocs : la limite pratique, c’est le pli, pas le plafond.',
       sms: 'Un SMS unique contient {gsmSingle} caractères en encodage GSM 7 bits, et tombe à {gsmMulti} par segment dès que le message se divise. Tout emoji ou caractère non GSM fait basculer le message entier en Unicode — {uniSingle} caractères par message unique, {uniMulti} par segment — et certains symboles GSM (€, crochets, barre verticale) comptent double.',
-      tiktok: 'TikTok autorise {limit} caractères par légende, émojis et hashtags comptant en entier. Comme la vidéo remplit l’écran, le fil replie la légende derrière « …plus » au premier saut de ligne ou vers {fold} caractères — selon ce qui vient en premier — si bien que la première ligne est tout ce que lit la plupart des spectateurs. Le cadre vidéo est vertical plein écran 9:16 (1080×1920).',
+      tiktok: 'TikTok autorise {limit} caractères par légende en publication native, mais l’API et les planificateurs plafonnent à {safe} ; émojis et hashtags comptent en entier. Comme la vidéo remplit l’écran, le fil replie la légende derrière « …plus » au premier saut de ligne ou vers {fold} caractères — selon ce qui vient en premier — si bien que la première ligne est tout ce que lit la plupart des spectateurs. Le cadre vidéo est vertical plein écran 9:16 (1080×1920).',
     },
   },
 
@@ -501,7 +501,7 @@ export const fr: Translations = {
         {
           heading: 'Ce qu’il fait',
           paragraphs: [
-            'Rédigez ou collez un brouillon une seule fois, et PostTruncate le rend tel que <strong>LinkedIn, X, Threads, Instagram et Facebook</strong> le feront réellement — le repli «…voir plus», la division en fils à 280 caractères, la pondération des liens à 23 caractères, le plafond de 5 hashtags. Vous voyez exactement ce qui survit au-dessus du repli avant de vous engager à publier.',
+            'Rédigez ou collez un brouillon une seule fois, et PostTruncate le rend tel que <strong>LinkedIn, X, Threads, Instagram et Facebook</strong> le feront réellement — le repli «…voir plus», la division en fils à 280 caractères, la pondération des liens à 23 caractères, le repère recommandé de ~5 hashtags et le plafond de 30. Vous voyez exactement ce qui survit au-dessus du repli avant de vous engager à publier.',
             'Il détecte aussi les problèmes silencieux qui réduisent votre portée : les caractères invisibles à largeur nulle qui faussent les comptages et les lecteurs d’écran, et les «polices décoratives» pseudo-Unicode qui semblent stylisées mais sont illisibles pour les technologies d’assistance.',
           ],
         },
@@ -686,7 +686,7 @@ export const fr: Translations = {
       },
       tiktok: {
         name: "TikTok",
-        limit: "2,200",
+        limit: "4,000",
         shown: "~100 caractères",
         bestPractice: "Accroche sur la première ligne",
         notes: "Émojis et hashtags comptent ; se replie au premier saut de ligne"
@@ -980,7 +980,9 @@ export const fr: Translations = {
       title: 'Aperçu TikTok',
       badgeIdle: 'Commencez à écrire',
       badgeSingle: 'Tient dans une légende',
-      badgeOver: 'Dépasse la limite de légende',
+      badgeOverSafe: 'Au-delà de la limite sûre',
+      badgeOver: 'Dépasse la limite de 4 000',
+      apiCapHint: 'Publié nativement, mais l’API TikTok et les planificateurs (Buffer, Hootsuite, Later) plafonnent la légende à {safe} caractères.',
       links: { one: '{n} lien', other: '{n} liens' },
       charLength: 'Longueur de la légende',
       seeMore: '…plus',
@@ -1000,8 +1002,8 @@ export const fr: Translations = {
       hashtagLabel: 'Concentration de hashtags',
       over: 'Au-delà de la limite stricte de {limit} hashtags d’Instagram — la légende ne pourra pas être publiée. Retirez-en {excess}.',
       approaching:
-        'Vous approchez du plafond de 5 tags. Réduisez à vos tags les plus pertinents.',
-      within: 'Confortablement sous la limite de 5 hashtags d’Instagram.',
+        '{n} hashtags — au-delà des {recommended} recommandés. Se publie quand même (plafond {max}), mais réduisez pour plus de portée.',
+      within: 'Dans la limite des {recommended} hashtags recommandés.',
       none: 'Aucun hashtag détecté pour l’instant.',
       a11yLabel: 'Accessibilité · polices fantaisie',
       audiencePublic: 'Public',

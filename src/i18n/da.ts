@@ -133,7 +133,7 @@ export const da: Translations = {
         heading: 'Tegngrænser på Instagram og Facebook',
         paragraphs: [
           'Instagram tillader op til 2.200 tegn i en billedtekst, men viser kun de første ca. 125, inden resten gemmes bag et "mere"-link. PostTruncate viser præcis, hvor dette klip falder, så den første synlige linje i feedet altid er den, du vil frem med.',
-          'Dashboardet overvåger også <strong>antal hashtags</strong> i realtid. Instagram udgiver lydløst ikke opslag med mere end 5 hashtags, så en advarsel vises, inden du når denne grænse. Mellemrum tæller altid med, præcis som platformen selv gør.',
+          'Dashboardet overvåger også <strong>antal hashtags</strong> i realtid. Instagram tillader op til 30 hashtags, før et opslag fejler, men ~5 er det anbefalede ideal — flere ligner spam —, så måleren advarer over 5 og markerer den hårde grænse på 30. Mellemrum tæller altid med, præcis som platformen selv gør.',
         ],
       },
       {
@@ -184,10 +184,10 @@ export const da: Translations = {
       instagram: {
         name: 'Instagram',
         tag: 'Hashtag-loft',
-        body: 'Instagram-billedtekster kan være op til 2.200 tegn, men viser kun cirka de første 125 før et "mere"-link. Den hårdere regel er hashtags: mere end 5 i en enkelt billedtekst eller kommentar, og opslaget undlader i det stille at blive publiceret. At stable dusinvis af hashtags med lav hensigt læses også som spam. Hold dine hashtags stramme og relevante, og hold øje med live-måleren, så du aldrig rammer 5-hashtag-muren.',
+        body: 'Instagram-billedtekster kan være op til 2.200 tegn, men viser kun cirka de første 125 før et "mere"-link. For hashtags er den hårde grænse 30 (billedtekst plus første kommentar); derover kan opslaget ikke publiceres. Men ~5 er det anbefalede ideal; at stable dusinvis af hashtags med lav hensigt læses som spam. Hold dine hashtags stramme og relevante, og hold øje med live-måleren, der advarer over 5 og markerer den hårde grænse på 30.',
         facts: [
           ['Grænse for billedtekst', '2.200 tegn'],
-          ['Hård hashtag-grænse', '5 hashtags'],
+          ['Hashtags', '~5 anbefalet / 30 hård'],
           ['Preview af billedtekst', '~125 tegn'],
         ],
       },
@@ -204,9 +204,9 @@ export const da: Translations = {
       tiktok: {
         name: 'TikTok',
         tag: 'Billedtekst-fold',
-        body: 'TikTok-billedtekster kan rumme op til 2.200 tegn, hvor emoji og hashtags tæller med i grænsen. Men feedet sætter videoen først: det viser kun begyndelsen af din billedtekst og folder resten bag “…mere” ved det første linjeskift eller omkring 100 tegn, alt efter hvad der kommer først. Start med din krog på én linje, så den overlever. PostTruncate tæller hvert tegn live og markerer præcis, hvor billedteksten foldes over en 9:16-reel.',
+        body: 'TikTok-billedtekster kan ved native opslag rumme op til 4.000 tegn, hvor emoji og hashtags tæller med i grænsen — men TikToks API og planlæggere (Buffer, Hootsuite, Later) sætter grænsen for billedteksten ved 2.200, så det er den sikre grænse, hvis du ikke poster manuelt. Men feedet sætter videoen først: det viser kun begyndelsen af din billedtekst og folder resten bag “…mere” ved det første linjeskift eller omkring 100 tegn, alt efter hvad der kommer først. Start med din krog på én linje, så den overlever. PostTruncate tæller hvert tegn live og markerer præcis, hvor billedteksten foldes over en 9:16-reel.',
         facts: [
-          ['Billedtekst-grænse', '2.200 tegn'],
+          ['Billedtekst-grænse', '4.000 native / 2.200 API'],
           ['“…mere”-fold', '~100 tegn / 1. linje'],
           ['Videoformat', '9:16 (1080×1920)'],
         ],
@@ -239,7 +239,7 @@ export const da: Translations = {
       },
       {
         q: 'Hvor nøjagtige er tegngrænserne?',
-        a: 'PostTruncate bruger hver platforms offentliggjorte og bredt observerede grænser — 280 for X, 210/140 for LinkedIn-folden, 5 hashtags for Instagram og en fast vægt på 23 tegn for links. Platforme justerer dem af og til, og gengivelsen varierer en smule fra enhed til enhed, så betragt previewene som et tæt estimat snarere end en pixelperfekt garanti.',
+        a: 'PostTruncate bruger hver platforms offentliggjorte og bredt observerede grænser — 280 for X, 210/140 for LinkedIn-folden, ~5 anbefalede hashtags (hård grænse 30) for Instagram og en fast vægt på 23 tegn for links. Platforme justerer dem af og til, og gengivelsen varierer en smule fra enhed til enhed, så betragt previewene som et tæt estimat snarere end en pixelperfekt garanti.',
       },
       {
         q: 'Tæller mellemrum og tegnsætning med som tegn?',
@@ -337,7 +337,7 @@ export const da: Translations = {
       linkedin: 'Tekst efter folden gemmes bag “…se mere”.',
       twitter: 'Ingen fold — over {limit} tegn opdeles i en tråd; hvert link tæller som {url} tegn.',
       threads: 'Links tæller fuldt ud; tekst over {limit} tegn fortsætter som nummererede svar.',
-      instagram: 'Billedteksten folder bag “mere”; hårdt loft på {hashtags} hashtags pr. opslag.',
+      instagram: 'Billedteksten folder bag “mere”; sigt efter ~{hashtags} hashtags (hård grænse {hashtagMax}).',
       facebook: 'Feedopslag klapper sammen bag “Se mere” længe før det tekniske loft.',
       tiktok: 'Billedteksten foldes bag “…mere” ved det første linjeskift eller ~100 tegn; emoji og hashtags tæller med.',
       smsGsm: '{single} tegn i en enkelt besked; {multi} pr. segment, når den opdeles.',
@@ -348,10 +348,10 @@ export const da: Translations = {
       linkedin: 'LinkedIn tillader {limit} tegn pr. opslag, men folder feedvisningen efter cirka {mobile} tegn på mobil og {desktop} på desktop — resten gemmes bag “…se mere”. Linjeskift tæller med, og den første sætning bærer næsten alle klik: sæt krogen forrest og links under folden.',
       twitter: 'X håndhæver et hårdt loft på {limit} tegn pr. opslag og viser slet ingen fold. Hver URL pakkes ind af t.co-forkorteren og koster altid {url} tegn uanset den reelle længde, og mange emojis vejer som to tegn. Længere udkast skal opdeles i en tråd — PostTruncate gør det automatisk ved ordgrænser.',
       threads: 'Threads tillader {limit} tegn pr. opslag og tæller — i modsætning til X — links i deres fulde længde. På mobil folder feedet lange opslag ved cirka {mobile} tegn. Alt over loftet skal fortsætte som nummererede svar kædet under det første opslag.',
-      instagram: 'Instagram-billedtekster kan være op til {limit} tegn, men feedet viser kun cirka de første {mobile} før “mere”-linket. Den hårdere regel er hashtags: mere end {hashtags} i en billedtekst eller første kommentar, og opslaget kan fejle i det stille.',
+      instagram: 'Instagram-billedtekster kan være op til {limit} tegn, men feedet viser kun cirka de første {mobile} før “mere”-linket. For hashtags er ~{hashtags} det anbefalede ideal — flere postes stadig, men ligner spam. Den hårde grænse er {hashtagMax} (billedtekst plus første kommentar); derover kan opslaget ikke publiceres.',
       facebook: 'Facebooks tekniske loft er {limit} tegn, men feedopslag klapper sammen bag “Se mere” ved cirka {mobile} tegn på mobil og {desktop} på desktop. Engagementet styrtdykker ved lange ubrudte blokke — den praktiske grænse er folden, ikke loftet.',
       sms: 'En enkelt SMS rummer {gsmSingle} tegn i GSM 7-bit-kodning og falder til {gsmMulti} pr. segment, når beskeden opdeles. Enhver emoji eller ethvert ikke-GSM-tegn skifter hele beskeden til Unicode — {uniSingle} tegn pr. enkelt besked, {uniMulti} pr. segment — og nogle GSM-symboler (€, kantede parenteser, lodret streg) tæller som to.',
-      tiktok: 'TikTok tillader {limit} tegn pr. billedtekst, hvor emoji og hashtags tæller fuldt med. Fordi videoen fylder skærmen, folder feedet billedteksten bag “…mere” ved det første linjeskift eller omkring {fold} tegn — alt efter hvad der kommer først — så den første linje er alt, de fleste seere læser. Videoformatet er fuldskærm lodret 9:16 (1080×1920).',
+      tiktok: 'TikTok tillader {limit} tegn pr. billedtekst ved native opslag, men API og planlæggere sætter grænsen ved {safe}; emoji og hashtags tæller fuldt med. Fordi videoen fylder skærmen, folder feedet billedteksten bag “…mere” ved det første linjeskift eller omkring {fold} tegn — alt efter hvad der kommer først — så den første linje er alt, de fleste seere læser. Videoformatet er fuldskærm lodret 9:16 (1080×1920).',
     },
   },
 
@@ -501,7 +501,7 @@ export const da: Translations = {
         {
           heading: 'Hvad det gør',
           paragraphs: [
-            'Skriv eller indsæt et udkast én gang, og PostTruncate gengiver det, som <strong>LinkedIn, X, Threads, Instagram og Facebook</strong> rent faktisk vil — \u201e\u2026se mere\u201c-folden, trådopdelingen ved 280 tegn, link-vægtningen på 23 tegn, hashtag-loftet på 5. Du ser præcis, hvad der overlever over folden, før du forpligter dig til at publicere.',
+            'Skriv eller indsæt et udkast én gang, og PostTruncate gengiver det, som <strong>LinkedIn, X, Threads, Instagram og Facebook</strong> rent faktisk vil — \u201e\u2026se mere\u201c-folden, trådopdelingen ved 280 tegn, link-vægtningen på 23 tegn, det anbefalede niveau på ~5 hashtags og den hårde grænse på 30. Du ser præcis, hvad der overlever over folden, før du forpligter dig til at publicere.',
             'Det fanger også de stille problemer, der skrumper din rækkevidde: usynlige nul-bredde-tegn, der bryder tæller og skærmlæsere, og pseudo-Unicode-\u201esmarte skrifttyper\u201c, der ser stilede ud, men er ulæselige for hjælpeteknologi.',
           ],
         },
@@ -686,7 +686,7 @@ export const da: Translations = {
       },
       tiktok: {
         name: "TikTok",
-        limit: "2,200",
+        limit: "4,000",
         shown: "~100 tegn",
         bestPractice: "Krog på den første linje",
         notes: "Emoji og hashtags tæller med; foldes ved det første linjeskift"
@@ -980,7 +980,9 @@ export const da: Translations = {
       title: 'TikTok-forhåndsvisning',
       badgeIdle: 'Begynd at skrive',
       badgeSingle: 'Kan være i én billedtekst',
-      badgeOver: 'Over billedtekst-grænsen',
+      badgeOverSafe: 'Over den sikre grænse',
+      badgeOver: 'Over 4.000-grænsen',
+      apiCapHint: 'Postes native, men TikToks API og planlæggere (Buffer, Hootsuite, Later) sætter grænsen for billedteksten ved {safe} tegn.',
       links: { one: '{n} link', other: '{n} links' },
       charLength: 'Billedtekst-længde',
       seeMore: '…mere',
@@ -1000,8 +1002,8 @@ export const da: Translations = {
       hashtagLabel: 'Hashtag-koncentration',
       over: 'Over Instagrams hårde grænse på {limit} hashtags — billedteksten kan ikke postes. Fjern {excess}.',
       approaching:
-        'Nærmer dig 5-hashtag-loftet. Skær ned til dine hashtags med højest hensigt.',
-      within: 'Komfortabelt inden for Instagrams grænse på 5 hashtags.',
+        '{n} hashtags — over de anbefalede {recommended}. Postes stadig (hård grænse {max}), men skær ned for mere rækkevidde.',
+      within: 'Inden for de anbefalede {recommended} hashtags.',
       none: 'Ingen hashtags registreret endnu.',
       a11yLabel: 'Tilgængelighed · fancy skrifttyper',
       audiencePublic: 'Offentlig',

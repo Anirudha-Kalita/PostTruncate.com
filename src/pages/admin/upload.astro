@@ -198,7 +198,15 @@ export const prerender = true;
 
       // ── schema mirror (keep in sync with src/content.config.ts) ──────────
       const TITLE_MAX = 70, DESC_MAX = 180, SUBTITLE_MAX = 200;
-      const RELATED = ['twitter','instagram','linkedin','facebook','sms','threads','general'];
+      const RELATED = ['twitter','instagram','linkedin','facebook','sms','threads','tiktok','general'];
+      // Blog category ids — mirror src/data/blogCategories.ts (the `category`
+      // enum is REQUIRED by the schema). Every generated post gets one so it's
+      // build-valid; pick the real category later in the CMS.
+      const CATEGORIES = ['twitter-x','linkedin','instagram','facebook','threads','sms-marketing','seo-serp','copywriting-strategy','tools-automation','tiktok'];
+      const DEFAULT_CATEGORY = 'copywriting-strategy';
+      // Sensible default: map a detected relatedPlatform → its matching category,
+      // else fall back to DEFAULT_CATEGORY.
+      const PLATFORM_TO_CATEGORY = { twitter:'twitter-x', instagram:'instagram', linkedin:'linkedin', facebook:'facebook', threads:'threads', sms:'sms-marketing', tiktok:'tiktok' };
       const SLUG_RE = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
       const LOCALE = 'en';
 
@@ -341,6 +349,7 @@ export const prerender = true;
         body = formatFaq(body);
 
         const slug = title ? slugify(title) : '';
+        const platform = detectPlatform(title + ' ' + body);
         const fm = {
           title: title || '',
           subtitle: '',                                  // not reliably detectable → blank
@@ -350,7 +359,8 @@ export const prerender = true;
           locale: LOCALE,                                // convention
           slug,
           translationKey: slug,
-          relatedPlatform: detectPlatform(title + ' ' + body),
+          relatedPlatform: platform,
+          category: PLATFORM_TO_CATEGORY[platform] || DEFAULT_CATEGORY, // required; refine in CMS
           author: author || article?.byline || '',       // blank if not found
           draft: true,                                   // convention — review first
           ogImage: '',                                   // set after image download
@@ -399,6 +409,11 @@ export const prerender = true;
         if (!author) add('author', 'fail', 'required — fill it in');
         else add('author', 'pass', author);
 
+        const category = (fm.category ?? '').toString().trim();
+        if (!category) add('category', 'fail', 'required — pick one (or click Auto-fill)');
+        else if (!CATEGORIES.includes(category)) add('category', 'fail', `"${category}" not a valid category`);
+        else add('category', 'pass', category);
+
         if (fm.subtitle != null && String(fm.subtitle).length > SUBTITLE_MAX) add('subtitle', 'fail', `too long (> ${SUBTITLE_MAX})`);
         else if (fm.subtitle) add('subtitle', 'pass', 'optional');
         if (fm.updatedDate != null && fm.updatedDate !== '' && !toISO(fm.updatedDate)) add('updatedDate', 'warn', 'not a valid date — will be dropped');
@@ -422,6 +437,9 @@ export const prerender = true;
         if (!String(f.author ?? '').trim()) f.author = 'PostTruncate Team';
         if (typeof f.draft !== 'boolean') f.draft = true;
         if (!f.translationKey) f.translationKey = f.slug;
+        if (!CATEGORIES.includes(f.category)) {
+          f.category = PLATFORM_TO_CATEGORY[f.relatedPlatform] || DEFAULT_CATEGORY;
+        }
         return f;
       }
 
@@ -436,6 +454,8 @@ export const prerender = true;
         out.slug = String(fm.slug ?? '');
         out.translationKey = fm.translationKey ? String(fm.translationKey) : String(fm.slug ?? '');
         if (RELATED.includes(fm.relatedPlatform)) out.relatedPlatform = fm.relatedPlatform;
+        // category is required by the schema — always emit a valid one.
+        out.category = CATEGORIES.includes(fm.category) ? fm.category : DEFAULT_CATEGORY;
         out.author = String(fm.author ?? '');
         out.draft = typeof fm.draft === 'boolean' ? fm.draft : true;
         if (fm.ogImage) out.ogImage = String(fm.ogImage);
@@ -647,14 +667,41 @@ export const prerender = true;
       }
 
       // Pull every image URL out of the markdown body — both Markdown
-      // ![alt](url) and raw <img src="…"> (the FAQ block / pasted HTML can carry
-      // either). Returns unique URLs in first-seen order.
+      // ![alt](url) and raw <img src="…">. A regex can't do the Markdown case
+      // safely because the alt text may itself contain a nested link with its
+      // own brackets/parens (e.g. ![… \[label\](/path)](https://cdn/img.png)) —
+      // a `[^\]]*` alt stops at the first `]` and grabs the INNER link instead
+      // of the real image URL. So we hand-scan, tracking bracket depth across
+      // the alt (honoring backslash escapes) and paren depth across the URL.
+      // Returns unique URLs in first-seen order.
       function collectBodyImageUrls(md) {
         const urls = new Set();
-        const mdRe = /!\[[^\]]*\]\(\s*<?([^()\s>]+)>?(?:\s+["'][^)]*)?\s*\)/g;
+        for (let i = 0; i < md.length; i++) {
+          if (md[i] !== '!' || md[i + 1] !== '[') continue;
+          // Walk the alt text to its matching ']', skipping escaped chars and
+          // honoring nested '['/']' so an embedded link doesn't end it early.
+          let j = i + 2, depth = 1;
+          for (; j < md.length && depth > 0; j++) {
+            const c = md[j];
+            if (c === '\\') { j++; continue; }
+            if (c === '[') depth++;
+            else if (c === ']') depth--;
+          }
+          if (depth !== 0 || md[j] !== '(') continue; // not an inline image
+          // Read the URL to its matching ')', honoring nested parens.
+          let k = j + 1; const start = k; let pdepth = 1;
+          for (; k < md.length && pdepth > 0; k++) {
+            const c = md[k];
+            if (c === '(') pdepth++;
+            else if (c === ')') pdepth--;
+            if (pdepth === 0) break;
+          }
+          let url = md.slice(start, k).trim().replace(/^<|>$/g, '').split(/\s+/)[0];
+          if (url) urls.add(url);
+          i = k;
+        }
         const htmlRe = /<img\b[^>]*?\bsrc\s*=\s*["']([^"']+)["']/gi;
         let m;
-        while ((m = mdRe.exec(md))) urls.add(m[1]);
         while ((m = htmlRe.exec(md))) urls.add(m[1]);
         return [...urls];
       }

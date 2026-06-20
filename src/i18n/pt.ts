@@ -133,7 +133,7 @@ export const pt: Translations = {
         heading: 'Limites de caracteres no Instagram e no Facebook',
         paragraphs: [
           'O Instagram permite até 2 200 caracteres numa legenda, mas só mostra os primeiros 125 aproximadamente antes de ocultar o resto por trás de um link «ver mais». O PostTruncate indica exatamente onde cai esse corte, para que a primeira linha visível no feed seja sempre a que importa.',
-          'O painel também monitoriza o <strong>número de hashtags</strong> em tempo real. O Instagram não publica silenciosamente publicações com mais de 5 hashtags, pelo que aparece um aviso antes de atingir esse limite. Os espaços são sempre contados, em conformidade com o comportamento da própria plataforma.',
+          'O painel também monitoriza o <strong>número de hashtags</strong> em tempo real. O Instagram permite até 30 hashtags antes de uma publicação falhar, mas ~5 é o ponto ideal recomendado — mais é lido como spam —, por isso o medidor avisa acima de 5 e assinala o limite máximo de 30. Os espaços são sempre contados, em conformidade com o comportamento da própria plataforma.',
         ],
       },
       {
@@ -184,10 +184,10 @@ export const pt: Translations = {
       instagram: {
         name: 'Instagram',
         tag: 'Limite de hashtags',
-        body: 'As legendas do Instagram podem ir até 2200 caracteres, mas só mostram cerca dos primeiros 125 antes de uma ligação «mais». A regra mais rígida são as hashtags: mais de 5 numa única legenda ou comentário e a publicação falha silenciosamente. Acumular dezenas de tags de baixa intenção também é lido como spam. Mantenha as suas tags reduzidas e relevantes e vigie o medidor em tempo real para nunca esbarrar no limite de 5 tags.',
+        body: 'As legendas do Instagram podem ir até 2200 caracteres, mas só mostram cerca dos primeiros 125 antes de uma ligação «mais». Para as hashtags, o limite máximo é 30 (legenda e primeiro comentário); acima disso a publicação falha. Mas ~5 é o ponto ideal recomendado; acumular dezenas de tags de baixa intenção é lido como spam. Mantenha as suas tags reduzidas e relevantes e vigie o medidor em tempo real, que avisa acima de 5 e assinala o limite de 30.',
         facts: [
           ['Limite da legenda', '2200 caracteres'],
-          ['Limite máximo de hashtags', '5 tags'],
+          ['Hashtags', '~5 recomendado / 30 máximo'],
           ['Pré-visualização da legenda', '~125 caracteres'],
         ],
       },
@@ -204,9 +204,9 @@ export const pt: Translations = {
       tiktok: {
         name: 'TikTok',
         tag: 'Dobra da legenda',
-        body: 'As legendas do TikTok comportam até 2.200 caracteres, com emojis e hashtags contando para o limite. Mas o feed prioriza o vídeo: mostra apenas o início da sua legenda e dobra o resto atrás de “…mais” na primeira quebra de linha ou por volta de 100 caracteres, o que vier primeiro. Comece pelo seu gancho em uma única linha para que ele sobreviva. O PostTruncate conta cada caractere ao vivo e marca exatamente onde a legenda dobra sobre um reel 9:16.',
+        body: 'As legendas do TikTok comportam até 4.000 caracteres ao publicar na app, com emojis e hashtags contando para o limite — mas a API do TikTok e os agendadores (Buffer, Hootsuite, Later) limitam a legenda a 2.200, por isso esse é o limite seguro se não publicar à mão. Mas o feed prioriza o vídeo: mostra apenas o início da sua legenda e dobra o resto atrás de “…mais” na primeira quebra de linha ou por volta de 100 caracteres, o que vier primeiro. Comece pelo seu gancho em uma única linha para que ele sobreviva. O PostTruncate conta cada caractere ao vivo e marca exatamente onde a legenda dobra sobre um reel 9:16.',
         facts: [
-          ['Limite de legenda', '2.200 caracteres'],
+          ['Limite de legenda', '4.000 nativo / 2.200 API'],
           ['Dobra “…mais”', '~100 car. / 1.ª linha'],
           ['Quadro de vídeo', '9:16 (1080×1920)'],
         ],
@@ -239,7 +239,7 @@ export const pt: Translations = {
       },
       {
         q: 'Qual é a precisão dos limites de caracteres?',
-        a: 'O PostTruncate usa os limites publicados e amplamente observados de cada plataforma — 280 para o X, 210/140 para a dobra do LinkedIn, 5 hashtags para o Instagram e um peso fixo de 23 caracteres para as ligações. As plataformas ajustam-nos ocasionalmente, e a apresentação varia ligeiramente consoante o dispositivo, por isso encare as pré-visualizações como uma estimativa aproximada e não como uma garantia perfeita ao píxel.',
+        a: 'O PostTruncate usa os limites publicados e amplamente observados de cada plataforma — 280 para o X, 210/140 para a dobra do LinkedIn, ~5 hashtags recomendadas (limite de 30) para o Instagram e um peso fixo de 23 caracteres para as ligações. As plataformas ajustam-nos ocasionalmente, e a apresentação varia ligeiramente consoante o dispositivo, por isso encare as pré-visualizações como uma estimativa aproximada e não como uma garantia perfeita ao píxel.',
       },
       {
         q: 'Os espaços e a pontuação contam como caracteres?',
@@ -337,7 +337,7 @@ export const pt: Translations = {
       linkedin: 'O texto após a dobra fica oculto atrás de «…ver mais».',
       twitter: 'Sem dobra — acima de {limit} caracteres divide-se em thread; cada link conta como {url} caracteres.',
       threads: 'Os links contam por inteiro; o texto além de {limit} caracteres continua como respostas numeradas.',
-      instagram: 'A legenda dobra atrás de «mais»; teto rígido de {hashtags} hashtags por publicação.',
+      instagram: 'A legenda dobra atrás de «mais»; aponte para ~{hashtags} hashtags (limite máximo {hashtagMax}).',
       facebook: 'As publicações do feed recolhem atrás de «Ver mais» muito antes do limite técnico.',
       tiktok: 'A legenda dobra atrás de “…mais” na primeira quebra de linha ou ~100 caracteres; emojis e hashtags contam.',
       smsGsm: '{single} caracteres numa única mensagem; {multi} por segmento quando se divide.',
@@ -348,10 +348,10 @@ export const pt: Translations = {
       linkedin: 'O LinkedIn permite {limit} caracteres por publicação, mas dobra a vista do feed após cerca de {mobile} caracteres no móvel e {desktop} no desktop — o resto fica oculto atrás de «…ver mais». As quebras de linha contam, e a primeira frase concentra quase todos os cliques: coloque o gancho no início e os links abaixo da dobra.',
       twitter: 'O X impõe um teto rígido de {limit} caracteres por publicação e não mostra dobra nenhuma. Cada URL é envolvido pelo encurtador t.co e custa sempre {url} caracteres independentemente do comprimento real, e muitos emojis pesam como dois caracteres. Rascunhos mais longos têm de ser divididos em thread — o PostTruncate fá-lo automaticamente nos limites das palavras.',
       threads: 'O Threads permite {limit} caracteres por publicação e, ao contrário do X, conta os links no comprimento total. No móvel, o feed dobra as publicações longas por volta dos {mobile} caracteres. Tudo o que passar do teto tem de continuar como respostas numeradas encadeadas sob a primeira.',
-      instagram: 'As legendas do Instagram podem chegar aos {limit} caracteres, mas o feed mostra apenas cerca dos primeiros {mobile} antes do link «mais». A regra mais dura são os hashtags: mais de {hashtags} numa legenda ou primeiro comentário e a publicação pode falhar silenciosamente.',
+      instagram: 'As legendas do Instagram podem chegar aos {limit} caracteres, mas o feed mostra apenas cerca dos primeiros {mobile} antes do link «mais». Para hashtags, ~{hashtags} é o ponto ideal recomendado — acima disso ainda publica mas parece spam. O limite máximo é {hashtagMax} (legenda e primeiro comentário); ultrapassá-lo impede a publicação.',
       facebook: 'O teto técnico do Facebook é de {limit} caracteres, mas as publicações do feed recolhem atrás de «Ver mais» por volta dos {mobile} caracteres no móvel e {desktop} no desktop. A interação cai a pique em blocos longos sem pausas — o limite prático é a dobra, não o teto.',
       sms: 'Um único SMS comporta {gsmSingle} caracteres na codificação GSM de 7 bits, caindo para {gsmMulti} por segmento quando a mensagem se divide. Qualquer emoji ou caráter não GSM muda a mensagem inteira para Unicode — {uniSingle} caracteres por mensagem única, {uniMulti} por segmento — e alguns símbolos GSM (€, parênteses retos, a barra vertical) contam como dois.',
-      tiktok: 'O TikTok permite {limit} caracteres por legenda, com emojis e hashtags contando por inteiro. Como o vídeo preenche a tela, o feed dobra a legenda atrás de “…mais” na primeira quebra de linha ou por volta de {fold} caracteres — o que vier primeiro — então a primeira linha é tudo o que a maioria lê. O quadro de vídeo é vertical em tela cheia 9:16 (1080×1920).',
+      tiktok: 'O TikTok permite {limit} caracteres por legenda ao publicar na app, embora a API e os agendadores a limitem a {safe}; emojis e hashtags contam por inteiro. Como o vídeo preenche a tela, o feed dobra a legenda atrás de “…mais” na primeira quebra de linha ou por volta de {fold} caracteres — o que vier primeiro — então a primeira linha é tudo o que a maioria lê. O quadro de vídeo é vertical em tela cheia 9:16 (1080×1920).',
     },
   },
 
@@ -501,7 +501,7 @@ export const pt: Translations = {
         {
           heading: 'O que faz',
           paragraphs: [
-            'Escreva ou cole um rascunho uma vez e o PostTruncate apresenta-o tal como o <strong>LinkedIn, o X, o Threads, o Instagram e o Facebook</strong> o farão de facto — a dobra «…ver mais», a divisão de threads aos 280 caracteres, o peso de 23 caracteres das ligações, o limite de 5 hashtags. Vê exatamente o que sobrevive acima da dobra antes de se comprometer a publicar.',
+            'Escreva ou cole um rascunho uma vez e o PostTruncate apresenta-o tal como o <strong>LinkedIn, o X, o Threads, o Instagram e o Facebook</strong> o farão de facto — a dobra «…ver mais», a divisão de threads aos 280 caracteres, o peso de 23 caracteres das ligações, a marca recomendada de ~5 hashtags e o limite de 30. Vê exatamente o que sobrevive acima da dobra antes de se comprometer a publicar.',
             'Também deteta os problemas discretos que reduzem o seu alcance: caracteres invisíveis de largura zero que quebram as contagens e os leitores de ecrã, e os «tipos de letra decorativos» em pseudo-Unicode que parecem estilizados mas são ilegíveis para a tecnologia de apoio.',
           ],
         },
@@ -686,7 +686,7 @@ export const pt: Translations = {
       },
       tiktok: {
         name: "TikTok",
-        limit: "2,200",
+        limit: "4,000",
         shown: "~100 caracteres",
         bestPractice: "Gancho na primeira linha",
         notes: "Emojis e hashtags contam; dobra na primeira quebra de linha"
@@ -980,7 +980,9 @@ export const pt: Translations = {
       title: 'Prévia do TikTok',
       badgeIdle: 'Comece a digitar',
       badgeSingle: 'Cabe em uma legenda',
-      badgeOver: 'Acima do limite da legenda',
+      badgeOverSafe: 'Acima do limite seguro',
+      badgeOver: 'Acima do limite de 4000',
+      apiCapHint: 'Publica na app, mas a API do TikTok e os agendadores (Buffer, Hootsuite, Later) limitam a legenda a {safe} caracteres.',
       links: { one: '{n} link', other: '{n} links' },
       charLength: 'Comprimento da legenda',
       seeMore: '…mais',
@@ -1000,8 +1002,8 @@ export const pt: Translations = {
       hashtagLabel: 'Concentração de hashtags',
       over: 'Acima do limite máximo do Instagram de {limit} hashtags — a legenda não será publicada. Remova {excess}.',
       approaching:
-        'A aproximar-se do limite de 5 tags. Reduza às suas tags de maior intenção.',
-      within: 'Confortavelmente dentro do limite de 5 hashtags do Instagram.',
+        '{n} hashtags — acima das {recommended} recomendadas. Ainda publica (o limite é {max}), mas reduza para mais alcance.',
+      within: 'Dentro das {recommended} hashtags recomendadas.',
       none: 'Ainda não foram detetadas hashtags.',
       a11yLabel: 'Acessibilidade · tipos de letra decorativos',
       audiencePublic: 'Público',

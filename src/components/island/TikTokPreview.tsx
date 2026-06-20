@@ -20,8 +20,11 @@ interface Props {
 }
 
 /**
- * TikTok preview — organic post + reel. No thread splitting: a single 2,200-char
- * caption over a full-screen 9:16 video. The feed collapses the caption behind
+ * TikTok preview — organic post + reel. No thread splitting: a single caption
+ * over a full-screen 9:16 video. Posting natively allows up to 4,000 characters,
+ * but the TikTok API and third-party schedulers still cap captions at 2,200, so
+ * the preview warns once a caption passes that "safe" ceiling. The feed collapses
+ * the caption behind
  * "…more" at the first line break OR ~100 chars, whichever comes first. An
  * optional (default-off) safe-zone overlay shows the native-UI dead zones.
  */
@@ -32,7 +35,10 @@ export function TikTokPreview({ text, lang, s, toolLinkHref, view, setView, imag
   const trimmed = text.trim();
   const count = charCount(trimmed);
   const urls = detectUrls(trimmed);
-  const over = count > LIMITS.TIKTOK_CAPTION;
+  // Two-tier: 4,000 is the native hard cap; past 2,200 still posts natively but
+  // breaks the TikTok API / schedulers, so it warns rather than errors.
+  const over = count > LIMITS.TIKTOK_CAPTION_MAX;
+  const overSafe = !over && count > LIMITS.TIKTOK_CAPTION_SAFE;
 
   const foldAt = tiktokFoldIndex(trimmed);
   const shouldFold = charCount(trimmed) > foldAt;
@@ -77,6 +83,8 @@ export function TikTokPreview({ text, lang, s, toolLinkHref, view, setView, imag
             <Badge tone="neutral" dot={false}>{tk.badgeIdle}</Badge>
           ) : over ? (
             <Badge tone="danger">{tk.badgeOver}</Badge>
+          ) : overSafe ? (
+            <Badge tone="warn">{tk.badgeOverSafe}</Badge>
           ) : (
             <Badge tone="safe">{tk.badgeSingle}</Badge>
           )}
@@ -84,9 +92,14 @@ export function TikTokPreview({ text, lang, s, toolLinkHref, view, setView, imag
             {urls.length > 0 ? interp(plural(tk.links, urls.length), { n: nf.format(urls.length) }) : tk.charLength}
           </span>
           <span class="font-mono text-[12px] text-mute tabular-nums">
-            {nf.format(count)} / {nf.format(LIMITS.TIKTOK_CAPTION)}
+            {nf.format(count)} / {nf.format(LIMITS.TIKTOK_CAPTION_MAX)}
           </span>
         </div>
+        {overSafe && (
+          <p class="mt-1 text-[12px] text-warning-deep">
+            {interp(tk.apiCapHint, { safe: nf.format(LIMITS.TIKTOK_CAPTION_SAFE) })}
+          </p>
+        )}
         {shouldFold && hidden && (
           <p class="mt-1 text-[12px] text-mute">{tk.lineBreakHint}</p>
         )}
@@ -138,7 +151,7 @@ export function TikTokPreview({ text, lang, s, toolLinkHref, view, setView, imag
                 {shouldFold && showFolded && hidden && <span class="text-white/40 line-through">{hidden}</span>}
               </p>
             ) : (
-              <p class="mt-1 text-[13px] text-white/70">{interp(tk.placeholder, { limit: nf.format(LIMITS.TIKTOK_CAPTION) })}</p>
+              <p class="mt-1 text-[13px] text-white/70">{interp(tk.placeholder, { limit: nf.format(LIMITS.TIKTOK_CAPTION_MAX) })}</p>
             )}
           </div>
 

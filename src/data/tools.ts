@@ -365,7 +365,7 @@ export const tools: ToolDefinition[] = [
     editorAnchor: 'workspace',
     lastUpdated: '2026-05-22',
     platformLimits:
-      '2200 character caption limit, feed truncates at ~125 characters behind a "more" link, maximum 5 hashtags before the post silently fails to publish',
+      '2200 character caption limit, feed truncates at ~125 characters behind a "more" link, ~5 hashtags recommended (30 is the hard cap before a post fails to publish)',
 
     slugs: {
       en: 'instagram-character-counter',
@@ -1605,7 +1605,7 @@ export const tools: ToolDefinition[] = [
     editorAnchor: 'workspace',
     lastUpdated: '2026-06-19',
     platformLimits:
-      '2,200 characters per caption (emojis and hashtags count in full), caption collapses behind "…more" at the first line break or ~100 characters whichever comes first, 9:16 vertical video (1080×1920), reference profile limits: bio 80, handle 24, display name 30',
+      '4,000 characters per caption when posting natively (2,200 via the API/schedulers; emojis and hashtags count in full), caption collapses behind "…more" at the first line break or ~100 characters whichever comes first, 9:16 vertical video (1080×1920), reference profile limits: bio 80, handle 24, display name 30',
 
     slugs: {
       en: 'tiktok-caption-checker',
@@ -1634,49 +1634,49 @@ export const tools: ToolDefinition[] = [
     },
 
     titles: {
-      en: 'TikTok Caption Checker — Free 2,200-Char Caption & Fold Preview',
-      es: 'Verificador de Leyendas TikTok — Gratis 2.200 caracteres y vista del pliegue',
-      de: 'TikTok Untertitel-Prüfer — Kostenlos 2.200 Zeichen & Falz-Vorschau',
-      fr: 'Vérificateur de Légendes TikTok — Gratuit 2 200 caractères & aperçu du pli',
-      pt: 'Verificador de Legendas TikTok — Grátis 2.200 caracteres e prévia da dobra',
-      it: 'Controllo Didascalie TikTok — Gratis 2.200 caratteri e anteprima della piega',
-      nl: 'TikTok Bijschrift-checker — Gratis 2.200 tekens & vouw-voorbeeld',
-      ja: 'TikTokキャプションチェッカー — 2,200文字と「…続き」を無料プレビュー',
-      zh: 'TikTok文案检查器 — 免费预览2,200字符与折叠点',
-      da: 'TikTok Billedtekst-tjek — Gratis 2.200 tegn & fold-forhåndsvisning',
+      en: 'TikTok Caption Checker — Free 4,000-Char Caption & Fold Preview',
+      es: 'Verificador de Leyendas TikTok — Gratis 4.000 caracteres y vista del pliegue',
+      de: 'TikTok Untertitel-Prüfer — Kostenlos 4.000 Zeichen & Falz-Vorschau',
+      fr: 'Vérificateur de Légendes TikTok — Gratuit 4 000 caractères & aperçu du pli',
+      pt: 'Verificador de Legendas TikTok — Grátis 4.000 caracteres e prévia da dobra',
+      it: 'Controllo Didascalie TikTok — Gratis 4.000 caratteri e anteprima della piega',
+      nl: 'TikTok Bijschrift-checker — Gratis 4.000 tekens & vouw-voorbeeld',
+      ja: 'TikTokキャプションチェッカー — 4,000文字と「…続き」を無料プレビュー',
+      zh: 'TikTok文案检查器 — 免费预览4,000字符与折叠点',
+      da: 'TikTok Billedtekst-tjek — Gratis 4.000 tegn & fold-forhåndsvisning',
     },
 
     metaDescriptions: {
-      en: 'Free TikTok caption checker. Track the 2,200-character limit live, see exactly where your caption collapses behind "…more" (first line break or ~100 chars), and preview it over a 9:16 reel.',
-      es: 'Verificador de leyendas de TikTok gratis. Controla el límite de 2.200 caracteres en vivo, mira exactamente dónde se pliega tu leyenda tras «…más» (primer salto de línea o ~100 caracteres) y previsualízala sobre un reel 9:16.',
-      de: 'Kostenloser TikTok-Untertitel-Prüfer. Verfolge das 2.200-Zeichen-Limit live, sieh genau wo dein Text hinter „…mehr“ einklappt (erster Zeilenumbruch oder ~100 Zeichen) und zeig ihn auf einem 9:16-Reel.',
-      fr: 'Vérificateur de légendes TikTok gratuit. Suivez la limite de 2 200 caractères en direct, voyez précisément où votre légende se replie derrière « …plus » (premier saut de ligne ou ~100 caractères) et prévisualisez-la sur un reel 9:16.',
-      pt: 'Verificador de legendas do TikTok gratuito. Acompanhe o limite de 2.200 caracteres ao vivo, veja exatamente onde sua legenda dobra atrás de "…mais" (primeira quebra de linha ou ~100 caracteres) e visualize-a sobre um reel 9:16.',
-      it: 'Controllo didascalie TikTok gratuito. Monitora il limite di 2.200 caratteri in tempo reale, scopri dove la didascalia si piega dietro "…altro" (primo a capo o ~100 caratteri) e visualizzala su un reel 9:16.',
-      nl: 'Gratis TikTok bijschrift-checker. Volg de limiet van 2.200 tekens live, zie precies waar je bijschrift achter "…meer" invouwt (eerste regeleinde of ~100 tekens) en bekijk het over een 9:16-reel.',
-      ja: '無料のTikTokキャプションチェッカー。2,200文字の上限をリアルタイムで追跡し、キャプションが「…続きを見る」で折りたたまれる位置（最初の改行または約100文字）を正確に確認し、9:16のリールでプレビュー。',
-      zh: '免费TikTok文案检查器。实时追踪2,200字符上限，精确查看文案在何处被「…更多」折叠（首个换行或约100字符），并在9:16竖屏上预览。',
-      da: 'Gratis TikTok billedtekst-tjek. Følg 2.200-tegns-grænsen live, se præcis hvor din tekst foldes bag "…mere" (første linjeskift eller ~100 tegn), og forhåndsvis den over en 9:16-reel.',
+      en: 'Free TikTok caption checker. Track the 4,000-character limit live (schedulers cap at 2,200), see exactly where your caption collapses behind "…more" (first line break or ~100 chars), and preview it over a 9:16 reel.',
+      es: 'Verificador de leyendas de TikTok gratis. Controla el límite de 4.000 caracteres en vivo (la API limita a 2.200), mira exactamente dónde se pliega tu leyenda tras «…más» (primer salto de línea o ~100 caracteres) y previsualízala sobre un reel 9:16.',
+      de: 'Kostenloser TikTok-Untertitel-Prüfer. Verfolge das 4.000-Zeichen-Limit live (API/Scheduler: 2.200), sieh genau wo dein Text hinter „…mehr“ einklappt (erster Zeilenumbruch oder ~100 Zeichen) und zeig ihn auf einem 9:16-Reel.',
+      fr: 'Vérificateur de légendes TikTok gratuit. Suivez la limite de 4 000 caractères en direct (l’API plafonne à 2 200), voyez précisément où votre légende se replie derrière « …plus » (premier saut de ligne ou ~100 caractères) et prévisualisez-la sur un reel 9:16.',
+      pt: 'Verificador de legendas do TikTok gratuito. Acompanhe o limite de 4.000 caracteres ao vivo (a API limita a 2.200), veja exatamente onde sua legenda dobra atrás de "…mais" (primeira quebra de linha ou ~100 caracteres) e visualize-a sobre um reel 9:16.',
+      it: 'Controllo didascalie TikTok gratuito. Monitora il limite di 4.000 caratteri in tempo reale (l’API si ferma a 2.200), scopri dove la didascalia si piega dietro "…altro" (primo a capo o ~100 caratteri) e visualizzala su un reel 9:16.',
+      nl: 'Gratis TikTok bijschrift-checker. Volg de limiet van 4.000 tekens live (API/planners: 2.200), zie precies waar je bijschrift achter "…meer" invouwt (eerste regeleinde of ~100 tekens) en bekijk het over een 9:16-reel.',
+      ja: '無料のTikTokキャプションチェッカー。4,000文字の上限（APIは2,200文字）をリアルタイムで追跡し、キャプションが「…続きを見る」で折りたたまれる位置（最初の改行または約100文字）を正確に確認し、9:16のリールでプレビュー。',
+      zh: '免费TikTok文案检查器。实时追踪4,000字符上限（API 为 2,200），精确查看文案在何处被「…更多」折叠（首个换行或约100字符），并在9:16竖屏上预览。',
+      da: 'Gratis TikTok billedtekst-tjek. Følg 4.000-tegns-grænsen live (API/planlæggere: 2.200), se præcis hvor din tekst foldes bag "…mere" (første linjeskift eller ~100 tegn), og forhåndsvis den over en 9:16-reel.',
     },
 
     intro: {
-      en: "Check your TikTok caption before you post — the editor below tracks the 2,200-character limit live and shows exactly where the feed hides the rest behind '…more' (the first line break or about 100 characters, whichever comes first).",
-      es: "Revisa tu leyenda de TikTok antes de publicar: el editor de abajo controla en vivo el límite de 2.200 caracteres y muestra exactamente dónde el feed oculta el resto tras «…más» (el primer salto de línea o unos 100 caracteres, lo que ocurra primero).",
-      de: "Prüfe deinen TikTok-Text vor dem Posten — der Editor unten verfolgt live das 2.200-Zeichen-Limit und zeigt genau, wo der Feed den Rest hinter „…mehr“ verbirgt (der erste Zeilenumbruch oder etwa 100 Zeichen, je nachdem was zuerst kommt).",
-      fr: "Vérifiez votre légende TikTok avant de publier : l'éditeur ci-dessous suit en direct la limite de 2 200 caractères et montre précisément où le fil masque le reste derrière « …plus » (le premier saut de ligne ou environ 100 caractères, selon ce qui vient en premier).",
-      pt: "Confira sua legenda do TikTok antes de publicar: o editor abaixo acompanha ao vivo o limite de 2.200 caracteres e mostra exatamente onde o feed esconde o resto atrás de \"…mais\" (a primeira quebra de linha ou cerca de 100 caracteres, o que vier primeiro).",
-      it: "Controlla la didascalia TikTok prima di pubblicare: l'editor qui sotto monitora in tempo reale il limite di 2.200 caratteri e mostra esattamente dove il feed nasconde il resto dietro \"…altro\" (il primo a capo o circa 100 caratteri, a seconda di cosa viene prima).",
-      nl: "Controleer je TikTok-bijschrift voordat je post — de editor hieronder volgt live de limiet van 2.200 tekens en toont precies waar de feed de rest achter \"…meer\" verbergt (het eerste regeleinde of ongeveer 100 tekens, wat het eerst komt).",
-      ja: "投稿する前にTikTokのキャプションをチェック。下のエディターは2,200文字の上限をリアルタイムで追跡し、フィードが残りを「…続きを見る」で隠す位置（最初の改行または約100文字のうち早いほう）を正確に表示します。",
-      zh: "发布前检查你的 TikTok 文案：下方编辑器实时追踪 2,200 字符上限，并精确显示信息流在何处用「…更多」隐藏其余内容（首个换行或约 100 字符，以先到者为准）。",
-      da: "Tjek din TikTok-tekst, før du poster — editoren nedenfor følger live 2.200-tegns-grænsen og viser præcis, hvor feedet skjuler resten bag \"…mere\" (det første linjeskift eller omkring 100 tegn, alt efter hvad der kommer først).",
+      en: "Check your TikTok caption before you post — the editor below tracks the 4,000-character limit live (2,200 via the API and schedulers) and shows exactly where the feed hides the rest behind '…more' (the first line break or about 100 characters, whichever comes first).",
+      es: "Revisa tu leyenda de TikTok antes de publicar: el editor de abajo controla en vivo el límite de 4.000 caracteres (2.200 vía la API y los programadores) y muestra exactamente dónde el feed oculta el resto tras «…más» (el primer salto de línea o unos 100 caracteres, lo que ocurra primero).",
+      de: "Prüfe deinen TikTok-Text vor dem Posten — der Editor unten verfolgt live das 4.000-Zeichen-Limit (2.200 über die API und Scheduler) und zeigt genau, wo der Feed den Rest hinter „…mehr“ verbirgt (der erste Zeilenumbruch oder etwa 100 Zeichen, je nachdem was zuerst kommt).",
+      fr: "Vérifiez votre légende TikTok avant de publier : l'éditeur ci-dessous suit en direct la limite de 4 000 caractères (2 200 via l’API et les planificateurs) et montre précisément où le fil masque le reste derrière « …plus » (le premier saut de ligne ou environ 100 caractères, selon ce qui vient en premier).",
+      pt: "Confira sua legenda do TikTok antes de publicar: o editor abaixo acompanha ao vivo o limite de 4.000 caracteres (2.200 via a API e os agendadores) e mostra exatamente onde o feed esconde o resto atrás de \"…mais\" (a primeira quebra de linha ou cerca de 100 caracteres, o que vier primeiro).",
+      it: "Controlla la didascalia TikTok prima di pubblicare: l'editor qui sotto monitora in tempo reale il limite di 4.000 caratteri (2.200 via l’API e gli scheduler) e mostra esattamente dove il feed nasconde il resto dietro \"…altro\" (il primo a capo o circa 100 caratteri, a seconda di cosa viene prima).",
+      nl: "Controleer je TikTok-bijschrift voordat je post — de editor hieronder volgt live de limiet van 4.000 tekens (2.200 via de API en planners) en toont precies waar de feed de rest achter \"…meer\" verbergt (het eerste regeleinde of ongeveer 100 tekens, wat het eerst komt).",
+      ja: "投稿する前にTikTokのキャプションをチェック。下のエディターは4,000文字の上限（APIやスケジューラーは2,200文字）をリアルタイムで追跡し、フィードが残りを「…続きを見る」で隠す位置（最初の改行または約100文字のうち早いほう）を正確に表示します。",
+      zh: "发布前检查你的 TikTok 文案：下方编辑器实时追踪 4,000 字符上限（API 和排程工具为 2,200），并精确显示信息流在何处用「…更多」隐藏其余内容（首个换行或约 100 字符，以先到者为准）。",
+      da: "Tjek din TikTok-tekst, før du poster — editoren nedenfor følger live 4.000-tegns-grænsen (2.200 via API og planlæggere) og viser præcis, hvor feedet skjuler resten bag \"…mere\" (det første linjeskift eller omkring 100 tegn, alt efter hvad der kommer først).",
     },
 
     faq: {
       en: [
         {
           q: 'What is the maximum caption character limit on TikTok?',
-          a: 'A TikTok organic video caption can hold up to 2,200 characters. This matches the ceiling of an Instagram caption and provides plenty of room for micro-blogging, context, and SEO keywords. However, just because you have 2,200 characters doesn\'t mean your audience will see them all without clicking to expand the text.',
+          a: 'A TikTok organic video caption can hold up to 4,000 characters when you post natively in the app — though the TikTok API and most schedulers (Buffer, Hootsuite, Later) still cap captions at 2,200, so that\'s the safe ceiling if you don\'t post by hand. Either way it provides plenty of room for micro-blogging, context, and SEO keywords. However, just because you have the space doesn\'t mean your audience will see it all without clicking to expand the text.',
         },
         {
           q: 'When does TikTok truncate my caption behind the "…more" button?',
@@ -1684,7 +1684,7 @@ export const tools: ToolDefinition[] = [
         },
         {
           q: 'Do hashtags and emojis count against the character limits?',
-          a: 'Yes. Every single hashtag, emoji, space, and line break counts toward your total 2,200-character budget. More importantly, they count toward your visible cutoff limit. Stacking too many hashtags at the beginning of your post will push your actual text downward, forcing it behind the "…more" button much faster.',
+          a: 'Yes. Every single hashtag, emoji, space, and line break counts toward your total caption budget (4,000 native, 2,200 via the API). More importantly, they count toward your visible cutoff limit. Stacking too many hashtags at the beginning of your post will push your actual text downward, forcing it behind the "…more" button much faster.',
         },
         {
           q: 'What is the correct size and aspect ratio for a TikTok video?',
@@ -1708,9 +1708,9 @@ export const tools: ToolDefinition[] = [
         },
       ],
       es: [
-        { q: '¿Cuál es el límite de caracteres de la leyenda en TikTok?', a: 'Una leyenda de TikTok admite hasta 2.200 caracteres, el mismo tope que una leyenda de Instagram. Los emojis y los hashtags cuentan todos. El contador en vivo de arriba evita que te corten al llegar al límite.' },
+        { q: '¿Cuál es el límite de caracteres de la leyenda en TikTok?', a: 'Una leyenda de TikTok admite hasta 4.000 caracteres al publicar desde la app (la API y la mayoría de los programadores la limitan a 2.200). Los emojis y los hashtags cuentan todos. El contador en vivo de arriba evita que te corten al llegar al límite.' },
         { q: '¿Por qué TikTok oculta mi leyenda tras «…más»?', a: 'TikTok prioriza el vídeo, así que el feed solo muestra el inicio de tu leyenda —aproximadamente la primera línea O los primeros 100 caracteres, lo que ocurra primero— y pliega el resto tras un «…más». Empieza por tu gancho y mantenlo en una sola línea para que sobreviva al pliegue.' },
-        { q: '¿Los hashtags y emojis cuentan para el límite de 2.200?', a: 'Sí. Cada hashtag, emoji, espacio y salto de línea cuenta contra el presupuesto de 2.200 caracteres. Un bloque de hashtags al final puede consumir mucho espacio, por eso el contador los rastrea en tiempo real.' },
+        { q: '¿Los hashtags y emojis cuentan para el límite?', a: 'Sí. Cada hashtag, emoji, espacio y salto de línea cuenta contra el presupuesto de la leyenda (4.000 nativo, 2.200 vía API). Un bloque de hashtags al final puede consumir mucho espacio, por eso el contador los rastrea en tiempo real.' },
         { q: '¿Qué tamaño debe tener un vídeo de TikTok?', a: 'TikTok es vertical a pantalla completa 9:16: 1080×1920 píxeles. Mantén el texto clave y las caras lejos de los bordes: el ~10% superior y el ~18% inferior quedan bajo el usuario, la leyenda y los botones, y el ~15% derecho lo cubre la barra de me gusta/comentarios/compartir. La vista previa de arriba incluye una capa opcional de zonas seguras.' },
         { q: '¿Cuáles son las zonas seguras (Safe Zones) de TikTok para el texto y los gráficos del vídeo?', a: 'La zona segura de TikTok es el área central de tu vídeo 9:16 donde el texto y los stickers que añadas no quedarán bloqueados por los elementos nativos de la aplicación. Para evitar que tu contenido quede oculto, debes evitar colocar elementos visuales críticos en tres "zonas muertas": La parte inferior (~20%): Cubierta por tu nombre de usuario, leyenda y el control deslizante de música. El lado derecho (~15%): Cubierto por los botones de interacción (foto de perfil, me gusta, comentar, guardar y compartir). La parte superior (~10%): Cubierta por la barra de estado y las pestañas de navegación "Para ti".' },
         { q: '¿Son diferentes los límites de texto para los anuncios In-Feed de TikTok y las publicaciones orgánicas?', a: 'Sí, de forma significativa. Mientras que las publicaciones orgánicas ocultan el texto después de unos 100 caracteres, las leyendas de los anuncios In-Feed patrocinados se truncan casi de inmediato — normalmente después de solo 1 línea de texto (entre 35 y 40 caracteres). La interfaz de usuario de TikTok corta el texto de los anuncios de forma agresiva para priorizar el botón de llamada a la acción (CTA) clicable en la parte inferior de la pantalla.' },
@@ -1718,9 +1718,9 @@ export const tools: ToolDefinition[] = [
         { q: '¿Cómo puedo previsualizar mi vídeo de TikTok para comprobar si hay superposición de texto?', a: 'La forma más fiable de evitar que el texto quede bloqueado es probar tu diseño antes de publicarlo. Usando el simulador en vivo de PostTruncate, puedes pegar tu borrador y ver al instante dónde se pliega el texto de forma natural. También puedes subir una miniatura del vídeo y activar la capa translúcida de la zona segura para asegurarte de que tus gráficos en pantalla quedan completamente libres de los botones nativos de la interfaz de TikTok.' },
       ],
       de: [
-        { q: 'Wie lautet das Zeichenlimit für TikTok-Untertitel?', a: 'Ein TikTok-Untertitel fasst bis zu 2.200 Zeichen — dieselbe Obergrenze wie bei Instagram. Emojis und Hashtags zählen alle mit. Der Live-Zähler oben bewahrt dich davor, am Limit abgeschnitten zu werden.' },
+        { q: 'Wie lautet das Zeichenlimit für TikTok-Untertitel?', a: 'Ein TikTok-Untertitel fasst beim nativen Posten bis zu 4.000 Zeichen (die API und die meisten Scheduler begrenzen auf 2.200). Emojis und Hashtags zählen alle mit. Der Live-Zähler oben bewahrt dich davor, am Limit abgeschnitten zu werden.' },
         { q: 'Warum verbirgt TikTok meinen Text hinter „…mehr“?', a: 'TikTok stellt das Video voran, also zeigt der Feed nur den Anfang deines Textes — etwa die erste Zeile ODER die ersten 100 Zeichen, je nachdem was zuerst kommt — und klappt den Rest hinter „…mehr“ ein. Beginne mit deinem Hook und halte ihn in einer Zeile, damit er den Falz übersteht.' },
-        { q: 'Zählen Hashtags und Emojis zum 2.200-Limit?', a: 'Ja. Jeder Hashtag, jedes Emoji, jedes Leerzeichen und jeder Zeilenumbruch zählt gegen das 2.200-Zeichen-Budget. Ein Block Hashtags am Ende kann überraschend viel Platz fressen, daher zählt der Zähler sie in Echtzeit mit.' },
+        { q: 'Zählen Hashtags und Emojis zum Limit?', a: 'Ja. Jeder Hashtag, jedes Emoji, jedes Leerzeichen und jeder Zeilenumbruch zählt gegen das Untertitel-Budget (4.000 nativ, 2.200 über die API). Ein Block Hashtags am Ende kann überraschend viel Platz fressen, daher zählt der Zähler sie in Echtzeit mit.' },
         { q: 'Welche Größe sollte ein TikTok-Video haben?', a: 'TikTok ist vollbild-vertikal 9:16 — 1080×1920 Pixel. Halte wichtigen Text und Gesichter von den Rändern fern: die oberen ~10% und unteren ~18% liegen unter Nutzername, Untertitel und Buttons, und die rechten ~15% verdeckt die Like-/Kommentar-/Teilen-Leiste. Die Vorschau oben enthält eine optionale Sicherheitszonen-Überlagerung.' },
         { q: 'Was sind die TikTok-Sicherheitszonen (Safe Zones) für Videotext und Grafiken?', a: 'Die TikTok-Sicherheitszone ist der zentrale Bereich deines 9:16-Videos, in dem eingefügter Text und Sticker nicht von den nativen App-Elementen verdeckt werden. Um zu verhindern, dass deine Inhalte verborgen werden, solltest du wichtige visuelle Elemente nicht in diesen drei „toten Zonen“ platzieren: Unten (~20%): Verdeckt durch deinen Benutzernamen, Untertitel und den durchlaufenden Musikticker. Rechte Seite (~15%): Verdeckt durch Interaktions-Buttons (Profilbild, Like, Kommentar, Lesezeichen und Teilen). Oben (~10%): Verdeckt durch die Statusleiste und die „Für dich“-Navigations-Tabs.' },
         { q: 'Unterscheiden sich die Textlimits für TikTok In-Feed-Anzeigen von organischen Posts?', a: 'Ja, deutlich. Während organische Posts den Text nach etwa 100 Zeichen verbergen, werden gesponserte In-Feed-Ad-Untertitel fast sofort abgeschnitten — typischerweise schon nach 1 Textzeile (etwa 35 bis 40 Zeichen). Die TikTok-Benutzeroberfläche schneidet Anzeigentexte aggressiv ab, um den klickbaren Call-To-Action (CTA) Button am unteren Bildschirmrand zu priorisieren.' },
@@ -1728,9 +1728,9 @@ export const tools: ToolDefinition[] = [
         { q: 'Wie kann ich eine Vorschau meines TikTok-Videos erstellen, um Textüberschneidungen zu prüfen?', a: 'Der zuverlässigste Weg, verdeckten Text zu vermeiden, ist, dein Layout vor der Veröffentlichung zu testen. Mit dem Live-Simulator von PostTruncate kannst du deinen Entwurf einfügen und sofort sehen, wo der Text natürlich umbricht. Du kannst auch ein Video-Vorschaubild hochladen und das durchscheinende Sicherheitszonen-Overlay aktivieren, um sicherzustellen, dass deine Bildschirmgrafiken die nativen TikTok-Buttons komplett freilassen.' },
       ],
       fr: [
-        { q: 'Quelle est la limite de caractères de la légende sur TikTok ?', a: 'Une légende TikTok peut contenir jusqu’à 2 200 caractères — le même plafond qu’une légende Instagram. Les émojis et les hashtags comptent tous. Le compteur en direct ci-dessus vous évite d’être coupé au plafond.' },
+        { q: 'Quelle est la limite de caractères de la légende sur TikTok ?', a: 'Une légende TikTok peut contenir jusqu’à 4 000 caractères en publication native (l’API et la plupart des planificateurs plafonnent à 2 200). Les émojis et les hashtags comptent tous. Le compteur en direct ci-dessus vous évite d’être coupé au plafond.' },
         { q: 'Pourquoi TikTok masque-t-il ma légende derrière « …plus » ?', a: 'TikTok met la vidéo en avant : le fil n’affiche donc que le début de votre légende — environ la première ligne OU les 100 premiers caractères, selon ce qui vient en premier — puis replie le reste derrière un « …plus ». Commencez par votre accroche et gardez-la sur une seule ligne pour qu’elle survive au pli.' },
-        { q: 'Les hashtags et émojis comptent-ils dans la limite de 2 200 ?', a: 'Oui. Chaque hashtag, émoji, espace et saut de ligne compte dans le budget de 2 200 caractères. Un bloc de hashtags à la fin peut consommer beaucoup d’espace, c’est pourquoi le compteur les suit en temps réel.' },
+        { q: 'Les hashtags et émojis comptent-ils dans la limite ?', a: 'Oui. Chaque hashtag, émoji, espace et saut de ligne compte dans le budget de la légende (4 000 en natif, 2 200 via l’API). Un bloc de hashtags à la fin peut consommer beaucoup d’espace, c’est pourquoi le compteur les suit en temps réel.' },
         { q: 'Quelle taille doit faire une vidéo TikTok ?', a: 'TikTok est vertical plein écran 9:16 — 1080×1920 pixels. Gardez le texte clé et les visages loin des bords : les ~10% du haut et ~18% du bas sont sous le pseudo, la légende et les boutons, et les ~15% de droite sont couverts par la barre j’aime/commentaire/partage. L’aperçu ci-dessus inclut une superposition de zones de sécurité optionnelle.' },
         { q: 'Quelles sont les zones de sécurité (Safe Zones) de TikTok pour le texte et les graphiques vidéo ?', a: 'La zone de sécurité TikTok est la zone centrale de votre vidéo 9:16 où le texte codé en dur et les autocollants ne seront pas bloqués par les éléments natifs de l\'application. Pour éviter que votre contenu ne soit masqué, vous devez éviter de placer des éléments visuels importants dans trois « zones mortes » : En bas (~20 %) : couvert par votre nom d\'utilisateur, votre légende et le téléscripteur musical. Le côté droit (~15 %) : couvert par les boutons d\'interaction (photo de profil, j\'aime, commentaire, signet et partage). En haut (~10 %) : couvert par la barre d\'état et les onglets de navigation « Pour Toi ».' },
         { q: 'Les limites de texte des publicités In-Feed de TikTok sont-elles différentes des publications organiques ?', a: 'Oui, de manière significative. Alors que les publications organiques masquent le texte après environ 100 caractères, les légendes des publicités In-Feed sponsorisées sont tronquées presque immédiatement — généralement après seulement 1 ligne de texte (environ 35 à 40 caractères). L\'interface utilisateur de TikTok coupe le texte de l\'annonce de manière agressive pour prioriser le bouton d\'appel à l\'action (CTA) cliquable en bas de l\'écran.' },
@@ -1738,9 +1738,9 @@ export const tools: ToolDefinition[] = [
         { q: 'Comment puis-je prévisualiser ma vidéo TikTok pour vérifier les chevauchements de texte ?', a: 'Le moyen le plus fiable d\'éviter le texte bloqué est de tester votre mise en page avant de publier. En utilisant le simulateur en direct de PostTruncate, vous pouvez coller votre brouillon et voir instantanément où le texte se plie naturellement. Vous pouvez également télécharger une miniature vidéo et activer la superposition translucide de la zone de sécurité pour vous assurer que vos graphiques à l\'écran sont complètement dégagés des boutons natifs de l\'interface utilisateur de TikTok.' },
       ],
       pt: [
-        { q: 'Qual é o limite de caracteres da legenda no TikTok?', a: 'Uma legenda do TikTok comporta até 2.200 caracteres — o mesmo teto de uma legenda do Instagram. Emojis e hashtags contam todos. O contador ao vivo acima evita que você seja cortado no limite.' },
+        { q: 'Qual é o limite de caracteres da legenda no TikTok?', a: 'Uma legenda do TikTok comporta até 4.000 caracteres ao publicar na app (a API e a maioria dos agendadores limitam a 2.200). Emojis e hashtags contam todos. O contador ao vivo acima evita que você seja cortado no limite.' },
         { q: 'Por que o TikTok esconde minha legenda atrás de "…mais"?', a: 'O TikTok prioriza o vídeo, então o feed só mostra o início da sua legenda — cerca da primeira linha OU dos primeiros 100 caracteres, o que vier primeiro — e dobra o resto atrás de um "…mais". Comece pelo seu gancho e mantenha-o em uma única linha para que sobreviva à dobra.' },
-        { q: 'Hashtags e emojis contam para o limite de 2.200?', a: 'Sim. Cada hashtag, emoji, espaço e quebra de linha conta contra o orçamento de 2.200 caracteres. Um bloco de hashtags no final pode consumir bastante espaço, por isso o contador os rastreia em tempo real.' },
+        { q: 'Hashtags e emojis contam para o limite?', a: 'Sim. Cada hashtag, emoji, espaço e quebra de linha conta contra o orçamento da legenda (4.000 nativo, 2.200 via API). Um bloco de hashtags no final pode consumir bastante espaço, por isso o contador os rastreia em tempo real.' },
         { q: 'Qual deve ser o tamanho de um vídeo do TikTok?', a: 'O TikTok é vertical em tela cheia 9:16 — 1080×1920 pixels. Mantenha o texto principal e os rostos longe das bordas: os ~10% do topo e ~18% da base ficam sob o usuário, a legenda e os botões, e os ~15% da direita são cobertos pela barra de curtir/comentar/compartilhar. A prévia acima inclui uma camada opcional de zonas seguras.' },
         { q: 'Quais são as Zonas Seguras (Safe Zones) do TikTok para texto e gráficos de vídeo?', a: 'A Zona Segura do TikTok é a área central do seu vídeo 9:16 onde o texto e os adesivos não serão bloqueados por elementos nativos do aplicativo. Para evitar que seu conteúdo fique oculto, evite colocar elementos visuais críticos em três "zonas mortas": A parte inferior (~20%): Coberta pelo seu nome de usuário, legenda e controle deslizante de música. O lado direito (~15%): Coberto pelos botões de interação (foto de perfil, curtir, comentar, salvar e compartilhar). A parte superior (~10%): Coberta pela barra de status e pelas guias de navegação "Para você".' },
         { q: 'Os limites de texto dos anúncios In-Feed do TikTok são diferentes das postagens orgânicas?', a: 'Sim, significativamente. Enquanto as postagens orgânicas ocultam o texto após cerca de 100 caracteres, as legendas dos anúncios In-Feed patrocinados são truncadas quase imediatamente — normalmente após apenas 1 linha de texto (cerca de 35 a 40 caracteres). A interface do TikTok corta o texto do anúncio de forma agressiva para priorizar o botão de call-to-action (CTA) clicável na parte inferior da tela.' },
@@ -1748,9 +1748,9 @@ export const tools: ToolDefinition[] = [
         { q: 'Como posso visualizar meu vídeo do TikTok para verificar se há sobreposição de texto?', a: 'A maneira mais confiável de evitar que o texto fique bloqueado é testar seu layout antes de publicar. Usando o simulador ao vivo do PostTruncate, você pode colar seu rascunho e ver instantaneamente onde o texto se dobra naturalmente. Você também pode enviar uma miniatura do vídeo e ativar a sobreposição translúcida da Zona Segura para garantir que os gráficos na tela fiquem totalmente livres dos botões nativos da interface do TikTok.' },
       ],
       it: [
-        { q: 'Qual è il limite di caratteri della didascalia su TikTok?', a: 'Una didascalia TikTok può contenere fino a 2.200 caratteri — lo stesso tetto di una didascalia Instagram. Emoji e hashtag contano tutti. Il contatore in tempo reale qui sopra ti evita di essere tagliato al limite.' },
+        { q: 'Qual è il limite di caratteri della didascalia su TikTok?', a: 'Una didascalia TikTok può contenere fino a 4.000 caratteri pubblicando nativamente (l’API e la maggior parte degli scheduler si fermano a 2.200). Emoji e hashtag contano tutti. Il contatore in tempo reale qui sopra ti evita di essere tagliato al limite.' },
         { q: 'Perché TikTok nasconde la mia didascalia dietro "…altro"?', a: 'TikTok mette il video al primo posto, quindi il feed mostra solo l’inizio della didascalia — circa la prima riga OPPURE i primi 100 caratteri, a seconda di cosa viene prima — e piega il resto dietro un "…altro". Inizia con il tuo gancio e tienilo su una sola riga perché sopravviva alla piega.' },
-        { q: 'Hashtag ed emoji contano per il limite di 2.200?', a: 'Sì. Ogni hashtag, emoji, spazio e a capo conta nel budget di 2.200 caratteri. Un blocco di hashtag alla fine può consumare parecchio spazio, perciò il contatore li traccia in tempo reale.' },
+        { q: 'Hashtag ed emoji contano per il limite?', a: 'Sì. Ogni hashtag, emoji, spazio e a capo conta nel budget della didascalia (4.000 nativo, 2.200 via API). Un blocco di hashtag alla fine può consumare parecchio spazio, perciò il contatore li traccia in tempo reale.' },
         { q: 'Che dimensioni deve avere un video TikTok?', a: 'TikTok è verticale a schermo intero 9:16 — 1080×1920 pixel. Tieni testo chiave e volti lontani dai bordi: il ~10% in alto e il ~18% in basso stanno sotto nome utente, didascalia e pulsanti, e il ~15% a destra è coperto dalla barra mi piace/commenta/condividi. L’anteprima qui sopra include una sovrapposizione opzionale delle zone di sicurezza.' },
         { q: 'Quali sono le Zone Sicure (Safe Zones) di TikTok per il testo e la grafica video?', a: 'La Zona Sicura di TikTok è l\'area centrale del tuo video in 9:16 dove il testo e gli adesivi inseriti non verranno bloccati dagli elementi nativi dell\'app. Per evitare che i tuoi contenuti vengano nascosti, devi evitare di posizionare elementi visivi importanti in tre "zone morte": In basso (~20%): Coperta dal tuo nome utente, didascalia e il ticker musicale scorrevole. Lato destro (~15%): Coperto dai pulsanti di interazione (immagine del profilo, mi piace, commenta, salva e condividi). In alto (~10%): Coperta dalla barra di stato e dalle schede di navigazione "Per te".' },
         { q: 'I limiti di testo degli annunci In-Feed di TikTok sono diversi dai post organici?', a: 'Sì, in modo significativo. Mentre i post organici nascondono il testo dopo circa 100 caratteri, le didascalie degli annunci sponsorizzati In-Feed vengono troncate quasi immediatamente, in genere dopo appena 1 riga di testo (circa 35-40 caratteri). L\'interfaccia di TikTok taglia in modo aggressivo il testo dell\'annuncio per dare priorità al pulsante Call-To-Action (CTA) cliccabile nella parte inferiore dello schermo.' },
@@ -1758,9 +1758,9 @@ export const tools: ToolDefinition[] = [
         { q: 'Come posso visualizzare in anteprima il mio video TikTok per controllare eventuali sovrapposizioni di testo?', a: 'Il modo più affidabile per evitare che il testo venga bloccato è testare il layout prima della pubblicazione. Utilizzando il simulatore dal vivo di PostTruncate, puoi incollare la tua bozza e vedere immediatamente dove il testo si piega naturalmente. Puoi anche caricare la miniatura di un video e attivare la sovrapposizione traslucida della Zona Sicura per assicurarti che la tua grafica sullo schermo sia completamente libera dai pulsanti nativi dell\'interfaccia utente di TikTok.' },
       ],
       nl: [
-        { q: 'Wat is de tekenlimiet van het bijschrift op TikTok?', a: 'Een TikTok-bijschrift kan tot 2.200 tekens bevatten — hetzelfde plafond als een Instagram-bijschrift. Emoji en hashtags tellen allemaal mee. De live teller hierboven voorkomt dat je bij de limiet wordt afgekapt.' },
+        { q: 'Wat is de tekenlimiet van het bijschrift op TikTok?', a: 'Een TikTok-bijschrift kan bij native plaatsen tot 4.000 tekens bevatten (de API en de meeste planners limiteren op 2.200). Emoji en hashtags tellen allemaal mee. De live teller hierboven voorkomt dat je bij de limiet wordt afgekapt.' },
         { q: 'Waarom verbergt TikTok mijn bijschrift achter "…meer"?', a: 'TikTok zet de video voorop, dus de feed toont alleen het begin van je bijschrift — ongeveer de eerste regel OF de eerste 100 tekens, wat het eerst komt — en vouwt de rest achter een "…meer" in. Begin met je hook en houd die op één regel zodat hij de vouw overleeft.' },
-        { q: 'Tellen hashtags en emoji mee voor de limiet van 2.200?', a: 'Ja. Elke hashtag, emoji, spatie en regeleinde telt mee voor het budget van 2.200 tekens. Een blok hashtags aan het eind kan verrassend veel ruimte opslokken, dus de teller volgt ze in real time.' },
+        { q: 'Tellen hashtags en emoji mee voor de limiet?', a: 'Ja. Elke hashtag, emoji, spatie en regeleinde telt mee voor het bijschriftbudget (4.000 native, 2.200 via de API). Een blok hashtags aan het eind kan verrassend veel ruimte opslokken, dus de teller volgt ze in real time.' },
         { q: 'Welk formaat moet een TikTok-video hebben?', a: 'TikTok is fullscreen verticaal 9:16 — 1080×1920 pixels. Houd belangrijke tekst en gezichten weg van de randen: de bovenste ~10% en onderste ~18% zitten onder de gebruikersnaam, het bijschrift en de knoppen, en de rechter ~15% wordt bedekt door de like-/reactie-/deelbalk. Het voorbeeld hierboven bevat een optionele veilige-zone-overlay.' },
         { q: 'Wat zijn de veilige zones (Safe Zones) op TikTok voor tekst en videographics?', a: 'De TikTok Safe Zone is het centrale gebied van je 9:16-video waar toegevoegde tekst en stickers niet worden geblokkeerd door de eigen elementen van de app. Om te voorkomen dat je content verborgen raakt, moet je vermijden belangrijke visuele elementen in drie "dode zones" te plaatsen: Onderaan (~20%): Bedekt door je gebruikersnaam, bijschrift en de scrollende muziekticker. Rechterkant (~15%): Bedekt door de interactieknoppen (profielfoto, like, reactie, opslaan en delen). Bovenaan (~10%): Bedekt door de statusbalk en de "Voor jou"-navigatietabbladen.' },
         { q: 'Zijn de tekstlimieten voor TikTok In-Feed-advertenties anders dan voor organische posts?', a: 'Ja, aanzienlijk. Terwijl organische posts tekst verbergen na ongeveer 100 tekens, worden gesponsorde In-Feed-advertentiebijschriften bijna onmiddellijk afgekapt — meestal na slechts 1 regel tekst (ongeveer 35 tot 40 tekens). De TikTok-interface snijdt advertentietekst agressief af om voorrang te geven aan de klikbare Call-To-Action (CTA)-knop onderaan het scherm.' },
@@ -1768,9 +1768,9 @@ export const tools: ToolDefinition[] = [
         { q: 'Hoe kan ik mijn TikTok-video als voorbeeld bekijken om te controleren op overlappende tekst?', a: 'De meest betrouwbare manier om geblokkeerde tekst te voorkomen, is door je lay-out te testen voordat je publiceert. Met de live simulator van PostTruncate kun je je concept plakken en direct zien waar de tekst op natuurlijke wijze vouwt. Je kunt ook een miniatuurweergave van een video uploaden en de doorzichtige Safe Zone-overlay inschakelen om er zeker van te zijn dat je afbeeldingen op het scherm volledig vrij zijn van de eigen knoppen in de TikTok-interface.' },
       ],
       ja: [
-        { q: 'TikTokのキャプションの文字数制限は？', a: 'TikTokのキャプションは最大2,200文字まで——Instagramのキャプションと同じ上限です。絵文字やハッシュタグもすべてカウントされます。上のリアルタイムカウンターが上限での切れを防ぎます。' },
+        { q: 'TikTokのキャプションの文字数制限は？', a: 'TikTokのキャプションはアプリから直接投稿する場合は最大4,000文字まで（APIやほとんどのスケジューラーは2,200文字）。絵文字やハッシュタグもすべてカウントされます。上のリアルタイムカウンターが上限での切れを防ぎます。' },
         { q: 'なぜTikTokはキャプションを「…続きを見る」で隠すの？', a: 'TikTokは動画を最優先するため、フィードはキャプションの冒頭——最初の1行、または最初の約100文字のうち早いほう——だけを表示し、残りを「…続きを見る」で折りたたみます。フックを先頭に置き、1行に収めると折り返しを越えて表示されます。' },
-        { q: 'ハッシュタグや絵文字は2,200文字の上限に含まれますか？', a: 'はい。ハッシュタグ・絵文字・スペース・改行はすべて2,200文字の枠に算入されます。末尾に並べたハッシュタグは意外と多くの文字を消費するため、カウンターがリアルタイムで追跡します。' },
+        { q: 'ハッシュタグや絵文字は文字数の上限に含まれますか？', a: 'はい。ハッシュタグ・絵文字・スペース・改行はすべてキャプションの枠（ネイティブ4,000文字、API経由は2,200文字）に算入されます。末尾に並べたハッシュタグは意外と多くの文字を消費するため、カウンターがリアルタイムで追跡します。' },
         { q: 'TikTok動画のサイズはどれくらいにすべき？', a: 'TikTokは全画面の縦型9:16——1080×1920ピクセルです。重要なテキストや顔は端から離しましょう。上の約10%と下の約18%はユーザー名・キャプション・ボタンの下に、右の約15%はいいね/コメント/シェアのバーに隠れます。上のプレビューには任意のセーフゾーン表示があります。' },
         { q: '動画のテキストやグラフィックに関するTikTokのセーフゾーン（安全領域）とは何ですか？', a: 'TikTokのセーフゾーンとは、9:16の動画の中央部分で、追加したテキストやステッカーがアプリのネイティブ要素にブロックされない領域のことです。コンテンツが隠れるのを防ぐには、重要な視覚要素を次の3つの「デッドゾーン」に配置しないようにする必要があります： 下部（約20%）：ユーザー名、キャプション、スクロールする音楽ティッカーで隠れます。 右側（約15%）：エンゲージメントボタン（プロフィール画像、いいね、コメント、保存、シェア）で隠れます。 上部（約10%）：ステータスバーと「おすすめ」などのナビゲーションタブで隠れます。' },
         { q: 'TikTokのインフィード広告のテキスト制限は、オーガニック投稿と異なりますか？', a: 'はい、大きく異なります。オーガニック投稿では約100文字以降のテキストが隠れますが、スポンサー付きのインフィード広告のキャプションはほぼすぐに、通常はわずか1行（約35〜40文字）で切り捨てられます。TikTokのUIは、画面下部のクリック可能なCall-To-Action（CTA）ボタンを優先するため、広告テキストを積極的に切り詰めます。' },
@@ -1778,9 +1778,9 @@ export const tools: ToolDefinition[] = [
         { q: 'テキストの重なりを確認するためにTikTok動画をプレビューするにはどうすればよいですか？', a: 'テキストが隠れるのを防ぐ最も確実な方法は、公開前にレイアウトをテストすることです。PostTruncateのライブシミュレーターを使用すると、下書きを貼り付けて、テキストが自然に折りたたまれる場所を即座に確認できます。また、動画のサムネイルをアップロードし、半透明のセーフゾーンオーバーレイをオンにすることで、画面上のグラフィックがTikTokのネイティブUIボタンと完全に重ならないことを確認できます。' },
       ],
       zh: [
-        { q: 'TikTok 的文案字符上限是多少？', a: 'TikTok 文案最多可容纳 2,200 个字符——与 Instagram 文案上限相同。表情符号和话题标签都计入其中。上方的实时计数器能防止你在上限处被截断。' },
+        { q: 'TikTok 的文案字符上限是多少？', a: 'TikTok 文案在应用内原生发布时最多可容纳 4,000 个字符（API 和大多数排程工具为 2,200）。表情符号和话题标签都计入其中。上方的实时计数器能防止你在上限处被截断。' },
         { q: '为什么 TikTok 把我的文案藏在「…更多」后面？', a: 'TikTok 以视频为先，因此信息流只显示文案开头——大约首行或前 100 个字符，以先到者为准——然后把其余内容折叠在「…更多」后。把钩子放在开头并保持在一行内，它就能越过折叠点显示。' },
-        { q: '话题标签和表情符号会计入 2,200 上限吗？', a: '会。每个话题标签、表情符号、空格和换行都计入 2,200 字符的额度。文案末尾的一串话题标签会占用相当多空间，因此计数器会实时追踪它们。' },
+        { q: '话题标签和表情符号会计入文案上限吗？', a: '会。每个话题标签、表情符号、空格和换行都计入文案额度（原生 4,000，API 为 2,200）。文案末尾的一串话题标签会占用相当多空间，因此计数器会实时追踪它们。' },
         { q: 'TikTok 视频应该是什么尺寸？', a: 'TikTok 是全屏竖版 9:16——1080×1920 像素。让关键文字和人脸远离边缘：顶部约 10% 和底部约 18% 位于用户名、文案和按钮之下，右侧约 15% 被点赞/评论/分享栏遮挡。上方预览包含可选的安全区叠层。' },
         { q: 'TikTok 视频文字和图形的安全区（Safe Zones）是什么？', a: 'TikTok 安全区是你 9:16 视频的中央区域，在该区域内硬编码的文字和贴纸不会被应用程序的原生元素遮挡。为防止你的内容被隐藏，必须避免在三个"死区"放置关键视觉元素：底部（约 20%）：被你的用户名、文案和滚动音乐字幕条覆盖。右侧（约 15%）：被互动按钮（头像、点赞、评论、收藏和分享图标）覆盖。顶部（约 10%）：被状态栏和"为你推荐"导航选项卡覆盖。' },
         { q: 'TikTok 信息流广告的文字限制与普通发布有所不同吗？', a: '有，而且差别显著。普通发布在约 100 个字符后隐藏文字，而赞助信息流广告的文案几乎立即被截断——通常仅在 1 行文字（约 35 至 40 个字符）后就会截断。TikTok 界面会激进地截断广告文字，以优先展示屏幕底部的可点击行动号召（CTA）按钮。' },
@@ -1788,9 +1788,9 @@ export const tools: ToolDefinition[] = [
         { q: '如何预览我的 TikTok 视频以检查文字是否重叠？', a: '避免文字被遮挡最可靠的方法是在发布前测试你的布局。使用 PostTruncate 的实时模拟器，你可以粘贴草稿并立即看到文字自然折叠的位置。你还可以上传视频缩略图，并开启半透明安全区叠层，确保你的屏幕图形完全避开 TikTok 原生界面按钮。' },
       ],
       da: [
-        { q: 'Hvad er tegngrænsen for billedteksten på TikTok?', a: 'En TikTok-billedtekst kan rumme op til 2.200 tegn — samme loft som en Instagram-billedtekst. Emoji og hashtags tæller alle med. Live-tælleren ovenfor forhindrer, at du bliver skåret af ved grænsen.' },
+        { q: 'Hvad er tegngrænsen for billedteksten på TikTok?', a: 'En TikTok-billedtekst kan ved native opslag rumme op til 4.000 tegn (API og de fleste planlæggere sætter grænsen ved 2.200). Emoji og hashtags tæller alle med. Live-tælleren ovenfor forhindrer, at du bliver skåret af ved grænsen.' },
         { q: 'Hvorfor skjuler TikTok min billedtekst bag "…mere"?', a: 'TikTok sætter videoen først, så feedet viser kun begyndelsen af din tekst — cirka den første linje ELLER de første 100 tegn, alt efter hvad der kommer først — og folder resten bag et "…mere". Start med din krog og hold den på én linje, så den overlever folden.' },
-        { q: 'Tæller hashtags og emoji med i grænsen på 2.200?', a: 'Ja. Hvert hashtag, emoji, mellemrum og linjeskift tæller med i budgettet på 2.200 tegn. En stak hashtags til sidst kan bruge overraskende meget plads, så tælleren følger dem i realtid.' },
+        { q: 'Tæller hashtags og emoji med i grænsen?', a: 'Ja. Hvert hashtag, emoji, mellemrum og linjeskift tæller med i budgettet for billedteksten (4.000 native, 2.200 via API). En stak hashtags til sidst kan bruge overraskende meget plads, så tælleren følger dem i realtid.' },
         { q: 'Hvilken størrelse skal en TikTok-video have?', a: 'TikTok er fuldskærm lodret 9:16 — 1080×1920 pixel. Hold vigtig tekst og ansigter væk fra kanterne: de øverste ~10% og nederste ~18% ligger under brugernavn, billedtekst og knapper, og de højre ~15% dækkes af like-/kommentar-/del-bjælken. Forhåndsvisningen ovenfor har et valgfrit sikkerhedszone-overlay.' },
         { q: 'Hvad er TikToks sikre zoner (Safe Zones) for tekst og grafik i videoen?', a: 'TikToks sikre zone er det centrale område i din 9:16-video, hvor indsat tekst og klistermærker ikke blokeres af appens egne elementer. For at forhindre, at dit indhold skjules, skal du undgå at placere vigtige visuelle elementer i tre "døde zoner": Bunden (~20%): Dækkes af dit brugernavn, billedtekst og rulleteksten med musik. Højre side (~15%): Dækkes af interaktionsknapper (profilbillede, synes godt om, kommentar, bogmærke og del). Toppen (~10%): Dækkes af statuslinjen og "Til dig"-navigationsfanerne.' },
         { q: 'Er tekstgrænserne for TikTok In-Feed-annoncer anderledes end for organiske opslag?', a: 'Ja, markant. Mens organiske opslag skjuler teksten efter cirka 100 tegn, afkortes sponsorerede In-Feed-annoncebilledtekster næsten med det samme — typisk allerede efter 1 linje tekst (omkring 35 til 40 tegn). TikToks brugerflade afkorter annoncetekst aggressivt for at prioritere den klikbare Call-To-Action (CTA) knap i bunden af skærmen.' },
@@ -1800,8 +1800,8 @@ export const tools: ToolDefinition[] = [
     },
 
     content: {
-      en: `<h2>TikTok's 2,200-character caption limit</h2>
-<p>A TikTok caption can run up to <strong>2,200 characters</strong> — the same ceiling Instagram uses, and far more than most creators ever fill. That headroom is real, but it is rarely the constraint that matters on TikTok. The video carries the message; the caption is context, searchable keywords, and a nudge to act. PostTruncate's <strong>TikTok caption checker</strong> counts every character live as you type, with a colour-coded meter that warns you as you approach the cap and flags the moment you cross it.</p>
+      en: `<h2>TikTok's 4,000-character caption limit</h2>
+<p>A TikTok caption can run up to <strong>4,000 characters</strong> when you post natively in the app — though the TikTok API and schedulers (Buffer, Hootsuite, Later) still cap captions at <strong>2,200</strong>, so that's the safe ceiling if you don't post by hand. Either way it is far more than most creators ever fill. That headroom is real, but it is rarely the constraint that matters on TikTok. The video carries the message; the caption is context, searchable keywords, and a nudge to act. PostTruncate's <strong>TikTok caption checker</strong> counts every character live as you type, with a colour-coded meter that warns you as you approach the cap and flags the moment you cross it.</p>
 <p>Because TikTok is built around the video, almost nobody reads a 2,000-character caption in the feed. The smart play is to front-load: say the one thing that earns the watch or the comment in the first handful of words, then add the rest for the algorithm and the people who tap through.</p>
 
 <h2>The "…more" fold: the first line or ~100 characters</h2>
@@ -1809,15 +1809,15 @@ export const tools: ToolDefinition[] = [
 <p>That makes your opening line the entire caption for most viewers. Write a hook that stands on its own, keep it to one line, and hold any hashtags, credits, or line breaks until after it. The preview above marks exactly where your caption folds so you can see what survives before you post.</p>
 
 <h2>Hashtags and emojis count — and the 9:16 canvas</h2>
-<p>Every <strong>hashtag, emoji, space, and line break counts</strong> toward the 2,200-character total. A wall of hashtags at the end of a caption can quietly burn through hundreds of characters, and emoji-heavy copy adds up faster than it looks. The counter above tracks all of it in real time so nothing pushes you over unexpectedly.</p>
+<p>Every <strong>hashtag, emoji, space, and line break counts</strong> toward the caption total (4,000 native, 2,200 via the API). A wall of hashtags at the end of a caption can quietly burn through hundreds of characters, and emoji-heavy copy adds up faster than it looks. The counter above tracks all of it in real time so nothing pushes you over unexpectedly.</p>
 <p>TikTok video is <strong>full-screen vertical 9:16 — 1080×1920 pixels</strong>. The native interface sits on top of your video: the username, caption, and music ticker run along the bottom, and the like, comment, share, and profile buttons stack down the right edge. Keep important text and faces clear of those zones. The preview's optional safe-zone overlay shows the top ~10%, bottom ~18%, and right ~15% that the UI covers.</p>
 
 <h2>Profile limits and writing for the For You feed</h2>
 <p>For reference when you set up or tidy a profile: a TikTok <strong>bio holds 80 characters</strong>, the <strong>@handle (username) holds 24</strong>, and the <strong>display name holds 30</strong>. These are short by design — treat the bio as a single sharp line, not a paragraph.</p>
 <p>TikTok's For You feed rewards watch time and replies over polish. A caption that poses a question, sets up a payoff, or invites people to finish the thought in the comments consistently outperforms a tidy summary. Use PostTruncate to draft your caption, check the count, confirm your hook clears the "…more" fold, and preview it over a 9:16 reel — all before you ever open the app.</p>`,
 
-      es: `<h2>El límite de 2.200 caracteres de la leyenda en TikTok</h2>
-<p>Una leyenda de TikTok puede llegar a <strong>2.200 caracteres</strong>, el mismo tope que usa Instagram y mucho más de lo que la mayoría de creadores llega a rellenar. Ese margen es real, pero rara vez es la restricción que importa en TikTok. El vídeo lleva el mensaje; la leyenda aporta contexto, palabras clave buscables y un empujón a la acción. El <strong>verificador de leyendas de TikTok</strong> de PostTruncate cuenta cada carácter en vivo mientras escribes, con un medidor codificado por colores que avisa al acercarte al tope y lo marca en cuanto lo superas.</p>
+      es: `<h2>El límite de 4.000 caracteres de la leyenda en TikTok</h2>
+<p>Una leyenda de TikTok puede llegar a <strong>4.000 caracteres</strong> al publicar desde la app —aunque la API y los programadores (Buffer, Hootsuite, Later) las limitan a <strong>2.200</strong>, ese es el tope seguro si no publicas a mano—, mucho más de lo que la mayoría de creadores llega a rellenar. Ese margen es real, pero rara vez es la restricción que importa en TikTok. El vídeo lleva el mensaje; la leyenda aporta contexto, palabras clave buscables y un empujón a la acción. El <strong>verificador de leyendas de TikTok</strong> de PostTruncate cuenta cada carácter en vivo mientras escribes, con un medidor codificado por colores que avisa al acercarte al tope y lo marca en cuanto lo superas.</p>
 <p>Como TikTok gira en torno al vídeo, casi nadie lee una leyenda de 2.000 caracteres en el feed. Lo inteligente es poner lo importante delante: di en las primeras palabras lo que gana la visualización o el comentario, y añade el resto para el algoritmo y para quien toque «…más».</p>
 
 <h2>El pliegue de «…más»: la primera línea o ~100 caracteres</h2>
@@ -1825,15 +1825,15 @@ export const tools: ToolDefinition[] = [
 <p>Eso convierte tu primera línea en la leyenda entera para la mayoría. Escribe un gancho que se sostenga solo, mantenlo en una línea y deja hashtags, créditos o saltos de línea para después. La vista previa de arriba marca exactamente dónde se pliega tu leyenda para que veas qué sobrevive antes de publicar.</p>
 
 <h2>Los hashtags y emojis cuentan — y el lienzo 9:16</h2>
-<p>Cada <strong>hashtag, emoji, espacio y salto de línea cuenta</strong> para el total de 2.200 caracteres. Un muro de hashtags al final puede consumir cientos de caracteres sin que lo notes, y el texto cargado de emojis suma más rápido de lo que parece. El contador de arriba lo rastrea todo en tiempo real para que nada te pase del límite por sorpresa.</p>
+<p>Cada <strong>hashtag, emoji, espacio y salto de línea cuenta</strong> para el total de la leyenda (4.000 nativo, 2.200 vía API). Un muro de hashtags al final puede consumir cientos de caracteres sin que lo notes, y el texto cargado de emojis suma más rápido de lo que parece. El contador de arriba lo rastrea todo en tiempo real para que nada te pase del límite por sorpresa.</p>
 <p>El vídeo de TikTok es <strong>vertical a pantalla completa 9:16: 1080×1920 píxeles</strong>. La interfaz nativa se superpone al vídeo: el usuario, la leyenda y el ticker de música recorren la parte inferior, y los botones de me gusta, comentario, compartir y perfil se apilan en el borde derecho. Mantén el texto importante y las caras lejos de esas zonas. La capa opcional de zonas seguras muestra el ~10% superior, el ~18% inferior y el ~15% derecho que cubre la interfaz.</p>
 
 <h2>Límites del perfil y escribir para el feed «Para ti»</h2>
 <p>Como referencia al configurar u ordenar un perfil: la <strong>biografía de TikTok admite 80 caracteres</strong>, el <strong>@usuario admite 24</strong> y el <strong>nombre visible admite 30</strong>. Son cortos a propósito: trata la biografía como una sola línea afilada, no un párrafo.</p>
 <p>El feed «Para ti» de TikTok premia el tiempo de visualización y las respuestas por encima del pulido. Una leyenda que plantea una pregunta, prepara una recompensa o invita a terminar la idea en los comentarios rinde mejor que un resumen ordenado. Usa PostTruncate para redactar tu leyenda, comprobar el recuento, confirmar que tu gancho supera el pliegue de «…más» y previsualizarla sobre un reel 9:16, todo antes de abrir la app.</p>`,
 
-      de: `<h2>TikToks 2.200-Zeichen-Limit für Untertitel</h2>
-<p>Ein TikTok-Untertitel kann bis zu <strong>2.200 Zeichen</strong> umfassen — dieselbe Obergrenze wie bei Instagram und weit mehr, als die meisten Creator je füllen. Dieser Spielraum ist real, aber selten die Beschränkung, die auf TikTok zählt. Das Video trägt die Botschaft; der Untertitel liefert Kontext, suchbare Keywords und einen Anstoß zur Aktion. PostTruncates <strong>TikTok-Untertitel-Prüfer</strong> zählt jedes Zeichen live beim Tippen, mit einer farbkodierten Anzeige, die warnt wenn du dich dem Limit näherst und markiert sobald du es überschreitest.</p>
+      de: `<h2>TikToks 4.000-Zeichen-Limit für Untertitel</h2>
+<p>Ein TikTok-Untertitel kann beim nativen Posten bis zu <strong>4.000 Zeichen</strong> umfassen — die TikTok-API und Scheduler (Buffer, Hootsuite, Later) begrenzen den Untertitel jedoch weiterhin auf <strong>2.200</strong>, das ist also die sichere Grenze, wenn du nicht manuell postest — und weit mehr, als die meisten Creator je füllen. Dieser Spielraum ist real, aber selten die Beschränkung, die auf TikTok zählt. Das Video trägt die Botschaft; der Untertitel liefert Kontext, suchbare Keywords und einen Anstoß zur Aktion. PostTruncates <strong>TikTok-Untertitel-Prüfer</strong> zählt jedes Zeichen live beim Tippen, mit einer farbkodierten Anzeige, die warnt wenn du dich dem Limit näherst und markiert sobald du es überschreitest.</p>
 <p>Da sich bei TikTok alles um das Video dreht, liest fast niemand einen 2.000-Zeichen-Untertitel im Feed. Klug ist es, vorne zu laden: sag in den ersten Worten, was den Blick oder den Kommentar verdient, und füge den Rest für den Algorithmus und die Durchtippenden hinzu.</p>
 
 <h2>Der „…mehr“-Falz: die erste Zeile oder ~100 Zeichen</h2>
@@ -1841,15 +1841,15 @@ export const tools: ToolDefinition[] = [
 <p>Damit wird deine erste Zeile für die meisten Zuschauer zum ganzen Untertitel. Schreib einen Hook, der für sich steht, halte ihn in einer Zeile und spar dir Hashtags, Credits oder Zeilenumbrüche bis danach. Die Vorschau oben markiert genau, wo dein Untertitel einklappt, damit du vor dem Posten siehst, was übersteht.</p>
 
 <h2>Hashtags und Emojis zählen — und die 9:16-Fläche</h2>
-<p>Jeder <strong>Hashtag, jedes Emoji, jedes Leerzeichen und jeder Zeilenumbruch zählt</strong> zum 2.200-Zeichen-Total. Eine Wand aus Hashtags am Ende kann leise Hunderte Zeichen verbrauchen, und emoji-lastiger Text summiert sich schneller als es aussieht. Der Zähler oben verfolgt alles in Echtzeit, damit dich nichts unerwartet über das Limit schiebt.</p>
+<p>Jeder <strong>Hashtag, jedes Emoji, jedes Leerzeichen und jeder Zeilenumbruch zählt</strong> zum Untertitel-Total (4.000 nativ, 2.200 über die API). Eine Wand aus Hashtags am Ende kann leise Hunderte Zeichen verbrauchen, und emoji-lastiger Text summiert sich schneller als es aussieht. Der Zähler oben verfolgt alles in Echtzeit, damit dich nichts unerwartet über das Limit schiebt.</p>
 <p>TikTok-Video ist <strong>vollbild-vertikal 9:16 — 1080×1920 Pixel</strong>. Die native Oberfläche liegt über deinem Video: Nutzername, Untertitel und Musik-Ticker laufen unten entlang, und die Buttons für Like, Kommentar, Teilen und Profil stapeln sich am rechten Rand. Halte wichtigen Text und Gesichter aus diesen Zonen heraus. Die optionale Sicherheitszonen-Überlagerung zeigt die oberen ~10%, unteren ~18% und rechten ~15%, die die UI verdeckt.</p>
 
 <h2>Profil-Limits und Schreiben für den „Für dich“-Feed</h2>
 <p>Zur Orientierung beim Einrichten oder Aufräumen eines Profils: eine TikTok-<strong>Bio fasst 80 Zeichen</strong>, der <strong>@Name (Username) fasst 24</strong> und der <strong>Anzeigename fasst 30</strong>. Sie sind absichtlich kurz — behandle die Bio als eine einzige prägnante Zeile, nicht als Absatz.</p>
 <p>TikToks „Für dich“-Feed belohnt Wiedergabezeit und Antworten über Hochglanz. Ein Untertitel, der eine Frage stellt, eine Pointe aufbaut oder dazu einlädt den Gedanken in den Kommentaren zu Ende zu bringen, schlägt konstant eine ordentliche Zusammenfassung. Nutze PostTruncate, um deinen Untertitel zu entwerfen, die Zählung zu prüfen, zu bestätigen dass dein Hook den „…mehr“-Falz übersteht, und ihn auf einem 9:16-Reel vorzuschauen — alles bevor du die App öffnest.</p>`,
 
-      fr: `<h2>La limite de 2 200 caractères de la légende TikTok</h2>
-<p>Une légende TikTok peut atteindre <strong>2 200 caractères</strong> — le même plafond qu’Instagram, et bien plus que ce que la plupart des créateurs remplissent. Cette marge est réelle, mais c’est rarement la contrainte qui compte sur TikTok. La vidéo porte le message ; la légende apporte le contexte, des mots-clés recherchables et une incitation à agir. Le <strong>vérificateur de légendes TikTok</strong> de PostTruncate compte chaque caractère en direct, avec une jauge colorée qui vous avertit à l’approche du plafond et le signale dès que vous le dépassez.</p>
+      fr: `<h2>La limite de 4 000 caractères de la légende TikTok</h2>
+<p>Une légende TikTok peut atteindre <strong>4 000 caractères</strong> en publication native — mais l’API TikTok et les planificateurs (Buffer, Hootsuite, Later) plafonnent la légende à <strong>2 200</strong>, c’est donc la limite sûre si vous ne publiez pas à la main — et bien plus que ce que la plupart des créateurs remplissent. Cette marge est réelle, mais c’est rarement la contrainte qui compte sur TikTok. La vidéo porte le message ; la légende apporte le contexte, des mots-clés recherchables et une incitation à agir. Le <strong>vérificateur de légendes TikTok</strong> de PostTruncate compte chaque caractère en direct, avec une jauge colorée qui vous avertit à l’approche du plafond et le signale dès que vous le dépassez.</p>
 <p>Comme TikTok est construit autour de la vidéo, presque personne ne lit une légende de 2 000 caractères dans le fil. Le bon réflexe est de placer l’essentiel en tête : dites en quelques mots ce qui mérite le visionnage ou le commentaire, puis ajoutez le reste pour l’algorithme et pour ceux qui touchent « …plus ».</p>
 
 <h2>Le pli « …plus » : la première ligne ou ~100 caractères</h2>
@@ -1857,15 +1857,15 @@ export const tools: ToolDefinition[] = [
 <p>Votre première ligne devient ainsi la légende entière pour la plupart des spectateurs. Écrivez une accroche qui tient seule, gardez-la sur une ligne et réservez hashtags, crédits ou sauts de ligne pour après. L’aperçu ci-dessus marque précisément où votre légende se replie, pour voir ce qui survit avant de publier.</p>
 
 <h2>Les hashtags et émojis comptent — et le cadre 9:16</h2>
-<p>Chaque <strong>hashtag, émoji, espace et saut de ligne compte</strong> dans le total de 2 200 caractères. Un mur de hashtags à la fin peut consumer des centaines de caractères sans bruit, et un texte chargé d’émojis grimpe plus vite qu’il n’y paraît. Le compteur ci-dessus suit tout en temps réel pour que rien ne vous fasse dépasser par surprise.</p>
+<p>Chaque <strong>hashtag, émoji, espace et saut de ligne compte</strong> dans le total de la légende (4 000 en natif, 2 200 via l’API). Un mur de hashtags à la fin peut consumer des centaines de caractères sans bruit, et un texte chargé d’émojis grimpe plus vite qu’il n’y paraît. Le compteur ci-dessus suit tout en temps réel pour que rien ne vous fasse dépasser par surprise.</p>
 <p>La vidéo TikTok est <strong>verticale plein écran 9:16 — 1080×1920 pixels</strong>. L’interface native se superpose à votre vidéo : le pseudo, la légende et le bandeau musical longent le bas, et les boutons j’aime, commentaire, partage et profil s’empilent sur le bord droit. Gardez le texte important et les visages hors de ces zones. La superposition de zones de sécurité optionnelle montre les ~10% du haut, ~18% du bas et ~15% de droite que couvre l’interface.</p>
 
 <h2>Limites du profil et écrire pour le fil « Pour toi »</h2>
 <p>Pour référence quand vous configurez ou rangez un profil : la <strong>bio TikTok contient 80 caractères</strong>, le <strong>@pseudo (nom d’utilisateur) en contient 24</strong> et le <strong>nom affiché en contient 30</strong>. Ils sont courts par conception — traitez la bio comme une seule ligne percutante, pas un paragraphe.</p>
 <p>Le fil « Pour toi » de TikTok récompense le temps de visionnage et les réponses plus que le soin. Une légende qui pose une question, prépare une chute ou invite à finir l’idée en commentaire surpasse régulièrement un résumé propre. Utilisez PostTruncate pour rédiger votre légende, vérifier le compte, confirmer que votre accroche franchit le pli « …plus » et la prévisualiser sur un reel 9:16 — le tout avant même d’ouvrir l’app.</p>`,
 
-      pt: `<h2>O limite de 2.200 caracteres da legenda no TikTok</h2>
-<p>Uma legenda do TikTok pode chegar a <strong>2.200 caracteres</strong> — o mesmo teto do Instagram e muito mais do que a maioria dos criadores preenche. Essa folga é real, mas raramente é a restrição que importa no TikTok. O vídeo carrega a mensagem; a legenda dá contexto, palavras-chave pesquisáveis e um empurrão para a ação. O <strong>verificador de legendas do TikTok</strong> do PostTruncate conta cada caractere ao vivo, com um medidor colorido que avisa ao se aproximar do teto e o marca assim que você o ultrapassa.</p>
+      pt: `<h2>O limite de 4.000 caracteres da legenda no TikTok</h2>
+<p>Uma legenda do TikTok pode chegar a <strong>4.000 caracteres</strong> ao publicar na app — mas a API do TikTok e os agendadores (Buffer, Hootsuite, Later) limitam a legenda a <strong>2.200</strong>, por isso esse é o limite seguro se não publicar à mão — muito mais do que a maioria dos criadores preenche. Essa folga é real, mas raramente é a restrição que importa no TikTok. O vídeo carrega a mensagem; a legenda dá contexto, palavras-chave pesquisáveis e um empurrão para a ação. O <strong>verificador de legendas do TikTok</strong> do PostTruncate conta cada caractere ao vivo, com um medidor colorido que avisa ao se aproximar do teto e o marca assim que você o ultrapassa.</p>
 <p>Como o TikTok gira em torno do vídeo, quase ninguém lê uma legenda de 2.000 caracteres no feed. O ideal é colocar o importante na frente: diga nas primeiras palavras o que garante a visualização ou o comentário e acrescente o resto para o algoritmo e para quem tocar em "…mais".</p>
 
 <h2>A dobra "…mais": a primeira linha ou ~100 caracteres</h2>
@@ -1873,15 +1873,15 @@ export const tools: ToolDefinition[] = [
 <p>Isso transforma sua primeira linha na legenda inteira para a maioria. Escreva um gancho que se sustente sozinho, mantenha-o em uma linha e deixe hashtags, créditos ou quebras de linha para depois. A prévia acima marca exatamente onde sua legenda dobra para você ver o que sobrevive antes de publicar.</p>
 
 <h2>Hashtags e emojis contam — e a tela 9:16</h2>
-<p>Cada <strong>hashtag, emoji, espaço e quebra de linha conta</strong> para o total de 2.200 caracteres. Um muro de hashtags no final pode consumir centenas de caracteres em silêncio, e um texto cheio de emojis soma mais rápido do que parece. O contador acima rastreia tudo em tempo real para que nada o ultrapasse de surpresa.</p>
+<p>Cada <strong>hashtag, emoji, espaço e quebra de linha conta</strong> para o total da legenda (4.000 nativo, 2.200 via API). Um muro de hashtags no final pode consumir centenas de caracteres em silêncio, e um texto cheio de emojis soma mais rápido do que parece. O contador acima rastreia tudo em tempo real para que nada o ultrapasse de surpresa.</p>
 <p>O vídeo do TikTok é <strong>vertical em tela cheia 9:16 — 1080×1920 pixels</strong>. A interface nativa fica sobre o seu vídeo: o usuário, a legenda e o ticker de música correm pela parte de baixo, e os botões de curtir, comentar, compartilhar e perfil se empilham na borda direita. Mantenha o texto importante e os rostos longe dessas zonas. A camada opcional de zonas seguras mostra os ~10% do topo, ~18% da base e ~15% da direita que a interface cobre.</p>
 
 <h2>Limites do perfil e escrever para o feed "Para você"</h2>
 <p>Para referência ao configurar ou organizar um perfil: a <strong>bio do TikTok comporta 80 caracteres</strong>, o <strong>@usuário comporta 24</strong> e o <strong>nome de exibição comporta 30</strong>. São curtos de propósito — trate a bio como uma única linha afiada, não um parágrafo.</p>
 <p>O feed "Para você" do TikTok recompensa tempo de exibição e respostas acima do acabamento. Uma legenda que faz uma pergunta, prepara uma recompensa ou convida a concluir a ideia nos comentários supera consistentemente um resumo arrumado. Use o PostTruncate para redigir sua legenda, conferir a contagem, confirmar que seu gancho passa da dobra "…mais" e visualizá-la sobre um reel 9:16 — tudo antes de abrir o app.</p>`,
 
-      it: `<h2>Il limite di 2.200 caratteri della didascalia su TikTok</h2>
-<p>Una didascalia TikTok può arrivare a <strong>2.200 caratteri</strong> — lo stesso tetto di Instagram e molto più di quanto la maggior parte dei creator riempia. Questo margine è reale, ma raramente è il vincolo che conta su TikTok. Il video porta il messaggio; la didascalia dà contesto, parole chiave ricercabili e una spinta all’azione. Il <strong>controllo didascalie TikTok</strong> di PostTruncate conta ogni carattere in tempo reale, con un indicatore colorato che avvisa quando ti avvicini al tetto e lo segnala appena lo superi.</p>
+      it: `<h2>Il limite di 4.000 caratteri della didascalia su TikTok</h2>
+<p>Una didascalia TikTok può arrivare a <strong>4.000 caratteri</strong> pubblicando nativamente — ma l’API di TikTok e gli scheduler (Buffer, Hootsuite, Later) limitano la didascalia a <strong>2.200</strong>, quindi è quello il limite sicuro se non pubblichi a mano — molto più di quanto la maggior parte dei creator riempia. Questo margine è reale, ma raramente è il vincolo che conta su TikTok. Il video porta il messaggio; la didascalia dà contesto, parole chiave ricercabili e una spinta all’azione. Il <strong>controllo didascalie TikTok</strong> di PostTruncate conta ogni carattere in tempo reale, con un indicatore colorato che avvisa quando ti avvicini al tetto e lo segnala appena lo superi.</p>
 <p>Poiché TikTok ruota attorno al video, quasi nessuno legge una didascalia da 2.000 caratteri nel feed. La mossa giusta è caricare in testa: di’ nelle prime parole ciò che guadagna la visualizzazione o il commento, poi aggiungi il resto per l’algoritmo e per chi tocca "…altro".</p>
 
 <h2>La piega "…altro": la prima riga o ~100 caratteri</h2>
@@ -1889,15 +1889,15 @@ export const tools: ToolDefinition[] = [
 <p>Così la tua prima riga diventa l’intera didascalia per la maggior parte degli spettatori. Scrivi un gancio che regga da solo, tienilo su una riga e rimanda hashtag, crediti o a capo a dopo. L’anteprima qui sopra segna esattamente dove la didascalia si piega, così vedi cosa sopravvive prima di pubblicare.</p>
 
 <h2>Hashtag ed emoji contano — e la tela 9:16</h2>
-<p>Ogni <strong>hashtag, emoji, spazio e a capo conta</strong> nel totale di 2.200 caratteri. Un muro di hashtag alla fine può bruciare centinaia di caratteri in silenzio, e un testo pieno di emoji cresce più in fretta di quanto sembri. Il contatore qui sopra traccia tutto in tempo reale così nulla ti manda oltre il limite di sorpresa.</p>
+<p>Ogni <strong>hashtag, emoji, spazio e a capo conta</strong> nel totale della didascalia (4.000 nativo, 2.200 via API). Un muro di hashtag alla fine può bruciare centinaia di caratteri in silenzio, e un testo pieno di emoji cresce più in fretta di quanto sembri. Il contatore qui sopra traccia tutto in tempo reale così nulla ti manda oltre il limite di sorpresa.</p>
 <p>Il video TikTok è <strong>verticale a schermo intero 9:16 — 1080×1920 pixel</strong>. L’interfaccia nativa si sovrappone al video: nome utente, didascalia e ticker musicale corrono in basso, e i pulsanti mi piace, commento, condividi e profilo si impilano sul bordo destro. Tieni testo importante e volti fuori da quelle zone. La sovrapposizione opzionale delle zone di sicurezza mostra il ~10% in alto, il ~18% in basso e il ~15% a destra coperti dall’interfaccia.</p>
 
 <h2>Limiti del profilo e scrivere per il feed "Per te"</h2>
 <p>Come riferimento quando imposti o sistemi un profilo: la <strong>bio di TikTok contiene 80 caratteri</strong>, il <strong>@nome utente ne contiene 24</strong> e il <strong>nome visualizzato ne contiene 30</strong>. Sono corti di proposito — tratta la bio come un’unica riga incisiva, non un paragrafo.</p>
 <p>Il feed "Per te" di TikTok premia il tempo di visualizzazione e le risposte più della rifinitura. Una didascalia che pone una domanda, prepara una conclusione o invita a finire il pensiero nei commenti batte regolarmente un riassunto ordinato. Usa PostTruncate per redigere la didascalia, controllare il conteggio, confermare che il gancio superi la piega "…altro" e visualizzarla su un reel 9:16 — tutto prima di aprire l’app.</p>`,
 
-      nl: `<h2>TikToks tekenlimiet van 2.200 voor bijschriften</h2>
-<p>Een TikTok-bijschrift kan tot <strong>2.200 tekens</strong> lopen — hetzelfde plafond als Instagram, en veel meer dan de meeste makers ooit vullen. Die ruimte is echt, maar zelden de beperking die op TikTok telt. De video draagt de boodschap; het bijschrift geeft context, doorzoekbare zoekwoorden en een zetje tot actie. PostTruncates <strong>TikTok bijschrift-checker</strong> telt elk teken live terwijl je typt, met een kleurgecodeerde meter die waarschuwt als je het plafond nadert en aanslaat zodra je eroverheen gaat.</p>
+      nl: `<h2>TikToks tekenlimiet van 4.000 voor bijschriften</h2>
+<p>Een TikTok-bijschrift kan bij native plaatsen tot <strong>4.000 tekens</strong> lopen — maar de TikTok-API en planners (Buffer, Hootsuite, Later) limiteren het bijschrift op <strong>2.200</strong>, dus dat is de veilige grens als je niet handmatig plaatst — en veel meer dan de meeste makers ooit vullen. Die ruimte is echt, maar zelden de beperking die op TikTok telt. De video draagt de boodschap; het bijschrift geeft context, doorzoekbare zoekwoorden en een zetje tot actie. PostTruncates <strong>TikTok bijschrift-checker</strong> telt elk teken live terwijl je typt, met een kleurgecodeerde meter die waarschuwt als je het plafond nadert en aanslaat zodra je eroverheen gaat.</p>
 <p>Omdat TikTok om de video draait, leest bijna niemand een bijschrift van 2.000 tekens in de feed. De slimme zet is om vooraan te laden: zeg in de eerste paar woorden wat de kijktijd of de reactie verdient, en voeg de rest toe voor het algoritme en de mensen die doortikken.</p>
 
 <h2>De "…meer"-vouw: de eerste regel of ~100 tekens</h2>
@@ -1905,15 +1905,15 @@ export const tools: ToolDefinition[] = [
 <p>Daarmee wordt je eerste regel voor de meeste kijkers het hele bijschrift. Schrijf een hook die op zichzelf staat, houd hem op één regel en bewaar hashtags, credits of regeleinden tot daarna. Het voorbeeld hierboven markeert precies waar je bijschrift invouwt, zodat je ziet wat overleeft voordat je post.</p>
 
 <h2>Hashtags en emoji tellen mee — en het 9:16-canvas</h2>
-<p>Elke <strong>hashtag, emoji, spatie en regeleinde telt mee</strong> voor het totaal van 2.200 tekens. Een muur van hashtags aan het eind kan stilletjes honderden tekens opslokken, en emoji-rijke tekst loopt sneller op dan het lijkt. De teller hierboven volgt alles in real time zodat niets je onverwacht over de limiet duwt.</p>
+<p>Elke <strong>hashtag, emoji, spatie en regeleinde telt mee</strong> voor het bijschrifttotaal (4.000 native, 2.200 via de API). Een muur van hashtags aan het eind kan stilletjes honderden tekens opslokken, en emoji-rijke tekst loopt sneller op dan het lijkt. De teller hierboven volgt alles in real time zodat niets je onverwacht over de limiet duwt.</p>
 <p>TikTok-video is <strong>fullscreen verticaal 9:16 — 1080×1920 pixels</strong>. De native interface ligt over je video: de gebruikersnaam, het bijschrift en de muziek-ticker lopen onderlangs, en de knoppen voor like, reactie, delen en profiel stapelen langs de rechterrand. Houd belangrijke tekst en gezichten uit die zones. De optionele veilige-zone-overlay toont de bovenste ~10%, onderste ~18% en rechter ~15% die de UI bedekt.</p>
 
 <h2>Profiellimieten en schrijven voor de Voor jou-feed</h2>
 <p>Ter referentie bij het opzetten of opruimen van een profiel: een TikTok-<strong>bio bevat 80 tekens</strong>, de <strong>@naam (gebruikersnaam) bevat er 24</strong> en de <strong>weergavenaam bevat er 30</strong>. Ze zijn kort met opzet — behandel de bio als één scherpe regel, geen alinea.</p>
 <p>TikToks Voor jou-feed beloont kijktijd en reacties boven gladheid. Een bijschrift dat een vraag stelt, een uitsmijter opbouwt of uitnodigt de gedachte in de reacties af te maken, presteert consequent beter dan een nette samenvatting. Gebruik PostTruncate om je bijschrift op te stellen, de telling te checken, te bevestigen dat je hook de "…meer"-vouw haalt en het over een 9:16-reel te bekijken — allemaal voordat je de app opent.</p>`,
 
-      ja: `<h2>TikTokのキャプション2,200文字制限</h2>
-<p>TikTokのキャプションは最大<strong>2,200文字</strong>まで——Instagramと同じ上限で、ほとんどのクリエイターが使い切らない量です。この余裕は本物ですが、TikTokで効いてくる制約はめったにこれではありません。メッセージを運ぶのは動画で、キャプションは文脈・検索可能なキーワード・行動への後押しです。PostTruncateの<strong>TikTokキャプションチェッカー</strong>は入力中に1文字ずつカウントし、上限に近づくと警告し、超えた瞬間に色分け表示で知らせます。</p>
+      ja: `<h2>TikTokのキャプション4,000文字制限</h2>
+<p>TikTokのキャプションはアプリから直接投稿する場合は最大<strong>4,000文字</strong>まで——ただしTikTokのAPIやスケジューラー（Buffer、Hootsuite、Later）はキャプションを<strong>2,200文字</strong>に制限するため、手動で投稿しないなら2,200が安全な上限です——ほとんどのクリエイターが使い切らない量です。この余裕は本物ですが、TikTokで効いてくる制約はめったにこれではありません。メッセージを運ぶのは動画で、キャプションは文脈・検索可能なキーワード・行動への後押しです。PostTruncateの<strong>TikTokキャプションチェッカー</strong>は入力中に1文字ずつカウントし、上限に近づくと警告し、超えた瞬間に色分け表示で知らせます。</p>
 <p>TikTokは動画を中心に作られているため、フィードで2,000文字のキャプションを読む人はほぼいません。賢いのは前詰めです。視聴やコメントを生む一言を最初の数語で言い切り、残りはアルゴリズムとタップして読む人のために添えましょう。</p>
 
 <h2>「…続きを見る」の折り返し：最初の1行または約100文字</h2>
@@ -1921,15 +1921,15 @@ export const tools: ToolDefinition[] = [
 <p>つまり大半の視聴者にとって最初の1行がキャプションのすべてです。単独で成立するフックを書き、1行に収め、ハッシュタグ・クレジット・改行はその後に回しましょう。上のプレビューはキャプションが折りたたまれる位置を正確に示すので、投稿前に何が残るか確認できます。</p>
 
 <h2>ハッシュタグと絵文字もカウント——そして9:16のキャンバス</h2>
-<p>すべての<strong>ハッシュタグ・絵文字・スペース・改行がカウント</strong>され、2,200文字の合計に算入されます。末尾のハッシュタグの壁は気づかぬうちに数百文字を消費し、絵文字の多い文章は見た目より早く積み上がります。上のカウンターがすべてをリアルタイムで追跡し、不意の超過を防ぎます。</p>
+<p>すべての<strong>ハッシュタグ・絵文字・スペース・改行がカウント</strong>され、キャプションの合計（ネイティブ4,000文字、API経由は2,200文字）に算入されます。末尾のハッシュタグの壁は気づかぬうちに数百文字を消費し、絵文字の多い文章は見た目より早く積み上がります。上のカウンターがすべてをリアルタイムで追跡し、不意の超過を防ぎます。</p>
 <p>TikTok動画は<strong>全画面の縦型9:16——1080×1920ピクセル</strong>です。ネイティブのUIが動画の上に重なります。ユーザー名・キャプション・楽曲ティッカーは下部を走り、いいね・コメント・シェア・プロフィールのボタンは右端に縦に並びます。重要なテキストや顔はこれらの領域から外しましょう。任意のセーフゾーン表示は、UIが覆う上部約10%・下部約18%・右側約15%を示します。</p>
 
 <h2>プロフィールの上限と「おすすめ」フィード向けの書き方</h2>
 <p>プロフィールの設定や整理の参考に：TikTokの<strong>自己紹介は80文字</strong>、<strong>@ユーザー名は24文字</strong>、<strong>表示名は30文字</strong>です。意図的に短いので、自己紹介は段落ではなく1本の鋭い行として扱いましょう。</p>
 <p>TikTokの「おすすめ」フィードは、洗練より視聴時間と返信を評価します。問いを投げる、オチを仕込む、コメントで考えの続きを促す——そんなキャプションは、きれいな要約より一貫して成果を上げます。PostTruncateでキャプションを下書きし、文字数を確認し、フックが「…続きを見る」の折り返しを越えるか確かめ、9:16のリールでプレビュー——すべてアプリを開く前に。</p>`,
 
-      zh: `<h2>TikTok 的 2,200 字符文案上限</h2>
-<p>TikTok 文案最多可达 <strong>2,200 个字符</strong>——与 Instagram 上限相同，远多于大多数创作者实际填写的量。这份余地是真实的，但它很少是 TikTok 上真正起作用的限制。视频承载信息，文案提供背景、可搜索的关键词以及行动的推动。PostTruncate 的 <strong>TikTok 文案检查器</strong> 在你输入时逐字实时计数，用颜色编码的指示条在接近上限时提醒、在越过上限的瞬间标记。</p>
+      zh: `<h2>TikTok 的 4,000 字符文案上限</h2>
+<p>TikTok 文案在应用内原生发布时最多可达 <strong>4,000 个字符</strong>——但 TikTok 的 API 和排程工具（Buffer、Hootsuite、Later）仍将文案上限定为 <strong>2,200</strong>，所以如果你不手动发布，2,200 才是安全上限——远多于大多数创作者实际填写的量。这份余地是真实的，但它很少是 TikTok 上真正起作用的限制。视频承载信息，文案提供背景、可搜索的关键词以及行动的推动。PostTruncate 的 <strong>TikTok 文案检查器</strong> 在你输入时逐字实时计数，用颜色编码的指示条在接近上限时提醒、在越过上限的瞬间标记。</p>
 <p>由于 TikTok 围绕视频构建，几乎没有人会在信息流里读完 2,000 字符的文案。聪明的做法是前置：在头几个字里说清能换来观看或评论的那一句，其余留给算法和点开阅读的人。</p>
 
 <h2>「…更多」折叠：首行或约 100 字符</h2>
@@ -1937,15 +1937,15 @@ export const tools: ToolDefinition[] = [
 <p>这让你的第一行对大多数观众而言就是整条文案。写一个能独立成立的钩子，保持在一行内，把话题标签、署名或换行都留到之后。上方预览会精确标出文案折叠的位置，让你在发布前看到什么能留下。</p>
 
 <h2>话题标签和表情符号都计数——以及 9:16 画布</h2>
-<p>每个 <strong>话题标签、表情符号、空格和换行都计数</strong>，计入 2,200 字符的总额。末尾一墙话题标签会悄悄烧掉数百个字符，满是表情符号的文案累加得比看上去更快。上方计数器实时追踪这一切，让任何东西都不会出乎意料地把你推过上限。</p>
+<p>每个 <strong>话题标签、表情符号、空格和换行都计数</strong>，计入文案总额（原生 4,000，API 为 2,200）。末尾一墙话题标签会悄悄烧掉数百个字符，满是表情符号的文案累加得比看上去更快。上方计数器实时追踪这一切，让任何东西都不会出乎意料地把你推过上限。</p>
 <p>TikTok 视频是 <strong>全屏竖版 9:16——1080×1920 像素</strong>。原生界面叠在视频之上：用户名、文案和音乐滚动条沿底部排列，点赞、评论、分享和头像按钮沿右缘竖向堆叠。让重要文字和人脸避开这些区域。可选的安全区叠层会显示界面遮挡的顶部约 10%、底部约 18% 和右侧约 15%。</p>
 
 <h2>个人资料上限与为「为你推荐」信息流写作</h2>
 <p>设置或整理资料时可参考：TikTok 的 <strong>简介可容纳 80 个字符</strong>，<strong>@用户名可容纳 24 个</strong>，<strong>显示名称可容纳 30 个</strong>。它们刻意很短——把简介当作一行利落的话，而不是一段。</p>
 <p>TikTok 的「为你推荐」信息流更看重观看时长和回复，而非打磨。一条提出问题、埋下回报、或邀请人们在评论里把想法说完的文案，长期表现胜过工整的总结。用 PostTruncate 起草文案、检查字数、确认钩子越过「…更多」折叠点，并在 9:16 竖屏上预览——这一切都在你打开应用之前完成。</p>`,
 
-      da: `<h2>TikToks tegngrænse på 2.200 for billedtekster</h2>
-<p>En TikTok-billedtekst kan løbe op til <strong>2.200 tegn</strong> — samme loft som Instagram og langt mere, end de fleste kreatører nogensinde fylder. Den plads er reel, men det er sjældent den begrænsning, der betyder noget på TikTok. Videoen bærer budskabet; billedteksten giver kontekst, søgbare nøgleord og et skub til handling. PostTruncates <strong>TikTok billedtekst-tjek</strong> tæller hvert tegn live, mens du skriver, med en farvekoderet måler, der advarer når du nærmer dig loftet og markerer i det øjeblik du krydser det.</p>
+      da: `<h2>TikToks tegngrænse på 4.000 for billedtekster</h2>
+<p>En TikTok-billedtekst kan ved native opslag løbe op til <strong>4.000 tegn</strong> — men TikToks API og planlæggere (Buffer, Hootsuite, Later) sætter grænsen for billedteksten ved <strong>2.200</strong>, så det er den sikre grænse, hvis du ikke poster manuelt — og langt mere, end de fleste kreatører nogensinde fylder. Den plads er reel, men det er sjældent den begrænsning, der betyder noget på TikTok. Videoen bærer budskabet; billedteksten giver kontekst, søgbare nøgleord og et skub til handling. PostTruncates <strong>TikTok billedtekst-tjek</strong> tæller hvert tegn live, mens du skriver, med en farvekoderet måler, der advarer når du nærmer dig loftet og markerer i det øjeblik du krydser det.</p>
 <p>Fordi TikTok er bygget op om videoen, læser næsten ingen en billedtekst på 2.000 tegn i feedet. Det smarte er at lægge forrest: sig i de første par ord det, der fortjener visningen eller kommentaren, og tilføj resten til algoritmen og dem, der trykker sig ind.</p>
 
 <h2>"…mere"-folden: den første linje eller ~100 tegn</h2>
@@ -1953,7 +1953,7 @@ export const tools: ToolDefinition[] = [
 <p>Det gør din første linje til hele billedteksten for de fleste seere. Skriv en krog, der står alene, hold den på én linje, og gem hashtags, kreditering eller linjeskift til bagefter. Forhåndsvisningen ovenfor markerer præcis, hvor din billedtekst foldes, så du kan se, hvad der overlever, før du poster.</p>
 
 <h2>Hashtags og emoji tæller — og 9:16-lærredet</h2>
-<p>Hvert <strong>hashtag, emoji, mellemrum og linjeskift tæller</strong> med i de 2.200 tegn i alt. En mur af hashtags til sidst kan lydløst brænde hundredvis af tegn af, og emoji-tung tekst lægger sig hurtigere sammen, end det ser ud. Tælleren ovenfor følger det hele i realtid, så intet skubber dig over grænsen uventet.</p>
+<p>Hvert <strong>hashtag, emoji, mellemrum og linjeskift tæller</strong> med i billedtekstens samlede tegn (4.000 native, 2.200 via API). En mur af hashtags til sidst kan lydløst brænde hundredvis af tegn af, og emoji-tung tekst lægger sig hurtigere sammen, end det ser ud. Tælleren ovenfor følger det hele i realtid, så intet skubber dig over grænsen uventet.</p>
 <p>TikTok-video er <strong>fuldskærm lodret 9:16 — 1080×1920 pixel</strong>. Den native grænseflade ligger oven på din video: brugernavn, billedtekst og musik-ticker løber langs bunden, og knapperne til like, kommentar, del og profil stables langs højre kant. Hold vigtig tekst og ansigter væk fra de zoner. Det valgfrie sikkerhedszone-overlay viser de øverste ~10%, nederste ~18% og højre ~15%, som grænsefladen dækker.</p>
 
 <h2>Profilgrænser og at skrive til For dig-feedet</h2>

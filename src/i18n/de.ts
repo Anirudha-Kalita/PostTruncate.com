@@ -134,7 +134,7 @@ export const de: Translations = {
         heading: 'Zeichenlimits bei Instagram und Facebook',
         paragraphs: [
           'Instagram erlaubt bis zu 2.200 Zeichen in einer Bildunterschrift, zeigt aber nur die ersten rund 125 an, bevor der Rest hinter einem „Mehr"-Link verschwindet. PostTruncate zeigt genau, wo dieser Schnitt liegt — damit die erste sichtbare Zeile im Feed immer die ist, die du vermitteln willst.',
-          'Das Dashboard überwacht außerdem die <strong>Hashtag-Anzahl</strong> in Echtzeit. Instagram veröffentlicht Beiträge mit mehr als 5 Hashtags stillschweigend nicht, daher erscheint rechtzeitig eine Warnung, bevor du dieses Limit erreichst. Leerzeichen werden immer mitgezählt — genau wie auf der Plattform selbst.',
+          'Das Dashboard überwacht außerdem die <strong>Hashtag-Anzahl</strong> in Echtzeit. Instagram erlaubt bis zu 30 Hashtags, bevor ein Beitrag scheitert, doch ~5 ist der empfohlene Idealwert — mehr wirkt wie Spam —, daher warnt der Live-Zähler ab 5 und markiert das harte Limit von 30. Leerzeichen werden immer mitgezählt — genau wie auf der Plattform selbst.',
         ],
       },
       {
@@ -185,10 +185,10 @@ export const de: Translations = {
       instagram: {
         name: 'Instagram',
         tag: 'Hashtag-Obergrenze',
-        body: 'Instagram-Bildunterschriften umfassen bis zu 2.200 Zeichen, zeigen aber nur etwa die ersten 125 vor einem „mehr“-Link. Die härtere Regel sind Hashtags: mehr als 5 in einer einzelnen Bildunterschrift oder einem Kommentar und der Beitrag lässt sich klammheimlich nicht veröffentlichen. Dutzende absichtsschwache Tags zu stapeln wirkt zudem wie Spam. Halte deine Tags knapp und relevant und behalte den Live-Zähler im Blick, damit du nie an die 5-Tag-Wand stößt.',
+        body: 'Instagram-Bildunterschriften umfassen bis zu 2.200 Zeichen, zeigen aber nur etwa die ersten 125 vor einem „mehr“-Link. Bei Hashtags ist das harte Limit 30 (Bildunterschrift plus erster Kommentar); darüber lässt sich der Beitrag nicht veröffentlichen. Doch ~5 ist der empfohlene Idealwert; Dutzende absichtsschwache Tags zu stapeln wirkt wie Spam. Halte deine Tags knapp und relevant und behalte den Live-Zähler im Blick, der ab 5 warnt und das harte Limit von 30 markiert.',
         facts: [
           ['Limit Bildunterschrift', '2.200 Zeichen'],
-          ['Hartes Hashtag-Limit', '5 Tags'],
+          ['Hashtags', '~5 empfohlen / 30 hartes Limit'],
           ['Vorschau Bildunterschrift', '~125 Zeichen'],
         ],
       },
@@ -205,9 +205,9 @@ export const de: Translations = {
       tiktok: {
         name: 'TikTok',
         tag: 'Untertitel-Falz',
-        body: 'TikTok-Untertitel fassen bis zu 2.200 Zeichen, wobei Emojis und Hashtags zum Limit zählen. Doch der Feed stellt das Video voran: Er zeigt nur den Anfang deines Untertitels und klappt den Rest hinter „…mehr“ ein — beim ersten Zeilenumbruch oder etwa 100 Zeichen, je nachdem was zuerst kommt. Beginne mit deinem Hook in einer einzigen Zeile, damit er überlebt. PostTruncate zählt jedes Zeichen live und markiert genau, wo der Untertitel über einem 9:16-Reel einklappt.',
+        body: 'TikTok-Untertitel fassen beim nativen Posten bis zu 4.000 Zeichen, wobei Emojis und Hashtags zum Limit zählen — die TikTok-API und Scheduler (Buffer, Hootsuite, Later) begrenzen den Untertitel jedoch weiterhin auf 2.200, das ist also die sichere Grenze, wenn du nicht manuell postest. Doch der Feed stellt das Video voran: Er zeigt nur den Anfang deines Untertitels und klappt den Rest hinter „…mehr“ ein — beim ersten Zeilenumbruch oder etwa 100 Zeichen, je nachdem was zuerst kommt. Beginne mit deinem Hook in einer einzigen Zeile, damit er überlebt. PostTruncate zählt jedes Zeichen live und markiert genau, wo der Untertitel über einem 9:16-Reel einklappt.',
         facts: [
-          ['Untertitel-Limit', '2.200 Zeichen'],
+          ['Untertitel-Limit', '4.000 nativ / 2.200 API'],
           ['„…mehr“-Falz', '~100 Z. / 1. Zeile'],
           ['Videoformat', '9:16 (1080×1920)'],
         ],
@@ -240,7 +240,7 @@ export const de: Translations = {
       },
       {
         q: 'Wie genau sind die Zeichenlimits?',
-        a: 'PostTruncate verwendet die veröffentlichten und weithin beobachteten Limits jeder Plattform — 280 für X, 210/140 für die LinkedIn-Falz, 5 Hashtags für Instagram und ein pauschales Gewicht von 23 Zeichen für Links. Plattformen passen diese gelegentlich an, und die Darstellung variiert je nach Gerät leicht, also behandle die Vorschauen als nahe Schätzung statt als pixelgenaue Garantie.',
+        a: 'PostTruncate verwendet die veröffentlichten und weithin beobachteten Limits jeder Plattform — 280 für X, 210/140 für die LinkedIn-Falz, empfohlene ~5 Hashtags (hartes Limit 30) für Instagram und ein pauschales Gewicht von 23 Zeichen für Links. Plattformen passen diese gelegentlich an, und die Darstellung variiert je nach Gerät leicht, also behandle die Vorschauen als nahe Schätzung statt als pixelgenaue Garantie.',
       },
       {
         q: 'Zählen Leerzeichen und Satzzeichen als Zeichen?',
@@ -338,7 +338,7 @@ export const de: Translations = {
       linkedin: 'Text hinter der Falz verschwindet hinter „…mehr anzeigen“.',
       twitter: 'Keine Falz — über {limit} Zeichen wird in einen Thread geteilt; jeder Link zählt als {url} Zeichen.',
       threads: 'Links zählen in voller Länge; Text über {limit} Zeichen wird als nummerierte Antworten verkettet.',
-      instagram: 'Die Caption faltet hinter „mehr“; hartes Limit von {hashtags} Hashtags pro Beitrag.',
+      instagram: 'Die Caption faltet hinter „mehr“; ziele auf ~{hashtags} Hashtags (hartes Limit {hashtagMax}).',
       facebook: 'Feed-Beiträge klappen hinter „Mehr anzeigen“ ein — lange vor der technischen Obergrenze.',
       tiktok: 'Der Untertitel klappt hinter „…mehr“ beim ersten Zeilenumbruch oder ~100 Zeichen ein; Emojis und Hashtags zählen.',
       smsGsm: '{single} Zeichen in einer einzelnen Nachricht; {multi} pro Segment, sobald sie geteilt wird.',
@@ -349,10 +349,10 @@ export const de: Translations = {
       linkedin: 'LinkedIn erlaubt {limit} Zeichen pro Beitrag, faltet die Feed-Ansicht aber nach etwa {mobile} Zeichen auf Mobilgeräten und {desktop} am Desktop — der Rest verschwindet hinter „…mehr anzeigen“. Zeilenumbrüche zählen mit, und der erste Satz trägt fast die gesamte Klickrate: Hook nach vorn, Links unter die Falz.',
       twitter: 'X erzwingt ein hartes Limit von {limit} Zeichen pro Beitrag und zeigt keinerlei Falz. Jede URL wird vom t.co-Kürzer umhüllt und kostet immer {url} Zeichen, egal wie lang sie wirklich ist; viele Emojis wiegen doppelt. Längere Entwürfe müssen in einen Thread geteilt werden — PostTruncate erledigt das automatisch an Wortgrenzen.',
       threads: 'Threads erlaubt {limit} Zeichen pro Beitrag und zählt Links — anders als X — in voller Länge. Auf Mobilgeräten faltet der Feed lange Beiträge bei etwa {mobile} Zeichen. Alles über der Obergrenze muss als nummerierte Antwort-Posts unter dem ersten weitergehen.',
-      instagram: 'Instagram-Captions dürfen {limit} Zeichen lang sein, aber der Feed zeigt nur etwa die ersten {mobile} vor dem „mehr“-Link. Die härtere Regel sind Hashtags: mehr als {hashtags} in Caption oder erstem Kommentar, und der Beitrag kann stillschweigend nicht veröffentlicht werden.',
+      instagram: 'Instagram-Captions dürfen {limit} Zeichen lang sein, aber der Feed zeigt nur etwa die ersten {mobile} vor dem „mehr“-Link. Bei Hashtags sind ~{hashtags} der empfohlene Idealwert — mehr wird trotzdem gepostet, wirkt aber wie Spam. Das harte Limit ist {hashtagMax} (Caption plus erster Kommentar); darüber lässt sich der Beitrag nicht veröffentlichen.',
       facebook: 'Facebooks technische Obergrenze liegt bei {limit} Zeichen, aber Feed-Beiträge klappen bei etwa {mobile} Zeichen mobil und {desktop} am Desktop hinter „Mehr anzeigen“ ein. Bei langen Textblöcken bricht das Engagement stark ein — das praktische Limit ist die Falz, nicht die Obergrenze.',
       sms: 'Eine einzelne SMS fasst {gsmSingle} Zeichen in GSM-7-Bit-Kodierung; sobald die Nachricht geteilt wird, sinkt der Platz auf {gsmMulti} pro Segment. Jedes Emoji oder Nicht-GSM-Zeichen schaltet die gesamte Nachricht auf Unicode um — {uniSingle} Zeichen pro Einzelnachricht, {uniMulti} pro Segment — und einige GSM-Symbole (€, Klammern, der senkrechte Strich) zählen doppelt.',
-      tiktok: 'TikTok erlaubt {limit} Zeichen pro Untertitel, wobei Emojis und Hashtags voll zählen. Da das Video den Bildschirm füllt, klappt der Feed den Untertitel hinter „…mehr“ ein — beim ersten Zeilenumbruch oder etwa {fold} Zeichen, je nachdem was zuerst kommt — sodass die erste Zeile alles ist, was die meisten lesen. Das Videoformat ist vollbild-vertikal 9:16 (1080×1920).',
+      tiktok: 'TikTok erlaubt {limit} Zeichen pro Untertitel beim nativen Posten, doch die API und Scheduler begrenzen auf {safe}; Emojis und Hashtags zählen voll. Da das Video den Bildschirm füllt, klappt der Feed den Untertitel hinter „…mehr“ ein — beim ersten Zeilenumbruch oder etwa {fold} Zeichen, je nachdem was zuerst kommt — sodass die erste Zeile alles ist, was die meisten lesen. Das Videoformat ist vollbild-vertikal 9:16 (1080×1920).',
     },
   },
 
@@ -502,7 +502,7 @@ export const de: Translations = {
         {
           heading: 'Was es tut',
           paragraphs: [
-            'Schreib oder füge einen Entwurf einmal ein, und PostTruncate stellt ihn so dar, wie <strong>LinkedIn, X, Threads, Instagram und Facebook</strong> es tatsächlich tun werden — die \u201e\u2026mehr anzeigen\u201c-Falz, die 280-Zeichen-Thread-Aufteilung, die 23-Zeichen-Link-Gewichtung, die 5-Hashtag-Obergrenze. Du siehst genau, was über der Falz überlebt, bevor du dich zur Veröffentlichung entscheidest.',
+            'Schreib oder füge einen Entwurf einmal ein, und PostTruncate stellt ihn so dar, wie <strong>LinkedIn, X, Threads, Instagram und Facebook</strong> es tatsächlich tun werden — die \u201e\u2026mehr anzeigen\u201c-Falz, die 280-Zeichen-Thread-Aufteilung, die 23-Zeichen-Link-Gewichtung, die empfohlene ~5-Hashtag-Marke und das harte Limit von 30. Du siehst genau, was über der Falz überlebt, bevor du dich zur Veröffentlichung entscheidest.',
             'Es erkennt auch die stillen Probleme, die deine Reichweite schrumpfen lassen: unsichtbare nullbreite Zeichen, die Zählungen und Screenreader stören, und pseudo-Unicode-\u201eFancy-Schriften\u201c, die gestaltet aussehen, aber für assistive Technik unlesbar sind.',
           ],
         },
@@ -687,7 +687,7 @@ export const de: Translations = {
       },
       tiktok: {
         name: "TikTok",
-        limit: "2,200",
+        limit: "4,000",
         shown: "~100 Zeichen",
         bestPractice: "Hook in der ersten Zeile",
         notes: "Emojis und Hashtags zählen; klappt beim ersten Zeilenumbruch ein"
@@ -981,7 +981,9 @@ export const de: Translations = {
       title: 'TikTok-Vorschau',
       badgeIdle: 'Tippe los',
       badgeSingle: 'Passt in einen Untertitel',
-      badgeOver: 'Über dem Untertitel-Limit',
+      badgeOverSafe: 'Über dem sicheren Limit',
+      badgeOver: 'Über dem 4.000-Limit',
+      apiCapHint: 'Wird nativ gepostet, doch die TikTok-API und Scheduler (Buffer, Hootsuite, Later) begrenzen Untertitel auf {safe} Zeichen.',
       links: { one: '{n} Link', other: '{n} Links' },
       charLength: 'Untertitel-Länge',
       seeMore: '…mehr',
@@ -1001,8 +1003,8 @@ export const de: Translations = {
       hashtagLabel: 'Hashtag-Konzentration',
       over: 'Über dem harten Limit von Instagram von {limit} Hashtags — die Bildunterschrift lässt sich nicht posten. Entferne {excess}.',
       approaching:
-        'Du näherst dich der 5-Tag-Obergrenze. Reduziere auf deine absichtsstärksten Tags.',
-      within: 'Bequem innerhalb des 5-Hashtag-Limits von Instagram.',
+        '{n} Hashtags — über den empfohlenen {recommended}. Wird trotzdem gepostet (hartes Limit {max}), aber kürze für mehr Reichweite.',
+      within: 'Innerhalb der empfohlenen {recommended} Hashtags.',
       none: 'Noch keine Hashtags erkannt.',
       a11yLabel: 'Barrierefreiheit · Fancy-Schriften',
       audiencePublic: 'Öffentlich',

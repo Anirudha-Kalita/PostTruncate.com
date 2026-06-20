@@ -45,7 +45,7 @@ const STRIP: { platform: HookPlatform; brand: Brand; name: string; limit: number
   { platform: 'instagram', brand: 'instagram', name: 'Instagram', limit: LIMITS.INSTAGRAM_CAPTION },
   { platform: 'facebook', brand: 'facebook', name: 'Facebook', limit: LIMITS.FACEBOOK_POST },
   { platform: 'threads', brand: 'threads', name: 'Threads', limit: LIMITS.THREADS },
-  { platform: 'tiktok', brand: 'tiktok', name: 'TikTok', limit: LIMITS.TIKTOK_CAPTION },
+  { platform: 'tiktok', brand: 'tiktok', name: 'TikTok', limit: LIMITS.TIKTOK_CAPTION_MAX },
 ];
 
 /**

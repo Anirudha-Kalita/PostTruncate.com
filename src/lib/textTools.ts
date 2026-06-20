@@ -18,14 +18,31 @@ export const LIMITS = {
   THREADS: 500,
   /** t.co wraps every URL to a fixed weight regardless of real length. */
   URL_WEIGHT: 23,
-  /** Instagram's hard ceiling for hashtags in a post or reel. */
-  INSTAGRAM_HASHTAGS: 5,
+  /**
+   * Recommended hashtag count for an Instagram post or reel. Going past this
+   * doesn't block publishing — it's a best-practice nudge (more reads as spam).
+   */
+  INSTAGRAM_HASHTAGS_RECOMMENDED: 5,
+  /**
+   * Instagram's hard hashtag cap (caption + first comment combined). Past this
+   * the post fails to publish or the hashtags are stripped.
+   */
+  INSTAGRAM_HASHTAGS_MAX: 30,
   /** Instagram's published caption character cap. */
   INSTAGRAM_CAPTION: 2200,
   /** Facebook's published hard cap for a feed post. */
   FACEBOOK_POST: 63206,
-  /** TikTok video-caption cap (emojis and hashtags count). */
-  TIKTOK_CAPTION: 2200,
+  /**
+   * TikTok caption hard cap when posting natively in the app (emojis and
+   * hashtags count). Exceeding this blocks publishing.
+   */
+  TIKTOK_CAPTION_MAX: 4000,
+  /**
+   * "Safe" TikTok caption ceiling: the TikTok API and third-party schedulers
+   * (Buffer, Hootsuite, Later) still cap captions here, so staying under it
+   * guarantees the text survives regardless of how the video is published.
+   */
+  TIKTOK_CAPTION_SAFE: 2200,
   /** TikTok organic caption "…more" fold (≈1 line). */
   TIKTOK_FOLD: 100,
 } as const;
