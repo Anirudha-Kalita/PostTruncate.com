@@ -87,7 +87,7 @@ The formula isn't prescriptive about punctuation or joining words - you can use 
 
 ![The 90-character Google Ads description formula infographic showing a horizontal bar divided into three color-coded segments: Value Prop in blue, Social Proof in gray, CTA in light blue - with character counts labeled per segment](/og/how-to-write-google-ads-descriptions-under-90-characters-2.png)
 
-T<p align="center"><span style="font-size: 12px; "><em>he 90-character Google Ads description formula infographic showing a horizontal bar divided into three colour-coded segments: Value Prop in blue, Social Proof in grey, CTA in light blue - with character counts labelled per segment</em></span></p>
+<p align="center"><span style="font-size: 12px; "><em>he 90-character Google Ads description formula infographic showing a horizontal bar divided into three colour-coded segments: Value Prop in blue, Social Proof in grey, CTA in light blue - with character counts labelled per segment</em></span></p>
 
 ## Formula in action: real examples with character counts
 
