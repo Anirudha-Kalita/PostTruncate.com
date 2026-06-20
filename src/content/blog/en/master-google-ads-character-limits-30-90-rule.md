@@ -88,7 +88,7 @@ Google hasn't changed these limits since RSA launched, and there's no indication
 
 For 2026, assume the limits are absolute. Assume Google is running stricter validation on uploads. Assume a space you can't see, or a character you think is one width but renders as another, will get caught.
 
-The solution isn't to get cleverer at hiding things-it's to measure accurately before you ship. That's what [PostTruncate's ad previews](/en/platform-limits/) were built for.
+The solution isn't to get cleverer at hiding things-it's to measure accurately before you ship. That's what [PostTruncate's ad previews](/en/ad-previews/google-ads/) were built for.
 
 Draft your next Google Ads campaign in [PostTruncate's Google Ads preview](/en/ad-previews/google-ads/). Write your headlines and descriptions, watch them render in pixel-perfect accuracy, and catch formatting issues before Google's API does. The tool is free, runs entirely in your browser, and nothing you paste is ever uploaded or stored.
 
