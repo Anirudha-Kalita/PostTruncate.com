@@ -29,7 +29,15 @@
   //   npx wrangler kv namespace create AI_RATELIMIT
   // The GEMINI_API_KEY is a *secret*, set with:
   //   npx wrangler secret put GEMINI_API_KEY   (and .dev.vars for local dev)
+  // SESSION: required by the @astrojs/cloudflare adapter, which auto-enables
+  // Astro sessions with the cloudflare-kv-binding driver bound as "SESSION".
+  // Local dev (miniflare) emulates this by name, so it only fails in
+  // production — a missing binding throws at runtime on every on-demand route
+  // (/, /[lang]/, /api/improve) → Cloudflare Error 1101. Create it once:
+  //   npx wrangler kv namespace create SESSION
+  // then paste the returned id below.
   "kv_namespaces": [
-    { "binding": "AI_RATELIMIT", "id": "1c6900843cb84f74971e30fc8070997d" }
+    { "binding": "AI_RATELIMIT", "id": "1c6900843cb84f74971e30fc8070997d" },
+    { "binding": "SESSION", "id": "bdf2b44c5ce24b89a9443cc23312c4dd" }
   ]
 }
