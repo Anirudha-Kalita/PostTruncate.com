@@ -163,7 +163,7 @@ export const prerender = true;
 
           <div class="card hide" id="outputCard" style="margin-top:24px;">
             <h2>File to be written — <span id="outName" style="font-family:var(--mono);"></span></h2>
-            <p class="note" style="margin-top:0;">Editable — fill any blank field, then Save. On Save, any remaining remote/CDN images are downloaded into <code>public/og/</code> and the paths rewritten to <code>/og/…</code> automatically.</p>
+            <p class="note" style="margin-top:0;">Editable — fill any blank field, then Save. On Save, remote/CDN images are downloaded into <code>public/og/</code> and the paths rewritten to <code>/og/…</code> automatically. If some report <strong>failed</strong> (a CDN blocks in-browser downloads via CORS), run <code>npm run localize-images</code> before building — it fetches them server-side where there's no CORS.</p>
             <textarea id="outContent" spellcheck="false"></textarea>
             <div class="row" style="margin-top:14px;">
               <button id="save" type="button" class="primary" disabled>Save to project</button>
