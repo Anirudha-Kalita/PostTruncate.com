@@ -9,8 +9,17 @@
   
   // Explicitly tell Cloudflare Workers where the generated Astro server script and static assets are
   "main": "./dist/_worker.js/index.js",
+  // `binding: "ASSETS"` is REQUIRED, not optional: the @astrojs/cloudflare
+  // adapter serves prerendered pages (incl. the custom 404/500) by calling
+  // env.ASSETS.fetch(request). Without this binding env.ASSETS is undefined and
+  // the Worker throws "Cannot read properties of undefined (reading 'fetch')"
+  // → Cloudflare Error 1101 on any path that reaches the Worker (e.g.
+  // /[lang]/<unknown>). `not_found_handling` makes the asset layer serve our
+  // built 404.html for unmatched static requests.
   "assets": {
-    "directory": "./dist"
+    "directory": "./dist",
+    "binding": "ASSETS",
+    "not_found_handling": "404-page"
   },
 
   // Serve the Worker at both the apex and the www hostname. custom_domain:true
