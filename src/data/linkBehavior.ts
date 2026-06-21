@@ -3,13 +3,14 @@
  * displays and counts links, across both PostTruncate silos (organic counters
  * and ad-preview simulators).
  *
- * This is a PURE DATA module. Its only import is `LIMITS` from the text engine,
- * used solely to source the X/Twitter fixed link weight so the two values can
- * never diverge. It does NOT import any engine behavior — the dependency is
- * one-way (engines and islands read this config; this config reads nothing back).
+ * This is a PURE DATA module. Its only import is `LIMITS` from the limits leaf
+ * module, used solely to source the X/Twitter fixed link weight so the two
+ * values can never diverge. It does NOT import any engine behavior, and it does
+ * NOT import `textTools` (the card extraction in `textTools` reads this config,
+ * so the shared `LIMITS` constant lives in `./limits` to keep the graph acyclic).
  */
 
-import { LIMITS } from '../lib/textTools';
+import { LIMITS } from '../lib/limits';
 
 /** The four ways a platform renders a link in an organic post body. */
 export type LinkDisplayModel =
@@ -61,6 +62,45 @@ export interface AdLinkBehavior {
   captionLinkClickable: boolean;
 }
 
+/** How a platform presents the card image. */
+export type CardImageStyle =
+  | 'large' // full-width banner at Card_Image_Ratio (Facebook, LinkedIn, Bluesky)
+  | 'thumbnail' // small square/rounded thumbnail in a horizontal chip (Threads)
+  | 'embed'; // image inside an embed body with a leading accent bar (Discord, WhatsApp)
+
+/** Casing applied to the displayed Card_Domain. */
+export type CardDomainCasing = 'uppercase' | 'lowercase' | 'as-is';
+
+/** Where the Card_Domain sits relative to the title within the card panel. */
+export type CardDomainPlacement =
+  | 'above-title' // domain header line above the title (Facebook)
+  | 'below-title' // domain footer line under the title (LinkedIn, Threads, Bluesky, WhatsApp)
+  | 'site-name'; // domain shown as the embed "site name" (Discord)
+
+/**
+ * Per-preview-card-platform visual link-card facts. The single source of truth
+ * for how each platform's Rich_Link_Card looks; the renderer reads these values
+ * rather than hard-coding them (Requirement 6.2).
+ */
+export interface CardLayoutProfile {
+  /** Large-image aspect ratio as "w:h" (Open Graph large = "1.91:1"). */
+  imageRatio: string;
+  /** Image presentation style for this platform. */
+  imageStyle: CardImageStyle;
+  /** Card_Title truncation length in grapheme clusters. */
+  titleMaxChars: number;
+  /** Card_Description truncation length; 0 omits the description region (Requirement 7.5). */
+  descriptionMaxChars: number;
+  /** Casing applied to the displayed Card_Domain (Facebook = uppercase). */
+  domainCasing: CardDomainCasing;
+  /** Placement of the Card_Domain within the card. */
+  domainPlacement: CardDomainPlacement;
+  /** True when the raw URL text is dropped from the post body once the card renders. */
+  removesRawUrl: boolean;
+  /** ISO YYYY-MM-DD date the layout facts were last reviewed (Requirement 6.4). */
+  lastReviewed: string;
+}
+
 /** One platform's complete link-display record. */
 export interface LinkBehaviorRecord {
   /** Stable platform id, shared across both silos. */
@@ -69,6 +109,11 @@ export interface LinkBehaviorRecord {
   organic?: OrganicLinkBehavior;
   /** Ad behavior. Present for every ad-preview platform. */
   ad?: AdLinkBehavior;
+  /**
+   * Per-platform Rich_Link_Card visual facts. Present only for the six
+   * preview-card platforms (Requirement 6.1, 14.2, 16.3).
+   */
+  cardLayout?: CardLayoutProfile;
   /** ISO YYYY-MM-DD date the rule was last reviewed (Requirement 15.1). */
   lastReviewed: string;
   /** Optional source note/URL for verifiability (Requirement 15). */
@@ -128,6 +173,16 @@ export const LINK_BEHAVIOR: Record<string, LinkBehaviorRecord> = {
       countMode: 'per-char',
       cardFromFirstUrlOnly: true,
     },
+    cardLayout: {
+      imageRatio: '1.91:1',
+      imageStyle: 'large',
+      titleMaxChars: 120,
+      descriptionMaxChars: 0,
+      domainCasing: 'lowercase',
+      domainPlacement: 'below-title',
+      removesRawUrl: true,
+      lastReviewed: '2026-06-18',
+    },
     lastReviewed: '2026-06-18',
     source: 'LinkedIn builds an Open Graph preview card from the first detected URL; link text counts per character.',
   },
@@ -159,6 +214,16 @@ export const LINK_BEHAVIOR: Record<string, LinkBehaviorRecord> = {
       model: 'preview-card',
       countMode: 'per-char',
       cardFromFirstUrlOnly: true,
+    },
+    cardLayout: {
+      imageRatio: '1.91:1',
+      imageStyle: 'large',
+      titleMaxChars: 80,
+      descriptionMaxChars: 200,
+      domainCasing: 'uppercase',
+      domainPlacement: 'above-title',
+      removesRawUrl: true,
+      lastReviewed: '2026-06-18',
     },
     ad: {
       showsDisplayLink: true,
@@ -200,6 +265,16 @@ export const LINK_BEHAVIOR: Record<string, LinkBehaviorRecord> = {
       countMode: 'per-char',
       cardFromFirstUrlOnly: true,
       bioLinkAllowance: 5,
+    },
+    cardLayout: {
+      imageRatio: '1.91:1',
+      imageStyle: 'thumbnail',
+      titleMaxChars: 70,
+      descriptionMaxChars: 0,
+      domainCasing: 'lowercase',
+      domainPlacement: 'below-title',
+      removesRawUrl: true,
+      lastReviewed: '2026-06-18',
     },
     lastReviewed: '2026-06-18',
     source: 'Threads (by Meta) builds a preview card from the first detected URL; counts links in full; up to 5 bio links.',
@@ -243,6 +318,16 @@ export const LINK_BEHAVIOR: Record<string, LinkBehaviorRecord> = {
       cardFromFirstUrlOnly: true,
       byteIndexedFacets: true,
     },
+    cardLayout: {
+      imageRatio: '1.91:1',
+      imageStyle: 'large',
+      titleMaxChars: 100,
+      descriptionMaxChars: 200,
+      domainCasing: 'lowercase',
+      domainPlacement: 'below-title',
+      removesRawUrl: true,
+      lastReviewed: '2026-06-18',
+    },
     lastReviewed: '2026-06-18',
     source:
       'Bluesky counts the 300-unit limit by UTF-8 bytes and marks external links with byte-indexed facets (byteStart/byteEnd); the preview card is built from the first URL.',
@@ -254,6 +339,16 @@ export const LINK_BEHAVIOR: Record<string, LinkBehaviorRecord> = {
       model: 'preview-card',
       countMode: 'per-char',
     },
+    cardLayout: {
+      imageRatio: '1.91:1',
+      imageStyle: 'embed',
+      titleMaxChars: 100,
+      descriptionMaxChars: 350,
+      domainCasing: 'lowercase',
+      domainPlacement: 'site-name',
+      removesRawUrl: false,
+      lastReviewed: '2026-06-18',
+    },
     lastReviewed: '2026-06-18',
     source: 'Discord renders an embed preview card for URLs; message text counts per character.',
   },
@@ -263,6 +358,16 @@ export const LINK_BEHAVIOR: Record<string, LinkBehaviorRecord> = {
     organic: {
       model: 'preview-card',
       countMode: 'per-char',
+    },
+    cardLayout: {
+      imageRatio: '1.91:1',
+      imageStyle: 'embed',
+      titleMaxChars: 70,
+      descriptionMaxChars: 140,
+      domainCasing: 'lowercase',
+      domainPlacement: 'below-title',
+      removesRawUrl: false,
+      lastReviewed: '2026-06-18',
     },
     lastReviewed: '2026-06-18',
     source: 'WhatsApp renders a link preview card for the first URL; text counts per character.',
@@ -333,4 +438,37 @@ export function organicLinkBehavior(platform: string): OrganicLinkBehavior | und
  */
 export function adLinkBehavior(platform: string): AdLinkBehavior | undefined {
   return LINK_BEHAVIOR[platform]?.ad;
+}
+
+/**
+ * Result of checking that every preview-card platform has a matching
+ * Card_Layout_Profile (Requirement 6.3).
+ */
+export interface CardLayoutCoverageResult {
+  /** True iff `missingCardLayout` is empty. */
+  ok: boolean;
+  /** Preview-card platform ids missing a `cardLayout` record. */
+  missingCardLayout: string[];
+}
+
+/**
+ * Verify every preview-card platform has a Card_Layout_Profile (Requirement 6.3).
+ * Pure: the canonical preview-card id list is passed in so it is unit-testable
+ * and callable from a build/test guard. The offending ids are reported so a
+ * failing test can name them.
+ */
+export function validateCardLayoutCoverage(previewCardPlatforms: string[]): CardLayoutCoverageResult {
+  const missingCardLayout = previewCardPlatforms.filter((platform) => !LINK_BEHAVIOR[platform]?.cardLayout);
+  return {
+    ok: missingCardLayout.length === 0,
+    missingCardLayout,
+  };
+}
+
+/**
+ * Look up a platform's Card_Layout_Profile. Returns `undefined` when the
+ * platform is not a configured preview-card platform.
+ */
+export function cardLayout(platform: string): CardLayoutProfile | undefined {
+  return LINK_BEHAVIOR[platform]?.cardLayout;
 }

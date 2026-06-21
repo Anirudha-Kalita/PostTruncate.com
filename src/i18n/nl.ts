@@ -855,6 +855,16 @@ export const nl: Translations = {
       remove: 'Media verwijderen',
       hint: 'Alleen voorbeeld — wordt nooit geüpload of opgeslagen. Verdwijnt bij herladen.',
     },
+    linkCard: {
+      editorHeading: 'Linkvoorbeeldkaart',
+      titleLabel: 'Kaarttitel',
+      descriptionLabel: 'Kaartbeschrijving',
+      titlePlaceholder: 'Voeg een titel toe voor je link',
+      descriptionPlaceholder: 'Voeg een beschrijving toe voor je link',
+      cardAria: 'Linkvoorbeeld: {title} — {domain}',
+      imageAlt: 'Linkvoorbeeldafbeelding',
+      firstUrlNote: 'De eerste link in je bericht wordt de voorbeeldkaart.',
+    },
     aiImprove: {
       button: 'AI-verbetering',
       pickTone: 'Verbeteren met AI',

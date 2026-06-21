@@ -857,6 +857,16 @@ export const en: Translations = {
       remove: 'Remove media',
       hint: 'Preview only — never uploaded or stored. Clears on reload.',
     },
+    linkCard: {
+      editorHeading: 'Link preview card',
+      titleLabel: 'Card title',
+      descriptionLabel: 'Card description',
+      titlePlaceholder: 'Add a title for your link',
+      descriptionPlaceholder: 'Add a description for your link',
+      cardAria: 'Link preview: {title} — {domain}',
+      imageAlt: 'Link preview image',
+      firstUrlNote: 'The first link in your post becomes the preview card.',
+    },
     aiImprove: {
       button: 'AI Improve',
       pickTone: 'Improve with AI',

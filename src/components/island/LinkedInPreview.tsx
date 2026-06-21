@@ -1,5 +1,6 @@
 /** @jsxImportSource preact */
-import { linkedInHook, charCount, LIMITS, IMAGE_RATIOS } from '../../lib/textTools';
+import { linkedInHook, charCount, LIMITS, IMAGE_RATIOS, extractLinkData, mutatePreviewText } from '../../lib/textTools';
+import { LivePreviewCard } from './LivePreviewCard';
 import {
   Card,
   CardHead,
@@ -37,6 +38,10 @@ interface Props {
   mediaKind?: 'image' | 'video';
   /** When false, hide the dimmed below-the-fold remainder (show only "…more"). */
   showFolded?: boolean;
+  /** User-edited Card_Title for the link-preview card (optional). */
+  cardTitle?: string;
+  /** User-edited Card_Description for the link-preview card (optional). */
+  cardDescription?: string;
 }
 
 /**
@@ -44,7 +49,7 @@ interface Props {
  * "…see more" fold (210 chars desktop / 140 mobile) and injects a non-clickable
  * bold "…see more" at the exact boundary when the post is truncated.
  */
-export function LinkedInPreview({ text, view, setView, lang, s, toolLinkHref, image, mediaKind = 'image', showFolded = true }: Props) {
+export function LinkedInPreview({ text, view, setView, lang, s, toolLinkHref, image, mediaKind = 'image', showFolded = true, cardTitle, cardDescription }: Props) {
   const l = s.linkedin;
   const nf = new Intl.NumberFormat(lang);
   const author = previewAuthor(s.common);
@@ -53,6 +58,15 @@ export function LinkedInPreview({ text, view, setView, lang, s, toolLinkHref, im
   const total = charCount(text);
   const isOverPostLimit = total > LIMITS.LINKEDIN_POST;
   const viewLabel = view === 'mobile' ? l.viewMobile : l.viewDesktop;
+
+  // Link-card simulation (Requirement 9): the counters/badge/meter above keep
+  // measuring the FULL `text`; only the rendered body swaps to the URL-omitted
+  // copy when the platform drops the raw URL once the card renders. The fold is
+  // recomputed on the display copy for the body only — never for the counts.
+  const linkData = extractLinkData(text, 'linkedin');
+  const showCard = linkData.firstUrl !== undefined;
+  const bodyText = showCard ? mutatePreviewText(text, linkData.removesRawUrl) : text;
+  const body = bodyText !== text ? linkedInHook(bodyText, limit) : { hook, rest, truncated };
 
   return (
     <Card>
@@ -135,22 +149,22 @@ export function LinkedInPreview({ text, view, setView, lang, s, toolLinkHref, im
             {text ? (
               <>
                 {/* The portion that survives above the fold, subtly lit. */}
-                <span class={truncated ? 'rounded-xs bg-cyan-soft/40' : ''}>
-                  {hook}
+                <span class={body.truncated ? 'rounded-xs bg-cyan-soft/40' : ''}>
+                  {body.hook}
                 </span>
-                {truncated && (
+                {body.truncated && (
                   <span class="font-semibold text-mute" aria-label={l.seeMore}>
                     {l.seeMore}
                   </span>
                 )}
                 {/* Explicit fold line: everything below is hidden in-feed. */}
-                {truncated && showFolded && (
+                {body.truncated && showFolded && (
                   <FoldMarker label={s.hook.foldLabel} ariaLabel={s.hook.foldAria} />
                 )}
                 {/* Folded remainder, dimmed to show what readers must click for. */}
-                {truncated && showFolded && rest && (
+                {body.truncated && showFolded && body.rest && (
                   <span class="text-mute/45 line-through decoration-hairline-strong/40">
-                    {rest}
+                    {body.rest}
                   </span>
                 )}
               </>
@@ -167,6 +181,21 @@ export function LinkedInPreview({ text, view, setView, lang, s, toolLinkHref, im
             <div class="-mx-4 mt-3">
               <FeedImage src={image} kind={mediaKind} maxRatio={IMAGE_RATIOS.linkedin.max} />
             </div>
+          )}
+
+          {/* Open Graph link-card simulation — view-only, rendered when a URL is
+              present. Counters above are unaffected (Requirement 9.4). */}
+          {showCard && (
+            <LivePreviewCard
+              platform="linkedin"
+              text={text}
+              cardTitle={cardTitle}
+              cardDescription={cardDescription}
+              image={image}
+              mediaKind={mediaKind}
+              lang={lang}
+              s={s}
+            />
           )}
 
           {/* Labeled reaction bar — Like / Comment / Share. */}

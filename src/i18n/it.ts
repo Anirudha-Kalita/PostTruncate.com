@@ -855,6 +855,16 @@ export const it: Translations = {
       remove: 'Rimuovi media',
       hint: 'Solo anteprima — mai caricata né salvata. Si cancella al ricaricamento.',
     },
+    linkCard: {
+      editorHeading: 'Scheda di anteprima del link',
+      titleLabel: 'Titolo della scheda',
+      descriptionLabel: 'Descrizione della scheda',
+      titlePlaceholder: 'Aggiungi un titolo per il tuo link',
+      descriptionPlaceholder: 'Aggiungi una descrizione per il tuo link',
+      cardAria: 'Anteprima del link: {title} — {domain}',
+      imageAlt: 'Immagine di anteprima del link',
+      firstUrlNote: 'Il primo link del tuo post diventa la scheda di anteprima.',
+    },
     aiImprove: {
       button: 'Migliora con IA',
       pickTone: 'Migliora con IA',

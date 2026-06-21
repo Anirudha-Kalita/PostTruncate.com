@@ -853,6 +853,16 @@ export const zh: Translations = {
       remove: '移除媒体',
       hint: '仅用于预览 — 不会上传或保存。刷新后即清除。',
     },
+    linkCard: {
+      editorHeading: '链接预览卡片',
+      titleLabel: '卡片标题',
+      descriptionLabel: '卡片描述',
+      titlePlaceholder: '为你的链接添加标题',
+      descriptionPlaceholder: '为你的链接添加描述',
+      cardAria: '链接预览：{title} — {domain}',
+      imageAlt: '链接预览图片',
+      firstUrlNote: '帖子中的第一个链接将成为预览卡片。',
+    },
     aiImprove: {
       button: 'AI 优化',
       pickTone: '使用 AI 优化',

@@ -855,6 +855,16 @@ export const es: Translations = {
       remove: 'Quitar contenido',
       hint: 'Solo vista previa: nunca se sube ni se guarda. Se borra al recargar.',
     },
+    linkCard: {
+      editorHeading: 'Tarjeta de vista previa del enlace',
+      titleLabel: 'Título de la tarjeta',
+      descriptionLabel: 'Descripción de la tarjeta',
+      titlePlaceholder: 'Añade un título para tu enlace',
+      descriptionPlaceholder: 'Añade una descripción para tu enlace',
+      cardAria: 'Vista previa del enlace: {title} — {domain}',
+      imageAlt: 'Imagen de vista previa del enlace',
+      firstUrlNote: 'El primer enlace de tu publicación se convierte en la tarjeta de vista previa.',
+    },
     aiImprove: {
       button: 'Mejorar con IA',
       pickTone: 'Mejorar con IA',

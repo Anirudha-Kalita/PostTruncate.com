@@ -1,5 +1,6 @@
 /** @jsxImportSource preact */
-import { charCount, detectUrls, FOLDS, LIMITS, sliceChars, splitThread, IMAGE_RATIOS } from '../../lib/textTools';
+import { charCount, detectUrls, FOLDS, LIMITS, sliceChars, splitThread, IMAGE_RATIOS, extractLinkData, mutatePreviewText } from '../../lib/textTools';
+import { LivePreviewCard } from './LivePreviewCard';
 import {
   Card,
   CardHead,
@@ -36,6 +37,10 @@ interface Props {
   mediaKind?: 'image' | 'video';
   /** When false, hide the dimmed below-the-fold remainder (show only "…more"). */
   showFolded?: boolean;
+  /** User-edited Card_Title for the link-preview card (optional). */
+  cardTitle?: string;
+  /** User-edited Card_Description for the link-preview card (optional). */
+  cardDescription?: string;
 }
 
 /**
@@ -43,7 +48,7 @@ interface Props {
  * validator keeps that full allowance, while the mock mobile card visually
  * folds one-block posts behind a "... more" affordance.
  */
-export function ThreadsPreview({ text, lang, s, toolLinkHref, view, setView, image, mediaKind = 'image', showFolded = true }: Props) {
+export function ThreadsPreview({ text, lang, s, toolLinkHref, view, setView, image, mediaKind = 'image', showFolded = true, cardTitle, cardDescription }: Props) {
   const th = s.threads;
   const nf = new Intl.NumberFormat(lang);
   const author = previewAuthor(s.common);
@@ -56,6 +61,12 @@ export function ThreadsPreview({ text, lang, s, toolLinkHref, view, setView, ima
   // attaches to the first post of a chain.
   const displayPosts = posts.length === 0 && image ? [''] : posts;
   const visualFold = FOLDS.threads[view];
+
+  // Link-card simulation (Requirement 9): counts/chain/per-post counters below
+  // keep measuring the original post text; only the FIRST post's displayed copy
+  // swaps to the URL-omitted string when Threads drops the raw URL.
+  const linkData = extractLinkData(trimmed, 'threads');
+  const showCard = linkData.firstUrl !== undefined;
 
   return (
     <Card>
@@ -147,7 +158,7 @@ export function ThreadsPreview({ text, lang, s, toolLinkHref, view, setView, ima
               }
             >
               <ThreadsPostText
-                post={post}
+                post={showCard && i === 0 ? mutatePreviewText(post, linkData.removesRawUrl) : post}
                 visualFold={visualFold}
                 seeMore={s.linkedin.seeMore}
                 foldLabel={s.hook.foldLabel}
@@ -161,6 +172,21 @@ export function ThreadsPreview({ text, lang, s, toolLinkHref, view, setView, ima
                 <div class="mt-2 overflow-hidden rounded-xl border border-hairline">
                   <FeedImage src={image} kind={mediaKind} maxRatio={IMAGE_RATIOS.threads.max} />
                 </div>
+              )}
+
+              {/* Open Graph link-card simulation — view-only, on the first post
+                  when a URL is present. Counters above are unaffected (Req 9.4). */}
+              {showCard && i === 0 && (
+                <LivePreviewCard
+                  platform="threads"
+                  text={trimmed}
+                  cardTitle={cardTitle}
+                  cardDescription={cardDescription}
+                  image={image}
+                  mediaKind={mediaKind}
+                  lang={lang}
+                  s={s}
+                />
               )}
 
               {/* Native Threads engagement row: left aligned, tightly packed */}

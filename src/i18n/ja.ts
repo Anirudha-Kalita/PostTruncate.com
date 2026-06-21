@@ -855,6 +855,16 @@ export const ja: Translations = {
       remove: 'メディアを削除',
       hint: 'プレビューのみ — アップロードも保存もされません。再読み込みで消えます。',
     },
+    linkCard: {
+      editorHeading: 'リンクプレビューカード',
+      titleLabel: 'カードのタイトル',
+      descriptionLabel: 'カードの説明',
+      titlePlaceholder: 'リンクのタイトルを追加',
+      descriptionPlaceholder: 'リンクの説明を追加',
+      cardAria: 'リンクプレビュー：{title} — {domain}',
+      imageAlt: 'リンクプレビュー画像',
+      firstUrlNote: '投稿の最初のリンクがプレビューカードになります。',
+    },
     aiImprove: {
       button: 'AIで改善',
       pickTone: 'AIで改善',

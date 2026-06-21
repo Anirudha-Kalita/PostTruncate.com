@@ -8,7 +8,10 @@ import {
   FOLDS,
   LIMITS,
   IMAGE_RATIOS,
+  extractLinkData,
+  mutatePreviewText,
 } from '../../lib/textTools';
+import { LivePreviewCard } from './LivePreviewCard';
 import {
   Card,
   CardHead,
@@ -55,6 +58,10 @@ interface Props {
   mediaKind?: 'image' | 'video';
   /** When false, hide the dimmed below-the-fold remainder (show only "…more"). */
   showFolded?: boolean;
+  /** User-edited Card_Title for the Facebook link-preview card (optional). */
+  cardTitle?: string;
+  /** User-edited Card_Description for the Facebook link-preview card (optional). */
+  cardDescription?: string;
 }
 
 function truncateForFeed(text: string, limit: number) {
@@ -71,7 +78,7 @@ function truncateForFeed(text: string, limit: number) {
  * Independent Instagram and Facebook monitors. Instagram owns caption preview
  * and hashtag concentration; Facebook owns feed preview and accessibility.
  */
-export function MetaMonitor({ text, lang, s, toolLinkHref, facebookToolLinkHref, priority, only, instagramView, setInstagramView, facebookView, setFacebookView, image, mediaKind = 'image', showFolded = true }: Props) {
+export function MetaMonitor({ text, lang, s, toolLinkHref, facebookToolLinkHref, priority, only, instagramView, setInstagramView, facebookView, setFacebookView, image, mediaKind = 'image', showFolded = true, cardTitle, cardDescription }: Props) {
   const m = s.meta;
   const nf = new Intl.NumberFormat(lang);
   const author = previewAuthor(s.common);
@@ -94,6 +101,16 @@ export function MetaMonitor({ text, lang, s, toolLinkHref, facebookToolLinkHref,
   const facebookLimit = FOLDS.facebook[facebookView];
   const instagramPreview = truncateForFeed(activeText, instagramLimit);
   const facebookPreview = truncateForFeed(activeText, facebookLimit);
+
+  // Facebook link-card simulation (Requirement 9): Facebook is the only Meta
+  // preview-card platform (Instagram stays plain-text, no card). The badge and
+  // counter above keep measuring the full `activeText`; only the rendered
+  // Facebook body swaps to the URL-omitted copy when the raw URL is dropped.
+  const fbLinkData = extractLinkData(activeText, 'facebook');
+  const fbShowCard = fbLinkData.firstUrl !== undefined;
+  const facebookDisplay = fbShowCard
+    ? truncateForFeed(mutatePreviewText(activeText, fbLinkData.removesRawUrl), facebookLimit)
+    : facebookPreview;
 
   const instagramCard = (
     <Card key="instagram">
@@ -291,16 +308,16 @@ export function MetaMonitor({ text, lang, s, toolLinkHref, facebookToolLinkHref,
             {/* Caption sits above the photo. Skip it for image-only posts. */}
             {(activeText !== '' || !image) && (
               <p class="mt-2 min-h-[42px] whitespace-pre-wrap break-words text-[14px] leading-[21px] text-ink">
-                {facebookPreview.previewText}
-                {facebookPreview.isTruncated && (
+                {facebookDisplay.previewText}
+                {facebookDisplay.isTruncated && (
                   <span class="text-slate-400"> {s.linkedin.seeMore}</span>
                 )}
-                {facebookPreview.isTruncated && showFolded && (
+                {facebookDisplay.isTruncated && showFolded && (
                   <FoldMarker label={s.hook.foldLabel} ariaLabel={s.hook.foldAria} />
                 )}
-                {facebookPreview.isTruncated && showFolded && facebookPreview.hiddenText && (
+                {facebookDisplay.isTruncated && showFolded && facebookDisplay.hiddenText && (
                   <span class="text-mute/45 line-through decoration-hairline-strong/40">
-                    {facebookPreview.hiddenText}
+                    {facebookDisplay.hiddenText}
                   </span>
                 )}
               </p>
@@ -311,6 +328,21 @@ export function MetaMonitor({ text, lang, s, toolLinkHref, facebookToolLinkHref,
               <div class="-mx-4 mt-3">
                 <FeedImage src={image} kind={mediaKind} maxRatio={IMAGE_RATIOS.facebook.max} />
               </div>
+            )}
+
+            {/* Open Graph link-card simulation — view-only, rendered when a URL
+                is present. The counter/badge above are unaffected (Req 9.4). */}
+            {fbShowCard && (
+              <LivePreviewCard
+                platform="facebook"
+                text={activeText}
+                cardTitle={cardTitle}
+                cardDescription={cardDescription}
+                image={image}
+                mediaKind={mediaKind}
+                lang={lang}
+                s={s}
+              />
             )}
 
             {/* Labeled action bar — Like / Comment / Share. */}

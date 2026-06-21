@@ -856,6 +856,16 @@ export const de: Translations = {
       remove: 'Medien entfernen',
       hint: 'Nur Vorschau – wird nie hochgeladen oder gespeichert. Beim Neuladen weg.',
     },
+    linkCard: {
+      editorHeading: 'Link-Vorschaukarte',
+      titleLabel: 'Kartentitel',
+      descriptionLabel: 'Kartenbeschreibung',
+      titlePlaceholder: 'Füge einen Titel für deinen Link hinzu',
+      descriptionPlaceholder: 'Füge eine Beschreibung für deinen Link hinzu',
+      cardAria: 'Link-Vorschau: {title} — {domain}',
+      imageAlt: 'Link-Vorschaubild',
+      firstUrlNote: 'Der erste Link in deinem Beitrag wird zur Vorschaukarte.',
+    },
     aiImprove: {
       button: 'KI-Verbesserung',
       pickTone: 'Mit KI verbessern',

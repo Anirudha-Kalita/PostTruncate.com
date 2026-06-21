@@ -2,11 +2,13 @@
 import { useMemo, useState } from 'preact/hooks';
 import { Card, CardHead, Meter, Badge, ClearButton, type Tone } from './ui';
 import { interp } from '../../i18n/interp';
-import { charCount, platformLengthByMode } from '../../lib/textTools';
+import { charCount, detectUrls, platformLengthByMode } from '../../lib/textTools';
 import { PLATFORM_COUNTERS } from '../../data/platformCounters';
 import { organicLinkBehavior } from '../../data/linkBehavior';
 import { selectLinkIndication } from '../../lib/linkIndication';
 import { linkDisplayStrings } from '../../i18n/linkDisplayStrings';
+import { linkCardStrings } from '../../i18n/linkCardStrings';
+import { LivePreviewCard } from './LivePreviewCard';
 import type { IslandStrings } from '../../i18n/types';
 
 interface Props {
@@ -27,6 +29,7 @@ export function PlatformCounter({ s, platform, lang }: Props) {
   // stored organic link behavior. Both are read additively — they never affect
   // the existing counters, meters, badges, or limits below.
   const ld = linkDisplayStrings(s);
+  const lc = linkCardStrings(s);
   const linkBehavior = organicLinkBehavior(platform);
   // Determine the platform's link-counting mode once. Bluesky's 300-unit limit
   // is measured in UTF-8 bytes (countMode === 'per-byte'); every other platform
@@ -53,6 +56,12 @@ export function PlatformCounter({ s, platform, lang }: Props) {
         // first link as the card source (Requirement 5.2); otherwise show the
         // generic preview-card line. A single clear line either way.
         lines.push(linkBehavior?.cardFromFirstUrlOnly ? ld.previewCardFirstUrl : ld.previewCard);
+        // When this platform builds the card from the first URL only AND more
+        // than one URL is present, add the localized note identifying which URL
+        // became the card (Requirement 5.2). Single-URL behavior is unchanged.
+        if (linkBehavior?.cardFromFirstUrlOnly && detectUrls(text).length > 1) {
+          lines.push(lc.firstUrlNote);
+        }
         break;
       case 'clickableInline':
         lines.push(ld.clickableInline);
@@ -130,6 +139,15 @@ export function PlatformCounter({ s, platform, lang }: Props) {
             {linkIndicationLines(f.text)?.map((line) => (
               <p class="text-[12px] leading-4 text-mute">{line}</p>
             ))}
+            {/* Open Graph link-card simulation for the preview-card counter
+                platforms (Discord/WhatsApp/Bluesky). Standalone counter pages
+                own no editor state, so the card uses placeholder metadata and
+                the no-image form. LivePreviewCard renders null when this field
+                has no URL or the platform is not a preview-card platform, so
+                URL-free behavior is unchanged (Requirement 1.1, 16.1). */}
+            {linkBehavior?.model === 'preview-card' && (
+              <LivePreviewCard platform={platform} text={f.text} lang={lang ?? 'en'} s={s} />
+            )}
           </div>
         ))}
 

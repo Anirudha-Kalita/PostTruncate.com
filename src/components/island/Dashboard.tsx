@@ -6,10 +6,13 @@ import { TwitterPreview } from './TwitterPreview';
 import { ThreadsPreview } from './ThreadsPreview';
 import { TikTokPreview } from './TikTokPreview';
 import { MetaMonitor } from './MetaMonitor';
+import { CardFieldEditor } from './CardFieldEditor';
 import { HookVisibilityCard } from './HookVisibilityCard';
 import { KeywordMonitor } from './KeywordMonitor';
 import type { HookPlatform } from '../../lib/hookAnalysis';
 import type { FoldView } from '../../lib/textTools';
+import { extractLinkData } from '../../lib/textTools';
+import { DRAFT_STORAGE_KEY, parseDraft, serializeDraft, type DraftEnvelope } from '../../lib/draftEnvelope';
 import { SmsCounter } from './SmsCounter';
 import { ReadabilityCard } from './ReadabilityCard';
 import { HookStrip } from './HookStrip';
@@ -36,7 +39,6 @@ interface Props {
   focus?: FocusPlatform;
 }
 
-const DRAFT_STORAGE_KEY = 'post_truncate_active_draft';
 const ANALYSIS_DEBOUNCE_MS = 80;
 const STORAGE_DEBOUNCE_MS = 250;
 
@@ -94,15 +96,22 @@ const PREVIEW_TABS: { id: FocusPlatform; name: string; brand: Brand }[] = [
 ];
 
 
-function readActiveDraft() {
-  if (typeof window === 'undefined') return '';
+function readActiveDraft(): DraftEnvelope {
+  if (typeof window === 'undefined') return { text: '' };
 
   try {
-    return window.sessionStorage.getItem(DRAFT_STORAGE_KEY) ?? '';
+    return parseDraft(window.sessionStorage.getItem(DRAFT_STORAGE_KEY));
   } catch {
-    return '';
+    return { text: '' };
   }
 }
+
+/**
+ * Platforms whose preview renders an Open Graph link-preview card (and whose
+ * editor therefore shows the Card_Field_Editor). Instagram/TikTok/X are not
+ * card platforms, so they never surface the editor.
+ */
+const PREVIEW_CARD_PLATFORMS = new Set<string>(['linkedin', 'facebook', 'threads']);
 
 /**
  * Root interactive island. Owns the single source of truth (the editor text +
@@ -114,6 +123,10 @@ function readActiveDraft() {
 export default function Dashboard({ lang, strings, toolSlugs, focus }: Props) {
   const [text, setText] = useState('');
   const [analysisText, setAnalysisText] = useState('');
+  // User-edited Rich_Link_Card metadata. Mirrors the `image` state pattern and
+  // is persisted alongside the draft text (the image stays in-memory only).
+  const [cardTitle, setCardTitle] = useState('');
+  const [cardDescription, setCardDescription] = useState('');
   // In-memory only: an uploaded image is held as an object URL and never
   // persisted. It is intentionally absent from sessionStorage, so a reload
   // drops it and the user re-uploads. The URL is revoked on replace/unmount.
@@ -182,10 +195,39 @@ export default function Dashboard({ lang, strings, toolSlugs, focus }: Props) {
   const hookOnly = focus ? FOCUS_TO_HOOK[focus] : undefined;
   const showHookPanel = !focus || hookOnly !== undefined;
 
+  // Card_Field_Editor visibility: the editor shows only while a Rich_Link_Card
+  // is actually rendered — i.e. the active preview platform is a preview-card
+  // platform AND the body contains a URL. On scoped pages the active platform
+  // is `focus`; on the homepage it is the selected `previewTab`, or (in
+  // compare-all) any preview-card platform, which is URL-driven and therefore
+  // the same decision for all three (linkedin/facebook/threads).
+  const activeCardPlatform = focus
+    ? (PREVIEW_CARD_PLATFORMS.has(focus) ? focus : null)
+    : compare
+      ? 'linkedin'
+      : (PREVIEW_CARD_PLATFORMS.has(previewTab) ? previewTab : null);
+  const showCardEditor =
+    activeCardPlatform !== null &&
+    extractLinkData(analysisText, activeCardPlatform).firstUrl !== undefined;
+  const cardEditor = showCardEditor ? (
+    <CardFieldEditor
+      cardTitle={cardTitle}
+      cardDescription={cardDescription}
+      onCardTitleChange={setCardTitle}
+      onCardDescriptionChange={setCardDescription}
+      image={imageUrl}
+      mediaKind={mediaKind}
+      lang={lang}
+      s={strings}
+    />
+  ) : null;
+
   useEffect(() => {
     const draft = readActiveDraft();
-    setText(draft);
-    setAnalysisText(draft);
+    setText(draft.text);
+    setAnalysisText(draft.text);
+    setCardTitle(draft.cardTitle ?? '');
+    setCardDescription(draft.cardDescription ?? '');
     setIsDraftLoaded(true);
   }, []);
 
@@ -202,14 +244,17 @@ export default function Dashboard({ lang, strings, toolSlugs, focus }: Props) {
 
     const id = window.setTimeout(() => {
       try {
-        window.sessionStorage.setItem(DRAFT_STORAGE_KEY, text);
+        window.sessionStorage.setItem(
+          DRAFT_STORAGE_KEY,
+          serializeDraft({ text, cardTitle, cardDescription }),
+        );
       } catch {
         // Storage can be unavailable in private browsing or locked-down contexts.
       }
     }, STORAGE_DEBOUNCE_MS);
 
     return () => window.clearTimeout(id);
-  }, [isDraftLoaded, text]);
+  }, [isDraftLoaded, text, cardTitle, cardDescription]);
 
   // Free the object URL when the image is swapped out or the island unmounts.
   useEffect(() => {
@@ -234,6 +279,8 @@ export default function Dashboard({ lang, strings, toolSlugs, focus }: Props) {
               {strings.dashboard.loadSample}
             </button>
           )}
+
+          {cardEditor}
         </div>
 
         <div class="flex flex-col gap-5">
@@ -247,10 +294,10 @@ export default function Dashboard({ lang, strings, toolSlugs, focus }: Props) {
             <HookVisibilityCard text={analysisText} lang={lang} s={strings} only={hookOnly} views={views} />
           )}
           {rightOrder.map(key => {
-            if (key === 'linkedin') return <div id="platform-card-linkedin" key="lw"><LinkedInPreview key="linkedin" text={analysisText} view={views.linkedin} setView={(v) => setPlatformView('linkedin', v)} lang={lang} s={strings} toolLinkHref={`/${lang}/${toolSlugs.linkedin}/`} image={imageUrl} mediaKind={mediaKind} showFolded={showFolded} /></div>;
+            if (key === 'linkedin') return <div id="platform-card-linkedin" key="lw"><LinkedInPreview key="linkedin" text={analysisText} view={views.linkedin} setView={(v) => setPlatformView('linkedin', v)} lang={lang} s={strings} toolLinkHref={`/${lang}/${toolSlugs.linkedin}/`} image={imageUrl} mediaKind={mediaKind} showFolded={showFolded} cardTitle={cardTitle} cardDescription={cardDescription} /></div>;
             if (key === 'twitter') return <div id="platform-card-twitter" key="tw"><TwitterPreview key="twitter" text={analysisText} lang={lang} s={strings} toolLinkHref={`/${lang}/${toolSlugs.twitter}/`} image={imageUrl} mediaKind={mediaKind} /></div>;
-            if (key === 'meta') return <div id="platform-card-meta" key="mw"><MetaMonitor key="meta" text={analysisText} lang={lang} s={strings} toolLinkHref={`/${lang}/${toolSlugs.instagram}/`} facebookToolLinkHref={`/${lang}/${toolSlugs.facebook}/`} priority={effectiveMetaPriority} only={metaOnly} instagramView={views.instagram} setInstagramView={(v) => setPlatformView('instagram', v)} facebookView={views.facebook} setFacebookView={(v) => setPlatformView('facebook', v)} image={imageUrl} mediaKind={mediaKind} showFolded={showFolded} /></div>;
-            if (key === 'threads') return <div id="platform-card-threads" key="thw"><ThreadsPreview key="threads" text={analysisText} lang={lang} s={strings} toolLinkHref={`/${lang}/${toolSlugs.threads}/`} view={views.threads} setView={(v) => setPlatformView('threads', v)} image={imageUrl} mediaKind={mediaKind} showFolded={showFolded} /></div>;
+            if (key === 'meta') return <div id="platform-card-meta" key="mw"><MetaMonitor key="meta" text={analysisText} lang={lang} s={strings} toolLinkHref={`/${lang}/${toolSlugs.instagram}/`} facebookToolLinkHref={`/${lang}/${toolSlugs.facebook}/`} priority={effectiveMetaPriority} only={metaOnly} instagramView={views.instagram} setInstagramView={(v) => setPlatformView('instagram', v)} facebookView={views.facebook} setFacebookView={(v) => setPlatformView('facebook', v)} image={imageUrl} mediaKind={mediaKind} showFolded={showFolded} cardTitle={cardTitle} cardDescription={cardDescription} /></div>;
+            if (key === 'threads') return <div id="platform-card-threads" key="thw"><ThreadsPreview key="threads" text={analysisText} lang={lang} s={strings} toolLinkHref={`/${lang}/${toolSlugs.threads}/`} view={views.threads} setView={(v) => setPlatformView('threads', v)} image={imageUrl} mediaKind={mediaKind} showFolded={showFolded} cardTitle={cardTitle} cardDescription={cardDescription} /></div>;
             if (key === 'tiktok') return <div id="platform-card-tiktok" key="ttw"><TikTokPreview key="tiktok" text={analysisText} lang={lang} s={strings} toolLinkHref={`/${lang}/${toolSlugs['tiktok-guide']}/`} view={views.tiktok} setView={(v) => setPlatformView('tiktok', v)} image={imageUrl} mediaKind={mediaKind} showFolded={showFolded} /></div>;
           })}
           {focus === 'sms' && <SmsCounter text={analysisText} lang={lang} s={strings.sms} />}
@@ -304,6 +351,8 @@ export default function Dashboard({ lang, strings, toolSlugs, focus }: Props) {
                 {strings.dashboard.loadSample}
               </button>
             )}
+
+            {cardEditor}
           </div>
 
           {/* Right — "Live platform preview" */}
@@ -373,20 +422,20 @@ export default function Dashboard({ lang, strings, toolSlugs, focus }: Props) {
               {compare ? (
                 <>
                   {cardOrder.map(key => {
-                    if (key === 'linkedin') return <div id="platform-card-linkedin" key="lw"><LinkedInPreview key="linkedin" text={analysisText} view={views.linkedin} setView={(v) => setPlatformView('linkedin', v)} lang={lang} s={strings} toolLinkHref={`/${lang}/${toolSlugs.linkedin}/`} image={imageUrl} mediaKind={mediaKind} showFolded={showFolded} /></div>;
+                    if (key === 'linkedin') return <div id="platform-card-linkedin" key="lw"><LinkedInPreview key="linkedin" text={analysisText} view={views.linkedin} setView={(v) => setPlatformView('linkedin', v)} lang={lang} s={strings} toolLinkHref={`/${lang}/${toolSlugs.linkedin}/`} image={imageUrl} mediaKind={mediaKind} showFolded={showFolded} cardTitle={cardTitle} cardDescription={cardDescription} /></div>;
                     if (key === 'twitter') return <div id="platform-card-twitter" key="tw"><TwitterPreview key="twitter" text={analysisText} lang={lang} s={strings} toolLinkHref={`/${lang}/${toolSlugs.twitter}/`} image={imageUrl} mediaKind={mediaKind} /></div>;
-                    if (key === 'meta') return <div id="platform-card-meta" key="mw"><MetaMonitor key="meta" text={analysisText} lang={lang} s={strings} toolLinkHref={`/${lang}/${toolSlugs.instagram}/`} facebookToolLinkHref={`/${lang}/${toolSlugs.facebook}/`} priority={effectiveMetaPriority} instagramView={views.instagram} setInstagramView={(v) => setPlatformView('instagram', v)} facebookView={views.facebook} setFacebookView={(v) => setPlatformView('facebook', v)} image={imageUrl} mediaKind={mediaKind} showFolded={showFolded} /></div>;
-                    if (key === 'threads') return <div id="platform-card-threads" key="thw"><ThreadsPreview key="threads" text={analysisText} lang={lang} s={strings} toolLinkHref={`/${lang}/${toolSlugs.threads}/`} view={views.threads} setView={(v) => setPlatformView('threads', v)} image={imageUrl} mediaKind={mediaKind} showFolded={showFolded} /></div>;
+                    if (key === 'meta') return <div id="platform-card-meta" key="mw"><MetaMonitor key="meta" text={analysisText} lang={lang} s={strings} toolLinkHref={`/${lang}/${toolSlugs.instagram}/`} facebookToolLinkHref={`/${lang}/${toolSlugs.facebook}/`} priority={effectiveMetaPriority} instagramView={views.instagram} setInstagramView={(v) => setPlatformView('instagram', v)} facebookView={views.facebook} setFacebookView={(v) => setPlatformView('facebook', v)} image={imageUrl} mediaKind={mediaKind} showFolded={showFolded} cardTitle={cardTitle} cardDescription={cardDescription} /></div>;
+                    if (key === 'threads') return <div id="platform-card-threads" key="thw"><ThreadsPreview key="threads" text={analysisText} lang={lang} s={strings} toolLinkHref={`/${lang}/${toolSlugs.threads}/`} view={views.threads} setView={(v) => setPlatformView('threads', v)} image={imageUrl} mediaKind={mediaKind} showFolded={showFolded} cardTitle={cardTitle} cardDescription={cardDescription} /></div>;
                     if (key === 'tiktok') return <div id="platform-card-tiktok" key="ttw"><TikTokPreview key="tiktok" text={analysisText} lang={lang} s={strings} toolLinkHref={`/${lang}/${toolSlugs['tiktok-guide']}/`} view={views.tiktok} setView={(v) => setPlatformView('tiktok', v)} image={imageUrl} mediaKind={mediaKind} showFolded={showFolded} /></div>;
                   })}
                 </>
               ) : (
                 <>
-                  {previewTab === 'linkedin' && <div id="platform-card-linkedin"><LinkedInPreview text={analysisText} view={views.linkedin} setView={(v) => setPlatformView('linkedin', v)} lang={lang} s={strings} toolLinkHref={`/${lang}/${toolSlugs.linkedin}/`} image={imageUrl} mediaKind={mediaKind} showFolded={showFolded} /></div>}
+                  {previewTab === 'linkedin' && <div id="platform-card-linkedin"><LinkedInPreview text={analysisText} view={views.linkedin} setView={(v) => setPlatformView('linkedin', v)} lang={lang} s={strings} toolLinkHref={`/${lang}/${toolSlugs.linkedin}/`} image={imageUrl} mediaKind={mediaKind} showFolded={showFolded} cardTitle={cardTitle} cardDescription={cardDescription} /></div>}
                   {previewTab === 'twitter' && <div id="platform-card-twitter"><TwitterPreview text={analysisText} lang={lang} s={strings} toolLinkHref={`/${lang}/${toolSlugs.twitter}/`} image={imageUrl} mediaKind={mediaKind} /></div>}
-                  {previewTab === 'instagram' && <div id="platform-card-meta"><MetaMonitor text={analysisText} lang={lang} s={strings} toolLinkHref={`/${lang}/${toolSlugs.instagram}/`} facebookToolLinkHref={`/${lang}/${toolSlugs.facebook}/`} only="instagram" instagramView={views.instagram} setInstagramView={(v) => setPlatformView('instagram', v)} facebookView={views.facebook} setFacebookView={(v) => setPlatformView('facebook', v)} image={imageUrl} mediaKind={mediaKind} showFolded={showFolded} /></div>}
-                  {previewTab === 'facebook' && <div id="platform-card-meta"><MetaMonitor text={analysisText} lang={lang} s={strings} toolLinkHref={`/${lang}/${toolSlugs.instagram}/`} facebookToolLinkHref={`/${lang}/${toolSlugs.facebook}/`} only="facebook" priority="facebook" instagramView={views.instagram} setInstagramView={(v) => setPlatformView('instagram', v)} facebookView={views.facebook} setFacebookView={(v) => setPlatformView('facebook', v)} image={imageUrl} mediaKind={mediaKind} showFolded={showFolded} /></div>}
-                  {previewTab === 'threads' && <div id="platform-card-threads"><ThreadsPreview text={analysisText} lang={lang} s={strings} toolLinkHref={`/${lang}/${toolSlugs.threads}/`} view={views.threads} setView={(v) => setPlatformView('threads', v)} image={imageUrl} mediaKind={mediaKind} showFolded={showFolded} /></div>}
+                  {previewTab === 'instagram' && <div id="platform-card-meta"><MetaMonitor text={analysisText} lang={lang} s={strings} toolLinkHref={`/${lang}/${toolSlugs.instagram}/`} facebookToolLinkHref={`/${lang}/${toolSlugs.facebook}/`} only="instagram" instagramView={views.instagram} setInstagramView={(v) => setPlatformView('instagram', v)} facebookView={views.facebook} setFacebookView={(v) => setPlatformView('facebook', v)} image={imageUrl} mediaKind={mediaKind} showFolded={showFolded} cardTitle={cardTitle} cardDescription={cardDescription} /></div>}
+                  {previewTab === 'facebook' && <div id="platform-card-meta"><MetaMonitor text={analysisText} lang={lang} s={strings} toolLinkHref={`/${lang}/${toolSlugs.instagram}/`} facebookToolLinkHref={`/${lang}/${toolSlugs.facebook}/`} only="facebook" priority="facebook" instagramView={views.instagram} setInstagramView={(v) => setPlatformView('instagram', v)} facebookView={views.facebook} setFacebookView={(v) => setPlatformView('facebook', v)} image={imageUrl} mediaKind={mediaKind} showFolded={showFolded} cardTitle={cardTitle} cardDescription={cardDescription} /></div>}
+                  {previewTab === 'threads' && <div id="platform-card-threads"><ThreadsPreview text={analysisText} lang={lang} s={strings} toolLinkHref={`/${lang}/${toolSlugs.threads}/`} view={views.threads} setView={(v) => setPlatformView('threads', v)} image={imageUrl} mediaKind={mediaKind} showFolded={showFolded} cardTitle={cardTitle} cardDescription={cardDescription} /></div>}
                   {previewTab === 'tiktok' && <div id="platform-card-tiktok"><TikTokPreview text={analysisText} lang={lang} s={strings} toolLinkHref={`/${lang}/${toolSlugs['tiktok-guide']}/`} view={views.tiktok} setView={(v) => setPlatformView('tiktok', v)} image={imageUrl} mediaKind={mediaKind} showFolded={showFolded} /></div>}
                 </>
               )}

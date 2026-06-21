@@ -7,50 +7,17 @@
  * combining marks, and astral-plane characters are not miscounted or split.
  */
 
-// Type-only import: erased at runtime, so it cannot create a circular runtime
-// import even though `src/data/linkBehavior.ts` imports the VALUE `LIMITS` from
-// this module (the dependency stays one-way at runtime).
+// Type-only import: erased at runtime. The runtime value imports from
+// `linkBehavior` (the card accessors) are safe because `linkBehavior` no longer
+// imports this module — the shared `LIMITS` constant was moved to the
+// dependency-free `./limits` leaf, so the import graph stays acyclic.
 import type { LinkCountMode } from '../data/linkBehavior';
+import { cardLayout, organicLinkBehavior } from '../data/linkBehavior';
+import { LIMITS } from './limits';
 
-/** Platform truncation/limit constants. */
-export const LIMITS = {
-  LINKEDIN_DESKTOP: 210,
-  LINKEDIN_MOBILE: 140,
-  /** LinkedIn's published hard cap for a standard feed post. */
-  LINKEDIN_POST: 3000,
-  TWEET: 280,
-  /** Threads (by Meta) per-post character ceiling; longer copy chains as replies. */
-  THREADS: 500,
-  /** t.co wraps every URL to a fixed weight regardless of real length. */
-  URL_WEIGHT: 23,
-  /**
-   * Recommended hashtag count for an Instagram post or reel. Going past this
-   * doesn't block publishing — it's a best-practice nudge (more reads as spam).
-   */
-  INSTAGRAM_HASHTAGS_RECOMMENDED: 5,
-  /**
-   * Instagram's hard hashtag cap (caption + first comment combined). Past this
-   * the post fails to publish or the hashtags are stripped.
-   */
-  INSTAGRAM_HASHTAGS_MAX: 30,
-  /** Instagram's published caption character cap. */
-  INSTAGRAM_CAPTION: 2200,
-  /** Facebook's published hard cap for a feed post. */
-  FACEBOOK_POST: 63206,
-  /**
-   * TikTok caption hard cap when posting natively in the app (emojis and
-   * hashtags count). Exceeding this blocks publishing.
-   */
-  TIKTOK_CAPTION_MAX: 4000,
-  /**
-   * "Safe" TikTok caption ceiling: the TikTok API and third-party schedulers
-   * (Buffer, Hootsuite, Later) still cap captions here, so staying under it
-   * guarantees the text survives regardless of how the video is published.
-   */
-  TIKTOK_CAPTION_SAFE: 2200,
-  /** TikTok organic caption "…more" fold (≈1 line). */
-  TIKTOK_FOLD: 100,
-} as const;
+// Re-exported so every existing `import { LIMITS } from './textTools'` keeps
+// working unchanged (the constant's value, type, and signature are identical).
+export { LIMITS };
 
 export type SmsEncoding = 'GSM 7-bit' | 'Unicode';
 
@@ -1332,4 +1299,188 @@ export function analyzeReadability(text: string): ReadabilityResult {
   const gradeLevel = Math.round(Math.max(0, rawGrade) * 10) / 10;
 
   return { fleschEase, gradeLevel, hasData: true };
+}
+
+// ──────────────────────────────────────────────────────────────────────────
+// Rich link-card local derivation (additive — rich-link-preview-cards).
+// These are NEW pure exports only; detectUrls / weightedLength / charCount keep
+// their signatures and results unchanged. Nothing here issues a network request:
+// the domain and favicon glyph are derived entirely from the typed URL text.
+// ──────────────────────────────────────────────────────────────────────────
+
+/** Matches a leading "scheme://" so scheme-less URLs can be normalized before parsing. */
+const URL_SCHEME_RE = /^[a-z][a-z0-9+.-]*:\/\//i;
+
+/**
+ * Derive the Card_Domain from a detected URL: the host component with any single
+ * leading "www." removed and case-folded to lower case. Scheme-less URLs (e.g.
+ * "example.com/path") are accepted by prepending a synthetic "https://" scheme
+ * before parsing. Returns `null` when no valid host can be parsed.
+ *
+ * The returned domain is always a lower-cased suffix of the URL's real host (with
+ * one leading "www." dropped) — never fabricated text absent from the host
+ * (Requirements 3.1, 3.2, 3.3, 3.5).
+ */
+export function deriveCardDomain(url: string): string | null {
+  if (!url) return null;
+
+  const candidate = URL_SCHEME_RE.test(url) ? url : `https://${url}`;
+  let host: string;
+  try {
+    host = new URL(candidate).hostname;
+  } catch {
+    return null;
+  }
+
+  if (!host) return null;
+
+  const lower = host.toLowerCase();
+  const stripped = lower.startsWith('www.') ? lower.slice(4) : lower;
+  return stripped || null;
+}
+
+/**
+ * Derive the local favicon monogram for a domain: the upper-cased first
+ * alphanumeric character. Computed locally with no network access — the card's
+ * favicon is a rendered glyph, never a fetched icon. Returns '' for an empty or
+ * invalid domain (no alphanumeric character) (Requirement 3.4).
+ */
+export function deriveFaviconMonogram(domain: string): string {
+  if (!domain) return '';
+  for (const ch of domain) {
+    if (/[\p{L}\p{N}]/u.test(ch)) return ch.toUpperCase();
+  }
+  return '';
+}
+
+/**
+ * The first detected URL in document order, or `undefined` when the text has no
+ * URL. Reuses `detectUrls` so URL detection and first-URL selection stay owned
+ * by a single implementation (Requirement 5.1).
+ */
+export function firstUrl(text: string): UrlMatch | undefined {
+  return detectUrls(text)[0];
+}
+
+/**
+ * Grapheme-safe truncation for a card field (Card_Title / Card_Description).
+ *
+ *  - `max === 0` returns `''` so the caller can omit the region entirely
+ *    (Requirement 7.5).
+ *  - text within `max` grapheme clusters is returned unchanged, with no ellipsis
+ *    (Requirement 7.3).
+ *  - longer text is clipped to the first `max` grapheme clusters followed by a
+ *    single "…" indicator (Requirements 7.1, 7.2).
+ *
+ * Uses the existing grapheme-safe `charCount`/`sliceChars` so emoji, ZWJ
+ * sequences, and combining marks are never split mid-cluster (Requirement 7.4).
+ */
+export function truncateCardField(text: string, max: number): string {
+  if (max <= 0) return '';
+  if (charCount(text) <= max) return text;
+  return `${sliceChars(text, 0, max)}…`;
+}
+
+/**
+ * Produce the preview body text for display only. When `removeUrl` is false the
+ * text is returned unchanged (Requirement 9.2). When `removeUrl` is true the
+ * first detected URL substring is removed using `firstUrl`'s offsets and the
+ * whitespace surrounding the removed span is collapsed so the visible copy reads
+ * cleanly (Requirement 9.1).
+ *
+ * The source string is never mutated — JS strings are immutable and the removal
+ * path returns a freshly composed string (Requirement 9.3).
+ */
+export function mutatePreviewText(text: string, removeUrl: boolean): string {
+  if (!removeUrl) return text;
+
+  const match = firstUrl(text);
+  if (!match) return text;
+
+  const before = text.slice(0, match.start).replace(/\s+$/u, '');
+  const after = text.slice(match.end).replace(/^\s+/u, '');
+
+  if (before && after) return `${before} ${after}`;
+  return before || after;
+}
+
+/**
+ * Locally-derived card metadata + display text for one platform. A pure value
+ * object — the renderer consumes it and holds no logic. `firstUrl` reuses the
+ * existing `UrlMatch` so offsets and detection stay owned by `detectUrls`.
+ */
+export interface ExtractedLinkData {
+  /** The first detected URL match, or undefined when the body has no URL. */
+  firstUrl?: UrlMatch;
+  /** Host with any leading "www." removed, case-folded; '' when no URL. */
+  domain: string;
+  /** Single-letter monogram for the local favicon glyph (e.g. 'E' for example.com); '' when no URL. */
+  faviconMonogram: string;
+  /** True when the URL parsed to a valid host; false => render raw URL as domain, omit favicon (Req 3.5). */
+  hasValidHost: boolean;
+  /** Smart Card_Title placeholder derived from the domain (e.g. "example.com"); '' when no URL. */
+  titlePlaceholder: string;
+  /** Post body text after applying the platform's raw-URL handling for the PREVIEW only. */
+  previewText: string;
+  /** Whether this platform removes the raw URL once the card renders (from cardLayout). */
+  removesRawUrl: boolean;
+}
+
+/**
+ * Orchestrator: compose the local-derivation helpers into the data a renderer
+ * needs for one platform. Pure and DOM-free; issues no network request.
+ *
+ * Reads the platform's classification (`organicLinkBehavior(platform).model`)
+ * and raw-URL handling (`cardLayout(platform).removesRawUrl`) from
+ * `LINK_BEHAVIOR` — the single source of truth (Requirements 1.1, 1.2, 14) —
+ * and detects URLs via `detectUrls`/`firstUrl` (Requirement 5.1).
+ *
+ *  - No URL: every card field is empty/undefined, `previewText` is the body
+ *    unchanged (Requirement 1.2).
+ *  - Valid host: `domain`/`faviconMonogram`/`titlePlaceholder` are derived
+ *    locally from the first URL (Requirements 2.3, 3.1–3.4, 5.1).
+ *  - Unparseable host: `hasValidHost` is false, the raw URL is used as the
+ *    `domain`, and the favicon monogram is omitted (Requirement 3.5).
+ *
+ * `previewText` applies the platform's `removesRawUrl` rule for the PREVIEW
+ * only — it never mutates the source body (Requirements 9.1, 9.2). Non-card
+ * platforms have no `cardLayout`, so `removesRawUrl` is false and `previewText`
+ * equals the body unchanged (Requirements 11.1, 12.1, 12.2).
+ */
+export function extractLinkData(text: string, platform: string): ExtractedLinkData {
+  const behavior = organicLinkBehavior(platform);
+  const isPreviewCard = behavior?.model === 'preview-card';
+  // Only a preview-card platform can remove the raw URL, and only when its
+  // Card_Layout_Profile says so — both facts read from LINK_BEHAVIOR.
+  const removesRawUrl = isPreviewCard ? (cardLayout(platform)?.removesRawUrl ?? false) : false;
+  const match = firstUrl(text);
+
+  if (!match) {
+    return {
+      firstUrl: undefined,
+      domain: '',
+      faviconMonogram: '',
+      hasValidHost: false,
+      titlePlaceholder: '',
+      previewText: text,
+      removesRawUrl,
+    };
+  }
+
+  const derivedDomain = deriveCardDomain(match.url);
+  const hasValidHost = derivedDomain !== null;
+  const domain = hasValidHost ? derivedDomain : match.url;
+  const faviconMonogram = hasValidHost ? deriveFaviconMonogram(domain) : '';
+
+  return {
+    firstUrl: match,
+    domain,
+    faviconMonogram,
+    hasValidHost,
+    // Smart Card_Title placeholder is derived solely from the domain, so it
+    // never contains text absent from the URL host (Requirement 2.3).
+    titlePlaceholder: domain,
+    previewText: mutatePreviewText(text, removesRawUrl),
+    removesRawUrl,
+  };
 }

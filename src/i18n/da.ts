@@ -855,6 +855,16 @@ export const da: Translations = {
       remove: 'Fjern medie',
       hint: 'Kun forhåndsvisning — uploades eller gemmes aldrig. Ryddes ved genindlæsning.',
     },
+    linkCard: {
+      editorHeading: 'Link-forhåndsvisningskort',
+      titleLabel: 'Korttitel',
+      descriptionLabel: 'Kortbeskrivelse',
+      titlePlaceholder: 'Tilføj en titel til dit link',
+      descriptionPlaceholder: 'Tilføj en beskrivelse til dit link',
+      cardAria: 'Linkforhåndsvisning: {title} — {domain}',
+      imageAlt: 'Link-forhåndsvisningsbillede',
+      firstUrlNote: 'Det første link i dit opslag bliver til forhåndsvisningskortet.',
+    },
     aiImprove: {
       button: 'AI-forbedring',
       pickTone: 'Forbedr med AI',

@@ -855,6 +855,16 @@ export const fr: Translations = {
       remove: 'Supprimer le média',
       hint: 'Aperçu uniquement — jamais téléversé ni stocké. Disparaît au rechargement.',
     },
+    linkCard: {
+      editorHeading: 'Carte d’aperçu du lien',
+      titleLabel: 'Titre de la carte',
+      descriptionLabel: 'Description de la carte',
+      titlePlaceholder: 'Ajoutez un titre pour votre lien',
+      descriptionPlaceholder: 'Ajoutez une description pour votre lien',
+      cardAria: 'Aperçu du lien : {title} — {domain}',
+      imageAlt: 'Image d’aperçu du lien',
+      firstUrlNote: 'Le premier lien de votre publication devient la carte d’aperçu.',
+    },
     aiImprove: {
       button: 'Améliorer avec l’IA',
       pickTone: 'Améliorer avec l’IA',

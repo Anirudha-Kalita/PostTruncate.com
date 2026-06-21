@@ -855,6 +855,16 @@ export const pt: Translations = {
       remove: 'Remover mídia',
       hint: 'Apenas pré-visualização — nunca enviada nem armazenada. Some ao recarregar.',
     },
+    linkCard: {
+      editorHeading: 'Cartão de pré-visualização do link',
+      titleLabel: 'Título do cartão',
+      descriptionLabel: 'Descrição do cartão',
+      titlePlaceholder: 'Adicione um título para o seu link',
+      descriptionPlaceholder: 'Adicione uma descrição para o seu link',
+      cardAria: 'Pré-visualização do link: {title} — {domain}',
+      imageAlt: 'Imagem de pré-visualização do link',
+      firstUrlNote: 'O primeiro link da sua publicação torna-se o cartão de pré-visualização.',
+    },
     aiImprove: {
       button: 'Melhorar com IA',
       pickTone: 'Melhorar com IA',

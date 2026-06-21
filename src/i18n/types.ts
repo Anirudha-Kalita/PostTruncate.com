@@ -201,6 +201,36 @@ export interface LinkDisplayStrings {
 }
 
 /**
+ * Strings for the Rich_Link_Card and its Card_Field_Editor on the six
+ * preview-card platforms (Facebook, LinkedIn, Threads, Discord, WhatsApp,
+ * Bluesky). Unlike `linkDisplay`, this sub-object is REQUIRED on every locale
+ * dictionary so that a missing key is a TypeScript error (Requirement 15.2) and
+ * the strict i18n parity lint (scripts/check-i18n.mjs) only passes when all ten
+ * locales carry the exact key paths. `en.ts` is the canonical source
+ * (Requirement 15.3). The runtime resolver `linkCardStrings(s)` still guards
+ * partial/absent values by falling back to the canonical English block
+ * (Requirement 15.4). "{title}" / "{domain}" tokens are filled by interp().
+ */
+export interface LinkCardStrings {
+  /** Card_Field_Editor section heading. */
+  editorHeading: string;
+  /** Title input label. */
+  titleLabel: string;
+  /** Description input label. */
+  descriptionLabel: string;
+  /** Title input placeholder (the smart domain-derived placeholder fills in at runtime when empty). */
+  titlePlaceholder: string;
+  /** Description placeholder used when the user supplies none (Requirement 2.4). */
+  descriptionPlaceholder: string;
+  /** Accessible-name template applied as an aria-label on the static (non-link) preview card. "{title}" / "{domain}" tokens (Requirement 10.5). */
+  cardAria: string;
+  /** Default image alt text when no title is available (Requirement 13.2). */
+  imageAlt: string;
+  /** Indication shown on cardFromFirstUrlOnly platforms with multiple URLs (Requirement 5.2). */
+  firstUrlNote: string;
+}
+
+/**
  * Strings consumed by the Preact islands. Split out from the rest because this
  * sub-object — and only this sub-object — is serialized into the client island
  * props, so it must stay free of any server-only values.
@@ -300,6 +330,15 @@ export interface IslandStrings {
    * green. A locale opts in by adding a `linkDisplay` override.
    */
   linkDisplay?: LinkDisplayStrings;
+  /**
+   * Rich_Link_Card + Card_Field_Editor strings for the six preview-card
+   * platforms. REQUIRED on every locale (unlike `linkDisplay`): declaring it on
+   * IslandStrings makes a missing key in any locale a TypeScript error
+   * (Requirement 15.2). `en.ts` is canonical; the `linkCardStrings(s)` resolver
+   * falls back to the canonical English block for any partial/absent value
+   * (Requirement 15.4).
+   */
+  linkCard: LinkCardStrings;
   /**
    * "AI Improve" feature — button, tone picker, progress, and result/error
    * states for the Gemini-backed rewrite. Tone keys mirror lib/aiImprove.ts.
