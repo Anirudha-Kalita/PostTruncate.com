@@ -46,6 +46,21 @@ export const CONFIG = {
   rasterExtensions: ['.png', '.jpg', '.jpeg', '.webp'],
   // WebP encoder quality.
   webpQuality: 80,
+
+  // Brand/UI images that live at the public root (not in public/og/) and are
+  // referenced by absolute path (/logo.webp, /author-anirudha.webp). They render
+  // tiny — the logo at ~197px, the author avatar at ≤140px (24px in bylines) —
+  // yet their sources are full-resolution (the logo is 2172px wide), so each
+  // page shipped ~90KB of logo. We give them their own small width ladders
+  // (enough to stay crisp up to ~3× DPR) and fold the variants into the SAME
+  // optimized/ folder + manifest, so ResponsiveImage resolves them like any
+  // blog image. Output keys are root-absolute (e.g. /logo.webp).
+  brandSourceDir: resolve(PROJECT_ROOT, 'public'),
+  brandImages: [
+    { file: 'logo.webp', widths: [200, 400, 600] },
+    { file: 'logo-dark.webp', widths: [200, 400, 600] },
+    { file: 'author-anirudha.webp', widths: [72, 150, 300] },
+  ],
 };
 
 // ── Pure helpers (unit-tested) ───────────────────────────────────────────────
@@ -95,6 +110,67 @@ export function sanitizeBaseName(name) {
 }
 
 /**
+ * Render the WebP variant ladder for a single source image (shared by the
+ * folder scan and the brand-image pass). Reads the source's intrinsic size,
+ * plans non-upscaling widths, and writes any missing/stale variants — caching
+ * up-to-date ones. Returns null when the source is unreadable, has no
+ * dimensions, or plans no widths (caller skips it).
+ *
+ * @param {string} srcPath  Absolute path to the source image.
+ * @param {{widths: number[], webpQuality: number, outputDir: string, publicOptimizedPrefix: string, label: string}} opts
+ * @returns {Promise<{meta: import('sharp').Metadata, srcBase: string, variants: {width: number, url: string}[], generated: number, skipped: number} | null>}
+ */
+async function renderVariants(srcPath, { widths, webpQuality, outputDir, publicOptimizedPrefix, label }) {
+  let meta;
+  try {
+    meta = await sharp(srcPath).metadata();
+  } catch (err) {
+    console.warn(`optimize-images: skip ${label} (${err.message})`);
+    return null;
+  }
+  if (!meta.width || !meta.height) {
+    console.warn(`optimize-images: skip ${label} (no dimensions)`);
+    return null;
+  }
+
+  const plan = planWidths(meta.width, widths);
+  if (plan.length === 0) return null;
+
+  const ext = extname(srcPath).toLowerCase();
+  const srcBase = basename(srcPath, ext);
+  const safeBase = sanitizeBaseName(srcBase);
+  const srcStat = await stat(srcPath);
+
+  const variants = [];
+  let generated = 0;
+  let skipped = 0;
+  for (const w of plan) {
+    const outName = `${safeBase}-${w}.webp`;
+    const outPath = join(outputDir, outName);
+
+    // Cache: keep an existing variant that's at least as new as its source.
+    let upToDate = false;
+    if (existsSync(outPath)) {
+      const outStat = await stat(outPath);
+      upToDate = outStat.mtimeMs >= srcStat.mtimeMs;
+    }
+    if (upToDate) {
+      skipped++;
+    } else {
+      await sharp(srcPath)
+        .resize({ width: w, withoutEnlargement: true })
+        .webp({ quality: webpQuality })
+        .toFile(outPath);
+      generated++;
+    }
+
+    variants.push({ width: w, url: `${publicOptimizedPrefix}/${outName}` });
+  }
+
+  return { meta, srcBase, variants, generated, skipped };
+}
+
+/**
  * Scan the source folder for raster images, emit multi-width WebP variants
  * (resize-only for WebP sources, convert+resize for PNG/JPG), and write a
  * manifest mapping each referenced path to its variant set + intrinsic size.
@@ -117,6 +193,9 @@ export async function generateVariants(options = {}) {
     webpQuality,
     publicPrefix,
     publicOptimizedPrefix,
+    // When false, build the manifest in memory but let the caller write it
+    // (so the brand pass can be merged into a single manifest file).
+    writeManifest = true,
   } = cfg;
 
   await mkdir(outputDir, { recursive: true });
@@ -140,65 +219,82 @@ export async function generateVariants(options = {}) {
     if (!rasterExtensions.includes(ext)) continue;
 
     const srcPath = join(sourceDir, dirent.name);
+    const res = await renderVariants(srcPath, {
+      widths,
+      webpQuality,
+      outputDir,
+      publicOptimizedPrefix,
+      label: dirent.name,
+    });
+    if (!res) continue;
 
-    // Read the header for intrinsic dimensions; skip anything Sharp can't parse.
-    let meta;
-    try {
-      meta = await sharp(srcPath).metadata();
-    } catch (err) {
-      console.warn(`optimize-images: skip ${dirent.name} (${err.message})`);
-      continue;
-    }
-    if (!meta.width || !meta.height) {
-      console.warn(`optimize-images: skip ${dirent.name} (no dimensions)`);
-      continue;
-    }
-
-    const plan = planWidths(meta.width, widths);
-    if (plan.length === 0) continue;
-
-    const srcBase = basename(dirent.name, ext);
-    const safeBase = sanitizeBaseName(srcBase);
-    const srcStat = await stat(srcPath);
-
-    const variants = [];
-    for (const w of plan) {
-      const outName = `${safeBase}-${w}.webp`;
-      const outPath = join(outputDir, outName);
-
-      // Cache: keep an existing variant that's at least as new as its source.
-      let upToDate = false;
-      if (existsSync(outPath)) {
-        const outStat = await stat(outPath);
-        upToDate = outStat.mtimeMs >= srcStat.mtimeMs;
-      }
-      if (upToDate) {
-        skipped++;
-      } else {
-        await sharp(srcPath)
-          .resize({ width: w, withoutEnlargement: true })
-          .webp({ quality: webpQuality })
-          .toFile(outPath);
-        generated++;
-      }
-
-      variants.push({ width: w, url: `${publicOptimizedPrefix}/${outName}` });
-    }
-
-    const entry = { width: meta.width, height: meta.height, variants };
+    const entry = { width: res.meta.width, height: res.meta.height, variants: res.variants };
     // Register the source's own referenced path plus the .webp alias, so a
     // reference works whether markup still says .png/.jpg (future uploads) or
     // .webp (existing posts) — both resolve to the same WebP variant set.
     manifest[`${publicPrefix}/${dirent.name}`] = entry;
-    manifest[`${publicPrefix}/${srcBase}.webp`] = entry;
+    manifest[`${publicPrefix}/${res.srcBase}.webp`] = entry;
+    generated += res.generated;
+    skipped += res.skipped;
     processed++;
   }
 
-  await writeFile(manifestPath, JSON.stringify(manifest, null, 2) + '\n', 'utf8');
-  console.log(
-    `optimize-images: ${processed} source(s) → ${generated} variant(s) generated, ${skipped} cached.\n` +
-      `  manifest: ${manifestPath}`,
-  );
+  if (writeManifest) {
+    await writeFile(manifestPath, JSON.stringify(manifest, null, 2) + '\n', 'utf8');
+    console.log(
+      `optimize-images: ${processed} source(s) → ${generated} variant(s) generated, ${skipped} cached.\n` +
+        `  manifest: ${manifestPath}`,
+    );
+  }
+  return { manifest, generated, skipped, processed };
+}
+
+/**
+ * Brand-image pass: render small responsive ladders for the configured
+ * public-root UI images (logo, dark logo, author avatar) into the SAME
+ * optimized/ folder, keyed by their root-absolute reference (e.g. /logo.webp).
+ * Returns the partial manifest to be merged with the folder-scan manifest.
+ *
+ * @param {Partial<typeof CONFIG>} [options]  Overrides (used by tests).
+ * @returns {Promise<{manifest: object, generated: number, skipped: number, processed: number}>}
+ */
+export async function generateBrandVariants(options = {}) {
+  const cfg = { ...CONFIG, ...options };
+  const { brandSourceDir, brandImages, outputDir, webpQuality, publicOptimizedPrefix } = cfg;
+
+  await mkdir(outputDir, { recursive: true });
+
+  /** @type {Record<string, {width: number, height: number, variants: {width: number, url: string}[]}>} */
+  const manifest = {};
+  let generated = 0;
+  let skipped = 0;
+  let processed = 0;
+
+  for (const img of brandImages ?? []) {
+    const srcPath = join(brandSourceDir, img.file);
+    if (!existsSync(srcPath)) {
+      console.warn(`optimize-images: brand image not found, skipping: ${img.file}`);
+      continue;
+    }
+    const res = await renderVariants(srcPath, {
+      widths: img.widths,
+      webpQuality,
+      outputDir,
+      publicOptimizedPrefix,
+      label: img.file,
+    });
+    if (!res) continue;
+
+    const entry = { width: res.meta.width, height: res.meta.height, variants: res.variants };
+    // Root-absolute key matches the markup reference (/logo.webp); the .webp
+    // alias keeps it robust if a source is ever swapped to PNG/JPG.
+    manifest[`/${img.file}`] = entry;
+    manifest[`/${res.srcBase}.webp`] = entry;
+    generated += res.generated;
+    skipped += res.skipped;
+    processed++;
+  }
+
   return { manifest, generated, skipped, processed };
 }
 
@@ -225,7 +321,17 @@ async function main(argv) {
     console.log(HELP);
     return;
   }
-  await generateVariants();
+  // Folder scan (blog media) + brand pass (root logo/avatar) share one manifest
+  // and one optimized/ folder. Build both in memory, then write once.
+  const og = await generateVariants({ writeManifest: false });
+  const brand = await generateBrandVariants();
+  const manifest = { ...og.manifest, ...brand.manifest };
+  await writeFile(CONFIG.manifestPath, JSON.stringify(manifest, null, 2) + '\n', 'utf8');
+  console.log(
+    `optimize-images: ${og.processed + brand.processed} source(s) → ` +
+      `${og.generated + brand.generated} variant(s) generated, ` +
+      `${og.skipped + brand.skipped} cached.\n  manifest: ${CONFIG.manifestPath}`,
+  );
 }
 
 // Run only when invoked directly (not when imported by tests).

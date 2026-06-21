@@ -7,6 +7,7 @@
 // set:html. The Contact page builds its own body and does not use this.
 import type { ContentPage } from '../i18n/types';
 import { getLocale } from '../i18n/config';
+import ResponsiveImage from './ResponsiveImage.astro';
 
 interface Props {
   /** Active locale — drives the back-to-home link prefix. */
@@ -43,12 +44,11 @@ const home = `/${lang}/${homeLocale.slug}/`;
         const isAuthorSection = authorImage && i === authorImageSectionIndex;
         return isAuthorSection ? (
           <div class="author-bio">
-            <img
+            <ResponsiveImage
               src={authorImage}
-              alt={authorImageAlt}
+              alt={authorImageAlt ?? ''}
               class="author-bio__img"
-              width="140"
-              height="140"
+              sizes="(max-width: 600px) 110px, 140px"
               loading="lazy"
               decoding="async"
             />
@@ -149,7 +149,9 @@ const home = `/${lang}/${homeLocale.slug}/`;
     gap: 24px;
     margin-top: 40px;
   }
-  .author-bio__img {
+  /* Rendered by the <ResponsiveImage> child component, whose <img> lacks this
+     component's scope hash — target it with :global under the scoped .author-bio. */
+  .author-bio :global(.author-bio__img) {
     flex-shrink: 0;
     width: 140px;
     height: 140px;
@@ -182,7 +184,7 @@ const home = `/${lang}/${homeLocale.slug}/`;
       align-items: center;
       text-align: center;
     }
-    .author-bio__img {
+    .author-bio :global(.author-bio__img) {
       width: 110px;
       height: 110px;
     }

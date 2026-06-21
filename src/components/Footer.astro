@@ -12,6 +12,7 @@ import { calculators } from '../data/calculators';
 import { adPreviews } from '../data/adPreviews';
 import { PLATFORM_COUNTERS } from '../data/platformCounters';
 import { BLOG_SEGMENT, getBlogStrings, getBlogLocales } from '../lib/blogI18n';
+import ResponsiveImage from './ResponsiveImage.astro';
 
 interface Props {
   lang: string;
@@ -140,8 +141,8 @@ const homeAdPreviewLinks = adPreviews.map((tool) => ({
   <div class="container-page footer__inner">
     <div class="footer__brand">
       <a href={home} class="footer__logo" aria-label={footer.homeAria}>
-        <img class="footer__logo-img footer__logo-img--light" src="/logo.webp" alt={images.logoAlt} width="172" height="35" />
-        <img class="footer__logo-img footer__logo-img--dark" src="/logo-dark.webp" alt={images.logoAlt} width="172" height="35" />
+        <ResponsiveImage class="footer__logo-img footer__logo-img--light" src="/logo.webp" alt={images.logoAlt} sizes="172px" />
+        <ResponsiveImage class="footer__logo-img footer__logo-img--dark" src="/logo-dark.webp" alt={images.logoAlt} sizes="172px" />
       </a>
       <p class="footer__tag">{footer.tag}</p>
     </div>
@@ -249,18 +250,21 @@ const homeAdPreviewLinks = adPreviews.map((tool) => ({
     font-size: 16px;
     letter-spacing: -0.4px;
   }
-  .footer__logo-img {
+  /* Rendered by the <ResponsiveImage> child component, whose <img> lacks this
+     component's scope hash — target it with :global, anchored under the scoped
+     .footer__logo so nothing leaks site-wide. */
+  .footer__logo :global(.footer__logo-img) {
     height: 35px;
     width: auto;
     display: block;
   }
-  .footer__logo-img--dark {
+  .footer__logo :global(.footer__logo-img--dark) {
     display: none;
   }
-  :global(html[data-theme='dark']) .footer__logo-img--light {
+  :global(html[data-theme='dark']) .footer__logo :global(.footer__logo-img--light) {
     display: none;
   }
-  :global(html[data-theme='dark']) .footer__logo-img--dark {
+  :global(html[data-theme='dark']) .footer__logo :global(.footer__logo-img--dark) {
     display: block;
   }
   .footer__tag {
