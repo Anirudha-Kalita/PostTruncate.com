@@ -9,6 +9,8 @@ import { interp } from '../../i18n/interp';
 import type { IslandStrings } from '../../i18n/types';
 import { adPreviewStrings } from '../../i18n/adPreviewStrings';
 import { AD_PLATFORM_CONFIG, type AdPlatform } from '../../data/adPlatformConfig';
+import { adLinkBehavior } from '../../data/linkBehavior';
+import { resolveCta } from '../../lib/adTruncation';
 import { charCount } from '../../lib/textTools';
 
 interface Props {
@@ -66,6 +68,20 @@ export function AdSimulator({ platform, s, lang }: Props) {
   const [safeZone, setSafeZone] = useState(true);
   const [mediaUrl, setMediaUrl] = useState<string | null>(null);
 
+  // Meta ad (Facebook/Instagram) display-link controls. Stored separately from
+  // the FieldKey map so the existing field meters stay untouched.
+  const linkBehavior = adLinkBehavior(platform);
+  const showsDisplayLink = linkBehavior?.showsDisplayLink ?? false;
+  const [destinationUrl, setDestinationUrl] = useState('');
+  const [cta, setCta] = useState('');
+  const ctaOptions = linkBehavior?.ctaLabels ?? [];
+
+  // Google RSA display-URL controls (final URL + up to two display-path
+  // segments). Gated on the platform's `supportsDisplayPath` (google only).
+  const supportsDisplayPath = linkBehavior?.supportsDisplayPath ?? false;
+  const [finalUrl, setFinalUrl] = useState('');
+  const [paths, setPaths] = useState<string[]>(['', '']);
+
   // Track the live object URL in a ref so the unmount cleanup always revokes
   // the latest value without resubscribing the effect on every change.
   const mediaUrlRef = useRef<string | null>(null);
@@ -110,6 +126,8 @@ export function AdSimulator({ platform, s, lang }: Props) {
             s={s}
             headlines={[values.headline1, values.headline2, values.headline3]}
             description={values.description}
+            destinationUrl={finalUrl}
+            paths={paths}
           />
         );
       case 'facebook':
@@ -121,6 +139,8 @@ export function AdSimulator({ platform, s, lang }: Props) {
             description={values.description}
             device={device}
             mediaUrl={mediaUrl}
+            destinationUrl={destinationUrl}
+            cta={cta || resolveCta('facebook') || undefined}
           />
         );
       case 'instagram':
@@ -131,6 +151,8 @@ export function AdSimulator({ platform, s, lang }: Props) {
             mode={mode}
             safeZone={safeZone}
             mediaUrl={mediaUrl}
+            destinationUrl={destinationUrl}
+            cta={cta || resolveCta('instagram') || undefined}
           />
         );
       case 'tiktok':
@@ -195,7 +217,79 @@ export function AdSimulator({ platform, s, lang }: Props) {
             );
           })}
 
-          {/* Media control */}
+          {/* Google RSA final URL + display-path controls */}
+          {supportsDisplayPath && (
+            <div class="flex flex-col gap-4">
+              <div class="flex flex-col gap-2">
+                <span class="text-[13px] text-body">Final URL</span>
+                <input
+                  type="text"
+                  value={finalUrl}
+                  onInput={(e) => setFinalUrl((e.currentTarget as HTMLInputElement).value)}
+                  placeholder="posttruncate.com"
+                  class="block w-full rounded-md border border-hairline bg-canvas-soft px-4 py-2.5 text-[15px] text-ink placeholder:text-mute focus:border-link focus:bg-canvas focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-link"
+                />
+              </div>
+              <div class="flex flex-col gap-2">
+                <span class="text-[13px] text-body">Path 1</span>
+                <input
+                  type="text"
+                  value={paths[0]}
+                  maxLength={15}
+                  onInput={(e) =>
+                    setPaths((prev) => [(e.currentTarget as HTMLInputElement).value, prev[1] ?? ''])
+                  }
+                  placeholder="products"
+                  class="block w-full rounded-md border border-hairline bg-canvas-soft px-4 py-2.5 text-[15px] text-ink placeholder:text-mute focus:border-link focus:bg-canvas focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-link"
+                />
+              </div>
+              <div class="flex flex-col gap-2">
+                <span class="text-[13px] text-body">Path 2</span>
+                <input
+                  type="text"
+                  value={paths[1]}
+                  maxLength={15}
+                  onInput={(e) =>
+                    setPaths((prev) => [prev[0] ?? '', (e.currentTarget as HTMLInputElement).value])
+                  }
+                  placeholder="sale"
+                  class="block w-full rounded-md border border-hairline bg-canvas-soft px-4 py-2.5 text-[15px] text-ink placeholder:text-mute focus:border-link focus:bg-canvas focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-link"
+                />
+              </div>
+            </div>
+          )}
+
+          {/* Meta ad display-link + CTA controls (Facebook / Instagram) */}
+          {showsDisplayLink && (
+            <div class="flex flex-col gap-4">
+              <div class="flex flex-col gap-2">
+                <span class="text-[13px] text-body">Display link / Destination URL</span>
+                <input
+                  type="text"
+                  value={destinationUrl}
+                  onInput={(e) => setDestinationUrl((e.currentTarget as HTMLInputElement).value)}
+                  placeholder="example.com"
+                  class="block w-full rounded-md border border-hairline bg-canvas-soft px-4 py-2.5 text-[15px] text-ink placeholder:text-mute focus:border-link focus:bg-canvas focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-link"
+                />
+              </div>
+              {ctaOptions.length > 0 && (
+                <div class="flex flex-col gap-2">
+                  <span class="text-[13px] text-body">Call to action</span>
+                  <select
+                    value={cta || (resolveCta(platform) ?? '')}
+                    onChange={(e) => setCta((e.currentTarget as HTMLSelectElement).value)}
+                    class="block w-full rounded-md border border-hairline bg-canvas-soft px-4 py-2.5 text-[15px] text-ink focus:border-link focus:bg-canvas focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-link"
+                  >
+                    {ctaOptions.map((label) => (
+                      <option value={label} key={label}>
+                        {label}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              )}
+            </div>
+          )}
           {controls.media && (
             <div class="flex flex-col gap-2">
               <div class="flex items-center gap-3">

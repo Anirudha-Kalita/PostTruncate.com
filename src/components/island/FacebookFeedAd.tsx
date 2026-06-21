@@ -16,6 +16,7 @@ import type { IslandStrings } from '../../i18n/types';
 import { adPreviewStrings } from '../../i18n/adPreviewStrings';
 import { AD_PLATFORM_CONFIG } from '../../data/adPlatformConfig';
 import { charCount, sliceChars } from '../../lib/textTools';
+import { clampDisplayLink, deriveDisplayLink, resolveCta } from '../../lib/adTruncation';
 
 interface Props {
   s: IslandStrings;
@@ -24,6 +25,10 @@ interface Props {
   description: string;
   device: 'mobile' | 'desktop';
   mediaUrl: string | null;
+  /** Optional Meta ad destination URL; falls back to the mock domain when empty. */
+  destinationUrl?: string;
+  /** Optional CTA label; resolves to the platform default when empty. */
+  cta?: string;
 }
 
 /**
@@ -32,7 +37,7 @@ interface Props {
  * safe-zone; the link description caps at 30 characters and hides when a long
  * headline squeezes the mobile layout.
  */
-export function FacebookFeedAd({ s, primary, headline, description, device, mediaUrl }: Props) {
+export function FacebookFeedAd({ s, primary, headline, description, device, mediaUrl, destinationUrl, cta }: Props) {
   const ap = adPreviewStrings(s);
   const fb = AD_PLATFORM_CONFIG.facebook;
   const common = s.common;
@@ -50,6 +55,15 @@ export function FacebookFeedAd({ s, primary, headline, description, device, medi
       ? sliceChars(description, 0, fb.descriptionMax)
       : description;
   const showDescription = descClamped.trim().length > 0 && !headlineSqueezed;
+
+  // Display link: the clamped, shown destination domain. Falls back to the mock
+  // domain when no destination URL is provided, so the preview is unchanged.
+  const displayLink = clampDisplayLink(
+    destinationUrl?.trim() ? deriveDisplayLink(destinationUrl) : 'posttruncate.com',
+    'facebook',
+  ).text;
+  // CTA label resolves to the requested label, else the platform default.
+  const ctaLabel = resolveCta('facebook', cta);
 
   const hasInput = primary.trim() || headline.trim() || description.trim() || mediaUrl;
   const badgeTone: Tone = !hasInput ? 'neutral' : primaryOver ? 'warn' : 'safe';
@@ -100,15 +114,24 @@ export function FacebookFeedAd({ s, primary, headline, description, device, medi
               </div>
             )}
 
-            {/* Link card: URL + headline + description */}
+            {/* Link card: URL + headline + description + CTA */}
             <div class="mt-3 rounded-md border border-hairline bg-canvas-soft px-3 py-2.5">
-              <p class="font-mono text-[11px] uppercase tracking-wide text-mute">posttruncate.com</p>
-              <p class="mt-0.5 truncate text-[15px] font-semibold leading-5 text-ink">
-                {headline.trim() || <span class="text-mute">{ap.placeholders.headline}</span>}
-              </p>
-              {showDescription && (
-                <p class="mt-0.5 truncate text-[13px] leading-5 text-body">{descClamped}</p>
-              )}
+              <div class="flex items-center justify-between gap-3">
+                <div class="min-w-0 flex-1">
+                  <p class="font-mono text-[11px] uppercase tracking-wide text-mute">{displayLink}</p>
+                  <p class="mt-0.5 truncate text-[15px] font-semibold leading-5 text-ink">
+                    {headline.trim() || <span class="text-mute">{ap.placeholders.headline}</span>}
+                  </p>
+                  {showDescription && (
+                    <p class="mt-0.5 truncate text-[13px] leading-5 text-body">{descClamped}</p>
+                  )}
+                </div>
+                {ctaLabel && (
+                  <span class="shrink-0 self-center rounded-md border border-hairline bg-canvas px-3 py-1.5 text-[13px] font-semibold leading-4 text-body">
+                    {ctaLabel}
+                  </span>
+                )}
+              </div>
             </div>
 
             <ActionBar

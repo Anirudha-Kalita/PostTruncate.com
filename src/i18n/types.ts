@@ -174,6 +174,33 @@ export interface AdPreviewStrings {
 }
 
 /**
+ * Link-display guidance copy for the Platform_Counter and Ad_Preview_Simulator
+ * islands. English-first: the canonical values live in
+ * src/i18n/linkDisplayStrings.ts and are consumed via an en-fallback getter
+ * (`linkDisplayStrings(s)`), so this is intentionally NOT required in any
+ * locale dictionary — that keeps the strict i18n parity lint
+ * (scripts/check-i18n.mjs) green while the silo ships English-only. A locale
+ * may opt in later by adding a `linkDisplay` override to its IslandStrings.
+ * Strings with runtime values hold {named} tokens filled by interp().
+ */
+export interface LinkDisplayStrings {
+  /** Plain-text platforms (Instagram, TikTok, YouTube): links aren't clickable. */
+  plainText: string;
+  /** Preview-card platforms (Facebook, LinkedIn, Threads): link renders a card. */
+  previewCard: string;
+  /** Preview-card platforms where only the first URL becomes the card. */
+  previewCardFirstUrl: string;
+  /** Clickable-inline platforms (Reddit, Pinterest): link stays clickable in body. */
+  clickableInline: string;
+  /** Counted-shortened platforms (X/Twitter): "{weight}" → fixed link weight. */
+  countedShortened: string;
+  /** Bio-link allowance line. "{n}" → number of clickable bio links allowed. */
+  bioLinkAllowance: string;
+  /** TikTok ad: in-feed captions carry no clickable link — the CTA does. */
+  adNoClickableLink: string;
+}
+
+/**
  * Strings consumed by the Preact islands. Split out from the rest because this
  * sub-object — and only this sub-object — is serialized into the client island
  * props, so it must stay free of any server-only values.
@@ -265,6 +292,14 @@ export interface IslandStrings {
    * parity lint stays green. Brand names stay untranslated in markup.
    */
   adPreviews?: AdPreviewStrings;
+  /**
+   * Link-display guidance for the counter & ad-preview islands. Optional and
+   * English-first while rolling out: intentionally absent from every locale
+   * dictionary, so the islands consume it through an en-fallback getter (see
+   * src/i18n/linkDisplayStrings.ts) and the strict i18n parity lint stays
+   * green. A locale opts in by adding a `linkDisplay` override.
+   */
+  linkDisplay?: LinkDisplayStrings;
   /**
    * "AI Improve" feature — button, tone picker, progress, and result/error
    * states for the Gemini-backed rewrite. Tone keys mirror lib/aiImprove.ts.

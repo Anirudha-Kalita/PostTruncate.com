@@ -2,8 +2,11 @@
 import { useMemo, useState } from 'preact/hooks';
 import { Card, CardHead, Meter, Badge, ClearButton, type Tone } from './ui';
 import { interp } from '../../i18n/interp';
-import { charCount } from '../../lib/textTools';
+import { charCount, platformLengthByMode } from '../../lib/textTools';
 import { PLATFORM_COUNTERS } from '../../data/platformCounters';
+import { organicLinkBehavior } from '../../data/linkBehavior';
+import { selectLinkIndication } from '../../lib/linkIndication';
+import { linkDisplayStrings } from '../../i18n/linkDisplayStrings';
 import type { IslandStrings } from '../../i18n/types';
 
 interface Props {
@@ -20,11 +23,62 @@ export function PlatformCounter({ s, platform, lang }: Props) {
 
   const nf = useMemo(() => new Intl.NumberFormat(lang), [lang]);
 
+  // Link-display guidance: resolve the localized copy and the platform's
+  // stored organic link behavior. Both are read additively — they never affect
+  // the existing counters, meters, badges, or limits below.
+  const ld = linkDisplayStrings(s);
+  const linkBehavior = organicLinkBehavior(platform);
+  // Determine the platform's link-counting mode once. Bluesky's 300-unit limit
+  // is measured in UTF-8 bytes (countMode === 'per-byte'); every other platform
+  // keeps the existing grapheme-based charCount with no behavior change.
+  const countMode = linkBehavior?.countMode;
+
+  /**
+   * Build the localized link-display indication lines for a field, or `null`
+   * when the field text contains no URL (Requirement 8.4 — render exactly as
+   * today). The indication key is derived solely from the platform's config via
+   * `selectLinkIndication`, so the displayed fact always matches stored config.
+   */
+  const linkIndicationLines = (text: string): string[] | null => {
+    const indication = selectLinkIndication(platform, text);
+    if (indication === 'none') return null;
+
+    const lines: string[] = [];
+    switch (indication) {
+      case 'plainText':
+        lines.push(ld.plainText);
+        break;
+      case 'previewCard':
+        // When the platform builds the card from the first URL only, name that
+        // first link as the card source (Requirement 5.2); otherwise show the
+        // generic preview-card line. A single clear line either way.
+        lines.push(linkBehavior?.cardFromFirstUrlOnly ? ld.previewCardFirstUrl : ld.previewCard);
+        break;
+      case 'clickableInline':
+        lines.push(ld.clickableInline);
+        break;
+      case 'countedShortened':
+        lines.push(
+          interp(ld.countedShortened, { weight: linkBehavior?.fixedLinkWeight ?? 23 }),
+        );
+        break;
+    }
+
+    const allowance = linkBehavior?.bioLinkAllowance;
+    if (allowance !== undefined) {
+      lines.push(interp(ld.bioLinkAllowance, { n: allowance }));
+    }
+
+    return lines.length > 0 ? lines : null;
+  };
+
   if (!config) return null;
 
   const counts = config.fields.map((f) => {
     const text = values[f.key] ?? '';
-    const count = charCount(text);
+    // Per-byte platforms (Bluesky) measure the body against the limit in UTF-8
+    // bytes; all other platforms remain byte-for-byte identical on charCount.
+    const count = countMode === 'per-byte' ? platformLengthByMode(text, 'per-byte') : charCount(text);
     return { ...f, text, count, over: count > f.limit };
   });
 
@@ -73,6 +127,9 @@ export function PlatformCounter({ s, platform, lang }: Props) {
                 {interp(c.remaining, { n: nf.format(f.limit - f.count) })}
               </p>
             )}
+            {linkIndicationLines(f.text)?.map((line) => (
+              <p class="text-[12px] leading-4 text-mute">{line}</p>
+            ))}
           </div>
         ))}
 

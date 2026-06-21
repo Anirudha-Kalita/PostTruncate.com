@@ -4,13 +4,17 @@ import type { IslandStrings } from '../../i18n/types';
 import { adPreviewStrings } from '../../i18n/adPreviewStrings';
 import { AD_PLATFORM_CONFIG } from '../../data/adPlatformConfig';
 import { font, truncateToWidth } from '../../lib/canvasText';
-import { googleHeadlineFits, GOOGLE_HEADLINE_SEPARATOR } from '../../lib/adTruncation';
+import { googleHeadlineFits, GOOGLE_HEADLINE_SEPARATOR, buildDisplayUrl } from '../../lib/adTruncation';
 
 interface Props {
   s: IslandStrings;
   /** Up to three RSA headlines (already char-capped by the inputs). */
   headlines: string[];
   description: string;
+  /** Optional final URL; when empty the display URL falls back to posttruncate.com. */
+  destinationUrl?: string;
+  /** Optional Google RSA display-path segments (clamped to ≤2 segments, ≤15 chars each). */
+  paths?: string[];
 }
 
 /**
@@ -19,10 +23,19 @@ interface Props {
  * breaches the ~600px desktop container, the trailing headline is dropped —
  * exactly the way Google clips the SERP ad slot.
  */
-export function GoogleRsaPreview({ s, headlines, description }: Props) {
+export function GoogleRsaPreview({ s, headlines, description, destinationUrl, paths }: Props) {
   const ap = adPreviewStrings(s);
   const cfg = AD_PLATFORM_CONFIG.google;
   const headlineFont = font(cfg.font.headlinePx, 'Arial');
+
+  // Build the green display URL from the final-URL domain plus up to two
+  // clamped, non-empty path segments. When no final URL is provided the
+  // display URL falls back to the canonical posttruncate.com (unchanged today).
+  const displayUrl = buildDisplayUrl(
+    destinationUrl?.trim() ? destinationUrl : 'posttruncate.com',
+    paths ?? [],
+    'google',
+  );
 
   const entered = headlines.map((h) => h.trim()).filter(Boolean);
   const hasInput = entered.length > 0 || description.trim().length > 0;
@@ -73,7 +86,7 @@ export function GoogleRsaPreview({ s, headlines, description }: Props) {
                 PostTruncate
               </span>
               <span style="display:block;font-family:Arial,Roboto,sans-serif;font-size:12px;line-height:1.3;color:#4d5156;">
-                posttruncate.com
+                {displayUrl}
               </span>
             </span>
           </div>

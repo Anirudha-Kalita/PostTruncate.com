@@ -5,6 +5,9 @@ import type { IslandStrings } from '../../i18n/types';
 import { adPreviewStrings } from '../../i18n/adPreviewStrings';
 import { AD_PLATFORM_CONFIG } from '../../data/adPlatformConfig';
 import { charCount, sliceChars } from '../../lib/textTools';
+import { tiktokAdCaptionHasNoClickableLink } from '../../lib/linkIndication';
+import { resolveCta } from '../../lib/adTruncation';
+import { linkDisplayStrings } from '../../i18n/linkDisplayStrings';
 
 interface Props {
   s: IslandStrings;
@@ -22,12 +25,19 @@ interface Props {
  */
 export function TikTokAd({ s, description, safeZone, mediaUrl }: Props) {
   const ap = adPreviewStrings(s);
+  const ld = linkDisplayStrings(s);
   const tk = AD_PLATFORM_CONFIG.tiktok;
   const common = s.common;
   const name = common.handle;
 
   const over = charCount(description) > tk.primaryTruncateChars;
   const visible = over ? sliceChars(description, 0, tk.primaryTruncateChars) : description;
+
+  // Additive link-display (Requirement 11). The CTA button carries the click
+  // (non-functional mock); the helper line appears only when the caption holds
+  // a URL/@/# that TikTok renders as non-clickable text.
+  const ctaLabel = resolveCta('tiktok');
+  const showNoClickable = tiktokAdCaptionHasNoClickableLink(description);
 
   const hasInput = description.trim() || mediaUrl;
   const badgeTone: Tone = !hasInput ? 'neutral' : over ? 'warn' : 'safe';
@@ -75,9 +85,20 @@ export function TikTokAd({ s, description, safeZone, mediaUrl }: Props) {
                 <span class="text-white/70">{ap.placeholders.primary}</span>
               )}
             </p>
+
+            {/* CTA pill carries the click on TikTok in-feed ads (mock). Solid
+                light background keeps it legible over the video. */}
+            {ctaLabel && (
+              <span class="mt-2 inline-flex rounded-md bg-white px-3 py-1.5 text-[12px] font-semibold leading-4 text-black drop-shadow-[0_1px_2px_rgba(0,0,0,0.6)]">
+                {ctaLabel}
+              </span>
+            )}
           </div>
         </div>
 
+        {showNoClickable && (
+          <p class="w-full text-[12px] leading-4 text-mute">{ld.adNoClickableLink}</p>
+        )}
         {safeZone && <p class="w-full text-[12px] leading-4 text-mute">{ap.safeZoneHint}</p>}
       </div>
     </Card>

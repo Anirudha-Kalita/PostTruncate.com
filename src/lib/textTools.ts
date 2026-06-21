@@ -7,6 +7,11 @@
  * combining marks, and astral-plane characters are not miscounted or split.
  */
 
+// Type-only import: erased at runtime, so it cannot create a circular runtime
+// import even though `src/data/linkBehavior.ts` imports the VALUE `LIMITS` from
+// this module (the dependency stays one-way at runtime).
+import type { LinkCountMode } from '../data/linkBehavior';
+
 /** Platform truncation/limit constants. */
 export const LIMITS = {
   LINKEDIN_DESKTOP: 210,
@@ -557,6 +562,70 @@ export function weightedLength(text: string): number {
   }
   weight += plainTextWeight(normalized.slice(cursor));
   return weight;
+}
+
+// ──────────────────────────────────────────────────────────────────────────
+// Platform-specific link-display counting (additive — platform-link-display).
+// These are NEW exports only; detectUrls / weightedLength / charCount /
+// byteCounts keep their signatures and results unchanged.
+// ──────────────────────────────────────────────────────────────────────────
+
+/** Total UTF-8 byte length, used for the Bluesky 300-unit limit. */
+export function utf8ByteLength(text: string): number {
+  return byteCounts(text).utf8;
+}
+
+/** A Bluesky external-link facet with UTF-8 byte offsets. */
+export interface LinkFacet {
+  url: string;
+  byteStart: number;
+  byteEnd: number;
+}
+
+/**
+ * Compute byte-indexed link facets for Bluesky. Reuses `detectUrls` (code-unit
+ * offsets) and converts each to UTF-8 byte offsets by measuring the UTF-8 byte
+ * length of the prefix substrings, so it never re-implements URL detection.
+ *
+ * Preserves the invariant `0 <= byteStart <= byteEnd <= utf8ByteLength(text)`
+ * and the round-trip that the UTF-8 byte slice `[byteStart, byteEnd)` decodes
+ * back to the detected `url`.
+ */
+export function blueskyLinkFacets(text: string): LinkFacet[] {
+  return detectUrls(text).map((m) => ({
+    url: m.url,
+    byteStart: utf8ByteLength(text.slice(0, m.start)),
+    byteEnd: utf8ByteLength(text.slice(0, m.end)),
+  }));
+}
+
+/**
+ * Per-platform body length selected by link-counting mode. This is an additive
+ * counting entry point that does NOT replace `weightedLength`:
+ *
+ *  - `'fixed-weight'` delegates to `weightedLength` (X/Twitter parity — every
+ *    URL collapses to `LIMITS.URL_WEIGHT`). `fixedLinkWeight` is accepted for
+ *    call-site symmetry but is intentionally not used to recompute the total,
+ *    since `weightedLength` already applies the fixed weight.
+ *  - `'per-char'` uses the standard plain-text weighting over the WHOLE string
+ *    with no URL collapse, so a detected URL contributes each of its characters
+ *    rather than a flat weight.
+ *  - `'per-byte'` returns the UTF-8 byte length (Bluesky 300-unit limit).
+ */
+export function platformLengthByMode(
+  text: string,
+  mode: LinkCountMode,
+  fixedLinkWeight?: number,
+): number {
+  switch (mode) {
+    case 'fixed-weight':
+      return weightedLength(text);
+    case 'per-byte':
+      return utf8ByteLength(text);
+    case 'per-char':
+    default:
+      return plainTextWeight(text.normalize('NFC'));
+  }
 }
 
 // ──────────────────────────────────────────────────────────────────────────

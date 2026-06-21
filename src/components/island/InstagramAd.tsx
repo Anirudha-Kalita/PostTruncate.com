@@ -5,7 +5,7 @@ import type { IslandStrings } from '../../i18n/types';
 import { adPreviewStrings } from '../../i18n/adPreviewStrings';
 import { AD_PLATFORM_CONFIG } from '../../data/adPlatformConfig';
 import { charCount, sliceChars } from '../../lib/textTools';
-import { instagramReelsFit } from '../../lib/adTruncation';
+import { clampDisplayLink, deriveDisplayLink, instagramReelsFit, resolveCta } from '../../lib/adTruncation';
 import { interp } from '../../i18n/interp';
 
 interface Props {
@@ -14,6 +14,10 @@ interface Props {
   mode: 'feed' | 'reels';
   safeZone: boolean;
   mediaUrl: string | null;
+  /** Optional Meta ad destination URL; the display link is derived from it. */
+  destinationUrl?: string;
+  /** Optional CTA label; resolves to the platform default when empty. */
+  cta?: string;
 }
 
 /**
@@ -22,7 +26,7 @@ interface Props {
  * safe zones (bottom profile band + right action stack) so caption/creative
  * collisions are visible.
  */
-export function InstagramAd({ s, caption, mode, safeZone, mediaUrl }: Props) {
+export function InstagramAd({ s, caption, mode, safeZone, mediaUrl, destinationUrl, cta }: Props) {
   const ap = adPreviewStrings(s);
   const ig = AD_PLATFORM_CONFIG.instagram;
   const common = s.common;
@@ -34,6 +38,15 @@ export function InstagramAd({ s, caption, mode, safeZone, mediaUrl }: Props) {
   const feedOver = charCount(caption) > ig.feedTruncateChars;
   const feedVisible = feedOver ? sliceChars(caption, 0, ig.feedTruncateChars) : caption;
   const reels = instagramReelsFit(caption);
+
+  // Meta ad CTA + display link (additive). CTA resolves to the requested label
+  // or the platform default; the display link is the clamped destination domain
+  // (omitted when empty — Instagram has no mock-domain fallback).
+  const ctaLabel = resolveCta('instagram', cta);
+  const displayLink = clampDisplayLink(
+    destinationUrl?.trim() ? deriveDisplayLink(destinationUrl) : '',
+    'instagram',
+  ).text;
 
   const truncated = isReels ? reels.truncated : feedOver;
   const hasInput = caption.trim() || mediaUrl;
@@ -87,6 +100,24 @@ export function InstagramAd({ s, caption, mode, safeZone, mediaUrl }: Props) {
               </div>
             )}
           </div>
+
+          {/* Meta ad CTA + display link (additive). The CTA button carries the
+              click on Instagram feed ads; the display link is shown muted when
+              a destination domain is available. */}
+          {ctaLabel && (
+            <div class="mt-2 flex items-center justify-between gap-3">
+              {displayLink ? (
+                <p class="min-w-0 flex-1 truncate font-mono text-[11px] uppercase tracking-wide text-mute">
+                  {displayLink}
+                </p>
+              ) : (
+                <span class="flex-1" />
+              )}
+              <span class="shrink-0 rounded-md border border-hairline bg-canvas px-3 py-1.5 text-[13px] font-semibold leading-4 text-body">
+                {ctaLabel}
+              </span>
+            </div>
+          )}
 
           {/* Feed caption below the media */}
           {!isReels && (
