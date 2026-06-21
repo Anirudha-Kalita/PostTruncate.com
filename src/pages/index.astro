@@ -12,8 +12,11 @@ import {
 } from '../i18n/config';
 
 const LANGUAGE_COOKIE = 'preferred_locale';
+// Geo-IP is the primary signal, with browser language as a secondary fallback,
+// so the response varies on the visitor's country signal, a saved cookie, and
+// Accept-Language.
 const REDIRECT_VARY =
-  'Accept-Language, Cookie, x-vercel-ip-country, cf-ipcountry, x-country-code, x-nf-country, fastly-client-country-code';
+  'Cookie, x-vercel-ip-country, cf-ipcountry, x-country-code, x-nf-country, fastly-client-country-code, Accept-Language';
 
 const COUNTRY_LOCALE = {
   AD: 'es',
@@ -154,9 +157,13 @@ if (queryLocale) {
   return redirectTo(queryLocale);
 }
 
+// Precedence: an explicit saved choice (set via ?lang= or the language
+// switcher) always wins; then the visitor's IP country; then browser language
+// (Accept-Language) as a fallback when geo is unknown/unmapped; English is the
+// final fallback.
 const savedLocale = normalizeLocale(Astro.cookies.get(LANGUAGE_COOKIE)?.value);
 const detectedLocale =
-  savedLocale ?? getBrowserLocale() ?? getGeoLocale() ?? DEFAULT_LOCALE;
+  savedLocale ?? getGeoLocale() ?? getBrowserLocale() ?? DEFAULT_LOCALE;
 
 return redirectTo(detectedLocale);
 ---
