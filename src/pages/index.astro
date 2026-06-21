@@ -109,6 +109,10 @@ const redirectTarget = (locale: LocaleCode) => {
 const redirectTo = (locale: LocaleCode) => {
   const response = Astro.redirect(redirectTarget(locale), 302);
   response.headers.set('Vary', REDIRECT_VARY);
+  // The target locale is per-visitor (cookie/geo/language), so this redirect
+  // must never be cached at the edge or in the browser — otherwise one
+  // visitor's locale would be served to everyone.
+  response.headers.set('Cache-Control', 'private, no-store');
   return response;
 };
 

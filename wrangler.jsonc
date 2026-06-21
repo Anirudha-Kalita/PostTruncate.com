@@ -16,10 +16,19 @@
   // → Cloudflare Error 1101 on any path that reaches the Worker (e.g.
   // /[lang]/<unknown>). `not_found_handling` makes the asset layer serve our
   // built 404.html for unmatched static requests.
+  //
+  // `run_worker_first: ["/"]` is REQUIRED for the bare-root locale router:
+  // the root has no static index.html (it's an on-demand SSR redirect), so with
+  // asset-first routing + not_found_handling:"404-page" the asset layer answers
+  // HTML navigations to "/" with the cached 404.html and never invokes the
+  // Worker (browsers send `Accept: text/html`; a plain curl slips through). This
+  // forces ONLY "/" to run the Worker first so geo/language detection runs;
+  // every other path keeps the fast asset-first behavior.
   "assets": {
     "directory": "./dist",
     "binding": "ASSETS",
-    "not_found_handling": "404-page"
+    "not_found_handling": "404-page",
+    "run_worker_first": [ "/" ]
   },
 
   // Serve the Worker at both the apex and the www hostname. custom_domain:true
