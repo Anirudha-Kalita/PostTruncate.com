@@ -1,10 +1,10 @@
 ---
 translationKey: tiktok-in-feed-ad-text-cutoff-the-100-character-trap
 title: 'TikTok in-feed ad text cutoff: the 100-character trap'
-subtitle: TikTok in-feed ads hard-cap your description at 100 characters - not the 2,200 you get organically. Here's exactly where the fold hits, what the safe zone is, and how to…
-description: TikTok in-feed ads hard-cap your description at 100 characters - not the 2,200 you get organically. Here's exactly where the fold hits, what the safe zone is, and how to…
+subtitle: TikTok in-feed ads hard-cap your description at 100 characters - not the 4,000 you get organically. Here's exactly where the fold hits, what the safe zone is, and how to…
+description: TikTok in-feed ads hard-cap your description at 100 characters - not the 4,000 you get organically. Here's exactly where the fold hits, what the safe zone is, and how to…
 publishDate: 2026-06-19
-updatedDate: ''
+updatedDate: '2026-06-21'
 locale: en
 slug: tiktok-in-feed-ad-text-cutoff-the-100-character-trap
 relatedPlatform: tiktok
@@ -16,7 +16,7 @@ ogImage: /og/TikTok_Ad_Hook_Hero.webp
 
 ## TL;DR
 
-TikTok's organic posts allow 2,200 characters. TikTok in-feed ads give you **100**. That's the hard cap the ads manager enforces - not a soft display fold, a real limit. Within that 100, the fold actually hits at the first line break or around the 100-character mark, so any CTA or discount code you placed after your opening line is almost certainly invisible to every user who doesn't tap "See more." The fix is to front-load your hook, value prop, and CTA into the first 50 to 70 characters - what I call the safe zone - and use a [TikTok ad preview simulator](/en/ad-previews/tiktok-ads/) to verify the fold before you put money behind it.
+TikTok's organic posts allow up to 4,000 characters. TikTok in-feed ads give you **100**. That's the hard cap the ads manager enforces - not a soft display fold, a real limit. Within that 100, the fold actually hits at the first line break or around the 100-character mark, so any CTA or discount code you placed after your opening line is almost certainly invisible to every user who doesn't tap "See more." The fix is to front-load your hook, value prop, and CTA into the first 50 to 70 characters - what I call the safe zone - and use a [TikTok ad preview simulator](/en/ad-previews/tiktok-ads/) to verify the fold before you put money behind it.
 
 Imagine this: you spend a week crafting a TikTok ad for a flash sale. The creative is sharp, the targeting is dialled in, and the spend is real - $500, $1,000, maybe more. The ad gets impressions. The video plays. But conversions are flat.
 
@@ -28,15 +28,15 @@ The promo code is already behind "See more." It was always behind "See more." Yo
 
 Here's what confuses most advertisers the first time they set up a TikTok campaign.
 
-When you post organically on TikTok, you get a generous 2,200-character limit for your caption. That's the same ceiling Instagram gives you, and most of the time it's more space than any creator actually needs. Yes, TikTok still folds the caption at the first line break or around 100 characters on the viewer side - but you have room to breathe.
+When you post organically on TikTok, you get a generous 4,000-character limit for your caption (2,200 if you post through the API or a scheduler). That's well beyond what Instagram gives you, and most of the time it's far more space than any creator actually needs. Yes, TikTok still folds the caption at the first line break or around 100 characters on the viewer side - but you have room to breathe.
 
 When you create a non-Spark in-feed ad through TikTok Ads Manager, the description field is a different product. The platform enforces a **100-character hard cap** at the point of entry. You literally cannot type past 100 characters. The field stops accepting input.
 
-That 2,200-character idea you had in your head? It doesn't exist in native ads. You get 100 characters. That's your entire written message.
+That 4,000-character idea you had in your head? It doesn't exist in native ads. You get 100 characters. That's your entire written message.
 
-![Organic vs. in-feed ad text limit comparison: 2,200 characters for organic posts, 100-character hard cap for native ads - same visible fold, completely different ceiling](/og/tiktok-in-feed-ad-1.png)
+![Organic vs. in-feed ad text limit comparison: 4,000 characters for organic posts, 100-character hard cap for native ads - same visible fold, completely different ceiling](/og/tiktok-in-feed-ad-1.png)
 
-<p align="center"><span style="font-size: 12px; "><em>Organic vs. in-feed ad text limit comparison: 2,200 characters for organic posts, 100-character hard cap for native ads - same visible fold, completely different ceiling</em></span></p>
+<p align="center"><span style="font-size: 12px; "><em>Organic vs. in-feed ad text limit comparison: 4,000 characters for organic posts, 100-character hard cap for native ads - same visible fold, completely different ceiling</em></span></p>
 
 And there's a second restriction that catches people off guard: **hashtags are blocked in the native ad description field.** You can't include `#sale` or `#skincare` In your ad copy. If hashtag discovery matters to your strategy, the only path is [Spark Ads](https://ads.tiktok.com/help/article/spark-ads) - where you post organically first and promote the existing post, inheriting its full text and hashtag formatting. It's a real workaround, but it requires a different workflow entirely.
 
@@ -70,7 +70,7 @@ After that safe zone, you enter a conditional band between roughly 70 and 100 ch
 
 And then there's the cliff: anything past 100 characters, or after the first hard line break, is hidden. Period.
 
-> "Plan for 100 characters as the effective limit, not the theoretical 2,200. Treat the description field like a headline or first line of an email subject: make it count."
+> "Plan for 100 characters as the effective limit, not the theoretical 4,000. Treat the description field like a headline or first line of an email subject: make it count."
 > 
 > -- [r/PPC community guide on TikTok ad specs](https://www.reddit.com/r/PPC/)
 
@@ -131,7 +131,7 @@ To put TikTok's in-feed ad limit in context, here's how it sits against the othe
 | Platform | Hard limit | Visible before fold | Notes |
 | --- | --- | --- | --- |
 | TikTok in-feed ad | 100 chars | \~70 chars (safe zone) | Hard cap enforced in Ads Manager; no hashtags |
-| TikTok organic | 2,200 chars | \~100 chars | Folds at first line break or \~100 chars |
+| TikTok organic | 4,000 chars | \~100 chars | Folds at first line break or \~100 chars; 2,200 via API/schedulers |
 | [Instagram](/en/blog/instagram-caption-limits-and-hashtag-rules-2026/) | 2,200 chars | \~125 chars | Hashtags allowed; folds consistently |
 | [Instagram Reels](/en/blog/instagram-reels-caption-character-limit-cutoff-explained/) | 2,200 chars | \~55-60 chars (Reels tab) | Even tighter fold in the Reels discovery view |
 | [Facebook](/en/blog/facebook-character-limits-the-feed-fold-and-what-gets-reach-in-2026/) | 63,206 chars | \~110 chars (mobile) | Massive ceiling, aggressive mobile fold |
@@ -151,7 +151,7 @@ If your next TikTok ad has a promo code, a price, a discount, or any specific ca
 ## FAQs
 
 <details><summary><b>What is the TikTok in-feed ad text character limit?</b></summary>
-<p>TikTok's ads manager enforces a **100-character limit** on the description field for non-Spark in-feed ads. This is the hard cap the platform applies at creation time - not just a display fold. Organic TikTok captions allow up to 2,200 characters, but ads are a different product with a much tighter ceiling. Use the [PostTruncate TikTok ad preview simulator](/en/ad-previews/tiktok-ads/) to see exactly where your text cuts off before you spend.</p></details>
+<p>TikTok's ads manager enforces a **100-character limit** on the description field for non-Spark in-feed ads. This is the hard cap the platform applies at creation time - not just a display fold. Organic TikTok captions allow up to 4,000 characters (2,200 via the API or a scheduler), but ads are a different product with a much tighter ceiling. Use the [PostTruncate TikTok ad preview simulator](/en/ad-previews/tiktok-ads/) to see exactly where your text cuts off before you spend.</p></details>
 
 <details><summary><b>Why does my TikTok ad description get cut off?</b></summary>
 <p>TikTok in-feed ads truncate the description at approximately **100 characters or the first line break**, whichever comes first. The platform then appends an unclickable "... See more" label. Because TikTok is a fast-scrolling, full-screen video experience, the vast majority of viewers never tap to expand - so anything past the cutoff is effectively invisible. The [TikTok caption checker](/en/tiktok-caption-checker/) on PostTruncate shows you the fold in real time as you type.</p></details>

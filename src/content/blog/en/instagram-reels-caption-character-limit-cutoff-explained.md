@@ -4,7 +4,7 @@ title: Instagram Reels Caption Character Limit Cutoff Explained
 subtitle: Instagram Reels captions get cut off at 125 characters in the feed - but only 55-60 in the Reels tab. Here's how to write captions that survive both views.
 description: Instagram Reels captions get cut off at 125 characters in the feed - but only 55-60 in the Reels tab. Here's how to write captions that survive both views.
 publishDate: 2026-06-17
-updatedDate: ''
+updatedDate: '2026-06-21'
 locale: en
 slug: instagram-reels-caption-character-limit-cutoff-explained
 relatedPlatform: instagram
@@ -123,7 +123,7 @@ I built [PostTruncate's Instagram caption preview tool](/en/instagram-character-
 
 <p align="center"><span style="font-size: 12px; "><em>PostTruncate Instagram character counter in action, showing live fold preview for feed and Reels tab views</em></span></p>
 
-The tool also flags when your hashtag count crosses the [5-hashtag practical safety ceiling](/en/blog/instagram-caption-limits-and-hashtag-rules-2026/) - a separate risk that can suppress reach silently. And it handles all the edge cases: emojis are counted as characters (complex emojis with skin-tone modifiers can register as multiple characters), line breaks count against your total, and the character count updates live across the entire caption.
+The tool also flags when your hashtag count passes the [recommended ~5-hashtag mark](/en/blog/instagram-caption-limits-and-hashtag-rules-2026/) (the hard cap is 30) - a separate risk that can suppress reach silently. And it handles all the edge cases: emojis are counted as characters (complex emojis with skin-tone modifiers can register as multiple characters), line breaks count against your total, and the character count updates live across the entire caption.
 
 The workflow I'd recommend:
 
@@ -159,7 +159,7 @@ The number has been independently documented by multiple creators and social med
 | Home feed | \~125 | Standard feed fold; same as regular posts |
 | Recommended safe zone | 50 | Buffer ensures visibility in both views |
 | Hard caption limit | 2,200 | Post won't publish if exceeded |
-| Practical hashtag ceiling | 5 | More risks of silent algorithmic suppression |
+| Recommended hashtags | ~5 (30 hard cap) | More than a handful risks silent algorithmic suppression |
 
 ## Try PostTruncate
 
