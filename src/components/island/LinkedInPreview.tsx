@@ -1,5 +1,5 @@
 /** @jsxImportSource preact */
-import { linkedInHook, charCount, LIMITS, IMAGE_RATIOS, extractLinkData, mutatePreviewText } from '../../lib/textTools';
+import { linkedInHook, charCount, LIMITS, IMAGE_RATIOS, extractLinkData } from '../../lib/textTools';
 import { LivePreviewCard } from './LivePreviewCard';
 import {
   Card,
@@ -15,8 +15,10 @@ import {
   VerifiedTick,
   Globe,
   ActionBar,
+  Engagement,
   MoreDots,
   PostCard,
+  LinkText,
   previewAuthor,
   monogram,
 } from './ui';
@@ -62,13 +64,11 @@ export function LinkedInPreview({ text, view, setView, lang, s, toolLinkHref, im
   const viewLabel = view === 'mobile' ? l.viewMobile : l.viewDesktop;
 
   // Link-card simulation (Requirement 9): the counters/badge/meter above keep
-  // measuring the FULL `text`; only the rendered body swaps to the URL-omitted
-  // copy when the platform drops the raw URL once the card renders. The fold is
-  // recomputed on the display copy for the body only — never for the counts.
+  // measuring the FULL `text`. LinkedIn keeps the pasted URL inline as blue
+  // clickable text (it does NOT drop it from the body), so the body renders the
+  // full text and the URL is highlighted in place via <LinkText> — never cut.
   const linkData = extractLinkData(text, 'linkedin');
   const showCard = linkData.firstUrl !== undefined;
-  const bodyText = showCard ? mutatePreviewText(text, linkData.removesRawUrl) : text;
-  const body = bodyText !== text ? linkedInHook(bodyText, limit) : { hook, rest, truncated };
 
   return (
     <Card>
@@ -150,23 +150,24 @@ export function LinkedInPreview({ text, view, setView, lang, s, toolLinkHref, im
           <div class="mt-3 whitespace-pre-wrap break-words text-[14px] leading-[22px] text-ink">
             {text ? (
               <>
-                {/* The portion that survives above the fold, subtly lit. */}
-                <span class={body.truncated ? 'rounded-xs bg-cyan-soft/40' : ''}>
-                  {body.hook}
+                {/* The portion that survives above the fold, subtly lit. Any URL
+                    in it is shown in link-blue, kept in place (not cut). */}
+                <span class={truncated ? 'rounded-xs bg-cyan-soft/40' : ''}>
+                  <LinkText text={hook} />
                 </span>
-                {body.truncated && (
+                {truncated && (
                   <span class="font-semibold text-mute" aria-label={l.seeMore}>
                     {l.seeMore}
                   </span>
                 )}
                 {/* Explicit fold line: everything below is hidden in-feed. */}
-                {body.truncated && showFolded && (
+                {truncated && showFolded && (
                   <FoldMarker label={s.hook.foldLabel} ariaLabel={s.hook.foldAria} />
                 )}
                 {/* Folded remainder, dimmed to show what readers must click for. */}
-                {body.truncated && showFolded && body.rest && (
+                {truncated && showFolded && rest && (
                   <span class="text-mute/45 line-through decoration-hairline-strong/40">
-                    {body.rest}
+                    {rest}
                   </span>
                 )}
               </>
@@ -200,12 +201,35 @@ export function LinkedInPreview({ text, view, setView, lang, s, toolLinkHref, im
             />
           )}
 
-          {/* Labeled reaction bar — Like / Comment / Share. */}
+          {/* Social proof — reaction bubbles + count on the left, comments ·
+              reposts on the right. LinkedIn shows this between the post content
+              and the action bar. */}
+          <div class="mt-3 flex items-center justify-between text-[13px] text-mute">
+            <div class="flex items-center gap-1.5">
+              <span class="flex -space-x-1" aria-hidden="true">
+                <span class="flex h-[18px] w-[18px] items-center justify-center rounded-full bg-link text-on-primary ring-1 ring-canvas">
+                  <Engagement icon="thumbsUp" size={11} />
+                </span>
+                <span class="flex h-[18px] w-[18px] items-center justify-center rounded-full bg-error text-on-primary ring-1 ring-canvas">
+                  <Engagement icon="like" size={11} />
+                </span>
+              </span>
+              <span>{nf.format(1200)}</span>
+            </div>
+            <div class="flex items-center gap-1.5">
+              <span>{interp(s.meta.commentsCount, { n: nf.format(89) })}</span>
+              <span aria-hidden="true">·</span>
+              <span>{interp(s.meta.repostsCount, { n: nf.format(17) })}</span>
+            </div>
+          </div>
+
+          {/* Labeled action bar — Like / Comment / Repost / Send. */}
           <ActionBar
             items={[
               { icon: 'thumbsUp', label: s.common.actions.like },
               { icon: 'comment', label: s.common.actions.comment },
-              { icon: 'share', label: s.common.actions.share },
+              { icon: 'repost', label: s.common.actions.repost },
+              { icon: 'send', label: s.common.actions.send },
             ]}
           />
         </PostCard>

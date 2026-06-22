@@ -1,7 +1,7 @@
 /** @jsxImportSource preact */
 import { useRef, useState } from 'preact/hooks';
 import { charCount, detectUrls, LIMITS, sliceChars, tiktokFoldIndex } from '../../lib/textTools';
-import { Card, CardHead, Badge, Segmented, BrandLogo, ToolLink, FoldMarker, previewAuthor } from './ui';
+import { Card, CardHead, Badge, Segmented, BrandLogo, ToolLink, FoldMarker, TikTokActionRail, previewAuthor } from './ui';
 import { interp, plural } from '../../i18n/interp';
 import type { IslandStrings } from '../../i18n/types';
 
@@ -133,12 +133,9 @@ export function TikTokPreview({ text, lang, s, toolLinkHref, view, setView, imag
           {/* Bottom gradient for legibility */}
           <div class="pointer-events-none absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/70 to-transparent" />
 
-          {/* Right-hand engagement rail */}
-          <div class="absolute bottom-[22%] right-2 flex flex-col items-center gap-4 text-white">
-            <RailIcon><path d="M12 21s-7-4.35-9.5-8.5C1 9 3 6 6 6c2 0 3 1.5 6 4 3-2.5 4-4 6-4 3 0 5 3 3.5 6.5C19 16.65 12 21 12 21z" /></RailIcon>
-            <RailIcon><path d="M21 12a8 8 0 0 1-11.5 7.2L3 21l1.8-6.5A8 8 0 1 1 21 12z" /></RailIcon>
-            <RailIcon><path d="M4 12v7a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-7M16 6l-4-4-4 4M12 2v13" /></RailIcon>
-          </div>
+          {/* Right-hand action rail — avatar + follow, like / comment / bookmark
+              / share with counts, then the rotating sound disc. */}
+          <TikTokActionRail handle={author.handle} lang={lang} class="absolute bottom-[9%] right-2" />
 
           {/* Caption overlay */}
           <div class="absolute inset-x-0 bottom-0 p-3 pr-12 text-white">
@@ -153,6 +150,11 @@ export function TikTokPreview({ text, lang, s, toolLinkHref, view, setView, imag
             ) : (
               <p class="mt-1 text-[13px] text-white/70">{interp(tk.placeholder, { limit: nf.format(LIMITS.TIKTOK_CAPTION_MAX) })}</p>
             )}
+            {/* Sound attribution — TikTok shows the track under the caption. */}
+            <div class="mt-1.5 flex items-center gap-1.5 text-[12px] text-white/90">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" class="shrink-0" aria-hidden="true"><path d="M12 3v10.55A4 4 0 1 0 14 17V7h4V3h-6z" /></svg>
+              <span class="truncate">{interp(tk.sound, { handle: author.handle })}</span>
+            </div>
           </div>
 
           {/* Safe-zone overlay (toggle, default off) */}
@@ -168,11 +170,5 @@ export function TikTokPreview({ text, lang, s, toolLinkHref, view, setView, imag
 
       {toolLinkHref && <ToolLink href={toolLinkHref}>{s.toolLinks.tiktok}</ToolLink>}
     </Card>
-  );
-}
-
-function RailIcon({ children }: { children: preact.ComponentChildren }) {
-  return (
-    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">{children}</svg>
   );
 }

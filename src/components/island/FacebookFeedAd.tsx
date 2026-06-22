@@ -17,6 +17,7 @@ import { adPreviewStrings } from '../../i18n/adPreviewStrings';
 import { AD_PLATFORM_CONFIG } from '../../data/adPlatformConfig';
 import { charCount, sliceChars } from '../../lib/textTools';
 import { clampDisplayLink, deriveDisplayLink, resolveCta } from '../../lib/adTruncation';
+import { interp } from '../../i18n/interp';
 
 interface Props {
   s: IslandStrings;
@@ -25,6 +26,8 @@ interface Props {
   description: string;
   device: 'mobile' | 'desktop';
   mediaUrl: string | null;
+  /** Whether the attached media is an image (default) or a video. */
+  mediaKind?: 'image' | 'video';
   /** Optional Meta ad destination URL; falls back to the mock domain when empty. */
   destinationUrl?: string;
   /** Optional CTA label; resolves to the platform default when empty. */
@@ -37,7 +40,7 @@ interface Props {
  * safe-zone; the link description caps at 30 characters and hides when a long
  * headline squeezes the mobile layout.
  */
-export function FacebookFeedAd({ s, primary, headline, description, device, mediaUrl, destinationUrl, cta }: Props) {
+export function FacebookFeedAd({ s, primary, headline, description, device, mediaUrl, mediaKind = 'image', destinationUrl, cta }: Props) {
   const ap = adPreviewStrings(s);
   const fb = AD_PLATFORM_CONFIG.facebook;
   const common = s.common;
@@ -110,7 +113,7 @@ export function FacebookFeedAd({ s, primary, headline, description, device, medi
             {/* Media */}
             {mediaUrl && (
               <div class="mt-3 overflow-hidden rounded-md border border-hairline">
-                <FeedImage src={mediaUrl} maxRatio={1.25} />
+                <FeedImage src={mediaUrl} kind={mediaKind} maxRatio={1.25} />
               </div>
             )}
 
@@ -128,7 +131,7 @@ export function FacebookFeedAd({ s, primary, headline, description, device, medi
                 </div>
                 {ctaLabel && (
                   <span class="shrink-0 self-center rounded-md border border-hairline bg-canvas px-3 py-1.5 text-[13px] font-semibold leading-4 text-body">
-                    {ctaLabel}
+                    {ap.cta[ctaLabel] ?? ctaLabel}
                   </span>
                 )}
               </div>
@@ -146,7 +149,7 @@ export function FacebookFeedAd({ s, primary, headline, description, device, medi
 
         {headlineSqueezed && (
           <p class="w-full text-[12px] leading-4 text-warning-deep">
-            Headline over {fb.headlineSafeMax} characters on mobile — the link description is hidden.
+            {interp(ap.fbHeadlineSqueezed, { limit: fb.headlineSafeMax })}
           </p>
         )}
       </div>

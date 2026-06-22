@@ -169,8 +169,28 @@ export interface AdPreviewStrings {
   /** Badge labels for the preview state. */
   badgeFits: string;
   badgeTruncated: string;
-  /** Mock brand row label, e.g. "Sponsored". */
+  /** Mock brand row label, e.g. "Sponsored" (Meta/TikTok). */
   sponsored: string;
+  /** Google's own ad label — localized differently from Meta's (e.g. de "Anzeige"). */
+  googleAdLabel: string;
+  /** Google RSA input label "Final URL". */
+  finalUrl: string;
+  /** Google RSA display-path input label "Path {n}". */
+  pathN: string;
+  /** Meta ad input label "Display link / Destination URL". */
+  displayLink: string;
+  /** Meta/TikTok ad input label "Call to action". */
+  callToAction: string;
+  /** Facebook warning when a long mobile headline squeezes out the description; "{limit}" token. */
+  fbHeadlineSqueezed: string;
+  /** Google warning when headlines overflow the slot; "{n}" and "{px}" tokens. */
+  googleHeadlinesDropped: Plural;
+  /**
+   * Localized labels for the platform CTA presets, keyed by the canonical English
+   * label (the stable value stored by `resolveCta`). Real platforms show the CTA
+   * in the viewer's language, so the rendered button reads from here.
+   */
+  cta: Record<string, string>;
 }
 
 /**
@@ -437,6 +457,10 @@ export interface IslandStrings {
       like: string;
       comment: string;
       share: string;
+      /** LinkedIn bottom-bar "Repost" action. */
+      repost: string;
+      /** LinkedIn bottom-bar "Send" action. */
+      send: string;
     };
   };
   sms: {
@@ -526,6 +550,8 @@ export interface IslandStrings {
     lineBreakHint: string;
     /** "{limit}". */
     placeholder: string;
+    /** Sound attribution in the caption overlay; "{handle}" token (e.g. "original sound · @{handle}"). */
+    sound: string;
   };
   meta: {
     title: string;
@@ -545,6 +571,20 @@ export interface IslandStrings {
     a11yLabel: string;
     /** Facebook audience label shown after the timestamp (e.g. "Public"). */
     audiencePublic: string;
+    /** Instagram likes line; "{handle}" token (e.g. "Liked by {handle} and others"). */
+    likedBy: string;
+    /** Instagram comments affordance; "{n}" token (e.g. "View all {n} comments"). */
+    viewAllComments: string;
+    /** Facebook engagement summary — comments count; "{n}" token (e.g. "{n} comments"). */
+    commentsCount: string;
+    /** Facebook engagement summary — shares count; "{n}" token (e.g. "{n} shares"). */
+    sharesCount: string;
+    /** LinkedIn social-proof summary — reposts count; "{n}" token (e.g. "{n} reposts"). */
+    repostsCount: string;
+    /** Threads engagement summary — replies count; "{n}" token (e.g. "{n} replies"). */
+    repliesCount: string;
+    /** Threads engagement summary — likes count; "{n}" token (e.g. "{n} likes"). */
+    likesCount: string;
     /** "{n} flagged". */
     flagged: string;
     flaggedNone: string;

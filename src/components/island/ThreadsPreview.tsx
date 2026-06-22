@@ -1,5 +1,5 @@
 /** @jsxImportSource preact */
-import { charCount, detectUrls, FOLDS, LIMITS, sliceChars, splitThread, IMAGE_RATIOS, extractLinkData, mutatePreviewText } from '../../lib/textTools';
+import { charCount, detectUrls, FOLDS, LIMITS, sliceChars, splitThread, IMAGE_RATIOS, extractLinkData } from '../../lib/textTools';
 import { LivePreviewCard } from './LivePreviewCard';
 import {
   Card,
@@ -15,6 +15,7 @@ import {
   Engagement,
   MoreDots,
   PostCard,
+  LinkText,
   previewAuthor,
   monogram,
 } from './ui';
@@ -65,8 +66,9 @@ export function ThreadsPreview({ text, lang, s, toolLinkHref, view, setView, ima
   const visualFold = FOLDS.threads[view];
 
   // Link-card simulation (Requirement 9): counts/chain/per-post counters below
-  // keep measuring the original post text; only the FIRST post's displayed copy
-  // swaps to the URL-omitted string when Threads drops the raw URL.
+  // keep measuring the original post text. Threads keeps the pasted URL inline
+  // as blue clickable text (it does NOT drop it), so the post body renders in
+  // full and the URL is highlighted in place via <LinkText> — never cut.
   const linkData = extractLinkData(trimmed, 'threads');
   const showCard = linkData.firstUrl !== undefined;
 
@@ -160,7 +162,7 @@ export function ThreadsPreview({ text, lang, s, toolLinkHref, view, setView, ima
               }
             >
               <ThreadsPostText
-                post={showCard && i === 0 ? mutatePreviewText(post, linkData.removesRawUrl) : post}
+                post={post}
                 visualFold={visualFold}
                 seeMore={s.linkedin.seeMore}
                 foldLabel={s.hook.foldLabel}
@@ -191,21 +193,20 @@ export function ThreadsPreview({ text, lang, s, toolLinkHref, view, setView, ima
                 />
               )}
 
-              {/* Native Threads engagement row: left aligned, tightly packed */}
+              {/* Native Threads engagement row: like / reply / repost / share,
+                  left aligned and tightly packed. */}
               <div class="mt-3 flex items-center gap-4 text-ink">
                 <Engagement icon="like" size={19} />
                 <Engagement icon="comment" size={19} />
                 <Engagement icon="repost" size={19} />
-                <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M22 2 11 13M22 2l-7 20-4-9-9-4 20-7z" />
-                </svg>
+                <Engagement icon="send" size={19} />
               </div>
 
               <div class="mt-2.5 flex items-center justify-between text-[14px] text-mute">
                 <div class="flex items-center gap-1.5">
-                  <span>123 replies</span>
-                  <span>·</span>
-                  <span>456 likes</span>
+                  <span>{interp(s.meta.repliesCount, { n: nf.format(123) })}</span>
+                  <span aria-hidden="true">·</span>
+                  <span>{interp(s.meta.likesCount, { n: nf.format(456) })}</span>
                 </div>
                 <div class="font-mono text-[11px] tabular-nums text-mute/70">
                   <span>{interp(s.common.charsSuffix, { n: nf.format(charCount(post)) })}</span>
@@ -244,7 +245,7 @@ function ThreadsPostText({
 
   return (
     <p class="mt-2 whitespace-pre-wrap break-words text-[14px] leading-[21px] text-ink">
-      {visible}
+      <LinkText text={visible} />
       {shouldFold && <span class="text-mute">{seeMore}</span>}
       {shouldFold && showFolded && <FoldMarker label={foldLabel} ariaLabel={foldAria} />}
       {shouldFold && showFolded && hidden && (

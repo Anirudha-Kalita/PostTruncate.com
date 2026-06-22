@@ -50,6 +50,8 @@ export interface InstagramPlatformConfig {
   reelsMin: number;
   /** Reels caption hard ceiling (chars). */
   reelsMax: number;
+  /** Feed caption "… more" affordance label. */
+  seeMoreLabel: string;
   safeZone: SafeZoneInsets;
 }
 
@@ -87,6 +89,7 @@ export const AD_PLATFORM_CONFIG = {
     feedTruncateChars: 125,
     reelsMin: 40,
     reelsMax: 72,
+    seeMoreLabel: '… more',
     safeZone: { bottomPct: 20, rightPct: 15 },
   },
   tiktok: {

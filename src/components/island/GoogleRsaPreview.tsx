@@ -5,6 +5,7 @@ import { adPreviewStrings } from '../../i18n/adPreviewStrings';
 import { AD_PLATFORM_CONFIG } from '../../data/adPlatformConfig';
 import { font, truncateToWidth } from '../../lib/canvasText';
 import { googleHeadlineFits, GOOGLE_HEADLINE_SEPARATOR, buildDisplayUrl } from '../../lib/adTruncation';
+import { interp, plural } from '../../i18n/interp';
 
 interface Props {
   s: IslandStrings;
@@ -71,7 +72,7 @@ export function GoogleRsaPreview({ s, headlines, description, destinationUrl, pa
           {/* "Sponsored" label — bold black, as Google has shown since Sept 2023
               (replacing the old "Ad" label). */}
           <p style="font-family:Arial,sans-serif;font-size:12px;font-weight:700;line-height:1.3;color:#202124;margin:0 0 6px;">
-            {ap.sponsored}
+            {ap.googleAdLabel}
           </p>
           {/* Favicon + advertiser name, with the display URL beneath. */}
           <div class="mb-1 flex items-center gap-2">
@@ -110,9 +111,10 @@ export function GoogleRsaPreview({ s, headlines, description, destinationUrl, pa
 
         {fit.truncated && (
           <p class="mt-3 text-[12px] leading-4 text-warning-deep">
-            {fit.dropped.length === 1
-              ? `1 headline dropped — combined width exceeds the ${cfg.desktopContainerPx}px desktop ad slot.`
-              : `${fit.dropped.length} headlines dropped — combined width exceeds the ${cfg.desktopContainerPx}px desktop ad slot.`}
+            {interp(plural(ap.googleHeadlinesDropped, fit.dropped.length), {
+              n: fit.dropped.length,
+              px: cfg.desktopContainerPx,
+            })}
           </p>
         )}
       </div>

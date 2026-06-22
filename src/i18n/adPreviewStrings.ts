@@ -1,14 +1,11 @@
 // ──────────────────────────────────────────────────────────────────────────
-// English-first UI copy for the Ad Previews & Simulators islands.
+// English fallback UI copy for the Ad Previews & Simulators islands.
 //
-// These strings are deliberately NOT placed in the per-locale dictionaries
-// (en.ts, es.ts, …): the i18n parity lint (scripts/check-i18n.mjs) requires
-// every locale to carry the EXACT same key paths, so an English-only block in
-// en.ts would break parity. Instead the islands read this constant through
-// `adPreviewStrings(s)`, which returns the locale's `adPreviews` override when
-// present and falls back to this English default otherwise. That keeps the lint
-// green while the silo ships English-only, and lets any locale opt in later by
-// adding an `adPreviews` sub-object to its IslandStrings.
+// All ten locale dictionaries now carry a fully-translated `adPreviews`
+// sub-object (chrome + CTA preset labels), so the islands read the localized
+// copy via `adPreviewStrings(s)` → `s.adPreviews`. This constant remains the
+// English default the getter falls back to if a locale ever omits the override,
+// and it must satisfy the full `AdPreviewStrings` shape so the type stays honest.
 // ──────────────────────────────────────────────────────────────────────────
 
 import type { AdPreviewStrings, IslandStrings } from './types';
@@ -47,6 +44,30 @@ export const AD_PREVIEW_STRINGS: AdPreviewStrings = {
   badgeFits: 'Fits',
   badgeTruncated: 'Truncated',
   sponsored: 'Sponsored',
+  googleAdLabel: 'Sponsored',
+  finalUrl: 'Final URL',
+  pathN: 'Path {n}',
+  displayLink: 'Display link / Destination URL',
+  callToAction: 'Call to action',
+  fbHeadlineSqueezed: 'Headline over {limit} characters on mobile — the link description is hidden.',
+  googleHeadlinesDropped: {
+    one: '{n} headline dropped — combined width exceeds the {px}px desktop ad slot.',
+    other: '{n} headlines dropped — combined width exceeds the {px}px desktop ad slot.',
+  },
+  cta: {
+    'Shop Now': 'Shop Now',
+    'Learn More': 'Learn More',
+    'Sign Up': 'Sign Up',
+    'Download': 'Download',
+    'Book Now': 'Book Now',
+    'Contact Us': 'Contact Us',
+    'Subscribe': 'Subscribe',
+    'Get Offer': 'Get Offer',
+    'Apply Now': 'Apply Now',
+    'Send Message': 'Send Message',
+    'Order Now': 'Order Now',
+    'Watch Now': 'Watch Now',
+  },
 };
 
 /**

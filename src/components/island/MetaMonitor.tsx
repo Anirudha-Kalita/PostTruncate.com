@@ -9,7 +9,6 @@ import {
   LIMITS,
   IMAGE_RATIOS,
   extractLinkData,
-  mutatePreviewText,
 } from '../../lib/textTools';
 import { LivePreviewCard } from './LivePreviewCard';
 import {
@@ -29,6 +28,7 @@ import {
   Engagement,
   MoreDots,
   PostCard,
+  LinkText,
   previewAuthor,
   monogram,
 } from './ui';
@@ -106,13 +106,11 @@ export function MetaMonitor({ text, lang, s, toolLinkHref, facebookToolLinkHref,
 
   // Facebook link-card simulation (Requirement 9): Facebook is the only Meta
   // preview-card platform (Instagram stays plain-text, no card). The badge and
-  // counter above keep measuring the full `activeText`; only the rendered
-  // Facebook body swaps to the URL-omitted copy when the raw URL is dropped.
+  // counter above keep measuring the full `activeText`. Facebook keeps the
+  // pasted URL inline as blue clickable text (it does NOT drop it), so the body
+  // renders the full caption and the URL is highlighted in place via <LinkText>.
   const fbLinkData = extractLinkData(activeText, 'facebook');
   const fbShowCard = fbLinkData.firstUrl !== undefined;
-  const facebookDisplay = fbShowCard
-    ? truncateForFeed(mutatePreviewText(activeText, fbLinkData.removesRawUrl), facebookLimit)
-    : facebookPreview;
 
   const instagramCard = (
     <Card key="instagram">
@@ -179,13 +177,25 @@ export function MetaMonitor({ text, lang, s, toolLinkHref, facebookToolLinkHref,
                 <FeedImage src={image} kind={mediaKind} minRatio={IMAGE_RATIOS.instagram.min} maxRatio={IMAGE_RATIOS.instagram.max} />
               </div>
             )}
-            {/* Faint Instagram action row — like / comment / share. */}
-            <div class="mt-3 flex max-w-[110px] items-center justify-between text-mute/45">
-              <Engagement icon="like" size={20} />
-              <Engagement icon="comment" size={20} />
-              <Engagement icon="share" size={20} />
+            {/* Faint Instagram action row — like / comment / share on the left,
+                save (bookmark) pushed to the right, exactly as in-feed. */}
+            <div class="mt-3 flex items-center justify-between text-mute/45">
+              <div class="flex items-center gap-4">
+                <Engagement icon="like" size={20} />
+                <Engagement icon="comment" size={20} />
+                <Engagement icon="share" size={20} />
+              </div>
+              <Engagement icon="save" size={20} />
             </div>
-            <p class="mt-2 min-h-[42px] whitespace-pre-wrap break-words text-[14px] leading-[21px] text-ink">
+            {/* Likes line ("Liked by … and others"). */}
+            <p class="mt-2 text-[13px] font-semibold text-ink">
+              {interp(m.likedBy, { handle: author.handle })}
+            </p>
+            {/* Caption — bold username prefix, then the caption text. */}
+            <p class="mt-1 min-h-[42px] whitespace-pre-wrap break-words text-[14px] leading-[21px] text-ink">
+              {instagramPreview.previewText && (
+                <span class="font-semibold">{author.handle} </span>
+              )}
               {instagramPreview.previewText}
               {instagramPreview.isTruncated && (
                 <span class="text-slate-400">{s.linkedin.seeMore}</span>
@@ -199,6 +209,12 @@ export function MetaMonitor({ text, lang, s, toolLinkHref, facebookToolLinkHref,
                 </span>
               )}
             </p>
+            {/* View-all-comments affordance. */}
+            <p class="mt-1 text-[13px] text-mute">
+              {interp(m.viewAllComments, { n: nf.format(128) })}
+            </p>
+            {/* Timestamp — Instagram renders it small and uppercased. */}
+            <p class="mt-1 text-[10px] uppercase tracking-wide text-mute">{author.timestamp}</p>
           </PostCard>
           {overCaptionLimit && (
             <p class="text-[12px] leading-4 text-error-deep">
@@ -310,16 +326,16 @@ export function MetaMonitor({ text, lang, s, toolLinkHref, facebookToolLinkHref,
             {/* Caption sits above the photo. Skip it for image-only posts. */}
             {(activeText !== '' || !image) && (
               <p class="mt-2 min-h-[42px] whitespace-pre-wrap break-words text-[14px] leading-[21px] text-ink">
-                {facebookDisplay.previewText}
-                {facebookDisplay.isTruncated && (
+                <LinkText text={facebookPreview.previewText} />
+                {facebookPreview.isTruncated && (
                   <span class="text-slate-400"> {s.linkedin.seeMore}</span>
                 )}
-                {facebookDisplay.isTruncated && showFolded && (
+                {facebookPreview.isTruncated && showFolded && (
                   <FoldMarker label={s.hook.foldLabel} ariaLabel={s.hook.foldAria} />
                 )}
-                {facebookDisplay.isTruncated && showFolded && facebookDisplay.hiddenText && (
+                {facebookPreview.isTruncated && showFolded && facebookPreview.hiddenText && (
                   <span class="text-mute/45 line-through decoration-hairline-strong/40">
-                    {facebookDisplay.hiddenText}
+                    {facebookPreview.hiddenText}
                   </span>
                 )}
               </p>
@@ -346,6 +362,28 @@ export function MetaMonitor({ text, lang, s, toolLinkHref, facebookToolLinkHref,
                 s={s}
               />
             )}
+
+            {/* Engagement summary — reaction bubbles + count on the left,
+                comments · shares on the right. Facebook shows this row between
+                the post content and the Like/Comment/Share bar. */}
+            <div class="mt-3 flex items-center justify-between text-[13px] text-mute">
+              <div class="flex items-center gap-1.5">
+                <span class="flex -space-x-1" aria-hidden="true">
+                  <span class="flex h-[18px] w-[18px] items-center justify-center rounded-full bg-link text-on-primary ring-1 ring-canvas">
+                    <Engagement icon="thumbsUp" size={11} />
+                  </span>
+                  <span class="flex h-[18px] w-[18px] items-center justify-center rounded-full bg-error text-on-primary ring-1 ring-canvas">
+                    <Engagement icon="like" size={11} />
+                  </span>
+                </span>
+                <span>{nf.format(1200)}</span>
+              </div>
+              <div class="flex items-center gap-1.5">
+                <span>{interp(m.commentsCount, { n: nf.format(234) })}</span>
+                <span aria-hidden="true">·</span>
+                <span>{interp(m.sharesCount, { n: nf.format(56) })}</span>
+              </div>
+            </div>
 
             {/* Labeled action bar — Like / Comment / Share. */}
             <ActionBar

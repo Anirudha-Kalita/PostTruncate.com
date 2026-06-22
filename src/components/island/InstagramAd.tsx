@@ -1,5 +1,5 @@
 /** @jsxImportSource preact */
-import { Card, CardHead, Badge, Avatar, FeedImage, MoreDots, monogram, type Tone } from './ui';
+import { Card, CardHead, Badge, Avatar, MoreDots, Engagement, CoverMedia, monogram, type Tone } from './ui';
 import { SafeZoneOverlay } from './SafeZoneOverlay';
 import type { IslandStrings } from '../../i18n/types';
 import { adPreviewStrings } from '../../i18n/adPreviewStrings';
@@ -14,6 +14,8 @@ interface Props {
   mode: 'feed' | 'reels';
   safeZone: boolean;
   mediaUrl: string | null;
+  /** Whether the attached media is an image (default) or a video. */
+  mediaKind?: 'image' | 'video';
   /** Optional Meta ad destination URL; the display link is derived from it. */
   destinationUrl?: string;
   /** Optional CTA label; resolves to the platform default when empty. */
@@ -26,7 +28,7 @@ interface Props {
  * safe zones (bottom profile band + right action stack) so caption/creative
  * collisions are visible.
  */
-export function InstagramAd({ s, caption, mode, safeZone, mediaUrl, destinationUrl, cta }: Props) {
+export function InstagramAd({ s, caption, mode, safeZone, mediaUrl, mediaKind = 'image', destinationUrl, cta }: Props) {
   const ap = adPreviewStrings(s);
   const ig = AD_PLATFORM_CONFIG.instagram;
   const common = s.common;
@@ -79,7 +81,7 @@ export function InstagramAd({ s, caption, mode, safeZone, mediaUrl, destinationU
             style={`aspect-ratio:${frameAspect};`}
           >
             {mediaUrl ? (
-              <img src={mediaUrl} alt="" class="h-full w-full object-cover" />
+              <CoverMedia src={mediaUrl} kind={mediaKind} />
             ) : (
               <div class="flex h-full w-full items-center justify-center text-[12px] text-mute">
                 {ap.media.add}
@@ -88,7 +90,8 @@ export function InstagramAd({ s, caption, mode, safeZone, mediaUrl, destinationU
 
             {isReels && safeZone && <SafeZoneOverlay insets={ig.safeZone} label={ap.safeZoneTag} />}
 
-            {/* Reels caption sits over the video, above the bottom safe band. */}
+            {/* Reels caption + CTA sit over the video, above the bottom safe
+                band, exactly as a Reels ad renders them. */}
             {isReels && (
               <div
                 class="absolute left-0 right-0 z-20 px-3"
@@ -97,41 +100,60 @@ export function InstagramAd({ s, caption, mode, safeZone, mediaUrl, destinationU
                 <p class="line-clamp-2 text-[13px] font-medium leading-4 text-white drop-shadow-[0_1px_2px_rgba(0,0,0,0.8)]">
                   {reels.text || ap.placeholders.primary}
                 </p>
+                {ctaLabel && (
+                  <span class="mt-2 inline-flex items-center gap-1 rounded-md bg-white px-3 py-1.5 text-[12px] font-semibold leading-4 text-black drop-shadow-[0_1px_2px_rgba(0,0,0,0.6)]">
+                    {ap.cta[ctaLabel] ?? ctaLabel}
+                    <Chevron size={13} />
+                  </span>
+                )}
               </div>
             )}
           </div>
 
-          {/* Meta ad CTA + display link (additive). The CTA button carries the
-              click on Instagram feed ads; the display link is shown muted when
-              a destination domain is available. */}
-          {ctaLabel && (
-            <div class="mt-2 flex items-center justify-between gap-3">
-              {displayLink ? (
-                <p class="min-w-0 flex-1 truncate font-mono text-[11px] uppercase tracking-wide text-mute">
+          {/* ── Feed placement: CTA bar, action icons, caption below the media ── */}
+          {!isReels && (
+            <>
+              {/* Full-width CTA bar — the defining Instagram feed-ad element,
+                  with a trailing chevron and a divider beneath it. */}
+              {ctaLabel && (
+                <div class="flex items-center justify-between gap-2 border-b border-hairline py-2.5 text-[14px] font-semibold text-ink">
+                  <span class="truncate">{ap.cta[ctaLabel] ?? ctaLabel}</span>
+                  <span class="shrink-0 text-mute">
+                    <Chevron size={16} />
+                  </span>
+                </div>
+              )}
+
+              {/* Engagement icons — like / comment / share + save. */}
+              <div class="mt-3 flex items-center justify-between text-mute/55">
+                <div class="flex items-center gap-4">
+                  <Engagement icon="like" size={20} />
+                  <Engagement icon="comment" size={20} />
+                  <Engagement icon="share" size={20} />
+                </div>
+                <Engagement icon="save" size={20} />
+              </div>
+
+              {/* Display link (muted), honoring the destination-URL input. */}
+              {displayLink && (
+                <p class="mt-2 truncate font-mono text-[11px] uppercase tracking-wide text-mute">
                   {displayLink}
                 </p>
-              ) : (
-                <span class="flex-1" />
               )}
-              <span class="shrink-0 rounded-md border border-hairline bg-canvas px-3 py-1.5 text-[13px] font-semibold leading-4 text-body">
-                {ctaLabel}
-              </span>
-            </div>
-          )}
 
-          {/* Feed caption below the media */}
-          {!isReels && (
-            <p class="mt-2 whitespace-pre-wrap text-[13px] leading-5 text-ink">
-              <span class="font-semibold">{name} </span>
-              {feedVisible ? (
-                <>
-                  {feedVisible}
-                  {feedOver && <span class="text-mute"> … more</span>}
-                </>
-              ) : (
-                <span class="text-mute">{ap.placeholders.primary}</span>
-              )}
-            </p>
+              {/* Caption — bold username + text. */}
+              <p class="mt-1 whitespace-pre-wrap text-[13px] leading-5 text-ink">
+                <span class="font-semibold">{name} </span>
+                {feedVisible ? (
+                  <>
+                    {feedVisible}
+                    {feedOver && <span class="text-mute"> {ig.seeMoreLabel}</span>}
+                  </>
+                ) : (
+                  <span class="text-mute">{ap.placeholders.primary}</span>
+                )}
+              </p>
+            </>
           )}
         </div>
 
@@ -145,5 +167,14 @@ export function InstagramAd({ s, caption, mode, safeZone, mediaUrl, destinationU
         )}
       </div>
     </Card>
+  );
+}
+
+/** Trailing right-chevron used on the Instagram CTA affordance. */
+function Chevron({ size = 16 }: { size?: number }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M9 6l6 6-6 6" />
+    </svg>
   );
 }

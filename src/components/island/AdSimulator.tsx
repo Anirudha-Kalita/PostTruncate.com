@@ -67,6 +67,10 @@ export function AdSimulator({ platform, s, lang }: Props) {
   const [mode, setMode] = useState<'feed' | 'reels'>('feed');
   const [safeZone, setSafeZone] = useState(true);
   const [mediaUrl, setMediaUrl] = useState<string | null>(null);
+  // Whether the picked media is an image (default) or a video. Facebook,
+  // Instagram (feed + Reels) and TikTok all run video ads; Google RSA is
+  // text-only and exposes no media control.
+  const [mediaKind, setMediaKind] = useState<'image' | 'video'>('image');
 
   // Meta ad (Facebook/Instagram) display-link controls. Stored separately from
   // the FieldKey map so the existing field meters stay untouched.
@@ -100,6 +104,7 @@ export function AdSimulator({ platform, s, lang }: Props) {
     const input = e.currentTarget as HTMLInputElement;
     const file = input.files?.[0];
     if (!file) return;
+    setMediaKind(file.type.startsWith('video/') ? 'video' : 'image');
     setMediaUrl((prev) => {
       if (prev) URL.revokeObjectURL(prev);
       return URL.createObjectURL(file);
@@ -139,6 +144,7 @@ export function AdSimulator({ platform, s, lang }: Props) {
             description={values.description}
             device={device}
             mediaUrl={mediaUrl}
+            mediaKind={mediaKind}
             destinationUrl={destinationUrl}
             cta={cta || resolveCta('facebook') || undefined}
           />
@@ -151,6 +157,7 @@ export function AdSimulator({ platform, s, lang }: Props) {
             mode={mode}
             safeZone={safeZone}
             mediaUrl={mediaUrl}
+            mediaKind={mediaKind}
             destinationUrl={destinationUrl}
             cta={cta || resolveCta('instagram') || undefined}
           />
@@ -159,9 +166,11 @@ export function AdSimulator({ platform, s, lang }: Props) {
         return (
           <TikTokAd
             s={s}
+            lang={lang}
             description={values.primary}
             safeZone={safeZone}
             mediaUrl={mediaUrl}
+            mediaKind={mediaKind}
           />
         );
     }
@@ -221,7 +230,7 @@ export function AdSimulator({ platform, s, lang }: Props) {
           {supportsDisplayPath && (
             <div class="flex flex-col gap-4">
               <div class="flex flex-col gap-2">
-                <span class="text-[13px] text-body">Final URL</span>
+                <span class="text-[13px] text-body">{ap.finalUrl}</span>
                 <input
                   type="text"
                   value={finalUrl}
@@ -231,7 +240,7 @@ export function AdSimulator({ platform, s, lang }: Props) {
                 />
               </div>
               <div class="flex flex-col gap-2">
-                <span class="text-[13px] text-body">Path 1</span>
+                <span class="text-[13px] text-body">{interp(ap.pathN, { n: 1 })}</span>
                 <input
                   type="text"
                   value={paths[0]}
@@ -244,7 +253,7 @@ export function AdSimulator({ platform, s, lang }: Props) {
                 />
               </div>
               <div class="flex flex-col gap-2">
-                <span class="text-[13px] text-body">Path 2</span>
+                <span class="text-[13px] text-body">{interp(ap.pathN, { n: 2 })}</span>
                 <input
                   type="text"
                   value={paths[1]}
@@ -263,7 +272,7 @@ export function AdSimulator({ platform, s, lang }: Props) {
           {showsDisplayLink && (
             <div class="flex flex-col gap-4">
               <div class="flex flex-col gap-2">
-                <span class="text-[13px] text-body">Display link / Destination URL</span>
+                <span class="text-[13px] text-body">{ap.displayLink}</span>
                 <input
                   type="text"
                   value={destinationUrl}
@@ -274,7 +283,7 @@ export function AdSimulator({ platform, s, lang }: Props) {
               </div>
               {ctaOptions.length > 0 && (
                 <div class="flex flex-col gap-2">
-                  <span class="text-[13px] text-body">Call to action</span>
+                  <span class="text-[13px] text-body">{ap.callToAction}</span>
                   <select
                     value={cta || (resolveCta(platform) ?? '')}
                     onChange={(e) => setCta((e.currentTarget as HTMLSelectElement).value)}
@@ -282,7 +291,7 @@ export function AdSimulator({ platform, s, lang }: Props) {
                   >
                     {ctaOptions.map((label) => (
                       <option value={label} key={label}>
-                        {label}
+                        {ap.cta[label] ?? label}
                       </option>
                     ))}
                   </select>
@@ -294,7 +303,7 @@ export function AdSimulator({ platform, s, lang }: Props) {
             <div class="flex flex-col gap-2">
               <div class="flex items-center gap-3">
                 <label class="inline-flex cursor-pointer items-center gap-2 rounded-pill border border-hairline bg-canvas-soft px-4 py-2 text-[13px] font-medium text-body transition-colors hover:text-ink">
-                  <input type="file" accept="image/*" onChange={onPickMedia} class="hidden" />
+                  <input type="file" accept="image/*,video/*" onChange={onPickMedia} class="hidden" />
                   {mediaUrl ? ap.media.replace : ap.media.add}
                 </label>
                 {mediaUrl && (

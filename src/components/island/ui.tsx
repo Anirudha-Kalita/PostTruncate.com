@@ -1,7 +1,7 @@
 /** @jsxImportSource preact */
 import type { ComponentChildren } from 'preact';
 import { useRef, useState } from 'preact/hooks';
-import { clampFeedRatio } from '../../lib/textTools';
+import { clampFeedRatio, detectUrls } from '../../lib/textTools';
 import type { IslandStrings } from '../../i18n/types';
 
 // ──────────────────────────────────────────────────────────────────────────
@@ -329,7 +329,7 @@ export function VerifiedTick({ size = 15, class: cls = 'text-link' }: VerifiedTi
   );
 }
 
-export type EngagementIcon = 'reply' | 'repost' | 'like' | 'views' | 'comment' | 'share' | 'thumbsUp';
+export type EngagementIcon = 'reply' | 'repost' | 'like' | 'views' | 'comment' | 'share' | 'thumbsUp' | 'save' | 'send';
 
 const ENGAGEMENT_PATHS: Record<EngagementIcon, ComponentChildren> = {
   reply: <path d="M4 5h16v10H9l-5 4z" />,
@@ -339,6 +339,10 @@ const ENGAGEMENT_PATHS: Record<EngagementIcon, ComponentChildren> = {
   comment: <path d="M4 5h16v10H9l-5 4z" />,
   share: <path d="M12 15V4M8 8l4-4 4 4M5 13v6h14v-6" />,
   thumbsUp: <path d="M7 10v9H4v-9zM7 10l4-7c1.2 0 2 .9 2 2v3h5c1 0 1.7.9 1.5 1.9l-1.3 6c-.2.9-1 1.1-1.7 1.1H7" />,
+  // Bookmark/save outline — Instagram's right-aligned action.
+  save: <path d="M6 4h12v16l-6-4-6 4z" />,
+  // Paper-plane — LinkedIn's "Send" action.
+  send: <path d="M22 2 11 13M22 2l-7 20-4-9-9-4 20-7z" />,
 };
 
 interface EngagementProps {
@@ -496,6 +500,98 @@ export function FeedImage({ src, kind = 'image', minRatio, maxRatio, fit = 'cove
   );
 }
 
+/**
+ * Media that fills a fixed-aspect parent frame edge-to-edge (`object-cover`),
+ * used by the vertical/square ad simulators where the container already sets the
+ * aspect ratio. Renders an `<img>` for images, or a tap-to-play `<video>` (muted,
+ * playsInline) with the same centered play button as `FeedImage`. The parent
+ * frame must be `position: relative` for the play button to overlay correctly.
+ */
+export function CoverMedia({ src, kind = 'image' }: { src: string; kind?: 'image' | 'video' }) {
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [started, setStarted] = useState(false);
+
+  if (kind !== 'video') {
+    return <img src={src} alt="" class="h-full w-full object-cover" />;
+  }
+
+  return (
+    <>
+      <video
+        ref={videoRef}
+        src={src}
+        onPlay={() => setStarted(true)}
+        controls={started}
+        muted
+        playsInline
+        preload="metadata"
+        class="h-full w-full object-cover"
+      />
+      {!started && (
+        <button
+          type="button"
+          aria-label="Play video"
+          onClick={() => videoRef.current?.play()}
+          class="group absolute inset-0 z-10 flex items-center justify-center bg-black/5 transition-colors hover:bg-black/10 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+        >
+          <span class="flex h-12 w-12 items-center justify-center rounded-full bg-black/55 shadow-lg backdrop-blur-sm transition-transform duration-100 group-hover:scale-105">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="white" aria-hidden="true" class="ml-0.5">
+              <path d="M8 5.14v13.72a1 1 0 0 0 1.54.84l10.79-6.86a1 1 0 0 0 0-1.68L9.54 4.3A1 1 0 0 0 8 5.14z" />
+            </svg>
+          </span>
+        </button>
+      )}
+    </>
+  );
+}
+
+/** One TikTok rail action: a stroked glyph with its (mock) compact count beneath. */
+function TikTokRailAction({ count, children }: { count: string; children: ComponentChildren }) {
+  return (
+    <div class="flex flex-col items-center gap-1">
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">{children}</svg>
+      <span class="text-[11px] font-semibold tabular-nums">{count}</span>
+    </div>
+  );
+}
+
+/**
+ * TikTok's right-hand action rail — creator avatar + follow, then like / comment
+ * / bookmark / share with compact mock counts, capped by the rotating sound disc.
+ * Shared by the organic TikTok preview and the TikTok ad simulator so the two
+ * render identically. Counts are mock display values, locale-formatted via `lang`.
+ */
+export function TikTokActionRail({ handle, lang, class: className = '' }: { handle: string; lang: string; class?: string }) {
+  const nfCompact = new Intl.NumberFormat(lang, { notation: 'compact', maximumFractionDigits: 1 });
+  return (
+    <div class={`flex flex-col items-center gap-3.5 text-white ${className}`}>
+      {/* Creator avatar with a + follow badge. */}
+      <div class="relative mb-1">
+        <Avatar size="h-10 w-10" initial={monogram(handle)} />
+        <span class="absolute -bottom-2 left-1/2 flex h-5 w-5 -translate-x-1/2 items-center justify-center rounded-full bg-error text-white">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14" /></svg>
+        </span>
+      </div>
+      <TikTokRailAction count={nfCompact.format(1200000)}>
+        <path d="M12 21s-7-4.35-9.5-8.5C1 9 3 6 6 6c2 0 3 1.5 6 4 3-2.5 4-4 6-4 3 0 5 3 3.5 6.5C19 16.65 12 21 12 21z" />
+      </TikTokRailAction>
+      <TikTokRailAction count={nfCompact.format(3456)}>
+        <path d="M21 12a8 8 0 0 1-11.5 7.2L3 21l1.8-6.5A8 8 0 1 1 21 12z" />
+      </TikTokRailAction>
+      <TikTokRailAction count={nfCompact.format(12500)}>
+        <path d="M6 4h12v16l-6-4-6 4z" />
+      </TikTokRailAction>
+      <TikTokRailAction count={nfCompact.format(8901)}>
+        <path d="M4 12v7a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-7M16 6l-4-4-4 4M12 2v13" />
+      </TikTokRailAction>
+      {/* Rotating sound disc (album art). */}
+      <span class="mt-1 flex h-9 w-9 items-center justify-center rounded-full bg-ink ring-2 ring-white/15">
+        <span class="h-3 w-3 rounded-full bg-white/80" />
+      </span>
+    </div>
+  );
+}
+
 interface PostCardProps {
   /** "gutter" = avatar in a left column beside the body (X, Threads). "stacked"
    *  = avatar beside the name only, body spanning full width below (FB, LinkedIn, IG). */
@@ -597,6 +693,40 @@ export function FoldMarker({ label, ariaLabel }: FoldMarkerProps) {
       <span class="h-0 flex-1 border-t border-dashed border-warning/60" aria-hidden="true" />
     </span>
   );
+}
+
+/**
+ * Render a body-text segment with any detected URLs colored in the platform
+ * link-blue — the way LinkedIn, Facebook and Threads show a pasted URL inline
+ * (the clickable "blue link" look) while the rich preview card renders below it.
+ *
+ * View-only: this is a styled `<span>`, never a real anchor. The URL text is
+ * kept exactly in place (these platforms do NOT auto-remove it from the body),
+ * so the link no longer appears "cut" from the surrounding copy.
+ *
+ * Offsets come from `detectUrls` on the SAME string passed in, so they are valid
+ * code-unit indices for slicing here. Callers pass already-folded segments (the
+ * above-fold hook / visible portion), so detection runs per-segment and never
+ * mixes grapheme- and code-unit indexing.
+ */
+export function LinkText({ text }: { text: string }) {
+  const urls = detectUrls(text);
+  if (urls.length === 0) return <>{text}</>;
+
+  const nodes: ComponentChildren[] = [];
+  let cursor = 0;
+  urls.forEach((m, i) => {
+    if (m.start > cursor) nodes.push(text.slice(cursor, m.start));
+    nodes.push(
+      <span key={i} class="text-link">
+        {m.url}
+      </span>,
+    );
+    cursor = m.end;
+  });
+  if (cursor < text.length) nodes.push(text.slice(cursor));
+
+  return <>{nodes}</>;
 }
 
 export type HookStatus = 'pass' | 'warn' | 'fail';

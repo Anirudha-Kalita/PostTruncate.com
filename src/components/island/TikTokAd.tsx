@@ -1,5 +1,5 @@
 /** @jsxImportSource preact */
-import { Card, CardHead, Badge, type Tone } from './ui';
+import { Card, CardHead, Badge, CoverMedia, TikTokActionRail, type Tone } from './ui';
 import { SafeZoneOverlay } from './SafeZoneOverlay';
 import type { IslandStrings } from '../../i18n/types';
 import { adPreviewStrings } from '../../i18n/adPreviewStrings';
@@ -11,9 +11,12 @@ import { linkDisplayStrings } from '../../i18n/linkDisplayStrings';
 
 interface Props {
   s: IslandStrings;
+  lang: string;
   description: string;
   safeZone: boolean;
   mediaUrl: string | null;
+  /** Whether the attached media is an image (default) or a video. */
+  mediaKind?: 'image' | 'video';
 }
 
 /**
@@ -23,7 +26,7 @@ interface Props {
  * bar (~10%), bottom username/caption/CTA/music ticker (~20%), and the right
  * profile + engagement icon stack (~15%).
  */
-export function TikTokAd({ s, description, safeZone, mediaUrl }: Props) {
+export function TikTokAd({ s, lang, description, safeZone, mediaUrl, mediaKind = 'image' }: Props) {
   const ap = adPreviewStrings(s);
   const ld = linkDisplayStrings(s);
   const tk = AD_PLATFORM_CONFIG.tiktok;
@@ -55,7 +58,7 @@ export function TikTokAd({ s, description, safeZone, mediaUrl }: Props) {
           style="width:100%;max-width:300px;aspect-ratio:9 / 16;"
         >
           {mediaUrl ? (
-            <img src={mediaUrl} alt="" class="h-full w-full object-cover" />
+            <CoverMedia src={mediaUrl} kind={mediaKind} />
           ) : (
             <div class="flex h-full w-full items-center justify-center text-[12px] text-white/70">
               {ap.media.add}
@@ -64,13 +67,23 @@ export function TikTokAd({ s, description, safeZone, mediaUrl }: Props) {
 
           {safeZone && <SafeZoneOverlay insets={tk.safeZone} label={ap.safeZoneTag} />}
 
-          {/* Username + description sit over the video, above the bottom safe band. */}
+          {/* Right-hand action rail — avatar + follow, like / comment / bookmark
+              / share with counts, then the sound disc, exactly as a real TikTok
+              in-feed ad. Sits above the safe-zone band so it stays visible. */}
+          <TikTokActionRail handle={name} lang={lang} class="absolute bottom-[24%] right-1.5 z-20" />
+
+          {/* Username + description sit over the video, above the bottom safe
+              band; right padding clears the action rail. */}
           <div
-            class="absolute left-0 right-0 z-20 px-3"
+            class="absolute left-0 right-0 z-20 pl-3 pr-12"
             style={`bottom:${(tk.safeZone.bottomPct ?? 0) + 2}%;`}
           >
             <p class="text-[13px] font-semibold leading-4 text-white drop-shadow-[0_1px_2px_rgba(0,0,0,0.9)]">
               @{name}
+            </p>
+            {/* Sponsored/ad disclosure — every TikTok in-feed ad carries it. */}
+            <p class="mt-0.5 text-[11px] leading-4 text-white/80 drop-shadow-[0_1px_2px_rgba(0,0,0,0.9)]">
+              {ap.sponsored}
             </p>
             <p
               class="mt-1 whitespace-pre-wrap text-[12px] leading-4 text-white drop-shadow-[0_1px_2px_rgba(0,0,0,0.9)]"
@@ -90,7 +103,7 @@ export function TikTokAd({ s, description, safeZone, mediaUrl }: Props) {
                 light background keeps it legible over the video. */}
             {ctaLabel && (
               <span class="mt-2 inline-flex rounded-md bg-white px-3 py-1.5 text-[12px] font-semibold leading-4 text-black drop-shadow-[0_1px_2px_rgba(0,0,0,0.6)]">
-                {ctaLabel}
+                {ap.cta[ctaLabel] ?? ctaLabel}
               </span>
             )}
           </div>

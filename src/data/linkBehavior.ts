@@ -180,11 +180,13 @@ export const LINK_BEHAVIOR: Record<string, LinkBehaviorRecord> = {
       descriptionMaxChars: 0,
       domainCasing: 'lowercase',
       domainPlacement: 'below-title',
-      removesRawUrl: true,
-      lastReviewed: '2026-06-18',
+      // LinkedIn keeps the pasted URL in the body as blue clickable text by
+      // default; removing it is a manual, optional step (2026-06-22 review).
+      removesRawUrl: false,
+      lastReviewed: '2026-06-22',
     },
-    lastReviewed: '2026-06-18',
-    source: 'LinkedIn builds an Open Graph preview card from the first detected URL; link text counts per character.',
+    lastReviewed: '2026-06-22',
+    source: 'LinkedIn builds an Open Graph preview card from the first detected URL and keeps the raw URL inline as blue clickable text by default; link text counts per character.',
   },
 
   instagram: {
@@ -222,8 +224,10 @@ export const LINK_BEHAVIOR: Record<string, LinkBehaviorRecord> = {
       descriptionMaxChars: 200,
       domainCasing: 'uppercase',
       domainPlacement: 'above-title',
-      removesRawUrl: true,
-      lastReviewed: '2026-06-18',
+      // Facebook keeps the pasted URL in the body as blue clickable text by
+      // default; deleting it (preview stays) is a manual step (2026-06-22 review).
+      removesRawUrl: false,
+      lastReviewed: '2026-06-22',
     },
     ad: {
       showsDisplayLink: true,
@@ -233,9 +237,9 @@ export const LINK_BEHAVIOR: Record<string, LinkBehaviorRecord> = {
       ctaLabels: META_CTA_LABELS,
       captionLinkClickable: false,
     },
-    lastReviewed: '2026-06-18',
+    lastReviewed: '2026-06-22',
     source:
-      'Facebook builds an Open Graph preview card from the first detected URL. Meta ads expose a display link distinct from the destination plus a CTA button.',
+      'Facebook builds an Open Graph preview card from the first detected URL and keeps the raw URL inline as blue clickable text by default. Meta ads expose a display link distinct from the destination plus a CTA button.',
   },
 
   tiktok: {
@@ -276,11 +280,13 @@ export const LINK_BEHAVIOR: Record<string, LinkBehaviorRecord> = {
       descriptionMaxChars: 0,
       domainCasing: 'lowercase',
       domainPlacement: 'below-title',
-      removesRawUrl: true,
-      lastReviewed: '2026-06-20',
+      // Threads keeps the pasted URL inline as blue clickable text; recent iOS
+      // builds even require it to stay for the card to render (2026-06-22 review).
+      removesRawUrl: false,
+      lastReviewed: '2026-06-22',
     },
-    lastReviewed: '2026-06-18',
-    source: 'Threads (by Meta) builds a preview card from the first detected URL; counts links in full; up to 5 bio links.',
+    lastReviewed: '2026-06-22',
+    source: 'Threads (by Meta) builds a preview card from the first detected URL and keeps the raw URL inline as blue clickable text (iOS now requires it to stay); counts links in full; up to 5 bio links.',
   },
 
   youtube: {

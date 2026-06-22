@@ -133,12 +133,32 @@ export function TwitterPreview({ text, lang, s, toolLinkHref, image, mediaKind =
                 </div>
               )}
 
-              {/* Faint engagement row — reply / repost / like / views. */}
-              <div class="mt-3 flex max-w-[300px] items-center justify-between text-mute/55">
-                <Engagement icon="reply" />
-                <Engagement icon="repost" />
-                <Engagement icon="like" />
-                <Engagement icon="views" />
+              {/* Engagement row — reply / repost / like / views with inline
+                  counts, then bookmark + share pushed to the right, exactly as
+                  on X. Counts are mock display values; X has no text labels. */}
+              <div class="mt-3 flex items-center justify-between text-[13px] text-mute/70">
+                <div class="flex flex-1 items-center justify-between pr-6">
+                  <span class="flex items-center gap-1.5">
+                    <Engagement icon="reply" size={18} />
+                    {nf.format(12)}
+                  </span>
+                  <span class="flex items-center gap-1.5">
+                    <Engagement icon="repost" size={18} />
+                    {nf.format(8)}
+                  </span>
+                  <span class="flex items-center gap-1.5">
+                    <Engagement icon="like" size={18} />
+                    {nf.format(124)}
+                  </span>
+                  <span class="flex items-center gap-1.5">
+                    <Engagement icon="views" size={18} />
+                    {nf.format(3400)}
+                  </span>
+                </div>
+                <div class="flex items-center gap-4">
+                  <Engagement icon="save" size={18} />
+                  <Engagement icon="share" size={18} />
+                </div>
               </div>
 
               {/* Tool annotations: per-tweet char weight + thread position. */}
