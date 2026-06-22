@@ -104,7 +104,7 @@ I have tested enough carousel posts to have a fairly consistent pre-post checkli
 
 **Write the caption with the fold in mind.** I draft in PostTruncate's editor so I can see the live character count. The goal is a hook that lands in the first 90 characters, leaves no line break before that, and makes someone want to swipe. Everything else - context, hashtags, credit lines, location - goes below the fold. Hashtags, especially: a wall of hashtags above your hook burns through your visible character budget and pushes the actual message below the "more" button before most people see it.
 
-**Run the preview against slide one.** Once I have the photo and the caption, I drop both into the [TikTok layout preview](/en/tiktok-caption-checker) and check three things: is the text readable, does the hook clear the safe zone, and does the visible portion of the caption end in a way that makes tapping "more" feel worthwhile or at least not punishing?
+**Run the preview against slide one.** Once I have the photo and the caption, I drop both into the [TikTok layout preview](/en/ad-previews/tiktok-ads/) and check three things: is the text readable, does the hook clear the safe zone, and does the visible portion of the caption end in a way that makes tapping "more" feel worthwhile or at least not punishing?
 
 **Check the right rail too.** If I have any text elements baked into the image itself - a price, a date, a location name - I make sure they are not sitting in that right-side 162-pixel column where the engagement buttons will partially cover them.
 
@@ -114,7 +114,7 @@ This is a five-minute check that has saved me from discovering formatting proble
 
 ## Try PostTruncate
 
-I built [PostTruncate](/en/tiktok-caption-checker) because I needed it - and once I had it, I could not imagine going back to posting carousels without checking the layout first. The TikTok caption preview runs entirely in your browser. Nothing is uploaded to a server. You paste your image, type your caption, see exactly what your audience will see, and then decide whether it is ready to post.
+I built [PostTruncate](/en/ad-previews/tiktok-ads/)[ ](/en/ad-previews/tiktok-ads/)because I needed it - and once I had it, I could not imagine going back to posting carousels without checking the layout first. The TikTok caption preview runs entirely in your browser. Nothing is uploaded to a server. You paste your image, type your caption, see exactly what your audience will see, and then decide whether it is ready to post.
 
 For TikTok creators, social media managers, and aesthetic influencers who care about how their work actually looks in the feed, the preview step takes less time than writing the caption itself. The tool also catches the character fold issue, the safe zone conflicts, and any line break that would trigger early truncation - all in one pass, before anything goes live.
 
