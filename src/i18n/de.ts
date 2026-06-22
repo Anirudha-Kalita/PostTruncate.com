@@ -856,6 +856,16 @@ export const de: Translations = {
       remove: 'Medien entfernen',
       hint: 'Nur Vorschau – wird nie hochgeladen oder gespeichert. Beim Neuladen weg.',
     },
+    linkDisplay: {
+      plainText: 'Links im Text sind hier nicht anklickbar – sie werden als reiner Text angezeigt.',
+      previewCard: 'Dieser Link erzeugt eine Vorschaukarte.',
+      previewCardFirstUrl: 'Der erste Link wird zur Vorschaukarte.',
+      clickableInline: 'Dieser Link bleibt im Text anklickbar.',
+      countedShortened: 'Jeder Link zählt als {weight} Zeichen.',
+      bioLinkAllowance: 'In deiner Bio sind bis zu {n} anklickbare Links erlaubt.',
+      adNoClickableLink:
+        'In-Feed-Anzeigentexte enthalten keinen anklickbaren Link – der CTA-Button übernimmt den Klick.',
+    },
     linkCard: {
       editorHeading: 'Link-Vorschaukarte',
       titleLabel: 'Kartentitel',

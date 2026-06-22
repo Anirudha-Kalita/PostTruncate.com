@@ -855,6 +855,16 @@ export const pt: Translations = {
       remove: 'Remover mídia',
       hint: 'Apenas pré-visualização — nunca enviada nem armazenada. Some ao recarregar.',
     },
+    linkDisplay: {
+      plainText: 'Os links no corpo não são clicáveis aqui — aparecem como texto simples.',
+      previewCard: 'Este link gera um cartão de pré-visualização.',
+      previewCardFirstUrl: 'O primeiro link torna-se o cartão de pré-visualização.',
+      clickableInline: 'Este link permanece clicável no texto.',
+      countedShortened: 'Cada link conta como {weight} caracteres.',
+      bioLinkAllowance: 'São permitidos até {n} links clicáveis na sua bio.',
+      adNoClickableLink:
+        'As legendas de anúncios in-feed não têm link clicável — o botão de CTA realiza o clique.',
+    },
     linkCard: {
       editorHeading: 'Cartão de pré-visualização do link',
       titleLabel: 'Título do cartão',

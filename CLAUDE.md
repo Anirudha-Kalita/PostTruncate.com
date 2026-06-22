@@ -46,7 +46,7 @@ src/
     Layout.astro      # Master <head>: SEO, hreflang, GA, JSON-LD
   styles/
     global.css        # Tailwind @theme tokens (colors, fonts, spacing, radius, shadows)
-public/               # favicon, webmanifest, flag SVGs, og.png
+public/               # favicon, webmanifest, flag SVGs, og.webp
 DESIGN.md             # Design system spec — read before touching styles
 ```
 

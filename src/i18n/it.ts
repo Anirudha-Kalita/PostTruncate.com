@@ -855,6 +855,16 @@ export const it: Translations = {
       remove: 'Rimuovi media',
       hint: 'Solo anteprima — mai caricata né salvata. Si cancella al ricaricamento.',
     },
+    linkDisplay: {
+      plainText: 'I link nel corpo non sono cliccabili qui: vengono mostrati come testo semplice.',
+      previewCard: 'Questo link genera una scheda di anteprima.',
+      previewCardFirstUrl: 'Il primo link diventa la scheda di anteprima.',
+      clickableInline: 'Questo link resta cliccabile nel testo.',
+      countedShortened: 'Ogni link conta come {weight} caratteri.',
+      bioLinkAllowance: 'Sono consentiti fino a {n} link cliccabili nella tua bio.',
+      adNoClickableLink:
+        'Le didascalie degli annunci in-feed non contengono un link cliccabile: è il pulsante CTA a gestire il clic.',
+    },
     linkCard: {
       editorHeading: 'Scheda di anteprima del link',
       titleLabel: 'Titolo della scheda',

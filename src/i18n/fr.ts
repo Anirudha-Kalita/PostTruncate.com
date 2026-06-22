@@ -855,6 +855,16 @@ export const fr: Translations = {
       remove: 'Supprimer le média',
       hint: 'Aperçu uniquement — jamais téléversé ni stocké. Disparaît au rechargement.',
     },
+    linkDisplay: {
+      plainText: 'Les liens dans le corps ne sont pas cliquables ici : ils s’affichent en texte brut.',
+      previewCard: 'Ce lien génère une carte d’aperçu.',
+      previewCardFirstUrl: 'Le premier lien devient la carte d’aperçu.',
+      clickableInline: 'Ce lien reste cliquable dans le texte.',
+      countedShortened: 'Chaque lien compte pour {weight} caractères.',
+      bioLinkAllowance: 'Jusqu’à {n} liens cliquables sont autorisés dans votre bio.',
+      adNoClickableLink:
+        'Les textes des publicités in-feed ne contiennent pas de lien cliquable : c’est le bouton CTA qui porte le clic.',
+    },
     linkCard: {
       editorHeading: 'Carte d’aperçu du lien',
       titleLabel: 'Titre de la carte',

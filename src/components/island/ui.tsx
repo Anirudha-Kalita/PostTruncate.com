@@ -411,6 +411,14 @@ interface FeedImageProps {
   maxRatio?: number;
   /** Object-fit when the natural ratio is clamped (default "cover" = crop). */
   fit?: 'cover' | 'contain';
+  /**
+   * Optional responsive srcset ("url 400w, …") for static, manifest-backed
+   * sources (e.g. the default link-card OG image). Omitted for user-uploaded
+   * blob URLs, which have no generated variants. Images only (ignored for video).
+   */
+  srcset?: string;
+  /** Optional `sizes` hint paired with `srcset`. */
+  sizes?: string;
 }
 
 /**
@@ -419,7 +427,7 @@ interface FeedImageProps {
  * so the preview crops exactly the way that platform would. Before the media
  * loads it renders at natural height to avoid a reserved-space flash.
  */
-export function FeedImage({ src, kind = 'image', minRatio, maxRatio, fit = 'cover' }: FeedImageProps) {
+export function FeedImage({ src, kind = 'image', minRatio, maxRatio, fit = 'cover', srcset, sizes }: FeedImageProps) {
   const [ratio, setRatio] = useState<number | null>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
   // Once playback has started we hand off to the native controls; before that
@@ -478,6 +486,8 @@ export function FeedImage({ src, kind = 'image', minRatio, maxRatio, fit = 'cove
   return (
     <img
       src={src}
+      srcset={srcset}
+      sizes={sizes}
       alt=""
       onLoad={onLoad}
       class={`block w-full bg-canvas-soft-2 ${fitClass}`}

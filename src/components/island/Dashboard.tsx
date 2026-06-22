@@ -152,7 +152,7 @@ export default function Dashboard({ lang, strings, toolSlugs, focus }: Props) {
   const [cardImage, setCardImage] = useState<{ url: string; name: string } | null>(null);
   const onSelectCardImage = (file: File | null) => {
     setCardImage((prev) => {
-      // Only revoke object URLs created here — never the default /og.png path.
+      // Only revoke object URLs created here — never the default /og.webp path.
       if (prev) URL.revokeObjectURL(prev.url);
       if (!file) return null;
       return { url: URL.createObjectURL(file), name: file.name };
@@ -282,7 +282,7 @@ export default function Dashboard({ lang, strings, toolSlugs, focus }: Props) {
   }, [image]);
 
   // Free the card-image object URL on swap/unmount. Never revokes the default
-  // /og.png path (cardImage is null in that case, so this is a no-op then).
+  // /og.webp path (cardImage is null in that case, so this is a no-op then).
   useEffect(() => {
     return () => {
       if (cardImage) URL.revokeObjectURL(cardImage.url);

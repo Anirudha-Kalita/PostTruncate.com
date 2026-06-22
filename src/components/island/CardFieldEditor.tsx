@@ -1,5 +1,6 @@
 /** @jsxImportSource preact */
 import { linkCardStrings } from '../../i18n/linkCardStrings';
+import { DEFAULT_CARD_IMAGE, DEFAULT_CARD_IMAGE_SRCSET } from './LivePreviewCard';
 import type { IslandStrings } from '../../i18n/types';
 
 // ──────────────────────────────────────────────────────────────────────────
@@ -7,7 +8,7 @@ import type { IslandStrings } from '../../i18n/types';
 // metadata. It edits the Card_Title, the Card_Description, AND the card's
 // "demo image". That demo image is COMPLETELY SEPARATE from the post "Add
 // media" attachment in Workspace/Dashboard — editing one never affects the
-// other. The card image defaults to the site OG image (/og.png); the user can
+// other. The card image defaults to the site OG image (/og.webp); the user can
 // upload an image-only file to override it (videos are not accepted here) or
 // reset back to the default.
 //
@@ -32,7 +33,7 @@ export interface CardFieldEditorProps {
   onCardDescriptionChange: (next: string) => void;
   /**
    * The resolved card image URL — either the user's uploaded object URL or the
-   * default OG image (/og.png). Independent from the post "Add media" image.
+   * default OG image (/og.webp). Independent from the post "Add media" image.
    */
   cardImage: string | null;
   /** True when `cardImage` is the default OG image (no custom upload set). */
@@ -116,6 +117,8 @@ export function CardFieldEditor({
           {cardImage && (
             <img
               src={cardImage}
+              srcset={cardImage === DEFAULT_CARD_IMAGE ? DEFAULT_CARD_IMAGE_SRCSET : undefined}
+              sizes={cardImage === DEFAULT_CARD_IMAGE ? '40px' : undefined}
               alt={strings.imageAlt}
               class="h-10 w-10 shrink-0 rounded-md border border-hairline object-cover"
             />

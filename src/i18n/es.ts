@@ -855,6 +855,16 @@ export const es: Translations = {
       remove: 'Quitar contenido',
       hint: 'Solo vista previa: nunca se sube ni se guarda. Se borra al recargar.',
     },
+    linkDisplay: {
+      plainText: 'Los enlaces en el cuerpo no son clicables aquí: se muestran como texto sin formato.',
+      previewCard: 'Este enlace genera una tarjeta de vista previa.',
+      previewCardFirstUrl: 'El primer enlace se convierte en la tarjeta de vista previa.',
+      clickableInline: 'Este enlace permanece clicable en el texto.',
+      countedShortened: 'Cada enlace cuenta como {weight} caracteres.',
+      bioLinkAllowance: 'Se permiten hasta {n} enlaces clicables en tu biografía.',
+      adNoClickableLink:
+        'Los textos de los anuncios in-feed no llevan un enlace clicable: el botón de CTA realiza el clic.',
+    },
     linkCard: {
       editorHeading: 'Tarjeta de vista previa del enlace',
       titleLabel: 'Título de la tarjeta',

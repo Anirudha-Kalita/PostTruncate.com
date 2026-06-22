@@ -42,7 +42,7 @@ export interface Props {
   canonicalUrl?: string;
   /** OpenGraph object type. Defaults to "website"; blog posts pass "article". */
   ogType?: 'website' | 'article';
-  /** Override the OG/Twitter image (path or absolute URL). Defaults to /og.png. */
+  /** Override the OG/Twitter image (path or absolute URL). Defaults to /og.webp. */
   ogImage?: string;
   /** ISO 8601 publish time → article:published_time (only when ogType="article"). */
   articlePublishedTime?: string;
@@ -73,7 +73,7 @@ const pageTitle = title ?? t.seo.title;
 const pageDescription = description ?? t.seo.description;
 
 const site = Astro.site ?? new URL('https://posttruncate.com');
-const ogImage = new URL(ogImageOverride ?? '/og.png', site).href;
+const ogImage = new URL(ogImageOverride ?? '/og.webp', site).href;
 
 // Build the absolute URL for this same page in a given locale. For the
 // homepage (path === '/') each locale uses its keyword-rich slug; other pages

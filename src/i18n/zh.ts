@@ -853,6 +853,16 @@ export const zh: Translations = {
       remove: '移除媒体',
       hint: '仅用于预览 — 不会上传或保存。刷新后即清除。',
     },
+    linkDisplay: {
+      plainText: '正文中的链接在这里不可点击——它们会显示为纯文本。',
+      previewCard: '此链接会生成一张预览卡片。',
+      previewCardFirstUrl: '第一个链接会成为预览卡片。',
+      clickableInline: '此链接在正文中保持可点击。',
+      countedShortened: '每个链接按 {weight} 个字符计算。',
+      bioLinkAllowance: '你的简介中最多允许 {n} 个可点击链接。',
+      adNoClickableLink:
+        '信息流广告文案不含可点击链接——由号召性用语（CTA）按钮承载点击。',
+    },
     linkCard: {
       editorHeading: '链接预览卡片',
       titleLabel: '卡片标题',

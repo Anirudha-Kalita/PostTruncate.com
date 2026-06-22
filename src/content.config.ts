@@ -127,7 +127,7 @@ const blog = defineCollection({
     /**
      * Optional OG/Twitter image. A path under /public ("/og/my-post.png") or an
      * absolute URL. Resolved to an absolute URL at render; falls back to the
-     * site-wide /og.png when omitted.
+     * site-wide /og.webp when omitted.
      */
     ogImage: z.preprocess(blankToUndefined, z.string().optional()),
   })

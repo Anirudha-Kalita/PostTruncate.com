@@ -3,7 +3,7 @@ import { useMemo, useState } from 'preact/hooks';
 import { Card, CardHead, Meter, Badge, ClearButton, type Tone } from './ui';
 import { interp } from '../../i18n/interp';
 import { charCount, detectUrls, platformLengthByMode } from '../../lib/textTools';
-import { PLATFORM_COUNTERS } from '../../data/platformCounters';
+import { PLATFORM_COUNTERS, type CounterField } from '../../data/platformCounters';
 import { organicLinkBehavior } from '../../data/linkBehavior';
 import { selectLinkIndication } from '../../lib/linkIndication';
 import { linkDisplayStrings } from '../../i18n/linkDisplayStrings';
@@ -37,13 +37,28 @@ export function PlatformCounter({ s, platform, lang }: Props) {
   const countMode = linkBehavior?.countMode;
 
   /**
-   * Build the localized link-display indication lines for a field, or `null`
+   * Build the localized link-display indication lines for ONE field, or `null`
    * when the field text contains no URL (Requirement 8.4 — render exactly as
-   * today). The indication key is derived solely from the platform's config via
-   * `selectLinkIndication`, so the displayed fact always matches stored config.
+   * today). The indication is derived from the field's own link behavior: a
+   * field's `link` override wins, otherwise it inherits the platform model. This
+   * keeps the displayed fact matched to what actually happens in THAT box —
+   * e.g. a Bio link is clickable while a caption link is plain text.
    */
-  const linkIndicationLines = (text: string): string[] | null => {
-    const indication = selectLinkIndication(platform, text);
+  const linkIndicationLines = (field: CounterField & { text: string }): string[] | null => {
+    if (detectUrls(field.text).length === 0) return null;
+
+    // Profile/bio field: the link is clickable, so show ONLY the platform's
+    // bio-link-allowance line — never the "not clickable / preview card" copy.
+    if (field.link === 'bio') {
+      const allowance = linkBehavior?.bioLinkAllowance;
+      return allowance !== undefined
+        ? [interp(ld.bioLinkAllowance, { n: allowance })]
+        : null;
+    }
+
+    // The remaining roles map 1:1 onto a Link_Display_Model; pass the override
+    // (or undefined to inherit the platform model) to the pure selector.
+    const indication = selectLinkIndication(platform, field.text, field.link);
     if (indication === 'none') return null;
 
     const lines: string[] = [];
@@ -59,7 +74,7 @@ export function PlatformCounter({ s, platform, lang }: Props) {
         // When this platform builds the card from the first URL only AND more
         // than one URL is present, add the localized note identifying which URL
         // became the card (Requirement 5.2). Single-URL behavior is unchanged.
-        if (linkBehavior?.cardFromFirstUrlOnly && detectUrls(text).length > 1) {
+        if (linkBehavior?.cardFromFirstUrlOnly && detectUrls(field.text).length > 1) {
           lines.push(lc.firstUrlNote);
         }
         break;
@@ -71,11 +86,6 @@ export function PlatformCounter({ s, platform, lang }: Props) {
           interp(ld.countedShortened, { weight: linkBehavior?.fixedLinkWeight ?? 23 }),
         );
         break;
-    }
-
-    const allowance = linkBehavior?.bioLinkAllowance;
-    if (allowance !== undefined) {
-      lines.push(interp(ld.bioLinkAllowance, { n: allowance }));
     }
 
     return lines.length > 0 ? lines : null;
@@ -136,16 +146,18 @@ export function PlatformCounter({ s, platform, lang }: Props) {
                 {interp(c.remaining, { n: nf.format(f.limit - f.count) })}
               </p>
             )}
-            {linkIndicationLines(f.text)?.map((line) => (
+            {linkIndicationLines(f)?.map((line) => (
               <p class="text-[12px] leading-4 text-mute">{line}</p>
             ))}
-            {/* Open Graph link-card simulation for the preview-card counter
-                platforms (Discord/WhatsApp/Bluesky). Standalone counter pages
-                own no editor state, so the card uses placeholder metadata and
-                the no-image form. LivePreviewCard renders null when this field
-                has no URL or the platform is not a preview-card platform, so
-                URL-free behavior is unchanged (Requirement 1.1, 16.1). */}
-            {linkBehavior?.model === 'preview-card' && (
+            {/* Open Graph link-card simulation, gated on the FIELD's effective
+                link behavior — not the platform model — so a field overridden
+                away from preview-card (e.g. the WhatsApp "About" tagline) shows
+                no card, while the Status field still does. Standalone counter
+                pages own no editor state, so the card uses placeholder metadata
+                and the no-image form. LivePreviewCard renders null when this
+                field has no URL or the platform is not a preview-card platform,
+                so URL-free behavior is unchanged (Requirement 1.1, 16.1). */}
+            {(f.link && f.link !== 'bio' ? f.link : linkBehavior?.model) === 'preview-card' && (
               <LivePreviewCard platform={platform} text={f.text} image={DEFAULT_CARD_IMAGE} lang={lang ?? 'en'} s={s} />
             )}
           </div>

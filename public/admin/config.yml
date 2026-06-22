@@ -78,7 +78,7 @@ collections:
         options:
           - Anirudha
       - { name: draft, label: Draft, widget: boolean, default: false }
-      - { name: ogImage, label: Social image, widget: image, required: false, hint: 'Optional. Falls back to the site default (/og.png).' }
+      - { name: ogImage, label: Social image, widget: image, required: false, hint: 'Optional. Falls back to the site default (/og.webp).' }
       # Rich-text body. `editor_components: [image, code-block]` give the media-
       # library image insert + code blocks. Videos: paste a YouTube/Vimeo URL on
       # its own line — the build turns it into a responsive, lazy iframe.

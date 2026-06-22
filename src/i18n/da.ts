@@ -855,6 +855,16 @@ export const da: Translations = {
       remove: 'Fjern medie',
       hint: 'Kun forhåndsvisning — uploades eller gemmes aldrig. Ryddes ved genindlæsning.',
     },
+    linkDisplay: {
+      plainText: 'Links i teksten kan ikke klikkes her – de vises som almindelig tekst.',
+      previewCard: 'Dette link genererer et forhåndsvisningskort.',
+      previewCardFirstUrl: 'Det første link bliver til forhåndsvisningskortet.',
+      clickableInline: 'Dette link forbliver klikbart i teksten.',
+      countedShortened: 'Hvert link tæller som {weight} tegn.',
+      bioLinkAllowance: 'Der tillades op til {n} klikbare links i din bio.',
+      adNoClickableLink:
+        'Annoncetekster i feedet indeholder ikke et klikbart link – CTA-knappen står for klikket.',
+    },
     linkCard: {
       editorHeading: 'Link-forhåndsvisningskort',
       titleLabel: 'Korttitel',

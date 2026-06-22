@@ -28,7 +28,7 @@ translationKey: twitter-limit-guide   # SAME value across all translations (href
 relatedPlatform: twitter       # optional: twitter|instagram|linkedin|facebook|sms|threads|general
 author: PostTruncate Team
 draft: false                   # true = hidden from production build
-ogImage: /og/twitter-limit.png # optional; falls back to /og.png
+ogImage: /og/twitter-limit.png # optional; falls back to /og.webp
 ---
 
 Markdown body…

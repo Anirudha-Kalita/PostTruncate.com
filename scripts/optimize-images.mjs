@@ -60,6 +60,13 @@ export const CONFIG = {
     { file: 'logo.webp', widths: [200, 400, 600] },
     { file: 'logo-dark.webp', widths: [200, 400, 600] },
     { file: 'author-anirudha.webp', widths: [72, 150, 300] },
+    // Site-wide Open Graph image. Rendered as a real <img> in blog post cards
+    // (ResponsiveImage) and the link-preview card simulation, so it needs a
+    // device-sized ladder: 160 for the editor's tiny card thumbnail, 400/800
+    // for cards + the live preview, 1200 for the full-bleed/high-DPR case.
+    // (The og:image META tag still points at the full /og.webp — scrapers want
+    // the single 1200x630 asset, which is the largest variant's source.)
+    { file: 'og.webp', widths: [160, 400, 800, 1200] },
   ],
 };
 

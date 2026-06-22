@@ -855,6 +855,16 @@ export const nl: Translations = {
       remove: 'Media verwijderen',
       hint: 'Alleen voorbeeld — wordt nooit geüpload of opgeslagen. Verdwijnt bij herladen.',
     },
+    linkDisplay: {
+      plainText: 'Links in de tekst zijn hier niet klikbaar — ze worden als platte tekst weergegeven.',
+      previewCard: 'Deze link genereert een voorbeeldkaart.',
+      previewCardFirstUrl: 'De eerste link wordt de voorbeeldkaart.',
+      clickableInline: 'Deze link blijft klikbaar in de tekst.',
+      countedShortened: 'Elke link telt als {weight} tekens.',
+      bioLinkAllowance: 'Maximaal {n} klikbare links toegestaan in je bio.',
+      adNoClickableLink:
+        'In-feed advertentieteksten bevatten geen klikbare link — de CTA-knop verzorgt de klik.',
+    },
     linkCard: {
       editorHeading: 'Linkvoorbeeldkaart',
       titleLabel: 'Kaarttitel',

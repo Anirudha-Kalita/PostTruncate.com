@@ -11,8 +11,9 @@
 //   • Only the built og/ media folder is touched (dist/client/og or dist/og).
 //   • Only *.png/*.jpg/*.jpeg inside it are removed; the generated optimized/
 //     WebP variants and the manifest stay.
-//   • The site-wide default at dist/client/og.png (one level UP, not inside
-//     og/) is NOT touched — it's the OG/social fallback image.
+//   • The site-wide default at dist/client/og.webp (one level UP, not inside
+//     og/) is NOT touched — it's the OG/social fallback image (and being WebP,
+//     it is never a prune target anyway).
 //
 // Usage:
 //   node scripts/prune-dist-originals.mjs          # prune (postbuild default)
@@ -43,7 +44,7 @@ Usage:
 
 Removes *.png/*.jpg/*.jpeg from the deployed og/ media folder so the site is
 WebP-only. The generated optimized/ WebP, the manifest, and the site-wide
-og.png fallback are kept. Source files in public/og/ are never touched.`;
+og.webp fallback are kept. Source files in public/og/ are never touched.`;
 
 /** The built og/ folder for this build, or null if none exists yet. */
 export function resolveDistOgDir(candidates = DIST_OG_CANDIDATES) {

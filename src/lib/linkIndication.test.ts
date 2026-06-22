@@ -3,7 +3,8 @@ import assert from 'node:assert/strict';
 import fc from 'fast-check';
 
 import { selectLinkIndication, tiktokAdCaptionHasNoClickableLink } from './linkIndication';
-import { LINK_BEHAVIOR, organicLinkBehavior } from '../data/linkBehavior';
+import { LINK_BEHAVIOR, organicLinkBehavior, type LinkDisplayModel } from '../data/linkBehavior';
+import { PLATFORM_COUNTERS } from '../data/platformCounters';
 import { detectUrls } from './textTools';
 
 // ───────────────────────────────────────────────────────────────────────────
@@ -93,6 +94,77 @@ test('Property 8: an unknown platform id always returns "none"', () => {
     }),
     { numRuns: 100 },
   );
+});
+
+// ───────────────────────────────────────────────────────────────────────────
+// Property 8b: Per-field model override
+// Feature: platform-link-display (field-aware guidance)
+// A counter field whose link behavior differs from its platform's primary
+// model passes an explicit `modelOverride`; the indication must follow the
+// override, not the platform model — and still gate on URL presence.
+// ───────────────────────────────────────────────────────────────────────────
+
+const OVERRIDE_MODELS: LinkDisplayModel[] = [
+  'plain-text',
+  'preview-card',
+  'clickable-inline',
+  'counted-shortened',
+];
+
+test('Property 8b: an explicit modelOverride selects its mapped key (URL present)', () => {
+  fc.assert(
+    fc.property(
+      fc.constantFrom(...organicPlatforms),
+      urlBearingText,
+      fc.constantFrom(...OVERRIDE_MODELS),
+      (platform, text, model) => {
+        // The override wins over whatever the platform's own model is.
+        assert.equal(selectLinkIndication(platform, text, model), MODEL_TO_KEY[model]);
+      },
+    ),
+    { numRuns: 100 },
+  );
+});
+
+test('Property 8b: a modelOverride still yields "none" when no URL is present', () => {
+  fc.assert(
+    fc.property(
+      fc.constantFrom(...organicPlatforms),
+      urlFreeText,
+      fc.constantFrom(...OVERRIDE_MODELS),
+      (platform, text, model) => {
+        assert.equal(selectLinkIndication(platform, text, model), 'none');
+      },
+    ),
+    { numRuns: 100 },
+  );
+});
+
+// ───────────────────────────────────────────────────────────────────────────
+// Property 8c: Configured counter-field overrides resolve correctly
+// Drives straight from PLATFORM_COUNTERS so the per-field facts shown on the
+// counter pages can never drift from this mapping. The 'bio' role is resolved
+// by the island (allowance line only), not by selectLinkIndication, so it is
+// asserted separately to have no Link_Display_Model mapping.
+// ───────────────────────────────────────────────────────────────────────────
+
+test('Property 8c: each configured field override maps to the expected indication', () => {
+  const url = 'https://example.com/path';
+  for (const [platform, config] of Object.entries(PLATFORM_COUNTERS)) {
+    for (const field of config.fields) {
+      if (field.link === undefined) continue; // inherits the platform model
+      if (field.link === 'bio') {
+        // 'bio' is not a Link_Display_Model — it must not be a switch key.
+        assert.ok(!(field.link in MODEL_TO_KEY));
+        continue;
+      }
+      assert.equal(
+        selectLinkIndication(platform, url, field.link),
+        MODEL_TO_KEY[field.link],
+        `${platform}.${field.key} (${field.link})`,
+      );
+    }
+  }
 });
 
 // ───────────────────────────────────────────────────────────────────────────

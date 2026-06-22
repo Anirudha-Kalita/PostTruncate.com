@@ -855,6 +855,16 @@ export const ja: Translations = {
       remove: 'メディアを削除',
       hint: 'プレビューのみ — アップロードも保存もされません。再読み込みで消えます。',
     },
+    linkDisplay: {
+      plainText: '本文内のリンクはここではクリックできません。プレーンテキストとして表示されます。',
+      previewCard: 'このリンクはプレビューカードを生成します。',
+      previewCardFirstUrl: '最初のリンクがプレビューカードになります。',
+      clickableInline: 'このリンクは本文内でクリック可能なままです。',
+      countedShortened: '各リンクは{weight}文字としてカウントされます。',
+      bioLinkAllowance: 'プロフィール（bio）にはクリック可能なリンクを最大{n}件まで設定できます。',
+      adNoClickableLink:
+        'インフィード広告のキャプションにクリック可能なリンクはありません。クリックはCTAボタンが担います。',
+    },
     linkCard: {
       editorHeading: 'リンクプレビューカード',
       titleLabel: 'カードのタイトル',

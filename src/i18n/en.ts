@@ -1,4 +1,5 @@
 import type { Translations } from './types';
+import { LINK_DISPLAY_STRINGS } from './linkDisplayStrings';
 
 // ──────────────────────────────────────────────────────────────────────────
 // English — the canonical dictionary. Every other locale mirrors this exact
@@ -857,6 +858,9 @@ export const en: Translations = {
       remove: 'Remove media',
       hint: 'Preview only — never uploaded or stored. Clears on reload.',
     },
+    // Canonical English link-display guidance. Other locales inline their own
+    // translated block; en references the shared constant so the two never drift.
+    linkDisplay: LINK_DISPLAY_STRINGS,
     linkCard: {
       editorHeading: 'Link preview card',
       titleLabel: 'Card title',

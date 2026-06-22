@@ -10,7 +10,7 @@
  * WHICH indication applies. Islands resolve the localized copy separately.
  */
 
-import { organicLinkBehavior } from '../data/linkBehavior';
+import { organicLinkBehavior, type LinkDisplayModel } from '../data/linkBehavior';
 import { detectHashtags, detectUrls } from './textTools';
 
 /** The indication key chosen for a counter body, or `'none'` when no URL applies. */
@@ -29,14 +29,23 @@ export type LinkIndication =
  *   (Requirements 4.1, 5.1, 7.1, 8.1, 8.3).
  * - Returns `'none'` for any platform without an organic record so un-wired
  *   platforms degrade safely to today's behavior.
+ *
+ * `modelOverride` lets a specific counter field declare link behavior that
+ * differs from the platform's primary/body model (e.g. a YouTube description
+ * that autolinks, a Pinterest title that does not). When omitted the platform's
+ * own `model` is used, so the existing call sites are unchanged.
  */
-export function selectLinkIndication(platform: string, text: string): LinkIndication {
+export function selectLinkIndication(
+  platform: string,
+  text: string,
+  modelOverride?: LinkDisplayModel,
+): LinkIndication {
   if (detectUrls(text).length === 0) return 'none';
 
   const behavior = organicLinkBehavior(platform);
   if (!behavior) return 'none';
 
-  switch (behavior.model) {
+  switch (modelOverride ?? behavior.model) {
     case 'plain-text':
       return 'plainText';
     case 'preview-card':
