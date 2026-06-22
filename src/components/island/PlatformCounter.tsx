@@ -8,7 +8,7 @@ import { organicLinkBehavior } from '../../data/linkBehavior';
 import { selectLinkIndication } from '../../lib/linkIndication';
 import { linkDisplayStrings } from '../../i18n/linkDisplayStrings';
 import { linkCardStrings } from '../../i18n/linkCardStrings';
-import { LivePreviewCard } from './LivePreviewCard';
+import { LivePreviewCard, DEFAULT_CARD_IMAGE } from './LivePreviewCard';
 import type { IslandStrings } from '../../i18n/types';
 
 interface Props {
@@ -146,7 +146,7 @@ export function PlatformCounter({ s, platform, lang }: Props) {
                 has no URL or the platform is not a preview-card platform, so
                 URL-free behavior is unchanged (Requirement 1.1, 16.1). */}
             {linkBehavior?.model === 'preview-card' && (
-              <LivePreviewCard platform={platform} text={f.text} lang={lang ?? 'en'} s={s} />
+              <LivePreviewCard platform={platform} text={f.text} image={DEFAULT_CARD_IMAGE} lang={lang ?? 'en'} s={s} />
             )}
           </div>
         ))}

@@ -864,6 +864,9 @@ export const es: Translations = {
       cardAria: 'Vista previa del enlace: {title} — {domain}',
       imageAlt: 'Imagen de vista previa del enlace',
       firstUrlNote: 'El primer enlace de tu publicación se convierte en la tarjeta de vista previa.',
+      imageAdd: 'Añadir imagen de demostración',
+      imageReplace: 'Cambiar imagen de demostración',
+      imageRemove: 'Quitar imagen de demostración',
     },
     aiImprove: {
       button: 'Mejorar con IA',

@@ -4,17 +4,18 @@ import type { IslandStrings } from '../../i18n/types';
 
 // ──────────────────────────────────────────────────────────────────────────
 // CardFieldEditor — the editor-column controls for a Rich_Link_Card's mock
-// metadata. It edits ONLY the Card_Title and Card_Description (Requirement 4.1):
-// the card image is supplied by the editor's EXISTING media-attachment object
-// URL (the `image`/`onSelectImage` control already in Workspace/Dashboard), so
-// there is deliberately NO new upload control here (Requirement 4.3). When no
-// image is attached the component reflects the no-image form (Requirement 4.5);
-// the actual no-image card layout is rendered by LivePreviewCard.
+// metadata. It edits the Card_Title, the Card_Description, AND the card's
+// "demo image". That demo image is COMPLETELY SEPARATE from the post "Add
+// media" attachment in Workspace/Dashboard — editing one never affects the
+// other. The card image defaults to the site OG image (/og.png); the user can
+// upload an image-only file to override it (videos are not accepted here) or
+// reset back to the default.
 //
-// Both fields are controlled inputs with keyboard-operable, labelled controls
-// whose labels resolve from the locale via linkCardStrings (Requirement 13.3,
-// 15.1). All styling uses the project's Tailwind v4 design tokens (no arbitrary
-// values), mirroring the editor textarea/media-attach conventions in Workspace.
+// All fields are controlled, keyboard-operable, labelled controls whose labels
+// resolve from the locale via linkCardStrings (Requirement 13.3, 15.1). The
+// upload control mirrors the Workspace media-attach pattern (sr-only file
+// input wrapped in a <label>, input.value reset after change). All styling
+// uses the project's Tailwind v4 design tokens (no arbitrary values).
 // ──────────────────────────────────────────────────────────────────────────
 
 const TITLE_INPUT_ID = 'card-title-input';
@@ -30,13 +31,16 @@ export interface CardFieldEditorProps {
   /** Push an edited Card_Description up to the owning editor state. */
   onCardDescriptionChange: (next: string) => void;
   /**
-   * The editor's existing media-attachment object URL (reused as the card
-   * image), or null when none is attached. This component never uploads — it
-   * only reflects the attachment state. When null, the no-image form is shown.
+   * The resolved card image URL — either the user's uploaded object URL or the
+   * default OG image (/og.png). Independent from the post "Add media" image.
    */
-  image?: string | null;
-  /** Whether the attached media is an image (default) or a video. */
-  mediaKind?: 'image' | 'video';
+  cardImage: string | null;
+  /** True when `cardImage` is the default OG image (no custom upload set). */
+  isDefaultImage: boolean;
+  /** Hand a picked image File (or null to clear) up to the card-image state. */
+  onSelectCardImage: (file: File | null) => void;
+  /** Reset the card image back to the default OG image. */
+  onResetCardImage: () => void;
   /** Active locale. */
   lang: string;
   /** Translated island strings. */
@@ -44,21 +48,23 @@ export interface CardFieldEditorProps {
 }
 
 /**
- * Editable Card_Title input + Card_Description textarea for the active
- * Rich_Link_Card. Controlled and keyboard-operable; the attached media (if any)
- * is reflected read-only because it is owned by the editor's media-attach
- * control, not edited here.
+ * Editable Card_Title input + Card_Description textarea + a working demo-image
+ * upload control for the active Rich_Link_Card. The image control is fully
+ * independent from the post media attachment.
  */
 export function CardFieldEditor({
   cardTitle,
   cardDescription,
   onCardTitleChange,
   onCardDescriptionChange,
-  image,
-  mediaKind = 'image',
+  cardImage,
+  isDefaultImage,
+  onSelectCardImage,
+  onResetCardImage,
   s,
 }: CardFieldEditorProps) {
   const strings = linkCardStrings(s);
+  const uploadLabel = isDefaultImage ? strings.imageAdd : strings.imageReplace;
 
   return (
     <section class="rounded-md border border-hairline bg-canvas-soft p-3.5 sm:p-4">
@@ -103,32 +109,40 @@ export function CardFieldEditor({
           />
         </div>
 
-        {/* Attached media is reused as the card image — reflected read-only here
-            (no upload control). The no-image form is shown when none is set. */}
+        {/* Demo image — a WORKING, image-only upload control independent from the
+            post "Add media" attachment. Defaults to the site OG image; users can
+            replace it or reset back to the default. */}
         <div class="flex items-center gap-2.5">
-          {image ? (
-            mediaKind === 'video' ? (
-              <video
-                src={image}
-                muted
-                playsInline
-                preload="metadata"
-                class="h-10 w-10 shrink-0 rounded-md border border-hairline object-cover"
-              />
-            ) : (
-              <img
-                src={image}
-                alt={strings.imageAlt}
-                class="h-10 w-10 shrink-0 rounded-md border border-hairline object-cover"
-              />
-            )
-          ) : (
-            <span
-              class="flex h-10 w-10 shrink-0 items-center justify-center rounded-md border border-dashed border-hairline-strong text-mute"
-              aria-hidden="true"
+          {cardImage && (
+            <img
+              src={cardImage}
+              alt={strings.imageAlt}
+              class="h-10 w-10 shrink-0 rounded-md border border-hairline object-cover"
+            />
+          )}
+          <label class="inline-flex cursor-pointer items-center gap-1.5 rounded-pill border border-link bg-link px-3.5 py-2 text-[13px] font-semibold text-on-primary transition-[transform,background] duration-100 hover:bg-link-deep active:scale-[0.96]">
+            <MediaIcon />
+            {uploadLabel}
+            <input
+              type="file"
+              accept="image/*"
+              class="sr-only"
+              onChange={(e) => {
+                const input = e.currentTarget as HTMLInputElement;
+                onSelectCardImage(input.files?.[0] ?? null);
+                input.value = '';
+              }}
+            />
+          </label>
+          {!isDefaultImage && (
+            <button
+              type="button"
+              onClick={onResetCardImage}
+              aria-label={strings.imageRemove}
+              class="inline-flex items-center gap-1.5 rounded-pill px-3.5 py-2 text-[13px] font-medium text-error transition-[transform,color,background] duration-100 hover:bg-error-soft active:scale-[0.96]"
             >
-              <ImagePlaceholderIcon />
-            </span>
+              {strings.imageRemove}
+            </button>
           )}
         </div>
       </div>
@@ -136,12 +150,12 @@ export function CardFieldEditor({
   );
 }
 
-/** Faint image glyph for the no-image placeholder tile. */
-function ImagePlaceholderIcon() {
+/** Image glyph for the demo-image upload button. */
+function MediaIcon() {
   return (
     <svg
-      width="16"
-      height="16"
+      width="15"
+      height="15"
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"

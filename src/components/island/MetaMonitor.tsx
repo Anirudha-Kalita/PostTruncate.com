@@ -62,6 +62,8 @@ interface Props {
   cardTitle?: string;
   /** User-edited Card_Description for the Facebook link-preview card (optional). */
   cardDescription?: string;
+  /** Independent Facebook link-card image (defaults to the site OG image), separate from the post media. */
+  cardImage?: string | null;
 }
 
 function truncateForFeed(text: string, limit: number) {
@@ -78,7 +80,7 @@ function truncateForFeed(text: string, limit: number) {
  * Independent Instagram and Facebook monitors. Instagram owns caption preview
  * and hashtag concentration; Facebook owns feed preview and accessibility.
  */
-export function MetaMonitor({ text, lang, s, toolLinkHref, facebookToolLinkHref, priority, only, instagramView, setInstagramView, facebookView, setFacebookView, image, mediaKind = 'image', showFolded = true, cardTitle, cardDescription }: Props) {
+export function MetaMonitor({ text, lang, s, toolLinkHref, facebookToolLinkHref, priority, only, instagramView, setInstagramView, facebookView, setFacebookView, image, mediaKind = 'image', showFolded = true, cardTitle, cardDescription, cardImage }: Props) {
   const m = s.meta;
   const nf = new Intl.NumberFormat(lang);
   const author = previewAuthor(s.common);
@@ -338,8 +340,8 @@ export function MetaMonitor({ text, lang, s, toolLinkHref, facebookToolLinkHref,
                 text={activeText}
                 cardTitle={cardTitle}
                 cardDescription={cardDescription}
-                image={image}
-                mediaKind={mediaKind}
+                image={cardImage}
+                mediaKind="image"
                 lang={lang}
                 s={s}
               />

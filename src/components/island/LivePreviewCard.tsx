@@ -8,6 +8,14 @@ import { interp } from '../../i18n/interp';
 import { linkCardStrings } from '../../i18n/linkCardStrings';
 import type { IslandStrings } from '../../i18n/types';
 
+/**
+ * Default Rich_Link_Card image — the site's Open Graph image served from
+ * public/og.png. The card image is independent from the post "Add media"
+ * attachment, so it defaults here when the user has not set a custom card
+ * image. Imported by Dashboard and PlatformCounter.
+ */
+export const DEFAULT_CARD_IMAGE = '/og.png';
+
 // ──────────────────────────────────────────────────────────────────────────
 // LivePreviewCard — a NON-INTERACTIVE, view-only simulation of a platform's
 // Open Graph link card. It is deliberately NOT a link/anchor: it never

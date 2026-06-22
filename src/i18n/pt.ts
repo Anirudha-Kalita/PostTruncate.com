@@ -864,6 +864,9 @@ export const pt: Translations = {
       cardAria: 'Pré-visualização do link: {title} — {domain}',
       imageAlt: 'Imagem de pré-visualização do link',
       firstUrlNote: 'O primeiro link da sua publicação torna-se o cartão de pré-visualização.',
+      imageAdd: 'Adicionar imagem de demonstração',
+      imageReplace: 'Substituir imagem de demonstração',
+      imageRemove: 'Remover imagem de demonstração',
     },
     aiImprove: {
       button: 'Melhorar com IA',

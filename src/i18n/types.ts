@@ -228,6 +228,12 @@ export interface LinkCardStrings {
   imageAlt: string;
   /** Indication shown on cardFromFirstUrlOnly platforms with multiple URLs (Requirement 5.2). */
   firstUrlNote: string;
+  /** Card_Field_Editor image upload button label when no custom card image is set. */
+  imageAdd: string;
+  /** Card_Field_Editor image button label when a custom card image is already set. */
+  imageReplace: string;
+  /** Card_Field_Editor remove/reset control label (reverts to the default OG image). */
+  imageRemove: string;
 }
 
 /**

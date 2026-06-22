@@ -160,8 +160,8 @@ A new `Card_Layout_Profile` type is added and attached to each preview-card reco
 ```typescript
 /** How a platform presents the card image. */
 export type CardImageStyle =
-  | 'large'      // full-width banner at Card_Image_Ratio (Facebook, LinkedIn, Bluesky)
-  | 'thumbnail'  // small square/rounded thumbnail in a horizontal chip (Threads)
+  | 'large'      // full-width banner at Card_Image_Ratio (Facebook, LinkedIn, Threads, Bluesky)
+  | 'thumbnail'  // small square/rounded thumbnail in a horizontal chip (reserved; unused after the 2026 Threads re-review)
   | 'embed';     // image inside an embed body with a leading accent bar (Discord, WhatsApp)
 
 /** Casing applied to the displayed Card_Domain. */
@@ -205,7 +205,7 @@ platform's 2025/26 link-card presentation):
 |---|---|---|---|---|---|---|---|
 | `facebook` | 1.91:1 | large | 80 | 200 | uppercase | above-title | true |
 | `linkedin` | 1.91:1 | large | 120 | 0 | lowercase | below-title | true |
-| `threads` | 1.91:1 | thumbnail | 70 | 0 | lowercase | below-title | true |
+| `threads` | 1.91:1 | large | 70 | 0 | lowercase | below-title | true |
 | `discord` | 1.91:1 | embed | 100 | 350 | lowercase | site-name | false |
 | `whatsapp` | 1.91:1 | embed | 70 | 140 | lowercase | below-title | false |
 | `bluesky` | 1.91:1 | large | 100 | 200 | lowercase | below-title | true |
@@ -704,7 +704,7 @@ Property → suite mapping:
 
 - **Per-platform card layout (Requirements 8.1–8.6):** render assertions that each platform's card
   matches its `cardLayout` — Facebook uppercase domain above a 1.91:1 image, LinkedIn title+domain,
-  Threads thumbnail chip, Discord accent-bar embed, WhatsApp bubble, Bluesky large card.
+  Threads large landscape banner (title + domain), Discord accent-bar embed, WhatsApp bubble, Bluesky large card.
 - **Non-interactive view-only card (Requirements 10.1–10.5):** the card root is a non-interactive
   container (`<article>`/`<div>`), there is **no** `<a>`/`href` to `firstUrl.url` and no link role
   (e.g. `queryByRole('link')` finds nothing within the card), no `target`/`rel` attributes are present,

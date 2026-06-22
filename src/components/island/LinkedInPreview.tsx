@@ -42,6 +42,8 @@ interface Props {
   cardTitle?: string;
   /** User-edited Card_Description for the link-preview card (optional). */
   cardDescription?: string;
+  /** Independent link-card image (defaults to the site OG image), separate from the post media. */
+  cardImage?: string | null;
 }
 
 /**
@@ -49,7 +51,7 @@ interface Props {
  * "…see more" fold (210 chars desktop / 140 mobile) and injects a non-clickable
  * bold "…see more" at the exact boundary when the post is truncated.
  */
-export function LinkedInPreview({ text, view, setView, lang, s, toolLinkHref, image, mediaKind = 'image', showFolded = true, cardTitle, cardDescription }: Props) {
+export function LinkedInPreview({ text, view, setView, lang, s, toolLinkHref, image, mediaKind = 'image', showFolded = true, cardTitle, cardDescription, cardImage }: Props) {
   const l = s.linkedin;
   const nf = new Intl.NumberFormat(lang);
   const author = previewAuthor(s.common);
@@ -191,8 +193,8 @@ export function LinkedInPreview({ text, view, setView, lang, s, toolLinkHref, im
               text={text}
               cardTitle={cardTitle}
               cardDescription={cardDescription}
-              image={image}
-              mediaKind={mediaKind}
+              image={cardImage}
+              mediaKind="image"
               lang={lang}
               s={s}
             />

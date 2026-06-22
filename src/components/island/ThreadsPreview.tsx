@@ -41,6 +41,8 @@ interface Props {
   cardTitle?: string;
   /** User-edited Card_Description for the link-preview card (optional). */
   cardDescription?: string;
+  /** Independent link-card image (defaults to the site OG image), separate from the post media. */
+  cardImage?: string | null;
 }
 
 /**
@@ -48,7 +50,7 @@ interface Props {
  * validator keeps that full allowance, while the mock mobile card visually
  * folds one-block posts behind a "... more" affordance.
  */
-export function ThreadsPreview({ text, lang, s, toolLinkHref, view, setView, image, mediaKind = 'image', showFolded = true, cardTitle, cardDescription }: Props) {
+export function ThreadsPreview({ text, lang, s, toolLinkHref, view, setView, image, mediaKind = 'image', showFolded = true, cardTitle, cardDescription, cardImage }: Props) {
   const th = s.threads;
   const nf = new Intl.NumberFormat(lang);
   const author = previewAuthor(s.common);
@@ -182,8 +184,8 @@ export function ThreadsPreview({ text, lang, s, toolLinkHref, view, setView, ima
                   text={trimmed}
                   cardTitle={cardTitle}
                   cardDescription={cardDescription}
-                  image={image}
-                  mediaKind={mediaKind}
+                  image={cardImage}
+                  mediaKind="image"
                   lang={lang}
                   s={s}
                 />

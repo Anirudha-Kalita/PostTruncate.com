@@ -866,6 +866,9 @@ export const en: Translations = {
       cardAria: 'Link preview: {title} — {domain}',
       imageAlt: 'Link preview image',
       firstUrlNote: 'The first link in your post becomes the preview card.',
+      imageAdd: 'Add URL Demo Image',
+      imageReplace: 'Replace demo image',
+      imageRemove: 'Remove demo image',
     },
     aiImprove: {
       button: 'AI Improve',

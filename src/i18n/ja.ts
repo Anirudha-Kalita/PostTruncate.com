@@ -864,6 +864,9 @@ export const ja: Translations = {
       cardAria: 'リンクプレビュー：{title} — {domain}',
       imageAlt: 'リンクプレビュー画像',
       firstUrlNote: '投稿の最初のリンクがプレビューカードになります。',
+      imageAdd: 'デモ画像を追加',
+      imageReplace: 'デモ画像を変更',
+      imageRemove: 'デモ画像を削除',
     },
     aiImprove: {
       button: 'AIで改善',

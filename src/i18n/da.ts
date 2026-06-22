@@ -864,6 +864,9 @@ export const da: Translations = {
       cardAria: 'Linkforhåndsvisning: {title} — {domain}',
       imageAlt: 'Link-forhåndsvisningsbillede',
       firstUrlNote: 'Det første link i dit opslag bliver til forhåndsvisningskortet.',
+      imageAdd: 'Tilføj demobillede',
+      imageReplace: 'Erstat demobillede',
+      imageRemove: 'Fjern demobillede',
     },
     aiImprove: {
       button: 'AI-forbedring',

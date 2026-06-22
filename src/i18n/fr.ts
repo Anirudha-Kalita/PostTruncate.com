@@ -864,6 +864,9 @@ export const fr: Translations = {
       cardAria: 'Aperçu du lien : {title} — {domain}',
       imageAlt: 'Image d’aperçu du lien',
       firstUrlNote: 'Le premier lien de votre publication devient la carte d’aperçu.',
+      imageAdd: 'Ajouter une image de démo',
+      imageReplace: 'Remplacer l’image de démo',
+      imageRemove: 'Retirer l’image de démo',
     },
     aiImprove: {
       button: 'Améliorer avec l’IA',

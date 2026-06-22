@@ -864,6 +864,9 @@ export const it: Translations = {
       cardAria: 'Anteprima del link: {title} — {domain}',
       imageAlt: 'Immagine di anteprima del link',
       firstUrlNote: 'Il primo link del tuo post diventa la scheda di anteprima.',
+      imageAdd: 'Aggiungi immagine demo',
+      imageReplace: 'Sostituisci immagine demo',
+      imageRemove: 'Rimuovi immagine demo',
     },
     aiImprove: {
       button: 'Migliora con IA',

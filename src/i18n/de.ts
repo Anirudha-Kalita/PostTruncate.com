@@ -865,6 +865,9 @@ export const de: Translations = {
       cardAria: 'Link-Vorschau: {title} — {domain}',
       imageAlt: 'Link-Vorschaubild',
       firstUrlNote: 'Der erste Link in deinem Beitrag wird zur Vorschaukarte.',
+      imageAdd: 'Demobild hinzufügen',
+      imageReplace: 'Demobild ersetzen',
+      imageRemove: 'Demobild entfernen',
     },
     aiImprove: {
       button: 'KI-Verbesserung',

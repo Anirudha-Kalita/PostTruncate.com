@@ -862,6 +862,9 @@ export const zh: Translations = {
       cardAria: '链接预览：{title} — {domain}',
       imageAlt: '链接预览图片',
       firstUrlNote: '帖子中的第一个链接将成为预览卡片。',
+      imageAdd: '添加演示图片',
+      imageReplace: '替换演示图片',
+      imageRemove: '移除演示图片',
     },
     aiImprove: {
       button: 'AI 优化',

@@ -40,5 +40,8 @@ export function linkCardStrings(s: IslandStrings): LinkCardStrings {
     cardAria: v.cardAria || LINK_CARD_STRINGS.cardAria,
     imageAlt: v.imageAlt || LINK_CARD_STRINGS.imageAlt,
     firstUrlNote: v.firstUrlNote || LINK_CARD_STRINGS.firstUrlNote,
+    imageAdd: v.imageAdd || LINK_CARD_STRINGS.imageAdd,
+    imageReplace: v.imageReplace || LINK_CARD_STRINGS.imageReplace,
+    imageRemove: v.imageRemove || LINK_CARD_STRINGS.imageRemove,
   };
 }

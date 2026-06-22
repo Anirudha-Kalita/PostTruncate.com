@@ -268,13 +268,16 @@ export const LINK_BEHAVIOR: Record<string, LinkBehaviorRecord> = {
     },
     cardLayout: {
       imageRatio: '1.91:1',
-      imageStyle: 'thumbnail',
+      // Threads renders a large landscape banner (~1.91:1, OG source 1200x628)
+      // with the title + domain below — NOT a small square thumbnail chip
+      // (verified against Threads' live link-card rendering, 2026 review).
+      imageStyle: 'large',
       titleMaxChars: 70,
       descriptionMaxChars: 0,
       domainCasing: 'lowercase',
       domainPlacement: 'below-title',
       removesRawUrl: true,
-      lastReviewed: '2026-06-18',
+      lastReviewed: '2026-06-20',
     },
     lastReviewed: '2026-06-18',
     source: 'Threads (by Meta) builds a preview card from the first detected URL; counts links in full; up to 5 bio links.',

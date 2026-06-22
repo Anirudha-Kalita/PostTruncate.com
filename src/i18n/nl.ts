@@ -864,6 +864,9 @@ export const nl: Translations = {
       cardAria: 'Linkvoorbeeld: {title} — {domain}',
       imageAlt: 'Linkvoorbeeldafbeelding',
       firstUrlNote: 'De eerste link in je bericht wordt de voorbeeldkaart.',
+      imageAdd: 'Demoafbeelding toevoegen',
+      imageReplace: 'Demoafbeelding vervangen',
+      imageRemove: 'Demoafbeelding verwijderen',
     },
     aiImprove: {
       button: 'AI-verbetering',
