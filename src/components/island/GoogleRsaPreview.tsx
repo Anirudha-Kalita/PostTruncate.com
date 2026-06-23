@@ -1,4 +1,5 @@
 /** @jsxImportSource preact */
+import type { ComponentChildren } from 'preact';
 import { Card, CardHead, Badge, type Tone } from './ui';
 import type { IslandStrings } from '../../i18n/types';
 import { adPreviewStrings } from '../../i18n/adPreviewStrings';
@@ -16,6 +17,8 @@ interface Props {
   destinationUrl?: string;
   /** Optional Google RSA display-path segments (clamped to ≤2 segments, ≤15 chars each). */
   paths?: string[];
+  /** Optional controls rendered in the card heading, left of the status badge. */
+  toolbar?: ComponentChildren;
 }
 
 /**
@@ -24,7 +27,7 @@ interface Props {
  * breaches the ~600px desktop container, the trailing headline is dropped —
  * exactly the way Google clips the SERP ad slot.
  */
-export function GoogleRsaPreview({ s, headlines, description, destinationUrl, paths }: Props) {
+export function GoogleRsaPreview({ s, headlines, description, destinationUrl, paths, toolbar }: Props) {
   const ap = adPreviewStrings(s);
   const cfg = AD_PLATFORM_CONFIG.google;
   const headlineFont = font(cfg.font.headlinePx, 'Arial');
@@ -57,6 +60,7 @@ export function GoogleRsaPreview({ s, headlines, description, destinationUrl, pa
   return (
     <Card class="flex flex-col">
       <CardHead eyebrow="Google" title={ap.previewLabel}>
+        {toolbar}
         <Badge tone={badgeTone}>{badgeLabel}</Badge>
       </CardHead>
 

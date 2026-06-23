@@ -903,6 +903,13 @@ export const de: Translations = {
       imageReplace: 'Demobild ersetzen',
       imageRemove: 'Demobild entfernen',
     },
+    share: {
+      button: 'Teilen',
+      success: 'Link in die Zwischenablage kopiert',
+      error: 'Automatisches Kopieren fehlgeschlagen – kopiere den Link unten',
+      tooLarge: 'Dieser Inhalt ist zu lang, um als Link geteilt zu werden',
+      manualLabel: 'Diesen Link kopieren',
+    },
     aiImprove: {
       button: 'KI-Verbesserung',
       pickTone: 'Mit KI verbessern',

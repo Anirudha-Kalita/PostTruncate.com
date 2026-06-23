@@ -14,6 +14,9 @@ import type { HookPlatform } from '../../lib/hookAnalysis';
 import type { FoldView } from '../../lib/textTools';
 import { extractLinkData } from '../../lib/textTools';
 import { DRAFT_STORAGE_KEY, parseDraft, serializeDraft, type DraftEnvelope } from '../../lib/draftEnvelope';
+import { parseShare, pruneEmptyFields } from '../../lib/shareLink';
+import { readShareTokenFromHash } from '../../lib/shareUrl';
+import type { ShareAdapter } from './shareAdapter';
 import { SmsCounter } from './SmsCounter';
 import { ReadabilityCard } from './ReadabilityCard';
 import { HookStrip } from './HookStrip';
@@ -240,7 +243,32 @@ export default function Dashboard({ lang, strings, toolSlugs, focus }: Props) {
     />
   ) : null;
 
+  // Editor Share_Link adapter: snapshots / restores the post body + card
+  // metadata. The attached media is never read or written here, so a shared
+  // link can never carry it and is left empty on open (Req 1.7, 5.5).
+  const shareAdapter: ShareAdapter = {
+    kind: 'editor',
+    id: focus ?? 'editor',
+    collect: () => pruneEmptyFields({ kind: 'editor', text, cardTitle, cardDescription }),
+    apply: (state) => {
+      if (state.kind !== 'editor') return;
+      setText(state.text);
+      setAnalysisText(state.text);
+      setCardTitle(state.cardTitle ?? '');
+      setCardDescription(state.cardDescription ?? '');
+    },
+  };
+
   useEffect(() => {
+    // A share link wins over the stored draft (Req 8.1, 8.2): when the hash
+    // carries a valid editor token, the Share_Link hook (in <ShareControls>)
+    // hydrates the editor from it, so skip the draft load here and just enable
+    // the existing auto-save. Otherwise the draft-load path is unchanged.
+    const shared = parseShare(readShareTokenFromHash(window.location.hash));
+    if (shared && shared.state.kind === 'editor') {
+      setIsDraftLoaded(true);
+      return;
+    }
     const draft = readActiveDraft();
     setText(draft.text);
     setAnalysisText(draft.text);
@@ -294,7 +322,7 @@ export default function Dashboard({ lang, strings, toolSlugs, focus }: Props) {
     return (
       <div class="grid grid-cols-1 gap-5 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)]">
         <div class="flex flex-col gap-5">
-          <Workspace text={text} setText={setText} lang={lang} s={strings} focus={focus} image={image?.url ?? null} mediaKind={mediaKind} onSelectImage={onSelectImage} />
+          <Workspace text={text} setText={setText} lang={lang} s={strings} focus={focus} image={image?.url ?? null} mediaKind={mediaKind} onSelectImage={onSelectImage} shareAdapter={shareAdapter} />
 
           {!text && (
             <button
@@ -366,7 +394,7 @@ export default function Dashboard({ lang, strings, toolSlugs, focus }: Props) {
         <div class="grid grid-cols-1 gap-5 lg:grid-cols-2 lg:gap-6">
           {/* Left — "Write your post" */}
           <div class="flex min-w-0 flex-col gap-4">
-            <Workspace text={text} setText={setText} lang={lang} s={strings} image={image?.url ?? null} mediaKind={mediaKind} onSelectImage={onSelectImage} />
+            <Workspace text={text} setText={setText} lang={lang} s={strings} image={image?.url ?? null} mediaKind={mediaKind} onSelectImage={onSelectImage} shareAdapter={shareAdapter} />
 
             {!text && (
               <button

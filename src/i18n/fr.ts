@@ -902,6 +902,13 @@ export const fr: Translations = {
       imageReplace: 'Remplacer l’image de démo',
       imageRemove: 'Retirer l’image de démo',
     },
+    share: {
+      button: 'Partager',
+      success: 'Lien copié dans le presse-papiers',
+      error: 'Copie automatique impossible — copiez le lien ci-dessous',
+      tooLarge: 'Ce contenu est trop long pour être partagé sous forme de lien',
+      manualLabel: 'Copier ce lien',
+    },
     aiImprove: {
       button: 'Améliorer avec l’IA',
       pickTone: 'Améliorer avec l’IA',

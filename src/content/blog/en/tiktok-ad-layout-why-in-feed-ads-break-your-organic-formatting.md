@@ -47,7 +47,7 @@ Critically, this button is inserted _above the username_, not below it. The enti
 
 The result: the bottom unsafe zone in an in-feed ad expands from \~20% to approximately **25–30% of the screen** - or 480–576px from the bottom on a full-height 9:16 frame. That's a \~100–200px shift of the safe zone boundary compared to organic.
 
-![Side-by-side comparison showing the same 9:16 TikTok video in Organic View (clean layout, caption safely positioned) vs Ad View (injected CTA button covers the subtitle), as illustrated for PostTruncate](https://cdn-public.eesel.ai/809a7b85-3028-4413-8616-f52982e792e8/16757f0d-0cc5-40a4-8ece-c1a9f9753432/270edab3d6054f9aa9bc29d6b62b1308.png)
+![Side-by-side comparison showing the same 9:16 TikTok video in Organic View (clean layout, caption safely positioned) vs Ad View (injected CTA button covers the subtitle), as illustrated for PostTruncate](/og/tiktok-ad-layout-why-in-feed-ads-break-your-organic-formatting-1.png)
 
 <p align="center"><span style="font-size: 12px; "><em>Side-by-side comparison showing the same 9:16 TikTok video in Organic View (clean layout, caption safely positioned) vs Ad View (injected CTA button covers the subtitle), as illustrated for PostTruncate</em></span></p>
 
@@ -80,7 +80,7 @@ That leaves you a canvas of roughly **750x1248px** - about 44% of the total fram
 
 When you build creative in organic view, you're working with a larger, more forgiving safe area. When TikTok runs your creative as an ad, you're suddenly operating with a 44% canvas. The subtitle positioned "just above the username" is now sitting on top of the CTA button.
 
-![Technical safe zone diagram for TikTok in-feed ads 2026, showing the top 10%, right 15%, and bottom 25–30% unsafe zones with pixel measurements on a 1080x1920 canvas](https://cdn-public.eesel.ai/809a7b85-3028-4413-8616-f52982e792e8/16757f0d-0cc5-40a4-8ece-c1a9f9753432/556baaa5c3d3423ea946d88638d57546.png)
+![Technical safe zone diagram for TikTok in-feed ads 2026, showing the top 10%, right 15%, and bottom 25–30% unsafe zones with pixel measurements on a 1080x1920 canvas](/og/tiktok-ad-layout-why-in-feed-ads-break-your-organic-formatting-2.png)
 
 <p align="center"><span style="font-size: 12px; "><em>Technical safe zone diagram for TikTok in-feed ads 2026, showing the top 10%, right 15%, and bottom 25–30% unsafe zones with pixel measurements on a 1080x1920 canvas</em></span></p>
 
@@ -113,7 +113,7 @@ The organic solution to this problem (adding a semi-transparent dark scrim behin
 
 What you can control is the video background itself in that region. If you know your ad caption will appear in a certain frame of the video, you can plan the shot so the background behind the caption zone has enough contrast to support white text. This requires knowing, before you shoot or export, exactly where the caption will land.
 
-![Close-up UI illustration showing white ad caption text rendered illegibly against a busy, light-colored video background in the bottom 30% of a TikTok in-feed ad](https://cdn-public.eesel.ai/809a7b85-3028-4413-8616-f52982e792e8/16757f0d-0cc5-40a4-8ece-c1a9f9753432/80035830f4ff44429ad7452603e7b65e.png)
+![Close-up UI illustration showing white ad caption text rendered illegibly against a busy, light-colored video background in the bottom 30% of a TikTok in-feed ad](/og/tiktok-ad-layout-why-in-feed-ads-break-your-organic-formatting-3.png)
 
 <p align="center"><span style="font-size: 12px; "><em>Close-up UI illustration showing white ad caption text rendered illegibly against a busy, light-colored video background in the bottom 30% of a TikTok in-feed ad</em></span></p>
 

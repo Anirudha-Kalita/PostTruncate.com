@@ -898,6 +898,13 @@ export const en: Translations = {
       imageReplace: 'Replace demo image',
       imageRemove: 'Remove demo image',
     },
+    share: {
+      button: 'Share',
+      success: 'Link copied to clipboard',
+      error: 'Couldn’t copy automatically — copy the link below',
+      tooLarge: 'This content is too long to share as a link',
+      manualLabel: 'Copy this link',
+    },
     aiImprove: {
       button: 'AI Improve',
       pickTone: 'Improve with AI',

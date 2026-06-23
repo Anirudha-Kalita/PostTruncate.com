@@ -1,4 +1,5 @@
 /** @jsxImportSource preact */
+import type { ComponentChildren } from 'preact';
 import { Card, CardHead, Badge, Avatar, MoreDots, Engagement, CoverMedia, monogram, type Tone } from './ui';
 import { SafeZoneOverlay } from './SafeZoneOverlay';
 import type { IslandStrings } from '../../i18n/types';
@@ -20,6 +21,8 @@ interface Props {
   destinationUrl?: string;
   /** Optional CTA label; resolves to the platform default when empty. */
   cta?: string;
+  /** Optional controls rendered in the card heading, left of the status badge. */
+  toolbar?: ComponentChildren;
 }
 
 /**
@@ -28,7 +31,7 @@ interface Props {
  * safe zones (bottom profile band + right action stack) so caption/creative
  * collisions are visible.
  */
-export function InstagramAd({ s, caption, mode, safeZone, mediaUrl, mediaKind = 'image', destinationUrl, cta }: Props) {
+export function InstagramAd({ s, caption, mode, safeZone, mediaUrl, mediaKind = 'image', destinationUrl, cta, toolbar }: Props) {
   const ap = adPreviewStrings(s);
   const ig = AD_PLATFORM_CONFIG.instagram;
   const common = s.common;
@@ -60,6 +63,7 @@ export function InstagramAd({ s, caption, mode, safeZone, mediaUrl, mediaKind = 
   return (
     <Card class="flex flex-col">
       <CardHead eyebrow="Instagram" title={ap.previewLabel}>
+        {toolbar}
         <Badge tone={badgeTone}>{badgeLabel}</Badge>
       </CardHead>
 

@@ -18,8 +18,11 @@ import {
 } from '../../lib/textTools';
 import { Card, Stat, Badge } from './ui';
 import { AiImprove } from './AiImprove';
+import { ShareControls } from './ShareControls';
+import type { ShareAdapter } from './shareAdapter';
 import { interp, plural } from '../../i18n/interp';
 import type { IslandStrings } from '../../i18n/types';
+import { shareStrings } from '../../i18n/shareStrings';
 
 const READING_WORDS_PER_MINUTE = 275;
 const SPEAKING_WORDS_PER_MINUTE = 150;
@@ -36,6 +39,8 @@ interface Props {
   mediaKind?: 'image' | 'video';
   /** Hand a picked File (or null to clear) up to the Dashboard image state. */
   onSelectImage?: (file: File | null) => void;
+  /** Editor Share_Link adapter; when set, the Share control is hosted here. */
+  shareAdapter?: ShareAdapter;
 }
 
 /**
@@ -43,7 +48,7 @@ interface Props {
  * optimization engine actions. All transforms route through the pure helpers
  * in textTools so behaviour matches the previews exactly.
  */
-export function Workspace({ text, setText, lang, s, focus, image, mediaKind = 'image', onSelectImage }: Props) {
+export function Workspace({ text, setText, lang, s, focus, image, mediaKind = 'image', onSelectImage, shareAdapter }: Props) {
   const hidden = detectHiddenUnicode(text);
   const w = s.workspace;
   const img = s.imageUpload ?? {
@@ -249,14 +254,21 @@ export function Workspace({ text, setText, lang, s, focus, image, mediaKind = 'i
               </span>
             )}
           </button>
-          <button
-            type="button"
-            onClick={onClear}
-            disabled={!text}
-            class="ml-auto min-h-11 sm:min-h-9 inline-flex items-center gap-1.5 rounded-pill px-3.5 py-2 text-[13px] font-medium text-error transition-[transform,color,background] duration-100 hover:bg-error-soft active:scale-[0.96] active:bg-error-soft disabled:cursor-not-allowed disabled:opacity-45 disabled:active:scale-100"
-          >
-            {w.clear}
-          </button>
+          {/* Right-aligned action group: the prominent Share button (when a
+              Share_Link adapter is wired) next to the destructive Clear. */}
+          <div class="ml-auto flex items-center gap-2">
+            {shareAdapter && (
+              <ShareControls adapter={shareAdapter} strings={shareStrings(s)} />
+            )}
+            <button
+              type="button"
+              onClick={onClear}
+              disabled={!text}
+              class="min-h-11 sm:min-h-9 inline-flex items-center gap-1.5 rounded-pill px-3.5 py-2 text-[13px] font-medium text-error transition-[transform,color,background] duration-100 hover:bg-error-soft active:scale-[0.96] active:bg-error-soft disabled:cursor-not-allowed disabled:opacity-45 disabled:active:scale-100"
+            >
+              {w.clear}
+            </button>
+          </div>
         </div>
 
         {hidden.count > 0 && (

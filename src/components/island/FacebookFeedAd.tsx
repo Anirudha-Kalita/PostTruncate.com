@@ -12,6 +12,7 @@ import {
   monogram,
   type Tone,
 } from './ui';
+import type { ComponentChildren } from 'preact';
 import type { IslandStrings } from '../../i18n/types';
 import { adPreviewStrings } from '../../i18n/adPreviewStrings';
 import { AD_PLATFORM_CONFIG } from '../../data/adPlatformConfig';
@@ -32,6 +33,8 @@ interface Props {
   destinationUrl?: string;
   /** Optional CTA label; resolves to the platform default when empty. */
   cta?: string;
+  /** Optional controls rendered in the card heading, left of the status badge. */
+  toolbar?: ComponentChildren;
 }
 
 /**
@@ -40,7 +43,7 @@ interface Props {
  * safe-zone; the link description caps at 30 characters and hides when a long
  * headline squeezes the mobile layout.
  */
-export function FacebookFeedAd({ s, primary, headline, description, device, mediaUrl, mediaKind = 'image', destinationUrl, cta }: Props) {
+export function FacebookFeedAd({ s, primary, headline, description, device, mediaUrl, mediaKind = 'image', destinationUrl, cta, toolbar }: Props) {
   const ap = adPreviewStrings(s);
   const fb = AD_PLATFORM_CONFIG.facebook;
   const common = s.common;
@@ -78,6 +81,7 @@ export function FacebookFeedAd({ s, primary, headline, description, device, medi
   return (
     <Card class="flex flex-col">
       <CardHead eyebrow="Facebook" title={ap.previewLabel}>
+        {toolbar}
         <Badge tone={badgeTone}>{badgeLabel}</Badge>
       </CardHead>
 

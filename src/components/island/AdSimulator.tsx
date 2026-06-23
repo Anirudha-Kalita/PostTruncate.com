@@ -5,9 +5,13 @@ import { GoogleRsaPreview } from './GoogleRsaPreview';
 import { FacebookFeedAd } from './FacebookFeedAd';
 import { InstagramAd } from './InstagramAd';
 import { TikTokAd } from './TikTokAd';
+import { ShareControls } from './ShareControls';
+import type { ShareAdapter } from './shareAdapter';
+import { pruneEmptyFields, type AdShareView } from '../../lib/shareLink';
 import { interp } from '../../i18n/interp';
 import type { IslandStrings } from '../../i18n/types';
 import { adPreviewStrings } from '../../i18n/adPreviewStrings';
+import { shareStrings } from '../../i18n/shareStrings';
 import { AD_PLATFORM_CONFIG, type AdPlatform } from '../../data/adPlatformConfig';
 import { adLinkBehavior } from '../../data/linkBehavior';
 import { resolveCta } from '../../lib/adTruncation';
@@ -119,8 +123,81 @@ export function AdSimulator({ platform, s, lang }: Props) {
       return null;
     });
 
+  // ── Share_Link adapter ────────────────────────────────────────────────────
+  // collect() snapshots only this platform's exposed toggles + non-empty field
+  // values; apply() restores them only for a matching platform (cross-tool
+  // isolation, Req 5.4). The in-memory media URL is never read or written, so a
+  // shared link can never carry it and stays empty on open (Req 1.7, 5.5).
+  const shareAdapter: ShareAdapter = {
+    kind: 'ad',
+    id: platform,
+    collect: () => {
+      const view: AdShareView = {};
+      if (controls.device) view.device = device;
+      if (controls.mode) view.mode = mode;
+      if (controls.safeZone) view.safeZone = safeZone;
+      if (showsDisplayLink) {
+        view.destinationUrl = destinationUrl;
+        view.cta = cta;
+      }
+      if (supportsDisplayPath) {
+        view.finalUrl = finalUrl;
+        view.paths = paths;
+      }
+      return pruneEmptyFields({ kind: 'ad', platform, fields: { ...values }, view });
+    },
+    apply: (state) => {
+      if (state.kind !== 'ad' || state.platform !== platform) return;
+      // Merge over EMPTY_VALUES, dropping any unknown field keys.
+      const next: Record<FieldKey, string> = { ...EMPTY_VALUES };
+      for (const key of Object.keys(EMPTY_VALUES) as FieldKey[]) {
+        const v = state.fields[key];
+        if (typeof v === 'string') next[key] = v;
+      }
+      setValues(next);
+      const view = state.view;
+      if (view.device) setDevice(view.device);
+      if (view.mode) setMode(view.mode);
+      if (typeof view.safeZone === 'boolean') setSafeZone(view.safeZone);
+      if (view.destinationUrl !== undefined) setDestinationUrl(view.destinationUrl);
+      if (view.cta !== undefined) setCta(view.cta);
+      if (view.finalUrl !== undefined) setFinalUrl(view.finalUrl);
+      if (view.paths) setPaths([view.paths[0] ?? '', view.paths[1] ?? '']);
+    },
+  };
+
   // ── Per-platform left-column field set ────────────────────────────────────
   const fields = buildFields(platform, ap, cfg);
+
+  // Controls hosted in the preview card heading (next to the status badge): the
+  // device (Mobile/Desktop) toggle where the platform exposes it, plus Share.
+  const previewToolbar = (
+    <>
+      {controls.device && (
+        <Segmented
+          ariaLabel={ap.deviceAria}
+          value={device}
+          onChange={setDevice}
+          options={[
+            { value: 'mobile', label: ap.mobile },
+            { value: 'desktop', label: ap.desktop },
+          ]}
+        />
+      )}
+      {controls.mode && (
+        <Segmented
+          ariaLabel={ap.modeAria}
+          value={mode}
+          onChange={setMode}
+          options={[
+            { value: 'feed', label: ap.feed },
+            { value: 'reels', label: ap.reels },
+          ]}
+        />
+      )}
+      <ShareControls adapter={shareAdapter} strings={shareStrings(s)} size="sm" />
+    </>
+  );
 
   // ── Right-column preview ──────────────────────────────────────────────────
   const preview = (() => {
@@ -133,6 +210,7 @@ export function AdSimulator({ platform, s, lang }: Props) {
             description={values.description}
             destinationUrl={finalUrl}
             paths={paths}
+            toolbar={previewToolbar}
           />
         );
       case 'facebook':
@@ -147,6 +225,7 @@ export function AdSimulator({ platform, s, lang }: Props) {
             mediaKind={mediaKind}
             destinationUrl={destinationUrl}
             cta={cta || resolveCta('facebook') || undefined}
+            toolbar={previewToolbar}
           />
         );
       case 'instagram':
@@ -160,6 +239,7 @@ export function AdSimulator({ platform, s, lang }: Props) {
             mediaKind={mediaKind}
             destinationUrl={destinationUrl}
             cta={cta || resolveCta('instagram') || undefined}
+            toolbar={previewToolbar}
           />
         );
       case 'tiktok':
@@ -171,6 +251,7 @@ export function AdSimulator({ platform, s, lang }: Props) {
             safeZone={safeZone}
             mediaUrl={mediaUrl}
             mediaKind={mediaKind}
+            toolbar={previewToolbar}
           />
         );
     }
@@ -321,31 +402,10 @@ export function AdSimulator({ platform, s, lang }: Props) {
             </div>
           )}
 
-          {/* Shared toggles */}
-          {(controls.device || controls.mode || controls.safeZone) && (
+          {/* Shared toggles (the device + Feed/Reels toggles are hosted in the
+              preview card heading; the safe-zone toggle stays with the inputs). */}
+          {controls.safeZone && (
             <div class="flex flex-wrap items-center gap-4 border-t border-hairline pt-4">
-              {controls.device && (
-                <Segmented
-                  ariaLabel={ap.deviceAria}
-                  value={device}
-                  onChange={setDevice}
-                  options={[
-                    { value: 'mobile', label: ap.mobile },
-                    { value: 'desktop', label: ap.desktop },
-                  ]}
-                />
-              )}
-              {controls.mode && (
-                <Segmented
-                  ariaLabel={ap.modeAria}
-                  value={mode}
-                  onChange={setMode}
-                  options={[
-                    { value: 'feed', label: ap.feed },
-                    { value: 'reels', label: ap.reels },
-                  ]}
-                />
-              )}
               {controls.safeZone && (
                 <label class="inline-flex cursor-pointer items-center gap-2 text-[13px] font-medium text-body">
                   <input

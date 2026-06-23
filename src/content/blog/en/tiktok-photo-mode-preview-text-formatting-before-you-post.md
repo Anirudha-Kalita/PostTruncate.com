@@ -55,7 +55,7 @@ There is also the structural difference in how TikTok positions the caption. On 
 
 Working in Photo Mode means working with a 1080 x 1920 pixel canvas - the standard 9:16 vertical format that TikTok, Reels, and Shorts all share. Within that canvas, TikTok's native UI covers three distinct regions.
 
-![TikTok Photo Mode safe zone diagram showing the three UI overlay regions on a 1080x1920 pixel canvas, with the center safe zone highlighted](https://cdn-public.eesel.ai/809a7b85-3028-4413-8616-f52982e792e8/16757f0d-0cc5-40a4-8ece-c1a9f9753432/4bc000ef0e7d4f059872847e2d71dc68.png)
+![TikTok Photo Mode safe zone diagram showing the three UI overlay regions on a 1080x1920 pixel canvas, with the center safe zone highlighted](/og/tiktok-photo-mode-preview-text-formatting-before-you-post-1.png)
 
 TikTok Photo Mode safe zone diagram showing the three UI overlay regions on a 1080x1920 pixel canvas, with the center safe zone highlighted
 
@@ -71,7 +71,7 @@ That leaves an effective safe zone of roughly 918 pixels wide (85% of 1080) and 
 
 Carousels are not passive content. When a viewer encounters a photo carousel in the For You feed, they have to make an active choice: swipe through, or keep scrolling. That decision usually happens within the first one to two seconds of looking at slide one.
 
-![Side-by-side comparison of a TikTok Photo Mode carousel: left shows invisible white caption text against a light background, right shows clearly readable caption after previewing with a layout tool](https://cdn-public.eesel.ai/809a7b85-3028-4413-8616-f52982e792e8/16757f0d-0cc5-40a4-8ece-c1a9f9753432/4c6e0a5f6fac42caa51cf08dfe4caeba.png)
+![Side-by-side comparison of a TikTok Photo Mode carousel: left shows invisible white caption text against a light background, right shows clearly readable caption after previewing with a layout tool](/og/tiktok-photo-mode-preview-text-formatting-before-you-post-2.png)
 
 Side-by-side comparison of a TikTok Photo Mode carousel: left shows invisible white caption text against a light background, right shows clearly readable caption after previewing with a layout tool
 

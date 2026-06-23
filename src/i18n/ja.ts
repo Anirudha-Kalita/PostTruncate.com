@@ -902,6 +902,13 @@ export const ja: Translations = {
       imageReplace: 'デモ画像を変更',
       imageRemove: 'デモ画像を削除',
     },
+    share: {
+      button: '共有',
+      success: 'リンクをクリップボードにコピーしました',
+      error: '自動コピーできませんでした — 下のリンクをコピーしてください',
+      tooLarge: 'このコンテンツは長すぎてリンクで共有できません',
+      manualLabel: 'このリンクをコピー',
+    },
     aiImprove: {
       button: 'AIで改善',
       pickTone: 'AIで改善',

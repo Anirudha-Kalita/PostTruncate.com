@@ -1,4 +1,5 @@
 /** @jsxImportSource preact */
+import type { ComponentChildren } from 'preact';
 import { Card, CardHead, Badge, CoverMedia, TikTokActionRail, type Tone } from './ui';
 import { SafeZoneOverlay } from './SafeZoneOverlay';
 import type { IslandStrings } from '../../i18n/types';
@@ -17,6 +18,8 @@ interface Props {
   mediaUrl: string | null;
   /** Whether the attached media is an image (default) or a video. */
   mediaKind?: 'image' | 'video';
+  /** Optional controls rendered in the card heading, left of the status badge. */
+  toolbar?: ComponentChildren;
 }
 
 /**
@@ -26,7 +29,7 @@ interface Props {
  * bar (~10%), bottom username/caption/CTA/music ticker (~20%), and the right
  * profile + engagement icon stack (~15%).
  */
-export function TikTokAd({ s, lang, description, safeZone, mediaUrl, mediaKind = 'image' }: Props) {
+export function TikTokAd({ s, lang, description, safeZone, mediaUrl, mediaKind = 'image', toolbar }: Props) {
   const ap = adPreviewStrings(s);
   const ld = linkDisplayStrings(s);
   const tk = AD_PLATFORM_CONFIG.tiktok;
@@ -49,6 +52,7 @@ export function TikTokAd({ s, lang, description, safeZone, mediaUrl, mediaKind =
   return (
     <Card class="flex flex-col">
       <CardHead eyebrow="TikTok" title={ap.previewLabel}>
+        {toolbar}
         <Badge tone={badgeTone}>{badgeLabel}</Badge>
       </CardHead>
 

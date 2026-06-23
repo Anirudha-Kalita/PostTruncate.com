@@ -902,6 +902,13 @@ export const da: Translations = {
       imageReplace: 'Erstat demobillede',
       imageRemove: 'Fjern demobillede',
     },
+    share: {
+      button: 'Del',
+      success: 'Link kopieret til udklipsholder',
+      error: 'Kunne ikke kopiere automatisk – kopiér linket nedenfor',
+      tooLarge: 'Dette indhold er for langt til at dele som et link',
+      manualLabel: 'Kopiér dette link',
+    },
     aiImprove: {
       button: 'AI-forbedring',
       pickTone: 'Forbedr med AI',

@@ -902,6 +902,13 @@ export const nl: Translations = {
       imageReplace: 'Demoafbeelding vervangen',
       imageRemove: 'Demoafbeelding verwijderen',
     },
+    share: {
+      button: 'Delen',
+      success: 'Link gekopieerd naar klembord',
+      error: 'Automatisch kopiëren mislukt — kopieer de onderstaande link',
+      tooLarge: 'Deze inhoud is te lang om als link te delen',
+      manualLabel: 'Kopieer deze link',
+    },
     aiImprove: {
       button: 'AI-verbetering',
       pickTone: 'Verbeteren met AI',

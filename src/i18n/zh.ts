@@ -900,6 +900,13 @@ export const zh: Translations = {
       imageReplace: '替换演示图片',
       imageRemove: '移除演示图片',
     },
+    share: {
+      button: '分享',
+      success: '链接已复制到剪贴板',
+      error: '无法自动复制——请复制下方链接',
+      tooLarge: '此内容过长，无法以链接形式分享',
+      manualLabel: '复制此链接',
+    },
     aiImprove: {
       button: 'AI 优化',
       pickTone: '使用 AI 优化',

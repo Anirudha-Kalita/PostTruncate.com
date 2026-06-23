@@ -215,7 +215,7 @@ export function CardHead({ eyebrow, title, logo, children }: CardHeadProps) {
           </p>
         </div>
       </div>
-      {children && <div class="flex shrink-0 items-center gap-2">{children}</div>}
+      {children && <div class="flex flex-wrap items-center justify-end gap-2">{children}</div>}
     </header>
   );
 }

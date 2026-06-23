@@ -257,6 +257,28 @@ export interface LinkCardStrings {
 }
 
 /**
+ * Strings for the Share_Link feature — the Share_Button label and the four
+ * Toast_Message / manual-copy strings. REQUIRED on every locale dictionary
+ * (like `linkCard`, unlike `linkDisplay`) so a missing key in any locale is a
+ * TypeScript error (Requirement 10.2) and the strict i18n parity lint only
+ * passes when all ten locales carry the exact key paths (Requirement 10.3).
+ * `en.ts` is canonical; the `shareStrings(s)` resolver falls back to the
+ * canonical English block for any partial/absent value (Requirement 10.4).
+ */
+export interface ShareStrings {
+  /** Share_Button label / aria-label. */
+  button: string;
+  /** Success Toast_Message after the link is copied. */
+  success: string;
+  /** Error Toast_Message when the clipboard write fails. */
+  error: string;
+  /** Warning Toast_Message when the content is too large to share by link. */
+  tooLarge: string;
+  /** Label for the manual-copy field shown when the clipboard is unavailable. */
+  manualLabel: string;
+}
+
+/**
  * Strings consumed by the Preact islands. Split out from the rest because this
  * sub-object — and only this sub-object — is serialized into the client island
  * props, so it must stay free of any server-only values.
@@ -365,6 +387,13 @@ export interface IslandStrings {
    * (Requirement 15.4).
    */
   linkCard: LinkCardStrings;
+  /**
+   * Share_Link feature strings (button + toasts + manual-copy label). REQUIRED
+   * on every locale so a missing key is a TypeScript error (Requirement 10.2);
+   * the `shareStrings(s)` resolver falls back to English per key (Requirement
+   * 10.4).
+   */
+  share: ShareStrings;
   /**
    * "AI Improve" feature — button, tone picker, progress, and result/error
    * states for the Gemini-backed rewrite. Tone keys mirror lib/aiImprove.ts.
