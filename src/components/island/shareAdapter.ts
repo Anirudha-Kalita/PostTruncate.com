@@ -18,4 +18,10 @@ export interface ShareAdapter {
   collect: () => ShareState;
   /** Apply a parsed ShareState into the island's state (only valid fields). */
   apply: (state: ShareState) => void;
+  /**
+   * Whether the island currently has attached media. Media is never encoded in
+   * a share link, so when this is true the success toast warns that only text
+   * is shared. Optional — islands with no media may omit it.
+   */
+  hasMedia?: () => boolean;
 }

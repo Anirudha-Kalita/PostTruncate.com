@@ -250,6 +250,7 @@ export default function Dashboard({ lang, strings, toolSlugs, focus }: Props) {
     kind: 'editor',
     id: focus ?? 'editor',
     collect: () => pruneEmptyFields({ kind: 'editor', text, cardTitle, cardDescription }),
+    hasMedia: () => image !== null || cardImage !== null,
     apply: (state) => {
       if (state.kind !== 'editor') return;
       setText(state.text);
@@ -322,30 +323,27 @@ export default function Dashboard({ lang, strings, toolSlugs, focus }: Props) {
     return (
       <div class="grid grid-cols-1 gap-5 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)]">
         <div class="flex flex-col gap-5">
-          <Workspace text={text} setText={setText} lang={lang} s={strings} focus={focus} image={image?.url ?? null} mediaKind={mediaKind} onSelectImage={onSelectImage} shareAdapter={shareAdapter} />
-
-          {!text && (
-            <button
-              type="button"
-              onClick={() => setText(strings.dashboard.samples[focus])}
-              class="self-start rounded-pill border border-transparent bg-link px-3.5 py-2 text-[13px] font-medium text-on-primary transition-[transform,background] duration-100 hover:bg-link-deep active:scale-[0.96]"
-            >
-              {strings.dashboard.loadSample}
-            </button>
-          )}
+          <Workspace text={text} setText={setText} lang={lang} s={strings} focus={focus} image={image?.url ?? null} mediaKind={mediaKind} onSelectImage={onSelectImage} shareAdapter={shareAdapter} onLoadSample={() => setText(strings.dashboard.samples[focus])} />
 
           {cardEditor}
         </div>
 
         <div class="flex flex-col gap-5">
-          {/* X and SMS have no "…more" fold remainder, so the toggle is moot there. */}
-          {focus !== 'twitter' && focus !== 'sms' && (
+          {/* X and SMS have no "…more" fold remainder, so the toggle is moot
+              there. On Instagram it sits below the hook card (just above the
+              preview); elsewhere it stays at the top of the column. */}
+          {focus !== 'twitter' && focus !== 'sms' && focus !== 'instagram' && (
             <div class="flex justify-end">
               <FoldToggle checked={showFolded} onChange={() => setShowFolded((v) => !v)} label={strings.previewPanel.showHidden} />
             </div>
           )}
           {showHookPanel && (
             <HookVisibilityCard text={analysisText} lang={lang} s={strings} only={hookOnly} views={views} />
+          )}
+          {focus === 'instagram' && (
+            <div class="flex justify-end">
+              <FoldToggle checked={showFolded} onChange={() => setShowFolded((v) => !v)} label={strings.previewPanel.showHidden} />
+            </div>
           )}
           {rightOrder.map(key => {
             if (key === 'linkedin') return <div id="platform-card-linkedin" key="lw"><LinkedInPreview key="linkedin" text={analysisText} view={views.linkedin} setView={(v) => setPlatformView('linkedin', v)} lang={lang} s={strings} toolLinkHref={`/${lang}/${toolSlugs.linkedin}/`} image={imageUrl} mediaKind={mediaKind} cardImage={cardImageUrl} showFolded={showFolded} cardTitle={cardTitle} cardDescription={cardDescription} /></div>;
@@ -394,17 +392,7 @@ export default function Dashboard({ lang, strings, toolSlugs, focus }: Props) {
         <div class="grid grid-cols-1 gap-5 lg:grid-cols-2 lg:gap-6">
           {/* Left — "Write your post" */}
           <div class="flex min-w-0 flex-col gap-4">
-            <Workspace text={text} setText={setText} lang={lang} s={strings} image={image?.url ?? null} mediaKind={mediaKind} onSelectImage={onSelectImage} shareAdapter={shareAdapter} />
-
-            {!text && (
-              <button
-                type="button"
-                onClick={() => setText(strings.dashboard.sample)}
-                class="self-start rounded-pill border border-transparent bg-link px-3.5 py-2 text-[13px] font-medium text-on-primary transition-[transform,background] duration-100 hover:bg-link-deep active:scale-[0.96]"
-              >
-                {strings.dashboard.loadSample}
-              </button>
-            )}
+            <Workspace text={text} setText={setText} lang={lang} s={strings} image={image?.url ?? null} mediaKind={mediaKind} onSelectImage={onSelectImage} shareAdapter={shareAdapter} onLoadSample={() => setText(strings.dashboard.sample)} />
 
             {cardEditor}
           </div>

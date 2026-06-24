@@ -734,6 +734,7 @@ export const fr: Translations = {
 
   island: {
     adPreviews: {
+      editorLabel: 'Composez votre annonce',
       fields: {
         headline: 'Titre',
         primary: 'Texte principal',
@@ -772,6 +773,7 @@ export const fr: Translations = {
       pathN: 'Chemin {n}',
       displayLink: 'Lien affiché / URL de destination',
       callToAction: 'Incitation à l’action',
+      adLabel: 'Sponsorisé',
       fbHeadlineSqueezed: 'Titre de plus de {limit} caractères sur mobile — la description du lien est masquée.',
       googleHeadlinesDropped: {
         one: '{n} titre supprimé — la largeur combinée dépasse l’emplacement publicitaire de {px} px sur ordinateur.',
@@ -793,7 +795,7 @@ export const fr: Translations = {
       },
     },
     dashboard: {
-      loadSample: 'Charger un exemple de publication →',
+      loadSample: 'Charger un exemple de publication',
       sample:
         'La semaine dernière, nous avons livré une toute petite fonctionnalité qui a discrètement doublé notre taux de conversion d’essai en abonnement payant.\n\n' +
         'Aucune nouvelle tarification. Aucune astuce de croissance. Juste un changement dans le parcours d’intégration qui a supprimé une seule décision du premier écran.\n\n' +
@@ -908,6 +910,7 @@ export const fr: Translations = {
       error: 'Copie automatique impossible — copiez le lien ci-dessous',
       tooLarge: 'Ce contenu est trop long pour être partagé sous forme de lien',
       manualLabel: 'Copier ce lien',
+      mediaNote: 'Seul votre texte est partagé — les médias ne sont pas inclus.',
     },
     aiImprove: {
       button: 'Améliorer avec l’IA',
@@ -1071,6 +1074,9 @@ export const fr: Translations = {
       repostsCount: '{n} republications',
       repliesCount: '{n} réponses',
       likesCount: '{n} j’aime',
+      reelAudio: 'Audio original',
+      follow: 'Suivre',
+      reelAudioUses: '{n} utilisateurs',
       flagged: '{n} signalé(s)',
       flaggedNone: 'Aucun',
       fancyDetected: {

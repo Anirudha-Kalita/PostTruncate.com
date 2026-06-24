@@ -734,6 +734,7 @@ export const da: Translations = {
 
   island: {
     adPreviews: {
+      editorLabel: 'Opret din annonce',
       fields: {
         headline: 'Overskrift',
         primary: 'Primær tekst',
@@ -772,6 +773,7 @@ export const da: Translations = {
       pathN: 'Sti {n}',
       displayLink: 'Vist link / Destinations-URL',
       callToAction: 'Handlingsopfordring',
+      adLabel: 'Annonce',
       fbHeadlineSqueezed: 'Overskrift på over {limit} tegn på mobil — linkbeskrivelsen skjules.',
       googleHeadlinesDropped: {
         one: '{n} overskrift fjernet — den samlede bredde overstiger annoncepladsen på {px} px på computer.',
@@ -793,7 +795,7 @@ export const da: Translations = {
       },
     },
     dashboard: {
-      loadSample: 'Indlæs et eksempelopslag →',
+      loadSample: 'Indlæs et eksempelopslag',
       sample:
         'Vi lancerede en lillebitte funktion i sidste uge, der i det stille fordoblede vores trial-til-betalende-rate.\n\n' +
         'Ingen ny prissætning. Intet vækst-hack. Bare én ændring i onboarding-flowet, der fjernede en enkelt beslutning fra den første skærm.\n\n' +
@@ -908,6 +910,7 @@ export const da: Translations = {
       error: 'Kunne ikke kopiere automatisk – kopiér linket nedenfor',
       tooLarge: 'Dette indhold er for langt til at dele som et link',
       manualLabel: 'Kopiér dette link',
+      mediaNote: 'Kun din tekst deles – medier er ikke inkluderet.',
     },
     aiImprove: {
       button: 'AI-forbedring',
@@ -1071,6 +1074,9 @@ export const da: Translations = {
       repostsCount: '{n} reposts',
       repliesCount: '{n} svar',
       likesCount: '{n} Synes godt om',
+      reelAudio: 'Original lyd',
+      follow: 'Følg',
+      reelAudioUses: '{n} brugere',
       flagged: '{n} markeret',
       flaggedNone: 'Ingen',
       fancyDetected: {

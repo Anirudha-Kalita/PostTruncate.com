@@ -329,14 +329,20 @@ export function VerifiedTick({ size = 15, class: cls = 'text-link' }: VerifiedTi
   );
 }
 
-export type EngagementIcon = 'reply' | 'repost' | 'like' | 'views' | 'comment' | 'share' | 'thumbsUp' | 'save' | 'send';
+export type EngagementIcon = 'reply' | 'repost' | 'reshare' | 'like' | 'views' | 'comment' | 'commentRound' | 'share' | 'thumbsUp' | 'save' | 'send';
 
 const ENGAGEMENT_PATHS: Record<EngagementIcon, ComponentChildren> = {
   reply: <path d="M4 5h16v10H9l-5 4z" />,
   repost: <path d="M5 8l3-3 3 3M8 5v8h8M19 16l-3 3-3-3M16 19v-8H8" />,
+  // Circular two-arrow loop — Instagram's reshare glyph.
+  reshare: <path d="M4.5 10.5A7.5 7.5 0 0 1 17 7l1.5 1.5M19 4v4h-4M19.5 13.5A7.5 7.5 0 0 1 7 17l-1.5-1.5M5 20v-4h4" />,
   like: <path d="M12 19.2 4.6 12c-1.5-1.5-1.5-3.9 0-5.4 1.5-1.5 3.9-1.5 5.4 0l2 2 2-2c1.5-1.5 3.9-1.5 5.4 0 1.5 1.5 1.5 3.9 0 5.4Z" />,
   views: <path d="M4 19V11M9 19V5M14 19v-6M19 19V8" />,
   comment: <path d="M4 5h16v10H9l-5 4z" />,
+  // Rounded speech bubble with a tail — Instagram/Threads comment glyph.
+  commentRound: (
+    <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" />
+  ),
   share: <path d="M12 15V4M8 8l4-4 4 4M5 13v6h14v-6" />,
   thumbsUp: <path d="M7 10v9H4v-9zM7 10l4-7c1.2 0 2 .9 2 2v3h5c1 0 1.7.9 1.5 1.9l-1.3 6c-.2.9-1 1.1-1.7 1.1H7" />,
   // Bookmark/save outline — Instagram's right-aligned action.
@@ -434,10 +440,11 @@ interface FeedImageProps {
 export function FeedImage({ src, kind = 'image', minRatio, maxRatio, fit = 'cover', srcset, sizes }: FeedImageProps) {
   const [ratio, setRatio] = useState<number | null>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
-  // Once playback has started we hand off to the native controls; before that
-  // we show a centered play button over the poster frame, like every social
-  // feed renders a video in-line.
-  const [started, setStarted] = useState(false);
+  // Feed videos use minimal controls — a centered tap-to-play/pause button and a
+  // corner sound toggle, never the native HTML5 scrubber (no social feed shows a
+  // seek bar inline; Instagram's native feed player has no scrubber at all).
+  const [playing, setPlaying] = useState(false);
+  const [muted, setMuted] = useState(true);
 
   const fitClass = fit === 'cover' ? 'object-cover' : 'object-contain';
   const style = ratio !== null ? `aspect-ratio: 1 / ${ratio};` : undefined;
@@ -449,34 +456,66 @@ export function FeedImage({ src, kind = 'image', minRatio, maxRatio, fit = 'cove
       setRatio(clampFeedRatio(v.videoHeight / v.videoWidth, { min: minRatio, max: maxRatio }));
     };
 
+    const togglePlay = () => {
+      const v = videoRef.current;
+      if (!v) return;
+      if (v.paused) v.play();
+      else v.pause();
+    };
+    const toggleMute = () => {
+      const v = videoRef.current;
+      const next = !muted;
+      if (v) v.muted = next;
+      setMuted(next);
+    };
+
     return (
       <div class="relative">
         <video
           ref={videoRef}
           src={src}
           onLoadedMetadata={onMeta}
-          onPlay={() => setStarted(true)}
-          controls={started}
-          muted
+          onPlay={() => setPlaying(true)}
+          onPause={() => setPlaying(false)}
+          onEnded={() => setPlaying(false)}
+          muted={muted}
           playsInline
           preload="metadata"
           class={`block w-full bg-canvas-soft-2 ${fitClass}`}
           style={style}
         />
-        {!started && (
-          <button
-            type="button"
-            aria-label="Play video"
-            onClick={() => videoRef.current?.play()}
-            class="group absolute inset-0 flex items-center justify-center bg-black/5 transition-colors hover:bg-black/10 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
-          >
+        {/* Tap target + centered play affordance. No native scrubber — feed
+            videos play/pause on tap, like the real in-feed player. */}
+        <button
+          type="button"
+          aria-label={playing ? 'Pause' : 'Play'}
+          onClick={togglePlay}
+          class="group absolute inset-0 flex items-center justify-center focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+        >
+          {!playing && (
             <span class="flex h-14 w-14 items-center justify-center rounded-full bg-black/55 shadow-lg backdrop-blur-sm transition-transform duration-100 group-hover:scale-105">
               <svg width="22" height="22" viewBox="0 0 24 24" fill="white" aria-hidden="true" class="ml-0.5">
                 <path d="M8 5.14v13.72a1 1 0 0 0 1.54.84l10.79-6.86a1 1 0 0 0 0-1.68L9.54 4.3A1 1 0 0 0 8 5.14z" />
               </svg>
             </span>
-          </button>
-        )}
+          )}
+        </button>
+        {/* Sound toggle — the bottom-right corner control every social feed shows. */}
+        <button
+          type="button"
+          aria-label={muted ? 'Unmute' : 'Mute'}
+          onClick={toggleMute}
+          class="absolute bottom-2 right-2 z-10 flex h-7 w-7 items-center justify-center rounded-full bg-black/55 text-white shadow-lg backdrop-blur-sm transition-transform duration-100 hover:scale-105"
+        >
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M11 5 6 9H3v6h3l5 4z" fill="currentColor" />
+            {muted ? (
+              <path d="M16 9.5l5 5M21 9.5l-5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+            ) : (
+              <path d="M15.5 8.5a5 5 0 0 1 0 7M18.5 6a9 9 0 0 1 0 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+            )}
+          </svg>
+        </button>
       </div>
     );
   }
@@ -507,39 +546,106 @@ export function FeedImage({ src, kind = 'image', minRatio, maxRatio, fit = 'cove
  * playsInline) with the same centered play button as `FeedImage`. The parent
  * frame must be `position: relative` for the play button to overlay correctly.
  */
-export function CoverMedia({ src, kind = 'image' }: { src: string; kind?: 'image' | 'video' }) {
+export function CoverMedia({
+  src,
+  kind = 'image',
+  onPlayingChange,
+  showProgress = false,
+}: {
+  src: string;
+  kind?: 'image' | 'video';
+  /** Notified with the live play/pause state of a video (true = playing). */
+  onPlayingChange?: (playing: boolean) => void;
+  /** Render a thin live playback progress bar along the bottom edge (video only). */
+  showProgress?: boolean;
+}) {
   const videoRef = useRef<HTMLVideoElement>(null);
-  const [started, setStarted] = useState(false);
+  const [playing, setPlaying] = useState(false);
+  const [muted, setMuted] = useState(true);
+  const [progress, setProgress] = useState(0);
 
   if (kind !== 'video') {
     return <img src={src} alt="" class="h-full w-full object-cover" />;
   }
+
+  const togglePlay = () => {
+    const v = videoRef.current;
+    if (!v) return;
+    if (v.paused) v.play();
+    else v.pause();
+  };
+  const toggleMute = () => {
+    const v = videoRef.current;
+    const next = !muted;
+    if (v) v.muted = next;
+    setMuted(next);
+  };
 
   return (
     <>
       <video
         ref={videoRef}
         src={src}
-        onPlay={() => setStarted(true)}
-        controls={started}
-        muted
+        onPlay={() => {
+          setPlaying(true);
+          onPlayingChange?.(true);
+        }}
+        onPause={() => {
+          setPlaying(false);
+          onPlayingChange?.(false);
+        }}
+        onEnded={() => {
+          setPlaying(false);
+          onPlayingChange?.(false);
+        }}
+        onTimeUpdate={(e) => {
+          const v = e.currentTarget as HTMLVideoElement;
+          if (v.duration > 0) setProgress(v.currentTime / v.duration);
+        }}
+        muted={muted}
         playsInline
         preload="metadata"
         class="h-full w-full object-cover"
       />
-      {!started && (
+      {/* Reels-style controls only: a centered play/pause button with a small
+          mute toggle above it. No native scrubber/timeline or other controls. */}
+      <div class="pointer-events-none absolute inset-0 z-30 flex flex-col items-center justify-center gap-3">
         <button
           type="button"
-          aria-label="Play video"
-          onClick={() => videoRef.current?.play()}
-          class="group absolute inset-0 z-10 flex items-center justify-center bg-black/5 transition-colors hover:bg-black/10 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+          aria-label={muted ? 'Unmute' : 'Mute'}
+          onClick={toggleMute}
+          class="pointer-events-auto flex h-8 w-8 items-center justify-center rounded-full bg-black/55 text-white shadow-lg backdrop-blur-sm transition-transform duration-100 hover:scale-105"
         >
-          <span class="flex h-12 w-12 items-center justify-center rounded-full bg-black/55 shadow-lg backdrop-blur-sm transition-transform duration-100 group-hover:scale-105">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="white" aria-hidden="true" class="ml-0.5">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M11 5 6 9H3v6h3l5 4z" fill="currentColor" />
+            {muted ? (
+              <path d="M16 9.5l5 5M21 9.5l-5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+            ) : (
+              <path d="M15.5 8.5a5 5 0 0 1 0 7M18.5 6a9 9 0 0 1 0 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+            )}
+          </svg>
+        </button>
+        <button
+          type="button"
+          aria-label={playing ? 'Pause' : 'Play'}
+          onClick={togglePlay}
+          class="pointer-events-auto flex h-14 w-14 items-center justify-center rounded-full bg-black/55 text-white shadow-lg backdrop-blur-sm transition-transform duration-100 hover:scale-105"
+        >
+          {playing ? (
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M8 5h3v14H8zM15 5h3v14h-3z" />
+            </svg>
+          ) : (
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" class="ml-0.5">
               <path d="M8 5.14v13.72a1 1 0 0 0 1.54.84l10.79-6.86a1 1 0 0 0 0-1.68L9.54 4.3A1 1 0 0 0 8 5.14z" />
             </svg>
-          </span>
+          )}
         </button>
+      </div>
+      {showProgress && (
+        <div class="pointer-events-none absolute inset-x-0 bottom-0 z-30 h-[2.5px] bg-white/25">
+          <div class="h-full bg-white" style={`width:${(progress * 100).toFixed(2)}%;`} />
+        </div>
       )}
     </>
   );

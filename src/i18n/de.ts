@@ -735,6 +735,7 @@ export const de: Translations = {
 
   island: {
     adPreviews: {
+      editorLabel: 'Anzeige erstellen',
       fields: {
         headline: 'Titel',
         primary: 'Primärtext',
@@ -773,6 +774,7 @@ export const de: Translations = {
       pathN: 'Pfad {n}',
       displayLink: 'Anzeige-Link / Ziel-URL',
       callToAction: 'Handlungsaufforderung',
+      adLabel: 'Werbung',
       fbHeadlineSqueezed: 'Titel über {limit} Zeichen auf Mobilgeräten – die Linkbeschreibung wird ausgeblendet.',
       googleHeadlinesDropped: {
         one: '{n} Titel entfernt – die kombinierte Breite überschreitet den {px} px breiten Desktop-Anzeigenplatz.',
@@ -794,7 +796,7 @@ export const de: Translations = {
       },
     },
     dashboard: {
-      loadSample: 'Beispielbeitrag laden →',
+      loadSample: 'Beispielbeitrag laden',
       sample:
         'Letzte Woche haben wir eine winzige Funktion veröffentlicht, die unsere Testversion-zu-Zahlung-Rate still und leise verdoppelt hat.\n\n' +
         'Keine neuen Preise. Kein Wachstums-Hack. Nur eine Änderung am Onboarding-Ablauf, die eine einzige Entscheidung vom ersten Bildschirm entfernt hat.\n\n' +
@@ -909,6 +911,7 @@ export const de: Translations = {
       error: 'Automatisches Kopieren fehlgeschlagen – kopiere den Link unten',
       tooLarge: 'Dieser Inhalt ist zu lang, um als Link geteilt zu werden',
       manualLabel: 'Diesen Link kopieren',
+      mediaNote: 'Nur dein Text wird geteilt – Medien sind nicht enthalten.',
     },
     aiImprove: {
       button: 'KI-Verbesserung',
@@ -1072,6 +1075,9 @@ export const de: Translations = {
       repostsCount: '{n} Reposts',
       repliesCount: '{n} Antworten',
       likesCount: '{n} Likes',
+      reelAudio: 'Original-Audio',
+      follow: 'Folgen',
+      reelAudioUses: '{n} Nutzer',
       flagged: '{n} markiert',
       flaggedNone: 'Keine',
       fancyDetected: {

@@ -139,6 +139,8 @@ export interface AdPreviewStrings {
   over: string;
   /** Section label above the live preview column. */
   previewLabel: string;
+  /** Section label above the inputs/editor column. */
+  editorLabel: string;
   /** Accessible label for the Mobile/Desktop segmented control. */
   deviceAria: string;
   mobile: string;
@@ -181,6 +183,8 @@ export interface AdPreviewStrings {
   displayLink: string;
   /** Meta/TikTok ad input label "Call to action". */
   callToAction: string;
+  /** Short ad disclosure shown in the corner of a Reels ad (e.g. "Ad"). */
+  adLabel: string;
   /** Facebook warning when a long mobile headline squeezes out the description; "{limit}" token. */
   fbHeadlineSqueezed: string;
   /** Google warning when headlines overflow the slot; "{n}" and "{px}" tokens. */
@@ -276,6 +280,8 @@ export interface ShareStrings {
   tooLarge: string;
   /** Label for the manual-copy field shown when the clipboard is unavailable. */
   manualLabel: string;
+  /** Note appended to the success toast when attached media is excluded. */
+  mediaNote: string;
 }
 
 /**
@@ -614,6 +620,12 @@ export interface IslandStrings {
     repliesCount: string;
     /** Threads engagement summary — likes count; "{n}" token (e.g. "{n} likes"). */
     likesCount: string;
+    /** Instagram Reels audio attribution label (e.g. "Original audio"). */
+    reelAudio: string;
+    /** Instagram Reels "Follow" affordance next to the username. */
+    follow: string;
+    /** Instagram Reels audio-uses count; "{n}" token (e.g. "{n} users"). */
+    reelAudioUses: string;
     /** "{n} flagged". */
     flagged: string;
     flaggedNone: string;

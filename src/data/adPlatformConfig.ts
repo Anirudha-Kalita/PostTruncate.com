@@ -52,7 +52,11 @@ export interface InstagramPlatformConfig {
   reelsMax: number;
   /** Feed caption "… more" affordance label. */
   seeMoreLabel: string;
+  /** Organic Reels safe zone (bottom caption band + right action stack). */
   safeZone: SafeZoneInsets;
+  /** Reels AD safe zone — larger: the Sponsored label + CTA push the bottom band
+   *  to ~35% and add a ~14% top band, on top of the ~15% right action stack. */
+  safeZoneAd: SafeZoneInsets;
 }
 
 export interface TikTokPlatformConfig {
@@ -88,15 +92,22 @@ export const AD_PLATFORM_CONFIG = {
   instagram: {
     feedTruncateChars: 125,
     reelsMin: 40,
-    reelsMax: 72,
+    // The Reels tab collapses captions more aggressively than the feed: only the
+    // first ~55–60 characters show before "… more" (verified 2026 against the
+    // live Reels player). The feed keeps the standard 125-char cutoff above.
+    reelsMax: 60,
     seeMoreLabel: '… more',
     safeZone: { bottomPct: 20, rightPct: 15 },
+    safeZoneAd: { topPct: 14, bottomPct: 35, rightPct: 15 },
   },
   tiktok: {
     primaryTruncateChars: 100,
     maxLines: 4,
     seeMoreLabel: '... See more',
-    safeZone: { topPct: 10, bottomPct: 20, rightPct: 15 },
+    // 2026 in-feed AD safe zone: top tabs ~108–130px (~7%), right action rail
+    // ~120px (~11%), and a bottom band ~440px for the username/caption/CTA/music
+    // (~23%, deeper than organic because the CTA button adds dead space).
+    safeZone: { topPct: 7, bottomPct: 23, rightPct: 11 },
   },
 } as const satisfies AdPlatformConfig;
 

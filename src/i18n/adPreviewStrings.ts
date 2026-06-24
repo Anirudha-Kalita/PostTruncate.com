@@ -25,6 +25,7 @@ export const AD_PREVIEW_STRINGS: AdPreviewStrings = {
   counter: '{n} / {limit}',
   over: '{n} over',
   previewLabel: 'Live preview',
+  editorLabel: 'Compose your ad',
   deviceAria: 'Choose preview device',
   mobile: 'Mobile',
   desktop: 'Desktop',
@@ -49,6 +50,7 @@ export const AD_PREVIEW_STRINGS: AdPreviewStrings = {
   pathN: 'Path {n}',
   displayLink: 'Display link / Destination URL',
   callToAction: 'Call to action',
+  adLabel: 'Ad',
   fbHeadlineSqueezed: 'Headline over {limit} characters on mobile — the link description is hidden.',
   googleHeadlinesDropped: {
     one: '{n} headline dropped — combined width exceeds the {px}px desktop ad slot.',

@@ -23,6 +23,8 @@ export type ToastTone = 'success' | 'error' | 'warn';
 export interface ToastState {
   tone: ToastTone;
   message: string;
+  /** Optional secondary line (e.g. the media-exclusion note on success). */
+  note?: string;
 }
 
 /** Fixed visible duration before a Toast_Message auto-dismisses (Req 11.3). */
@@ -83,8 +85,8 @@ export function useShareLink({ adapter, strings }: UseShareLinkArgs): UseShareLi
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const showToast = useCallback((tone: ToastTone, message: string) => {
-    setToast({ tone, message });
+  const showToast = useCallback((tone: ToastTone, message: string, note?: string) => {
+    setToast({ tone, message, note });
     if (timerRef.current) window.clearTimeout(timerRef.current);
     timerRef.current = window.setTimeout(() => setToast(null), TOAST_DURATION_MS);
   }, []);
@@ -119,7 +121,9 @@ export function useShareLink({ adapter, strings }: UseShareLinkArgs): UseShareLi
     try {
       if (!navigator.clipboard?.writeText) throw new Error('clipboard-unavailable');
       await navigator.clipboard.writeText(url);
-      showToast('success', strings.success);
+      // When media is attached, remind the user it's intentionally not shared.
+      const note = adapter.hasMedia?.() ? strings.mediaNote : undefined;
+      showToast('success', strings.success, note);
     } catch {
       // Missing or rejecting Clipboard_API → offer manual copy (Req 8.4, 11.x).
       // The draft envelope is intentionally never touched on this path.

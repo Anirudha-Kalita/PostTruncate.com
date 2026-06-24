@@ -1,5 +1,6 @@
 /** @jsxImportSource preact */
 import type { ComponentChildren } from 'preact';
+import { useState } from 'preact/hooks';
 import { Card, CardHead, Badge, Avatar, MoreDots, Engagement, CoverMedia, monogram, type Tone } from './ui';
 import { SafeZoneOverlay } from './SafeZoneOverlay';
 import type { IslandStrings } from '../../i18n/types';
@@ -11,7 +12,10 @@ import { interp } from '../../i18n/interp';
 
 interface Props {
   s: IslandStrings;
+  lang: string;
   caption: string;
+  /** Reels CTA-card headline (the hook above the "Learn more" button). */
+  headline?: string;
   mode: 'feed' | 'reels';
   safeZone: boolean;
   mediaUrl: string | null;
@@ -31,13 +35,19 @@ interface Props {
  * safe zones (bottom profile band + right action stack) so caption/creative
  * collisions are visible.
  */
-export function InstagramAd({ s, caption, mode, safeZone, mediaUrl, mediaKind = 'image', destinationUrl, cta, toolbar }: Props) {
+export function InstagramAd({ s, lang, caption, headline, mode, safeZone, mediaUrl, mediaKind = 'image', destinationUrl, cta, toolbar }: Props) {
   const ap = adPreviewStrings(s);
   const ig = AD_PLATFORM_CONFIG.instagram;
   const common = s.common;
   const name = common.handle;
+  const nf = new Intl.NumberFormat(lang);
 
   const isReels = mode === 'reels';
+
+  // CTA-card visibility: shown for images always; for a video Reel it appears
+  // only while paused (the reference state) and collapses during playback.
+  const [reelPlaying, setReelPlaying] = useState(false);
+  const showCtaCard = mediaKind !== 'video' || !reelPlaying;
 
   // Feed: fold at 125 chars with "… more". Reels: 40–72 window.
   const feedOver = charCount(caption) > ig.feedTruncateChars;
@@ -69,47 +79,98 @@ export function InstagramAd({ s, caption, mode, safeZone, mediaUrl, mediaKind = 
 
       <div class="flex flex-col items-center gap-2 p-4 sm:p-5">
         <div style="width:100%;max-width:360px;">
-          {/* Header */}
-          <div class="flex items-center gap-2 pb-2">
-            <Avatar size="h-8 w-8" initial={monogram(name)} />
-            <div class="min-w-0 flex-1">
-              <p class="truncate text-[13px] font-semibold leading-4 text-ink">{name}</p>
-              <p class="text-[11px] text-mute">{ap.sponsored}</p>
+          {/* Feed header — Reels is full-screen, so its identity lives in the
+              overlay instead. */}
+          {!isReels && (
+            <div class="flex items-center gap-2 pb-2">
+              <Avatar size="h-8 w-8" initial={monogram(name)} />
+              <div class="min-w-0 flex-1">
+                <p class="truncate text-[13px] font-semibold leading-4 text-ink">{name}</p>
+                <p class="text-[11px] text-mute">{ap.sponsored}</p>
+              </div>
+              <MoreDots />
             </div>
-            <MoreDots />
-          </div>
+          )}
 
-          {/* Media frame with optional safe-zone overlay + Reels caption overlay */}
+          {/* Media frame with optional safe-zone overlay + Reels ad chrome. */}
           <div
             class="relative overflow-hidden rounded-md border border-hairline bg-canvas-soft-2"
             style={`aspect-ratio:${frameAspect};`}
           >
             {mediaUrl ? (
-              <CoverMedia src={mediaUrl} kind={mediaKind} />
+              <CoverMedia src={mediaUrl} kind={mediaKind} onPlayingChange={isReels ? setReelPlaying : undefined} />
             ) : (
               <div class="flex h-full w-full items-center justify-center text-[12px] text-mute">
                 {ap.media.add}
               </div>
             )}
 
-            {isReels && safeZone && <SafeZoneOverlay insets={ig.safeZone} label={ap.safeZoneTag} />}
+            {isReels && safeZone && <SafeZoneOverlay insets={ig.safeZoneAd} label={ap.safeZoneTag} />}
 
-            {/* Reels caption + CTA sit over the video, above the bottom safe
-                band, exactly as a Reels ad renders them. */}
+            {/* Right action rail — like + count, comment, reshare, send. The
+                only "•••" lives in the advertiser row below, not here. */}
             {isReels && (
               <div
-                class="absolute left-0 right-0 z-20 px-3"
-                style={`bottom:${ig.safeZone.bottomPct ?? 0}%;`}
+                class="absolute right-2 z-20 flex flex-col items-center gap-4 text-white drop-shadow-[0_1px_2px_rgba(0,0,0,0.8)]"
+                style="bottom:11%;"
               >
-                <p class="line-clamp-2 text-[13px] font-medium leading-4 text-white drop-shadow-[0_1px_2px_rgba(0,0,0,0.8)]">
-                  {reels.text || ap.placeholders.primary}
-                </p>
-                {ctaLabel && (
-                  <span class="mt-2 inline-flex items-center gap-1 rounded-md bg-white px-3 py-1.5 text-[12px] font-semibold leading-4 text-black drop-shadow-[0_1px_2px_rgba(0,0,0,0.6)]">
-                    {ap.cta[ctaLabel] ?? ctaLabel}
-                    <Chevron size={13} />
-                  </span>
+                <div class="flex flex-col items-center gap-1">
+                  <Engagement icon="like" size={26} />
+                  <span class="text-[11px] font-semibold tabular-nums">{nf.format(1045)}</span>
+                </div>
+                <Engagement icon="commentRound" size={26} />
+                <Engagement icon="reshare" size={26} />
+                <Engagement icon="send" size={26} />
+              </div>
+            )}
+
+            {/* Sponsored overlay stack — CTA card (paused/image only), then the
+                advertiser row and the caption + "Ad" disclosure. */}
+            {isReels && (
+              <div class="absolute inset-x-0 bottom-0 z-20 p-3 text-white drop-shadow-[0_1px_2px_rgba(0,0,0,0.8)]">
+                {showCtaCard && (
+                  <div class="mr-12 overflow-hidden rounded-xl">
+                    <div class="flex items-center gap-2 bg-black/45 px-2.5 py-2">
+                      <span class="h-9 w-9 shrink-0 overflow-hidden rounded bg-canvas-soft-2">
+                        {mediaUrl ? (
+                          mediaKind === 'video' ? (
+                            <video src={mediaUrl} muted preload="metadata" class="h-full w-full object-cover" />
+                          ) : (
+                            <img src={mediaUrl} alt="" class="h-full w-full object-cover" />
+                          )
+                        ) : null}
+                      </span>
+                      <p class="line-clamp-2 text-[12px] font-medium leading-4 text-white">
+                        {headline?.trim() || ap.placeholders.headline}
+                      </p>
+                    </div>
+                    {ctaLabel && (
+                      <span class="flex w-full items-center justify-between bg-link px-3 py-2.5 text-[14px] font-semibold text-on-primary">
+                        <span class="truncate">{ap.cta[ctaLabel] ?? ctaLabel}</span>
+                        <Chevron size={18} />
+                      </span>
+                    )}
+                  </div>
                 )}
+
+                {/* Advertiser identity row. */}
+                <div class="mt-2.5 flex items-center gap-2">
+                  <Avatar size="h-6 w-6" initial={monogram(name)} />
+                  <span class="flex-1 truncate text-[13px] font-semibold leading-4">{name}</span>
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                    <circle cx="5" cy="12" r="1.6" />
+                    <circle cx="12" cy="12" r="1.6" />
+                    <circle cx="19" cy="12" r="1.6" />
+                  </svg>
+                </div>
+
+                {/* Caption + "Ad" disclosure. */}
+                <div class="mt-1.5 flex items-start gap-2">
+                  <p class="line-clamp-1 flex-1 text-[12px] leading-4">
+                    {reels.text || <span class="text-white/80">{ap.placeholders.primary}</span>}
+                  </p>
+                  <span class="shrink-0 text-[12px] text-white/90">{ap.adLabel}</span>
+                </div>
               </div>
             )}
           </div>
@@ -117,11 +178,19 @@ export function InstagramAd({ s, caption, mode, safeZone, mediaUrl, mediaKind = 
           {/* ── Feed placement: CTA bar, action icons, caption below the media ── */}
           {!isReels && (
             <>
-              {/* Full-width CTA bar — the defining Instagram feed-ad element,
-                  with a trailing chevron and a divider beneath it. */}
-              {ctaLabel && (
-                <div class="flex items-center justify-between gap-2 border-b border-hairline py-2.5 text-[14px] font-semibold text-ink">
-                  <span class="truncate">{ap.cta[ctaLabel] ?? ctaLabel}</span>
+              {/* Full-width CTA bar — the defining Instagram feed-ad element:
+                  the headline above the CTA label, with a trailing chevron and a
+                  divider beneath it. */}
+              {(headline?.trim() || ctaLabel) && (
+                <div class="flex items-center justify-between gap-2 border-b border-hairline py-2.5">
+                  <div class="min-w-0 flex-1">
+                    {headline?.trim() && (
+                      <p class="truncate text-[14px] font-semibold leading-5 text-ink">{headline}</p>
+                    )}
+                    {ctaLabel && (
+                      <span class="text-[12px] font-medium text-link">{ap.cta[ctaLabel] ?? ctaLabel}</span>
+                    )}
+                  </div>
                   <span class="shrink-0 text-mute">
                     <Chevron size={16} />
                   </span>

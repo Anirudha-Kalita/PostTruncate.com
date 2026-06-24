@@ -79,7 +79,7 @@ test('google: keeps all headlines when they fit', () => {
   assert.deepEqual(r.dropped, []);
 });
 
-// ── Instagram Reels (40–72 window) ──────────────────────────────────────────
+// ── Instagram Reels (40–60 window) ──────────────────────────────────────────
 test('instagram reels: 40 chars is within the window', () => {
   const r = instagramReelsFit(repeat(40));
   assert.equal(r.truncated, false);
@@ -92,13 +92,13 @@ test('instagram reels: under 40 chars is flagged tooShort', () => {
   assert.equal(r.tooShort, true);
 });
 
-test('instagram reels: exactly 72 chars is not truncated', () => {
-  const r = instagramReelsFit(repeat(72));
+test('instagram reels: exactly 60 chars is not truncated', () => {
+  const r = instagramReelsFit(repeat(60));
   assert.equal(r.truncated, false);
 });
 
-test('instagram reels: 73 chars truncates with an ellipsis', () => {
-  const r = instagramReelsFit(repeat(73));
+test('instagram reels: 61 chars truncates with an ellipsis', () => {
+  const r = instagramReelsFit(repeat(61));
   assert.equal(r.truncated, true);
-  assert.equal(r.text, repeat(72) + '…');
+  assert.equal(r.text, repeat(60) + '…');
 });

@@ -18,8 +18,8 @@ interface Props {
 
 /** Size → button sizing classes. */
 const SIZE_CLASS: Record<'md' | 'sm', string> = {
-  md: 'min-h-11 gap-2 px-4 py-2 text-[13px] shadow-e1 hover:shadow-e2 sm:min-h-9',
-  sm: 'gap-1.5 px-3 py-1.5 text-[12px]',
+  md: 'gap-2 px-4 py-1.5 text-[13px] shadow-e1 hover:shadow-e2',
+  sm: 'gap-1.5 px-3 py-1 text-[12px]',
 };
 
 /** Tone → toast pill colors, using existing design tokens. */
@@ -59,9 +59,10 @@ export function ShareControls({ adapter, strings, class: cls = '', size = 'md' }
       >
         {toast && (
           <div
-            class={`rounded-lg px-3 py-2.5 text-[13px] font-medium leading-5 shadow-e3 ${TONE_CLASS[toast.tone]}`}
+            class={`rounded-lg px-3 py-2.5 text-[13px] leading-5 shadow-e3 ${TONE_CLASS[toast.tone]}`}
           >
-            {toast.message}
+            <span class="font-medium">{toast.message}</span>
+            {toast.note && <span class="mt-1 block text-[12px] opacity-80">{toast.note}</span>}
           </div>
         )}
 

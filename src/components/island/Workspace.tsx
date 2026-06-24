@@ -41,6 +41,8 @@ interface Props {
   onSelectImage?: (file: File | null) => void;
   /** Editor Share_Link adapter; when set, the Share control is hosted here. */
   shareAdapter?: ShareAdapter;
+  /** Loads a sample post into the editor; the button shows only while empty. */
+  onLoadSample?: () => void;
 }
 
 /**
@@ -48,7 +50,7 @@ interface Props {
  * optimization engine actions. All transforms route through the pure helpers
  * in textTools so behaviour matches the previews exactly.
  */
-export function Workspace({ text, setText, lang, s, focus, image, mediaKind = 'image', onSelectImage, shareAdapter }: Props) {
+export function Workspace({ text, setText, lang, s, focus, image, mediaKind = 'image', onSelectImage, shareAdapter, onLoadSample }: Props) {
   const hidden = detectHiddenUnicode(text);
   const w = s.workspace;
   const img = s.imageUpload ?? {
@@ -254,11 +256,24 @@ export function Workspace({ text, setText, lang, s, focus, image, mediaKind = 'i
               </span>
             )}
           </button>
-          {/* Right-aligned action group: the prominent Share button (when a
-              Share_Link adapter is wired) next to the destructive Clear. */}
+          {/* Right-aligned action group: load-sample (while empty) + the Share
+              button (when a Share_Link adapter is wired) next to Clear. */}
           <div class="ml-auto flex items-center gap-2">
+            {onLoadSample && !text && (
+              <button
+                type="button"
+                onClick={onLoadSample}
+                class={`inline-flex items-center rounded-pill border border-transparent bg-link font-medium text-on-primary transition-[transform,background] duration-100 hover:bg-link-deep active:scale-[0.96] ${focus ? 'gap-1.5 px-3 py-1 text-[12px]' : 'gap-2 px-4 py-1.5 text-[13px]'}`}
+              >
+                {s.dashboard.loadSample}
+              </button>
+            )}
             {shareAdapter && (
-              <ShareControls adapter={shareAdapter} strings={shareStrings(s)} />
+              <ShareControls
+                adapter={shareAdapter}
+                strings={shareStrings(s)}
+                size={focus ? 'sm' : 'md'}
+              />
             )}
             <button
               type="button"

@@ -732,6 +732,7 @@ export const zh: Translations = {
 
   island: {
     adPreviews: {
+      editorLabel: '撰写广告',
       fields: {
         headline: '标题',
         primary: '主文案',
@@ -770,6 +771,7 @@ export const zh: Translations = {
       pathN: '路径 {n}',
       displayLink: '显示链接 / 目标网址',
       callToAction: '行动号召',
+      adLabel: '广告',
       fbHeadlineSqueezed: '移动端标题超过 {limit} 个字符——链接描述将被隐藏。',
       googleHeadlinesDropped: {
         one: '已省略 {n} 条标题——合并宽度超过 {px}px 的桌面广告位。',
@@ -791,7 +793,7 @@ export const zh: Translations = {
       },
     },
     dashboard: {
-      loadSample: '加载示例帖子 →',
+      loadSample: '加载示例帖子',
       sample:
         '上周我们上线了一个不起眼的小功能，悄悄地让我们的试用转付费率翻了一倍。\n\n' +
         '没有新的定价。没有增长黑客。只是对引导流程做了一处改动，从首屏移除了一个决定。\n\n' +
@@ -906,6 +908,7 @@ export const zh: Translations = {
       error: '无法自动复制——请复制下方链接',
       tooLarge: '此内容过长，无法以链接形式分享',
       manualLabel: '复制此链接',
+      mediaNote: '仅分享文本，不包含媒体内容。',
     },
     aiImprove: {
       button: 'AI 优化',
@@ -1069,6 +1072,9 @@ export const zh: Translations = {
       repostsCount: '{n} 次转发',
       repliesCount: '{n} 条回复',
       likesCount: '{n} 个赞',
+      reelAudio: '原创音频',
+      follow: '关注',
+      reelAudioUses: '{n} 人使用',
       flagged: '已标记 {n} 个',
       flaggedNone: '无',
       fancyDetected: {

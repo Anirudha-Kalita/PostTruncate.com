@@ -34,5 +34,6 @@ export function shareStrings(s: IslandStrings): ShareStrings {
     error: v.error || SHARE_STRINGS.error,
     tooLarge: v.tooLarge || SHARE_STRINGS.tooLarge,
     manualLabel: v.manualLabel || SHARE_STRINGS.manualLabel,
+    mediaNote: v.mediaNote || SHARE_STRINGS.mediaNote,
   };
 }

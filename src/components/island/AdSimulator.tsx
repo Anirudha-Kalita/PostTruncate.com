@@ -146,6 +146,7 @@ export function AdSimulator({ platform, s, lang }: Props) {
       }
       return pruneEmptyFields({ kind: 'ad', platform, fields: { ...values }, view });
     },
+    hasMedia: () => mediaUrl !== null,
     apply: (state) => {
       if (state.kind !== 'ad' || state.platform !== platform) return;
       // Merge over EMPTY_VALUES, dropping any unknown field keys.
@@ -232,7 +233,9 @@ export function AdSimulator({ platform, s, lang }: Props) {
         return (
           <InstagramAd
             s={s}
+            lang={lang}
             caption={values.primary}
+            headline={values.headline1}
             mode={mode}
             safeZone={safeZone}
             mediaUrl={mediaUrl}
@@ -261,7 +264,7 @@ export function AdSimulator({ platform, s, lang }: Props) {
     <div class="grid gap-5 lg:grid-cols-2">
       {/* ── Left column: inputs ── */}
       <Card class="flex flex-col">
-        <CardHead eyebrow={ap.fields.primary} title={ap.previewLabel} />
+        <CardHead eyebrow={ap.fields.primary} title={ap.editorLabel} />
         <div class="flex flex-col gap-5 p-4 sm:p-5">
           {fields.map((f) => {
             const val = values[f.key];
@@ -493,6 +496,12 @@ function buildFields(
           placeholder: ap.placeholders.primary,
           softMax: cfg.instagram.feedTruncateChars,
           multiline: true,
+        },
+        {
+          key: 'headline1',
+          label: ap.fields.headline,
+          placeholder: ap.placeholders.headline,
+          softMax: 40,
         },
       ];
     case 'tiktok':

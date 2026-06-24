@@ -734,6 +734,7 @@ export const nl: Translations = {
 
   island: {
     adPreviews: {
+      editorLabel: 'Stel je advertentie samen',
       fields: {
         headline: 'Kop',
         primary: 'Primaire tekst',
@@ -772,6 +773,7 @@ export const nl: Translations = {
       pathN: 'Pad {n}',
       displayLink: 'Weergavelink / Bestemmings-URL',
       callToAction: 'Call-to-action',
+      adLabel: 'Advertentie',
       fbHeadlineSqueezed: 'Titel langer dan {limit} tekens op mobiel — de linkbeschrijving wordt verborgen.',
       googleHeadlinesDropped: {
         one: '{n} titel verwijderd — de gecombineerde breedte overschrijdt de advertentieruimte van {px} px op desktop.',
@@ -793,7 +795,7 @@ export const nl: Translations = {
       },
     },
     dashboard: {
-      loadSample: 'Laad een voorbeeldbericht →',
+      loadSample: 'Laad een voorbeeldbericht',
       sample:
         'Vorige week hebben we een piepkleine functie uitgebracht die ons percentage proef-naar-betaald stilletjes verdubbelde.\n\n' +
         'Geen nieuwe prijzen. Geen groeitruc. Gewoon één wijziging in de onboardingflow die één enkele beslissing van het eerste scherm haalde.\n\n' +
@@ -908,6 +910,7 @@ export const nl: Translations = {
       error: 'Automatisch kopiëren mislukt — kopieer de onderstaande link',
       tooLarge: 'Deze inhoud is te lang om als link te delen',
       manualLabel: 'Kopieer deze link',
+      mediaNote: 'Alleen je tekst wordt gedeeld — media worden niet meegenomen.',
     },
     aiImprove: {
       button: 'AI-verbetering',
@@ -1071,6 +1074,9 @@ export const nl: Translations = {
       repostsCount: '{n} reposts',
       repliesCount: '{n} reacties',
       likesCount: '{n} vind-ik-leuks',
+      reelAudio: 'Originele audio',
+      follow: 'Volgen',
+      reelAudioUses: '{n} gebruikers',
       flagged: '{n} gemarkeerd',
       flaggedNone: 'Geen',
       fancyDetected: {

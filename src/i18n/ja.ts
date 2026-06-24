@@ -734,6 +734,7 @@ export const ja: Translations = {
 
   island: {
     adPreviews: {
+      editorLabel: '広告を作成',
       fields: {
         headline: '見出し',
         primary: '主要テキスト',
@@ -772,6 +773,7 @@ export const ja: Translations = {
       pathN: 'パス {n}',
       displayLink: '表示リンク / リンク先 URL',
       callToAction: '行動喚起',
+      adLabel: '広告',
       fbHeadlineSqueezed: 'モバイルで見出しが{limit}文字を超えています。リンクの説明は非表示になります。',
       googleHeadlinesDropped: {
         one: '見出し{n}件を省略しました。合計幅がデスクトップの広告枠（{px}px）を超えています。',
@@ -793,7 +795,7 @@ export const ja: Translations = {
       },
     },
     dashboard: {
-      loadSample: 'サンプル投稿を読み込む →',
+      loadSample: 'サンプル投稿を読み込む',
       sample:
         '先週、ささやかな機能をリリースしたところ、無料トライアルから有料への転換率が静かに倍増しました。\n\n' +
         '新しい価格設定もグロースハックもありません。最初の画面から1つの判断を取り除いた、オンボーディングフローへのたった1つの変更だけです。\n\n' +
@@ -908,6 +910,7 @@ export const ja: Translations = {
       error: '自動コピーできませんでした — 下のリンクをコピーしてください',
       tooLarge: 'このコンテンツは長すぎてリンクで共有できません',
       manualLabel: 'このリンクをコピー',
+      mediaNote: '共有されるのはテキストのみです。メディアは含まれません。',
     },
     aiImprove: {
       button: 'AIで改善',
@@ -1071,6 +1074,9 @@ export const ja: Translations = {
       repostsCount: '再投稿{n}件',
       repliesCount: '返信{n}件',
       likesCount: 'いいね！{n}件',
+      reelAudio: 'オリジナル音源',
+      follow: 'フォロー',
+      reelAudioUses: '{n}人が使用',
       flagged: '{n} 件検出',
       flaggedNone: 'なし',
       fancyDetected: {

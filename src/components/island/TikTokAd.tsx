@@ -25,9 +25,9 @@ interface Props {
 /**
  * TikTok ad preview on a true 9:16 vertical canvas. The description truncates
  * at 100 characters behind an unclickable "... See more" and is clamped to four
- * lines. The safe-zone overlay marks the three blind spots — top tabs/status
- * bar (~10%), bottom username/caption/CTA/music ticker (~20%), and the right
- * profile + engagement icon stack (~15%).
+ * lines. The safe-zone overlay marks the three blind spots (2026 in-feed ad
+ * spec) — top tabs (~7%), bottom username/caption/CTA/music band (~23%), and the
+ * right profile + engagement icon stack (~11%).
  */
 export function TikTokAd({ s, lang, description, safeZone, mediaUrl, mediaKind = 'image', toolbar }: Props) {
   const ap = adPreviewStrings(s);
@@ -73,15 +73,12 @@ export function TikTokAd({ s, lang, description, safeZone, mediaUrl, mediaKind =
 
           {/* Right-hand action rail — avatar + follow, like / comment / bookmark
               / share with counts, then the sound disc, exactly as a real TikTok
-              in-feed ad. Sits above the safe-zone band so it stays visible. */}
-          <TikTokActionRail handle={name} lang={lang} class="absolute bottom-[24%] right-1.5 z-20" />
+              in-feed ad. The sound disc sits near the caption/CTA level. */}
+          <TikTokActionRail handle={name} lang={lang} class="absolute bottom-[13%] right-1.5 z-20" />
 
-          {/* Username + description sit over the video, above the bottom safe
-              band; right padding clears the action rail. */}
-          <div
-            class="absolute left-0 right-0 z-20 pl-3 pr-12"
-            style={`bottom:${(tk.safeZone.bottomPct ?? 0) + 2}%;`}
-          >
+          {/* Username + description + CTA sit low over the video, in the bottom
+              UI band where TikTok renders them; right padding clears the rail. */}
+          <div class="absolute inset-x-0 bottom-0 z-20 p-3 pr-12">
             <p class="text-[13px] font-semibold leading-4 text-white drop-shadow-[0_1px_2px_rgba(0,0,0,0.9)]">
               @{name}
             </p>

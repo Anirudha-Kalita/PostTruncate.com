@@ -735,6 +735,7 @@ export const en: Translations = {
 
   island: {
     adPreviews: {
+      editorLabel: 'Compose your ad',
       fields: {
         headline: 'Headline',
         primary: 'Primary text',
@@ -773,6 +774,7 @@ export const en: Translations = {
       pathN: 'Path {n}',
       displayLink: 'Display link / Destination URL',
       callToAction: 'Call to action',
+      adLabel: 'Ad',
       fbHeadlineSqueezed: 'Headline over {limit} characters on mobile — the link description is hidden.',
       googleHeadlinesDropped: {
         one: '{n} headline dropped — combined width exceeds the {px}px desktop ad slot.',
@@ -794,7 +796,7 @@ export const en: Translations = {
       },
     },
     dashboard: {
-      loadSample: 'Load a sample post →',
+      loadSample: 'Load sample post',
       sample:
         'We shipped a tiny feature last week that quietly doubled our trial-to-paid rate.\n\n' +
         'No new pricing. No growth hack. Just one change to the onboarding flow that removed a single decision from the first screen.\n\n' +
@@ -904,6 +906,7 @@ export const en: Translations = {
       error: 'Couldn’t copy automatically — copy the link below',
       tooLarge: 'This content is too long to share as a link',
       manualLabel: 'Copy this link',
+      mediaNote: 'Only your text is shared — media isn’t included.',
     },
     aiImprove: {
       button: 'AI Improve',
@@ -1067,6 +1070,9 @@ export const en: Translations = {
       repostsCount: '{n} reposts',
       repliesCount: '{n} replies',
       likesCount: '{n} likes',
+      reelAudio: 'Original audio',
+      follow: 'Follow',
+      reelAudioUses: '{n} users',
       flagged: '{n} flagged',
       flaggedNone: 'None',
       fancyDetected: {
