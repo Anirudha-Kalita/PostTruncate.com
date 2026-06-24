@@ -115,7 +115,7 @@ export function InstagramAd({ s, lang, caption, headline, mode, safeZone, mediaU
                 style="bottom:11%;"
               >
                 <div class="flex flex-col items-center gap-1">
-                  <Engagement icon="like" size={26} />
+                  <Engagement icon="like" size={26} liked />
                   <span class="text-[11px] font-semibold tabular-nums">{nf.format(1045)}</span>
                 </div>
                 <Engagement icon="commentRound" size={26} />
@@ -200,7 +200,7 @@ export function InstagramAd({ s, lang, caption, headline, mode, safeZone, mediaU
               {/* Engagement icons — like / comment / share + save. */}
               <div class="mt-3 flex items-center justify-between text-mute/55">
                 <div class="flex items-center gap-4">
-                  <Engagement icon="like" size={20} />
+                  <Engagement icon="like" size={20} liked />
                   <Engagement icon="comment" size={20} />
                   <Engagement icon="share" size={20} />
                 </div>

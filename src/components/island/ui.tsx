@@ -354,18 +354,21 @@ const ENGAGEMENT_PATHS: Record<EngagementIcon, ComponentChildren> = {
 interface EngagementProps {
   icon: EngagementIcon;
   size?: number;
+  /** When true, renders the heart filled in Instagram-red ("already liked" state). */
+  liked?: boolean;
 }
 
 /** Faint, stroked social-action glyph for a card's engagement row. */
-export function Engagement({ icon, size = 18 }: EngagementProps) {
+export function Engagement({ icon, size = 18, liked = false }: EngagementProps) {
+  const isLikedHeart = liked && icon === 'like';
   return (
     <svg
       width={size}
       height={size}
       viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      stroke-width="1.6"
+      fill={isLikedHeart ? '#e0335e' : 'none'}
+      stroke={isLikedHeart ? 'none' : 'currentColor'}
+      stroke-width={isLikedHeart ? '0' : '1.6'}
       stroke-linecap="round"
       stroke-linejoin="round"
       aria-hidden="true"
@@ -652,10 +655,20 @@ export function CoverMedia({
 }
 
 /** One TikTok rail action: a stroked glyph with its (mock) compact count beneath. */
-function TikTokRailAction({ count, children }: { count: string; children: ComponentChildren }) {
+function TikTokRailAction({ count, liked = false, children }: { count: string; liked?: boolean; children: ComponentChildren }) {
   return (
     <div class="flex flex-col items-center gap-1">
-      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">{children}</svg>
+      <svg
+        width="26"
+        height="26"
+        viewBox="0 0 24 24"
+        fill={liked ? '#e63950' : 'none'}
+        stroke={liked ? 'none' : 'currentColor'}
+        stroke-width={liked ? '0' : '2'}
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        aria-hidden="true"
+      >{children}</svg>
       <span class="text-[11px] font-semibold tabular-nums">{count}</span>
     </div>
   );
@@ -678,7 +691,7 @@ export function TikTokActionRail({ handle, lang, class: className = '' }: { hand
           <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14" /></svg>
         </span>
       </div>
-      <TikTokRailAction count={nfCompact.format(1200000)}>
+      <TikTokRailAction count={nfCompact.format(1200000)} liked>
         <path d="M12 21s-7-4.35-9.5-8.5C1 9 3 6 6 6c2 0 3 1.5 6 4 3-2.5 4-4 6-4 3 0 5 3 3.5 6.5C19 16.65 12 21 12 21z" />
       </TikTokRailAction>
       <TikTokRailAction count={nfCompact.format(3456)}>

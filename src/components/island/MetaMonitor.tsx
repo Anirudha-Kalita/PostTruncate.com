@@ -243,7 +243,7 @@ export function MetaMonitor({ text, lang, s, toolLinkHref, facebookToolLinkHref,
                     style={`bottom:${(ig.safeZone.bottomPct ?? 0) - 8}%;`}
                   >
                     <div class="flex flex-col items-center gap-1">
-                      <Engagement icon="like" size={24} />
+                      <Engagement icon="like" size={24} liked />
                       <span class="text-[11px] font-semibold tabular-nums">{nfCompact.format(34500)}</span>
                     </div>
                     <div class="flex flex-col items-center gap-1">
@@ -335,7 +335,7 @@ export function MetaMonitor({ text, lang, s, toolLinkHref, facebookToolLinkHref,
             <div class="mt-3 flex items-center justify-between text-ink">
               <div class="flex items-center gap-4 text-[14px] font-semibold">
                 <span class="flex items-center gap-1.5">
-                  <Engagement icon="like" size={24} />
+                  <Engagement icon="like" size={24} liked />
                   {nfCompact.format(19900)}
                 </span>
                 <span class="flex items-center gap-1.5">
