@@ -1073,6 +1073,8 @@ export const en: Translations = {
       reelAudio: 'Original audio',
       follow: 'Follow',
       reelAudioUses: '{n} users',
+      subscribe: 'Subscribe',
+      fullscreen: 'Fullscreen',
       flagged: '{n} flagged',
       flaggedNone: 'None',
       fancyDetected: {

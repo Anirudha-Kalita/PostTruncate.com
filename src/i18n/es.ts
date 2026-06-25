@@ -1077,6 +1077,8 @@ export const es: Translations = {
       reelAudio: 'Audio original',
       follow: 'Seguir',
       reelAudioUses: '{n} usuarios',
+      subscribe: 'Suscribirte',
+      fullscreen: 'Pantalla completa',
       flagged: '{n} marcados',
       flaggedNone: 'Ninguno',
       fancyDetected: {

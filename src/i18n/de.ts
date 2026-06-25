@@ -1078,6 +1078,8 @@ export const de: Translations = {
       reelAudio: 'Original-Audio',
       follow: 'Folgen',
       reelAudioUses: '{n} Nutzer',
+      subscribe: 'Abonnieren',
+      fullscreen: 'Vollbild',
       flagged: '{n} markiert',
       flaggedNone: 'Keine',
       fancyDetected: {

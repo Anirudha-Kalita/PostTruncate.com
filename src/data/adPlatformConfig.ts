@@ -41,6 +41,9 @@ export interface FacebookPlatformConfig {
   /** Link description character cap. */
   descriptionMax: number;
   seeMoreLabel: string;
+  /** Facebook Reels safe zone — same 9:16 UI as Instagram Reels (top tabs ~14%,
+   *  bottom caption/audio/CTA band ~35%, right action stack ~15%). */
+  reelsSafeZone: SafeZoneInsets;
 }
 
 export interface InstagramPlatformConfig {
@@ -88,6 +91,7 @@ export const AD_PLATFORM_CONFIG = {
     headlineSafeMax: 40,
     descriptionMax: 30,
     seeMoreLabel: '… See More',
+    reelsSafeZone: { topPct: 14, bottomPct: 35, rightPct: 15 },
   },
   instagram: {
     feedTruncateChars: 125,

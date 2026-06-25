@@ -1077,6 +1077,8 @@ export const nl: Translations = {
       reelAudio: 'Originele audio',
       follow: 'Volgen',
       reelAudioUses: '{n} gebruikers',
+      subscribe: 'Abonneren',
+      fullscreen: 'Volledig scherm',
       flagged: '{n} gemarkeerd',
       flaggedNone: 'Geen',
       fancyDetected: {

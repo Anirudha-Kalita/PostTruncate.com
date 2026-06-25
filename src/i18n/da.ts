@@ -1077,6 +1077,8 @@ export const da: Translations = {
       reelAudio: 'Original lyd',
       follow: 'Følg',
       reelAudioUses: '{n} brugere',
+      subscribe: 'Abonner',
+      fullscreen: 'Fuld skærm',
       flagged: '{n} markeret',
       flaggedNone: 'Ingen',
       fancyDetected: {

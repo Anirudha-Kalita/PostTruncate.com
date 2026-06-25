@@ -626,6 +626,10 @@ export interface IslandStrings {
     follow: string;
     /** Instagram Reels audio-uses count; "{n}" token (e.g. "{n} users"). */
     reelAudioUses: string;
+    /** Facebook Reels "Subscribe" affordance next to the creator name. */
+    subscribe: string;
+    /** Facebook Reels "Fullscreen" affordance for landscape video. */
+    fullscreen: string;
     /** "{n} flagged". */
     flagged: string;
     flaggedNone: string;

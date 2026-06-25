@@ -1077,6 +1077,8 @@ export const ja: Translations = {
       reelAudio: 'オリジナル音源',
       follow: 'フォロー',
       reelAudioUses: '{n}人が使用',
+      subscribe: '登録',
+      fullscreen: '全画面',
       flagged: '{n} 件検出',
       flaggedNone: 'なし',
       fancyDetected: {

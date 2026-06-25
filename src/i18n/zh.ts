@@ -1075,6 +1075,8 @@ export const zh: Translations = {
       reelAudio: '原创音频',
       follow: '关注',
       reelAudioUses: '{n} 人使用',
+      subscribe: '订阅',
+      fullscreen: '全屏',
       flagged: '已标记 {n} 个',
       flaggedNone: '无',
       fancyDetected: {
