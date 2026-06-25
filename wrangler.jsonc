@@ -17,18 +17,25 @@
   // /[lang]/<unknown>). `not_found_handling` makes the asset layer serve our
   // built 404.html for unmatched static requests.
   //
-  // `run_worker_first: ["/"]` is REQUIRED for the bare-root locale router:
-  // the root has no static index.html (it's an on-demand SSR redirect), so with
-  // asset-first routing + not_found_handling:"404-page" the asset layer answers
-  // HTML navigations to "/" with the cached 404.html and never invokes the
-  // Worker (browsers send `Accept: text/html`; a plain curl slips through). This
-  // forces ONLY "/" to run the Worker first so geo/language detection runs;
-  // every other path keeps the fast asset-first behavior.
+  // `run_worker_first` lists the paths that MUST invoke the Worker before the
+  // asset layer. Two reasons a path needs to be here:
+  //  • "/" — the bare-root locale router has no static index.html (it's an
+  //    on-demand SSR redirect), so with asset-first routing +
+  //    not_found_handling:"404-page" the asset layer would answer HTML
+  //    navigations to "/" with the cached 404.html and never invoke the Worker
+  //    (browsers send `Accept: text/html`; a plain curl slips through). This
+  //    forces "/" to run the Worker first so geo/language detection runs.
+  //  • "/api/*" — the static-asset server only handles GET/HEAD. A POST to an
+  //    asset-first path (no matching static file) is rejected with 405 BEFORE it
+  //    reaches the SSR handler, so /api/improve must run the Worker first or
+  //    every POST returns 405. GET pages fall through to the Worker fine; only
+  //    non-GET methods hit this, which is why it surfaced as a 405 on POST.
+  // Every other path keeps the fast asset-first behavior.
   "assets": {
     "directory": "./dist",
     "binding": "ASSETS",
     "not_found_handling": "404-page",
-    "run_worker_first": [ "/" ]
+    "run_worker_first": [ "/", "/api/*" ]
   },
 
   // Serve the Worker at both the apex and the www hostname. custom_domain:true
