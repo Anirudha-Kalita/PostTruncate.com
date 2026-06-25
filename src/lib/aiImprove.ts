@@ -96,7 +96,13 @@ interface GeminiResponse {
 export function parseGeminiText(json: unknown): string | null {
   const res = json as GeminiResponse;
   if (res?.promptFeedback?.blockReason) return null;
-  const parts = res?.candidates?.[0]?.content?.parts;
+  const candidate = res?.candidates?.[0];
+  // A truncated rewrite — the model hit the output-token ceiling, typically
+  // because this "thinking" model spent the budget reasoning before writing —
+  // is unusable. Signal failure so the caller falls back to the secondary
+  // provider instead of dropping a half-finished post into the editor.
+  if (candidate?.finishReason === 'MAX_TOKENS') return null;
+  const parts = candidate?.content?.parts;
   if (!Array.isArray(parts)) return null;
   const text = parts
     .map((p) => p?.text ?? '')
@@ -121,6 +127,58 @@ export function geminiBody(prompt: string): unknown {
     // produces a short reply — this only raises the ceiling, not the length.
     generationConfig: { temperature: 0.7, topP: 0.9, maxOutputTokens: 4096 },
   };
+}
+
+// ── Groq fallback (OpenAI-compatible Chat Completions) ───────────────────────
+// Used when Gemini fails, is unavailable, or returns an empty/truncated rewrite
+// (the typical long-post failure mode). Llama 3.3 70B is a plain instruct model
+// with no hidden "thinking" tokens, so the full output budget goes to the post.
+
+/** Free-tier-eligible Groq model. Non-reasoning instruct model. */
+export const GROQ_MODEL = 'llama-3.3-70b-versatile';
+const GROQ_HOST = 'https://api.groq.com/openai/v1';
+
+/** Build the Groq Chat Completions REST URL (key goes in the auth header). */
+export function groqUrl(): string {
+  return `${GROQ_HOST}/chat/completions`;
+}
+
+/** Request body for the Groq Chat Completions call (OpenAI-compatible). */
+export function groqBody(prompt: string): unknown {
+  return {
+    model: GROQ_MODEL,
+    messages: [{ role: 'user', content: prompt }],
+    temperature: 0.7,
+    top_p: 0.9,
+    // Generous ceiling so a near-max-length post is never cut off. Llama spends
+    // no tokens on hidden reasoning, so this is purely the visible reply budget.
+    max_completion_tokens: 4096,
+  };
+}
+
+/** Minimal shape of the Groq (OpenAI-compatible) chat completion response. */
+interface GroqResponse {
+  choices?: {
+    message?: { content?: string };
+    finish_reason?: string;
+  }[];
+}
+
+/**
+ * Extract the rewritten text from a Groq chat completion. Returns null when the
+ * reply is empty or was cut off at the token ceiling (`finish_reason: "length"`)
+ * so a truncated post is never dropped into the editor.
+ */
+export function parseGroqText(json: unknown): string | null {
+  const res = json as GroqResponse;
+  const choice = res?.choices?.[0];
+  if (!choice) return null;
+  // A length-truncated rewrite is unusable.
+  if (choice.finish_reason === 'length') return null;
+  const text = (choice.message?.content ?? '').trim();
+  if (!text) return null;
+  // Strip a single layer of wrapping quotes the model sometimes adds anyway.
+  return text.replace(/^"([\s\S]*)"$/, '$1').trim();
 }
 
 // ── Rate limiting (fixed 12h window, anchored at first use in the window) ────

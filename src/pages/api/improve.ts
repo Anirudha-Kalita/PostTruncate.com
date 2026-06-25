@@ -1,25 +1,31 @@
 // ──────────────────────────────────────────────────────────────────────────
 // POST /api/improve — server-side AI rewrite endpoint (Cloudflare Worker).
 //
-// This is the ONE server route on the site. It exists so the Gemini API key is
-// never shipped to the browser and so the per-visitor rate limit can't be
-// bypassed by clearing storage. The key lives in env.GEMINI_API_KEY (a Worker
-// secret / .dev.vars locally); the limit counter lives in the AI_RATELIMIT KV
-// namespace. All pure logic is in src/lib/aiImprove.ts and unit-tested there.
+// This is the ONE server route on the site. It exists so the AI provider keys
+// are never shipped to the browser and so the per-visitor rate limit can't be
+// bypassed by clearing storage. Gemini is the primary provider (GEMINI_API_KEY);
+// Groq's Llama 3.3 70B (GROQ_API_KEY) is an optional fallback that kicks in when
+// Gemini errors or returns an empty/truncated rewrite — the common long-post
+// failure mode. Keys are Worker secrets (.dev.vars locally); the limit counter
+// lives in the AI_RATELIMIT KV namespace. All pure logic is in
+// src/lib/aiImprove.ts and unit-tested there.
+//
+// Provider strategy: Gemini is primary. On ANY Gemini failure (network error,
+// non-200, safety block, empty, or a token-truncated reply) the request falls
+// back to Groq's Llama 3.3 70B when env.GROQ_API_KEY is set. The fallback is a
+// no-op when that key is absent, so Gemini-only deployments keep working.
 // ──────────────────────────────────────────────────────────────────────────
 import type { APIRoute } from 'astro';
-// `env` is a live binding to the Worker's environment (secrets + KV). In
-// @astrojs/cloudflare v13 / Astro 6 this replaced the removed
-// `Astro.locals.runtime.env` API. Virtual module — only resolves at runtime.
-// @ts-expect-error - provided by the Cloudflare Workers runtime
-import { env } from 'cloudflare:workers';
 import {
   buildPrompt,
   evaluateRateLimit,
   geminiBody,
   geminiUrl,
+  groqBody,
+  groqUrl,
   isTone,
   parseGeminiText,
+  parseGroqText,
   MAX_INPUT_CHARS,
   RATE_LIMIT_MAX,
   type RateRecord,
@@ -44,7 +50,24 @@ interface KvLike {
 }
 
 /** Typed view over the Worker bindings we rely on. */
-const bindings = env as { GEMINI_API_KEY?: string; AI_RATELIMIT?: KvLike };
+interface Bindings {
+  GEMINI_API_KEY?: string;
+  /** Optional Groq key — enables the Llama 3.3 70B fallback when present. */
+  GROQ_API_KEY?: string;
+  AI_RATELIMIT?: KvLike;
+}
+
+/**
+ * Read the Worker bindings (secrets + KV) for this request. On
+ * @astrojs/cloudflare v12 / Astro 5 these are exposed via
+ * `context.locals.runtime.env` (populated by the platformProxy in dev and the
+ * Worker runtime in production). The older `cloudflare:workers` virtual-module
+ * import only exists on adapter v13 / Astro 6 and throws here at module load.
+ */
+function getBindings(context: Parameters<APIRoute>[0]): Bindings {
+  const runtime = (context.locals as { runtime?: { env?: Bindings } }).runtime;
+  return runtime?.env ?? {};
+}
 
 function json(body: unknown, status: number, headers?: Record<string, string>): Response {
   return new Response(JSON.stringify(body), {
@@ -58,8 +81,12 @@ function fail(code: ErrorCode, status: number, extra?: Record<string, unknown>):
 }
 
 export const POST: APIRoute = async (context) => {
-  const apiKey = bindings.GEMINI_API_KEY;
-  if (!apiKey) return fail('not_configured', 503);
+  const bindings = getBindings(context);
+  // At least one provider must be configured. Gemini is primary; Groq is the
+  // fallback. If neither key is present the feature is genuinely unavailable.
+  if (!bindings.GEMINI_API_KEY && !bindings.GROQ_API_KEY) {
+    return fail('not_configured', 503);
+  }
 
   // ── Parse + validate input ────────────────────────────────────────────────
   // Read the raw body then JSON.parse it (rather than request.json()) so an
@@ -100,20 +127,44 @@ export const POST: APIRoute = async (context) => {
     await kv
       .put(`rl:${ip}`, JSON.stringify(decision.next), { expirationTtl: ttl })
       .catch(() => {});
-    return await callGemini(apiKey, tone, text, decision.remaining);
+    return await improveText(bindings, tone, text, decision.remaining);
   }
 
   // No KV bound — proceed without a limit (local/dev fallback).
-  return await callGemini(apiKey, tone, text, RATE_LIMIT_MAX - 1);
+  return await improveText(bindings, tone, text, RATE_LIMIT_MAX - 1);
 };
 
-async function callGemini(
-  apiKey: string,
+/**
+ * Run the rewrite with Gemini as primary and Groq (Llama 3.3 70B) as fallback.
+ * Gemini handles the common case; when it errors, is blocked, or returns an
+ * empty/truncated rewrite (the typical long-post failure mode), we transparently
+ * retry with Groq. If no Groq key is configured the fallback is simply skipped.
+ * Returns 502 only when every available provider fails.
+ */
+async function improveText(
+  bindings: Bindings,
   tone: Parameters<typeof buildPrompt>[0],
   text: string,
   remaining: number,
 ): Promise<Response> {
   const prompt = buildPrompt(tone, text);
+
+  // Primary: Gemini.
+  let improved = bindings.GEMINI_API_KEY
+    ? await callGemini(bindings.GEMINI_API_KEY, prompt)
+    : null;
+
+  // Fallback: Groq Llama 3.3 70B (only if a key is bound).
+  if (!improved && bindings.GROQ_API_KEY) {
+    improved = await callGroq(bindings.GROQ_API_KEY, prompt);
+  }
+
+  if (!improved) return fail('upstream', 502);
+  return json({ improved, remaining }, 200);
+}
+
+/** Call Gemini generateContent. Returns the rewrite, or null on any failure. */
+async function callGemini(apiKey: string, prompt: string): Promise<string | null> {
   let res: Response;
   try {
     res = await fetch(geminiUrl(apiKey), {
@@ -122,22 +173,41 @@ async function callGemini(
       body: JSON.stringify(geminiBody(prompt)),
     });
   } catch {
-    return fail('upstream', 502);
+    return null;
   }
-
-  if (!res.ok) return fail('upstream', 502);
-
+  if (!res.ok) return null;
   let data: unknown;
   try {
     data = await res.json();
   } catch {
-    return fail('upstream', 502);
+    return null;
   }
+  return parseGeminiText(data);
+}
 
-  const improved = parseGeminiText(data);
-  if (!improved) return fail('upstream', 502);
-
-  return json({ improved, remaining }, 200);
+/** Call Groq Chat Completions. Returns the rewrite, or null on any failure. */
+async function callGroq(apiKey: string, prompt: string): Promise<string | null> {
+  let res: Response;
+  try {
+    res = await fetch(groqUrl(), {
+      method: 'POST',
+      headers: {
+        'content-type': 'application/json',
+        authorization: `Bearer ${apiKey}`,
+      },
+      body: JSON.stringify(groqBody(prompt)),
+    });
+  } catch {
+    return null;
+  }
+  if (!res.ok) return null;
+  let data: unknown;
+  try {
+    data = await res.json();
+  } catch {
+    return null;
+  }
+  return parseGroqText(data);
 }
 
 // Reject non-POST verbs cleanly so the route advertises its contract.

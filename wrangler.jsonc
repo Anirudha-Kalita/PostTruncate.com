@@ -47,6 +47,15 @@
   //   npx wrangler kv namespace create AI_RATELIMIT
   // The GEMINI_API_KEY is a *secret*, set with:
   //   npx wrangler secret put GEMINI_API_KEY   (and .dev.vars for local dev)
+  // GROQ_API_KEY (optional) is also a *secret* — it enables the Llama 3.3 70B
+  // fallback used when Gemini fails or returns an empty/truncated rewrite:
+  //   npx wrangler secret put GROQ_API_KEY     (and .dev.vars for local dev)
+  // GROQ_API_KEY is an optional *secret* enabling the Llama 3.3 70B fallback
+  // (used when Gemini errors or returns an empty/truncated rewrite). Set with:
+  //   npx wrangler secret put GROQ_API_KEY     (and .dev.vars for local dev)
+  // GROQ_API_KEY is an optional *secret* enabling the Llama 3.3 70B fallback
+  // used when Gemini errors or returns an empty/truncated rewrite:
+  //   npx wrangler secret put GROQ_API_KEY     (and .dev.vars for local dev)
   // SESSION: required by the @astrojs/cloudflare adapter, which auto-enables
   // Astro sessions with the cloudflare-kv-binding driver bound as "SESSION".
   // Local dev (miniflare) emulates this by name, so it only fails in

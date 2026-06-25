@@ -4,8 +4,12 @@ import {
   buildPrompt,
   evaluateRateLimit,
   geminiUrl,
+  groqBody,
+  groqUrl,
+  GROQ_MODEL,
   isTone,
   parseGeminiText,
+  parseGroqText,
   RATE_LIMIT_MAX,
   RATE_LIMIT_WINDOW_MS,
   TONES,
@@ -83,10 +87,57 @@ test('parseGeminiText returns null on safety block or empty output', () => {
   assert.equal(parseGeminiText({}), null);
 });
 
+test('parseGeminiText returns null when the reply was truncated at the token ceiling', () => {
+  // A thinking model can hit MAX_TOKENS with only a partial post — unusable, so
+  // the endpoint can fall back to Groq rather than inserting half a rewrite.
+  const json = {
+    candidates: [{ finishReason: 'MAX_TOKENS', content: { parts: [{ text: 'Half a rewr' }] } }],
+  };
+  assert.equal(parseGeminiText(json), null);
+});
+
+// ── Groq fallback parsing ────────────────────────────────────────────────────
+
+test('parseGroqText pulls and trims the message content', () => {
+  const json = { choices: [{ message: { content: '  Hello world  ' }, finish_reason: 'stop' }] };
+  assert.equal(parseGroqText(json), 'Hello world');
+});
+
+test('parseGroqText strips a single layer of wrapping quotes', () => {
+  const json = { choices: [{ message: { content: '"quoted"' }, finish_reason: 'stop' }] };
+  assert.equal(parseGroqText(json), 'quoted');
+});
+
+test('parseGroqText returns null on empty, missing, or length-truncated replies', () => {
+  assert.equal(parseGroqText({ choices: [] }), null);
+  assert.equal(parseGroqText({}), null);
+  assert.equal(parseGroqText({ choices: [{ message: { content: '   ' }, finish_reason: 'stop' }] }), null);
+  // finish_reason 'length' means the model hit the ceiling → unusable.
+  assert.equal(
+    parseGroqText({ choices: [{ message: { content: 'partial' }, finish_reason: 'length' }] }),
+    null,
+  );
+});
+
 // ── URL builder ──────────────────────────────────────────────────────────────
 
 test('geminiUrl encodes the key as a query param', () => {
   assert.match(geminiUrl('abc 123'), /\?key=abc%20123$/);
+});
+
+test('groqUrl points at the OpenAI-compatible chat completions endpoint', () => {
+  assert.match(groqUrl(), /\/openai\/v1\/chat\/completions$/);
+});
+
+test('groqBody targets the Llama 3.3 70B model and carries the prompt', () => {
+  const body = groqBody('rewrite this') as {
+    model: string;
+    messages: { role: string; content: string }[];
+    max_completion_tokens: number;
+  };
+  assert.equal(body.model, GROQ_MODEL);
+  assert.equal(body.messages[0].content, 'rewrite this');
+  assert.ok(body.max_completion_tokens >= 2048, 'output ceiling should be generous for long posts');
 });
 
 // ── rate limiting ────────────────────────────────────────────────────────────

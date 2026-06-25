@@ -1,4 +1,11 @@
 # Local dev secrets for `npm run dev` (Cloudflare adapter reads .dev.vars).
-# Copy this file to `.dev.vars` (git-ignored) and fill in a real key.
-# In production this is set via: npx wrangler secret put GEMINI_API_KEY
+# Copy this file to `.dev.vars` (git-ignored) and fill in real keys.
+# In production these are set via: npx wrangler secret put <NAME>
+
+# Primary AI Improve provider (Google Gemini). Required.
 GEMINI_API_KEY=your-gemini-api-key-here
+
+# Optional fallback provider (Groq, Llama 3.3 70B). Used automatically when
+# Gemini errors or returns an empty/truncated rewrite (e.g. long posts). Leave
+# unset to disable the fallback. Get a free key at https://console.groq.com/keys
+GROQ_API_KEY=your-groq-api-key-here
