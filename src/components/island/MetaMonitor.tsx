@@ -748,7 +748,8 @@ function FacebookReelsPlayer({
   // the frame, so it's hidden. 9:16 ≈ 0.5625; 3:4 ≈ 0.75 and wider letterbox.
   const [ratio, setRatio] = useState<number | null>(null);
   const isVideo = mediaKind === 'video' && !!mediaUrl;
-  const showFullscreen = ratio !== null && ratio > 0.6;
+  // Fullscreen affordance is a video-only control — never shown for an image.
+  const showFullscreen = isVideo && ratio !== null && ratio > 0.6;
 
   const togglePlay = () => {
     const v = videoRef.current;

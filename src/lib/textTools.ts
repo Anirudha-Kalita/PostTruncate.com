@@ -996,7 +996,7 @@ export type FoldView = 'mobile' | 'desktop';
 export const FOLDS = {
   linkedin: { mobile: LIMITS.LINKEDIN_MOBILE, desktop: LIMITS.LINKEDIN_DESKTOP },
   instagram: { mobile: 125, desktop: 125 },
-  facebook: { mobile: 110, desktop: 480 },
+  facebook: { mobile: 125, desktop: 480 },
   threads: { mobile: 250, desktop: LIMITS.THREADS },
   tiktok: { mobile: LIMITS.TIKTOK_FOLD, desktop: LIMITS.TIKTOK_FOLD },
 } as const;
