@@ -51,11 +51,13 @@ export function ShareControls({ adapter, strings, class: cls = '', size = 'md' }
         {strings.button}
       </button>
 
-      {/* Floating ARIA live region: toast + manual-copy field, anchored to the
-          button so it overlays content instead of pushing the row down. */}
+      {/* ARIA live region: toast + manual-copy field. On mobile it docks as a
+          full-width banner pinned to the bottom of the viewport (so it never
+          overflows or gets clipped by a narrow row); from `sm` up it becomes a
+          compact dropdown anchored under the button. */}
       <div
         aria-live="polite"
-        class="absolute right-0 top-full z-30 mt-2 flex w-[min(20rem,82vw)] flex-col gap-2 empty:hidden"
+        class="fixed inset-x-3 bottom-3 z-50 mx-auto flex max-w-md flex-col gap-2 empty:hidden sm:absolute sm:inset-x-auto sm:bottom-auto sm:right-0 sm:top-full sm:mx-0 sm:mt-2 sm:w-[min(20rem,82vw)] sm:max-w-none"
       >
         {toast && (
           <div
