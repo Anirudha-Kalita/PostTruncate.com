@@ -44,6 +44,20 @@ export interface FacebookPlatformConfig {
   /** Facebook Reels safe zone — same 9:16 UI as Instagram Reels (top tabs ~14%,
    *  bottom caption/audio/CTA band ~35%, right action stack ~15%). */
   reelsSafeZone: SafeZoneInsets;
+  /** Reels caption characters shown before the "… See More" cutoff, measured in
+   *  grapheme clusters. */
+  reelsPrimaryTruncateChars: number;
+  /** Facebook Carousel format caps and card-count bounds. */
+  carousel: {
+    /** Minimum number of cards a carousel can hold. */
+    minCards: number;
+    /** Maximum number of cards a carousel can hold. */
+    maxCards: number;
+    /** Per-card headline cap, in grapheme clusters (clamped, no affordance). */
+    cardHeadlineMax: number;
+    /** Per-card description cap, in grapheme clusters (clamped, no affordance). */
+    cardDescriptionMax: number;
+  };
 }
 
 export interface InstagramPlatformConfig {
@@ -92,6 +106,13 @@ export const AD_PLATFORM_CONFIG = {
     descriptionMax: 30,
     seeMoreLabel: '… See More',
     reelsSafeZone: { topPct: 14, bottomPct: 35, rightPct: 15 },
+    reelsPrimaryTruncateChars: 55,
+    carousel: {
+      minCards: 2,
+      maxCards: 10,
+      cardHeadlineMax: 40,
+      cardDescriptionMax: 20,
+    },
   },
   instagram: {
     feedTruncateChars: 125,

@@ -3,19 +3,25 @@ import { useEffect, useRef, useState } from 'preact/hooks';
 import { Card, CardHead, Meter, Segmented, type Tone } from './ui';
 import { GoogleRsaPreview } from './GoogleRsaPreview';
 import { FacebookFeedAd } from './FacebookFeedAd';
+import { FacebookReelsAd } from './FacebookReelsAd';
+import { FacebookCarouselAd, type CarouselCard } from './FacebookCarouselAd';
 import { InstagramAd } from './InstagramAd';
 import { TikTokAd } from './TikTokAd';
 import { ShareControls } from './ShareControls';
 import type { ShareAdapter } from './shareAdapter';
-import { pruneEmptyFields, type AdShareView } from '../../lib/shareLink';
+import { pruneEmptyFields, type AdShareView, type AdShareCard } from '../../lib/shareLink';
 import { interp } from '../../i18n/interp';
 import type { IslandStrings } from '../../i18n/types';
 import { adPreviewStrings } from '../../i18n/adPreviewStrings';
 import { shareStrings } from '../../i18n/shareStrings';
 import { AD_PLATFORM_CONFIG, type AdPlatform } from '../../data/adPlatformConfig';
 import { adLinkBehavior } from '../../data/linkBehavior';
-import { resolveCta } from '../../lib/adTruncation';
+import { addCard, removeCard, resolveCta, stepCard } from '../../lib/adTruncation';
 import { charCount } from '../../lib/textTools';
+
+type FbFormat = 'feed' | 'reels' | 'carousel';
+
+const EMPTY_CARD: CarouselCard = { headline: '', description: '', mediaUrl: null, mediaKind: 'image' };
 
 interface Props {
   /** Which platform simulator to mount (from the registry tool id). */
@@ -50,15 +56,16 @@ const EMPTY_VALUES: Record<FieldKey, string> = {
 interface PlatformControls {
   device: boolean;
   mode: boolean; // Instagram Feed/Reels
+  format: boolean; // Facebook Feed/Reels/Carousel
   safeZone: boolean;
   media: boolean;
 }
 
 const CONTROLS: Record<AdPlatform, PlatformControls> = {
-  google: { device: false, mode: false, safeZone: false, media: false },
-  facebook: { device: true, mode: false, safeZone: false, media: true },
-  instagram: { device: false, mode: true, safeZone: true, media: true },
-  tiktok: { device: false, mode: false, safeZone: true, media: true },
+  google: { device: false, mode: false, format: false, safeZone: false, media: false },
+  facebook: { device: true, mode: false, format: true, safeZone: false, media: true },
+  instagram: { device: false, mode: true, format: false, safeZone: true, media: true },
+  tiktok: { device: false, mode: false, format: false, safeZone: true, media: true },
 };
 
 export function AdSimulator({ platform, s, lang }: Props) {
@@ -69,6 +76,9 @@ export function AdSimulator({ platform, s, lang }: Props) {
   const [values, setValues] = useState<Record<FieldKey, string>>({ ...EMPTY_VALUES });
   const [device, setDevice] = useState<'mobile' | 'desktop'>('mobile');
   const [mode, setMode] = useState<'feed' | 'reels'>('feed');
+  const [fbFormat, setFbFormat] = useState<FbFormat>('feed');
+  const [cards, setCards] = useState<CarouselCard[]>([]);
+  const [activeCard, setActiveCard] = useState(0);
   const [safeZone, setSafeZone] = useState(true);
   const [mediaUrl, setMediaUrl] = useState<string | null>(null);
   // Whether the picked media is an image (default) or a video. Facebook,
@@ -123,6 +133,91 @@ export function AdSimulator({ platform, s, lang }: Props) {
       return null;
     });
 
+  // ── Facebook Carousel card-set state ──────────────────────────────────────
+  const fbCarouselCfg = cfg.facebook.carousel;
+
+  // Seed the minimum cards exactly once, on the first switch to Carousel with
+  // an empty set (idempotent — switching away and back preserves the cards).
+  const setFormat = (next: FbFormat) => {
+    setFbFormat(next);
+    if (next === 'carousel') {
+      setCards((prev) => {
+        if (prev.length > 0) return prev;
+        setActiveCard(0);
+        return Array.from({ length: fbCarouselCfg.minCards }, () => ({ ...EMPTY_CARD }));
+      });
+    }
+  };
+
+  // Mirror the live cards array so the unmount cleanup revokes the latest
+  // object URLs without resubscribing the effect on every change.
+  const cardsRef = useRef<CarouselCard[]>([]);
+  cardsRef.current = cards;
+  useEffect(
+    () => () => {
+      for (const c of cardsRef.current) {
+        if (c.mediaUrl) URL.revokeObjectURL(c.mediaUrl);
+      }
+    },
+    [],
+  );
+
+  const setCardField = (index: number, key: 'headline' | 'description', v: string) =>
+    setCards((prev) => prev.map((c, i) => (i === index ? { ...c, [key]: v } : c)));
+
+  const onPickCardMedia = (index: number) => (e: Event) => {
+    const input = e.currentTarget as HTMLInputElement;
+    const file = input.files?.[0];
+    if (!file) return;
+    const kind: 'image' | 'video' = file.type.startsWith('video/') ? 'video' : 'image';
+    const url = URL.createObjectURL(file);
+    setCards((prev) =>
+      prev.map((c, i) => {
+        if (i !== index) return c;
+        if (c.mediaUrl) URL.revokeObjectURL(c.mediaUrl);
+        return { ...c, mediaUrl: url, mediaKind: kind };
+      }),
+    );
+    input.value = '';
+  };
+
+  const onRemoveCardMedia = (index: number) =>
+    setCards((prev) =>
+      prev.map((c, i) => {
+        if (i !== index) return c;
+        if (c.mediaUrl) URL.revokeObjectURL(c.mediaUrl);
+        return { ...c, mediaUrl: null };
+      }),
+    );
+
+  const [cardNotice, setCardNotice] = useState<'max' | 'min' | null>(null);
+
+  const onAddCard = () => {
+    const result = addCard(cards.length, activeCard, fbCarouselCfg.minCards, fbCarouselCfg.maxCards);
+    if (result.atLimit) {
+      setCardNotice('max');
+      return;
+    }
+    setCardNotice(null);
+    setCards((prev) => [...prev, { ...EMPTY_CARD }]);
+    setActiveCard(result.activeIndex);
+  };
+
+  const onRemoveCard = (index: number) => {
+    const result = removeCard(cards.length, index, activeCard, fbCarouselCfg.minCards);
+    if (result.atLimit) {
+      setCardNotice('min');
+      return;
+    }
+    setCardNotice(null);
+    const removed = cards[index];
+    if (removed?.mediaUrl) URL.revokeObjectURL(removed.mediaUrl);
+    setCards((prev) => prev.filter((_, i) => i !== index));
+    setActiveCard(result.activeIndex);
+  };
+
+  const onStepCard = (dir: -1 | 1) => setActiveCard((prev) => stepCard(prev, dir, cards.length));
+
   // ── Share_Link adapter ────────────────────────────────────────────────────
   // collect() snapshots only this platform's exposed toggles + non-empty field
   // values; apply() restores them only for a matching platform (cross-tool
@@ -135,7 +230,15 @@ export function AdSimulator({ platform, s, lang }: Props) {
       const view: AdShareView = {};
       if (controls.device) view.device = device;
       if (controls.mode) view.mode = mode;
-      if (controls.safeZone) view.safeZone = safeZone;
+      if (controls.format) {
+        view.adFormat = fbFormat;
+        if (fbFormat === 'reels') view.safeZone = safeZone;
+        if (fbFormat === 'carousel') {
+          view.cards = cards.map((c): AdShareCard => ({ headline: c.headline, description: c.description }));
+        }
+      } else if (controls.safeZone) {
+        view.safeZone = safeZone;
+      }
       if (showsDisplayLink) {
         view.destinationUrl = destinationUrl;
         view.cta = cta;
@@ -146,7 +249,7 @@ export function AdSimulator({ platform, s, lang }: Props) {
       }
       return pruneEmptyFields({ kind: 'ad', platform, fields: { ...values }, view });
     },
-    hasMedia: () => mediaUrl !== null,
+    hasMedia: () => mediaUrl !== null || cards.some((c) => c.mediaUrl !== null),
     apply: (state) => {
       if (state.kind !== 'ad' || state.platform !== platform) return;
       // Merge over EMPTY_VALUES, dropping any unknown field keys.
@@ -159,6 +262,24 @@ export function AdSimulator({ platform, s, lang }: Props) {
       const view = state.view;
       if (view.device) setDevice(view.device);
       if (view.mode) setMode(view.mode);
+      if (controls.format) {
+        // Malformed/absent adFormat falls back to Feed (Req 1.8, 10.6).
+        setFbFormat(view.adFormat ?? 'feed');
+        if (view.adFormat === 'carousel' && view.cards) {
+          setCards(
+            view.cards.map((c): CarouselCard => ({
+              headline: c.headline ?? '',
+              description: c.description ?? '',
+              mediaUrl: null,
+              mediaKind: 'image',
+            })),
+          );
+          setActiveCard(0);
+        } else {
+          setCards([]);
+          setActiveCard(0);
+        }
+      }
       if (typeof view.safeZone === 'boolean') setSafeZone(view.safeZone);
       if (view.destinationUrl !== undefined) setDestinationUrl(view.destinationUrl);
       if (view.cta !== undefined) setCta(view.cta);
@@ -168,7 +289,7 @@ export function AdSimulator({ platform, s, lang }: Props) {
   };
 
   // ── Per-platform left-column field set ────────────────────────────────────
-  const fields = buildFields(platform, ap, cfg);
+  const fields = buildFields(platform, ap, cfg, fbFormat);
 
   // Controls hosted in the preview card heading (next to the status badge): the
   // device (Mobile/Desktop) toggle where the platform exposes it, plus Share.
@@ -196,6 +317,18 @@ export function AdSimulator({ platform, s, lang }: Props) {
           ]}
         />
       )}
+      {controls.format && (
+        <Segmented
+          ariaLabel={ap.formatAria}
+          value={fbFormat}
+          onChange={setFormat}
+          options={[
+            { value: 'feed', label: ap.formatFeed },
+            { value: 'reels', label: ap.formatReels },
+            { value: 'carousel', label: ap.formatCarousel },
+          ]}
+        />
+      )}
       <ShareControls adapter={shareAdapter} strings={shareStrings(s)} size="sm" />
     </>
   );
@@ -215,6 +348,37 @@ export function AdSimulator({ platform, s, lang }: Props) {
           />
         );
       case 'facebook':
+        if (fbFormat === 'reels') {
+          return (
+            <FacebookReelsAd
+              s={s}
+              lang={lang}
+              primary={values.primary}
+              safeZone={safeZone}
+              mediaUrl={mediaUrl}
+              mediaKind={mediaKind}
+              destinationUrl={destinationUrl}
+              cta={cta || resolveCta('facebook') || undefined}
+              toolbar={previewToolbar}
+            />
+          );
+        }
+        if (fbFormat === 'carousel') {
+          return (
+            <FacebookCarouselAd
+              s={s}
+              primary={values.primary}
+              cards={cards}
+              activeCard={Math.min(activeCard, Math.max(cards.length - 1, 0))}
+              onPrev={() => onStepCard(-1)}
+              onNext={() => onStepCard(1)}
+              onArrowKey={onStepCard}
+              destinationUrl={destinationUrl}
+              cta={cta || resolveCta('facebook') || undefined}
+              toolbar={previewToolbar}
+            />
+          );
+        }
         return (
           <FacebookFeedAd
             s={s}
@@ -259,6 +423,9 @@ export function AdSimulator({ platform, s, lang }: Props) {
         );
     }
   })();
+
+  const isCarousel = platform === 'facebook' && fbFormat === 'carousel';
+  const isReels = platform === 'facebook' && fbFormat === 'reels';
 
   return (
     <div class="grid gap-5 lg:grid-cols-2">
@@ -352,7 +519,100 @@ export function AdSimulator({ platform, s, lang }: Props) {
             </div>
           )}
 
-          {/* Meta ad display-link + CTA controls (Facebook / Instagram) */}
+          {/* Carousel card editor: shared primary above (already rendered by the
+              generic fields loop), then per-card headline/description/media rows
+              plus add/remove + the card navigator. */}
+          {isCarousel && (
+            <div class="flex flex-col gap-4 border-t border-hairline pt-4">
+              <div class="flex items-center justify-between gap-3">
+                <span class="text-[13px] font-medium text-body">
+                  {interp(ap.cardN, { n: activeCard + 1 })}
+                </span>
+                <div class="flex items-center gap-2">
+                  <button
+                    type="button"
+                    onClick={() => onRemoveCard(activeCard)}
+                    class="text-[13px] font-medium text-error transition-colors hover:text-error-deep"
+                  >
+                    {ap.carouselRemoveCard}
+                  </button>
+                  <button
+                    type="button"
+                    onClick={onAddCard}
+                    class="rounded-pill border border-hairline bg-canvas-soft px-3 py-1.5 text-[13px] font-medium text-body transition-colors hover:text-ink"
+                  >
+                    {ap.carouselAddCard}
+                  </button>
+                </div>
+              </div>
+
+              {cardNotice === 'max' && (
+                <p class="text-[12px] leading-4 text-warning-deep">
+                  {interp(ap.carouselMaxReached, { max: fbCarouselCfg.maxCards })}
+                </p>
+              )}
+              {cardNotice === 'min' && (
+                <p class="text-[12px] leading-4 text-warning-deep">
+                  {interp(ap.carouselMinReached, { min: fbCarouselCfg.minCards })}
+                </p>
+              )}
+
+              {cards.map((c, i) => (
+                <div
+                  class={`flex flex-col gap-2 rounded-md border p-3 ${i === activeCard ? 'border-link bg-link-bg-soft/40' : 'border-hairline'}`}
+                  key={i}
+                >
+                  <button
+                    type="button"
+                    onClick={() => setActiveCard(i)}
+                    class="self-start text-[12px] font-medium text-link"
+                  >
+                    {interp(ap.cardN, { n: i + 1 })}
+                  </button>
+                  <input
+                    type="text"
+                    value={c.headline}
+                    maxLength={fbCarouselCfg.cardHeadlineMax}
+                    onInput={(e) => setCardField(i, 'headline', (e.currentTarget as HTMLInputElement).value)}
+                    placeholder={ap.placeholders.cardHeadline}
+                    aria-label={ap.cardHeadline}
+                    class="block w-full rounded-md border border-hairline bg-canvas-soft px-3 py-2 text-[14px] text-ink placeholder:text-mute focus:border-link focus:bg-canvas focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-link"
+                  />
+                  <input
+                    type="text"
+                    value={c.description}
+                    maxLength={fbCarouselCfg.cardDescriptionMax}
+                    onInput={(e) => setCardField(i, 'description', (e.currentTarget as HTMLInputElement).value)}
+                    placeholder={ap.placeholders.cardDescription}
+                    aria-label={ap.cardDescription}
+                    class="block w-full rounded-md border border-hairline bg-canvas-soft px-3 py-2 text-[14px] text-ink placeholder:text-mute focus:border-link focus:bg-canvas focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-link"
+                  />
+                  <div class="flex items-center gap-3">
+                    <label class="inline-flex cursor-pointer items-center gap-2 rounded-pill border border-hairline bg-canvas-soft px-3 py-1.5 text-[12px] font-medium text-body transition-colors hover:text-ink">
+                      <input type="file" accept="image/*,video/*" onChange={onPickCardMedia(i)} class="hidden" />
+                      {c.mediaUrl ? ap.media.replace : ap.media.add}
+                    </label>
+                    {c.mediaUrl && (
+                      <button
+                        type="button"
+                        onClick={() => onRemoveCardMedia(i)}
+                        aria-label={ap.media.remove}
+                        class="text-[12px] font-medium text-error transition-colors hover:text-error-deep"
+                      >
+                        {ap.media.remove}
+                      </button>
+                    )}
+                  </div>
+                </div>
+              ))}
+              <p class="text-[12px] leading-4 text-mute">{ap.media.hint}</p>
+            </div>
+          )}
+
+          {/* Meta ad display-link + CTA controls (Facebook / Instagram). Real
+              Facebook carousels apply one shared CTA button across every card
+              (Meta's Ads Manager has a single "Call to action" picker for the
+              whole carousel unit), so this isn't gated off for Carousel. */}
           {showsDisplayLink && (
             <div class="flex flex-col gap-4">
               <div class="flex flex-col gap-2">
@@ -383,7 +643,7 @@ export function AdSimulator({ platform, s, lang }: Props) {
               )}
             </div>
           )}
-          {controls.media && (
+          {controls.media && !isCarousel && (
             <div class="flex flex-col gap-2">
               <div class="flex items-center gap-3">
                 <label class="inline-flex cursor-pointer items-center gap-2 rounded-pill border border-hairline bg-canvas-soft px-4 py-2 text-[13px] font-medium text-body transition-colors hover:text-ink">
@@ -406,20 +666,21 @@ export function AdSimulator({ platform, s, lang }: Props) {
           )}
 
           {/* Shared toggles (the device + Feed/Reels toggles are hosted in the
-              preview card heading; the safe-zone toggle stays with the inputs). */}
-          {controls.safeZone && (
+              preview card heading; the safe-zone toggle stays with the inputs).
+              Facebook only shows this while the active Ad_Format is Reels
+              (Req 3.1, 3.6) — that flag isn't in the static CONTROLS map since it
+              depends on the live `fbFormat`, so it's computed here. */}
+          {(controls.safeZone || isReels) && (
             <div class="flex flex-wrap items-center gap-4 border-t border-hairline pt-4">
-              {controls.safeZone && (
-                <label class="inline-flex cursor-pointer items-center gap-2 text-[13px] font-medium text-body">
-                  <input
-                    type="checkbox"
-                    checked={safeZone}
-                    onChange={(e) => setSafeZone((e.currentTarget as HTMLInputElement).checked)}
-                    class="h-4 w-4 rounded border-hairline accent-link"
-                  />
-                  {ap.safeZoneLabel}
-                </label>
-              )}
+              <label class="inline-flex cursor-pointer items-center gap-2 rounded-md px-1 py-0.5 text-[13px] font-medium text-body transition-transform duration-100 active:scale-[0.97]">
+                <input
+                  type="checkbox"
+                  checked={safeZone}
+                  onChange={(e) => setSafeZone((e.currentTarget as HTMLInputElement).checked)}
+                  class="h-4 w-4 rounded border-hairline accent-link"
+                />
+                {ap.safeZoneLabel}
+              </label>
             </div>
           )}
         </div>
@@ -436,6 +697,7 @@ function buildFields(
   platform: AdPlatform,
   ap: ReturnType<typeof adPreviewStrings>,
   cfg: typeof AD_PLATFORM_CONFIG,
+  fbFormat: FbFormat,
 ): FieldDef[] {
   switch (platform) {
     case 'google':
@@ -467,6 +729,28 @@ function buildFields(
         },
       ];
     case 'facebook':
+      if (fbFormat === 'reels') {
+        return [
+          {
+            key: 'primary',
+            label: ap.fields.primary,
+            placeholder: ap.placeholders.primary,
+            softMax: cfg.facebook.reelsPrimaryTruncateChars,
+            multiline: true,
+          },
+        ];
+      }
+      if (fbFormat === 'carousel') {
+        return [
+          {
+            key: 'primary',
+            label: ap.fields.primary,
+            placeholder: ap.placeholders.primary,
+            softMax: cfg.facebook.primaryTruncateChars,
+            multiline: true,
+          },
+        ];
+      }
       return [
         {
           key: 'primary',

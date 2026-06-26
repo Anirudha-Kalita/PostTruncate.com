@@ -57,11 +57,15 @@ const { categories } = Astro.props;
     border-radius: 64px;
     background: transparent;
     text-decoration: none;
-    transition: border-color 0.15s ease, color 0.15s ease, background 0.15s ease;
+    transition: border-color 0.15s ease, color 0.15s ease, background 0.15s ease, transform 100ms ease;
   }
   .blog-cat-nav__pill:hover {
     color: var(--color-ink);
     border-color: var(--color-ink);
+    background: var(--color-canvas-soft);
+  }
+  .blog-cat-nav__pill:active {
+    transform: scale(0.93);
     background: var(--color-canvas-soft);
   }
   .blog-cat-nav__pill:focus-visible {

@@ -108,11 +108,16 @@ const { label, sections } = Astro.props;
     line-height: 18px;
     color: var(--color-body);
     text-decoration: none;
-    transition: color 0.15s ease, background 0.15s ease;
+    transition: color 0.15s ease, background 0.15s ease, transform 100ms ease;
   }
 
   .on-page__link:hover {
     color: var(--color-ink);
+    background: var(--color-canvas-soft-2);
+  }
+
+  .on-page__link:active {
+    transform: scale(0.985);
     background: var(--color-canvas-soft-2);
   }
 
@@ -144,12 +149,17 @@ const { label, sections } = Astro.props;
     line-height: 16px;
     color: var(--color-body);
     text-decoration: none;
-    transition: color 0.15s ease, border-color 0.15s ease, background 0.15s ease;
+    transition: color 0.15s ease, border-color 0.15s ease, background 0.15s ease, transform 100ms ease;
   }
 
   .on-page__pill:hover {
     color: var(--color-ink);
     border-color: var(--color-hairline-strong);
+    background: var(--color-canvas-soft);
+  }
+
+  .on-page__pill:active {
+    transform: scale(0.955);
     background: var(--color-canvas-soft);
   }
 

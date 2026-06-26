@@ -151,7 +151,7 @@ const statusText = statusTemplate
     border-radius: 64px;
     background: transparent;
     text-decoration: none;
-    transition: border-color 0.15s ease, color 0.15s ease, background 0.15s ease;
+    transition: border-color 0.15s ease, color 0.15s ease, background 0.15s ease, transform 100ms ease;
   }
   .blog-pagination__num {
     min-width: 38px;
@@ -162,6 +162,14 @@ const statusText = statusTemplate
     color: var(--color-ink);
     border-color: var(--color-ink);
     background: var(--color-canvas-soft);
+  }
+  .blog-pagination__num:active,
+  .blog-pagination__step:active {
+    transform: scale(0.93);
+    background: var(--color-canvas-soft);
+  }
+  .blog-pagination__num[aria-current='page']:active {
+    transform: none;
   }
   .blog-pagination__num:focus-visible,
   .blog-pagination__step:focus-visible {

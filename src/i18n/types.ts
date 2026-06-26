@@ -132,6 +132,10 @@ export interface AdPreviewStrings {
     headline: string;
     primary: string;
     description: string;
+    /** Carousel per-card headline input placeholder. */
+    cardHeadline: string;
+    /** Carousel per-card description input placeholder. */
+    cardDescription: string;
   };
   /** "{n} / {limit}" character-counter caption shared by all fields. */
   counter: string;
@@ -189,6 +193,34 @@ export interface AdPreviewStrings {
   fbHeadlineSqueezed: string;
   /** Google warning when headlines overflow the slot; "{n}" and "{px}" tokens. */
   googleHeadlinesDropped: Plural;
+  /** Accessible name for the Facebook Feed/Reels/Carousel format selector. */
+  formatAria: string;
+  /** Facebook format-selector option label — Feed. */
+  formatFeed: string;
+  /** Facebook format-selector option label — Reels. */
+  formatReels: string;
+  /** Facebook format-selector option label — Carousel. */
+  formatCarousel: string;
+  /** Carousel add-card button label. */
+  carouselAddCard: string;
+  /** Carousel remove-card button label. */
+  carouselRemoveCard: string;
+  /** Notice shown when the carousel is at its card maximum; "{max}" token. */
+  carouselMaxReached: string;
+  /** Notice shown when the carousel is at its card minimum; "{min}" token. */
+  carouselMinReached: string;
+  /** Carousel previous-card control accessible name. */
+  carouselPrev: string;
+  /** Carousel next-card control accessible name. */
+  carouselNext: string;
+  /** Carousel position indicator; "{current}" / "{total}" tokens (e.g. "3 / 5"). */
+  carouselPosition: string;
+  /** Carousel per-card section heading; "{n}" token (e.g. "Card 2"). */
+  cardN: string;
+  /** Carousel per-card headline input label. */
+  cardHeadline: string;
+  /** Carousel per-card description input label. */
+  cardDescription: string;
   /**
    * Localized labels for the platform CTA presets, keyed by the canonical English
    * label (the stable value stored by `resolveCta`). Real platforms show the CTA

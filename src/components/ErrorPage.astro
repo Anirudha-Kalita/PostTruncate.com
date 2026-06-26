@@ -176,10 +176,14 @@ const brand = 'PostTruncate';
     color: var(--color-on-primary);
     font-size: 16px;
     font-weight: 500;
-    transition: opacity 0.15s ease;
+    transition: opacity 0.15s ease, transform 100ms ease;
   }
   .error__primary:hover {
     opacity: 0.88;
+  }
+  .error__primary:active {
+    transform: scale(0.955);
+    opacity: 0.82;
   }
 
   /* Bright mesh stops read washed-out at 0.16 over near-black; lift them. */

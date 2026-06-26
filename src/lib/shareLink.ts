@@ -41,10 +41,27 @@ export interface EditorShareState {
   cardDescription?: string;
 }
 
+/**
+ * One serialized Carousel_Card. Each text field is present only when it is a
+ * non-empty / non-whitespace string (media is never representable here, so it
+ * can never enter a Share_Link — Req 10.5).
+ */
+export interface AdShareCard {
+  headline?: string; // present only when non-empty
+  description?: string; // present only when non-empty
+}
+
 /** Ad-preview-tool view toggles; each key present only when meaningful. */
 export interface AdShareView {
   device?: 'mobile' | 'desktop';
   mode?: 'feed' | 'reels';
+  /**
+   * Facebook Ad_Format discriminator. Present only when it is exactly one of the
+   * three literals; any other value is dropped so it resolves to Feed (Req 10.6).
+   */
+  adFormat?: 'feed' | 'reels' | 'carousel';
+  /** Carousel cards in display order. Present only when carousel (Req 10.2, 10.4). */
+  cards?: AdShareCard[];
   safeZone?: boolean;
   destinationUrl?: string;
   cta?: string;
@@ -179,6 +196,25 @@ function validateView(raw: unknown): AdShareView {
 
   if (raw.device === 'mobile' || raw.device === 'desktop') out.device = raw.device;
   if (raw.mode === 'feed' || raw.mode === 'reels') out.mode = raw.mode;
+  // Accept adFormat only when it is exactly one of the three literals; any other
+  // value is dropped so the caller resolves it to Feed (Req 10.6).
+  if (raw.adFormat === 'feed' || raw.adFormat === 'reels' || raw.adFormat === 'carousel') {
+    out.adFormat = raw.adFormat;
+  }
+  // Accept cards only when it is an array of plain objects; coerce each entry to
+  // { headline?, description? } keeping only non-empty strings. Non-object
+  // entries are dropped (Req 10.2).
+  if (Array.isArray(raw.cards)) {
+    const cards: AdShareCard[] = [];
+    for (const entry of raw.cards) {
+      if (!isPlainObject(entry)) continue;
+      const card: AdShareCard = {};
+      if (isNonEmptyString(entry.headline)) card.headline = entry.headline;
+      if (isNonEmptyString(entry.description)) card.description = entry.description;
+      cards.push(card);
+    }
+    out.cards = cards;
+  }
   if (typeof raw.safeZone === 'boolean') out.safeZone = raw.safeZone;
   if (typeof raw.destinationUrl === 'string') out.destinationUrl = raw.destinationUrl;
   if (typeof raw.cta === 'string') out.cta = raw.cta;
@@ -214,6 +250,21 @@ export function pruneEmptyFields(state: ShareState): ShareState {
   const view: AdShareView = {};
   if (v.device !== undefined) view.device = v.device;
   if (v.mode !== undefined) view.mode = v.mode;
+  // Carry through the Facebook Ad_Format discriminator when present (Req 10.1).
+  if (v.adFormat !== undefined) view.adFormat = v.adFormat;
+  // Emit one cards entry per card in display order (preserving count, Req 10.4),
+  // dropping empty headline/description within each entry (Req 10.2). The caller
+  // only passes cards for the carousel format, so emitting whenever a non-empty
+  // array is provided keeps cards out of non-carousel links (Req 10.5 media is
+  // never representable here).
+  if (v.cards && v.cards.length > 0) {
+    view.cards = v.cards.map((card) => {
+      const out: AdShareCard = {};
+      if (isNonEmptyString(card.headline)) out.headline = card.headline;
+      if (isNonEmptyString(card.description)) out.description = card.description;
+      return out;
+    });
+  }
   if (v.safeZone !== undefined) view.safeZone = v.safeZone;
   if (isNonEmptyString(v.destinationUrl)) view.destinationUrl = v.destinationUrl;
   if (isNonEmptyString(v.cta)) view.cta = v.cta;

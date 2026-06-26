@@ -29,6 +29,156 @@ export function truncateFacebookPrimary(text: string): FieldTruncation {
 }
 
 /**
+ * Facebook Reels caption: show the first `reelsPrimaryTruncateChars` grapheme
+ * clusters, then the configured "… See More" affordance. Mirrors
+ * `truncateFacebookPrimary` exactly but reads the Reels-specific cutoff. Copy at
+ * or under the cutoff renders in full; an empty caption yields
+ * `{ text: '', truncated: false }` (no text, no affordance).
+ */
+export function truncateFacebookReelsPrimary(text: string): FieldTruncation {
+  const { reelsPrimaryTruncateChars, seeMoreLabel } = AD_PLATFORM_CONFIG.facebook;
+  if (charCount(text) <= reelsPrimaryTruncateChars) return { text, truncated: false };
+  return { text: sliceChars(text, 0, reelsPrimaryTruncateChars) + seeMoreLabel, truncated: true };
+}
+
+/**
+ * Hard-clamp a field to a grapheme-cluster cap with NO "See More" affordance.
+ * Shared by the Facebook Carousel card-field helpers below. Text at or under the
+ * cap is returned unchanged (`truncated: false`); over the cap it is sliced
+ * grapheme-safe to exactly `cap` clusters (`truncated: true`).
+ */
+function clampField(text: string, cap: number): FieldTruncation {
+  return { text: sliceChars(text, 0, cap), truncated: charCount(text) > cap };
+}
+
+/**
+ * Facebook Carousel card headline: hard-clamp to the configured headline cap,
+ * grapheme-safe, with no affordance appended.
+ */
+export function clampCarouselHeadline(text: string): FieldTruncation {
+  return clampField(text, AD_PLATFORM_CONFIG.facebook.carousel.cardHeadlineMax);
+}
+
+/**
+ * Facebook Carousel card description: hard-clamp to the configured description
+ * cap, grapheme-safe, with no affordance appended.
+ */
+export function clampCarouselDescription(text: string): FieldTruncation {
+  return clampField(text, AD_PLATFORM_CONFIG.facebook.carousel.cardDescriptionMax);
+}
+
+// ──────────────────────────────────────────────────────────────────────────
+// Facebook Carousel card-set reducers (pure; operate on counts/indices, not
+// React state) and the per-format status-badge helper. Centralizing the
+// count-bound and active-index rules here keeps the components free of this
+// logic (Req 13.2) and the helpers DOM-free and unit-testable (Req 13.4).
+// ──────────────────────────────────────────────────────────────────────────
+
+/**
+ * Result of a card-set mutation. `count`/`activeIndex` are the post-operation
+ * values (unchanged when the operation was a no-op), `changed` is true only when
+ * the set actually mutated, and `atLimit` is true when the operation was refused
+ * because the count is already at its `min`/`max` bound (drives the localized
+ * max/min-reached notices).
+ *
+ * Invariant on the returned value: `min <= count <= max` and
+ * `0 <= activeIndex < count`.
+ */
+export interface CardCountResult {
+  count: number;
+  activeIndex: number;
+  changed: boolean;
+  atLimit: boolean;
+}
+
+/**
+ * Append a card. When `count < max`: increment the count by one, append after
+ * the last card, and select the newly appended last card (`activeIndex = count`,
+ * the old count being the new last index). When `count === max`: leave the set
+ * unchanged and report `atLimit` so the UI can surface the max-reached notice
+ * (Req 5.3, 5.4).
+ */
+export function addCard(
+  count: number,
+  activeIndex: number,
+  min: number,
+  max: number,
+): CardCountResult {
+  if (count < max) {
+    return { count: count + 1, activeIndex: count, changed: true, atLimit: false };
+  }
+  return { count, activeIndex, changed: false, atLimit: true };
+}
+
+/**
+ * Remove the card at `removeIndex`. When `count > min`: decrement the count by
+ * one and reassign the active index per spec —
+ *  - removing the active card that is NOT the last → the active index stays the
+ *    same (the following card shifts into that slot),
+ *  - removing the active card that IS the last → the active index moves to the
+ *    preceding card (`count - 2`),
+ *  - removing a card positioned before the active card → the active index shifts
+ *    down by one,
+ *  - removing a card positioned after the active card → the active index is
+ *    unchanged.
+ * When `count === min`: leave the set unchanged and report `atLimit` so the UI
+ * can surface the min-reached notice (Req 5.5–5.8). The returned `activeIndex`
+ * always satisfies `0 <= activeIndex < count`.
+ */
+export function removeCard(
+  count: number,
+  removeIndex: number,
+  activeIndex: number,
+  min: number,
+): CardCountResult {
+  if (count <= min) {
+    return { count, activeIndex, changed: false, atLimit: true };
+  }
+  const newCount = count - 1;
+  let newActive: number;
+  if (removeIndex === activeIndex) {
+    // Removing the active card: stay in place unless it was the last card.
+    newActive = removeIndex === count - 1 ? removeIndex - 1 : activeIndex;
+  } else if (removeIndex < activeIndex) {
+    // A card before the active one shifts everything down by one.
+    newActive = activeIndex - 1;
+  } else {
+    // A card after the active one leaves the active index untouched.
+    newActive = activeIndex;
+  }
+  return { count: newCount, activeIndex: newActive, changed: true, atLimit: false };
+}
+
+/**
+ * Move the active card one position inward in direction `dir` (-1 previous, +1
+ * next). Clamps at either bound: stepping before the first card or past the last
+ * card is a no-op that returns the current `activeIndex` unchanged (Req 8.1,
+ * 8.3, 8.4).
+ */
+export function stepCard(activeIndex: number, dir: -1 | 1, count: number): number {
+  const next = activeIndex + dir;
+  if (next < 0 || next > count - 1) return activeIndex;
+  return next;
+}
+
+/** Tone + label key for the per-format Fits/Truncated status badge. */
+export type BadgeState = { toneKind: 'neutral' | 'safe' | 'warn'; label: 'fits' | 'truncated' };
+
+/**
+ * Resolve the status-badge state for a Facebook format from two pure flags:
+ *  - no field has input → neutral tone + "fits",
+ *  - any field is clamped or truncated → warn tone + "truncated",
+ *  - otherwise (input present, nothing truncated) → safe tone + "fits".
+ * The label is always a non-empty key so badge state is conveyed by text and
+ * tone, never tone alone (Req 9.1–9.5, 9.7).
+ */
+export function facebookBadgeState(anyInput: boolean, anyTruncated: boolean): BadgeState {
+  if (!anyInput) return { toneKind: 'neutral', label: 'fits' };
+  if (anyTruncated) return { toneKind: 'warn', label: 'truncated' };
+  return { toneKind: 'safe', label: 'fits' };
+}
+
+/**
  * TikTok description: show the first 100 characters, then an unclickable
  * "... See more". (The "max 4 lines" rule is a render-time CSS clamp.)
  */

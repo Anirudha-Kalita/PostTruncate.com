@@ -235,7 +235,7 @@ export function ToolLink({ href, children }: ToolLinkProps) {
   return (
     <a
       href={href}
-      class="block border-t border-hairline px-4 py-2.5 text-[13px] text-mute transition-colors hover:text-link sm:px-5"
+      class="block border-t border-hairline px-4 py-2.5 text-[13px] font-medium text-link transition-colors hover:text-link-deep sm:px-5"
     >
       {children}
     </a>

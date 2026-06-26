@@ -96,10 +96,16 @@ const { platforms, textTemplate, closeLabel } = Astro.props;
     min-width: 0;
     text-decoration: none;
     color: var(--color-ink);
+    transition: transform 100ms ease, opacity 0.15s ease;
   }
 
   .platform-banner__link:hover .platform-banner__text {
     text-decoration: underline;
+  }
+
+  .platform-banner__link:active {
+    transform: scale(0.99);
+    opacity: 0.85;
   }
 
   .platform-banner__logo {

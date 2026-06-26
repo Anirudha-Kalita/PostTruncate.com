@@ -306,25 +306,44 @@ export function Workspace({ text, setText, lang, s, focus, image, mediaKind = 'i
         {/* Collapsed toolkit: format actions + full counters + pacing timers.
             Same controls and computations as before, regrouped behind one
             disclosure so the default editor column stays calm. */}
-        <details class="group mt-4 rounded-md border border-hairline bg-canvas-soft">
-          <summary class="flex cursor-pointer list-none items-center justify-between gap-2 px-3.5 py-2.5 font-mono text-[11px] uppercase tracking-wide text-mute transition-colors hover:text-ink [&::-webkit-details-marker]:hidden">
-            {w.formatterLabel}
+        <details class="group mt-4 overflow-hidden rounded-md border border-hairline-strong/70 bg-canvas shadow-e1">
+          <summary class="flex cursor-pointer list-none items-center justify-between gap-2 bg-canvas-soft px-3.5 py-3 text-[13px] font-semibold text-ink transition-colors duration-150 hover:bg-canvas-soft-2 [&::-webkit-details-marker]:hidden">
+            <span class="flex items-center gap-2">
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+                class="shrink-0 text-link"
+              >
+                <path d="M4 6h16M4 12h10M4 18h7" />
+                <circle cx="18" cy="6" r="1.6" fill="currentColor" stroke="none" />
+                <circle cx="13" cy="12" r="1.6" fill="currentColor" stroke="none" />
+                <circle cx="9" cy="18" r="1.6" fill="currentColor" stroke="none" />
+              </svg>
+              {w.formatterLabel}
+            </span>
             <svg
-              width="14"
-              height="14"
+              width="16"
+              height="16"
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
-              stroke-width="2"
+              stroke-width="2.25"
               stroke-linecap="round"
               stroke-linejoin="round"
               aria-hidden="true"
-              class="shrink-0 transition-transform duration-200 group-open:rotate-180"
+              class="shrink-0 text-mute transition-transform duration-200 group-open:rotate-180 group-open:text-ink"
             >
               <path d="m6 9 6 6 6-6" />
             </svg>
           </summary>
-          <div class="border-t border-hairline p-2.5">
+          <div class="border-t border-hairline bg-canvas-soft p-2.5">
             <div class="grid grid-cols-2 gap-2 sm:grid-cols-3">
               {formatterActions.map((item) => (
                 <button
