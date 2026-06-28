@@ -73,6 +73,14 @@ const blogListingByPath = buildBlogListingLastmodByPath();
 // so routes, the language switcher, and hreflang tags never drift apart.
 export default defineConfig({
   site: SITE,
+  // Emit every stylesheet as a hashed external file with a render-blocking
+  // <link rel="stylesheet"> in <head> (never inline). This gives the
+  // post-build CSS inlining transform a single, predictable starting shape
+  // instead of Astro's 'auto' default, which inlines small bundles and links
+  // large ones depending on size.
+  build: {
+    inlineStylesheets: 'never',
+  },
   i18n: {
     defaultLocale: DEFAULT_LOCALE,
     locales: LOCALE_CODES,
