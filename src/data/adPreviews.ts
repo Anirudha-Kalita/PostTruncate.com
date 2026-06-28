@@ -360,6 +360,345 @@ export const adPreviews: ToolDefinition[] = [
   },
 
   {
+    id: 'linkedin-ads',
+    editorAnchor: 'workspace',
+    lastUpdated: '2026-06-28',
+    platformLimits:
+      'LinkedIn single-image Sponsored Content: intro text truncates behind an inline "…more" around 150 characters on desktop (a little earlier on mobile; hard cap 3,000); headline best kept under 70 characters (hard cap 200); description under 100 characters (hard cap 300), shown mainly on desktop and the LinkedIn Audience Network.',
+
+    slugs: {
+      en: 'linkedin-ads',
+      es: 'anuncios-de-linkedin',
+      de: 'linkedin-anzeigen',
+      fr: 'annonces-linkedin',
+      pt: 'anuncios-do-linkedin',
+      it: 'annunci-linkedin',
+      nl: 'linkedin-advertenties',
+      ja: 'linkedin-kokoku',
+      zh: 'linkedin-guang-gao',
+      da: 'linkedin-annoncer',
+    },
+
+    schemaName: {
+      en: 'LinkedIn Ad Preview & Character Limit Simulator',
+      es: 'Vista previa de anuncios de LinkedIn y simulador de límites de caracteres',
+      de: 'LinkedIn-Anzeigenvorschau & Zeichenlimit-Simulator',
+      fr: 'Aperçu d’annonces LinkedIn et simulateur de limites de caractères',
+      pt: 'Pré-visualização de anúncios do LinkedIn e simulador de limites de caracteres',
+      it: 'Anteprima degli annunci LinkedIn e simulatore dei limiti di caratteri',
+      nl: 'LinkedIn-advertentievoorbeeld & tekenlimietsimulator',
+      ja: 'LinkedIn広告プレビューと文字数制限シミュレーター',
+      zh: 'LinkedIn 广告预览与字符限制模拟器',
+      da: 'LinkedIn-annonceforhåndsvisning og tegngrænse-simulator',
+    },
+
+    titles: {
+      en: 'LinkedIn Ad Preview — Live Sponsored Content Mockup & Character Limits',
+      es: 'Vista previa de anuncios de LinkedIn — Maqueta de contenido patrocinado en vivo y límites de caracteres',
+      de: 'LinkedIn-Anzeigenvorschau — Live-Mockup für Sponsored Content & Zeichenlimits',
+      fr: 'Aperçu d’annonces LinkedIn — Maquette de contenu sponsorisé en direct et limites de caractères',
+      pt: 'Pré-visualização de anúncios do LinkedIn — Maquete de conteúdo patrocinado ao vivo e limites de caracteres',
+      it: 'Anteprima annunci LinkedIn — Mockup di contenuti sponsorizzati in tempo reale e limiti di caratteri',
+      nl: 'LinkedIn-advertentievoorbeeld — Live mockup voor gesponsorde content & tekenlimieten',
+      ja: 'LinkedIn広告プレビュー — スポンサードコンテンツのライブモックアップと文字数制限',
+      zh: 'LinkedIn 广告预览 — 实时赞助内容模拟与字符限制',
+      da: 'LinkedIn-annonceforhåndsvisning — Live mockup af sponsoreret indhold og tegngrænser',
+    },
+
+    metaDescriptions: {
+      en: 'Free LinkedIn single-image ad preview. See exactly where your intro text hits the "…more" fold around 150 characters, check the 70-character headline and description limits, and switch between mobile and desktop — live as you type.',
+      es: 'Vista previa gratuita de anuncios de imagen única de LinkedIn. Ve exactamente dónde tu texto de introducción alcanza el pliegue "…más" sobre los 150 caracteres, comprueba los límites de título de 70 caracteres y de descripción, y alterna entre móvil y escritorio, en vivo mientras escribes.',
+      de: 'Kostenlose Vorschau für LinkedIn-Einzelbildanzeigen. Sieh genau, wo dein Einleitungstext bei etwa 150 Zeichen auf die „…mehr"-Falz trifft, prüfe das 70-Zeichen-Titellimit und das Beschreibungslimit und wechsle live beim Tippen zwischen Mobil und Desktop.',
+      fr: 'Aperçu gratuit d’annonces LinkedIn à image unique. Voyez exactement où votre texte d’introduction atteint le pli « …plus » vers 150 caractères, vérifiez les limites de titre de 70 caractères et de description, et basculez entre mobile et ordinateur, en direct pendant que vous tapez.',
+      pt: 'Pré-visualização gratuita de anúncios de imagem única do LinkedIn. Veja exatamente onde o seu texto de introdução atinge a dobra "…mais" por volta dos 150 caracteres, verifique os limites de título de 70 caracteres e de descrição e alterne entre telemóvel e computador, ao vivo enquanto escreve.',
+      it: 'Anteprima gratuita degli annunci LinkedIn con immagine singola. Vedi esattamente dove il testo introduttivo raggiunge la piega "…altro" intorno ai 150 caratteri, controlla i limiti di titolo di 70 caratteri e di descrizione e passa da mobile a desktop, in tempo reale mentre scrivi.',
+      nl: 'Gratis voorbeeld van LinkedIn-advertenties met één afbeelding. Zie precies waar je introtekst de "…meer"-vouw rond 150 tekens raakt, controleer de limieten voor de kop van 70 tekens en de beschrijving en wissel tussen mobiel en desktop — live terwijl je typt.',
+      ja: '無料のLinkedIn単一画像広告プレビュー。導入テキストが約150文字で「…もっと見る」の折り返しに達する位置を正確に確認し、70文字の見出しと説明の制限をチェックし、入力しながらモバイルとデスクトップをリアルタイムで切り替えられます。',
+      zh: '免费的 LinkedIn 单图广告预览。准确查看你的引导文案在约 150 字符处触及"…更多"折叠的位置，检查 70 字符的标题和描述限制，并在输入时实时切换移动端与桌面端。',
+      da: 'Gratis forhåndsvisning af LinkedIn-annoncer med ét billede. Se præcis, hvor din introtekst rammer "…mere"-folden omkring 150 tegn, tjek grænserne for overskrift på 70 tegn og beskrivelse, og skift mellem mobil og desktop — live mens du skriver.',
+    },
+
+    intro: {
+      en: 'Paste your intro text, headline, and description below to see a pixel-accurate LinkedIn Sponsored Content mockup. The preview applies LinkedIn\'s real "…more" fold around 150 characters and shows how your headline and description behave on mobile versus desktop.',
+      es: 'Pega tu texto de introducción, título y descripción abajo para ver una maqueta de contenido patrocinado de LinkedIn con precisión de píxeles. La vista previa aplica el pliegue real "…más" de LinkedIn sobre los 150 caracteres y muestra cómo se comportan tu título y descripción en móvil frente a escritorio.',
+      de: 'Füge unten deinen Einleitungstext, Titel und deine Beschreibung ein, um ein pixelgenaues Mockup von LinkedIn Sponsored Content zu sehen. Die Vorschau wendet LinkedIns echte „…mehr"-Falz bei etwa 150 Zeichen an und zeigt, wie sich Titel und Beschreibung auf Mobil und Desktop verhalten.',
+      fr: 'Collez votre texte d’introduction, votre titre et votre description ci-dessous pour voir une maquette de contenu sponsorisé LinkedIn au pixel près. L’aperçu applique le vrai pli « …plus » de LinkedIn vers 150 caractères et montre comment votre titre et votre description se comportent sur mobile et ordinateur.',
+      pt: 'Cole o seu texto de introdução, título e descrição abaixo para ver uma maquete de conteúdo patrocinado do LinkedIn com precisão de pixels. A pré-visualização aplica a dobra real "…mais" do LinkedIn por volta dos 150 caracteres e mostra como o seu título e descrição se comportam no telemóvel face ao computador.',
+      it: 'Incolla qui sotto il testo introduttivo, il titolo e la descrizione per vedere un mockup dei contenuti sponsorizzati di LinkedIn accurato al pixel. L’anteprima applica la vera piega "…altro" di LinkedIn intorno ai 150 caratteri e mostra come si comportano titolo e descrizione su mobile rispetto al desktop.',
+      nl: 'Plak hieronder je introtekst, kop en beschrijving om een pixelnauwkeurige mockup van LinkedIn Sponsored Content te zien. Het voorbeeld past LinkedIns echte "…meer"-vouw rond 150 tekens toe en laat zien hoe je kop en beschrijving zich gedragen op mobiel versus desktop.',
+      ja: '下に導入テキスト、見出し、説明を貼り付けると、ピクセル精度のLinkedInスポンサードコンテンツのモックアップが表示されます。プレビューはLinkedInの実際の約150文字での「…もっと見る」の折り返しを適用し、見出しと説明がモバイルとデスクトップでどのように表示されるかを示します。',
+      zh: '在下方粘贴你的引导文案、标题和描述，即可看到像素级精确的 LinkedIn 赞助内容模拟。预览会应用 LinkedIn 真实的约 150 字符"…更多"折叠，并显示你的标题和描述在移动端与桌面端的表现。',
+      da: 'Indsæt din introtekst, overskrift og beskrivelse nedenfor for at se et pixelnøjagtigt mockup af LinkedIn Sponsored Content. Forhåndsvisningen anvender LinkedIns rigtige "…mere"-fold omkring 150 tegn og viser, hvordan din overskrift og beskrivelse opfører sig på mobil kontra desktop.',
+    },
+
+    content: {
+      en: `<h2>LinkedIn ad character limits that actually matter</h2>
+<p>LinkedIn lets you type a great deal — the intro text accepts up to <strong>3,000 characters</strong> — but what trips advertisers up is <strong>the fold</strong>. In the feed, your <strong>intro text is collapsed behind an inline "…more" at roughly 150 characters</strong>, and everything after it stays hidden unless the viewer expands it. Most never do. The simulator above shows that fold live, so you can guarantee your hook and value proposition land before "…more".</p>
+<h2>Headline and description rules</h2>
+<p>The <strong>headline</strong> is the bold line on the link card beneath your image. LinkedIn accepts up to <strong>200 characters</strong>, but keep it <strong>under 70</strong> so it never truncates on the card. The <strong>description</strong> accepts up to <strong>300 characters</strong> and reads best <strong>under 100</strong>; it surfaces mainly on desktop and across the LinkedIn Audience Network, so treat it as supporting copy rather than a place for anything critical.</p>
+<h2>Mobile versus desktop</h2>
+<p>Most LinkedIn members scroll the feed on their phones, and mobile is less forgiving: the narrower column folds the intro text a little earlier, and the link-card description is dropped. Toggle the preview between <strong>Mobile</strong> and <strong>Desktop</strong> to confirm your ad reads cleanly on the small screen, where the majority of impressions happen.</p>
+<h2>Why preview before you publish</h2>
+<p>Rewriting an ad after it has entered review wastes time and can reset its learning. Checking the fold in advance means your strongest copy is never buried behind "…more," your headline never clips, and your call to action stays visible. Because PostTruncate runs entirely in your browser, nothing you paste is uploaded or stored — type your draft, watch the fold in real time, and copy the final version straight into Campaign Manager.</p>`,
+      es: `<h2>Los límites de caracteres de los anuncios de LinkedIn que de verdad importan</h2>
+<p>LinkedIn te deja escribir muchísimo —el texto de introducción admite hasta <strong>3000 caracteres</strong>— pero lo que hace tropezar a los anunciantes es <strong>el pliegue</strong>. En el feed, tu <strong>texto de introducción se colapsa tras un "…más" en línea sobre los 150 caracteres</strong>, y todo lo que queda después permanece oculto a menos que el usuario lo expanda. Casi nadie lo hace. El simulador de arriba muestra ese pliegue en vivo, para que garantices que tu gancho y tu propuesta de valor queden antes de "…más".</p>
+<h2>Reglas de título y descripción</h2>
+<p>El <strong>título</strong> es la línea en negrita de la tarjeta de enlace debajo de tu imagen. LinkedIn admite hasta <strong>200 caracteres</strong>, pero mantenlo <strong>por debajo de 70</strong> para que nunca se trunque en la tarjeta. La <strong>descripción</strong> admite hasta <strong>300 caracteres</strong> y se lee mejor <strong>por debajo de 100</strong>; aparece sobre todo en escritorio y en la Red de Audiencia de LinkedIn, así que trátala como texto de apoyo y no como un lugar para algo crítico.</p>
+<h2>Móvil frente a escritorio</h2>
+<p>La mayoría de los miembros de LinkedIn recorren el feed en el móvil, y el móvil es menos indulgente: la columna más estrecha pliega el texto de introducción un poco antes y la descripción de la tarjeta de enlace se elimina. Alterna la vista previa entre <strong>Móvil</strong> y <strong>Escritorio</strong> para confirmar que tu anuncio se lee bien en la pantalla pequeña, donde ocurre la mayoría de las impresiones.</p>
+<h2>Por qué hacer la vista previa antes de publicar</h2>
+<p>Reescribir un anuncio después de que ha entrado en revisión hace perder tiempo y puede reiniciar su aprendizaje. Comprobar el pliegue por adelantado significa que tu mejor texto nunca queda enterrado tras "…más", tu título nunca se corta y tu llamada a la acción permanece visible. Como PostTruncate funciona por completo en tu navegador, nada de lo que pegas se sube ni se almacena: escribe tu borrador, observa el pliegue en tiempo real y copia la versión final directamente en el Administrador de campañas.</p>`,
+      de: `<h2>LinkedIn-Anzeigen-Zeichenlimits, die wirklich zählen</h2>
+<p>LinkedIn lässt dich sehr viel tippen — der Einleitungstext erlaubt bis zu <strong>3.000 Zeichen</strong> — doch was Werbetreibende stolpern lässt, ist <strong>die Falz</strong>. Im Feed wird dein <strong>Einleitungstext bei etwa 150 Zeichen hinter einem „…mehr" eingeklappt</strong>, und alles danach bleibt verborgen, sofern der Betrachter es nicht ausklappt. Die meisten tun das nie. Der Simulator oben zeigt diese Falz live, sodass du sicherstellen kannst, dass dein Aufhänger und dein Nutzenversprechen vor „…mehr" landen.</p>
+<h2>Regeln für Titel und Beschreibung</h2>
+<p>Der <strong>Titel</strong> ist die fette Zeile auf der Link-Karte unter deinem Bild. LinkedIn erlaubt bis zu <strong>200 Zeichen</strong>, halte ihn aber <strong>unter 70</strong>, damit er auf der Karte nie abschneidet. Die <strong>Beschreibung</strong> erlaubt bis zu <strong>300 Zeichen</strong> und liest sich am besten <strong>unter 100</strong>; sie erscheint vor allem auf dem Desktop und im LinkedIn Audience Network, behandle sie also als unterstützenden Text und nicht als Ort für Wichtiges.</p>
+<h2>Mobil versus Desktop</h2>
+<p>Die meisten LinkedIn-Mitglieder scrollen den Feed auf dem Handy, und Mobil verzeiht weniger: Die schmalere Spalte klappt den Einleitungstext etwas früher ein, und die Beschreibung der Link-Karte fällt weg. Schalte die Vorschau zwischen <strong>Mobil</strong> und <strong>Desktop</strong> um, um zu bestätigen, dass deine Anzeige auf dem kleinen Bildschirm sauber liest, wo die meisten Impressionen geschehen.</p>
+<h2>Warum vor dem Veröffentlichen eine Vorschau</h2>
+<p>Eine Anzeige umzuschreiben, nachdem sie in die Prüfung gegangen ist, kostet Zeit und kann ihr Lernen zurücksetzen. Die Falz vorab zu prüfen bedeutet, dass dein stärkster Text nie hinter „…mehr" verschwindet, dein Titel nie abschneidet und dein Call-to-Action sichtbar bleibt. Da PostTruncate vollständig in deinem Browser läuft, wird nichts, was du einfügst, hochgeladen oder gespeichert — tippe deinen Entwurf, beobachte die Falz in Echtzeit und kopiere die finale Version direkt in den Kampagnen-Manager.</p>`,
+      fr: `<h2>Les limites de caractères des annonces LinkedIn qui comptent vraiment</h2>
+<p>LinkedIn vous laisse écrire énormément — le texte d’introduction accepte jusqu’à <strong>3 000 caractères</strong> — mais ce qui fait trébucher les annonceurs, c’est <strong>le pli</strong>. Dans le fil, votre <strong>texte d’introduction est replié derrière un « …plus » vers 150 caractères</strong>, et tout ce qui suit reste masqué à moins que la personne ne le développe. La plupart ne le font jamais. Le simulateur ci-dessus montre ce pli en direct, pour que vous garantissiez que votre accroche et votre proposition de valeur restent avant « …plus ».</p>
+<h2>Règles de titre et de description</h2>
+<p>Le <strong>titre</strong> est la ligne en gras de la carte de lien sous votre image. LinkedIn accepte jusqu’à <strong>200 caractères</strong>, mais gardez-le <strong>sous 70</strong> pour qu’il ne se coupe jamais sur la carte. La <strong>description</strong> accepte jusqu’à <strong>300 caractères</strong> et se lit mieux <strong>sous 100</strong> ; elle apparaît surtout sur ordinateur et sur le LinkedIn Audience Network, alors traitez-la comme un texte d’appoint, pas comme un endroit pour l’essentiel.</p>
+<h2>Mobile contre ordinateur</h2>
+<p>La plupart des membres LinkedIn parcourent le fil sur leur téléphone, et le mobile pardonne moins : la colonne plus étroite replie le texte d’introduction un peu plus tôt, et la description de la carte de lien disparaît. Basculez l’aperçu entre <strong>Mobile</strong> et <strong>Ordinateur</strong> pour confirmer que votre annonce se lit proprement sur le petit écran, où se produit la majorité des impressions.</p>
+<h2>Pourquoi prévisualiser avant de publier</h2>
+<p>Réécrire une annonce après qu’elle est entrée en examen fait perdre du temps et peut réinitialiser son apprentissage. Vérifier le pli à l’avance signifie que votre meilleur texte n’est jamais enterré derrière « …plus », que votre titre n’est jamais coupé et que votre appel à l’action reste visible. Comme PostTruncate fonctionne entièrement dans votre navigateur, rien de ce que vous collez n’est téléversé ni stocké — tapez votre brouillon, observez le pli en temps réel et copiez la version finale directement dans le Gestionnaire de campagnes.</p>`,
+      pt: `<h2>Os limites de caracteres dos anúncios do LinkedIn que realmente importam</h2>
+<p>O LinkedIn deixa-o escrever imenso — o texto de introdução aceita até <strong>3000 caracteres</strong> — mas o que faz os anunciantes tropeçarem é <strong>a dobra</strong>. No feed, o seu <strong>texto de introdução é recolhido atrás de um "…mais" por volta dos 150 caracteres</strong>, e tudo o que vem depois fica oculto a menos que o utilizador o expanda. A maioria nunca o faz. O simulador acima mostra essa dobra ao vivo, para que garanta que o seu gancho e a sua proposta de valor ficam antes de "…mais".</p>
+<h2>Regras de título e descrição</h2>
+<p>O <strong>título</strong> é a linha a negrito no cartão de link por baixo da sua imagem. O LinkedIn aceita até <strong>200 caracteres</strong>, mas mantenha-o <strong>abaixo de 70</strong> para que nunca seja truncado no cartão. A <strong>descrição</strong> aceita até <strong>300 caracteres</strong> e lê-se melhor <strong>abaixo de 100</strong>; aparece sobretudo no computador e na Rede de Público do LinkedIn, por isso trate-a como texto de apoio e não como lugar para algo crítico.</p>
+<h2>Telemóvel face a computador</h2>
+<p>A maioria dos membros do LinkedIn percorre o feed no telemóvel, e o telemóvel é menos tolerante: a coluna mais estreita dobra o texto de introdução um pouco mais cedo e a descrição do cartão de link é eliminada. Alterne a pré-visualização entre <strong>Telemóvel</strong> e <strong>Computador</strong> para confirmar que o seu anúncio se lê de forma limpa no ecrã pequeno, onde acontece a maioria das impressões.</p>
+<h2>Porquê pré-visualizar antes de publicar</h2>
+<p>Reescrever um anúncio depois de entrar em revisão desperdiça tempo e pode reiniciar a sua aprendizagem. Verificar a dobra com antecedência significa que o seu melhor texto nunca fica enterrado atrás de "…mais", o seu título nunca corta e a sua chamada para ação permanece visível. Como o PostTruncate funciona totalmente no seu navegador, nada do que cola é carregado ou armazenado — escreva o seu rascunho, observe a dobra em tempo real e copie a versão final diretamente para o Gestor de campanhas.</p>`,
+      it: `<h2>I limiti di caratteri degli annunci LinkedIn che contano davvero</h2>
+<p>LinkedIn ti lascia scrivere moltissimo — il testo introduttivo accetta fino a <strong>3.000 caratteri</strong> — ma ciò che fa inciampare gli inserzionisti è <strong>la piega</strong>. Nel feed, il tuo <strong>testo introduttivo viene ripiegato dietro un "…altro" intorno ai 150 caratteri</strong>, e tutto ciò che viene dopo resta nascosto a meno che l’utente non lo espanda. Quasi nessuno lo fa. Il simulatore qui sopra mostra quella piega in tempo reale, così puoi garantire che il tuo gancio e la tua proposta di valore restino prima di "…altro".</p>
+<h2>Regole di titolo e descrizione</h2>
+<p>Il <strong>titolo</strong> è la riga in grassetto sulla scheda del link sotto la tua immagine. LinkedIn accetta fino a <strong>200 caratteri</strong>, ma tienilo <strong>sotto i 70</strong> così non viene mai troncato sulla scheda. La <strong>descrizione</strong> accetta fino a <strong>300 caratteri</strong> e si legge meglio <strong>sotto i 100</strong>; compare soprattutto su desktop e sul LinkedIn Audience Network, quindi trattala come testo di supporto e non come un posto per qualcosa di critico.</p>
+<h2>Mobile contro desktop</h2>
+<p>La maggior parte degli iscritti a LinkedIn scorre il feed dal telefono, e il mobile è meno indulgente: la colonna più stretta ripiega il testo introduttivo un po’ prima e la descrizione della scheda del link viene eliminata. Alterna l’anteprima tra <strong>Mobile</strong> e <strong>Desktop</strong> per confermare che il tuo annuncio si legga in modo pulito sullo schermo piccolo, dove avviene la maggior parte delle impression.</p>
+<h2>Perché fare l’anteprima prima di pubblicare</h2>
+<p>Riscrivere un annuncio dopo che è entrato in revisione fa perdere tempo e può azzerare il suo apprendimento. Controllare la piega in anticipo significa che il tuo testo migliore non finisce mai sepolto dietro "…altro", il tuo titolo non viene mai tagliato e la tua call to action resta visibile. Poiché PostTruncate funziona interamente nel tuo browser, nulla di ciò che incolli viene caricato o memorizzato — scrivi la tua bozza, osserva la piega in tempo reale e copia la versione finale direttamente in Gestione campagne.</p>`,
+      nl: `<h2>LinkedIn-advertentie-tekenlimieten die er echt toe doen</h2>
+<p>LinkedIn laat je heel veel typen — de introtekst accepteert tot <strong>3.000 tekens</strong> — maar wat adverteerders doet struikelen is <strong>de vouw</strong>. In de feed wordt je <strong>introtekst rond 150 tekens achter een "…meer" ingeklapt</strong>, en alles daarna blijft verborgen tenzij de kijker het uitklapt. De meesten doen dat nooit. De simulator hierboven toont die vouw live, zodat je kunt garanderen dat je hook en waardepropositie vóór "…meer" landen.</p>
+<h2>Regels voor kop en beschrijving</h2>
+<p>De <strong>kop</strong> is de vetgedrukte regel op de linkkaart onder je afbeelding. LinkedIn accepteert tot <strong>200 tekens</strong>, maar houd hem <strong>onder de 70</strong> zodat hij nooit wordt afgekapt op de kaart. De <strong>beschrijving</strong> accepteert tot <strong>300 tekens</strong> en leest het best <strong>onder de 100</strong>; ze verschijnt vooral op desktop en op het LinkedIn Audience Network, dus behandel haar als ondersteunende tekst en niet als plek voor iets cruciaals.</p>
+<h2>Mobiel versus desktop</h2>
+<p>De meeste LinkedIn-leden scrollen de feed op hun telefoon, en mobiel is minder vergevingsgezind: de smallere kolom vouwt de introtekst iets eerder in en de beschrijving van de linkkaart vervalt. Wissel het voorbeeld tussen <strong>Mobiel</strong> en <strong>Desktop</strong> om te bevestigen dat je advertentie netjes leest op het kleine scherm, waar de meeste vertoningen plaatsvinden.</p>
+<h2>Waarom een voorbeeld bekijken vóór publicatie</h2>
+<p>Een advertentie herschrijven nadat hij in beoordeling is gegaan, kost tijd en kan zijn leerfase resetten. De vouw vooraf controleren betekent dat je sterkste tekst nooit achter "…meer" verdwijnt, je kop nooit wordt afgekapt en je call-to-action zichtbaar blijft. Omdat PostTruncate volledig in je browser draait, wordt niets van wat je plakt geüpload of opgeslagen — typ je concept, bekijk de vouw in realtime en kopieer de definitieve versie rechtstreeks naar Campagnebeheer.</p>`,
+      ja: `<h2>本当に重要なLinkedIn広告の文字数制限</h2>
+<p>LinkedInは非常に多くの文字を入力できます。導入テキストは最大<strong>3,000文字</strong>まで受け付けます。しかし広告主がつまずくのは<strong>折り返し</strong>です。フィードでは、<strong>導入テキストはおよそ150文字でインラインの「…もっと見る」の裏に折りたたまれ</strong>、それ以降はユーザーが展開しない限り隠れたままです。ほとんどの人は展開しません。上のシミュレーターはその折り返しをリアルタイムで表示するので、フックと価値提案を確実に「…もっと見る」より前に収められます。</p>
+<h2>見出しと説明のルール</h2>
+<p><strong>見出し</strong>は画像の下のリンクカードにある太字の行です。LinkedInは最大<strong>200文字</strong>まで受け付けますが、カードで切れないよう<strong>70文字未満</strong>に保ってください。<strong>説明</strong>は最大<strong>300文字</strong>まで受け付け、<strong>100文字未満</strong>が最も読みやすくなります。これは主にデスクトップとLinkedInオーディエンスネットワークで表示されるため、重要な情報を置く場所ではなく補足テキストとして扱ってください。</p>
+<h2>モバイル対デスクトップ</h2>
+<p>ほとんどのLinkedInメンバーはスマートフォンでフィードをスクロールしており、モバイルはより容赦がありません。狭い列は導入テキストを少し早く折りたたみ、リンクカードの説明は省略されます。プレビューを<strong>モバイル</strong>と<strong>デスクトップ</strong>で切り替えて、インプレッションの大半が発生する小さな画面で広告がきれいに読めることを確認してください。</p>
+<h2>公開前にプレビューする理由</h2>
+<p>広告が審査に入った後に書き直すと時間を浪費し、学習がリセットされることがあります。事前に折り返しを確認しておけば、最も強いコピーが「…もっと見る」の裏に埋もれることはなく、見出しが切れることもなく、行動喚起が表示されたままになります。PostTruncateは完全にブラウザー内で動作するため、貼り付けた内容はアップロードも保存もされません。下書きを入力し、折り返しをリアルタイムで確認し、最終版をキャンペーンマネージャーに直接コピーしてください。</p>`,
+      zh: `<h2>真正重要的 LinkedIn 广告字符限制</h2>
+<p>LinkedIn 允许你输入很多内容——引导文案最多可达 <strong>3000 字符</strong>——但让广告主栽跟头的是<strong>折叠</strong>。在信息流中，你的<strong>引导文案大约在 150 字符处被折叠到行内的"…更多"之后</strong>，除非用户展开，否则其后内容都会隐藏。大多数人从不展开。上方的模拟器会实时显示该折叠点，让你确保钩子和价值主张落在"…更多"之前。</p>
+<h2>标题与描述规则</h2>
+<p><strong>标题</strong>是图片下方链接卡片上的加粗行。LinkedIn 最多接受 <strong>200 字符</strong>，但请保持在 <strong>70 字符以内</strong>，这样它在卡片上就永远不会被截断。<strong>描述</strong>最多接受 <strong>300 字符</strong>，在 <strong>100 字符以内</strong>阅读体验最佳；它主要显示在桌面端和 LinkedIn 受众网络上，因此应将其视为辅助文案，而不是放置关键信息的地方。</p>
+<h2>移动端对比桌面端</h2>
+<p>大多数 LinkedIn 会员都在手机上浏览信息流，而移动端宽容度更低：更窄的栏目会更早地折叠引导文案，链接卡片的描述也会被丢弃。在<strong>移动端</strong>与<strong>桌面端</strong>之间切换预览，确认你的广告在小屏幕上读起来清爽——大多数展示都发生在那里。</p>
+<h2>为什么要在发布前预览</h2>
+<p>广告进入审核后再改写既浪费时间，又可能重置其学习期。提前检查折叠意味着你最有力的文案绝不会埋在"…更多"之后，标题不会被切，行动号召保持可见。由于 PostTruncate 完全在你的浏览器中运行，你粘贴的任何内容都不会被上传或存储——输入草稿，实时观察折叠，再把最终版本直接复制到广告系列管理工具。</p>`,
+      da: `<h2>LinkedIn-annoncens tegngrænser, der faktisk betyder noget</h2>
+<p>LinkedIn lader dig skrive rigtig meget — introteksten accepterer op til <strong>3.000 tegn</strong> — men det, der får annoncører til at snuble, er <strong>folden</strong>. I feedet bliver din <strong>introtekst foldet sammen bag et "…mere" omkring 150 tegn</strong>, og alt derefter forbliver skjult, medmindre seeren udvider det. De fleste gør det aldrig. Simulatoren ovenfor viser den fold live, så du kan garantere, at din krog og dit værditilbud lander før "…mere".</p>
+<h2>Regler for overskrift og beskrivelse</h2>
+<p><strong>Overskriften</strong> er den fede linje på linkkortet under dit billede. LinkedIn accepterer op til <strong>200 tegn</strong>, men hold den <strong>under 70</strong>, så den aldrig skæres af på kortet. <strong>Beskrivelsen</strong> accepterer op til <strong>300 tegn</strong> og læses bedst <strong>under 100</strong>; den vises primært på desktop og på tværs af LinkedIn Audience Network, så behandl den som støttetekst og ikke som et sted til noget kritisk.</p>
+<h2>Mobil kontra desktop</h2>
+<p>De fleste LinkedIn-medlemmer scroller feedet på telefonen, og mobil er mindre tilgivende: den smallere spalte folder introteksten lidt tidligere, og linkkortets beskrivelse droppes. Skift forhåndsvisningen mellem <strong>Mobil</strong> og <strong>Desktop</strong> for at bekræfte, at din annonce læses rent på den lille skærm, hvor størstedelen af visningerne sker.</p>
+<h2>Hvorfor forhåndsvise før du udgiver</h2>
+<p>At omskrive en annonce, efter den er gået i gennemgang, spilder tid og kan nulstille dens læring. At tjekke folden på forhånd betyder, at din stærkeste tekst aldrig begraves bag "…mere", din overskrift aldrig klippes, og din handlingsopfordring forbliver synlig. Fordi PostTruncate kører helt i din browser, bliver intet af det, du indsætter, uploadet eller gemt — skriv dit udkast, se folden i realtid, og kopiér den endelige version direkte ind i Kampagneadministrator.</p>`,
+    },
+
+    faq: {
+      en: [
+        {
+          q: 'What is the LinkedIn ad intro text character limit?',
+          a: 'You can enter up to 3,000 characters, but the feed folds the intro behind "…more" at roughly 150 characters (a little earlier on mobile). Keep your hook and core message before that point so it shows without a click.',
+        },
+        {
+          q: 'How long can a LinkedIn ad headline be?',
+          a: 'The hard cap is 200 characters, but keep it under 70 so the headline never truncates on the link card across placements.',
+        },
+        {
+          q: 'Does the description always show?',
+          a: 'No. The description (up to 300 characters, best under 100) surfaces mainly on desktop and the LinkedIn Audience Network, and is often dropped on the mobile feed card. Treat it as supporting copy.',
+        },
+        {
+          q: 'Is my ad copy uploaded anywhere?',
+          a: 'No. The preview runs entirely in your browser. Nothing you type or any image you attach is sent to a server or stored.',
+        },
+      ],
+      es: [
+        {
+          q: '¿Cuál es el límite de caracteres del texto de introducción de un anuncio de LinkedIn?',
+          a: 'Puedes introducir hasta 3000 caracteres, pero el feed pliega la introducción tras "…más" sobre los 150 caracteres (un poco antes en móvil). Mantén tu gancho y tu mensaje central antes de ese punto para que se muestren sin un clic.',
+        },
+        {
+          q: '¿Cuánto puede medir el título de un anuncio de LinkedIn?',
+          a: 'El tope rígido es de 200 caracteres, pero mantenlo por debajo de 70 para que el título nunca se trunque en la tarjeta de enlace en todas las ubicaciones.',
+        },
+        {
+          q: '¿La descripción siempre se muestra?',
+          a: 'No. La descripción (hasta 300 caracteres, mejor por debajo de 100) aparece sobre todo en escritorio y en la Red de Audiencia de LinkedIn, y a menudo se elimina en la tarjeta del feed móvil. Trátala como texto de apoyo.',
+        },
+        {
+          q: '¿Se sube a algún sitio el texto de mi anuncio?',
+          a: 'No. La vista previa funciona por completo en tu navegador. Nada de lo que escribes ni ninguna imagen que adjuntas se envía a un servidor ni se almacena.',
+        },
+      ],
+      de: [
+        {
+          q: 'Wie hoch ist das Zeichenlimit des Einleitungstexts einer LinkedIn-Anzeige?',
+          a: 'Du kannst bis zu 3.000 Zeichen eingeben, aber der Feed klappt die Einleitung bei etwa 150 Zeichen hinter „…mehr" ein (auf dem Handy etwas früher). Halte deinen Aufhänger und deine Kernbotschaft vor diesem Punkt, damit sie ohne Klick erscheinen.',
+        },
+        {
+          q: 'Wie lang darf ein LinkedIn-Anzeigentitel sein?',
+          a: 'Die harte Grenze liegt bei 200 Zeichen, aber halte ihn unter 70, damit der Titel auf der Link-Karte über alle Platzierungen nie abschneidet.',
+        },
+        {
+          q: 'Wird die Beschreibung immer angezeigt?',
+          a: 'Nein. Die Beschreibung (bis zu 300 Zeichen, am besten unter 100) erscheint vor allem auf dem Desktop und im LinkedIn Audience Network und wird auf der mobilen Feed-Karte oft weggelassen. Behandle sie als unterstützenden Text.',
+        },
+        {
+          q: 'Wird mein Anzeigentext irgendwo hochgeladen?',
+          a: 'Nein. Die Vorschau läuft vollständig in deinem Browser. Nichts, was du tippst, und kein Bild, das du anhängst, wird an einen Server gesendet oder gespeichert.',
+        },
+      ],
+      fr: [
+        {
+          q: 'Quelle est la limite de caractères du texte d’introduction d’une annonce LinkedIn ?',
+          a: 'Vous pouvez saisir jusqu’à 3 000 caractères, mais le fil replie l’introduction derrière « …plus » vers 150 caractères (un peu plus tôt sur mobile). Gardez votre accroche et votre message clé avant ce point pour qu’ils s’affichent sans clic.',
+        },
+        {
+          q: 'Quelle longueur peut faire un titre d’annonce LinkedIn ?',
+          a: 'Le plafond strict est de 200 caractères, mais gardez-le sous 70 pour que le titre ne se coupe jamais sur la carte de lien, quel que soit l’emplacement.',
+        },
+        {
+          q: 'La description s’affiche-t-elle toujours ?',
+          a: 'Non. La description (jusqu’à 300 caractères, idéalement sous 100) apparaît surtout sur ordinateur et sur le LinkedIn Audience Network, et est souvent supprimée sur la carte du fil mobile. Considérez-la comme un texte d’appoint.',
+        },
+        {
+          q: 'Le texte de mon annonce est-il téléversé quelque part ?',
+          a: 'Non. L’aperçu fonctionne entièrement dans votre navigateur. Rien de ce que vous tapez ni aucune image que vous joignez n’est envoyé à un serveur ni stocké.',
+        },
+      ],
+      pt: [
+        {
+          q: 'Qual é o limite de caracteres do texto de introdução de um anúncio do LinkedIn?',
+          a: 'Pode introduzir até 3000 caracteres, mas o feed dobra a introdução atrás de "…mais" por volta dos 150 caracteres (um pouco mais cedo no telemóvel). Mantenha o seu gancho e a mensagem central antes desse ponto para que apareçam sem um clique.',
+        },
+        {
+          q: 'Que comprimento pode ter um título de anúncio do LinkedIn?',
+          a: 'O limite rígido é de 200 caracteres, mas mantenha-o abaixo de 70 para que o título nunca seja truncado no cartão de link em todos os posicionamentos.',
+        },
+        {
+          q: 'A descrição mostra-se sempre?',
+          a: 'Não. A descrição (até 300 caracteres, idealmente abaixo de 100) aparece sobretudo no computador e na Rede de Público do LinkedIn, e é frequentemente eliminada no cartão do feed móvel. Trate-a como texto de apoio.',
+        },
+        {
+          q: 'O texto do meu anúncio é carregado para algum lado?',
+          a: 'Não. A pré-visualização funciona totalmente no seu navegador. Nada do que escreve nem qualquer imagem que anexa é enviado para um servidor ou armazenado.',
+        },
+      ],
+      it: [
+        {
+          q: 'Qual è il limite di caratteri del testo introduttivo di un annuncio LinkedIn?',
+          a: 'Puoi inserire fino a 3.000 caratteri, ma il feed ripiega l’introduzione dietro "…altro" intorno ai 150 caratteri (un po’ prima su mobile). Tieni il gancio e il messaggio centrale prima di quel punto perché si vedano senza un clic.',
+        },
+        {
+          q: 'Quanto può essere lungo il titolo di un annuncio LinkedIn?',
+          a: 'Il limite rigido è di 200 caratteri, ma tienilo sotto i 70 così il titolo non viene mai troncato sulla scheda del link su tutti i posizionamenti.',
+        },
+        {
+          q: 'La descrizione viene sempre mostrata?',
+          a: 'No. La descrizione (fino a 300 caratteri, meglio sotto i 100) compare soprattutto su desktop e sul LinkedIn Audience Network, e viene spesso eliminata sulla scheda del feed mobile. Trattala come testo di supporto.',
+        },
+        {
+          q: 'Il testo del mio annuncio viene caricato da qualche parte?',
+          a: 'No. L’anteprima funziona interamente nel tuo browser. Nulla di ciò che scrivi né alcuna immagine che alleghi viene inviato a un server o memorizzato.',
+        },
+      ],
+      nl: [
+        {
+          q: 'Wat is de tekenlimiet van de introtekst van een LinkedIn-advertentie?',
+          a: 'Je kunt tot 3.000 tekens invoeren, maar de feed vouwt de intro achter "…meer" rond 150 tekens in (iets eerder op mobiel). Houd je hook en kernboodschap vóór dat punt zodat ze zonder klik verschijnen.',
+        },
+        {
+          q: 'Hoe lang mag een LinkedIn-advertentiekop zijn?',
+          a: 'De harde limiet is 200 tekens, maar houd hem onder de 70 zodat de kop nooit wordt afgekapt op de linkkaart, op alle plaatsingen.',
+        },
+        {
+          q: 'Wordt de beschrijving altijd getoond?',
+          a: 'Nee. De beschrijving (tot 300 tekens, het best onder de 100) verschijnt vooral op desktop en op het LinkedIn Audience Network, en wordt op de mobiele feedkaart vaak weggelaten. Behandel haar als ondersteunende tekst.',
+        },
+        {
+          q: 'Wordt mijn advertentietekst ergens geüpload?',
+          a: 'Nee. Het voorbeeld draait volledig in je browser. Niets van wat je typt of welke afbeelding je toevoegt, wordt naar een server gestuurd of opgeslagen.',
+        },
+      ],
+      ja: [
+        {
+          q: 'LinkedIn広告の導入テキストの文字数制限はどれくらいですか？',
+          a: '最大3,000文字まで入力できますが、フィードは導入テキストをおよそ150文字で「…もっと見る」の裏に折りたたみます（モバイルでは少し早めです）。クリックなしで表示されるよう、フックと中心メッセージはその前に収めてください。',
+        },
+        {
+          q: 'LinkedIn広告の見出しはどれくらいの長さにできますか？',
+          a: 'ハードな上限は200文字ですが、すべての配置でリンクカード上の見出しが切れないよう、70文字未満に保ってください。',
+        },
+        {
+          q: '説明は常に表示されますか？',
+          a: 'いいえ。説明（最大300文字、100文字未満が最適）は主にデスクトップとLinkedInオーディエンスネットワークで表示され、モバイルのフィードカードではしばしば省略されます。補足テキストとして扱ってください。',
+        },
+        {
+          q: '私の広告コピーはどこかにアップロードされますか？',
+          a: 'いいえ。プレビューは完全にブラウザー内で動作します。入力した内容も添付した画像も、サーバーに送信されたり保存されたりすることはありません。',
+        },
+      ],
+      zh: [
+        {
+          q: 'LinkedIn 广告引导文案的字符限制是多少？',
+          a: '你最多可输入 3000 字符，但信息流会在大约 150 字符处把引导文案折叠到"…更多"之后（移动端略早）。把钩子和核心信息放在该点之前，这样无需点击即可显示。',
+        },
+        {
+          q: 'LinkedIn 广告标题可以多长？',
+          a: '硬性上限为 200 字符，但请保持在 70 字符以内，这样标题在所有版位的链接卡片上都不会被截断。',
+        },
+        {
+          q: '描述总会显示吗？',
+          a: '不会。描述（最多 300 字符，最好在 100 字符以内）主要显示在桌面端和 LinkedIn 受众网络上，在移动端信息流卡片上常被丢弃。把它视为辅助文案。',
+        },
+        {
+          q: '我的广告文案会被上传到任何地方吗？',
+          a: '不会。预览完全在你的浏览器中运行。你输入的任何内容或附加的任何图片都不会发送到服务器或被存储。',
+        },
+      ],
+      da: [
+        {
+          q: 'Hvad er tegngrænsen for introteksten i en LinkedIn-annonce?',
+          a: 'Du kan indtaste op til 3.000 tegn, men feedet folder introen bag "…mere" omkring 150 tegn (lidt tidligere på mobil). Hold din krog og dit kernebudskab før det punkt, så de vises uden et klik.',
+        },
+        {
+          q: 'Hvor lang må en LinkedIn-annonceoverskrift være?',
+          a: 'Den hårde grænse er 200 tegn, men hold den under 70, så overskriften aldrig skæres af på linkkortet på tværs af placeringer.',
+        },
+        {
+          q: 'Vises beskrivelsen altid?',
+          a: 'Nej. Beskrivelsen (op til 300 tegn, bedst under 100) vises primært på desktop og på LinkedIn Audience Network og droppes ofte på det mobile feedkort. Behandl den som støttetekst.',
+        },
+        {
+          q: 'Bliver min annoncetekst uploadet nogen steder?',
+          a: 'Nej. Forhåndsvisningen kører helt i din browser. Intet af det, du skriver, eller noget billede, du vedhæfter, sendes til en server eller gemmes.',
+        },
+      ],
+    },
+  },
+
+  {
     id: 'google-ads',
     editorAnchor: 'workspace',
     lastUpdated: '2026-06-18',

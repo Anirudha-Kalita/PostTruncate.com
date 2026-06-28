@@ -60,6 +60,31 @@ export interface FacebookPlatformConfig {
   };
 }
 
+export interface LinkedInPlatformConfig {
+  /**
+   * Introductory ("intro") text characters shown on DESKTOP before LinkedIn
+   * collapses the rest behind an inline "…more". LinkedIn truncates the feed
+   * post by rendered height, not a hard character count, so this is the
+   * practical visible threshold advertisers target (~150 chars).
+   */
+  introTruncateChars: number;
+  /**
+   * Intro characters shown on MOBILE before "…more". The narrower mobile column
+   * fits a little less than desktop, so the fold lands a touch earlier.
+   */
+  introTruncateCharsMobile: number;
+  /** Headline length (chars) recommended to avoid truncation on the link card. */
+  headlineSafeMax: number;
+  /** Headline hard cap accepted by Campaign Manager. */
+  headlineMax: number;
+  /** Description length (chars) recommended for full visibility on desktop / LAN. */
+  descriptionSafeMax: number;
+  /** Description hard cap accepted by Campaign Manager. */
+  descriptionMax: number;
+  /** Inline affordance LinkedIn appends to truncated intro text. */
+  seeMoreLabel: string;
+}
+
 export interface InstagramPlatformConfig {
   /** Feed caption characters shown before the "… more" cutoff. */
   feedTruncateChars: number;
@@ -88,6 +113,7 @@ export interface TikTokPlatformConfig {
 export interface AdPlatformConfig {
   google: GooglePlatformConfig;
   facebook: FacebookPlatformConfig;
+  linkedin: LinkedInPlatformConfig;
   instagram: InstagramPlatformConfig;
   tiktok: TikTokPlatformConfig;
 }
@@ -113,6 +139,19 @@ export const AD_PLATFORM_CONFIG = {
       cardHeadlineMax: 40,
       cardDescriptionMax: 20,
     },
+  },
+  linkedin: {
+    // Single-image Sponsored Content: ~150 chars show on desktop before "…more",
+    // a little less on mobile. Headline recommended ≤70 (hard cap 200);
+    // description recommended ≤100 (hard cap 300). Verified 2026 against
+    // LinkedIn's published single-image ad specs.
+    introTruncateChars: 150,
+    introTruncateCharsMobile: 140,
+    headlineSafeMax: 70,
+    headlineMax: 200,
+    descriptionSafeMax: 100,
+    descriptionMax: 300,
+    seeMoreLabel: '…more',
   },
   instagram: {
     feedTruncateChars: 125,

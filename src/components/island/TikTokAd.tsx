@@ -87,7 +87,7 @@ export function TikTokAd({ s, lang, description, safeZone, mediaUrl, mediaKind =
               {ap.sponsored}
             </p>
             <p
-              class="mt-1 whitespace-pre-wrap text-[12px] leading-4 text-white drop-shadow-[0_1px_2px_rgba(0,0,0,0.9)]"
+              class="mt-1 whitespace-pre-wrap break-words text-[12px] leading-4 text-white drop-shadow-[0_1px_2px_rgba(0,0,0,0.9)]"
               style="display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden;"
             >
               {visible ? (

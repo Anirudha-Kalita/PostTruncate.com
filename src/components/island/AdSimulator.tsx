@@ -5,6 +5,7 @@ import { GoogleRsaPreview } from './GoogleRsaPreview';
 import { FacebookFeedAd } from './FacebookFeedAd';
 import { FacebookReelsAd } from './FacebookReelsAd';
 import { FacebookCarouselAd, type CarouselCard } from './FacebookCarouselAd';
+import { LinkedInAd } from './LinkedInAd';
 import { InstagramAd } from './InstagramAd';
 import { TikTokAd } from './TikTokAd';
 import { ShareControls } from './ShareControls';
@@ -64,6 +65,7 @@ interface PlatformControls {
 const CONTROLS: Record<AdPlatform, PlatformControls> = {
   google: { device: false, mode: false, format: false, safeZone: false, media: false },
   facebook: { device: true, mode: false, format: true, safeZone: false, media: true },
+  linkedin: { device: true, mode: false, format: false, safeZone: false, media: true },
   instagram: { device: false, mode: true, format: false, safeZone: true, media: true },
   tiktok: { device: false, mode: false, format: false, safeZone: true, media: true },
 };
@@ -390,6 +392,19 @@ export function AdSimulator({ platform, s, lang }: Props) {
             mediaKind={mediaKind}
             destinationUrl={destinationUrl}
             cta={cta || resolveCta('facebook') || undefined}
+            toolbar={previewToolbar}
+          />
+        );
+      case 'linkedin':
+        return (
+          <LinkedInAd
+            s={s}
+            primary={values.primary}
+            headline={values.headline1}
+            device={device}
+            mediaUrl={mediaUrl}
+            mediaKind={mediaKind}
+            cta={cta || resolveCta('linkedin') || undefined}
             toolbar={previewToolbar}
           />
         );
@@ -770,6 +785,25 @@ function buildFields(
           label: ap.fields.description,
           placeholder: ap.placeholders.description,
           max: cfg.facebook.descriptionMax,
+        },
+      ];
+    case 'linkedin':
+      // No description field: LinkedIn keeps the description off the in-feed ad
+      // (it only surfaces on the Audience Network), so exposing it here would be
+      // an input with no effect on the preview.
+      return [
+        {
+          key: 'primary',
+          label: ap.fields.primary,
+          placeholder: ap.placeholders.primary,
+          softMax: cfg.linkedin.introTruncateChars,
+          multiline: true,
+        },
+        {
+          key: 'headline1',
+          label: ap.fields.headline,
+          placeholder: ap.placeholders.headline,
+          softMax: cfg.linkedin.headlineSafeMax,
         },
       ];
     case 'instagram':

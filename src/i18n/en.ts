@@ -785,6 +785,7 @@ export const en: Translations = {
       badgeFits: 'Fits',
       badgeTruncated: 'Truncated',
       sponsored: 'Sponsored',
+      promoted: 'Promoted',
       googleAdLabel: 'Sponsored',
       finalUrl: 'Final URL',
       pathN: 'Path {n}',

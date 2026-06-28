@@ -784,6 +784,7 @@ export const nl: Translations = {
       badgeFits: 'Past',
       badgeTruncated: 'Afgekapt',
       sponsored: 'Gesponsord',
+      promoted: 'Gepromoot',
       googleAdLabel: 'Advertentie',
       finalUrl: 'Uiteindelijke URL',
       pathN: 'Pad {n}',

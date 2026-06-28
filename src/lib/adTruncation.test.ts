@@ -2,6 +2,7 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import {
   truncateFacebookPrimary,
+  truncateLinkedInIntro,
   truncateTikTokPrimary,
   clampGoogleField,
   instagramReelsFit,
@@ -30,6 +31,33 @@ test('facebook: 126 chars truncates with "… See More"', () => {
   const r = truncateFacebookPrimary(repeat(126));
   assert.equal(r.truncated, true);
   assert.equal(r.text, repeat(125) + '… See More');
+});
+
+// ── LinkedIn intro (150 desktop / 140 mobile cutoff) ────────────────────────
+test('linkedin: 150 chars renders in full on desktop', () => {
+  const r = truncateLinkedInIntro(repeat(150), 'desktop');
+  assert.equal(r.truncated, false);
+  assert.equal(r.text, repeat(150));
+});
+
+test('linkedin: 151 chars truncates with "…more" on desktop', () => {
+  const r = truncateLinkedInIntro(repeat(151), 'desktop');
+  assert.equal(r.truncated, true);
+  assert.equal(r.text, repeat(150) + '…more');
+});
+
+test('linkedin: mobile folds earlier (140) than desktop (150)', () => {
+  const text = repeat(145);
+  assert.equal(truncateLinkedInIntro(text, 'desktop').truncated, false);
+  const mobile = truncateLinkedInIntro(text, 'mobile');
+  assert.equal(mobile.truncated, true);
+  assert.equal(mobile.text, repeat(140) + '…more');
+});
+
+test('linkedin: empty intro yields no affordance', () => {
+  const r = truncateLinkedInIntro('', 'desktop');
+  assert.equal(r.truncated, false);
+  assert.equal(r.text, '');
 });
 
 // ── TikTok primary (100-char cutoff) ────────────────────────────────────────

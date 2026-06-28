@@ -137,6 +137,21 @@ const META_CTA_LABELS = [
   'Send Message',
 ];
 
+/**
+ * LinkedIn Sponsored Content call-to-action button labels. LinkedIn ads route
+ * the click through this CTA button (and the destination URL), not through a
+ * clickable link in the intro text. These are all members of the existing
+ * localized CTA preset map, so no new i18n keys are required.
+ */
+const LINKEDIN_CTA_LABELS = [
+  'Learn More',
+  'Sign Up',
+  'Download',
+  'Subscribe',
+  'Apply Now',
+  'Contact Us',
+];
+
 /** TikTok in-feed ad call-to-action button labels. */
 const TIKTOK_CTA_LABELS = [
   'Shop Now',
@@ -185,8 +200,18 @@ export const LINK_BEHAVIOR: Record<string, LinkBehaviorRecord> = {
       removesRawUrl: false,
       lastReviewed: '2026-06-22',
     },
+    ad: {
+      // LinkedIn single-image Sponsored Content shows a destination domain on the
+      // link card and routes the click through the CTA button, not the intro text.
+      showsDisplayLink: true,
+      displayLinkMaxChars: 30,
+      supportsDisplayPath: false,
+      hasCtaButton: true,
+      ctaLabels: LINKEDIN_CTA_LABELS,
+      captionLinkClickable: false,
+    },
     lastReviewed: '2026-06-22',
-    source: 'LinkedIn builds an Open Graph preview card from the first detected URL and keeps the raw URL inline as blue clickable text by default; link text counts per character.',
+    source: 'LinkedIn builds an Open Graph preview card from the first detected URL and keeps the raw URL inline as blue clickable text by default; link text counts per character. Single-image Sponsored Content ads expose a destination URL + CTA button.',
   },
 
   instagram: {

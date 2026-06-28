@@ -177,6 +177,8 @@ export interface AdPreviewStrings {
   badgeTruncated: string;
   /** Mock brand row label, e.g. "Sponsored" (Meta/TikTok). */
   sponsored: string;
+  /** LinkedIn's own ad disclosure on a promoted post — "Promoted", not "Sponsored". */
+  promoted: string;
   /** Google's own ad label — localized differently from Meta's (e.g. de "Anzeige"). */
   googleAdLabel: string;
   /** Google RSA input label "Final URL". */

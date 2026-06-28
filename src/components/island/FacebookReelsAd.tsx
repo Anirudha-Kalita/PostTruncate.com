@@ -92,7 +92,7 @@ export function FacebookReelsAd({ s, primary, safeZone, mediaUrl, mediaKind = 'i
               </div>
 
               {caption.text && (
-                <p class="mt-1.5 whitespace-pre-wrap text-[13px] leading-5">
+                <p class="mt-1.5 whitespace-pre-wrap break-words text-[13px] leading-5">
                   {caption.text}
                   {caption.truncated && <span class="text-white/80">{fb.seeMoreLabel}</span>}
                 </p>

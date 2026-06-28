@@ -784,6 +784,7 @@ export const fr: Translations = {
       badgeFits: 'Tient',
       badgeTruncated: 'Tronqué',
       sponsored: 'Sponsorisé',
+      promoted: 'Post sponsorisé',
       googleAdLabel: 'Annonce',
       finalUrl: 'URL finale',
       pathN: 'Chemin {n}',

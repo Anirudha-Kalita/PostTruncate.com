@@ -42,6 +42,23 @@ export function truncateFacebookReelsPrimary(text: string): FieldTruncation {
 }
 
 /**
+ * LinkedIn intro (introductory) text: show the first N grapheme clusters, then
+ * an inline "…more". The cutoff is device-aware — LinkedIn's narrower mobile
+ * column folds a touch earlier than desktop. Copy at or under the cutoff renders
+ * in full; an empty intro yields `{ text: '', truncated: false }`.
+ */
+export function truncateLinkedInIntro(
+  text: string,
+  device: 'mobile' | 'desktop',
+): FieldTruncation {
+  const { introTruncateChars, introTruncateCharsMobile, seeMoreLabel } =
+    AD_PLATFORM_CONFIG.linkedin;
+  const cap = device === 'mobile' ? introTruncateCharsMobile : introTruncateChars;
+  if (charCount(text) <= cap) return { text, truncated: false };
+  return { text: sliceChars(text, 0, cap) + seeMoreLabel, truncated: true };
+}
+
+/**
  * Hard-clamp a field to a grapheme-cluster cap with NO "See More" affordance.
  * Shared by the Facebook Carousel card-field helpers below. Text at or under the
  * cap is returned unchanged (`truncated: false`); over the cap it is sliced

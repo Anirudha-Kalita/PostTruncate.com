@@ -782,6 +782,7 @@ export const zh: Translations = {
       badgeFits: '合适',
       badgeTruncated: '已截断',
       sponsored: '赞助',
+      promoted: '推广',
       googleAdLabel: '赞助商广告',
       finalUrl: '最终链接',
       pathN: '路径 {n}',

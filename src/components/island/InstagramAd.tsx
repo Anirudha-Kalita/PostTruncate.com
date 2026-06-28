@@ -215,7 +215,7 @@ export function InstagramAd({ s, lang, caption, headline, mode, safeZone, mediaU
               )}
 
               {/* Caption — bold username + text. */}
-              <p class="mt-1 whitespace-pre-wrap text-[13px] leading-5 text-ink">
+              <p class="mt-1 whitespace-pre-wrap break-words text-[13px] leading-5 text-ink">
                 <span class="font-semibold">{name} </span>
                 {feedVisible ? (
                   <>

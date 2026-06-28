@@ -61,6 +61,7 @@ export const AD_PREVIEW_STRINGS: AdPreviewStrings = {
   badgeFits: 'Fits',
   badgeTruncated: 'Truncated',
   sponsored: 'Sponsored',
+  promoted: 'Promoted',
   googleAdLabel: 'Sponsored',
   finalUrl: 'Final URL',
   pathN: 'Path {n}',

@@ -785,6 +785,7 @@ export const de: Translations = {
       badgeFits: 'Passt',
       badgeTruncated: 'Gekürzt',
       sponsored: 'Gesponsert',
+      promoted: 'Anzeige',
       googleAdLabel: 'Anzeige',
       finalUrl: 'Finale URL',
       pathN: 'Pfad {n}',

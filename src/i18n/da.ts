@@ -784,6 +784,7 @@ export const da: Translations = {
       badgeFits: 'Passer',
       badgeTruncated: 'Afskåret',
       sponsored: 'Sponsoreret',
+      promoted: 'Promoveret',
       googleAdLabel: 'Sponsoreret',
       finalUrl: 'Endelig URL',
       pathN: 'Sti {n}',

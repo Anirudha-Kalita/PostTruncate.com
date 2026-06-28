@@ -784,6 +784,7 @@ export const ja: Translations = {
       badgeFits: '収まる',
       badgeTruncated: '切り捨て',
       sponsored: '広告',
+      promoted: 'プロモーション',
       googleAdLabel: 'スポンサー',
       finalUrl: '最終 URL',
       pathN: 'パス {n}',

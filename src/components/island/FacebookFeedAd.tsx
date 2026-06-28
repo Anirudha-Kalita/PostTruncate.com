@@ -103,7 +103,7 @@ export function FacebookFeedAd({ s, primary, headline, description, device, medi
             trailing={<MoreDots />}
           >
             {/* Primary text */}
-            <p class="mt-2 whitespace-pre-wrap text-[14px] leading-5 text-ink">
+            <p class="mt-2 whitespace-pre-wrap break-words text-[14px] leading-5 text-ink">
               {primaryVisible ? (
                 <>
                   {primaryVisible}

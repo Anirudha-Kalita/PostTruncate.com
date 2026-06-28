@@ -101,7 +101,7 @@ export function FacebookCarouselAd({
         <div style="width:100%;max-width:420px;" onKeyDown={onKeyDown}>
           {/* Shared primary text — truncateFacebookPrimary already appends the
               "See More" affordance to `text` when truncated. */}
-          <p class="whitespace-pre-wrap text-[14px] leading-5 text-ink">
+          <p class="whitespace-pre-wrap break-words text-[14px] leading-5 text-ink">
             {primaryResult.text || <span class="text-mute">{ap.placeholders.primary}</span>}
           </p>
 
