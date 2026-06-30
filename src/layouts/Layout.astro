@@ -409,14 +409,33 @@ const canonical = canonicalOverride ?? localeHref(lang);
     </script>
 
     <script>
+      // Reveal the back-to-top control once the page is scrolled past a
+      // threshold. Instead of reading window.scrollY on load and on every
+      // scroll — a geometric read that forced a synchronous reflow (flagged by
+      // Lighthouse) — we observe an off-screen sentinel SHOW_AT px down the
+      // page. IntersectionObserver computes visibility off the main thread, so
+      // toggling the button never thrashes layout.
       const btn = document.querySelector<HTMLButtonElement>('.to-top');
       if (btn) {
         const SHOW_AT = 400; // px scrolled before the button appears
-        const sync = () => {
-          btn.hidden = window.scrollY < SHOW_AT;
-        };
-        sync();
-        window.addEventListener('scroll', sync, { passive: true });
+
+        // Invisible, out-of-flow marker pinned SHOW_AT px from the document top
+        // (position:absolute → zero layout shift). While it's in view (near the
+        // top) the button stays hidden; once it scrolls out of view, the button
+        // appears.
+        const sentinel = document.createElement('div');
+        sentinel.setAttribute('aria-hidden', 'true');
+        sentinel.style.cssText =
+          'position:absolute;top:' +
+          SHOW_AT +
+          'px;left:0;width:1px;height:1px;visibility:hidden;pointer-events:none;';
+        document.body.appendChild(sentinel);
+
+        const io = new IntersectionObserver((entries) => {
+          btn.hidden = entries[0].isIntersecting;
+        });
+        io.observe(sentinel);
+
         btn.addEventListener('click', () => {
           const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
           window.scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' });
