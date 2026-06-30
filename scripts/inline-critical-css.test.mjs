@@ -213,7 +213,7 @@ test('over-budget route sheet is deferred via preload+noscript and not pruned; i
     await mkdir(join(root, '_astro'), { recursive: true });
     const bigHref = '/_astro/big.EEEEEEEE.css';
     await writeFile(join(root, '_astro', 'global.AAAAAAAA.css'), cssOfSize('global', 2048));
-    await writeFile(join(root, '_astro', 'big.EEEEEEEE.css'), cssOfSize('big', 70 * 1024));
+    await writeFile(join(root, '_astro', 'big.EEEEEEEE.css'), cssOfSize('big', 170 * 1024));
 
     // 4 pages all link the shared global; only en/index also links the big
     // sheet (so big is route-specific, not shared) and is forced to defer it.
@@ -272,7 +272,7 @@ test('oversized critical sheet fails analysis; commit is not invoked and the fix
   try {
     await mkdir(join(root, '_astro'), { recursive: true });
     const hugeHref = '/_astro/huge.FFFFFFFF.css';
-    const hugeBytes = 70 * 1024; // 71680 > 65536 budget
+    const hugeBytes = 170 * 1024; // 174080 > 163840 (160 KiB) budget
     await writeFile(join(root, '_astro', 'huge.FFFFFFFF.css'), cssOfSize('huge', hugeBytes));
 
     const page = join(root, 'en', 'index.html');

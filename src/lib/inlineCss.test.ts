@@ -384,9 +384,9 @@ test('Property 3: CSS completeness — no rule dropped or duplicated', () => {
   );
 });
 
-// Feature: render-blocking-css-fix, Property 4: For any set of linked stylesheets that the transform processes successfully, the total UTF-8 byte length of inlined <style> content SHALL be less than or equal to 64 KiB (64 × 1024 = 65536 bytes).
+// Feature: render-blocking-css-fix, Property 4: For any set of linked stylesheets that the transform processes successfully, the total UTF-8 byte length of inlined <style> content SHALL be less than or equal to the HTML_PAYLOAD_BUDGET_BYTES budget.
 // Validates: Requirements 5.1, 5.2
-test('Property 4: inlined payload stays within the 64 KiB budget', () => {
+test('Property 4: inlined payload stays within the budget', () => {
   fc.assert(
     fc.property(
       docArb({ budgetBytes: HTML_PAYLOAD_BUDGET_BYTES, maxAssetBytes: 9000, maxRouteAssets: 5 }),

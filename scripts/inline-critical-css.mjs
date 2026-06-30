@@ -60,7 +60,7 @@ Usage:
 Resolves the static root (dist/client if present, else dist), enumerates every
 *.html page, resolves their render-blocking CSS links from disk, and runs the
 pure transform for every page in memory. If ANY page fails (missing asset or
-critical CSS over the 25 KiB budget) it prints a per-page report and exits
+critical CSS over the 160 KiB budget) it prints a per-page report and exits
 non-zero WITHOUT writing, leaving dist/ exactly as astro build emitted it. Only
 when every page passes does it write the transformed HTML and prune _astro/*.css
 files no page references any more.`;

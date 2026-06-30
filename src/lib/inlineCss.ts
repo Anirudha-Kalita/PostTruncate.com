@@ -17,8 +17,22 @@
 
 import * as cheerio from 'cheerio';
 
-/** 64 KiB, where 1 KiB = 1024 bytes, measured as UTF-8 byte length. */
-export const HTML_PAYLOAD_BUDGET_BYTES = 64 * 1024;
+/**
+ * Per-page inline-CSS budget, measured as UTF-8 byte length (1 KiB = 1024 bytes).
+ *
+ * This MUST stay above the largest single page's total CSS so that every page
+ * inlines ALL of its CSS and nothing is async-deferred. Astro emits per-page CSS
+ * bundles that are NOT split by fold position, so the route-specific bundle
+ * (hero, platform cards, workspace, …) is above the fold just like the shared
+ * base bundle. Deferring any of it via the non-render-blocking preload pattern
+ * paints the page before those styles load → a flash of unstyled content (FOUC):
+ * giant unstyled SVG logos, unstyled text. The heaviest page (the homepage) is
+ * ~102 KiB of CSS; 160 KiB leaves headroom for growth. Inlined CSS is brotli-
+ * compressed on the wire (~6–8×), so the larger HTML costs little and saves a
+ * round-trip. If a future page exceeds this, the build logs a non-zero
+ * "deferred CSS links" count — bump this budget rather than shipping FOUC.
+ */
+export const HTML_PAYLOAD_BUDGET_BYTES = 160 * 1024;
 
 export interface CssLink {
   /** href as written in the <link> (e.g. "/_astro/index.BCnqUpcK.css"). */
