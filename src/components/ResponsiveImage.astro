@@ -20,6 +20,10 @@ interface Props {
   loading?: 'lazy' | 'eager';
   fetchpriority?: 'high' | 'low' | 'auto';
   decoding?: 'async' | 'sync' | 'auto';
+  /** Optional intrinsic dimensions — used to reserve the box (CLS) when the
+      image isn't in the optimizer manifest (the fallback <img> branch). */
+  width?: number;
+  height?: number;
 }
 
 const {
@@ -30,6 +34,8 @@ const {
   loading = 'lazy',
   fetchpriority,
   decoding = 'async',
+  width,
+  height,
 } = Astro.props;
 
 const data = getVariants(src);
@@ -55,6 +61,8 @@ const largest = data?.variants.at(-1);
       src={src}
       alt={alt}
       class={className}
+      width={width}
+      height={height}
       loading={loading}
       fetchpriority={fetchpriority}
       decoding={decoding}

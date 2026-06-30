@@ -1,5 +1,8 @@
 ---
 import '../styles/global.css';
+// Import the primary Geist latin woff2 subset so Astro/Vite resolves the final
+// hashed /_astro/...woff2 URL for an early <head> preload (fixes font-swap CLS).
+import geistLatin from '@fontsource-variable/geist/files/geist-latin-wght-normal.woff2';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
 import FAQSchema from '../components/FAQSchema.astro';
@@ -99,6 +102,12 @@ const canonical = canonicalOverride ?? localeHref(lang);
     <meta name="apple-mobile-web-app-title" content="Truncator" />
     <link rel="manifest" href="/site.webmanifest" />
     <meta name="generator" content="Astro" />
+
+    {/* Preload the primary Geist latin subset (self-hosted /_astro/ URL) so the
+        font is discovered before the stylesheet pulls it in, letting the swap
+        complete before first contentful paint. crossorigin matches the font's
+        anonymous CORS fetch. */}
+    <link rel="preload" href={geistLatin} as="font" type="font/woff2" crossorigin />
 
     <!-- Google tag (gtag.js) -->
     <script

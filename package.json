@@ -17,6 +17,7 @@
     "lint": "node --experimental-strip-types --import ./scripts/ts-resolve.mjs scripts/check-i18n.mjs",
     "test:fast": "npm run typecheck && npm run lint",
     "test:lib": "node --experimental-strip-types --import ./scripts/ts-resolve.mjs --test \"src/lib/**/*.test.ts\"",
+    "test:cls": "node --test \"tests/e2e/**/*.test.mjs\"",
     "test:scripts": "node --experimental-strip-types --import ./scripts/ts-resolve.mjs --test \"scripts/**/*.test.mjs\"",
     "clean": "node -e \"for (const d of ['.astro','dist']) require('node:fs').rmSync(d, { recursive: true, force: true })\"",
     "clean:full": "node -e \"for (const d of ['.astro','dist','node_modules']) require('node:fs').rmSync(d, { recursive: true, force: true })\" && npm install",
@@ -41,6 +42,7 @@
     "typescript": "^6.0.3"
   },
   "devDependencies": {
-    "fast-check": "4.8.0"
+    "fast-check": "4.8.0",
+    "playwright": "^1.61.1"
   }
 }

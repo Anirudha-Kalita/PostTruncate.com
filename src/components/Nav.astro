@@ -88,8 +88,8 @@ const adPreviewLinks = adPreviews.map((tool) => ({
 <header class="nav">
   <div class="container-page nav__inner">
     <a href={home} class="nav__brand" aria-label={nav.homeAria}>
-      <ResponsiveImage class="nav__logo nav__logo--light" src="/logo.webp" alt={t.images.logoAlt} sizes="197px" loading="eager" />
-      <ResponsiveImage class="nav__logo nav__logo--dark" src="/logo-dark.webp" alt={t.images.logoAlt} sizes="197px" loading="eager" />
+      <ResponsiveImage class="nav__logo nav__logo--light" src="/logo.webp" alt={t.images.logoAlt} sizes="197px" width={197} height={40} loading="eager" />
+      <ResponsiveImage class="nav__logo nav__logo--dark" src="/logo-dark.webp" alt={t.images.logoAlt} sizes="197px" width={197} height={40} loading="eager" />
     </a>
 
     <nav class="nav__links" aria-label="Primary">
@@ -568,6 +568,7 @@ const adPreviewLinks = adPreviews.map((tool) => ({
   .nav__brand :global(.nav__logo) {
     height: 40px;
     width: auto;
+    aspect-ratio: 2172 / 441;
     display: block;
   }
   .nav__brand :global(.nav__logo--dark) {
@@ -584,9 +585,10 @@ const adPreviewLinks = adPreviews.map((tool) => ({
     display: none;
     align-items: center;
     justify-content: center;
-    /* Wrap to a second row when the links don't fit one line (longer non-English
-       labels) instead of overflowing into the actions cluster. */
-    flex-wrap: wrap;
+    /* Keep links on a single row so the nav height cannot change across the
+       Geist font swap (longer fallback labels would otherwise wrap then un-wrap,
+       shifting the hero). */
+    flex-wrap: nowrap;
     gap: 4px;
   }
   .nav__link {

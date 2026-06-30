@@ -10,9 +10,23 @@
 @import '@fontsource-variable/geist/wght.css';
 @import '@fontsource-variable/geist-mono/wght.css';
 
+/* Metric-matched fallback for Geist Variable — reshapes a local Arial to
+   occupy Geist's exact layout box so the font swap is dimensionally invisible
+   (eliminates the site-wide font-swap CLS). Override values calibrated against
+   Geist Variable's real metrics — see calibration-notes.md (task 3.1). */
+@font-face {
+  font-family: 'Geist Fallback';
+  src: local('Arial');
+  size-adjust: 105.7982%;
+  ascent-override: 94.9921%;
+  descent-override: 27.8833%;
+  line-gap-override: 0.0000%;
+}
+
 @theme {
   /* ── Font families ─────────────────────────────────────────────── */
-  --font-sans: 'Geist Variable', 'Inter', system-ui, -apple-system, sans-serif;
+  --font-sans: 'Geist Variable', 'Geist Fallback', 'Inter', system-ui,
+    -apple-system, sans-serif;
   --font-mono: 'Geist Mono Variable', ui-monospace, SFMono-Regular, Menlo,
     Monaco, monospace;
 

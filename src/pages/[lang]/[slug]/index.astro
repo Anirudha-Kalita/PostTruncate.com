@@ -415,8 +415,8 @@ const latestPosts = (await getPublishedPosts())
   }
   .hero__mesh {
     position: absolute;
-    inset: -40% 0 auto 0;
-    height: 130%;
+    inset: 0 0 auto 0;
+    height: 130vh;
     /* Toned down from 0.16 — the calm hero keeps the brand mesh as a
        whisper rather than a wash. */
     opacity: 0.08;
@@ -535,6 +535,7 @@ const latestPosts = (await getPublishedPosts())
       grid-template-columns: minmax(0, 1.08fr) minmax(0, 0.92fr);
       gap: var(--spacing-section-sm);
       text-align: left;
+      align-items: start;
     }
     .hero__title,
     .hero__lede,
