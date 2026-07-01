@@ -437,6 +437,7 @@ export default function Dashboard({ lang, strings, toolSlugs, focus }: Props) {
               <button
                 type="button"
                 aria-pressed={compare}
+                aria-label={strings.previewPanel.compareAll}
                 onClick={() => setCompare((c) => !c)}
                 class={`mb-2 inline-flex h-10 w-10 shrink-0 items-center justify-center gap-1.5 rounded-pill border p-0 text-[12px] font-medium transition-[transform,color,background,border-color] duration-100 active:scale-[0.96] sm:h-auto sm:w-auto sm:px-3 sm:py-1.5 ${compare
                     ? 'border-link bg-link-bg-soft text-link-deep'
