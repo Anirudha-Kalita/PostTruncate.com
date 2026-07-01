@@ -11,7 +11,7 @@
     "build": "astro build",
     "localize-images": "node scripts/localize-blog-images.mjs",
     "prebuild": "node scripts/localize-blog-images.mjs && node scripts/optimize-images.mjs",
-    "postbuild": "node scripts/prune-dist-originals.mjs && node --experimental-strip-types --import ./scripts/ts-resolve.mjs scripts/inline-critical-css.mjs",
+    "postbuild": "node scripts/prune-dist-originals.mjs && node --experimental-strip-types --import ./scripts/ts-resolve.mjs scripts/inject-modulepreload.mjs && node --experimental-strip-types --import ./scripts/ts-resolve.mjs scripts/inline-critical-css.mjs",
     "preview": "astro preview",
     "typecheck": "astro check",
     "lint": "node --experimental-strip-types --import ./scripts/ts-resolve.mjs scripts/check-i18n.mjs",
