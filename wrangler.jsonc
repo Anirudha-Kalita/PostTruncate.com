@@ -30,19 +30,12 @@
   //    reaches the SSR handler, so /api/improve must run the Worker first or
   //    every POST returns 405. GET pages fall through to the Worker fine; only
   //    non-GET methods hit this, which is why it surfaced as a 405 on POST.
-  //  • "/admin" + "/admin/*" — the admin tooling is prerendered (static). On a
-  //    Workers static-assets deploy those files are served by the asset layer
-  //    and the Worker (and the Basic-Auth gate in src/middleware.ts) never runs.
-  //    Forcing them worker-first makes the gate run. Because the SSR app has no
-  //    route for a prerendered page, the gate itself serves the file via
-  //    env.ASSETS.fetch() after auth (calling next() there would 404). Backed by
-  //    the ADMIN_AUTH secret (below); the gate fails closed when it is unset.
   // Every other path keeps the fast asset-first behavior.
   "assets": {
     "directory": "./dist",
     "binding": "ASSETS",
     "not_found_handling": "404-page",
-    "run_worker_first": [ "/", "/api/*", "/admin", "/admin/*" ]
+    "run_worker_first": [ "/", "/api/*" ]
   },
 
   // Serve the Worker at both the apex and the www hostname. custom_domain:true
@@ -70,13 +63,6 @@
   // GROQ_API_KEY is an optional *secret* enabling the Llama 3.3 70B fallback
   // used when Gemini errors or returns an empty/truncated rewrite:
   //   npx wrangler secret put GROQ_API_KEY     (and .dev.vars for local dev)
-  // ADMIN_AUTH: the HTTP Basic Auth credential guarding /admin/* in production
-  // (see src/middleware.ts). Value is a single "username:password" string. The
-  // gate fails CLOSED — if this secret is unset in production, every /admin/*
-  // request returns 401. The localhost dev server skips the gate (not
-  // internet-exposed). Set it with:
-  //   npx wrangler secret put ADMIN_AUTH        (value: user:password)
-  // To exercise the gate locally too, add ADMIN_AUTH=user:password to .dev.vars.
   // SESSION: required by the @astrojs/cloudflare adapter, which auto-enables
   // Astro sessions with the cloudflare-kv-binding driver bound as "SESSION".
   // Local dev (miniflare) emulates this by name, so it only fails in

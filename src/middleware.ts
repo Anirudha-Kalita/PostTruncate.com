@@ -1,97 +1,10 @@
 import { defineMiddleware } from 'astro:middleware';
 
-/** Worker bindings this middleware reads. */
-interface AdminEnv {
-  /** HTTP Basic Auth credential for /admin/*, as "username:password". */
-  ADMIN_AUTH?: string;
-  /**
-   * Cloudflare static-asset binding. The admin pages are prerendered (static),
-   * so they are NOT in this SSR Worker's route manifest. Once /admin is forced
-   * worker-first (wrangler.jsonc), the gate serves the file straight from this
-   * binding after auth — next() would render the SSR 404 instead.
-   */
-  ASSETS?: { fetch(request: Request): Promise<Response> };
-}
-
-/** True for the admin surface (the bare /admin and everything beneath it). */
-function isAdminPath(pathname: string): boolean {
-  return pathname === '/admin' || pathname === '/admin/' || pathname.startsWith('/admin/');
-}
-
-/** 401 challenge — prompts the browser's native Basic Auth login. */
-function adminChallenge(): Response {
-  return new Response('Authentication required.', {
-    status: 401,
-    headers: {
-      'WWW-Authenticate': 'Basic realm="PostTruncate Admin", charset="UTF-8"',
-      'content-type': 'text/plain; charset=utf-8',
-      // Never let a browser or edge cache the gate response itself.
-      'cache-control': 'no-store',
-    },
-  });
-}
-
-/**
- * Length-safe, early-exit-free string compare. Not a hard constant-time
- * guarantee in JS, but avoids leaking the credential's length/prefix through
- * the trivial `===` short-circuit.
- */
-function safeEqual(a: string, b: string): boolean {
-  if (a.length !== b.length) return false;
-  let diff = 0;
-  for (let i = 0; i < a.length; i++) diff |= a.charCodeAt(i) ^ b.charCodeAt(i);
-  return diff === 0;
-}
-
-/** Validate an `Authorization: Basic …` header against the expected "user:pass". */
-function basicAuthOk(header: string | null, expected: string): boolean {
-  if (!header || !header.startsWith('Basic ')) return false;
-  let decoded: string;
-  try {
-    decoded = atob(header.slice('Basic '.length).trim());
-  } catch {
-    return false;
-  }
-  return safeEqual(decoded, expected);
-}
-
 // Middleware runs inside the Cloudflare Worker for every request, including
-// prerendered static assets served through the Worker (the admin surface is
-// forced worker-first via run_worker_first in wrangler.jsonc so this gate runs
-// before any admin asset is served).
+// prerendered static assets served through the Worker.
 export const onRequest = defineMiddleware(async (context, next) => {
-  const { pathname } = new URL(context.request.url);
-
-  // ── Gate the admin tooling behind HTTP Basic Auth (production only) ────────
-  // The localhost dev server is not internet-exposed, so the gate is skipped
-  // there to keep the File System Access authoring workflow frictionless. In a
-  // production build the gate is mandatory and fails CLOSED: a missing/unset
-  // ADMIN_AUTH secret denies access rather than exposing /admin unauthenticated.
-  if (import.meta.env.PROD && isAdminPath(pathname)) {
-    const env = (context.locals as { runtime?: { env?: AdminEnv } }).runtime?.env;
-    const expected = env?.ADMIN_AUTH;
-    if (!expected || !basicAuthOk(context.request.headers.get('authorization'), expected)) {
-      return adminChallenge();
-    }
-    // Authenticated. /admin is forced worker-first, and the admin pages are
-    // prerendered STATIC files not present in this SSR Worker's route manifest —
-    // so next() would render the SSR 404. Serve the file straight from the
-    // ASSETS binding instead (this goes directly to the asset store and does NOT
-    // re-enter run_worker_first, so there is no loop). Keep it uncacheable so no
-    // shared/edge cache can replay an admin page to an unauthenticated client.
-    const served = env?.ASSETS
-      ? await env.ASSETS.fetch(context.request)
-      : await next();
-    const headers = new Headers(served.headers);
-    headers.set('cache-control', 'no-store');
-    return new Response(served.body, {
-      status: served.status,
-      statusText: served.statusText,
-      headers,
-    });
-  }
-
   const response = await next();
+  const { pathname } = new URL(context.request.url);
 
   // For the bare-widget embed pages (/en/embed/, /de/embed/, etc.) we must
   // allow any third-party site to frame the page. By default Cloudflare and
