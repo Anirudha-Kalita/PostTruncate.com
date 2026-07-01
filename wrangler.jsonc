@@ -30,13 +30,13 @@
   //    reaches the SSR handler, so /api/improve must run the Worker first or
   //    every POST returns 405. GET pages fall through to the Worker fine; only
   //    non-GET methods hit this, which is why it surfaced as a 405 on POST.
-  //  • "/admin" + "/admin/*" — the admin tooling (CMS entry + upload/category
-  //    helpers + config.yml) is prerendered, so by default the asset layer would
-  //    serve it WITHOUT invoking the Worker, and the Basic-Auth gate in
-  //    src/middleware.ts would never run. Forcing these paths worker-first makes
-  //    every admin request pass through the gate before any admin asset is
-  //    served. Backed by the ADMIN_AUTH secret (see below); the gate fails
-  //    closed in production when that secret is absent.
+  //  • "/admin" + "/admin/*" — the admin tooling is prerendered (static). On a
+  //    Workers static-assets deploy those files are served by the asset layer
+  //    and the Worker (and the Basic-Auth gate in src/middleware.ts) never runs.
+  //    Forcing them worker-first makes the gate run. Because the SSR app has no
+  //    route for a prerendered page, the gate itself serves the file via
+  //    env.ASSETS.fetch() after auth (calling next() there would 404). Backed by
+  //    the ADMIN_AUTH secret (below); the gate fails closed when it is unset.
   // Every other path keeps the fast asset-first behavior.
   "assets": {
     "directory": "./dist",

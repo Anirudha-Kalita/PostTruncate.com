@@ -4,6 +4,13 @@ import { defineMiddleware } from 'astro:middleware';
 interface AdminEnv {
   /** HTTP Basic Auth credential for /admin/*, as "username:password". */
   ADMIN_AUTH?: string;
+  /**
+   * Cloudflare static-asset binding. The admin pages are prerendered (static),
+   * so they are NOT in this SSR Worker's route manifest. Once /admin is forced
+   * worker-first (wrangler.jsonc), the gate serves the file straight from this
+   * binding after auth — next() would render the SSR 404 instead.
+   */
+  ASSETS?: { fetch(request: Request): Promise<Response> };
 }
 
 /** True for the admin surface (the bare /admin and everything beneath it). */
@@ -66,14 +73,20 @@ export const onRequest = defineMiddleware(async (context, next) => {
     if (!expected || !basicAuthOk(context.request.headers.get('authorization'), expected)) {
       return adminChallenge();
     }
-    // Authenticated: serve the admin asset but keep it uncacheable so a shared
-    // or edge cache can never replay it to an unauthenticated client.
-    const authed = await next();
-    const headers = new Headers(authed.headers);
+    // Authenticated. /admin is forced worker-first, and the admin pages are
+    // prerendered STATIC files not present in this SSR Worker's route manifest —
+    // so next() would render the SSR 404. Serve the file straight from the
+    // ASSETS binding instead (this goes directly to the asset store and does NOT
+    // re-enter run_worker_first, so there is no loop). Keep it uncacheable so no
+    // shared/edge cache can replay an admin page to an unauthenticated client.
+    const served = env?.ASSETS
+      ? await env.ASSETS.fetch(context.request)
+      : await next();
+    const headers = new Headers(served.headers);
     headers.set('cache-control', 'no-store');
-    return new Response(authed.body, {
-      status: authed.status,
-      statusText: authed.statusText,
+    return new Response(served.body, {
+      status: served.status,
+      statusText: served.statusText,
       headers,
     });
   }
