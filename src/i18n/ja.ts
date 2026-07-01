@@ -809,6 +809,12 @@ export const ja: Translations = {
         'Send Message': 'メッセージを送信',
         'Order Now': '今すぐ注文',
         'Watch Now': '今すぐ見る',
+        'Apply': '応募する',
+        'Register': '登録する',
+        'Join': '参加する',
+        'Attend': '出席する',
+        'Request Demo': 'デモをリクエスト',
+        'View Quote': '見積もりを見る',
       },
     },
     dashboard: {

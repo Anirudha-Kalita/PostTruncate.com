@@ -138,18 +138,22 @@ const META_CTA_LABELS = [
 ];
 
 /**
- * LinkedIn Sponsored Content call-to-action button labels. LinkedIn ads route
- * the click through this CTA button (and the destination URL), not through a
- * clickable link in the intro text. These are all members of the existing
- * localized CTA preset map, so no new i18n keys are required.
+ * LinkedIn Sponsored Content call-to-action button labels — the exact 10
+ * options Campaign Manager offers for single-image ads (verified 2026 against
+ * LinkedIn's own ad-creation UI). Note this set does NOT include Meta-style
+ * labels like "Contact Us" or "Book Now" — LinkedIn's list is its own.
  */
 const LINKEDIN_CTA_LABELS = [
   'Learn More',
-  'Sign Up',
+  'Apply',
   'Download',
+  'Sign Up',
   'Subscribe',
-  'Apply Now',
-  'Contact Us',
+  'Register',
+  'Join',
+  'Attend',
+  'Request Demo',
+  'View Quote',
 ];
 
 /** TikTok in-feed ad call-to-action button labels. */
@@ -201,17 +205,19 @@ export const LINK_BEHAVIOR: Record<string, LinkBehaviorRecord> = {
       lastReviewed: '2026-06-22',
     },
     ad: {
-      // LinkedIn single-image Sponsored Content shows a destination domain on the
-      // link card and routes the click through the CTA button, not the intro text.
-      showsDisplayLink: true,
-      displayLinkMaxChars: 30,
+      // LinkedIn single-image Sponsored Content shows ONLY a headline + CTA
+      // button beneath the image — unlike Facebook/Instagram, it renders no
+      // destination-domain text on the card, so the click routes through the
+      // headline/CTA, not a visible display link (verified 2026 against
+      // LinkedIn's published single-image ad specs).
+      showsDisplayLink: false,
       supportsDisplayPath: false,
       hasCtaButton: true,
       ctaLabels: LINKEDIN_CTA_LABELS,
       captionLinkClickable: false,
     },
     lastReviewed: '2026-06-22',
-    source: 'LinkedIn builds an Open Graph preview card from the first detected URL and keeps the raw URL inline as blue clickable text by default; link text counts per character. Single-image Sponsored Content ads expose a destination URL + CTA button.',
+    source: 'LinkedIn builds an Open Graph preview card from the first detected URL and keeps the raw URL inline as blue clickable text by default; link text counts per character. Single-image Sponsored Content ads expose only a headline + CTA button beneath the image — no destination domain is shown.',
   },
 
   instagram: {

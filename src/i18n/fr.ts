@@ -809,6 +809,12 @@ export const fr: Translations = {
         'Send Message': 'Envoyer un message',
         'Order Now': 'Commander',
         'Watch Now': 'Regarder',
+        'Apply': 'Postuler',
+        'Register': 'S’inscrire',
+        'Join': 'Rejoindre',
+        'Attend': 'Participer',
+        'Request Demo': 'Demander une démo',
+        'View Quote': 'Voir le devis',
       },
     },
     dashboard: {

@@ -810,6 +810,12 @@ export const en: Translations = {
         'Send Message': 'Send Message',
         'Order Now': 'Order Now',
         'Watch Now': 'Watch Now',
+        'Apply': 'Apply',
+        'Register': 'Register',
+        'Join': 'Join',
+        'Attend': 'Attend',
+        'Request Demo': 'Request Demo',
+        'View Quote': 'View Quote',
       },
     },
     dashboard: {

@@ -60,14 +60,21 @@ interface PlatformControls {
   format: boolean; // Facebook Feed/Reels/Carousel
   safeZone: boolean;
   media: boolean;
+  /**
+   * Whether the preview's CTA button is user-editable via the CTA select.
+   * Independent of `showsDisplayLink` (LinkedIn has an editable CTA but no
+   * display-link field; TikTok's CTA is a fixed mock the preview component
+   * resolves on its own, so it stays uneditable here).
+   */
+  cta: boolean;
 }
 
 const CONTROLS: Record<AdPlatform, PlatformControls> = {
-  google: { device: false, mode: false, format: false, safeZone: false, media: false },
-  facebook: { device: true, mode: false, format: true, safeZone: false, media: true },
-  linkedin: { device: true, mode: false, format: false, safeZone: false, media: true },
-  instagram: { device: false, mode: true, format: false, safeZone: true, media: true },
-  tiktok: { device: false, mode: false, format: false, safeZone: true, media: true },
+  google: { device: false, mode: false, format: false, safeZone: false, media: false, cta: false },
+  facebook: { device: true, mode: false, format: true, safeZone: false, media: true, cta: true },
+  linkedin: { device: true, mode: false, format: false, safeZone: false, media: true, cta: true },
+  instagram: { device: false, mode: true, format: false, safeZone: true, media: true, cta: true },
+  tiktok: { device: false, mode: false, format: false, safeZone: true, media: true, cta: false },
 };
 
 export function AdSimulator({ platform, s, lang }: Props) {
@@ -241,10 +248,8 @@ export function AdSimulator({ platform, s, lang }: Props) {
       } else if (controls.safeZone) {
         view.safeZone = safeZone;
       }
-      if (showsDisplayLink) {
-        view.destinationUrl = destinationUrl;
-        view.cta = cta;
-      }
+      if (showsDisplayLink) view.destinationUrl = destinationUrl;
+      if (controls.cta) view.cta = cta;
       if (supportsDisplayPath) {
         view.finalUrl = finalUrl;
         view.paths = paths;
@@ -624,38 +629,40 @@ export function AdSimulator({ platform, s, lang }: Props) {
             </div>
           )}
 
-          {/* Meta ad display-link + CTA controls (Facebook / Instagram). Real
-              Facebook carousels apply one shared CTA button across every card
-              (Meta's Ads Manager has a single "Call to action" picker for the
-              whole carousel unit), so this isn't gated off for Carousel. */}
+          {/* Meta ad display-link control (Facebook / Instagram only — the
+              destination shown separately from the headline/domain). */}
           {showsDisplayLink && (
-            <div class="flex flex-col gap-4">
-              <div class="flex flex-col gap-2">
-                <span class="text-[13px] text-body">{ap.displayLink}</span>
-                <input
-                  type="text"
-                  value={destinationUrl}
-                  onInput={(e) => setDestinationUrl((e.currentTarget as HTMLInputElement).value)}
-                  placeholder="example.com"
-                  class="block w-full rounded-md border border-hairline bg-canvas-soft px-4 py-2.5 text-[15px] text-ink placeholder:text-mute focus:border-link focus:bg-canvas focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-link"
-                />
-              </div>
-              {ctaOptions.length > 0 && (
-                <div class="flex flex-col gap-2">
-                  <span class="text-[13px] text-body">{ap.callToAction}</span>
-                  <select
-                    value={cta || (resolveCta(platform) ?? '')}
-                    onChange={(e) => setCta((e.currentTarget as HTMLSelectElement).value)}
-                    class="block w-full rounded-md border border-hairline bg-canvas-soft px-4 py-2.5 text-[15px] text-ink focus:border-link focus:bg-canvas focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-link"
-                  >
-                    {ctaOptions.map((label) => (
-                      <option value={label} key={label}>
-                        {ap.cta[label] ?? label}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-              )}
+            <div class="flex flex-col gap-2">
+              <span class="text-[13px] text-body">{ap.displayLink}</span>
+              <input
+                type="text"
+                value={destinationUrl}
+                onInput={(e) => setDestinationUrl((e.currentTarget as HTMLInputElement).value)}
+                placeholder="example.com"
+                class="block w-full rounded-md border border-hairline bg-canvas-soft px-4 py-2.5 text-[15px] text-ink placeholder:text-mute focus:border-link focus:bg-canvas focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-link"
+              />
+            </div>
+          )}
+          {/* CTA button control — independent of the display link above: Meta
+              carousels apply one shared CTA across every card (Ads Manager has
+              a single picker for the whole unit, so this isn't gated off for
+              Carousel), and LinkedIn has an editable CTA with no display link
+              at all. TikTok's CTA is a fixed mock the preview resolves on its
+              own, so `controls.cta` stays false there. */}
+          {controls.cta && ctaOptions.length > 0 && (
+            <div class="flex flex-col gap-2">
+              <span class="text-[13px] text-body">{ap.callToAction}</span>
+              <select
+                value={cta || (resolveCta(platform) ?? '')}
+                onChange={(e) => setCta((e.currentTarget as HTMLSelectElement).value)}
+                class="block w-full rounded-md border border-hairline bg-canvas-soft px-4 py-2.5 text-[15px] text-ink focus:border-link focus:bg-canvas focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-link"
+              >
+                {ctaOptions.map((label) => (
+                  <option value={label} key={label}>
+                    {ap.cta[label] ?? label}
+                  </option>
+                ))}
+              </select>
             </div>
           )}
           {controls.media && !isCarousel && (

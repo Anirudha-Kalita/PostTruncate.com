@@ -809,6 +809,12 @@ export const da: Translations = {
         'Send Message': 'Send besked',
         'Order Now': 'Bestil nu',
         'Watch Now': 'Se nu',
+        'Apply': 'Ansøg',
+        'Register': 'Registrer dig',
+        'Join': 'Deltag',
+        'Attend': 'Deltag i',
+        'Request Demo': 'Anmod om demo',
+        'View Quote': 'Se tilbud',
       },
     },
     dashboard: {

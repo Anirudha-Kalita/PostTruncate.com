@@ -67,8 +67,11 @@ export function LinkedInPreview({ text, view, setView, lang, s, toolLinkHref, im
   // measuring the FULL `text`. LinkedIn keeps the pasted URL inline as blue
   // clickable text (it does NOT drop it from the body), so the body renders the
   // full text and the URL is highlighted in place via <LinkText> — never cut.
+  // LinkedIn only ever renders ONE visual attachment per post: a separately
+  // uploaded photo/video takes priority and suppresses the auto-generated
+  // Open Graph link card, so the card is hidden whenever `image` is set.
   const linkData = extractLinkData(text, 'linkedin');
-  const showCard = linkData.firstUrl !== undefined;
+  const showCard = linkData.firstUrl !== undefined && !image;
 
   return (
     <Card>

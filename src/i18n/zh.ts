@@ -807,6 +807,12 @@ export const zh: Translations = {
         'Send Message': '发送消息',
         'Order Now': '立即下单',
         'Watch Now': '立即观看',
+        'Apply': '申请',
+        'Register': '注册',
+        'Join': '加入',
+        'Attend': '参加',
+        'Request Demo': '申请演示',
+        'View Quote': '查看报价',
       },
     },
     dashboard: {

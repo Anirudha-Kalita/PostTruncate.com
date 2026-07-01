@@ -810,6 +810,12 @@ export const de: Translations = {
         'Send Message': 'Nachricht senden',
         'Order Now': 'Jetzt bestellen',
         'Watch Now': 'Jetzt ansehen',
+        'Apply': 'Bewerben',
+        'Register': 'Registrieren',
+        'Join': 'Beitreten',
+        'Attend': 'Teilnehmen',
+        'Request Demo': 'Demo anfordern',
+        'View Quote': 'Angebot ansehen',
       },
     },
     dashboard: {

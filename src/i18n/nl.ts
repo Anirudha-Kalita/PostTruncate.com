@@ -809,6 +809,12 @@ export const nl: Translations = {
         'Send Message': 'Bericht sturen',
         'Order Now': 'Nu bestellen',
         'Watch Now': 'Nu kijken',
+        'Apply': 'Solliciteren',
+        'Register': 'Registreren',
+        'Join': 'Deelnemen',
+        'Attend': 'Bijwonen',
+        'Request Demo': 'Demo aanvragen',
+        'View Quote': 'Offerte bekijken',
       },
     },
     dashboard: {
