@@ -70,7 +70,7 @@ export function ThreadsPreview({ text, lang, s, toolLinkHref, view, setView, ima
   // as blue clickable text (it does NOT drop it), so the post body renders in
   // full and the URL is highlighted in place via <LinkText> — never cut.
   const linkData = extractLinkData(trimmed, 'threads');
-  const showCard = linkData.firstUrl !== undefined;
+  const showCard = linkData.firstUrl !== undefined && !image;
 
   return (
     <Card>

@@ -143,7 +143,7 @@ export function MetaMonitor({ text, lang, s, toolLinkHref, facebookToolLinkHref,
   // pasted URL inline as blue clickable text (it does NOT drop it), so the body
   // renders the full caption and the URL is highlighted in place via <LinkText>.
   const fbLinkData = extractLinkData(activeText, 'facebook');
-  const fbShowCard = fbLinkData.firstUrl !== undefined;
+  const fbShowCard = fbLinkData.firstUrl !== undefined && !image;
 
   const instagramCard = (
     <Card key="instagram">
@@ -496,7 +496,7 @@ export function MetaMonitor({ text, lang, s, toolLinkHref, facebookToolLinkHref,
                 auto-generated link card ONLY when no photo/video is attached;
                 adding media drops the card and the URL stays as inline text
                 (the LinkText above). The counter/badge are unaffected (Req 9.4). */}
-            {fbShowCard && !image && (
+            {fbShowCard && (
               <LivePreviewCard
                 platform="facebook"
                 text={activeText}
