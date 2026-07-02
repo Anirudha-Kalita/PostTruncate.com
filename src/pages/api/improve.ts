@@ -45,6 +45,11 @@ type ErrorCode =
   | 'too_long'
   | 'rate_limited'
   | 'not_configured'
+  // The Worker runtime/bindings weren't reachable at all — a server-side
+  // breakage (e.g. an adapter upgrade that changed the binding API), NOT a
+  // missing-key config issue. Kept distinct from not_configured so it's
+  // diagnosable rather than a silent 503.
+  | 'runtime_unavailable'
   | 'upstream'
   // Anti-abuse guards — never hit by the site's own client (it always sends the
   // right Origin + JSON content-type), so the client maps them to its generic
@@ -73,10 +78,25 @@ interface Bindings {
  * `context.locals.runtime.env` (populated by the platformProxy in dev and the
  * Worker runtime in production). The older `cloudflare:workers` virtual-module
  * import only exists on adapter v13 / Astro 6 and throws here at module load.
+ *
+ * Returns a discriminated result so the caller can tell a STRUCTURAL failure
+ * (no runtime on locals) apart from a mere missing-key config. On a healthy v12
+ * deploy `runtime` is always present for an on-demand route, so its absence is a
+ * loud, actionable signal — logged, not silently collapsed to an empty object.
  */
-function getBindings(context: Parameters<APIRoute>[0]): Bindings {
+type BindingsResult = { ok: true; bindings: Bindings } | { ok: false };
+
+function getBindings(context: Parameters<APIRoute>[0]): BindingsResult {
   const runtime = (context.locals as { runtime?: { env?: Bindings } }).runtime;
-  return runtime?.env ?? {};
+  if (!runtime) {
+    console.error(
+      '[api/improve] context.locals.runtime is missing — Worker bindings are ' +
+        'unreachable. If @astrojs/cloudflare was upgraded to v13 / Astro 6, ' +
+        'read bindings via `import { env } from "cloudflare:workers"` instead.',
+    );
+    return { ok: false };
+  }
+  return { ok: true, bindings: runtime.env ?? {} };
 }
 
 function json(body: unknown, status: number, headers?: Record<string, string>): Response {
@@ -91,7 +111,12 @@ function fail(code: ErrorCode, status: number, extra?: Record<string, unknown>):
 }
 
 export const POST: APIRoute = async (context) => {
-  const bindings = getBindings(context);
+  // Bindings unreachable (runtime missing) is a server breakage, not a config
+  // gap — surface it as its own 503 (already logged in getBindings).
+  const bindingsResult = getBindings(context);
+  if (!bindingsResult.ok) return fail('runtime_unavailable', 503);
+  const bindings = bindingsResult.bindings;
+
   // At least one provider must be configured. Gemini is primary; Groq is the
   // fallback. If neither key is present the feature is genuinely unavailable.
   if (!bindings.GEMINI_API_KEY && !bindings.GROQ_API_KEY) {

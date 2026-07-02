@@ -79,7 +79,7 @@ test('normalizeClientToken rejects malformed / abusive tokens', () => {
   assert.equal(normalizeClientToken('inject/../key0000'), null); // key-path chars
   assert.equal(normalizeClientToken(null), null);
   assert.equal(normalizeClientToken(undefined), null);
-  assert.equal(normalizeClientToken(12345678901234567), null);  // non-string
+  assert.equal(normalizeClientToken(123456), null);  // non-string
 });
 
 // ── prompt builder ───────────────────────────────────────────────────────────
