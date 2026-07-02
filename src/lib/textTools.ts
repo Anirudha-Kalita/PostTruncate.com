@@ -1242,7 +1242,16 @@ export interface ReadabilityResult {
  * Uses a vowel-group heuristic with corrections for common silent-e patterns.
  */
 export function countSyllables(word: string): number {
-  const w = word.toLowerCase().replace(/[^a-z]/g, '');
+  // Fold accented Latin letters to their ASCII base (á→a, ñ→n, ü→u, ç→c, …) so
+  // the vowel-group heuristic below counts them instead of dropping the letter.
+  // NFD splits an accented letter into base + combining mark; U+0300–U+036F
+  // (the combining-diacritics block) removes the mark. Pure-ASCII words are
+  // unaffected — this is a no-op on them.
+  const w = word
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .toLowerCase()
+    .replace(/[^a-z]/g, '');
   if (w.length === 0) return 0;
   if (w.length <= 3) return 1;
 
@@ -1275,7 +1284,12 @@ export function countSyllables(word: string): number {
  *   FK Grade   = 0.39 × (words/sentences) + 11.8 × (syllables/words) − 15.59
  */
 export function analyzeReadability(text: string): ReadabilityResult {
-  const wordList = text.match(/[a-zA-Z]+/g) ?? [];
+  // Match whole Latin-script words including accented letters (ñ, á, ü, ç, ã …),
+  // not just ASCII a–z. The old /[a-zA-Z]+/ split "niño" into "ni"+"o", inflating
+  // the word count and corrupting syllables for es/de/fr/pt/it/nl/da. Non-Latin
+  // scripts (CJK, etc.) are excluded here — and the ReadabilityCard gates the
+  // CJK locales out entirely, so this stays a Latin-script reading-ease measure.
+  const wordList = text.match(/\p{Script=Latin}+/gu) ?? [];
   const words = wordList.length;
 
   if (words === 0) return { fleschEase: 0, gradeLevel: 0, hasData: false };
