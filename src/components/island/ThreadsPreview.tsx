@@ -1,4 +1,5 @@
 /** @jsxImportSource preact */
+import { useMemo } from 'preact/hooks';
 import { charCount, detectUrls, FOLDS, LIMITS, sliceChars, splitThread, IMAGE_RATIOS, extractLinkData } from '../../lib/textTools';
 import { LivePreviewCard } from './LivePreviewCard';
 import {
@@ -56,20 +57,27 @@ export function ThreadsPreview({ text, lang, s, toolLinkHref, view, setView, ima
   const nf = new Intl.NumberFormat(lang);
   const author = previewAuthor(s.common);
   const trimmed = text.trim();
-  const count = charCount(trimmed);
-  const urls = detectUrls(trimmed);
-  const posts = trimmed ? splitThread(trimmed, LIMITS.THREADS, charCount) : [];
+  // Memoized on the post text: splitThread is the expensive (superlinear) call,
+  // so it must not re-run on unrelated re-renders (e.g. a fold/view toggle
+  // elsewhere). These only recompute when `trimmed` changes.
+  const { count, urls, posts, linkData } = useMemo(
+    () => ({
+      count: charCount(trimmed),
+      urls: detectUrls(trimmed),
+      posts: trimmed ? splitThread(trimmed, LIMITS.THREADS, charCount) : [],
+      // Link-card simulation (Requirement 9): counters below keep measuring the
+      // original post text. Threads keeps the pasted URL inline as blue
+      // clickable text (it does NOT drop it), so the body renders in full and
+      // the URL is highlighted in place via <LinkText> — never cut.
+      linkData: extractLinkData(trimmed, 'threads'),
+    }),
+    [trimmed],
+  );
   const isChain = posts.length > 1;
   // An image-only post is valid; render one empty post to carry it. The image
   // attaches to the first post of a chain.
   const displayPosts = posts.length === 0 && image ? [''] : posts;
   const visualFold = FOLDS.threads[view];
-
-  // Link-card simulation (Requirement 9): counts/chain/per-post counters below
-  // keep measuring the original post text. Threads keeps the pasted URL inline
-  // as blue clickable text (it does NOT drop it), so the post body renders in
-  // full and the URL is highlighted in place via <LinkText> — never cut.
-  const linkData = extractLinkData(trimmed, 'threads');
   const showCard = linkData.firstUrl !== undefined && !image;
 
   return (

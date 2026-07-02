@@ -27,6 +27,15 @@ import { shareStrings } from '../../i18n/shareStrings';
 const READING_WORDS_PER_MINUTE = 275;
 const SPEAKING_WORDS_PER_MINUTE = 150;
 
+/**
+ * Hard character cap on the editor — a safety rail, not a platform limit. Set
+ * comfortably above the most permissive platform (Facebook, 63,206) so no real
+ * single-platform draft is ever blocked and every over-limit state stays
+ * reachable, while bounding a pathological megabyte paste that would otherwise
+ * make the superlinear thread-splitting analysis (X/Threads) janky.
+ */
+const EDITOR_MAX_CHARS = 80_000;
+
 interface Props {
   text: string;
   setText: (next: string) => void;
@@ -147,6 +156,7 @@ export function Workspace({ text, setText, lang, s, focus, image, mediaKind = 'i
             ref={textareaRef}
             id="post-input"
             value={text}
+            maxLength={EDITOR_MAX_CHARS}
             onInput={(e) => setText((e.currentTarget as HTMLTextAreaElement).value)}
             placeholder={focus && w.placeholders && w.placeholders[focus as keyof typeof w.placeholders] ? w.placeholders[focus as keyof typeof w.placeholders] : w.placeholder}
             rows={12}

@@ -1,5 +1,6 @@
 /** @jsxImportSource preact */
 import { Fragment } from 'preact';
+import { useMemo } from 'preact/hooks';
 import {
   splitThread,
   weightedLength,
@@ -49,9 +50,17 @@ export function TwitterPreview({ text, lang, s, toolLinkHref, image, mediaKind =
   const author = previewAuthor(s.common);
   const initial = monogram(author.displayName);
   const trimmed = text.trim();
-  const weighted = weightedLength(trimmed);
-  const urls = detectUrls(trimmed);
-  const tweets = splitThread(trimmed);
+  // Memoized on the post text: splitThread is the expensive (superlinear) call,
+  // so it must not re-run on unrelated re-renders (e.g. a fold/view toggle
+  // elsewhere in the dashboard). It only recomputes when `trimmed` changes.
+  const { weighted, urls, tweets } = useMemo(
+    () => ({
+      weighted: weightedLength(trimmed),
+      urls: detectUrls(trimmed),
+      tweets: splitThread(trimmed),
+    }),
+    [trimmed],
+  );
   const isThread = tweets.length > 1;
   // An image alone (no text) is still a valid post, so render one empty tweet
   // to carry it. The image always attaches to the first tweet of a thread.
