@@ -11,11 +11,11 @@ and rate-limits via KV. Do not add other server routes without good reason.
 
 | Layer | Technology |
 |---|---|
-| Framework | Astro 6.4.3 (SSG + Cloudflare Workers SSR) |
+| Framework | Astro 5.18.2 (SSG + Cloudflare Workers SSR) |
 | UI/Islands | Preact 10.29.2 (`client:load` islands) |
 | Styling | Tailwind CSS v4 (CSS-first `@theme` config in `global.css`) |
 | Fonts | Geist Variable + Geist Mono Variable (Fontsource) |
-| Deployment | Cloudflare Workers (`@astrojs/cloudflare` adapter) |
+| Deployment | Cloudflare Workers (`@astrojs/cloudflare` v12, pinned) |
 | i18n | Custom system — 10 locales (en, es, de, fr, pt, it, nl, ja, zh, da) |
 | TypeScript | Strict mode; JSX → Preact (`jsxImportSource: "preact"`) |
 | Node | >=22.12.0 required |
@@ -90,6 +90,7 @@ Layered pipeline — **run the cheapest layer that covers the change; escalate o
 - **NEVER run `git commit`, `git push`, or any git write/push command**
 - No backend except `api/improve.ts`; GA ID hardcoded in `layouts/Layout.astro`. The only server secret/env is `GEMINI_API_KEY` (Worker secret + `.dev.vars` locally) plus the `AI_RATELIMIT` KV binding in `wrangler.jsonc`.
 - Node >=22.12.0 — do not downgrade dependencies
+- `@astrojs/cloudflare` is pinned to an exact **v12** (Astro 5). Worker bindings (secrets + KV) are read via `context.locals.runtime.env` — see `getBindings` in `api/improve.ts`. Do NOT bump the adapter to v13 / Astro 6 casually: v13 removes `locals.runtime` and requires `import { env } from 'cloudflare:workers'` instead, which would break `improve.ts` (and any middleware) until migrated.
 
 ### After any file edits
 
