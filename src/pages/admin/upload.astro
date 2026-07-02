@@ -255,6 +255,32 @@ export const prerender = true;
       const todayISO = () => new Date().toISOString().slice(0, 10);
       const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 
+      // Strip active content before pasted/converted article HTML is rendered via
+      // innerHTML in the preview. The source article can be untrusted, so parse it
+      // into a DETACHED document, drop script-bearing elements, and remove every
+      // event-handler (on*) and javascript:/vbscript:/data:text/html URL. Not a
+      // full sanitizer, but it neutralizes the common XSS vectors for this
+      // client-side preview (no server, no stored effect from viewing it here).
+      const sanitizeHtml = (html) => {
+        const doc = new DOMParser().parseFromString(String(html), 'text/html');
+        doc.querySelectorAll('script, style, iframe, object, embed, link, meta, base, form')
+          .forEach((el) => el.remove());
+        doc.querySelectorAll('*').forEach((el) => {
+          for (const attr of [...el.attributes]) {
+            const name = attr.name.toLowerCase();
+            const val = attr.value.replace(/\s+/g, '').toLowerCase();
+            if (name.startsWith('on')) el.removeAttribute(attr.name);
+            else if (
+              (name === 'href' || name === 'src' || name === 'xlink:href') &&
+              (val.startsWith('javascript:') || val.startsWith('vbscript:') || val.startsWith('data:text/html'))
+            ) {
+              el.removeAttribute(attr.name);
+            }
+          }
+        });
+        return doc.body.innerHTML;
+      };
+
       // ── state ─────────────────────────────────────────────────────────--
       let state = { fm: null, body: '', _content: '', _slug: '', _heroUrl: '', dirHandle: null };
 
@@ -475,7 +501,7 @@ export const prerender = true;
         badge.className = 'pill ' + (result.ok ? 'ok' : 'err');
         $('checks').innerHTML = result.checks.map((c) => `
           <li><span class="mark ${c.level}">${c.level === 'pass' ? '✓' : c.level === 'warn' ? '!' : '✗'}</span>
-          <span class="k">${c.k}</span><span>${esc(c.msg)}</span></li>`).join('');
+          <span class="k">${esc(c.k)}</span><span>${esc(c.msg)}</span></li>`).join('');
       }
 
       function renderPreview(fm, body) {
@@ -492,7 +518,7 @@ export const prerender = true;
           ${fm.subtitle ? `<p class="pv-subtitle">${esc(fm.subtitle)}</p>` : ''}
           ${meta ? `<p class="pv-meta">${meta}</p>` : ''}
           ${hero}
-          <div class="pv-body">${marked.parse(cleanBody || '')}</div>`;
+          <div class="pv-body">${sanitizeHtml(marked.parse(cleanBody || ''))}</div>`;
       }
 
       // Output textarea is the source of truth after generation. Re-derive
@@ -632,23 +658,22 @@ export const prerender = true;
           .replace(/^[-.]+|[-.]+$/g, '') || 'image';
 
       // Fetch an image's bytes and write them into public/og/ as <base>.<ext>.
-      // Tries a direct fetch first; on CORS failure, falls back to a public
-      // proxy so images on hosts without CORS headers can still be saved. The
+      // DIRECT fetch only — deliberately no third-party CORS proxy. Routing image
+      // URLs through a public proxy (e.g. allorigins) would leak those URLs to an
+      // outside service AND let it hand back arbitrary bytes that we then commit
+      // into public/og/. So an image on a host without CORS headers is left
+      // un-downloaded and its URL is kept in the markdown to handle manually. The
       // file keeps its ORIGINAL format (PNG/JPG/WebP) — the BUILD step
-      // (npm run build → optimize-images) is what resizes it and converts it to
-      // WebP. Shared by the hero and the in-body image savers.
+      // (npm run build → optimize-images) resizes it and converts it to WebP.
+      // Shared by the hero and the in-body image savers.
       async function saveImageToOg(url, base) {
         if (!state.dirHandle) return { ok: false, reason: 'choose the project root first' };
         if (!(await ensurePerm(state.dirHandle))) return { ok: false, reason: 'write permission denied' };
         let blob = null;
         try { const r = await fetch(url); if (r.ok) blob = await r.blob(); } catch (e) {}
         if (!blob || !blob.type.startsWith('image/')) {
-          try {
-            const r = await fetch('https://api.allorigins.win/raw?url=' + encodeURIComponent(url));
-            if (r.ok) { const b = await r.blob(); if (b.type.startsWith('image/')) blob = b; }
-          } catch (e) {}
+          return { ok: false, reason: 'fetch blocked (CORS) — save this image manually' };
         }
-        if (!blob) return { ok: false, reason: 'fetch blocked (CORS)' };
         let ext = (blob.type.split('/')[1] || url.split(/[?#]/)[0].split('.').pop() || 'png').toLowerCase();
         ext = ({ jpeg: 'jpg', 'svg+xml': 'svg' }[ext] || ext).replace(/[^a-z0-9]/g, '').slice(0, 4) || 'png';
         const filename = `${sanitizeImgBase(base)}.${ext}`;

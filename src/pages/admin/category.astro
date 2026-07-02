@@ -235,6 +235,9 @@ export const prerender = true;
       // Single-quoted YAML scalar ('' escapes an inner quote).
       const yq = (s) => "'" + collapse(s).replace(/'/g, "''") + "'";
       const reEsc = (s) => String(s).replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+      // HTML-escape for the few status messages built with innerHTML below, so a
+      // category name (or an error echoing it) can never inject markup.
+      const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 
       const fields = () => ({
         name: collapse($('f_name').value),
@@ -413,10 +416,10 @@ export const prerender = true;
           await writeText(regH, newReg);
           await writeText(cfgH, newCfg);
 
-          status.innerHTML = `<span class="pill ok">Added "${f.name}"</span> wrote both files.`;
+          status.innerHTML = `<span class="pill ok">Added "${esc(f.name)}"</span> wrote both files.`;
           $('doneCard').classList.remove('hide');
         } catch (e) {
-          status.innerHTML = `<span class="pill err">Failed</span> ${e.message}`;
+          status.innerHTML = `<span class="pill err">Failed</span> ${esc(e.message)}`;
         }
       });
 
