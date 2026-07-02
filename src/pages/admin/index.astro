@@ -6,7 +6,12 @@
 // • noindex/nofollow so search engines never list the admin UI.
 // • Excluded from the sitemap via a filter rule in astro.config.mjs.
 // • No site Layout (no nav/footer) — the CMS owns the whole viewport.
-export const prerender = true;
+//
+// SSR (prerender = false) so the Basic-Auth gate in src/middleware.ts actually
+// runs: a prerendered admin page would be served by the asset layer WITHOUT the
+// Worker, bypassing the gate. SSR has no static file, so every request runs the
+// Worker + gate. (Requires /admin worker-first in wrangler.jsonc.)
+export const prerender = false;
 ---
 
 <!doctype html>

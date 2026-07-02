@@ -17,8 +17,10 @@
 //
 // noindex + outside the [lang] routing, same as /admin and /admin/upload.
 // Excluded from the sitemap by the ^/admin filter rule in astro.config.mjs.
+// SSR (prerender = false) so the Basic-Auth gate in src/middleware.ts runs — a
+// prerendered page is asset-served and would bypass the Worker gate.
 // ──────────────────────────────────────────────────────────────────────────
-export const prerender = true;
+export const prerender = false;
 ---
 
 <!doctype html>

@@ -17,8 +17,10 @@
 // authorize your PROJECT ROOT once (the folder containing src/ and public/).
 //
 // noindex + outside the [lang] routing, same as the Sveltia /admin entry.
+// SSR (prerender = false) so the Basic-Auth gate in src/middleware.ts runs — a
+// prerendered page is asset-served and would bypass the Worker gate.
 // ──────────────────────────────────────────────────────────────────────────
-export const prerender = true;
+export const prerender = false;
 ---
 
 <!doctype html>
