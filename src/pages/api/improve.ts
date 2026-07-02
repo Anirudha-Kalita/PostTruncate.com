@@ -23,6 +23,8 @@ import {
   geminiUrl,
   groqBody,
   groqUrl,
+  isAllowedOrigin,
+  isJsonContentType,
   isTone,
   parseGeminiText,
   parseGroqText,
@@ -40,7 +42,12 @@ type ErrorCode =
   | 'too_long'
   | 'rate_limited'
   | 'not_configured'
-  | 'upstream';
+  | 'upstream'
+  // Anti-abuse guards — never hit by the site's own client (it always sends the
+  // right Origin + JSON content-type), so the client maps them to its generic
+  // error via the default branch of messageForError.
+  | 'forbidden_origin'
+  | 'unsupported_media_type';
 
 /** Minimal slice of the Cloudflare KV API this route uses (avoids a hard
  *  dependency on @cloudflare/workers-types ambient globals). */
@@ -86,6 +93,18 @@ export const POST: APIRoute = async (context) => {
   // fallback. If neither key is present the feature is genuinely unavailable.
   if (!bindings.GEMINI_API_KEY && !bindings.GROQ_API_KEY) {
     return fail('not_configured', 503);
+  }
+
+  // ── Anti-abuse guards ─────────────────────────────────────────────────────
+  // Only the site's own pages may spend the shared AI quota. A cross-site
+  // browser request always carries an Origin, so an allowlist blocks it; and a
+  // JSON content-type is required so a cross-site "simple" POST (which skips the
+  // CORS preflight and actually reaches the server) can't smuggle a payload in.
+  if (!isAllowedOrigin(context.request.headers.get('origin'))) {
+    return fail('forbidden_origin', 403);
+  }
+  if (!isJsonContentType(context.request.headers.get('content-type'))) {
+    return fail('unsupported_media_type', 415);
   }
 
   // ── Parse + validate input ────────────────────────────────────────────────

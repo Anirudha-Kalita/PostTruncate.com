@@ -21,6 +21,49 @@ export function isTone(value: unknown): value is Tone {
   return typeof value === 'string' && (TONES as readonly string[]).includes(value);
 }
 
+// ── Request guards (anti-abuse) ──────────────────────────────────────────────
+// This endpoint spends the site's shared AI quota, so it must only serve the
+// site's own pages — not any third-party website that POSTs here to get free
+// rewrites. Both guards below are pure so they're unit-tested in Layer 1.
+
+/** Origins the site is served from (see the `routes` in wrangler.jsonc). */
+export const ALLOWED_ORIGINS = [
+  'https://posttruncate.com',
+  'https://www.posttruncate.com',
+] as const;
+
+/**
+ * True when a request's `Origin` may use the endpoint. A cross-site browser
+ * request (another website's page calling this) ALWAYS carries an Origin, so an
+ * allowlist check blocks that abuse. A MISSING Origin is allowed through: it
+ * means a non-browser client (curl, a server), which is not the "embed on their
+ * site" vector and is already bounded by the per-IP rate limit. localhost /
+ * 127.0.0.1 on any port is allowed for local dev — that can't be abused from a
+ * public site because a browser always reports the page's real origin.
+ */
+export function isAllowedOrigin(origin: string | null | undefined): boolean {
+  if (!origin) return true;
+  if ((ALLOWED_ORIGINS as readonly string[]).includes(origin)) return true;
+  try {
+    const { hostname } = new URL(origin);
+    return hostname === 'localhost' || hostname === '127.0.0.1';
+  } catch {
+    return false;
+  }
+}
+
+/**
+ * True when the request declares a JSON body. Required so a cross-site "simple"
+ * POST — one using text/plain or a form content-type, the kinds that skip the
+ * CORS preflight and so actually reach the server — can't smuggle a JSON payload
+ * in to spend quota. Any parameter after the media type (e.g. "; charset=utf-8")
+ * is ignored.
+ */
+export function isJsonContentType(contentType: string | null | undefined): boolean {
+  if (!contentType) return false;
+  return contentType.split(';', 1)[0].trim().toLowerCase() === 'application/json';
+}
+
 /** Hard input cap — protects the free Gemini quota and keeps latency sane. */
 export const MAX_INPUT_CHARS = 3000;
 

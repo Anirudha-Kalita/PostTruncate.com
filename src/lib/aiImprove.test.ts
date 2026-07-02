@@ -7,6 +7,8 @@ import {
   groqBody,
   groqUrl,
   GROQ_MODEL,
+  isAllowedOrigin,
+  isJsonContentType,
   isTone,
   parseGeminiText,
   parseGroqText,
@@ -24,6 +26,38 @@ test('isTone accepts every catalogued tone and rejects others', () => {
   assert.equal(isTone(''), false);
   assert.equal(isTone(null), false);
   assert.equal(isTone(42), false);
+});
+
+// ── request guards (anti-abuse) ──────────────────────────────────────────────
+
+test('isAllowedOrigin permits the site origins and localhost, rejects others', () => {
+  assert.equal(isAllowedOrigin('https://posttruncate.com'), true);
+  assert.equal(isAllowedOrigin('https://www.posttruncate.com'), true);
+  assert.equal(isAllowedOrigin('http://localhost:4321'), true);
+  assert.equal(isAllowedOrigin('http://127.0.0.1:8787'), true);
+  // Cross-site abuse and look-alikes are blocked.
+  assert.equal(isAllowedOrigin('https://evil.com'), false);
+  assert.equal(isAllowedOrigin('https://posttruncate.com.evil.com'), false);
+  assert.equal(isAllowedOrigin('https://notposttruncate.com'), false);
+  assert.equal(isAllowedOrigin('not-a-url'), false);
+});
+
+test('isAllowedOrigin allows a missing Origin (non-browser client, rate-limited)', () => {
+  assert.equal(isAllowedOrigin(null), true);
+  assert.equal(isAllowedOrigin(undefined), true);
+  assert.equal(isAllowedOrigin(''), true);
+});
+
+test('isJsonContentType requires application/json and ignores parameters', () => {
+  assert.equal(isJsonContentType('application/json'), true);
+  assert.equal(isJsonContentType('application/json; charset=utf-8'), true);
+  assert.equal(isJsonContentType('  Application/JSON '), true);
+  // The "simple" content-types that skip the CORS preflight are rejected.
+  assert.equal(isJsonContentType('text/plain'), false);
+  assert.equal(isJsonContentType('application/x-www-form-urlencoded'), false);
+  assert.equal(isJsonContentType('multipart/form-data'), false);
+  assert.equal(isJsonContentType(null), false);
+  assert.equal(isJsonContentType(''), false);
 });
 
 // ── prompt builder ───────────────────────────────────────────────────────────
