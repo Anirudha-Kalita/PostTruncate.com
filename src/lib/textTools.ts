@@ -256,54 +256,17 @@ export function sentenceCount(text: string): number {
 }
 
 // ──────────────────────────────────────────────────────────────────────────
-// Words-per-page estimation. Pure, DOM-free helper backing the
-// "how many pages is N words" calculator tool. Baselines follow the common
-// convention where a 12pt single-spaced page holds ~500 words, so 1,000 words
-// ≈ 2 pages single-spaced and ≈ 4 pages double-spaced.
+// Words-per-page estimation — shared types. There is a single estimator,
+// `estimateDocumentPages` below (the layout-aware one the calculator UI uses).
 // ──────────────────────────────────────────────────────────────────────────
 
-export type PageFontSize = 10 | 11 | 12 | 14;
 export type PageSpacing = 'single' | 'oneAndHalf' | 'double';
-
-/** Words that fit on one single-spaced page at each common font size. */
-const SINGLE_SPACED_WPP: Record<PageFontSize, number> = {
-  10: 600,
-  11: 550,
-  12: 500,
-  14: 430,
-};
-
-/** Line-spacing multiplier applied to the single-spaced baseline. */
-const SPACING_FACTOR: Record<PageSpacing, number> = {
-  single: 1,
-  oneAndHalf: 2 / 3,
-  double: 0.5,
-};
-
-export interface PageEstimateOptions {
-  /** Point size of the body font (default 12). */
-  fontSize?: PageFontSize;
-  /** Line spacing (default "single"). */
-  spacing?: PageSpacing;
-}
 
 export interface PageEstimate {
   /** Words assumed to fit on one page for the chosen settings. */
   wordsPerPage: number;
   /** Fractional page count (e.g. 1.5). Always >= 0. */
   pages: number;
-}
-
-/**
- * Estimate document pages from a word count for the chosen font size + line
- * spacing. Unknown/negative word counts are treated as 0.
- */
-export function wordsToPages(words: number, opts: PageEstimateOptions = {}): PageEstimate {
-  const fontSize = opts.fontSize ?? 12;
-  const spacing = opts.spacing ?? 'single';
-  const wordsPerPage = Math.round(SINGLE_SPACED_WPP[fontSize] * SPACING_FACTOR[spacing]);
-  const safeWords = Number.isFinite(words) && words > 0 ? words : 0;
-  return { wordsPerPage, pages: safeWords / wordsPerPage };
 }
 
 // ──────────────────────────────────────────────────────────────────────────
@@ -1294,9 +1257,10 @@ export function analyzeReadability(text: string): ReadabilityResult {
 
   if (words === 0) return { fleschEase: 0, gradeLevel: 0, hasData: false };
 
-  // Count sentence-ending punctuation runs as one sentence boundary each
-  const sentenceMatches = text.match(/[.!?]+/g) ?? [];
-  const sentences = Math.max(1, sentenceMatches.length);
+  // Reuse the single sentence counter (handles ?!/… runs, decimals, and CJK
+  // terminators) rather than a second, cruder /[.!?]+/ here. Floored at 1 so the
+  // words/sentences ratio in the Flesch formula never divides by zero.
+  const sentences = Math.max(1, sentenceCount(text));
 
   let syllables = 0;
   for (const word of wordList) {
