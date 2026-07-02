@@ -19,10 +19,22 @@ export const prerender = true;
   </head>
   <body>
     <!-- is:inline so Astro doesn't bundle/transform the external CMS module.
-         Sveltia auto-loads ./config.yml (i.e. /admin/config.yml). -->
+         Sveltia auto-loads ./config.yml (i.e. /admin/config.yml).
+
+         PINNED to an exact version + Subresource-Integrity hash so this
+         third-party script (which authenticates to GitHub with write access to
+         this repo) can neither silently change nor be tampered with on the CDN:
+         the browser refuses to run the file if its hash doesn't match. The
+         @<version> URL is immutable, and the dist bundle is self-contained
+         (no external sub-imports), so the one hash covers all of it.
+         To upgrade: bump the version, then regenerate the hash with
+           curl -sL "https://unpkg.com/@sveltia/cms@<VER>/dist/sveltia-cms.js" \
+             | openssl dgst -sha384 -binary | openssl base64 -A -->
     <script
       is:inline
       type="module"
-      src="https://unpkg.com/@sveltia/cms/dist/sveltia-cms.js"></script>
+      src="https://unpkg.com/@sveltia/cms@0.169.1/dist/sveltia-cms.js"
+      integrity="sha384-bZPXv5iCz/2JNwBehhFWqz6qWmJ0z9GrJYbWpm9S/YYviAs5yLypyxUp+U8ps7DP"
+      crossorigin="anonymous"></script>
   </body>
 </html>
