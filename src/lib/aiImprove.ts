@@ -64,11 +64,35 @@ export function isJsonContentType(contentType: string | null | undefined): boole
   return contentType.split(';', 1)[0].trim().toLowerCase() === 'application/json';
 }
 
+/**
+ * Normalize a client-supplied rate-limit token (a random id the browser keeps in
+ * localStorage and sends per request). Returns the lower-cased token, or null
+ * when it's missing/malformed. The bounded charset + length stop a caller from
+ * spraying arbitrary KV keys (unbounded cardinality / storage abuse); a random
+ * UUID from crypto.randomUUID() satisfies it.
+ */
+export function normalizeClientToken(raw: unknown): string | null {
+  if (typeof raw !== 'string') return null;
+  const t = raw.trim().toLowerCase();
+  return /^[a-z0-9-]{16,64}$/.test(t) ? t : null;
+}
+
 /** Hard input cap — protects the free Gemini quota and keeps latency sane. */
 export const MAX_INPUT_CHARS = 3000;
 
-/** Rate limit: N successful improvements per rolling window, per visitor IP. */
+// ── Rate limiting: two tiers so shared NAT/office IPs aren't over-blocked ────
+// The per-client-token cap is the intended per-user allowance; the per-IP cap is
+// a higher backstop that clearing browser storage can't get past (so one IP
+// still can't run away). A request needs budget in BOTH; the route consumes both.
+
+/** Per-client-token cap: N successful improvements per rolling window, per browser. */
 export const RATE_LIMIT_MAX = 3;
+/**
+ * Per-IP backstop cap. Higher than the per-client cap so several people behind
+ * one NAT/office IP aren't collectively capped at the per-user limit, while a
+ * single IP is still bounded (this tier is NOT reset by clearing storage).
+ */
+export const RATE_LIMIT_IP_MAX = 20;
 export const RATE_LIMIT_WINDOW_MS = 12 * 60 * 60 * 1000; // 12 hours
 
 /** Gemini model + REST host. Free-tier eligible flash model. */

@@ -14,6 +14,28 @@ interface Props {
 
 type Status = 'idle' | 'loading' | 'done' | 'error';
 
+/**
+ * A stable per-browser id sent as X-Client-Token so the server can apply the
+ * per-user rate-limit tier (fair under shared NAT) alongside its per-IP backstop.
+ * Persisted in localStorage; regenerated if missing/malformed. Returns '' when
+ * storage is unavailable (private mode) — the server then falls back to per-IP.
+ */
+function aiClientToken(): string {
+  try {
+    const KEY = 'pt-ai-client';
+    let t = localStorage.getItem(KEY);
+    if (!t || !/^[a-z0-9-]{16,64}$/.test(t)) {
+      t = (crypto.randomUUID?.() ?? `${Date.now().toString(36)}${Math.random().toString(36).slice(2)}`)
+        .toLowerCase()
+        .slice(0, 64);
+      localStorage.setItem(KEY, t);
+    }
+    return t;
+  } catch {
+    return '';
+  }
+}
+
 /** Map a server error code → a localized message. */
 function messageForError(
   code: string,
@@ -74,7 +96,7 @@ export function AiImprove({ text, setText, s, onImproved }: Props) {
     try {
       const res = await fetch('/api/improve', {
         method: 'POST',
-        headers: { 'content-type': 'application/json' },
+        headers: { 'content-type': 'application/json', 'x-client-token': aiClientToken() },
         body: JSON.stringify({ text, tone }),
       });
       const data = (await res.json().catch(() => ({}))) as {

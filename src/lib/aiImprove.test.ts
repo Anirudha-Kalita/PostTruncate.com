@@ -10,6 +10,7 @@ import {
   isAllowedOrigin,
   isJsonContentType,
   isTone,
+  normalizeClientToken,
   parseGeminiText,
   parseGroqText,
   RATE_LIMIT_MAX,
@@ -58,6 +59,27 @@ test('isJsonContentType requires application/json and ignores parameters', () =>
   assert.equal(isJsonContentType('multipart/form-data'), false);
   assert.equal(isJsonContentType(null), false);
   assert.equal(isJsonContentType(''), false);
+});
+
+// ── client-token normalization (rate-limit tier) ─────────────────────────────
+
+test('normalizeClientToken accepts UUID-shaped tokens, lower-cased', () => {
+  assert.equal(
+    normalizeClientToken('550E8400-E29B-41D4-A716-446655440000'),
+    '550e8400-e29b-41d4-a716-446655440000',
+  );
+  assert.equal(normalizeClientToken('  a1b2c3d4e5f60718  '), 'a1b2c3d4e5f60718'); // trimmed, 16 chars
+});
+
+test('normalizeClientToken rejects malformed / abusive tokens', () => {
+  assert.equal(normalizeClientToken(''), null);
+  assert.equal(normalizeClientToken('short'), null);            // < 16 chars
+  assert.equal(normalizeClientToken('x'.repeat(65)), null);     // > 64 chars (KV key abuse)
+  assert.equal(normalizeClientToken('bad token with spaces!!'), null);
+  assert.equal(normalizeClientToken('inject/../key0000'), null); // key-path chars
+  assert.equal(normalizeClientToken(null), null);
+  assert.equal(normalizeClientToken(undefined), null);
+  assert.equal(normalizeClientToken(12345678901234567), null);  // non-string
 });
 
 // ── prompt builder ───────────────────────────────────────────────────────────

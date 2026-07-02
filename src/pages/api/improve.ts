@@ -26,10 +26,13 @@ import {
   isAllowedOrigin,
   isJsonContentType,
   isTone,
+  normalizeClientToken,
   parseGeminiText,
   parseGroqText,
   MAX_INPUT_CHARS,
   RATE_LIMIT_MAX,
+  RATE_LIMIT_IP_MAX,
+  type RateDecision,
   type RateRecord,
 } from '../../lib/aiImprove';
 
@@ -124,34 +127,78 @@ export const POST: APIRoute = async (context) => {
   if (!text.trim()) return fail('empty', 400);
   if (text.length > MAX_INPUT_CHARS) return fail('too_long', 413, { max: MAX_INPUT_CHARS });
 
-  // ── Rate limit by visitor IP (KV, fixed 12h window) ───────────────────────
-  // Cloudflare sets CF-Connecting-IP on every edge request. If KV isn't bound
-  // (e.g. a bare local dev run), we degrade to no limiting rather than erroring.
+  // ── Rate limit (KV, two tiers, 12h rolling window) ────────────────────────
+  // Two tiers so people sharing one NAT/office IP aren't collectively capped at
+  // the per-user allowance:
+  //  • per client-token — a random id the browser keeps in localStorage and
+  //    sends via X-Client-Token. The intended per-user cap (RATE_LIMIT_MAX). It
+  //    is resettable by clearing storage, which is why it is NOT the only tier.
+  //  • per IP (CF-Connecting-IP) — a higher backstop (RATE_LIMIT_IP_MAX) that
+  //    clearing storage can't get past, so a single IP still can't run away.
+  // A request needs budget in BOTH; both are consumed on success. If KV isn't
+  // bound (bare local dev) we degrade to no limiting rather than erroring.
   const kv = bindings.AI_RATELIMIT;
-  const ip = context.request.headers.get('CF-Connecting-IP') ?? 'unknown';
   const now = Date.now();
 
   if (kv) {
-    const stored = await kv.get(`rl:${ip}`, 'json').catch(() => null);
-    const decision = evaluateRateLimit(stored as RateRecord | null, now);
-    if (!decision.allowed) {
+    const ip = context.request.headers.get('CF-Connecting-IP') ?? 'unknown';
+    const clientId = normalizeClientToken(context.request.headers.get('X-Client-Token'));
+    const ipKey = `rl:ip:${ip}`;
+    const clientKey = clientId ? `rl:ct:${clientId}` : null;
+
+    const [ipRec, clientRec] = await Promise.all([
+      kv.get(ipKey, 'json').catch(() => null),
+      clientKey ? kv.get(clientKey, 'json').catch(() => null) : Promise.resolve(null),
+    ]);
+
+    const ipDecision = evaluateRateLimit(ipRec as RateRecord | null, now, RATE_LIMIT_IP_MAX);
+    // No valid client token → fall back to the IP backstop only.
+    const clientDecision = clientKey
+      ? evaluateRateLimit(clientRec as RateRecord | null, now)
+      : null;
+
+    // Blocked when EITHER tier is exhausted; report the blocking tier's reset/max.
+    const blocking = !ipDecision.allowed
+      ? { decision: ipDecision, max: RATE_LIMIT_IP_MAX }
+      : clientDecision && !clientDecision.allowed
+        ? { decision: clientDecision, max: RATE_LIMIT_MAX }
+        : null;
+    if (blocking) {
       return fail('rate_limited', 429, {
-        retryAfterSec: decision.retryAfterSec,
+        retryAfterSec: blocking.decision.retryAfterSec,
         remaining: 0,
-        max: RATE_LIMIT_MAX,
+        max: blocking.max,
       });
     }
-    // Persist the consumed slot with a TTL that expires exactly at window end.
-    const ttl = Math.max(60, Math.ceil((decision.next.resetAt - now) / 1000));
-    await kv
-      .put(`rl:${ip}`, JSON.stringify(decision.next), { expirationTtl: ttl })
-      .catch(() => {});
-    return await improveText(bindings, tone, text, decision.remaining);
+
+    // Consume both tiers (each TTL expires exactly at its own window end).
+    await Promise.all([
+      persistLimit(kv, ipKey, ipDecision, now),
+      clientKey && clientDecision
+        ? persistLimit(kv, clientKey, clientDecision, now)
+        : Promise.resolve(),
+    ]);
+
+    // Surface the per-user remaining (what the UI shows); fall back to the IP
+    // remaining when the request carried no client token.
+    const remaining = clientDecision ? clientDecision.remaining : ipDecision.remaining;
+    return await improveText(bindings, tone, text, remaining);
   }
 
   // No KV bound — proceed without a limit (local/dev fallback).
   return await improveText(bindings, tone, text, RATE_LIMIT_MAX - 1);
 };
+
+/** Persist a consumed rate-limit slot with a TTL that expires at the window end. */
+function persistLimit(
+  kv: KvLike,
+  key: string,
+  decision: RateDecision,
+  now: number,
+): Promise<void> {
+  const ttl = Math.max(60, Math.ceil((decision.next.resetAt - now) / 1000));
+  return kv.put(key, JSON.stringify(decision.next), { expirationTtl: ttl }).catch(() => {});
+}
 
 /**
  * Run the rewrite with Gemini as primary and Groq (Llama 3.3 70B) as fallback.
