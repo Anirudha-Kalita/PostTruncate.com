@@ -1041,6 +1041,11 @@ export const ja: Translations = {
         one: 'リンク {n} 件 · それぞれ {weight} としてカウント',
         other: 'リンク {n} 件 · それぞれ {weight} としてカウント',
       },
+      modeFree: '無料 · {limit}',
+      modePremium: 'Premium · {limit}',
+      badgePremium: '長文投稿',
+      showMore: 'もっと見る',
+      premiumHint: 'Premium は最大 {limit} 文字まで投稿できますが、タイムラインには最初の 280 文字だけが表示され、その後に「もっと見る」リンクが付きます。',
       weightedLength: '重み付けされた長さ',
       placeholder:
         'ツイートのプレビューがここに表示されます。{limit} 文字を超えると、自動的にスレッドに分割されます。',

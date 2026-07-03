@@ -1041,6 +1041,11 @@ export const nl: Translations = {
         one: '{n} link · geteld als {weight} per stuk',
         other: '{n} links · geteld als {weight} per stuk',
       },
+      modeFree: 'Gratis · {limit}',
+      modePremium: 'Premium · {limit}',
+      badgePremium: 'Lange post',
+      showMore: 'Meer weergeven',
+      premiumHint: 'Premium staat tot {limit} tekens toe, maar de tijdlijn toont alleen de eerste 280 vóór een “Meer weergeven”-link.',
       weightedLength: 'Gewogen lengte',
       placeholder:
         'Je tweetpreview verschijnt hier. Ga voorbij {limit} tekens en hij splitst automatisch op in een thread.',

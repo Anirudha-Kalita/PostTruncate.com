@@ -1033,6 +1033,11 @@ export const en: Translations = {
       badgeIdle: 'Idle',
       badgeThread: '{n}-tweet thread',
       badgeSingle: 'Single tweet',
+      modeFree: 'Free · {limit}',
+      modePremium: 'Premium · {limit}',
+      badgePremium: 'Long-form post',
+      showMore: 'Show more',
+      premiumHint: 'Premium posts up to {limit} characters, but the timeline shows only the first 280 before a “Show more” link.',
       links: {
         one: '{n} link · counted as {weight} each',
         other: '{n} links · counted as {weight} each',

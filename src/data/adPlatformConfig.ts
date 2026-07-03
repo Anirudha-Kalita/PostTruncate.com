@@ -94,7 +94,8 @@ export interface InstagramPlatformConfig {
   reelsMax: number;
   /** Feed caption "… more" affordance label. */
   seeMoreLabel: string;
-  /** Organic Reels safe zone (bottom caption band + right action stack). */
+  /** Organic Reels safe zone: top attribution band (username/follow/audio ~11%),
+   *  bottom caption band, and the right action stack. */
   safeZone: SafeZoneInsets;
   /** Reels AD safe zone — larger: the Sponsored label + CTA push the bottom band
    *  to ~35% and add a ~14% top band, on top of the ~15% right action stack. */
@@ -161,7 +162,10 @@ export const AD_PLATFORM_CONFIG = {
     // live Reels player). The feed keeps the standard 125-char cutoff above.
     reelsMax: 60,
     seeMoreLabel: '… more',
-    safeZone: { bottomPct: 20, rightPct: 15 },
+    // Organic Reels: the top ~210px of a 1080×1920 frame (~11%) carries the
+    // username, follow button, and audio attribution; the bottom caption band and
+    // the right action stack round out the native chrome. (2026 Reels player.)
+    safeZone: { topPct: 11, bottomPct: 20, rightPct: 15 },
     safeZoneAd: { topPct: 14, bottomPct: 35, rightPct: 15 },
   },
   tiktok: {
@@ -169,9 +173,10 @@ export const AD_PLATFORM_CONFIG = {
     maxLines: 4,
     seeMoreLabel: '... See more',
     // 2026 in-feed AD safe zone: top tabs ~108–130px (~7%), right action rail
-    // ~120px (~11%), and a bottom band ~440px for the username/caption/CTA/music
-    // (~23%, deeper than organic because the CTA button adds dead space).
-    safeZone: { topPct: 7, bottomPct: 23, rightPct: 11 },
+    // ~140–164px (~13%, matching the organic rail — icons + labels), and a bottom
+    // band ~440px for the username/caption/CTA/music (~23%, deeper than organic
+    // because the CTA button adds dead space).
+    safeZone: { topPct: 7, bottomPct: 23, rightPct: 13 },
   },
 } as const satisfies AdPlatformConfig;
 

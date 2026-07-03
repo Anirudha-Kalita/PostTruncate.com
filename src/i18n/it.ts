@@ -1041,6 +1041,11 @@ export const it: Translations = {
         one: '{n} link · conteggiato come {weight} ciascuno',
         other: '{n} link · conteggiati come {weight} ciascuno',
       },
+      modeFree: 'Gratis · {limit}',
+      modePremium: 'Premium · {limit}',
+      badgePremium: 'Post lungo',
+      showMore: 'Mostra altro',
+      premiumHint: 'Premium consente fino a {limit} caratteri, ma la timeline mostra solo i primi 280 prima di un link “Mostra altro”.',
       weightedLength: 'Lunghezza ponderata',
       placeholder:
         'L’anteprima del tuo tweet appare qui. Supera i {limit} caratteri e si suddivide automaticamente in un thread.',

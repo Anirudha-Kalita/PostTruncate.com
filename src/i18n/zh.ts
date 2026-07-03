@@ -1039,6 +1039,11 @@ export const zh: Translations = {
         one: '{n} 个链接 · 每个计为 {weight}',
         other: '{n} 个链接 · 每个计为 {weight}',
       },
+      modeFree: '免费 · {limit}',
+      modePremium: 'Premium · {limit}',
+      badgePremium: '长帖',
+      showMore: '显示更多',
+      premiumHint: 'Premium 最多可发布 {limit} 个字符，但时间线仅显示前 280 个字符，之后是“显示更多”链接。',
       weightedLength: '计重长度',
       placeholder:
         '你的推文预览会显示在这里。超过 {limit} 个字符，它会自动拆分为串文。',

@@ -331,11 +331,16 @@ export function VerifiedTick({ size = 15, class: cls = 'text-link' }: VerifiedTi
 
 export type EngagementIcon = 'reply' | 'repost' | 'reshare' | 'like' | 'views' | 'comment' | 'commentRound' | 'share' | 'shareArrow' | 'thumbsUp' | 'save' | 'send';
 
+// Circular two-arrow loop, shared by X/Threads "repost" and Instagram/Facebook
+// "reshare" — both now render the same circular double-arrow glyph (matching X's
+// current repost button, which is a circular loop rather than the old squared one).
+const CIRCULAR_ARROWS_D =
+  'M4.5 10.5A7.5 7.5 0 0 1 17 7l1.5 1.5M19 4v4h-4M19.5 13.5A7.5 7.5 0 0 1 7 17l-1.5-1.5M5 20v-4h4';
+
 const ENGAGEMENT_PATHS: Record<EngagementIcon, ComponentChildren> = {
   reply: <path d="M4 5h16v10H9l-5 4z" />,
-  repost: <path d="M5 8l3-3 3 3M8 5v8h8M19 16l-3 3-3-3M16 19v-8H8" />,
-  // Circular two-arrow loop — Instagram's reshare glyph.
-  reshare: <path d="M4.5 10.5A7.5 7.5 0 0 1 17 7l1.5 1.5M19 4v4h-4M19.5 13.5A7.5 7.5 0 0 1 7 17l-1.5-1.5M5 20v-4h4" />,
+  repost: <path d={CIRCULAR_ARROWS_D} />,
+  reshare: <path d={CIRCULAR_ARROWS_D} />,
   like: <path d="M12 19.2 4.6 12c-1.5-1.5-1.5-3.9 0-5.4 1.5-1.5 3.9-1.5 5.4 0l2 2 2-2c1.5-1.5 3.9-1.5 5.4 0 1.5 1.5 1.5 3.9 0 5.4Z" />,
   views: <path d="M4 19V11M9 19V5M14 19v-6M19 19V8" />,
   comment: <path d="M4 5h16v10H9l-5 4z" />,

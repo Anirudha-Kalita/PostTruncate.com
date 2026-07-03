@@ -1041,6 +1041,11 @@ export const pt: Translations = {
         one: '{n} ligação · contada como {weight} cada',
         other: '{n} ligações · contadas como {weight} cada',
       },
+      modeFree: 'Grátis · {limit}',
+      modePremium: 'Premium · {limit}',
+      badgePremium: 'Post longo',
+      showMore: 'Ver mais',
+      premiumHint: 'O Premium permite até {limit} caracteres, mas a linha do tempo mostra apenas os primeiros 280 antes de um link “Ver mais”.',
       weightedLength: 'Comprimento ponderado',
       placeholder:
         'A pré-visualização do seu tweet aparece aqui. Passe dos {limit} caracteres e divide-se automaticamente numa thread.',

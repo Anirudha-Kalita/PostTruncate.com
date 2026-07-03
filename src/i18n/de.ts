@@ -1042,6 +1042,11 @@ export const de: Translations = {
         one: '{n} Link · gezählt als je {weight}',
         other: '{n} Links · gezählt als je {weight}',
       },
+      modeFree: 'Kostenlos · {limit}',
+      modePremium: 'Premium · {limit}',
+      badgePremium: 'Langform-Beitrag',
+      showMore: 'Mehr anzeigen',
+      premiumHint: 'Premium erlaubt bis zu {limit} Zeichen, aber die Timeline zeigt nur die ersten 280 vor einem „Mehr anzeigen“-Link.',
       weightedLength: 'Gewichtete Länge',
       placeholder:
         'Deine Tweet-Vorschau erscheint hier. Geh über {limit} Zeichen und sie teilt sich automatisch in einen Thread auf.',

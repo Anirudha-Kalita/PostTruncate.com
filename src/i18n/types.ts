@@ -579,6 +579,16 @@ export interface IslandStrings {
     /** "{n}-tweet thread". */
     badgeThread: string;
     badgeSingle: string;
+    /** Account-tier toggle, free thread mode. "{limit}" = 280 (compact-formatted). */
+    modeFree: string;
+    /** Account-tier toggle, Premium long-form mode. "{limit}" = 25,000 (compact-formatted). */
+    modePremium: string;
+    /** Badge for a single Premium long-form post. */
+    badgePremium: string;
+    /** Inline "Show more" affordance at the Premium timeline fold. */
+    showMore: string;
+    /** Premium fold explainer: "{limit}" chars shown before "Show more". */
+    premiumHint: string;
     /** "{n}" links · "{weight}" each. */
     links: Plural;
     weightedLength: string;

@@ -138,6 +138,19 @@ export function charCount(text: string): number {
   return splitGraphemes(text).length;
 }
 
+/**
+ * UTF-16 code-unit length — the unit TikTok's *publishing* caption caps are
+ * measured in (TikTok's Content Posting API documents the caption/title field as
+ * a UTF-16 "rune" count). For plain BMP text this equals `charCount`, but an
+ * astral-plane character (most emoji) is 2 code units and a ZWJ / skin-tone /
+ * flag sequence is many, so this is always >= `charCount`. Use it for hard
+ * publish-cap comparisons; keep `charCount` for the visible "…more" fold, which
+ * the platform measures by rendered glyphs, not code units.
+ */
+export function utf16Length(text: string): number {
+  return text.length;
+}
+
 // ──────────────────────────────────────────────────────────────────────────
 // Byte counting across the common Unicode encodings. Pure and DOM-free
 // (TextEncoder is a Web/Node global, not a DOM API). Backs the byte-counter /

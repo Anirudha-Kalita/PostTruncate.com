@@ -1041,6 +1041,11 @@ export const fr: Translations = {
         one: '{n} lien · compté comme {weight} chacun',
         other: '{n} liens · comptés comme {weight} chacun',
       },
+      modeFree: 'Gratuit · {limit}',
+      modePremium: 'Premium · {limit}',
+      badgePremium: 'Post long',
+      showMore: 'Afficher plus',
+      premiumHint: 'Premium autorise jusqu’à {limit} caractères, mais le fil n’affiche que les 280 premiers avant un lien « Afficher plus ».',
       weightedLength: 'Longueur pondérée',
       placeholder:
         'L’aperçu de votre tweet apparaît ici. Dépassez {limit} caractères et il se découpe automatiquement en fil.',

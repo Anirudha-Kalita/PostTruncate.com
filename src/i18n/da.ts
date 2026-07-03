@@ -1041,6 +1041,11 @@ export const da: Translations = {
         one: '{n} link · tæller som {weight} hver',
         other: '{n} links · tæller som {weight} hver',
       },
+      modeFree: 'Gratis · {limit}',
+      modePremium: 'Premium · {limit}',
+      badgePremium: 'Langt opslag',
+      showMore: 'Vis mere',
+      premiumHint: 'Premium tillader op til {limit} tegn, men tidslinjen viser kun de første 280 før et “Vis mere”-link.',
       weightedLength: 'Vægtet længde',
       placeholder:
         'Dit tweet-preview vises her. Gå forbi {limit} tegn, og det opdeles automatisk i en tråd.',

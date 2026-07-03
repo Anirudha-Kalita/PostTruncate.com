@@ -1041,6 +1041,11 @@ export const es: Translations = {
         one: '{n} enlace · contado como {weight} cada uno',
         other: '{n} enlaces · contados como {weight} cada uno',
       },
+      modeFree: 'Gratis · {limit}',
+      modePremium: 'Premium · {limit}',
+      badgePremium: 'Publicación larga',
+      showMore: 'Ver más',
+      premiumHint: 'Premium permite hasta {limit} caracteres, pero la cronología solo muestra los primeros 280 antes de un enlace “Ver más”.',
       weightedLength: 'Longitud ponderada',
       placeholder:
         'La previsualización de tu tuit aparece aquí. Pasa de {limit} caracteres y se divide automáticamente en un hilo.',

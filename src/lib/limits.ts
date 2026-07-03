@@ -17,6 +17,13 @@ export const LIMITS = {
   /** LinkedIn's published hard cap for a standard feed post. */
   LINKEDIN_POST: 3000,
   TWEET: 280,
+  /**
+   * X Premium long-form post cap. Premium (paid) accounts publish a single post
+   * up to 25,000 weighted characters; the timeline still shows only the first
+   * ~280 before a "Show more" link. Free accounts stay at TWEET (280) and must
+   * thread longer copy.
+   */
+  TWEET_PREMIUM: 25000,
   /** Threads (by Meta) per-post character ceiling; longer copy chains as replies. */
   THREADS: 500,
   /** t.co wraps every URL to a fixed weight regardless of real length. */

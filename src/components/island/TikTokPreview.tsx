@@ -1,6 +1,6 @@
 /** @jsxImportSource preact */
 import { useRef, useState } from 'preact/hooks';
-import { charCount, detectUrls, LIMITS, sliceChars, tiktokFoldIndex } from '../../lib/textTools';
+import { charCount, detectUrls, LIMITS, sliceChars, tiktokFoldIndex, utf16Length } from '../../lib/textTools';
 import { Card, CardHead, Badge, Segmented, BrandLogo, ToolLink, FoldMarker, TikTokActionRail, previewAuthor } from './ui';
 import { interp, plural } from '../../i18n/interp';
 import type { IslandStrings } from '../../i18n/types';
@@ -33,7 +33,11 @@ export function TikTokPreview({ text, lang, s, toolLinkHref, view, setView, imag
   const nf = new Intl.NumberFormat(lang);
   const author = previewAuthor(s.common);
   const trimmed = text.trim();
-  const count = charCount(trimmed);
+  // The publish cap (4,000 / 2,200) is measured by TikTok in UTF-16 code units,
+  // not grapheme clusters, so an emoji-heavy caption within the grapheme count
+  // can still be rejected by the API. Count the cap in code units; the visible
+  // "…more" fold below stays grapheme-based (tiktokFoldIndex / sliceChars).
+  const count = utf16Length(trimmed);
   const urls = detectUrls(trimmed);
   // Two-tier: 4,000 is the native hard cap; past 2,200 still posts natively but
   // breaks the TikTok API / schedulers, so it warns rather than errors.
@@ -160,9 +164,9 @@ export function TikTokPreview({ text, lang, s, toolLinkHref, view, setView, imag
           {/* Safe-zone overlay (toggle, default off) */}
           {safeZones && (
             <div class="pointer-events-none absolute inset-0" aria-hidden="true">
-              <div class="absolute inset-x-0 top-0 h-[10%] bg-[rgba(255,0,0,0.35)]" />
-              <div class="absolute inset-x-0 bottom-0 h-[18%] bg-[rgba(255,0,0,0.35)]" />
-              <div class="absolute right-0 bottom-[18%] h-[50%] w-[15%] bg-[rgba(255,0,0,0.35)]" />
+              <div class="absolute inset-x-0 top-0 h-[7%] bg-error/35" />
+              <div class="absolute inset-x-0 bottom-0 h-[18%] bg-error/35" />
+              <div class="absolute right-0 bottom-[18%] h-[50%] w-[15%] bg-error/35" />
             </div>
           )}
         </div>
