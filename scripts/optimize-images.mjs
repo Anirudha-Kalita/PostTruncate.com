@@ -46,6 +46,14 @@ export const CONFIG = {
   rasterExtensions: ['.png', '.jpg', '.jpeg', '.webp'],
   // WebP encoder quality.
   webpQuality: 80,
+  // WebP alpha-channel quality (0–100). Lossy WebP stores the alpha channel
+  // losslessly by default (alphaQuality 100), which roughly doubles the file
+  // size of transparent assets — our translucent-nav logos (`/logo.webp`,
+  // `/logo-dark.webp`) keep their transparency for the glass backdrop, so their
+  // alpha mask was the bulk of the bytes (Lighthouse "Improve image delivery").
+  // 60 compresses that anti-aliasing mask with no visible fringing on the crisp
+  // wordmark edges, cutting each logo variant ~33%. A no-op for opaque images.
+  webpAlphaQuality: 60,
 
   // Brand/UI images that live at the public root (not in public/og/) and are
   // referenced by absolute path (/logo.webp, /author-anirudha.webp). They render
@@ -124,10 +132,10 @@ export function sanitizeBaseName(name) {
  * dimensions, or plans no widths (caller skips it).
  *
  * @param {string} srcPath  Absolute path to the source image.
- * @param {{widths: number[], webpQuality: number, outputDir: string, publicOptimizedPrefix: string, label: string}} opts
+ * @param {{widths: number[], webpQuality: number, webpAlphaQuality: number, outputDir: string, publicOptimizedPrefix: string, label: string}} opts
  * @returns {Promise<{meta: import('sharp').Metadata, srcBase: string, variants: {width: number, url: string}[], generated: number, skipped: number} | null>}
  */
-async function renderVariants(srcPath, { widths, webpQuality, outputDir, publicOptimizedPrefix, label }) {
+async function renderVariants(srcPath, { widths, webpQuality, webpAlphaQuality, outputDir, publicOptimizedPrefix, label }) {
   let meta;
   try {
     meta = await sharp(srcPath).metadata();
@@ -166,7 +174,7 @@ async function renderVariants(srcPath, { widths, webpQuality, outputDir, publicO
     } else {
       await sharp(srcPath)
         .resize({ width: w, withoutEnlargement: true })
-        .webp({ quality: webpQuality })
+        .webp({ quality: webpQuality, alphaQuality: webpAlphaQuality })
         .toFile(outPath);
       generated++;
     }
@@ -198,6 +206,7 @@ export async function generateVariants(options = {}) {
     widths,
     rasterExtensions,
     webpQuality,
+    webpAlphaQuality,
     publicPrefix,
     publicOptimizedPrefix,
     // When false, build the manifest in memory but let the caller write it
@@ -229,6 +238,7 @@ export async function generateVariants(options = {}) {
     const res = await renderVariants(srcPath, {
       widths,
       webpQuality,
+      webpAlphaQuality,
       outputDir,
       publicOptimizedPrefix,
       label: dirent.name,
@@ -267,7 +277,7 @@ export async function generateVariants(options = {}) {
  */
 export async function generateBrandVariants(options = {}) {
   const cfg = { ...CONFIG, ...options };
-  const { brandSourceDir, brandImages, outputDir, webpQuality, publicOptimizedPrefix } = cfg;
+  const { brandSourceDir, brandImages, outputDir, webpQuality, webpAlphaQuality, publicOptimizedPrefix } = cfg;
 
   await mkdir(outputDir, { recursive: true });
 
@@ -286,6 +296,7 @@ export async function generateBrandVariants(options = {}) {
     const res = await renderVariants(srcPath, {
       widths: img.widths,
       webpQuality,
+      webpAlphaQuality,
       outputDir,
       publicOptimizedPrefix,
       label: img.file,
