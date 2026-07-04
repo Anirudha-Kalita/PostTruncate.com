@@ -895,6 +895,7 @@ export const de: Translations = {
       clean: 'Überflüssige Leerräume entfernen',
       sanitize: 'Text bereinigen',
       clear: 'Editor leeren',
+      paste: 'Text einfügen',
       hiddenWarning:
         'Unsichtbare Zeichen gefunden, die Zählungen und Screenreader stören: {codes}. Bereinige, um sie zu entfernen.',
       statusLine: 'Echtzeit-Analyse ist aktiv',

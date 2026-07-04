@@ -894,6 +894,7 @@ export const it: Translations = {
       clean: 'Pulisci spazi in eccesso',
       sanitize: 'Sanifica testo',
       clear: 'Svuota l’editor',
+      paste: 'Incolla testo',
       hiddenWarning:
         'Trovati caratteri invisibili che mandano in tilt conteggi e screen reader: {codes}. Sanifica per eliminarli.',
       statusLine: 'L’analisi in tempo reale è attiva',

@@ -90,6 +90,33 @@ export function Workspace({ text, setText, lang, s, focus, image, mediaKind = 'i
   const onSanitize = () => setText(sanitizeText(text).text);
   const onClear = () => setText('');
 
+  // Paste from the system clipboard into the editor. Inserts at the caret when
+  // the textarea is focused, otherwise appends; capped at EDITOR_MAX_CHARS. If
+  // the Clipboard API is blocked (permissions / insecure context), fall back to
+  // focusing the editor so the user can paste manually with Ctrl/Cmd+V.
+  const onPaste = async () => {
+    const el = textareaRef.current;
+    try {
+      const clip = await navigator.clipboard.readText();
+      if (!clip) {
+        el?.focus();
+        return;
+      }
+      const focused = el && document.activeElement === el;
+      const start = focused ? (el.selectionStart ?? text.length) : text.length;
+      const end = focused ? (el.selectionEnd ?? text.length) : text.length;
+      const next = (text.slice(0, start) + clip + text.slice(end)).slice(0, EDITOR_MAX_CHARS);
+      setText(next);
+      const caret = Math.min(start + clip.length, EDITOR_MAX_CHARS);
+      requestAnimationFrame(() => {
+        el?.focus({ preventScroll: true });
+        el?.setSelectionRange(caret, caret);
+      });
+    } catch {
+      el?.focus();
+    }
+  };
+
   // After an AI rewrite lands, pull the user's eye back to the editor: scroll it
   // into view (so mobile jumps up from the button below), focus it, and flash a
   // highlighted border for 5s. The highlight is React/Preact state — not a manual
@@ -149,6 +176,27 @@ export function Workspace({ text, setText, lang, s, focus, image, mediaKind = 'i
         <label for="post-input" class="sr-only">
           {w.title}
         </label>
+        {/* Quick actions sitting right above the editor: paste from clipboard on
+            the left, clear on the right — both within reach of the visible text. */}
+        <div class="mb-2 flex items-center gap-2">
+          <button
+            type="button"
+            onClick={onPaste}
+            class="inline-flex items-center gap-1.5 rounded-pill border border-hairline bg-canvas px-3 py-1.5 text-[12px] font-medium text-ink transition-[transform,color,background] duration-100 hover:bg-canvas-soft-2 active:scale-[0.96] active:bg-canvas-soft-2"
+          >
+            <PasteIcon />
+            {w.paste}
+          </button>
+          <button
+            type="button"
+            onClick={onClear}
+            disabled={!text}
+            class="ml-auto inline-flex items-center gap-1.5 rounded-pill px-3 py-1.5 text-[12px] font-medium text-error transition-[transform,color,background] duration-100 hover:bg-error-soft active:scale-[0.96] active:bg-error-soft disabled:cursor-not-allowed disabled:opacity-45 disabled:active:scale-100"
+          >
+            <ClearIcon />
+            {w.clear}
+          </button>
+        </div>
         {/* Relative wrapper anchors the AI Improve floating action button to the
             editor's bottom-left corner. */}
         <div class="relative">
@@ -243,7 +291,8 @@ export function Workspace({ text, setText, lang, s, focus, image, mediaKind = 'i
           <Stat label={w.counters.paragraphs} value={nf.format(paragraphCount(text))} />
         </div>
 
-        {/* Action row — cleanup tools grouped left, destructive clear right. */}
+        {/* Action row — cleanup tools grouped left, load-sample/share right.
+            Clear lives in the toolbar above the editor. */}
         <div class="mt-3 flex flex-wrap items-center gap-2">
           <button
             type="button"
@@ -267,7 +316,7 @@ export function Workspace({ text, setText, lang, s, focus, image, mediaKind = 'i
             )}
           </button>
           {/* Right-aligned action group: load-sample (while empty) + the Share
-              button (when a Share_Link adapter is wired) next to Clear. */}
+              button (when a Share_Link adapter is wired). */}
           <div class="ml-auto flex items-center gap-2">
             {onLoadSample && !text && (
               <button
@@ -285,14 +334,6 @@ export function Workspace({ text, setText, lang, s, focus, image, mediaKind = 'i
                 size={focus ? 'sm' : 'md'}
               />
             )}
-            <button
-              type="button"
-              onClick={onClear}
-              disabled={!text}
-              class="min-h-11 sm:min-h-9 inline-flex items-center gap-1.5 rounded-pill px-3.5 py-2 text-[13px] font-medium text-error transition-[transform,color,background] duration-100 hover:bg-error-soft active:scale-[0.96] active:bg-error-soft disabled:cursor-not-allowed disabled:opacity-45 disabled:active:scale-100"
-            >
-              {w.clear}
-            </button>
           </div>
         </div>
 
@@ -399,6 +440,25 @@ function TimerStat({ icon, label, value }: TimerStatProps) {
         </div>
       </div>
     </div>
+  );
+}
+
+function PasteIcon() {
+  return (
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <rect x="8" y="2" width="8" height="4" rx="1" />
+      <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2" />
+    </svg>
+  );
+}
+
+function ClearIcon() {
+  return (
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M3 6h18" />
+      <path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
+      <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6" />
+    </svg>
   );
 }
 

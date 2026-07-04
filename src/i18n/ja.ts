@@ -894,6 +894,7 @@ export const ja: Translations = {
       clean: '余分なスペースを整理',
       sanitize: 'テキストをサニタイズ',
       clear: 'エディターをクリア',
+      paste: 'テキストを貼り付け',
       hiddenWarning:
         '文字数カウントやスクリーンリーダーを壊す不可視文字が見つかりました：{codes}。サニタイズで取り除けます。',
       statusLine: 'リアルタイム分析が有効です',

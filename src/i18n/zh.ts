@@ -892,6 +892,7 @@ export const zh: Translations = {
       clean: '清理多余空格',
       sanitize: '净化文本',
       clear: '清空编辑器',
+      paste: '粘贴文本',
       hiddenWarning:
         '发现了会破坏计数和屏幕阅读器的不可见字符：{codes}。净化以将其剥除。',
       statusLine: '实时分析已开启',

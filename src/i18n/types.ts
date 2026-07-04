@@ -382,6 +382,8 @@ export interface IslandStrings {
     clean: string;
     sanitize: string;
     clear: string;
+    /** Quick-action label above the editor: pastes clipboard text in. */
+    paste: string;
     /** "{codes}" → comma-joined code points. */
     hiddenWarning: string;
     /** Status line under the editor actions, e.g. "Real-time analysis is on". */

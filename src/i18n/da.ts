@@ -894,6 +894,7 @@ export const da: Translations = {
       clean: 'Fjern overflødige mellemrum',
       sanitize: 'Rens tekst',
       clear: 'Ryd editor',
+      paste: 'Indsæt tekst',
       hiddenWarning:
         'Fandt usynlige tegn, der bryder tællinger og skærmlæsere: {codes}. Rens for at fjerne dem.',
       statusLine: 'Realtidsanalyse er slået til',

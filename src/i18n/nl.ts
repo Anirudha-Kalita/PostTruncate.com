@@ -894,6 +894,7 @@ export const nl: Translations = {
       clean: 'Overtollige spaties opschonen',
       sanitize: 'Tekst opschonen',
       clear: 'Editor wissen',
+      paste: 'Tekst plakken',
       hiddenWarning:
         'Onzichtbare tekens gevonden die tellingen en schermlezers verstoren: {codes}. Schoon op om ze te verwijderen.',
       statusLine: 'Realtime analyse is actief',

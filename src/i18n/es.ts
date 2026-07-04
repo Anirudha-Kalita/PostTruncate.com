@@ -894,6 +894,7 @@ export const es: Translations = {
       clean: 'Limpiar espacio sobrante',
       sanitize: 'Sanear el texto',
       clear: 'Vaciar el editor',
+      paste: 'Pegar texto',
       hiddenWarning:
         'Se encontraron caracteres invisibles que rompen los recuentos y los lectores de pantalla: {codes}. Sanea para eliminarlos.',
       statusLine: 'El análisis en tiempo real está activo',

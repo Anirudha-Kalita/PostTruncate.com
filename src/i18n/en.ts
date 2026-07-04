@@ -897,6 +897,7 @@ export const en: Translations = {
       clean: 'Clean excess space',
       sanitize: 'Sanitize text',
       clear: 'Clear editor',
+      paste: 'Paste text',
       hiddenWarning:
         'Found invisible characters that break counts and screen readers: {codes}. Sanitize to strip them.',
       statusLine: 'Real-time analysis is on',
