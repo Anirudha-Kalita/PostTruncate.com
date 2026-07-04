@@ -57,19 +57,19 @@ export const es: Translations = {
   },
 
   howItWorks: {
-    heading: 'Cómo funciona',
+    heading: 'Descubre cómo funciona en 3 sencillos pasos',
     steps: [
       {
-        name: 'Pega o escribe tu texto',
-        text: 'Introduce tu borrador en el editor y el contador de caracteres se actualiza al instante mientras escribes.',
+        name: 'Pega tu texto',
+        text: 'Pega o escribe tu contenido en el editor.',
       },
       {
-        name: 'Todas las plataformas se muestran a la vez',
-        text: 'Las tarjetas de vista previa de LinkedIn, X, Threads, Instagram, Facebook y SMS se actualizan simultáneamente, sin necesidad de selección.',
+        name: 'Analizamos al instante',
+        text: 'Comprobamos el recuento de caracteres, los puntos de truncamiento y los límites de cada plataforma en tiempo real.',
       },
       {
-        name: 'Ve exactamente dónde se corta el texto',
-        text: 'La vista previa resalta el punto de truncamiento para que sepas exactamente qué verán tus lectores.',
+        name: 'Publica con confianza',
+        text: 'Comprueba exactamente cómo se verá y publica sin preocuparte por el texto cortado.',
       },
     ],
   },
@@ -398,6 +398,23 @@ export const es: Translations = {
         ],
       },
     },
+    features: {
+      realtime: 'Vistas previas en tiempo real',
+      privacy: 'Privacidad primero',
+      noData: 'Sin datos almacenados',
+      everywhere: 'Funciona en todas partes',
+    },
+    followUs: 'Síguenos',
+    newsletter: {
+      heading: 'Mantente al día',
+      sub: 'Consejos, novedades y nuevas herramientas, directo a tu correo.',
+      placeholder: 'Introduce tu correo',
+      button: 'Suscribirse',
+      success: '¡Suscripción realizada, gracias!',
+      already: 'Ya estás suscrito.',
+      error: 'Algo salió mal. Inténtalo de nuevo.',
+    },
+    backToTop: 'Volver arriba',
     copyright: '© {year} PostTruncate. Hecho para creadores de todo el mundo.',
     disclaimer:
       'No afiliado con LinkedIn, X, Meta ni Instagram. Los límites son estimaciones y pueden cambiar.',
@@ -601,7 +618,7 @@ export const es: Translations = {
 
   whyPostTruncate: {
     eyebrow: '¿POR QUÉ POSTTRUNCATE?',
-    title: 'Escribe con confianza.<br/>Publica sin preocupaciones.',
+    title: 'Escribe con <span class="why-title__accent">confianza.</span><br/>Publica sin preocupaciones.',
     p1: 'Cada plataforma tiene límites de caracteres y reglas de truncamiento diferentes. PostTruncate te muestra exactamente cómo aparecerá tu contenido antes de publicar.',
     p2: 'Ahorra tiempo, aumenta la interacción y haz que cada carácter cuente con vistas previas en tiempo real, información inteligente y reescritura de tono con IA en un toque.',
     features: {

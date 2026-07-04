@@ -57,19 +57,19 @@ export const da: Translations = {
   },
 
   howItWorks: {
-    heading: 'Sådan fungerer det',
+    heading: 'Se hvordan det virker i 3 enkle trin',
     steps: [
       {
-        name: 'Indsæt eller skriv din tekst',
-        text: 'Sæt dit udkast ind i editoren, og karaktertælleren opdateres øjeblikkeligt, mens du skriver.',
+        name: 'Indsæt din tekst',
+        text: 'Indsæt eller skriv dit indhold i editoren.',
       },
       {
-        name: 'Alle platforme vises på én gang',
-        text: 'Forhåndsvisningskortene til LinkedIn, X, Threads, Instagram, Facebook og SMS opdateres alle på samme tid — ingen valg er nødvendigt.',
+        name: 'Vi analyserer med det samme',
+        text: 'Vi tjekker tegnantal, afskæringspunkter og platformgrænser i realtid.',
       },
       {
-        name: 'Se præcis, hvor teksten afskæres',
-        text: 'Forhåndsvisningen fremhæver afskæringsstedet, så du ved præcis, hvad læserne vil se.',
+        name: 'Udgiv med selvtillid',
+        text: 'Se præcis hvordan det vil se ud, og udgiv uden at bekymre dig om afskåret tekst.',
       },
     ],
   },
@@ -398,6 +398,23 @@ export const da: Translations = {
         ],
       },
     },
+    features: {
+      realtime: 'Forhåndsvisninger i realtid',
+      privacy: 'Privatliv først',
+      noData: 'Ingen data gemmes',
+      everywhere: 'Virker overalt',
+    },
+    followUs: 'Følg os',
+    newsletter: {
+      heading: 'Hold dig opdateret',
+      sub: 'Tips, opdateringer og nye værktøjer — direkte i din indbakke.',
+      placeholder: 'Indtast din e-mail',
+      button: 'Tilmeld',
+      success: 'Tilmelding gennemført – tak!',
+      already: 'Du er allerede tilmeldt.',
+      error: 'Noget gik galt. Prøv igen.',
+    },
+    backToTop: 'Til toppen',
     copyright: '© {year} PostTruncate. Bygget til kreative overalt.',
     disclaimer:
       'Ikke tilknyttet LinkedIn, X, Meta eller Instagram. Grænser er estimater og kan ændre sig.',
@@ -601,7 +618,7 @@ export const da: Translations = {
 
   whyPostTruncate: {
     eyebrow: 'HVORFOR POSTTRUNCATE?',
-    title: 'Skriv med selvtillid.<br/>Udgiv uden bekymringer.',
+    title: 'Skriv med <span class="why-title__accent">selvtillid.</span><br/>Udgiv uden bekymringer.',
     p1: 'Hver platform har forskellige tegngrænser og afkortningsregler. PostTruncate viser dig præcis, hvordan dit indhold vil se ud, før du trykker på udgiv.',
     p2: 'Spar tid, øg engagementet og få hvert tegn til at tælle med forhåndsvisninger i realtid, smart indsigt og ét-klik AI-tonomskrivning.',
     features: {

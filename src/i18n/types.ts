@@ -1089,7 +1089,7 @@ export interface Translations {
   /** Three-step "How it works" explainer on the homepage. Steps must match
       the visible card content exactly — used for both rendering and HowTo JSON-LD. */
   howItWorks: {
-    /** Screen-reader-only section heading. */
+    /** Visible section heading, e.g. "See how it works in 3 simple steps". */
     heading: string;
     /** Exactly three ordered steps; order matches the on-page cards. */
     steps: [
@@ -1262,6 +1262,30 @@ export interface Translations {
       legal: FooterColumn;
       guides: FooterColumn;
     };
+    /** Trust chips under the brand tagline. */
+    features: {
+      realtime: string;
+      privacy: string;
+      noData: string;
+      everywhere: string;
+    };
+    /** "Follow us" heading above the social icons. */
+    followUs: string;
+    /** "Stay updated" newsletter band. */
+    newsletter: {
+      heading: string;
+      sub: string;
+      placeholder: string;
+      button: string;
+      /** Popup banner after a successful subscribe. */
+      success: string;
+      /** Popup banner when the email is already on the list. */
+      already: string;
+      /** Popup banner when the subscribe request fails. */
+      error: string;
+    };
+    /** Aria-label for the back-to-top button. */
+    backToTop: string;
     /** "{year}". */
     copyright: string;
     disclaimer: string;

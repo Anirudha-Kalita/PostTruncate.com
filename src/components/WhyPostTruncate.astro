@@ -6,56 +6,71 @@ interface Props {
 }
 
 const { s } = Astro.props;
+
+// Card model: icon key (selects the inline SVG) + accent (drives the tinted
+// icon chip, the arrow button, and the hover border via CSS custom props).
+const features = [
+  { key: 'realTime', accent: 'blue', title: s.features.realTime.title, desc: s.features.realTime.desc },
+  { key: 'insights', accent: 'purple', title: s.features.insights.title, desc: s.features.insights.desc },
+  { key: 'privacy', accent: 'green', title: s.features.privacy.title, desc: s.features.privacy.desc },
+  { key: 'aiTone', accent: 'amber', title: s.features.aiTone.title, desc: s.features.aiTone.desc },
+] as const;
 ---
 <section class="container-page why-section">
   <div class="why-grid">
     <div class="why-left">
-      <p class="section-eyebrow">{s.eyebrow}</p>
+      <p class="why-eyebrow">{s.eyebrow}</p>
       <h2 class="why-title" set:html={s.title}></h2>
+      <div class="why-flourish" aria-hidden="true">
+        <span class="why-flourish__bar"></span>
+        <span class="why-flourish__dot"></span>
+      </div>
       <p class="why-text">{s.p1}</p>
       <p class="why-text">{s.p2}</p>
     </div>
+
     <div class="why-right">
-      <div class="feature-card">
-        <div class="feature-icon icon-blue">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
-          </svg>
-        </div>
-        <h3 class="feature-title">{s.features.realTime.title}</h3>
-        <p class="feature-desc">{s.features.realTime.desc}</p>
-      </div>
-      <div class="feature-card">
-        <div class="feature-icon icon-purple">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
-            <polyline points="14 2 14 8 20 8"></polyline>
-            <circle cx="10" cy="13" r="2"></circle>
-            <path d="m11.5 14.5 3 3"></path>
-          </svg>
-        </div>
-        <h3 class="feature-title">{s.features.insights.title}</h3>
-        <p class="feature-desc">{s.features.insights.desc}</p>
-      </div>
-      <div class="feature-card">
-        <div class="feature-icon icon-green">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
-            <path d="m9 12 2 2 4-4"></path>
-          </svg>
-        </div>
-        <h3 class="feature-title">{s.features.privacy.title}</h3>
-        <p class="feature-desc">{s.features.privacy.desc}</p>
-      </div>
-      <div class="feature-card">
-        <div class="feature-icon icon-amber">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M15 4V2" /><path d="M15 16v-2" /><path d="M8 9h2" /><path d="M20 9h2" /><path d="M17.8 11.8 19 13" /><path d="M15 9h0" /><path d="M17.8 6.2 19 5" /><path d="m3 21 9-9" /><path d="M12.2 6.2 11 5" />
-          </svg>
-        </div>
-        <h3 class="feature-title">{s.features.aiTone.title}</h3>
-        <p class="feature-desc">{s.features.aiTone.desc}</p>
-      </div>
+      {features.map((f) => (
+        <article class={`feature-card feature-card--${f.accent}`}>
+          <span class="feature-icon">
+            {f.key === 'realTime' && (
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
+              </svg>
+            )}
+            {f.key === 'insights' && (
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                <polyline points="14 2 14 8 20 8" />
+                <circle cx="10" cy="13" r="2" />
+                <path d="m11.5 14.5 3 3" />
+              </svg>
+            )}
+            {f.key === 'privacy' && (
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                <path d="m9 12 2 2 4-4" />
+              </svg>
+            )}
+            {f.key === 'aiTone' && (
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M15 4V2" /><path d="M15 16v-2" /><path d="M8 9h2" /><path d="M20 9h2" /><path d="M17.8 11.8 19 13" /><path d="M15 9h0" /><path d="M17.8 6.2 19 5" /><path d="m3 21 9-9" /><path d="M12.2 6.2 11 5" />
+              </svg>
+            )}
+          </span>
+
+          <h3 class="feature-title">{f.title}</h3>
+          <span class="feature-divider" aria-hidden="true"></span>
+          <p class="feature-desc">{f.desc}</p>
+
+          <span class="feature-arrow" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M5 12h14" />
+              <path d="m13 6 6 6-6 6" />
+            </svg>
+          </span>
+        </article>
+      ))}
     </div>
   </div>
 </section>
@@ -77,98 +92,184 @@ const { s } = Astro.props;
       gap: 80px;
     }
   }
-  .section-eyebrow {
+
+  /* ── Left column ─────────────────────────────────────────────────────── */
+  .why-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    margin-bottom: 24px;
+    padding: 7px 16px;
+    border-radius: var(--radius-pill);
+    background: var(--color-link-bg-soft);
+    color: var(--color-link-deep);
     font-family: var(--font-mono);
     font-size: 12px;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-    color: var(--color-mute);
-    margin-bottom: 12px;
     font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
   }
   .why-title {
-    font-size: 32px;
+    font-size: clamp(32px, 4vw, 44px);
     font-weight: 700;
-    line-height: 1.2;
-    letter-spacing: -1px;
+    line-height: 1.12;
+    letter-spacing: -1.5px;
     color: var(--color-ink);
-    margin-bottom: 24px;
+  }
+  /* Injected via set:html, so it carries no scope hash → target with :global. */
+  .why-title :global(.why-title__accent) {
+    background: linear-gradient(100deg, #0066e0 0%, #7c3aed 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .why-flourish {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 24px 0 28px;
+  }
+  .why-flourish__bar {
+    width: 44px;
+    height: 5px;
+    border-radius: var(--radius-pill);
+    background: linear-gradient(100deg, #0066e0 0%, #7c3aed 100%);
+  }
+  .why-flourish__dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #7c3aed;
   }
   .why-text {
     font-size: 16px;
     line-height: 26px;
     color: var(--color-body);
     margin-bottom: 16px;
+    max-width: 30rem;
   }
+
+  /* ── Right column — feature cards ────────────────────────────────────── */
   .why-right {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 28px;
+    gap: 24px;
   }
-  @media (max-width: 480px) {
+  @media (max-width: 560px) {
     .why-right {
       grid-template-columns: 1fr;
     }
   }
+
   .feature-card {
+    /* Accent custom props are set per-modifier below. */
+    --accent: var(--color-link);
+    --accent-soft: var(--color-link-bg-soft);
+    position: relative;
     display: flex;
     flex-direction: column;
-    gap: 12px;
-    flex: 1;
+    padding: 24px;
+    border-radius: var(--radius-xl);
+    background: var(--color-canvas);
+    border: 1px solid var(--color-hairline);
+    box-shadow: var(--shadow-e1);
+    transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
   }
+  .feature-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-e3);
+    border-color: color-mix(in srgb, var(--accent) 45%, var(--color-hairline));
+  }
+
   .feature-icon {
-    width: 64px;
-    height: 64px;
-    border-radius: 50%;
-    display: flex;
+    display: inline-flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: 8px;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    margin-bottom: 20px;
+    background: var(--accent-soft);
+    color: var(--accent);
+    transition: transform 0.18s ease;
+  }
+  .feature-card:hover .feature-icon {
+    transform: scale(1.06);
   }
   .feature-icon svg {
-    width: 28px;
-    height: 28px;
-  }
-  .icon-blue {
-    background: #E8F2FF;
-    color: #0A66C2;
-  }
-  .icon-purple {
-    background: #F4E8FF;
-    color: #9333EA;
-  }
-  .icon-green {
-    background: #E8F8F0;
-    color: #16A34A;
-  }
-  .icon-amber {
-    background: #FFF3E0;
-    color: #EA6C00;
-  }
-  :global(html[data-theme='dark']) .icon-blue {
-    background: rgba(10, 102, 194, 0.2);
-    color: #60A5FA;
-  }
-  :global(html[data-theme='dark']) .icon-purple {
-    background: rgba(147, 51, 234, 0.2);
-    color: #C084FC;
-  }
-  :global(html[data-theme='dark']) .icon-green {
-    background: rgba(22, 163, 74, 0.2);
-    color: #4ADE80;
-  }
-  :global(html[data-theme='dark']) .icon-amber {
-    background: rgba(234, 108, 0, 0.2);
-    color: #FBBF24;
+    width: 26px;
+    height: 26px;
   }
   .feature-title {
-    font-size: 17px;
-    font-weight: 600;
+    font-size: 19px;
+    font-weight: 700;
+    letter-spacing: -0.3px;
     color: var(--color-ink);
+  }
+  .feature-divider {
+    height: 1px;
+    width: 100%;
+    margin: 14px 0 16px;
+    background: var(--color-hairline);
   }
   .feature-desc {
     font-size: 15px;
     line-height: 24px;
     color: var(--color-body);
+    /* Reserve room so the arrow never collides with a long description. */
+    padding-right: 44px;
+  }
+  .feature-arrow {
+    position: absolute;
+    right: 20px;
+    bottom: 20px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: var(--accent-soft);
+    color: var(--accent);
+    transition: transform 0.18s ease, background 0.18s ease, color 0.18s ease;
+  }
+  .feature-arrow svg {
+    width: 18px;
+    height: 18px;
+  }
+  .feature-card:hover .feature-arrow {
+    background: var(--accent);
+    color: #ffffff;
+    transform: translateX(3px);
+  }
+
+  /* Per-accent palettes (light). */
+  .feature-card--blue   { --accent: #0066e0; --accent-soft: #e8f2ff; }
+  .feature-card--purple { --accent: #9333ea; --accent-soft: #f4e8ff; }
+  .feature-card--green  { --accent: #16a34a; --accent-soft: #e8f8f0; }
+  .feature-card--amber  { --accent: #ea6c00; --accent-soft: #fff3e0; }
+
+  /* Dark theme — lift the icon/arrow tints and colors for contrast. */
+  :global(html[data-theme='dark']) .feature-card--blue   { --accent: #60a5fa; --accent-soft: rgba(0, 102, 224, 0.2); }
+  :global(html[data-theme='dark']) .feature-card--purple { --accent: #c084fc; --accent-soft: rgba(147, 51, 234, 0.2); }
+  :global(html[data-theme='dark']) .feature-card--green  { --accent: #4ade80; --accent-soft: rgba(22, 163, 74, 0.2); }
+  :global(html[data-theme='dark']) .feature-card--amber  { --accent: #fbbf24; --accent-soft: rgba(234, 108, 0, 0.2); }
+  :global(html[data-theme='dark']) .feature-card:hover .feature-arrow {
+    color: var(--color-canvas);
+  }
+
+  /* Respect reduced-motion: keep the color feedback, drop the movement. */
+  @media (prefers-reduced-motion: reduce) {
+    .feature-card,
+    .feature-icon,
+    .feature-arrow {
+      transition: background 0.18s ease, color 0.18s ease, border-color 0.18s ease;
+    }
+    .feature-card:hover {
+      transform: none;
+    }
+    .feature-card:hover .feature-icon,
+    .feature-card:hover .feature-arrow {
+      transform: none;
+    }
   }
 </style>

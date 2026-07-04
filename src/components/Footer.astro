@@ -1,8 +1,11 @@
 ---
 // Column footer used on every route (Tools · Learn · Legal · Platform Guides ·
-// Character Counters). Mono-caps eyebrow labels, body-sm link rows. All copy is
-// localized via the `footer` dictionary; link labels come from the dictionary
-// while their hrefs (anchors + the locale-prefixed home) are wired here.
+// Character Counters · Ad Previews). Redesigned into: a brand block with trust
+// chips + social links, six icon-headed link columns, a "Stay updated"
+// newsletter band, and a copyright bar with a back-to-top control. All copy is
+// localized via the `footer` dictionary; hrefs (anchors + locale-prefixed home)
+// are wired here. Palette is unchanged — everything resolves through the same
+// neutral + link tokens the old footer used, so it still theme-swaps.
 import { interp } from '../i18n/interp';
 import { getLocale } from '../i18n/config';
 import { getTranslations } from '../i18n';
@@ -28,24 +31,25 @@ const locale = getLocale(lang);
 const images = getTranslations(lang).images;
 const home = `/${lang}/${locale.slug}/`;
 
+// ── Newsletter endpoint (Mailchimp classic embed) ──────────────────────────
+// Posts the email to the PostTruncate Mailchimp audience. The email field must
+// be named EMAIL; the hidden `b_*` input is Mailchimp's bot honeypot (kept
+// off-screen and empty); the classic embed opens its confirmation in a new tab.
+const NEWSLETTER_ACTION =
+  'https://posttruncate.us16.list-manage.com/subscribe/post?u=a1bd7cbf73e882228eae06fbb&id=808861a069&f_id=006f27e1f0';
+const NEWSLETTER_HONEYPOT = 'b_a1bd7cbf73e882228eae06fbb_808861a069';
+
 // Blog link — English-first, en-fallback label (same pattern as blogI18n.ts).
-// Only shown when this locale actually has a published post, mirroring the
-// "empty locales produce nothing" rule used by the blog routes themselves.
 const blogLink = (await getBlogLocales()).has(lang)
   ? { label: getBlogStrings(lang).footerLink, href: `/${lang}/${BLOG_SEGMENT}/` }
   : null;
 
-// Hrefs paired positionally with each column's translated labels. Anchors are
-// home-prefixed so they resolve from every route; the legal column points at
-// real standalone routes, which are locale-prefixed.
+// Hrefs paired positionally with each column's translated labels.
 const columnHrefs = {
   learn: [
     `/${lang}/platform-limits/`,
     `/${lang}/faq/`,
-    // Absolute (home-prefixed) so the in-page hook-guide anchor resolves from
-    // every route, not just the landing page where that section lives.
     `${home}#hook-guide`,
-    // "Accessibility" → the fancy-fonts accessibility answer on the FAQ page.
     `/${lang}/faq/#fancy-fonts`,
   ],
   legal: [
@@ -56,33 +60,26 @@ const columnHrefs = {
   ],
 };
 
-const columns = (
-  ['learn', 'legal'] as const
-).map((key) => {
+const learnLegal = (['learn', 'legal'] as const).map((key) => {
   const links = footer.columns[key].links.map((label, i) => ({
     label,
     href: columnHrefs[key][i] ?? '#',
   }));
-  // The blog index lives under the "Learn" column when this locale has posts.
   if (key === 'learn' && blogLink) links.push(blogLink);
   return { title: footer.columns[key].title, links };
 });
 
-// Platform Guides column: URLs come from tools.ts (single source of truth);
-// display labels come from the locale's footer.columns.guides.links array.
+// Platform Guides column: URLs from tools.ts, labels from footer dictionary.
 const guidesLinks = tools.map((tool, i) => ({
   label: footer.columns.guides.links[i],
   href: `/${lang}/${tool.slugs[lang] ?? tool.slugs['en']}/`,
 }));
-
 guidesLinks.push({
   label: getTranslations(lang).nav.links.limits,
   href: `/${lang}/platform-limits/`,
 });
 
-// Calculators split into two columns the same way the nav does — generic
-// "Tools" vs. per-platform "Character Counters" (ids in PLATFORM_COUNTERS).
-// Tool labels come from each calculator's localized schemaName.
+// Calculators split like the nav: generic "Tools" vs. per-platform "Counters".
 const toolsTitle = getTranslations(lang).nav.links.tools;
 const countersTitle = getTranslations(lang).nav.links.counters;
 const homeToolsLinks = calculators
@@ -91,14 +88,10 @@ const homeToolsLinks = calculators
     label: tool.schemaName[lang] ?? tool.schemaName['en'],
     href: `/${lang}/tools/${tool.slugs[lang] ?? tool.slugs['en']}/`,
   }));
-
 homeToolsLinks.push({
   label: footer.columns.tool.links[4],
   href: `/${lang}/embed-widget/`,
 });
-// Counter labels use just the bare platform name (e.g. "YouTube", "TikTok")
-// from PLATFORM_COUNTERS.brand — the "Character Counter" suffix in schemaName
-// is redundant under a column already titled "Character Counters".
 const homeCounterLinks = calculators
   .filter((tool) => PLATFORM_COUNTERS[tool.id])
   .map((tool) => ({
@@ -106,10 +99,7 @@ const homeCounterLinks = calculators
     href: `/${lang}/tools/${tool.slugs[lang] ?? tool.slugs['en']}/`,
   }));
 
-// Ad Previews column — mirrors the "Tools" column. Title from nav.links; URLs
-// from adPreviews.ts. Labels are the bare platform brand plus the localized
-// word for "Ads" (order and connector vary by language); brand names stay
-// untranslated, like the Character Counters column.
+// Ad Previews column — mirrors "Tools". Brand names stay untranslated.
 const adPreviewsTitle = getTranslations(lang).nav.links.adPreviews;
 const AD_PREVIEW_BRANDS: Record<string, string> = {
   'facebook-ads': 'Facebook',
@@ -135,88 +125,280 @@ const homeAdPreviewLinks = adPreviews.map((tool) => ({
   label: fmtAds(AD_PREVIEW_BRANDS[tool.id] ?? tool.schemaName['en']),
   href: `/${lang}/ad-previews/${tool.slugs[lang] ?? tool.slugs['en']}/`,
 }));
+
+// Unified column model with a per-column header icon key (order matches the
+// reference: Tools · Learn · Legal · Platform Guides · Character Counters · Ads).
+const navColumns = [
+  { icon: 'tools', title: toolsTitle, links: homeToolsLinks },
+  { icon: 'learn', title: learnLegal[0].title, links: learnLegal[0].links },
+  { icon: 'legal', title: learnLegal[1].title, links: learnLegal[1].links },
+  { icon: 'guides', title: footer.columns.guides.title, links: guidesLinks },
+  { icon: 'counters', title: countersTitle, links: homeCounterLinks },
+  { icon: 'ads', title: adPreviewsTitle, links: homeAdPreviewLinks },
+] as const;
+
+const features = [
+  { icon: 'bolt', label: footer.features.realtime },
+  { icon: 'shield', label: footer.features.privacy },
+  { icon: 'lock', label: footer.features.noData },
+  { icon: 'globe', label: footer.features.everywhere },
+] as const;
+
+const socials = [
+  { name: 'LinkedIn', href: 'https://www.linkedin.com/company/posttruncate/', icon: 'linkedin' },
+  { name: 'X', href: 'https://x.com/posttruncate77', icon: 'x' },
+  { name: 'Instagram', href: 'https://www.instagram.com/posttruncate77/', icon: 'instagram' },
+  { name: 'Facebook', href: 'https://www.facebook.com/PostTruncate/', icon: 'facebook' },
+] as const;
 ---
 
 <footer class="footer" class:list={{ 'footer--home': isHome }}>
   <div class="footer__mesh mesh-gradient" aria-hidden="true"></div>
+
   <div class="container-page footer__inner">
+    <!-- Brand block: logo, tagline, trust chips, social links -->
     <div class="footer__brand">
       <a href={home} class="footer__logo" aria-label={footer.homeAria}>
         <ResponsiveImage class="footer__logo-img footer__logo-img--light" src="/logo.webp" alt={images.logoAlt} sizes="172px" />
         <ResponsiveImage class="footer__logo-img footer__logo-img--dark" src="/logo-dark.webp" alt={images.logoAlt} sizes="172px" />
       </a>
       <p class="footer__tag">{footer.tag}</p>
+
+      <ul class="footer__features">
+        {features.map((f) => (
+          <li class="footer__chip">
+            <span class="footer__chip-icon">
+              {f.icon === 'bolt' && (
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z" /></svg>
+              )}
+              {f.icon === 'shield' && (
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" /><path d="m9 12 2 2 4-4" /></svg>
+              )}
+              {f.icon === 'lock' && (
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2" /><path d="M7 11V7a5 5 0 0 1 10 0v4" /></svg>
+              )}
+              {f.icon === 'globe' && (
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10" /><path d="M2 12h20" /><path d="M12 2a15 15 0 0 1 0 20 15 15 0 0 1 0-20" /></svg>
+              )}
+            </span>
+            <span class="footer__chip-label">{f.label}</span>
+          </li>
+        ))}
+      </ul>
+
+      <div class="footer__social">
+        <p class="footer__social-label">{footer.followUs}</p>
+        <div class="footer__socials">
+          {socials.map((s) => (
+            <a class="footer__social-link" href={s.href} target="_blank" rel="noopener noreferrer" aria-label={s.name}>
+              {s.icon === 'linkedin' && (
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28ZM5.34 7.43a2.07 2.07 0 1 1 0-4.14 2.07 2.07 0 0 1 0 4.14ZM7.12 20.45H3.55V9h3.57v11.45ZM22.22 0H1.77C.8 0 0 .78 0 1.75v20.5C0 23.22.8 24 1.77 24h20.45c.98 0 1.78-.78 1.78-1.75V1.75C24 .78 23.2 0 22.22 0Z" /></svg>
+              )}
+              {s.icon === 'x' && (
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24h-6.66l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231 5.45-6.231Zm-1.161 17.52h1.833L7.084 4.126H5.117L17.083 19.77Z" /></svg>
+              )}
+              {s.icon === 'instagram' && (
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 1.17.05 1.8.25 2.23.41.56.22.96.48 1.38.9.42.42.68.82.9 1.38.16.42.36 1.06.41 2.23.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.05 1.17-.25 1.8-.41 2.23a3.7 3.7 0 0 1-.9 1.38 3.7 3.7 0 0 1-1.38.9c-.42.16-1.06.36-2.23.41-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-1.17-.05-1.8-.25-2.23-.41a3.7 3.7 0 0 1-1.38-.9 3.7 3.7 0 0 1-.9-1.38c-.16-.42-.36-1.06-.41-2.23-.06-1.27-.07-1.65-.07-4.85s.01-3.58.07-4.85c.05-1.17.25-1.8.41-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.42-.16 1.06-.36 2.23-.41C8.42 2.17 8.8 2.16 12 2.16M12 0C8.74 0 8.33.01 7.05.07 5.78.13 4.9.33 4.14.63a5.86 5.86 0 0 0-2.12 1.38A5.86 5.86 0 0 0 .63 4.13c-.3.76-.5 1.64-.56 2.91C.01 8.33 0 8.74 0 12s.01 3.67.07 4.95c.06 1.27.26 2.15.56 2.91a5.86 5.86 0 0 0 1.38 2.12c.66.66 1.33 1.07 2.12 1.38.76.3 1.64.5 2.91.56C8.33 23.99 8.74 24 12 24s3.67-.01 4.95-.07c1.27-.06 2.15-.26 2.91-.56a5.86 5.86 0 0 0 2.12-1.38 5.86 5.86 0 0 0 1.38-2.12c.3-.76.5-1.64.56-2.91.06-1.28.07-1.69.07-4.95s-.01-3.67-.07-4.95c-.06-1.27-.26-2.15-.56-2.91a5.86 5.86 0 0 0-1.38-2.12A5.86 5.86 0 0 0 19.86.63c-.76-.3-1.64-.5-2.91-.56C15.67.01 15.26 0 12 0Zm0 5.84a6.16 6.16 0 1 0 0 12.32 6.16 6.16 0 0 0 0-12.32ZM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8Zm6.4-10.85a1.44 1.44 0 1 0 0 2.88 1.44 1.44 0 0 0 0-2.88Z" /></svg>
+              )}
+              {s.icon === 'facebook' && (
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M24 12.07C24 5.4 18.63 0 12 0S0 5.4 0 12.07C0 18.1 4.39 23.1 10.13 24v-8.44H7.08v-3.49h3.05V9.41c0-3.02 1.79-4.7 4.53-4.7 1.31 0 2.68.24 2.68.24v2.97h-1.51c-1.49 0-1.96.93-1.96 1.89v2.26h3.33l-.53 3.49h-2.8V24C19.61 23.1 24 18.1 24 12.07Z" /></svg>
+              )}
+            </a>
+          ))}
+        </div>
+      </div>
     </div>
 
+    <!-- Six icon-headed link columns -->
     <div class="footer__cols">
-      <div class="footer__col">
-        <p class="footer__eyebrow">{toolsTitle}</p>
-        <ul class="footer__list">
-          {homeToolsLinks.map((l) => (
-            <li>
-              <a href={l.href} class="footer__link">{l.label}</a>
-            </li>
-          ))}
-        </ul>
-      </div>
-      {columns.map((col) => (
+      {navColumns.map((col) => (
         <div class="footer__col">
-          <p class="footer__eyebrow">{col.title}</p>
+          <p class="footer__eyebrow">
+            <span class="footer__eyebrow-icon">
+              {col.icon === 'tools' && (
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z" /></svg>
+              )}
+              {col.icon === 'learn' && (
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 10 12 5 2 10l10 5 10-5z" /><path d="M6 12v5c3 3 9 3 12 0v-5" /></svg>
+              )}
+              {col.icon === 'legal' && (
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" /></svg>
+              )}
+              {col.icon === 'guides' && (
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z" /><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z" /></svg>
+              )}
+              {col.icon === 'counters' && (
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9h16" /><path d="M4 15h16" /><path d="M10 3 8 21" /><path d="M16 3l-2 18" /></svg>
+              )}
+              {col.icon === 'ads' && (
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3 11 18-5v12L3 14v-3z" /><path d="M11.6 16.8a3 3 0 1 1-5.8-1.6" /></svg>
+              )}
+            </span>
+            {col.title}
+          </p>
           <ul class="footer__list">
             {col.links.map((l) => (
               <li>
-                <a href={l.href} class="footer__link">
-                  {l.label}
-                </a>
+                <a href={l.href} class="footer__link">{l.label}</a>
               </li>
             ))}
           </ul>
         </div>
       ))}
-      <div class="footer__col">
-        <p class="footer__eyebrow">{footer.columns.guides.title}</p>
-        <ul class="footer__list">
-          {guidesLinks.map((l) => (
-            <li>
-              <a href={l.href} class="footer__link">{l.label}</a>
-            </li>
-          ))}
-        </ul>
-      </div>
-      <div class="footer__col">
-        <p class="footer__eyebrow">{countersTitle}</p>
-        <ul class="footer__list">
-          {homeCounterLinks.map((l) => (
-            <li>
-              <a href={l.href} class="footer__link">{l.label}</a>
-            </li>
-          ))}
-        </ul>
-      </div>
-      <div class="footer__col">
-        <p class="footer__eyebrow">{adPreviewsTitle}</p>
-        <ul class="footer__list">
-          {homeAdPreviewLinks.map((l) => (
-            <li>
-              <a href={l.href} class="footer__link">{l.label}</a>
-            </li>
-          ))}
-        </ul>
-      </div>
     </div>
+  </div>
+
+  <!-- Stay-updated newsletter band -->
+  <div class="container-page">
+    <section class="footer__news" aria-labelledby="footer-news-heading">
+      <div class="footer__news-copy">
+        <span class="footer__news-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2" /><path d="m22 7-10 6L2 7" /></svg>
+        </span>
+        <div>
+          <p id="footer-news-heading" class="footer__news-title">{footer.newsletter.heading}</p>
+          <p class="footer__news-sub">{footer.newsletter.sub}</p>
+        </div>
+      </div>
+      {/* Submits to Mailchimp in the background (JSONP) via the script below, so
+          no external page opens; target="_blank" is the no-JS fallback only. */}
+      <form
+        class="footer__news-form"
+        method="post"
+        action={NEWSLETTER_ACTION}
+        target="_blank"
+        data-success={footer.newsletter.success}
+        data-already={footer.newsletter.already}
+        data-error={footer.newsletter.error}
+      >
+        {/* Popup banner — sits above the input; shown after a subscribe attempt. */}
+        <div class="footer__toast" role="status" aria-live="polite" data-tone="success">
+          <span class="footer__toast-emoji" aria-hidden="true"></span>
+          <span class="footer__toast-msg"></span>
+        </div>
+        <input
+          class="footer__news-input"
+          type="email"
+          name="EMAIL"
+          required
+          autocomplete="email"
+          placeholder={footer.newsletter.placeholder}
+          aria-label={footer.newsletter.placeholder}
+        />
+        {/* Mailchimp bot honeypot — must stay off-screen and empty. */}
+        <div aria-hidden="true" style="position:absolute;left:-5000px;">
+          <input type="text" name={NEWSLETTER_HONEYPOT} tabindex="-1" value="" autocomplete="off" />
+        </div>
+        <button type="submit" name="subscribe" class="footer__news-btn">
+          <span class="footer__news-btn-text">{footer.newsletter.button}</span>
+          <span class="footer__news-btn-spinner" aria-hidden="true"></span>
+        </button>
+      </form>
+    </section>
   </div>
 
   <div class="container-page footer__bar">
     <p>{interp(footer.copyright, { year })}</p>
-    <p class="footer__note">{footer.disclaimer}</p>
+    <div class="footer__bar-right">
+      <p class="footer__note">{footer.disclaimer}</p>
+      <button type="button" class="footer__totop" aria-label={footer.backToTop}>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5" /><path d="m5 12 7-7 7 7" /></svg>
+      </button>
+    </div>
   </div>
 </footer>
 
+<script>
+  // Back-to-top: smooth scroll to the top of the document.
+  document.querySelector('.footer__totop')?.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
+  // Newsletter: subscribe in the background via Mailchimp's JSONP endpoint
+  // (its /post-json variant accepts a `c` callback), so no external thank-you
+  // page opens — we show an in-page popup banner instead. With JS disabled the
+  // plain <form> still posts to Mailchimp's page (target="_blank") as a fallback.
+  const form = document.querySelector<HTMLFormElement>('.footer__news-form');
+  const toast = document.querySelector<HTMLElement>('.footer__toast');
+  if (form && toast) {
+    const emojiEl = toast.querySelector<HTMLElement>('.footer__toast-emoji');
+    const msgEl = toast.querySelector<HTMLElement>('.footer__toast-msg');
+    const btn = form.querySelector<HTMLButtonElement>('.footer__news-btn');
+    let hideTimer: number | undefined;
+
+    // Toggle the button's spinner + disabled state while a request is in flight.
+    const setLoading = (on: boolean) => {
+      form.classList.toggle('is-loading', on);
+      if (btn) btn.disabled = on;
+    };
+
+    const showToast = (message: string, tone: 'success' | 'error') => {
+      if (msgEl) msgEl.textContent = message;
+      if (emojiEl) emojiEl.textContent = tone === 'success' ? '👍' : '⚠️';
+      toast.dataset.tone = tone;
+      toast.classList.add('is-visible');
+      window.clearTimeout(hideTimer);
+      hideTimer = window.setTimeout(() => toast.classList.remove('is-visible'), 4500);
+    };
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const email = form.querySelector<HTMLInputElement>('input[name="EMAIL"]');
+      if (!email || !email.checkValidity()) {
+        email?.reportValidity();
+        return;
+      }
+
+      setLoading(true);
+
+      // Swap /post? → /post-json? and carry every existing param (u, id, f_id).
+      const url = new URL((form.getAttribute('action') || '').replace('/post?', '/post-json?'));
+      url.searchParams.set('EMAIL', email.value.trim());
+      const honeypot = form.querySelector<HTMLInputElement>('input[tabindex="-1"]');
+      if (honeypot) url.searchParams.set(honeypot.name, '');
+      const cb = 'mcjsonp_' + Date.now();
+      url.searchParams.set('c', cb);
+
+      const script = document.createElement('script');
+      let settled = false;
+      let failTimer: number | undefined;
+      // Run the outcome once — from the JSONP callback, a load error, or the
+      // timeout — and always clear the spinner first.
+      const settle = (run: () => void) => {
+        if (settled) return;
+        settled = true;
+        window.clearTimeout(failTimer);
+        delete (window as unknown as Record<string, unknown>)[cb];
+        script.remove();
+        setLoading(false);
+        run();
+      };
+
+      (window as unknown as Record<string, unknown>)[cb] = (data: { result?: string; msg?: string }) =>
+        settle(() => {
+          if (data && data.result === 'success') {
+            form.reset();
+            showToast(form.dataset.success || '', 'success');
+          } else if (data && /already/i.test(data.msg || '')) {
+            // "Already subscribed" isn't a failure for the visitor — treat it kindly.
+            showToast(form.dataset.already || '', 'success');
+          } else {
+            showToast(form.dataset.error || '', 'error');
+          }
+        });
+      script.onerror = () => settle(() => showToast(form.dataset.error || '', 'error'));
+      // Safety net: if the JSONP never calls back, fail after 10s.
+      failTimer = window.setTimeout(() => settle(() => showToast(form.dataset.error || '', 'error')), 10000);
+      script.src = url.toString();
+      document.body.appendChild(script);
+    });
+  }
+</script>
+
 <style>
   .footer {
-    /* Footer shares the hero's surface: canvas hue + a faded brand mesh, so it
-       reads as the same "bookend" plane rather than a black slab. Tokens resolve
-       through the global palette, so it swaps with the theme like the hero. */
+    /* Footer shares the hero's surface: canvas hue + a faded brand mesh. Tokens
+       resolve through the global palette, so it swaps with the theme. */
     position: relative;
     overflow: hidden;
     margin-top: 96px;
@@ -226,7 +408,6 @@ const homeAdPreviewLinks = adPreviews.map((tool) => ({
   .footer--home {
     margin-top: 48px;
   }
-  /* Same brand mesh as the hero, same low opacity fade. */
   .footer__mesh {
     position: absolute;
     inset: 0;
@@ -239,9 +420,10 @@ const homeAdPreviewLinks = adPreviews.map((tool) => ({
     display: grid;
     gap: 48px;
     padding-top: 64px;
-    padding-bottom: 48px;
+    padding-bottom: 40px;
   }
 
+  /* ── Brand block ─────────────────────────────────────────────────────── */
   .footer__logo {
     display: inline-flex;
     align-items: center;
@@ -251,9 +433,6 @@ const homeAdPreviewLinks = adPreviews.map((tool) => ({
     font-size: 16px;
     letter-spacing: -0.4px;
   }
-  /* Rendered by the <ResponsiveImage> child component, whose <img> lacks this
-     component's scope hash — target it with :global, anchored under the scoped
-     .footer__logo so nothing leaks site-wide. */
   .footer__logo :global(.footer__logo-img) {
     height: 35px;
     width: auto;
@@ -270,56 +449,262 @@ const homeAdPreviewLinks = adPreviews.map((tool) => ({
   }
   .footer__tag {
     margin-top: 12px;
-    max-width: 320px;
+    max-width: 300px;
     color: var(--color-body);
     font-size: 14px;
     line-height: 20px;
     letter-spacing: -0.28px;
   }
 
-  /* Mobile: multi-column flow rather than a row-based grid. A 2-col grid sized
-     each row to its tallest cell, so a short column (e.g. Legal) sitting beside
-     a tall one (Platform Guides) left a dead gap before the next row. Multicol
-     packs each block directly under the previous one, so there's no gap. */
+  /* Trust chips */
+  .footer__features {
+    list-style: none;
+    margin: 24px 0 0;
+    padding: 0;
+    display: grid;
+    gap: 10px;
+    max-width: 280px;
+  }
+  .footer__chip {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 12px;
+    border: 1px solid var(--color-hairline);
+    border-radius: var(--radius-pill);
+    background: var(--color-canvas);
+    transition: border-color 0.15s ease, background 0.15s ease, transform 0.15s ease;
+  }
+  .footer__chip:hover {
+    border-color: color-mix(in srgb, var(--color-link) 40%, var(--color-hairline));
+    background: var(--color-canvas-soft);
+    transform: translateY(-1px);
+  }
+  .footer__chip-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    background: var(--color-link-bg-soft);
+    color: var(--color-link);
+  }
+  .footer__chip-icon svg {
+    width: 15px;
+    height: 15px;
+  }
+  .footer__chip-label {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--color-ink);
+    letter-spacing: -0.2px;
+  }
+
+  /* Social row */
+  .footer__social {
+    margin-top: 28px;
+  }
+  .footer__social-label {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-mute);
+    margin-bottom: 12px;
+  }
+  .footer__socials {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .footer__social-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    border: 1px solid var(--color-hairline);
+    color: var(--color-body);
+    background: var(--color-canvas);
+    transition: color 0.15s ease, border-color 0.15s ease, background 0.15s ease, transform 0.15s ease;
+  }
+  .footer__social-link:hover {
+    color: var(--color-ink);
+    border-color: color-mix(in srgb, var(--color-link) 45%, var(--color-hairline));
+    background: var(--color-canvas-soft);
+    transform: translateY(-2px);
+  }
+  .footer__social-link svg {
+    width: 17px;
+    height: 17px;
+  }
+
+  /* ── Link columns ────────────────────────────────────────────────────── */
+  /* Mobile: multi-column flow so short blocks pack under tall ones with no gap. */
   .footer__cols {
     columns: 2;
     column-gap: 32px;
   }
   .footer__col {
     break-inside: avoid;
-    margin-bottom: 32px;
+    margin-bottom: 28px;
   }
   .footer__eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 8px;
     font-family: var(--font-mono);
     font-size: 12px;
     line-height: 16px;
     letter-spacing: 0.04em;
     text-transform: uppercase;
-    color: var(--color-mute);
-    margin-bottom: 12px;
+    color: var(--color-ink);
+    margin-bottom: 8px;
+  }
+  .footer__eyebrow-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-link);
+  }
+  .footer__eyebrow-icon svg {
+    width: 16px;
+    height: 16px;
   }
   .footer__list {
     list-style: none;
     padding: 0;
     margin: 0;
-    display: grid;
-    gap: 10px;
+  }
+  .footer__list li {
+    border-bottom: 1px solid var(--color-hairline);
+  }
+  .footer__list li:last-child {
+    border-bottom: 0;
   }
   .footer__link {
+    display: block;
+    padding: 9px 0;
     color: var(--color-body);
     font-size: 14px;
     letter-spacing: -0.28px;
-    transition: color 0.15s ease;
+    transition: color 0.15s ease, padding-left 0.15s ease;
   }
   .footer__link:hover {
     color: var(--color-ink);
+    padding-left: 4px;
   }
 
+  /* ── Newsletter band ─────────────────────────────────────────────────── */
+  .footer__news {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px 32px;
+    margin-bottom: 32px;
+    padding: 22px 24px;
+    border: 1px solid color-mix(in srgb, var(--color-link) 22%, var(--color-hairline));
+    border-radius: var(--radius-xl);
+    background: var(--color-link-bg-soft);
+  }
+  .footer__news-copy {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    min-width: 0;
+  }
+  .footer__news-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    background: var(--color-canvas);
+    color: var(--color-link);
+  }
+  .footer__news-icon svg {
+    width: 20px;
+    height: 20px;
+  }
+  .footer__news-title {
+    font-size: 17px;
+    font-weight: 700;
+    letter-spacing: -0.3px;
+    color: var(--color-ink);
+  }
+  .footer__news-sub {
+    margin-top: 3px;
+    font-size: 14px;
+    line-height: 20px;
+    color: var(--color-body);
+  }
+  .footer__news-form {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    flex: 1 1 300px;
+    max-width: 460px;
+    justify-content: flex-end;
+  }
+  .footer__news-input {
+    flex: 1 1 180px;
+    min-width: 0;
+    height: 44px;
+    padding: 0 14px;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--color-hairline);
+    background: var(--color-canvas);
+    color: var(--color-ink);
+    font-size: 14px;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  }
+  .footer__news-input::placeholder {
+    color: var(--color-mute);
+  }
+  .footer__news-input:focus {
+    outline: none;
+    border-color: var(--color-link);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-link) 20%, transparent);
+  }
+  .footer__news-btn {
+    position: relative;
+    height: 44px;
+    padding: 0 22px;
+    border: none;
+    border-radius: var(--radius-md);
+    background: var(--color-link);
+    color: var(--color-on-primary);
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background 0.15s ease, transform 0.1s ease;
+  }
+  .footer__news-btn:disabled {
+    cursor: progress;
+  }
+  .footer__news-btn:hover {
+    background: var(--color-link-deep);
+  }
+  .footer__news-btn:active {
+    transform: scale(0.97);
+  }
+
+  /* ── Copyright bar ───────────────────────────────────────────────────── */
   .footer__bar {
     position: relative;
     display: flex;
     flex-wrap: wrap;
-    gap: 8px 24px;
+    gap: 12px 24px;
+    align-items: center;
     justify-content: space-between;
     padding-top: 24px;
     padding-bottom: 40px;
@@ -328,29 +713,154 @@ const homeAdPreviewLinks = adPreviews.map((tool) => ({
     font-size: 12px;
     line-height: 16px;
   }
+  .footer__bar-right {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
   .footer__note {
     max-width: 420px;
   }
+  .footer__totop {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    border: 1px solid var(--color-hairline);
+    background: var(--color-canvas);
+    color: var(--color-body);
+    cursor: pointer;
+    transition: color 0.15s ease, border-color 0.15s ease, background 0.15s ease, transform 0.15s ease;
+  }
+  .footer__totop:hover {
+    color: var(--color-link);
+    border-color: color-mix(in srgb, var(--color-link) 45%, var(--color-hairline));
+    background: var(--color-canvas-soft);
+    transform: translateY(-2px);
+  }
+  .footer__totop svg {
+    width: 18px;
+    height: 18px;
+  }
 
-  @media (min-width: 720px) {
-    .footer__inner {
-      grid-template-columns: 1.2fr 2fr;
+  /* ── Subscribe popup banner (sits directly above the email field) ─────── */
+  .footer__toast {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: calc(100% + 10px);
+    z-index: 5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 10px 16px;
+    border-radius: var(--radius-pill);
+    background: var(--color-canvas);
+    border: 1px solid var(--color-hairline);
+    box-shadow: var(--shadow-e3);
+    color: var(--color-ink);
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: -0.2px;
+    text-align: center;
+    opacity: 0;
+    transform: translateY(6px);
+    transition: opacity 0.25s ease, transform 0.25s ease;
+    pointer-events: none;
+  }
+  .footer__toast.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .footer__toast[data-tone='error'] {
+    border-color: color-mix(in srgb, var(--color-error) 45%, var(--color-hairline));
+    color: var(--color-error);
+  }
+  .footer__toast-emoji {
+    font-size: 18px;
+    line-height: 1;
+  }
+
+  /* Subscribe button loading spinner — centered over the hidden label. */
+  .footer__news-btn-spinner {
+    position: absolute;
+    inset: 0;
+    margin: auto;
+    width: 18px;
+    height: 18px;
+    display: none;
+    border: 2px solid color-mix(in srgb, var(--color-on-primary) 40%, transparent);
+    border-top-color: var(--color-on-primary);
+    border-radius: 50%;
+    animation: footer-spin 0.7s linear infinite;
+  }
+  .footer__news-form.is-loading .footer__news-btn-text {
+    visibility: hidden;
+  }
+  .footer__news-form.is-loading .footer__news-btn-spinner {
+    display: block;
+  }
+  @keyframes footer-spin {
+    to {
+      transform: rotate(360deg);
     }
-    /* Wider viewports: revert to an aligned grid (multicol props are inert on a
-       grid container). All columns share a baseline, so no row-gap problem. */
+  }
+
+  /* ── Responsive ──────────────────────────────────────────────────────── */
+  @media (min-width: 720px) {
     .footer__cols {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 32px;
+      gap: 28px;
     }
     .footer__col {
       margin-bottom: 0;
     }
+    .footer__news {
+      flex-wrap: nowrap;
+      padding: 24px 32px;
+    }
+    .footer__news-form {
+      justify-content: flex-end;
+    }
   }
 
   @media (min-width: 1100px) {
+    .footer__inner {
+      grid-template-columns: 1.25fr 3fr;
+      gap: 56px;
+    }
     .footer__cols {
       grid-template-columns: repeat(6, 1fr);
+      gap: 24px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .footer__chip,
+    .footer__social-link,
+    .footer__totop,
+    .footer__link {
+      transition: color 0.15s ease, border-color 0.15s ease, background 0.15s ease;
+    }
+    .footer__chip:hover,
+    .footer__social-link:hover,
+    .footer__totop:hover {
+      transform: none;
+    }
+    .footer__link:hover {
+      padding-left: 0;
+    }
+    .footer__toast {
+      transition: opacity 0.25s ease;
+      transform: none;
+    }
+    .footer__toast.is-visible {
+      transform: none;
     }
   }
 </style>

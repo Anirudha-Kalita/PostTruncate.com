@@ -1,0 +1,200 @@
+---
+// "See how it works in 3 simple steps" — a light, centered process strip shown
+// directly below the workspace. Three numbered steps (paste → analyze → post)
+// with a brand icon each and dashed connectors between them on desktop.
+import type { Translations } from '../i18n/types';
+
+interface Props {
+  s: Translations['howItWorks'];
+}
+
+const { s } = Astro.props;
+
+// The three step icons, in order (paste → analyze → post). Mapped by index onto
+// the localized `steps` tuple, whose length the type pins at exactly three.
+const icons = ['paste', 'analyze', 'confidence'] as const;
+const steps = s.steps.map((step, i) => ({
+  num: i + 1,
+  icon: icons[i],
+  title: step.name,
+  body: step.text,
+}));
+---
+
+<section class="how container-page" aria-labelledby="how-heading">
+  <h2 id="how-heading" class="how__title">{s.heading}</h2>
+
+  <ol class="how__steps">
+    {steps.map((step) => (
+      <li class="how__step">
+        <div class="how__figure">
+          <span class="how__num">{step.num}</span>
+          <span class="how__icon">
+            {step.icon === 'paste' && (
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M14.5 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2v-6" />
+                <path d="M8 8h4" />
+                <path d="M8 12h3" />
+                <path d="M8 16h2.5" />
+                <path d="M18.4 3.6a1.9 1.9 0 0 1 2.7 2.7L15.5 12l-3.3.6.6-3.3 5.6-5.7z" />
+              </svg>
+            )}
+            {step.icon === 'analyze' && (
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <circle cx="11" cy="11" r="7" />
+                <path d="m20.5 20.5-4.2-4.2" />
+                <path d="M8.5 11h5" />
+                <path d="M11 8.5v5" />
+              </svg>
+            )}
+            {step.icon === 'confidence' && (
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <circle cx="11" cy="13" r="8" />
+                <circle cx="11" cy="13" r="4" />
+                <path d="M11 13 20.5 3.5" />
+                <path d="M16 3.5h4.5V8" />
+              </svg>
+            )}
+          </span>
+        </div>
+        <h3 class="how__step-title">{step.title}</h3>
+        <p class="how__step-body">{step.body}</p>
+
+        {/* Dashed connector to the next step — desktop only, decorative. */}
+        <svg class="how__connector" viewBox="0 0 64 24" fill="none" stroke="currentColor" aria-hidden="true">
+          <path d="M2 12h52" stroke-width="2" stroke-linecap="round" stroke-dasharray="1 6" />
+          <path d="m50 6 8 6-8 6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+      </li>
+    ))}
+  </ol>
+</section>
+
+<style>
+  .how {
+    padding-top: 96px;
+    scroll-margin-top: 80px;
+    text-align: center;
+  }
+  .how__title {
+    font-size: 32px;
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -1px;
+    color: var(--color-ink);
+    margin-bottom: 56px;
+  }
+  .how__steps {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 48px;
+    max-width: 320px;
+    margin-inline: auto;
+  }
+  @media (min-width: 768px) {
+    .how__steps {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      max-width: none;
+    }
+  }
+  .how__step {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-inline: 8px;
+  }
+  /* Number badge + icon sit side by side, badge lifted like the mockup. */
+  .how__figure {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  .how__num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    align-self: flex-start;
+    background: #0066e0;
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+    box-shadow: 0 4px 12px rgba(0, 102, 224, 0.28);
+  }
+  .how__icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 64px;
+    height: 64px;
+    border-radius: 18px;
+    background: #e8f2ff;
+    color: #0a66c2;
+  }
+  .how__icon svg {
+    width: 32px;
+    height: 32px;
+  }
+  .how__step-title {
+    font-size: 17px;
+    font-weight: 700;
+    letter-spacing: -0.2px;
+    color: var(--color-ink);
+    margin-bottom: 10px;
+  }
+  .how__step-body {
+    font-size: 15px;
+    line-height: 24px;
+    color: var(--color-mute);
+    max-width: 30ch;
+  }
+  /* Connector: dashed arrow from a step to the next. Sits in the icon band, to
+     the right of the step. Hidden on the last step and on stacked (mobile). */
+  .how__connector {
+    display: none;
+    position: absolute;
+    top: 16px;
+    left: calc(50% + 60px);
+    width: 64px;
+    height: 24px;
+    color: #c4b5fd;
+    pointer-events: none;
+  }
+  @media (min-width: 768px) {
+    .how__step:not(:last-child) .how__connector {
+      display: block;
+    }
+  }
+
+  /* Dark theme — soften the light icon chip and connector to fit the dark UI. */
+  :global(html[data-theme='dark']) .how__icon {
+    background: rgba(10, 102, 194, 0.2);
+    color: #60a5fa;
+  }
+  :global(html[data-theme='dark']) .how__num {
+    background: #0066e0;
+    box-shadow: 0 4px 12px rgba(0, 102, 224, 0.4);
+  }
+  :global(html[data-theme='dark']) .how__connector {
+    color: #6d5bb0;
+  }
+
+  @media (max-width: 768px) {
+    .how {
+      padding-top: 64px;
+    }
+    .how__title {
+      font-size: 26px;
+      margin-bottom: 40px;
+    }
+  }
+</style>

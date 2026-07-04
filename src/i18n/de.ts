@@ -58,19 +58,19 @@ export const de: Translations = {
   },
 
   howItWorks: {
-    heading: 'So funktioniert es',
+    heading: 'So funktioniert es in 3 einfachen Schritten',
     steps: [
       {
-        name: 'Text einfügen oder eingeben',
-        text: 'Füge deinen Entwurf in den Editor ein und die Zeichenanzahl aktualisiert sich sofort beim Tippen.',
+        name: 'Text einfügen',
+        text: 'Füge deinen Inhalt in den Editor ein oder tippe ihn.',
       },
       {
-        name: 'Alle Plattformen werden gleichzeitig angezeigt',
-        text: 'LinkedIn, X, Threads, Instagram, Facebook und SMS – alle Vorschaukarten aktualisieren sich gleichzeitig, ohne dass eine Auswahl nötig ist.',
+        name: 'Wir analysieren sofort',
+        text: 'Wir prüfen Zeichenanzahl, Abschneidepunkte und Plattformlimits in Echtzeit.',
       },
       {
-        name: 'Sieh genau, wo der Text abgeschnitten wird',
-        text: 'Die Vorschau markiert den Kürzungspunkt, damit du genau weißt, was die Leser sehen werden.',
+        name: 'Selbstbewusst posten',
+        text: 'Sieh genau, wie dein Beitrag erscheint, und poste ohne Sorge vor abgeschnittenem Text.',
       },
     ],
   },
@@ -399,6 +399,23 @@ export const de: Translations = {
         ],
       },
     },
+    features: {
+      realtime: 'Echtzeit-Vorschau',
+      privacy: 'Datenschutz zuerst',
+      noData: 'Keine Daten gespeichert',
+      everywhere: 'Funktioniert überall',
+    },
+    followUs: 'Folge uns',
+    newsletter: {
+      heading: 'Bleib auf dem Laufenden',
+      sub: 'Tipps, Updates und neue Tools – direkt in dein Postfach.',
+      placeholder: 'E-Mail eingeben',
+      button: 'Abonnieren',
+      success: 'Erfolgreich abonniert – danke!',
+      already: 'Du bist bereits abonniert.',
+      error: 'Etwas ist schiefgelaufen. Bitte versuche es erneut.',
+    },
+    backToTop: 'Nach oben',
     copyright: '© {year} PostTruncate. Gebaut für Creator überall.',
     disclaimer:
       'Nicht verbunden mit LinkedIn, X, Meta oder Instagram. Limits sind Schätzungen und können sich ändern.',
@@ -602,7 +619,7 @@ export const de: Translations = {
 
   whyPostTruncate: {
     eyebrow: 'WARUM POSTTRUNCATE?',
-    title: 'Schreiben Sie mit Zuversicht.<br/>Posten Sie ohne Sorgen.',
+    title: 'Schreiben Sie mit <span class="why-title__accent">Zuversicht.</span><br/>Posten Sie ohne Sorgen.',
     p1: 'Jede Plattform hat unterschiedliche Zeichenlimits und Kürzungsregeln. PostTruncate zeigt Ihnen genau, wie Ihr Inhalt aussehen wird, bevor Sie auf Veröffentlichen klicken.',
     p2: 'Sparen Sie Zeit, steigern Sie das Engagement und nutzen Sie jedes Zeichen durch Echtzeit-Vorschauen, intelligente Analysen und KI-gestützte Ton-Umschreibung mit einem Klick.',
     features: {

@@ -58,6 +58,16 @@ export interface BlogStrings {
   paginationNavLabel: string;
   /** Pagination: status template with {current} and {total} tokens. */
   paginationStatus: string;
+  /** Heading above the article share row, e.g. "Share this article". */
+  shareHeading: string;
+  /** Share-link aria-label template with a {platform} token, e.g. "Share on {platform}". */
+  shareOn: string;
+  /** Copy-link button label, e.g. "Copy link". */
+  shareCopy: string;
+  /** Confirmation shown after the link is copied, e.g. "Link copied!". */
+  shareCopied: string;
+  /** Native (Web Share API) button label, e.g. "Share". */
+  shareNative: string;
 }
 
 // Only English is authored today. Add keys for 'de', 'es', … when translating.
@@ -88,6 +98,11 @@ const BLOG_STRINGS: Record<string, BlogStrings> = {
     paginationNext: 'Next',
     paginationNavLabel: 'Blog pagination',
     paginationStatus: 'Page {current} of {total}',
+    shareHeading: 'Share this article',
+    shareOn: 'Share on {platform}',
+    shareCopy: 'Copy link',
+    shareCopied: 'Link copied!',
+    shareNative: 'Share',
   },
 };
 

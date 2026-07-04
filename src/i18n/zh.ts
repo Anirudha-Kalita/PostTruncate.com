@@ -57,19 +57,19 @@ export const zh: Translations = {
   },
 
   howItWorks: {
-    heading: '使用方法',
+    heading: '通过 3 个简单步骤了解工作原理',
     steps: [
       {
-        name: '粘贴或输入您的文本',
-        text: '将草稿粘贴到编辑器中，字符计数器会随着您的输入实时更新。',
+        name: '粘贴你的文本',
+        text: '将内容粘贴或输入到编辑器中。',
       },
       {
-        name: '所有平台同时渲染',
-        text: 'LinkedIn、X、Threads、Instagram、Facebook 和短信预览卡同时更新，无需手动选择。',
+        name: '我们即时分析',
+        text: '我们实时检查字符数、截断位置和各平台限制。',
       },
       {
-        name: '精确查看截断位置',
-        text: '预览会突出显示截断点，让您清楚地了解读者将看到的内容。',
+        name: '自信地发布',
+        text: '准确查看显示效果，发布时无需担心文本被截断。',
       },
     ],
   },
@@ -398,6 +398,23 @@ export const zh: Translations = {
         ],
       },
     },
+    features: {
+      realtime: '实时预览',
+      privacy: '隐私优先',
+      noData: '不存储数据',
+      everywhere: '随处可用',
+    },
+    followUs: '关注我们',
+    newsletter: {
+      heading: '保持更新',
+      sub: '技巧、更新和新工具，直接发送到你的邮箱。',
+      placeholder: '输入你的邮箱',
+      button: '订阅',
+      success: '订阅成功，谢谢！',
+      already: '你已经订阅了。',
+      error: '出错了，请重试。',
+    },
+    backToTop: '返回顶部',
     copyright: '© {year} PostTruncate。为世界各地的创作者打造。',
     disclaimer:
       '与 LinkedIn、X、Meta 或 Instagram 无任何关联。各项限制均为估算值，可能随时变动。',
@@ -599,7 +616,7 @@ export const zh: Translations = {
 
   whyPostTruncate: {
     eyebrow: '为什么选择 POSTTRUNCATE？',
-    title: '自信地写作，<br/>无忧地发布。',
+    title: '<span class="why-title__accent">自信</span>地写作，<br/>无忧地发布。',
     p1: '每个平台都有不同的字符限制和截断规则。PostTruncate 可以让您在点击发布之前准确看到内容的外观。',
     p2: '节省时间，提升互动，利用实时预览、智能洞察和一键AI语调改写，让每个字符都发挥价值。',
     features: {

@@ -58,19 +58,19 @@ export const en: Translations = {
   },
 
   howItWorks: {
-    heading: 'How it works',
+    heading: 'See how it works in 3 simple steps',
     steps: [
       {
-        name: 'Paste or type your text',
-        text: 'Drop your draft into the editor and the live character count updates instantly as you type.',
+        name: 'Paste Your Text',
+        text: 'Paste or type your content into the editor.',
       },
       {
-        name: 'All platforms render at once',
-        text: 'LinkedIn, X, Threads, Instagram, Facebook, and SMS preview cards all update simultaneously — no selection needed.',
+        name: 'We Analyze Instantly',
+        text: 'We check character count, truncation points, and platform limits in real-time.',
       },
       {
-        name: 'See exactly where it cuts off',
-        text: 'The preview highlights the truncation point so you know precisely what readers will see.',
+        name: 'Post With Confidence',
+        text: 'See exactly how it will appear and post without worrying about cut-off text.',
       },
     ],
   },
@@ -399,6 +399,23 @@ export const en: Translations = {
         ],
       },
     },
+    features: {
+      realtime: 'Real-time previews',
+      privacy: 'Privacy first',
+      noData: 'No data stored',
+      everywhere: 'Works everywhere',
+    },
+    followUs: 'Follow us',
+    newsletter: {
+      heading: 'Stay updated',
+      sub: 'Tips, updates, and new tools — straight to your inbox.',
+      placeholder: 'Enter your email',
+      button: 'Subscribe',
+      success: 'Subscribed successfully — thank you!',
+      already: 'You’re already subscribed.',
+      error: 'Something went wrong. Please try again.',
+    },
+    backToTop: 'Back to top',
     copyright: '© {year} PostTruncate. Built for creators everywhere.',
     disclaimer:
       'Not affiliated with LinkedIn, X, Meta, or Instagram. Limits are estimates and can change.',
@@ -602,7 +619,7 @@ export const en: Translations = {
 
   whyPostTruncate: {
     eyebrow: 'WHY POSTTRUNCATE?',
-    title: 'Write with confidence.<br/>Post without worries.',
+    title: 'Write with <span class="why-title__accent">confidence.</span><br/>Post without worries.',
     p1: 'Every platform has different character limits and truncation rules. PostTruncate shows you exactly how your content will appear before you hit publish.',
     p2: 'Save time, increase engagement, and make every character count with real-time previews, smart insights, and one-tap AI tone rewriting.',
     features: {

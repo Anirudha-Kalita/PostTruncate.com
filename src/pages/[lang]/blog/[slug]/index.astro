@@ -2,6 +2,7 @@
 import { getCollection, render, type CollectionEntry } from 'astro:content';
 import Layout from '../../../../layouts/Layout.astro';
 import BlogStructuredData from '../../../../components/BlogStructuredData.astro';
+import BlogShare from '../../../../components/BlogShare.astro';
 import BlogCardGrid from '../../../../components/BlogCardGrid.astro';
 import ResponsiveImage from '../../../../components/ResponsiveImage.astro';
 import { getLocale, DEFAULT_LOCALE } from '../../../../i18n/config';
@@ -285,6 +286,10 @@ const { Content } = await render(post);
     <div class="post__body seo-prose">
       <Content />
     </div>
+
+    {/* Share row — appears on every article; a plain share-intent link set plus
+        Copy link + native share (progressive enhancement). */}
+    <BlogShare url={canonicalUrl} title={data.title} strings={s} />
 
     {relatedToolHref && relatedToolName && (
       <p class="post__related">

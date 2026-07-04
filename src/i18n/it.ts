@@ -57,19 +57,19 @@ export const it: Translations = {
   },
 
   howItWorks: {
-    heading: 'Come funziona',
+    heading: 'Scopri come funziona in 3 semplici passaggi',
     steps: [
       {
-        name: 'Incolla o digita il tuo testo',
-        text: 'Inserisci la tua bozza nell\'editor e il contatore di caratteri si aggiorna istantaneamente mentre scrivi.',
+        name: 'Incolla il tuo testo',
+        text: 'Incolla o scrivi il tuo contenuto nell\'editor.',
       },
       {
-        name: 'Tutte le piattaforme vengono visualizzate contemporaneamente',
-        text: 'Le anteprime di LinkedIn, X, Threads, Instagram, Facebook e SMS si aggiornano simultaneamente — nessuna selezione necessaria.',
+        name: 'Analizziamo all\'istante',
+        text: 'Controlliamo il conteggio dei caratteri, i punti di troncamento e i limiti delle piattaforme in tempo reale.',
       },
       {
-        name: 'Vedi esattamente dove viene tagliato il testo',
-        text: 'L\'anteprima evidenzia il punto di troncamento in modo da sapere esattamente cosa vedranno i lettori.',
+        name: 'Pubblica con sicurezza',
+        text: 'Guarda esattamente come apparirà e pubblica senza preoccuparti del testo tagliato.',
       },
     ],
   },
@@ -398,6 +398,23 @@ export const it: Translations = {
         ],
       },
     },
+    features: {
+      realtime: 'Anteprime in tempo reale',
+      privacy: 'Privacy prima di tutto',
+      noData: 'Nessun dato memorizzato',
+      everywhere: 'Funziona ovunque',
+    },
+    followUs: 'Seguici',
+    newsletter: {
+      heading: 'Resta aggiornato',
+      sub: 'Consigli, novità e nuovi strumenti — direttamente nella tua casella.',
+      placeholder: 'Inserisci la tua email',
+      button: 'Iscriviti',
+      success: 'Iscrizione riuscita, grazie!',
+      already: 'Sei già iscritto.',
+      error: 'Qualcosa è andato storto. Riprova.',
+    },
+    backToTop: 'Torna su',
     copyright: '© {year} PostTruncate. Creato per i creator di tutto il mondo.',
     disclaimer:
       'Non affiliato a LinkedIn, X, Meta o Instagram. I limiti sono stime e possono cambiare.',
@@ -601,7 +618,7 @@ export const it: Translations = {
 
   whyPostTruncate: {
     eyebrow: 'PERCHÉ POSTTRUNCATE?',
-    title: 'Scrivi con sicurezza.<br/>Pubblica senza preoccupazioni.',
+    title: 'Scrivi con <span class="why-title__accent">sicurezza.</span><br/>Pubblica senza preoccupazioni.',
     p1: 'Ogni piattaforma ha limiti di caratteri e regole di troncamento diversi. PostTruncate ti mostra esattamente come apparirà il tuo contenuto prima di pubblicarlo.',
     p2: 'Risparmia tempo, aumenta il coinvolgimento e dai valore a ogni carattere con anteprime in tempo reale, analisi intelligenti e riscrittura del tono con IA in un clic.',
     features: {

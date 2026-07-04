@@ -57,19 +57,19 @@ export const ja: Translations = {
   },
 
   howItWorks: {
-    heading: '使い方',
+    heading: '3つの簡単なステップで仕組みを見る',
     steps: [
       {
-        name: 'テキストを貼り付けるか入力する',
-        text: 'エディタに下書きを貼り付けると、入力するたびに文字数がリアルタイムで更新されます。',
+        name: 'テキストを貼り付け',
+        text: 'エディターにコンテンツを貼り付けるか入力します。',
       },
       {
-        name: 'すべてのプラットフォームが同時に表示される',
-        text: 'LinkedIn、X、Threads、Instagram、Facebook、SMSのプレビューカードがすべて同時に更新されます。選択は不要です。',
+        name: '即座に分析',
+        text: '文字数、切り捨て位置、各プラットフォームの上限をリアルタイムでチェックします。',
       },
       {
-        name: 'どこで切れるかを正確に確認する',
-        text: 'プレビューが切り捨てポイントをハイライト表示するので、読者に何が見えるかを正確に把握できます。',
+        name: '自信を持って投稿',
+        text: '実際の表示を正確に確認し、テキストの切れを気にせず投稿できます。',
       },
     ],
   },
@@ -398,6 +398,23 @@ export const ja: Translations = {
         ],
       },
     },
+    features: {
+      realtime: 'リアルタイムプレビュー',
+      privacy: 'プライバシー最優先',
+      noData: 'データ保存なし',
+      everywhere: 'どこでも使える',
+    },
+    followUs: 'フォローする',
+    newsletter: {
+      heading: '最新情報を受け取る',
+      sub: 'ヒント、アップデート、新ツールをメールでお届けします。',
+      placeholder: 'メールアドレスを入力',
+      button: '登録する',
+      success: '登録が完了しました。ありがとうございます！',
+      already: 'すでに登録済みです。',
+      error: 'エラーが発生しました。もう一度お試しください。',
+    },
+    backToTop: 'トップに戻る',
     copyright: '© {year} PostTruncate. 世界中のクリエイターのために作られました。',
     disclaimer:
       'LinkedIn、X、Meta、Instagramとは提携していません。上限は推定値であり、変更される可能性があります。',
@@ -601,7 +618,7 @@ export const ja: Translations = {
 
   whyPostTruncate: {
     eyebrow: 'POSTTRUNCATEが選ばれる理由',
-    title: '自信を持って書き、<br/>安心して投稿する。',
+    title: '<span class="why-title__accent">自信</span>を持って書き、<br/>安心して投稿する。',
     p1: '各プラットフォームには、それぞれ異なる文字数制限と切り捨てのルールがあります。PostTruncateを使えば、公開ボタンを押す前にコンテンツがどのように表示されるかを正確に確認できます。',
     p2: '時間を節約し、エンゲージメントを高め、リアルタイムプレビュー、スマートな洞察、そしてワンクリックのAIトーン書き換えですべての文字を活かしましょう。',
     features: {

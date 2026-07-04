@@ -11,9 +11,9 @@ import { calculators } from '../../../data/calculators';
 import { getFeaturedFaqs } from '../../../data/faq';
 import PlatformBanner from '../../../components/PlatformBanner.astro';
 import HeroPreviewCard from '../../../components/HeroPreviewCard.astro';
+import HowItWorks from '../../../components/HowItWorks.astro';
 import WhyPostTruncate from '../../../components/WhyPostTruncate.astro';
 import HowTruncationWorks from '../../../components/HowTruncationWorks.astro';
-import PlatformCharacterLimits from '../../../components/PlatformCharacterLimits.astro';
 import WhoIsItFor from '../../../components/WhoIsItFor.astro';
 import BlogCardGrid from '../../../components/BlogCardGrid.astro';
 import {
@@ -165,9 +165,12 @@ const latestPosts = (await getPublishedPosts())
     <Dashboard client:load lang={lang} strings={t.island} toolSlugs={toolSlugs} />
   </main>
 
+  <!-- ── "See how it works in 3 simple steps" — process strip directly below
+       the workspace (editor + advanced tools), above the value props. -->
+  <HowItWorks s={t.howItWorks} />
+
   <WhyPostTruncate s={t.whyPostTruncate} />
   <HowTruncationWorks s={t.howTruncationWorks} lang={lang} />
-  <PlatformCharacterLimits s={t.platformCharacterLimits} lang={lang} />
   <WhoIsItFor s={t.whoIsItFor} />
 
   <!-- ── Top leaderboard ad (reserved height → 0 CLS) ─────────────────── -->

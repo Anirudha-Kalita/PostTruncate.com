@@ -57,19 +57,19 @@ export const nl: Translations = {
   },
 
   howItWorks: {
-    heading: 'Hoe het werkt',
+    heading: 'Zo werkt het in 3 eenvoudige stappen',
     steps: [
       {
-        name: 'Plak of typ uw tekst',
-        text: 'Zet uw concept in de editor en de tekenteller wordt direct bijgewerkt terwijl u typt.',
+        name: 'Plak je tekst',
+        text: 'Plak of typ je inhoud in de editor.',
       },
       {
-        name: 'Alle platforms worden tegelijk weergegeven',
-        text: 'De voorbeeldkaarten van LinkedIn, X, Threads, Instagram, Facebook en sms worden allemaal tegelijk bijgewerkt — zonder dat u iets hoeft te selecteren.',
+        name: 'Wij analyseren direct',
+        text: 'We controleren het aantal tekens, afkappunten en platformlimieten in realtime.',
       },
       {
-        name: 'Zie precies waar de tekst wordt afgekapt',
-        text: 'De voorbeeldweergave markeert het afkappunt zodat u precies weet wat de lezers zullen zien.',
+        name: 'Plaats met vertrouwen',
+        text: 'Zie precies hoe het eruit komt te zien en plaats zonder zorgen over afgekapte tekst.',
       },
     ],
   },
@@ -398,6 +398,23 @@ export const nl: Translations = {
         ],
       },
     },
+    features: {
+      realtime: 'Realtime voorbeelden',
+      privacy: 'Privacy voorop',
+      noData: 'Geen data opgeslagen',
+      everywhere: 'Werkt overal',
+    },
+    followUs: 'Volg ons',
+    newsletter: {
+      heading: 'Blijf op de hoogte',
+      sub: 'Tips, updates en nieuwe tools — rechtstreeks in je inbox.',
+      placeholder: 'Vul je e-mail in',
+      button: 'Abonneren',
+      success: 'Aanmelding gelukt, bedankt!',
+      already: 'Je bent al aangemeld.',
+      error: 'Er ging iets mis. Probeer het opnieuw.',
+    },
+    backToTop: 'Terug naar boven',
     copyright: '© {year} PostTruncate. Gebouwd voor creators overal.',
     disclaimer:
       'Niet gelieerd aan LinkedIn, X, Meta of Instagram. Limieten zijn schattingen en kunnen veranderen.',
@@ -601,7 +618,7 @@ export const nl: Translations = {
 
   whyPostTruncate: {
     eyebrow: 'WAAROM POSTTRUNCATE?',
-    title: 'Schrijf met vertrouwen.<br/>Plaats zonder zorgen.',
+    title: 'Schrijf met <span class="why-title__accent">vertrouwen.</span><br/>Plaats zonder zorgen.',
     p1: 'Elk platform heeft andere tekenlimieten en afkapregels. PostTruncate laat precies zien hoe je content eruitziet voordat je op publiceren klikt.',
     p2: 'Bespaar tijd, verhoog de betrokkenheid en laat elk teken tellen met realtime voorbeelden, slimme inzichten en AI-toonherschrijving met één klik.',
     features: {
