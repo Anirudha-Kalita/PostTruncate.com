@@ -449,6 +449,10 @@ export interface IslandStrings {
     pickTone: string;
     /** Short helper line under the heading. */
     pickToneSub: string;
+    /** First-run coach-mark body pointing at the AI button (shown once). */
+    hint: string;
+    /** Aria-label for the first-run hint's dismiss button. */
+    hintDismiss: string;
     /** Tone option labels (keys match the Tone union). */
     tones: {
       professional: string;

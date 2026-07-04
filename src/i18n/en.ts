@@ -937,6 +937,8 @@ export const en: Translations = {
       button: 'AI Improve',
       pickTone: 'Improve with AI',
       pickToneSub: 'Pick a tone — AI rewrites your post.',
+      hint: 'New: rewrite your post in one tap — just pick a tone.',
+      hintDismiss: 'Dismiss',
       tones: {
         professional: 'Professional',
         casual: 'Casual',

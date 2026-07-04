@@ -942,6 +942,8 @@ export const de: Translations = {
       button: 'KI-Verbesserung',
       pickTone: 'Mit KI verbessern',
       pickToneSub: 'Wähle einen Ton — die KI schreibt deinen Beitrag um.',
+      hint: 'Neu: Schreibe deinen Beitrag mit einem Tippen um – wähle einfach einen Ton.',
+      hintDismiss: 'Schließen',
       tones: {
         professional: 'Professionell',
         casual: 'Locker',

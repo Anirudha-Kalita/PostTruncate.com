@@ -941,6 +941,8 @@ export const nl: Translations = {
       button: 'AI-verbetering',
       pickTone: 'Verbeteren met AI',
       pickToneSub: 'Kies een toon — AI herschrijft je bericht.',
+      hint: 'Nieuw: herschrijf je bericht met één tik — kies gewoon een toon.',
+      hintDismiss: 'Sluiten',
       tones: {
         professional: 'Professioneel',
         casual: 'Informeel',

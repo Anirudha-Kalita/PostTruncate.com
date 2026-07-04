@@ -1,5 +1,5 @@
 /** @jsxImportSource preact */
-import { useRef, useState } from 'preact/hooks';
+import { useEffect, useRef, useState } from 'preact/hooks';
 import { TONES, type Tone } from '../../lib/aiImprove';
 import { interp, plural } from '../../i18n/interp';
 import type { IslandStrings } from '../../i18n/types';
@@ -13,6 +13,9 @@ interface Props {
 }
 
 type Status = 'idle' | 'loading' | 'done' | 'error';
+
+/** localStorage flag: set once the first-run AI hint has been seen/dismissed. */
+const HINT_SEEN_KEY = 'pt-ai-hint-seen';
 
 /**
  * A stable per-browser id sent as X-Client-Token so the server can apply the
@@ -83,8 +86,31 @@ export function AiImprove({ text, setText, s, onImproved }: Props) {
   // editor moves away from this — cleared or edited — that UI is stale.
   const shownForText = useRef<string | null>(null);
 
+  // First-run coach-mark: shown once (per browser) the first time the user has a
+  // post in the editor, so they learn what the AI button does. Starts hidden to
+  // avoid an SSR/hydration flash; an effect reveals it only if never dismissed.
+  const [hintEligible, setHintEligible] = useState(false);
+  useEffect(() => {
+    try {
+      if (!localStorage.getItem(HINT_SEEN_KEY)) setHintEligible(true);
+    } catch {
+      // Storage blocked (private mode) — simply never show the hint.
+    }
+  }, []);
+  const dismissHint = () => {
+    setHintEligible(false);
+    try {
+      localStorage.setItem(HINT_SEEN_KEY, '1');
+    } catch {
+      // Ignore — worst case the hint shows again next visit.
+    }
+  };
+
   const busy = status === 'loading';
   const hasText = text.trim().length > 0;
+  // Only surface the hint once there's text to act on, and never over the open
+  // menu / a spinner / a result toast.
+  const showHint = hintEligible && hasText && !open && status === 'idle';
   // Auto-hide the Undo button / toast as soon as the editor text diverges from
   // the result it relates to (e.g. the user clears or retypes the editor).
   const statusForCurrentText = shownForText.current !== null && text === shownForText.current;
@@ -156,6 +182,34 @@ export function AiImprove({ text, setText, s, onImproved }: Props) {
         />
       )}
 
+      {/* First-run coach-mark — a small callout above the FAB explaining what it
+          does, shown once until the user opens the dial or dismisses it. */}
+      {showHint && (
+        <div class="absolute bottom-16 right-3 z-30 w-[min(17rem,72vw)]">
+          <div class="relative rounded-lg border border-link/30 bg-canvas px-3 py-2.5 shadow-e3">
+            <div class="flex items-start gap-2">
+              <span class="mt-0.5 shrink-0 text-link">
+                <SparkleIcon size={14} />
+              </span>
+              <p class="text-[12px] leading-4 text-body">{s.hint}</p>
+              <button
+                type="button"
+                onClick={dismissHint}
+                aria-label={s.hintDismiss}
+                class="-mr-1 -mt-1 ml-auto shrink-0 rounded p-1 text-mute transition-colors hover:bg-canvas-soft-2 hover:text-ink"
+              >
+                <CloseIcon size={13} />
+              </button>
+            </div>
+            {/* Pointer aimed at the FAB below-right. */}
+            <span
+              class="absolute -bottom-1.5 right-6 h-3 w-3 rotate-45 border-b border-r border-link/30 bg-canvas"
+              aria-hidden="true"
+            />
+          </div>
+        </div>
+      )}
+
       {/* FAB cluster — pinned to the editor's bottom-right corner. */}
       <div class="absolute bottom-3 right-3 z-20">
         {/* Tone speed-dial: round buttons fanning out along a quarter-circle arc
@@ -197,7 +251,11 @@ export function AiImprove({ text, setText, s, onImproved }: Props) {
         {/* The FAB itself. */}
         <button
           type="button"
-          onClick={() => setOpen((o) => !o)}
+          onClick={() => {
+            // Opening the dial means the user found the button — retire the hint.
+            if (hintEligible) dismissHint();
+            setOpen((o) => !o);
+          }}
           disabled={busy || (!open && !hasText)}
           aria-haspopup="menu"
           aria-expanded={open}
@@ -328,9 +386,9 @@ function ToneIcon({ tone }: { tone: Tone }) {
   }
 }
 
-function CloseIcon() {
+function CloseIcon({ size = 20 }: { size?: number }) {
   return (
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
       <path d="M18 6 6 18M6 6l12 12" />
     </svg>
   );

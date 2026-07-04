@@ -939,6 +939,8 @@ export const zh: Translations = {
       button: 'AI 优化',
       pickTone: '使用 AI 优化',
       pickToneSub: '选择语气，AI 将重写你的帖子。',
+      hint: '新功能：一键改写你的帖子，只需选择语气。',
+      hintDismiss: '关闭',
       tones: {
         professional: '专业',
         casual: '轻松',

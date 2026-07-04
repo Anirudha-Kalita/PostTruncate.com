@@ -941,6 +941,8 @@ export const da: Translations = {
       button: 'AI-forbedring',
       pickTone: 'Forbedr med AI',
       pickToneSub: 'Vælg en tone — AI omskriver dit opslag.',
+      hint: 'Nyt: omskriv dit opslag med ét tryk — vælg bare en tone.',
+      hintDismiss: 'Afvis',
       tones: {
         professional: 'Professionel',
         casual: 'Afslappet',

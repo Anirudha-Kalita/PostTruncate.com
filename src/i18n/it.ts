@@ -941,6 +941,8 @@ export const it: Translations = {
       button: 'Migliora con IA',
       pickTone: 'Migliora con IA',
       pickToneSub: 'Scegli un tono — l’IA riscrive il tuo post.',
+      hint: 'Novità: riscrivi il tuo post con un tocco — scegli un tono.',
+      hintDismiss: 'Chiudi',
       tones: {
         professional: 'Professionale',
         casual: 'Informale',

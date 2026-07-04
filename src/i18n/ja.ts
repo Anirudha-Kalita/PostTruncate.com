@@ -941,6 +941,8 @@ export const ja: Translations = {
       button: 'AIで改善',
       pickTone: 'AIで改善',
       pickToneSub: 'トーンを選ぶと、AIが投稿を書き直します。',
+      hint: '新機能：ワンタップで投稿をリライト。トーンを選ぶだけです。',
+      hintDismiss: '閉じる',
       tones: {
         professional: 'プロフェッショナル',
         casual: 'カジュアル',
