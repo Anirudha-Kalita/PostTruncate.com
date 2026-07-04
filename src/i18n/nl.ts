@@ -819,6 +819,7 @@ export const nl: Translations = {
     },
     dashboard: {
       loadSample: 'Laad een voorbeeldbericht',
+      tryExample: 'Probeer een voorbeeld:',
       sample:
         'Vorige week hebben we een piepkleine functie uitgebracht die ons percentage proef-naar-betaald stilletjes verdubbelde.\n\n' +
         'Geen nieuwe prijzen. Geen groeitruc. Gewoon één wijziging in de onboardingflow die één enkele beslissing van het eerste scherm haalde.\n\n' +

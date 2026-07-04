@@ -30,6 +30,7 @@ import {
   monogram,
 } from './ui';
 import { interp, plural } from '../../i18n/interp';
+import type { ComponentChildren } from 'preact';
 import type { IslandStrings } from '../../i18n/types';
 
 type Tier = 'free' | 'premium';
@@ -46,6 +47,8 @@ interface Props {
   /** When false (the default), the Premium fold marker + hidden remainder are
    *  not rendered — only the "…Show more" affordance. Mirrors the other previews. */
   showFolded?: boolean;
+  /** Optional Share_Link action pinned to the top-right of the card header. */
+  share?: ComponentChildren;
 }
 
 /**
@@ -58,7 +61,7 @@ interface Props {
  *    timeline still shows only the first ~280 before a "Show more" link, so the
  *    preview folds at exactly that point (twitterFoldIndex) instead of threading.
  */
-export function TwitterPreview({ text, lang, s, toolLinkHref, image, mediaKind = 'image', showFolded = true }: Props) {
+export function TwitterPreview({ text, lang, s, toolLinkHref, image, mediaKind = 'image', showFolded = true, share }: Props) {
   const tw = s.twitter;
   const nf = new Intl.NumberFormat(lang);
   // Compact, locale-correct thousands for the tier toggle labels — e.g. en "25K",
@@ -154,6 +157,7 @@ export function TwitterPreview({ text, lang, s, toolLinkHref, image, mediaKind =
         eyebrow="X"
         title={tw.title}
         logo={<BrandLogo brand="x" />}
+        share={share}
       >
         <div class="flex items-center gap-2">
           <Segmented<Tier>

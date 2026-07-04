@@ -817,6 +817,7 @@ export const zh: Translations = {
     },
     dashboard: {
       loadSample: '加载示例帖子',
+      tryExample: '试试示例：',
       sample:
         '上周我们上线了一个不起眼的小功能，悄悄地让我们的试用转付费率翻了一倍。\n\n' +
         '没有新的定价。没有增长黑客。只是对引导流程做了一处改动，从首屏移除了一个决定。\n\n' +

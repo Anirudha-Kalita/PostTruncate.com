@@ -820,6 +820,7 @@ export const de: Translations = {
     },
     dashboard: {
       loadSample: 'Beispielbeitrag laden',
+      tryExample: 'Beispiel ausprobieren:',
       sample:
         'Letzte Woche haben wir eine winzige Funktion veröffentlicht, die unsere Testversion-zu-Zahlung-Rate still und leise verdoppelt hat.\n\n' +
         'Keine neuen Preise. Kein Wachstums-Hack. Nur eine Änderung am Onboarding-Ablauf, die eine einzige Entscheidung vom ersten Bildschirm entfernt hat.\n\n' +

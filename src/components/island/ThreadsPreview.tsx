@@ -21,6 +21,7 @@ import {
   monogram,
 } from './ui';
 import { interp, plural } from '../../i18n/interp';
+import type { ComponentChildren } from 'preact';
 import type { IslandStrings } from '../../i18n/types';
 
 type FeedView = 'desktop' | 'mobile';
@@ -45,6 +46,8 @@ interface Props {
   cardDescription?: string;
   /** Independent link-card image (defaults to the site OG image), separate from the post media. */
   cardImage?: string | null;
+  /** Optional Share_Link action pinned to the top-right of the card header. */
+  share?: ComponentChildren;
 }
 
 /**
@@ -52,7 +55,7 @@ interface Props {
  * validator keeps that full allowance, while the mock mobile card visually
  * folds one-block posts behind a "... more" affordance.
  */
-export function ThreadsPreview({ text, lang, s, toolLinkHref, view, setView, image, mediaKind = 'image', showFolded = true, cardTitle, cardDescription, cardImage }: Props) {
+export function ThreadsPreview({ text, lang, s, toolLinkHref, view, setView, image, mediaKind = 'image', showFolded = true, cardTitle, cardDescription, cardImage, share }: Props) {
   const th = s.threads;
   const nf = new Intl.NumberFormat(lang);
   const author = previewAuthor(s.common);
@@ -86,6 +89,7 @@ export function ThreadsPreview({ text, lang, s, toolLinkHref, view, setView, ima
         eyebrow="Threads"
         title={th.title}
         logo={<BrandLogo brand="threads" />}
+        share={share}
       >
           <Segmented<FeedView>
           ariaLabel={`${th.title} ${s.linkedin.viewAriaLabel}`}

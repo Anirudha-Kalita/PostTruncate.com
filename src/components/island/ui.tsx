@@ -195,13 +195,19 @@ interface CardHeadProps {
   /** Brand logo element rendered to the left of the name. */
   logo?: ComponentChildren;
   children?: ComponentChildren;
+  /**
+   * Optional action pinned to the top-right of the card header (e.g. the
+   * Share_Link button on scoped platform pages). Rendered before `children`
+   * so it leads the right-aligned control group.
+   */
+  share?: ComponentChildren;
 }
 
 /**
  * Standard card header: brand logo + large brand name, with a smaller mono
  * function label beneath it and an optional right-aligned slot.
  */
-export function CardHead({ eyebrow, title, logo, children }: CardHeadProps) {
+export function CardHead({ eyebrow, title, logo, children, share }: CardHeadProps) {
   return (
     <header class="flex items-center justify-between gap-x-3 border-b border-hairline px-4 py-3.5 sm:px-5 sm:py-4">
       <div class="flex min-w-0 items-center gap-2.5">
@@ -215,7 +221,12 @@ export function CardHead({ eyebrow, title, logo, children }: CardHeadProps) {
           </p>
         </div>
       </div>
-      {children && <div class="flex flex-wrap items-center justify-end gap-2">{children}</div>}
+      {(share || children) && (
+        <div class="flex flex-wrap items-center justify-end gap-2">
+          {share}
+          {children}
+        </div>
+      )}
     </header>
   );
 }

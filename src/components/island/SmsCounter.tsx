@@ -2,6 +2,7 @@
 import { useMemo } from 'preact/hooks';
 import { analyzeSms } from '../../lib/textTools';
 import { interp } from '../../i18n/interp';
+import type { ComponentChildren } from 'preact';
 import type { IslandStrings } from '../../i18n/types';
 import { Badge, Card, CardHead, Stat } from './ui';
 
@@ -9,9 +10,11 @@ interface Props {
   text: string;
   lang: string;
   s: IslandStrings['sms'];
+  /** Optional Share_Link action pinned to the top-right of the card header. */
+  share?: ComponentChildren;
 }
 
-export function SmsCounter({ text, lang, s }: Props) {
+export function SmsCounter({ text, lang, s, share }: Props) {
   const sms = useMemo(() => analyzeSms(text), [text]);
   const nf = useMemo(() => new Intl.NumberFormat(lang), [lang]);
   const badgeTone = sms.isGsm ? 'safe' : 'warn';
@@ -19,7 +22,7 @@ export function SmsCounter({ text, lang, s }: Props) {
 
   return (
     <Card>
-      <CardHead eyebrow={s.eyebrow} title={s.title}>
+      <CardHead eyebrow={s.eyebrow} title={s.title} share={share}>
         <Badge tone={badgeTone}>{sms.isGsm ? s.encodingGsm : s.encodingUnicode}</Badge>
       </CardHead>
 

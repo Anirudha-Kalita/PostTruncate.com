@@ -17,6 +17,8 @@ import { DRAFT_STORAGE_KEY, parseDraft, serializeDraft, type DraftEnvelope } fro
 import { parseShare, pruneEmptyFields } from '../../lib/shareLink';
 import { readShareTokenFromHash } from '../../lib/shareUrl';
 import type { ShareAdapter } from './shareAdapter';
+import { ShareControls } from './ShareControls';
+import { shareStrings } from '../../i18n/shareStrings';
 import { SmsCounter } from './SmsCounter';
 import { ReadabilityCard } from './ReadabilityCard';
 import { HookStrip } from './HookStrip';
@@ -320,10 +322,28 @@ export default function Dashboard({ lang, strings, toolSlugs, focus }: Props) {
 
   // ── Scoped tool pages — original layout, byte-for-byte behavior ──────────
   if (focus) {
+    // On scoped platform pages the Share_Link button lives inside the preview
+    // card header (top-right), rather than in the editor or a separate row.
+    const shareButton = (
+      <ShareControls adapter={shareAdapter} strings={shareStrings(strings)} size="sm" />
+    );
+    // Single "Try an example" chip for this page's platform (SMS has no tab).
+    const focusName = PREVIEW_TABS.find((t) => t.id === focus)?.name ?? 'SMS';
     return (
       <div class="grid grid-cols-1 gap-5 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)]">
         <div class="flex flex-col gap-5">
-          <Workspace text={text} setText={setText} lang={lang} s={strings} focus={focus} image={image?.url ?? null} mediaKind={mediaKind} onSelectImage={onSelectImage} shareAdapter={shareAdapter} onLoadSample={() => setText(strings.dashboard.samples[focus])} />
+          <Workspace
+            text={text}
+            setText={setText}
+            lang={lang}
+            s={strings}
+            focus={focus}
+            image={image?.url ?? null}
+            mediaKind={mediaKind}
+            onSelectImage={onSelectImage}
+            examplesLabel={strings.dashboard.tryExample}
+            examples={[{ label: focusName, onClick: () => setText(strings.dashboard.samples[focus]) }]}
+          />
 
           {cardEditor}
         </div>
@@ -346,13 +366,13 @@ export default function Dashboard({ lang, strings, toolSlugs, focus }: Props) {
             </div>
           )}
           {rightOrder.map(key => {
-            if (key === 'linkedin') return <div id="platform-card-linkedin" key="lw"><LinkedInPreview key="linkedin" text={analysisText} view={views.linkedin} setView={(v) => setPlatformView('linkedin', v)} lang={lang} s={strings} toolLinkHref={`/${lang}/${toolSlugs.linkedin}/`} image={imageUrl} mediaKind={mediaKind} cardImage={cardImageUrl} showFolded={showFolded} cardTitle={cardTitle} cardDescription={cardDescription} /></div>;
-            if (key === 'twitter') return <div id="platform-card-twitter" key="tw"><TwitterPreview key="twitter" text={analysisText} lang={lang} s={strings} toolLinkHref={`/${lang}/${toolSlugs.twitter}/`} image={imageUrl} mediaKind={mediaKind} showFolded={showFolded} /></div>;
-            if (key === 'meta') return <div id="platform-card-meta" key="mw"><MetaMonitor key="meta" text={analysisText} lang={lang} s={strings} toolLinkHref={`/${lang}/${toolSlugs.instagram}/`} facebookToolLinkHref={`/${lang}/${toolSlugs.facebook}/`} priority={effectiveMetaPriority} only={metaOnly} instagramView={views.instagram} setInstagramView={(v) => setPlatformView('instagram', v)} facebookView={views.facebook} setFacebookView={(v) => setPlatformView('facebook', v)} image={imageUrl} mediaKind={mediaKind} cardImage={cardImageUrl} showFolded={showFolded} cardTitle={cardTitle} cardDescription={cardDescription} /></div>;
-            if (key === 'threads') return <div id="platform-card-threads" key="thw"><ThreadsPreview key="threads" text={analysisText} lang={lang} s={strings} toolLinkHref={`/${lang}/${toolSlugs.threads}/`} view={views.threads} setView={(v) => setPlatformView('threads', v)} image={imageUrl} mediaKind={mediaKind} cardImage={cardImageUrl} showFolded={showFolded} cardTitle={cardTitle} cardDescription={cardDescription} /></div>;
-            if (key === 'tiktok') return <div id="platform-card-tiktok" key="ttw"><TikTokPreview key="tiktok" text={analysisText} lang={lang} s={strings} toolLinkHref={`/${lang}/${toolSlugs['tiktok-guide']}/`} view={views.tiktok} setView={(v) => setPlatformView('tiktok', v)} image={imageUrl} mediaKind={mediaKind} showFolded={showFolded} /></div>;
+            if (key === 'linkedin') return <div id="platform-card-linkedin" key="lw"><LinkedInPreview key="linkedin" text={analysisText} view={views.linkedin} setView={(v) => setPlatformView('linkedin', v)} lang={lang} s={strings} toolLinkHref={`/${lang}/${toolSlugs.linkedin}/`} image={imageUrl} mediaKind={mediaKind} cardImage={cardImageUrl} showFolded={showFolded} cardTitle={cardTitle} cardDescription={cardDescription} share={shareButton} /></div>;
+            if (key === 'twitter') return <div id="platform-card-twitter" key="tw"><TwitterPreview key="twitter" text={analysisText} lang={lang} s={strings} toolLinkHref={`/${lang}/${toolSlugs.twitter}/`} image={imageUrl} mediaKind={mediaKind} showFolded={showFolded} share={shareButton} /></div>;
+            if (key === 'meta') return <div id="platform-card-meta" key="mw"><MetaMonitor key="meta" text={analysisText} lang={lang} s={strings} toolLinkHref={`/${lang}/${toolSlugs.instagram}/`} facebookToolLinkHref={`/${lang}/${toolSlugs.facebook}/`} priority={effectiveMetaPriority} only={metaOnly} instagramView={views.instagram} setInstagramView={(v) => setPlatformView('instagram', v)} facebookView={views.facebook} setFacebookView={(v) => setPlatformView('facebook', v)} image={imageUrl} mediaKind={mediaKind} cardImage={cardImageUrl} showFolded={showFolded} cardTitle={cardTitle} cardDescription={cardDescription} share={shareButton} /></div>;
+            if (key === 'threads') return <div id="platform-card-threads" key="thw"><ThreadsPreview key="threads" text={analysisText} lang={lang} s={strings} toolLinkHref={`/${lang}/${toolSlugs.threads}/`} view={views.threads} setView={(v) => setPlatformView('threads', v)} image={imageUrl} mediaKind={mediaKind} cardImage={cardImageUrl} showFolded={showFolded} cardTitle={cardTitle} cardDescription={cardDescription} share={shareButton} /></div>;
+            if (key === 'tiktok') return <div id="platform-card-tiktok" key="ttw"><TikTokPreview key="tiktok" text={analysisText} lang={lang} s={strings} toolLinkHref={`/${lang}/${toolSlugs['tiktok-guide']}/`} view={views.tiktok} setView={(v) => setPlatformView('tiktok', v)} image={imageUrl} mediaKind={mediaKind} showFolded={showFolded} share={shareButton} /></div>;
           })}
-          {focus === 'sms' && <SmsCounter text={analysisText} lang={lang} s={strings.sms} />}
+          {focus === 'sms' && <SmsCounter text={analysisText} lang={lang} s={strings.sms} share={shareButton} />}
           <details class="group rounded-xl bg-canvas shadow-e2">
             <summary class="flex cursor-pointer list-none items-center gap-3 px-4 py-4 transition-colors hover:bg-canvas-soft sm:px-6 [&::-webkit-details-marker]:hidden">
               <InsightsIcon />
@@ -389,19 +409,35 @@ export default function Dashboard({ lang, strings, toolSlugs, focus }: Props) {
   return (
     <div>
       <div class="rounded-xl bg-canvas p-4 shadow-e3 sm:p-6">
-        <div class="grid grid-cols-1 gap-5 lg:grid-cols-2 lg:gap-6">
+        <div class="grid grid-cols-1 gap-5 lg:grid-cols-[minmax(0,3fr)_minmax(0,2fr)] lg:gap-6">
           {/* Left — "Write your post" */}
           <div class="flex min-w-0 flex-col gap-4">
-            <Workspace text={text} setText={setText} lang={lang} s={strings} image={image?.url ?? null} mediaKind={mediaKind} onSelectImage={onSelectImage} shareAdapter={shareAdapter} onLoadSample={() => setText(strings.dashboard.sample)} />
+            <Workspace
+              text={text}
+              setText={setText}
+              lang={lang}
+              s={strings}
+              image={image?.url ?? null}
+              mediaKind={mediaKind}
+              onSelectImage={onSelectImage}
+              examplesLabel={strings.dashboard.tryExample}
+              examples={PREVIEW_TABS.map((p) => ({
+                label: p.name,
+                onClick: () => setText(strings.dashboard.samples[p.id]),
+              }))}
+            />
 
             {cardEditor}
           </div>
 
           {/* Right — "Live platform preview" */}
           <div class="flex min-w-0 flex-col">
-            <h3 class="text-[16px] font-semibold leading-6 tracking-[-0.3px] text-ink">
-              {strings.previewPanel.title}
-            </h3>
+            <div class="flex items-center justify-between gap-3">
+              <h3 class="min-w-0 text-[16px] font-semibold leading-6 tracking-[-0.3px] text-ink">
+                {strings.previewPanel.title}
+              </h3>
+              <ShareControls adapter={shareAdapter} strings={shareStrings(strings)} size="sm" />
+            </div>
 
             {/* Platform selector: tablist left, compare-all right */}
             <div class="mt-2.5 flex items-end gap-1 border-b border-hairline sm:gap-2">

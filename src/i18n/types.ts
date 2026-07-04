@@ -326,6 +326,8 @@ export interface ShareStrings {
 export interface IslandStrings {
   dashboard: {
     loadSample: string;
+    /** Leading label for the homepage "Try an example" chip row. */
+    tryExample: string;
     /** Demo post injected by "Load a sample" on the homepage; URL kept verbatim. */
     sample: string;
     /**

@@ -23,6 +23,7 @@ import {
   monogram,
 } from './ui';
 import { interp } from '../../i18n/interp';
+import type { ComponentChildren } from 'preact';
 import type { IslandStrings } from '../../i18n/types';
 
 export type LinkedInView = 'desktop' | 'mobile';
@@ -34,6 +35,8 @@ interface Props {
   lang: string;
   s: IslandStrings;
   toolLinkHref?: string;
+  /** Optional Share_Link action pinned to the top-right of the card header. */
+  share?: ComponentChildren;
   /** Object URL of the attached preview media, or null when none. */
   image?: string | null;
   /** Whether the attached media is an image (default) or a video. */
@@ -53,7 +56,7 @@ interface Props {
  * "…see more" fold (210 chars desktop / 140 mobile) and injects a non-clickable
  * bold "…see more" at the exact boundary when the post is truncated.
  */
-export function LinkedInPreview({ text, view, setView, lang, s, toolLinkHref, image, mediaKind = 'image', showFolded = true, cardTitle, cardDescription, cardImage }: Props) {
+export function LinkedInPreview({ text, view, setView, lang, s, toolLinkHref, image, mediaKind = 'image', showFolded = true, cardTitle, cardDescription, cardImage, share }: Props) {
   const l = s.linkedin;
   const nf = new Intl.NumberFormat(lang);
   const author = previewAuthor(s.common);
@@ -79,6 +82,7 @@ export function LinkedInPreview({ text, view, setView, lang, s, toolLinkHref, im
         eyebrow="LinkedIn"
         title={l.title}
         logo={<BrandLogo brand="linkedin" />}
+        share={share}
       >
         <Segmented<LinkedInView>
           ariaLabel={l.viewAriaLabel}

@@ -819,6 +819,7 @@ export const it: Translations = {
     },
     dashboard: {
       loadSample: 'Carica un post di esempio',
+      tryExample: 'Prova un esempio:',
       sample:
         'La settimana scorsa abbiamo rilasciato una piccola funzione che ha silenziosamente raddoppiato il nostro tasso di conversione da prova a pagamento.\n\n' +
         'Nessun nuovo prezzo. Nessun trucco di crescita. Solo una modifica al flusso di onboarding che ha tolto una singola decisione dalla prima schermata.\n\n' +

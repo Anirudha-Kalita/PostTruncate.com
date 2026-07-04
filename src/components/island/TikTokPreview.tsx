@@ -3,6 +3,7 @@ import { useRef, useState } from 'preact/hooks';
 import { charCount, detectUrls, LIMITS, sliceChars, tiktokFoldIndex, utf16Length } from '../../lib/textTools';
 import { Card, CardHead, Badge, Segmented, BrandLogo, ToolLink, FoldMarker, TikTokActionRail, previewAuthor } from './ui';
 import { interp, plural } from '../../i18n/interp';
+import type { ComponentChildren } from 'preact';
 import type { IslandStrings } from '../../i18n/types';
 
 type FeedView = 'desktop' | 'mobile';
@@ -17,6 +18,8 @@ interface Props {
   image?: string | null;
   mediaKind?: 'image' | 'video';
   showFolded?: boolean;
+  /** Optional Share_Link action pinned to the top-right of the card header. */
+  share?: ComponentChildren;
 }
 
 /**
@@ -28,7 +31,7 @@ interface Props {
  * "…more" at the first line break OR ~100 chars, whichever comes first. An
  * optional (default-off) safe-zone overlay shows the native-UI dead zones.
  */
-export function TikTokPreview({ text, lang, s, toolLinkHref, view, setView, image, mediaKind = 'image', showFolded = true }: Props) {
+export function TikTokPreview({ text, lang, s, toolLinkHref, view, setView, image, mediaKind = 'image', showFolded = true, share }: Props) {
   const tk = s.tiktok;
   const nf = new Intl.NumberFormat(lang);
   const author = previewAuthor(s.common);
@@ -55,7 +58,7 @@ export function TikTokPreview({ text, lang, s, toolLinkHref, view, setView, imag
 
   return (
     <Card>
-      <CardHead eyebrow="TikTok" title={tk.title} logo={<BrandLogo brand="tiktok" />}>
+      <CardHead eyebrow="TikTok" title={tk.title} logo={<BrandLogo brand="tiktok" />} share={share}>
         <div class="flex items-center gap-2">
           <button
             type="button"

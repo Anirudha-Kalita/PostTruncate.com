@@ -820,6 +820,7 @@ export const en: Translations = {
     },
     dashboard: {
       loadSample: 'Load sample post',
+      tryExample: 'Try an example:',
       sample:
         'We shipped a tiny feature last week that quietly doubled our trial-to-paid rate.\n\n' +
         'No new pricing. No growth hack. Just one change to the onboarding flow that removed a single decision from the first screen.\n\n' +

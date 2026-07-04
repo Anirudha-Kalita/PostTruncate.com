@@ -585,11 +585,13 @@ const adPreviewLinks = adPreviews.map((tool) => ({
     display: none;
     align-items: center;
     justify-content: center;
-    /* Keep links on a single row so the nav height cannot change across the
-       Geist font swap (longer fallback labels would otherwise wrap then un-wrap,
-       shifting the hero). */
-    flex-wrap: nowrap;
-    gap: 4px;
+    /* Allow the center links to wrap onto additional rows when the localized
+       labels are long (many of the 9 non-English locales run longer than the
+       English source). Paired with the min-height + padding-block on
+       .nav__inner, the bar then grows taller to fit instead of overflowing or
+       clipping. row-gap keeps the wrapped rows legible. */
+    flex-wrap: wrap;
+    gap: 6px 4px;
   }
   .nav__link {
     padding: 8px 12px;

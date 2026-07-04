@@ -18,11 +18,8 @@ import {
 } from '../../lib/textTools';
 import { Card, Stat, Badge } from './ui';
 import { AiImprove } from './AiImprove';
-import { ShareControls } from './ShareControls';
-import type { ShareAdapter } from './shareAdapter';
 import { interp, plural } from '../../i18n/interp';
 import type { IslandStrings } from '../../i18n/types';
-import { shareStrings } from '../../i18n/shareStrings';
 
 const READING_WORDS_PER_MINUTE = 275;
 const SPEAKING_WORDS_PER_MINUTE = 150;
@@ -48,10 +45,15 @@ interface Props {
   mediaKind?: 'image' | 'video';
   /** Hand a picked File (or null to clear) up to the Dashboard image state. */
   onSelectImage?: (file: File | null) => void;
-  /** Editor Share_Link adapter; when set, the Share control is hosted here. */
-  shareAdapter?: ShareAdapter;
-  /** Loads a sample post into the editor; the button shows only while empty. */
-  onLoadSample?: () => void;
+  /**
+   * "Try an example" chips — one per platform on the homepage, or a single
+   * chip for the page's platform on scoped tool pages. Each loads that
+   * platform's sample into the editor. The row shows only while the editor is
+   * empty.
+   */
+  examples?: { label: string; onClick: () => void }[];
+  /** Leading label for the {@link examples} row, e.g. "Try an example:". */
+  examplesLabel?: string;
 }
 
 /**
@@ -59,7 +61,7 @@ interface Props {
  * optimization engine actions. All transforms route through the pure helpers
  * in textTools so behaviour matches the previews exactly.
  */
-export function Workspace({ text, setText, lang, s, focus, image, mediaKind = 'image', onSelectImage, shareAdapter, onLoadSample }: Props) {
+export function Workspace({ text, setText, lang, s, focus, image, mediaKind = 'image', onSelectImage, examples, examplesLabel }: Props) {
   const hidden = detectHiddenUnicode(text);
   const w = s.workspace;
   const img = s.imageUpload ?? {
@@ -215,6 +217,27 @@ export function Workspace({ text, setText, lang, s, focus, image, mediaKind = 'i
           <AiImprove text={text} setText={setText} s={s.aiImprove} onImproved={onImproved} />
         </div>
 
+        {/* "Try an example" — one chip per platform, each loading that platform's
+            sample into the editor. Shown only while the editor is empty; sits
+            right under the editor, above the media attach. */}
+        {examples && examples.length > 0 && !text && (
+          <div class="mt-3 flex flex-wrap items-center gap-2">
+            <span class="inline-flex items-center gap-1.5 text-[13px] font-medium text-mute">
+              <LightbulbIcon />
+              {examplesLabel}
+            </span>
+            {examples.map((ex) => (
+              <button
+                type="button"
+                onClick={ex.onClick}
+                class="min-h-9 inline-flex items-center rounded-pill border border-hairline bg-canvas px-3 py-1.5 text-[13px] font-medium text-ink transition-[transform,color,background,border-color] duration-100 hover:border-hairline-strong hover:bg-canvas-soft-2 active:scale-[0.96] active:bg-canvas-soft-2"
+              >
+                {ex.label}
+              </button>
+            ))}
+          </div>
+        )}
+
         {/* Media attach — prominent, right under the editor. In-memory preview
             only; the picked File is handed up to Dashboard state. */}
         {onSelectImage && (
@@ -291,8 +314,8 @@ export function Workspace({ text, setText, lang, s, focus, image, mediaKind = 'i
           <Stat label={w.counters.paragraphs} value={nf.format(paragraphCount(text))} />
         </div>
 
-        {/* Action row — cleanup tools grouped left, load-sample/share right.
-            Clear lives in the toolbar above the editor. */}
+        {/* Action row — cleanup tools. Clear lives in the toolbar above the
+            editor; the "Try an example" chips sit under the editor. */}
         <div class="mt-3 flex flex-wrap items-center gap-2">
           <button
             type="button"
@@ -315,26 +338,6 @@ export function Workspace({ text, setText, lang, s, focus, image, mediaKind = 'i
               </span>
             )}
           </button>
-          {/* Right-aligned action group: load-sample (while empty) + the Share
-              button (when a Share_Link adapter is wired). */}
-          <div class="ml-auto flex items-center gap-2">
-            {onLoadSample && !text && (
-              <button
-                type="button"
-                onClick={onLoadSample}
-                class={`inline-flex items-center rounded-pill border border-transparent bg-link font-medium text-on-primary transition-[transform,background] duration-100 hover:bg-link-deep active:scale-[0.96] ${focus ? 'gap-1.5 px-3 py-1 text-[12px]' : 'gap-2 px-4 py-1.5 text-[13px]'}`}
-              >
-                {s.dashboard.loadSample}
-              </button>
-            )}
-            {shareAdapter && (
-              <ShareControls
-                adapter={shareAdapter}
-                strings={shareStrings(s)}
-                size={focus ? 'sm' : 'md'}
-              />
-            )}
-          </div>
         </div>
 
         {hidden.count > 0 && (
@@ -440,6 +443,16 @@ function TimerStat({ icon, label, value }: TimerStatProps) {
         </div>
       </div>
     </div>
+  );
+}
+
+function LightbulbIcon() {
+  return (
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="text-warning">
+      <path d="M9 18h6" />
+      <path d="M10 22h4" />
+      <path d="M15.09 14c.18-.98.65-1.74 1.41-2.5A4.65 4.65 0 0 0 18 8 6 6 0 0 0 6 8c0 1 .23 2.23 1.5 3.5A4.61 4.61 0 0 1 8.91 14" />
+    </svg>
   );
 }
 

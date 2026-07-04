@@ -819,6 +819,7 @@ export const da: Translations = {
     },
     dashboard: {
       loadSample: 'Indlæs et eksempelopslag',
+      tryExample: 'Prøv et eksempel:',
       sample:
         'Vi lancerede en lillebitte funktion i sidste uge, der i det stille fordoblede vores trial-til-betalende-rate.\n\n' +
         'Ingen ny prissætning. Intet vækst-hack. Bare én ændring i onboarding-flowet, der fjernede en enkelt beslutning fra den første skærm.\n\n' +

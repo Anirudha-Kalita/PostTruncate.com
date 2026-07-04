@@ -819,6 +819,7 @@ export const fr: Translations = {
     },
     dashboard: {
       loadSample: 'Charger un exemple de publication',
+      tryExample: 'Essayez un exemple :',
       sample:
         'La semaine dernière, nous avons livré une toute petite fonctionnalité qui a discrètement doublé notre taux de conversion d’essai en abonnement payant.\n\n' +
         'Aucune nouvelle tarification. Aucune astuce de croissance. Juste un changement dans le parcours d’intégration qui a supprimé une seule décision du premier écran.\n\n' +

@@ -39,6 +39,7 @@ import {
   monogram,
 } from './ui';
 import { interp, plural } from '../../i18n/interp';
+import type { ComponentChildren } from 'preact';
 import type { IslandStrings } from '../../i18n/types';
 
 type FeedView = 'desktop' | 'mobile';
@@ -70,6 +71,8 @@ interface Props {
   cardDescription?: string;
   /** Independent Facebook link-card image (defaults to the site OG image), separate from the post media. */
   cardImage?: string | null;
+  /** Optional Share_Link action pinned to the top-right of the card header. */
+  share?: ComponentChildren;
 }
 
 function truncateForFeed(text: string, limit: number) {
@@ -86,7 +89,7 @@ function truncateForFeed(text: string, limit: number) {
  * Independent Instagram and Facebook monitors. Instagram owns caption preview
  * and hashtag concentration; Facebook owns feed preview and accessibility.
  */
-export function MetaMonitor({ text, lang, s, toolLinkHref, facebookToolLinkHref, priority, only, instagramView, setInstagramView, facebookView, setFacebookView, image, mediaKind = 'image', showFolded = true, cardTitle, cardDescription, cardImage }: Props) {
+export function MetaMonitor({ text, lang, s, toolLinkHref, facebookToolLinkHref, priority, only, instagramView, setInstagramView, facebookView, setFacebookView, image, mediaKind = 'image', showFolded = true, cardTitle, cardDescription, cardImage, share }: Props) {
   const m = s.meta;
   const nf = new Intl.NumberFormat(lang);
   // Abbreviated like-count for the Reels rail (e.g. "34.5K"), localized.
@@ -151,6 +154,7 @@ export function MetaMonitor({ text, lang, s, toolLinkHref, facebookToolLinkHref,
           eyebrow="Instagram"
           title={m.title}
           logo={<BrandLogo brand="instagram" />}
+          share={share}
         >
           <Segmented<'feed' | 'reels'>
             ariaLabel={ap.modeAria}
@@ -369,6 +373,7 @@ export function MetaMonitor({ text, lang, s, toolLinkHref, facebookToolLinkHref,
           eyebrow="Facebook"
           title={m.a11yLabel}
           logo={<BrandLogo brand="facebook" />}
+          share={share}
         >
           <Segmented<'feed' | 'reels'>
             ariaLabel={`${m.a11yLabel} ${ap.modeAria}`}
