@@ -12,84 +12,122 @@ const { s, lang } = Astro.props;
 const t = getTranslations(lang);
 const L = t.limitsPage;
 const nf = new Intl.NumberFormat(lang);
+
+// Per-platform card model. `accent`/`bar` are driven from CSS by the modifier
+// class; each card shows two stat rows (fold mobile/desktop, or no-fold + hard
+// limit for X). `value: null` renders just the label (X's "No fold" row).
+const platforms = [
+  {
+    key: 'linkedin',
+    name: s.platforms.linkedin.name,
+    rows: [
+      { label: L.table.foldMobile, value: FOLDS.linkedin.mobile as number | null, approx: true },
+      { label: L.table.foldDesktop, value: FOLDS.linkedin.desktop as number | null, approx: true },
+    ],
+  },
+  {
+    key: 'twitter',
+    name: s.platforms.twitter.name,
+    rows: [
+      { label: L.noFold, value: null as number | null, approx: false },
+      { label: L.table.limit, value: LIMITS.TWEET as number | null, approx: false },
+    ],
+  },
+  {
+    key: 'instagram',
+    name: s.platforms.instagram.name,
+    rows: [
+      { label: L.table.foldMobile, value: FOLDS.instagram.mobile as number | null, approx: true },
+      { label: L.table.foldDesktop, value: FOLDS.instagram.desktop as number | null, approx: true },
+    ],
+  },
+  {
+    key: 'facebook',
+    name: s.platforms.facebook.name,
+    rows: [
+      { label: L.table.foldMobile, value: FOLDS.facebook.mobile as number | null, approx: true },
+      { label: L.table.foldDesktop, value: FOLDS.facebook.desktop as number | null, approx: true },
+    ],
+  },
+  {
+    key: 'threads',
+    name: s.platforms.threads.name,
+    rows: [
+      { label: L.table.foldMobile, value: FOLDS.threads.mobile as number | null, approx: true },
+      { label: L.table.foldDesktop, value: FOLDS.threads.desktop as number | null, approx: false },
+    ],
+  },
+  {
+    key: 'tiktok',
+    name: s.platforms.tiktok.name,
+    rows: [
+      { label: L.table.foldMobile, value: FOLDS.tiktok.mobile as number | null, approx: true },
+      { label: L.table.foldDesktop, value: FOLDS.tiktok.desktop as number | null, approx: true },
+    ],
+  },
+] as const;
 ---
 
 <section class="container-page truncation-section">
   <div class="truncation-head">
-    <p class="section-eyebrow">{s.eyebrow}</p>
+    <p class="truncation-eyebrow">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+        <path d="M12 2.5l1.7 6.1 6.1 1.7-6.1 1.7L12 18.1l-1.7-6.1L4.2 10.3l6.1-1.7z" />
+        <path d="M18.5 14l.9 2.6 2.6.9-2.6.9-.9 2.6-.9-2.6-2.6-.9 2.6-.9z" />
+      </svg>
+      {s.eyebrow}
+    </p>
+    <h2 class="truncation-title" set:html={s.title}></h2>
     <p class="truncation-desc">{s.description}</p>
   </div>
 
   <div class="platforms-grid">
-    <div class="platform-card">
-      <div class="platform-header">
-        <svg class="icon-linkedin" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="#0a66c2"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
-        <span class="platform-name">{s.platforms.linkedin.name}</span>
-      </div>
-      <p class="platform-desc">
-        {L.table.foldMobile}: ~{nf.format(FOLDS.linkedin.mobile)}<br/>
-        {L.table.foldDesktop}: ~{nf.format(FOLDS.linkedin.desktop)}
-      </p>
-    </div>
+    {platforms.map((p) => (
+      <article class={`platform-card platform-card--${p.key}`}>
+        <span class="platform-icon">
+          {p.key === 'linkedin' && (
+            <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="#0a66c2" aria-hidden="true"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" /></svg>
+          )}
+          {p.key === 'twitter' && (
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" /></svg>
+          )}
+          {p.key === 'instagram' && (
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5.5" fill="none" stroke="url(#ig-grad)" stroke-width="2" /><circle cx="12" cy="12" r="4.2" fill="none" stroke="url(#ig-grad)" stroke-width="2" /><circle cx="17.4" cy="6.6" r="1.2" fill="#d6249f" /></svg>
+          )}
+          {p.key === 'facebook' && (
+            <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="#1877f2" aria-hidden="true"><path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z" /></svg>
+          )}
+          {p.key === 'threads' && (
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.186 24h-.007c-3.581-.024-6.334-1.205-8.184-3.509C2.35 18.44 1.5 15.586 1.472 12.01v-.017c.03-3.579.879-6.43 2.525-8.482C5.845 1.205 8.6.024 12.18 0h.014c2.746.02 5.043.725 6.826 2.098 1.677 1.291 2.858 3.13 3.509 5.467l-2.04.569c-1.104-3.96-3.898-5.984-8.304-6.015-2.91.022-5.11.936-6.54 2.717C4.307 6.504 3.616 8.914 3.589 12c.027 3.086.718 5.496 2.057 7.164 1.43 1.781 3.631 2.695 6.54 2.717 2.623-.02 4.358-.631 5.8-2.045 1.647-1.613 1.618-3.593 1.09-4.798-.31-.71-.873-1.3-1.634-1.75-.192 1.352-.622 2.446-1.284 3.272-.886 1.102-2.14 1.704-3.73 1.79-1.202.065-2.36-.218-3.259-.801-1.063-.689-1.685-1.74-1.752-2.964-.065-1.19.408-2.285 1.33-3.082.88-.76 2.119-1.207 3.583-1.291a13.853 13.853 0 0 1 3.02.142c-.126-.742-.375-1.332-.75-1.757-.513-.586-1.308-.883-2.359-.89h-.029c-.844 0-1.992.232-2.721 1.32L7.734 7.847c.98-1.454 2.568-2.256 4.478-2.256h.044c3.194.02 5.097 1.975 5.287 5.388.108.046.216.094.32.142 1.49.7 2.58 1.761 3.154 3.07.797 1.82.871 4.79-1.548 7.158-1.85 1.81-4.094 2.628-7.277 2.65Zm1.235-11.587c-.336 0-.679.01-1.024.029-1.838.103-2.978.95-2.913 2.122.063 1.235 1.435 1.81 2.756 1.737 1.211-.066 2.79-.534 3.058-3.71-.59-.124-1.215-.181-1.876-.181Z" /></svg>
+          )}
+          {p.key === 'tiktok' && (
+            <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16.6 5.82A4.28 4.28 0 0 1 15.54 3h-3.09v12.4a2.59 2.59 0 0 1-2.59 2.5 2.59 2.59 0 0 1-2.59-2.59 2.59 2.59 0 0 1 3.39-2.46V9.69a5.66 5.66 0 0 0-.8-.06A5.69 5.69 0 0 0 4.17 15.31 5.69 5.69 0 0 0 13.94 19.3a5.69 5.69 0 0 0 1.6-3.96V9.01a7.34 7.34 0 0 0 4.29 1.37V7.3a4.28 4.28 0 0 1-3.23-1.48z" /></svg>
+          )}
+        </span>
 
-    <div class="platform-card">
-      <div class="platform-header">
-        <svg class="icon-x" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-        <span class="platform-name">{s.platforms.twitter.name}</span>
-      </div>
-      <p class="platform-desc">
-        {L.noFold}<br/>
-        {L.table.limit}: {nf.format(LIMITS.TWEET)}
-      </p>
-    </div>
+        <h3 class="platform-name">{p.name}</h3>
 
-    <div class="platform-card">
-      <div class="platform-header">
-        <svg class="icon-instagram" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5.5" fill="none" stroke="#E4405F" stroke-width="2" /><circle cx="12" cy="12" r="4.2" fill="none" stroke="#E4405F" stroke-width="2" /><circle cx="17.4" cy="6.6" r="1.2" fill="#E4405F" /></svg>
-        <span class="platform-name">{s.platforms.instagram.name}</span>
-      </div>
-      <p class="platform-desc">
-        {L.table.foldMobile}: ~{nf.format(FOLDS.instagram.mobile)}<br/>
-        {L.table.foldDesktop}: ~{nf.format(FOLDS.instagram.desktop)}
-      </p>
-    </div>
-
-    <div class="platform-card">
-      <div class="platform-header">
-        <svg class="icon-facebook" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="#1877f2"><path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"/></svg>
-        <span class="platform-name">{s.platforms.facebook.name}</span>
-      </div>
-      <p class="platform-desc">
-        {L.table.foldMobile}: ~{nf.format(FOLDS.facebook.mobile)}<br/>
-        {L.table.foldDesktop}: ~{nf.format(FOLDS.facebook.desktop)}
-      </p>
-    </div>
-
-    <div class="platform-card">
-      <div class="platform-header">
-        <svg class="icon-threads" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" class="text-ink" aria-hidden="true"><path d="M12.186 24h-.007c-3.581-.024-6.334-1.205-8.184-3.509C2.35 18.44 1.5 15.586 1.472 12.01v-.017c.03-3.579.879-6.43 2.525-8.482C5.845 1.205 8.6.024 12.18 0h.014c2.746.02 5.043.725 6.826 2.098 1.677 1.291 2.858 3.13 3.509 5.467l-2.04.569c-1.104-3.96-3.898-5.984-8.304-6.015-2.91.022-5.11.936-6.54 2.717C4.307 6.504 3.616 8.914 3.589 12c.027 3.086.718 5.496 2.057 7.164 1.43 1.781 3.631 2.695 6.54 2.717 2.623-.02 4.358-.631 5.8-2.045 1.647-1.613 1.618-3.593 1.09-4.798-.31-.71-.873-1.3-1.634-1.75-.192 1.352-.622 2.446-1.284 3.272-.886 1.102-2.14 1.704-3.73 1.79-1.202.065-2.36-.218-3.259-.801-1.063-.689-1.685-1.74-1.752-2.964-.065-1.19.408-2.285 1.33-3.082.88-.76 2.119-1.207 3.583-1.291a13.853 13.853 0 0 1 3.02.142c-.126-.742-.375-1.332-.75-1.757-.513-.586-1.308-.883-2.359-.89h-.029c-.844 0-1.992.232-2.721 1.32L7.734 7.847c.98-1.454 2.568-2.256 4.478-2.256h.044c3.194.02 5.097 1.975 5.287 5.388.108.046.216.094.32.142 1.49.7 2.58 1.761 3.154 3.07.797 1.82.871 4.79-1.548 7.158-1.85 1.81-4.094 2.628-7.277 2.65Zm1.235-11.587c-.336 0-.679.01-1.024.029-1.838.103-2.978.95-2.913 2.122.063 1.235 1.435 1.81 2.756 1.737 1.211-.066 2.79-.534 3.058-3.71-.59-.124-1.215-.181-1.876-.181Z" /></svg>
-        <span class="platform-name">{s.platforms.threads.name}</span>
-      </div>
-      <p class="platform-desc">
-        {L.table.foldMobile}: ~{nf.format(FOLDS.threads.mobile)}<br/>
-        {L.table.foldDesktop}: {nf.format(FOLDS.threads.desktop)}
-      </p>
-    </div>
-
-    <div class="platform-card">
-      <div class="platform-header">
-        <svg class="icon-tiktok" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" class="text-ink" aria-hidden="true"><path d="M16.6 5.82A4.28 4.28 0 0 1 15.54 3h-3.09v12.4a2.59 2.59 0 0 1-2.59 2.5 2.59 2.59 0 0 1-2.59-2.59 2.59 2.59 0 0 1 3.39-2.46V9.69a5.66 5.66 0 0 0-.8-.06A5.69 5.69 0 0 0 4.17 15.31 5.69 5.69 0 0 0 13.94 19.3a5.69 5.69 0 0 0 1.6-3.96V9.01a7.34 7.34 0 0 0 4.29 1.37V7.3a4.28 4.28 0 0 1-3.23-1.48z"/></svg>
-        <span class="platform-name">{s.platforms.tiktok.name}</span>
-      </div>
-      <p class="platform-desc">
-        {L.table.foldMobile}: ~{nf.format(FOLDS.tiktok.mobile)}<br/>
-        {L.table.foldDesktop}: ~{nf.format(FOLDS.tiktok.desktop)}
-      </p>
-    </div>
+        <div class="platform-stats">
+          <div class="platform-stat">
+            <span class="platform-stat-label">{p.rows[0].label}</span>
+            {p.rows[0].value !== null && (
+              <span class="platform-stat-value">{p.rows[0].approx ? '~' : ''}{nf.format(p.rows[0].value)}</span>
+            )}
+          </div>
+          <span class="platform-divider" aria-hidden="true"></span>
+          <div class="platform-stat">
+            <span class="platform-stat-label">{p.rows[1].label}</span>
+            {p.rows[1].value !== null && (
+              <span class="platform-stat-value">{p.rows[1].approx ? '~' : ''}{nf.format(p.rows[1].value)}</span>
+            )}
+          </div>
+        </div>
+      </article>
+    ))}
   </div>
 </section>
 
-<svg width="0" height="0" class="hidden" style="display:none">
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
   <defs>
     <linearGradient id="ig-grad" x1="0%" y1="100%" x2="100%" y2="0%">
       <stop offset="0%" stop-color="#fd5949" />
@@ -102,45 +140,51 @@ const nf = new Intl.NumberFormat(lang);
 <style>
   .truncation-section {
     padding-top: 96px;
-    padding-bottom: 0px;
   }
   .truncation-head {
-    margin-bottom: 32px;
-    max-width: 800px;
+    margin: 0 auto 48px;
+    max-width: 720px;
+    text-align: center;
   }
-  .section-eyebrow {
+  .truncation-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 24px;
+    padding: 7px 16px;
+    border-radius: var(--radius-pill);
+    background: var(--color-link-bg-soft);
+    color: var(--color-link-deep);
     font-family: var(--font-mono);
-    font-size: 13px;
-    letter-spacing: 0.04em;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
     text-transform: uppercase;
-    color: var(--color-ink);
-    margin-bottom: 12px;
+  }
+  .truncation-title {
+    font-size: clamp(28px, 3.6vw, 40px);
     font-weight: 700;
+    line-height: 1.14;
+    letter-spacing: -1.2px;
+    color: var(--color-ink);
+    margin-bottom: 16px;
+  }
+  /* Injected via set:html, so it carries no scope hash → target with :global. */
+  .truncation-title :global(.truncation-title__accent) {
+    color: var(--color-link);
   }
   .truncation-desc {
-    font-size: 15px;
-    line-height: 24px;
+    max-width: 640px;
+    margin-inline: auto;
+    font-size: 16px;
+    line-height: 26px;
     color: var(--color-body);
   }
+
   .platforms-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 16px;
-  }
-  .platform-card {
-    background: var(--color-canvas);
-    border: 1px solid var(--color-hairline);
-    border-radius: 12px;
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    box-shadow: var(--shadow-e3);
-    transition: box-shadow 0.15s ease, transform 0.15s ease;
-  }
-  .platform-card:hover {
-    box-shadow: var(--shadow-e4);
-    transform: translateY(-2px);
+    gap: 18px;
   }
   @media (min-width: 640px) {
     .platforms-grid {
@@ -152,25 +196,128 @@ const nf = new Intl.NumberFormat(lang);
       grid-template-columns: repeat(6, 1fr);
     }
   }
-  .platform-header {
+
+  .platform-card {
+    /* Accent + top-bar are set per-modifier below. */
+    --accent: var(--color-ink);
+    --bar: var(--color-ink);
+    position: relative;
     display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 26px 16px 22px;
+    border-radius: var(--radius-lg);
+    background: var(--color-canvas);
+    border: 1px solid var(--color-hairline);
+    box-shadow: var(--shadow-e2);
+    overflow: hidden;
+    transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+  }
+  /* Brand accent bar across the top edge. */
+  .platform-card::before {
+    content: '';
+    position: absolute;
+    inset: 0 0 auto 0;
+    height: 4px;
+    background: var(--bar);
+    transition: height 0.18s ease;
+  }
+  .platform-card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-e4);
+    border-color: color-mix(in srgb, var(--accent) 40%, var(--color-hairline));
+  }
+  .platform-card:hover::before {
+    height: 6px;
+  }
+
+  .platform-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 58px;
+    height: 58px;
+    border-radius: 50%;
+    margin-bottom: 14px;
+    background: var(--color-canvas-soft-2);
+    color: var(--color-ink);
+    transition: transform 0.18s ease, background 0.18s ease;
+  }
+  .platform-card:hover .platform-icon {
+    transform: scale(1.07);
+    background: color-mix(in srgb, var(--accent) 14%, var(--color-canvas-soft-2));
+  }
+
+  .platform-name {
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: -0.3px;
+    color: var(--color-ink);
+    margin-bottom: 16px;
+  }
+
+  .platform-stats {
+    display: flex;
+    flex-direction: column;
     align-items: center;
     gap: 12px;
+    width: 100%;
   }
-  .platform-name {
-    font-size: 15px;
-    font-weight: 600;
-    color: var(--color-ink);
+  .platform-stat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    min-height: 40px;
+    justify-content: center;
   }
-  .platform-desc {
+  .platform-stat-label {
     font-size: 13px;
-    line-height: 20px;
-    color: var(--color-body);
+    color: var(--color-mute);
   }
-  .icon-x, .icon-threads {
-    color: var(--color-ink);
+  .platform-stat-value {
+    font-size: 17px;
+    font-weight: 700;
+    letter-spacing: -0.2px;
+    color: var(--accent);
+    font-variant-numeric: tabular-nums;
   }
-  .icon-instagram {
-    stroke: url(#ig-grad);
+  .platform-divider {
+    width: 100%;
+    height: 1px;
+    background: var(--color-hairline);
+  }
+
+  /* ── Per-platform brand palettes ─────────────────────────────────────── */
+  .platform-card--linkedin { --accent: #0a66c2; --bar: #0a66c2; }
+  .platform-card--twitter  { --accent: var(--color-ink); --bar: var(--color-ink); }
+  .platform-card--instagram {
+    --accent: #d6249f;
+    --bar: linear-gradient(90deg, #fd5949 0%, #d6249f 55%, #285aeb 100%);
+  }
+  .platform-card--facebook { --accent: #1877f2; --bar: #1877f2; }
+  .platform-card--threads  { --accent: var(--color-ink); --bar: var(--color-ink); }
+  .platform-card--tiktok {
+    --accent: #fe2c55;
+    --bar: linear-gradient(90deg, #25f4ee 0%, #000 50%, #fe2c55 100%);
+  }
+
+  /* In dark mode the near-black brand accents (X, Threads, TikTok bar) would
+     vanish against the dark card — lift them to the ink token / brighter stops. */
+  :global(html[data-theme='dark']) .platform-card--tiktok {
+    --bar: linear-gradient(90deg, #25f4ee 0%, #fff 50%, #fe2c55 100%);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .platform-card {
+      transition: box-shadow 0.18s ease, border-color 0.18s ease;
+    }
+    .platform-card:hover {
+      transform: none;
+    }
+    .platform-card:hover .platform-icon {
+      transform: none;
+    }
   }
 </style>

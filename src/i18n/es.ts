@@ -643,6 +643,7 @@ export const es: Translations = {
 
   howTruncationWorks: {
     eyebrow: 'CÓMO FUNCIONA EL TRUNCAMIENTO',
+    title: 'Ve <span class="truncation-title__accent">exactamente</span> cómo aparecerá tu publicación',
     description: 'Cada plataforma tiene límites de caracteres y reglas de visualización únicos. Cuando tu contenido supera estos límites, se trunca con "..." o "Ver más". PostTruncate simula exactamente cómo aparecerá tu publicación.',
     platforms: {
       linkedin: { name: 'LinkedIn', desc: 'Muestra ~220 caracteres antes de "...ver más"' },
@@ -720,23 +721,28 @@ export const es: Translations = {
 
   whoIsItFor: {
       eyebrow: "¿PARA QUIÉN ES?",
-      title: "Perfecto para cada creador de contenido",
+      title: 'Perfecto para <span class="who-title__accent">cada</span> creador de contenido',
+      subtitle: "Ya sea que estés haciendo crecer una marca, gestionando clientes o construyendo tu audiencia, PostTruncate te ayuda a escribir mejor y publicar con confianza.",
       roles: {
           marketers: {
               title: "Marketers",
-              desc: "Optimiza campañas, textos publicitarios y publicaciones sociales para maximizar el alcance y la participación."
+              desc: "Optimiza campañas, textos publicitarios y publicaciones sociales para maximizar el alcance y la participación.",
+              cta: "Genera más impacto"
           },
           creators: {
               title: "Creadores",
-              desc: "Escribe mejores subtítulos e hilos que obtengan más me gusta, compartidos y guardados."
+              desc: "Escribe mejores subtítulos e hilos que obtengan más me gusta, compartidos y guardados.",
+              cta: "Haz crecer tu audiencia"
           },
           agencies: {
               title: "Agencias",
-              desc: "Gestiona múltiples clientes y asegúrate de que cada publicación esté perfectamente optimizada."
+              desc: "Gestiona múltiples clientes y asegúrate de que cada publicación esté perfectamente optimizada.",
+              cta: "Ofrece resultados consistentes"
           },
           founders: {
               title: "Fundadores",
-              desc: "Comparte actualizaciones y construye tu marca con contenido claro e impactante."
+              desc: "Comparte actualizaciones y construye tu marca con contenido claro e impactante.",
+              cta: "Genera confianza y visibilidad"
           }
       }
   },

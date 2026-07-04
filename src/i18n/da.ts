@@ -643,6 +643,7 @@ export const da: Translations = {
 
   howTruncationWorks: {
     eyebrow: 'HVORDAN AFKORTNING VIRKER',
+    title: 'Se <span class="truncation-title__accent">præcis</span>, hvordan dit opslag vil se ud',
     description: 'Hver platform har unikke tegngrænser og visningsregler. Når dit indhold overstiger disse grænser, afkortes det med "..." eller "Se mere". PostTruncate simulerer præcis, hvordan dit opslag vil se ud.',
     platforms: {
       linkedin: { name: 'LinkedIn', desc: 'Viser ~220 tegn før "...se mere"' },
@@ -720,23 +721,28 @@ export const da: Translations = {
 
   whoIsItFor: {
       eyebrow: "HVEM ER DET TIL?",
-      title: "Perfekt til enhver indholdsskaber",
+      title: 'Perfekt til <span class="who-title__accent">enhver</span> indholdsskaber',
+      subtitle: "Uanset om du opbygger et brand, håndterer kunder eller opbygger dit publikum, hjælper PostTruncate dig med at skrive bedre og udgive med selvtillid.",
       roles: {
           marketers: {
               title: "Markedsførere",
-              desc: "Optimer kampagner, annoncetekster og sociale opslag for maksimal rækkevidde og engagement."
+              desc: "Optimer kampagner, annoncetekster og sociale opslag for maksimal rækkevidde og engagement.",
+              cta: "Skab større effekt"
           },
           creators: {
               title: "Skabere",
-              desc: "Skriv bedre billedtekster og tråde, der får flere likes, delinger og gemmer."
+              desc: "Skriv bedre billedtekster og tråde, der får flere likes, delinger og gemmer.",
+              cta: "Få dit publikum til at vokse"
           },
           agencies: {
               title: "Bureauer",
-              desc: "Administrer flere kunder og sørg for, at hvert opslag er perfekt optimeret."
+              desc: "Administrer flere kunder og sørg for, at hvert opslag er perfekt optimeret.",
+              cta: "Lever ensartede resultater"
           },
           founders: {
               title: "Stiftere",
-              desc: "Del opdateringer og opbyg dit brand med klart, virkningsfuldt indhold."
+              desc: "Del opdateringer og opbyg dit brand med klart, virkningsfuldt indhold.",
+              cta: "Opbyg tillid og synlighed"
           }
       }
   },

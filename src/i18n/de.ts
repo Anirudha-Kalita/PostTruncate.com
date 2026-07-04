@@ -644,6 +644,7 @@ export const de: Translations = {
 
   howTruncationWorks: {
     eyebrow: 'WIE KÜRZUNGEN FUNKTIONIEREN',
+    title: 'Sieh <span class="truncation-title__accent">genau</span>, wie dein Beitrag erscheint',
     description: 'Jede Plattform hat eigene Zeichenlimits und Anzeigeregeln. Wenn Ihr Inhalt diese Limits überschreitet, wird er mit "..." oder "Mehr anzeigen" gekürzt. PostTruncate simuliert genau, wie Ihr Beitrag aussehen wird.',
     platforms: {
       linkedin: { name: 'LinkedIn', desc: 'Zeigt ~220 Zeichen vor "...mehr anzeigen"' },
@@ -721,23 +722,28 @@ export const de: Translations = {
 
   whoIsItFor: {
       eyebrow: "FÜR WEN IST ES?",
-      title: "Perfekt für jeden Content Creator",
+      title: 'Perfekt für <span class="who-title__accent">jeden</span> Content Creator',
+      subtitle: "Ob du eine Marke aufbaust, Kunden betreust oder dein Publikum vergrößerst – PostTruncate hilft dir, besser zu schreiben und selbstbewusst zu posten.",
       roles: {
           marketers: {
               title: "Marketer",
-              desc: "Optimiere Kampagnen, Anzeigentexte und Social-Media-Posts für maximale Reichweite und Interaktion."
+              desc: "Optimiere Kampagnen, Anzeigentexte und Social-Media-Posts für maximale Reichweite und Interaktion.",
+              cta: "Mehr Wirkung erzielen"
           },
           creators: {
               title: "Creators",
-              desc: "Schreibe bessere Bildunterschriften und Threads, die mehr Likes, Shares und Saves erhalten."
+              desc: "Schreibe bessere Bildunterschriften und Threads, die mehr Likes, Shares und Saves erhalten.",
+              cta: "Publikum vergrößern"
           },
           agencies: {
               title: "Agenturen",
-              desc: "Verwalte mehrere Kunden und stelle sicher, dass jeder Post perfekt optimiert ist."
+              desc: "Verwalte mehrere Kunden und stelle sicher, dass jeder Post perfekt optimiert ist.",
+              cta: "Konsistente Ergebnisse liefern"
           },
           founders: {
               title: "Gründer",
-              desc: "Teile Updates und baue deine Marke mit klaren, wirkungsvollen Inhalten auf."
+              desc: "Teile Updates und baue deine Marke mit klaren, wirkungsvollen Inhalten auf.",
+              cta: "Vertrauen & Sichtbarkeit aufbauen"
           }
       }
   },

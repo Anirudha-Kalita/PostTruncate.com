@@ -71,6 +71,15 @@ const SECTION_TOOL_IDS: (string | undefined)[] = [
   undefined,    // "Word count, readability, and platform analytics"
 ];
 
+// Per-section card presentation (icon + accent), index-aligned with the above.
+const SECTION_CARDS: { icon: string; accent: string }[] = [
+  { icon: 'counter', accent: 'blue' },
+  { icon: 'sms', accent: 'green' },
+  { icon: 'x', accent: 'blue' },
+  { icon: 'instagram', accent: 'pink' },
+  { icon: 'analytics', accent: 'blue' },
+];
+
 // Referral banner: the ?platform= param is only known at runtime (static page),
 // so we pass all translated platform data to the client script via data attributes.
 const bannerPlatforms = {
@@ -183,26 +192,46 @@ const latestPosts = (await getPublishedPosts())
        <strong> keyword markup, so they render with set:html. Placed right below
        the editor so it sits in the main content flow for crawlers. -->
   <section class="seo-copy container-page" aria-label={t.seoCopy.ariaLabel}>
-    <article class="seo-prose">
+    <div class="seo-cards">
       {
         t.seoCopy.sections.map((s, i) => {
           const link = SECTION_TOOL_IDS[i] ? toolLinks[SECTION_TOOL_IDS[i]!] : undefined;
+          const card = SECTION_CARDS[i] ?? { icon: 'info', accent: 'blue' };
           return (
-            <Fragment>
-              <h2>{s.heading}</h2>
-              {s.paragraphs.map((p) => (
-                <p set:html={p} />
-              ))}
-              {link && (
-                <p class="seo-copy__tool-link">
-                  <a href={link.href}>{link.label}</a>
-                </p>
-              )}
-            </Fragment>
+            <article class:list={['seo-card', `seo-card--${card.accent}`]}>
+              <span class="seo-card__icon">
+                {card.icon === 'counter' && (
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" /><polyline points="14 2 14 8 20 8" /><line x1="8" y1="13" x2="14" y2="13" /><line x1="8" y1="17" x2="12" y2="17" /></svg>
+                )}
+                {card.icon === 'sms' && (
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" /><circle cx="8" cy="10" r="1" fill="currentColor" stroke="none" /><circle cx="12" cy="10" r="1" fill="currentColor" stroke="none" /><circle cx="16" cy="10" r="1" fill="currentColor" stroke="none" /></svg>
+                )}
+                {card.icon === 'x' && (
+                  <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24h-6.66l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231 5.45-6.231Zm-1.161 17.52h1.833L7.084 4.126H5.117L17.083 19.77Z" /></svg>
+                )}
+                {card.icon === 'instagram' && (
+                  <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 1.17.05 1.8.25 2.23.41.56.22.96.48 1.38.9.42.42.68.82.9 1.38.16.42.36 1.06.41 2.23.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.05 1.17-.25 1.8-.41 2.23a3.7 3.7 0 0 1-.9 1.38 3.7 3.7 0 0 1-1.38.9c-.42.16-1.06.36-2.23.41-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-1.17-.05-1.8-.25-2.23-.41a3.7 3.7 0 0 1-1.38-.9 3.7 3.7 0 0 1-.9-1.38c-.16-.42-.36-1.06-.41-2.23-.06-1.27-.07-1.65-.07-4.85s.01-3.58.07-4.85c.05-1.17.25-1.8.41-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.42-.16 1.06-.36 2.23-.41C8.42 2.17 8.8 2.16 12 2.16M12 0C8.74 0 8.33.01 7.05.07 5.78.13 4.9.33 4.14.63a5.86 5.86 0 0 0-2.12 1.38A5.86 5.86 0 0 0 .63 4.13c-.3.76-.5 1.64-.56 2.91C.01 8.33 0 8.74 0 12s.01 3.67.07 4.95c.06 1.27.26 2.15.56 2.91a5.86 5.86 0 0 0 1.38 2.12c.66.66 1.33 1.07 2.12 1.38.76.3 1.64.5 2.91.56C8.33 23.99 8.74 24 12 24s3.67-.01 4.95-.07c1.27-.06 2.15-.26 2.91-.56a5.86 5.86 0 0 0 2.12-1.38 5.86 5.86 0 0 0 1.38-2.12c.3-.76.5-1.64.56-2.91.06-1.28.07-1.69.07-4.95s-.01-3.67-.07-4.95c-.06-1.27-.26-2.15-.56-2.91a5.86 5.86 0 0 0-1.38-2.12A5.86 5.86 0 0 0 19.86.63c-.76-.3-1.64-.5-2.91-.56C15.67.01 15.26 0 12 0Zm0 5.84a6.16 6.16 0 1 0 0 12.32 6.16 6.16 0 0 0 0-12.32ZM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8Zm6.4-10.85a1.44 1.44 0 1 0 0 2.88 1.44 1.44 0 0 0 0-2.88Z" /></svg>
+                )}
+                {card.icon === 'analytics' && (
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 3v16a2 2 0 0 0 2 2h16" /><rect x="7" y="11" width="3" height="6" rx="0.8" /><rect x="12" y="7" width="3" height="10" rx="0.8" /><rect x="17" y="13" width="3" height="4" rx="0.8" /></svg>
+                )}
+              </span>
+              <div class="seo-card__body">
+                <h2 class="seo-card__title">{s.heading}</h2>
+                {s.paragraphs.map((p) => (
+                  <p class="seo-card__p" set:html={p} />
+                ))}
+                {link && (
+                  <a class="seo-card__link" href={link.href}>
+                    {link.label}<span aria-hidden="true">→</span>
+                  </a>
+                )}
+              </div>
+            </article>
           );
         })
       }
-    </article>
+    </div>
   </section>
 
 
@@ -942,47 +971,117 @@ const latestPosts = (await getPublishedPosts())
     }
   }
 
-  /* ── Long-form SEO copy ─────────────────────────────────────────────────
-     Readable measure (~4xl), tokenised colours so dark mode is automatic. */
+  /* ── Long-form SEO copy — icon cards ─────────────────────────────────────
+     Each section renders as a hover-active card with a tinted icon chip. All
+     colours resolve through tokens / per-card accent props so dark mode works. */
   .seo-copy {
     scroll-margin-top: 80px;
     padding-top: 96px;
   }
-  .seo-prose {
+  .seo-cards {
+    display: grid;
+    gap: 20px;
+    max-width: 60rem;
+    margin-inline: auto;
   }
-  .seo-prose h2 {
-    margin-top: 40px;
-    font-size: 22px;
-    font-weight: 600;
-    line-height: 30px;
-    letter-spacing: -0.6px;
+  .seo-card {
+    --accent: var(--color-link);
+    --accent-soft: var(--color-link-bg-soft);
+    display: flex;
+    gap: 20px;
+    padding: 24px;
+    border-radius: var(--radius-xl);
+    background: var(--color-canvas);
+    border: 1px solid var(--color-hairline);
+    box-shadow: var(--shadow-e1);
+    transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+  }
+  .seo-card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-e3);
+    border-color: color-mix(in srgb, var(--accent) 40%, var(--color-hairline));
+  }
+  .seo-card__icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 52px;
+    height: 52px;
+    border-radius: 14px;
+    background: var(--accent-soft);
+    color: var(--accent);
+    transition: transform 0.18s ease;
+  }
+  .seo-card:hover .seo-card__icon {
+    transform: scale(1.06);
+  }
+  .seo-card__icon svg {
+    width: 24px;
+    height: 24px;
+  }
+  .seo-card__body {
+    min-width: 0;
+  }
+  .seo-card__title {
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 28px;
+    letter-spacing: -0.5px;
     color: var(--color-ink);
   }
-  .seo-prose h2:first-child {
-    margin-top: 0;
-  }
-  .seo-prose p {
-    margin-top: 14px;
-    font-size: 16px;
-    line-height: 28px;
+  .seo-card__p {
+    margin-top: 12px;
+    font-size: 15px;
+    line-height: 25px;
     color: var(--color-body);
   }
-  .seo-prose strong {
+  .seo-card__p :global(strong) {
     font-weight: 600;
     color: var(--color-ink);
   }
-  .seo-copy__tool-link {
-    margin-top: 20px;
+  .seo-card__link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 16px;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--accent);
+    transition: gap 0.15s ease;
   }
-  .seo-copy__tool-link a {
-    font-size: 15px;
-    font-weight: 500;
-    color: var(--color-ink);
-    text-decoration: underline;
-    text-underline-offset: 3px;
+  .seo-card__link:hover {
+    gap: 10px;
   }
-  .seo-copy__tool-link a:hover {
-    opacity: 0.75;
+
+  /* Per-card accents (light). */
+  .seo-card--blue  { --accent: #0066e0; --accent-soft: #e8f2ff; }
+  .seo-card--green { --accent: #16a34a; --accent-soft: #e8f8f0; }
+  .seo-card--pink  { --accent: #e1306c; --accent-soft: #fdecf3; }
+
+  /* Dark theme — lift the tints + colours for contrast. */
+  :global(html[data-theme='dark']) .seo-card--blue  { --accent: #60a5fa; --accent-soft: rgba(0, 102, 224, 0.2); }
+  :global(html[data-theme='dark']) .seo-card--green { --accent: #4ade80; --accent-soft: rgba(22, 163, 74, 0.2); }
+  :global(html[data-theme='dark']) .seo-card--pink  { --accent: #f472b6; --accent-soft: rgba(225, 48, 108, 0.2); }
+
+  @media (max-width: 540px) {
+    .seo-card {
+      flex-direction: column;
+      gap: 14px;
+      padding: 20px;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .seo-card,
+    .seo-card__icon {
+      transition: border-color 0.18s ease;
+    }
+    .seo-card:hover {
+      transform: none;
+    }
+    .seo-card:hover .seo-card__icon {
+      transform: none;
+    }
   }
 
   /* ── Responsive ─────────────────────────────────────────────────────── */

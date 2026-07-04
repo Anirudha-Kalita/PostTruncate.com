@@ -1371,6 +1371,8 @@ export interface Translations {
   };
   howTruncationWorks: {
     eyebrow: string;
+    /** Section heading (HTML); the emphasis word is wrapped in a blue accent span. */
+    title: string;
     description: string;
     platforms: {
       linkedin: { name: string; desc: string };
@@ -1405,12 +1407,15 @@ export interface Translations {
   /** "Who is it for?" persona grid — four audience cards on the homepage. */
   whoIsItFor: {
     eyebrow: string;
+    /** Section heading (HTML); the emphasis word is wrapped in an accent span. */
     title: string;
+    /** Supporting line under the heading. */
+    subtitle: string;
     roles: {
-      marketers: { title: string; desc: string };
-      creators: { title: string; desc: string };
-      agencies: { title: string; desc: string };
-      founders: { title: string; desc: string };
+      marketers: { title: string; desc: string; cta: string };
+      creators: { title: string; desc: string; cta: string };
+      agencies: { title: string; desc: string; cta: string };
+      founders: { title: string; desc: string; cta: string };
     };
   };
   /** Closing call-to-action banner above the footer on the homepage. */

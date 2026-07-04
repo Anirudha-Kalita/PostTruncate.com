@@ -644,6 +644,7 @@ export const en: Translations = {
 
   howTruncationWorks: {
     eyebrow: 'HOW TRUNCATION WORKS',
+    title: 'See <span class="truncation-title__accent">exactly</span> how your post will appear',
     description: 'Each platform has unique character limits and display rules. When your content exceeds these limits, it gets truncated with "..." or "See more". PostTruncate simulates exactly how your post will appear after publishing.',
     platforms: {
       linkedin: { name: 'LinkedIn', desc: 'Shows ~220 chars before "...see more"' },
@@ -721,23 +722,28 @@ export const en: Translations = {
 
   whoIsItFor: {
       eyebrow: "WHO IS IT FOR?",
-      title: "Perfect for every content creator",
+      title: 'Perfect for <span class="who-title__accent">every</span> content creator',
+      subtitle: "Whether you’re growing a brand, managing clients, or building your audience, PostTruncate helps you write better and post with confidence.",
       roles: {
           marketers: {
               title: "Marketers",
-              desc: "Optimize campaigns, ad copy, and social posts for maximum reach and engagement."
+              desc: "Optimize campaigns, ad copy, and social posts for maximum reach and engagement.",
+              cta: "Drive more impact"
           },
           creators: {
               title: "Creators",
-              desc: "Write better captions and threads that get more likes, shares, and saves."
+              desc: "Write better captions and threads that get more likes, shares, and saves.",
+              cta: "Grow your audience"
           },
           agencies: {
               title: "Agencies",
-              desc: "Manage multiple clients and ensure every post is perfectly optimized."
+              desc: "Manage multiple clients and ensure every post is perfectly optimized.",
+              cta: "Deliver consistent results"
           },
           founders: {
               title: "Founders",
-              desc: "Share updates and build your brand with clear, impactful content."
+              desc: "Share updates and build your brand with clear, impactful content.",
+              cta: "Build trust & visibility"
           }
       }
   },

@@ -299,21 +299,11 @@ const socials = [
 
   <div class="container-page footer__bar">
     <p>{interp(footer.copyright, { year })}</p>
-    <div class="footer__bar-right">
-      <p class="footer__note">{footer.disclaimer}</p>
-      <button type="button" class="footer__totop" aria-label={footer.backToTop}>
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5" /><path d="m5 12 7-7 7 7" /></svg>
-      </button>
-    </div>
+    <p class="footer__note">{footer.disclaimer}</p>
   </div>
 </footer>
 
 <script>
-  // Back-to-top: smooth scroll to the top of the document.
-  document.querySelector('.footer__totop')?.addEventListener('click', () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  });
-
   // Newsletter: subscribe in the background via Mailchimp's JSONP endpoint
   // (its /post-json variant accepts a `c` callback), so no external thank-you
   // page opens — we show an in-page popup banner instead. With JS disabled the
@@ -713,37 +703,8 @@ const socials = [
     font-size: 12px;
     line-height: 16px;
   }
-  .footer__bar-right {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-  }
   .footer__note {
     max-width: 420px;
-  }
-  .footer__totop {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 40px;
-    height: 40px;
-    flex-shrink: 0;
-    border-radius: 50%;
-    border: 1px solid var(--color-hairline);
-    background: var(--color-canvas);
-    color: var(--color-body);
-    cursor: pointer;
-    transition: color 0.15s ease, border-color 0.15s ease, background 0.15s ease, transform 0.15s ease;
-  }
-  .footer__totop:hover {
-    color: var(--color-link);
-    border-color: color-mix(in srgb, var(--color-link) 45%, var(--color-hairline));
-    background: var(--color-canvas-soft);
-    transform: translateY(-2px);
-  }
-  .footer__totop svg {
-    width: 18px;
-    height: 18px;
   }
 
   /* ── Subscribe popup banner (sits directly above the email field) ─────── */
@@ -843,13 +804,11 @@ const socials = [
   @media (prefers-reduced-motion: reduce) {
     .footer__chip,
     .footer__social-link,
-    .footer__totop,
     .footer__link {
       transition: color 0.15s ease, border-color 0.15s ease, background 0.15s ease;
     }
     .footer__chip:hover,
-    .footer__social-link:hover,
-    .footer__totop:hover {
+    .footer__social-link:hover {
       transform: none;
     }
     .footer__link:hover {

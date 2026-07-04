@@ -643,6 +643,7 @@ export const nl: Translations = {
 
   howTruncationWorks: {
     eyebrow: 'HOE AFKAPPEN WERKT',
+    title: 'Zie <span class="truncation-title__accent">precies</span> hoe je bericht eruit komt te zien',
     description: 'Elk platform heeft unieke tekenlimieten en weergave regels. Wanneer uw inhoud deze limieten overschrijdt, wordt deze afgekapt met "..." of "Meer weergeven". PostTruncate simuleert precies hoe uw post zal verschijnen.',
     platforms: {
       linkedin: { name: 'LinkedIn', desc: 'Toont ~220 tekens vóór "...meer weergeven"' },
@@ -720,23 +721,28 @@ export const nl: Translations = {
 
   whoIsItFor: {
       eyebrow: "VOOR WIE IS HET?",
-      title: "Perfect voor elke content creator",
+      title: 'Perfect voor <span class="who-title__accent">elke</span> content creator',
+      subtitle: "Of je nu een merk laat groeien, klanten beheert of je publiek opbouwt, PostTruncate helpt je beter te schrijven en met vertrouwen te posten.",
       roles: {
           marketers: {
               title: "Marketeers",
-              desc: "Optimaliseer campagnes, advertentieteksten en sociale posts voor maximaal bereik en betrokkenheid."
+              desc: "Optimaliseer campagnes, advertentieteksten en sociale posts voor maximaal bereik en betrokkenheid.",
+              cta: "Maak meer impact"
           },
           creators: {
               title: "Creators",
-              desc: "Schrijf betere bijschriften en threads die meer likes, shares en saves krijgen."
+              desc: "Schrijf betere bijschriften en threads die meer likes, shares en saves krijgen.",
+              cta: "Laat je publiek groeien"
           },
           agencies: {
               title: "Bureaus",
-              desc: "Beheer meerdere klanten en zorg ervoor dat elke post perfect is geoptimaliseerd."
+              desc: "Beheer meerdere klanten en zorg ervoor dat elke post perfect is geoptimaliseerd.",
+              cta: "Lever consistente resultaten"
           },
           founders: {
               title: "Oprichters",
-              desc: "Deel updates en bouw je merk op met duidelijke, impactvolle content."
+              desc: "Deel updates en bouw je merk op met duidelijke, impactvolle content.",
+              cta: "Bouw vertrouwen en zichtbaarheid op"
           }
       }
   },

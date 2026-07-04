@@ -641,6 +641,7 @@ export const zh: Translations = {
 
   howTruncationWorks: {
     eyebrow: '截断如何工作',
+    title: '<span class="truncation-title__accent">精确</span>查看你的帖子将如何显示',
     description: '每个平台都有独特的字符限制和显示规则。当您的内容超过这些限制时，将用“...”或“查看更多”截断。PostTruncate 完全模拟您发布后帖子的外观。',
     platforms: {
       linkedin: { name: 'LinkedIn', desc: '在“...查看更多”之前显示 ~220 字符' },
@@ -718,23 +719,28 @@ export const zh: Translations = {
 
   whoIsItFor: {
       eyebrow: "适用人群",
-      title: "适合所有内容创作者",
+      title: '适合<span class="who-title__accent">所有</span>内容创作者',
+      subtitle: "无论你是在打造品牌、管理客户还是构建受众，PostTruncate 都能帮助你写得更好、自信发布。",
       roles: {
           marketers: {
               title: "营销人员",
-              desc: "优化广告活动、广告文案和社交帖子，实现覆盖面和互动率最大化。"
+              desc: "优化广告活动、广告文案和社交帖子，实现覆盖面和互动率最大化。",
+              cta: "创造更大影响"
           },
           creators: {
               title: "创作者",
-              desc: "撰写更优质的字幕和长文，获得更多点赞、分享和收藏。"
+              desc: "撰写更优质的字幕和长文，获得更多点赞、分享和收藏。",
+              cta: "扩大你的受众"
           },
           agencies: {
               title: "代理机构",
-              desc: "管理多个客户并确保每篇帖子都得到完美优化。"
+              desc: "管理多个客户并确保每篇帖子都得到完美优化。",
+              cta: "交付稳定成果"
           },
           founders: {
               title: "创始人",
-              desc: "通过清晰、有影响力的内容分享动态并打造您的品牌。"
+              desc: "通过清晰、有影响力的内容分享动态并打造您的品牌。",
+              cta: "建立信任与曝光"
           }
       }
   },

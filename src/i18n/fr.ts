@@ -643,6 +643,7 @@ export const fr: Translations = {
 
   howTruncationWorks: {
     eyebrow: 'COMMENT FONCTIONNE LA TRONCATURE',
+    title: 'Voyez <span class="truncation-title__accent">exactement</span> comment votre publication apparaîtra',
     description: 'Chaque plateforme a des limites de caractères et des règles d\'affichage uniques. Lorsque votre contenu dépasse ces limites, il est tronqué par "..." ou "Voir plus". PostTruncate simule exactement l\'apparence de votre publication.',
     platforms: {
       linkedin: { name: 'LinkedIn', desc: 'Affiche ~220 caractères avant "...voir plus"' },
@@ -720,23 +721,28 @@ export const fr: Translations = {
 
   whoIsItFor: {
       eyebrow: "POUR QUI EST-CE ?",
-      title: "Parfait pour chaque créateur de contenu",
+      title: 'Parfait pour <span class="who-title__accent">chaque</span> créateur de contenu',
+      subtitle: "Que vous développiez une marque, gériez des clients ou construisiez votre audience, PostTruncate vous aide à mieux écrire et à publier en toute confiance.",
       roles: {
           marketers: {
               title: "Marketeurs",
-              desc: "Optimisez les campagnes, les textes publicitaires et les posts sociaux pour une portée et un engagement maximums."
+              desc: "Optimisez les campagnes, les textes publicitaires et les posts sociaux pour une portée et un engagement maximums.",
+              cta: "Générez plus d’impact"
           },
           creators: {
               title: "Créateurs",
-              desc: "Rédigez de meilleures légendes et threads qui obtiennent plus de likes, de partages et d'enregistrements."
+              desc: "Rédigez de meilleures légendes et threads qui obtiennent plus de likes, de partages et d'enregistrements.",
+              cta: "Développez votre audience"
           },
           agencies: {
               title: "Agences",
-              desc: "Gérez plusieurs clients et assurez-vous que chaque post est parfaitement optimisé."
+              desc: "Gérez plusieurs clients et assurez-vous que chaque post est parfaitement optimisé.",
+              cta: "Fournissez des résultats constants"
           },
           founders: {
               title: "Fondateurs",
-              desc: "Partagez des mises à jour et développez votre marque avec un contenu clair et percutant."
+              desc: "Partagez des mises à jour et développez votre marque avec un contenu clair et percutant.",
+              cta: "Bâtissez confiance et visibilité"
           }
       }
   },
