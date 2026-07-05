@@ -1,0 +1,259 @@
+---
+// Two-column marketing hero for the standalone X / Twitter character-counter
+// page. Left: headline (with the "280" figure accented) + lede + on-this-page
+// pills. Right: a decorative X-logo tile with floating stat cards. Shared across
+// all 10 locales — every locale's title string contains the literal "280", so
+// the accent split works language-agnostically. The right-hand illustration is
+// purely decorative (aria-hidden) and keeps its stylised English micro-labels
+// to match the brand mock across locales.
+import OnThisPage from './OnThisPage.astro';
+import type { SectionAnchor } from '../lib/headingAnchors';
+
+interface Props {
+  title: string;
+  intro: string;
+  sections: SectionAnchor[];
+  onThisPageLabel: string;
+}
+
+const { title, intro, sections, onThisPageLabel } = Astro.props;
+
+// Split the localized title on the universal "280" figure so it can be tinted.
+const titleParts = title.split('280');
+---
+
+<header class="thero">
+  <div class="thero__copy">
+    <h1 class="thero__title">
+      {titleParts.map((part, i) => (
+        <>
+          {part}
+          {i < titleParts.length - 1 && <span class="thero__accent">280</span>}
+        </>
+      ))}
+    </h1>
+    {intro && <p class="thero__lede">{intro}</p>}
+    <OnThisPage label={onThisPageLabel} sections={sections} />
+  </div>
+
+  <div class="thero__art" aria-hidden="true">
+    <div class="thero__glow"></div>
+
+    <div class="thero__logo">
+      <svg viewBox="0 0 24 24" width="112" height="112" role="presentation">
+        <path
+          fill="#fff"
+          d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.713 6.231 5.451-6.231zm-1.161 17.52h1.833L7.084 4.126H5.117L17.083 19.77z"
+        ></path>
+      </svg>
+    </div>
+
+    <div class="thero__card thero__card--count">
+      <span class="thero__card-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="6" cy="6" r="3"></circle>
+          <circle cx="6" cy="18" r="3"></circle>
+          <line x1="20" y1="4" x2="8.12" y2="15.88"></line>
+          <line x1="14.47" y1="14.48" x2="20" y2="20"></line>
+          <line x1="8.12" y1="8.12" x2="12" y2="12"></line>
+        </svg>
+      </span>
+      <span class="thero__count-num">280</span>
+      <span class="thero__count-label">Characters</span>
+    </div>
+
+    <div class="thero__card thero__card--heart">
+      <svg viewBox="0 0 24 24" fill="currentColor" width="26" height="26">
+        <path d="M12 21s-8-4.5-8-10a4 4 0 0 1 8-1 4 4 0 0 1 8 1c0 5.5-8 10-8 10z"></path>
+      </svg>
+    </div>
+
+    <div class="thero__card thero__card--thread">
+      <span class="thero__thread-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="6" cy="6" r="3"></circle>
+          <circle cx="6" cy="18" r="3"></circle>
+          <line x1="20" y1="4" x2="8.12" y2="15.88"></line>
+          <line x1="14.47" y1="14.48" x2="20" y2="20"></line>
+          <line x1="8.12" y1="8.12" x2="12" y2="12"></line>
+        </svg>
+      </span>
+      <span class="thero__thread-text">Thread<br />Splitter</span>
+    </div>
+  </div>
+</header>
+
+<style>
+  .thero {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 40px;
+    align-items: center;
+    margin-bottom: 40px;
+  }
+
+  /* ── Left column: copy ──────────────────────────────────────────────── */
+  .thero__title {
+    font-size: clamp(30px, 5vw, 46px);
+    font-weight: 600;
+    line-height: 1.06;
+    letter-spacing: -1.8px;
+    color: var(--color-ink);
+    text-wrap: balance;
+  }
+
+  .thero__accent {
+    color: var(--color-link);
+  }
+
+  .thero__lede {
+    margin-top: 18px;
+    max-width: 34rem;
+    font-size: 18px;
+    line-height: 28px;
+    color: var(--color-body);
+  }
+
+  .thero__copy :global(.on-page) {
+    margin-top: 24px;
+  }
+
+  /* ── Right column: decorative illustration ──────────────────────────── */
+  .thero__art {
+    position: relative;
+    display: none;
+    aspect-ratio: 5 / 4;
+    max-width: 460px;
+    margin-inline: auto;
+    width: 100%;
+  }
+
+  .thero__glow {
+    position: absolute;
+    inset: 8% 4%;
+    border-radius: 50%;
+    background: radial-gradient(
+      circle at 60% 45%,
+      var(--color-link-bg-soft) 0%,
+      color-mix(in srgb, var(--color-link-bg-soft) 40%, transparent) 45%,
+      transparent 72%
+    );
+  }
+
+  /* Black brand tile with the white X mark — kept branded in both themes. */
+  .thero__logo {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-38%, -50%) rotate(-4deg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 46%;
+    aspect-ratio: 1;
+    border-radius: var(--radius-xl);
+    background: #050505;
+    box-shadow: var(--shadow-e5),
+      inset 0 1px 0 rgba(255, 255, 255, 0.12);
+  }
+
+  .thero__logo svg {
+    width: 52%;
+    height: 52%;
+  }
+
+  /* Floating cards share a soft elevated surface that adapts to dark mode. */
+  .thero__card {
+    position: absolute;
+    border-radius: var(--radius-lg);
+    background: var(--color-canvas);
+    box-shadow: var(--shadow-e5);
+  }
+
+  .thero__card--count {
+    top: 10%;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    padding: 14px 18px;
+    border-radius: var(--radius-xl);
+    background: var(--color-success);
+    color: #fff;
+    box-shadow: 0 18px 34px -12px color-mix(in srgb, var(--color-success) 55%, transparent),
+      var(--shadow-e2);
+  }
+
+  .thero__card-icon {
+    display: inline-flex;
+    opacity: 0.9;
+  }
+  .thero__card-icon svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  .thero__count-num {
+    font-size: 30px;
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: -1px;
+  }
+
+  .thero__count-label {
+    font-size: 12px;
+    font-weight: 500;
+    opacity: 0.92;
+  }
+
+  .thero__card--heart {
+    bottom: 8%;
+    left: 12%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 60px;
+    height: 60px;
+    color: var(--color-link);
+  }
+
+  .thero__card--thread {
+    right: 0;
+    bottom: 20%;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 18px;
+    color: var(--color-ink);
+  }
+
+  .thero__thread-icon {
+    display: inline-flex;
+    color: var(--color-link);
+  }
+  .thero__thread-icon svg {
+    width: 22px;
+    height: 22px;
+  }
+
+  .thero__thread-text {
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1.15;
+    letter-spacing: -0.3px;
+    color: var(--color-ink);
+  }
+
+  /* ── Responsive: two columns + illustration only on wider viewports ──── */
+  @media (min-width: 900px) {
+    .thero {
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 48px;
+      margin-bottom: 48px;
+    }
+
+    .thero__art {
+      display: block;
+    }
+  }
+</style>

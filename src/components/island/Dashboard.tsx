@@ -329,8 +329,14 @@ export default function Dashboard({ lang, strings, toolSlugs, focus }: Props) {
     );
     // Single "Try an example" chip for this page's platform (SMS has no tab).
     const focusName = PREVIEW_TABS.find((t) => t.id === focus)?.name ?? 'SMS';
+    // Redesigned platform pages split the workspace 60/40 (editor/preview);
+    // every other scoped platform keeps the balanced ~50/50 columns.
+    const WIDE_SPLIT_FOCUS = new Set<FocusPlatform>(['twitter', 'instagram', 'linkedin', 'facebook', 'threads', 'tiktok']);
+    const columns = WIDE_SPLIT_FOCUS.has(focus)
+      ? 'lg:grid-cols-[minmax(0,3fr)_minmax(0,2fr)]'
+      : 'lg:grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)]';
     return (
-      <div class="grid grid-cols-1 gap-5 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)]">
+      <div class={`grid grid-cols-1 gap-5 ${columns}`}>
         <div class="flex flex-col gap-5">
           <Workspace
             text={text}

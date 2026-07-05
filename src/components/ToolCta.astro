@@ -1,0 +1,169 @@
+---
+// Closing call-to-action for redesigned standalone platform pages. A soft
+// tinted, centered card with the heading, blurb and a blue pill button, flanked
+// by two faded decorative icon tiles. Copy arrives already-localized from the
+// shared toolPage.cta dictionary, so this is a pure visual reframe per locale.
+interface Props {
+  heading: string;
+  blurb: string;
+  button: string;
+  href: string | undefined;
+}
+
+const { heading, blurb, button, href } = Astro.props;
+---
+
+<aside class="xcta">
+  <div class="xcta__deco xcta__deco--left" aria-hidden="true">
+    <span class="xcta__glow"></span>
+    <span class="xcta__tile xcta__tile--msg">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+        <circle cx="12" cy="10" r="0.6" fill="currentColor" stroke="none"></circle>
+      </svg>
+    </span>
+  </div>
+
+  <div class="xcta__inner">
+    <h2 class="xcta__heading">{heading}</h2>
+    <p class="xcta__blurb">{blurb}</p>
+    <a href={href} class="xcta__btn">{button}</a>
+  </div>
+
+  <div class="xcta__deco xcta__deco--right" aria-hidden="true">
+    <span class="xcta__glow"></span>
+    <span class="xcta__tile xcta__tile--heart">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 21s-8-4.5-8-10a4 4 0 0 1 8-1 4 4 0 0 1 8 1c0 5.5-8 10-8 10z"></path>
+      </svg>
+    </span>
+  </div>
+</aside>
+
+<style>
+  .xcta {
+    position: relative;
+    overflow: hidden;
+    margin-top: 48px;
+    padding: 56px 24px;
+    border-radius: var(--radius-xl);
+    background:
+      radial-gradient(circle at 12% 50%, color-mix(in srgb, var(--color-link-bg-soft) 55%, transparent), transparent 42%),
+      radial-gradient(circle at 88% 55%, color-mix(in srgb, var(--color-violet-soft) 45%, transparent), transparent 42%),
+      var(--color-canvas-soft);
+    box-shadow: var(--shadow-e1);
+  }
+
+  /* ── Centered copy column ───────────────────────────────────────────── */
+  .xcta__inner {
+    position: relative;
+    z-index: 1;
+    max-width: 40rem;
+    margin-inline: auto;
+    text-align: center;
+  }
+
+  .xcta__heading {
+    font-size: clamp(22px, 3vw, 28px);
+    font-weight: 600;
+    line-height: 1.2;
+    letter-spacing: -0.8px;
+    color: var(--color-ink);
+  }
+
+  .xcta__blurb {
+    margin-top: 14px;
+    font-size: 16px;
+    line-height: 26px;
+    color: var(--color-body);
+  }
+
+  .xcta__btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 48px;
+    margin-top: 24px;
+    padding: 0 28px;
+    border-radius: var(--radius-pill);
+    background: var(--color-link);
+    color: #fff;
+    font-size: 16px;
+    font-weight: 600;
+    box-shadow: 0 14px 28px -12px color-mix(in srgb, var(--color-link) 60%, transparent);
+    transition: transform 100ms ease, opacity 0.15s ease, box-shadow 0.2s ease;
+  }
+
+  .xcta__btn:hover {
+    opacity: 0.94;
+    box-shadow: 0 18px 34px -12px color-mix(in srgb, var(--color-link) 65%, transparent);
+  }
+
+  .xcta__btn:active {
+    transform: scale(0.96);
+  }
+
+  /* ── Faded decorative icon tiles ────────────────────────────────────── */
+  .xcta__deco {
+    position: absolute;
+    top: 50%;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    width: 96px;
+    height: 96px;
+    transform: translateY(-50%);
+    opacity: 0.55;
+    pointer-events: none;
+  }
+
+  .xcta__deco--left {
+    left: 3.5%;
+  }
+  .xcta__deco--right {
+    right: 3.5%;
+  }
+
+  .xcta__glow {
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background: radial-gradient(circle, color-mix(in srgb, var(--color-link-bg-soft) 70%, transparent) 0%, transparent 70%);
+  }
+
+  .xcta__tile {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 52px;
+    height: 52px;
+    border-radius: var(--radius-lg);
+    background: var(--color-canvas);
+    box-shadow: var(--shadow-e3);
+  }
+
+  .xcta__tile svg {
+    width: 24px;
+    height: 24px;
+  }
+
+  .xcta__tile--msg {
+    color: var(--color-link);
+    transform: rotate(-6deg);
+  }
+  .xcta__tile--heart {
+    color: var(--color-violet-deep);
+    transform: rotate(6deg);
+  }
+
+  /* Show the flanking decorations only where there's room beside the copy. */
+  @media (min-width: 900px) {
+    .xcta {
+      padding-inline: 88px;
+    }
+    .xcta__deco {
+      display: flex;
+    }
+  }
+</style>

@@ -7,6 +7,37 @@ export interface SectionAnchor {
   label: string;
 }
 
+/** One <h2>-delimited slice of tool body HTML, for the card layout. */
+export interface ToolSection {
+  /** The id already injected on the <h2> (empty string if none). */
+  id: string;
+  /** Inner HTML of the <h2> heading. */
+  headingHtml: string;
+  /** Everything between this <h2> and the next one (or end of doc), trimmed. */
+  bodyHtml: string;
+}
+
+/**
+ * Split prepared tool-body HTML into one section per <h2>. Pure and DOM-free —
+ * operates on the flat `<h2>…</h2><p>…</p>…` string that tool content uses.
+ * Anything before the first <h2> is ignored (tool bodies always open on an h2).
+ */
+export function splitToolSections(html: string): ToolSection[] {
+  const re = new RegExp(H2_RE.source, 'gi');
+  const matches = [...html.matchAll(re)];
+  return matches.map((m, i) => {
+    const attrs = m[1] ?? '';
+    const idMatch = /\bid\s*=\s*["']([^"']*)["']/.exec(attrs);
+    const start = (m.index ?? 0) + m[0].length;
+    const end = i + 1 < matches.length ? (matches[i + 1].index ?? html.length) : html.length;
+    return {
+      id: idMatch ? idMatch[1] : '',
+      headingHtml: m[2].trim(),
+      bodyHtml: html.slice(start, end).trim(),
+    };
+  });
+}
+
 function stripHtml(html: string): string {
   return html.replace(/<[^>]+>/g, '').trim();
 }

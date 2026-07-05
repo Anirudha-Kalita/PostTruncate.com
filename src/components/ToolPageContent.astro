@@ -6,6 +6,9 @@
 //     → prose → FAQ accordion → cross-promo to the full home editor.
 //   • Classic (everything else, e.g. google-serp): heading → prose → CTA.
 import OnThisPage from './OnThisPage.astro';
+import TwitterHero from './TwitterHero.astro';
+import ToolCta from './ToolCta.astro';
+import ToolSectionCards from './ToolSectionCards.astro';
 import BlogCardGrid from './BlogCardGrid.astro';
 import Dashboard from './island/Dashboard.tsx';
 import type { ToolDefinition } from '../data/tools';
@@ -13,7 +16,7 @@ import type { IslandStrings } from '../i18n/types';
 import { DEFAULT_LOCALE } from '../i18n/config';
 import { getTranslations } from '../i18n';
 import { interp } from '../i18n/interp';
-import { buildCanonicalSlugs, prepareToolContent } from '../lib/headingAnchors';
+import { buildCanonicalSlugs, prepareToolContent, splitToolSections } from '../lib/headingAnchors';
 import { formatLocaleDate } from '../lib/contentDates';
 import { getBlogStrings, getPublishedPosts } from '../lib/blogI18n';
 
@@ -39,6 +42,14 @@ const globalT = getTranslations(lang);
 
 const canonicalSlugs = buildCanonicalSlugs(tool.content[DEFAULT_LOCALE] ?? '');
 const { html: bodyHtml, sections } = prepareToolContent(tStr(tool.content), canonicalSlugs);
+
+// Platform pages that have been migrated to the redesigned layout: full-width
+// editor + content, prose body reframed as hover-active icon cards, and the
+// centered CTA card. Rolled out one platform at a time (hero is handled
+// separately and stays on the default header until each hero is redesigned).
+const REDESIGNED_TOOL_IDS = new Set(['twitter', 'instagram', 'linkedin', 'facebook', 'threads', 'tiktok-guide']);
+const useCards = REDESIGNED_TOOL_IDS.has(tool.id);
+const cardSections = useCards ? splitToolSections(bodyHtml) : [];
 const lastUpdatedLine = interp(globalT.toolPage.lastUpdated, {
   date: formatLocaleDate(tool.lastUpdated, lang),
 });
@@ -81,19 +92,32 @@ const cta = globalT.toolPage.cta;
 
 // Related blog posts for this platform, newest first. Only this locale's posts,
 // so untranslated locales (no posts yet) render nothing. English-only today.
+// Match on the focus platform, not the raw tool id, so TikTok's `tiktok-guide`
+// id resolves to the `tiktok` posts (focus === tool.id for every other page;
+// classic non-platform tools fall back to the raw id).
+const relatedPlatformKey = focus ?? tool.id;
 const blogStrings = getBlogStrings(lang);
 const relatedPosts = (await getPublishedPosts())
-  .filter((p) => p.data.locale === lang && p.data.relatedPlatform === tool.id)
+  .filter((p) => p.data.locale === lang && p.data.relatedPlatform === relatedPlatformKey)
   .sort((a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf());
 ---
 
 {isStandalone ? (
-  <section class="tool-page container-page">
-    <header class="tool-page__prose tool-page__head">
-      <h1 class="tool-page__title">{tStr(tool.titles)}</h1>
-      {introText && <p class="tool-page__lede">{introText}</p>}
-      <OnThisPage label={globalT.toolPage.onThisPage} sections={sections} />
-    </header>
+  <section class:list={['tool-page container-page', { 'tool-page--wide': useCards }]}>
+    {tool.id === 'twitter' ? (
+      <TwitterHero
+        title={tStr(tool.titles)}
+        intro={introText}
+        sections={sections}
+        onThisPageLabel={globalT.toolPage.onThisPage}
+      />
+    ) : (
+      <header class="tool-page__prose tool-page__head">
+        <h1 class="tool-page__title">{tStr(tool.titles)}</h1>
+        {introText && <p class="tool-page__lede">{introText}</p>}
+        <OnThisPage label={globalT.toolPage.onThisPage} sections={sections} />
+      </header>
+    )}
 
     {/* Live tool — scoped to this platform, with workspace heading matching the homepage. */}
     <div class="tool-page__tool">
@@ -107,7 +131,11 @@ const relatedPosts = (await getPublishedPosts())
     </div>
 
     <article class="tool-page__prose">
-      <div class="tool-page__body" set:html={bodyHtml} />
+      {useCards ? (
+        <ToolSectionCards sections={cardSections} />
+      ) : (
+        <div class="tool-page__body" set:html={bodyHtml} />
+      )}
 
       {relatedPosts.length > 0 && (
         <section class="tool-page__related" aria-label={blogStrings.relatedHeading}>
@@ -134,11 +162,15 @@ const relatedPosts = (await getPublishedPosts())
       <p class="tool-page__updated">{lastUpdatedLine}</p>
 
       {/* CTA: give context then send users to the full home editor. */}
-      <aside class="tool-page__xpromo">
-        <h2 class="tool-page__cta-heading">{cta.heading}</h2>
-        <p class="tool-page__cta-blurb">{cta.blurb}</p>
-        <a href={homeHref} class="tool-page__btn tool-page__cta-btn">{cta.button}</a>
-      </aside>
+      {useCards ? (
+        <ToolCta heading={cta.heading} blurb={cta.blurb} button={cta.button} href={homeHref} />
+      ) : (
+        <aside class="tool-page__xpromo">
+          <h2 class="tool-page__cta-heading">{cta.heading}</h2>
+          <p class="tool-page__cta-blurb">{cta.blurb}</p>
+          <a href={homeHref} class="tool-page__btn tool-page__cta-btn">{cta.button}</a>
+        </aside>
+      )}
     </article>
   </section>
 ) : (
@@ -186,6 +218,15 @@ const relatedPosts = (await getPublishedPosts())
   .tool-page__prose {
     max-width: 48rem;
     margin-inline: auto;
+  }
+
+  /* Redesigned platform pages: editor island + content sections span the full
+     (container-page) width, so the whole page reads as one consistent column.
+     The hero header is deliberately excluded — it keeps its measure until its
+     own redesign, and on not-yet-redesigned heroes it is a .tool-page__prose. */
+  .tool-page--wide .tool-page__tool,
+  .tool-page--wide .tool-page__prose:not(.tool-page__head) {
+    max-width: none;
   }
 
   .tool-page__head {

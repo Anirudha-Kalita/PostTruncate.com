@@ -1,0 +1,196 @@
+---
+// Card layout for the prose body of redesigned standalone platform pages. Each
+// <h2>-delimited section from the tool content becomes an elevated, hover-active
+// card with a tinted icon tile on the left and the original heading + copy on
+// the right. Text is preserved verbatim (set:html) — this is purely a visual
+// reframe of the same content, so it stays translation-safe across all locales.
+import type { ToolSection } from '../lib/headingAnchors';
+
+interface Props {
+  sections: ToolSection[];
+}
+
+const { sections } = Astro.props;
+
+// Rotating icon set — kept generic-but-relevant and cycled by section index so
+// the layout works for any number of sections in any locale. Each entry pairs a
+// tint class with an inline SVG (24×24, currentColor stroke).
+const ICONS = [
+  {
+    tint: 'is-blue',
+    svg: '<path d="M6 9V4h12v5M6 15v5h12v-5M4 9h16v6H4z"/>',
+  },
+  {
+    tint: 'is-violet',
+    svg: '<path d="M10 13a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1.5 1.5M14 11a5 5 0 0 0-7 0l-3 3a5 5 0 0 0 7 7l1.5-1.5"/>',
+  },
+  {
+    tint: 'is-green',
+    svg: '<circle cx="12" cy="12" r="9"/><path d="M8 14s1.5 2 4 2 4-2 4-2M9 9h.01M15 9h.01"/>',
+  },
+  {
+    tint: 'is-amber',
+    svg: '<path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0zM12 9v4M12 17h.01"/>',
+  },
+  {
+    tint: 'is-sky',
+    svg: '<path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>',
+  },
+];
+---
+
+<div class="cards">
+  {sections.map((section, i) => {
+    const icon = ICONS[i % ICONS.length];
+    return (
+      <article class={`card ${icon.tint}`}>
+        <span class="card__icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" set:html={icon.svg} />
+        </span>
+        <div class="card__content">
+          <h2 class="card__title" id={section.id} set:html={section.headingHtml} />
+          <div class="card__body" set:html={section.bodyHtml} />
+        </div>
+      </article>
+    );
+  })}
+</div>
+
+<style>
+  .cards {
+    display: grid;
+    gap: 16px;
+  }
+
+  .card {
+    display: flex;
+    gap: 20px;
+    padding: 24px;
+    border-radius: var(--radius-xl);
+    background: var(--color-canvas);
+    box-shadow: var(--shadow-e2);
+    scroll-margin-top: 88px;
+    transition: box-shadow 0.2s ease, transform 0.2s ease, border-color 0.2s ease;
+  }
+
+  /* Hover-active: lift + deepen the elevation, and warm the icon tile. */
+  .card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-e4);
+  }
+
+  /* ── Icon tile ──────────────────────────────────────────────────────── */
+  .card__icon {
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border-radius: var(--radius-lg);
+    transition: transform 0.2s ease;
+  }
+
+  .card__icon svg {
+    width: 22px;
+    height: 22px;
+  }
+
+  .card:hover .card__icon {
+    transform: scale(1.06);
+  }
+
+  /* Tint pairs — soft fill + saturated glyph, all token-driven for dark mode. */
+  .is-blue .card__icon {
+    background: var(--color-link-bg-soft);
+    color: var(--color-link);
+  }
+  .is-violet .card__icon {
+    background: var(--color-violet-soft);
+    color: var(--color-violet-deep);
+  }
+  .is-green .card__icon {
+    background: var(--color-cyan-soft);
+    color: var(--color-cyan-deep);
+  }
+  .is-amber .card__icon {
+    background: var(--color-warning-soft);
+    color: var(--color-warning-deep);
+  }
+  .is-sky .card__icon {
+    background: var(--color-link-bg-soft);
+    color: var(--color-success);
+  }
+
+  /* ── Content column ─────────────────────────────────────────────────── */
+  .card__content {
+    min-width: 0;
+    flex: 1;
+  }
+
+  .card__title {
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 28px;
+    letter-spacing: -0.5px;
+    color: var(--color-ink);
+  }
+
+  .card__body :global(p) {
+    margin-top: 12px;
+    font-size: 15.5px;
+    line-height: 26px;
+    color: var(--color-body);
+  }
+
+  .card__body :global(p:first-child) {
+    margin-top: 10px;
+  }
+
+  .card__body :global(strong) {
+    font-weight: 600;
+    color: var(--color-ink);
+  }
+
+  .card__body :global(ul),
+  .card__body :global(ol) {
+    margin-top: 12px;
+    padding-left: 1.25rem;
+    font-size: 15.5px;
+    line-height: 26px;
+    color: var(--color-body);
+  }
+
+  .card__body :global(li) {
+    margin-top: 8px;
+  }
+
+  .card__body :global(li)::marker {
+    color: var(--color-hairline-strong);
+  }
+
+  .card__body :global(a) {
+    color: var(--color-link);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  @media (max-width: 640px) {
+    .card {
+      gap: 16px;
+      padding: 20px;
+    }
+    .card__icon {
+      width: 38px;
+      height: 38px;
+    }
+    .card__icon svg {
+      width: 20px;
+      height: 20px;
+    }
+    .card__title {
+      font-size: 18px;
+      line-height: 26px;
+    }
+  }
+</style>
