@@ -68,6 +68,8 @@ export interface ContentPage {
 
 /** The contact page: a lede, a message form, and an email/social fallback. */
 export interface ContactPage {
+  /** Small pill above the heading, e.g. "We're here to help". */
+  eyebrow: string;
   title: string;
   description: string;
   intro: string;

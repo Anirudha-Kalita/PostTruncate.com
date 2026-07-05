@@ -545,6 +545,7 @@ export const it: Translations = {
     },
 
     contact: {
+      eyebrow: 'Siamo qui per aiutarti',
       title: 'Contattaci',
       description:
         'Mettiti in contatto con il team di PostTruncate — inviaci un messaggio o scrivici direttamente con feedback, segnalazioni di bug o domande.',

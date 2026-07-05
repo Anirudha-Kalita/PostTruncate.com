@@ -1,8 +1,9 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import PlatformLimitsPromo from '../../components/PlatformLimitsPromo.astro';
 import { getTranslations } from '../../i18n';
 import { LOCALE_CODES, getLocale } from '../../i18n/config';
-import { getFaqsByCategory, getFaqItems } from '../../data/faq';
+import { getFaqsByCategory, getFaqItems, type FaqCategoryId } from '../../data/faq';
 
 // One static FAQ page per locale (/en/faq/, /da/faq/, …). This page is the
 // canonical FAQ surface: it renders every question from the shared registry
@@ -18,6 +19,35 @@ const locale = getLocale(lang);
 const home = `/${lang}/${locale.slug}/`;
 
 const groups = getFaqsByCategory(t);
+
+// Per-category colour + icon. The tint class sets --solid/--soft/--fg, so the
+// group heading icon (solid tile) and each item icon (soft chip) stay in sync.
+const CAT: Record<FaqCategoryId, { tint: string; icon: string }> = {
+  about: {
+    tint: 'tint-violet',
+    icon: '<circle cx="12" cy="12" r="9"/><path d="M12 11v5"/><path d="M12 8h.01"/>',
+  },
+  counting: {
+    tint: 'tint-green',
+    icon: '<rect x="6" y="3" width="12" height="18" rx="2"/><path d="M9 7h6"/><path d="M9 11h.01M12 11h.01M15 11h.01M9 14.5h.01M12 14.5h.01M15 14.5h.01M9 18h.01M12 18h.01M15 18h.01"/>',
+  },
+  cleanup: {
+    tint: 'tint-amber',
+    icon: '<path d="M12 3l1.6 4.4L18 9l-4.4 1.6L12 15l-1.6-4.4L6 9z"/><path d="M18.5 14l.7 1.8 1.8.7-1.8.7-.7 1.8-.7-1.8L16 16.5l1.8-.7z"/>',
+  },
+  insights: {
+    tint: 'tint-blue',
+    icon: '<path d="M3 21h18"/><path d="M7 21v-6M12 21V9M17 21v-9"/>',
+  },
+  privacy: {
+    tint: 'tint-pink',
+    icon: '<rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/>',
+  },
+  sms: {
+    tint: 'tint-violet',
+    icon: '<path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/><path d="M8 9h8M8 13h5"/>',
+  },
+};
 
 // FAQPage JSON-LD over the FULL question list (rendered via Layout's
 // faqSchema prop → FAQSchema.astro).
@@ -45,45 +75,55 @@ const breadcrumbJsonLd = {
   faqSchema={faqSchema}
   jsonLd={[breadcrumbJsonLd]}
 >
-  <section class="page container-page">
-    <article class="page__prose">
-      <nav class="page__crumbs" aria-label={t.faqPage.heading}>
-        <a href={home}>{t.breadcrumbs.home}</a>
-        <span aria-hidden="true">/</span>
+  <section class="faqx container-page">
+    <div class="faqx__inner">
+      <nav class="faqx__crumbs" aria-label={t.faqPage.heading}>
+        <a href={home}>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11l9-8 9 8"></path><path d="M5 10v10h14V10"></path></svg>
+          {t.breadcrumbs.home}
+        </a>
+        <span aria-hidden="true">›</span>
         <span aria-current="page">{t.faqPage.heading}</span>
       </nav>
 
-      <header class="page__head">
-        <p class="page__eyebrow">{t.faqPage.eyebrow}</p>
-        <h1 class="page__title">{t.faqPage.heading}</h1>
-        <p class="page__intro">{t.faqPage.lede}</p>
+      {/* ── Hero ──────────────────────────────────────────────────────── */}
+      <header class="faqx-hero">
+        <div class="faqx-hero__copy">
+          <h1 class="faqx-hero__title">{t.faqPage.heading}</h1>
+          <p class="faqx-hero__lede">{t.faqPage.lede}</p>
+        </div>
+
+        <div class="faqx-hero__art" aria-hidden="true">
+          <span class="faqx-hero__blob"></span>
+          <span class="faqx-hero__q"><span>?</span></span>
+          <span class="faqx-hero__dots"><b></b><b></b><b></b></span>
+          <span class="faqx-hero__sparks"><i></i><i></i><i></i></span>
+        </div>
       </header>
 
+      {/* ── Category groups ──────────────────────────────────────────── */}
       {
         groups.map((group) => (
-          <section class="faq-group">
-            <h2 class="faq-group__title">{t.faqPage.categories[group.category]}</h2>
-            <div class="faq-group__list">
+          <section class="faqx-group">
+            <div class={`faqx-group__head ${CAT[group.category].tint}`}>
+              <span class="faqx-group__icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" set:html={CAT[group.category].icon} />
+              </span>
+              <h2 class="faqx-group__title">{t.faqPage.categories[group.category]}</h2>
+            </div>
+            <div class={`faqx-group__card ${CAT[group.category].tint}`}>
               {group.items.map((f) => (
-                <details class="faq__item" id={f.id}>
-                  <summary class="faq__q">
-                    <span>{f.q}</span>
-                    <svg
-                      class="faq__chev"
-                      width="14"
-                      height="14"
-                      viewBox="0 0 10 10"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="1.5"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      aria-hidden="true"
-                    >
-                      <path d="M2.5 3.5 5 6.5 7.5 3.5" />
+                <details class="faqx-item" id={f.id}>
+                  <summary class="faqx-item__q">
+                    <span class="faqx-item__icon">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" set:html={CAT[group.category].icon} />
+                    </span>
+                    <span class="faqx-item__text">{f.q}</span>
+                    <svg class="faqx-item__chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                      <path d="m6 9 6 6 6-6" />
                     </svg>
                   </summary>
-                  <p class="faq__a">{f.a}</p>
+                  <p class="faqx-item__a">{f.a}</p>
                 </details>
               ))}
             </div>
@@ -91,161 +131,333 @@ const breadcrumbJsonLd = {
         ))
       }
 
-      <p class="page__related">
-        <a href={`/${lang}/platform-limits/`}>{t.island.hookStrip.viewAll} →</a>
-      </p>
+      {/* ── Platform-limits promo card ───────────────────────────────── */}
+      <div class="faqx-promo">
+        <PlatformLimitsPromo lang={lang} />
+      </div>
 
-      <p class="page__back">
-        <a href={`${home}#workspace`}>{t.pages.common.backHome}</a>
-      </p>
-    </article>
+      <a class="faqx-back" href={`${home}#workspace`}>← {t.pages.common.backHome}</a>
+    </div>
   </section>
 </Layout>
 
 <style>
-  /* Page scaffold — mirrors Prose.astro so standalone pages stay uniform. */
-  .page {
+  .faqx {
     scroll-margin-top: 80px;
-    padding-top: 64px;
-    padding-bottom: 24px;
+    padding-top: 40px;
+    padding-bottom: 96px;
   }
-  .page__prose {
-    max-width: 48rem;
+  .faqx__inner {
+    max-width: 64rem;
     margin-inline: auto;
   }
-  .page__crumbs {
+
+  /* ── Breadcrumb ──────────────────────────────────────────────────────── */
+  .faqx__crumbs {
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
     gap: 8px;
-    margin-bottom: 24px;
+    margin-bottom: 12px;
     font-size: 13px;
     color: var(--color-mute);
   }
-  .page__crumbs a {
+  .faqx__crumbs a {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
     color: var(--color-body);
     transition: color 0.15s ease;
   }
-  .page__crumbs a:hover {
+  .faqx__crumbs a:hover {
     color: var(--color-ink);
   }
-  .page__head {
-    margin-bottom: 8px;
+
+  /* ── Hero ────────────────────────────────────────────────────────────── */
+  .faqx-hero {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 24px;
+    align-items: center;
+    margin-bottom: 44px;
   }
-  .page__eyebrow {
-    font-family: var(--font-mono);
-    font-size: 12px;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-    color: var(--color-mute);
-  }
-  .page__title {
-    margin-top: 12px;
-    font-size: clamp(30px, 5vw, 40px);
-    font-weight: 600;
-    line-height: 1.08;
-    letter-spacing: -1.6px;
+  .faqx-hero__title {
+    font-size: clamp(32px, 5.4vw, 46px);
+    font-weight: 700;
+    line-height: 1.05;
+    letter-spacing: -1.8px;
     color: var(--color-ink);
+    text-wrap: balance;
   }
-  .page__intro {
+  .faqx-hero__lede {
     margin-top: 16px;
-    font-size: 18px;
-    line-height: 28px;
+    max-width: 34rem;
+    font-size: 17px;
+    line-height: 27px;
     color: var(--color-body);
   }
 
-  /* Category groups */
-  .faq-group {
-    margin-top: 40px;
+  /* Hero illustration — two glossy 3D chat bubbles ("?" + "…") with accents. */
+  .faqx-hero__art {
+    position: relative;
+    display: none;
+    aspect-ratio: 7 / 5;
+    max-width: 400px;
+    width: 100%;
+    margin-inline: auto;
   }
-  .faq-group__title {
+  .faqx-hero__blob {
+    position: absolute;
+    right: 0;
+    bottom: 2%;
+    width: 42%;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background: color-mix(in srgb, var(--color-violet) 10%, var(--color-canvas-soft));
+  }
+  /* Big "?" chat bubble (tail points down-left). */
+  .faqx-hero__q {
+    position: absolute;
+    right: 6%;
+    top: 5%;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 58%;
+    aspect-ratio: 1;
+    border-radius: 50% 50% 50% 14px;
+    background: linear-gradient(150deg, #f3eefc 0%, #ddd0f4 55%, #cdbaef 100%);
+    box-shadow:
+      0 22px 44px -14px rgba(121, 40, 202, 0.3),
+      inset 0 6px 12px rgba(255, 255, 255, 0.7),
+      inset 0 -16px 28px rgba(121, 40, 202, 0.16);
+  }
+  .faqx-hero__q > span {
+    font-size: clamp(48px, 11vw, 82px);
+    font-weight: 800;
+    line-height: 1;
+    background: linear-gradient(160deg, #9a6df0 0%, #6d28d9 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  /* "…" chat bubble (front-left, overlaps the "?" bubble). */
+  .faqx-hero__dots {
+    position: absolute;
+    left: 5%;
+    bottom: 5%;
+    z-index: 2;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 43%;
+    aspect-ratio: 1.12;
+    border-radius: 50% 50% 50% 12px;
+    background: linear-gradient(150deg, #f7f3fd 0%, #e5dbf8 60%, #d6c7f2 100%);
+    box-shadow:
+      0 16px 32px -12px rgba(121, 40, 202, 0.26),
+      inset 0 5px 10px rgba(255, 255, 255, 0.78),
+      inset 0 -12px 22px rgba(121, 40, 202, 0.13);
+  }
+  .faqx-hero__dots b {
+    width: 11px;
+    height: 11px;
+    border-radius: 50%;
+    background: linear-gradient(160deg, #9a6df0, #6d28d9);
+  }
+  /* Pink accent strokes (top-right of the "?" bubble). */
+  .faqx-hero__sparks {
+    position: absolute;
+    right: 0;
+    top: 2%;
+    z-index: 3;
+    width: 52px;
+    height: 52px;
+  }
+  .faqx-hero__sparks i {
+    position: absolute;
+    border-radius: var(--radius-pill);
+    background: var(--color-highlight-pink);
+  }
+  .faqx-hero__sparks i:nth-child(1) {
+    top: 28px;
+    right: 3px;
+    width: 24px;
+    height: 3.5px;
+    transform: rotate(26deg);
+  }
+  .faqx-hero__sparks i:nth-child(2) {
+    top: 13px;
+    right: 2px;
+    width: 19px;
+    height: 3.5px;
+    transform: rotate(-4deg);
+  }
+  .faqx-hero__sparks i:nth-child(3) {
+    top: -2px;
+    right: 12px;
+    width: 3.5px;
+    height: 19px;
+    transform: rotate(16deg);
+  }
+
+  /* ── Category tint tokens ────────────────────────────────────────────── */
+  .tint-violet {
+    --solid: var(--color-violet);
+    --soft: var(--color-violet-soft);
+    --fg: var(--color-violet-deep);
+  }
+  .tint-green {
+    --solid: #17b978;
+    --soft: var(--color-cyan-soft);
+    --fg: var(--color-cyan-deep);
+  }
+  .tint-amber {
+    --solid: var(--color-warning);
+    --soft: var(--color-warning-soft);
+    --fg: var(--color-warning-deep);
+  }
+  .tint-blue {
+    --solid: var(--color-link);
+    --soft: var(--color-link-bg-soft);
+    --fg: var(--color-link);
+  }
+  .tint-pink {
+    --solid: var(--color-highlight-pink);
+    --soft: color-mix(in srgb, var(--color-highlight-pink) 12%, transparent);
+    --fg: var(--color-highlight-magenta);
+  }
+
+  /* ── Category groups ─────────────────────────────────────────────────── */
+  .faqx-group {
+    margin-top: 44px;
+  }
+  .faqx-group__head {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 18px;
+  }
+  .faqx-group__icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: var(--solid);
+    color: #fff;
+  }
+  .faqx-group__icon svg {
+    width: 20px;
+    height: 20px;
+  }
+  .faqx-group__title {
     font-size: 22px;
     font-weight: 600;
-    line-height: 30px;
     letter-spacing: -0.6px;
     color: var(--color-ink);
   }
-  .faq-group__list {
-    margin-top: 16px;
-    display: grid;
-    gap: 12px;
-  }
-
-  /* Accordion rows — same visual language as the homepage FAQ section. */
-  .faq__item {
-    scroll-margin-top: 80px;
-    border-radius: var(--radius-lg);
+  .faqx-group__card {
+    border-radius: var(--radius-xl);
     background: var(--color-canvas);
-    box-shadow: var(--shadow-e1);
+    box-shadow: var(--shadow-e2);
     overflow: hidden;
   }
-  .faq__q {
+
+  /* ── Accordion rows ──────────────────────────────────────────────────── */
+  .faqx-item {
+    scroll-margin-top: 88px;
+  }
+  .faqx-item:not(:last-child) {
+    border-bottom: 1px solid var(--color-hairline);
+  }
+  .faqx-item__q {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    gap: 16px;
+    gap: 14px;
     cursor: pointer;
-    padding: 18px 20px;
-    font-size: 16px;
+    padding: 16px 20px;
+    font-size: 15.5px;
     font-weight: 500;
-    text-align: left;
     color: var(--color-ink);
     list-style: none;
-    transition: transform 100ms ease, background 0.15s ease;
+    transition: background 0.15s ease;
   }
-  .faq__q:active {
-    transform: scale(0.985);
-    background: var(--color-canvas-soft-2);
+  .faqx-item__q:hover {
+    background: var(--color-canvas-soft);
   }
-  .faq__q::-webkit-details-marker {
+  .faqx-item__q::-webkit-details-marker {
     display: none;
   }
-  .faq__chev {
+  .faqx-item__icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 34px;
+    height: 34px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    background: var(--soft);
+    color: var(--fg);
+  }
+  .faqx-item__icon svg {
+    width: 17px;
+    height: 17px;
+  }
+  .faqx-item__text {
+    flex: 1;
+    min-width: 0;
+    line-height: 22px;
+  }
+  .faqx-item__chev {
     flex-shrink: 0;
     color: var(--color-mute);
     transition: transform 0.2s ease;
   }
-  .faq__item[open] .faq__chev {
+  .faqx-item[open] .faqx-item__chev {
     transform: rotate(180deg);
   }
-  .faq__a {
-    padding: 0 20px 18px;
+  .faqx-item__a {
+    padding: 0 20px 18px 68px;
     font-size: 15px;
     line-height: 24px;
     color: var(--color-body);
   }
 
-  .page__related {
-    margin-top: 40px;
-  }
-  .page__related a {
-    font-size: 15px;
-    font-weight: 500;
-    color: var(--color-ink);
-    text-decoration: underline;
-    text-underline-offset: 3px;
-  }
-  .page__related a:hover {
-    opacity: 0.75;
+  /* ── Platform-limits promo card ──────────────────────────────────────── */
+  .faqx-promo {
+    margin-top: 48px;
   }
 
-  .page__back {
-    margin-top: 48px;
-    padding-top: 24px;
-    border-top: 1px solid var(--color-hairline);
-  }
-  .page__back a {
+  .faqx-back {
+    display: inline-block;
+    margin-top: 28px;
     font-size: 14px;
     font-weight: 500;
     color: var(--color-body);
     transition: color 0.15s ease;
   }
-  .page__back a:hover {
+  .faqx-back:hover {
     color: var(--color-ink);
   }
 
+  @media (min-width: 900px) {
+    .faqx-hero {
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 40px;
+    }
+    .faqx-hero__art {
+      display: block;
+    }
+  }
+
   @media (max-width: 768px) {
-    .page {
-      padding-top: 48px;
+    .faqx {
+      padding-top: 28px;
+      padding-bottom: 64px;
     }
   }
 </style>

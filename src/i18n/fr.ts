@@ -545,6 +545,7 @@ export const fr: Translations = {
     },
 
     contact: {
+      eyebrow: 'Nous sommes là pour vous aider',
       title: 'Nous contacter',
       description:
         'Entrez en contact avec l’équipe PostTruncate — envoyez-nous un message ou écrivez-nous directement par e-mail pour nous faire part de vos retours, signaler un bug ou poser une question.',

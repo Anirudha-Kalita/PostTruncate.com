@@ -545,6 +545,7 @@ export const zh: Translations = {
     },
 
     contact: {
+      eyebrow: '我们随时为您提供帮助',
       title: '联系我们',
       description:
         '与 PostTruncate 团队取得联系——给我们发消息，或直接发送电子邮件提交反馈、错误报告或疑问。',

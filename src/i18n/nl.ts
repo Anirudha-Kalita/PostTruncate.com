@@ -545,6 +545,7 @@ export const nl: Translations = {
     },
 
     contact: {
+      eyebrow: 'We helpen je graag',
       title: 'Neem contact op',
       description:
         'Neem contact op met het PostTruncate-team — stuur ons een bericht of mail ons rechtstreeks met feedback, bugmeldingen of vragen.',

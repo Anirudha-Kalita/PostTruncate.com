@@ -9,13 +9,23 @@
 
 interface Props {
   categories: { name: string; href: string }[];
+  /** Optional leading "All" pill (the blog index). Marked active here. */
+  allHref?: string;
+  allLabel?: string;
 }
 
-const { categories } = Astro.props;
+const { categories, allHref, allLabel } = Astro.props;
 ---
 
 <nav class="blog-cat-nav" aria-label="Blog categories">
   <ul class="blog-cat-nav__list">
+    {allHref && (
+      <li>
+        <a class="blog-cat-nav__pill blog-cat-nav__pill--active" href={allHref} aria-current="page">
+          {allLabel}
+        </a>
+      </li>
+    )}
     {categories.map(({ name, href }) => (
       <li>
         <a class="blog-cat-nav__pill" href={href}>{name}</a>
@@ -63,6 +73,13 @@ const { categories } = Astro.props;
     color: var(--color-ink);
     border-color: var(--color-ink);
     background: var(--color-canvas-soft);
+  }
+  /* Active pill (the "All" index tab) — filled brand violet. */
+  .blog-cat-nav__pill--active,
+  .blog-cat-nav__pill--active:hover {
+    color: #fff;
+    background: var(--color-violet);
+    border-color: var(--color-violet);
   }
   .blog-cat-nav__pill:active {
     transform: scale(0.93);

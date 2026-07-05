@@ -545,6 +545,7 @@ export const ja: Translations = {
     },
 
     contact: {
+      eyebrow: 'お手伝いします',
       title: 'お問い合わせ',
       description:
         'PostTruncateチームにご連絡ください。フィードバック、バグ報告、ご質問は、メッセージを送るか直接メールでお寄せください。',

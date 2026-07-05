@@ -545,6 +545,7 @@ export const da: Translations = {
     },
 
     contact: {
+      eyebrow: 'Vi er her for at hjælpe',
       title: 'Kontakt os',
       description:
         'Kom i kontakt med PostTruncate-teamet — send os en besked eller skriv direkte til os med feedback, fejlrapporter eller spørgsmål.',

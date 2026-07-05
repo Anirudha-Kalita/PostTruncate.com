@@ -1,0 +1,96 @@
+---
+// Soft-violet promo card linking to the platform-limits reference page. Shared
+// by the FAQ and Blog pages (and anywhere a "need the numbers?" nudge fits).
+// Title/subtitle come from the blog string map (English-first with fallback);
+// the button label reuses the fully-translated hookStrip.viewAll.
+import { getTranslations } from '../i18n';
+import { getBlogStrings } from '../lib/blogI18n';
+
+interface Props {
+  lang: string;
+}
+
+const { lang } = Astro.props;
+const t = getTranslations(lang);
+const b = getBlogStrings(lang);
+const href = `/${lang}/platform-limits/`;
+---
+
+<aside class="limits-promo">
+  <span class="limits-promo__icon" aria-hidden="true">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M8 6h9M8 12h9M8 18h6"></path>
+      <circle cx="4.5" cy="6" r="0.6" fill="currentColor" stroke="none"></circle>
+      <circle cx="4.5" cy="12" r="0.6" fill="currentColor" stroke="none"></circle>
+      <circle cx="4.5" cy="18" r="0.6" fill="currentColor" stroke="none"></circle>
+    </svg>
+  </span>
+  <div class="limits-promo__text">
+    <p class="limits-promo__title">{b.limitsPromoTitle}</p>
+    <p class="limits-promo__sub">{b.limitsPromoText}</p>
+  </div>
+  <a class="limits-promo__btn" href={href}>{t.island.hookStrip.viewAll} →</a>
+</aside>
+
+<style>
+  .limits-promo {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    flex-wrap: wrap;
+    padding: 22px 24px;
+    border-radius: var(--radius-xl);
+    background: color-mix(in srgb, var(--color-violet) 7%, var(--color-canvas-soft));
+    box-shadow: var(--shadow-e1);
+  }
+  .limits-promo__icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    flex-shrink: 0;
+    border-radius: var(--radius-lg);
+    background: var(--color-canvas);
+    box-shadow: var(--shadow-e2);
+    color: var(--color-violet-deep);
+  }
+  .limits-promo__icon svg {
+    width: 24px;
+    height: 24px;
+  }
+  .limits-promo__text {
+    flex: 1;
+    min-width: 200px;
+  }
+  .limits-promo__title {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--color-ink);
+  }
+  .limits-promo__sub {
+    margin-top: 4px;
+    font-size: 14px;
+    line-height: 20px;
+    color: var(--color-body);
+  }
+  .limits-promo__btn {
+    display: inline-flex;
+    align-items: center;
+    height: 44px;
+    padding: 0 20px;
+    border-radius: var(--radius-pill);
+    background: var(--color-violet);
+    color: #fff;
+    font-size: 14px;
+    font-weight: 600;
+    white-space: nowrap;
+    transition: opacity 0.15s ease, transform 100ms ease;
+  }
+  .limits-promo__btn:hover {
+    opacity: 0.92;
+  }
+  .limits-promo__btn:active {
+    transform: scale(0.97);
+  }
+</style>

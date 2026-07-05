@@ -40,6 +40,12 @@ export interface BlogStrings {
   latestHeading: string;
   /** Link text to the full blog index, e.g. "View all articles". */
   viewAll: string;
+  /** Blog index "All" category pill label. */
+  all: string;
+  /** Platform-limits promo card title. */
+  limitsPromoTitle: string;
+  /** Platform-limits promo card subtitle. */
+  limitsPromoText: string;
   /** Post-footer heading when same-platform matches exist, e.g. "Related posts". */
   relatedPostsHeading: string;
   /** Post-footer heading when filled with recent posts, e.g. "More articles". */
@@ -88,6 +94,10 @@ const BLOG_STRINGS: Record<string, BlogStrings> = {
     relatedHeading: 'From the blog',
     latestHeading: 'Latest from the blog',
     viewAll: 'View all articles',
+    all: 'All',
+    limitsPromoTitle: 'Need platform-specific limits?',
+    limitsPromoText:
+      'View the latest character limits and requirements for every platform we support.',
     relatedPostsHeading: 'Related posts',
     morePostsHeading: 'More articles',
     readingTime: '{min} min read',
