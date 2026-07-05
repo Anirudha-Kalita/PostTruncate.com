@@ -159,9 +159,9 @@ const THREADS_GLYPH =
     stroke: var(--color-violet-soft);
   }
 
-  /* Black Threads tile with the white glyph — the platform's real brand colors.
-     A faint gradient + inset highlight keep the glossy depth of the other tiles;
-     kept branded (fixed black/white) in both light and dark themes. */
+  /* Black Threads tile with the white glyph — the platform's real brand colors,
+     with 3D depth from gradient lighting, stacked shadows and inset highlights.
+     Kept branded (fixed black/white) in both light and dark themes. */
   .thero__logo {
     position: absolute;
     top: 50%;
@@ -174,12 +174,18 @@ const THREADS_GLYPH =
     aspect-ratio: 1;
     border-radius: 26%;
     background: linear-gradient(158deg, #2b2b2b 0%, #050505 62%);
-    box-shadow: var(--shadow-e5), inset 0 2px 4px rgba(255, 255, 255, 0.12);
+    box-shadow:
+      0 3px 4px rgba(0, 0, 0, 0.4),
+      0 12px 22px -6px rgba(0, 0, 0, 0.5),
+      0 32px 50px -14px rgba(0, 0, 0, 0.45),
+      inset 0 3px 6px rgba(255, 255, 255, 0.16),
+      inset 0 -8px 14px rgba(0, 0, 0, 0.6);
   }
 
   .thero__logo svg {
     width: 56%;
     height: 56%;
+    filter: drop-shadow(0 3px 4px rgba(0, 0, 0, 0.55));
   }
 
   /* Floating cards share a soft elevated surface that adapts to dark mode. */

@@ -54,7 +54,6 @@ const IN_GLYPH =
 
     <div class="lhero__logo">
       <svg viewBox="0 0 24 24" role="presentation">
-        <path fill="#0A66C2" d="M22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"></path>
         <path fill="#fff" d={IN_GLYPH}></path>
       </svg>
     </div>
@@ -150,24 +149,34 @@ const IN_GLYPH =
     stroke: var(--color-link-bg-soft);
   }
 
-  /* LinkedIn tile — the SVG supplies the brand blue; the wrapper rounds and
-     elevates it, so it stays branded in both themes. */
+  /* LinkedIn tile — the brand blue lives on the wrapper (gradient lighting) so
+     the white "in" glyph sits above it with 3D depth: stacked blue-tinted
+     shadows plus inset highlight/shade. Branded (fixed blue) in both themes. */
   .lhero__logo {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
     width: 44%;
     aspect-ratio: 1;
     border-radius: 26%;
-    overflow: hidden;
-    box-shadow: var(--shadow-e5);
+    background: linear-gradient(158deg, #3b8ae5 0%, #0a66c2 52%, #064a94 100%);
+    box-shadow:
+      0 3px 4px rgba(5, 58, 120, 0.35),
+      0 12px 22px -6px rgba(5, 58, 120, 0.5),
+      0 32px 50px -14px rgba(5, 58, 120, 0.5),
+      inset 0 3px 6px rgba(255, 255, 255, 0.4),
+      inset 0 -8px 14px rgba(4, 45, 110, 0.45);
   }
 
   .lhero__logo svg {
     display: block;
     width: 100%;
     height: 100%;
+    filter: drop-shadow(0 3px 4px rgba(4, 45, 110, 0.45));
   }
 
   /* Floating cards share a soft elevated surface that adapts to dark mode. */

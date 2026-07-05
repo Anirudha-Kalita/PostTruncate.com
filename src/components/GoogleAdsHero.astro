@@ -1,0 +1,357 @@
+---
+// Two-column marketing hero for the Google Ads preview page. Left: a blue
+// eyebrow badge, headline (with the phrase after the em-dash tinted blue) +
+// lede + on-this-page pills. Right: a Google SERP mockup — the multicolor
+// "Google" wordmark, a sponsored Responsive Search Ad block, and a floating
+// Google Ads logo rendered in its real brand colors.
+//
+// The accent is everything after the "—" so it stays language-agnostic across
+// all 10 locales. The illustration is decorative (aria-hidden).
+import OnThisPage from './OnThisPage.astro';
+import type { SectionAnchor } from '../lib/headingAnchors';
+
+interface Props {
+  title: string;
+  intro: string;
+  sections: SectionAnchor[];
+  onThisPageLabel: string;
+}
+
+const { title, intro, sections, onThisPageLabel } = Astro.props;
+
+const dashIndex = title.indexOf('—');
+const titleHead = dashIndex >= 0 ? title.slice(0, dashIndex + 1) : title;
+const titleTail = dashIndex >= 0 ? title.slice(dashIndex + 1).trim() : '';
+
+// "Google" wordmark, per-letter brand colors (blue, red, yellow, blue, green, red).
+const WORDMARK = [
+  ['G', '#4285F4'],
+  ['o', '#EA4335'],
+  ['o', '#FBBC04'],
+  ['g', '#4285F4'],
+  ['l', '#34A853'],
+  ['e', '#EA4335'],
+];
+---
+
+<header class="gahero">
+  <div class="gahero__copy">
+    <span class="gahero__eyebrow">
+      <svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true">
+        <path fill="currentColor" d="M12 11v2.8h4a3.9 3.9 0 0 1-4 2.9 4.7 4.7 0 0 1 0-9.4 4.4 4.4 0 0 1 3 1.2l2-2A7.3 7.3 0 1 0 12 20a6.7 6.7 0 0 0 6.9-7 7 7 0 0 0-.1-1.2z"></path>
+      </svg>
+      Google Ads tool
+    </span>
+
+    <h1 class="gahero__title">
+      <span>{titleHead}</span>
+      {titleTail && <><br /><span class="gahero__accent">{titleTail}</span></>}
+    </h1>
+    {intro && <p class="gahero__lede">{intro}</p>}
+    <OnThisPage label={onThisPageLabel} sections={sections} />
+  </div>
+
+  <div class="gahero__art" aria-hidden="true">
+    <span class="gahero__blob"></span>
+    <span class="gahero__dots"></span>
+
+    <div class="gahero__serp">
+      <div class="gahero__searchbar">
+        <span class="gahero__wordmark">
+          {WORDMARK.map(([ch, color]) => <b style={`color:${color}`}>{ch}</b>)}
+        </span>
+        <div class="gahero__input">
+          <svg viewBox="0 0 24 24" class="gahero__mic" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="9" y="3" width="6" height="11" rx="3"></rect><path d="M5 11a7 7 0 0 0 14 0M12 18v3"></path>
+          </svg>
+          <svg viewBox="0 0 24 24" class="gahero__search" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="7"></circle><path d="m21 21-4.3-4.3"></path>
+          </svg>
+        </div>
+      </div>
+
+      <div class="gahero__reslines">
+        <span></span>
+        <span></span>
+      </div>
+
+      <div class="gahero__ad">
+        <span class="gahero__sponsored">Sponsored</span>
+        <div class="gahero__adhead">
+          <span class="gahero__avatar">P</span>
+          <div class="gahero__advertiser">
+            <b>PostTruncate</b>
+            <small>posttruncate.com</small>
+          </div>
+        </div>
+        <span class="gahero__headline">Your headline</span>
+        <span class="gahero__desc">Add a short description</span>
+        <div class="gahero__adlines">
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+    </div>
+
+    <span class="gahero__adslogo">
+      <svg viewBox="0 0 24 24" role="presentation">
+        <rect x="10" y="3.5" width="4.2" height="17" rx="2.1" fill="#FBBC04" transform="rotate(22 12 4.5)"></rect>
+        <rect x="10" y="3.5" width="4.2" height="17" rx="2.1" fill="#4285F4" transform="rotate(-22 12 4.5)"></rect>
+        <circle cx="7" cy="18.5" r="2.7" fill="#4285F4"></circle>
+      </svg>
+    </span>
+  </div>
+</header>
+
+<style>
+  .gahero {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 40px;
+    align-items: center;
+    margin-bottom: 40px;
+  }
+
+  /* ── Left column: copy ──────────────────────────────────────────────── */
+  .gahero__eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 18px;
+    padding: 6px 12px;
+    border-radius: var(--radius-pill);
+    background: var(--color-link-bg-soft);
+    color: var(--color-link-deep);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .gahero__title {
+    font-size: clamp(30px, 5vw, 46px);
+    font-weight: 600;
+    line-height: 1.1;
+    letter-spacing: -1.8px;
+    color: var(--color-ink);
+    text-wrap: balance;
+  }
+
+  .gahero__accent {
+    color: var(--color-link);
+  }
+
+  .gahero__lede {
+    margin-top: 18px;
+    max-width: 34rem;
+    font-size: 18px;
+    line-height: 28px;
+    color: var(--color-body);
+  }
+
+  .gahero__copy :global(.on-page) {
+    margin-top: 24px;
+  }
+
+  /* ── Right column: Google SERP mockup ───────────────────────────────── */
+  .gahero__art {
+    position: relative;
+    display: none;
+    aspect-ratio: 1 / 1;
+    max-width: 460px;
+    margin-inline: auto;
+    width: 100%;
+  }
+
+  .gahero__blob {
+    position: absolute;
+    left: 0;
+    top: 20%;
+    width: 26%;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background: radial-gradient(circle, color-mix(in srgb, var(--color-link-bg-soft) 85%, transparent), transparent 70%);
+  }
+  .gahero__dots {
+    position: absolute;
+    left: 6%;
+    bottom: 8%;
+    width: 84px;
+    height: 70px;
+    background-image: radial-gradient(currentColor 1.3px, transparent 1.3px);
+    background-size: 11px 11px;
+    color: color-mix(in srgb, var(--color-link) 26%, transparent);
+  }
+
+  .gahero__serp {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 74%;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 18px 16px;
+    border-radius: 18px;
+    background: var(--color-canvas);
+    box-shadow: var(--shadow-e5);
+  }
+
+  .gahero__searchbar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .gahero__wordmark {
+    font-size: 18px;
+    font-weight: 600;
+    letter-spacing: -0.5px;
+    line-height: 1;
+  }
+  .gahero__wordmark b {
+    font-weight: 600;
+  }
+  .gahero__input {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 8px;
+    height: 26px;
+    padding: 0 10px;
+    border: 1px solid var(--color-hairline);
+    border-radius: var(--radius-pill);
+  }
+  .gahero__mic {
+    color: #4285f4;
+  }
+  .gahero__search {
+    color: #4285f4;
+  }
+
+  .gahero__reslines {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .gahero__reslines span {
+    height: 6px;
+    border-radius: var(--radius-pill);
+    background: var(--color-canvas-soft-2);
+  }
+  .gahero__reslines span:first-child {
+    width: 78%;
+  }
+  .gahero__reslines span:last-child {
+    width: 52%;
+  }
+
+  .gahero__ad {
+    display: flex;
+    flex-direction: column;
+    margin-top: 2px;
+    padding: 14px;
+    border: 1px solid var(--color-hairline);
+    border-radius: 12px;
+  }
+  .gahero__sponsored {
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--color-ink);
+  }
+  .gahero__adhead {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 8px;
+  }
+  .gahero__avatar {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: var(--color-canvas-soft-2);
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--color-ink);
+  }
+  .gahero__advertiser {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.2;
+  }
+  .gahero__advertiser b {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--color-ink);
+  }
+  .gahero__advertiser small {
+    font-size: 10px;
+    color: var(--color-mute);
+  }
+  .gahero__headline {
+    margin-top: 10px;
+    font-size: 15px;
+    font-weight: 500;
+    letter-spacing: -0.2px;
+    color: #1a0dab;
+  }
+  .gahero__desc {
+    margin-top: 4px;
+    font-size: 11px;
+    color: var(--color-body);
+  }
+  .gahero__adlines {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    margin-top: 8px;
+  }
+  .gahero__adlines span {
+    height: 5px;
+    border-radius: var(--radius-pill);
+    background: var(--color-canvas-soft-2);
+  }
+  .gahero__adlines span:first-child {
+    width: 92%;
+  }
+  .gahero__adlines span:last-child {
+    width: 70%;
+  }
+
+  /* Floating Google Ads logo — real brand colors on a white tile */
+  .gahero__adslogo {
+    position: absolute;
+    right: 2%;
+    top: 46%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 58px;
+    height: 58px;
+    border-radius: var(--radius-lg);
+    background: var(--color-canvas);
+    box-shadow: var(--shadow-e5);
+  }
+  .gahero__adslogo svg {
+    width: 30px;
+    height: 30px;
+  }
+
+  /* ── Responsive: two columns + illustration only on wider viewports ──── */
+  @media (min-width: 900px) {
+    .gahero {
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 48px;
+      margin-bottom: 48px;
+    }
+
+    .gahero__art {
+      display: block;
+    }
+  }
+</style>

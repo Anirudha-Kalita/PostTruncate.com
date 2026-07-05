@@ -50,16 +50,6 @@ const titleTail = dashIndex >= 0 ? title.slice(dashIndex + 1).trim() : '';
 
     <div class="ihero__logo">
       <svg viewBox="0 0 24 24" role="presentation">
-        <defs>
-          <radialGradient id="ig-hero-bg" cx="30%" cy="107%" r="150%">
-            <stop offset="0%" stop-color="#FFDD55"></stop>
-            <stop offset="10%" stop-color="#FFAD55"></stop>
-            <stop offset="50%" stop-color="#FF543E"></stop>
-            <stop offset="70%" stop-color="#C837AB"></stop>
-            <stop offset="100%" stop-color="#3F5BD9"></stop>
-          </radialGradient>
-        </defs>
-        <rect width="24" height="24" rx="6" fill="url(#ig-hero-bg)"></rect>
         <rect x="4.5" y="4.5" width="15" height="15" rx="4.5" fill="none" stroke="#fff" stroke-width="1.5"></rect>
         <circle cx="12" cy="12" r="3.75" fill="none" stroke="#fff" stroke-width="1.5"></circle>
         <circle cx="17" cy="7" r="1.1" fill="#fff"></circle>
@@ -168,24 +158,41 @@ const titleTail = dashIndex >= 0 ? title.slice(dashIndex + 1).trim() : '';
     );
   }
 
-  /* Gradient Instagram tile — the SVG supplies the brand gradient; the wrapper
-     just rounds and elevates it, so it stays branded in both themes. */
+  /* Gradient Instagram tile — the brand radial gradient lives on the wrapper so
+     the white camera glyph can sit above it with 3D depth: stacked brand-tinted
+     shadows plus inset highlight/shade. Branded (fixed gradient) in both themes. */
   .ihero__logo {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
     width: 44%;
     aspect-ratio: 1;
     border-radius: 26%;
-    overflow: hidden;
-    box-shadow: var(--shadow-e5);
+    background: radial-gradient(
+      circle at 30% 107%,
+      #ffdd55 0%,
+      #ffad55 10%,
+      #ff543e 50%,
+      #c837ab 70%,
+      #3f5bd9 100%
+    );
+    box-shadow:
+      0 3px 4px rgba(120, 30, 110, 0.3),
+      0 12px 22px -6px rgba(200, 55, 171, 0.45),
+      0 32px 50px -14px rgba(120, 30, 110, 0.4),
+      inset 0 3px 6px rgba(255, 255, 255, 0.45),
+      inset 0 -8px 16px rgba(90, 20, 80, 0.4);
   }
 
   .ihero__logo svg {
     display: block;
     width: 100%;
     height: 100%;
+    filter: drop-shadow(0 2px 4px rgba(90, 20, 80, 0.45));
   }
 
   /* Floating cards share a soft elevated surface that adapts to dark mode. */

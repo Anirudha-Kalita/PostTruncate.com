@@ -148,7 +148,7 @@ const faqBlogAccent = FAQ_BLOG_ACCENT[tool.id] ?? {
 ---
 
 {isStandalone ? (
-  <section class:list={['tool-page container-page', { 'tool-page--wide': useCards }]}>
+  <section class:list={['tool-page container-page', { 'tool-page--wide': useCards, 'tool-page--cta-tight': useCards }]}>
     {tool.id === 'twitter' ? (
       <TwitterHero
         title={tStr(tool.titles)}
@@ -312,6 +312,14 @@ const faqBlogAccent = FAQ_BLOG_ACCENT[tool.id] ?? {
     scroll-margin-top: 80px;
     padding-top: 64px;
     padding-bottom: 64px;
+  }
+
+  /* Pages that close on the ToolCta card sit tight to the footer: trim the
+     section's bottom padding and cancel the footer's 96px top margin (they are
+     adjacent siblings under <body>, so the negative margin collapses with it). */
+  .tool-page.tool-page--cta-tight {
+    padding-bottom: 24px;
+    margin-bottom: -96px;
   }
 
   .tool-page__prose {

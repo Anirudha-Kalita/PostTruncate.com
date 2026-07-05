@@ -140,7 +140,8 @@ const titleParts = title.split('280');
     );
   }
 
-  /* Black brand tile with the white X mark — kept branded in both themes. */
+  /* Black brand tile with the white X mark — 3D depth via gradient lighting,
+     stacked shadows and inset highlights. Kept branded in both themes. */
   .thero__logo {
     position: absolute;
     top: 50%;
@@ -152,14 +153,19 @@ const titleParts = title.split('280');
     width: 46%;
     aspect-ratio: 1;
     border-radius: var(--radius-xl);
-    background: #050505;
-    box-shadow: var(--shadow-e5),
-      inset 0 1px 0 rgba(255, 255, 255, 0.12);
+    background: linear-gradient(158deg, #2c2c2c 0%, #050505 62%);
+    box-shadow:
+      0 3px 4px rgba(0, 0, 0, 0.4),
+      0 12px 22px -6px rgba(0, 0, 0, 0.5),
+      0 32px 50px -14px rgba(0, 0, 0, 0.45),
+      inset 0 3px 6px rgba(255, 255, 255, 0.16),
+      inset 0 -8px 14px rgba(0, 0, 0, 0.6);
   }
 
   .thero__logo svg {
     width: 52%;
     height: 52%;
+    filter: drop-shadow(0 3px 4px rgba(0, 0, 0, 0.55));
   }
 
   /* Floating cards share a soft elevated surface that adapts to dark mode. */

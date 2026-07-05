@@ -1,0 +1,381 @@
+---
+// Two-column marketing hero for the Instagram Ads preview page. Left: a violet
+// eyebrow badge, headline (with the phrase after the em-dash tinted violet) +
+// lede + on-this-page pills. Right: a phone mockup of an Instagram feed ad with
+// floating "eye" (fold) and "safe-zone" badges over dashed-grid decoration.
+//
+// Like the other multi-word heroes, the accent is everything after the "—" so
+// it stays language-agnostic across all 10 locales. The illustration is
+// decorative (aria-hidden).
+import OnThisPage from './OnThisPage.astro';
+import type { SectionAnchor } from '../lib/headingAnchors';
+
+interface Props {
+  title: string;
+  intro: string;
+  sections: SectionAnchor[];
+  onThisPageLabel: string;
+}
+
+const { title, intro, sections, onThisPageLabel } = Astro.props;
+
+const dashIndex = title.indexOf('—');
+const titleHead = dashIndex >= 0 ? title.slice(0, dashIndex + 1) : title;
+const titleTail = dashIndex >= 0 ? title.slice(dashIndex + 1).trim() : '';
+---
+
+<header class="iahero">
+  <div class="iahero__copy">
+    <span class="iahero__eyebrow">
+      <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+        <rect x="3" y="3" width="18" height="18" rx="5"></rect>
+        <circle cx="12" cy="12" r="4"></circle>
+        <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"></circle>
+      </svg>
+      Instagram tool
+    </span>
+
+    <h1 class="iahero__title">
+      <span>{titleHead}</span>
+      {titleTail && <> <span class="iahero__accent">{titleTail}</span></>}
+    </h1>
+    {intro && <p class="iahero__lede">{intro}</p>}
+    <OnThisPage label={onThisPageLabel} sections={sections} />
+  </div>
+
+  <div class="iahero__art" aria-hidden="true">
+    <span class="iahero__blob iahero__blob--violet"></span>
+    <span class="iahero__blob iahero__blob--blue"></span>
+    <svg class="iahero__grid" viewBox="0 0 200 200" fill="none" preserveAspectRatio="xMidYMid meet">
+      <path d="M10 40h70v120M40 10v90h150M120 190V70h60" stroke="var(--color-violet-soft)" stroke-width="1" stroke-dasharray="4 5" />
+    </svg>
+
+    <div class="iahero__phone">
+      <span class="iahero__notch"></span>
+      <div class="iahero__post">
+        <div class="iahero__post-head">
+          <span class="iahero__avatar"></span>
+          <div class="iahero__lines">
+            <span></span>
+            <span></span>
+          </div>
+        </div>
+
+        <div class="iahero__media">
+          <svg viewBox="0 0 24 24" class="iahero__ig" role="presentation">
+            <defs>
+              <radialGradient id="ia-ig-bg" cx="30%" cy="107%" r="150%">
+                <stop offset="0%" stop-color="#FFDD55"></stop>
+                <stop offset="10%" stop-color="#FFAD55"></stop>
+                <stop offset="50%" stop-color="#FF543E"></stop>
+                <stop offset="70%" stop-color="#C837AB"></stop>
+                <stop offset="100%" stop-color="#3F5BD9"></stop>
+              </radialGradient>
+            </defs>
+            <rect width="24" height="24" rx="6" fill="url(#ia-ig-bg)"></rect>
+            <rect x="4.5" y="4.5" width="15" height="15" rx="4.5" fill="none" stroke="#fff" stroke-width="1.5"></rect>
+            <circle cx="12" cy="12" r="3.75" fill="none" stroke="#fff" stroke-width="1.5"></circle>
+            <circle cx="17" cy="7" r="1.1" fill="#fff"></circle>
+          </svg>
+        </div>
+
+        <div class="iahero__actions">
+          <svg viewBox="0 0 24 24" class="iahero__heart" width="20" height="20"><path d="M12 21s-8-4.5-8-10a4 4 0 0 1 8-1 4 4 0 0 1 8 1c0 5.5-8 10-8 10z"></path></svg>
+          <svg viewBox="0 0 24 24" class="iahero__act" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 11.5a8.5 8.5 0 0 1-12.2 7.7L3 21l1.8-5.8A8.5 8.5 0 1 1 21 11.5z"></path></svg>
+          <svg viewBox="0 0 24 24" class="iahero__act" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M22 2 11 13M22 2l-7 20-4-9-9-4 20-7z"></path></svg>
+          <svg viewBox="0 0 24 24" class="iahero__act iahero__act--end" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path></svg>
+        </div>
+
+        <span class="iahero__sponsored">Sponsored</span>
+        <div class="iahero__caption">
+          <span></span>
+          <span></span>
+        </div>
+        <div class="iahero__dots">
+          <i></i><i></i><i></i><i></i><i></i>
+        </div>
+      </div>
+    </div>
+
+    <span class="iahero__badge iahero__badge--eye">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"></path><circle cx="12" cy="12" r="3"></circle>
+      </svg>
+    </span>
+    <span class="iahero__badge iahero__badge--scan">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M4 8V5a1 1 0 0 1 1-1h3M16 4h3a1 1 0 0 1 1 1v3M20 16v3a1 1 0 0 1-1 1h-3M8 20H5a1 1 0 0 1-1-1v-3"></path>
+      </svg>
+    </span>
+  </div>
+</header>
+
+<style>
+  .iahero {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 40px;
+    align-items: center;
+    margin-bottom: 40px;
+  }
+
+  /* ── Left column: copy ──────────────────────────────────────────────── */
+  /* Eyebrow + accent mirror the Instagram platform hero: pink pill, IG-gradient
+     accent text (violet → magenta → amber). */
+  .iahero__eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 18px;
+    padding: 6px 12px;
+    border-radius: var(--radius-pill);
+    background: color-mix(in srgb, var(--color-highlight-pink) 12%, transparent);
+    color: var(--color-highlight-magenta);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .iahero__title {
+    font-size: clamp(30px, 5vw, 46px);
+    font-weight: 600;
+    line-height: 1.1;
+    letter-spacing: -1.8px;
+    color: var(--color-ink);
+    text-wrap: balance;
+  }
+
+  .iahero__accent {
+    background: linear-gradient(
+      96deg,
+      var(--color-violet) 2%,
+      var(--color-highlight-pink) 48%,
+      var(--color-warning) 98%
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .iahero__lede {
+    margin-top: 18px;
+    max-width: 34rem;
+    font-size: 18px;
+    line-height: 28px;
+    color: var(--color-body);
+  }
+
+  .iahero__copy :global(.on-page) {
+    margin-top: 24px;
+  }
+
+  /* ── Right column: phone-mockup illustration ────────────────────────── */
+  .iahero__art {
+    position: relative;
+    display: none;
+    aspect-ratio: 1 / 1;
+    max-width: 440px;
+    margin-inline: auto;
+    width: 100%;
+  }
+
+  .iahero__blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(2px);
+  }
+  .iahero__blob--violet {
+    left: 4%;
+    top: 26%;
+    width: 30%;
+    aspect-ratio: 1;
+    background: radial-gradient(circle, color-mix(in srgb, var(--color-violet-soft) 70%, transparent), transparent 70%);
+  }
+  .iahero__blob--blue {
+    right: 2%;
+    bottom: 8%;
+    width: 34%;
+    aspect-ratio: 1;
+    background: radial-gradient(circle, color-mix(in srgb, var(--color-highlight-pink) 20%, transparent), transparent 70%);
+  }
+
+  .iahero__grid {
+    position: absolute;
+    inset: 6%;
+    width: 88%;
+    height: 88%;
+    margin: auto;
+    opacity: 0.9;
+  }
+
+  /* Phone frame */
+  .iahero__phone {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 55%;
+    aspect-ratio: 9 / 18;
+    padding: 12px 11px;
+    border-radius: 30px;
+    background: var(--color-canvas);
+    box-shadow: var(--shadow-e5);
+  }
+
+  .iahero__notch {
+    position: absolute;
+    top: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 34%;
+    height: 5px;
+    border-radius: var(--radius-pill);
+    background: var(--color-canvas-soft-2);
+  }
+
+  .iahero__post {
+    margin-top: 14px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .iahero__post-head {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    margin-bottom: 8px;
+  }
+  .iahero__avatar {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--color-violet-soft), color-mix(in srgb, var(--color-highlight-pink) 30%, transparent));
+    flex-shrink: 0;
+  }
+  .iahero__lines {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    flex: 1;
+  }
+  .iahero__lines span {
+    height: 5px;
+    border-radius: var(--radius-pill);
+    background: var(--color-canvas-soft-2);
+  }
+  .iahero__lines span:first-child {
+    width: 55%;
+  }
+  .iahero__lines span:last-child {
+    width: 35%;
+  }
+
+  .iahero__media {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    aspect-ratio: 1;
+    border-radius: 10px;
+    background: var(--color-canvas-soft-2);
+  }
+  .iahero__ig {
+    width: 40%;
+    height: 40%;
+    filter: drop-shadow(0 3px 6px rgba(120, 20, 90, 0.28));
+  }
+
+  .iahero__actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 10px;
+    color: var(--color-ink);
+  }
+  .iahero__heart {
+    fill: #ff2d55;
+  }
+  .iahero__act--end {
+    margin-left: auto;
+  }
+
+  .iahero__sponsored {
+    margin-top: 8px;
+    font-size: 9px;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    color: var(--color-mute);
+  }
+
+  .iahero__caption {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    margin-top: 8px;
+  }
+  .iahero__caption span {
+    height: 5px;
+    border-radius: var(--radius-pill);
+    background: var(--color-canvas-soft-2);
+  }
+  .iahero__caption span:first-child {
+    width: 90%;
+  }
+  .iahero__caption span:last-child {
+    width: 65%;
+  }
+
+  .iahero__dots {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 14px;
+  }
+  .iahero__dots i {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--color-canvas-soft-2);
+  }
+
+  /* Floating badges */
+  .iahero__badge {
+    position: absolute;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 52px;
+    height: 52px;
+    border-radius: var(--radius-lg);
+    background: var(--color-canvas);
+    box-shadow: var(--shadow-e5);
+  }
+  .iahero__badge svg {
+    width: 24px;
+    height: 24px;
+  }
+  .iahero__badge--eye {
+    left: 0;
+    top: 46%;
+    color: var(--color-violet-deep);
+  }
+  .iahero__badge--scan {
+    right: 4%;
+    top: 12%;
+    color: var(--color-highlight-magenta);
+  }
+
+  /* ── Responsive: two columns + illustration only on wider viewports ──── */
+  @media (min-width: 900px) {
+    .iahero {
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 48px;
+      margin-bottom: 48px;
+    }
+
+    .iahero__art {
+      display: block;
+    }
+  }
+</style>

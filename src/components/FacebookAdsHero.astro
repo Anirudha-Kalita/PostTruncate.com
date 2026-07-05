@@ -1,0 +1,289 @@
+---
+// Two-column marketing hero for the Facebook Ads preview page. Left: a blue
+// eyebrow badge, headline (with the phrase after the em-dash tinted Facebook
+// blue) + lede + on-this-page pills. Right: a Facebook feed-ad card mockup —
+// the FB logo, skeleton copy, reactions and a blue CTA bar — over dotted-grid
+// decoration and soft blue blobs.
+//
+// Color scheme mirrors the Facebook platform page (blue base). The accent is
+// everything after the "—" so it stays language-agnostic across all 10 locales.
+// The illustration is decorative (aria-hidden).
+import OnThisPage from './OnThisPage.astro';
+import type { SectionAnchor } from '../lib/headingAnchors';
+
+interface Props {
+  title: string;
+  intro: string;
+  sections: SectionAnchor[];
+  onThisPageLabel: string;
+}
+
+const { title, intro, sections, onThisPageLabel } = Astro.props;
+
+const dashIndex = title.indexOf('—');
+const titleHead = dashIndex >= 0 ? title.slice(0, dashIndex + 1) : title;
+const titleTail = dashIndex >= 0 ? title.slice(dashIndex + 1).trim() : '';
+---
+
+<header class="fahero">
+  <div class="fahero__copy">
+    <span class="fahero__eyebrow">
+      <svg viewBox="0 0 24 24" width="13" height="13" fill="currentColor" aria-hidden="true">
+        <path d="M15 8.5h-2.2c-.3 0-.5.2-.5.7V11h2.8l-.4 2.8h-2.4V21h-3v-7.2H7.5V11H9.3V9c0-2.1 1.3-3.5 3.5-3.5H15V8.5z"></path>
+      </svg>
+      Facebook tools
+    </span>
+
+    <h1 class="fahero__title">
+      <span>{titleHead}</span>
+      {titleTail && <><br /><span class="fahero__accent">{titleTail}</span></>}
+    </h1>
+    {intro && <p class="fahero__lede">{intro}</p>}
+    <OnThisPage label={onThisPageLabel} sections={sections} />
+  </div>
+
+  <div class="fahero__art" aria-hidden="true">
+    <span class="fahero__blob fahero__blob--solid"></span>
+    <span class="fahero__blob fahero__blob--soft"></span>
+    <span class="fahero__dots fahero__dots--tl"></span>
+    <span class="fahero__dots fahero__dots--br"></span>
+
+    <div class="fahero__card">
+      <span class="fahero__titlebar"></span>
+
+      <div class="fahero__media">
+        <svg viewBox="0 0 24 24" class="fahero__fb" role="presentation">
+          <circle cx="12" cy="12" r="12" fill="#1877F2"></circle>
+          <path fill="#fff" d="M15 8.5h-2.2c-.3 0-.5.2-.5.7V11h2.8l-.4 2.8h-2.4V21h-3v-7.2H7.5V11H9.3V9c0-2.1 1.3-3.5 3.5-3.5H15V8.5z"></path>
+        </svg>
+      </div>
+
+      <div class="fahero__lines">
+        <span></span>
+        <span></span>
+      </div>
+
+      <div class="fahero__reacts">
+        <span class="fahero__react fahero__react--like">
+          <svg viewBox="0 0 24 24" fill="#fff"><path d="M7 22V11H3a1 1 0 0 0-1 1v9a1 1 0 0 0 1 1zM9 11l3.2-6.4A1.6 1.6 0 0 1 14 5.4V10h5a2 2 0 0 1 2 2.3l-1.3 7A2 2 0 0 1 17.7 21H9z"></path></svg>
+        </span>
+        <span class="fahero__react fahero__react--love">
+          <svg viewBox="0 0 24 24" fill="#fff"><path d="M12 21s-8-4.5-8-10a4 4 0 0 1 8-1 4 4 0 0 1 8 1c0 5.5-8 10-8 10z"></path></svg>
+        </span>
+        <span class="fahero__react fahero__react--haha">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M7.3 10.3c.7-.9 1.9-.9 2.6 0"></path>
+            <path d="M14.1 10.3c.7-.9 1.9-.9 2.6 0"></path>
+            <path d="M6.8 13.4c1.2 2.4 3.1 3.4 5.2 3.4s4-1 5.2-3.4z" fill="#fff" stroke="none"></path>
+          </svg>
+        </span>
+      </div>
+
+      <span class="fahero__cta"></span>
+    </div>
+  </div>
+</header>
+
+<style>
+  .fahero {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 40px;
+    align-items: center;
+    margin-bottom: 40px;
+  }
+
+  /* ── Left column: copy (blue base, matching the Facebook platform page) ── */
+  .fahero__eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 18px;
+    padding: 6px 12px;
+    border-radius: var(--radius-pill);
+    background: var(--color-link-bg-soft);
+    color: var(--color-link-deep);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .fahero__title {
+    font-size: clamp(30px, 5vw, 46px);
+    font-weight: 600;
+    line-height: 1.1;
+    letter-spacing: -1.8px;
+    color: var(--color-ink);
+    text-wrap: balance;
+  }
+
+  .fahero__accent {
+    color: var(--color-link);
+  }
+
+  .fahero__lede {
+    margin-top: 18px;
+    max-width: 34rem;
+    font-size: 18px;
+    line-height: 28px;
+    color: var(--color-body);
+  }
+
+  .fahero__copy :global(.on-page) {
+    margin-top: 24px;
+  }
+
+  /* ── Right column: Facebook card mockup ─────────────────────────────── */
+  .fahero__art {
+    position: relative;
+    display: none;
+    aspect-ratio: 1 / 1;
+    max-width: 440px;
+    margin-inline: auto;
+    width: 100%;
+  }
+
+  .fahero__blob {
+    position: absolute;
+    border-radius: 50%;
+  }
+  .fahero__blob--solid {
+    right: 2%;
+    top: 12%;
+    width: 22%;
+    aspect-ratio: 1;
+    background: var(--color-link);
+    opacity: 0.9;
+  }
+  .fahero__blob--soft {
+    left: 2%;
+    top: 40%;
+    width: 28%;
+    aspect-ratio: 1;
+    background: radial-gradient(circle, color-mix(in srgb, var(--color-link-bg-soft) 85%, transparent), transparent 70%);
+  }
+
+  .fahero__dots {
+    position: absolute;
+    background-image: radial-gradient(currentColor 1.3px, transparent 1.3px);
+    background-size: 11px 11px;
+    color: color-mix(in srgb, var(--color-link) 28%, transparent);
+  }
+  .fahero__dots--tl {
+    left: 8%;
+    top: 14%;
+    width: 74px;
+    height: 60px;
+  }
+  .fahero__dots--br {
+    right: 6%;
+    bottom: 12%;
+    width: 90px;
+    height: 74px;
+  }
+
+  /* Feed card */
+  .fahero__card {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    gap: 11px;
+    padding: 16px;
+    border-radius: 18px;
+    background: var(--color-canvas);
+    box-shadow: var(--shadow-e5);
+  }
+
+  .fahero__titlebar {
+    width: 62%;
+    height: 9px;
+    border-radius: var(--radius-pill);
+    background: var(--color-canvas-soft-2);
+  }
+
+  .fahero__media {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    aspect-ratio: 16 / 11;
+    border-radius: 10px;
+    background: var(--color-canvas-soft-2);
+  }
+  .fahero__fb {
+    width: 42%;
+    height: 42%;
+    filter: drop-shadow(0 3px 6px rgba(11, 74, 173, 0.3));
+  }
+
+  .fahero__lines {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .fahero__lines span {
+    height: 7px;
+    border-radius: var(--radius-pill);
+    background: var(--color-canvas-soft-2);
+  }
+  .fahero__lines span:first-child {
+    width: 85%;
+  }
+  .fahero__lines span:last-child {
+    width: 60%;
+  }
+
+  .fahero__reacts {
+    display: flex;
+    align-items: center;
+  }
+  .fahero__react {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 1.5px solid var(--color-canvas);
+  }
+  .fahero__react:not(:first-child) {
+    margin-left: -5px;
+  }
+  .fahero__react svg {
+    width: 11px;
+    height: 11px;
+  }
+  .fahero__react--like {
+    background: #1877f2;
+  }
+  .fahero__react--love {
+    background: #f33e58;
+  }
+  .fahero__react--haha {
+    background: #f7b125;
+  }
+
+  .fahero__cta {
+    height: 22px;
+    border-radius: var(--radius-sm);
+    background: linear-gradient(180deg, #2a86ff 0%, #1877f2 100%);
+  }
+
+  /* ── Responsive: two columns + illustration only on wider viewports ──── */
+  @media (min-width: 900px) {
+    .fahero {
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 48px;
+      margin-bottom: 48px;
+    }
+
+    .fahero__art {
+      display: block;
+    }
+  }
+</style>

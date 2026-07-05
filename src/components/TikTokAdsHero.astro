@@ -1,0 +1,311 @@
+---
+// Two-column marketing hero for the TikTok Ads preview page. Left: a magenta
+// eyebrow badge, headline (with the phrase after the em-dash tinted TikTok
+// magenta) + lede + on-this-page pills. Right: a 9:16 phone mockup with the
+// chromatic TikTok logo tile and skeleton caption lines, plus floating "fold"
+// (eye) and "safe-zone" (frame) badges over dotted-grid decoration.
+//
+// Color scheme mirrors the TikTok platform page (magenta / cyan / black base).
+// The accent is everything after the "—" so it stays language-agnostic across
+// all 10 locales. The illustration is decorative (aria-hidden).
+import OnThisPage from './OnThisPage.astro';
+import type { SectionAnchor } from '../lib/headingAnchors';
+
+interface Props {
+  title: string;
+  intro: string;
+  sections: SectionAnchor[];
+  onThisPageLabel: string;
+}
+
+const { title, intro, sections, onThisPageLabel } = Astro.props;
+
+const dashIndex = title.indexOf('—');
+const titleHead = dashIndex >= 0 ? title.slice(0, dashIndex + 1) : title;
+const titleTail = dashIndex >= 0 ? title.slice(dashIndex + 1).trim() : '';
+
+const TIKTOK_GLYPH =
+  'M16.6 5.82A4.28 4.28 0 0 1 15.54 3h-3.09v12.4a2.59 2.59 0 0 1-2.59 2.5 2.59 2.59 0 0 1-2.59-2.59 2.59 2.59 0 0 1 3.39-2.46V9.69a5.66 5.66 0 0 0-.8-.06A5.69 5.69 0 0 0 4.17 15.31 5.69 5.69 0 0 0 13.94 19.3a5.69 5.69 0 0 0 1.6-3.96V9.01a7.34 7.34 0 0 0 4.29 1.37V7.3a4.28 4.28 0 0 1-3.23-1.48z';
+---
+
+<header class="tahero">
+  <div class="tahero__copy">
+    <span class="tahero__eyebrow">
+      <svg viewBox="0 0 24 24" width="13" height="13" fill="currentColor" aria-hidden="true">
+        <path d={TIKTOK_GLYPH}></path>
+      </svg>
+      TikTok tool
+    </span>
+
+    <h1 class="tahero__title">
+      <span>{titleHead}</span>
+      {titleTail && <><br /><span class="tahero__accent">{titleTail}</span></>}
+    </h1>
+    {intro && <p class="tahero__lede">{intro}</p>}
+    <OnThisPage label={onThisPageLabel} sections={sections} />
+  </div>
+
+  <div class="tahero__art" aria-hidden="true">
+    <span class="tahero__blob tahero__blob--magenta"></span>
+    <span class="tahero__blob tahero__blob--cyan"></span>
+    <span class="tahero__dots tahero__dots--tl"></span>
+    <span class="tahero__dots tahero__dots--br"></span>
+
+    <div class="tahero__phone">
+      <span class="tahero__notch"></span>
+      <div class="tahero__screen">
+        <div class="tahero__logo">
+          <svg viewBox="0 0 24 24" role="presentation">
+            <path class="tahero__note tahero__note--cyan" transform="translate(-0.7 -0.5)" d={TIKTOK_GLYPH}></path>
+            <path class="tahero__note tahero__note--magenta" transform="translate(0.7 0.5)" d={TIKTOK_GLYPH}></path>
+            <path class="tahero__note tahero__note--white" d={TIKTOK_GLYPH}></path>
+          </svg>
+        </div>
+        <div class="tahero__caption">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+    </div>
+
+    <span class="tahero__badge tahero__badge--eye">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"></path><circle cx="12" cy="12" r="3"></circle>
+      </svg>
+    </span>
+    <span class="tahero__badge tahero__badge--safe">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M4 9V5a1 1 0 0 1 1-1h4M20 9V5a1 1 0 0 0-1-1h-4M4 15v4a1 1 0 0 0 1 1h4M20 15v4a1 1 0 0 1-1 1h-4"></path>
+      </svg>
+    </span>
+  </div>
+</header>
+
+<style>
+  .tahero {
+    --tt-cyan: #25f4ee;
+    --tt-magenta: #fe2c55;
+    --tt-magenta-deep: color-mix(in srgb, #fe2c55 82%, #000);
+    --tt-cyan-deep: color-mix(in srgb, #25f4ee 55%, #013b39);
+
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 40px;
+    align-items: center;
+    margin-bottom: 40px;
+  }
+
+  /* ── Left column: copy (magenta base, matching the TikTok platform page) ── */
+  .tahero__eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 18px;
+    padding: 6px 12px;
+    border-radius: var(--radius-pill);
+    background: color-mix(in srgb, var(--tt-magenta) 12%, transparent);
+    color: var(--tt-magenta-deep);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .tahero__title {
+    font-size: clamp(30px, 5vw, 46px);
+    font-weight: 600;
+    line-height: 1.1;
+    letter-spacing: -1.8px;
+    color: var(--color-ink);
+    text-wrap: balance;
+  }
+
+  .tahero__accent {
+    color: var(--tt-magenta);
+  }
+
+  .tahero__lede {
+    margin-top: 18px;
+    max-width: 34rem;
+    font-size: 18px;
+    line-height: 28px;
+    color: var(--color-body);
+  }
+
+  .tahero__copy :global(.on-page) {
+    margin-top: 24px;
+  }
+
+  /* ── Right column: 9:16 phone mockup ────────────────────────────────── */
+  .tahero__art {
+    position: relative;
+    display: none;
+    aspect-ratio: 1 / 1;
+    max-width: 440px;
+    margin-inline: auto;
+    width: 100%;
+  }
+
+  .tahero__blob {
+    position: absolute;
+    border-radius: 50%;
+  }
+  .tahero__blob--magenta {
+    left: 10%;
+    top: 22%;
+    width: 26%;
+    aspect-ratio: 1;
+    background: radial-gradient(circle, color-mix(in srgb, var(--tt-magenta) 16%, transparent), transparent 70%);
+  }
+  .tahero__blob--cyan {
+    right: 6%;
+    bottom: 14%;
+    width: 26%;
+    aspect-ratio: 1;
+    background: radial-gradient(circle, color-mix(in srgb, var(--tt-cyan) 22%, transparent), transparent 70%);
+  }
+
+  .tahero__dots {
+    position: absolute;
+    background-image: radial-gradient(currentColor 1.3px, transparent 1.3px);
+    background-size: 11px 11px;
+    color: color-mix(in srgb, var(--tt-magenta) 30%, transparent);
+  }
+  .tahero__dots--tl {
+    left: 6%;
+    top: 20%;
+    width: 74px;
+    height: 60px;
+  }
+  .tahero__dots--br {
+    right: 8%;
+    bottom: 16%;
+    width: 66px;
+    height: 74px;
+  }
+
+  /* Phone frame (9:16) */
+  .tahero__phone {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 46%;
+    aspect-ratio: 9 / 19;
+    padding: 12px 11px;
+    border-radius: 30px;
+    background: var(--color-canvas);
+    box-shadow: var(--shadow-e5);
+  }
+  .tahero__notch {
+    position: absolute;
+    top: 9px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 30%;
+    height: 5px;
+    border-radius: var(--radius-pill);
+    background: var(--color-canvas-soft-2);
+  }
+  .tahero__screen {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 18%;
+  }
+
+  /* CSS-3D black TikTok tile with the offset cyan/magenta/white note. */
+  .tahero__logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 62%;
+    aspect-ratio: 1;
+    border-radius: 24%;
+    background: linear-gradient(158deg, #2c2c2c 0%, var(--tt-black, #010101) 62%);
+    box-shadow:
+      0 2px 3px rgba(0, 0, 0, 0.4),
+      0 10px 18px -6px rgba(0, 0, 0, 0.5),
+      inset 0 2px 4px rgba(255, 255, 255, 0.14),
+      inset 0 -6px 10px rgba(0, 0, 0, 0.55);
+  }
+  .tahero__logo svg {
+    width: 56%;
+    height: 56%;
+  }
+  .tahero__note--cyan {
+    fill: var(--tt-cyan);
+  }
+  .tahero__note--magenta {
+    fill: var(--tt-magenta);
+  }
+  .tahero__note--white {
+    fill: #fff;
+  }
+
+  .tahero__caption {
+    width: 78%;
+    margin-top: auto;
+    margin-bottom: 14%;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .tahero__caption span {
+    height: 6px;
+    border-radius: var(--radius-pill);
+    background: var(--color-canvas-soft-2);
+  }
+  .tahero__caption span:nth-child(1) {
+    width: 100%;
+  }
+  .tahero__caption span:nth-child(2) {
+    width: 82%;
+  }
+  .tahero__caption span:nth-child(3) {
+    width: 55%;
+  }
+
+  /* Floating badges */
+  .tahero__badge {
+    position: absolute;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 52px;
+    height: 52px;
+    border-radius: var(--radius-lg);
+    background: var(--color-canvas);
+    box-shadow: var(--shadow-e5);
+  }
+  .tahero__badge svg {
+    width: 24px;
+    height: 24px;
+  }
+  .tahero__badge--eye {
+    left: 2%;
+    top: 50%;
+    color: var(--tt-magenta-deep);
+  }
+  .tahero__badge--safe {
+    right: 4%;
+    top: 20%;
+    color: var(--tt-cyan-deep);
+  }
+
+  /* ── Responsive: two columns + illustration only on wider viewports ──── */
+  @media (min-width: 900px) {
+    .tahero {
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 48px;
+      margin-bottom: 48px;
+    }
+
+    .tahero__art {
+      display: block;
+    }
+  }
+</style>

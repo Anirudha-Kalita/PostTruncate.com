@@ -93,6 +93,9 @@ const TT_CYAN: Tint = {
   fg: 'color-mix(in srgb, #25f4ee 55%, #013b39)',
 };
 
+const GREEN: Tint = { bg: 'var(--color-cyan-soft)', fg: 'var(--color-cyan-deep)' };
+const RED: Tint = { bg: 'var(--color-error-soft)', fg: 'var(--color-error-deep)' };
+
 const PALETTES: Record<string, Tint[]> = {
   twitter: [BLUE, INK, CYAN, BLUE_DEEP],
   linkedin: [BLUE, BLUE_DEEP, CYAN, BLUE],
@@ -100,6 +103,8 @@ const PALETTES: Record<string, Tint[]> = {
   instagram: [VIOLET, PINK, AMBER, PINK],
   threads: [VIOLET, PINK, AMBER, VIOLET],
   tiktok: [TT_MAGENTA, TT_CYAN, INK, TT_MAGENTA],
+  // Google's four-color brand: blue · red · amber · green.
+  google: [BLUE, RED, AMBER, GREEN],
 };
 const palette = (theme && PALETTES[theme]) || [VIOLET, PINK, AMBER, BLUE];
 ---

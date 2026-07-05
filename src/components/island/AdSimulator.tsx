@@ -448,7 +448,7 @@ export function AdSimulator({ platform, s, lang }: Props) {
   const isReels = platform === 'facebook' && fbFormat === 'reels';
 
   return (
-    <div class="grid gap-5 lg:grid-cols-2">
+    <div class="grid gap-5 lg:grid-cols-[minmax(0,3fr)_minmax(0,2fr)]">
       {/* ── Left column: inputs ── */}
       <Card class="flex flex-col">
         <CardHead eyebrow={ap.fields.primary} title={ap.editorLabel} />
