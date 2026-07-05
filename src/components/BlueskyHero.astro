@@ -1,0 +1,279 @@
+---
+// Two-column marketing hero for the Bluesky character-counter page. Left: a blue
+// eyebrow badge, headline (with the phrase after the em-dash in a blue gradient)
+// + lede + on-this-page pills. Right: a Bluesky post-card mockup with the
+// butterfly logo, skeleton copy and action icons, plus floating "300 chars max"
+// and analytics badges over dotted-grid decoration.
+//
+// The accent is everything after the "—" so it stays language-agnostic across
+// all 10 locales. The illustration is decorative (aria-hidden).
+import OnThisPage from './OnThisPage.astro';
+import type { SectionAnchor } from '../lib/headingAnchors';
+
+interface Props {
+  title: string;
+  intro: string;
+  sections: SectionAnchor[];
+  onThisPageLabel: string;
+}
+
+const { title, intro, sections, onThisPageLabel } = Astro.props;
+
+const dashIndex = title.indexOf('—');
+const titleHead = dashIndex >= 0 ? title.slice(0, dashIndex + 1) : title;
+const titleTail = dashIndex >= 0 ? title.slice(dashIndex + 1).trim() : '';
+
+const BSKY_GLYPH =
+  'M12 10.8C11.1 9.1 8.6 6 6.3 4.4 4.1 2.9 3.3 3.1 2.7 3.4 2 3.7 2 4.7 2 5.4c0 .7.4 5.5.6 6.3.7 2.6 3.5 3.5 6 3.2-3.7.5-7 1.9-2.7 6.7C11 21.4 12 18.9 12 17.6c0 1.3 1 3.8 6.1 1.9 4.3-4.8 1-6.2-2.7-6.7 2.5.3 5.3-.6 6-3.2.2-.8.6-5.6.6-6.3 0-.7 0-1.7-.7-2-.6-.3-1.4-.5-3.6 1-2.3 1.6-4.8 4.7-6.7 6.5z';
+---
+
+<header class="bhero">
+  <div class="bhero__copy">
+    <span class="bhero__eyebrow">
+      <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true">
+        <path d={BSKY_GLYPH}></path>
+      </svg>
+      Bluesky tool
+    </span>
+
+    <h1 class="bhero__title">
+      <span>{titleHead}</span>
+      {titleTail && <><br /><span class="bhero__accent">{titleTail}</span></>}
+    </h1>
+    {intro && <p class="bhero__lede">{intro}</p>}
+    <OnThisPage label={onThisPageLabel} sections={sections} />
+  </div>
+
+  <div class="bhero__art" aria-hidden="true">
+    <span class="bhero__blob"></span>
+    <span class="bhero__dots"></span>
+
+    <div class="bhero__card">
+      <div class="bhero__logo">
+        <svg viewBox="0 0 24 24" role="presentation">
+          <circle cx="12" cy="12" r="12" fill="#1185FE"></circle>
+          <path fill="#fff" d={BSKY_GLYPH}></path>
+        </svg>
+      </div>
+      <div class="bhero__lines">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      <div class="bhero__actions">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 2l4 4-4 4"></path><path d="M3 11V9a4 4 0 0 1 4-4h14M7 22l-4-4 4-4"></path><path d="M21 13v2a4 4 0 0 1-4 4H3"></path></svg>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-8-4.5-8-10a4 4 0 0 1 8-1 4 4 0 0 1 8 1c0 5.5-8 10-8 10z"></path></svg>
+      </div>
+    </div>
+
+    <div class="bhero__badge bhero__badge--count">
+      <span class="bhero__num">300</span>
+      <span class="bhero__label">chars max</span>
+    </div>
+    <span class="bhero__badge bhero__badge--chart">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M3 21h18"></path><path d="M7 21v-6M12 21V9M17 21v-9"></path>
+      </svg>
+    </span>
+  </div>
+</header>
+
+<style>
+  .bhero {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 40px;
+    align-items: center;
+    margin-bottom: 40px;
+  }
+
+  /* ── Left column: copy (Bluesky blue) ───────────────────────────────── */
+  .bhero__eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 18px;
+    padding: 6px 12px;
+    border-radius: var(--radius-pill);
+    background: color-mix(in srgb, #1185fe 14%, transparent);
+    color: #0a6edb;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .bhero__title {
+    font-size: clamp(30px, 5vw, 46px);
+    font-weight: 600;
+    line-height: 1.1;
+    letter-spacing: -1.8px;
+    color: var(--color-ink);
+    text-wrap: balance;
+  }
+
+  .bhero__accent {
+    background: linear-gradient(96deg, #1185fe 0%, #4aa3ff 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .bhero__lede {
+    margin-top: 18px;
+    max-width: 34rem;
+    font-size: 18px;
+    line-height: 28px;
+    color: var(--color-body);
+  }
+
+  .bhero__copy :global(.on-page) {
+    margin-top: 24px;
+  }
+
+  /* ── Right column: Bluesky card mockup ──────────────────────────────── */
+  .bhero__art {
+    position: relative;
+    display: none;
+    aspect-ratio: 1 / 1;
+    max-width: 440px;
+    margin-inline: auto;
+    width: 100%;
+  }
+
+  .bhero__blob {
+    position: absolute;
+    right: 2%;
+    bottom: 12%;
+    width: 28%;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background: radial-gradient(circle, color-mix(in srgb, #1185fe 15%, transparent), transparent 70%);
+  }
+  .bhero__dots {
+    position: absolute;
+    right: 4%;
+    top: 8%;
+    width: 74px;
+    height: 60px;
+    background-image: radial-gradient(currentColor 1.3px, transparent 1.3px);
+    background-size: 11px 11px;
+    color: color-mix(in srgb, #1185fe 26%, transparent);
+  }
+
+  /* Post card */
+  .bhero__card {
+    position: absolute;
+    top: 50%;
+    left: 48%;
+    transform: translate(-50%, -50%);
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    padding: 18px;
+    border-radius: 18px;
+    background: var(--color-canvas);
+    box-shadow: var(--shadow-e5);
+  }
+  .bhero__logo {
+    width: 32%;
+    aspect-ratio: 1;
+    filter: drop-shadow(0 6px 12px rgba(10, 110, 219, 0.28));
+  }
+  .bhero__logo svg {
+    width: 100%;
+    height: 100%;
+  }
+  .bhero__lines {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+  }
+  .bhero__lines span {
+    height: 7px;
+    border-radius: var(--radius-pill);
+    background: var(--color-canvas-soft-2);
+  }
+  .bhero__lines span:nth-child(1) {
+    width: 92%;
+  }
+  .bhero__lines span:nth-child(2) {
+    width: 78%;
+  }
+  .bhero__lines span:nth-child(3) {
+    width: 84%;
+  }
+  .bhero__lines span:nth-child(4) {
+    width: 52%;
+  }
+  .bhero__actions {
+    display: flex;
+    align-items: center;
+    gap: 22px;
+    margin-top: 2px;
+    color: var(--color-mute);
+  }
+  .bhero__actions svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  /* Floating badges */
+  .bhero__badge {
+    position: absolute;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius-lg);
+    background: var(--color-canvas);
+    box-shadow: var(--shadow-e5);
+    color: #1185fe;
+  }
+  .bhero__badge--count {
+    top: 22%;
+    right: 0;
+    flex-direction: column;
+    gap: 2px;
+    padding: 12px 16px;
+    border-radius: var(--radius-xl);
+  }
+  .bhero__num {
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 1.05;
+    letter-spacing: -1px;
+    color: #0a6edb;
+  }
+  .bhero__label {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--color-mute);
+  }
+  .bhero__badge--chart {
+    left: 0;
+    top: 44%;
+    width: 52px;
+    height: 52px;
+  }
+  .bhero__badge svg {
+    width: 24px;
+    height: 24px;
+  }
+
+  /* ── Responsive: two columns + illustration only on wider viewports ──── */
+  @media (min-width: 900px) {
+    .bhero {
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 48px;
+      margin-bottom: 48px;
+    }
+
+    .bhero__art {
+      display: block;
+    }
+  }
+</style>

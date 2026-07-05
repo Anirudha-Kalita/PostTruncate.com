@@ -1,0 +1,278 @@
+---
+// Two-column marketing hero for the Discord character-counter page. Left: a
+// blurple eyebrow badge, headline (with the phrase after the em-dash in a
+// blurple gradient) + lede + on-this-page pills. Right: a Discord message-card
+// mockup with the logo, skeleton copy and a blurple typing bubble, plus floating
+// "2,000 chars limit" and shield badges over dotted-grid decoration.
+//
+// The accent is everything after the "—" so it stays language-agnostic across
+// all 10 locales. The illustration is decorative (aria-hidden).
+import OnThisPage from './OnThisPage.astro';
+import type { SectionAnchor } from '../lib/headingAnchors';
+
+interface Props {
+  title: string;
+  intro: string;
+  sections: SectionAnchor[];
+  onThisPageLabel: string;
+}
+
+const { title, intro, sections, onThisPageLabel } = Astro.props;
+
+const dashIndex = title.indexOf('—');
+const titleHead = dashIndex >= 0 ? title.slice(0, dashIndex + 1) : title;
+const titleTail = dashIndex >= 0 ? title.slice(dashIndex + 1).trim() : '';
+
+const DISCORD_GLYPH =
+  'M18.9 7.3a15.9 15.9 0 0 0-3.9-1.2l-.2.4a14.7 14.7 0 0 1 3.4 1.1 12.4 12.4 0 0 0-10.5 0A14.7 14.7 0 0 1 11 6.5l-.2-.4a15.9 15.9 0 0 0-3.9 1.2C4.4 11 3.8 14.5 4.1 18a16 16 0 0 0 4.9 2.5l.6-1a10.4 10.4 0 0 1-1.6-.8l.4-.3a11.4 11.4 0 0 0 9.7 0l.4.3a10.4 10.4 0 0 1-1.6.8l.6 1a16 16 0 0 0 4.9-2.5c.4-4.1-.6-7.6-2.5-10.7zM9.7 15.6c-.9 0-1.7-.9-1.7-1.9s.8-1.9 1.7-1.9 1.7.9 1.7 1.9-.8 1.9-1.7 1.9zm4.6 0c-.9 0-1.7-.9-1.7-1.9s.8-1.9 1.7-1.9 1.7.9 1.7 1.9-.8 1.9-1.7 1.9z';
+---
+
+<header class="dhero">
+  <div class="dhero__copy">
+    <span class="dhero__eyebrow">
+      <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true">
+        <path d={DISCORD_GLYPH}></path>
+      </svg>
+      Discord tool
+    </span>
+
+    <h1 class="dhero__title">
+      <span>{titleHead}</span>
+      {titleTail && <><br /><span class="dhero__accent">{titleTail}</span></>}
+    </h1>
+    {intro && <p class="dhero__lede">{intro}</p>}
+    <OnThisPage label={onThisPageLabel} sections={sections} />
+  </div>
+
+  <div class="dhero__art" aria-hidden="true">
+    <span class="dhero__blob"></span>
+    <span class="dhero__dots"></span>
+
+    <div class="dhero__card">
+      <div class="dhero__logo">
+        <svg viewBox="0 0 24 24" role="presentation">
+          <circle cx="12" cy="12" r="12" fill="#5865F2"></circle>
+          <path fill="#fff" d={DISCORD_GLYPH}></path>
+        </svg>
+      </div>
+      <div class="dhero__lines">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      <div class="dhero__bubble">
+        <i></i><i></i><i></i>
+      </div>
+    </div>
+
+    <div class="dhero__badge dhero__badge--count">
+      <span class="dhero__num">2,000</span>
+      <span class="dhero__label">chars limit</span>
+    </div>
+    <span class="dhero__badge dhero__badge--shield">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 3l8 3v5c0 5-3.5 8-8 10-4.5-2-8-5-8-10V6z"></path><path d="M9 12l2 2 4-4"></path>
+      </svg>
+    </span>
+  </div>
+</header>
+
+<style>
+  .dhero {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 40px;
+    align-items: center;
+    margin-bottom: 40px;
+  }
+
+  /* ── Left column: copy (Discord blurple) ────────────────────────────── */
+  .dhero__eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 18px;
+    padding: 6px 12px;
+    border-radius: var(--radius-pill);
+    background: color-mix(in srgb, #5865f2 15%, transparent);
+    color: #4752c4;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .dhero__title {
+    font-size: clamp(30px, 5vw, 46px);
+    font-weight: 600;
+    line-height: 1.1;
+    letter-spacing: -1.8px;
+    color: var(--color-ink);
+    text-wrap: balance;
+  }
+
+  .dhero__accent {
+    background: linear-gradient(96deg, #5865f2 0%, #8763ea 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .dhero__lede {
+    margin-top: 18px;
+    max-width: 34rem;
+    font-size: 18px;
+    line-height: 28px;
+    color: var(--color-body);
+  }
+
+  .dhero__copy :global(.on-page) {
+    margin-top: 24px;
+  }
+
+  /* ── Right column: Discord card mockup ──────────────────────────────── */
+  .dhero__art {
+    position: relative;
+    display: none;
+    aspect-ratio: 1 / 1;
+    max-width: 440px;
+    margin-inline: auto;
+    width: 100%;
+  }
+
+  .dhero__blob {
+    position: absolute;
+    right: 2%;
+    bottom: 12%;
+    width: 26%;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background: radial-gradient(circle, color-mix(in srgb, #5865f2 16%, transparent), transparent 70%);
+  }
+  .dhero__dots {
+    position: absolute;
+    right: 4%;
+    top: 8%;
+    width: 74px;
+    height: 60px;
+    background-image: radial-gradient(currentColor 1.3px, transparent 1.3px);
+    background-size: 11px 11px;
+    color: color-mix(in srgb, #5865f2 28%, transparent);
+  }
+
+  /* Message card */
+  .dhero__card {
+    position: absolute;
+    top: 50%;
+    left: 48%;
+    transform: translate(-50%, -50%);
+    width: 62%;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    padding: 18px;
+    border-radius: 18px;
+    background: var(--color-canvas);
+    box-shadow: var(--shadow-e5);
+  }
+  .dhero__logo {
+    width: 34%;
+    aspect-ratio: 1;
+    filter: drop-shadow(0 6px 12px rgba(71, 82, 196, 0.3));
+  }
+  .dhero__logo svg {
+    width: 100%;
+    height: 100%;
+  }
+  .dhero__lines {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+  }
+  .dhero__lines span {
+    height: 7px;
+    border-radius: var(--radius-pill);
+    background: var(--color-canvas-soft-2);
+  }
+  .dhero__lines span:nth-child(1) {
+    width: 90%;
+  }
+  .dhero__lines span:nth-child(2) {
+    width: 72%;
+  }
+  .dhero__lines span:nth-child(3) {
+    width: 54%;
+  }
+  .dhero__bubble {
+    align-self: flex-start;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 12px 16px;
+    border-radius: 16px 16px 16px 4px;
+    background: #5865f2;
+  }
+  .dhero__bubble i {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #fff;
+    opacity: 0.9;
+  }
+
+  /* Floating badges */
+  .dhero__badge {
+    position: absolute;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius-lg);
+    background: var(--color-canvas);
+    box-shadow: var(--shadow-e5);
+    color: #5865f2;
+  }
+  .dhero__badge--count {
+    top: 22%;
+    right: 0;
+    flex-direction: column;
+    gap: 2px;
+    padding: 12px 16px;
+    border-radius: var(--radius-xl);
+  }
+  .dhero__num {
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 1.05;
+    letter-spacing: -1px;
+    color: #4752c4;
+  }
+  .dhero__label {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--color-mute);
+  }
+  .dhero__badge--shield {
+    right: 6%;
+    bottom: 16%;
+    width: 52px;
+    height: 52px;
+  }
+  .dhero__badge svg {
+    width: 24px;
+    height: 24px;
+  }
+
+  /* ── Responsive: two columns + illustration only on wider viewports ──── */
+  @media (min-width: 900px) {
+    .dhero {
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 48px;
+      margin-bottom: 48px;
+    }
+
+    .dhero__art {
+      display: block;
+    }
+  }
+</style>

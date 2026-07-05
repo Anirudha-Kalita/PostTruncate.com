@@ -1,0 +1,300 @@
+---
+// Two-column marketing hero for the YouTube character-counter page. Left: a red
+// eyebrow badge, headline (with the phrase after the em-dash in a red gradient)
+// + lede + on-this-page pills. Right: a YouTube video-card mockup with the logo,
+// skeleton copy and a red progress bar, plus floating "Aa" (title) and analytics
+// badges over dotted-grid + soft-red decoration.
+//
+// The accent is everything after the "—" so it stays language-agnostic across
+// all 10 locales. The illustration is decorative (aria-hidden).
+import OnThisPage from './OnThisPage.astro';
+import type { SectionAnchor } from '../lib/headingAnchors';
+
+interface Props {
+  title: string;
+  intro: string;
+  sections: SectionAnchor[];
+  onThisPageLabel: string;
+}
+
+const { title, intro, sections, onThisPageLabel } = Astro.props;
+
+const dashIndex = title.indexOf('—');
+const titleHead = dashIndex >= 0 ? title.slice(0, dashIndex + 1) : title;
+const titleTail = dashIndex >= 0 ? title.slice(dashIndex + 1).trim() : '';
+---
+
+<header class="ythero">
+  <div class="ythero__copy">
+    <span class="ythero__eyebrow">
+      <svg viewBox="0 0 24 18" width="16" height="12" aria-hidden="true">
+        <rect width="24" height="18" rx="5" fill="currentColor"></rect>
+        <path d="M10 5.5 15.5 9 10 12.5z" fill="#fff"></path>
+      </svg>
+      YouTube tool
+    </span>
+
+    <h1 class="ythero__title">
+      <span>{titleHead}</span>
+      {titleTail && <><br /><span class="ythero__accent">{titleTail}</span></>}
+    </h1>
+    {intro && <p class="ythero__lede">{intro}</p>}
+    <OnThisPage label={onThisPageLabel} sections={sections} />
+  </div>
+
+  <div class="ythero__art" aria-hidden="true">
+    <span class="ythero__blob ythero__blob--1"></span>
+    <span class="ythero__blob ythero__blob--2"></span>
+    <span class="ythero__dots"></span>
+
+    <div class="ythero__card">
+      <div class="ythero__chrome">
+        <i></i><i></i><i></i>
+      </div>
+      <div class="ythero__inner">
+        <div class="ythero__thumb">
+          <span class="ythero__logo">
+            <svg viewBox="0 0 28 20" class="ythero__play" aria-hidden="true">
+              <rect width="28" height="20" rx="5" fill="#FF0000"></rect>
+              <path d="M11 5.5 19 10l-8 4.5z" fill="#fff"></path>
+            </svg>
+            <span class="ythero__word">YouTube</span>
+          </span>
+        </div>
+        <div class="ythero__lines">
+          <span></span>
+          <span></span>
+        </div>
+        <div class="ythero__progress"><i></i></div>
+      </div>
+    </div>
+
+    <span class="ythero__badge ythero__badge--aa">Aa</span>
+    <span class="ythero__badge ythero__badge--chart">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M3 21h18"></path><path d="M7 21v-6M12 21V9M17 21v-9"></path>
+      </svg>
+    </span>
+  </div>
+</header>
+
+<style>
+  .ythero {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 40px;
+    align-items: center;
+    margin-bottom: 40px;
+  }
+
+  /* ── Left column: copy (YouTube red) ────────────────────────────────── */
+  .ythero__eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 18px;
+    padding: 6px 12px;
+    border-radius: var(--radius-pill);
+    background: color-mix(in srgb, #ff0000 12%, transparent);
+    color: #d10000;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .ythero__title {
+    font-size: clamp(30px, 5vw, 46px);
+    font-weight: 600;
+    line-height: 1.1;
+    letter-spacing: -1.8px;
+    color: var(--color-ink);
+    text-wrap: balance;
+  }
+
+  .ythero__accent {
+    background: linear-gradient(96deg, #ff0000 0%, #ff4e6a 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .ythero__lede {
+    margin-top: 18px;
+    max-width: 34rem;
+    font-size: 18px;
+    line-height: 28px;
+    color: var(--color-body);
+  }
+
+  .ythero__copy :global(.on-page) {
+    margin-top: 24px;
+  }
+
+  /* ── Right column: YouTube card mockup ──────────────────────────────── */
+  .ythero__art {
+    position: relative;
+    display: none;
+    aspect-ratio: 1 / 1;
+    max-width: 440px;
+    margin-inline: auto;
+    width: 100%;
+  }
+
+  .ythero__blob {
+    position: absolute;
+    border-radius: 50%;
+    background: radial-gradient(circle, color-mix(in srgb, #ff0000 16%, transparent), transparent 70%);
+  }
+  .ythero__blob--1 {
+    left: 4%;
+    top: 22%;
+    width: 26%;
+    aspect-ratio: 1;
+  }
+  .ythero__blob--2 {
+    left: 8%;
+    bottom: 12%;
+    width: 20%;
+    aspect-ratio: 1;
+    opacity: 0.7;
+  }
+  .ythero__dots {
+    position: absolute;
+    right: 6%;
+    top: 16%;
+    width: 74px;
+    height: 60px;
+    background-image: radial-gradient(currentColor 1.3px, transparent 1.3px);
+    background-size: 11px 11px;
+    color: color-mix(in srgb, #ff0000 28%, transparent);
+  }
+
+  /* Video card */
+  .ythero__card {
+    position: absolute;
+    top: 50%;
+    left: 52%;
+    transform: translate(-50%, -50%);
+    width: 66%;
+    padding: 12px;
+    border-radius: 18px;
+    background: var(--color-canvas);
+    box-shadow: var(--shadow-e5);
+  }
+  .ythero__chrome {
+    display: flex;
+    gap: 5px;
+    padding: 2px 4px 10px;
+  }
+  .ythero__chrome i {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--color-canvas-soft-2);
+  }
+  .ythero__inner {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 12px;
+    border-radius: 12px;
+    box-shadow: var(--shadow-e2);
+  }
+  .ythero__thumb {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    aspect-ratio: 16 / 8;
+    border-radius: 8px;
+    background: var(--color-canvas-soft-2);
+  }
+  .ythero__logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .ythero__play {
+    width: 34px;
+    height: 24px;
+    filter: drop-shadow(0 2px 4px rgba(200, 0, 0, 0.28));
+  }
+  .ythero__word {
+    font-size: 17px;
+    font-weight: 700;
+    letter-spacing: -0.6px;
+    color: var(--color-ink);
+  }
+  .ythero__lines {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .ythero__lines span {
+    height: 7px;
+    border-radius: var(--radius-pill);
+    background: var(--color-canvas-soft-2);
+  }
+  .ythero__lines span:first-child {
+    width: 88%;
+  }
+  .ythero__lines span:last-child {
+    width: 62%;
+  }
+  .ythero__progress {
+    height: 8px;
+    border-radius: var(--radius-pill);
+    background: var(--color-canvas-soft-2);
+    overflow: hidden;
+  }
+  .ythero__progress i {
+    display: block;
+    width: 58%;
+    height: 100%;
+    border-radius: var(--radius-pill);
+    background: #ff0000;
+  }
+
+  /* Floating badges */
+  .ythero__badge {
+    position: absolute;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 52px;
+    height: 52px;
+    border-radius: var(--radius-lg);
+    background: var(--color-canvas);
+    box-shadow: var(--shadow-e5);
+    color: #e00000;
+  }
+  .ythero__badge svg {
+    width: 24px;
+    height: 24px;
+  }
+  .ythero__badge--aa {
+    right: 2%;
+    top: 22%;
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+  }
+  .ythero__badge--chart {
+    right: 6%;
+    bottom: 16%;
+  }
+
+  /* ── Responsive: two columns + illustration only on wider viewports ──── */
+  @media (min-width: 900px) {
+    .ythero {
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 48px;
+      margin-bottom: 48px;
+    }
+
+    .ythero__art {
+      display: block;
+    }
+  }
+</style>

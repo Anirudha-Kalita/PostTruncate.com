@@ -1,0 +1,280 @@
+---
+// Two-column marketing hero for the TikTok character-counter page. Left: a blue
+// eyebrow badge, headline (with the phrase after the em-dash in a blue gradient)
+// + lede + on-this-page pills. Right: a caption-card mockup with the black
+// TikTok logo tile and skeleton copy, plus floating "Aa" and profile badges over
+// dotted-grid decoration.
+//
+// This counter page follows a blue accent scheme (per the reference) while
+// keeping TikTok's black brand logo. The accent is everything after the "—" so
+// it stays language-agnostic across all 10 locales. Illustration is aria-hidden.
+import OnThisPage from './OnThisPage.astro';
+import type { SectionAnchor } from '../lib/headingAnchors';
+
+interface Props {
+  title: string;
+  intro: string;
+  sections: SectionAnchor[];
+  onThisPageLabel: string;
+}
+
+const { title, intro, sections, onThisPageLabel } = Astro.props;
+
+const dashIndex = title.indexOf('—');
+const titleHead = dashIndex >= 0 ? title.slice(0, dashIndex + 1) : title;
+const titleTail = dashIndex >= 0 ? title.slice(dashIndex + 1).trim() : '';
+
+const TIKTOK_GLYPH =
+  'M16.6 5.82A4.28 4.28 0 0 1 15.54 3h-3.09v12.4a2.59 2.59 0 0 1-2.59 2.5 2.59 2.59 0 0 1-2.59-2.59 2.59 2.59 0 0 1 3.39-2.46V9.69a5.66 5.66 0 0 0-.8-.06A5.69 5.69 0 0 0 4.17 15.31 5.69 5.69 0 0 0 13.94 19.3a5.69 5.69 0 0 0 1.6-3.96V9.01a7.34 7.34 0 0 0 4.29 1.37V7.3a4.28 4.28 0 0 1-3.23-1.48z';
+---
+
+<header class="tchero">
+  <div class="tchero__copy">
+    <span class="tchero__eyebrow">
+      <svg viewBox="0 0 24 24" width="13" height="13" fill="currentColor" aria-hidden="true">
+        <path d={TIKTOK_GLYPH}></path>
+      </svg>
+      TikTok tool
+    </span>
+
+    <h1 class="tchero__title">
+      <span>{titleHead}</span>
+      {titleTail && <><br /><span class="tchero__accent">{titleTail}</span></>}
+    </h1>
+    {intro && <p class="tchero__lede">{intro}</p>}
+    <OnThisPage label={onThisPageLabel} sections={sections} />
+  </div>
+
+  <div class="tchero__art" aria-hidden="true">
+    <span class="tchero__dots"></span>
+
+    <div class="tchero__card">
+      <div class="tchero__logo">
+        <svg viewBox="0 0 24 24" role="presentation">
+          <path class="tchero__note tchero__note--cyan" transform="translate(-0.7 -0.5)" d={TIKTOK_GLYPH}></path>
+          <path class="tchero__note tchero__note--magenta" transform="translate(0.7 0.5)" d={TIKTOK_GLYPH}></path>
+          <path class="tchero__note tchero__note--white" d={TIKTOK_GLYPH}></path>
+        </svg>
+      </div>
+      <div class="tchero__lines">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+
+    <span class="tchero__aa">Aa</span>
+    <span class="tchero__person">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="8" r="4"></circle><path d="M4 21a8 8 0 0 1 16 0"></path>
+      </svg>
+    </span>
+  </div>
+</header>
+
+<style>
+  .tchero {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 40px;
+    align-items: center;
+    margin-bottom: 40px;
+  }
+
+  /* ── Left column: copy (blue accent, black brand logo) ──────────────── */
+  .tchero__eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 18px;
+    padding: 6px 12px;
+    border-radius: var(--radius-pill);
+    background: color-mix(in srgb, #2f6bfe 14%, transparent);
+    color: #2359d6;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .tchero__title {
+    font-size: clamp(30px, 5vw, 46px);
+    font-weight: 600;
+    line-height: 1.1;
+    letter-spacing: -1.8px;
+    color: var(--color-ink);
+    text-wrap: balance;
+  }
+
+  .tchero__accent {
+    background: linear-gradient(96deg, #2f6bfe 0%, #5b8bff 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .tchero__lede {
+    margin-top: 18px;
+    max-width: 34rem;
+    font-size: 18px;
+    line-height: 28px;
+    color: var(--color-body);
+  }
+
+  .tchero__copy :global(.on-page) {
+    margin-top: 24px;
+  }
+
+  /* ── Right column: caption-card mockup ──────────────────────────────── */
+  .tchero__art {
+    position: relative;
+    display: none;
+    aspect-ratio: 1 / 1;
+    max-width: 440px;
+    margin-inline: auto;
+    width: 100%;
+  }
+
+  .tchero__dots {
+    position: absolute;
+    right: 2%;
+    top: 20%;
+    width: 66px;
+    height: 66px;
+    background-image: radial-gradient(currentColor 1.3px, transparent 1.3px);
+    background-size: 11px 11px;
+    color: color-mix(in srgb, #2f6bfe 30%, transparent);
+  }
+
+  /* Caption card — tall, logo at the top, paragraph skeleton below. */
+  .tchero__card {
+    position: absolute;
+    top: 50%;
+    left: 52%;
+    transform: translate(-50%, -50%);
+    width: 48%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 22px 20px;
+    border-radius: 20px;
+    background: var(--color-canvas);
+    box-shadow: var(--shadow-e5);
+  }
+
+  /* Black TikTok tile with the offset cyan/magenta/white note. */
+  .tchero__logo {
+    align-self: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 42%;
+    aspect-ratio: 1;
+    margin-top: 4px;
+    border-radius: 24%;
+    background: linear-gradient(158deg, #2c2c2c 0%, #010101 62%);
+    box-shadow:
+      0 2px 3px rgba(0, 0, 0, 0.4),
+      0 10px 18px -6px rgba(0, 0, 0, 0.5),
+      inset 0 2px 4px rgba(255, 255, 255, 0.14),
+      inset 0 -6px 10px rgba(0, 0, 0, 0.55);
+  }
+  .tchero__logo svg {
+    width: 56%;
+    height: 56%;
+  }
+  .tchero__note--cyan {
+    fill: #25f4ee;
+  }
+  .tchero__note--magenta {
+    fill: #fe2c55;
+  }
+  .tchero__note--white {
+    fill: #fff;
+  }
+
+  .tchero__lines {
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+  }
+  .tchero__lines span {
+    height: 7px;
+    border-radius: var(--radius-pill);
+    background: var(--color-canvas-soft-2);
+  }
+  .tchero__lines span:nth-child(1) {
+    width: 96%;
+  }
+  .tchero__lines span:nth-child(2) {
+    width: 88%;
+  }
+  .tchero__lines span:nth-child(3) {
+    width: 92%;
+  }
+  .tchero__lines span:nth-child(4) {
+    width: 80%;
+  }
+  .tchero__lines span:nth-child(5) {
+    width: 90%;
+  }
+  .tchero__lines span:nth-child(6) {
+    width: 58%;
+  }
+
+  /* "Aa" speech bubble (left) */
+  .tchero__aa {
+    position: absolute;
+    left: 0;
+    top: 44%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 72px;
+    height: 64px;
+    border-radius: 22px 22px 22px 5px;
+    background: color-mix(in srgb, #2f6bfe 14%, var(--color-canvas));
+    box-shadow: var(--shadow-e5);
+    font-size: 24px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    color: #2f6bfe;
+  }
+
+  /* Profile squircle (right) */
+  .tchero__person {
+    position: absolute;
+    right: 2%;
+    top: 34%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 60px;
+    height: 60px;
+    border-radius: 30%;
+    background: color-mix(in srgb, var(--color-violet) 14%, var(--color-canvas));
+    box-shadow: var(--shadow-e5);
+    color: var(--color-violet-deep);
+  }
+  .tchero__person svg {
+    width: 26px;
+    height: 26px;
+  }
+
+  /* ── Responsive: two columns + illustration only on wider viewports ──── */
+  @media (min-width: 900px) {
+    .tchero {
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 48px;
+      margin-bottom: 48px;
+    }
+
+    .tchero__art {
+      display: block;
+    }
+  }
+</style>

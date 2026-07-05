@@ -54,6 +54,55 @@ const ICON_SETS: Record<string, string[]> = {
     '<path d="M10 6h11M10 12h11M10 18h11"/><path d="M4 5h1v4M4 9h2"/><path d="M6 18H4l2-2.5H4"/>',
     '<path d="M12 20h9M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4 12.5-12.5z"/>',
   ],
+  // 1 limits · 2 caption that performs · 3 80-char bio · 4 private & instant
+  'tiktok-counter': [
+    '<path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6M8 13h8M8 17h5"/>',
+    '<path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>',
+    '<circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/>',
+    '<path d="M12 3l8 3v5c0 5-3.5 8-8 10-4.5-2-8-5-8-10V6z"/><path d="M9 12l2 2 4-4"/>',
+  ],
+  // 1 limits · 2 write for search · 3 titles/descriptions/boards · 4 private
+  pinterest: [
+    '<path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6M8 13h8M8 17h5"/>',
+    '<circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/>',
+    '<path d="M3 12V4a1 1 0 0 1 1-1h8l9 9-9 9z"/><circle cx="7.5" cy="7.5" r="1.2"/>',
+    '<path d="M12 3l8 3v5c0 5-3.5 8-8 10-4.5-2-8-5-8-10V6z"/><path d="M9 12l2 2 4-4"/>',
+  ],
+  // 1 limits · 2 titles do heavy lifting · 3 bodies/comments/flair · 4 private
+  reddit: [
+    '<path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6M8 13h8M8 17h5"/>',
+    '<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/>',
+    '<path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>',
+    '<path d="M12 3l8 3v5c0 5-3.5 8-8 10-4.5-2-8-5-8-10V6z"/><path d="M9 12l2 2 4-4"/>',
+  ],
+  // 1 char limit · 2 grapheme counting · 3 make 300 work · 4 private & instant
+  bluesky: [
+    '<path d="M12 3l8 3v5c0 5-3.5 8-8 10-4.5-2-8-5-8-10V6z"/><path d="M9 12l2 2 4-4"/>',
+    '<path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/>',
+    '<path d="M12 20h9M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4 12.5-12.5z"/>',
+    '<rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/>',
+  ],
+  // 1 limits · 2 messages/embeds/bots · 3 working around the limit · 4 private
+  discord: [
+    '<path d="M4 7V5h16v2M9 19h6M12 5v14"/>',
+    '<path d="M9 17H7A5 5 0 0 1 7 7h2M15 7h2a5 5 0 0 1 0 10h-2M8 12h8"/>',
+    '<path d="M4 9h16M4 15h16M10 3 8 21M16 3l-2 18"/>',
+    '<path d="M12 3l8 3v5c0 5-3.5 8-8 10-4.5-2-8-5-8-10V6z"/><path d="M9 12l2 2 4-4"/>',
+  ],
+  // 1 limits · 2 text status · 3 About line · 4 private & instant
+  whatsapp: [
+    '<path d="M4 7V5h16v2M9 19h6M12 5v14"/>',
+    '<path d="M9 17H7A5 5 0 0 1 7 7h2M15 7h2a5 5 0 0 1 0 10h-2M8 12h8"/>',
+    '<path d="M4 9h16M4 15h16M10 3 8 21M16 3l-2 18"/>',
+    '<rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/>',
+  ],
+  // 1 limits · 2 first lines matter · 3 titles/tags/comments · 4 private counting
+  youtube: [
+    '<path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6M8 13h8M8 17h5"/>',
+    '<path d="M12 3l2.6 6.3 6.8.5-5.2 4.4 1.6 6.6L12 17.8 6.2 21.3l1.6-6.6L2.6 9.8l6.8-.5z"/>',
+    '<path d="M3 12V4a1 1 0 0 1 1-1h8l9 9-9 9z"/><circle cx="7.5" cy="7.5" r="1.2"/>',
+    '<path d="M12 3l8 3v5c0 5-3.5 8-8 10-4.5-2-8-5-8-10V6z"/><path d="M9 12l2 2 4-4"/>',
+  ],
   // 1 caption limit · 2 "…more" fold · 3 hashtags/9:16 canvas · 4 profile/FYP
   tiktok: [
     '<path d="M4 6h16M4 12h10M4 18h13"/>',
@@ -96,6 +145,14 @@ const TT_CYAN: Tint = {
 const GREEN: Tint = { bg: 'var(--color-cyan-soft)', fg: 'var(--color-cyan-deep)' };
 const RED: Tint = { bg: 'var(--color-error-soft)', fg: 'var(--color-error-deep)' };
 
+// Character-counter platform brand tints (soft fill + readable brand glyph).
+const YT_RED: Tint = { bg: 'color-mix(in srgb, #ff0000 12%, transparent)', fg: '#c00' };
+const PIN_RED: Tint = { bg: 'color-mix(in srgb, #e60023 12%, transparent)', fg: '#c9001f' };
+const RD_ORANGE: Tint = { bg: 'color-mix(in srgb, #ff4500 14%, transparent)', fg: '#d93a00' };
+const BSKY_BLUE: Tint = { bg: 'color-mix(in srgb, #1185fe 14%, transparent)', fg: '#0a6edb' };
+const DISCORD: Tint = { bg: 'color-mix(in srgb, #5865f2 16%, transparent)', fg: '#4752c4' };
+const WA_GREEN: Tint = { bg: 'color-mix(in srgb, #25d366 16%, transparent)', fg: '#128c4a' };
+
 const PALETTES: Record<string, Tint[]> = {
   twitter: [BLUE, INK, CYAN, BLUE_DEEP],
   linkedin: [BLUE, BLUE_DEEP, CYAN, BLUE],
@@ -105,6 +162,16 @@ const PALETTES: Record<string, Tint[]> = {
   tiktok: [TT_MAGENTA, TT_CYAN, INK, TT_MAGENTA],
   // Google's four-color brand: blue · red · amber · green.
   google: [BLUE, RED, AMBER, GREEN],
+  // Character-counter platforms — each in its own brand color, alternated with ink.
+  youtube: [YT_RED, AMBER, VIOLET, GREEN],
+  pinterest: [PIN_RED, AMBER, VIOLET, GREEN],
+  reddit: [RD_ORANGE, BLUE, VIOLET, GREEN],
+  bluesky: [BSKY_BLUE, CYAN, VIOLET, GREEN],
+  discord: [DISCORD, BLUE, DISCORD, CYAN],
+  whatsapp: [WA_GREEN, WA_GREEN, WA_GREEN, WA_GREEN],
+  // TikTok counter page uses a blue accent scheme (distinct from the magenta
+  // 'tiktok' key that the platform + ad-preview pages share).
+  'tiktok-counter': [BLUE, GREEN, VIOLET, AMBER],
 };
 const palette = (theme && PALETTES[theme]) || [VIOLET, PINK, AMBER, BLUE];
 ---

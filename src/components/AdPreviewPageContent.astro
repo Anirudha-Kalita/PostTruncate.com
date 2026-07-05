@@ -13,12 +13,15 @@ import GoogleAdsHero from './GoogleAdsHero.astro';
 import TikTokAdsHero from './TikTokAdsHero.astro';
 import ToolSectionCards from './ToolSectionCards.astro';
 import ToolCta from './ToolCta.astro';
+import PlatformFaqBlog from './PlatformFaqBlog.astro';
 import type { ToolDefinition } from '../data/tools';
 import { DEFAULT_LOCALE } from '../i18n/config';
 import { getTranslations } from '../i18n';
 import { interp } from '../i18n/interp';
 import { buildCanonicalSlugs, prepareToolContent, splitToolSections } from '../lib/headingAnchors';
 import { formatLocaleDate } from '../lib/contentDates';
+import { BLOG_SEGMENT, getBlogStrings, getPublishedPosts } from '../lib/blogI18n';
+import { getCategoryById, getCategorySlug } from '../data/blogCategories';
 
 interface Props {
   tool: ToolDefinition;
@@ -44,6 +47,63 @@ const lastUpdatedLine = interp(globalT.toolPage.lastUpdated, {
 const introText = tool.intro?.[lang] ?? tool.intro?.[DEFAULT_LOCALE] ?? '';
 const faqItems = tool.faq?.[lang] ?? tool.faq?.[DEFAULT_LOCALE] ?? [];
 const cta = globalT.toolPage.cta;
+
+// ── FAQ + Blog row (mirrors the platform-guide pages) ─────────────────────────
+// Each ad page borrows its base platform's blog category: Facebook Ads →
+// Facebook, Instagram Ads → Instagram, etc. Google Ads has no social platform,
+// so it maps to the SEO & SERP category (where the Google Ads posts live).
+const AD_BASE_CATEGORY: Record<string, string> = {
+  facebook: 'facebook',
+  instagram: 'instagram',
+  linkedin: 'linkedin',
+  tiktok: 'tiktok',
+  google: 'seo-serp',
+};
+
+const blogStrings = getBlogStrings(lang);
+const allPosts = await getPublishedPosts();
+
+// Forward-looking provision: the moment a dedicated ad category (e.g.
+// `facebook-ads`) is added to the blog registry, this page switches to it and
+// the base platform category (`facebook`) drops off — automatically, no code
+// change here. Posts are matched on the same category the "view all" hub links
+// to, so the row stays coherent.
+const adCategoryId = platformKey ? `${platformKey}-ads` : undefined;
+const categoryId =
+  adCategoryId && getCategoryById(adCategoryId) !== undefined
+    ? adCategoryId
+    : platformKey
+      ? AD_BASE_CATEGORY[platformKey]
+      : undefined;
+
+const relatedPosts = allPosts
+  .filter((p) => p.data.locale === lang && p.data.category === categoryId)
+  .sort((a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf());
+const faqBlogPosts = relatedPosts.slice(0, 2);
+
+const blogCategory = categoryId ? getCategoryById(categoryId) : undefined;
+const blogCategoryHref = blogCategory
+  ? `/${lang}/${BLOG_SEGMENT}/${getCategorySlug(blogCategory, lang)}/`
+  : `/${lang}/${BLOG_SEGMENT}/`;
+
+// FAQ/Blog icon accent — matches each ad page's theme (blue base; IG/TikTok pop).
+const FAQ_BLOG_ACCENT: Record<string, { bg: string; fg: string }> = {
+  facebook: { bg: 'var(--color-link-bg-soft)', fg: 'var(--color-link)' },
+  linkedin: { bg: 'var(--color-link-bg-soft)', fg: 'var(--color-link)' },
+  google: { bg: 'var(--color-link-bg-soft)', fg: 'var(--color-link)' },
+  instagram: {
+    bg: 'color-mix(in srgb, var(--color-highlight-pink) 14%, transparent)',
+    fg: 'var(--color-highlight-magenta)',
+  },
+  tiktok: {
+    bg: 'color-mix(in srgb, #fe2c55 14%, transparent)',
+    fg: 'color-mix(in srgb, #fe2c55 82%, #000)',
+  },
+};
+const faqBlogAccent = (platformKey && FAQ_BLOG_ACCENT[platformKey]) || {
+  bg: 'var(--color-violet-soft)',
+  fg: 'var(--color-violet-deep)',
+};
 ---
 
 <section class="tool-page container-page tool-page--cta-tight">
@@ -98,26 +158,24 @@ const cta = globalT.toolPage.cta;
   {/* Keyword prose reframed as hover-active, platform-themed section cards. */}
   <ToolSectionCards sections={cardSections} theme={platformKey} />
 
-  <article class="tool-page__prose">
-    {faqItems.length > 0 && (
-      <section class="tool-page__faq" aria-label={globalT.faq.title}>
-        <h2 class="tool-page__faq-heading">{globalT.faq.title}</h2>
-        <div class="faq__list">
-          {faqItems.map((f) => (
-            <details class="faq__item">
-              <summary class="faq__q">
-                <span>{f.q}</span>
-                <span class="faq__chev" aria-hidden="true">+</span>
-              </summary>
-              <p class="faq__a">{f.a}</p>
-            </details>
-          ))}
-        </div>
-      </section>
-    )}
+  {faqItems.length > 0 && (
+    <PlatformFaqBlog
+      lang={lang}
+      faqItems={faqItems}
+      faqTitle={globalT.faq.title}
+      faqViewAll={globalT.faq.viewAll}
+      faqHref={`/${lang}/faq/`}
+      posts={faqBlogPosts}
+      blogHeading={blogStrings.latestHeading}
+      blogViewAll={blogStrings.viewAll}
+      blogHref={blogCategoryHref}
+      readMoreLabel={blogStrings.readMore}
+      iconBg={faqBlogAccent.bg}
+      iconFg={faqBlogAccent.fg}
+    />
+  )}
 
-    <p class="tool-page__updated">{lastUpdatedLine}</p>
-  </article>
+  <p class="tool-page__updated">{lastUpdatedLine}</p>
 
   {/* Closing CTA — the shared centered card used across the platform pages. */}
   <ToolCta heading={cta.heading} blurb={cta.blurb} button={cta.button} href={homeHref} />

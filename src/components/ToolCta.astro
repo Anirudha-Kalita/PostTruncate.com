@@ -8,12 +8,23 @@ interface Props {
   blurb: string;
   button: string;
   href: string | undefined;
+  /** Optional accent color (e.g. a platform brand). Defaults to the link blue. */
+  accent?: string;
 }
 
-const { heading, blurb, button, href } = Astro.props;
+const { heading, blurb, button, href, accent } = Astro.props;
+
+// When an accent is supplied, recolor the button, decorations and soft tinted
+// background to that brand; otherwise the CSS var fallbacks keep the blue look.
+const accentStyle = accent
+  ? `--cta-accent:${accent};--cta-heart:${accent};` +
+    `--cta-bg-a:color-mix(in srgb, ${accent} 14%, transparent);` +
+    `--cta-bg-b:color-mix(in srgb, ${accent} 9%, transparent);` +
+    `--cta-glow:color-mix(in srgb, ${accent} 18%, transparent);`
+  : undefined;
 ---
 
-<aside class="xcta">
+<aside class="xcta" style={accentStyle}>
   <div class="xcta__deco xcta__deco--left" aria-hidden="true">
     <span class="xcta__glow"></span>
     <span class="xcta__tile xcta__tile--msg">
@@ -48,8 +59,8 @@ const { heading, blurb, button, href } = Astro.props;
     padding: 56px 24px;
     border-radius: var(--radius-xl);
     background:
-      radial-gradient(circle at 12% 50%, color-mix(in srgb, var(--color-link-bg-soft) 55%, transparent), transparent 42%),
-      radial-gradient(circle at 88% 55%, color-mix(in srgb, var(--color-violet-soft) 45%, transparent), transparent 42%),
+      radial-gradient(circle at 12% 50%, var(--cta-bg-a, color-mix(in srgb, var(--color-link-bg-soft) 55%, transparent)), transparent 42%),
+      radial-gradient(circle at 88% 55%, var(--cta-bg-b, color-mix(in srgb, var(--color-violet-soft) 45%, transparent)), transparent 42%),
       var(--color-canvas-soft);
     box-shadow: var(--shadow-e1);
   }
@@ -86,17 +97,17 @@ const { heading, blurb, button, href } = Astro.props;
     margin-top: 24px;
     padding: 0 28px;
     border-radius: var(--radius-pill);
-    background: var(--color-link);
+    background: var(--cta-accent, var(--color-link));
     color: #fff;
     font-size: 16px;
     font-weight: 600;
-    box-shadow: 0 14px 28px -12px color-mix(in srgb, var(--color-link) 60%, transparent);
+    box-shadow: 0 14px 28px -12px color-mix(in srgb, var(--cta-accent, var(--color-link)) 60%, transparent);
     transition: transform 100ms ease, opacity 0.15s ease, box-shadow 0.2s ease;
   }
 
   .xcta__btn:hover {
     opacity: 0.94;
-    box-shadow: 0 18px 34px -12px color-mix(in srgb, var(--color-link) 65%, transparent);
+    box-shadow: 0 18px 34px -12px color-mix(in srgb, var(--cta-accent, var(--color-link)) 65%, transparent);
   }
 
   .xcta__btn:active {
@@ -128,7 +139,7 @@ const { heading, blurb, button, href } = Astro.props;
     position: absolute;
     inset: 0;
     border-radius: 50%;
-    background: radial-gradient(circle, color-mix(in srgb, var(--color-link-bg-soft) 70%, transparent) 0%, transparent 70%);
+    background: radial-gradient(circle, var(--cta-glow, color-mix(in srgb, var(--color-link-bg-soft) 70%, transparent)) 0%, transparent 70%);
   }
 
   .xcta__tile {
@@ -149,11 +160,11 @@ const { heading, blurb, button, href } = Astro.props;
   }
 
   .xcta__tile--msg {
-    color: var(--color-link);
+    color: var(--cta-accent, var(--color-link));
     transform: rotate(-6deg);
   }
   .xcta__tile--heart {
-    color: var(--color-violet-deep);
+    color: var(--cta-heart, var(--color-violet-deep));
     transform: rotate(6deg);
   }
 

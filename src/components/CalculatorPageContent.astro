@@ -6,12 +6,22 @@
 // the home editor. Mirrors the standalone platform template's look, but without
 // the platform Dashboard or platform cross-promo.
 import OnThisPage from './OnThisPage.astro';
+import YouTubeHero from './YouTubeHero.astro';
+import WhatsAppHero from './WhatsAppHero.astro';
+import DiscordHero from './DiscordHero.astro';
+import BlueskyHero from './BlueskyHero.astro';
+import RedditHero from './RedditHero.astro';
+import PinterestHero from './PinterestHero.astro';
+import TikTokCounterHero from './TikTokCounterHero.astro';
+import ToolSectionCards from './ToolSectionCards.astro';
+import ToolCta from './ToolCta.astro';
 import type { ToolDefinition } from '../data/tools';
 import { calculators } from '../data/calculators';
+import { PLATFORM_COUNTERS } from '../data/platformCounters';
 import { DEFAULT_LOCALE } from '../i18n/config';
 import { getTranslations } from '../i18n';
 import { interp } from '../i18n/interp';
-import { buildCanonicalSlugs, prepareToolContent } from '../lib/headingAnchors';
+import { buildCanonicalSlugs, prepareToolContent, splitToolSections } from '../lib/headingAnchors';
 import { formatLocaleDate } from '../lib/contentDates';
 
 interface Props {
@@ -28,6 +38,29 @@ const globalT = getTranslations(lang);
 
 const canonicalSlugs = buildCanonicalSlugs(tool.content[DEFAULT_LOCALE] ?? '');
 const { html: bodyHtml, sections } = prepareToolContent(tStr(tool.content), canonicalSlugs);
+
+// The 7 per-platform character counters get the redesigned treatment: prose
+// body reframed as hover-active, brand-themed icon cards + the shared CTA card.
+const isCounter = !!PLATFORM_COUNTERS[tool.id];
+const cardSections = isCounter ? splitToolSections(bodyHtml) : [];
+
+// Per-counter brand accent — themes the closing CTA card (and, in future, the
+// hero) for each character-counter platform.
+const COUNTER_ACCENT: Record<string, string> = {
+  youtube: '#ff0000',
+  // The TikTok counter page uses a blue accent scheme (per its design), not the
+  // TikTok magenta the platform + ad-preview pages use.
+  tiktok: '#2f6bfe',
+  pinterest: '#e60023',
+  reddit: '#ff4500',
+  bluesky: '#1185fe',
+  discord: '#5865f2',
+  whatsapp: '#25d366',
+};
+const ctaAccent = COUNTER_ACCENT[tool.id];
+// Card palette key: TikTok's counter uses a dedicated blue theme so it doesn't
+// collide with the shared magenta 'tiktok' key.
+const cardTheme = tool.id === 'tiktok' ? 'tiktok-counter' : tool.id;
 const lastUpdatedLine = interp(globalT.toolPage.lastUpdated, {
   date: formatLocaleDate(tool.lastUpdated, lang),
 });
@@ -50,20 +83,82 @@ const relatedBlurb = tool.related
   : undefined;
 ---
 
-<section class="tool-page container-page">
-  <header class="tool-page__prose tool-page__head">
-    <h1 class="tool-page__title">{tStr(tool.titles)}</h1>
-    {introText && <p class="tool-page__lede">{introText}</p>}
-    <OnThisPage label={globalT.toolPage.onThisPage} sections={sections} />
-  </header>
+<section class:list={['tool-page container-page', { 'tool-page--cta-tight': isCounter, 'tool-page--counter': isCounter }]}>
+  {tool.id === 'youtube' ? (
+    <YouTubeHero
+      title={tStr(tool.titles)}
+      intro={introText}
+      sections={sections}
+      onThisPageLabel={globalT.toolPage.onThisPage}
+    />
+  ) : tool.id === 'whatsapp' ? (
+    <WhatsAppHero
+      title={tStr(tool.titles)}
+      intro={introText}
+      sections={sections}
+      onThisPageLabel={globalT.toolPage.onThisPage}
+    />
+  ) : tool.id === 'discord' ? (
+    <DiscordHero
+      title={tStr(tool.titles)}
+      intro={introText}
+      sections={sections}
+      onThisPageLabel={globalT.toolPage.onThisPage}
+    />
+  ) : tool.id === 'bluesky' ? (
+    <BlueskyHero
+      title={tStr(tool.titles)}
+      intro={introText}
+      sections={sections}
+      onThisPageLabel={globalT.toolPage.onThisPage}
+    />
+  ) : tool.id === 'reddit' ? (
+    <RedditHero
+      title={tStr(tool.titles)}
+      intro={introText}
+      sections={sections}
+      onThisPageLabel={globalT.toolPage.onThisPage}
+    />
+  ) : tool.id === 'pinterest' ? (
+    <PinterestHero
+      title={tStr(tool.titles)}
+      intro={introText}
+      sections={sections}
+      onThisPageLabel={globalT.toolPage.onThisPage}
+    />
+  ) : tool.id === 'tiktok' ? (
+    <TikTokCounterHero
+      title={tStr(tool.titles)}
+      intro={introText}
+      sections={sections}
+      onThisPageLabel={globalT.toolPage.onThisPage}
+    />
+  ) : (
+    <header class="tool-page__prose tool-page__head">
+      <h1 class="tool-page__title">{tStr(tool.titles)}</h1>
+      {introText && <p class="tool-page__lede">{introText}</p>}
+      <OnThisPage label={globalT.toolPage.onThisPage} sections={sections} />
+    </header>
+  )}
 
-  {/* Live calculator island, supplied by the route via the default slot. */}
-  <div class="tool-page__tool">
+  {/* Live calculator island, supplied by the route via the default slot. The
+      YouTube editor recolors its link-accent (focus rings) to brand red by
+      overriding the link tokens on this wrapper — scoped to this page only. */}
+  <div
+    class="tool-page__tool"
+    style={ctaAccent
+      ? `--color-link:${ctaAccent};--color-link-deep:color-mix(in srgb, ${ctaAccent} 78%, #000);--color-link-bg-soft:color-mix(in srgb, ${ctaAccent} 14%, transparent)`
+      : undefined}
+  >
     <slot />
   </div>
 
   <article class="tool-page__prose">
-    <div class="tool-page__body" set:html={bodyHtml} />
+    {isCounter ? (
+      <ToolSectionCards sections={cardSections} theme={cardTheme} />
+    ) : (
+      <div class="tool-page__body" set:html={bodyHtml} />
+    )}
 
     {faqItems.length > 0 && (
       <section class="tool-page__faq" aria-label={globalT.faq.title}>
@@ -94,11 +189,15 @@ const relatedBlurb = tool.related
 
     <p class="tool-page__updated">{lastUpdatedLine}</p>
 
-    <div class="tool-page__cta">
-      <h2 class="tool-page__cta-heading">{cta.heading}</h2>
-      <p class="tool-page__cta-blurb">{cta.blurb}</p>
-      <a href={homeHref} class="tool-page__btn tool-page__cta-btn">{cta.button}</a>
-    </div>
+    {isCounter ? (
+      <ToolCta heading={cta.heading} blurb={cta.blurb} button={cta.button} href={homeHref} accent={ctaAccent} />
+    ) : (
+      <div class="tool-page__cta">
+        <h2 class="tool-page__cta-heading">{cta.heading}</h2>
+        <p class="tool-page__cta-blurb">{cta.blurb}</p>
+        <a href={homeHref} class="tool-page__btn tool-page__cta-btn">{cta.button}</a>
+      </div>
+    )}
   </article>
 </section>
 
@@ -107,6 +206,20 @@ const relatedBlurb = tool.related
     scroll-margin-top: 80px;
     padding-top: 64px;
     padding-bottom: 64px;
+  }
+
+  /* Counter pages close on the ToolCta card — sit tight to the footer: trim the
+     bottom padding and cancel the footer's 96px top margin (adjacent siblings
+     under <body>, so the negative margin collapses with it). */
+  .tool-page.tool-page--cta-tight {
+    padding-bottom: 24px;
+    margin-bottom: -96px;
+  }
+
+  /* Counter pages align the editor + content to the same measure as the hero. */
+  .tool-page--counter .tool-page__tool,
+  .tool-page--counter .tool-page__prose {
+    max-width: 64rem;
   }
 
   .tool-page__prose {

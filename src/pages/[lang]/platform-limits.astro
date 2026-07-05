@@ -1,5 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import ToolCta from '../../components/ToolCta.astro';
 import { getTranslations } from '../../i18n';
 import { interp } from '../../i18n/interp';
 import { LOCALE_CODES, getLocale } from '../../i18n/config';
@@ -22,8 +23,6 @@ const home = `/${lang}/${locale.slug}/`;
 const nf = new Intl.NumberFormat(lang);
 
 // Per-tool localized URLs so each table row links to its dedicated tool page.
-// Platform guides live at /[lang]/<slug>/; Tools (SMS, Google SERP, …) live
-// at /[lang]/tools/<slug>/ — so we build from both registries.
 const toolHref: Record<string, string> = {};
 for (const tool of tools) {
   toolHref[tool.id] = `/${lang}/${tool.slugs[lang] ?? tool.slugs['en']}/`;
@@ -34,10 +33,16 @@ for (const calc of calculators) {
 
 const L = t.limitsPage;
 
-// Brand names stay untranslated (site-wide convention).
+// Heading accent: blue-tint the phrase after the first comma (per the design).
+const [headHead, ...headRestParts] = L.heading.split(',');
+const headTail = headRestParts.join(',').trim();
+
+// Brand names stay untranslated (site-wide convention). `logo` maps to a file
+// under /public/logos/ (branded tiles, so the table + timeline read at a glance).
 const rows = [
   {
     name: 'LinkedIn',
+    logo: 'linkedin',
     href: toolHref['linkedin'],
     limit: nf.format(LIMITS.LINKEDIN_POST),
     foldMobile: `~${nf.format(FOLDS.linkedin.mobile)}`,
@@ -46,6 +51,7 @@ const rows = [
   },
   {
     name: 'X (Twitter)',
+    logo: 'twitter',
     href: toolHref['twitter'],
     limit: nf.format(LIMITS.TWEET),
     foldMobile: L.noFold,
@@ -54,6 +60,7 @@ const rows = [
   },
   {
     name: 'Threads',
+    logo: 'threads',
     href: toolHref['threads'],
     limit: nf.format(LIMITS.THREADS),
     foldMobile: `~${nf.format(FOLDS.threads.mobile)}`,
@@ -62,6 +69,7 @@ const rows = [
   },
   {
     name: 'Instagram',
+    logo: 'instagram',
     href: toolHref['instagram'],
     limit: nf.format(LIMITS.INSTAGRAM_CAPTION),
     foldMobile: `~${nf.format(FOLDS.instagram.mobile)}`,
@@ -73,6 +81,7 @@ const rows = [
   },
   {
     name: 'Facebook',
+    logo: 'facebook',
     href: toolHref['facebook'],
     limit: nf.format(LIMITS.FACEBOOK_POST),
     foldMobile: `~${nf.format(FOLDS.facebook.mobile)}`,
@@ -81,6 +90,7 @@ const rows = [
   },
   {
     name: 'TikTok',
+    logo: 'tiktok',
     href: toolHref['tiktok-guide'],
     limit: nf.format(LIMITS.TIKTOK_CAPTION_MAX),
     foldMobile: `~${nf.format(FOLDS.tiktok.mobile)}`,
@@ -89,6 +99,7 @@ const rows = [
   },
   {
     name: 'SMS (GSM 7-bit)',
+    logo: 'sms',
     href: toolHref['sms'],
     limit: nf.format(SMS_LIMITS.GSM.singlePart),
     foldMobile: L.noFold,
@@ -100,6 +111,7 @@ const rows = [
   },
   {
     name: 'SMS (Unicode)',
+    logo: 'sms',
     href: toolHref['sms'],
     limit: nf.format(SMS_LIMITS.UNICODE.singlePart),
     foldMobile: L.noFold,
@@ -112,6 +124,7 @@ const rows = [
 const ruleSections = [
   {
     name: 'LinkedIn',
+    logo: 'linkedin',
     href: toolHref['linkedin'],
     body: interp(L.rules.linkedin, {
       limit: nf.format(LIMITS.LINKEDIN_POST),
@@ -121,6 +134,7 @@ const ruleSections = [
   },
   {
     name: 'X (Twitter)',
+    logo: 'twitter',
     href: toolHref['twitter'],
     body: interp(L.rules.twitter, {
       limit: nf.format(LIMITS.TWEET),
@@ -129,6 +143,7 @@ const ruleSections = [
   },
   {
     name: 'Threads',
+    logo: 'threads',
     href: toolHref['threads'],
     body: interp(L.rules.threads, {
       limit: nf.format(LIMITS.THREADS),
@@ -137,6 +152,7 @@ const ruleSections = [
   },
   {
     name: 'Instagram',
+    logo: 'instagram',
     href: toolHref['instagram'],
     body: interp(L.rules.instagram, {
       limit: nf.format(LIMITS.INSTAGRAM_CAPTION),
@@ -147,6 +163,7 @@ const ruleSections = [
   },
   {
     name: 'Facebook',
+    logo: 'facebook',
     href: toolHref['facebook'],
     body: interp(L.rules.facebook, {
       limit: nf.format(LIMITS.FACEBOOK_POST),
@@ -156,6 +173,7 @@ const ruleSections = [
   },
   {
     name: 'TikTok',
+    logo: 'tiktok',
     href: toolHref['tiktok-guide'],
     body: interp(L.rules.tiktok, {
       limit: nf.format(LIMITS.TIKTOK_CAPTION_MAX),
@@ -165,6 +183,7 @@ const ruleSections = [
   },
   {
     name: 'SMS',
+    logo: 'sms',
     href: toolHref['sms'],
     body: interp(L.rules.sms, {
       gsmSingle: nf.format(SMS_LIMITS.GSM.singlePart),
@@ -175,6 +194,7 @@ const ruleSections = [
   },
 ];
 
+const cta = t.toolPage.cta;
 const site = Astro.site ?? new URL('https://posttruncate.com');
 const breadcrumbJsonLd = {
   '@context': 'https://schema.org',
@@ -193,22 +213,69 @@ const breadcrumbJsonLd = {
   description={L.description}
   jsonLd={[breadcrumbJsonLd]}
 >
-  <section class="page container-page">
-    <article class="page__prose">
-      <nav class="page__crumbs" aria-label={L.heading}>
+  <section class="lp container-page">
+    <nav class="lp__crumbs" aria-label={L.heading}>
         <a href={home}>{t.breadcrumbs.home}</a>
-        <span aria-hidden="true">/</span>
+        <span aria-hidden="true">›</span>
+        <span>{L.eyebrow}</span>
+        <span aria-hidden="true">›</span>
         <span aria-current="page">{L.heading}</span>
       </nav>
 
-      <header class="page__head">
-        <p class="page__eyebrow">{L.eyebrow}</p>
-        <h1 class="page__title">{L.heading}</h1>
-        <p class="page__intro">{L.lede}</p>
+      {/* ── Hero ──────────────────────────────────────────────────────── */}
+      <header class="lp-hero">
+        <div class="lp-hero__copy">
+          <span class="lp-hero__eyebrow">{L.eyebrow}</span>
+          <h1 class="lp-hero__title">
+            <span>{headHead}{headTail ? ',' : ''}</span>
+            {headTail && <> <span class="lp-hero__accent">{headTail}</span></>}
+          </h1>
+          <p class="lp-hero__lede">{L.lede}</p>
+        </div>
+
+        <div class="lp-hero__art" aria-hidden="true">
+          <span class="lp-hero__blob"></span>
+          <span class="lp-hero__dots"></span>
+          <div class="lp-hero__doc">
+            <div class="lp-hero__doc-head">
+              <span class="lp-hero__doc-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M9 8h8M9 12h8M9 16h5"></path>
+                  <circle cx="5.5" cy="8" r="0.9" fill="#fff" stroke="none"></circle>
+                  <circle cx="5.5" cy="12" r="0.9" fill="#fff" stroke="none"></circle>
+                  <circle cx="5.5" cy="16" r="0.9" fill="#fff" stroke="none"></circle>
+                </svg>
+              </span>
+              <div class="lp-hero__doc-headlines">
+                <span></span>
+                <span></span>
+              </div>
+            </div>
+            <div class="lp-hero__grid">
+              <span class="lp-hero__bar lp-hero__bar--1"></span>
+              <span class="lp-hero__bar lp-hero__bar--2"></span>
+              <div class="lp-hero__row"><span></span><span></span><span></span></div>
+              <div class="lp-hero__row"><span></span><span></span><span></span></div>
+              <div class="lp-hero__row"><span></span><span></span><span></span></div>
+            </div>
+          </div>
+
+          <span class="lp-hero__badge lp-hero__badge--chart">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"></path><path d="M7 21v-6M12 21V9M17 21v-9"></path></svg>
+          </span>
+          <span class="lp-hero__badge lp-hero__badge--chat">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+          </span>
+          <span class="lp-hero__badge lp-hero__badge--hash">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9h16M4 15h16M10 3 8 21M16 3l-2 18"></path></svg>
+          </span>
+        </div>
       </header>
 
-      <div class="limits__scroll">
-        <table class="limits__table">
+      <div class="lp__inner">
+      {/* ── Limits table ──────────────────────────────────────────────── */}
+      <div class="lp-table__wrap">
+        <table class="lp-table">
           <caption class="sr-only">{L.table.caption}</caption>
           <thead>
             <tr>
@@ -224,11 +291,14 @@ const breadcrumbJsonLd = {
               rows.map((r) => (
                 <tr>
                   <th scope="row" data-label={L.table.platform}>
-                    <a href={r.href}>{r.name}</a>
+                    <a href={r.href}>
+                      <img class="lp-logo" src={`/logos/${r.logo}.svg`} width="24" height="24" alt="" loading="lazy" />
+                      <span>{r.name}</span>
+                    </a>
                   </th>
-                  <td class="limits__num" data-label={L.table.limit}>{r.limit}</td>
-                  <td class="limits__num" data-label={L.table.foldMobile}>{r.foldMobile}</td>
-                  <td class="limits__num" data-label={L.table.foldDesktop}>{r.foldDesktop}</td>
+                  <td class="lp-num" data-label={L.table.limit}>{r.limit}</td>
+                  <td class="lp-num" data-label={L.table.foldMobile}>{r.foldMobile}</td>
+                  <td class="lp-num" data-label={L.table.foldDesktop}>{r.foldDesktop}</td>
                   <td data-label={L.table.notes}>{r.note}</td>
                 </tr>
               ))
@@ -237,78 +307,44 @@ const breadcrumbJsonLd = {
         </table>
       </div>
 
-      <h2 class="limits__rules-heading">{L.rulesHeading}</h2>
-      {
-        ruleSections.map((s) => (
-          <section class="limits__rule">
-            <h3>
-              <a href={s.href}>{s.name}</a>
-            </h3>
-            <p>{s.body}</p>
-          </section>
-        ))
-      }
+      {/* ── Per-platform truncation rules (timeline) ──────────────────── */}
+      <h2 class="lp-rules__heading">{L.rulesHeading}</h2>
+      <ol class="lp-rules">
+        {
+          ruleSections.map((s) => (
+            <li class="lp-rule">
+              <span class="lp-rule__marker">
+                <img src={`/logos/${s.logo}.svg`} width="30" height="30" alt="" loading="lazy" />
+              </span>
+              <div class="lp-rule__content">
+                <h3><a href={s.href}>{s.name}</a></h3>
+                <p>{s.body}</p>
+              </div>
+            </li>
+          ))
+        }
+      </ol>
 
-      <p class="page__related">
-        <a href={`/${lang}/faq/`}>{t.faq.viewAll} →</a>
-      </p>
+      <a class="lp-faq-btn" href={`/${lang}/faq/`}>{t.faq.viewAll} →</a>
 
-      <p class="page__back">
-        <a href={`${home}#workspace`}>{t.pages.common.backHome}</a>
-      </p>
-    </article>
+      {/* ── Closing CTA — the shared card used across the site ─────────── */}
+      <ToolCta heading={cta.heading} blurb={cta.blurb} button={cta.button} href={`${home}#workspace`} />
+    </div>
   </section>
 </Layout>
 
 <style>
-  /* Page scaffold — mirrors Prose.astro so standalone pages stay uniform. */
-  .page {
+  .lp {
     scroll-margin-top: 80px;
-    padding-top: 64px;
+    padding-top: 48px;
+    /* Closes on the ToolCta card — sit tight to the footer (adjacent sibling,
+       so the negative margin collapses with the footer's 96px top margin). */
     padding-bottom: 24px;
+    margin-bottom: -96px;
   }
-  .page__prose {
-    max-width: 56rem;
+  .lp__inner {
+    max-width: 64rem;
     margin-inline: auto;
-  }
-  .page__crumbs {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    margin-bottom: 24px;
-    font-size: 13px;
-    color: var(--color-mute);
-  }
-  .page__crumbs a {
-    color: var(--color-body);
-    transition: color 0.15s ease;
-  }
-  .page__crumbs a:hover {
-    color: var(--color-ink);
-  }
-  .page__head {
-    margin-bottom: 32px;
-  }
-  .page__eyebrow {
-    font-family: var(--font-mono);
-    font-size: 12px;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-    color: var(--color-mute);
-  }
-  .page__title {
-    margin-top: 12px;
-    font-size: clamp(30px, 5vw, 40px);
-    font-weight: 600;
-    line-height: 1.08;
-    letter-spacing: -1.6px;
-    color: var(--color-ink);
-  }
-  .page__intro {
-    margin-top: 16px;
-    font-size: 18px;
-    line-height: 28px;
-    color: var(--color-body);
   }
 
   .sr-only {
@@ -320,145 +356,415 @@ const breadcrumbJsonLd = {
     white-space: nowrap;
   }
 
-  /* The limits table — horizontal scroll on narrow viewports. */
-  .limits__scroll {
+  /* ── Breadcrumb ──────────────────────────────────────────────────────── */
+  .lp__crumbs {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 20px;
+    font-size: 13px;
+    color: var(--color-mute);
+  }
+  .lp__crumbs a {
+    color: var(--color-body);
+    transition: color 0.15s ease;
+  }
+  .lp__crumbs a:hover {
+    color: var(--color-ink);
+  }
+
+  /* ── Hero ────────────────────────────────────────────────────────────── */
+  .lp-hero {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 32px;
+    align-items: start;
+    margin-bottom: 48px;
+  }
+  .lp-hero__eyebrow {
+    display: inline-block;
+    padding: 6px 12px;
+    border-radius: var(--radius-pill);
+    background: var(--color-link-bg-soft);
+    color: var(--color-link-deep);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .lp-hero__title {
+    margin-top: 18px;
+    font-size: clamp(30px, 5vw, 44px);
+    font-weight: 600;
+    line-height: 1.08;
+    letter-spacing: -1.6px;
+    color: var(--color-ink);
+    text-wrap: balance;
+  }
+  .lp-hero__accent {
+    color: var(--color-link);
+  }
+  .lp-hero__lede {
+    margin-top: 16px;
+    max-width: 34rem;
+    font-size: 18px;
+    line-height: 28px;
+    color: var(--color-body);
+  }
+
+  /* Hero illustration — document/table card with floating badges. */
+  .lp-hero__art {
+    position: relative;
+    display: none;
+    aspect-ratio: 7 / 5;
+    max-width: 480px;
+    width: 100%;
+    margin-inline: auto;
+  }
+  /* Soft blue shape peeking from behind the card. */
+  .lp-hero__blob {
+    position: absolute;
+    right: 4%;
+    top: 20%;
+    width: 56%;
+    aspect-ratio: 0.92;
+    border-radius: 34px;
+    background: color-mix(in srgb, var(--color-link) 9%, var(--color-canvas-soft));
+  }
+  .lp-hero__dots {
+    position: absolute;
+    left: 1%;
+    top: 12%;
+    width: 78px;
+    height: 78px;
+    background-image: radial-gradient(currentColor 1.4px, transparent 1.4px);
+    background-size: 12px 12px;
+    color: color-mix(in srgb, var(--color-link) 28%, transparent);
+  }
+  .lp-hero__doc {
+    position: absolute;
+    top: 50%;
+    left: 52%;
+    transform: translate(-50%, -50%);
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    padding: 22px 20px;
+    border-radius: 22px;
+    background: var(--color-canvas);
+    box-shadow: var(--shadow-e5);
+    z-index: 1;
+  }
+  .lp-hero__doc-head {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .lp-hero__doc-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    flex-shrink: 0;
+    border-radius: 14px;
+    background: linear-gradient(145deg, #5c8cf5 0%, #3b6be6 100%);
+  }
+  .lp-hero__doc-icon svg {
+    width: 26px;
+    height: 26px;
+  }
+  .lp-hero__doc-headlines {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    flex: 1;
+  }
+  .lp-hero__doc-headlines span {
+    height: 8px;
+    border-radius: var(--radius-pill);
+    background: var(--color-canvas-soft-2);
+  }
+  .lp-hero__doc-headlines span:first-child {
+    width: 72%;
+  }
+  .lp-hero__doc-headlines span:last-child {
+    width: 48%;
+  }
+  /* Table-grid skeleton — all light blue, like rows of cells. */
+  .lp-hero__grid {
+    display: flex;
+    flex-direction: column;
+    gap: 11px;
+  }
+  .lp-hero__bar {
+    height: 9px;
+    border-radius: var(--radius-pill);
+    background: var(--color-link-bg-soft);
+  }
+  .lp-hero__bar--1 {
+    width: 82%;
+  }
+  .lp-hero__bar--2 {
+    width: 60%;
+  }
+  .lp-hero__row {
+    display: flex;
+    gap: 8px;
+  }
+  .lp-hero__row span {
+    height: 9px;
+    flex: 1;
+    border-radius: var(--radius-pill);
+    background: var(--color-link-bg-soft);
+  }
+  .lp-hero__badge {
+    position: absolute;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 52px;
+    height: 52px;
+    border-radius: 15px;
+    background: var(--color-canvas);
+    box-shadow: var(--shadow-e5);
+    color: var(--color-link);
+    z-index: 2;
+  }
+  .lp-hero__badge svg {
+    width: 24px;
+    height: 24px;
+  }
+  /* Chart badge (left) — soft-blue with a downward speech tail. */
+  .lp-hero__badge--chart {
+    left: 1%;
+    top: 46%;
+    background: color-mix(in srgb, var(--color-link) 10%, var(--color-canvas));
+  }
+  .lp-hero__badge--chart::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 50%;
+    width: 12px;
+    height: 12px;
+    border-radius: 3px;
+    background: color-mix(in srgb, var(--color-link) 10%, var(--color-canvas));
+    transform: translateX(-50%) rotate(45deg);
+  }
+  .lp-hero__badge--chat {
+    right: 1%;
+    top: 8%;
+    background: color-mix(in srgb, var(--color-link) 10%, var(--color-canvas));
+  }
+  .lp-hero__badge--hash {
+    right: 5%;
+    bottom: 12%;
+  }
+
+  /* ── Limits table ────────────────────────────────────────────────────── */
+  .lp-table__wrap {
     overflow-x: auto;
-    border-radius: var(--radius-lg);
-    box-shadow: var(--shadow-e1);
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-e2);
     background: var(--color-canvas);
   }
-  .limits__table {
+  .lp-table {
     width: 100%;
-    min-width: 640px;
+    min-width: 680px;
     border-collapse: collapse;
     font-size: 14px;
     line-height: 20px;
   }
-  .limits__table thead th {
-    padding: 14px 16px;
+  .lp-table thead th {
+    padding: 16px 18px;
     text-align: left;
     font-family: var(--font-mono);
     font-size: 11px;
-    letter-spacing: 0.04em;
+    letter-spacing: 0.05em;
     text-transform: uppercase;
     font-weight: 500;
     color: var(--color-mute);
+    background: var(--color-canvas-soft);
     border-bottom: 1px solid var(--color-hairline);
     white-space: nowrap;
   }
-  .limits__table tbody th,
-  .limits__table tbody td {
-    padding: 14px 16px;
+  .lp-table tbody th,
+  .lp-table tbody td {
+    padding: 16px 18px;
     text-align: left;
-    vertical-align: top;
+    vertical-align: middle;
     border-bottom: 1px solid var(--color-hairline);
     color: var(--color-body);
   }
-  .limits__table tbody tr:last-child th,
-  .limits__table tbody tr:last-child td {
+  .lp-table tbody tr:last-child th,
+  .lp-table tbody tr:last-child td {
     border-bottom: none;
   }
-  .limits__table tbody th {
+  .lp-table tbody tr {
+    transition: background 0.15s ease;
+  }
+  .lp-table tbody tr:hover {
+    background: var(--color-canvas-soft);
+  }
+  .lp-table tbody th {
     font-weight: 600;
     color: var(--color-ink);
     white-space: nowrap;
   }
-  .limits__table tbody th a {
+  .lp-table tbody th a {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
     color: inherit;
-    text-decoration: underline;
-    text-underline-offset: 3px;
-    text-decoration-color: var(--color-hairline);
-    transition: text-decoration-color 0.15s ease;
+    transition: color 0.15s ease;
   }
-  .limits__table tbody th a:hover {
-    text-decoration-color: currentColor;
+  .lp-table tbody th a:hover {
+    color: var(--color-link);
   }
-  .limits__num {
+  .lp-logo {
+    flex-shrink: 0;
+    border-radius: 6px;
+    display: block;
+  }
+  .lp-num {
     font-variant-numeric: tabular-nums;
     white-space: nowrap;
+    color: var(--color-ink);
+    font-weight: 500;
   }
 
-  /* Detailed rule sections */
-  .limits__rules-heading {
-    margin-top: 48px;
+  /* ── Truncation-rule timeline ────────────────────────────────────────── */
+  .lp-rules__heading {
+    margin-top: 56px;
+    margin-bottom: 28px;
     font-size: 26px;
     font-weight: 600;
     line-height: 32px;
     letter-spacing: -0.8px;
     color: var(--color-ink);
   }
-  .limits__rule {
-    margin-top: 28px;
+  .lp-rules {
+    list-style: none;
+    margin: 0;
+    padding: 0;
   }
-  .limits__rule h3 {
+  .lp-rule {
+    position: relative;
+    display: flex;
+    gap: 20px;
+    padding-bottom: 30px;
+  }
+  .lp-rule:last-child {
+    padding-bottom: 0;
+  }
+  /* Dashed connector between markers. */
+  .lp-rule:not(:last-child)::before {
+    content: '';
+    position: absolute;
+    left: 23px;
+    top: 50px;
+    bottom: 4px;
+    border-left: 2px dashed var(--color-hairline);
+    transform: translateX(-1px);
+  }
+  .lp-rule__marker {
+    position: relative;
+    z-index: 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 46px;
+    height: 46px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    background: var(--color-canvas);
+    box-shadow: var(--shadow-e2);
+  }
+  .lp-rule__marker img {
+    width: 30px;
+    height: 30px;
+    border-radius: 7px;
+    display: block;
+  }
+  .lp-rule__content {
+    padding-top: 2px;
+    min-width: 0;
+  }
+  .lp-rule__content h3 {
     font-size: 18px;
     font-weight: 600;
     line-height: 26px;
     letter-spacing: -0.4px;
     color: var(--color-ink);
   }
-  .limits__rule h3 a {
+  .lp-rule__content h3 a {
     color: inherit;
-    transition: opacity 0.15s ease;
-  }
-  .limits__rule h3 a:hover {
-    opacity: 0.75;
-  }
-  .limits__rule p {
-    margin-top: 10px;
-    font-size: 16px;
-    line-height: 28px;
-    color: var(--color-body);
-  }
-
-  .page__related {
-    margin-top: 40px;
-  }
-  .page__related a {
-    font-size: 15px;
-    font-weight: 500;
-    color: var(--color-ink);
-    text-decoration: underline;
-    text-underline-offset: 3px;
-  }
-  .page__related a:hover {
-    opacity: 0.75;
-  }
-
-  .page__back {
-    margin-top: 48px;
-    padding-top: 24px;
-    border-top: 1px solid var(--color-hairline);
-  }
-  .page__back a {
-    font-size: 14px;
-    font-weight: 500;
-    color: var(--color-body);
     transition: color 0.15s ease;
   }
-  .page__back a:hover {
-    color: var(--color-ink);
+  .lp-rule__content h3 a:hover {
+    color: var(--color-link);
+  }
+  .lp-rule__content p {
+    margin-top: 8px;
+    font-size: 15.5px;
+    line-height: 26px;
+    color: var(--color-body);
   }
 
-  @media (max-width: 768px) {
-    .page {
-      padding-top: 48px;
+  /* ── "View all FAQs" button ──────────────────────────────────────────── */
+  .lp-faq-btn {
+    display: inline-flex;
+    align-items: center;
+    margin-top: 40px;
+    padding: 11px 20px;
+    border-radius: var(--radius-pill);
+    background: var(--color-canvas);
+    box-shadow: var(--shadow-e2);
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--color-link);
+    transition: background 0.15s ease, transform 100ms ease;
+  }
+  .lp-faq-btn:hover {
+    background: var(--color-link-bg-soft);
+  }
+  .lp-faq-btn:active {
+    transform: scale(0.98);
+  }
+
+  @media (min-width: 900px) {
+    .lp-hero {
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 48px;
+      margin-bottom: 56px;
+    }
+    .lp-hero__art {
+      display: block;
     }
   }
 
-  /* Mobile: stack each row as a labelled card so the full table fits the
-     viewport without horizontal scrolling. */
+  @media (max-width: 768px) {
+    .lp {
+      padding-top: 32px;
+    }
+  }
+
+  /* Mobile: stack each table row as a labelled card. */
   @media (max-width: 640px) {
-    .limits__scroll {
+    .lp-table__wrap {
       overflow-x: visible;
       box-shadow: none;
       background: transparent;
       border-radius: 0;
     }
-    .limits__table {
+    .lp-table {
       min-width: 0;
     }
-    .limits__table thead {
+    .lp-table thead {
       position: absolute;
       width: 1px;
       height: 1px;
@@ -466,23 +772,22 @@ const breadcrumbJsonLd = {
       clip: rect(0, 0, 0, 0);
       white-space: nowrap;
     }
-    .limits__table,
-    .limits__table tbody,
-    .limits__table tr,
-    .limits__table tbody th,
-    .limits__table tbody td {
+    .lp-table,
+    .lp-table tbody,
+    .lp-table tr,
+    .lp-table tbody th,
+    .lp-table tbody td {
       display: block;
     }
-    .limits__table tr {
-      border: 1px solid var(--color-hairline);
+    .lp-table tr {
       border-radius: var(--radius-lg);
       box-shadow: var(--shadow-e1);
       background: var(--color-canvas);
       padding: 8px 16px;
       margin-bottom: 16px;
     }
-    .limits__table tbody th,
-    .limits__table tbody td {
+    .lp-table tbody th,
+    .lp-table tbody td {
       padding: 10px 0;
       border-bottom: 1px solid var(--color-hairline);
       white-space: normal;
@@ -490,13 +795,13 @@ const breadcrumbJsonLd = {
       justify-content: space-between;
       gap: 16px;
     }
-    .limits__table tbody tr td:last-child {
+    .lp-table tbody tr td:last-child {
       border-bottom: none;
     }
-    .limits__table tbody th {
+    .lp-table tbody th {
       font-size: 16px;
     }
-    .limits__table tbody td::before {
+    .lp-table tbody td::before {
       content: attr(data-label);
       font-family: var(--font-mono);
       font-size: 11px;
@@ -507,7 +812,7 @@ const breadcrumbJsonLd = {
       flex: 0 0 auto;
       align-self: center;
     }
-    .limits__num {
+    .lp-num {
       white-space: normal;
     }
   }

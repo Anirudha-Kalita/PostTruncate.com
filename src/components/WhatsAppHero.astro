@@ -1,0 +1,325 @@
+---
+// Two-column marketing hero for the WhatsApp character-counter page. Left: a
+// green eyebrow badge, headline (with the phrase after the em-dash in a green
+// gradient) + lede + on-this-page pills. Right: a phone mockup with the WhatsApp
+// logo, a text-status skeleton and a chat input bar, plus floating "700 status
+// limit", chat and profile badges over dotted-grid + soft-green decoration.
+//
+// The accent is everything after the "—" so it stays language-agnostic across
+// all 10 locales. The illustration is decorative (aria-hidden).
+import OnThisPage from './OnThisPage.astro';
+import type { SectionAnchor } from '../lib/headingAnchors';
+
+interface Props {
+  title: string;
+  intro: string;
+  sections: SectionAnchor[];
+  onThisPageLabel: string;
+}
+
+const { title, intro, sections, onThisPageLabel } = Astro.props;
+
+const dashIndex = title.indexOf('—');
+const titleHead = dashIndex >= 0 ? title.slice(0, dashIndex + 1) : title;
+const titleTail = dashIndex >= 0 ? title.slice(dashIndex + 1).trim() : '';
+
+const WA_GLYPH =
+  'M17.5 6.4A7.6 7.6 0 0 0 5.6 15.6L4.5 19.5l4-1.05a7.6 7.6 0 0 0 3.6.92h.003a7.6 7.6 0 0 0 5.4-13zM12.1 18.1a6.3 6.3 0 0 1-3.2-.88l-.23-.14-2.37.62.63-2.31-.15-.24a6.3 6.3 0 1 1 5.32 2.95zm3.47-4.72c-.19-.1-1.12-.55-1.3-.61-.17-.06-.3-.1-.42.1-.13.19-.49.61-.6.74-.11.13-.22.14-.41.05-.19-.1-.8-.3-1.53-.94-.57-.5-.95-1.13-1.06-1.32-.11-.19-.01-.29.08-.39.09-.09.19-.22.29-.34.1-.11.13-.19.19-.32.06-.13.03-.24-.02-.34-.05-.1-.42-1.02-.58-1.39-.15-.36-.31-.31-.42-.32h-.36c-.13 0-.34.05-.51.24-.17.19-.67.65-.67 1.58s.68 1.84.78 1.96c.1.13 1.34 2.05 3.25 2.87.45.2.81.31 1.09.4.46.15.87.13 1.2.08.37-.05 1.12-.46 1.28-.9.16-.44.16-.82.11-.9-.05-.08-.17-.13-.36-.23z';
+---
+
+<header class="wahero">
+  <div class="wahero__copy">
+    <span class="wahero__eyebrow">
+      <svg viewBox="0 0 24 24" width="13" height="13" fill="currentColor" aria-hidden="true">
+        <path d={WA_GLYPH}></path>
+      </svg>
+      WhatsApp tool
+    </span>
+
+    <h1 class="wahero__title">
+      <span>{titleHead}</span>
+      {titleTail && <><br /><span class="wahero__accent">{titleTail}</span></>}
+    </h1>
+    {intro && <p class="wahero__lede">{intro}</p>}
+    <OnThisPage label={onThisPageLabel} sections={sections} />
+  </div>
+
+  <div class="wahero__art" aria-hidden="true">
+    <span class="wahero__blob wahero__blob--1"></span>
+    <span class="wahero__blob wahero__blob--2"></span>
+    <span class="wahero__dots"></span>
+
+    <div class="wahero__phone">
+      <span class="wahero__notch"></span>
+      <div class="wahero__screen">
+        <div class="wahero__logo">
+          <svg viewBox="0 0 24 24" role="presentation">
+            <circle cx="12" cy="12" r="12" fill="#25D366"></circle>
+            <path fill="#fff" d={WA_GLYPH}></path>
+          </svg>
+        </div>
+        <div class="wahero__lines">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+        <div class="wahero__input">
+          <svg viewBox="0 0 24 24" class="wahero__emoji" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round">
+            <circle cx="12" cy="12" r="9"></circle><path d="M8.5 14.5s1.3 1.5 3.5 1.5 3.5-1.5 3.5-1.5"></path><path d="M9 9.5h.01M15 9.5h.01"></path>
+          </svg>
+          <span class="wahero__input-line"></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="wahero__badge wahero__badge--count">
+      <span class="wahero__num">700</span>
+      <span class="wahero__label">status limit</span>
+    </div>
+    <span class="wahero__badge wahero__badge--chat">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+      </svg>
+    </span>
+    <span class="wahero__badge wahero__badge--person">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="8" r="4"></circle><path d="M4 21a8 8 0 0 1 16 0"></path>
+      </svg>
+    </span>
+  </div>
+</header>
+
+<style>
+  .wahero {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 40px;
+    align-items: center;
+    margin-bottom: 40px;
+  }
+
+  /* ── Left column: copy (WhatsApp green) ─────────────────────────────── */
+  .wahero__eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 18px;
+    padding: 6px 12px;
+    border-radius: var(--radius-pill);
+    background: color-mix(in srgb, #25d366 16%, transparent);
+    color: #128c4a;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .wahero__title {
+    font-size: clamp(30px, 5vw, 46px);
+    font-weight: 600;
+    line-height: 1.1;
+    letter-spacing: -1.8px;
+    color: var(--color-ink);
+    text-wrap: balance;
+  }
+
+  .wahero__accent {
+    background: linear-gradient(96deg, #25d366 0%, #0e9f52 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .wahero__lede {
+    margin-top: 18px;
+    max-width: 34rem;
+    font-size: 18px;
+    line-height: 28px;
+    color: var(--color-body);
+  }
+
+  .wahero__copy :global(.on-page) {
+    margin-top: 24px;
+  }
+
+  /* ── Right column: phone mockup ─────────────────────────────────────── */
+  .wahero__art {
+    position: relative;
+    display: none;
+    aspect-ratio: 1 / 1;
+    max-width: 440px;
+    margin-inline: auto;
+    width: 100%;
+  }
+
+  .wahero__blob {
+    position: absolute;
+    border-radius: 50%;
+    background: radial-gradient(circle, color-mix(in srgb, #25d366 16%, transparent), transparent 70%);
+  }
+  .wahero__blob--1 {
+    left: 6%;
+    top: 24%;
+    width: 26%;
+    aspect-ratio: 1;
+  }
+  .wahero__blob--2 {
+    left: 10%;
+    bottom: 14%;
+    width: 18%;
+    aspect-ratio: 1;
+    opacity: 0.7;
+  }
+  .wahero__dots {
+    position: absolute;
+    right: 4%;
+    top: 12%;
+    width: 70px;
+    height: 58px;
+    background-image: radial-gradient(currentColor 1.3px, transparent 1.3px);
+    background-size: 11px 11px;
+    color: color-mix(in srgb, #25d366 30%, transparent);
+  }
+
+  /* Phone frame */
+  .wahero__phone {
+    position: absolute;
+    top: 50%;
+    left: 48%;
+    transform: translate(-50%, -50%);
+    width: 50%;
+    aspect-ratio: 9 / 17;
+    padding: 12px 11px;
+    border-radius: 30px;
+    background: var(--color-canvas);
+    box-shadow: var(--shadow-e5);
+  }
+  .wahero__notch {
+    position: absolute;
+    top: 9px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 30%;
+    height: 5px;
+    border-radius: var(--radius-pill);
+    background: var(--color-canvas-soft-2);
+  }
+  .wahero__screen {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    padding-top: 16%;
+  }
+  .wahero__logo {
+    align-self: center;
+    width: 44%;
+    aspect-ratio: 1;
+    margin-bottom: 14px;
+    filter: drop-shadow(0 6px 12px rgba(18, 140, 74, 0.28));
+  }
+  .wahero__logo svg {
+    width: 100%;
+    height: 100%;
+  }
+  .wahero__lines {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+  }
+  .wahero__lines span {
+    height: 7px;
+    border-radius: var(--radius-pill);
+    background: color-mix(in srgb, #25d366 22%, transparent);
+  }
+  .wahero__lines span:nth-child(1) {
+    width: 92%;
+  }
+  .wahero__lines span:nth-child(2) {
+    width: 76%;
+  }
+  .wahero__lines span:nth-child(3) {
+    width: 58%;
+  }
+  .wahero__input {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: auto;
+    margin-bottom: 12%;
+    padding: 8px 10px;
+    border-radius: var(--radius-pill);
+    background: var(--color-canvas-soft-2);
+  }
+  .wahero__emoji {
+    color: #128c4a;
+    flex-shrink: 0;
+  }
+  .wahero__input-line {
+    flex: 1;
+    height: 5px;
+    border-radius: var(--radius-pill);
+    background: var(--color-hairline);
+  }
+
+  /* Floating badges */
+  .wahero__badge {
+    position: absolute;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius-lg);
+    background: var(--color-canvas);
+    box-shadow: var(--shadow-e5);
+    color: #17a44f;
+  }
+  .wahero__badge--count {
+    top: 16%;
+    right: 0;
+    flex-direction: column;
+    gap: 2px;
+    padding: 12px 16px;
+    border-radius: var(--radius-xl);
+  }
+  .wahero__num {
+    font-size: 26px;
+    font-weight: 700;
+    line-height: 1.05;
+    letter-spacing: -1px;
+    color: #128c4a;
+  }
+  .wahero__label {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--color-mute);
+  }
+  .wahero__badge--chat {
+    left: 0;
+    top: 40%;
+    width: 52px;
+    height: 52px;
+  }
+  .wahero__badge--person {
+    right: 4%;
+    bottom: 18%;
+    width: 52px;
+    height: 52px;
+  }
+  .wahero__badge svg {
+    width: 24px;
+    height: 24px;
+  }
+
+  /* ── Responsive: two columns + illustration only on wider viewports ──── */
+  @media (min-width: 900px) {
+    .wahero {
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 48px;
+      margin-bottom: 48px;
+    }
+
+    .wahero__art {
+      display: block;
+    }
+  }
+</style>
