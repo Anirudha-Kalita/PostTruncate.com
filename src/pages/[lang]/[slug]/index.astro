@@ -581,14 +581,12 @@ const latestPosts = (await getPublishedPosts())
 
   /* ── Workspace — the centerpiece container under the hero ───────────────
      The island renders its own rounded panel; this section just constrains
-     and centers it. Widened ~40% over the 1200px page width (→1680px) so the
-     editor and live-preview columns get more room; it stays centered, so the
-     extra width spreads evenly to both sides. Intentionally wider than the
-     1400px page container the other sections use. */
+     and centers it. Held to the same 1400px page container width the other
+     homepage sections use, so the editor lines up with them edge-to-edge. */
   .workspace {
     scroll-margin-top: 80px;
     padding-top: var(--spacing-flow);
-    max-width: 1680px;
+    max-width: var(--max-width-page-wide);
   }
   .workspace__head {
     margin-bottom: var(--spacing-stack);
@@ -981,8 +979,6 @@ const latestPosts = (await getPublishedPosts())
   .seo-cards {
     display: grid;
     gap: 20px;
-    max-width: 60rem;
-    margin-inline: auto;
   }
   .seo-card {
     --accent: var(--color-link);
