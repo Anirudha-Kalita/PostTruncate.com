@@ -8,44 +8,109 @@ import type { ToolSection } from '../lib/headingAnchors';
 
 interface Props {
   sections: ToolSection[];
+  /** Platform key ('twitter'|'instagram'|…) selecting the icon-tile palette. */
+  theme?: string;
 }
 
-const { sections } = Astro.props;
+const { sections, theme } = Astro.props;
 
-// Rotating icon set — kept generic-but-relevant and cycled by section index so
-// the layout works for any number of sections in any locale. Each entry pairs a
-// tint class with an inline SVG (24×24, currentColor stroke).
-const ICONS = [
-  {
-    tint: 'is-blue',
-    svg: '<path d="M6 9V4h12v5M6 15v5h12v-5M4 9h16v6H4z"/>',
-  },
-  {
-    tint: 'is-violet',
-    svg: '<path d="M10 13a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1.5 1.5M14 11a5 5 0 0 0-7 0l-3 3a5 5 0 0 0 7 7l1.5-1.5"/>',
-  },
-  {
-    tint: 'is-green',
-    svg: '<circle cx="12" cy="12" r="9"/><path d="M8 14s1.5 2 4 2 4-2 4-2M9 9h.01M15 9h.01"/>',
-  },
-  {
-    tint: 'is-amber',
-    svg: '<path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0zM12 9v4M12 17h.01"/>',
-  },
-  {
-    tint: 'is-sky',
-    svg: '<path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>',
-  },
+// Per-platform icon sets — one meaningful glyph per section, chosen to match
+// that platform's own content (limit, fold, links, hashtags, etc.). Distinct
+// sets so each page reads differently; a few glyphs recur where the underlying
+// idea is the same (e.g. "links"). currentColor stroke, 24×24 viewBox.
+const ICON_SETS: Record<string, string[]> = {
+  // 1 limits · 2 links · 3 emoji/non-Latin · 4 mistakes · 5 threads
+  twitter: [
+    '<path d="M12 13a2 2 0 1 0 0-4 2 2 0 0 0 0 4z"/><path d="M13.4 11 17 7"/><path d="M4.6 17a9 9 0 1 1 14.8 0"/>',
+    '<path d="M9 17H7A5 5 0 0 1 7 7h2M15 7h2a5 5 0 0 1 0 10h-2M8 12h8"/>',
+    '<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a15 15 0 0 1 0 18 15 15 0 0 1 0-18z"/>',
+    '<path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h16.9a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0zM12 9v4M12 17h.01"/>',
+    '<path d="M12 2 2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>',
+  ],
+  // 1 caption limit · 2 125-fold · 3 hashtags · 4 saves & shares
+  instagram: [
+    '<path d="M4 6h16M4 12h10M4 18h13"/>',
+    '<circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M20 4 8.12 15.88M14.47 14.48 20 20M8.12 8.12 12 12"/>',
+    '<path d="M4 9h16M4 15h16M10 3 8 21M16 3l-2 18"/>',
+    '<path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/>',
+  ],
+  // 1 post limit · 2 desktop/mobile fold · 3 front-loading reach
+  linkedin: [
+    '<path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6M8 13h8M8 17h5"/>',
+    '<rect x="2" y="4" width="14" height="11" rx="1"/><path d="M6 19h6M9 15v4"/><rect x="17" y="9" width="5" height="12" rx="1"/>',
+    '<path d="M22 7 13.5 15.5 8.5 10.5 2 17"/><path d="M16 7h6v6"/>',
+  ],
+  // 1 limits · 2 See-More fold · 3 short posts perform · 4 fancy fonts
+  facebook: [
+    '<path d="M16 3 21 8 8 21 3 16 16 3z"/><path d="M9 9l2 2M12 6l2 2M6 12l2 2"/>',
+    '<path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/>',
+    '<path d="M3 21h18"/><rect x="5" y="10" width="3" height="8"/><rect x="10.5" y="5" width="3" height="13"/><rect x="16" y="13" width="3" height="5"/>',
+    '<path d="M4 7V5h16v2M9 19h6M12 5v14"/>',
+  ],
+  // 1 500 limit (bigger ceiling) · 2 links count full · 3 chains · 4 feed writing
+  threads: [
+    '<path d="M7 15l5 5 5-5M7 9l5-5 5 5"/>',
+    '<path d="M9 17H7A5 5 0 0 1 7 7h2M15 7h2a5 5 0 0 1 0 10h-2M8 12h8"/>',
+    '<path d="M10 6h11M10 12h11M10 18h11"/><path d="M4 5h1v4M4 9h2"/><path d="M6 18H4l2-2.5H4"/>',
+    '<path d="M12 20h9M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4 12.5-12.5z"/>',
+  ],
+  // 1 caption limit · 2 "…more" fold · 3 hashtags/9:16 canvas · 4 profile/FYP
+  tiktok: [
+    '<path d="M4 6h16M4 12h10M4 18h13"/>',
+    '<circle cx="5" cy="12" r="1.5" fill="currentColor" stroke="none"/><circle cx="12" cy="12" r="1.5" fill="currentColor" stroke="none"/><circle cx="19" cy="12" r="1.5" fill="currentColor" stroke="none"/>',
+    '<rect x="6" y="3" width="12" height="18" rx="2"/><path d="M10.5 9 15 12l-4.5 3z"/>',
+    '<circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/>',
+  ],
+};
+const DEFAULT_ICONS = [
+  '<path d="M4 7V5h16v2M9 19h6M12 5v14"/>',
+  '<path d="M9 17H7A5 5 0 0 1 7 7h2M15 7h2a5 5 0 0 1 0 10h-2M8 12h8"/>',
+  '<path d="M4 9h16M4 15h16M10 3 8 21M16 3l-2 18"/>',
+  '<path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h16.9a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0zM12 9v4M12 17h.01"/>',
 ];
+const icons = (theme && ICON_SETS[theme]) || DEFAULT_ICONS;
+
+// Per-platform tile palettes (soft fill + saturated glyph). Cards cycle through
+// them so each page's cards read in that platform's own colors. TikTok/Instagram
+// mix brand hues; the blue networks vary blue/cyan shades; default = violet.
+type Tint = { bg: string; fg: string };
+const BLUE: Tint = { bg: 'var(--color-link-bg-soft)', fg: 'var(--color-link)' };
+const BLUE_DEEP: Tint = { bg: 'var(--color-link-bg-soft)', fg: 'var(--color-link-deep)' };
+const CYAN: Tint = { bg: 'var(--color-cyan-soft)', fg: 'var(--color-cyan-deep)' };
+const VIOLET: Tint = { bg: 'var(--color-violet-soft)', fg: 'var(--color-violet-deep)' };
+const AMBER: Tint = { bg: 'var(--color-warning-soft)', fg: 'var(--color-warning-deep)' };
+const INK: Tint = { bg: 'var(--color-canvas-soft-2)', fg: 'var(--color-ink)' };
+const PINK: Tint = {
+  bg: 'color-mix(in srgb, var(--color-highlight-pink) 14%, transparent)',
+  fg: 'var(--color-highlight-magenta)',
+};
+const TT_MAGENTA: Tint = {
+  bg: 'color-mix(in srgb, #fe2c55 14%, transparent)',
+  fg: 'color-mix(in srgb, #fe2c55 82%, #000)',
+};
+const TT_CYAN: Tint = {
+  bg: 'color-mix(in srgb, #25f4ee 20%, transparent)',
+  fg: 'color-mix(in srgb, #25f4ee 55%, #013b39)',
+};
+
+const PALETTES: Record<string, Tint[]> = {
+  twitter: [BLUE, INK, CYAN, BLUE_DEEP],
+  linkedin: [BLUE, BLUE_DEEP, CYAN, BLUE],
+  facebook: [BLUE, BLUE_DEEP, CYAN, BLUE],
+  instagram: [VIOLET, PINK, AMBER, PINK],
+  threads: [VIOLET, PINK, AMBER, VIOLET],
+  tiktok: [TT_MAGENTA, TT_CYAN, INK, TT_MAGENTA],
+};
+const palette = (theme && PALETTES[theme]) || [VIOLET, PINK, AMBER, BLUE];
 ---
 
 <div class="cards">
   {sections.map((section, i) => {
-    const icon = ICONS[i % ICONS.length];
+    const tint = palette[i % palette.length];
     return (
-      <article class={`card ${icon.tint}`}>
-        <span class="card__icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" set:html={icon.svg} />
+      <article class="card">
+        <span class="card__icon" aria-hidden="true" style={`background: ${tint.bg}; color: ${tint.fg};`}>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" set:html={icons[i % icons.length]} />
         </span>
         <div class="card__content">
           <h2 class="card__title" id={section.id} set:html={section.headingHtml} />
@@ -98,28 +163,6 @@ const ICONS = [
 
   .card:hover .card__icon {
     transform: scale(1.06);
-  }
-
-  /* Tint pairs — soft fill + saturated glyph, all token-driven for dark mode. */
-  .is-blue .card__icon {
-    background: var(--color-link-bg-soft);
-    color: var(--color-link);
-  }
-  .is-violet .card__icon {
-    background: var(--color-violet-soft);
-    color: var(--color-violet-deep);
-  }
-  .is-green .card__icon {
-    background: var(--color-cyan-soft);
-    color: var(--color-cyan-deep);
-  }
-  .is-amber .card__icon {
-    background: var(--color-warning-soft);
-    color: var(--color-warning-deep);
-  }
-  .is-sky .card__icon {
-    background: var(--color-link-bg-soft);
-    color: var(--color-success);
   }
 
   /* ── Content column ─────────────────────────────────────────────────── */

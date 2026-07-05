@@ -7,9 +7,15 @@
 //   • Classic (everything else, e.g. google-serp): heading → prose → CTA.
 import OnThisPage from './OnThisPage.astro';
 import TwitterHero from './TwitterHero.astro';
+import ThreadsHero from './ThreadsHero.astro';
+import InstagramHero from './InstagramHero.astro';
+import LinkedInHero from './LinkedInHero.astro';
+import FacebookHero from './FacebookHero.astro';
+import TikTokHero from './TikTokHero.astro';
 import ToolCta from './ToolCta.astro';
 import ToolSectionCards from './ToolSectionCards.astro';
 import BlogCardGrid from './BlogCardGrid.astro';
+import PlatformFaqBlog from './PlatformFaqBlog.astro';
 import Dashboard from './island/Dashboard.tsx';
 import type { ToolDefinition } from '../data/tools';
 import type { IslandStrings } from '../i18n/types';
@@ -18,7 +24,8 @@ import { getTranslations } from '../i18n';
 import { interp } from '../i18n/interp';
 import { buildCanonicalSlugs, prepareToolContent, splitToolSections } from '../lib/headingAnchors';
 import { formatLocaleDate } from '../lib/contentDates';
-import { getBlogStrings, getPublishedPosts } from '../lib/blogI18n';
+import { BLOG_SEGMENT, getBlogStrings, getPublishedPosts } from '../lib/blogI18n';
+import { getCategoryById, getCategorySlug } from '../data/blogCategories';
 
 interface Props {
   tool: ToolDefinition;
@@ -100,12 +107,85 @@ const blogStrings = getBlogStrings(lang);
 const relatedPosts = (await getPublishedPosts())
   .filter((p) => p.data.locale === lang && p.data.relatedPlatform === relatedPlatformKey)
   .sort((a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf());
+
+// "View all articles" target: this platform's blog category hub. Falls back to
+// the blog index if the focus has no category (never happens for the 6 pages).
+const FOCUS_TO_CATEGORY: Record<string, string> = {
+  twitter: 'twitter-x',
+  instagram: 'instagram',
+  linkedin: 'linkedin',
+  facebook: 'facebook',
+  threads: 'threads',
+  tiktok: 'tiktok',
+};
+const blogCategory = focus ? getCategoryById(FOCUS_TO_CATEGORY[focus]) : undefined;
+const blogCategoryHref = blogCategory
+  ? `/${lang}/${BLOG_SEGMENT}/${getCategorySlug(blogCategory, lang)}/`
+  : `/${lang}/${BLOG_SEGMENT}/`;
+// The redesigned FAQ+Blog row shows the two latest posts (a single 2-up row).
+const faqBlogPosts = relatedPosts.slice(0, 2);
+
+// Per-platform theme colors for the FAQ/Blog section icons — mirrors each hero's
+// accent (soft tile fill + glyph), keyed by tool id.
+const FAQ_BLOG_ACCENT: Record<string, { bg: string; fg: string }> = {
+  twitter: { bg: 'var(--color-link-bg-soft)', fg: 'var(--color-link)' },
+  linkedin: { bg: 'var(--color-link-bg-soft)', fg: 'var(--color-link)' },
+  facebook: { bg: 'var(--color-link-bg-soft)', fg: 'var(--color-link)' },
+  instagram: {
+    bg: 'color-mix(in srgb, var(--color-highlight-pink) 14%, transparent)',
+    fg: 'var(--color-highlight-magenta)',
+  },
+  threads: { bg: 'var(--color-violet-soft)', fg: 'var(--color-violet-deep)' },
+  'tiktok-guide': {
+    bg: 'color-mix(in srgb, #fe2c55 14%, transparent)',
+    fg: 'color-mix(in srgb, #fe2c55 82%, #000)',
+  },
+};
+const faqBlogAccent = FAQ_BLOG_ACCENT[tool.id] ?? {
+  bg: 'var(--color-violet-soft)',
+  fg: 'var(--color-violet-deep)',
+};
 ---
 
 {isStandalone ? (
   <section class:list={['tool-page container-page', { 'tool-page--wide': useCards }]}>
     {tool.id === 'twitter' ? (
       <TwitterHero
+        title={tStr(tool.titles)}
+        intro={introText}
+        sections={sections}
+        onThisPageLabel={globalT.toolPage.onThisPage}
+      />
+    ) : tool.id === 'threads' ? (
+      <ThreadsHero
+        title={tStr(tool.titles)}
+        intro={introText}
+        sections={sections}
+        onThisPageLabel={globalT.toolPage.onThisPage}
+      />
+    ) : tool.id === 'instagram' ? (
+      <InstagramHero
+        title={tStr(tool.titles)}
+        intro={introText}
+        sections={sections}
+        onThisPageLabel={globalT.toolPage.onThisPage}
+      />
+    ) : tool.id === 'linkedin' ? (
+      <LinkedInHero
+        title={tStr(tool.titles)}
+        intro={introText}
+        sections={sections}
+        onThisPageLabel={globalT.toolPage.onThisPage}
+      />
+    ) : tool.id === 'facebook' ? (
+      <FacebookHero
+        title={tStr(tool.titles)}
+        intro={introText}
+        sections={sections}
+        onThisPageLabel={globalT.toolPage.onThisPage}
+      />
+    ) : tool.id === 'tiktok-guide' ? (
+      <TikTokHero
         title={tStr(tool.titles)}
         intro={introText}
         sections={sections}
@@ -132,32 +212,51 @@ const relatedPosts = (await getPublishedPosts())
 
     <article class="tool-page__prose">
       {useCards ? (
-        <ToolSectionCards sections={cardSections} />
+        <ToolSectionCards sections={cardSections} theme={focus} />
       ) : (
         <div class="tool-page__body" set:html={bodyHtml} />
       )}
 
-      {relatedPosts.length > 0 && (
-        <section class="tool-page__related" aria-label={blogStrings.relatedHeading}>
-          <h2 class="tool-page__related-heading">{blogStrings.relatedHeading}</h2>
-          <BlogCardGrid posts={relatedPosts} lang={lang} readMoreLabel={blogStrings.readMore} />
-        </section>
-      )}
+      {useCards ? (
+        <PlatformFaqBlog
+          lang={lang}
+          faqItems={faqItems}
+          faqTitle={globalT.faq.title}
+          faqViewAll={globalT.faq.viewAll}
+          faqHref={`/${lang}/faq/`}
+          posts={faqBlogPosts}
+          blogHeading={blogStrings.latestHeading}
+          blogViewAll={blogStrings.viewAll}
+          blogHref={blogCategoryHref}
+          readMoreLabel={blogStrings.readMore}
+          iconBg={faqBlogAccent.bg}
+          iconFg={faqBlogAccent.fg}
+        />
+      ) : (
+        <>
+          {relatedPosts.length > 0 && (
+            <section class="tool-page__related" aria-label={blogStrings.relatedHeading}>
+              <h2 class="tool-page__related-heading">{blogStrings.relatedHeading}</h2>
+              <BlogCardGrid posts={relatedPosts} lang={lang} readMoreLabel={blogStrings.readMore} />
+            </section>
+          )}
 
-      <section class="tool-page__faq" aria-label={globalT.faq.title}>
-        <h2 class="tool-page__faq-heading">{globalT.faq.title}</h2>
-        <div class="faq__list">
-          {faqItems.map((f) => (
-            <details class="faq__item">
-              <summary class="faq__q">
-                <span>{f.q}</span>
-                <span class="faq__chev" aria-hidden="true">+</span>
-              </summary>
-              <p class="faq__a">{f.a}</p>
-            </details>
-          ))}
-        </div>
-      </section>
+          <section class="tool-page__faq" aria-label={globalT.faq.title}>
+            <h2 class="tool-page__faq-heading">{globalT.faq.title}</h2>
+            <div class="faq__list">
+              {faqItems.map((f) => (
+                <details class="faq__item">
+                  <summary class="faq__q">
+                    <span>{f.q}</span>
+                    <span class="faq__chev" aria-hidden="true">+</span>
+                  </summary>
+                  <p class="faq__a">{f.a}</p>
+                </details>
+              ))}
+            </div>
+          </section>
+        </>
+      )}
 
       <p class="tool-page__updated">{lastUpdatedLine}</p>
 

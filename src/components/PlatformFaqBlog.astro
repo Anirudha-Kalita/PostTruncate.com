@@ -1,0 +1,286 @@
+---
+// Single-row FAQ + Blog block for the redesigned platform pages. FAQ accordion
+// on the left (with a "view all FAQs" link to /{lang}/faq/), the platform's
+// latest posts on the right (with a "view all articles" link to that platform's
+// blog category hub). When the locale has no posts yet the FAQ stands alone.
+import BlogPostCard from './BlogPostCard.astro';
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  lang: string;
+  faqItems: { q: string; a: string }[];
+  faqTitle: string;
+  faqViewAll: string;
+  faqHref: string;
+  posts: CollectionEntry<'blog'>[];
+  blogHeading: string;
+  blogViewAll: string;
+  blogHref: string;
+  readMoreLabel: string;
+  /** Platform theme colors for the section icons (soft tile fill + glyph). */
+  iconBg: string;
+  iconFg: string;
+}
+
+const {
+  lang,
+  faqItems,
+  faqTitle,
+  faqViewAll,
+  faqHref,
+  posts,
+  blogHeading,
+  blogViewAll,
+  blogHref,
+  readMoreLabel,
+  iconBg,
+  iconFg,
+} = Astro.props;
+
+const hasBlog = posts.length > 0;
+---
+
+<section class:list={['fb', { 'fb--solo': !hasBlog }]} style={`--fb-icon-bg: ${iconBg}; --fb-icon-fg: ${iconFg};`}>
+  <div class="fb__col">
+    <div class="fb__head">
+      <span class="fb__head-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+          <path d="M9.2 9.1a2.4 2.4 0 1 1 3.3 2.2c-.7.4-.9.8-.9 1.5"></path>
+          <path d="M11.6 15.6h.01"></path>
+        </svg>
+      </span>
+      <h2 class="fb__head-title">{faqTitle}</h2>
+    </div>
+
+    <div class="fb__faq-list">
+      {faqItems.map((f) => (
+        <details class="fb__item">
+          <summary class="fb__q">
+            <span class="fb__q-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="9"></circle>
+                <path d="M9.6 9.4a2.4 2.4 0 1 1 3.3 2.2c-.7.4-.9.8-.9 1.5"></path>
+                <path d="M12 16.4h.01"></path>
+              </svg>
+            </span>
+            <span class="fb__q-text">{f.q}</span>
+            <svg class="fb__chev" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="m6 9 6 6 6-6"></path>
+            </svg>
+          </summary>
+          <p class="fb__a">{f.a}</p>
+        </details>
+      ))}
+    </div>
+
+    <a href={faqHref} class="fb__viewall-box">{faqViewAll} →</a>
+  </div>
+
+  {hasBlog && (
+    <div class="fb__col fb__col--blog">
+      <div class="fb__head fb__head--split">
+        <div class="fb__head-left">
+          <span class="fb__head-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 5a2 2 0 0 1 2-2h9l5 5v11a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2z"></path>
+              <path d="M14 3v5h5"></path>
+              <path d="M8 13h8M8 17h5"></path>
+            </svg>
+          </span>
+          <h2 class="fb__head-title">{blogHeading}</h2>
+        </div>
+        <a href={blogHref} class="fb__viewall">{blogViewAll} →</a>
+      </div>
+
+      <ul class="fb__cards">
+        {posts.map((post) => (
+          <li><BlogPostCard post={post} lang={lang} readMoreLabel={readMoreLabel} /></li>
+        ))}
+      </ul>
+    </div>
+  )}
+</section>
+
+<style>
+  .fb {
+    margin-top: 48px;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  .fb__col {
+    min-width: 0;
+  }
+
+  /* ── Section heading (icon + title, optional right-aligned link) ──────── */
+  .fb__head {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+
+  .fb__head--split {
+    justify-content: space-between;
+  }
+
+  .fb__head-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-width: 0;
+  }
+
+  .fb__head-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    flex-shrink: 0;
+    border-radius: var(--radius-md);
+    background: var(--fb-icon-bg, var(--color-violet-soft));
+    color: var(--fb-icon-fg, var(--color-violet-deep));
+  }
+  .fb__head-icon svg {
+    width: 19px;
+    height: 19px;
+  }
+
+  .fb__head-title {
+    font-size: 20px;
+    font-weight: 600;
+    letter-spacing: -0.5px;
+    color: var(--color-ink);
+  }
+
+  /* ── FAQ accordion ────────────────────────────────────────────────────── */
+  .fb__faq-list {
+    display: grid;
+    gap: 12px;
+  }
+
+  .fb__item {
+    border-radius: var(--radius-lg);
+    background: var(--color-canvas);
+    box-shadow: var(--shadow-e1);
+    overflow: hidden;
+    transition: box-shadow 0.2s ease;
+  }
+  .fb__item:hover {
+    box-shadow: var(--shadow-e3);
+  }
+
+  .fb__q {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    cursor: pointer;
+    padding: 16px 18px;
+    list-style: none;
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--color-ink);
+  }
+  .fb__q::-webkit-details-marker {
+    display: none;
+  }
+
+  .fb__q-icon {
+    display: inline-flex;
+    flex-shrink: 0;
+    color: var(--fb-icon-fg, var(--color-violet-deep));
+  }
+  .fb__q-icon svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  .fb__q-text {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .fb__chev {
+    flex-shrink: 0;
+    color: var(--color-mute);
+    transition: transform 0.2s ease;
+  }
+  .fb__item[open] .fb__chev {
+    transform: rotate(180deg);
+  }
+
+  .fb__a {
+    padding: 0 18px 16px 48px;
+    font-size: 14px;
+    line-height: 23px;
+    color: var(--color-body);
+  }
+
+  /* ── "View all FAQs" box (full-width, soft-tinted) ────────────────────── */
+  .fb__viewall-box {
+    display: block;
+    margin-top: 16px;
+    padding: 16px;
+    border-radius: var(--radius-lg);
+    background: var(--color-canvas-soft-2);
+    text-align: center;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--color-link);
+    transition: background 0.15s ease, transform 100ms ease;
+  }
+  .fb__viewall-box:hover {
+    background: var(--color-link-bg-soft);
+  }
+  .fb__viewall-box:active {
+    transform: scale(0.99);
+  }
+
+  /* ── "View all articles" inline link ──────────────────────────────────── */
+  .fb__viewall {
+    flex-shrink: 0;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--color-link);
+    white-space: nowrap;
+    transition: color 0.15s ease;
+  }
+  .fb__viewall:hover {
+    color: var(--color-link-deep);
+  }
+
+  /* ── Blog card grid (2-up) ────────────────────────────────────────────── */
+  .fb__cards {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .fb__cards > li {
+    display: flex;
+  }
+
+  @media (min-width: 560px) {
+    .fb__cards {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  /* ── Two-column row on wide viewports ─────────────────────────────────── */
+  @media (min-width: 900px) {
+    .fb {
+      grid-template-columns: 2fr 3fr;
+      gap: 48px;
+      align-items: start;
+    }
+    /* FAQ-only (no posts in this locale) stays comfortably measured. */
+    .fb--solo {
+      grid-template-columns: minmax(0, 720px);
+    }
+  }
+</style>
