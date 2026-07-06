@@ -24,6 +24,13 @@ const titleParts = title.split('280');
 
 <header class="thero">
   <div class="thero__copy">
+    <span class="thero__eyebrow">
+      <svg viewBox="0 0 24 24" width="13" height="13" fill="currentColor" aria-hidden="true">
+        <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.713 6.231 5.451-6.231zm-1.161 17.52h1.833L7.084 4.126H5.117L17.083 19.77z"></path>
+      </svg>
+      X tool
+    </span>
+
     <h1 class="thero__title">
       {titleParts.map((part, i) => (
         <>
@@ -93,6 +100,22 @@ const titleParts = title.split('280');
   }
 
   /* ── Left column: copy ──────────────────────────────────────────────── */
+  .thero__eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 18px;
+    padding: 6px 12px;
+    border-radius: var(--radius-pill);
+    background: var(--color-link-bg-soft);
+    color: var(--color-link);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
   .thero__title {
     font-size: clamp(30px, 5vw, 46px);
     font-weight: 600;
