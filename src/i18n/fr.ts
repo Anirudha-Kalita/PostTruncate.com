@@ -456,13 +456,14 @@ export const fr: Translations = {
         {
           heading: 'Le formulaire de contact',
           paragraphs: [
-            'La seule fonctionnalité qui envoie des données hors de votre appareil est le <strong>formulaire de contact</strong>. Lorsque vous choisissez de nous envoyer un message, le nom, l’adresse e-mail et le message que vous saisissez nous sont transmis via un service tiers de traitement des formulaires afin que nous puissions les lire et y répondre. Nous utilisons ces informations uniquement pour vous répondre et ne les utilisons pas à des fins de marketing. Si vous préférez ne pas passer par un tiers, vous pouvez nous écrire directement par e-mail.',
+            'La seule fonctionnalité qui envoie des données hors de votre appareil est le <a href="../contact/"><strong>formulaire de contact</strong></a>. Lorsque vous choisissez de nous envoyer un message, le nom, l’adresse e-mail et le message que vous saisissez nous sont transmis via un service tiers de traitement des formulaires afin que nous puissions les lire et y répondre. Nous utilisons ces informations uniquement pour vous répondre et ne les utilisons pas à des fins de marketing. Si vous préférez ne pas passer par un tiers, vous pouvez nous écrire directement par e-mail.',
+            'Par ailleurs, si vous vous abonnez aux actualités via le champ e-mail situé dans le pied de page de notre site, l’adresse e-mail que vous saisissez est transmise à notre prestataire d’envoi d’e-mails et y est conservée afin que nous puissions vous envoyer ces actualités. Nous l’utilisons uniquement pour ces actualités et jamais pour autre chose, et vous pouvez vous désabonner à tout moment.',
           ],
         },
         {
           heading: 'Modifications et contact',
           paragraphs: [
-            'Nous pouvons mettre à jour cette politique à mesure que le produit évolue ; la date de « dernière mise à jour » ci-dessus reflète toujours la version actuelle. Si vous avez des questions concernant la confidentialité, écrivez-nous à <strong>contact@posttruncate.com</strong>.',
+            'Nous pouvons mettre à jour cette politique à mesure que le produit évolue ; la date de « dernière mise à jour » ci-dessus reflète toujours la version actuelle. Si vous avez des questions concernant la confidentialité, écrivez-nous à <a href="mailto:contact@posttruncate.com"><strong>contact@posttruncate.com</strong></a>.',
           ],
         },
       ],
@@ -502,7 +503,7 @@ export const fr: Translations = {
         {
           heading: 'Modifications de ces conditions',
           paragraphs: [
-            'Nous pouvons réviser ces conditions de temps à autre ; la date de « dernière mise à jour » ci-dessus reflète la version actuelle, et le fait de continuer à utiliser l’outil signifie que vous acceptez les dernières conditions. Des questions ? Écrivez à <strong>contact@posttruncate.com</strong>.',
+            'Nous pouvons réviser ces conditions de temps à autre ; la date de « dernière mise à jour » ci-dessus reflète la version actuelle, et le fait de continuer à utiliser l’outil signifie que vous acceptez les dernières conditions. Des questions ? Écrivez à <a href="mailto:contact@posttruncate.com"><strong>contact@posttruncate.com</strong></a>.',
           ],
         },
       ],

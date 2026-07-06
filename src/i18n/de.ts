@@ -457,13 +457,14 @@ export const de: Translations = {
         {
           heading: 'Das Kontaktformular',
           paragraphs: [
-            'Die einzige Funktion, die Daten von deinem Gerät sendet, ist das <strong>Kontaktformular</strong>. Wenn du dich entscheidest, uns eine Nachricht zu senden, werden der Name, die E-Mail und die Nachricht, die du eingibst, über einen Drittanbieter-Formulardienst an uns übermittelt, damit wir sie lesen und antworten können. Wir nutzen diese Informationen ausschließlich, um dir zu antworten, und verwenden sie nicht für Marketing. Wenn du lieber keinen Dritten nutzen möchtest, kannst du uns stattdessen direkt eine E-Mail schreiben.',
+            'Die einzige Funktion, die Daten von deinem Gerät sendet, ist das <a href="../contact/"><strong>Kontaktformular</strong></a>. Wenn du dich entscheidest, uns eine Nachricht zu senden, werden der Name, die E-Mail und die Nachricht, die du eingibst, über einen Drittanbieter-Formulardienst an uns übermittelt, damit wir sie lesen und antworten können. Wir nutzen diese Informationen ausschließlich, um dir zu antworten, und verwenden sie nicht für Marketing. Wenn du lieber keinen Dritten nutzen möchtest, kannst du uns stattdessen direkt eine E-Mail schreiben.',
+            'Außerdem: Wenn du dich über das E-Mail-Feld in der Fußzeile unserer Website für Updates anmeldest, wird die von dir eingegebene E-Mail-Adresse an unseren E-Mail-Versanddienstleister übermittelt und dort gespeichert, damit wir dir diese Updates senden können. Wir verwenden sie ausschließlich für diese Updates und niemals für etwas anderes, und du kannst dich jederzeit abmelden.',
           ],
         },
         {
           heading: 'Änderungen & Kontakt',
           paragraphs: [
-            'Wir können diese Erklärung anpassen, während sich das Produkt weiterentwickelt; das oben angegebene „Zuletzt aktualisiert“-Datum spiegelt immer die aktuelle Version wider. Wenn du Fragen zum Datenschutz hast, schreib uns an <strong>contact@posttruncate.com</strong>.',
+            'Wir können diese Erklärung anpassen, während sich das Produkt weiterentwickelt; das oben angegebene „Zuletzt aktualisiert“-Datum spiegelt immer die aktuelle Version wider. Wenn du Fragen zum Datenschutz hast, schreib uns an <a href="mailto:contact@posttruncate.com"><strong>contact@posttruncate.com</strong></a>.',
           ],
         },
       ],
@@ -503,7 +504,7 @@ export const de: Translations = {
         {
           heading: 'Änderungen dieser Bedingungen',
           paragraphs: [
-            'Wir können diese Bedingungen von Zeit zu Zeit überarbeiten; das oben angegebene „Zuletzt aktualisiert“-Datum spiegelt die aktuelle Version wider, und die fortgesetzte Nutzung des Tools bedeutet, dass du die neuesten Bedingungen akzeptierst. Fragen? Schreib an <strong>contact@posttruncate.com</strong>.',
+            'Wir können diese Bedingungen von Zeit zu Zeit überarbeiten; das oben angegebene „Zuletzt aktualisiert“-Datum spiegelt die aktuelle Version wider, und die fortgesetzte Nutzung des Tools bedeutet, dass du die neuesten Bedingungen akzeptierst. Fragen? Schreib an <a href="mailto:contact@posttruncate.com"><strong>contact@posttruncate.com</strong></a>.',
           ],
         },
       ],

@@ -45,11 +45,62 @@ const brand = 'PostTruncate';
   <section class="error" lang={DEFAULT_LOCALE}>
     <div class="error__mesh mesh-gradient" aria-hidden="true"></div>
     <div class="container-page error__inner">
-      <p class="error__code">{en.code}</p>
-      <h1 class="error__title">{en.heading}</h1>
-      <p class="error__lede">{en.body}</p>
-      <div class="error__cta">
-        <a href="/" class="error__primary">{en.cta}</a>
+      <div class="error__card">
+        <div class="error__art" aria-hidden="true">
+          <svg viewBox="0 0 240 210" fill="none" xmlns="http://www.w3.org/2000/svg" role="presentation">
+            <defs>
+              <linearGradient id="ep-win" x1="0.5" y1="0" x2="0.5" y2="1">
+                <stop offset="0" stop-color="#ffffff"></stop>
+                <stop offset="1" stop-color="#eaf2fc"></stop>
+              </linearGradient>
+              <linearGradient id="ep-bar" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0" stop-color="#4a97f4"></stop>
+                <stop offset="1" stop-color="#0066e0"></stop>
+              </linearGradient>
+              <linearGradient id="ep-doc" x1="0.5" y1="0" x2="0.5" y2="1">
+                <stop offset="0" stop-color="#ffffff"></stop>
+                <stop offset="1" stop-color="#eaf1fb"></stop>
+              </linearGradient>
+            </defs>
+
+            <ellipse cx="150" cy="184" rx="66" ry="11" fill="#0066e0" opacity="0.12"></ellipse>
+
+            <path d="M42 150 C 78 128, 96 172, 132 150 S 196 120, 226 146" stroke="#b9d6f6" stroke-width="1.6" stroke-dasharray="1.5 6" stroke-linecap="round"></path>
+            <circle cx="230" cy="146" r="3.2" fill="none" stroke="#b9d6f6" stroke-width="1.6"></circle>
+            <circle cx="38" cy="150" r="2.6" fill="#b9d6f6"></circle>
+
+            <rect x="60" y="40" width="132" height="110" rx="13" fill="url(#ep-win)"></rect>
+            <path d="M60 53 a13 13 0 0 1 13 -13 h106 a13 13 0 0 1 13 13 v11 H60 Z" fill="url(#ep-bar)"></path>
+            <circle cx="76" cy="52" r="3.6" fill="#ff6b5e"></circle>
+            <circle cx="89" cy="52" r="3.6" fill="#ffb340"></circle>
+            <circle cx="102" cy="52" r="3.6" fill="#37d67a"></circle>
+
+            <g transform="rotate(5 160 122)">
+              <path d="M137 83 H188 L200 95 V162 a9 9 0 0 1 -9 9 H137 a9 9 0 0 1 -9 -9 V92 a9 9 0 0 1 9 -9 Z" fill="#0a4fa0" opacity="0.12"></path>
+              <path d="M133 78 H184 L196 90 V157 a9 9 0 0 1 -9 9 H133 a9 9 0 0 1 -9 -9 V87 a9 9 0 0 1 9 -9 Z" fill="url(#ep-doc)"></path>
+              <path d="M184 78 V90 H196 Z" fill="#cfe2fa"></path>
+              <path d="M184 78 L196 90" stroke="#b9d6f6" stroke-width="1.4"></path>
+              <path d="M143 104l8 8M151 104l-8 8" stroke="#0066e0" stroke-width="3.2" stroke-linecap="round"></path>
+              <path d="M167 104l8 8M175 104l-8 8" stroke="#0066e0" stroke-width="3.2" stroke-linecap="round"></path>
+              <path d="M150 138 Q160 126 170 138" stroke="#0066e0" stroke-width="3.2" fill="none" stroke-linecap="round"></path>
+            </g>
+
+            <path d="M44 96h9M48.5 91.5v9" stroke="#8fbdf4" stroke-width="2.4" stroke-linecap="round"></path>
+            <path d="M210 70h9M214.5 65.5v9" stroke="#8fbdf4" stroke-width="2.4" stroke-linecap="round"></path>
+            <path d="M206 150h8M210 146v8" stroke="#8fbdf4" stroke-width="2.4" stroke-linecap="round"></path>
+            <circle cx="120" cy="196" r="2.6" fill="#a9cef5"></circle>
+            <circle cx="196" cy="120" r="2.4" fill="#a9cef5"></circle>
+          </svg>
+        </div>
+        <p class="error__code">{en.code}</p>
+        <h1 class="error__title">{en.heading}</h1>
+        <p class="error__lede">{en.body}</p>
+        <div class="error__cta">
+          <a href="/" class="error__primary">
+            <svg class="error__arrow" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M12 19l-7-7 7-7"></path></svg>
+            <span class="error__cta-label">{en.cta}</span>
+          </a>
+        </div>
       </div>
     </div>
   </section>
@@ -98,7 +149,7 @@ const brand = 'PostTruncate';
         setText('.error__code', t.code);
         setText('.error__title', t.heading);
         setText('.error__lede', t.body);
-        setText('.error__primary', t.cta);
+        setText('.error__cta-label', t.cta);
 
         document.title = t.title + ' · ' + brand;
         var desc = document.querySelector('meta[name="description"]');
@@ -117,9 +168,11 @@ const brand = 'PostTruncate';
     position: relative;
     overflow: hidden;
     background: var(--color-canvas);
-    min-height: clamp(420px, 70vh, 680px);
+    min-height: clamp(360px, 50vh, 520px);
     display: grid;
     place-items: center;
+    /* Cancel most of the footer's 96px margin-top to tighten the gap. */
+    margin-bottom: -56px;
   }
   .error__mesh {
     position: absolute;
@@ -131,36 +184,55 @@ const brand = 'PostTruncate';
   }
   .error__inner {
     position: relative;
-    padding-top: 72px;
-    padding-bottom: 72px;
+    padding-top: 32px;
+    padding-bottom: 28px;
+    display: grid;
+    place-items: center;
+  }
+  .error__card {
+    width: 100%;
+    max-width: 720px;
+    padding: clamp(22px, 3.5vw, 40px) clamp(24px, 5vw, 64px) clamp(26px, 3.5vw, 44px);
+    border-radius: var(--radius-xl);
+    background: var(--color-canvas);
+    border: 1px solid var(--color-hairline);
+    box-shadow: var(--shadow-e4);
     text-align: center;
   }
+  .error__art {
+    width: 100%;
+    max-width: clamp(120px, 22vw, 156px);
+    margin: 0 auto 4px;
+  }
+  .error__art svg {
+    width: 100%;
+    height: auto;
+  }
   .error__code {
-    font-family: var(--font-mono);
-    font-size: clamp(72px, 16vw, 140px);
-    font-weight: 600;
+    font-size: clamp(56px, 11vw, 96px);
+    font-weight: 800;
     line-height: 1;
-    letter-spacing: -4px;
+    letter-spacing: -3px;
     color: var(--color-ink);
   }
   .error__title {
-    margin: 12px auto 0;
+    margin: 2px auto 0;
     max-width: 560px;
-    font-size: clamp(26px, 5vw, 40px);
-    font-weight: 600;
-    line-height: 1.08;
-    letter-spacing: -1.6px;
+    font-size: clamp(24px, 4.4vw, 34px);
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: -1.4px;
     color: var(--color-ink);
   }
   .error__lede {
-    margin: 18px auto 0;
+    margin: 12px auto 0;
     max-width: 480px;
-    font-size: 17px;
-    line-height: 27px;
+    font-size: 16px;
+    line-height: 25px;
     color: var(--color-body);
   }
   .error__cta {
-    margin-top: 32px;
+    margin-top: 22px;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -169,21 +241,26 @@ const brand = 'PostTruncate';
   .error__primary {
     display: inline-flex;
     align-items: center;
+    gap: 10px;
     height: 48px;
-    padding: 0 24px;
-    border-radius: var(--radius-pill);
-    background: var(--color-ink);
-    color: var(--color-on-primary);
+    padding: 0 28px;
+    border-radius: var(--radius-lg);
+    background: var(--color-link);
+    color: #ffffff;
     font-size: 16px;
-    font-weight: 500;
-    transition: opacity 0.15s ease, transform 100ms ease;
+    font-weight: 600;
+    box-shadow: var(--shadow-e2);
+    transition: background 0.15s ease, transform 100ms ease, box-shadow 0.15s ease;
   }
   .error__primary:hover {
-    opacity: 0.88;
+    background: var(--color-link-deep);
+    box-shadow: var(--shadow-e3);
   }
   .error__primary:active {
-    transform: scale(0.955);
-    opacity: 0.82;
+    transform: scale(0.97);
+  }
+  .error__arrow {
+    flex-shrink: 0;
   }
 
   /* Bright mesh stops read washed-out at 0.16 over near-black; lift them. */

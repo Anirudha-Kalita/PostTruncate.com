@@ -1,0 +1,316 @@
+---
+// Shared body for the Terms & Conditions page, used by BOTH terms routes:
+//   • /[lang]/terms/          (src/pages/[lang]/terms.astro)
+//   • /[lang]/<slug>/terms/   (src/pages/[lang]/[slug]/terms.astro — nav-linked)
+// A hero with a 3D document + scales-of-justice illustration, then the numbered
+// sections as accent cards. Mirrors PrivacyContent; colours use only the site
+// palette tokens (violet / cyan / warning / link).
+import type { ContentPage } from '../i18n/types';
+import { getLocale } from '../i18n/config';
+
+interface Props {
+  lang: string;
+  page: ContentPage;
+  /** Fully interpolated "Last updated: <date>" line. */
+  lastUpdated: string;
+  /** The date substring (for tinting it), e.g. "June 1, 2026". */
+  lastUpdatedDate: string;
+  backHome: string;
+}
+
+const { lang, page, lastUpdated, lastUpdatedDate, backHome } = Astro.props;
+const home = `/${lang}/${getLocale(lang).slug}/`;
+
+// Split the "last updated" line so the date can be tinted.
+const dateIdx = lastUpdated.indexOf(lastUpdatedDate);
+const luLabel = dateIdx >= 0 ? lastUpdated.slice(0, dateIdx) : lastUpdated;
+const luDate = dateIdx >= 0 ? lastUpdatedDate : '';
+
+// Per-section icon + tint, by index (the terms sections are fixed at five).
+const SHIELD = '<path d="M12 3l8 3v5c0 5-3.5 8-8 10-4.5-2-8-5-8-10V6z"/>';
+const CHART = '<path d="M4 4v16h16"/><path d="M7 14l3.5-4 3 2.5L20 7"/><path d="M16 6.5h4v4"/>';
+const PEOPLE = '<circle cx="9" cy="8" r="3.4"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0"/><path d="M16 5.2a3.3 3.3 0 0 1 0 5.6"/><path d="M18 20a6.5 6.5 0 0 0-3.6-5.8"/>';
+const SHIELD_CHECK = '<path d="M12 3l8 3v5c0 5-3.5 8-8 10-4.5-2-8-5-8-10V6z"/><path d="M9 11.8l2 2 4-4"/>';
+const CYCLE = '<path d="M3 12a9 9 0 0 1 15-6.7L21 8M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-15 6.7L3 16M3 21v-5h5"/>';
+const SECTION_META = [
+  { icon: SHIELD, tint: 'tint-violet' },
+  { icon: CHART, tint: 'tint-green' },
+  { icon: PEOPLE, tint: 'tint-amber' },
+  { icon: SHIELD_CHECK, tint: 'tint-blue' },
+  { icon: CYCLE, tint: 'tint-violet' },
+];
+const metaFor = (i: number) => SECTION_META[i] ?? { icon: SHIELD, tint: 'tint-violet' };
+---
+
+<section class="tc container-page">
+  <div class="tc__inner">
+    {/* ── Hero ────────────────────────────────────────────────────────── */}
+    <header class="tc-hero">
+      <div class="tc-hero__copy">
+        <h1 class="tc-hero__title">{page.title}</h1>
+        <p class="tc-lu">
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"></rect><path d="M3 9h18M8 2v4M16 2v4"></path></svg>
+          <span class="tc-lu__label">{luLabel}</span><span class="tc-lu__date">{luDate}</span>
+        </p>
+        <p class="tc-hero__intro">{page.intro}</p>
+      </div>
+
+      <div class="tc-hero__art" aria-hidden="true">
+        <svg viewBox="0 0 200 190" fill="none" xmlns="http://www.w3.org/2000/svg" role="presentation">
+          <defs>
+            <linearGradient id="tc-doc" x1="0.5" y1="0" x2="0.5" y2="1">
+              <stop offset="0" stop-color="#ffffff"></stop>
+              <stop offset="1" stop-color="#edeaf7"></stop>
+            </linearGradient>
+            <linearGradient id="tc-badge" x1="0.25" y1="0" x2="0.75" y2="1">
+              <stop offset="0" stop-color="#7c5cf0"></stop>
+              <stop offset="1" stop-color="#5b2ec9"></stop>
+            </linearGradient>
+          </defs>
+
+          <circle cx="98" cy="88" r="66" fill="#d8ccf1" opacity="0.4"></circle>
+
+          {/* Document — back sheet + front sheet with text lines */}
+          <rect x="66" y="36" width="86" height="112" rx="10" fill="#c9b8ec" opacity="0.5" transform="rotate(5 109 92)"></rect>
+          <g transform="rotate(-5 101 84)">
+            <rect x="58" y="28" width="86" height="112" rx="10" fill="url(#tc-doc)"></rect>
+            <rect x="72" y="46" width="52" height="6" rx="3" fill="#c9bce8"></rect>
+            <rect x="72" y="60" width="40" height="6" rx="3" fill="#dcd4ef"></rect>
+            <rect x="72" y="74" width="58" height="6" rx="3" fill="#dcd4ef"></rect>
+            <rect x="72" y="88" width="44" height="6" rx="3" fill="#dcd4ef"></rect>
+            <rect x="72" y="102" width="50" height="6" rx="3" fill="#e4ddf3"></rect>
+            <rect x="72" y="116" width="34" height="6" rx="3" fill="#e4ddf3"></rect>
+          </g>
+
+          {/* Scales of justice inside a violet badge */}
+          <circle cx="150" cy="130" r="31" fill="url(#tc-badge)"></circle>
+          <circle cx="150" cy="115" r="2" fill="#ffffff"></circle>
+          <path d="M150 116v28" stroke="#ffffff" stroke-width="2.6" stroke-linecap="round"></path>
+          <path d="M137 121h26" stroke="#ffffff" stroke-width="2.6" stroke-linecap="round"></path>
+          <path d="M142 145h16" stroke="#ffffff" stroke-width="2.6" stroke-linecap="round"></path>
+          <path d="M137 121l-4 8M137 121l4 8" stroke="#ffffff" stroke-width="1.6" stroke-linecap="round"></path>
+          <path d="M131 129a6 5 0 0 0 12 0" stroke="#ffffff" stroke-width="2.2" fill="none" stroke-linecap="round"></path>
+          <path d="M163 121l-4 8M163 121l4 8" stroke="#ffffff" stroke-width="1.6" stroke-linecap="round"></path>
+          <path d="M157 129a6 5 0 0 0 12 0" stroke="#ffffff" stroke-width="2.2" fill="none" stroke-linecap="round"></path>
+
+          {/* Sparkles & dots */}
+          <circle cx="72" cy="26" r="5.5" fill="#50e3c2"></circle>
+          <path d="M52 78l3.5-6 3.5 6-3.5 6z" fill="#7928ca" opacity="0.7"></path>
+          <path d="M176 58h9M180.5 53.5v9" stroke="#7928ca" stroke-width="2.6" stroke-linecap="round" opacity="0.5"></path>
+          <path d="M184 143c1.4 4.6 1.4 4.6 6 6-4.6 1.4-4.6 1.4-6 6-1.4-4.6-1.4-4.6-6-6 4.6-1.4 4.6-1.4 6-6z" fill="#50e3c2"></path>
+          <circle cx="44" cy="128" r="3" fill="#7928ca" opacity="0.5"></circle>
+        </svg>
+      </div>
+    </header>
+
+    {/* ── Sections ────────────────────────────────────────────────────── */}
+    {
+      page.sections.map((s, i) => {
+        const meta = metaFor(i);
+        const num = String(i + 1).padStart(2, '0');
+        return (
+          <section class={`tc-card ${meta.tint}`}>
+            <span class="tc-card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" set:html={meta.icon} /></span>
+            <div class="tc-card__content">
+              <h2 class="tc-card__title"><span class="tc-card__num">{num}</span>{s.heading}</h2>
+              {s.paragraphs.map((p) => <p class="tc-card__p" set:html={p} />)}
+            </div>
+          </section>
+        );
+      })
+    }
+
+    <a class="tc-back" href={`${home}#workspace`}>← {backHome}</a>
+  </div>
+</section>
+
+<style>
+  .tc {
+    scroll-margin-top: 80px;
+    padding-top: 44px;
+    padding-bottom: 96px;
+  }
+  .tc__inner {
+    max-width: 60rem;
+    margin-inline: auto;
+  }
+
+  /* ── Tint tokens (site palette only) ──────────────────────────────────── */
+  .tint-violet {
+    --soft: var(--color-violet-soft);
+    --fg: var(--color-violet-deep);
+  }
+  .tint-green {
+    --soft: var(--color-cyan-soft);
+    --fg: var(--color-cyan-deep);
+  }
+  .tint-amber {
+    --soft: var(--color-warning-soft);
+    --fg: var(--color-warning-deep);
+  }
+  .tint-blue {
+    --soft: var(--color-link-bg-soft);
+    --fg: var(--color-link);
+  }
+
+  /* ── Hero ─────────────────────────────────────────────────────────────── */
+  .tc-hero {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 24px;
+    align-items: center;
+    margin-bottom: 44px;
+  }
+  .tc-hero__title {
+    font-size: clamp(34px, 5.4vw, 52px);
+    font-weight: 700;
+    line-height: 1.02;
+    letter-spacing: -1.9px;
+    color: var(--color-ink);
+  }
+  .tc-lu {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    margin-top: 14px;
+    color: var(--color-mute);
+  }
+  .tc-lu__label {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+  .tc-lu__date {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--color-violet-deep);
+  }
+  .tc-hero__intro {
+    margin-top: 16px;
+    max-width: 34rem;
+    font-size: 17px;
+    line-height: 27px;
+    color: var(--color-body);
+  }
+  .tc-hero__art {
+    display: none;
+    justify-self: end;
+    width: 100%;
+    max-width: 320px;
+  }
+  .tc-hero__art svg {
+    width: 100%;
+    height: auto;
+  }
+
+  /* ── Accent cards ─────────────────────────────────────────────────────── */
+  .tc-card {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    margin-top: 22px;
+    padding: 26px 28px;
+    border-radius: var(--radius-xl);
+    border-left: 4px solid var(--fg);
+    background: color-mix(in srgb, var(--fg) 4%, var(--color-canvas));
+    box-shadow: var(--shadow-e1);
+    transition: box-shadow 0.2s ease, transform 0.2s ease;
+  }
+  .tc-card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-e4);
+  }
+  .tc-card:hover .tc-card__icon {
+    transform: scale(1.06);
+  }
+  .tc-card__icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 46px;
+    height: 46px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    background: var(--soft);
+    color: var(--fg);
+    transition: transform 0.2s ease;
+  }
+  .tc-card__icon svg {
+    width: 22px;
+    height: 22px;
+  }
+  .tc-card__content {
+    flex: 1;
+    min-width: 0;
+  }
+  .tc-card__title {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    font-size: 21px;
+    font-weight: 600;
+    line-height: 29px;
+    letter-spacing: -0.5px;
+    color: var(--color-ink);
+  }
+  .tc-card__num {
+    flex-shrink: 0;
+    font-family: var(--font-mono);
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--fg);
+  }
+  .tc-card__p {
+    margin-top: 12px;
+    font-size: 16px;
+    line-height: 27px;
+    color: var(--color-body);
+  }
+  .tc-card__p :global(strong) {
+    font-weight: 600;
+    color: var(--color-ink);
+  }
+  .tc-card__p :global(a) {
+    color: var(--color-violet-deep);
+    font-weight: 500;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  .tc-back {
+    display: inline-block;
+    margin-top: 36px;
+    padding-top: 24px;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--color-body);
+    border-top: 1px solid var(--color-hairline);
+    transition: color 0.15s ease;
+  }
+  .tc-back:hover {
+    color: var(--color-ink);
+  }
+
+  @media (min-width: 900px) {
+    .tc-hero {
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 40px;
+    }
+    .tc-hero__art {
+      display: block;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .tc-card {
+      flex-direction: column;
+      gap: 14px;
+      padding: 22px 20px;
+    }
+  }
+</style>

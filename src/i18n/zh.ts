@@ -456,13 +456,14 @@ export const zh: Translations = {
         {
           heading: '联系表单',
           paragraphs: [
-            '唯一会把数据发送出你设备的功能是<strong>联系表单</strong>。当你选择向我们发送消息时，你填写的姓名、电子邮箱和消息会通过第三方表单处理服务送达我们，以便我们阅读并回复。我们仅将这些信息用于回复你，绝不会用于营销。如果你不想使用第三方服务，也可以直接给我们发电子邮件。',
+            '唯一会把数据发送出你设备的功能是<a href="../contact/"><strong>联系表单</strong></a>。当你选择向我们发送消息时，你填写的姓名、电子邮箱和消息会通过第三方表单处理服务送达我们，以便我们阅读并回复。我们仅将这些信息用于回复你，绝不会用于营销。如果你不想使用第三方服务，也可以直接给我们发电子邮件。',
+            '此外，如果你通过我们网站页脚的邮箱输入框订阅更新，你填写的电子邮箱地址会被发送到我们的邮件发送服务商并存储在那里，以便我们向你发送这些更新。我们仅将其用于这些更新，绝不用于其他任何用途，你可以随时取消订阅。',
           ],
         },
         {
           heading: '变更与联系',
           paragraphs: [
-            '随着产品的演进，我们可能会更新本政策；上方的“最后更新”日期始终反映当前版本。如果你对隐私有任何疑问，请发送电子邮件至 <strong>contact@posttruncate.com</strong>。',
+            '随着产品的演进，我们可能会更新本政策；上方的“最后更新”日期始终反映当前版本。如果你对隐私有任何疑问，请发送电子邮件至 <a href="mailto:contact@posttruncate.com"><strong>contact@posttruncate.com</strong></a>。',
           ],
         },
       ],
@@ -502,7 +503,7 @@ export const zh: Translations = {
         {
           heading: '本条款的变更',
           paragraphs: [
-            '我们可能会不时修订这些条款；上方的“最后更新”日期反映当前版本，继续使用本工具即表示你接受最新条款。有疑问？请发送电子邮件至 <strong>contact@posttruncate.com</strong>。',
+            '我们可能会不时修订这些条款；上方的“最后更新”日期反映当前版本，继续使用本工具即表示你接受最新条款。有疑问？请发送电子邮件至 <a href="mailto:contact@posttruncate.com"><strong>contact@posttruncate.com</strong></a>。',
           ],
         },
       ],

@@ -456,13 +456,14 @@ export const da: Translations = {
         {
           heading: 'Kontaktformularen',
           paragraphs: [
-            'Den eneste funktion, der sender data væk fra din enhed, er <strong>kontaktformularen</strong>. Når du vælger at sende os en besked, leveres det navn, den e-mail og den besked, du indtaster, til os gennem en tredjeparts-formulartjeneste, så vi kan læse og svare. Vi bruger udelukkende disse oplysninger til at svare dig og bruger dem ikke til markedsføring. Hvis du hellere vil undgå en tredjepart, kan du i stedet sende os en e-mail direkte.',
+            'Den eneste funktion, der sender data væk fra din enhed, er <a href="../contact/"><strong>kontaktformularen</strong></a>. Når du vælger at sende os en besked, leveres det navn, den e-mail og den besked, du indtaster, til os gennem en tredjeparts-formulartjeneste, så vi kan læse og svare. Vi bruger udelukkende disse oplysninger til at svare dig og bruger dem ikke til markedsføring. Hvis du hellere vil undgå en tredjepart, kan du i stedet sende os en e-mail direkte.',
+            'Derudover: hvis du tilmelder dig opdateringer via e-mailfeltet i sidefoden på vores websted, sendes den e-mailadresse, du indtaster, til vores e-mailudbyder og gemmes dér, så vi kan sende dig disse opdateringer. Vi bruger den udelukkende til disse opdateringer og aldrig til andet, og du kan til enhver tid framelde dig.',
           ],
         },
         {
           heading: 'Ændringer & kontakt',
           paragraphs: [
-            'Vi kan opdatere denne politik, efterhånden som produktet udvikler sig; “sidst opdateret”-datoen ovenfor afspejler altid den aktuelle version. Hvis du har spørgsmål om privatliv, så skriv til os på <strong>contact@posttruncate.com</strong>.',
+            'Vi kan opdatere denne politik, efterhånden som produktet udvikler sig; “sidst opdateret”-datoen ovenfor afspejler altid den aktuelle version. Hvis du har spørgsmål om privatliv, så skriv til os på <a href="mailto:contact@posttruncate.com"><strong>contact@posttruncate.com</strong></a>.',
           ],
         },
       ],
@@ -502,7 +503,7 @@ export const da: Translations = {
         {
           heading: 'Ændringer af disse vilkår',
           paragraphs: [
-            'Vi kan revidere disse vilkår fra tid til anden; “sidst opdateret”-datoen ovenfor afspejler den aktuelle version, og fortsat brug af værktøjet betyder, at du accepterer de seneste vilkår. Spørgsmål? Skriv til <strong>contact@posttruncate.com</strong>.',
+            'Vi kan revidere disse vilkår fra tid til anden; “sidst opdateret”-datoen ovenfor afspejler den aktuelle version, og fortsat brug af værktøjet betyder, at du accepterer de seneste vilkår. Spørgsmål? Skriv til <a href="mailto:contact@posttruncate.com"><strong>contact@posttruncate.com</strong></a>.',
           ],
         },
       ],

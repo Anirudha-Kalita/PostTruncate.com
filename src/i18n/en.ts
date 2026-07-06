@@ -457,13 +457,14 @@ export const en: Translations = {
         {
           heading: 'The contact form',
           paragraphs: [
-            'The only feature that sends data off your device is the <strong>contact form</strong>. When you choose to send us a message, the name, email, and message you enter are delivered to us through a third-party form-handling service so we can read and reply. We use that information solely to respond to you and do not use it for marketing. If you would rather not use a third party, you can email us directly instead.',
+            'The only feature that sends data off your device is the <a href="../contact/"><strong>contact form</strong></a>. When you choose to send us a message, the name, email, and message you enter are delivered to us through a third-party form-handling service so we can read and reply. We use that information solely to respond to you and do not use it for marketing. If you would rather not use a third party, you can email us directly instead.',
+            'Separately, if you subscribe to updates through the email box in our site footer, the email address you enter is sent to and stored by our email delivery provider so we can send you those updates. We use it only for those updates and never for anything else, and you can unsubscribe at any time.',
           ],
         },
         {
           heading: 'Changes & contact',
           paragraphs: [
-            'We may update this policy as the product evolves; the “last updated” date above always reflects the current version. If you have any questions about privacy, email us at <strong>contact@posttruncate.com</strong>.',
+            'We may update this policy as the product evolves; the “last updated” date above always reflects the current version. If you have any questions about privacy, email us at <a href="mailto:contact@posttruncate.com"><strong>contact@posttruncate.com</strong></a>.',
           ],
         },
       ],
@@ -503,7 +504,7 @@ export const en: Translations = {
         {
           heading: 'Changes to these terms',
           paragraphs: [
-            'We may revise these terms from time to time; the “last updated” date above reflects the current version, and continued use of the tool means you accept the latest terms. Questions? Email <strong>contact@posttruncate.com</strong>.',
+            'We may revise these terms from time to time; the “last updated” date above reflects the current version, and continued use of the tool means you accept the latest terms. Questions? Email <a href="mailto:contact@posttruncate.com"><strong>contact@posttruncate.com</strong></a>.',
           ],
         },
       ],

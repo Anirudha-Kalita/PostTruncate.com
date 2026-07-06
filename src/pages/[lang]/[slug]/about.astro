@@ -1,6 +1,6 @@
 ---
 import Layout from '../../../layouts/Layout.astro';
-import Prose from '../../../components/Prose.astro';
+import AboutContent from '../../../components/AboutContent.astro';
 import { getTranslations } from '../../../i18n';
 import { LOCALES } from '../../../i18n/config';
 
@@ -19,5 +19,5 @@ const page = t.pages.about;
   title={page.title}
   description={page.description}
 >
-  <Prose lang={lang} page={page} backHome={t.pages.common.backHome} authorImage="/author-anirudha.webp" authorImageSectionIndex={1} authorImageAlt={t.images.authorAlt} />
+  <AboutContent lang={lang} page={page} backHome={t.pages.common.backHome} authorImage="/author-anirudha.webp" authorImageSectionIndex={1} authorImageAlt={t.images.authorAlt} />
 </Layout>

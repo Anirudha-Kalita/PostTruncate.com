@@ -456,13 +456,14 @@ export const es: Translations = {
         {
           heading: 'El formulario de contacto',
           paragraphs: [
-            'La única función que envía datos fuera de tu dispositivo es el <strong>formulario de contacto</strong>. Cuando eliges enviarnos un mensaje, el nombre, el correo electrónico y el mensaje que introduces nos llegan a través de un servicio externo de gestión de formularios para que podamos leerlo y responder. Usamos esa información únicamente para responderte y no la utilizamos con fines de marketing. Si prefieres no usar un tercero, puedes escribirnos directamente por correo electrónico.',
+            'La única función que envía datos fuera de tu dispositivo es el <a href="../contact/"><strong>formulario de contacto</strong></a>. Cuando eliges enviarnos un mensaje, el nombre, el correo electrónico y el mensaje que introduces nos llegan a través de un servicio externo de gestión de formularios para que podamos leerlo y responder. Usamos esa información únicamente para responderte y no la utilizamos con fines de marketing. Si prefieres no usar un tercero, puedes escribirnos directamente por correo electrónico.',
+            'Además, si te suscribes a las novedades mediante el cuadro de correo del pie de página de nuestro sitio, la dirección de correo electrónico que introduces se envía a nuestro proveedor de envío de correos y se almacena allí para que podamos enviarte esas novedades. La usamos únicamente para esas novedades y nunca para ninguna otra cosa, y puedes darte de baja en cualquier momento.',
           ],
         },
         {
           heading: 'Cambios y contacto',
           paragraphs: [
-            'Podemos actualizar esta política a medida que el producto evoluciona; la fecha de «última actualización» de arriba siempre refleja la versión actual. Si tienes alguna pregunta sobre privacidad, escríbenos a <strong>contact@posttruncate.com</strong>.',
+            'Podemos actualizar esta política a medida que el producto evoluciona; la fecha de «última actualización» de arriba siempre refleja la versión actual. Si tienes alguna pregunta sobre privacidad, escríbenos a <a href="mailto:contact@posttruncate.com"><strong>contact@posttruncate.com</strong></a>.',
           ],
         },
       ],
@@ -502,7 +503,7 @@ export const es: Translations = {
         {
           heading: 'Cambios en estos términos',
           paragraphs: [
-            'Podemos revisar estos términos de vez en cuando; la fecha de «última actualización» de arriba refleja la versión actual, y el uso continuado de la herramienta significa que aceptas los términos más recientes. ¿Preguntas? Escribe a <strong>contact@posttruncate.com</strong>.',
+            'Podemos revisar estos términos de vez en cuando; la fecha de «última actualización» de arriba refleja la versión actual, y el uso continuado de la herramienta significa que aceptas los términos más recientes. ¿Preguntas? Escribe a <a href="mailto:contact@posttruncate.com"><strong>contact@posttruncate.com</strong></a>.',
           ],
         },
       ],

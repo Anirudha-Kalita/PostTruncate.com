@@ -456,13 +456,14 @@ export const nl: Translations = {
         {
           heading: 'Het contactformulier',
           paragraphs: [
-            'De enige functie die gegevens van je apparaat verstuurt, is het <strong>contactformulier</strong>. Wanneer je ervoor kiest ons een bericht te sturen, worden de naam, het e-mailadres en het bericht die je invult via een externe formulierverwerkingsdienst aan ons bezorgd, zodat we ze kunnen lezen en beantwoorden. We gebruiken die informatie uitsluitend om je te antwoorden en niet voor marketing. Wil je liever geen derde partij gebruiken, dan kun je ons ook rechtstreeks mailen.',
+            'De enige functie die gegevens van je apparaat verstuurt, is het <a href="../contact/"><strong>contactformulier</strong></a>. Wanneer je ervoor kiest ons een bericht te sturen, worden de naam, het e-mailadres en het bericht die je invult via een externe formulierverwerkingsdienst aan ons bezorgd, zodat we ze kunnen lezen en beantwoorden. We gebruiken die informatie uitsluitend om je te antwoorden en niet voor marketing. Wil je liever geen derde partij gebruiken, dan kun je ons ook rechtstreeks mailen.',
+            'Daarnaast: als je je via het e-mailveld in de voettekst van onze site aanmeldt voor updates, wordt het e-mailadres dat je invult naar onze e-maildienstverlener gestuurd en daar bewaard zodat we je die updates kunnen sturen. We gebruiken het uitsluitend voor die updates en nooit voor iets anders, en je kunt je op elk moment afmelden.',
           ],
         },
         {
           heading: 'Wijzigingen & contact',
           paragraphs: [
-            'We kunnen dit beleid bijwerken naarmate het product evolueert; de datum “laatst bijgewerkt” hierboven geeft altijd de huidige versie weer. Heb je vragen over privacy, mail ons dan op <strong>contact@posttruncate.com</strong>.',
+            'We kunnen dit beleid bijwerken naarmate het product evolueert; de datum “laatst bijgewerkt” hierboven geeft altijd de huidige versie weer. Heb je vragen over privacy, mail ons dan op <a href="mailto:contact@posttruncate.com"><strong>contact@posttruncate.com</strong></a>.',
           ],
         },
       ],
@@ -502,7 +503,7 @@ export const nl: Translations = {
         {
           heading: 'Wijzigingen in deze voorwaarden',
           paragraphs: [
-            'We kunnen deze voorwaarden van tijd tot tijd herzien; de datum “laatst bijgewerkt” hierboven geeft de huidige versie weer, en voortgezet gebruik van de tool betekent dat je de meest recente voorwaarden accepteert. Vragen? Mail <strong>contact@posttruncate.com</strong>.',
+            'We kunnen deze voorwaarden van tijd tot tijd herzien; de datum “laatst bijgewerkt” hierboven geeft de huidige versie weer, en voortgezet gebruik van de tool betekent dat je de meest recente voorwaarden accepteert. Vragen? Mail <a href="mailto:contact@posttruncate.com"><strong>contact@posttruncate.com</strong></a>.',
           ],
         },
       ],
