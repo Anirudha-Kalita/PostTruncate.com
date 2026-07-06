@@ -1,60 +1,50 @@
 ---
+translationKey: linkedins-see-more-cutoff-master-the-fold-in-2026
 title: "LinkedIn's See More Cutoff: Master the Fold in 2026"
+subtitle: The LinkedIn 'See more' cutoff kills engagement before your hook lands. Here's the exact character limits for desktop, mobile, and comments - and how to survive the fold.
 description: The LinkedIn 'See more' cutoff kills engagement before your hook lands. Here's the exact character limits for desktop, mobile, and comments - and how to survive the fold.
 publishDate: 2026-07-06
+updatedDate: ''
 locale: en
-slug: linkedins-see-more-cutoff-master-the-fold-in-2026
-translationKey: linkedins-see-more-cutoff-master-the-fold-in-2026
+slug: linkedin-posts-survive-the-fold
 relatedPlatform: linkedin
 category: linkedin
-author: PostTruncate Team
-draft: true
+author: Anirudha
+draft: false
 ogImage: /og/linkedins-see-more-cutoff-master-the-fold-in-2026.png
 ---
-
-The LinkedIn 'See more' cutoff kills engagement before your hook lands. Here's the exact character limits for desktop, mobile, and comments - and how to survive the fold.
-
-*July 6, 2026 · 11 min read*
-
-Person typing on a laptop with a mobile phone showing a LinkedIn-style feed with a visible See more fold line highlighted
-
-* * *
 
 ## TL;DR
 
 LinkedIn collapses your post behind a "See more" link at approximately **140 characters on mobile** and **210 characters on desktop**. Since the majority of LinkedIn's audience is on mobile, the 140-character threshold is where your engagement is won or lost. Emojis bite harder than you think - standard ones count as 2 characters, skin-tone variants up to 7. "Broetry" formatting (one sentence, Enter twice, one sentence) doubles the problem by consuming vertical line height and triggering the fold even earlier than your character count suggests. Short, bold, declarative opening statements outperform questions every time. And guessing where your hook ends is a losing game - [PostTruncate's LinkedIn character counter](/en/linkedin-character-counter/) shows both fold lines live as you write.
 
-* * *
-
 ## The numbers that actually matter
 
 I'm going to give you the exact figures right now, because everything else in this article builds on them.
 
-**Desktop fold:** ~210 characters, roughly 2-3 short sentences. Everything after that hides behind "…see more."
+**Desktop fold:** \~210 characters, roughly 2-3 short sentences. Everything after that hides behind "…see more."
 
-**Mobile fold:** ~140 characters. About a sentence and a half. This is the dangerous one.
+**Mobile fold:** \~140 characters. About a sentence and a half. This is the dangerous one.
 
-**Comments:** ~150 characters on mobile before the same fold kicks in.
+**Comments:** \~150 characters on mobile before the same fold kicks in.
 
 **Overall post limit:** 3,000 characters - generous, mostly irrelevant. The fold is the real ceiling.
 
-The gap between desktop and mobile - 70 characters - sounds small until you realize that a hook you carefully crafted to land at 190 characters is invisible to every mobile reader. They scroll past without ever tapping "see more," which means your best line never existed for the majority of your audience.
+The gap between desktop and mobile - 70 characters - sounds small until you realise that a hook you carefully crafted to land at 190 characters is invisible to every mobile reader. They scroll past without ever tapping "see more," which means your best line never existed for the majority of your audience.
 
 According to [PostTruncate's LinkedIn character limits research](/en/blog/linkedin-character-limits-2026), posts where the main value sits below the mobile fold see **40-60% lower engagement** than posts that deliver the core message within the first 140 characters. The LinkedIn algorithm tracks dwell time and early engagement - likes and comments within the first hour - which means the fold isn't just a display choice. It actively shapes your reach.
 
 ![LinkedIn character limits infographic showing desktop fold ~210 chars, mobile fold ~140 chars, comments ~150 chars, with emoji weight warning for skin-tone variants using up to 7 characters, as taken from PostTruncate](https://cdn-public.eesel.ai/380a75be-b0ce-4ddc-97ad-603f12408855/ee76e589-3008-45a4-ba70-9dfc2ffd3cd0/be68454a025b44c4a4dfc3292c1d6871.png)
 
-LinkedIn character limits infographic showing desktop fold ~210 chars, mobile fold ~140 chars, comments ~150 chars, with emoji weight warning for skin-tone variants using up to 7 characters, as taken from PostTruncate
-
-* * *
+<p align="center"><span style="font-size: 12px; "><em>LinkedIn character limits infographic showing desktop fold \~210 chars, mobile fold \~140 chars, comments \~150 chars, with emoji weight warning for skin-tone variants using up to 7 characters, as taken from PostTruncate</em></span></p>
 
 ## Emojis are eating your hook
 
 Here's the technical detail most creators miss. On LinkedIn, emoji character weight is not uniform.
 
-A standard emoji - 😊, 🔥, 👍 - counts as **2 characters**, not 1. Unicode encodes most basic emoji as two code units in UTF-16, and LinkedIn's character counter follows that convention. So if you're working within a 140-character mobile window, you're effectively working with a 70-emoji limit before you've typed a single word.
+A standard emoji - 😊, 🔥, 👍 - counts as **2 characters**, not 1. Unicode encodes most basic emojis as two code units in UTF-16, and LinkedIn's character counter follows that convention. So if you're working within a 140-character mobile window, you're effectively working with a 70-emoji limit before you've typed a single word.
 
-Skin-tone modifiers and ZWJ (Zero Width Joiner) sequences are far worse. A thumbs-up with a specific skin tone: **4 characters**. A family emoji built from multiple combined characters: up to **7 characters**. These "combined" emoji are invisible complexity - they look like one glyph in your text editor but count like a short word on LinkedIn's backend.
+Skin-tone modifiers and ZWJ (Zero Width Joiner) sequences are far worse. A thumbs-up with a specific skin tone: **4 characters**. A family emoji built from multiple combined characters: up to **7 characters**. These "combined" emojis are invisible complexity - they look like one glyph in your text editor but count like a short word on LinkedIn's backend.
 
 I ran into this personally. I wrote a post about landing a client I'd been chasing for six months. I was proud of it. Timed the hook perfectly - or so I thought. Then I pasted it into a preview tool and saw that one skin-tone variant on the celebration emoji had pushed my opening sentence to 147 characters. The punchline landed at character 158. Every mobile reader got a cliffhanger with no payoff. Click-through was a fraction of what I expected.
 
@@ -62,21 +52,19 @@ The fix was simple: swap the 7-character skin-tone emoji for the base version (2
 
 The rule: if your hook is anywhere near 140 characters, treat every emoji as suspicious. Check the actual count, not the visual count.
 
-* * *
-
 ## The whitespace trap: why "broetry" breaks the fold
 
 Every LinkedIn creator has seen the broetry format:
 
-*One sentence here.*
+_One sentence here._
 
-*Enter. Enter.*
+_Enter. Enter._
 
-*Another sentence.*
+_Another sentence._
 
-*Enter. Enter.*
+_Enter. Enter._
 
-*A third.*
+_A third._
 
 It spread because short-form, single-sentence paragraphs are genuinely easier to read on mobile. A wall of text is still a wall of text, even on a 6-inch screen. Whitespace works as a readability tool.
 
@@ -90,11 +78,9 @@ The hook you buried at sentence three? Invisible to most readers, regardless of 
 
 ![Split-screen comparison showing the Broetry Trap on the left triggering early See more cutoff due to double line breaks, versus an Optimized Hook on the right with compact lines keeping more content above the fold, as taken from PostTruncate](https://cdn-public.eesel.ai/380a75be-b0ce-4ddc-97ad-603f12408855/ee76e589-3008-45a4-ba70-9dfc2ffd3cd0/b7c5d6cd7c134437b4fc676d64e5e10a.png)
 
-Split-screen comparison showing the Broetry Trap on the left triggering early See more cutoff due to double line breaks, versus an Optimized Hook on the right with compact lines keeping more content above the fold, as taken from PostTruncate
+<p align="center"><span style="font-size: 12px; "><em>Split-screen comparison showing the Broetry Trap on the left triggering early See more cutoff due to double line breaks, versus an Optimised Hook on the right with compact lines keeping more content above the fold, as taken from PostTruncate</em></span></p>
 
 This doesn't mean abandon whitespace entirely. Single line breaks work fine - they create breathing room without consuming a full visual line. Double line breaks in the first 3-4 sentences are where people get hurt. After the fold, format however you want. Nobody's abandoning a post they're already reading because of line breaks.
-
-* * *
 
 ## What actually drives "See more" clicks in 2026
 
@@ -120,7 +106,7 @@ The key is specificity. Generic open loops ("Something happened that changed how
 
 "I said no to a $20,000 project last month. It was the best decision I've made."
 
-That's two sentences, 79 characters, well within both the mobile and desktop fold. The tension is immediate and specific: why would turning down $20,000 be a *good* decision? The reader needs to know. That's what "See more" clicks look like.
+That's two sentences, 79 characters, well within both the mobile and desktop fold. The tension is immediate and specific: why would turning down $20,000 be a _good_ decision? The reader needs to know. That's what "See more" clicks look like.
 
 The open loop works because of a well-documented psychological principle: incomplete patterns generate cognitive discomfort that the brain wants to resolve. The technical term is the Zeigarnik effect - we remember and fixate on unfinished tasks more than completed ones. Start a story in a way that feels genuinely incomplete, and your reader's brain will not let them scroll past it.
 
@@ -136,25 +122,21 @@ A third option that works especially well for founders and operators: lead with 
 
 The number is the hook. It says: this is not opinion, this is data. The specificity signals real experience in a way no amount of adjectives can. LinkedIn creators, ghostwriters, and B2B founders reading this post: the number hook is probably underused in your content calendar. Try it.
 
-* * *
-
 ## Mobile is where your reach actually lives
 
 There's a tendency to write LinkedIn posts at a laptop, preview them at a laptop, and think in terms of desktop layout. That's exactly backwards.
 
 [LinkedIn's own data](/en/linkedin-character-counter/) shows that over 60% of active users on the platform are on mobile. For most B2B audiences - where professionals are checking the feed between meetings, on commutes, during brief windows in the day - that number is likely even higher. Your post will be read on a phone more often than not.
 
-This shapes everything. On mobile, your post is narrower, your font renders slightly larger relative to the screen, and your 140-character window is the entire first screen impression. There is no "below the fold" browsing behavior on mobile the way there is on a long-form desktop page. The fold is a binary - click or don't. Your hook needs to land within that constraint.
+This shapes everything. On mobile, your post is narrower, your font renders slightly larger relative to the screen, and your 140-character window is the entire first screen impression. There is no "below the fold" browsing behaviour on mobile the way there is on a long-form desktop page. The fold is a binary - click or don't. Your hook needs to land within that constraint.
 
 ![Side-by-side comparison of LinkedIn's mobile fold ~140 characters versus desktop fold ~210 characters showing where posts get cut on each device, as taken from PostTruncate](https://cdn-public.eesel.ai/380a75be-b0ce-4ddc-97ad-603f12408855/ee76e589-3008-45a4-ba70-9dfc2ffd3cd0/3bd8cb643296486cbf2bd1abeb6844e8.webp)
 
-Side-by-side comparison of LinkedIn's mobile fold ~140 characters versus desktop fold ~210 characters showing where posts get cut on each device, as taken from PostTruncate
+<p align="center"><span style="font-size: 12px; "><em>Side-by-side comparison of LinkedIn's mobile fold \~140 characters versus desktop fold \~210 characters showing where posts get cut on each device, as taken from PostTruncate</em></span></p>
 
 This is also why formatting choices that look elegant on desktop can destroy a post on mobile. A bold header followed by a bullet list looks clean in a 1200px browser window. On a phone, that header eats the entire first visible line, the bullet points start immediately, and your hook never had a chance to do its job.
 
 Write for the smallest screen first. Everything that works on mobile will work on desktop. The reverse is not true.
-
-* * *
 
 ## The five-word rule for LinkedIn openings
 
@@ -162,13 +144,11 @@ I've been writing LinkedIn posts for years and coaching other creators on their 
 
 Not the first sentence. The first five words.
 
-If someone reads "We cut our onboarding" and their brain isn't already filling in "by how much?" - your hook isn't there yet. If they read "I was fired from" and they're not already wondering "from what?" - you haven't started mid-scene enough.
+If someone reads "We cut our onboarding", and their brain isn't already filling in "by how much?" - your hook isn't there yet. If they read "I was fired from" and they're not already wondering "from what?" - you haven't started mid-scene enough.
 
 The test: cover everything after word five. Does what remains create genuine curiosity, or does it create nothing? If nothing, rewrite the opening.
 
 This is especially important for the LinkedIn "See more" fold character limit because the fold hits so fast. On mobile, you have roughly three sentences before the wall. The first sentence has to earn the second, the second has to earn the third, and the third has to earn the click. That chain starts at word one.
-
-* * *
 
 The LinkedIn feed in 2026 is brutally competitive. The average user scrolls through hundreds of posts per session, making subconscious triage decisions in under a second. Eye-tracking research on social media feeds shows that most posts get a single fixation point - usually the first two to three words - before the reader decides to keep scrolling or stop.
 
@@ -184,21 +164,19 @@ The emotional triggers that reliably stop a scroll are:
 
 All four of these can land within 140 characters. All four require you to know exactly where 140 characters ends in your draft. Which brings us to the tool question.
 
-* * *
-
 ## Stop guessing where your hook dies
 
 This is the part where I'm going to be blunt: guessing where the LinkedIn "See more" fold lands is a waste of time and a real risk to your engagement.
 
 The fold isn't a fixed character count - it's a combination of characters, line height, font rendering, and device resolution. Different phones show slightly different fold lines. The 140-character figure is an approximation, not a guarantee. Your double line breaks, your emoji choices, your sentence length all interact in ways that are genuinely hard to predict by feel.
 
-I built [PostTruncate's LinkedIn character counter](/en/linkedin-character-counter/) because I got burned enough times. The tool renders your post in a real LinkedIn-style preview and shows both fold lines - mobile at ~140 and desktop at ~210 - as visible markers that update live as you type. Toggle between Desktop and Mobile view and you'll see exactly which words your readers never see without clicking.
+I built [PostTruncate's LinkedIn character counter](/en/linkedin-character-counter/) because I got burned enough times. The tool renders your post in a real LinkedIn-style preview and shows both fold lines - mobile at \~140 and desktop at \~210 - as visible markers that update live as you type. Toggle between Desktop and Mobile view and you'll see exactly which words your readers never see without clicking.
 
 It's free, no sign-up, and your text never leaves your browser. Paste your draft, watch the fold, adjust until your hook is above both lines, and publish knowing that what you wrote is what your audience reads.
 
 ![PostTruncate text editor interface showing Desktop View and Mobile View toggle buttons with a visible fold line indicating exactly where See more appears in the live preview, as taken from PostTruncate](https://cdn-public.eesel.ai/380a75be-b0ce-4ddc-97ad-603f12408855/ee76e589-3008-45a4-ba70-9dfc2ffd3cd0/ef35a76980e34a83a03335b6fbfaf7fe.png)
 
-PostTruncate text editor interface showing Desktop View and Mobile View toggle buttons with a visible fold line indicating exactly where See more appears in the live preview, as taken from PostTruncate
+<p align="center"><span style="font-size: 12px; "><em>PostTruncate text editor interface showing Desktop View and Mobile View toggle buttons with a visible fold line indicating exactly where See more appears in the live preview, as taken from PostTruncate</em></span></p>
 
 The tactical checklist before every post:
 
@@ -211,34 +189,30 @@ The tactical checklist before every post:
 
 That's it. No guessing required.
 
-* * *
-
 ## Try PostTruncate
 
-[PostTruncate](/en/linkedin-character-counter/) is a free LinkedIn character counter and post preview tool I built for exactly this problem. It shows your post in a real-time LinkedIn-style preview - mobile fold at ~140 characters, desktop fold at ~210 - with both fold lines updating live as you type.
+[PostTruncate](/en/linkedin-character-counter/) is a free LinkedIn character counter and post preview tool I built for exactly this problem. It shows your post in a real-time LinkedIn-style preview - mobile fold at \~140 characters, desktop fold at \~210 - with both fold lines updating live as you type.
 
 You can toggle between Mobile and Desktop views, spot where emojis are inflating your character count, and check that your hook lands above the fold before you publish. No sign-up, no storage, no data leaves your browser. If you're writing LinkedIn posts and you're not previewing the fold before you publish, you're leaving engagement on the table every single time.
 
-* * *
+## FAQs
 
-## Frequently Asked Questions
-
-</br><details><summary><b>What is LinkedIn's 'See more' character limit on mobile in 2026?</b></summary>
-<p>On mobile, LinkedIn collapses your post after approximately <strong>140 characters</strong> and shows a &#39;See more&#39; link. Since over 60% of LinkedIn&#39;s active audience browses on mobile, this is the threshold that matters most for engagement. You can check exactly where your hook gets cut using <a href="/en/linkedin-character-counter/">PostTruncate&#39;s free LinkedIn character counter</a>, which shows the mobile fold live as you type.</p>
+<details><summary><b>What is LinkedIn's 'See more' character limit on mobile in 2026?</b></summary>
+<p>On mobile, LinkedIn collapses your post after approximately <strong>140 characters</strong> and shows a 'See more' link. Since over 60% of LinkedIn's active audience browses on mobile, this is the threshold that matters most for engagement. You can check exactly where your hook gets cut using <a href="/en/linkedin-character-counter/">PostTruncate's free LinkedIn character counter</a>, which shows the mobile fold live as you type.</p>
 </details>
 
-</br><details><summary><b>Does the LinkedIn fold count line breaks as part of the character limit?</b></summary>
-<p>Not directly - but line breaks affect something more important: <strong>vertical line height</strong>. LinkedIn also triggers the &#39;See more&#39; cutoff based on the physical number of lines a post occupies, typically after 3 to 5 lines. A double line break (the &#39;broetry&#39; format) consumes two lines of vertical space with just a newline character, so your fold can appear far earlier than your raw character count suggests. Writing compact, unbroken opening lines is the safest approach.</p>
+<details><summary><b>Does the LinkedIn fold count line breaks as part of the character limit?</b></summary>
+<p>Not directly - but line breaks affect something more important: <strong>vertical line height</strong>. LinkedIn also triggers the 'See more' cutoff based on the physical number of lines a post occupies, typically after 3 to 5 lines. A double line break (the 'broetry' format) consumes two lines of vertical space with just a newline character, so your fold can appear far earlier than your raw character count suggests. Writing compact, unbroken opening lines is the safest approach.</p>
 </details>
 
-</br><details><summary><b>How many characters does a skin-tone emoji count as on LinkedIn?</b></summary>
+<details><summary><b>How many characters does a skin-tone emoji count as on LinkedIn?</b></summary>
 <p>A standard emoji (like 😀) counts as <strong>2 characters</strong> on LinkedIn. A skin-tone modifier or combined emoji - such as a hand gesture with a specific skin tone, or a family emoji made up of multiple ZWJ sequences - can count anywhere from <strong>4 to 7 characters</strong>. If your hook is right at the 140-character mobile limit, a single skin-tone emoji could be enough to push your best sentence below the fold.</p>
 </details>
 
-</br><details><summary><b>Why does 'broetry' formatting trigger the See more link earlier?</b></summary>
+<details><summary><b>Why does 'broetry' formatting trigger the See more link earlier?</b></summary>
 <p>Broetry - the practice of writing one sentence, pressing Enter twice, and writing the next - uses double line breaks between every sentence. LinkedIn renders each blank line as a separate visual row, so a broetry post with five sentences and four double breaks can occupy <strong>13 lines of vertical space</strong>. LinkedIn typically folds posts after 3 to 5 visible lines, meaning the cutoff hits after just the first two sentences regardless of character count. The fold is partly a character limit, partly a height limit.</p>
 </details>
 
-</br><details><summary><b>How can I see exactly where my LinkedIn post gets cut off before publishing?</b></summary>
-<p>Paste your draft into <a href="/en/linkedin-character-counter/">PostTruncate&#39;s LinkedIn character counter</a> - a free, no-sign-up tool that renders your post in a live LinkedIn-style preview and shows both the mobile fold (<del>140 chars) and the desktop fold (</del>210 chars) as visible markers that update in real time as you type. Toggle between Desktop and Mobile views to see exactly which words your audience never reads without tapping &#39;See more.&#39;</p>
+<details><summary><b>How can I see exactly where my LinkedIn post gets cut off before publishing?</b></summary>
+<p>Paste your draft into <a href="/en/linkedin-character-counter/">PostTruncate's LinkedIn character counter</a> - a free, no-sign-up tool that renders your post in a live LinkedIn-style preview and shows both the mobile fold (<del>140 chars) and the desktop fold (</del>210 chars) as visible markers that update in real time as you type. Toggle between Desktop and Mobile views to see exactly which words your audience never reads without tapping 'See more.'</p>
 </details>
