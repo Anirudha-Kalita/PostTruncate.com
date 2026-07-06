@@ -1,0 +1,414 @@
+---
+// Two-column marketing hero for the Reading Time Calculator page. Left: a
+// blue eyebrow badge, headline (with the phrase after the em-dash in a blue
+// gradient) + lede + on-this-page pills. Right: a document/reading mockup illustration
+// with a clock badge inside the document, floating soundwave, book, and duration stats cards.
+//
+// The accent is everything after the "—" so it stays language-agnostic across
+// all 10 locales. The illustration is decorative (aria-hidden).
+import OnThisPage from './OnThisPage.astro';
+import type { SectionAnchor } from '../lib/headingAnchors';
+
+interface Props {
+  title: string;
+  intro: string;
+  sections: SectionAnchor[];
+  onThisPageLabel: string;
+}
+
+const { title, intro, sections, onThisPageLabel } = Astro.props;
+
+const dashIndex = title.indexOf('—');
+const titleHead = dashIndex >= 0 ? title.slice(0, dashIndex + 1) : title;
+const titleTail = dashIndex >= 0 ? title.slice(dashIndex + 1).trim() : '';
+
+// Helper to resolve custom icons for each section in the Jump Links list
+const getLinkIcon = (id: string) => {
+  if (id.includes('speed') || id.includes('speaking')) {
+    // Wave icon
+    return '<svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10v4M8 6v12M12 9v6M16 7v10M20 11v2"/></svg>';
+  }
+  if (id.includes('calculate') || id.includes('how')) {
+    // Calculator/Calendar icon
+    return '<svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="9" y1="3" x2="9" y2="21"></line><line x1="15" y1="3" x2="15" y2="21"></line><line x1="3" y1="9" x2="21" y2="9"></line><line x1="3" y1="15" x2="21" y2="15"></line></svg>';
+  }
+  if (id.includes('who') || id.includes('user')) {
+    // Person/User icon
+    return '<svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>';
+  }
+  // Clock / Default timer icon
+  return '<svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>';
+};
+---
+
+<header class="rthero">
+  <div class="rthero__copy">
+    <span class="rthero__eyebrow">
+      <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <circle cx="12" cy="12" r="10"></circle>
+        <polyline points="12 6 12 12 16 14"></polyline>
+      </svg>
+      Calculator
+    </span>
+
+    <h1 class="rthero__title">
+      <span>{titleHead}</span>
+      {titleTail && <><br /><span class="rthero__accent">{titleTail}</span></>}
+    </h1>
+    {intro && <p class="rthero__lede">{intro}</p>}
+    
+    <div class="rthero__jump">
+      <p class="rthero__jump-title">{onThisPageLabel}</p>
+      <div class="rthero__pills">
+        {sections.map((sec) => (
+          <a href={`#${sec.id}`} class="rthero__pill">
+            <span class="rthero__pill-icon" set:html={getLinkIcon(sec.id)} />
+            <span>{sec.label}</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </div>
+
+  <div class="rthero__art" aria-hidden="true">
+    <span class="rthero__blob rthero__blob--1"></span>
+    <span class="rthero__blob rthero__blob--2"></span>
+    <span class="rthero__dots"></span>
+
+    <!-- Sibling lines connecting visual elements -->
+    <span class="rthero__line-connect rthero__line-connect--horizontal"></span>
+    <span class="rthero__line-connect rthero__line-connect--vertical"></span>
+
+    <!-- Document mockup card -->
+    <div class="rthero__card">
+      <div class="rthero__card-inner">
+        <!-- Large Clock icon in blue tile -->
+        <div class="rthero__clock-wrap">
+          <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="10"></circle>
+            <polyline points="12 6 12 12 16 14"></polyline>
+          </svg>
+        </div>
+        <!-- Skeleton lines representing document text -->
+        <div class="rthero__lines">
+          <span class="rthero__line rthero__line--full"></span>
+          <span class="rthero__line rthero__line--long"></span>
+          <span class="rthero__line rthero__line--medium"></span>
+          <span class="rthero__line rthero__line--full"></span>
+          <span class="rthero__line rthero__line--short"></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Floating Soundwave Circle Badge -->
+    <div class="rthero__badge rthero__badge--wave">
+      <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M4 10v4M8 6v12M12 9v6M16 7v10M20 11v2"/>
+      </svg>
+    </div>
+
+    <!-- Floating Open Book Badge -->
+    <div class="rthero__badge rthero__badge--book">
+      <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2zM22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+      </svg>
+    </div>
+
+    <!-- Floating stats display panel -->
+    <div class="rthero__stats">
+      <div class="rthero__stat-row">
+        <span class="rthero__stat-num">4 min</span>
+        <span class="rthero__stat-label">reading</span>
+      </div>
+      <div class="rthero__stat-row border-t border-hairline pt-3">
+        <span class="rthero__stat-num">5 min 20 sec</span>
+        <span class="rthero__stat-label">speaking</span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<style>
+  .rthero {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 40px;
+    align-items: center;
+    margin-bottom: 40px;
+  }
+
+  /* ── Left column copy ────────────────────────────────────────────────── */
+  .rthero__eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 18px;
+    padding: 6px 12px;
+    border-radius: var(--radius-pill);
+    background: color-mix(in srgb, #2563eb 12%, transparent);
+    color: #2563eb;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .rthero__title {
+    font-size: clamp(30px, 5vw, 44px);
+    font-weight: 700;
+    line-height: 1.12;
+    letter-spacing: -1.6px;
+    color: var(--color-ink);
+    text-wrap: balance;
+  }
+
+  .rthero__accent {
+    background: linear-gradient(96deg, #2563eb 0%, #4f86f7 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .rthero__lede {
+    margin-top: 18px;
+    max-width: 35rem;
+    font-size: 17px;
+    line-height: 27px;
+    color: var(--color-body);
+  }
+
+  /* ── Custom jump menu ─────────────────────────────────────────────────── */
+  .rthero__jump {
+    margin-top: 32px;
+  }
+
+  .rthero__jump-title {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-mute);
+    margin-bottom: 12px;
+  }
+
+  .rthero__pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .rthero__pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    border-radius: var(--radius-pill);
+    border: 1px solid var(--color-hairline);
+    background: var(--color-canvas);
+    font-size: 13.5px;
+    font-weight: 500;
+    color: var(--color-body);
+    transition: all 0.15s ease;
+  }
+
+  .rthero__pill:hover {
+    border-color: var(--color-link);
+    color: var(--color-link);
+    box-shadow: var(--shadow-e1);
+  }
+
+  .rthero__pill-icon {
+    display: inline-flex;
+    align-items: center;
+    color: var(--color-link);
+  }
+
+  /* ── Right column illustration ───────────────────────────────────────── */
+  .rthero__art {
+    position: relative;
+    display: none;
+    aspect-ratio: 1.1 / 1;
+    max-width: 460px;
+    margin-inline: auto;
+    width: 100%;
+  }
+
+  .rthero__blob {
+    position: absolute;
+    border-radius: 50%;
+    background: radial-gradient(circle, color-mix(in srgb, #2563eb 12%, transparent), transparent 70%);
+  }
+  .rthero__blob--1 {
+    left: 2%;
+    top: 15%;
+    width: 32%;
+    aspect-ratio: 1;
+  }
+  .rthero__blob--2 {
+    right: 2%;
+    bottom: 10%;
+    width: 25%;
+    aspect-ratio: 1;
+    opacity: 0.6;
+  }
+  .rthero__dots {
+    position: absolute;
+    left: 28%;
+    bottom: 5%;
+    width: 76px;
+    height: 50px;
+    background-image: radial-gradient(currentColor 1.3px, transparent 1.3px);
+    background-size: 11px 11px;
+    color: color-mix(in srgb, #2563eb 22%, transparent);
+  }
+
+  /* Structural visual links */
+  .rthero__line-connect {
+    position: absolute;
+    background: color-mix(in srgb, var(--color-link) 15%, transparent);
+    z-index: 1;
+  }
+  .rthero__line-connect--horizontal {
+    left: 45%;
+    bottom: 22%;
+    width: 35%;
+    height: 2px;
+  }
+  .rthero__line-connect--vertical {
+    right: 20%;
+    bottom: 12%;
+    width: 2px;
+    height: 10%;
+  }
+
+  /* Document card */
+  .rthero__card {
+    position: absolute;
+    top: 50%;
+    left: 40%;
+    transform: translate(-50%, -50%);
+    width: 54%;
+    padding: 24px;
+    border-radius: 20px;
+    background: var(--color-canvas);
+    box-shadow: var(--shadow-e5);
+    z-index: 2;
+  }
+  .rthero__card-inner {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+
+  /* Blue clock tile icon */
+  .rthero__clock-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 52px;
+    height: 52px;
+    border-radius: 14px;
+    background: #2563eb;
+    color: #fff;
+    flex-shrink: 0;
+  }
+
+  /* Skeleton text lines */
+  .rthero__lines {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .rthero__line {
+    height: 7px;
+    border-radius: var(--radius-pill);
+    background: var(--color-canvas-soft-2);
+  }
+  .rthero__line--full   { width: 100%; }
+  .rthero__line--long   { width: 85%; }
+  .rthero__line--medium { width: 68%; }
+  .rthero__line--short  { width: 45%; }
+
+  /* Floating badges */
+  .rthero__badge {
+    position: absolute;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    background: var(--color-canvas);
+    box-shadow: var(--shadow-e3);
+    color: #2563eb;
+    z-index: 3;
+  }
+  .rthero__badge--wave {
+    left: 8%;
+    top: 50%;
+    transform: translateY(-50%);
+    animation: rthero-float 3.8s ease-in-out infinite;
+  }
+  .rthero__badge--book {
+    right: 14%;
+    bottom: 12%;
+    border: 1px solid var(--color-hairline);
+    animation: rthero-float 4.4s ease-in-out 0.6s infinite;
+  }
+
+  /* Duration stats card */
+  .rthero__stats {
+    position: absolute;
+    top: 25%;
+    right: 4%;
+    width: 42%;
+    padding: 16px 20px;
+    border-radius: 18px;
+    background: color-mix(in srgb, #2563eb 2%, var(--color-canvas));
+    border: 1px solid color-mix(in srgb, #2563eb 8%, var(--color-hairline));
+    box-shadow: var(--shadow-e4);
+    z-index: 3;
+    animation: rthero-float 3.6s ease-in-out 0.3s infinite;
+  }
+
+  .rthero__stat-row {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  
+  .rthero__stat-num {
+    font-size: 22px;
+    font-weight: 700;
+    line-height: 1.1;
+    color: #2563eb;
+    letter-spacing: -0.6px;
+  }
+  
+  .rthero__stat-label {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--color-mute);
+  }
+
+  /* Floater anim */
+  @keyframes rthero-float {
+    0%, 100% { transform: translateY(0); }
+    50%       { transform: translateY(-5px); }
+  }
+
+  /* ── Responsive breakpoints ─────────────────────────────────────────── */
+  @media (min-width: 900px) {
+    .rthero {
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 48px;
+      margin-bottom: 48px;
+    }
+
+    .rthero__art {
+      display: block;
+    }
+  }
+</style>

@@ -14,6 +14,7 @@ import RedditHero from './RedditHero.astro';
 import PinterestHero from './PinterestHero.astro';
 import TikTokCounterHero from './TikTokCounterHero.astro';
 import WordsPerPageHero from './WordsPerPageHero.astro';
+import ReadingTimeHero from './ReadingTimeHero.astro';
 import ToolSectionCards from './ToolSectionCards.astro';
 import ToolCta from './ToolCta.astro';
 import type { ToolDefinition } from '../data/tools';
@@ -43,9 +44,8 @@ const { html: bodyHtml, sections } = prepareToolContent(tStr(tool.content), cano
 // The 7 per-platform character counters get the redesigned treatment: prose
 // body reframed as hover-active, brand-themed icon cards + the shared CTA card.
 const isCounter = !!PLATFORM_COUNTERS[tool.id];
-// Words-per-page also gets the card-body + ToolCta design, but it keeps its
-// own spacing (not the counter's tight footer margin).
-const isWppCards = tool.id === 'words-per-page';
+// Words-per-page and Reading-time get the card-body + ToolCta design.
+const isWppCards = tool.id === 'words-per-page' || tool.id === 'reading-time';
 const cardSections = (isCounter || isWppCards) ? splitToolSections(bodyHtml) : [];
 
 // Per-counter brand accent — themes the closing CTA card (and, in future, the
@@ -102,6 +102,13 @@ const relatedIconPath = tool.related ? (RELATED_ICON[tool.related.id] ?? '<path 
 <section class:list={['tool-page container-page', { 'tool-page--cta-tight': isCounter || isWppCards, 'tool-page--counter': isCounter, 'tool-page--wpp': isWppCards && !isCounter }]}>
   {tool.id === 'words-per-page' ? (
     <WordsPerPageHero
+      title={tStr(tool.titles)}
+      intro={introText}
+      sections={sections}
+      onThisPageLabel={globalT.toolPage.onThisPage}
+    />
+  ) : tool.id === 'reading-time' ? (
+    <ReadingTimeHero
       title={tStr(tool.titles)}
       intro={introText}
       sections={sections}
