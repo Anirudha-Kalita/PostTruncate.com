@@ -27,6 +27,13 @@ const ICON_SETS: Record<string, string[]> = {
     '<path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h16.9a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0zM12 9v4M12 17h.01"/>',
     '<path d="M12 2 2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>',
   ],
+  // 1 word-count→pages · 2 quick-reference table · 3 estimate variables · 4 who uses it
+  'words-per-page': [
+    '<rect x="4" y="2" width="16" height="20" rx="2"/><path d="M8 10h8M8 14h6"/><path d="M15 2v4h5"/>',
+    '<rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/>',
+    '<path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0h10a2 2 0 0 0 2-2V9M9 21H5a2 2 0 0 1-2-2V9m0 0h18"/>',
+    '<circle cx="9" cy="7" r="4"/><path d="M3 21v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2M16 3.13a4 4 0 0 1 0 7.75"/><path d="M21 21v-2a4 4 0 0 0-3-3.87"/>',
+  ],
   // 1 caption limit · 2 125-fold · 3 hashtags · 4 saves & shares
   instagram: [
     '<path d="M4 6h16M4 12h10M4 18h13"/>',
@@ -172,6 +179,8 @@ const PALETTES: Record<string, Tint[]> = {
   // TikTok counter page uses a blue accent scheme (distinct from the magenta
   // 'tiktok' key that the platform + ad-preview pages share).
   'tiktok-counter': [BLUE, GREEN, VIOLET, AMBER],
+  // Words-per-page: blue theme matching the hero accent.
+  'words-per-page': [BLUE, CYAN, BLUE_DEEP, VIOLET],
 };
 const palette = (theme && PALETTES[theme]) || [VIOLET, PINK, AMBER, BLUE];
 ---

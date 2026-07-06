@@ -1,7 +1,7 @@
 /** @jsxImportSource preact */
 import type { ComponentChildren } from 'preact';
-import { useMemo, useState } from 'preact/hooks';
-import { Card, CardHead, Stat, Badge, ClearButton, type Tone } from './ui';
+import { useMemo, useState, useRef } from 'preact/hooks';
+import { Card } from './ui';
 import { interp } from '../../i18n/interp';
 import {
   wordCount,
@@ -62,6 +62,38 @@ function Field({ label, children }: { label: string; children: ComponentChildren
   );
 }
 
+/** Stat tile with a leading icon, large numeric value and an uppercase label. */
+function StatIcon({
+  value,
+  label,
+  icon,
+  iconBg,
+  iconColor,
+}: {
+  value: string;
+  label: string;
+  icon: ComponentChildren;
+  iconBg: string;
+  iconColor: string;
+}) {
+  return (
+    <div class="flex items-center gap-3 rounded-lg border border-hairline bg-canvas px-4 py-3.5">
+      <span
+        class="inline-flex shrink-0 items-center justify-center rounded-lg"
+        style={`width:40px;height:40px;background:${iconBg};color:${iconColor};`}
+      >
+        {icon}
+      </span>
+      <div>
+        <div class="font-mono text-[28px] font-semibold leading-8 text-ink tabular-nums">
+          {value}
+        </div>
+        <div class="mt-0.5 font-mono text-[11px] uppercase tracking-wide text-mute">{label}</div>
+      </div>
+    </div>
+  );
+}
+
 export function WordsPerPageCalculator({ s, lang }: Props) {
   const c = s.calculators.wordsPerPage;
 
@@ -80,6 +112,31 @@ export function WordsPerPageCalculator({ s, lang }: Props) {
     left: '1',
   });
 
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
+
+  const onPaste = async () => {
+    setMode('text');
+    requestAnimationFrame(async () => {
+      const el = textareaRef.current;
+      el?.focus();
+      try {
+        const clip = await navigator.clipboard.readText();
+        if (!clip) return;
+        const focused = el && document.activeElement === el;
+        const start = focused ? (el.selectionStart ?? text.length) : text.length;
+        const end = focused ? (el.selectionEnd ?? text.length) : text.length;
+        const next = text.slice(0, start) + clip + text.slice(end);
+        setText(next);
+        const caret = start + clip.length;
+        requestAnimationFrame(() => {
+          el?.setSelectionRange(caret, caret);
+        });
+      } catch {
+        // Silently catch clipboard block/rejection
+      }
+    });
+  };
+
   const nf0 = useMemo(() => new Intl.NumberFormat(lang, { maximumFractionDigits: 0 }), [lang]);
   const nf1 = useMemo(() => new Intl.NumberFormat(lang, { maximumFractionDigits: 1 }), [lang]);
 
@@ -95,10 +152,6 @@ export function WordsPerPageCalculator({ s, lang }: Props) {
   const opts = { font, fontSize, spacing, format, unit, margins: numMargins };
 
   const { wordsPerPage, pages } = estimateDocumentPages(words, opts);
-
-  const hasInput = words > 0;
-  const badgeTone: Tone = hasInput ? 'safe' : 'neutral';
-  const badgeLabel = hasInput ? c.badgeResult : c.badgeIdle;
 
   const formatPages = (p: number) => (p <= 0 ? '0' : nf1.format(Math.round(p * 10) / 10));
 
@@ -159,24 +212,65 @@ export function WordsPerPageCalculator({ s, lang }: Props) {
     requestAnimationFrame(() => window.print());
   };
 
+  // ── Tab styles: underline indicator ────────────────────────────────────────
+  const tabBase =
+    'relative flex-1 text-center pb-2.5 pt-2 px-5 text-[14px] font-medium transition-colors duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-link focus-visible:ring-offset-1';
+  const tabActive =
+    'text-link after:absolute after:bottom-0 after:left-0 after:right-0 after:h-[2px] after:rounded-t-sm after:bg-link';
+  const tabInactive = 'text-mute hover:text-body';
+
+  // Page document icon (for PAGES stat)
+  const pageIcon = (
+    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <rect x="4" y="2" width="16" height="20" rx="2" />
+      <path d="M8 10h8M8 14h6" />
+      <path d="M15 2v4h5" />
+    </svg>
+  );
+
+  // Text/A icon (for WORDS stat)
+  const wordIcon = (
+    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M4 7V5h16v2M9 19h6M12 5v14" />
+    </svg>
+  );
+
   return (
     <Card class="flex flex-col">
-      <CardHead eyebrow={c.eyebrow} title={c.title}>
-        <Badge tone={badgeTone}>{badgeLabel}</Badge>
-      </CardHead>
+      {/* ── Header: title block + "Enter text" outline pill button ──────── */}
+      <header class="flex items-center justify-between gap-3 border-b border-hairline px-4 py-3.5 sm:px-5 sm:py-4">
+        <div>
+          <h3 class="text-[20px] font-bold leading-6 tracking-[-0.5px] text-ink">
+            {c.eyebrow}
+          </h3>
+          <p class="mt-0.5 font-mono text-[11px] uppercase tracking-wide text-mute">
+            {c.title}
+          </p>
+        </div>
+        <button
+          type="button"
+          onClick={onPaste}
+          class="inline-flex shrink-0 items-center gap-1.5 rounded-full border border-hairline bg-canvas px-4 py-2 text-[13px] font-medium text-ink shadow-e1 transition-[box-shadow,background] hover:bg-canvas-soft-2 hover:shadow-e2 active:scale-[0.97]"
+        >
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M12 20h9M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4 12.5-12.5z" />
+          </svg>
+          {c.modeText}
+        </button>
+      </header>
 
       <div class="flex flex-col gap-5 p-4 sm:p-5">
-        {/* Input mode toggle — full-width segmented switch */}
+        {/* ── Underline-style tab bar ──────────────────────────────────────── */}
         <div
           role="group"
           aria-label={c.modeAria}
-          class="grid grid-cols-2 gap-1 rounded-lg border border-hairline bg-canvas-soft-2 p-1"
+          class="relative -mx-4 flex border-b border-hairline px-4 sm:-mx-5 sm:px-5"
         >
           {(
             [
-              { value: 'text', label: c.modeText },
-              { value: 'count', label: c.modeCount },
-            ] as { value: Mode; label: string }[]
+              { value: 'text' as Mode, label: c.modeText },
+              { value: 'count' as Mode, label: c.modeCount },
+            ]
           ).map((opt) => {
             const active = mode === opt.value;
             return (
@@ -184,9 +278,7 @@ export function WordsPerPageCalculator({ s, lang }: Props) {
                 type="button"
                 aria-pressed={active}
                 onClick={() => setMode(opt.value)}
-                class={`rounded-md px-3 py-2 text-[14px] font-medium transition-colors ${
-                  active ? 'bg-canvas text-ink shadow-e2' : 'text-mute hover:text-ink'
-                }`}
+                class={`${tabBase} ${active ? tabActive : tabInactive}`}
               >
                 {opt.label}
               </button>
@@ -194,15 +286,32 @@ export function WordsPerPageCalculator({ s, lang }: Props) {
           })}
         </div>
 
-        {/* Input — paste text or type a raw word count */}
+        {/* ── Input — paste text or type a raw word count ──────────────────── */}
         {mode === 'text' ? (
-          <textarea
-            value={text}
-            onInput={(e) => setText((e.currentTarget as HTMLTextAreaElement).value)}
-            placeholder={c.placeholder}
-            rows={6}
-            class="block w-full resize-y rounded-md border border-hairline bg-canvas-soft px-4 py-3 text-[17px] leading-7 text-ink placeholder:text-mute focus:border-link focus:bg-canvas focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-link"
-          />
+          <div class="flex flex-col gap-1">
+            <textarea
+              ref={textareaRef}
+              value={text}
+              onInput={(e) => setText((e.currentTarget as HTMLTextAreaElement).value)}
+              placeholder={c.placeholder}
+              rows={6}
+              class="block w-full resize-y rounded-md border border-hairline bg-canvas-soft px-4 py-3 text-[15px] leading-7 text-ink placeholder:text-mute focus:border-link focus:bg-canvas focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-link"
+            />
+            {/* Clear button — right-aligned, below the textarea */}
+            <div class="flex justify-end">
+              <button
+                type="button"
+                onClick={() => { setText(''); setCount(''); }}
+                disabled={!text && !count}
+                class="inline-flex items-center gap-1.5 rounded-pill px-3 py-1.5 text-[13px] font-medium text-error transition-[transform,color,background] duration-100 hover:bg-error-soft active:scale-[0.96] disabled:cursor-not-allowed disabled:opacity-40"
+              >
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M18 6 6 18M6 6l12 12" />
+                </svg>
+                {s.calculators.clear}
+              </button>
+            </div>
+          </div>
         ) : (
           <Field label={c.wordsLabel}>
             <input
@@ -217,16 +326,7 @@ export function WordsPerPageCalculator({ s, lang }: Props) {
           </Field>
         )}
 
-        <ClearButton
-          label={s.calculators.clear}
-          disabled={!text && !count}
-          onClick={() => {
-            setText('');
-            setCount('');
-          }}
-        />
-
-        {/* Document settings — font, size, spacing, page size */}
+        {/* ── Document settings — font, size, spacing, page size ─────────── */}
         <div class="grid grid-cols-2 gap-3 sm:grid-cols-4">
           <Field label={c.fontLabel}>
             <select class={selectCls} value={font} onChange={(e) => setFont((e.currentTarget as HTMLSelectElement).value as PageFont)}>
@@ -258,10 +358,10 @@ export function WordsPerPageCalculator({ s, lang }: Props) {
           </Field>
         </div>
 
-        {/* Margins + units */}
+        {/* ── Margins + units ──────────────────────────────────────────────── */}
         <div class="flex flex-col gap-2">
           <div class="flex items-center justify-between gap-3">
-            <span class="text-[13px] text-body">{c.marginsLabel}</span>
+            <span class="text-[13px] font-medium text-ink">{c.marginsLabel}</span>
             <label class="flex items-center gap-2">
               <span class="text-[12px] text-mute">{c.unitsLabel}</span>
               <select
@@ -301,18 +401,30 @@ export function WordsPerPageCalculator({ s, lang }: Props) {
           </div>
         </div>
 
-        {/* Result */}
+        {/* ── Result stat cards with icons ─────────────────────────────────── */}
         <div class="flex flex-col gap-2">
           <div class="grid grid-cols-2 gap-3">
-            <Stat label={c.pagesLabel} value={formatPages(pages)} />
-            <Stat label={c.wordsStatLabel} value={nf0.format(words)} />
+            <StatIcon
+              value={formatPages(pages)}
+              label={c.pagesLabel}
+              icon={pageIcon}
+              iconBg="color-mix(in srgb, #2563eb 12%, transparent)"
+              iconColor="#2563eb"
+            />
+            <StatIcon
+              value={nf0.format(words)}
+              label={c.wordsStatLabel}
+              icon={wordIcon}
+              iconBg="color-mix(in srgb, #059669 12%, transparent)"
+              iconColor="#059669"
+            />
           </div>
           <p class="font-mono text-[12px] text-mute">
             {interp(c.perPageNote, { n: nf0.format(wordsPerPage) })}
           </p>
         </div>
 
-        {/* Print the typed document with the chosen layout (text mode only) */}
+        {/* ── Print the typed document with the chosen layout (text only) ── */}
         {mode === 'text' && (
           <div>
             <button
@@ -329,7 +441,7 @@ export function WordsPerPageCalculator({ s, lang }: Props) {
           </div>
         )}
 
-        {/* Quick-reference table — pages for common word counts at the current setting */}
+        {/* ── Quick-reference table — pages for common word counts ─────────── */}
         <div>
           <p class="mb-2 font-mono text-[11px] uppercase tracking-wide text-mute">
             {c.referenceHeading}
@@ -338,15 +450,15 @@ export function WordsPerPageCalculator({ s, lang }: Props) {
             <table class="w-full border-collapse text-[14px]">
               <thead>
                 <tr class="bg-canvas-soft-2 text-left text-[12px] uppercase tracking-wide text-mute">
-                  <th class="px-4 py-2 font-medium">{c.refWordsCol}</th>
-                  <th class="px-4 py-2 font-medium">{c.refPagesCol}</th>
+                  <th class="px-4 py-2.5 font-medium">{c.refWordsCol}</th>
+                  <th class="px-4 py-2.5 font-medium">{c.refPagesCol}</th>
                 </tr>
               </thead>
               <tbody>
                 {REFERENCE_WORDS.map((w) => (
-                  <tr class="border-t border-hairline">
-                    <td class="px-4 py-2 text-body tabular-nums">{nf0.format(w)}</td>
-                    <td class="px-4 py-2 font-medium text-ink tabular-nums">
+                  <tr class="border-t border-hairline transition-colors hover:bg-canvas-soft">
+                    <td class="px-4 py-2.5 font-medium text-ink tabular-nums">{nf0.format(w)}</td>
+                    <td class="px-4 py-2.5 font-semibold text-ink tabular-nums">
                       {formatPages(estimateDocumentPages(w, opts).pages)}
                     </td>
                   </tr>

@@ -1,0 +1,305 @@
+---
+// Two-column marketing hero for the Words-to-Pages Calculator page. Left: a
+// blue eyebrow badge, headline (with the phrase after the em-dash in a blue
+// gradient) + lede + on-this-page pills. Right: a document/page mockup card
+// with a large "A" glyph, skeleton lines, a floating "1000 words" count badge,
+// and a floating calculator icon badge over dotted-grid + soft-blue decoration.
+//
+// The accent is everything after the "—" so it stays language-agnostic across
+// all 10 locales. The illustration is decorative (aria-hidden).
+import OnThisPage from './OnThisPage.astro';
+import type { SectionAnchor } from '../lib/headingAnchors';
+
+interface Props {
+  title: string;
+  intro: string;
+  sections: SectionAnchor[];
+  onThisPageLabel: string;
+}
+
+const { title, intro, sections, onThisPageLabel } = Astro.props;
+
+const dashIndex = title.indexOf('—');
+const titleHead = dashIndex >= 0 ? title.slice(0, dashIndex + 1) : title;
+const titleTail = dashIndex >= 0 ? title.slice(dashIndex + 1).trim() : '';
+---
+
+<header class="wpphero">
+  <div class="wpphero__copy">
+    <span class="wpphero__eyebrow">
+      <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <rect x="4" y="2" width="16" height="20" rx="2" ry="2"></rect>
+        <line x1="8" y1="10" x2="16" y2="10"></line>
+        <line x1="8" y1="14" x2="16" y2="14"></line>
+        <line x1="8" y1="18" x2="12" y2="18"></line>
+      </svg>
+      Calculator
+    </span>
+
+    <h1 class="wpphero__title">
+      <span>{titleHead}</span>
+      {titleTail && <><br /><span class="wpphero__accent">{titleTail}</span></>}
+    </h1>
+    {intro && <p class="wpphero__lede">{intro}</p>}
+    <OnThisPage label={onThisPageLabel} sections={sections} />
+  </div>
+
+  <div class="wpphero__art" aria-hidden="true">
+    <span class="wpphero__blob wpphero__blob--1"></span>
+    <span class="wpphero__blob wpphero__blob--2"></span>
+    <span class="wpphero__dots"></span>
+
+    <!-- Document / page mockup card -->
+    <div class="wpphero__card">
+      <div class="wpphero__card-inner">
+        <!-- Large "A" typography glyph at top -->
+        <div class="wpphero__glyph-wrap">
+          <span class="wpphero__glyph">A</span>
+        </div>
+        <!-- Skeleton lines representing document text -->
+        <div class="wpphero__lines">
+          <span class="wpphero__line wpphero__line--full"></span>
+          <span class="wpphero__line wpphero__line--long"></span>
+          <span class="wpphero__line wpphero__line--medium"></span>
+          <span class="wpphero__line wpphero__line--full"></span>
+          <span class="wpphero__line wpphero__line--short"></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Floating "1000 words" count badge -->
+    <div class="wpphero__badge wpphero__badge--count">
+      <span class="wpphero__num">1000</span>
+      <span class="wpphero__unit">words</span>
+    </div>
+
+    <!-- Floating calculator icon badge -->
+    <span class="wpphero__badge wpphero__badge--calc">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <rect x="4" y="2" width="16" height="20" rx="2"></rect>
+        <line x1="8" y1="8" x2="16" y2="8"></line>
+        <line x1="8" y1="12" x2="10" y2="12"></line>
+        <line x1="14" y1="12" x2="16" y2="12"></line>
+        <line x1="8" y1="16" x2="10" y2="16"></line>
+        <line x1="14" y1="16" x2="16" y2="16"></line>
+      </svg>
+    </span>
+  </div>
+</header>
+
+<style>
+  .wpphero {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 40px;
+    align-items: center;
+    margin-bottom: 40px;
+  }
+
+  /* ── Left column: copy (blue / indigo accent) ───────────────────────── */
+  .wpphero__eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 18px;
+    padding: 6px 12px;
+    border-radius: var(--radius-pill);
+    background: color-mix(in srgb, #4f86f7 14%, transparent);
+    color: #2563eb;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .wpphero__title {
+    font-size: clamp(30px, 5vw, 46px);
+    font-weight: 600;
+    line-height: 1.1;
+    letter-spacing: -1.8px;
+    color: var(--color-ink);
+    text-wrap: balance;
+  }
+
+  .wpphero__accent {
+    background: linear-gradient(96deg, #2563eb 0%, #4f86f7 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .wpphero__lede {
+    margin-top: 18px;
+    max-width: 34rem;
+    font-size: 18px;
+    line-height: 28px;
+    color: var(--color-body);
+  }
+
+  .wpphero__copy :global(.on-page) {
+    margin-top: 24px;
+  }
+
+  /* ── Right column: document mockup illustration ─────────────────────── */
+  .wpphero__art {
+    position: relative;
+    display: none;
+    aspect-ratio: 1 / 1;
+    max-width: 440px;
+    margin-inline: auto;
+    width: 100%;
+  }
+
+  .wpphero__blob {
+    position: absolute;
+    border-radius: 50%;
+    background: radial-gradient(circle, color-mix(in srgb, #4f86f7 16%, transparent), transparent 70%);
+  }
+  .wpphero__blob--1 {
+    left: 2%;
+    top: 18%;
+    width: 28%;
+    aspect-ratio: 1;
+  }
+  .wpphero__blob--2 {
+    left: 6%;
+    bottom: 10%;
+    width: 20%;
+    aspect-ratio: 1;
+    opacity: 0.6;
+  }
+  .wpphero__dots {
+    position: absolute;
+    right: 4%;
+    top: 10%;
+    width: 76px;
+    height: 64px;
+    background-image: radial-gradient(currentColor 1.3px, transparent 1.3px);
+    background-size: 11px 11px;
+    color: color-mix(in srgb, #4f86f7 28%, transparent);
+  }
+
+  /* Document card */
+  .wpphero__card {
+    position: absolute;
+    top: 50%;
+    left: 46%;
+    transform: translate(-50%, -50%);
+    width: 58%;
+    padding: 20px 18px;
+    border-radius: 18px;
+    background: var(--color-canvas);
+    box-shadow: var(--shadow-e5);
+  }
+  .wpphero__card-inner {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  /* Large "A" glyph */
+  .wpphero__glyph-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 52px;
+    height: 52px;
+    border-radius: 14px;
+    background: color-mix(in srgb, #4f86f7 16%, transparent);
+    flex-shrink: 0;
+  }
+  .wpphero__glyph {
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: -1px;
+    color: #2563eb;
+    line-height: 1;
+  }
+
+  /* Skeleton document lines */
+  .wpphero__lines {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .wpphero__line {
+    height: 7px;
+    border-radius: var(--radius-pill);
+    background: var(--color-canvas-soft-2);
+  }
+  .wpphero__line--full   { width: 100%; }
+  .wpphero__line--long   { width: 82%; }
+  .wpphero__line--medium { width: 64%; }
+  .wpphero__line--short  { width: 46%; }
+
+  /* Floating badges */
+  .wpphero__badge {
+    position: absolute;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius-lg);
+    background: var(--color-canvas);
+    box-shadow: var(--shadow-e5);
+    color: #2563eb;
+  }
+
+  /* "1000 words" count badge — upper right */
+  .wpphero__badge--count {
+    top: 14%;
+    right: 0;
+    flex-direction: column;
+    gap: 2px;
+    padding: 12px 18px;
+    border-radius: var(--radius-xl);
+    animation: wpphero-float 3.6s ease-in-out infinite;
+  }
+  .wpphero__num {
+    font-size: 26px;
+    font-weight: 700;
+    line-height: 1.05;
+    letter-spacing: -1px;
+    color: #2563eb;
+  }
+  .wpphero__unit {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--color-mute);
+  }
+
+  /* Calculator icon badge — bottom right */
+  .wpphero__badge--calc {
+    right: 2%;
+    bottom: 16%;
+    width: 52px;
+    height: 52px;
+    border-radius: var(--radius-lg);
+    background: #2563eb;
+    color: #fff;
+    animation: wpphero-float 4.2s ease-in-out 0.8s infinite;
+  }
+  .wpphero__badge--calc svg {
+    width: 22px;
+    height: 22px;
+  }
+
+  /* Subtle floating animation */
+  @keyframes wpphero-float {
+    0%, 100% { transform: translateY(0); }
+    50%       { transform: translateY(-6px); }
+  }
+
+  /* ── Responsive: two columns + illustration only on wider viewports ──── */
+  @media (min-width: 900px) {
+    .wpphero {
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 48px;
+      margin-bottom: 48px;
+    }
+
+    .wpphero__art {
+      display: block;
+    }
+  }
+</style>
