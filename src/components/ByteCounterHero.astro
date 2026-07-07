@@ -21,22 +21,25 @@ const dashIndex = title.indexOf('—');
 const titleHead = dashIndex >= 0 ? title.slice(0, dashIndex + 1) : title;
 const titleTail = dashIndex >= 0 ? title.slice(dashIndex + 1).trim() : '';
 
-// Helper to resolve custom icons for each section in the Jump Links list
 const getLinkIcon = (id: string) => {
-  if (id.includes('why') || id.includes('matter')) {
-    // Database disk icon
+  if (id.includes('how-')) {
+    // 1st: Stylized B (Baht/Bitcoin/Byte)
+    return '<svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>';
+  }
+  if (id.includes('why-') || id.includes('matter')) {
+    // 2nd: Database disk icon
     return '<svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2"><ellipse cx="12" cy="5" rx="9" ry="3"></ellipse><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path><path d="M3 12c0 1.66 4 3 9 3s9-1.34 9-3"></path></svg>';
   }
-  if (id.includes('character') || id.includes('point')) {
-    // Characters breakdown icon
+  if (id.includes('character') || id.includes('vs-')) {
+    // 3rd: Characters breakdown T icon
     return '<svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7V4h16v3M9 20h6M12 4v16"></path></svg>';
   }
-  if (id.includes('private') || id.includes('instant')) {
-    // Secure shield icon
+  if (id.includes('private-') || id.includes('secure')) {
+    // 4th: Secure shield icon
     return '<svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>';
   }
-  // Code brackets / default bytes count icon
-  return '<svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>';
+  // Default fallback (Stylized B)
+  return '<svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>';
 };
 ---
 
