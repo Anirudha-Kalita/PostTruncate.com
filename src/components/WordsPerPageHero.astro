@@ -7,7 +7,6 @@
 //
 // The accent is everything after the "—" so it stays language-agnostic across
 // all 10 locales. The illustration is decorative (aria-hidden).
-import OnThisPage from './OnThisPage.astro';
 import type { SectionAnchor } from '../lib/headingAnchors';
 
 interface Props {
@@ -22,6 +21,24 @@ const { title, intro, sections, onThisPageLabel } = Astro.props;
 const dashIndex = title.indexOf('—');
 const titleHead = dashIndex >= 0 ? title.slice(0, dashIndex + 1) : title;
 const titleTail = dashIndex >= 0 ? title.slice(dashIndex + 1).trim() : '';
+
+// Helper to resolve custom icons for each section in the Jump Links list
+const getLinkIcon = (id: string) => {
+  if (id.includes('reference') || id.includes('quick')) {
+    // List/Grid icon
+    return '<svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>';
+  }
+  if (id.includes('vary') || id.includes('why')) {
+    // Settings / sliders / variations icon
+    return '<svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/><circle cx="12" cy="12" r="4"/></svg>';
+  }
+  if (id.includes('who') || id.includes('user')) {
+    // Person / group icon
+    return '<svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>';
+  }
+  // Document / page icon (Default)
+  return '<svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2" ry="2"></rect><line x1="8" y1="10" x2="16" y2="10"></line><line x1="8" y1="14" x2="16" y2="14"></line><line x1="8" y1="18" x2="12" y2="18"></line></svg>';
+};
 ---
 
 <header class="wpphero">
@@ -41,7 +58,41 @@ const titleTail = dashIndex >= 0 ? title.slice(dashIndex + 1).trim() : '';
       {titleTail && <><br /><span class="wpphero__accent">{titleTail}</span></>}
     </h1>
     {intro && <p class="wpphero__lede">{intro}</p>}
-    <OnThisPage label={onThisPageLabel} sections={sections} />
+    
+    {/* Jump navigation: mobile dropdown / desktop pills */}
+    {sections.length > 0 && (
+      <nav class="wpphero__jump" aria-label={onThisPageLabel}>
+        {/* Mobile dropdown */}
+        <details class="wpphero__mobile-nav">
+          <summary class="wpphero__mobile-toggle">
+            <span class="wpphero__mobile-label">{onThisPageLabel}</span>
+            <svg class="wpphero__mobile-chevron" width="12" height="12" viewBox="0 0 12 12" aria-hidden="true">
+              <path d="M2.5 4.5 6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+          </summary>
+          <ul class="wpphero__mobile-list">
+            {sections.map((section) => (
+              <li>
+                <a class="wpphero__mobile-link" href={`#${section.id}`}>{section.label}</a>
+              </li>
+            ))}
+          </ul>
+        </details>
+
+        {/* Desktop pills row */}
+        <div class="wpphero__desktop-nav">
+          <span class="wpphero__desktop-label">{onThisPageLabel}</span>
+          <div class="wpphero__pills">
+            {sections.map((sec) => (
+              <a href={`#${sec.id}`} class="wpphero__pill">
+                <span class="wpphero__pill-icon" set:html={getLinkIcon(sec.id)} />
+                <span>{sec.label}</span>
+              </a>
+            ))}
+          </div>
+        </div>
+      </nav>
+    )}
   </div>
 
   <div class="wpphero__art" aria-hidden="true">
@@ -137,8 +188,131 @@ const titleTail = dashIndex >= 0 ? title.slice(dashIndex + 1).trim() : '';
     color: var(--color-body);
   }
 
-  .wpphero__copy :global(.on-page) {
-    margin-top: 24px;
+  /* ── Jump menu: responsive mobile / desktop ──────────────────────────── */
+  .wpphero__jump {
+    margin-top: 32px;
+  }
+
+  .wpphero__mobile-nav {
+    border: 1px solid var(--color-hairline);
+    border-radius: var(--radius-md);
+    background: var(--color-canvas);
+  }
+
+  .wpphero__mobile-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 10px 14px;
+    cursor: pointer;
+    list-style: none;
+    user-select: none;
+  }
+
+  .wpphero__mobile-toggle::-webkit-details-marker {
+    display: none;
+  }
+
+  .wpphero__mobile-label {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--color-mute);
+  }
+
+  .wpphero__mobile-chevron {
+    flex-shrink: 0;
+    color: var(--color-mute);
+    transition: transform 0.15s ease;
+  }
+
+  .wpphero__mobile-nav[open] .wpphero__mobile-chevron {
+    transform: rotate(180deg);
+  }
+
+  .wpphero__mobile-list {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    margin: 0;
+    padding: 0 8px 8px;
+    list-style: none;
+    border-top: 1px solid var(--color-hairline);
+  }
+
+  .wpphero__mobile-link {
+    display: block;
+    padding: 8px 10px;
+    border-radius: var(--radius-sm);
+    font-size: 13px;
+    line-height: 18px;
+    color: var(--color-body);
+    text-decoration: none;
+    transition: color 0.15s ease, background 0.15s ease;
+  }
+
+  .wpphero__mobile-link:hover {
+    color: var(--color-ink);
+    background: var(--color-canvas-soft-2);
+  }
+
+  .wpphero__desktop-nav {
+    display: none;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .wpphero__desktop-label {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-mute);
+  }
+
+  .wpphero__pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .wpphero__pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    border-radius: var(--radius-pill);
+    border: 1px solid var(--color-hairline);
+    background: var(--color-canvas);
+    font-size: 13.5px;
+    font-weight: 500;
+    color: var(--color-body);
+    transition: all 0.15s ease;
+  }
+
+  .wpphero__pill:hover {
+    border-color: var(--color-link);
+    color: var(--color-link);
+    box-shadow: var(--shadow-e1);
+  }
+
+  .wpphero__pill-icon {
+    display: inline-flex;
+    align-items: center;
+    color: var(--color-link);
+  }
+
+  @media (min-width: 640px) {
+    .wpphero__mobile-nav {
+      display: none;
+    }
+    .wpphero__desktop-nav {
+      display: flex;
+    }
   }
 
   /* ── Right column: document mockup illustration ─────────────────────── */

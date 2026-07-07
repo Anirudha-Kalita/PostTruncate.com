@@ -1,12 +1,11 @@
 ---
-// Two-column marketing hero for the Reading Time Calculator page. Left: a
+// Two-column marketing hero for the Byte Counter page. Left: a
 // blue eyebrow badge, headline (with the phrase after the em-dash in a blue
-// gradient) + lede + on-this-page pills. Right: a document/reading mockup illustration
-// with a clock badge inside the document, floating soundwave, book, and duration stats cards.
+// gradient) + lede + on-this-page pills. Right: a document/code mockup illustration
+// with a code badge, skeleton lines, a floating hash badge, and a floating binary text card.
 //
 // The accent is everything after the "—" so it stays language-agnostic across
 // all 10 locales. The illustration is decorative (aria-hidden).
-import OnThisPage from './OnThisPage.astro';
 import type { SectionAnchor } from '../lib/headingAnchors';
 
 interface Props {
@@ -24,66 +23,66 @@ const titleTail = dashIndex >= 0 ? title.slice(dashIndex + 1).trim() : '';
 
 // Helper to resolve custom icons for each section in the Jump Links list
 const getLinkIcon = (id: string) => {
-  if (id.includes('speed') || id.includes('speaking')) {
-    // Wave icon
-    return '<svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10v4M8 6v12M12 9v6M16 7v10M20 11v2"/></svg>';
+  if (id.includes('why') || id.includes('matter')) {
+    // Database disk icon
+    return '<svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2"><ellipse cx="12" cy="5" rx="9" ry="3"></ellipse><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path><path d="M3 12c0 1.66 4 3 9 3s9-1.34 9-3"></path></svg>';
   }
-  if (id.includes('calculate') || id.includes('how')) {
-    // Calculator/Calendar icon
-    return '<svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="9" y1="3" x2="9" y2="21"></line><line x1="15" y1="3" x2="15" y2="21"></line><line x1="3" y1="9" x2="21" y2="9"></line><line x1="3" y1="15" x2="21" y2="15"></line></svg>';
+  if (id.includes('character') || id.includes('point')) {
+    // Characters breakdown icon
+    return '<svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7V4h16v3M9 20h6M12 4v16"></path></svg>';
   }
-  if (id.includes('who') || id.includes('user')) {
-    // Person/User icon
-    return '<svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>';
+  if (id.includes('private') || id.includes('instant')) {
+    // Secure shield icon
+    return '<svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>';
   }
-  // Clock / Default timer icon
-  return '<svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>';
+  // Code brackets / default bytes count icon
+  return '<svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>';
 };
 ---
 
-<header class="rthero">
-  <div class="rthero__copy">
-    <span class="rthero__eyebrow">
+<header class="bchero">
+  <div class="bchero__copy">
+    <span class="bchero__eyebrow">
       <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-        <circle cx="12" cy="12" r="10"></circle>
-        <polyline points="12 6 12 12 16 14"></polyline>
+        <polyline points="16 18 22 12 16 6"></polyline>
+        <polyline points="8 6 2 12 8 18"></polyline>
       </svg>
-      Calculator
+      Developer Tool
     </span>
 
-    <h1 class="rthero__title">
+    <h1 class="bchero__title">
       <span>{titleHead}</span>
-      {titleTail && <><br /><span class="rthero__accent">{titleTail}</span></>}
+      {titleTail && <><br /><span class="bchero__accent">{titleTail}</span></>}
     </h1>
-    {intro && <p class="rthero__lede">{intro}</p>}
+    {intro && <p class="bchero__lede">{intro}</p>}
     
     {/* Jump navigation: mobile dropdown / desktop pills */}
     {sections.length > 0 && (
-      <nav class="rthero__jump" aria-label={onThisPageLabel}>
+      <nav class="bchero__jump" aria-label={onThisPageLabel}>
         {/* Mobile dropdown */}
-        <details class="rthero__mobile-nav">
-          <summary class="rthero__mobile-toggle">
-            <span class="rthero__mobile-label">{onThisPageLabel}</span>
-            <svg class="rthero__mobile-chevron" width="12" height="12" viewBox="0 0 12 12" aria-hidden="true">
+        <details class="bchero__mobile-nav">
+          <summary class="bchero__mobile-toggle">
+            <span class="bchero__mobile-label">{onThisPageLabel}</span>
+            <svg class="bchero__mobile-chevron" width="12" height="12" viewBox="0 0 12 12" aria-hidden="true">
               <path d="M2.5 4.5 6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
             </svg>
           </summary>
-          <ul class="rthero__mobile-list">
+          <ul class="bchero__mobile-list">
             {sections.map((section) => (
               <li>
-                <a class="rthero__mobile-link" href={`#${section.id}`}>{section.label}</a>
+                <a class="bchero__mobile-link" href={`#${section.id}`}>{section.label}</a>
               </li>
             ))}
           </ul>
         </details>
 
         {/* Desktop pills row */}
-        <div class="rthero__desktop-nav">
-          <span class="rthero__desktop-label">{onThisPageLabel}</span>
-          <div class="rthero__pills">
+        <div class="bchero__desktop-nav">
+          <span class="bchero__desktop-label">{onThisPageLabel}</span>
+          <div class="bchero__pills">
             {sections.map((sec) => (
-              <a href={`#${sec.id}`} class="rthero__pill">
-                <span class="rthero__pill-icon" set:html={getLinkIcon(sec.id)} />
+              <a href={`#${sec.id}`} class="bchero__pill">
+                <span class="bchero__pill-icon" set:html={getLinkIcon(sec.id)} />
                 <span>{sec.label}</span>
               </a>
             ))}
@@ -93,66 +92,52 @@ const getLinkIcon = (id: string) => {
     )}
   </div>
 
-  <div class="rthero__art" aria-hidden="true">
-    <span class="rthero__blob rthero__blob--1"></span>
-    <span class="rthero__blob rthero__blob--2"></span>
-    <span class="rthero__dots"></span>
+  <div class="bchero__art" aria-hidden="true">
+    <span class="bchero__blob bchero__blob--1"></span>
+    <span class="bchero__blob bchero__blob--2"></span>
+    <span class="bchero__dots"></span>
 
-    <!-- Sibling lines connecting visual elements -->
-    <span class="rthero__line-connect rthero__line-connect--horizontal"></span>
-    <span class="rthero__line-connect rthero__line-connect--vertical"></span>
+    <!-- Connecting visuals -->
+    <span class="bchero__line-connect bchero__line-connect--horizontal"></span>
+    <span class="bchero__line-connect bchero__line-connect--vertical"></span>
 
     <!-- Document mockup card -->
-    <div class="rthero__card">
-      <div class="rthero__card-inner">
-        <!-- Large Clock icon in blue tile -->
-        <div class="rthero__clock-wrap">
-          <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <circle cx="12" cy="12" r="10"></circle>
-            <polyline points="12 6 12 12 16 14"></polyline>
+    <div class="bchero__card">
+      <div class="bchero__card-inner">
+        <!-- Blue code tag tile -->
+        <div class="bchero__code-wrap">
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <polyline points="16 18 22 12 16 6"></polyline>
+            <polyline points="8 6 2 12 8 18"></polyline>
           </svg>
         </div>
         <!-- Skeleton lines representing document text -->
-        <div class="rthero__lines">
-          <span class="rthero__line rthero__line--full"></span>
-          <span class="rthero__line rthero__line--long"></span>
-          <span class="rthero__line rthero__line--medium"></span>
-          <span class="rthero__line rthero__line--full"></span>
-          <span class="rthero__line rthero__line--short"></span>
+        <div class="bchero__lines">
+          <span class="bchero__line bchero__line--full"></span>
+          <span class="bchero__line bchero__line--long"></span>
+          <span class="bchero__line bchero__line--medium"></span>
+          <span class="bchero__line bchero__line--full"></span>
+          <span class="bchero__line bchero__line--short"></span>
         </div>
       </div>
     </div>
 
-    <!-- Floating Soundwave Circle Badge -->
-    <div class="rthero__badge rthero__badge--wave">
-      <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-        <path d="M4 10v4M8 6v12M12 9v6M16 7v10M20 11v2"/>
-      </svg>
+    <!-- Floating Hash Badge (lower left) -->
+    <div class="bchero__badge bchero__badge--hash">
+      <span class="bchero__hash">#</span>
     </div>
 
-    <!-- Floating Open Book Badge -->
-    <div class="rthero__badge rthero__badge--book">
-      <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-        <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2zM22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
-      </svg>
-    </div>
-
-    <!-- Floating stats display panel -->
-    <div class="rthero__stats">
-      <div class="rthero__stat-row">
-        <span class="rthero__stat-num">4 min</span>
-        <span class="rthero__stat-label">reading</span>
-      </div>
-      <div class="rthero__stat-row border-t border-hairline pt-3">
-        <span class="rthero__stat-num">5 min 20 sec</span>
-        <span class="rthero__stat-label">speaking</span>
-      </div>
+    <!-- Floating Binary Stats Card (right) -->
+    <div class="bchero__binary-card">
+      <div class="bchero__binary-line">01001001</div>
+      <div class="bchero__binary-line">11000021</div>
+      <div class="bchero__binary-line">10100010</div>
     </div>
   </div>
 </header>
 
 <style>
-  .rthero {
+  .bchero {
     display: grid;
     grid-template-columns: 1fr;
     gap: 40px;
@@ -161,7 +146,7 @@ const getLinkIcon = (id: string) => {
   }
 
   /* ── Left column copy ────────────────────────────────────────────────── */
-  .rthero__eyebrow {
+  .bchero__eyebrow {
     display: inline-flex;
     align-items: center;
     gap: 6px;
@@ -177,7 +162,7 @@ const getLinkIcon = (id: string) => {
     text-transform: uppercase;
   }
 
-  .rthero__title {
+  .bchero__title {
     font-size: clamp(30px, 5vw, 44px);
     font-weight: 700;
     line-height: 1.12;
@@ -186,14 +171,14 @@ const getLinkIcon = (id: string) => {
     text-wrap: balance;
   }
 
-  .rthero__accent {
+  .bchero__accent {
     background: linear-gradient(96deg, #2563eb 0%, #4f86f7 100%);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
   }
 
-  .rthero__lede {
+  .bchero__lede {
     margin-top: 18px;
     max-width: 35rem;
     font-size: 17px;
@@ -202,17 +187,17 @@ const getLinkIcon = (id: string) => {
   }
 
   /* ── Jump menu: responsive mobile / desktop ──────────────────────────── */
-  .rthero__jump {
+  .bchero__jump {
     margin-top: 32px;
   }
 
-  .rthero__mobile-nav {
+  .bchero__mobile-nav {
     border: 1px solid var(--color-hairline);
     border-radius: var(--radius-md);
     background: var(--color-canvas);
   }
 
-  .rthero__mobile-toggle {
+  .bchero__mobile-toggle {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -223,11 +208,11 @@ const getLinkIcon = (id: string) => {
     user-select: none;
   }
 
-  .rthero__mobile-toggle::-webkit-details-marker {
+  .bchero__mobile-toggle::-webkit-details-marker {
     display: none;
   }
 
-  .rthero__mobile-label {
+  .bchero__mobile-label {
     font-family: var(--font-mono);
     font-size: 11px;
     font-weight: 500;
@@ -236,17 +221,17 @@ const getLinkIcon = (id: string) => {
     color: var(--color-mute);
   }
 
-  .rthero__mobile-chevron {
+  .bchero__mobile-chevron {
     flex-shrink: 0;
     color: var(--color-mute);
     transition: transform 0.15s ease;
   }
 
-  .rthero__mobile-nav[open] .rthero__mobile-chevron {
+  .bchero__mobile-nav[open] .bchero__mobile-chevron {
     transform: rotate(180deg);
   }
 
-  .rthero__mobile-list {
+  .bchero__mobile-list {
     display: flex;
     flex-direction: column;
     gap: 2px;
@@ -256,7 +241,7 @@ const getLinkIcon = (id: string) => {
     border-top: 1px solid var(--color-hairline);
   }
 
-  .rthero__mobile-link {
+  .bchero__mobile-link {
     display: block;
     padding: 8px 10px;
     border-radius: var(--radius-sm);
@@ -267,18 +252,18 @@ const getLinkIcon = (id: string) => {
     transition: color 0.15s ease, background 0.15s ease;
   }
 
-  .rthero__mobile-link:hover {
+  .bchero__mobile-link:hover {
     color: var(--color-ink);
     background: var(--color-canvas-soft-2);
   }
 
-  .rthero__desktop-nav {
+  .bchero__desktop-nav {
     display: none;
     flex-direction: column;
     gap: 12px;
   }
 
-  .rthero__desktop-label {
+  .bchero__desktop-label {
     font-family: var(--font-mono);
     font-size: 11px;
     font-weight: 600;
@@ -287,13 +272,13 @@ const getLinkIcon = (id: string) => {
     color: var(--color-mute);
   }
 
-  .rthero__pills {
+  .bchero__pills {
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
   }
 
-  .rthero__pill {
+  .bchero__pill {
     display: inline-flex;
     align-items: center;
     gap: 8px;
@@ -307,29 +292,29 @@ const getLinkIcon = (id: string) => {
     transition: all 0.15s ease;
   }
 
-  .rthero__pill:hover {
+  .bchero__pill:hover {
     border-color: var(--color-link);
     color: var(--color-link);
     box-shadow: var(--shadow-e1);
   }
 
-  .rthero__pill-icon {
+  .bchero__pill-icon {
     display: inline-flex;
     align-items: center;
     color: var(--color-link);
   }
 
   @media (min-width: 640px) {
-    .rthero__mobile-nav {
+    .bchero__mobile-nav {
       display: none;
     }
-    .rthero__desktop-nav {
+    .bchero__desktop-nav {
       display: flex;
     }
   }
 
   /* ── Right column illustration ───────────────────────────────────────── */
-  .rthero__art {
+  .bchero__art {
     position: relative;
     display: none;
     aspect-ratio: 1.1 / 1;
@@ -338,28 +323,28 @@ const getLinkIcon = (id: string) => {
     width: 100%;
   }
 
-  .rthero__blob {
+  .bchero__blob {
     position: absolute;
     border-radius: 50%;
     background: radial-gradient(circle, color-mix(in srgb, #2563eb 12%, transparent), transparent 70%);
   }
-  .rthero__blob--1 {
+  .bchero__blob--1 {
     left: 2%;
     top: 15%;
     width: 32%;
     aspect-ratio: 1;
   }
-  .rthero__blob--2 {
+  .bchero__blob--2 {
     right: 2%;
     bottom: 10%;
     width: 25%;
     aspect-ratio: 1;
     opacity: 0.6;
   }
-  .rthero__dots {
+  .bchero__dots {
     position: absolute;
-    left: 28%;
-    bottom: 5%;
+    right: 6%;
+    top: 5%;
     width: 76px;
     height: 50px;
     background-image: radial-gradient(currentColor 1.3px, transparent 1.3px);
@@ -367,30 +352,30 @@ const getLinkIcon = (id: string) => {
     color: color-mix(in srgb, #2563eb 22%, transparent);
   }
 
-  /* Structural visual links */
-  .rthero__line-connect {
+  /* Connecting guideline lines */
+  .bchero__line-connect {
     position: absolute;
     background: color-mix(in srgb, var(--color-link) 15%, transparent);
     z-index: 1;
   }
-  .rthero__line-connect--horizontal {
+  .bchero__line-connect--horizontal {
     left: 45%;
-    bottom: 22%;
+    bottom: 25%;
     width: 35%;
     height: 2px;
   }
-  .rthero__line-connect--vertical {
-    right: 20%;
-    bottom: 12%;
+  .bchero__line-connect--vertical {
+    left: 24%;
+    bottom: 16%;
     width: 2px;
-    height: 10%;
+    height: 18%;
   }
 
   /* Document card */
-  .rthero__card {
+  .bchero__card {
     position: absolute;
     top: 50%;
-    left: 40%;
+    left: 44%;
     transform: translate(-50%, -50%);
     width: 54%;
     padding: 24px;
@@ -399,43 +384,43 @@ const getLinkIcon = (id: string) => {
     box-shadow: var(--shadow-e5);
     z-index: 2;
   }
-  .rthero__card-inner {
+  .bchero__card-inner {
     display: flex;
     flex-direction: column;
     gap: 18px;
   }
 
-  /* Blue clock tile icon */
-  .rthero__clock-wrap {
+  /* Blue code tag tile icon */
+  .bchero__code-wrap {
     display: flex;
     align-items: center;
     justify-content: center;
     width: 52px;
     height: 52px;
     border-radius: 14px;
-    background: #2563eb;
-    color: #fff;
+    background: color-mix(in srgb, #2563eb 15%, transparent);
+    color: #2563eb;
     flex-shrink: 0;
   }
 
   /* Skeleton text lines */
-  .rthero__lines {
+  .bchero__lines {
     display: flex;
     flex-direction: column;
     gap: 10px;
   }
-  .rthero__line {
+  .bchero__line {
     height: 7px;
     border-radius: var(--radius-pill);
     background: var(--color-canvas-soft-2);
   }
-  .rthero__line--full   { width: 100%; }
-  .rthero__line--long   { width: 85%; }
-  .rthero__line--medium { width: 68%; }
-  .rthero__line--short  { width: 45%; }
+  .bchero__line--full   { width: 100%; }
+  .bchero__line--long   { width: 85%; }
+  .bchero__line--medium { width: 68%; }
+  .bchero__line--short  { width: 45%; }
 
   /* Floating badges */
-  .rthero__badge {
+  .bchero__badge {
     position: absolute;
     display: inline-flex;
     align-items: center;
@@ -445,72 +430,58 @@ const getLinkIcon = (id: string) => {
     border-radius: 12px;
     background: var(--color-canvas);
     box-shadow: var(--shadow-e3);
-    color: #2563eb;
     z-index: 3;
   }
-  .rthero__badge--wave {
-    left: 8%;
-    top: 50%;
-    transform: translateY(-50%);
-    animation: rthero-float 3.8s ease-in-out infinite;
-  }
-  .rthero__badge--book {
-    right: 14%;
+  .bchero__badge--hash {
+    left: 12%;
     bottom: 12%;
     border: 1px solid var(--color-hairline);
-    animation: rthero-float 4.4s ease-in-out 0.6s infinite;
+    animation: bchero-float 3.8s ease-in-out infinite;
+  }
+  .bchero__hash {
+    font-size: 20px;
+    font-weight: 700;
+    color: #2563eb;
   }
 
-  /* Duration stats card */
-  .rthero__stats {
+  /* Floating binary panel */
+  .bchero__binary-card {
     position: absolute;
-    top: 25%;
+    top: 40%;
     right: 4%;
-    width: 42%;
     padding: 16px 20px;
     border-radius: 18px;
-    background: color-mix(in srgb, #2563eb 2%, var(--color-canvas));
-    border: 1px solid color-mix(in srgb, #2563eb 8%, var(--color-hairline));
+    background: var(--color-canvas);
+    border: 1px solid var(--color-hairline);
     box-shadow: var(--shadow-e4);
     z-index: 3;
-    animation: rthero-float 3.6s ease-in-out 0.3s infinite;
-  }
-
-  .rthero__stat-row {
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
+    animation: bchero-float 4.2s ease-in-out 0.4s infinite;
   }
   
-  .rthero__stat-num {
-    font-size: 22px;
-    font-weight: 700;
-    line-height: 1.1;
-    color: #2563eb;
-    letter-spacing: -0.6px;
-  }
-  
-  .rthero__stat-label {
-    font-size: 11px;
+  .bchero__binary-line {
+    font-family: var(--font-mono);
+    font-size: 13px;
     font-weight: 500;
+    line-height: 1.8;
     color: var(--color-mute);
+    letter-spacing: 0.05em;
   }
 
-  /* Floater anim */
-  @keyframes rthero-float {
+  /* Floating animation */
+  @keyframes bchero-float {
     0%, 100% { transform: translateY(0); }
     50%       { transform: translateY(-5px); }
   }
 
   /* ── Responsive breakpoints ─────────────────────────────────────────── */
   @media (min-width: 900px) {
-    .rthero {
-      grid-template-columns: 1.1fr 0.9fr;
+    .bchero {
+      grid-template-columns: 1.150fr 0.850fr;
       gap: 48px;
       margin-bottom: 48px;
     }
 
-    .rthero__art {
+    .bchero__art {
       display: block;
     }
   }

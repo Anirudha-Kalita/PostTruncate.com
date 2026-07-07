@@ -615,6 +615,22 @@ export const calculators: ToolDefinition[] = [
     lastUpdated: '2026-06-14',
     platformLimits: 'UTF-8 1–4 bytes/char; UTF-16 2–4 bytes; UTF-32 4 bytes',
 
+    related: {
+      id: 'words-per-page',
+      blurb: {
+        en: 'Planning a document rather than a talk? See how many printed pages your word count fills at any font, size, spacing, and margins with our words-to-pages calculator.',
+        es: '¿Planificas un documento en lugar de una charla? Comprueba cuántas páginas impresas ocupa tu número de palabras con cualquier fuente, tamaño, interlineado y márgenes con nuestra calculadora de palabras por página.',
+        de: 'Planst du ein Dokument statt eines Vortrags? Sieh mit unserem Wörter-pro-Seite-Rechner, wie viele gedruckte Seiten deine Wortzahl bei beliebiger Schrift, Größe, Abstand und Rändern füllt.',
+        fr: 'Vous préparez un document plutôt qu’un discours ? Voyez combien de pages imprimées votre nombre de mots occupe selon la police, la taille, l’interligne et les marges avec notre calculateur de mots par page.',
+        pt: 'Está a planear um documento em vez de uma palestra? Veja quantas páginas impressas o seu número de palavras ocupa com qualquer fonte, tamanho, espaçamento e margens com a nossa calculadora de palavras por página.',
+        it: 'Stai pianificando un documento anziché un discorso? Scopri quante pagine stampate occupa il tuo numero di parole con qualsiasi carattere, dimensione, interlinea e margini con il nostro calcolatore di parole per pagina.',
+        nl: 'Plan je een document in plaats van een toespraak? Bekijk hoeveel gedrukte pagina’s je aantal woorden vult bij elk lettertype, grootte, regelafstand en marges met onze woorden-per-pagina-calculator.',
+        ja: 'スピーチではなく書類を準備していますか？単語数が任意のフォント・サイズ・行間・余白で何ページになるかを、単語数→ページ数の計算ツールで確認できます。',
+        zh: '要做的是文档而不是演讲？用我们的字数转页数计算器，看看你的字数在任意字体、字号、行距和页边距下会占多少打印页。',
+        da: 'Planlægger du et dokument frem for en tale? Se, hvor mange trykte sider dit ordtal fylder ved enhver skrifttype, størrelse, linjeafstand og margener med vores ord-per-side-beregner.',
+      },
+    },
+
     slugs: {
       en: 'byte-counter',
       es: 'contador-de-bytes',
@@ -832,6 +848,22 @@ export const calculators: ToolDefinition[] = [
     lastUpdated: '2026-06-14',
     platformLimits: 'Emoji counted as grapheme clusters; hidden chars incl. U+200B/200C/200D/FEFF',
 
+    related: {
+      id: 'words-per-page',
+      blurb: {
+        en: 'Planning a document rather than a talk? See how many printed pages your word count fills at any font, size, spacing, and margins with our words-to-pages calculator.',
+        es: '¿Planificas un documento en lugar de una charla? Comprueba cuántas páginas impresas ocupa tu número de palabras con cualquier fuente, tamaño, interlineado y márgenes con nuestra calculadora de palabras por página.',
+        de: 'Planst du ein Dokument statt eines Vortrags? Sieh mit unserem Wörter-pro-Seite-Rechner, wie viele gedruckte Seiten deine Wortzahl bei beliebiger Schrift, Größe, Abstand und Rändern füllt.',
+        fr: 'Vous préparez un document plutôt qu’un discours ? Voyez combien de pages imprimées votre nombre de mots occupe selon la police, la taille, l’interligne et les marges avec notre calculateur de mots par page.',
+        pt: 'Está a planear um documento em vez de uma palestra? Veja quantas páginas impressas o seu número de palavras ocupa com qualquer fonte, tamanho, espaçamento e margens com a nossa calculadora de palavras por página.',
+        it: 'Stai pianificando un documento anziché un discorso? Scopri quante pagine stampate occupa il tuo numero di parole con qualsiasi carattere, dimensione, interlinea e margini con il nostro calcolatore di parole per pagina.',
+        nl: 'Plan je een document in plaats van een toespraak? Bekijk hoeveel gedrukte pagina’s je aantal woorden vult bij elk lettertype, grootte, regelafstand en marges met onze woorden-per-pagina-calculator.',
+        ja: 'スピーチではなく書類を準備していますか？単語数が任意のフォント・サイズ・行间・余白で何ページになるかを、単語数→ページ数の計算ツールで確認できます。',
+        zh: '要做的是文档而不是演讲？用我们的字数转页数计算器，看看你的字数在任意字体、字号、行距和页边距下会占多少打印页。',
+        da: 'Planlægger du et dokument frem for en tale? Se, hvor mange trykte sider dit ordtal fylder ved enhver skrifttype, størrelse, linjeafstand og margener med vores ord-per-side-beregner.',
+      },
+    },
+
     slugs: {
       en: 'emoji-counter',
       es: 'contador-de-emojis',
@@ -859,7 +891,7 @@ export const calculators: ToolDefinition[] = [
     },
 
     titles: {
-      en: 'Emoji Counter & Invisible Character Detector — Free Online Tool',
+      en: 'Emoji Counter & Invisible Character Detector — Count, Detect & Clean Instantly',
       es: 'Contador de Emojis y Detector de Caracteres Invisibles — Gratis',
       de: 'Emoji-Zähler & Detektor für unsichtbare Zeichen — Kostenlos',
       fr: 'Compteur d’Emojis & Détecteur de Caractères Invisibles — Gratuit',
@@ -2567,6 +2599,22 @@ export const calculators: ToolDefinition[] = [
     editorAnchor: 'workspace',
     lastUpdated: '2026-06-14',
     platformLimits: 'Sentences end at . ! ? … and 。！？; paragraphs split on blank lines',
+
+    related: {
+      id: 'words-per-page',
+      blurb: {
+        en: 'Planning a document rather than a talk? See how many printed pages your word count fills at any font, size, spacing, and margins with our words-to-pages calculator.',
+        es: '¿Planificas un documento en lugar de una charla? Comprueba cuántas páginas impresas ocupa tu número de palabras con cualquier fuente, tamaño, interlineado y márgenes con nuestra calculadora de palabras por página.',
+        de: 'Planst du ein Dokument statt eines Vortrags? Sieh mit unserem Wörter-pro-Seite-Rechner, wie viele gedruckte Seiten deine Wortzahl bei beliebiger Schrift, Größe, Abstand und Rändern füllt.',
+        fr: 'Vous préparez un document plutôt qu’un discours ? Voyez combien de pages imprimées votre nombre de mots occupe selon la police, la taille, l’interligne et les marges avec notre calculateur de mots par page.',
+        pt: 'Está a planear um documento em vez de uma palestra? Veja quantas páginas impressas o seu número de palavras ocupa com qualquer fonte, tamanho, espaçamento e margens com a nossa calculadora de palavras por página.',
+        it: 'Stai pianificando un documento anziché un discorso? Scopri quante pagine stampate occupa il tuo numero di parole con qualsiasi carattere, dimensione, interlinea e margini con il nostro calcolatore di parole per pagina.',
+        nl: 'Plan je een document in plaats van een toespraak? Bekijk hoeveel gedrukte pagina’s je aantal woorden vult bij elk lettertype, grootte, regelafstand en marges met onze woorden-per-pagina-calculator.',
+        ja: 'スピーチではなく書類を準備していますか？単語数が任意のフォント・サイズ・行间・余白で何ページになるかを、単語数→ページ数の計算ツールで確認できます。',
+        zh: '要做的是文档而不是演讲？用我们的字数转页数计算器，看看你的字数在任意字体、字号、行距和页边距下会占多少打印页。',
+        da: 'Planlægger du et dokument frem for en tale? Se, hvor mange trykte sider dit ordtal fylder ved enhver skrifttype, størrelse, linjeafstand og margener med vores ord-per-side-beregner.',
+      },
+    },
 
     slugs: {
       en: 'sentence-counter',
