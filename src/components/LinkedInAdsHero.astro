@@ -8,7 +8,6 @@
 // Color scheme mirrors the LinkedIn platform page (blue base). The accent is
 // everything after the "—" so it stays language-agnostic across all 10 locales.
 // The illustration is decorative (aria-hidden).
-import OnThisPage from './OnThisPage.astro';
 import type { SectionAnchor } from '../lib/headingAnchors';
 
 interface Props {
@@ -26,6 +25,13 @@ const titleTail = dashIndex >= 0 ? title.slice(dashIndex + 1).trim() : '';
 
 const IN_GLYPH =
   'M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452z';
+
+// Section navigation icons matching ICON_SETS.linkedin in ToolSectionCards.astro
+const ICONS = [
+  '<path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6M8 13h8M8 17h5"/>',
+  '<rect x="2" y="4" width="14" height="11" rx="1"/><path d="M6 19h6M9 15v4"/><rect x="17" y="9" width="5" height="12" rx="1"/>',
+  '<path d="M22 7 13.5 15.5 8.5 10.5 2 17"/><path d="M16 7h6v6"/>',
+];
 ---
 
 <header class="lahero">
@@ -42,7 +48,40 @@ const IN_GLYPH =
       {titleTail && <><br /><span class="lahero__accent">{titleTail}</span></>}
     </h1>
     {intro && <p class="lahero__lede">{intro}</p>}
-    <OnThisPage label={onThisPageLabel} sections={sections} />
+    {/* Jump navigation: mobile dropdown / desktop pills */}
+    {sections.length > 0 && (
+      <nav class="lahero__jump" aria-label={onThisPageLabel}>
+        {/* Mobile dropdown */}
+        <details class="lahero__mobile-nav">
+          <summary class="lahero__mobile-toggle">
+            <span class="lahero__mobile-label">{onThisPageLabel}</span>
+            <svg class="lahero__mobile-chevron" width="12" height="12" viewBox="0 0 12 12" aria-hidden="true">
+              <path d="M2.5 4.5 6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+          </summary>
+          <ul class="lahero__mobile-list">
+            {sections.map((section) => (
+              <li>
+                <a class="lahero__mobile-link" href={`#${section.id}`}>{section.label}</a>
+              </li>
+            ))}
+          </ul>
+        </details>
+
+        {/* Desktop pills row */}
+        <div class="lahero__desktop-nav">
+          <span class="lahero__desktop-label">{onThisPageLabel}</span>
+          <div class="lahero__pills">
+            {sections.map((sec, idx) => (
+              <a href={`#${sec.id}`} class="lahero__pill">
+                <span class="lahero__pill-icon" set:html={`<svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2">${ICONS[idx % ICONS.length]}</svg>`} />
+                <span>{sec.label}</span>
+              </a>
+            ))}
+          </div>
+        </div>
+      </nav>
+    )}
   </div>
 
   <div class="lahero__art" aria-hidden="true">
@@ -137,8 +176,131 @@ const IN_GLYPH =
     color: var(--color-body);
   }
 
-  .lahero__copy :global(.on-page) {
+  /* ── Jump menu: responsive mobile / desktop ──────────────────────────── */
+  .lahero__jump {
     margin-top: 24px;
+  }
+
+  .lahero__mobile-nav {
+    border: 1px solid var(--color-hairline);
+    border-radius: var(--radius-md);
+    background: var(--color-canvas);
+  }
+
+  .lahero__mobile-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 10px 14px;
+    cursor: pointer;
+    list-style: none;
+    user-select: none;
+  }
+
+  .lahero__mobile-toggle::-webkit-details-marker {
+    display: none;
+  }
+
+  .lahero__mobile-label {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--color-mute);
+  }
+
+  .lahero__mobile-chevron {
+    flex-shrink: 0;
+    color: var(--color-mute);
+    transition: transform 0.15s ease;
+  }
+
+  .lahero__mobile-nav[open] .lahero__mobile-chevron {
+    transform: rotate(180deg);
+  }
+
+  .lahero__mobile-list {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    margin: 0;
+    padding: 0 8px 8px;
+    list-style: none;
+    border-top: 1px solid var(--color-hairline);
+  }
+
+  .lahero__mobile-link {
+    display: block;
+    padding: 8px 10px;
+    border-radius: var(--radius-sm);
+    font-size: 13px;
+    line-height: 18px;
+    color: var(--color-body);
+    text-decoration: none;
+    transition: color 0.15s ease, background 0.15s ease;
+  }
+
+  .lahero__mobile-link:hover {
+    color: var(--color-ink);
+    background: var(--color-canvas-soft-2);
+  }
+
+  .lahero__desktop-nav {
+    display: none;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .lahero__desktop-label {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-mute);
+  }
+
+  .lahero__pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .lahero__pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    border-radius: var(--radius-pill);
+    border: 1px solid var(--color-hairline);
+    background: var(--color-canvas);
+    font-size: 13.5px;
+    font-weight: 500;
+    color: var(--color-body);
+    transition: all 0.15s ease;
+  }
+
+  .lahero__pill:hover {
+    border-color: var(--color-link);
+    color: var(--color-link-deep);
+    box-shadow: var(--shadow-e1);
+  }
+
+  .lahero__pill-icon {
+    display: inline-flex;
+    align-items: center;
+    color: var(--color-link);
+  }
+
+  @media (min-width: 640px) {
+    .lahero__mobile-nav {
+      display: none;
+    }
+    .lahero__desktop-nav {
+      display: flex;
+    }
   }
 
   /* ── Right column: LinkedIn card mockup ─────────────────────────────── */

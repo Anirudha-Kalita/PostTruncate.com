@@ -7,7 +7,6 @@
 //
 // The accent is everything after the "—" so it stays language-agnostic across
 // all 10 locales. The illustration is decorative (aria-hidden).
-import OnThisPage from './OnThisPage.astro';
 import type { SectionAnchor } from '../lib/headingAnchors';
 
 interface Props {
@@ -22,6 +21,15 @@ const { title, intro, sections, onThisPageLabel } = Astro.props;
 const dashIndex = title.indexOf('—');
 const titleHead = dashIndex >= 0 ? title.slice(0, dashIndex + 1) : title;
 const titleTail = dashIndex >= 0 ? title.slice(dashIndex + 1).trim() : '';
+
+// Section navigation icons matching ICON_SETS.google in ToolSectionCards.astro
+const ICONS = [
+  '<path d="m3 3 7.07 16.97 2.51-7.39 7.39-2.51L3 3z"/><path d="m13 13 6 6"/>',
+  '<rect x="3" y="3" width="18" height="18" rx="2"/><path d="M7 12h10M7 16h6"/>',
+  '<circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/>',
+  '<rect x="3" y="8" width="18" height="8" rx="2"/><path d="M7 8v4M11 8v2M15 8v4M19 8v2"/>',
+  '<path d="M12 2l3 6 6 1-4.5 4.5 1 6.5-5.5-3-5.5 3 1-6.5L3 9l6-1z"/>',
+];
 
 // "Google" wordmark, per-letter brand colors (blue, red, yellow, blue, green, red).
 const WORDMARK = [
@@ -48,7 +56,40 @@ const WORDMARK = [
       {titleTail && <><br /><span class="gahero__accent">{titleTail}</span></>}
     </h1>
     {intro && <p class="gahero__lede">{intro}</p>}
-    <OnThisPage label={onThisPageLabel} sections={sections} />
+    {/* Jump navigation: mobile dropdown / desktop pills */}
+    {sections.length > 0 && (
+      <nav class="gahero__jump" aria-label={onThisPageLabel}>
+        {/* Mobile dropdown */}
+        <details class="gahero__mobile-nav">
+          <summary class="gahero__mobile-toggle">
+            <span class="gahero__mobile-label">{onThisPageLabel}</span>
+            <svg class="gahero__mobile-chevron" width="12" height="12" viewBox="0 0 12 12" aria-hidden="true">
+              <path d="M2.5 4.5 6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+          </summary>
+          <ul class="gahero__mobile-list">
+            {sections.map((section) => (
+              <li>
+                <a class="gahero__mobile-link" href={`#${section.id}`}>{section.label}</a>
+              </li>
+            ))}
+          </ul>
+        </details>
+
+        {/* Desktop pills row */}
+        <div class="gahero__desktop-nav">
+          <span class="gahero__desktop-label">{onThisPageLabel}</span>
+          <div class="gahero__pills">
+            {sections.map((sec, idx) => (
+              <a href={`#${sec.id}`} class="gahero__pill">
+                <span class="gahero__pill-icon" set:html={`<svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2">${ICONS[idx % ICONS.length]}</svg>`} />
+                <span>{sec.label}</span>
+              </a>
+            ))}
+          </div>
+        </div>
+      </nav>
+    )}
   </div>
 
   <div class="gahero__art" aria-hidden="true">
@@ -150,8 +191,131 @@ const WORDMARK = [
     color: var(--color-body);
   }
 
-  .gahero__copy :global(.on-page) {
+  /* ── Jump menu: responsive mobile / desktop ──────────────────────────── */
+  .gahero__jump {
     margin-top: 24px;
+  }
+
+  .gahero__mobile-nav {
+    border: 1px solid var(--color-hairline);
+    border-radius: var(--radius-md);
+    background: var(--color-canvas);
+  }
+
+  .gahero__mobile-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 10px 14px;
+    cursor: pointer;
+    list-style: none;
+    user-select: none;
+  }
+
+  .gahero__mobile-toggle::-webkit-details-marker {
+    display: none;
+  }
+
+  .gahero__mobile-label {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--color-mute);
+  }
+
+  .gahero__mobile-chevron {
+    flex-shrink: 0;
+    color: var(--color-mute);
+    transition: transform 0.15s ease;
+  }
+
+  .gahero__mobile-nav[open] .gahero__mobile-chevron {
+    transform: rotate(180deg);
+  }
+
+  .gahero__mobile-list {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    margin: 0;
+    padding: 0 8px 8px;
+    list-style: none;
+    border-top: 1px solid var(--color-hairline);
+  }
+
+  .gahero__mobile-link {
+    display: block;
+    padding: 8px 10px;
+    border-radius: var(--radius-sm);
+    font-size: 13px;
+    line-height: 18px;
+    color: var(--color-body);
+    text-decoration: none;
+    transition: color 0.15s ease, background 0.15s ease;
+  }
+
+  .gahero__mobile-link:hover {
+    color: var(--color-ink);
+    background: var(--color-canvas-soft-2);
+  }
+
+  .gahero__desktop-nav {
+    display: none;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .gahero__desktop-label {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-mute);
+  }
+
+  .gahero__pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .gahero__pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    border-radius: var(--radius-pill);
+    border: 1px solid var(--color-hairline);
+    background: var(--color-canvas);
+    font-size: 13.5px;
+    font-weight: 500;
+    color: var(--color-body);
+    transition: all 0.15s ease;
+  }
+
+  .gahero__pill:hover {
+    border-color: var(--color-link);
+    color: var(--color-link-deep);
+    box-shadow: var(--shadow-e1);
+  }
+
+  .gahero__pill-icon {
+    display: inline-flex;
+    align-items: center;
+    color: var(--color-link);
+  }
+
+  @media (min-width: 640px) {
+    .gahero__mobile-nav {
+      display: none;
+    }
+    .gahero__desktop-nav {
+      display: flex;
+    }
   }
 
   /* ── Right column: Google SERP mockup ───────────────────────────────── */

@@ -8,7 +8,6 @@
 // Color scheme mirrors the TikTok platform page (magenta / cyan / black base).
 // The accent is everything after the "—" so it stays language-agnostic across
 // all 10 locales. The illustration is decorative (aria-hidden).
-import OnThisPage from './OnThisPage.astro';
 import type { SectionAnchor } from '../lib/headingAnchors';
 
 interface Props {
@@ -23,6 +22,14 @@ const { title, intro, sections, onThisPageLabel } = Astro.props;
 const dashIndex = title.indexOf('—');
 const titleHead = dashIndex >= 0 ? title.slice(0, dashIndex + 1) : title;
 const titleTail = dashIndex >= 0 ? title.slice(dashIndex + 1).trim() : '';
+
+// Section navigation icons matching ICON_SETS.tiktok in ToolSectionCards.astro
+const ICONS = [
+  '<path d="M4 6h16M4 12h10M4 18h13"/>',
+  '<circle cx="5" cy="12" r="1.5" fill="currentColor" stroke="none"/><circle cx="12" cy="12" r="1.5" fill="currentColor" stroke="none"/><circle cx="19" cy="12" r="1.5" fill="currentColor" stroke="none"/>',
+  '<rect x="6" y="3" width="12" height="18" rx="2"/><path d="M10.5 9 15 12l-4.5 3z"/>',
+  '<circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/>',
+];
 
 const TIKTOK_GLYPH =
   'M16.6 5.82A4.28 4.28 0 0 1 15.54 3h-3.09v12.4a2.59 2.59 0 0 1-2.59 2.5 2.59 2.59 0 0 1-2.59-2.59 2.59 2.59 0 0 1 3.39-2.46V9.69a5.66 5.66 0 0 0-.8-.06A5.69 5.69 0 0 0 4.17 15.31 5.69 5.69 0 0 0 13.94 19.3a5.69 5.69 0 0 0 1.6-3.96V9.01a7.34 7.34 0 0 0 4.29 1.37V7.3a4.28 4.28 0 0 1-3.23-1.48z';
@@ -42,7 +49,40 @@ const TIKTOK_GLYPH =
       {titleTail && <><br /><span class="tahero__accent">{titleTail}</span></>}
     </h1>
     {intro && <p class="tahero__lede">{intro}</p>}
-    <OnThisPage label={onThisPageLabel} sections={sections} />
+    {/* Jump navigation: mobile dropdown / desktop pills */}
+    {sections.length > 0 && (
+      <nav class="tahero__jump" aria-label={onThisPageLabel}>
+        {/* Mobile dropdown */}
+        <details class="tahero__mobile-nav">
+          <summary class="tahero__mobile-toggle">
+            <span class="tahero__mobile-label">{onThisPageLabel}</span>
+            <svg class="tahero__mobile-chevron" width="12" height="12" viewBox="0 0 12 12" aria-hidden="true">
+              <path d="M2.5 4.5 6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+          </summary>
+          <ul class="tahero__mobile-list">
+            {sections.map((section) => (
+              <li>
+                <a class="tahero__mobile-link" href={`#${section.id}`}>{section.label}</a>
+              </li>
+            ))}
+          </ul>
+        </details>
+
+        {/* Desktop pills row */}
+        <div class="tahero__desktop-nav">
+          <span class="tahero__desktop-label">{onThisPageLabel}</span>
+          <div class="tahero__pills">
+            {sections.map((sec, idx) => (
+              <a href={`#${sec.id}`} class="tahero__pill">
+                <span class="tahero__pill-icon" set:html={`<svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2">${ICONS[idx % ICONS.length]}</svg>`} />
+                <span>{sec.label}</span>
+              </a>
+            ))}
+          </div>
+        </div>
+      </nav>
+    )}
   </div>
 
   <div class="tahero__art" aria-hidden="true">
@@ -134,8 +174,131 @@ const TIKTOK_GLYPH =
     color: var(--color-body);
   }
 
-  .tahero__copy :global(.on-page) {
+  /* ── Jump menu: responsive mobile / desktop ──────────────────────────── */
+  .tahero__jump {
     margin-top: 24px;
+  }
+
+  .tahero__mobile-nav {
+    border: 1px solid var(--color-hairline);
+    border-radius: var(--radius-md);
+    background: var(--color-canvas);
+  }
+
+  .tahero__mobile-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 10px 14px;
+    cursor: pointer;
+    list-style: none;
+    user-select: none;
+  }
+
+  .tahero__mobile-toggle::-webkit-details-marker {
+    display: none;
+  }
+
+  .tahero__mobile-label {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--color-mute);
+  }
+
+  .tahero__mobile-chevron {
+    flex-shrink: 0;
+    color: var(--color-mute);
+    transition: transform 0.15s ease;
+  }
+
+  .tahero__mobile-nav[open] .tahero__mobile-chevron {
+    transform: rotate(180deg);
+  }
+
+  .tahero__mobile-list {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    margin: 0;
+    padding: 0 8px 8px;
+    list-style: none;
+    border-top: 1px solid var(--color-hairline);
+  }
+
+  .tahero__mobile-link {
+    display: block;
+    padding: 8px 10px;
+    border-radius: var(--radius-sm);
+    font-size: 13px;
+    line-height: 18px;
+    color: var(--color-body);
+    text-decoration: none;
+    transition: color 0.15s ease, background 0.15s ease;
+  }
+
+  .tahero__mobile-link:hover {
+    color: var(--color-ink);
+    background: var(--color-canvas-soft-2);
+  }
+
+  .tahero__desktop-nav {
+    display: none;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .tahero__desktop-label {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-mute);
+  }
+
+  .tahero__pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .tahero__pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    border-radius: var(--radius-pill);
+    border: 1px solid var(--color-hairline);
+    background: var(--color-canvas);
+    font-size: 13.5px;
+    font-weight: 500;
+    color: var(--color-body);
+    transition: all 0.15s ease;
+  }
+
+  .tahero__pill:hover {
+    border-color: var(--tt-magenta);
+    color: var(--tt-magenta-deep);
+    box-shadow: var(--shadow-e1);
+  }
+
+  .tahero__pill-icon {
+    display: inline-flex;
+    align-items: center;
+    color: var(--tt-magenta);
+  }
+
+  @media (min-width: 640px) {
+    .tahero__mobile-nav {
+      display: none;
+    }
+    .tahero__desktop-nav {
+      display: flex;
+    }
   }
 
   /* ── Right column: 9:16 phone mockup ────────────────────────────────── */
