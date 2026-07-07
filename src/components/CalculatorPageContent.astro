@@ -18,6 +18,8 @@ import ReadingTimeHero from './ReadingTimeHero.astro';
 import ByteCounterHero from './ByteCounterHero.astro';
 import EmojiCounterHero from './EmojiCounterHero.astro';
 import SentenceCounterHero from './SentenceCounterHero.astro';
+import SmsHero from './SmsHero.astro';
+import GoogleSerpHero from './GoogleSerpHero.astro';
 import ToolSectionCards from './ToolSectionCards.astro';
 import ToolCta from './ToolCta.astro';
 import type { ToolDefinition } from '../data/tools';
@@ -47,8 +49,8 @@ const { html: bodyHtml, sections } = prepareToolContent(tStr(tool.content), cano
 // The 7 per-platform character counters get the redesigned treatment: prose
 // body reframed as hover-active, brand-themed icon cards + the shared CTA card.
 const isCounter = !!PLATFORM_COUNTERS[tool.id];
-// Words-per-page, Reading-time, Byte-counter, Emoji-counter and Sentence-counter get the card-body + ToolCta design.
-const isWppCards = tool.id === 'words-per-page' || tool.id === 'reading-time' || tool.id === 'byte-counter' || tool.id === 'emoji-counter' || tool.id === 'sentence-counter';
+// Words-per-page, Reading-time, Byte-counter, Emoji-counter, Sentence-counter, SMS and Google SERP get the card-body + ToolCta design.
+const isWppCards = tool.id === 'words-per-page' || tool.id === 'reading-time' || tool.id === 'byte-counter' || tool.id === 'emoji-counter' || tool.id === 'sentence-counter' || tool.id === 'sms' || tool.id === 'google-serp';
 const cardSections = (isCounter || isWppCards) ? splitToolSections(bodyHtml) : [];
 
 // Per-counter brand accent — themes the closing CTA card (and, in future, the
@@ -66,8 +68,8 @@ const COUNTER_ACCENT: Record<string, string> = {
 };
 const ctaAccent = COUNTER_ACCENT[tool.id];
 // Card palette key: TikTok's counter uses a dedicated blue theme so it doesn't
-// collide with the shared magenta 'tiktok' key.
-const cardTheme = tool.id === 'tiktok' ? 'tiktok-counter' : tool.id;
+// collide with the shared magenta 'tiktok' key. Google SERP uses the 'google' theme.
+const cardTheme = tool.id === 'tiktok' ? 'tiktok-counter' : tool.id === 'google-serp' ? 'google' : tool.id;
 // Blue accent for the words-per-page ToolCta card.
 const wppAccent = '#2563eb';
 const lastUpdatedLine = interp(globalT.toolPage.lastUpdated, {
@@ -133,6 +135,20 @@ const relatedIconPath = tool.related ? (RELATED_ICON[tool.related.id] ?? '<path 
     />
   ) : tool.id === 'sentence-counter' ? (
     <SentenceCounterHero
+      title={tStr(tool.titles)}
+      intro={introText}
+      sections={sections}
+      onThisPageLabel={globalT.toolPage.onThisPage}
+    />
+  ) : tool.id === 'sms' ? (
+    <SmsHero
+      title={tStr(tool.titles)}
+      intro={introText}
+      sections={sections}
+      onThisPageLabel={globalT.toolPage.onThisPage}
+    />
+  ) : tool.id === 'google-serp' ? (
+    <GoogleSerpHero
       title={tStr(tool.titles)}
       intro={introText}
       sections={sections}
@@ -232,7 +248,7 @@ const relatedIconPath = tool.related ? (RELATED_ICON[tool.related.id] ?? '<path 
     )}
 
     {relatedTool && relatedHref && (
-      <aside class="tool-page__crosslink">
+      <aside class="tool-page__crosslink" style={tool.id === 'sms' ? "--color-link: #059669; --color-link-bg-soft: rgba(16, 185, 129, 0.12); --color-link-deep: #047857;" : undefined}>
         <span class="tool-page__crosslink-icon" aria-hidden="true">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" set:html={relatedIconPath} />
         </span>
@@ -248,6 +264,10 @@ const relatedIconPath = tool.related ? (RELATED_ICON[tool.related.id] ?? '<path 
 
     {isCounter ? (
       <ToolCta heading={cta.heading} blurb={cta.blurb} button={cta.button} href={homeHref} accent={ctaAccent} />
+    ) : tool.id === 'sms' ? (
+      <ToolCta heading={cta.heading} blurb={cta.blurb} button={cta.button} href={homeHref} accent="#10b981" />
+    ) : tool.id === 'google-serp' ? (
+      <ToolCta heading={cta.heading} blurb={cta.blurb} button={cta.button} href={homeHref} accent="#1a73e8" />
     ) : isWppCards ? (
       <ToolCta heading={cta.heading} blurb={cta.blurb} button={cta.button} href={homeHref} accent={wppAccent} />
     ) : (

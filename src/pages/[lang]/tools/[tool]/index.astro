@@ -116,7 +116,7 @@ const faqItems = tool.faq?.[lang];
       <SmsCounterCalculator client:load s={t.island} lang={lang} />
     )}
     {tool.id === 'google-serp' && (
-      <SeoPreview client:load s={t.island} />
+      <SeoPreview client:load s={t.island} lang={lang} />
     )}
   </CalculatorPageContent>
 </Layout>

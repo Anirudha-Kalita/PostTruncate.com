@@ -1,0 +1,713 @@
+---
+// Two-column marketing hero for the Google SERP Preview page. Left: a
+// blue eyebrow badge, headline (with the phrase after the em-dash in a blue
+// gradient) + lede + on-this-page pills. Right: a Google search mockup card
+// with Google logo text, a mock search bar, preview lines, a floating HTML badge,
+// and a floating Title / Description limits stats card.
+//
+// The accent is everything after the "—" so it stays language-agnostic across
+// all 10 locales. The illustration is decorative (aria-hidden).
+import type { SectionAnchor } from '../lib/headingAnchors';
+
+interface Props {
+  title: string;
+  intro: string;
+  sections: SectionAnchor[];
+  onThisPageLabel: string;
+}
+
+const { title, intro, sections, onThisPageLabel } = Astro.props;
+
+const dashIndex = title.indexOf('—');
+const titleHead = dashIndex >= 0 ? title.slice(0, dashIndex + 1) : title;
+const titleTail = dashIndex >= 0 ? title.slice(dashIndex + 1).trim() : '';
+
+// Helper to resolve custom icons for each section in the Jump Links list
+const getLinkIcon = (id: string) => {
+  if (id.includes('click') || id.includes('rate') || id.includes('decide')) {
+    // 1st: Cursor click SVG
+    return '<svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2"><path d="m3 3 7.07 16.97 2.51-7.39 7.39-2.51L3 3z"/><path d="m13 13 6 6"/></svg>';
+  }
+  if (id.includes('description') || id.includes('length')) {
+    // 2nd: Meta description SVG
+    return '<svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M7 12h10M7 16h6"/></svg>';
+  }
+  if (id.includes('decides') || id.includes('snippet') || id.includes('show')) {
+    // 3rd: Search glass SVG
+    return '<svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>';
+  }
+  if (id.includes('pixel') || id.includes('width') || id.includes('story')) {
+    // 4th: Ruler/pixel SVG
+    return '<svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="8" width="18" height="8" rx="2"/><path d="M7 8v4M11 8v2M15 8v4M19 8v2"/></svg>';
+  }
+  if (id.includes('write') || id.includes('publish') || id.includes('preview')) {
+    // 5th: Star/preview SVG
+    return '<svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3 6 6 1-4.5 4.5 1 6.5-5.5-3-5.5 3 1-6.5L3 9l6-1z"/></svg>';
+  }
+  // Default fallback
+  return '<svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M8 9h8M8 15h6"/></svg>';
+};
+---
+
+<header class="serphero">
+  <div class="serphero__copy">
+    <span class="serphero__eyebrow">
+      FREE ONLINE TOOL
+    </span>
+
+    <h1 class="serphero__title">
+      <span>{titleHead}</span>
+      {titleTail && <><br /><span class="serphero__accent">{titleTail}</span></>}
+    </h1>
+    {intro && <p class="serphero__lede">{intro}</p>}
+    
+    {/* Jump navigation: mobile dropdown / desktop pills */}
+    {sections.length > 0 && (
+      <nav class="serphero__jump" aria-label={onThisPageLabel}>
+        {/* Mobile dropdown */}
+        <details class="serphero__mobile-nav">
+          <summary class="serphero__mobile-toggle">
+            <span class="serphero__mobile-label">{onThisPageLabel}</span>
+            <svg class="serphero__mobile-chevron" width="12" height="12" viewBox="0 0 12 12" aria-hidden="true">
+              <path d="M2.5 4.5 6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+          </summary>
+          <ul class="serphero__mobile-list">
+            {sections.map((section) => (
+              <li>
+                <a class="serphero__mobile-link" href={`#${section.id}`}>{section.label}</a>
+              </li>
+            ))}
+          </ul>
+        </details>
+
+        {/* Desktop pills row */}
+        <div class="serphero__desktop-nav">
+          <span class="serphero__desktop-label">{onThisPageLabel}</span>
+          <div class="serphero__pills">
+            {sections.map((sec) => (
+              <a href={`#${sec.id}`} class="serphero__pill">
+                <span class="serphero__pill-icon" set:html={getLinkIcon(sec.id)} />
+                <span>{sec.label}</span>
+              </a>
+            ))}
+          </div>
+        </div>
+      </nav>
+    )}
+  </div>
+
+  <div class="serphero__art" aria-hidden="true">
+    <span class="serphero__blob serphero__blob--1"></span>
+    <span class="serphero__blob serphero__blob--2"></span>
+    <span class="serphero__dots"></span>
+
+    {/* Connecting Guideline Lines */}
+    <span class="serphero__line-connect serphero__line-connect--horizontal"></span>
+    <span class="serphero__line-connect serphero__line-connect--vertical"></span>
+
+    {/* Google SERP mockup container */}
+    <div class="serphero__card">
+      <div class="serphero__card-inner">
+        {/* Google Text Logo */}
+        <div class="serphero__logo">
+          <span class="serphero__logo-g">G</span>
+          <span class="serphero__logo-o1">o</span>
+          <span class="serphero__logo-o2">o</span>
+          <span class="serphero__logo-g2">g</span>
+          <span class="serphero__logo-l">l</span>
+          <span class="serphero__logo-e">e</span>
+        </div>
+        
+        {/* Mock Search Input */}
+        <div class="serphero__search-bar">
+          <span class="serphero__search-placeholder"></span>
+          <span class="serphero__search-btn">
+            <svg viewBox="0 0 24 24" width="10" height="10" fill="none" stroke="currentColor" stroke-width="2.5">
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+          </span>
+        </div>
+
+        {/* Snippet preview */}
+        <div class="serphero__snippet">
+          <div class="serphero__snippet-meta">
+            <span class="serphero__snippet-globe">
+              <svg viewBox="0 0 24 24" width="8" height="8" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="2" y1="12" x2="22" y2="12"></line>
+                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+              </svg>
+            </span>
+            <span class="serphero__snippet-url"></span>
+          </div>
+          
+          {/* Blue Title lines */}
+          <div class="serphero__snippet-title">
+            <span class="serphero__title-line serphero__title-line--long"></span>
+            <span class="serphero__title-line serphero__title-line--short"></span>
+          </div>
+
+          {/* Grey description lines */}
+          <div class="serphero__snippet-desc">
+            <span class="serphero__desc-line serphero__desc-line--long"></span>
+            <span class="serphero__desc-line serphero__desc-line--long"></span>
+            <span class="serphero__desc-line serphero__desc-line--medium"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    {/* Floating HTML code tag badge (left) */}
+    <div class="serphero__badge serphero__badge--code">
+      <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="16 18 22 12 16 6"></polyline>
+        <polyline points="8 6 2 12 8 18"></polyline>
+      </svg>
+    </div>
+
+    {/* Floating SERP Limits card (bottom right) */}
+    <div class="serphero__floating-stats">
+      <div class="serphero__stat-item">
+        <div class="serphero__stat-lbl">TITLE</div>
+        <div class="serphero__stat-num">0 <span class="serphero__stat-slash">/</span> 60</div>
+      </div>
+      <div class="serphero__stat-divider"></div>
+      <div class="serphero__stat-item">
+        <div class="serphero__stat-lbl">DESCRIPTION</div>
+        <div class="serphero__stat-num">0 <span class="serphero__stat-slash">/</span> 155</div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<style>
+  .serphero {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 40px;
+    align-items: center;
+    margin-bottom: 40px;
+  }
+
+  /* ── Left column copy ────────────────────────────────────────────────── */
+  .serphero__eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 18px;
+    padding: 6px 12px;
+    border-radius: var(--radius-pill);
+    background: color-mix(in srgb, var(--color-link) 12%, transparent);
+    color: var(--color-link);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .serphero__title {
+    font-size: clamp(30px, 5vw, 44px);
+    font-weight: 700;
+    line-height: 1.12;
+    letter-spacing: -1.6px;
+    color: var(--color-ink);
+    text-wrap: balance;
+  }
+
+  .serphero__accent {
+    background: linear-gradient(96deg, var(--color-link) 0%, var(--color-link-deep) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .serphero__lede {
+    margin-top: 18px;
+    max-width: 35rem;
+    font-size: 17px;
+    line-height: 27px;
+    color: var(--color-body);
+  }
+
+  /* ── Jump menu: responsive mobile / desktop ──────────────────────────── */
+  .serphero__jump {
+    margin-top: 32px;
+  }
+
+  .serphero__mobile-nav {
+    border: 1px solid var(--color-hairline);
+    border-radius: var(--radius-md);
+    background: var(--color-canvas);
+  }
+
+  .serphero__mobile-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 10px 14px;
+    cursor: pointer;
+    list-style: none;
+    user-select: none;
+  }
+
+  .serphero__mobile-toggle::-webkit-details-marker {
+    display: none;
+  }
+
+  .serphero__mobile-label {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--color-mute);
+  }
+
+  .serphero__mobile-chevron {
+    flex-shrink: 0;
+    color: var(--color-mute);
+    transition: transform 0.15s ease;
+  }
+
+  .serphero__mobile-nav[open] .serphero__mobile-chevron {
+    transform: rotate(180deg);
+  }
+
+  .serphero__mobile-list {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    margin: 0;
+    padding: 0 8px 8px;
+    list-style: none;
+    border-top: 1px solid var(--color-hairline);
+  }
+
+  .serphero__mobile-link {
+    display: block;
+    padding: 8px 10px;
+    border-radius: var(--radius-sm);
+    font-size: 13px;
+    line-height: 18px;
+    color: var(--color-body);
+    text-decoration: none;
+    transition: color 0.15s ease, background 0.15s ease;
+  }
+
+  .serphero__mobile-link:hover {
+    color: var(--color-ink);
+    background: var(--color-canvas-soft-2);
+  }
+
+  .serphero__desktop-nav {
+    display: none;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .serphero__desktop-label {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-mute);
+  }
+
+  .serphero__pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 12px;
+  }
+
+  .serphero__pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 14px 6px 10px;
+    border-radius: var(--radius-pill);
+    background: var(--color-canvas-soft);
+    border: 1px solid var(--color-hairline);
+    font-size: 14px;
+    line-height: 20px;
+    font-weight: 500;
+    color: var(--color-body);
+    text-decoration: none;
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .serphero__pill:hover {
+    color: var(--color-ink);
+    background: var(--color-canvas-soft-2);
+    border-color: var(--color-mute);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-e1);
+  }
+
+  .serphero__pill-icon {
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 22px;
+    height: 22px;
+    border-radius: var(--radius-sm);
+    background: color-mix(in srgb, var(--color-link) 10%, transparent);
+    color: var(--color-link);
+    transition: transform 0.2s ease;
+  }
+
+  .serphero__pill:hover .serphero__pill-icon {
+    transform: scale(1.08);
+  }
+
+  /* ── Right column illustration ────────────────────────────────────────── */
+  .serphero__art {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    aspect-ratio: 1.6;
+    border-radius: var(--radius-2xl);
+    background: radial-gradient(circle at 70% 30%, color-mix(in srgb, var(--color-link) 8%, transparent) 0%, transparent 70%);
+    overflow: visible;
+  }
+
+  /* Soft organic backdrop glows */
+  .serphero__blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: 0.55;
+    z-index: 1;
+  }
+
+  .serphero__blob--1 {
+    top: 10%;
+    right: 15%;
+    width: 180px;
+    height: 180px;
+    background: color-mix(in srgb, var(--color-link) 25%, transparent);
+  }
+
+  .serphero__blob--2 {
+    bottom: 10%;
+    left: 20%;
+    width: 140px;
+    height: 140px;
+    background: color-mix(in srgb, var(--color-link-deep) 20%, transparent);
+  }
+
+  /* Dotted grid */
+  .serphero__dots {
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(var(--color-hairline-hard) 1px, transparent 1px);
+    background-size: 20px 20px;
+    opacity: 0.45;
+    z-index: 2;
+  }
+
+  /* Guidelines */
+  .serphero__line-connect {
+    position: absolute;
+    background: linear-gradient(to right, var(--color-hairline) 50%, transparent 50%) repeat-x;
+    background-size: 8px 1px;
+    opacity: 0.8;
+    z-index: 2;
+  }
+
+  .serphero__line-connect--horizontal {
+    top: 50%;
+    left: 8%;
+    width: 32%;
+    height: 1px;
+  }
+
+  .serphero__line-connect--vertical {
+    top: 25%;
+    left: 40%;
+    width: 1px;
+    height: 50%;
+    background: linear-gradient(to bottom, var(--color-hairline) 50%, transparent 50%) repeat-y;
+    background-size: 1px 8px;
+  }
+
+  /* ── Google Search mockup card ────────────────────────────────────────── */
+  .serphero__card {
+    position: relative;
+    width: 250px;
+    height: 200px;
+    border-radius: 20px;
+    background: var(--color-canvas);
+    border: 1px solid var(--color-hairline);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.08), 0 4px 12px rgba(0, 0, 0, 0.03);
+    overflow: hidden;
+    z-index: 3;
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .serphero__card:hover {
+    transform: translateY(-4px) scale(1.02);
+  }
+
+  .serphero__card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    padding: 16px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  /* Google Logo styled */
+  .serphero__logo {
+    display: flex;
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    font-family: system-ui, -apple-system, sans-serif;
+    user-select: none;
+  }
+
+  .serphero__logo-g { color: #4285F4; }
+  .serphero__logo-o1 { color: #EA4335; }
+  .serphero__logo-o2 { color: #FBBC05; }
+  .serphero__logo-g2 { color: #4285F4; }
+  .serphero__logo-l { color: #34A853; }
+  .serphero__logo-e { color: #EA4335; }
+
+  /* Search input box */
+  .serphero__search-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 28px;
+    border-radius: 14px;
+    border: 1px solid var(--color-hairline-hard);
+    padding: 0 8px 0 12px;
+    background: var(--color-canvas);
+  }
+
+  .serphero__search-placeholder {
+    width: 60px;
+    height: 4px;
+    background: var(--color-hairline-hard);
+    border-radius: 2px;
+    opacity: 0.5;
+  }
+
+  .serphero__search-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: #1a73e8;
+    color: white;
+  }
+
+  /* Preview result snippet box */
+  .serphero__snippet {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    margin-top: 6px;
+  }
+
+  .serphero__snippet-meta {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .serphero__snippet-globe {
+    color: var(--color-mute);
+    opacity: 0.7;
+    display: inline-flex;
+  }
+
+  .serphero__snippet-url {
+    width: 80px;
+    height: 4px;
+    background: var(--color-hairline-hard);
+    border-radius: 2px;
+    opacity: 0.7;
+  }
+
+  .serphero__snippet-title {
+    display: flex;
+    gap: 4px;
+    margin-bottom: 2px;
+  }
+
+  .serphero__title-line {
+    height: 6px;
+    background: #1a0dab;
+    border-radius: 3px;
+  }
+
+  .serphero__title-line--long {
+    width: 100px;
+  }
+
+  .serphero__title-line--short {
+    width: 40px;
+  }
+
+  /* Grey description lines */
+  .serphero__snippet-desc {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .serphero__desc-line {
+    height: 4px;
+    background: var(--color-hairline-hard);
+    border-radius: 2px;
+    opacity: 0.75;
+  }
+
+  .serphero__desc-line--long {
+    width: 100%;
+  }
+
+  .serphero__desc-line--medium {
+    width: 75%;
+  }
+
+  /* ── Floating Badges ──────────────────────────────────────────────────── */
+  .serphero__badge {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius-xl);
+    background: var(--color-canvas);
+    border: 1px solid var(--color-hairline);
+    box-shadow: var(--shadow-e3);
+    z-index: 4;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .serphero__badge:hover {
+    transform: scale(1.05) translateY(-2px);
+    box-shadow: var(--shadow-e4);
+  }
+
+  .serphero__badge--code {
+    left: 8%;
+    top: 35%;
+    width: 48px;
+    height: 48px;
+    border-radius: 16px;
+    color: var(--color-link);
+  }
+
+  /* ── Floating Stats Card ──────────────────────────────────────────────── */
+  .serphero__floating-stats {
+    position: absolute;
+    right: 2%;
+    bottom: 12%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 14px 18px;
+    border-radius: 16px;
+    background: var(--color-canvas);
+    border: 1px solid var(--color-hairline);
+    box-shadow: var(--shadow-e3);
+    z-index: 4;
+    min-width: 130px;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .serphero__floating-stats:hover {
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: var(--shadow-e4);
+  }
+
+  .serphero__stat-item {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .serphero__stat-lbl {
+    font-size: 9px;
+    font-weight: 600;
+    color: var(--color-mute);
+    letter-spacing: 0.08em;
+  }
+
+  .serphero__stat-num {
+    margin-top: 2px;
+    font-size: 17px;
+    font-weight: 700;
+    line-height: 1.1;
+    color: var(--color-link);
+    letter-spacing: -0.5px;
+  }
+
+  .serphero__stat-slash {
+    color: var(--color-mute);
+    font-weight: 400;
+    font-size: 14px;
+  }
+
+  .serphero__stat-divider {
+    height: 1px;
+    background: var(--color-hairline);
+    width: 100%;
+  }
+
+  /* ── Responsive breakpoints ─────────────────────────────────────────── */
+  @media (min-width: 768px) {
+    .serphero {
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 50px;
+      margin-bottom: 50px;
+    }
+
+    .serphero__desktop-nav {
+      display: flex;
+    }
+
+    .serphero__mobile-nav {
+      display: none;
+    }
+
+    .serphero__card {
+      width: 270px;
+      height: 210px;
+    }
+
+    .serphero__badge--code {
+      left: 10%;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .serphero {
+      grid-template-columns: 1.25fr 0.75fr;
+      gap: 80px;
+    }
+
+    .serphero__card {
+      width: 300px;
+      height: 220px;
+    }
+
+    .serphero__badge--code {
+      left: 14%;
+    }
+  }
+</style>

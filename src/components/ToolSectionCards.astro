@@ -139,11 +139,27 @@ const ICON_SETS: Record<string, string[]> = {
     '<path d="M12 3l8 3v5c0 5-3.5 8-8 10-4.5-2-8-5-8-10V6z"/><path d="M9 12l2 2 4-4"/>',
   ],
   // 1 caption limit · 2 "…more" fold · 3 hashtags/9:16 canvas · 4 profile/FYP
+  // 1 caption limit · 2 "…more" fold · 3 hashtags/9:16 canvas · 4 profile/FYP
   tiktok: [
     '<path d="M4 6h16M4 12h10M4 18h13"/>',
     '<circle cx="5" cy="12" r="1.5" fill="currentColor" stroke="none"/><circle cx="12" cy="12" r="1.5" fill="currentColor" stroke="none"/><circle cx="19" cy="12" r="1.5" fill="currentColor" stroke="none"/>',
     '<rect x="6" y="3" width="12" height="18" rx="2"/><path d="M10.5 9 15 12l-4.5 3z"/>',
     '<circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/>',
+  ],
+  // 1 encodings · 2 emoji trap · 3 multipart segments · 4 extended double-cost
+  sms: [
+    '<rect x="4" y="4" width="16" height="16" rx="2"/><path d="M8 9h8M8 15h6"/>',
+    '<circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2M9 9h.01M15 9h.01"/>',
+    '<rect x="3" y="3" width="18" height="4" rx="1"/><rect x="3" y="10" width="18" height="4" rx="1"/><rect x="3" y="17" width="18" height="4" rx="1"/>',
+    '<path d="M17 6c-3.5 0-7 2.5-7 6s3.5 6 7 6M14 10H6M14 14H6"/>',
+  ],
+  // 1 click rate / cursor · 2 meta description / layout · 3 logic / search · 4 ruler / pixel · 5 star / preview
+  google: [
+    '<path d="m3 3 7.07 16.97 2.51-7.39 7.39-2.51L3 3z"/><path d="m13 13 6 6"/>',
+    '<rect x="3" y="3" width="18" height="18" rx="2"/><path d="M7 12h10M7 16h6"/>',
+    '<circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/>',
+    '<rect x="3" y="8" width="18" height="8" rx="2"/><path d="M7 8v4M11 8v2M15 8v4M19 8v2"/>',
+    '<path d="M12 2l3 6 6 1-4.5 4.5 1 6.5-5.5-3-5.5 3 1-6.5L3 9l6-1z"/>',
   ],
 };
 const DEFAULT_ICONS = [
@@ -188,6 +204,12 @@ const BSKY_BLUE: Tint = { bg: 'color-mix(in srgb, #1185fe 14%, transparent)', fg
 const DISCORD: Tint = { bg: 'color-mix(in srgb, #5865f2 16%, transparent)', fg: '#4752c4' };
 const WA_GREEN: Tint = { bg: 'color-mix(in srgb, #25d366 16%, transparent)', fg: '#128c4a' };
 
+// SMS character counter specific tints
+const SMS_GREEN: Tint = { bg: 'color-mix(in srgb, #10b981 12%, transparent)', fg: '#059669' };
+const SMS_EMERALD: Tint = { bg: 'color-mix(in srgb, #059669 12%, transparent)', fg: '#047857' };
+const SMS_TEAL: Tint = { bg: 'color-mix(in srgb, #0d9488 12%, transparent)', fg: '#0f766e' };
+const SMS_MUTE: Tint = { bg: 'var(--color-canvas-soft-2)', fg: 'var(--color-ink)' };
+
 const PALETTES: Record<string, Tint[]> = {
   twitter: [BLUE, INK, CYAN, BLUE_DEEP],
   linkedin: [BLUE, BLUE_DEEP, CYAN, BLUE],
@@ -217,6 +239,8 @@ const PALETTES: Record<string, Tint[]> = {
   'emoji-counter': [BLUE, CYAN, BLUE_DEEP, VIOLET],
   // Sentence-counter: blue theme matching the hero accent.
   'sentence-counter': [BLUE, CYAN, BLUE_DEEP, VIOLET],
+  // SMS: green theme matching the hero accent.
+  sms: [SMS_GREEN, SMS_EMERALD, SMS_TEAL, SMS_MUTE],
 };
 const palette = (theme && PALETTES[theme]) || [VIOLET, PINK, AMBER, BLUE];
 ---

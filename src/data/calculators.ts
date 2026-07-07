@@ -2834,6 +2834,22 @@ export const calculators: ToolDefinition[] = [
     platformLimits:
       '160 characters per segment in GSM-7 encoding, 70 characters per segment in Unicode encoding, multipart GSM reduces to 153 chars per segment, multipart Unicode reduces to 67 chars per segment, GSM extended characters (€ [ ] { } |) count as 2 characters each',
 
+    related: {
+      id: 'emoji-counter',
+      blurb: {
+        en: 'Want to check if an emoji or special character will split your text message? Paste your text into our emoji counter and invisible character detector to spot characters that reduce the SMS limit from 160 to 70.',
+        es: '¿Quieres comprobar si un emoji o carácter especial dividirá tu mensaje de texto? Pega tu texto en nuestro contador de emojis y detector de caracteres invisibles.',
+        de: 'Möchtest du prüfen, ob ein Emoji oder Sonderzeichen deine SMS teilt? Füge deinen Text in unseren Emoji-Zähler und Detektor für unsichtbare Zeichen ein.',
+        fr: 'Vous voulez vérifier si un émoji ou un caractère spécial va diviser votre SMS ? Collez votre texte dans notre compteur d’émojis et détecteur de caractères invisibles.',
+        pt: 'Quer verificar se um emoji ou caractere especial dividirá a sua mensagem de texto? Cole o seu texto no nosso contador de emojis e detetor de caracteres invisíveis.',
+        it: 'Vuoi verificare se un’emoji o un carattere speciale dividerà il tuo SMS? Incolla il testo nel nostro contatore di emoji e rilevatore di caratteri invisibili.',
+        nl: 'Wil je controleren of een emoji of speciaal teken je sms opsplitst? Plak je tekst in onze emoji-teller en detector van onzichtbare tekens.',
+        ja: '絵文字や特殊文字によってSMSが分割されるか確認したいですか？絵文字カウンター＆不可視文字ディテクターにテキストを貼り付けてみましょう。',
+        zh: '想检查表情符号或特殊字符是否会拆分你的短信？将文本粘贴到我们的表情符号计数器和不可见字符检测器中查看。',
+        da: 'Vil du tjekke, om en emoji eller et specialtegn deler din sms? Indsæt din tekst i vores emoji-tæller og detektor af usynlige tegn.',
+      },
+    },
+
     slugs: {
       en: 'sms-character-counter',
       es: 'contador-sms',
@@ -3155,6 +3171,22 @@ export const calculators: ToolDefinition[] = [
     platformLimits:
       'Page title: 60 characters before Google truncates in search results (~600px pixel width), meta description: 155 characters before truncation in search snippets',
 
+    related: {
+      id: 'emoji-counter',
+      blurb: {
+        en: 'Adding emojis to your title tags or meta descriptions? Use our emoji counter to ensure special characters don\'t inflate your page\'s pixel width and trigger search result truncation.',
+        es: '¿Añades emojis a tus title tags o meta descripciones? Usa nuestro contador de emojis para asegurarte de que los caracteres especiales no inflen el ancho en píxeles.',
+        de: 'Fügst du Emojis in deine Title Tags oder Meta-Beschreibungen ein? Nutze unseren Emoji-Zähler, um sicherzustellen, dass Sonderzeichen die Pixelbreite nicht aufblähen.',
+        fr: 'Vous ajoutez des émojis à vos title tags ou méta-descriptions ? Utilisez notre compteur d’émojis pour vous assurer que les caractères spéciaux ne dépassent pas la largeur en pixels.',
+        pt: 'Adiciona emojis aos seus title tags ou meta descriptions? Use o nosso contador de emojis para garantir que caracteres especiais não aumentem a largura em píxeis.',
+        it: 'Aggiungi emoji ai tuoi title tag o meta descrizioni? Usa il nostro contatore di emoji per assicurarti che i caratteri speciali non aumentino la larghezza in pixel.',
+        nl: 'Voeg je emoji’s toe aan je title tags of meta-omschrijvingen? Gebruik onze emoji-teller om te adviseren of speciale tekens de pixelbreedte niet vergroten.',
+        ja: 'タイトルタグやメタディスクリプションに絵文字を追加しますか？絵文字カウンターを使って、特殊文字がピクセル幅を圧迫し検索結果で省略されないか確認しましょう。',
+        zh: '在标题标签或元描述中添加了表情符号？使用我们的表情符号计数器，确保特殊字符不会撑大页面的像素宽度并导致搜索结果被截断。',
+        da: 'Tilføjer du emojis til dine title tags eller meta-beskrivelser? Brug vores emoji-tæller til at sikre, at specialtegn ikke puster din sides pixelbredde op.',
+      },
+    },
+
     slugs: {
       en: 'google-serp-preview',
       es: 'simulador-serp-google',
@@ -3398,6 +3430,228 @@ export const calculators: ToolDefinition[] = [
 
 <h2>Skriv én gang, forhåndsvis inden publicering</h2>
 <p>PostTruncate integrerer <strong>live SERP-forhåndsvisning</strong> direkte i skrivereditoren. Skriv din titel og beskrivelse, se Google-uddraget opdatere sig i realtid, bekræft at det ser rigtigt ud, og kopiér det til dit CMS — uden at skifte faner.</p>`,
+    },
+    faq: {
+      en: [
+        {
+          q: 'What is the ideal character and pixel limit for Google title tags in 2026?',
+          a: 'While most SEO guides recommend keeping your title tag between 50 to 60 characters, Google actually measures and truncates titles based on pixels, not character count. The current desktop display limit is roughly 600 pixels, while mobile search results truncate at around 580 pixels. Because wider letters like "W" take up more pixel space than thin letters like "I", checking character count alone is unreliable. Our free Google SERP Preview tool calculates real-time pixel widths to ensure your headline never gets cut off with an ellipsis (...).',
+        },
+        {
+          q: 'How long should an SEO meta description be to avoid getting truncated?',
+          a: 'To prevent your meta description from being cut off in Google search results, keep your text between 150 and 160 characters (or approximately 960 pixels on desktop and 680 pixels on mobile). If your description exceeds this limit, Google will truncate the end of your sentence, which often hides your crucial call-to-action (CTA) or contact details. Using a live SERP checker allows you to front-load your most important keywords and value propositions right where users can see them.',
+        },
+        {
+          q: 'Why is Google rewriting or changing my title tag and meta description?',
+          a: 'Google’s algorithm will frequently rewrite or replace your custom metadata if your tags are too long, keyword-stuffed, duplicate, or irrelevant to the user\'s specific search query. If your title tag exceeds the maximum pixel limit, Google may automatically pull an H1 tag or random body text from your webpage to fit the SERP space. By using a SERP simulator to craft concise, accurately formatted, and highly relevant snippets before publishing, you significantly reduce the chances of Google overriding your custom SEO formatting.',
+        },
+        {
+          q: 'How does using a SERP preview tool improve my organic click-through rate (CTR)?',
+          a: 'Your SERP snippet is your website\'s organic digital ad—it is the first impression a researcher has of your brand. Even if your webpage ranks in the top 3 results, a poorly formatted, truncated, or boring snippet will lose clicks to lower-ranking competitors. A SERP preview tool lets you A/B test compelling emotional hooks, special symbols, brand positioning, and clear CTAs in a live, risk-free sandbox, helping you engineer snippets designed to maximize clicks and drive more organic traffic.',
+        },
+        {
+          q: 'Does this tool simulate both desktop and mobile Google search result layouts?',
+          a: 'Yes. Google displays search results differently across devices; mobile layouts feature different line wrapping, smaller pixel constraints, prominent favicons, and dedicated site names above the URL path. Our Google SERP checker allows you to instantly toggle between desktop and mobile live previews. This ensures your metadata looks clean, legible, and structurally perfect regardless of the screen size your target audience is using.',
+        },
+      ],
+      es: [
+        {
+          q: '¿Cuál es el límite ideal de caracteres y píxeles para las etiquetas de título de Google en 2026?',
+          a: 'Aunque la mayoría de las guías de SEO recomiendan mantener la etiqueta de título entre 50 y 60 caracteres, Google en realidad mide y trunca los títulos según los píxeles, no el recuento de caracteres. El límite de visualización actual en escritorio es de aproximadamente 600 píxeles, mientras que en móviles se trunca alrededor de los 580 píxeles. Debido a que las letras más anchas como la "W" ocupan más espacio que las delgadas como la "I", confiar solo en el recuento de caracteres no es fiable. Nuestro simulador SERP de Google calcula el ancho en píxeles en tiempo real.',
+        },
+        {
+          q: '¿Qué longitud debe tener una meta descripción de SEO para evitar que se trunque?',
+          a: 'Para evitar que tu meta descripción se corte en los resultados de búsqueda de Google, mantén el texto entre 150 y 160 caracteres (o aproximadamente 960 píxeles en escritorio y 680 píxeles en móviles). Si tu descripción supera este límite, Google truncará el final de la frase, ocultando a menudo tu llamada a la acción (CTA) o detalles de contacto. El uso de un simulador SERP en vivo te ayuda a organizar el contenido de forma óptima.',
+        },
+        {
+          q: '¿Por qué Google está reescribiendo o cambiando mi title tag y meta descripción?',
+          a: 'El algoritmo de Google reescribirá con frecuencia tus metadatos si tus etiquetas son demasiado largas, están saturadas de palabras clave, están duplicadas o no son relevantes para la búsqueda del usuario. Si tu title tag supera el límite de píxeles, Google puede extraer un H1 o texto aleatorio de tu página. El uso de un simulador te ayuda a crear fragmentos concisos y con formato preciso para reducir las posibilidades de que Google los ignore.',
+        },
+        {
+          q: '¿Cómo mejora mi tasa de clics orgánicos (CTR) el uso de un simulador SERP?',
+          a: 'Tu fragmento SERP es el anuncio orgánico de tu web: la primera impresión que un usuario tiene de tu marca. Incluso si tu página está en el top 3, un fragmento mal formateado o cortado perderá clics frente a competidores peor posicionados. Un simulador te permite probar ganchos emocionales, símbolos especiales y llamadas a la acción en un entorno seguro, ayudándote a maximizar las visitas y el tráfico.',
+        },
+        {
+          q: '¿Este simulador representa los diseños de búsqueda de Google tanto para escritorio como para móviles?',
+          a: 'Sí. Google muestra los resultados de forma diferente según el dispositivo: los móviles tienen otros límites y favicons destacados. Nuestro comprobador SERP de Google te permite alternar al instante entre vistas previas de escritorio y móvil, garantizando que tus metadatos se vean limpios, legibles y estructuralmente perfectos en cualquier pantalla.',
+        },
+      ],
+      de: [
+        {
+          q: 'Was ist das ideale Zeichen- und Pixel-Limit für Google-Title-Tags im Jahr 2026?',
+          a: 'Während die meisten SEO-Ratgeber empfehlen, das Title-Tag zwischen 50 und 60 Zeichen zu halten, misst und kürzt Google Titel tatsächlich auf Pixelbasis und nicht nach Zeichenanzahl. Das aktuelle Limit auf dem Desktop liegt bei etwa 600 Pixeln, während mobile Suchergebnisse bei etwa 580 Pixeln abgeschnitten werden. Da breite Buchstaben wie „W“ mehr Pixel beanspruchen als schmale Buchstaben wie „I“, ist die reine Zeichenzählung unzuverlässig. Unser Google SERP Vorschau-Tool berechnet die Pixelbreiten in Echtzeit.',
+        },
+        {
+          q: 'Wie lang sollte eine SEO-Meta-Description sein, um ein Abschneiden zu vermeiden?',
+          a: 'Um zu verhindern, dass deine Meta-Beschreibung in den Google-Suchergebnissen abgeschnitten wird, halte deinen Text zwischen 150 und 160 Zeichen (oder etwa 960 Pixel auf dem Desktop und 680 Pixel auf Mobilgeräten). Wenn deine Beschreibung dieses Limit überschreitet, kürzt Google das Ende deines Satzes, wodurch oft dein wichtiger Call-to-Action (CTA) oder Kontaktdaten verborgen werden. Eine Live-SERP-Vorschau hilft dir, wichtige Keywords optimal zu platzieren.',
+        },
+        {
+          q: 'Warum schreibt Google mein Title-Tag und meine Meta-Beschreibung um?',
+          a: 'Der Google-Algorithmus schreibt deine Metadaten häufig um, wenn deine Tags zu lang, mit Keywords überladen, Duplikate oder für die Suchanfrage irrelevant sind. Wenn dein Title-Tag das Pixel-Limit überschreitet, zieht Google eventuell das H1-Tag oder Fließtext heran, um den Platz auszufüllen. Mit einem SERP-Simulator kannst du präzise, prägnante Schnipsel erstellen, was das Risiko verringert, dass Google deine SEO-Formatierung überschreibt.',
+        },
+        {
+          q: 'Wie verbessert ein SERP-Vorschau-Tool meine organische Klickrate (CTR)?',
+          a: 'Dein Suchergebnis-Snippet ist die organische Anzeige deiner Website – der erste Eindruck, den Suchende von deiner Marke bekommen. Selbst wenn deine Seite auf den vordersten Plätzen rankt, verliert ein abgeschnittenes oder langweiliges Snippet Klicks an Konkurrenten. Ein Vorschau-Tool ermöglicht das risikofreie Testen von emotionalen Hooks, Symbolen und CTAs, um Snippets für maximale Klicks und organischen Traffic zu optimieren.',
+        },
+        {
+          q: 'Simuliert dieses Tool sowohl Desktop- als auch mobile Google-Suchergebnisse?',
+          a: 'Ja. Google zeigt Suchergebnisse je nach Gerät unterschiedlich an: Mobile Layouts haben andere Zeilenumbrüche, engere Pixelgrenzen und auffällige Favicons. Unser Google SERP Checker ermöglicht es dir, sofort zwischen Desktop- und mobilen Live-Vorschauen umzuschalten, damit deine Metadaten auf allen Bildschirmgrößen perfekt und gut lesbar aussehen.',
+        },
+      ],
+      fr: [
+        {
+          q: 'Quelle est la limite idéale de caractères et de pixels pour les balises de titre Google en 2026 ?',
+          a: 'Bien que la plupart des guides SEO recommandent de limiter votre balise de titre entre 50 et 60 caractères, Google mesure et tronque en réalité les titres en pixels. La limite actuelle sur ordinateur est d\'environ 600 pixels, tandis que sur mobile elle se situe autour de 580 pixels. Comme les lettres larges comme le « W » prennent plus de place que les lettres fines comme le « I », le simple comptage des caractères n\'est pas fiable. Notre outil d\'aperçu SERP Google calcule la largeur en pixels en temps réel.',
+        },
+        {
+          q: 'Quelle doit être la longueur d\'une méta-description SEO pour éviter d\'être tronquée ?',
+          a: 'Pour éviter que votre méta-description ne soit coupée dans les résultats de recherche Google, limitez votre texte entre 150 et 160 caractères (soit environ 960 pixels sur ordinateur et 680 pixels sur mobile). Si votre description dépasse cette limite, Google tronquera la fin de votre phrase, ce qui masque souvent votre appel à l\'action (CTA). Utiliser un outil de prévisualisation en direct vous permet de placer vos mots-clés stratégiques au bon endroit.',
+        },
+        {
+          q: 'Pourquoi Google réécrit-il ou modifie-t-il ma balise de titre et ma méta-description ?',
+          a: 'L\'algorithme de Google réécrit fréquemment vos métadonnées si vos balises sont trop longues, bourrées de mots-clés, dupliquées ou non pertinentes par rapport à la requête de l\'utilisateur. Si votre titre dépasse la limite de pixels, Google peut utiliser une balise H1 ou un texte aléatoire du corps de la page. Utiliser un simulateur SERP permet de concevoir des extraits concis pour éviter que Google n\'écrase vos optimisations.',
+        },
+        {
+          q: 'Comment l\'utilisation d\'un outil d\'aperçu SERP améliore-t-elle mon taux de clic organique (CTR) ?',
+          a: 'Votre extrait SERP est la publicité naturelle de votre site — c\'est la première impression de votre marque pour l\'internaute. Même si votre page est dans les 3 premiers résultats, un extrait mal formaté perdra des clics au profit de concurrents. Un outil d\'aperçu SERP vous permet de tester des formulations accrocheuses, des symboles et des appels à l\'action pour maximiser les clics et le trafic organique.',
+        },
+        {
+          q: 'Cet outil simule-t-il à la fois les affichages de recherche Google sur ordinateur et sur mobile ?',
+          a: 'Oui. Google affiche les résultats différemment selon les appareils : les mobiles ont d\'autres retours à la ligne, des limites de pixels réduites et des favicons mis en avant. Notre outil vous permet de basculer instantanément entre les aperçus ordinateur et mobile, assurant ainsi que vos métadonnées restent lisibles et impeccables sur tous les écrans.',
+        },
+      ],
+      pt: [
+        {
+          q: 'Qual é o limite ideal de caracteres e píxeis para as etiquetas de título do Google em 2026?',
+          a: 'Embora a maioria dos guias de SEO recomende manter a etiqueta de título entre 50 e 60 caracteres, o Google mede e trunca os títulos com base em píxeis. O limite atual no computador é de aproximadamente 600 píxeis, enquanto os resultados de pesquisa móvel truncam em cerca de 580 píxeis. Como letras mais largas como o "W" ocupam mais espaço do que letras finas como o "I", contar apenas os caracteres não é fiável. O nosso simulador calcula a largura dos píxeis em tempo real.',
+        },
+        {
+          q: 'Qual deve ser o comprimento de uma meta description para evitar que seja truncada?',
+          a: 'Para evitar que a sua meta descrição seja cortada nos resultados de pesquisa do Google, mantenha o texto entre 150 e 160 caracteres (ou aproximadamente 960 píxeis no computador e 680 píxeis em dispositivos móveis). Se a descrição exceder este limite, o Google cortará o fim da frase, ocultando o apelo à ação (CTA). Um simulador em tempo real permite-lhe destacar os termos mais importantes onde fiquem visíveis.',
+        },
+        {
+          q: 'Por que o Google está a reescrever ou a alterar a minha etiqueta de título e meta descrição?',
+          a: 'O algoritmo do Google reescreve frequentemente os metadatos se as etiquetas forem muito longas, repetitivas, duplicadas ou irrelevantes para a pesquisa do utilizador. Se o título exceder o limite de píxeis, o Google pode extrair um H1 ou texto aleatório da página. Utilizar um simulador ajuda a criar fragmentos curtos e relevantes, reduzindo o risco de o Google ignorar a sua formatação personalizada.',
+        },
+        {
+          q: 'Como é que o uso de um simulador SERP melhora a minha taxa de cliques orgânicos (CTR)?',
+          a: 'O seu fragmento SERP é o anúncio digital orgânico do seu site — a primeira impressão da sua marca. Mesmo que a sua página esteja no top 3, um snippet mal formatado ou incompleto perderá cliques para concorrentes em posições inferiores. Um simulador permite-lhe testar ganchos emocionais, símbolos especiais e apelos à ação claros, ajudando a criar snippets que maximizam cliques e tráfego orgânico.',
+        },
+        {
+          q: 'Este simulador representa os formatos de pesquisa do Google tanto para computador como para telemóvel?',
+          a: 'Sim. O Google apresenta os resultados de forma diferente nos vários dispositivos: formatos móveis têm outros limites de quebra de linha e píxeis, além de favicons em destaque. O nosso simulador permite alternar instantaneamente entre a pré-visualização de computador e telemóvel para garantir uma leitura perfeita em qualquer ecrã.',
+        },
+      ],
+      it: [
+        {
+          q: 'Qual è il limite ideale di caratteri e pixel per i tag title di Google nel 2026?',
+          a: 'Sebbene la maggior parte delle guide SEO consigli di mantenere il tag title tra 50 e 60 caratteri, Google in realtà misura e tronca i titoli in base ai pixel. Il limite corrente su desktop è di circa 600 pixel, mentre sui dispositivi mobili il taglio avviene a circa 580 pixel. Poiché lettere larghe come la "W" occupano più spazio di lettere strette come la "I", affidarsi solo al conteggio dei caratteri non è sicuro. Il nostro strumento calcola la larghezza in pixel in tempo reale.',
+        },
+        {
+          q: 'Quanto deve essere lunga una meta descrizione SEO per evitare che venga troncata?',
+          a: 'Per evitare che la meta descrizione venga tagliata nei risultati di ricerca di Google, mantieni il testo tra 150 e 160 caratteri (o circa 960 pixel su desktop e 680 pixel su dispositivi mobili). Se la descrizione supera questo limite, Google taglierà la fine della frase, nascondendo la chiamata all\'azione (CTA) o i recapiti. L\'uso di un simulador in tempo reale ti consente di posizionare le parole chiave principali all\'inizio.',
+        },
+        {
+          q: 'Perché Google riscrive o modifica il mio tag title e la mia meta descrizione?',
+          a: 'L\'algoritmo di Google riscrive frequentemente i metadati se i tag sono troppo lunghi, pieni di parole chiave, duplicati o irrilevanti rispetto alla ricerca dell\'utente. Se il tag title supera il limite di pixel, Google potrebbe estrarre un tag H1 o un testo casuale dalla pagina per riempire lo spazio. Con un simulatore crei snippet concisi e pertinenti, riducendo le probabilità che Google sovrascriva la tua formatação.',
+        },
+        {
+          q: 'In che modo l\'uso di uno strumento di anteprima SERP migliora la mia percentuale di clic (CTR) organica?',
+          a: 'Il tuo snippet SERP è l\'annuncio organico del tuo sito: la prima impressione che un utente ha del tuo brand. Anche se la tua pagina è nei primi 3 risultati, uno snippet formattato male o tagliato perderà clic a favore di concorrenti posizionati più in basso. Uno strumento di anteprima ti consente di testare frasi d\'effetto, simboli speciali e CTA chiare per massimizzare i clic e il traffico organico.',
+        },
+        {
+          q: 'Questo strumento simula i layout dei risultati di ricerca di Google sia per desktop che per dispositivi mobili?',
+          a: 'Sì. Google mostra i risultati in modo diverso a seconda del dispositivo: i layout mobili hanno interruzioni di riga differenti, limiti di pixel più ridotti e favicon in evidenza. Il nostro strumento ti consente di passare istantaneamente dall\'anteprima desktop a quella mobile per garantire che i metadati siano leggibili e strutturati al meglio.',
+        },
+      ],
+      nl: [
+        {
+          q: 'Wat is de ideale teken- en pixellimiet voor Google-title tags in 2026?',
+          a: 'Hoewel de meeste SEO-gidsen adviseren om je title tag tussen de 50 en 60 tekens te houden, meet en kapt Google titels af op basis van pixels, niet op basis van het aantal tekens. De huidige limiet op desktop is ongeveer 600 pixels, terwijl mobiele zoekresultaten worden afgebroken rond de 580 pixels. Omdat bredere letters zoals "W" meer pixelruimte innemen dan dunne letters zoals "I", is alleen tekens tellen onbetrouwbaar. Onze tool berekent pixelbreedtes in realtime.',
+        },
+        {
+          q: 'Hoe lang moet een SEO-meta-omschrijving zijn om afkapping te voorkomen?',
+          a: 'Om te voorkomen dat je meta-beschrijving wordt afgekapt in de zoekresultaten van Google, houd je de tekst tussen de 150 en 160 tekens (of ongeveer 960 pixels op desktop en 680 pixels op mobiel). Als je beschrijving deze limiet overschrijdt, kapt Google het einde van je zin af, waardoor je call-to-action (CTA) of contactgegevens verborgen blijven. Een live SERP-checker helpt je om je belangrijkste zoekwoorden vooraan te krijgen.',
+        },
+        {
+          q: 'Waarom herschrijft of wijzigt Google mijn title tag en meta-omschrijving?',
+          a: 'Het algoritme van Google herschrijft je metadatatags regelmatig als ze te lang zijn, volgestouwd met zoekwoorden, gedupliceerd of irrelevant voor de zoekopdracht van de gebruiker. Als je title tag de pixellimiet overschrijdt, kan Google automatisch een H1-tag of willekeurige tekst van je pagina tonen. Door een SERP-simulator te gebruiken om beknopte, relevante snippets te maken, verklein je de kans dat Google je tekst overschrijft.',
+        },
+        {
+          q: 'Hoe verbetert het gebruik van een SERP-voorbeeldtool mijn organische doorklikratio (CTR)?',
+          a: 'Je SERP-snippet is de organische advertentie van je website — het is de eerste indruk die een zoeker van je merk krijgt. Zelfs als je pagina in de top 3 staat, zal een slecht opgemaakte of afgekapte snippet klikken verliezen aan lager geplaatste concurrenten. Een previewtool laat je hooks, symbolen en CTAs testen in een veilige sandbox om de doorklikratio te maximaliseren en meer verkeer aan te trekken.',
+        },
+        {
+          q: 'Simueleert deze tool zowel desktop- als mobiele Google-zoekresultaten?',
+          a: 'Ja. Google toont zoekresultaten anders per apparaat: mobiele lay-outs hebben andere regelafbrekingen, kleinere pixelbeperkingen en opvallende favicons. Onze Google SERP-checker laat je direct schakelen tussen desktop- en mobiele live-voorbeelden, zodat je metadata er op elk scherm perfect en leesbaar uitziet.',
+        },
+      ],
+      ja: [
+        {
+          q: '2026年におけるGoogleタイトルタグの理想的な文字数とピクセル数の制限は？',
+          a: '多くのSEOガイドではタイトルタグを50〜60文字に収めることを推奨していますが、Googleは文字数ではなくピクセル幅に基づいてタイトルを測定し切り捨てます。現在のデスクトップ表示制限は約600ピクセルで、モバイルの検索結果は約580ピクセルで切り捨てられます。「W」のような横幅の広い文字は「I」のような細い文字よりもピクセルスペースをとるため、文字数だけの確認は不十分です。当ツールはリアルタイムでピクセル幅を計算します。',
+        },
+        {
+          q: '切り捨てを避けるために、SEOメタディスクリプションはどのくらいの長さにすべきですか？',
+          a: 'メタディスクリプションが検索結果でカットされるのを防ぐには、テキストを150〜160文字（デスクトップで約960ピクセル、モバイルで約680ピクセル）の間に収めてください。この制限を超えると文末が切り捨てられ、重要なコールトゥアクション（CTA）や連絡先が見えなくなります。ライブプレビューを使えば、重要なキーワードや価値の提案を確実に読める位置に配置できます。',
+        },
+        {
+          q: 'Googleがタイトルタグやメタディスクリプションを書き換えたり変更したりするのはなぜですか？',
+          a: 'Googleのアルゴリズムは、タグが長すぎる、キーワードが詰め込まれている、重複している、または検索クエリに関連していない場合にメタデータを書き換えます。タイトルタグが最大ピクセル制限を超えると、Googleは自動的にH1タグや本文からテキストを抽出して表示します。事前にSERPシミュレーターを使って関連性の高いスニペットを作成することで、Googleによる書き換えを減らせます。',
+        },
+        {
+          q: 'SERPプレビューツールを使用すると、オーガニッククリック率（CTR）がどのように向上しますか？',
+          a: '検索結果のスニペットは、Webサイトのオーガニック広告であり、ブランドに対する第一印象となります。たとえ検索順位がトップ3であっても、不適切なフォーマットで途切れたスニペットは、下位の競合にクリックを奪われます。プレビューツールを使えば、感情を動かすフックや記号、明確なCTAを安全にテストし、クリックと検索流入を増やすことができます。',
+        },
+        {
+          q: 'このツールはデスクトップとモバイル両方のGoogle検索結果レイアウトをシミュレートしますか？',
+          a: 'はい。Googleはデバイスによって検索結果を異なって表示します。モバイル版では折り返し、ピクセル制限、ファビコンの強調などが異なります。当ツールはデスクトップとモバイルのプレビューを瞬時に切り替えられ、ターゲットユーザーの画面サイズに関わらず、メタデータが最適に表示されることを保証します。',
+        },
+      ],
+      zh: [
+        {
+          q: '2026年 Google 标题标签的理想字符与像素限制是多少？',
+          a: '虽然大多数 SEO 指南建议将标题标签保持在 50 到 60 个字符之间，但 Google 实际上是根据像素而不是字符数来衡量和截断标题的。目前的桌面显示限制大约是 600 像素，而移动搜索结果在 580 像素左右截断。因为像“W”这样较宽的字母比“I”这样较窄的字母占用更多的像素空间，所以单靠字符数是不够的。我们的免费工具能够实时计算像素宽度。',
+        },
+        {
+          q: 'SEO 元描述应该多长以避免被截断？',
+          a: '为了防止你的元描述在 Google 搜索结果中被截断，请将文本保持在 150 到 160 个字符之间（在桌面端大约为 960 像素，在移动端大约为 680 像素）。如果描述超出此限制，Google 将截断句尾，这往往会隐藏你的核心行动号召（CTA）或联系方式。使用实时 SERP 检查器可以帮助你在可见区域展示关键价值。',
+        },
+        {
+          q: '为什么 Google 会重写或更改我的标题标签和元描述？',
+          a: '如果你的标签太长、堆砌关键词、重复或与用户的特定搜索查询不相关，Google 的算法经常会重写你的自定义元数据。如果标题标签超出像素限制，Google 可能会自动抓取 H1 标签或页面上的随机正文。在发布前使用 SERP 模拟器制作简洁、格式准确且高度相关的摘要，可以显著降低 Google 覆盖你原有设置的几率。',
+        },
+        {
+          q: '使用 SERP 预览工具有何助于提高我的自然点击率（CTR）？',
+          a: '你的 SERP 摘要是网站的自然数字广告——它是搜索者对你品牌的第一印象。即使你的页面排名前三，格式混乱或无趣的摘要也会让点击量流失给排名靠后的竞争对手。SERP 预览工具让你可以在安全的沙盒中测试吸引人的情感钩子、特殊符号和清晰 of CTA，帮助你打磨出高点击率的摘要。',
+        },
+        {
+          q: '该工具是否同时模拟桌面端和移动端的 Google 搜索结果布局？',
+          a: '是的。Google 在不同设备上显示搜索结果的方式不同：移动端布局具有不同的换行、更小的像素限制以及醒目的网站图标。我们的 Google SERP 检查器允许你立即在桌面和移动端实时预览之间切换，无论目标受众使用何种屏幕，都能确保元数据整洁完美。',
+        },
+      ],
+      da: [
+        {
+          q: 'Hvad er den ideelle tegn- og pixelgrænse for Google title tags i 2026?',
+          a: 'Mans de fleste SEO-guides anbefaler at holde dit title tag mellem 50 og 60 tegn, måler og afkorter Google faktisk titler baseret på pixels, ikke antal tegn. Den aktuelle visningsgrænse på desktop er ca. 600 pixels, mens mobile søgeresultater afkortes ved ca. 580 pixels. Fordi brede bogstaver som "W" fylder mere pixelplads end tynde bogstaver som "I", er tegntælling alene upålidelig. Vores gratis Google SERP-værktøj beregner pixelbredder i realtid.',
+        },
+        {
+          q: 'Hvor lang skal en SEO meta description være for at undgå at blive afkortet?',
+          a: 'For at forhindre, at din metabeskrivelse bliver skåret over i Googles søgeresultater, skal du holde din tekst mellem 150 og 160 tegn (eller ca. 960 pixels på desktop og 680 pixels på mobil). Hvis din beskrivelse overskrider denne grænse, afkorter Google slutningen af din sætning, hvilket ofte skjuler din call-to-action (CTA) eller kontaktoplysninger. En live SERP-kontrol lader dig placere vigtige søgeord først.',
+        },
+        {
+          q: 'Hvorfor omskriver eller ændrer Google mit title tag og meta description?',
+          a: 'Googles algoritme omskriver ofte deine metadata, hvis dine tags er for lange, overfyldte med søgeord, dubletter eller irrelevante for søgeforespørgslen. Hvis dit title tag overskrider pixelgrænsen, kan Google automatisk hente et H1-tag eller tilfældig brødtekst for at udfylde pladsen. Ved at bruge en SERP-simulator til at lave præcise uddrag reducerer du risikoen for, at Google tilsidesætter din formatering.',
+        },
+        {
+          q: 'Hvordan forbedrer brugen af et SERP-værktøj min organiske klikrate (CTR)?',
+          a: 'Dit SERP-uddrag er din hjemmesides organiske reklame — det er det første indtryk, en bruger får af dit brand. Selv hvis din side ligger i top 3, vil et dårligt formateret eller kedeligt uddrag miste klik til lavere rangerende konkurrenter. Et SERP-værktøj lader dig afprøve fængende hooks, specialtegn og klare call-to-actions, hvilket hjælper dig med at skabe uddrag, der maksimerer klik og trafik.',
+        },
+        {
+          q: 'Simulerer dette værktøj både desktop- og mobile Google-søgeresultater?',
+          a: 'Ja. Google viser søgeresultater forskelligt på tværs af enheder: mobile layouts har andre linjeskift, mindre pixelgrænser og markante favicons. Vores Google SERP-tjekker lader dig skifte øjeblikkeligt mellem desktop- og mobile live-forhåndsvisninger, hvilket sikrer, at dine metadata ser rene og læsbare ud på alle skærme.',
+        },
+      ],
     },
   },
 ];

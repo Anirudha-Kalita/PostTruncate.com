@@ -1,0 +1,662 @@
+---
+// Two-column marketing hero for the SMS Character Counter page. Left: a
+// green eyebrow badge, headline (with the phrase after the em-dash in a green
+// gradient) + lede + on-this-page pills. Right: a mobile phone mockup illustration
+// with a green speech bubble, skeleton lines, a floating message badge,
+// and a floating GSM-7 / segment count stats card.
+//
+// The accent is everything after the "—" so it stays language-agnostic across
+// all 10 locales. The illustration is decorative (aria-hidden).
+import type { SectionAnchor } from '../lib/headingAnchors';
+
+interface Props {
+  title: string;
+  intro: string;
+  sections: SectionAnchor[];
+  onThisPageLabel: string;
+}
+
+const { title, intro, sections, onThisPageLabel } = Astro.props;
+
+const dashIndex = title.indexOf('—');
+const titleHead = dashIndex >= 0 ? title.slice(0, dashIndex + 1) : title;
+const titleTail = dashIndex >= 0 ? title.slice(dashIndex + 1).trim() : '';
+
+// Helper to resolve custom icons for each section in the Jump Links list
+const getLinkIcon = (id: string) => {
+  if (id.includes('encoding') || id.includes('limit')) {
+    // 1st: Encodings document sheet card icon
+    return '<svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M8 9h8M8 15h6"/></svg>';
+  }
+  if (id.includes('emoji-') || id.includes('trap')) {
+    // 2nd: Smiley face icon
+    return '<svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2M9 9h.01M15 9h.01"/></svg>';
+  }
+  if (id.includes('multipart') || id.includes('segment')) {
+    // 3rd: Multipart segment stacked rectangles icon
+    return '<svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="4" rx="1"/><rect x="3" y="10" width="18" height="4" rx="1"/><rect x="3" y="17" width="18" height="4" rx="1"/></svg>';
+  }
+  if (id.includes('extended') || id.includes('double')) {
+    // 4th: GSM extended characters Euro icon
+    return '<svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 6c-3.5 0-7 2.5-7 6s3.5 6 7 6M14 10H6M14 14H6"/></svg>';
+  }
+  // Default fallback (document icon)
+  return '<svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M8 9h8M8 15h6"/></svg>';
+};
+---
+
+<header class="smshero">
+  <div class="smshero__copy">
+    <span class="smshero__eyebrow">
+      FREE ONLINE TOOL
+    </span>
+
+    <h1 class="smshero__title">
+      <span>{titleHead}</span>
+      {titleTail && <><br /><span class="smshero__accent">{titleTail}</span></>}
+    </h1>
+    {intro && <p class="smshero__lede">{intro}</p>}
+    
+    {/* Jump navigation: mobile dropdown / desktop pills */}
+    {sections.length > 0 && (
+      <nav class="smshero__jump" aria-label={onThisPageLabel}>
+        {/* Mobile dropdown */}
+        <details class="smshero__mobile-nav">
+          <summary class="smshero__mobile-toggle">
+            <span class="smshero__mobile-label">{onThisPageLabel}</span>
+            <svg class="smshero__mobile-chevron" width="12" height="12" viewBox="0 0 12 12" aria-hidden="true">
+              <path d="M2.5 4.5 6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+          </summary>
+          <ul class="smshero__mobile-list">
+            {sections.map((section) => (
+              <li>
+                <a class="smshero__mobile-link" href={`#${section.id}`}>{section.label}</a>
+              </li>
+            ))}
+          </ul>
+        </details>
+
+        {/* Desktop pills row */}
+        <div class="smshero__desktop-nav">
+          <span class="smshero__desktop-label">{onThisPageLabel}</span>
+          <div class="smshero__pills">
+            {sections.map((sec) => (
+              <a href={`#${sec.id}`} class="smshero__pill">
+                <span class="smshero__pill-icon" set:html={getLinkIcon(sec.id)} />
+                <span>{sec.label}</span>
+              </a>
+            ))}
+          </div>
+        </div>
+      </nav>
+    )}
+  </div>
+
+  <div class="smshero__art" aria-hidden="true">
+    <span class="smshero__blob smshero__blob--1"></span>
+    <span class="smshero__blob smshero__blob--2"></span>
+    <span class="smshero__dots"></span>
+
+    {/* Connecting Guideline Lines */}
+    <span class="smshero__line-connect smshero__line-connect--horizontal"></span>
+    <span class="smshero__line-connect smshero__line-connect--vertical"></span>
+
+    {/* Phone mockup container */}
+    <div class="smshero__phone">
+      <div class="smshero__phone-inner">
+        {/* Screen camera notch */}
+        <div class="smshero__phone-notch"></div>
+        
+        {/* Message bubbles stream */}
+        <div class="smshero__bubbles">
+          {/* Green message bubble */}
+          <div class="smshero__bubble smshero__bubble--sent">
+            <div class="smshero__bubble-lines">
+              <span class="smshero__bubble-line smshero__bubble-line--long"></span>
+              <span class="smshero__bubble-line smshero__bubble-line--medium"></span>
+            </div>
+            {/* Bubble pointer */}
+            <span class="smshero__bubble-tail"></span>
+          </div>
+
+          {/* Skeleton lines for other messages */}
+          <div class="smshero__bubble smshero__bubble--recv">
+            <span class="smshero__phone-skeleton-line smshero__phone-skeleton-line--long"></span>
+            <span class="smshero__phone-skeleton-line smshero__phone-skeleton-line--medium"></span>
+          </div>
+          
+          <div class="smshero__bubble smshero__bubble--recv">
+            <span class="smshero__phone-skeleton-line smshero__phone-skeleton-line--short"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    {/* Floating message icon bubble badge (left) */}
+    <div class="smshero__badge smshero__badge--msg">
+      <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+      </svg>
+    </div>
+
+    {/* Floating SMS Count card (bottom right) */}
+    <div class="smshero__floating-stats">
+      <div class="smshero__stat-item">
+        <div class="smshero__stat-num">160</div>
+        <div class="smshero__stat-lbl">GSM-7</div>
+      </div>
+      <div class="smshero__stat-divider"></div>
+      <div class="smshero__stat-item">
+        <div class="smshero__stat-num">1</div>
+        <div class="smshero__stat-lbl">Segment</div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<style>
+  .smshero {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 40px;
+    align-items: center;
+    margin-bottom: 40px;
+  }
+
+  /* ── Left column copy ────────────────────────────────────────────────── */
+  .smshero__eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 18px;
+    padding: 6px 12px;
+    border-radius: var(--radius-pill);
+    background: color-mix(in srgb, #10b981 12%, transparent);
+    color: #059669;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .smshero__title {
+    font-size: clamp(30px, 5vw, 44px);
+    font-weight: 700;
+    line-height: 1.12;
+    letter-spacing: -1.6px;
+    color: var(--color-ink);
+    text-wrap: balance;
+  }
+
+  .smshero__accent {
+    background: linear-gradient(96deg, #10b981 0%, #059669 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .smshero__lede {
+    margin-top: 18px;
+    max-width: 35rem;
+    font-size: 17px;
+    line-height: 27px;
+    color: var(--color-body);
+  }
+
+  /* ── Jump menu: responsive mobile / desktop ──────────────────────────── */
+  .smshero__jump {
+    margin-top: 32px;
+  }
+
+  .smshero__mobile-nav {
+    border: 1px solid var(--color-hairline);
+    border-radius: var(--radius-md);
+    background: var(--color-canvas);
+  }
+
+  .smshero__mobile-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 10px 14px;
+    cursor: pointer;
+    list-style: none;
+    user-select: none;
+  }
+
+  .smshero__mobile-toggle::-webkit-details-marker {
+    display: none;
+  }
+
+  .smshero__mobile-label {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--color-mute);
+  }
+
+  .smshero__mobile-chevron {
+    flex-shrink: 0;
+    color: var(--color-mute);
+    transition: transform 0.15s ease;
+  }
+
+  .smshero__mobile-nav[open] .smshero__mobile-chevron {
+    transform: rotate(180deg);
+  }
+
+  .smshero__mobile-list {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    margin: 0;
+    padding: 0 8px 8px;
+    list-style: none;
+    border-top: 1px solid var(--color-hairline);
+  }
+
+  .smshero__mobile-link {
+    display: block;
+    padding: 8px 10px;
+    border-radius: var(--radius-sm);
+    font-size: 13px;
+    line-height: 18px;
+    color: var(--color-body);
+    text-decoration: none;
+    transition: color 0.15s ease, background 0.15s ease;
+  }
+
+  .smshero__mobile-link:hover {
+    color: var(--color-ink);
+    background: var(--color-canvas-soft-2);
+  }
+
+  .smshero__desktop-nav {
+    display: none;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .smshero__desktop-label {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-mute);
+  }
+
+  .smshero__pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 12px;
+  }
+
+  .smshero__pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 14px 6px 10px;
+    border-radius: var(--radius-pill);
+    background: var(--color-canvas-soft);
+    border: 1px solid var(--color-hairline);
+    font-size: 14px;
+    line-height: 20px;
+    font-weight: 500;
+    color: var(--color-body);
+    text-decoration: none;
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .smshero__pill:hover {
+    color: var(--color-ink);
+    background: var(--color-canvas-soft-2);
+    border-color: var(--color-mute);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-e1);
+  }
+
+  .smshero__pill-icon {
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 22px;
+    height: 22px;
+    border-radius: var(--radius-sm);
+    background: color-mix(in srgb, #10b981 10%, transparent);
+    color: #059669;
+    transition: transform 0.2s ease;
+  }
+
+  .smshero__pill:hover .smshero__pill-icon {
+    transform: scale(1.08);
+  }
+
+  /* ── Right column illustration ────────────────────────────────────────── */
+  .smshero__art {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    aspect-ratio: 1.6;
+    border-radius: var(--radius-2xl);
+    background: radial-gradient(circle at 70% 30%, color-mix(in srgb, #10b981 8%, transparent) 0%, transparent 70%);
+    overflow: visible;
+  }
+
+  /* Soft organic backdrop glows */
+  .smshero__blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: 0.55;
+    z-index: 1;
+  }
+
+  .smshero__blob--1 {
+    top: 10%;
+    right: 15%;
+    width: 180px;
+    height: 180px;
+    background: #a7f3d0;
+  }
+
+  .smshero__blob--2 {
+    bottom: 10%;
+    left: 20%;
+    width: 140px;
+    height: 140px;
+    background: #d1fae5;
+  }
+
+  /* Dotted grid */
+  .smshero__dots {
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(var(--color-hairline-hard) 1px, transparent 1px);
+    background-size: 20px 20px;
+    opacity: 0.45;
+    z-index: 2;
+  }
+
+  /* Guidelines */
+  .smshero__line-connect {
+    position: absolute;
+    background: linear-gradient(to right, var(--color-hairline) 50%, transparent 50%) repeat-x;
+    background-size: 8px 1px;
+    opacity: 0.8;
+    z-index: 2;
+  }
+
+  .smshero__line-connect--horizontal {
+    top: 50%;
+    left: 8%;
+    width: 32%;
+    height: 1px;
+  }
+
+  .smshero__line-connect--vertical {
+    top: 25%;
+    left: 40%;
+    width: 1px;
+    height: 50%;
+    background: linear-gradient(to bottom, var(--color-hairline) 50%, transparent 50%) repeat-y;
+    background-size: 1px 8px;
+  }
+
+  /* ── Phone Mockup ───────────────────────────────────────────────────── */
+  .smshero__phone {
+    position: relative;
+    width: 190px;
+    height: 310px;
+    border-radius: 36px;
+    background: var(--color-canvas);
+    border: 9px solid color-mix(in srgb, #10b981 12%, var(--color-canvas-soft-2));
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.08), 0 4px 12px rgba(0, 0, 0, 0.03);
+    overflow: hidden;
+    z-index: 3;
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .smshero__phone:hover {
+    transform: translateY(-4px) scale(1.02);
+  }
+
+  .smshero__phone-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    padding: 24px 16px;
+    background: var(--color-canvas);
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  /* Notch */
+  .smshero__phone-notch {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 70px;
+    height: 14px;
+    background: color-mix(in srgb, #10b981 12%, var(--color-canvas-soft-2));
+    border-bottom-left-radius: 12px;
+    border-bottom-right-radius: 12px;
+    z-index: 4;
+  }
+
+  /* Message bubbles */
+  .smshero__bubbles {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 10px;
+  }
+
+  .smshero__bubble {
+    position: relative;
+    max-width: 85%;
+    border-radius: 16px;
+    padding: 10px 12px;
+  }
+
+  .smshero__bubble--sent {
+    align-self: flex-end;
+    background: #10b981;
+    border-bottom-right-radius: 4px;
+    color: white;
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.2);
+  }
+
+  .smshero__bubble--recv {
+    align-self: flex-start;
+    background: var(--color-canvas-soft-2);
+    border-bottom-left-radius: 4px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    width: 80%;
+  }
+
+  /* Lines inside green bubble */
+  .smshero__bubble-lines {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .smshero__bubble-line {
+    height: 4px;
+    background: rgba(255, 255, 255, 0.45);
+    border-radius: 2px;
+  }
+
+  .smshero__bubble-line--long {
+    width: 100%;
+  }
+
+  .smshero__bubble-line--medium {
+    width: 70%;
+  }
+
+  /* Phone screen skeleton lines */
+  .smshero__phone-skeleton-line {
+    height: 4px;
+    background: var(--color-hairline-hard);
+    border-radius: 2px;
+    opacity: 0.65;
+  }
+
+  .smshero__phone-skeleton-line--long {
+    width: 85%;
+  }
+
+  .smshero__phone-skeleton-line--medium {
+    width: 60%;
+  }
+
+  .smshero__phone-skeleton-line--short {
+    width: 45%;
+  }
+
+  /* Sent bubble tail */
+  .smshero__bubble-tail {
+    position: absolute;
+    bottom: 0;
+    right: -6px;
+    width: 8px;
+    height: 10px;
+    background: #10b981;
+    clip-path: polygon(0 0, 100% 100%, 0 100%);
+  }
+
+  /* ── Floating Badges ──────────────────────────────────────────────────── */
+  .smshero__badge {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius-xl);
+    background: var(--color-canvas);
+    border: 1px solid var(--color-hairline);
+    box-shadow: var(--shadow-e3);
+    z-index: 4;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .smshero__badge:hover {
+    transform: scale(1.05) translateY(-2px);
+    box-shadow: var(--shadow-e4);
+  }
+
+  .smshero__badge--msg {
+    left: 10%;
+    top: 40%;
+    width: 52px;
+    height: 52px;
+    border-radius: 16px;
+    color: var(--color-ink);
+  }
+
+  /* ── Floating Stats Card ──────────────────────────────────────────────── */
+  .smshero__floating-stats {
+    position: absolute;
+    right: 2%;
+    bottom: 12%;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 18px 20px;
+    border-radius: 20px;
+    background: var(--color-canvas);
+    border: 1px solid var(--color-hairline);
+    box-shadow: var(--shadow-e3);
+    z-index: 4;
+    min-width: 100px;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .smshero__floating-stats:hover {
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: var(--shadow-e4);
+  }
+
+  .smshero__stat-item {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .smshero__stat-num {
+    font-size: 22px;
+    font-weight: 700;
+    line-height: 1;
+    color: var(--color-ink);
+    letter-spacing: -0.5px;
+  }
+
+  .smshero__stat-lbl {
+    margin-top: 4px;
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--color-mute);
+    letter-spacing: 0.02em;
+  }
+
+  .smshero__stat-divider {
+    height: 1px;
+    background: var(--color-hairline);
+    width: 100%;
+  }
+
+  /* ── Responsive breakpoints ─────────────────────────────────────────── */
+  @media (min-width: 768px) {
+    .smshero {
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 50px;
+      margin-bottom: 50px;
+    }
+
+    .smshero__desktop-nav {
+      display: flex;
+    }
+
+    .smshero__mobile-nav {
+      display: none;
+    }
+
+    .smshero__phone {
+      width: 200px;
+      height: 330px;
+    }
+
+    .smshero__badge--msg {
+      left: 12%;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .smshero {
+      grid-template-columns: 1.25fr 0.75fr;
+      gap: 80px;
+    }
+
+    .smshero__phone {
+      width: 210px;
+      height: 350px;
+    }
+
+    .smshero__badge--msg {
+      left: 15%;
+    }
+  }
+</style>

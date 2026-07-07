@@ -13,9 +13,10 @@ const TITLE_FONT = font(20, 'Arial');
 
 interface Props {
   s: IslandStrings;
+  lang?: string;
 }
 
-export function SeoPreview({ s }: Props) {
+export function SeoPreview({ s, lang }: Props) {
   const [pageTitle, setPageTitle] = useState('');
   const [metaDesc, setMetaDesc] = useState('');
   const sp = s.seoPreview;
@@ -169,7 +170,32 @@ export function SeoPreview({ s }: Props) {
             </p>
           </div>
         </div>
+
+        {/* ── Footer note info banner ────────────────────────────────────── */}
+        <div class="mt-2 flex items-start gap-3 rounded-lg border border-[color-mix(in_srgb,var(--color-link)_20%,transparent)] bg-[color-mix(in_srgb,var(--color-link)_6%,var(--color-canvas))] p-3.5 text-[13.5px] leading-relaxed text-body sm:items-center">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" class="mt-0.5 shrink-0 text-link sm:mt-0" aria-hidden="true">
+            <circle cx="12" cy="12" r="10"></circle>
+            <line x1="12" y1="16" x2="12" y2="12"></line>
+            <line x1="12" y1="8" x2="12.01" y2="8"></line>
+          </svg>
+          <div>
+            {LOCALIZED_NOTE[lang ?? 'en'] ?? LOCALIZED_NOTE.en}
+          </div>
+        </div>
       </div>
     </Card>
   );
 }
+
+const LOCALIZED_NOTE: Record<string, string> = {
+  en: 'Google typically displays titles up to ~600px wide (≈60 characters). Longer titles may be truncated.',
+  es: 'Google suele mostrar títulos de hasta ~600px de ancho (≈60 caracteres). Los títulos más largos pueden truncarse.',
+  de: 'Google zeigt Titel normalerweise bis zu einer Breite von ca. 600 Pixeln an (ca. 60 Zeichen). Längere Titel werden möglicherweise abgeschnitten.',
+  fr: 'Google affiche généralement des titres d\'une largeur maximale de ~600px (≈60 caractères). Les titres plus longs peuvent être tronqués.',
+  pt: 'O Google geralmente exibe títulos com até ~600px de largura (≈60 caracteres). Títulos mais longos podem ser truncados.',
+  it: 'Google in genere visualizza titoli fino a circa 600px di larghezza (≈60 caratteri). Titoli più lunghi potrebbero essere troncati.',
+  nl: 'Google geeft titels doorgaans weer tot ~600px breed (≈60 tekens). Langere titels kunnen worden afgekapt.',
+  ja: 'Googleは通常、最大約600px幅（約60文字）までタイトルを表示します。これより長いタイトルは省略される場合があります。',
+  zh: 'Google 通常会显示最宽约 600 像素（约 60 个字符）的标题。较长的标题可能会被截断。',
+  da: 'Google viser typisk titler på op til ~600px brede (≈60 tegn). Længere titler kan blive afkortet.',
+};

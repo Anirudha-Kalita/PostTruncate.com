@@ -34,7 +34,7 @@ The gap between desktop and mobile - 70 characters - sounds small until you real
 
 According to [PostTruncate's LinkedIn character limits research](/en/blog/linkedin-character-limits-2026), posts where the main value sits below the mobile fold see **40-60% lower engagement** than posts that deliver the core message within the first 140 characters. The LinkedIn algorithm tracks dwell time and early engagement - likes and comments within the first hour - which means the fold isn't just a display choice. It actively shapes your reach.
 
-![LinkedIn character limits infographic showing desktop fold ~210 chars, mobile fold ~140 chars, comments ~150 chars, with emoji weight warning for skin-tone variants using up to 7 characters, as taken from PostTruncate](https://cdn-public.eesel.ai/380a75be-b0ce-4ddc-97ad-603f12408855/ee76e589-3008-45a4-ba70-9dfc2ffd3cd0/be68454a025b44c4a4dfc3292c1d6871.png)
+![LinkedIn character limits infographic showing desktop fold ~210 chars, mobile fold ~140 chars, comments ~150 chars, with emoji weight warning for skin-tone variants using up to 7 characters, as taken from PostTruncate](/og/linkedin-posts-survive-the-fold-1.png)
 
 <p align="center"><span style="font-size: 12px; "><em>LinkedIn character limits infographic showing desktop fold \~210 chars, mobile fold \~140 chars, comments \~150 chars, with emoji weight warning for skin-tone variants using up to 7 characters, as taken from PostTruncate</em></span></p>
 
@@ -76,7 +76,7 @@ Here's what this looks like in practice. A three-sentence intro in flowing prose
 
 The hook you buried at sentence three? Invisible to most readers, regardless of character count.
 
-![Split-screen comparison showing the Broetry Trap on the left triggering early See more cutoff due to double line breaks, versus an Optimized Hook on the right with compact lines keeping more content above the fold, as taken from PostTruncate](https://cdn-public.eesel.ai/380a75be-b0ce-4ddc-97ad-603f12408855/ee76e589-3008-45a4-ba70-9dfc2ffd3cd0/b7c5d6cd7c134437b4fc676d64e5e10a.png)
+![Split-screen comparison showing the Broetry Trap on the left triggering early See more cutoff due to double line breaks, versus an Optimized Hook on the right with compact lines keeping more content above the fold, as taken from PostTruncate](/og/linkedin-posts-survive-the-fold-2.png)
 
 <p align="center"><span style="font-size: 12px; "><em>Split-screen comparison showing the Broetry Trap on the left triggering early See more cutoff due to double line breaks, versus an Optimised Hook on the right with compact lines keeping more content above the fold, as taken from PostTruncate</em></span></p>
 
@@ -130,7 +130,7 @@ There's a tendency to write LinkedIn posts at a laptop, preview them at a laptop
 
 This shapes everything. On mobile, your post is narrower, your font renders slightly larger relative to the screen, and your 140-character window is the entire first screen impression. There is no "below the fold" browsing behaviour on mobile the way there is on a long-form desktop page. The fold is a binary - click or don't. Your hook needs to land within that constraint.
 
-![Side-by-side comparison of LinkedIn's mobile fold ~140 characters versus desktop fold ~210 characters showing where posts get cut on each device, as taken from PostTruncate](https://cdn-public.eesel.ai/380a75be-b0ce-4ddc-97ad-603f12408855/ee76e589-3008-45a4-ba70-9dfc2ffd3cd0/3bd8cb643296486cbf2bd1abeb6844e8.webp)
+![Side-by-side comparison of LinkedIn's mobile fold ~140 characters versus desktop fold ~210 characters showing where posts get cut on each device, as taken from PostTruncate](/og/linkedin-posts-survive-the-fold-3.webp)
 
 <p align="center"><span style="font-size: 12px; "><em>Side-by-side comparison of LinkedIn's mobile fold \~140 characters versus desktop fold \~210 characters showing where posts get cut on each device, as taken from PostTruncate</em></span></p>
 
@@ -174,7 +174,7 @@ I built [PostTruncate's LinkedIn character counter](/en/linkedin-character-count
 
 It's free, no sign-up, and your text never leaves your browser. Paste your draft, watch the fold, adjust until your hook is above both lines, and publish knowing that what you wrote is what your audience reads.
 
-![PostTruncate text editor interface showing Desktop View and Mobile View toggle buttons with a visible fold line indicating exactly where See more appears in the live preview, as taken from PostTruncate](https://cdn-public.eesel.ai/380a75be-b0ce-4ddc-97ad-603f12408855/ee76e589-3008-45a4-ba70-9dfc2ffd3cd0/ef35a76980e34a83a03335b6fbfaf7fe.png)
+![PostTruncate text editor interface showing Desktop View and Mobile View toggle buttons with a visible fold line indicating exactly where See more appears in the live preview, as taken from PostTruncate](/og/linkedin-posts-survive-the-fold-4.png)
 
 <p align="center"><span style="font-size: 12px; "><em>PostTruncate text editor interface showing Desktop View and Mobile View toggle buttons with a visible fold line indicating exactly where See more appears in the live preview, as taken from PostTruncate</em></span></p>
 
