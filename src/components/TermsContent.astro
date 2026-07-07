@@ -5,8 +5,8 @@
 // A hero with a 3D document + scales-of-justice illustration, then the numbered
 // sections as accent cards. Mirrors PrivacyContent; colours use only the site
 // palette tokens (violet / cyan / warning / link).
-import type { ContentPage } from '../i18n/types';
-import { getLocale } from '../i18n/config';
+import type { ContentPage } from "../i18n/types";
+import { getLocale } from "../i18n/config";
 
 interface Props {
   lang: string;
@@ -24,22 +24,27 @@ const home = `/${lang}/${getLocale(lang).slug}/`;
 // Split the "last updated" line so the date can be tinted.
 const dateIdx = lastUpdated.indexOf(lastUpdatedDate);
 const luLabel = dateIdx >= 0 ? lastUpdated.slice(0, dateIdx) : lastUpdated;
-const luDate = dateIdx >= 0 ? lastUpdatedDate : '';
+const luDate = dateIdx >= 0 ? lastUpdatedDate : "";
 
 // Per-section icon + tint, by index (the terms sections are fixed at five).
 const SHIELD = '<path d="M12 3l8 3v5c0 5-3.5 8-8 10-4.5-2-8-5-8-10V6z"/>';
-const CHART = '<path d="M4 4v16h16"/><path d="M7 14l3.5-4 3 2.5L20 7"/><path d="M16 6.5h4v4"/>';
-const PEOPLE = '<circle cx="9" cy="8" r="3.4"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0"/><path d="M16 5.2a3.3 3.3 0 0 1 0 5.6"/><path d="M18 20a6.5 6.5 0 0 0-3.6-5.8"/>';
-const SHIELD_CHECK = '<path d="M12 3l8 3v5c0 5-3.5 8-8 10-4.5-2-8-5-8-10V6z"/><path d="M9 11.8l2 2 4-4"/>';
-const CYCLE = '<path d="M3 12a9 9 0 0 1 15-6.7L21 8M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-15 6.7L3 16M3 21v-5h5"/>';
+const CHART =
+  '<path d="M4 4v16h16"/><path d="M7 14l3.5-4 3 2.5L20 7"/><path d="M16 6.5h4v4"/>';
+const PEOPLE =
+  '<circle cx="9" cy="8" r="3.4"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0"/><path d="M16 5.2a3.3 3.3 0 0 1 0 5.6"/><path d="M18 20a6.5 6.5 0 0 0-3.6-5.8"/>';
+const SHIELD_CHECK =
+  '<path d="M12 3l8 3v5c0 5-3.5 8-8 10-4.5-2-8-5-8-10V6z"/><path d="M9 11.8l2 2 4-4"/>';
+const CYCLE =
+  '<path d="M3 12a9 9 0 0 1 15-6.7L21 8M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-15 6.7L3 16M3 21v-5h5"/>';
 const SECTION_META = [
-  { icon: SHIELD, tint: 'tint-violet' },
-  { icon: CHART, tint: 'tint-green' },
-  { icon: PEOPLE, tint: 'tint-amber' },
-  { icon: SHIELD_CHECK, tint: 'tint-blue' },
-  { icon: CYCLE, tint: 'tint-violet' },
+  { icon: SHIELD, tint: "tint-violet" },
+  { icon: CHART, tint: "tint-green" },
+  { icon: PEOPLE, tint: "tint-amber" },
+  { icon: SHIELD_CHECK, tint: "tint-blue" },
+  { icon: CYCLE, tint: "tint-violet" },
 ];
-const metaFor = (i: number) => SECTION_META[i] ?? { icon: SHIELD, tint: 'tint-violet' };
+const metaFor = (i: number) =>
+  SECTION_META[i] ?? { icon: SHIELD, tint: "tint-violet" };
 ---
 
 <section class="tc container-page">
@@ -49,14 +54,33 @@ const metaFor = (i: number) => SECTION_META[i] ?? { icon: SHIELD, tint: 'tint-vi
       <div class="tc-hero__copy">
         <h1 class="tc-hero__title">{page.title}</h1>
         <p class="tc-lu">
-          <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"></rect><path d="M3 9h18M8 2v4M16 2v4"></path></svg>
-          <span class="tc-lu__label">{luLabel}</span><span class="tc-lu__date">{luDate}</span>
+          <svg
+            viewBox="0 0 24 24"
+            width="14"
+            height="14"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.9"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+            ><rect x="3" y="4" width="18" height="18" rx="2"></rect><path
+              d="M3 9h18M8 2v4M16 2v4"></path></svg
+          >
+          <span class="tc-lu__label">{luLabel}</span><span class="tc-lu__date"
+            >{luDate}</span
+          >
         </p>
         <p class="tc-hero__intro">{page.intro}</p>
       </div>
 
       <div class="tc-hero__art" aria-hidden="true">
-        <svg viewBox="0 0 200 190" fill="none" xmlns="http://www.w3.org/2000/svg" role="presentation">
+        <svg
+          viewBox="0 0 200 190"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          role="presentation"
+        >
           <defs>
             <linearGradient id="tc-doc" x1="0.5" y1="0" x2="0.5" y2="1">
               <stop offset="0" stop-color="#ffffff"></stop>
@@ -71,33 +95,91 @@ const metaFor = (i: number) => SECTION_META[i] ?? { icon: SHIELD, tint: 'tint-vi
           <circle cx="98" cy="88" r="66" fill="#d8ccf1" opacity="0.4"></circle>
 
           {/* Document — back sheet + front sheet with text lines */}
-          <rect x="66" y="36" width="86" height="112" rx="10" fill="#c9b8ec" opacity="0.5" transform="rotate(5 109 92)"></rect>
+          <rect
+            x="66"
+            y="36"
+            width="86"
+            height="112"
+            rx="10"
+            fill="#c9b8ec"
+            opacity="0.5"
+            transform="rotate(5 109 92)"></rect>
           <g transform="rotate(-5 101 84)">
-            <rect x="58" y="28" width="86" height="112" rx="10" fill="url(#tc-doc)"></rect>
-            <rect x="72" y="46" width="52" height="6" rx="3" fill="#c9bce8"></rect>
-            <rect x="72" y="60" width="40" height="6" rx="3" fill="#dcd4ef"></rect>
-            <rect x="72" y="74" width="58" height="6" rx="3" fill="#dcd4ef"></rect>
-            <rect x="72" y="88" width="44" height="6" rx="3" fill="#dcd4ef"></rect>
-            <rect x="72" y="102" width="50" height="6" rx="3" fill="#e4ddf3"></rect>
-            <rect x="72" y="116" width="34" height="6" rx="3" fill="#e4ddf3"></rect>
+            <rect
+              x="58"
+              y="28"
+              width="86"
+              height="112"
+              rx="10"
+              fill="url(#tc-doc)"></rect>
+            <rect x="72" y="46" width="52" height="6" rx="3" fill="#c9bce8"
+            ></rect>
+            <rect x="72" y="60" width="40" height="6" rx="3" fill="#dcd4ef"
+            ></rect>
+            <rect x="72" y="74" width="58" height="6" rx="3" fill="#dcd4ef"
+            ></rect>
+            <rect x="72" y="88" width="44" height="6" rx="3" fill="#dcd4ef"
+            ></rect>
+            <rect x="72" y="102" width="50" height="6" rx="3" fill="#e4ddf3"
+            ></rect>
+            <rect x="72" y="116" width="34" height="6" rx="3" fill="#e4ddf3"
+            ></rect>
           </g>
 
           {/* Scales of justice inside a violet badge */}
           <circle cx="150" cy="130" r="31" fill="url(#tc-badge)"></circle>
           <circle cx="150" cy="115" r="2" fill="#ffffff"></circle>
-          <path d="M150 116v28" stroke="#ffffff" stroke-width="2.6" stroke-linecap="round"></path>
-          <path d="M137 121h26" stroke="#ffffff" stroke-width="2.6" stroke-linecap="round"></path>
-          <path d="M142 145h16" stroke="#ffffff" stroke-width="2.6" stroke-linecap="round"></path>
-          <path d="M137 121l-4 8M137 121l4 8" stroke="#ffffff" stroke-width="1.6" stroke-linecap="round"></path>
-          <path d="M131 129a6 5 0 0 0 12 0" stroke="#ffffff" stroke-width="2.2" fill="none" stroke-linecap="round"></path>
-          <path d="M163 121l-4 8M163 121l4 8" stroke="#ffffff" stroke-width="1.6" stroke-linecap="round"></path>
-          <path d="M157 129a6 5 0 0 0 12 0" stroke="#ffffff" stroke-width="2.2" fill="none" stroke-linecap="round"></path>
+          <path
+            d="M150 116v28"
+            stroke="#ffffff"
+            stroke-width="2.6"
+            stroke-linecap="round"></path>
+          <path
+            d="M137 121h26"
+            stroke="#ffffff"
+            stroke-width="2.6"
+            stroke-linecap="round"></path>
+          <path
+            d="M142 145h16"
+            stroke="#ffffff"
+            stroke-width="2.6"
+            stroke-linecap="round"></path>
+          <path
+            d="M137 121l-4 8M137 121l4 8"
+            stroke="#ffffff"
+            stroke-width="1.6"
+            stroke-linecap="round"></path>
+          <path
+            d="M131 129a6 5 0 0 0 12 0"
+            stroke="#ffffff"
+            stroke-width="2.2"
+            fill="none"
+            stroke-linecap="round"></path>
+          <path
+            d="M163 121l-4 8M163 121l4 8"
+            stroke="#ffffff"
+            stroke-width="1.6"
+            stroke-linecap="round"></path>
+          <path
+            d="M157 129a6 5 0 0 0 12 0"
+            stroke="#ffffff"
+            stroke-width="2.2"
+            fill="none"
+            stroke-linecap="round"></path>
 
           {/* Sparkles & dots */}
           <circle cx="72" cy="26" r="5.5" fill="#50e3c2"></circle>
-          <path d="M52 78l3.5-6 3.5 6-3.5 6z" fill="#7928ca" opacity="0.7"></path>
-          <path d="M176 58h9M180.5 53.5v9" stroke="#7928ca" stroke-width="2.6" stroke-linecap="round" opacity="0.5"></path>
-          <path d="M184 143c1.4 4.6 1.4 4.6 6 6-4.6 1.4-4.6 1.4-6 6-1.4-4.6-1.4-4.6-6-6 4.6-1.4 4.6-1.4 6-6z" fill="#50e3c2"></path>
+          <path d="M52 78l3.5-6 3.5 6-3.5 6z" fill="#7928ca" opacity="0.7"
+          ></path>
+          <path
+            d="M176 58h9M180.5 53.5v9"
+            stroke="#7928ca"
+            stroke-width="2.6"
+            stroke-linecap="round"
+            opacity="0.5"></path>
+          <path
+            d="M184 143c1.4 4.6 1.4 4.6 6 6-4.6 1.4-4.6 1.4-6 6-1.4-4.6-1.4-4.6-6-6 4.6-1.4 4.6-1.4 6-6z"
+            fill="#50e3c2"></path>
           <circle cx="44" cy="128" r="3" fill="#7928ca" opacity="0.5"></circle>
         </svg>
       </div>
@@ -107,20 +189,35 @@ const metaFor = (i: number) => SECTION_META[i] ?? { icon: SHIELD, tint: 'tint-vi
     {
       page.sections.map((s, i) => {
         const meta = metaFor(i);
-        const num = String(i + 1).padStart(2, '0');
+        const num = String(i + 1).padStart(2, "0");
         return (
           <section class={`tc-card ${meta.tint}`}>
-            <span class="tc-card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" set:html={meta.icon} /></span>
+            <span class="tc-card__icon">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.9"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                set:html={meta.icon}
+              />
+            </span>
             <div class="tc-card__content">
-              <h2 class="tc-card__title"><span class="tc-card__num">{num}</span>{s.heading}</h2>
-              {s.paragraphs.map((p) => <p class="tc-card__p" set:html={p} />)}
+              <h2 class="tc-card__title">
+                <span class="tc-card__num">{num}</span>
+                {s.heading}
+              </h2>
+              {s.paragraphs.map((p) => (
+                <p class="tc-card__p" set:html={p} />
+              ))}
             </div>
           </section>
         );
       })
     }
 
-    <a class="tc-back" href={`${home}#workspace`}>← {backHome}</a>
+    <a class="tc-back" href={`${home}#workspace`}>{backHome}</a>
   </div>
 </section>
 
@@ -219,7 +316,9 @@ const metaFor = (i: number) => SECTION_META[i] ?? { icon: SHIELD, tint: 'tint-vi
     border-left: 4px solid var(--fg);
     background: color-mix(in srgb, var(--fg) 4%, var(--color-canvas));
     box-shadow: var(--shadow-e1);
-    transition: box-shadow 0.2s ease, transform 0.2s ease;
+    transition:
+      box-shadow 0.2s ease,
+      transform 0.2s ease;
   }
   .tc-card:hover {
     transform: translateY(-3px);
