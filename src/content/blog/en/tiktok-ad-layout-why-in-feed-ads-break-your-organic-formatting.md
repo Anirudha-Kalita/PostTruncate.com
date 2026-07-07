@@ -22,7 +22,7 @@ I launched the ad on a Monday. By Wednesday, I had a nagging feeling about the c
 
 The video had worked perfectly in every preview I ran before exporting. It looked exactly right in TikTok's organic interface. But the moment TikTok's ad system injected the CTA button into the layout, the on-screen text that was carefully placed just above the username bar disappeared under a colored rectangle.
 
-I'm Anirudha, the solo developer behind [PostTruncate.com](/en/). I build tools that show creators and media buyers what their content actually looks like before they publish - including exactly this kind of visual disaster. And I'm writing this because I still catch myself almost making this mistake. If I'm doing it, performance marketers and video editors running real campaigns are doing it constantly, at scale.
+I'm Anirudha, the solo developer behind [PostTruncate.com](/). I build tools that show creators and media buyers what their content actually looks like before they publish - including exactly this kind of visual disaster. And I'm writing this because I still catch myself almost making this mistake. If I'm doing it, performance marketers and video editors running real campaigns are doing it constantly, at scale.
 
 This is the article I wish I'd had before that Monday.
 
