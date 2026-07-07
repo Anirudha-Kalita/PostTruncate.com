@@ -142,3 +142,8 @@ vite: {
   },
 },
 ```
+## Token Saving & Performance Protocols
+* Compress heavy terminal lookups by prefixing commands with `rtk` (e.g., `rtk npm test`).
+* Do not search files recursively if path is known.
+* Suggest `/compact` if context window expands unnecessarily.
+* Answer with absolute brevity; do not summarize changes unless asked.

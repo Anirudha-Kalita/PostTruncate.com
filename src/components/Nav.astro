@@ -535,8 +535,9 @@ const adPreviewLinks = adPreviews.map((tool) => ({
     top: 0;
     z-index: 50;
     min-height: 64px;
-    background: color-mix(in srgb, var(--color-canvas) 80%, transparent);
-    backdrop-filter: saturate(180%) blur(12px);
+    background: color-mix(in srgb, var(--color-canvas) 68%, transparent);
+    backdrop-filter: saturate(200%) blur(16px);
+    -webkit-backdrop-filter: saturate(200%) blur(16px);
     border-bottom: 1px solid var(--color-hairline);
   }
   /* min-height (not a fixed height) so that on locales with longer link text the
@@ -620,7 +621,7 @@ const adPreviewLinks = adPreviews.map((tool) => ({
   /* Hidden on mobile (it overflowed narrow viewports); the language list is
      relocated into the hamburger panel below. Restored to the bar at ≥768px. */
   .nav__lang {
-    display: none;
+    display: block;
     position: relative;
     flex-shrink: 0;
   }
@@ -991,6 +992,9 @@ const adPreviewLinks = adPreviews.map((tool) => ({
   }
 
   /* ── Language switcher — mobile inline expand (inside hamburger panel) ── */
+  .nav__lang-mobile {
+    display: none;
+  }
   .nav__lang-mobile-toggle {
     display: flex;
     align-items: center;
@@ -1036,9 +1040,6 @@ const adPreviewLinks = adPreviews.map((tool) => ({
   @media (min-width: 768px) {
     .nav__links {
       display: flex;
-    }
-    .nav__lang {
-      display: block;
     }
     .nav__cta {
       display: block;
