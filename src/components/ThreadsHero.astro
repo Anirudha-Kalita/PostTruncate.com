@@ -6,7 +6,6 @@
 // string contains the literal "500", so the accent split is language-agnostic.
 // The right-hand illustration is decorative (aria-hidden) and keeps its stylised
 // English micro-labels to match the brand mock across locales.
-import OnThisPage from './OnThisPage.astro';
 import type { SectionAnchor } from '../lib/headingAnchors';
 
 interface Props {
@@ -23,6 +22,14 @@ const titleParts = title.split('500');
 
 const THREADS_GLYPH =
   'M12.186 24h-.007c-3.581-.024-6.334-1.205-8.184-3.509C2.35 18.44 1.5 15.586 1.472 12.01v-.017c.03-3.579.879-6.43 2.525-8.482C5.845 1.205 8.6.024 12.18 0h.014c2.746.02 5.043.725 6.826 2.098 1.677 1.291 2.858 3.13 3.509 5.467l-2.04.569c-1.104-3.96-3.898-5.984-8.304-6.015-2.91.022-5.11.936-6.54 2.717C4.307 6.504 3.616 8.914 3.589 12c.027 3.086.718 5.496 2.057 7.164 1.43 1.781 3.631 2.695 6.54 2.717 2.623-.02 4.358-.631 5.8-2.045 1.647-1.613 1.618-3.593 1.09-4.798-.31-.71-.873-1.3-1.634-1.75-.192 1.352-.622 2.446-1.284 3.272-.886 1.102-2.14 1.704-3.73 1.79-1.202.065-2.36-.218-3.259-.801-1.063-.689-1.685-1.74-1.752-2.964-.065-1.19.408-2.285 1.33-3.082.88-.76 2.119-1.207 3.583-1.291a13.853 13.853 0 0 1 3.02.142c-.126-.742-.375-1.332-.75-1.757-.513-.586-1.308-.883-2.359-.89h-.029c-.844 0-1.992.232-2.721 1.32L7.734 7.847c.98-1.454 2.568-2.256 4.478-2.256h.044c3.194.02 5.097 1.975 5.287 5.388.108.046.216.094.32.142 1.49.7 2.58 1.761 3.154 3.07.797 1.82.871 4.79-1.548 7.158-1.85 1.81-4.094 2.628-7.277 2.65Zm1.235-11.587c-.336 0-.679.01-1.024.029-1.838.103-2.978.95-2.913 2.122.063 1.235 1.435 1.81 2.756 1.737 1.211-.066 2.79-.534 3.058-3.71-.59-.124-1.215-.181-1.876-.181Z';
+
+// Section navigation icons matching ICON_SETS.threads in ToolSectionCards.astro
+const ICONS = [
+  '<path d="M7 15l5 5 5-5M7 9l5-5 5 5"/>',
+  '<path d="M9 17H7A5 5 0 0 1 7 7h2M15 7h2a5 5 0 0 1 0 10h-2M8 12h8"/>',
+  '<path d="M10 6h11M10 12h11M10 18h11"/><path d="M4 5h1v4M4 9h2"/><path d="M6 18H4l2-2.5H4"/>',
+  '<path d="M12 20h9M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4 12.5-12.5z"/>',
+];
 ---
 
 <header class="thero">
@@ -43,7 +50,40 @@ const THREADS_GLYPH =
       ))}
     </h1>
     {intro && <p class="thero__lede">{intro}</p>}
-    <OnThisPage label={onThisPageLabel} sections={sections} />
+    {/* Jump navigation: mobile dropdown / desktop pills */}
+    {sections.length > 0 && (
+      <nav class="thero__jump" aria-label={onThisPageLabel}>
+        {/* Mobile dropdown */}
+        <details class="thero__mobile-nav">
+          <summary class="thero__mobile-toggle">
+            <span class="thero__mobile-label">{onThisPageLabel}</span>
+            <svg class="thero__mobile-chevron" width="12" height="12" viewBox="0 0 12 12" aria-hidden="true">
+              <path d="M2.5 4.5 6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+          </summary>
+          <ul class="thero__mobile-list">
+            {sections.map((section) => (
+              <li>
+                <a class="thero__mobile-link" href={`#${section.id}`}>{section.label}</a>
+              </li>
+            ))}
+          </ul>
+        </details>
+
+        {/* Desktop pills row */}
+        <div class="thero__desktop-nav">
+          <span class="thero__desktop-label">{onThisPageLabel}</span>
+          <div class="thero__pills">
+            {sections.map((sec, idx) => (
+              <a href={`#${sec.id}`} class="thero__pill">
+                <span class="thero__pill-icon" set:html={`<svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2">${ICONS[idx % ICONS.length]}</svg>`} />
+                <span>{sec.label}</span>
+              </a>
+            ))}
+          </div>
+        </div>
+      </nav>
+    )}
   </div>
 
   <div class="thero__art" aria-hidden="true">
@@ -132,8 +172,131 @@ const THREADS_GLYPH =
     color: var(--color-body);
   }
 
-  .thero__copy :global(.on-page) {
+  /* ── Jump menu: responsive mobile / desktop ──────────────────────────── */
+  .thero__jump {
     margin-top: 24px;
+  }
+
+  .thero__mobile-nav {
+    border: 1px solid var(--color-hairline);
+    border-radius: var(--radius-md);
+    background: var(--color-canvas);
+  }
+
+  .thero__mobile-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 10px 14px;
+    cursor: pointer;
+    list-style: none;
+    user-select: none;
+  }
+
+  .thero__mobile-toggle::-webkit-details-marker {
+    display: none;
+  }
+
+  .thero__mobile-label {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--color-mute);
+  }
+
+  .thero__mobile-chevron {
+    flex-shrink: 0;
+    color: var(--color-mute);
+    transition: transform 0.15s ease;
+  }
+
+  .thero__mobile-nav[open] .thero__mobile-chevron {
+    transform: rotate(180deg);
+  }
+
+  .thero__mobile-list {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    margin: 0;
+    padding: 0 8px 8px;
+    list-style: none;
+    border-top: 1px solid var(--color-hairline);
+  }
+
+  .thero__mobile-link {
+    display: block;
+    padding: 8px 10px;
+    border-radius: var(--radius-sm);
+    font-size: 13px;
+    line-height: 18px;
+    color: var(--color-body);
+    text-decoration: none;
+    transition: color 0.15s ease, background 0.15s ease;
+  }
+
+  .thero__mobile-link:hover {
+    color: var(--color-ink);
+    background: var(--color-canvas-soft-2);
+  }
+
+  .thero__desktop-nav {
+    display: none;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .thero__desktop-label {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-mute);
+  }
+
+  .thero__pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .thero__pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    border-radius: var(--radius-pill);
+    border: 1px solid var(--color-hairline);
+    background: var(--color-canvas);
+    font-size: 13.5px;
+    font-weight: 500;
+    color: var(--color-body);
+    transition: all 0.15s ease;
+  }
+
+  .thero__pill:hover {
+    border-color: var(--color-violet);
+    color: var(--color-violet-deep);
+    box-shadow: var(--shadow-e1);
+  }
+
+  .thero__pill-icon {
+    display: inline-flex;
+    align-items: center;
+    color: var(--color-violet-deep);
+  }
+
+  @media (min-width: 640px) {
+    .thero__mobile-nav {
+      display: none;
+    }
+    .thero__desktop-nav {
+      display: flex;
+    }
   }
 
   /* ── Right column: decorative illustration ──────────────────────────── */

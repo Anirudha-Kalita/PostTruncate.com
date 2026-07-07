@@ -6,7 +6,6 @@
 // the accent split works language-agnostically. The right-hand illustration is
 // purely decorative (aria-hidden) and keeps its stylised English micro-labels
 // to match the brand mock across locales.
-import OnThisPage from './OnThisPage.astro';
 import type { SectionAnchor } from '../lib/headingAnchors';
 
 interface Props {
@@ -20,6 +19,15 @@ const { title, intro, sections, onThisPageLabel } = Astro.props;
 
 // Split the localized title on the universal "280" figure so it can be tinted.
 const titleParts = title.split('280');
+
+// Section navigation icons matching ICON_SETS.twitter in ToolSectionCards.astro
+const ICONS = [
+  '<path d="M12 13a2 2 0 1 0 0-4 2 2 0 0 0 0 4z"/><path d="M13.4 11 17 7"/><path d="M4.6 17a9 9 0 1 1 14.8 0"/>',
+  '<path d="M9 17H7A5 5 0 0 1 7 7h2M15 7h2a5 5 0 0 1 0 10h-2M8 12h8"/>',
+  '<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a15 15 0 0 1 0 18 15 15 0 0 1 0-18z"/>',
+  '<path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h16.9a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0zM12 9v4M12 17h.01"/>',
+  '<path d="M12 2 2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>',
+];
 ---
 
 <header class="thero">
@@ -40,7 +48,41 @@ const titleParts = title.split('280');
       ))}
     </h1>
     {intro && <p class="thero__lede">{intro}</p>}
-    <OnThisPage label={onThisPageLabel} sections={sections} />
+    
+    {/* Jump navigation: mobile dropdown / desktop pills */}
+    {sections.length > 0 && (
+      <nav class="thero__jump" aria-label={onThisPageLabel}>
+        {/* Mobile dropdown */}
+        <details class="thero__mobile-nav">
+          <summary class="thero__mobile-toggle">
+            <span class="thero__mobile-label">{onThisPageLabel}</span>
+            <svg class="thero__mobile-chevron" width="12" height="12" viewBox="0 0 12 12" aria-hidden="true">
+              <path d="M2.5 4.5 6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+          </summary>
+          <ul class="thero__mobile-list">
+            {sections.map((section) => (
+              <li>
+                <a class="thero__mobile-link" href={`#${section.id}`}>{section.label}</a>
+              </li>
+            ))}
+          </ul>
+        </details>
+
+        {/* Desktop pills row */}
+        <div class="thero__desktop-nav">
+          <span class="thero__desktop-label">{onThisPageLabel}</span>
+          <div class="thero__pills">
+            {sections.map((sec, idx) => (
+              <a href={`#${sec.id}`} class="thero__pill">
+                <span class="thero__pill-icon" set:html={`<svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2">${ICONS[idx % ICONS.length]}</svg>`} />
+                <span>{sec.label}</span>
+              </a>
+            ))}
+          </div>
+        </div>
+      </nav>
+    )}
   </div>
 
   <div class="thero__art" aria-hidden="true">
@@ -137,8 +179,131 @@ const titleParts = title.split('280');
     color: var(--color-body);
   }
 
-  .thero__copy :global(.on-page) {
+  /* ── Jump menu: responsive mobile / desktop ──────────────────────────── */
+  .thero__jump {
     margin-top: 24px;
+  }
+
+  .thero__mobile-nav {
+    border: 1px solid var(--color-hairline);
+    border-radius: var(--radius-md);
+    background: var(--color-canvas);
+  }
+
+  .thero__mobile-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 10px 14px;
+    cursor: pointer;
+    list-style: none;
+    user-select: none;
+  }
+
+  .thero__mobile-toggle::-webkit-details-marker {
+    display: none;
+  }
+
+  .thero__mobile-label {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--color-mute);
+  }
+
+  .thero__mobile-chevron {
+    flex-shrink: 0;
+    color: var(--color-mute);
+    transition: transform 0.15s ease;
+  }
+
+  .thero__mobile-nav[open] .thero__mobile-chevron {
+    transform: rotate(180deg);
+  }
+
+  .thero__mobile-list {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    margin: 0;
+    padding: 0 8px 8px;
+    list-style: none;
+    border-top: 1px solid var(--color-hairline);
+  }
+
+  .thero__mobile-link {
+    display: block;
+    padding: 8px 10px;
+    border-radius: var(--radius-sm);
+    font-size: 13px;
+    line-height: 18px;
+    color: var(--color-body);
+    text-decoration: none;
+    transition: color 0.15s ease, background 0.15s ease;
+  }
+
+  .thero__mobile-link:hover {
+    color: var(--color-ink);
+    background: var(--color-canvas-soft-2);
+  }
+
+  .thero__desktop-nav {
+    display: none;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .thero__desktop-label {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-mute);
+  }
+
+  .thero__pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .thero__pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    border-radius: var(--radius-pill);
+    border: 1px solid var(--color-hairline);
+    background: var(--color-canvas);
+    font-size: 13.5px;
+    font-weight: 500;
+    color: var(--color-body);
+    transition: all 0.15s ease;
+  }
+
+  .thero__pill:hover {
+    border-color: var(--color-link);
+    color: var(--color-link);
+    box-shadow: var(--shadow-e1);
+  }
+
+  .thero__pill-icon {
+    display: inline-flex;
+    align-items: center;
+    color: var(--color-link);
+  }
+
+  @media (min-width: 640px) {
+    .thero__mobile-nav {
+      display: none;
+    }
+    .thero__desktop-nav {
+      display: flex;
+    }
   }
 
   /* ── Right column: decorative illustration ──────────────────────────── */
