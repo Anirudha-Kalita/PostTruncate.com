@@ -74,14 +74,7 @@ const blogListingByPath = buildBlogListingLastmodByPath();
 // Generate true HTTP 301 redirects for the bare locale routes (/en/, /es/, etc)
 // so the Cloudflare adapter emits them in _redirects. This ensures a silent
 // network-level hop, avoiding the visible HTML <meta> refresh page.
-/** @type {Record<string, string>} */
-const localeRedirects = {};
-for (const l of LOCALES) {
-  // Define only the trailing-slash variant to avoid Astro duplicate route warnings.
-  // We'll enforce sitewide trailing-slash normalization via Cloudflare Redirect Rules
-  // or Astro trailingSlash config.
-  localeRedirects[`/${l.code}/`] = `/${l.code}/${l.slug}/`;
-}
+
 
 export default defineConfig({
   site: SITE,
@@ -102,7 +95,6 @@ export default defineConfig({
       redirectToDefaultLocale: false,
     },
   },
-  redirects: localeRedirects,
   // Blog (.md) authors embed video by pasting a YouTube/Vimeo URL on its own
   // line; this remark plugin rewrites it to a responsive, lazy-loaded iframe.
   // The rehype plugin rewrites in-body /og/ images into responsive WebP srcset
