@@ -57,6 +57,7 @@ const { html: bodyHtml, sections } = prepareToolContent(tStr(tool.content), cano
 const REDESIGNED_TOOL_IDS = new Set(['twitter', 'instagram', 'linkedin', 'facebook', 'threads', 'tiktok-guide']);
 const useCards = REDESIGNED_TOOL_IDS.has(tool.id);
 const cardSections = useCards ? splitToolSections(bodyHtml) : [];
+const h1Str = tool.h1s?.[lang] ?? tStr(tool.titles);
 const lastUpdatedLine = interp(globalT.toolPage.lastUpdated, {
   date: formatLocaleDate(tool.lastUpdated, lang),
 });
@@ -151,49 +152,49 @@ const faqBlogAccent = FAQ_BLOG_ACCENT[tool.id] ?? {
   <section class:list={['tool-page container-page', { 'tool-page--wide': useCards, 'tool-page--cta-tight': useCards }]}>
     {tool.id === 'twitter' ? (
       <TwitterHero
-        title={tStr(tool.titles)}
+        title={h1Str}
         intro={introText}
         sections={sections}
         onThisPageLabel={globalT.toolPage.onThisPage}
       />
     ) : tool.id === 'threads' ? (
       <ThreadsHero
-        title={tStr(tool.titles)}
+        title={h1Str}
         intro={introText}
         sections={sections}
         onThisPageLabel={globalT.toolPage.onThisPage}
       />
     ) : tool.id === 'instagram' ? (
       <InstagramHero
-        title={tStr(tool.titles)}
+        title={h1Str}
         intro={introText}
         sections={sections}
         onThisPageLabel={globalT.toolPage.onThisPage}
       />
     ) : tool.id === 'linkedin' ? (
       <LinkedInHero
-        title={tStr(tool.titles)}
+        title={h1Str}
         intro={introText}
         sections={sections}
         onThisPageLabel={globalT.toolPage.onThisPage}
       />
     ) : tool.id === 'facebook' ? (
       <FacebookHero
-        title={tStr(tool.titles)}
+        title={h1Str}
         intro={introText}
         sections={sections}
         onThisPageLabel={globalT.toolPage.onThisPage}
       />
     ) : tool.id === 'tiktok-guide' ? (
       <TikTokHero
-        title={tStr(tool.titles)}
+        title={h1Str}
         intro={introText}
         sections={sections}
         onThisPageLabel={globalT.toolPage.onThisPage}
       />
     ) : (
       <header class="tool-page__prose tool-page__head">
-        <h1 class="tool-page__title">{tStr(tool.titles)}</h1>
+        <h1 class="tool-page__title">{h1Str}</h1>
         {introText && <p class="tool-page__lede">{introText}</p>}
         <OnThisPage label={globalT.toolPage.onThisPage} sections={sections} />
       </header>
@@ -275,7 +276,7 @@ const faqBlogAccent = FAQ_BLOG_ACCENT[tool.id] ?? {
 ) : (
   <section class="tool-page container-page">
     <header class="tool-page__head tool-page__prose">
-      <h1 class="tool-page__title">{tStr(tool.titles)}</h1>
+      <h1 class="tool-page__title">{h1Str}</h1>
       <OnThisPage label={globalT.toolPage.onThisPage} sections={sections} />
     </header>
 

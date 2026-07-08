@@ -20,6 +20,8 @@ export interface ToolDefinition {
   slugs: Record<string, string>;
   /** locale → page <title> */
   titles: Record<string, string>;
+  /** locale → page <h1>. If omitted, falls back to the localized title. */
+  h1s?: Record<string, string>;
   /** locale → meta description (≤160 chars recommended) */
   metaDescriptions: Record<string, string>;
   /** locale → 300+ word body content (may contain inline HTML like <strong>) */
@@ -79,7 +81,7 @@ export const tools: ToolDefinition[] = [
     },
 
     titles: {
-      en: 'Twitter / X Character Counter — Free 280-Char Tweet Counter',
+      en: "Auto-Split Tweets Into Threads | X Character Counter",
       es: 'Contador de Caracteres Twitter / X — Cuenta tus 280 caracteres gratis',
       de: 'Twitter / X Zeichenzähler — 280 Zeichen kostenlos zählen',
       fr: 'Compteur de Caractères Twitter / X — 280 caractères gratuitement',
@@ -89,6 +91,16 @@ export const tools: ToolDefinition[] = [
       ja: 'Twitter / X 文字数カウンター — 280文字を無料でカウント',
       zh: 'Twitter / X 字符计数器 — 免费统计280字符推文',
       da: 'Twitter / X Tegntæller — Tæl 280 tegn gratis',
+    },
+
+    h1s: {
+      en: "Write past the 280-character limit and automatically split your draft into a clean thread.",
+    
+      da: "Skriv forbi grænsen på 280 tegn, og opdel automatisk dit udkast i en ren tråd.",
+      nl: "Schrijf voorbij de limiet van 280 tekens en splits je concept automatisch op in een overzichtelijke thread.",
+    
+      de: "Schreibe über das Limit von 280 Zeichen hinaus und teile deinen Entwurf automatisch in einen übersichtlichen Thread auf.",
+      es: "Escribe más allá del límite de 280 caracteres y divide tu borrador automáticamente en un hilo ordenado.",
     },
 
     metaDescriptions: {
@@ -394,7 +406,7 @@ export const tools: ToolDefinition[] = [
     },
 
     titles: {
-      en: 'Instagram Character Counter — Free Caption & Hashtag Counter',
+      en: "See Where Instagram Cuts Your Caption | Character Counter",
       es: 'Contador de Caracteres Instagram — Contador gratis de pies de foto y hashtags',
       de: 'Instagram Zeichenzähler — Caption- und Hashtag-Zähler kostenlos',
       fr: 'Compteur de Caractères Instagram — Légendes et hashtags gratuitement',
@@ -404,6 +416,16 @@ export const tools: ToolDefinition[] = [
       ja: 'Instagram文字数カウンター — キャプションとハッシュタグを無料カウント',
       zh: 'Instagram字符计数器 — 免费统计说明文字与标签',
       da: 'Instagram Tegntæller — Gratis tæller til billedtekst og hashtags',
+    },
+
+    h1s: {
+      en: "Preview your caption to make sure your hook lands before the \"more\" button hides it.",
+    
+      da: "Få en forhåndsvisning af din tekst for at sikre, at din fængende indledning læses, før \"mere\"-knappen skjuler den.",
+      nl: "Bekijk een voorbeeld van je bijschrift om zeker te weten dat je pakkende intro opvalt voordat de \"meer\"-knop deze verbergt.",
+    
+      de: "Sieh dir eine Vorschau deines Textes an, um sicherzugehen, dass deine packende Einleitung auffällt, bevor der „Mehr“-Button sie verbirgt.",
+      es: "Obtén una vista previa de tu texto para asegurarte de que tu frase gancho destaque antes de que el botón \"más\" la oculte.",
     },
 
     metaDescriptions: {
@@ -713,7 +735,7 @@ export const tools: ToolDefinition[] = [
     },
 
     titles: {
-      en: 'LinkedIn Character Counter — Free Post Length & Fold Checker',
+      en: "See LinkedIn's \"See More\" Cutoff | Character Counter",
       es: 'Contador de Caracteres LinkedIn — Comprueba longitud y corte gratis',
       de: 'LinkedIn Zeichenzähler — Beitragslänge und Fold kostenlos prüfen',
       fr: 'Compteur de Caractères LinkedIn — Longueur et pli vérifiés gratuitement',
@@ -723,6 +745,16 @@ export const tools: ToolDefinition[] = [
       ja: 'LinkedIn文字数カウンター — 投稿の長さと折り返しを無料チェック',
       zh: 'LinkedIn字符计数器 — 免费检查帖子长度与折叠点',
       da: 'LinkedIn Tegntæller — Tjek længde og fold gratis',
+    },
+
+    h1s: {
+      en: "Preview exactly where LinkedIn truncates your post so your most important message stays visible.",
+    
+      da: "Se præcis, hvor LinkedIn beskærer dit opslag, så dit vigtigste budskab forbliver synligt.",
+      nl: "Bekijk precies waar LinkedIn je post afkapt, zodat je belangrijkste boodschap zichtbaar blijft.",
+    
+      de: "Erhalte eine genaue Vorschau davon, wo LinkedIn deinen Beitrag abschneidet, damit deine wichtigste Botschaft sichtbar bleibt.",
+      es: "Mira exactamente dónde recorta LinkedIn tu publicación para que tu mensaje más importante siga siendo visible.",
     },
 
     metaDescriptions: {
@@ -1003,7 +1035,7 @@ export const tools: ToolDefinition[] = [
     },
 
     titles: {
-      en: 'Facebook Character Counter — Free Post & Caption Length Checker',
+      en: "See Where Facebook Cuts Your Post | Character Counter",
       es: 'Contador de Caracteres Facebook — Comprueba longitud de posts gratis',
       de: 'Facebook Zeichenzähler — Beitrags- und Caption-Länge kostenlos prüfen',
       fr: 'Compteur de Caractères Facebook — Longueur des publications gratuitement',
@@ -1013,6 +1045,16 @@ export const tools: ToolDefinition[] = [
       ja: 'Facebook文字数カウンター — 投稿とキャプションの長さを無料チェック',
       zh: 'Facebook字符计数器 — 免费检查帖子与说明文字长度',
       da: 'Facebook Tegntæller — Tjek indlægs- og billedtekstlængde gratis',
+    },
+
+    h1s: {
+      en: "Check your post length and preview where Facebook hides your text in the mobile feed.",
+    
+      da: "Tjek længden på dit opslag, og få en forhåndsvisning af, hvor Facebook skjuler din tekst i mobil-feedet.",
+      nl: "Controleer de lengte van je post en zie in een voorbeeld waar Facebook je tekst in de mobiele feed verbergt.",
+    
+      de: "Überprüfe die Länge deines Beitrags und sieh in der Vorschau, wo Facebook deinen Text im mobilen Feed verbirgt.",
+      es: "Comprueba la longitud de tu publicación y mira en la vista previa dónde oculta Facebook tu texto en el feed móvil.",
     },
 
     metaDescriptions: {
@@ -1313,7 +1355,7 @@ export const tools: ToolDefinition[] = [
     },
 
     titles: {
-      en: 'Threads Character Counter — Free 500-Char Post Counter',
+      en: "See How Links Eat Your Threads Limit | Character Counter",
       es: 'Contador de Caracteres Threads — Contador gratis de 500 caracteres',
       de: 'Threads Zeichenzähler — Kostenloser 500-Zeichen-Postzähler',
       fr: 'Compteur de Caractères Threads — Compteur gratuit de 500 caractères',
@@ -1323,6 +1365,16 @@ export const tools: ToolDefinition[] = [
       ja: 'Threads文字数カウンター — 500文字の投稿を無料カウント',
       zh: 'Threads字符计数器 — 免费统计500字符帖文',
       da: 'Threads Tegntæller — Gratis 500-tegns indlægstæller',
+    },
+
+    h1s: {
+      en: "Track your 500-character limit and instantly chain overflow text into seamless replies.",
+    
+      da: "Følg med i din grænse på 500 tegn, og kæd øjeblikkeligt overskydende tekst sammen til glidende svar.",
+      nl: "Houd je limiet van 500 tekens bij en schakel overtollige tekst direct aaneen tot naadloze reacties.",
+    
+      de: "Behalte dein Limit von 500 Zeichen im Auge und verknüpfe überschüssigen Text sofort zu nahtlosen Antworten.",
+      es: "Controla tu límite de 500 caracteres y encadena al instante el texto sobrante en respuestas fluidas.",
     },
 
     metaDescriptions: {
@@ -1634,7 +1686,7 @@ export const tools: ToolDefinition[] = [
     },
 
     titles: {
-      en: 'TikTok Caption Checker — Free 4,000-Char Caption & Fold Preview',
+      en: "See Where TikTok Hides Your Caption | Caption Checker",
       es: 'Verificador de Leyendas TikTok — Gratis 4.000 caracteres y vista del pliegue',
       de: 'TikTok Untertitel-Prüfer — Kostenlos 4.000 Zeichen & Falz-Vorschau',
       fr: 'Vérificateur de Légendes TikTok — Gratuit 4 000 caractères & aperçu du pli',
@@ -1644,6 +1696,16 @@ export const tools: ToolDefinition[] = [
       ja: 'TikTokキャプションチェッカー — 4,000文字と「…続き」を無料プレビュー',
       zh: 'TikTok文案检查器 — 免费预览4,000字符与折叠点',
       da: 'TikTok Billedtekst-tjek — Gratis 4.000 tegn & fold-forhåndsvisning',
+    },
+
+    h1s: {
+      en: "Preview your text over a 9:16 video to see exactly where TikTok collapses your caption.",
+    
+      da: "Få en forhåndsvisning af din tekst over en 9:16-video for at se præcis, hvor TikTok folder den sammen.",
+      nl: "Bekijk een voorbeeld van je tekst over een 9:16-video om precies te zien waar TikTok je bijschrift inklapt.",
+    
+      de: "Sieh dir eine Vorschau deines Textes über einem 9:16-Video an, um genau zu sehen, wo TikTok deine Bildunterschrift einklappt.",
+      es: "Obtén una vista previa de tu texto sobre un vídeo en 9:16 para ver exactamente dónde colapsa TikTok tu descripción.",
     },
 
     metaDescriptions: {
