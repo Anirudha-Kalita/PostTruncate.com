@@ -7,7 +7,6 @@
 //
 // The accent is everything after the "—" so it stays language-agnostic across
 // all 10 locales. The illustration is decorative (aria-hidden).
-import OnThisPage from './OnThisPage.astro';
 import type { SectionAnchor } from '../lib/headingAnchors';
 
 interface Props {
@@ -22,6 +21,14 @@ const { title, intro, sections, onThisPageLabel } = Astro.props;
 const dashIndex = title.indexOf('—');
 const titleHead = dashIndex >= 0 ? title.slice(0, dashIndex + 1) : title;
 const titleTail = dashIndex >= 0 ? title.slice(dashIndex + 1).trim() : '';
+
+// Section navigation icons matching ICON_SETS.discord in ToolSectionCards.astro
+const ICONS = [
+  '<path d="M4 7V5h16v2M9 19h6M12 5v14"/>',
+  '<path d="M9 17H7A5 5 0 0 1 7 7h2M15 7h2a5 5 0 0 1 0 10h-2M8 12h8"/>',
+  '<path d="M4 9h16M4 15h16M10 3 8 21M16 3l-2 18"/>',
+  '<path d="M12 3l8 3v5c0 5-3.5 8-8 10-4.5-2-8-5-8-10V6z"/><path d="M9 12l2 2 4-4"/>',
+];
 
 const DISCORD_GLYPH =
   'M18.9 7.3a15.9 15.9 0 0 0-3.9-1.2l-.2.4a14.7 14.7 0 0 1 3.4 1.1 12.4 12.4 0 0 0-10.5 0A14.7 14.7 0 0 1 11 6.5l-.2-.4a15.9 15.9 0 0 0-3.9 1.2C4.4 11 3.8 14.5 4.1 18a16 16 0 0 0 4.9 2.5l.6-1a10.4 10.4 0 0 1-1.6-.8l.4-.3a11.4 11.4 0 0 0 9.7 0l.4.3a10.4 10.4 0 0 1-1.6.8l.6 1a16 16 0 0 0 4.9-2.5c.4-4.1-.6-7.6-2.5-10.7zM9.7 15.6c-.9 0-1.7-.9-1.7-1.9s.8-1.9 1.7-1.9 1.7.9 1.7 1.9-.8 1.9-1.7 1.9zm4.6 0c-.9 0-1.7-.9-1.7-1.9s.8-1.9 1.7-1.9 1.7.9 1.7 1.9-.8 1.9-1.7 1.9z';
@@ -41,7 +48,40 @@ const DISCORD_GLYPH =
       {titleTail && <><br /><span class="dhero__accent">{titleTail}</span></>}
     </h1>
     {intro && <p class="dhero__lede">{intro}</p>}
-    <OnThisPage label={onThisPageLabel} sections={sections} />
+    {/* Jump navigation: mobile dropdown / desktop pills */}
+    {sections.length > 0 && (
+      <nav class="dhero__jump" aria-label={onThisPageLabel}>
+        {/* Mobile dropdown */}
+        <details class="dhero__mobile-nav">
+          <summary class="dhero__mobile-toggle">
+            <span class="dhero__mobile-label">{onThisPageLabel}</span>
+            <svg class="dhero__mobile-chevron" width="12" height="12" viewBox="0 0 12 12" aria-hidden="true">
+              <path d="M2.5 4.5 6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+          </summary>
+          <ul class="dhero__mobile-list">
+            {sections.map((section) => (
+              <li>
+                <a class="dhero__mobile-link" href={`#${section.id}`}>{section.label}</a>
+              </li>
+            ))}
+          </ul>
+        </details>
+
+        {/* Desktop pills row */}
+        <div class="dhero__desktop-nav">
+          <span class="dhero__desktop-label">{onThisPageLabel}</span>
+          <div class="dhero__pills">
+            {sections.map((sec, idx) => (
+              <a href={`#${sec.id}`} class="dhero__pill">
+                <span class="dhero__pill-icon" set:html={`<svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2">${ICONS[idx % ICONS.length]}</svg>`} />
+                <span>{sec.label}</span>
+              </a>
+            ))}
+          </div>
+        </div>
+      </nav>
+    )}
   </div>
 
   <div class="dhero__art" aria-hidden="true">
@@ -127,8 +167,131 @@ const DISCORD_GLYPH =
     color: var(--color-body);
   }
 
-  .dhero__copy :global(.on-page) {
+  /* ── Jump menu: responsive mobile / desktop ──────────────────────────── */
+  .dhero__jump {
     margin-top: 24px;
+  }
+
+  .dhero__mobile-nav {
+    border: 1px solid var(--color-hairline);
+    border-radius: var(--radius-md);
+    background: var(--color-canvas);
+  }
+
+  .dhero__mobile-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 10px 14px;
+    cursor: pointer;
+    list-style: none;
+    user-select: none;
+  }
+
+  .dhero__mobile-toggle::-webkit-details-marker {
+    display: none;
+  }
+
+  .dhero__mobile-label {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--color-mute);
+  }
+
+  .dhero__mobile-chevron {
+    flex-shrink: 0;
+    color: var(--color-mute);
+    transition: transform 0.15s ease;
+  }
+
+  .dhero__mobile-nav[open] .dhero__mobile-chevron {
+    transform: rotate(180deg);
+  }
+
+  .dhero__mobile-list {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    margin: 0;
+    padding: 0 8px 8px;
+    list-style: none;
+    border-top: 1px solid var(--color-hairline);
+  }
+
+  .dhero__mobile-link {
+    display: block;
+    padding: 8px 10px;
+    border-radius: var(--radius-sm);
+    font-size: 13px;
+    line-height: 18px;
+    color: var(--color-body);
+    text-decoration: none;
+    transition: color 0.15s ease, background 0.15s ease;
+  }
+
+  .dhero__mobile-link:hover {
+    color: var(--color-ink);
+    background: var(--color-canvas-soft-2);
+  }
+
+  .dhero__desktop-nav {
+    display: none;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .dhero__desktop-label {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-mute);
+  }
+
+  .dhero__pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .dhero__pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    border-radius: var(--radius-pill);
+    border: 1px solid var(--color-hairline);
+    background: var(--color-canvas);
+    font-size: 13.5px;
+    font-weight: 500;
+    color: var(--color-body);
+    transition: all 0.15s ease;
+  }
+
+  .dhero__pill:hover {
+    border-color: #5865f2;
+    color: #4752c4;
+    box-shadow: var(--shadow-e1);
+  }
+
+  .dhero__pill-icon {
+    display: inline-flex;
+    align-items: center;
+    color: #5865f2;
+  }
+
+  @media (min-width: 640px) {
+    .dhero__mobile-nav {
+      display: none;
+    }
+    .dhero__desktop-nav {
+      display: flex;
+    }
   }
 
   /* ── Right column: Discord card mockup ──────────────────────────────── */

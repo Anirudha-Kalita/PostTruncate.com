@@ -7,7 +7,6 @@
 //
 // The accent is everything after the "—" so it stays language-agnostic across
 // all 10 locales. The illustration is decorative (aria-hidden).
-import OnThisPage from './OnThisPage.astro';
 import type { SectionAnchor } from '../lib/headingAnchors';
 
 interface Props {
@@ -22,6 +21,14 @@ const { title, intro, sections, onThisPageLabel } = Astro.props;
 const dashIndex = title.indexOf('—');
 const titleHead = dashIndex >= 0 ? title.slice(0, dashIndex + 1) : title;
 const titleTail = dashIndex >= 0 ? title.slice(dashIndex + 1).trim() : '';
+
+// Section navigation icons matching ICON_SETS.bluesky in ToolSectionCards.astro
+const ICONS = [
+  '<path d="M12 3l8 3v5c0 5-3.5 8-8 10-4.5-2-8-5-8-10V6z"/><path d="M9 12l2 2 4-4"/>',
+  '<path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/>',
+  '<path d="M12 20h9M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4 12.5-12.5z"/>',
+  '<rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/>',
+];
 
 const BSKY_GLYPH =
   'M12 10.8C11.1 9.1 8.6 6 6.3 4.4 4.1 2.9 3.3 3.1 2.7 3.4 2 3.7 2 4.7 2 5.4c0 .7.4 5.5.6 6.3.7 2.6 3.5 3.5 6 3.2-3.7.5-7 1.9-2.7 6.7C11 21.4 12 18.9 12 17.6c0 1.3 1 3.8 6.1 1.9 4.3-4.8 1-6.2-2.7-6.7 2.5.3 5.3-.6 6-3.2.2-.8.6-5.6.6-6.3 0-.7 0-1.7-.7-2-.6-.3-1.4-.5-3.6 1-2.3 1.6-4.8 4.7-6.7 6.5z';
@@ -41,7 +48,40 @@ const BSKY_GLYPH =
       {titleTail && <><br /><span class="bhero__accent">{titleTail}</span></>}
     </h1>
     {intro && <p class="bhero__lede">{intro}</p>}
-    <OnThisPage label={onThisPageLabel} sections={sections} />
+    {/* Jump navigation: mobile dropdown / desktop pills */}
+    {sections.length > 0 && (
+      <nav class="bhero__jump" aria-label={onThisPageLabel}>
+        {/* Mobile dropdown */}
+        <details class="bhero__mobile-nav">
+          <summary class="bhero__mobile-toggle">
+            <span class="bhero__mobile-label">{onThisPageLabel}</span>
+            <svg class="bhero__mobile-chevron" width="12" height="12" viewBox="0 0 12 12" aria-hidden="true">
+              <path d="M2.5 4.5 6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+          </summary>
+          <ul class="bhero__mobile-list">
+            {sections.map((section) => (
+              <li>
+                <a class="bhero__mobile-link" href={`#${section.id}`}>{section.label}</a>
+              </li>
+            ))}
+          </ul>
+        </details>
+
+        {/* Desktop pills row */}
+        <div class="bhero__desktop-nav">
+          <span class="bhero__desktop-label">{onThisPageLabel}</span>
+          <div class="bhero__pills">
+            {sections.map((sec, idx) => (
+              <a href={`#${sec.id}`} class="bhero__pill">
+                <span class="bhero__pill-icon" set:html={`<svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2">${ICONS[idx % ICONS.length]}</svg>`} />
+                <span>{sec.label}</span>
+              </a>
+            ))}
+          </div>
+        </div>
+      </nav>
+    )}
   </div>
 
   <div class="bhero__art" aria-hidden="true">
@@ -130,8 +170,131 @@ const BSKY_GLYPH =
     color: var(--color-body);
   }
 
-  .bhero__copy :global(.on-page) {
+  /* ── Jump menu: responsive mobile / desktop ──────────────────────────── */
+  .bhero__jump {
     margin-top: 24px;
+  }
+
+  .bhero__mobile-nav {
+    border: 1px solid var(--color-hairline);
+    border-radius: var(--radius-md);
+    background: var(--color-canvas);
+  }
+
+  .bhero__mobile-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 10px 14px;
+    cursor: pointer;
+    list-style: none;
+    user-select: none;
+  }
+
+  .bhero__mobile-toggle::-webkit-details-marker {
+    display: none;
+  }
+
+  .bhero__mobile-label {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--color-mute);
+  }
+
+  .bhero__mobile-chevron {
+    flex-shrink: 0;
+    color: var(--color-mute);
+    transition: transform 0.15s ease;
+  }
+
+  .bhero__mobile-nav[open] .bhero__mobile-chevron {
+    transform: rotate(180deg);
+  }
+
+  .bhero__mobile-list {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    margin: 0;
+    padding: 0 8px 8px;
+    list-style: none;
+    border-top: 1px solid var(--color-hairline);
+  }
+
+  .bhero__mobile-link {
+    display: block;
+    padding: 8px 10px;
+    border-radius: var(--radius-sm);
+    font-size: 13px;
+    line-height: 18px;
+    color: var(--color-body);
+    text-decoration: none;
+    transition: color 0.15s ease, background 0.15s ease;
+  }
+
+  .bhero__mobile-link:hover {
+    color: var(--color-ink);
+    background: var(--color-canvas-soft-2);
+  }
+
+  .bhero__desktop-nav {
+    display: none;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .bhero__desktop-label {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-mute);
+  }
+
+  .bhero__pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .bhero__pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    border-radius: var(--radius-pill);
+    border: 1px solid var(--color-hairline);
+    background: var(--color-canvas);
+    font-size: 13.5px;
+    font-weight: 500;
+    color: var(--color-body);
+    transition: all 0.15s ease;
+  }
+
+  .bhero__pill:hover {
+    border-color: #1185fe;
+    color: #0a6edb;
+    box-shadow: var(--shadow-e1);
+  }
+
+  .bhero__pill-icon {
+    display: inline-flex;
+    align-items: center;
+    color: #1185fe;
+  }
+
+  @media (min-width: 640px) {
+    .bhero__mobile-nav {
+      display: none;
+    }
+    .bhero__desktop-nav {
+      display: flex;
+    }
   }
 
   /* ── Right column: Bluesky card mockup ──────────────────────────────── */

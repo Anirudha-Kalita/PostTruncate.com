@@ -7,7 +7,6 @@
 //
 // The accent is everything after the "—" so it stays language-agnostic across
 // all 10 locales. The illustration is decorative (aria-hidden).
-import OnThisPage from './OnThisPage.astro';
 import type { SectionAnchor } from '../lib/headingAnchors';
 
 interface Props {
@@ -22,6 +21,14 @@ const { title, intro, sections, onThisPageLabel } = Astro.props;
 const dashIndex = title.indexOf('—');
 const titleHead = dashIndex >= 0 ? title.slice(0, dashIndex + 1) : title;
 const titleTail = dashIndex >= 0 ? title.slice(dashIndex + 1).trim() : '';
+
+// Section navigation icons matching ICON_SETS.youtube in ToolSectionCards.astro
+const ICONS = [
+  '<path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6M8 13h8M8 17h5"/>',
+  '<path d="M12 3l2.6 6.3 6.8.5-5.2 4.4 1.6 6.6L12 17.8 6.2 21.3l1.6-6.6L2.6 9.8l6.8-.5z"/>',
+  '<path d="M3 12V4a1 1 0 0 1 1-1h8l9 9-9 9z"/><circle cx="7.5" cy="7.5" r="1.2"/>',
+  '<path d="M12 3l8 3v5c0 5-3.5 8-8 10-4.5-2-8-5-8-10V6z"/><path d="M9 12l2 2 4-4"/>',
+];
 ---
 
 <header class="ythero">
@@ -39,7 +46,40 @@ const titleTail = dashIndex >= 0 ? title.slice(dashIndex + 1).trim() : '';
       {titleTail && <><br /><span class="ythero__accent">{titleTail}</span></>}
     </h1>
     {intro && <p class="ythero__lede">{intro}</p>}
-    <OnThisPage label={onThisPageLabel} sections={sections} />
+    {/* Jump navigation: mobile dropdown / desktop pills */}
+    {sections.length > 0 && (
+      <nav class="ythero__jump" aria-label={onThisPageLabel}>
+        {/* Mobile dropdown */}
+        <details class="ythero__mobile-nav">
+          <summary class="ythero__mobile-toggle">
+            <span class="ythero__mobile-label">{onThisPageLabel}</span>
+            <svg class="ythero__mobile-chevron" width="12" height="12" viewBox="0 0 12 12" aria-hidden="true">
+              <path d="M2.5 4.5 6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+          </summary>
+          <ul class="ythero__mobile-list">
+            {sections.map((section) => (
+              <li>
+                <a class="ythero__mobile-link" href={`#${section.id}`}>{section.label}</a>
+              </li>
+            ))}
+          </ul>
+        </details>
+
+        {/* Desktop pills row */}
+        <div class="ythero__desktop-nav">
+          <span class="ythero__desktop-label">{onThisPageLabel}</span>
+          <div class="ythero__pills">
+            {sections.map((sec, idx) => (
+              <a href={`#${sec.id}`} class="ythero__pill">
+                <span class="ythero__pill-icon" set:html={`<svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2">${ICONS[idx % ICONS.length]}</svg>`} />
+                <span>{sec.label}</span>
+              </a>
+            ))}
+          </div>
+        </div>
+      </nav>
+    )}
   </div>
 
   <div class="ythero__art" aria-hidden="true">
@@ -128,8 +168,131 @@ const titleTail = dashIndex >= 0 ? title.slice(dashIndex + 1).trim() : '';
     color: var(--color-body);
   }
 
-  .ythero__copy :global(.on-page) {
+  /* ── Jump menu: responsive mobile / desktop ──────────────────────────── */
+  .ythero__jump {
     margin-top: 24px;
+  }
+
+  .ythero__mobile-nav {
+    border: 1px solid var(--color-hairline);
+    border-radius: var(--radius-md);
+    background: var(--color-canvas);
+  }
+
+  .ythero__mobile-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 10px 14px;
+    cursor: pointer;
+    list-style: none;
+    user-select: none;
+  }
+
+  .ythero__mobile-toggle::-webkit-details-marker {
+    display: none;
+  }
+
+  .ythero__mobile-label {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--color-mute);
+  }
+
+  .ythero__mobile-chevron {
+    flex-shrink: 0;
+    color: var(--color-mute);
+    transition: transform 0.15s ease;
+  }
+
+  .ythero__mobile-nav[open] .ythero__mobile-chevron {
+    transform: rotate(180deg);
+  }
+
+  .ythero__mobile-list {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    margin: 0;
+    padding: 0 8px 8px;
+    list-style: none;
+    border-top: 1px solid var(--color-hairline);
+  }
+
+  .ythero__mobile-link {
+    display: block;
+    padding: 8px 10px;
+    border-radius: var(--radius-sm);
+    font-size: 13px;
+    line-height: 18px;
+    color: var(--color-body);
+    text-decoration: none;
+    transition: color 0.15s ease, background 0.15s ease;
+  }
+
+  .ythero__mobile-link:hover {
+    color: var(--color-ink);
+    background: var(--color-canvas-soft-2);
+  }
+
+  .ythero__desktop-nav {
+    display: none;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .ythero__desktop-label {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-mute);
+  }
+
+  .ythero__pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .ythero__pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    border-radius: var(--radius-pill);
+    border: 1px solid var(--color-hairline);
+    background: var(--color-canvas);
+    font-size: 13.5px;
+    font-weight: 500;
+    color: var(--color-body);
+    transition: all 0.15s ease;
+  }
+
+  .ythero__pill:hover {
+    border-color: #ff0000;
+    color: #d10000;
+    box-shadow: var(--shadow-e1);
+  }
+
+  .ythero__pill-icon {
+    display: inline-flex;
+    align-items: center;
+    color: #e00000;
+  }
+
+  @media (min-width: 640px) {
+    .ythero__mobile-nav {
+      display: none;
+    }
+    .ythero__desktop-nav {
+      display: flex;
+    }
   }
 
   /* ── Right column: YouTube card mockup ──────────────────────────────── */
