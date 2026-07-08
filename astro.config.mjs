@@ -77,11 +77,15 @@ const blogListingByPath = buildBlogListingLastmodByPath();
 /** @type {Record<string, string>} */
 const localeRedirects = {};
 for (const l of LOCALES) {
-  localeRedirects[`/${l.code}`] = `/${l.code}/${l.slug}/`;
+  // Define only the trailing-slash variant to avoid Astro duplicate route warnings.
+  // We'll enforce sitewide trailing-slash normalization via Cloudflare Redirect Rules
+  // or Astro trailingSlash config.
+  localeRedirects[`/${l.code}/`] = `/${l.code}/${l.slug}/`;
 }
 
 export default defineConfig({
   site: SITE,
+  trailingSlash: 'always',
   // Emit every stylesheet as a hashed external file with a render-blocking
   // <link rel="stylesheet"> in <head> (never inline). This gives the
   // post-build CSS inlining transform a single, predictable starting shape
