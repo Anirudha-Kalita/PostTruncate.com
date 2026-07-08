@@ -278,9 +278,10 @@ const hasBlog = posts.length > 0;
       gap: 48px;
       align-items: start;
     }
-    /* FAQ-only (no posts in this locale) stays comfortably measured. */
+    /* FAQ-only (no posts in this locale) stays comfortably measured and centered. */
     .fb--solo {
       grid-template-columns: minmax(0, 720px);
+      justify-content: center;
     }
   }
 </style>

@@ -249,12 +249,12 @@ const palette = (theme && PALETTES[theme]) || [VIOLET, PINK, AMBER, BLUE];
   {sections.map((section, i) => {
     const tint = palette[i % palette.length];
     return (
-      <article class="card">
+      <article class="card" id={section.id}>
         <span class="card__icon" aria-hidden="true" style={`background: ${tint.bg}; color: ${tint.fg};`}>
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" set:html={icons[i % icons.length]} />
         </span>
         <div class="card__content">
-          <h2 class="card__title" id={section.id} set:html={section.headingHtml} />
+          <h2 class="card__title" set:html={section.headingHtml} />
           <div class="card__body" set:html={section.bodyHtml} />
         </div>
       </article>
