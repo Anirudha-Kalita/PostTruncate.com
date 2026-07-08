@@ -123,6 +123,8 @@ I built [PostTruncate's Instagram caption preview tool](/en/instagram-character-
 
 <p align="center"><span style="font-size: 12px; "><em>PostTruncate Instagram character counter in action, showing live fold preview for feed and Reels tab views</em></span></p>
 
+For advertisers, the constraints are even tighter. If you are boosting a Reel or running a dedicated campaign, use the [Instagram Ad Preview tool](/en/ad-previews/instagram-ads/) to verify your ad copy against paid placement limits.
+
 The tool also flags when your hashtag count passes the [recommended ~5-hashtag mark](/en/blog/instagram-caption-limits-and-hashtag-rules-2026/) (the hard cap is 30) - a separate risk that can suppress reach silently. And it handles all the edge cases: emojis are counted as characters (complex emojis with skin-tone modifiers can register as multiple characters), line breaks count against your total, and the character count updates live across the entire caption.
 
 The workflow I'd recommend:

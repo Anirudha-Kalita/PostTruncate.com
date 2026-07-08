@@ -149,6 +149,8 @@ I've tested this across different industries. Marketers, developers, creators, n
 
 The fold concept isn't unique to Facebook. [LinkedIn truncates at around 140 characters on mobile](/en/blog/linkedin-posts-survive-the-fold/). [X (Twitter) shows 280 characters but weights early text heavily in the algorithm](/en/blog/twitter-x-seo-guide-maximize-post-reach/). Instagram hides captions behind "more" after 125 characters.
 
+If you are running paid campaigns, the rules change entirely. Paid placements have much stricter truncation limits than organic posts. You can preview exactly how your ad copy will render using our [Facebook Ad Preview simulator](/en/ad-previews/facebook-ads/) to ensure your primary CTA isn't buried under a button.
+
 The pattern across platforms is consistent: **lead with insight, keep your hook tight, optimise visuals** **for mobile, and trust that desktop readers will see more**. Write for the constraint, and your content works everywhere.
 
 ## Try PostTruncate

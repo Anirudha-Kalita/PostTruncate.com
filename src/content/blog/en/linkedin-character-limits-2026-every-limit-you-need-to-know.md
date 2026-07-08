@@ -183,6 +183,10 @@ The limits that create problems are the small ones:
 
 Knowing these numbers doesn't guarantee better content. But knowing where your audience will stop reading is the one constraint worth optimising for before every post.
 
+## All platform limits in one place
+
+If you're also managing paid campaigns, note that Sponsored Content has completely different truncation rules. You can use our [LinkedIn Ad Preview simulator](/en/ad-previews/linkedin-ads/) to test your ad copy and ensure your headlines and descriptions don't get cut off prematurely.
+
 For [Twitter/X](/en/twitter-character-counter/) (280-character hard limit), [Facebook](/en/facebook-character-counter/) (63,206 characters with a \~110-char mobile fold), [Instagram](/en/instagram-character-counter/) (2,200 characters with a \~125-char fold), [Threads](/en/threads-character-counter/) (500 characters), and [SMS](/en/tools/sms-character-counter/) (160 GSM characters), see the [full platform limits table](/en/platform-limits/).
 
 ## Try PostTruncate
