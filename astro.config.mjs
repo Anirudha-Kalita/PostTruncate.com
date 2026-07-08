@@ -71,6 +71,15 @@ const blogListingByPath = buildBlogListingLastmodByPath();
 // i18n: every locale is URL-prefixed (/en, /da, …) and the bare "/" redirects
 // to a chosen locale. Locales come from the single registry in src/i18n/config
 // so routes, the language switcher, and hreflang tags never drift apart.
+// Generate true HTTP 301 redirects for the bare locale routes (/en/, /es/, etc)
+// so the Cloudflare adapter emits them in _redirects. This ensures a silent
+// network-level hop, avoiding the visible HTML <meta> refresh page.
+/** @type {Record<string, string>} */
+const localeRedirects = {};
+for (const l of LOCALES) {
+  localeRedirects[`/${l.code}`] = `/${l.code}/${l.slug}/`;
+}
+
 export default defineConfig({
   site: SITE,
   // Emit every stylesheet as a hashed external file with a render-blocking
@@ -89,6 +98,7 @@ export default defineConfig({
       redirectToDefaultLocale: false,
     },
   },
+  redirects: localeRedirects,
   // Blog (.md) authors embed video by pasting a YouTube/Vimeo URL on its own
   // line; this remark plugin rewrites it to a responsive, lazy-loaded iframe.
   // The rehype plugin rewrites in-body /og/ images into responsive WebP srcset
