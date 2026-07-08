@@ -101,6 +101,12 @@ export const tools: ToolDefinition[] = [
     
       de: "Schreibe über das Limit von 280 Zeichen hinaus und teile deinen Entwurf automatisch in einen übersichtlichen Thread auf.",
       es: "Escribe más allá del límite de 280 caracteres y divide tu borrador automáticamente en un hilo ordenado.",
+    
+      fr: "Écrivez au-delà de la limite de 280 caractères et divisez automatiquement votre brouillon en un thread propre.",
+      it: "Scrivi oltre il limite di 280 caratteri e dividi automaticamente la tua bozza in un thread ordinato.",
+      pt: "Escreva além do limite de 280 caracteres e divida automaticamente o seu rascunho em uma thread organizada.",
+      ja: "280文字の上限を超えて入力し、下書きをきれいなスレッドに自動分割できます。",
+      zh: "突破 280 字符限制，将草稿自动拆分为整洁的推文串。",
     },
 
     metaDescriptions: {
@@ -426,6 +432,12 @@ export const tools: ToolDefinition[] = [
     
       de: "Sieh dir eine Vorschau deines Textes an, um sicherzugehen, dass deine packende Einleitung auffällt, bevor der „Mehr“-Button sie verbirgt.",
       es: "Obtén una vista previa de tu texto para asegurarte de que tu frase gancho destaque antes de que el botón \"más\" la oculte.",
+    
+      fr: "Prévisualisez votre légende pour vous assurer que votre phrase d'accroche frappe fort avant que le bouton « suite » ne la masque.",
+      it: "Visualizza l'anteprima della tua didascalia per assicurarti che la tua frase ad effetto colpisca nel segno prima che il pulsante \"altro\" la nasconda.",
+      pt: "Pré-visualize a sua legenda para garantir que a sua frase de engajamento tenha impacto antes que o botão \"mais\" a esconda.",
+      ja: "「続きを読む」ボタンで隠れる前にキャプションをプレビューして、フックとなる言葉が目立つか確認できます。",
+      zh: "预览文案，确保你的吸睛开头在被“展开”按钮隐藏前完美呈现。",
     },
 
     metaDescriptions: {
@@ -755,6 +767,12 @@ export const tools: ToolDefinition[] = [
     
       de: "Erhalte eine genaue Vorschau davon, wo LinkedIn deinen Beitrag abschneidet, damit deine wichtigste Botschaft sichtbar bleibt.",
       es: "Mira exactamente dónde recorta LinkedIn tu publicación para que tu mensaje más importante siga siendo visible.",
+    
+      fr: "Voyez exactement où LinkedIn coupe votre post afin que votre message le plus important reste visible.",
+      it: "Scopri esattamente dove LinkedIn taglia il tuo post in modo che il tuo messaggio più importante rimanga visibile.",
+      pt: "Veja exatamente onde o LinkedIn corta a sua publicação para que a sua mensagem mais importante continue visível.",
+      ja: "一番重要なメッセージが見えるように、LinkedInが投稿を省略する位置を正確にプレビューできます。",
+      zh: "精准预览 LinkedIn 截断帖子的位置，让最核心的信息保持可见。",
     },
 
     metaDescriptions: {
@@ -1055,6 +1073,12 @@ export const tools: ToolDefinition[] = [
     
       de: "Überprüfe die Länge deines Beitrags und sieh in der Vorschau, wo Facebook deinen Text im mobilen Feed verbirgt.",
       es: "Comprueba la longitud de tu publicación y mira en la vista previa dónde oculta Facebook tu texto en el feed móvil.",
+    
+      fr: "Vérifiez la longueur de votre publication et prévisualisez où Facebook masque votre texte dans le fil d'actualité mobile.",
+      it: "Controlla la lunghezza del tuo post e visualizza in anteprima dove Facebook nasconde il tuo testo nel feed mobile.",
+      pt: "Verifique o tamanho da sua publicação e veja na pré-visualização onde o Facebook esconde o seu texto no feed móvel.",
+      ja: "投稿の文字数を確認し、モバイル版のフィードでFacebookがテキストを隠す位置をプレビューできます。",
+      zh: "检查帖子长度，并预览 Facebook 在移动端信息流中隐藏文本的具体位置。",
     },
 
     metaDescriptions: {
@@ -1375,6 +1399,12 @@ export const tools: ToolDefinition[] = [
     
       de: "Behalte dein Limit von 500 Zeichen im Auge und verknüpfe überschüssigen Text sofort zu nahtlosen Antworten.",
       es: "Controla tu límite de 500 caracteres y encadena al instante el texto sobrante en respuestas fluidas.",
+    
+      fr: "Suivez votre limite de 500 caractères et enchaînez instantanément le texte excédentaire en réponses fluides.",
+      it: "Tieni d'occhio il limite di 500 caratteri e concatena all'istante il testo in eccesso in risposte continue.",
+      pt: "Acompanhe o seu limite de 500 caracteres e encadeie instantaneamente o texto excedente em respostas contínuas.",
+      ja: "500文字の上限を把握し、溢れたテキストをシームレスな返信として瞬時に連結できます。",
+      zh: "追踪 500 字符上限，瞬间将超长文本串联成流畅的回复。",
     },
 
     metaDescriptions: {
@@ -1706,6 +1736,12 @@ export const tools: ToolDefinition[] = [
     
       de: "Sieh dir eine Vorschau deines Textes über einem 9:16-Video an, um genau zu sehen, wo TikTok deine Bildunterschrift einklappt.",
       es: "Obtén una vista previa de tu texto sobre un vídeo en 9:16 para ver exactamente dónde colapsa TikTok tu descripción.",
+    
+      fr: "Prévisualisez votre texte sur une vidéo 9:16 pour voir exactement où TikTok replie votre légende.",
+      it: "Visualizza l'anteprima del tuo testo su un video in 9:16 per vedere esattamente dove TikTok comprime la tua didascalia.",
+      pt: "Pré-visualize o seu texto sobre um vídeo 9:16 para ver exatamente onde o TikTok oculta a sua legenda.",
+      ja: "9:16の動画上でテキストをプレビューし、TikTokがキャプションを折りたたむ位置を正確に確認できます。",
+      zh: "在 9:16 视频上预览文本，精准查看 TikTok 折叠文案的具体位置。",
     },
 
     metaDescriptions: {
