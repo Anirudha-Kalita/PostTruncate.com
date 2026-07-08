@@ -918,13 +918,16 @@ const latestPosts = (await getPublishedPosts())
     white-space: nowrap;
     background: var(--color-link);
     color: var(--color-on-primary);
-    transition: transform 100ms ease, background 0.15s ease;
+    transition: transform 150ms ease, background 0.15s ease, box-shadow 0.15s ease;
   }
   .cta-banner__cta:hover {
     background: var(--color-link-deep);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px -6px color-mix(in srgb, var(--color-link) 55%, transparent);
   }
   .cta-banner__cta:active {
     transform: scale(0.96);
+    box-shadow: none;
   }
   .cta-banner__cta:focus-visible {
     outline-color: var(--color-ink);
