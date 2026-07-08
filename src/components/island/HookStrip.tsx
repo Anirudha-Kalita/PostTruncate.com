@@ -136,11 +136,11 @@ export function HookStrip({ text, lang, s, views, limitsHref }: Props) {
       </div>
 
       {/* Equal cards: a 2×3 grid on phones, one horizontal row from sm up. */}
-      <div class="mt-3 grid grid-cols-2 gap-3 sm:flex sm:overflow-x-auto sm:pb-1">
+      <div class="mt-3 grid grid-cols-2 gap-3 pt-1 sm:flex sm:overflow-x-auto sm:pb-1">
         {cards.map((c) => (
           <div
             key={c.platform}
-            class="flex min-w-0 flex-col items-center gap-2.5 rounded-lg border border-hairline bg-canvas-soft p-3.5 text-center sm:min-w-40 sm:flex-1"
+            class="flex min-w-0 flex-col items-center gap-2.5 rounded-lg border border-hairline bg-canvas-soft p-3.5 text-center transition-all duration-200 hover:-translate-y-0.5 hover:border-link/40 hover:shadow-e3 sm:min-w-40 sm:flex-1"
           >
             <div class="flex items-center gap-2">
               <BrandLogo brand={c.brand} size={20} />
