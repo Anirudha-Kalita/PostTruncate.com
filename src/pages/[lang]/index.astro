@@ -1,14 +1,17 @@
 ---
 // Permanent redirect from the bare locale root (/en/, /es/, …) to the
-// keyword-rich homepage slug (/en/character-counter/, etc.). Runs as a
-// Cloudflare Worker so each locale code is validated server-side.
-export const prerender = false;
+// keyword-rich homepage slug (/en/character-counter/, etc.). Statically
+// generated so the edge can intercept and serve these as 301s without
+// invoking the SSR worker.
 
-import { getLocale, isLocale, DEFAULT_LOCALE } from '../../i18n/config';
+import { LOCALE_CODES, getLocale } from '../../i18n/config';
+
+export function getStaticPaths() {
+  return LOCALE_CODES.map((lang) => ({ params: { lang } }));
+}
 
 const { lang } = Astro.params as { lang: string };
-const target = isLocale(lang) ? lang : DEFAULT_LOCALE;
-const { slug } = getLocale(target);
+const { slug } = getLocale(lang);
 
-return Astro.redirect(`/${target}/${slug}/`, 301);
+return Astro.redirect(`/${lang}/${slug}/`, 301);
 ---

@@ -10,9 +10,9 @@ import { LINK_DISPLAY_STRINGS } from './linkDisplayStrings';
 export const en: Translations = {
   seo: {
     title:
-      'Character Counter — Free Online Character & Word Count Tool | PostTruncate',
+      'See Where Your Post Gets Cut Off | Character Counter',
     description:
-      'Free social media post previewer. See LinkedIn’s fold, split X/Twitter threads, catch hashtag limits and accessibility traps — live in your browser.',
+      'See exactly where LinkedIn, X, Instagram & Threads cut off your post — free live previewer with a built-in character counter. No signup.',
     skipLink: 'Skip to the editor',
   },
 
@@ -50,7 +50,7 @@ export const en: Translations = {
   hero: {
     eyebrow: 'Social preview & truncation simulator',
     title: 'See exactly where every platform cuts your text.',
-    lede: 'Write once and watch your post render in native LinkedIn, X, Threads, Instagram, and Facebook previews — with fold lines, thread splits, hashtag limits, and accessibility warnings live as you type, plus one-tap AI to improve your post on the spot.',
+    lede: 'See the fold. Stop guessing. Write once and watch your post render in native LinkedIn, X, Threads, Instagram, and Facebook previews — with fold lines, thread splits, hashtag limits, and accessibility warnings live as you type, plus one-tap AI to improve your post on the spot.',
     primary: 'Start writing',
     secondary: 'See platform limits',
     badge: 'Real-time previews. No more guessing.',
