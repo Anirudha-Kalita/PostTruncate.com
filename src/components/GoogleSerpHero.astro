@@ -368,7 +368,7 @@ const getLinkIcon = (id: string) => {
   /* ── Right column illustration ────────────────────────────────────────── */
   .serphero__art {
     position: relative;
-    display: flex;
+    display: none;
     align-items: center;
     justify-content: center;
     width: 100%;
@@ -675,6 +675,10 @@ const getLinkIcon = (id: string) => {
       grid-template-columns: 1.15fr 0.85fr;
       gap: 50px;
       margin-bottom: 50px;
+    }
+
+    .serphero__art {
+      display: flex;
     }
 
     .serphero__desktop-nav {

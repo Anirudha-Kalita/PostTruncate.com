@@ -341,7 +341,7 @@ const getLinkIcon = (id: string) => {
   /* ── Right column illustration ────────────────────────────────────────── */
   .smshero__art {
     position: relative;
-    display: flex;
+    display: none;
     align-items: center;
     justify-content: center;
     width: 100%;
@@ -624,6 +624,10 @@ const getLinkIcon = (id: string) => {
       grid-template-columns: 1.1fr 0.9fr;
       gap: 50px;
       margin-bottom: 50px;
+    }
+
+    .smshero__art {
+      display: flex;
     }
 
     .smshero__desktop-nav {
