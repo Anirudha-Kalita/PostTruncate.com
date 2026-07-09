@@ -119,6 +119,19 @@ export function EmbedWidget({ lang, s }: Props) {
           <p class="font-mono text-[11px] text-mute">{nf.format(limit)}</p>
         </div>
       </div>
+
+      {/* Backlink */}
+      <div class="text-center text-[12px] text-mute pt-1">
+        Powered by{' '}
+        <a
+          href="https://posttruncate.com"
+          target="_blank"
+          rel="noopener noreferrer nofollow"
+          class="font-medium text-ink hover:underline"
+        >
+          PostTruncate
+        </a>
+      </div>
     </div>
   );
 }

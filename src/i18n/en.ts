@@ -367,7 +367,7 @@ export const en: Translations = {
           'Live previews',
           'Thread splitter',
           'Unicode sanitizer',
-          'Embed widget',
+          'Embed free counter',
         ],
       },
       platforms: {
@@ -590,6 +590,13 @@ export const en: Translations = {
     forDevelopers:
       'Developers can drop the widget into any CMS, documentation page, or internal tool with a single <iframe> — no API key, no account, no build step required.',
     homepageLinkLabel: 'Embed on your site →',
+  },
+
+  embedCallout: {
+    eyebrow: 'Free Widget',
+    title: 'Embed a live character counter on your site',
+    body: 'Bloggers, educators, and developers: add our real-time character counter to any web page with a single line of HTML. Let your users track platform limits for X, LinkedIn, Threads, Instagram, and SMS without leaving your site. Free, no account or API key required.',
+    cta: 'Get the free embed code',
   },
 
   errors: {

@@ -247,6 +247,24 @@ const latestPosts = (await getPublishedPosts())
     </div>
   </section>
 
+  <!-- ── Embed Widget Callout ─────────────────────────────────────────── -->
+  <section id="embed-widget-promo" class="container-page" style="margin-top: 16px;">
+    <div class="cta-banner" style="background: var(--color-canvas-soft-2);">
+      <div class="cta-banner__main">
+        <div class="cta-banner__copy">
+          <p class="section-eyebrow">{t.embedCallout?.eyebrow}</p>
+          <h2 class="cta-banner__title" style="margin-top: 12px;">{t.embedCallout?.title}</h2>
+          <p class="cta-banner__body" style="margin-top: 8px;">{t.embedCallout?.body}</p>
+        </div>
+      </div>
+      <div class="cta-banner__action">
+        <a href={`/${lang}/embed-widget/`} class="cta-banner__cta">
+          {t.embedCallout?.cta}<span aria-hidden="true">→</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
   <!-- ── Hook-writing callout ─────────────────────────────────────────── -->
   <section id="hook-guide" class="container-page">
     <div class="hookband">

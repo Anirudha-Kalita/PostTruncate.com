@@ -1420,6 +1420,13 @@ export interface Translations {
       founders: { title: string; desc: string; cta: string };
     };
   };
+  /** Homepage callout section for the embed widget. */
+  embedCallout: {
+    eyebrow: string;
+    title: string;
+    body: string;
+    cta: string;
+  };
   /** Closing call-to-action banner above the footer on the homepage. */
   ctaBanner: {
     title: string;
