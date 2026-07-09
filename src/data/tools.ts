@@ -68,7 +68,7 @@ export const tools: ToolDefinition[] = [
     },
 
     schemaName: {
-      en: 'Twitter / X Character Counter',
+      en: 'X Thread Splitter & Character Counter',
       es: 'Contador de Caracteres para Twitter / X',
       de: 'Twitter / X Zeichenzähler',
       fr: 'Compteur de Caractères Twitter / X',
@@ -734,7 +734,7 @@ export const tools: ToolDefinition[] = [
     },
 
     schemaName: {
-      en: 'LinkedIn Character Counter',
+      en: 'LinkedIn "See More" Previewer & Counter',
       es: 'Contador de Caracteres para LinkedIn',
       de: 'LinkedIn Zeichenzähler',
       fr: 'Compteur de Caractères LinkedIn',
@@ -1040,7 +1040,7 @@ export const tools: ToolDefinition[] = [
     },
 
     schemaName: {
-      en: 'Facebook Character Counter',
+      en: 'Facebook Post Cutoff Previewer & Counter',
       es: 'Contador de Caracteres para Facebook',
       de: 'Facebook Zeichenzähler',
       fr: 'Compteur de Caractères Facebook',
