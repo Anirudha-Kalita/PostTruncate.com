@@ -21,11 +21,6 @@ function getFoldLimit(platform: PlatformKey): number {
   return (FOLDS as Record<string, { mobile: number; desktop: number }>)[platform]?.mobile ?? PLATFORM_LIMITS[platform];
 }
 
-/** For X and SMS, fold === limit — there is no "see more" truncation. */
-function isHardLimit(platform: PlatformKey): boolean {
-  return platform === 'twitter' || platform === 'sms';
-}
-
 const PLATFORM_ORDER: PlatformKey[] = [
   'twitter',
   'linkedin',
@@ -52,7 +47,6 @@ export function EmbedWidget({ lang, s }: Props) {
   const fold = getFoldLimit(platform);
   // foldPct: what percentage of the textarea width is "before the fold" (transparent)
   const foldPct = Math.min(100, (fold / limit) * 100);
-  const hardLimit = isHardLimit(platform);
   const isOver = chars > limit;
   const pct = Math.min(100, Math.round((chars / limit) * 100));
 
@@ -89,18 +83,8 @@ export function EmbedWidget({ lang, s }: Props) {
           placeholder={s.placeholders[platform]}
           rows={4}
           spellcheck
+          style={{ backgroundImage: `linear-gradient(to right, transparent ${foldPct}%, rgba(0,0,0,0.04) ${foldPct}%)` }}
           class="ew-textarea"
-        />
-        {/* Amber fold zone: represents the "past the fold / see more" area */}
-        {!hardLimit && foldPct < 100 && (
-          <div
-            class="ew-fold-zone"
-            style={{ width: `${100 - foldPct}%` }}
-            aria-hidden="true"
-          >
-            <span class="ew-cutoff-label">cutoff</span>
-          </div>
-        )}
       </div>
 
       {/* Progress bar */}
@@ -225,26 +209,6 @@ export function EmbedWidget({ lang, s }: Props) {
         }
 
         /* ── Fold zone ────────────────────────────────────────── */
-        .ew-fold-zone {
-          position: absolute;
-          top: 0;
-          right: 0;
-          bottom: 0;
-          background: #fef3c7;
-          border-left: 1.5px solid #fcd34d;
-          pointer-events: none;
-          z-index: 0;
-        }
-        .ew-cutoff-label {
-          position: absolute;
-          top: 10px;
-          left: -36px;
-          font-size: 11px;
-          font-weight: 600;
-          color: #d97706;
-          letter-spacing: 0.02em;
-          white-space: nowrap;
-        }
 
         /* ── Progress bar ─────────────────────────────────────── */
         .ew-progress-track {
