@@ -85,6 +85,7 @@ export function EmbedWidget({ lang, s }: Props) {
           spellcheck
           style={{ backgroundImage: `linear-gradient(to right, transparent ${foldPct}%, rgba(0,0,0,0.04) ${foldPct}%)` }}
           class="ew-textarea"
+        />
       </div>
 
       {/* Progress bar */}
