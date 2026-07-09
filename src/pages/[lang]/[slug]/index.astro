@@ -69,6 +69,7 @@ const SECTION_TOOL_IDS: (string | undefined)[] = [
   'twitter',    // "X (Twitter) limits and automatic thread splitting"
   'instagram',  // "Instagram and Facebook character limits"
   undefined,    // "Word count, readability, and platform analytics"
+  undefined,    // "AI-powered tone rewriting"
 ];
 
 // Per-section card presentation (icon + accent), index-aligned with the above.
@@ -78,6 +79,7 @@ const SECTION_CARDS: { icon: string; accent: string }[] = [
   { icon: 'x', accent: 'blue' },
   { icon: 'instagram', accent: 'pink' },
   { icon: 'analytics', accent: 'blue' },
+  { icon: 'ai', accent: 'blue' },
 ];
 
 // Referral banner: the ?platform= param is only known at runtime (static page),
@@ -214,6 +216,9 @@ const latestPosts = (await getPublishedPosts())
                 )}
                 {card.icon === 'analytics' && (
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 3v16a2 2 0 0 0 2 2h16" /><rect x="7" y="11" width="3" height="6" rx="0.8" /><rect x="12" y="7" width="3" height="10" rx="0.8" /><rect x="17" y="13" width="3" height="4" rx="0.8" /></svg>
+                )}
+                {card.icon === 'ai' && (
+                  <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.5l1.9 4.7 4.7 1.9-4.7 1.9L12 15.7l-1.9-4.7L5.4 9l4.7-1.9L12 2.5zM18.5 14l.95 2.35L21.8 17.3l-2.35.95L18.5 20.6l-.95-2.35L15.2 17.3l2.35-.95L18.5 14z" /></svg>
                 )}
               </span>
               <div class="seo-card__body">

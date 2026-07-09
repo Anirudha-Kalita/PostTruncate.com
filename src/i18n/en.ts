@@ -144,6 +144,13 @@ export const en: Translations = {
           'The dashboard handles multilingual text correctly, including CJK scripts where character count carries different semantic weight. Whether you’re writing in English, German, Japanese, or Chinese, the counts reflect what the target platform will actually see.',
         ],
       },
+      {
+        heading: 'AI-powered tone rewriting',
+        paragraphs: [
+          'The editor includes a built-in tone rewriter that adjusts the voice of your post without changing its meaning. Choose from five tones — professional, casual, marketing, friendly, or concise — and it rewrites your entire draft while preserving the original length and structure. It\'s a real AI model doing the rewriting, not a fixed template.',
+          'The rewriter locks every hashtag, @mention, URL, and emoji exactly where you placed them, so links and tags never get moved or dropped. It works on drafts up to 3,000 characters — longer posts (like an extended Facebook caption) won\'t be rewritten in full. It\'s free to use, with each visitor limited to 3 rewrites per 12 hours.'
+        ],
+      },
     ],
   },
 
