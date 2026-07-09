@@ -77,14 +77,18 @@ export function EmbedWidget({ lang, s }: Props) {
         onInput={(e) => {
           const el = e.currentTarget as HTMLTextAreaElement;
           setText(el.value);
+          // Grow to fit content up to max-height; beyond that, scroll internally.
+          // This keeps the tab bar, stats row, and footer always in view.
           el.style.height = 'auto';
-          el.style.height = `${el.scrollHeight}px`;
+          el.style.height = `${Math.min(el.scrollHeight, 220)}px`;
         }}
         placeholder={s.placeholders[platform]}
         rows={3}
         spellcheck
         style={{
-          backgroundImage: `linear-gradient(to right, transparent ${foldPct}%, var(--color-canvas-soft-2) ${foldPct}%)`
+          backgroundImage: `linear-gradient(to right, transparent ${foldPct}%, var(--color-canvas-soft-2) ${foldPct}%)`,
+          maxHeight: '220px',
+          overflowY: 'auto',
         }}
         class="block w-full resize-none rounded-md border border-hairline bg-canvas-soft px-4 py-3 text-[15px] leading-7 text-ink placeholder:text-mute focus:border-link focus:bg-canvas focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-link"
       />
@@ -120,6 +124,9 @@ export function EmbedWidget({ lang, s }: Props) {
           >
             {nf.format(chars)} / {nf.format(limit)}
           </p>
+          {platform === 'twitter' && (
+            <p class="font-mono text-[11px] text-mute mt-0.5">Hard limit · no fold</p>
+          )}
         </div>
       </div>
 
