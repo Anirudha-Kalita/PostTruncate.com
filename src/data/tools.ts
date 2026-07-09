@@ -399,7 +399,7 @@ export const tools: ToolDefinition[] = [
     },
 
     schemaName: {
-      en: 'Instagram Caption Character Counter',
+      en: 'Instagram Caption Cutoff Previewer & Counter',
       es: 'Contador de Caracteres para Instagram',
       de: 'Instagram Zeichenzähler',
       fr: 'Compteur de Caractères Instagram',
@@ -1366,7 +1366,7 @@ export const tools: ToolDefinition[] = [
     },
 
     schemaName: {
-      en: 'Threads Character Counter',
+      en: 'Threads Link & Character Counter',
       es: 'Contador de Caracteres para Threads',
       de: 'Threads Zeichenzähler',
       fr: 'Compteur de Caractères Threads',
@@ -1703,7 +1703,7 @@ export const tools: ToolDefinition[] = [
     },
 
     schemaName: {
-      en: 'TikTok Caption Checker',
+      en: 'TikTok Caption Cutoff Previewer & Checker',
       es: 'Verificador de Leyendas para TikTok',
       de: 'TikTok Untertitel-Prüfer',
       fr: 'Vérificateur de Légendes TikTok',
