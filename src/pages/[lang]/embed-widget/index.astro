@@ -14,7 +14,7 @@ const { lang } = Astro.params as { lang: string };
 const t = getTranslations(lang);
 const ew = t.embedWidget;
 const embedSrc = `https://posttruncate.com/${lang}/embed/`;
-const embedCode = `<iframe src="${embedSrc}" width="100%" height="420" frameborder="0"></iframe>`;
+const embedCode = `<iframe src="${embedSrc}" width="100%" height="320" frameborder="0"></iframe>`;
 ---
 
 <Layout
@@ -39,7 +39,7 @@ const embedCode = `<iframe src="${embedSrc}" width="100%" height="420" framebord
         <iframe
           src={embedSrc}
           width="100%"
-          height="420"
+          height="320"
           frameborder="0"
           title={ew.previewLabel}
           loading="lazy"

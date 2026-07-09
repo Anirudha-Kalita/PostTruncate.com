@@ -778,7 +778,6 @@ export interface IslandStrings {
   };
   /** Strings for the stripped-down embeddable widget at /[lang]/embed/. */
   embed: {
-    placeholder: string;
     /** Label under the character count stat tile. */
     charCount: string;
     /** Label under the word count stat tile. */
@@ -793,6 +792,18 @@ export interface IslandStrings {
       linkedin: string;
       threads: string;
       instagram: string;
+      facebook: string;
+      tiktok: string;
+      sms: string;
+    };
+    /** Dynamic placeholders per platform. */
+    placeholders: {
+      twitter: string;
+      linkedin: string;
+      threads: string;
+      instagram: string;
+      facebook: string;
+      tiktok: string;
       sms: string;
     };
   };

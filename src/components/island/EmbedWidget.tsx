@@ -1,24 +1,33 @@
 /** @jsxImportSource preact */
 import { useState, useMemo } from 'preact/hooks';
-import { charCount, wordCount } from '../../lib/textTools';
-import { interp } from '../../i18n/interp';
+import { charCount, wordCount, FOLDS, LIMITS } from '../../lib/textTools';
 import type { IslandStrings } from '../../i18n/types';
 
-type PlatformKey = 'twitter' | 'linkedin' | 'threads' | 'instagram' | 'sms';
+type PlatformKey = 'twitter' | 'linkedin' | 'threads' | 'instagram' | 'facebook' | 'tiktok' | 'sms';
 
 const PLATFORM_LIMITS: Record<PlatformKey, number> = {
-  twitter: 280,
-  linkedin: 3000,
-  threads: 500,
-  instagram: 2200,
+  twitter: LIMITS.TWEET,
+  linkedin: LIMITS.LINKEDIN_POST,
+  threads: LIMITS.THREADS,
+  instagram: LIMITS.INSTAGRAM_CAPTION,
+  facebook: LIMITS.FACEBOOK_POST,
+  tiktok: LIMITS.TIKTOK_CAPTION_SAFE,
   sms: 160,
 };
+
+function getFoldLimit(platform: PlatformKey): number {
+  if (platform === 'twitter') return LIMITS.TWEET;
+  if (platform === 'sms') return 160;
+  return FOLDS[platform]?.mobile ?? PLATFORM_LIMITS[platform];
+}
 
 const PLATFORM_ORDER: PlatformKey[] = [
   'twitter',
   'linkedin',
   'threads',
   'instagram',
+  'facebook',
+  'tiktok',
   'sms',
 ];
 
@@ -35,8 +44,9 @@ export function EmbedWidget({ lang, s }: Props) {
   const chars = charCount(text);
   const words = wordCount(text);
   const limit = PLATFORM_LIMITS[platform];
-  const remaining = limit - chars;
-  const isOver = remaining < 0;
+  const fold = getFoldLimit(platform);
+  const foldPct = Math.min(100, (fold / limit) * 100);
+  const isOver = chars > limit;
   const pct = Math.min(100, Math.round((chars / limit) * 100));
 
   return (
@@ -64,10 +74,18 @@ export function EmbedWidget({ lang, s }: Props) {
       {/* Editor */}
       <textarea
         value={text}
-        onInput={(e) => setText((e.currentTarget as HTMLTextAreaElement).value)}
-        placeholder={s.placeholder}
-        rows={7}
+        onInput={(e) => {
+          const el = e.currentTarget as HTMLTextAreaElement;
+          setText(el.value);
+          el.style.height = 'auto';
+          el.style.height = `${el.scrollHeight}px`;
+        }}
+        placeholder={s.placeholders[platform]}
+        rows={3}
         spellcheck
+        style={{
+          backgroundImage: `linear-gradient(to right, transparent ${foldPct}%, var(--color-canvas-soft-2) ${foldPct}%)`
+        }}
         class="block w-full resize-none rounded-md border border-hairline bg-canvas-soft px-4 py-3 text-[15px] leading-7 text-ink placeholder:text-mute focus:border-link focus:bg-canvas focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-link"
       />
 
@@ -83,19 +101,7 @@ export function EmbedWidget({ lang, s }: Props) {
 
       {/* Stats row */}
       <div class="flex items-center justify-between gap-4">
-        <div class="grid grid-cols-2 gap-2">
-          <div class="rounded-md border border-hairline bg-canvas px-3 py-2">
-            <div
-              class={`font-mono text-[20px] font-medium leading-7 tabular-nums ${
-                isOver ? 'text-error' : 'text-ink'
-              }`}
-            >
-              {nf.format(chars)}
-            </div>
-            <div class="mt-0.5 font-mono text-[11px] uppercase tracking-wide text-mute">
-              {s.charCount}
-            </div>
-          </div>
+        <div class="grid grid-cols-1 gap-2">
           <div class="rounded-md border border-hairline bg-canvas px-3 py-2">
             <div class="font-mono text-[20px] font-medium leading-7 tabular-nums text-ink">
               {nf.format(words)}
@@ -108,15 +114,12 @@ export function EmbedWidget({ lang, s }: Props) {
 
         <div class="shrink-0 text-right">
           <p
-            class={`font-mono text-[14px] font-medium tabular-nums ${
-              isOver ? 'text-error' : 'text-body'
+            class={`font-mono text-[18px] font-medium tabular-nums ${
+              isOver ? 'text-error' : 'text-ink'
             }`}
           >
-            {isOver
-              ? interp(s.overLimit, { n: nf.format(Math.abs(remaining)) })
-              : interp(s.remaining, { n: nf.format(remaining) })}
+            {nf.format(chars)} / {nf.format(limit)}
           </p>
-          <p class="font-mono text-[11px] text-mute">{nf.format(limit)}</p>
         </div>
       </div>
 
