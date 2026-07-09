@@ -591,6 +591,14 @@ export const it: Translations = {
     homepageLinkLabel: "Incorpora nel tuo sito →",
   },
 
+  embedCallout: {
+    eyebrow: 'Free Widget',
+    title: 'Embed a live character counter on your site',
+    body: 'Bloggers, educators, and developers: add our real-time character counter to any web page with a single line of HTML. Let your users track platform limits for X, LinkedIn, Threads, Instagram, and SMS without leaving your site. Free, no account or API key required.',
+    cta: 'Get the free embed code',
+  },
+
+
   errors: {
     notFound: {
       code: '404',
