@@ -51,7 +51,7 @@ function messageForError(
     case 'too_long':
       return interp(s.errorTooLong, { max: extra.max ?? 0 });
     case 'rate_limited':
-      return interp(s.limitReached, { time: formatDuration(extra.retryAfterSec ?? 0) });
+      return interp(s.limitReached, { time: formatDuration(extra.retryAfterSec ?? 0), max: extra.max ?? 3 });
     case 'not_configured':
       return s.errorUnavailable;
     default:
@@ -79,12 +79,30 @@ export function AiImprove({ text, setText, s, onImproved }: Props) {
   const [status, setStatus] = useState<Status>('idle');
   const [message, setMessage] = useState('');
   const [remaining, setRemaining] = useState<number | null>(null);
+  const [retryAfterSec, setRetryAfterSec] = useState<number | null>(null);
   const [maxUses, setMaxUses] = useState(3);
   // Snapshot of the text before the last successful rewrite, for Undo.
   const prevText = useRef<string | null>(null);
   // The editor text the current status UI (Undo / toast) belongs to. Once the
   // editor moves away from this — cleared or edited — that UI is stale.
   const shownForText = useRef<string | null>(null);
+
+  // Fetch initial limit status on mount
+  useEffect(() => {
+    let active = true;
+    fetch('/api/improve/', { headers: { 'x-client-token': aiClientToken() } })
+      .then((res) => res.json())
+      .then((data) => {
+        if (!active) return;
+        if (typeof data.max === 'number') setMaxUses(data.max);
+        if (typeof data.remaining === 'number') setRemaining(data.remaining);
+        if (typeof data.retryAfterSec === 'number') setRetryAfterSec(data.retryAfterSec);
+      })
+      .catch(() => {});
+    return () => {
+      active = false;
+    };
+  }, []);
 
   // First-run coach-mark: shown once (per browser) the first time the user has a
   // post in the editor, so they learn what the AI button does. Starts hidden to
@@ -120,7 +138,7 @@ export function AiImprove({ text, setText, s, onImproved }: Props) {
     setStatus('loading');
     setMessage('');
     try {
-      const res = await fetch('/api/improve', {
+      const res = await fetch('/api/improve/', {
         method: 'POST',
         headers: { 'content-type': 'application/json', 'x-client-token': aiClientToken() },
         body: JSON.stringify({ text, tone }),
@@ -143,6 +161,7 @@ export function AiImprove({ text, setText, s, onImproved }: Props) {
           }),
         );
         if (typeof data.remaining === 'number') setRemaining(data.remaining);
+        if (typeof data.retryAfterSec === 'number') setRetryAfterSec(data.retryAfterSec);
         shownForText.current = text;
         return;
       }
@@ -151,6 +170,7 @@ export function AiImprove({ text, setText, s, onImproved }: Props) {
       setText(data.improved);
       shownForText.current = data.improved;
       if (typeof data.remaining === 'number') setRemaining(data.remaining);
+      if (typeof data.retryAfterSec === 'number') setRetryAfterSec(data.retryAfterSec);
       setStatus('done');
       setMessage('');
       onImproved?.();
@@ -210,101 +230,104 @@ export function AiImprove({ text, setText, s, onImproved }: Props) {
         </div>
       )}
 
-      {/* FAB cluster — pinned to the editor's bottom-right corner. */}
-      <div class="absolute bottom-3 right-3 z-20">
-        {/* Tone speed-dial: round buttons fanning out along a quarter-circle arc
-            from the FAB (up → left), the way a bottom-right corner FAB reads best.
-            Positions are computed on the arc; each button carries a label pill.
-            The FAB centre sits at (24,24) within this 48px cluster. */}
-        {open && (
-          <div role="menu" aria-label={s.pickTone} class="absolute inset-0">
-            {TONES.map((tone, i) => {
-              const angle = ((90 - (i * 90) / (TONES.length - 1)) * Math.PI) / 180;
-              const radius = 168;
-              const cx = 24 - radius * Math.cos(angle);
-              const cy = 24 - radius * Math.sin(angle);
-              return (
-                <button
-                  key={tone}
-                  type="button"
-                  role="menuitem"
-                  aria-label={s.tones[tone]}
-                  onClick={() => improve(tone)}
-                  style={{ left: `${cx}px`, top: `${cy}px` }}
-                  class="absolute flex h-10 w-10 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-link text-on-primary shadow-e2 transition-[transform,background] duration-100 hover:bg-link-deep active:scale-90"
-                >
-                  <ToneIcon tone={tone} />
-                  {/* Label pill below the icon — own colours so it stays legible
-                      when the circle inverts on hover. */}
-                  <span class="pointer-events-none absolute left-1/2 top-full mt-1 -translate-x-1/2 whitespace-nowrap rounded bg-ink/85 px-1.5 py-0.5 text-[11px] font-semibold leading-none text-canvas shadow-e1">
-                    {s.tones[tone]}
-                  </span>
-                </button>
-              );
-            })}
-          </div>
+      {/* FAB cluster and notifications — pinned to the editor's bottom-right corner. */}
+      <div class="absolute bottom-3 right-3 z-20 flex items-center gap-3">
+        {/* Error / informational toast */}
+        {status === 'error' && message && statusForCurrentText && (
+          <p class="max-w-[15rem] truncate rounded-pill bg-error-soft px-3 py-1.5 text-[12px] font-medium text-error shadow-e1">
+            {message}
+          </p>
+        )}
+        {status === 'idle' && message && statusForCurrentText && (
+          <p class="max-w-[15rem] truncate rounded-pill bg-canvas px-3 py-1.5 text-[12px] text-mute shadow-e1">
+            {message}
+          </p>
         )}
 
-        {/* Spinning ring around the FAB while the rewrite is in flight. */}
-        {busy && <RingSpinner />}
-
-        {/* The FAB itself. */}
-        <button
-          type="button"
-          onClick={() => {
-            // Opening the dial means the user found the button — retire the hint.
-            if (hintEligible) dismissHint();
-            setOpen((o) => !o);
-          }}
-          disabled={busy || (!open && !hasText)}
-          aria-haspopup="menu"
-          aria-expanded={open}
-          aria-busy={busy}
-          aria-label={open ? s.cancel : s.button}
-          title={s.button}
-          class="relative flex h-12 w-12 items-center justify-center rounded-full bg-link text-on-primary shadow-e3 transition-[transform,background] duration-150 hover:bg-link-deep active:scale-95 disabled:cursor-not-allowed disabled:opacity-50"
-        >
-          {open ? (
-            <CloseIcon />
-          ) : (
-            <span class="flex flex-col items-center justify-center leading-none">
-              <SparkleIcon size={15} />
-              <span class="mt-0.5 text-[10px] font-bold tracking-wide">AI</span>
-            </span>
-          )}
-        </button>
-      </div>
-
-      {/* Undo + remaining quota, to the right of the FAB after a rewrite. */}
-      {status === 'done' && prevText.current !== null && statusForCurrentText && (
-        <div class="absolute bottom-3 right-16 z-20 flex items-center gap-2">
+        {/* Undo button */}
+        {status === 'done' && prevText.current !== null && statusForCurrentText && (
           <button
             type="button"
             onClick={undo}
-            class="inline-flex items-center gap-1.5 rounded-pill border border-hairline bg-canvas px-3 py-1.5 text-[12px] font-medium text-ink shadow-e1 transition-[transform,background] duration-100 hover:bg-canvas-soft-2 active:scale-95"
+            class="inline-flex shrink-0 items-center gap-1.5 rounded-pill border border-hairline bg-canvas px-3 py-1.5 text-[12px] font-medium text-ink shadow-e1 transition-[transform,background] duration-100 hover:bg-canvas-soft-2 active:scale-95"
           >
             <UndoIcon />
             {s.undo}
           </button>
-          {remaining !== null && (
-            <span class="rounded-pill bg-canvas/90 px-2 py-1 text-[11px] text-mute shadow-e1">
-              {interp(plural(s.remaining, remaining), { n: remaining, max: maxUses })}
-            </span>
-          )}
-        </div>
-      )}
+        )}
 
-      {/* Error / informational toast, to the right of the FAB. */}
-      {status === 'error' && message && statusForCurrentText && (
-        <p class="absolute bottom-3 right-16 z-20 max-w-[68%] rounded-pill bg-error-soft px-3 py-1.5 text-[12px] font-medium text-error shadow-e1">
-          {message}
-        </p>
-      )}
-      {status === 'idle' && message && statusForCurrentText && (
-        <p class="absolute bottom-3 right-16 z-20 max-w-[68%] rounded-pill bg-canvas px-3 py-1.5 text-[12px] text-mute shadow-e1">
-          {message}
-        </p>
-      )}
+        {/* Persistent remaining indicator */}
+        {remaining !== null && remaining > 0 && hasText && !open && (
+          <span class="whitespace-nowrap rounded-pill border border-hairline bg-canvas/90 px-3 py-1.5 text-[12px] font-medium text-mute shadow-e1">
+            {interp(plural(s.remaining, remaining), { n: remaining, max: maxUses })}
+          </span>
+        )}
+
+        {/* The FAB or the Limit Pill */}
+        {remaining === 0 && retryAfterSec ? (
+          <div class="whitespace-nowrap rounded-pill border border-hairline bg-canvas px-4 py-2.5 text-[13px] font-medium text-ink shadow-e3">
+            {interp(s.limitReached, { time: formatDuration(retryAfterSec), max: maxUses })}
+          </div>
+        ) : (
+          <div class="relative flex h-12 w-12 shrink-0 items-center justify-center">
+            {/* Tone speed-dial */}
+            {open && (
+              <div role="menu" aria-label={s.pickTone} class="absolute inset-0">
+                {TONES.map((tone, i) => {
+                  const angle = ((90 - (i * 90) / (TONES.length - 1)) * Math.PI) / 180;
+                  const radius = 168;
+                  const cx = 24 - radius * Math.cos(angle);
+                  const cy = 24 - radius * Math.sin(angle);
+                  return (
+                    <button
+                      key={tone}
+                      type="button"
+                      role="menuitem"
+                      aria-label={s.tones[tone]}
+                      onClick={() => improve(tone)}
+                      style={{ left: `${cx}px`, top: `${cy}px` }}
+                      class="absolute flex h-10 w-10 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-link text-on-primary shadow-e2 transition-[transform,background] duration-100 hover:bg-link-deep active:scale-90"
+                    >
+                      <ToneIcon tone={tone} />
+                      <span class="pointer-events-none absolute left-1/2 top-full mt-1 -translate-x-1/2 whitespace-nowrap rounded bg-ink/85 px-1.5 py-0.5 text-[11px] font-semibold leading-none text-canvas shadow-e1">
+                        {s.tones[tone]}
+                      </span>
+                    </button>
+                  );
+                })}
+              </div>
+            )}
+
+            {/* Spinning ring */}
+            {busy && <RingSpinner />}
+
+            {/* The FAB itself */}
+            <button
+              type="button"
+              onClick={() => {
+                if (hintEligible) dismissHint();
+                setOpen((o) => !o);
+              }}
+              disabled={busy || (!open && !hasText)}
+              aria-haspopup="menu"
+              aria-expanded={open}
+              aria-busy={busy}
+              aria-label={open ? s.cancel : s.button}
+              title={s.button}
+              class="relative flex h-12 w-12 items-center justify-center rounded-full bg-link text-on-primary shadow-e3 transition-[transform,background] duration-150 hover:bg-link-deep active:scale-95 disabled:cursor-not-allowed disabled:opacity-50"
+            >
+              {open ? (
+                <CloseIcon />
+              ) : (
+                <span class="flex flex-col items-center justify-center leading-none">
+                  <SparkleIcon size={15} />
+                  <span class="mt-0.5 text-[10px] font-bold tracking-wide">AI</span>
+                </span>
+              )}
+            </button>
+          </div>
+        )}
+      </div>
 
       {/* Screen-reader status while loading. */}
       <p class="sr-only" role="status" aria-live="polite">

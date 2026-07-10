@@ -301,5 +301,49 @@ async function callGroq(apiKey: string, prompt: string): Promise<string | null> 
   return parseGroqText(data);
 }
 
-// Reject non-POST verbs cleanly so the route advertises its contract.
+export const GET: APIRoute = async (context) => {
+  const bindingsResult = getBindings(context);
+  if (!bindingsResult.ok) return fail('runtime_unavailable', 503);
+  const bindings = bindingsResult.bindings;
+
+  const kv = bindings.AI_RATELIMIT;
+  if (!kv) {
+    return json({ remaining: RATE_LIMIT_MAX, max: RATE_LIMIT_MAX, retryAfterSec: 0 }, 200);
+  }
+
+  const now = Date.now();
+  const ip = context.request.headers.get('CF-Connecting-IP') ?? 'unknown';
+  const clientId = normalizeClientToken(context.request.headers.get('X-Client-Token'));
+  const ipKey = `rl:ip:${ip}`;
+  const clientKey = clientId ? `rl:ct:${clientId}` : null;
+
+  const [ipRec, clientRec] = await Promise.all([
+    kv.get(ipKey, 'json').catch(() => null),
+    clientKey ? kv.get(clientKey, 'json').catch(() => null) : Promise.resolve(null),
+  ]);
+
+  function getStatus(rec: RateRecord | null, max: number) {
+    if (!rec || rec.resetAt <= now) return { remaining: max, resetAt: 0 };
+    return { remaining: Math.max(0, max - rec.count), resetAt: rec.resetAt };
+  }
+
+  const ipStatus = getStatus(ipRec as RateRecord | null, RATE_LIMIT_IP_MAX);
+  const clientStatus = clientKey ? getStatus(clientRec as RateRecord | null, RATE_LIMIT_MAX) : null;
+
+  let remaining = clientStatus ? clientStatus.remaining : ipStatus.remaining;
+  let max = clientStatus ? RATE_LIMIT_MAX : RATE_LIMIT_IP_MAX;
+  let retryAfterSec = 0;
+  
+  if (clientStatus && clientStatus.remaining === 0) {
+    retryAfterSec = Math.ceil((clientStatus.resetAt - now) / 1000);
+  } else if (ipStatus.remaining === 0) {
+    remaining = 0;
+    max = RATE_LIMIT_IP_MAX;
+    retryAfterSec = Math.ceil((ipStatus.resetAt - now) / 1000);
+  }
+
+  return json({ remaining, max, retryAfterSec }, 200);
+};
+
+// Reject non-POST/GET verbs cleanly so the route advertises its contract.
 export const ALL: APIRoute = () => fail('bad_request', 405);

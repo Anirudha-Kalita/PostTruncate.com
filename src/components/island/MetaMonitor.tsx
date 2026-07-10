@@ -321,11 +321,12 @@ export function MetaMonitor({ text, lang, s, toolLinkHref, facebookToolLinkHref,
           </PostCard>
           )}
           {overCaptionLimit && (
-            <p class="text-[12px] leading-4 text-error-deep">
-              {interp(m.captionOver, {
+            <p class="flex items-start gap-1.5 text-[12px] leading-4 font-medium text-error-deep">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="shrink-0 mt-[1px]" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="m15 9-6 6"/><path d="m9 9 6 6"/></svg>
+              <span>{interp(m.captionOver, {
                 limit: nf.format(LIMITS.INSTAGRAM_CAPTION),
                 excess: nf.format(activeCount - LIMITS.INSTAGRAM_CAPTION),
-              })}
+              })}</span>
             </p>
           )}
 
@@ -339,19 +340,21 @@ export function MetaMonitor({ text, lang, s, toolLinkHref, facebookToolLinkHref,
             />
             <p class="mt-2.5 text-[12px] leading-4 text-body">
               {overHardLimit ? (
-                <span class="text-error-deep">
-                  {interp(m.over, {
+                <span class="inline-flex items-center gap-1 font-medium text-error-deep">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="shrink-0" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="m15 9-6 6"/><path d="m9 9 6 6"/></svg>
+                  <span>{interp(m.over, {
                     limit: nf.format(LIMITS.INSTAGRAM_HASHTAGS_MAX),
                     excess: nf.format(tagCount - LIMITS.INSTAGRAM_HASHTAGS_MAX),
-                  })}
+                  })}</span>
                 </span>
               ) : aboveRecommended ? (
-                <span class="text-warning-deep">
-                  {interp(m.approaching, {
+                <span class="inline-flex items-center gap-1 font-medium text-warning-deep">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="shrink-0" aria-hidden="true"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                  <span>{interp(m.approaching, {
                     n: nf.format(tagCount),
                     recommended: nf.format(LIMITS.INSTAGRAM_HASHTAGS_RECOMMENDED),
                     max: nf.format(LIMITS.INSTAGRAM_HASHTAGS_MAX),
-                  })}
+                  })}</span>
                 </span>
               ) : tagCount > 0 ? (
                 interp(m.within, {
@@ -566,8 +569,9 @@ export function MetaMonitor({ text, lang, s, toolLinkHref, facebookToolLinkHref,
             </div>
             <p class="mt-2 text-[12px] leading-4 text-body">
               {fancy ? (
-                <span class="text-warning-deep">
-                  {interp(plural(m.fancyDetected, fancyN), { n: nf.format(fancyN) })}
+                <span class="inline-flex items-center gap-1 font-medium text-warning-deep">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="shrink-0" aria-hidden="true"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                  <span>{interp(plural(m.fancyDetected, fancyN), { n: nf.format(fancyN) })}</span>
                 </span>
               ) : (
                 m.fancyClean
@@ -694,8 +698,9 @@ function ReelsPlayer({
       </div>
 
       {reels.tooShort && (
-        <p class="w-full text-[12px] leading-4 text-warning-deep">
-          {interp(ap.reelsTooShort, { min: ig.reelsMin, max: ig.reelsMax })}
+        <p class="flex items-start gap-1.5 w-full text-[12px] leading-4 font-medium text-warning-deep">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="shrink-0 mt-[1px]" aria-hidden="true"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+          <span>{interp(ap.reelsTooShort, { min: ig.reelsMin, max: ig.reelsMax })}</span>
         </p>
       )}
       {safeZone && <p class="w-full text-[12px] leading-4 text-mute">{ap.safeZoneHint}</p>}
@@ -937,8 +942,9 @@ function FacebookReelsPlayer({
       </div>
 
       {reels.tooShort && (
-        <p class="w-full text-[12px] leading-4 text-warning-deep">
-          {interp(ap.reelsTooShort, { min: ig.reelsMin, max: ig.reelsMax })}
+        <p class="flex items-start gap-1.5 w-full text-[12px] leading-4 font-medium text-warning-deep">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="shrink-0 mt-[1px]" aria-hidden="true"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+          <span>{interp(ap.reelsTooShort, { min: ig.reelsMin, max: ig.reelsMax })}</span>
         </p>
       )}
       {safeZone && <p class="w-full text-[12px] leading-4 text-mute">{ap.safeZoneHint}</p>}

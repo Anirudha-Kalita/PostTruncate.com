@@ -990,10 +990,10 @@ export const en: Translations = {
       undo: 'Undo',
       reverted: 'Reverted to your original text.',
       remaining: {
-        one: '{n} of {max} AI improvement left',
-        other: '{n} of {max} AI improvements left',
+        one: '{n} of {max} rewrites remaining today',
+        other: '{n} of {max} rewrites remaining today',
       },
-      limitReached: 'You’ve used all your AI improvements. Try again in {time}.',
+      limitReached: "You've used all {max} rewrites. Resets in {time}.",
       errorGeneric: 'Couldn’t improve the text. Please try again.',
       errorEmpty: 'Write something first.',
       errorTooLong: 'Text is too long for AI Improve (max {max} characters).',

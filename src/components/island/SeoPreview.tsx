@@ -100,13 +100,15 @@ export function SeoPreview({ s, lang }: Props) {
             tone={pixelMeterTone}
           />
           {titleCharOver && (
-            <p class="text-[12px] leading-4 text-error-deep">
-              {interp(sp.titleOverChar, { limit: TITLE_CHAR_LIMIT })}
+            <p class="flex items-start gap-1.5 text-[12px] leading-4 font-medium text-error-deep">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="shrink-0 mt-[1px]" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="m15 9-6 6"/><path d="m9 9 6 6"/></svg>
+              <span>{interp(sp.titleOverChar, { limit: TITLE_CHAR_LIMIT })}</span>
             </p>
           )}
           {!titleCharOver && titlePixelOver && (
-            <p class="text-[12px] leading-4 text-warning-deep">
-              {interp(sp.titleOverPixel, { max: TITLE_PIXEL_MAX })}
+            <p class="flex items-start gap-1.5 text-[12px] leading-4 font-medium text-warning-deep">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="shrink-0 mt-[1px]" aria-hidden="true"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+              <span>{interp(sp.titleOverPixel, { max: TITLE_PIXEL_MAX })}</span>
             </p>
           )}
         </div>
@@ -128,8 +130,9 @@ export function SeoPreview({ s, lang }: Props) {
             class="block w-full resize-y rounded-md border border-hairline bg-canvas-soft px-4 py-2.5 text-[15px] leading-6 text-ink placeholder:text-mute focus:border-link focus:bg-canvas focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-link"
           />
           {descOver && (
-            <p class="text-[12px] leading-4 text-error-deep">
-              {interp(sp.descOverChar, { limit: DESC_CHAR_LIMIT })}
+            <p class="flex items-start gap-1.5 text-[12px] leading-4 font-medium text-error-deep">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="shrink-0 mt-[1px]" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="m15 9-6 6"/><path d="m9 9 6 6"/></svg>
+              <span>{interp(sp.descOverChar, { limit: DESC_CHAR_LIMIT })}</span>
             </p>
           )}
         </div>
