@@ -141,7 +141,7 @@ Understanding the psychology behind character limits isn't just interesting hist
 
 If you've ever published a post only to discover that the line you thought was your hook was buried three lines below the fold, that frustration is exactly what [PostTruncate](/) is built to solve.
 
-PostTruncate is a free, browser-based character counter and live platform preview tool. As you type, it shows you exactly where each platform's fold falls - including the often-missed mobile/desktop split on LinkedIn. You can see your post rendered in native LinkedIn, X, Instagram, Facebook, Threads, and SMS previews simultaneously, with fold markers live in the text, thread splits calculated automatically, and SMS encoding detected in real time.
+PostTruncate is a free, browser-based character counter and live platform preview tool. As you type, it shows you exactly where each platform's fold falls - including the often-missed mobile/desktop split on LinkedIn. You can see your post rendered in native LinkedIn, X, TikTok, Instagram, Facebook, Threads, and SMS previews simultaneously, with fold markers live in the text, thread splits calculated automatically, and SMS encoding detected in real time.
 
 Everything runs in your browser. No account. No data uploaded. No server contact. Just you, your draft, and an honest picture of what your audience will actually see.
 
@@ -168,5 +168,5 @@ Every character limit on social media is a legacy of a decision made with incomp
 </details>
 
 <details><summary><b>How do I know where each platform will cut my post?</b></summary>
-<p>Every platform has different truncation rules, and they change without notice. The most reliable way is to use a live preview tool like <a href="/en/character-counter/">PostTruncate</a>, which shows real-time fold markers for LinkedIn, X, Instagram, Facebook, Threads, and SMS as you type. You can see exactly which words fall inside the mobile window, which appear only on desktop, and what disappears behind 'see more' - before you publish.</p>
+<p>Every platform has different truncation rules, and they change without notice. The most reliable way is to use a live preview tool like <a href="/en/character-counter/">PostTruncate</a>, which shows real-time fold markers for LinkedIn, X, TikTok, Instagram, Facebook, Threads, and SMS as you type. You can see exactly which words fall inside the mobile window, which appear only on desktop, and what disappears behind 'see more' - before you publish.</p>
 </details>

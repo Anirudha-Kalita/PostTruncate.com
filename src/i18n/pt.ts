@@ -49,7 +49,7 @@ export const pt: Translations = {
   hero: {
     eyebrow: 'Simulador de pré-visualização e truncagem para redes sociais',
     title: 'Veja exatamente onde cada plataforma corta o seu texto.',
-    lede: 'Escreva uma vez e veja a sua publicação a ser apresentada em pré-visualizações nativas do LinkedIn, X, Threads, Instagram e Facebook — com linhas de dobra, divisões de threads, limites de hashtags e avisos de acessibilidade em tempo real à medida que escreve, mais IA de um toque para melhorar a sua publicação na hora.',
+    lede: 'Escreva uma vez e veja a sua publicação a ser apresentada em pré-visualizações nativas do LinkedIn, X, TikTok, Threads, Instagram e Facebook — com linhas de dobra, divisões de threads, limites de hashtags e avisos de acessibilidade em tempo real à medida que escreve, mais IA de um toque para melhorar a sua publicação na hora.',
     primary: 'Começar a escrever',
     secondary: 'Ver os limites das plataformas',
     badge: 'Pré-visualizações em tempo real. Chega de adivinhação.',
@@ -235,7 +235,7 @@ export const pt: Translations = {
       },
       {
         q: 'Que plataformas é que o PostTruncate suporta?',
-        a: 'O PostTruncate pré-visualiza LinkedIn, X (Twitter), Threads, Instagram, Facebook e SMS — com contagem de caracteres ao vivo, marcadores de dobra, divisão em threads e cálculo de segmentos SMS para cada um. Inclui ainda uma pré-visualização de SERP do Google para títulos e meta descrições, e um widget contador gratuito para incorporar no seu próprio site.',
+        a: 'O PostTruncate pré-visualiza LinkedIn, X (Twitter), TikTok, Threads, Instagram, Facebook e SMS — com contagem de caracteres ao vivo, marcadores de dobra, divisão em threads e cálculo de segmentos SMS para cada um. Inclui ainda uma pré-visualização de SERP do Google para títulos e meta descrições, e um widget contador gratuito para incorporar no seu próprio site.',
       },
       {
         q: 'Qual é a precisão dos limites de caracteres?',
@@ -320,7 +320,7 @@ export const pt: Translations = {
   limitsPage: {
     title: 'Limites de caracteres das redes sociais 2026 — Tabela completa',
     description:
-      'A tabela completa de limites de caracteres para LinkedIn, X (Twitter), Threads, Instagram, Facebook e SMS — limites rígidos, dobras de truncamento e as regras por trás deles.',
+      'A tabela completa de limites de caracteres para LinkedIn, X (Twitter), TikTok, Threads, Instagram, Facebook e SMS — limites rígidos, dobras de truncamento e as regras por trás deles.',
     eyebrow: 'Referência',
     heading: 'Todos os limites das plataformas, numa só tabela',
     lede: 'Limites rígidos, dobras de texto visível e comportamento de excesso para cada plataforma que o PostTruncate pré-visualiza. Os números abaixo são as mesmas constantes que o editor ao vivo verifica.',
@@ -491,7 +491,7 @@ export const pt: Translations = {
         {
           heading: 'Sem afiliação',
           paragraphs: [
-            'O PostTruncate é uma ferramenta independente e <strong>não está afiliado, aprovado nem patrocinado por</strong> LinkedIn, X (Twitter), Meta, Instagram, Facebook ou Threads. Todos os nomes de produtos, logótipos e marcas são propriedade dos respetivos detentores e são aqui usados apenas para descrever o comportamento de cada plataforma.',
+            'O PostTruncate é uma ferramenta independente e <strong>não está afiliado, aprovado nem patrocinado por</strong> LinkedIn, X (Twitter), TikTok, Meta, Instagram, Facebook ou Threads. Todos os nomes de produtos, logótipos e marcas são propriedade dos respetivos detentores e são aqui usados apenas para descrever o comportamento de cada plataforma.',
           ],
         },
         {

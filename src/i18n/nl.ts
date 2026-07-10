@@ -49,7 +49,7 @@ export const nl: Translations = {
   hero: {
     eyebrow: 'Social-preview- en afkapsimulator',
     title: 'Zie precies waar elk platform je tekst afkapt.',
-    lede: 'Schrijf één keer en zie je bericht weergegeven in de native previews van LinkedIn, X, Threads, Instagram en Facebook — met vouwregels, threadsplitsingen, hashtaglimieten en toegankelijkheidswaarschuwingen live terwijl je typt, plus één-tik AI om je bericht meteen te verbeteren.',
+    lede: 'Schrijf één keer en zie je bericht weergegeven in de native previews van LinkedIn, X, TikTok, Threads, Instagram en Facebook — met vouwregels, threadsplitsingen, hashtaglimieten en toegankelijkheidswaarschuwingen live terwijl je typt, plus één-tik AI om je bericht meteen te verbeteren.',
     primary: 'Begin met schrijven',
     secondary: 'Bekijk de platformlimieten',
     badge: 'Real-time voorbeelden. Geen giswerk meer.',
@@ -235,7 +235,7 @@ export const nl: Translations = {
       },
       {
         q: 'Welke platforms ondersteunt PostTruncate?',
-        a: 'PostTruncate toont previews voor LinkedIn, X (Twitter), Threads, Instagram, Facebook en sms — met live tekentelling, vouwmarkeringen, thread-splitsing en sms-segmentberekening voor elk. Er is ook een Google SERP-preview voor paginatitels en metabeschrijvingen, plus een gratis insluitbare teller-widget voor je eigen site.',
+        a: 'PostTruncate toont previews voor LinkedIn, X (Twitter), TikTok, Threads, Instagram, Facebook en sms — met live tekentelling, vouwmarkeringen, thread-splitsing en sms-segmentberekening voor elk. Er is ook een Google SERP-preview voor paginatitels en metabeschrijvingen, plus een gratis insluitbare teller-widget voor je eigen site.',
       },
       {
         q: 'Hoe nauwkeurig zijn de tekenlimieten?',
@@ -320,7 +320,7 @@ export const nl: Translations = {
   limitsPage: {
     title: 'Tekenlimieten van sociale media 2026 — Volledige tabel',
     description:
-      'De complete tekenlimiettabel voor LinkedIn, X (Twitter), Threads, Instagram, Facebook en sms — harde limieten, truncatievouwen en de regels erachter.',
+      'De complete tekenlimiettabel voor LinkedIn, X (Twitter), TikTok, Threads, Instagram, Facebook en sms — harde limieten, truncatievouwen en de regels erachter.',
     eyebrow: 'Naslag',
     heading: 'Elke platformlimiet, in één tabel',
     lede: 'Harde limieten, vouwen voor zichtbare tekst en overloopgedrag voor elk platform dat PostTruncate previewt. De getallen hieronder zijn dezelfde constanten waar de live editor tegen controleert.',
@@ -417,7 +417,7 @@ export const nl: Translations = {
     backToTop: 'Terug naar boven',
     copyright: '© {year} PostTruncate. Gebouwd voor creators overal.',
     disclaimer:
-      'Niet gelieerd aan LinkedIn, X, Meta of Instagram. Limieten zijn schattingen en kunnen veranderen.',
+      'Niet gelieerd aan LinkedIn, X, TikTok, Meta of Instagram. Limieten zijn schattingen en kunnen veranderen.',
   },
 
   pages: {
@@ -491,7 +491,7 @@ export const nl: Translations = {
         {
           heading: 'Geen affiliatie',
           paragraphs: [
-            'PostTruncate is een onafhankelijke tool en is <strong>niet gelieerd aan, onderschreven door of gesponsord door</strong> LinkedIn, X (Twitter), Meta, Instagram, Facebook of Threads. Alle productnamen, logo’s en merken zijn eigendom van hun respectieve eigenaren en worden hier alleen gebruikt om het gedrag van elk platform te beschrijven.',
+            'PostTruncate is een onafhankelijke tool en is <strong>niet gelieerd aan, onderschreven door of gesponsord door</strong> LinkedIn, X (Twitter), TikTok, Meta, Instagram, Facebook of Threads. Alle productnamen, logo’s en merken zijn eigendom van hun respectieve eigenaren en worden hier alleen gebruikt om het gedrag van elk platform te beschrijven.',
           ],
         },
         {
@@ -519,7 +519,7 @@ export const nl: Translations = {
         {
           heading: 'Wat het doet',
           paragraphs: [
-            'Schrijf of plak een concept één keer, en PostTruncate geeft het weer zoals <strong>LinkedIn, X, Threads, Instagram en Facebook</strong> dat daadwerkelijk doen — de \u201e\u2026meer weergeven\u201d-vouw, de threadsplitsing bij 280 tekens, de weging van 23 tekens per link, het aanbevolen niveau van ~5 hashtags en de harde limiet van 30. Je ziet precies wat boven de vouw overleeft voordat je je vastlegt op publiceren.',
+            'Schrijf of plak een concept één keer, en PostTruncate geeft het weer zoals <strong>LinkedIn, X, TikTok, Threads, Instagram en Facebook</strong> dat daadwerkelijk doen — de \u201e\u2026meer weergeven\u201d-vouw, de threadsplitsing bij 280 tekens, de weging van 23 tekens per link, het aanbevolen niveau van ~5 hashtags en de harde limiet van 30. Je ziet precies wat boven de vouw overleeft voordat je je vastlegt op publiceren.',
             'Het signaleert ook de stille problemen die je bereik verkleinen: onzichtbare tekens met nulbreedte die tellingen en schermlezers verstoren, en pseudo-Unicode \u201esierlettertypen\u201d die opgemaakt lijken maar onleesbaar zijn voor hulptechnologie.',
           ],
         },

@@ -49,7 +49,7 @@ export const zh: Translations = {
   hero: {
     eyebrow: '社交预览与截断模拟器',
     title: '精准查看每个平台会在哪里截断你的文字。',
-    lede: '写一次，即可看到你的帖子在 LinkedIn、X、Threads、Instagram 和 Facebook 的原生预览中呈现的样子——包括折叠行、串文拆分、话题标签上限以及无障碍提醒，全部随你输入实时更新，还可一键 AI 即时优化你的帖子。',
+    lede: '写一次，即可看到你的帖子在 LinkedIn、X、TikTok、Threads、Instagram 和 Facebook 的原生预览中呈现的样子——包括折叠行、串文拆分、话题标签上限以及无障碍提醒，全部随你输入实时更新，还可一键 AI 即时优化你的帖子。',
     primary: '开始写作',
     secondary: '查看平台限制',
     badge: '实时预览。不再需要猜测。',
@@ -235,7 +235,7 @@ export const zh: Translations = {
       },
       {
         q: 'PostTruncate 支持哪些平台？',
-        a: 'PostTruncate 可预览 LinkedIn、X（Twitter）、Threads、Instagram、Facebook 和短信——每个平台都有实时字符统计、折叠线标记、推文串拆分和短信分段计算。还提供用于页面标题和元描述的 Google 搜索结果预览，以及可嵌入你自己网站的免费计数器小组件。',
+        a: 'PostTruncate 可预览 LinkedIn、X（Twitter）、TikTok、Threads、Instagram、Facebook 和短信——每个平台都有实时字符统计、折叠线标记、推文串拆分和短信分段计算。还提供用于页面标题和元描述的 Google 搜索结果预览，以及可嵌入你自己网站的免费计数器小组件。',
       },
       {
         q: '字符限制有多准确？',
@@ -320,7 +320,7 @@ export const zh: Translations = {
   limitsPage: {
     title: '2026 社交媒体字符限制 — 完整平台对照表',
     description:
-      'LinkedIn、X（Twitter）、Threads、Instagram、Facebook 和短信的完整字符限制表——硬性上限、截断折叠线及其背后的规则。',
+      'LinkedIn、X（Twitter）、TikTok、Threads、Instagram、Facebook 和短信的完整字符限制表——硬性上限、截断折叠线及其背后的规则。',
     eyebrow: '参考',
     heading: '所有平台限制，一表览尽',
     lede: 'PostTruncate 预览的每个平台的硬性上限、可见文本折叠线和超限行为。下表中的数字与实时编辑器校验所用的常量完全一致。',
@@ -417,7 +417,7 @@ export const zh: Translations = {
     backToTop: '返回顶部',
     copyright: '© {year} PostTruncate。为世界各地的创作者打造。',
     disclaimer:
-      '与 LinkedIn、X、Meta 或 Instagram 无任何关联。各项限制均为估算值，可能随时变动。',
+      '与 LinkedIn、X、TikTok、Meta 或 Instagram 无任何关联。各项限制均为估算值，可能随时变动。',
   },
 
   pages: {
@@ -491,7 +491,7 @@ export const zh: Translations = {
         {
           heading: '无关联声明',
           paragraphs: [
-            'PostTruncate 是一款独立工具，<strong>与 LinkedIn、X (Twitter)、Meta、Instagram、Facebook 或 Threads 无任何关联，也未获得它们的认可或赞助</strong>。所有产品名称、徽标和品牌均归其各自所有者所有，在此仅用于描述各平台的行为。',
+            'PostTruncate 是一款独立工具，<strong>与 LinkedIn、X (Twitter)、TikTok、Meta、Instagram、Facebook 或 Threads 无任何关联，也未获得它们的认可或赞助</strong>。所有产品名称、徽标和品牌均归其各自所有者所有，在此仅用于描述各平台的行为。',
           ],
         },
         {
@@ -519,7 +519,7 @@ export const zh: Translations = {
         {
           heading: '它能做什么',
           paragraphs: [
-            '只需撰写或粘贴一次草稿，PostTruncate 就会按照 <strong>LinkedIn、X、Threads、Instagram 和 Facebook</strong> 实际呈现的方式渲染它——“…查看更多”折叠、280 个字符的串文拆分、23 个字符的链接计重、推荐约 5 个话题标签的标记和 30 个的硬性上限。在你决定发布之前，你就能精准看到折叠线以上有哪些内容能够留存。',
+            '只需撰写或粘贴一次草稿，PostTruncate 就会按照 <strong>LinkedIn、X、TikTok、Threads、Instagram 和 Facebook</strong> 实际呈现的方式渲染它——“…查看更多”折叠、280 个字符的串文拆分、23 个字符的链接计重、推荐约 5 个话题标签的标记和 30 个的硬性上限。在你决定发布之前，你就能精准看到折叠线以上有哪些内容能够留存。',
             '它还会捕捉那些悄悄压低你触达的隐患：破坏计数和屏幕阅读器的不可见零宽字符，以及看似有样式、却让辅助技术无法识别的伪 Unicode“花式字体”。',
           ],
         },

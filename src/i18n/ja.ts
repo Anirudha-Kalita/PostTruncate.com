@@ -49,7 +49,7 @@ export const ja: Translations = {
   hero: {
     eyebrow: 'SNSプレビュー＆切り詰めシミュレーター',
     title: '各プラットフォームがテキストを切り詰める位置を正確に確認。',
-    lede: '一度書くだけで、LinkedIn、X、Threads、Instagram、Facebookのネイティブプレビューに投稿がそのまま表示されます。折りたたみ位置、スレッド分割、ハッシュタグの上限、アクセシビリティ警告まで入力しながらリアルタイムで確認でき、ワンタップAIでその場で投稿を改善することもできます。',
+    lede: '一度書くだけで、LinkedIn、X、TikTok、Threads、Instagram、Facebookのネイティブプレビューに投稿がそのまま表示されます。折りたたみ位置、スレッド分割、ハッシュタグの上限、アクセシビリティ警告まで入力しながらリアルタイムで確認でき、ワンタップAIでその場で投稿を改善することもできます。',
     primary: '書き始める',
     secondary: 'プラットフォームの上限を見る',
     badge: 'リアルタイムプレビュー。もう推測は不要です。',
@@ -235,7 +235,7 @@ export const ja: Translations = {
       },
       {
         q: 'PostTruncateはどのプラットフォームに対応していますか?',
-        a: 'PostTruncateはLinkedIn、X(Twitter)、Threads、Instagram、Facebook、SMSのプレビューに対応し、それぞれでリアルタイムの文字数カウント、フォールド表示、スレッド分割、SMSセグメント計算が使えます。さらに、ページタイトルとメタディスクリプション用のGoogle SERPプレビュー、自分のサイトに埋め込める無料カウンターウィジェットも用意しています。',
+        a: 'PostTruncateはLinkedIn、X(Twitter)、TikTok、Threads、Instagram、Facebook、SMSのプレビューに対応し、それぞれでリアルタイムの文字数カウント、フォールド表示、スレッド分割、SMSセグメント計算が使えます。さらに、ページタイトルとメタディスクリプション用のGoogle SERPプレビュー、自分のサイトに埋め込める無料カウンターウィジェットも用意しています。',
       },
       {
         q: '文字数の上限はどれくらい正確ですか？',
@@ -320,7 +320,7 @@ export const ja: Translations = {
   limitsPage: {
     title: 'SNS文字数制限 2026 — 全プラットフォーム一覧表',
     description:
-      'LinkedIn、X(Twitter)、Threads、Instagram、Facebook、SMSの文字数制限の完全な一覧表 — 上限、切り捨て位置(フォールド)、その背後にあるルール。',
+      'LinkedIn、X(Twitter)、TikTok、Threads、Instagram、Facebook、SMSの文字数制限の完全な一覧表 — 上限、切り捨て位置(フォールド)、その背後にあるルール。',
     eyebrow: 'リファレンス',
     heading: 'すべてのプラットフォーム制限を1つの表に',
     lede: 'PostTruncateがプレビューする各プラットフォームの上限、表示テキストのフォールド、超過時の挙動。以下の数値は、ライブエディターが照合しているものと同じ定数です。',
@@ -417,7 +417,7 @@ export const ja: Translations = {
     backToTop: 'トップに戻る',
     copyright: '© {year} PostTruncate. 世界中のクリエイターのために作られました。',
     disclaimer:
-      'LinkedIn、X、Meta、Instagramとは提携していません。上限は推定値であり、変更される可能性があります。',
+      'LinkedIn、X、TikTok、Meta、Instagramとは提携していません。上限は推定値であり、変更される可能性があります。',
   },
 
   pages: {
@@ -491,7 +491,7 @@ export const ja: Translations = {
         {
           heading: '提携関係なし',
           paragraphs: [
-            'PostTruncateは独立したツールであり、LinkedIn、X (Twitter)、Meta、Instagram、Facebook、Threadsと<strong>提携、推奨、後援を受けていません</strong>。すべての製品名、ロゴ、ブランドはそれぞれの所有者に帰属し、ここでは各プラットフォームの挙動を説明するためだけに使用しています。',
+            'PostTruncateは独立したツールであり、LinkedIn、X (Twitter)、TikTok、Meta、Instagram、Facebook、Threadsと<strong>提携、推奨、後援を受けていません</strong>。すべての製品名、ロゴ、ブランドはそれぞれの所有者に帰属し、ここでは各プラットフォームの挙動を説明するためだけに使用しています。',
           ],
         },
         {
@@ -519,7 +519,7 @@ export const ja: Translations = {
         {
           heading: 'できること',
           paragraphs: [
-            '下書きを一度書くか貼り付けるだけで、PostTruncateは<strong>LinkedIn、X、Threads、Instagram、Facebook</strong>が実際に表示する形でレンダリングします — 「…もっと見る」の折りたたみ、280文字のスレッド分割、リンクの23文字換算、推奨~5個のハッシュタグの目安と30個の硬い上限。公開前に、折りたたみより上に何が残るかを正確に確認できます。',
+            '下書きを一度書くか貼り付けるだけで、PostTruncateは<strong>LinkedIn、X、TikTok、Threads、Instagram、Facebook</strong>が実際に表示する形でレンダリングします — 「…もっと見る」の折りたたみ、280文字のスレッド分割、リンクの23文字換算、推奨~5個のハッシュタグの目安と30個の硬い上限。公開前に、折りたたみより上に何が残るかを正確に確認できます。',
             'また、リーチを静かに縮める問題も検出します：カウントやスクリーンリーダーを壊す不可視のゼロ幅文字、スタイリッシュに見えても支援技術には読めない擬似Unicode「デコラティブフォント」。',
           ],
         },

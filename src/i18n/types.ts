@@ -8,7 +8,7 @@
 //    e.g. "{n} / {limit}". Keep tokens identical across every locale.
 //  • Plural is { one, other }; the component picks by count (English-style
 //    binary plural — adequate for these short UI strings across our locales).
-//  • Brand names (PostTruncate, LinkedIn, X, Threads, Instagram, Facebook) are
+//  • Brand names (PostTruncate, LinkedIn, X, TikTok, Threads, Instagram, Facebook) are
 //    intentionally NOT translated and live in markup, not here.
 // ──────────────────────────────────────────────────────────────────────────
 

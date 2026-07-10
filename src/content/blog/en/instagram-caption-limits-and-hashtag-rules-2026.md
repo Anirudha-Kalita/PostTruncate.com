@@ -124,7 +124,7 @@ Beyond the limits themselves, a few silent failures crater performance:
 
 If Instagram formatting is a recurring headache - captions that don't render the way you planned, hashtags that disappear, the fold cutting off your hook - [PostTruncate's Instagram caption counter](/en/instagram-character-counter/) is built for exactly this.
 
-It's free, privacy-first (nothing uploads), and runs entirely in your browser. Draft once, see exactly what Instagram shows, and publish with confidence. The tool also works for LinkedIn, X (Twitter), Threads, and Facebook - one workspace for every platform you're on.
+It's free, privacy-first (nothing uploads), and runs entirely in your browser. Draft once, see exactly what Instagram shows, and publish with confidence. The tool also works for LinkedIn, X (Twitter), TikTok, Threads, and Facebook - one workspace for every platform you're on.
 
 Head over to PostTruncate and try the [Instagram character counter](/en/instagram-character-counter/) right now. Paste a caption you've been struggling with, watch the fold preview update in real time, and see exactly what your audience will read before they tap "more."
 

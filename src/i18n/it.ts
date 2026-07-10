@@ -49,7 +49,7 @@ export const it: Translations = {
   hero: {
     eyebrow: 'Anteprima social e simulatore di troncamento',
     title: 'Scopri esattamente dove ogni piattaforma taglia il tuo testo.',
-    lede: 'Scrivi una sola volta e guarda il tuo post nelle anteprime native di LinkedIn, X, Threads, Instagram e Facebook: con righe della soglia, suddivisioni dei thread, limiti degli hashtag e avvisi di accessibilità in tempo reale mentre scrivi, più IA in un tocco per migliorare il tuo post sul momento.',
+    lede: 'Scrivi una sola volta e guarda il tuo post nelle anteprime native di LinkedIn, X, TikTok, Threads, Instagram e Facebook: con righe della soglia, suddivisioni dei thread, limiti degli hashtag e avvisi di accessibilità in tempo reale mentre scrivi, più IA in un tocco per migliorare il tuo post sul momento.',
     primary: 'Inizia a scrivere',
     secondary: 'Vedi i limiti delle piattaforme',
     badge: 'Anteprime in tempo reale. Niente più supposizioni.',
@@ -235,7 +235,7 @@ export const it: Translations = {
       },
       {
         q: 'Quali piattaforme supporta PostTruncate?',
-        a: 'PostTruncate offre anteprime per LinkedIn, X (Twitter), Threads, Instagram, Facebook e SMS — con conteggio caratteri in tempo reale, indicatori di piega, divisione in thread e calcolo dei segmenti SMS per ciascuna. Include anche un’anteprima della SERP di Google per titoli e meta description, e un widget contatore gratuito da incorporare nel tuo sito.',
+        a: 'PostTruncate offre anteprime per LinkedIn, X (Twitter), TikTok, Threads, Instagram, Facebook e SMS — con conteggio caratteri in tempo reale, indicatori di piega, divisione in thread e calcolo dei segmenti SMS per ciascuna. Include anche un’anteprima della SERP di Google per titoli e meta description, e un widget contatore gratuito da incorporare nel tuo sito.',
       },
       {
         q: 'Quanto sono accurati i limiti di caratteri?',
@@ -320,7 +320,7 @@ export const it: Translations = {
   limitsPage: {
     title: 'Limiti di caratteri dei social 2026 — Tabella completa',
     description:
-      'La tabella completa dei limiti di caratteri per LinkedIn, X (Twitter), Threads, Instagram, Facebook e SMS — tetti rigidi, pieghe di troncamento e le regole che li governano.',
+      'La tabella completa dei limiti di caratteri per LinkedIn, X (Twitter), TikTok, Threads, Instagram, Facebook e SMS — tetti rigidi, pieghe di troncamento e le regole che li governano.',
     eyebrow: 'Riferimento',
     heading: 'Tutti i limiti delle piattaforme, in una sola tabella',
     lede: 'Tetti rigidi, pieghe del testo visibile e comportamento in caso di superamento per ogni piattaforma che PostTruncate mostra in anteprima. I numeri qui sotto sono le stesse costanti che l’editor verifica in tempo reale.',
@@ -417,7 +417,7 @@ export const it: Translations = {
     backToTop: 'Torna su',
     copyright: '© {year} PostTruncate. Creato per i creator di tutto il mondo.',
     disclaimer:
-      'Non affiliato a LinkedIn, X, Meta o Instagram. I limiti sono stime e possono cambiare.',
+      'Non affiliato a LinkedIn, X, TikTok, Meta o Instagram. I limiti sono stime e possono cambiare.',
   },
 
   pages: {
@@ -491,7 +491,7 @@ export const it: Translations = {
         {
           heading: 'Nessuna affiliazione',
           paragraphs: [
-            'PostTruncate è uno strumento indipendente e <strong>non è affiliato, approvato o sponsorizzato da</strong> LinkedIn, X (Twitter), Meta, Instagram, Facebook o Threads. Tutti i nomi di prodotti, i loghi e i marchi sono di proprietà dei rispettivi titolari e sono usati qui solo per descrivere il comportamento di ciascuna piattaforma.',
+            'PostTruncate è uno strumento indipendente e <strong>non è affiliato, approvato o sponsorizzato da</strong> LinkedIn, X (Twitter), TikTok, Meta, Instagram, Facebook o Threads. Tutti i nomi di prodotti, i loghi e i marchi sono di proprietà dei rispettivi titolari e sono usati qui solo per descrivere il comportamento di ciascuna piattaforma.',
           ],
         },
         {
@@ -519,7 +519,7 @@ export const it: Translations = {
         {
           heading: 'Cosa fa',
           paragraphs: [
-            'Scrivi o incolla una bozza una sola volta e PostTruncate la renderizza esattamente come faranno <strong>LinkedIn, X, Threads, Instagram e Facebook</strong> \u2014 il taglio \u00ab\u2026vedi altro\u00bb, la divisione in thread a 280 caratteri, la ponderazione dei link a 23 caratteri, il valore consigliato di ~5 hashtag e il limite massimo di 30. Vedi esattamente cosa sopravvive sopra il taglio prima di impegnarti a pubblicare.',
+            'Scrivi o incolla una bozza una sola volta e PostTruncate la renderizza esattamente come faranno <strong>LinkedIn, X, TikTok, Threads, Instagram e Facebook</strong> \u2014 il taglio \u00ab\u2026vedi altro\u00bb, la divisione in thread a 280 caratteri, la ponderazione dei link a 23 caratteri, il valore consigliato di ~5 hashtag e il limite massimo di 30. Vedi esattamente cosa sopravvive sopra il taglio prima di impegnarti a pubblicare.',
             'Rileva anche i problemi silenziosi che riducono la tua portata: caratteri invisibili a larghezza zero che rompono i contatori e gli screen reader, e \u00abcaratteri decorativi\u00bb pseudo-Unicode che sembrano stilizzati ma sono illeggibili per le tecnologie assistive.',
           ],
         },

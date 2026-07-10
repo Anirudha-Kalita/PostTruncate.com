@@ -50,7 +50,7 @@ export const de: Translations = {
   hero: {
     eyebrow: 'Social-Vorschau & Abschneide-Simulator',
     title: 'Sieh genau, wo jede Plattform deinen Text abschneidet.',
-    lede: 'Schreib einmal und beobachte, wie dein Beitrag in nativen Vorschauen von LinkedIn, X, Threads, Instagram und Facebook erscheint — mit Falz-Linien, Thread-Aufteilungen, Hashtag-Limits und Barrierefreiheits-Warnungen live beim Tippen, plus Ein-Tipp-KI zur sofortigen Verbesserung deines Beitrags.',
+    lede: 'Schreib einmal und beobachte, wie dein Beitrag in nativen Vorschauen von LinkedIn, X, TikTok, Threads, Instagram und Facebook erscheint — mit Falz-Linien, Thread-Aufteilungen, Hashtag-Limits und Barrierefreiheits-Warnungen live beim Tippen, plus Ein-Tipp-KI zur sofortigen Verbesserung deines Beitrags.',
     primary: 'Loslegen',
     secondary: 'Plattform-Limits ansehen',
     badge: 'Echtzeit-Vorschau. Kein Rätselraten mehr.',
@@ -236,7 +236,7 @@ export const de: Translations = {
       },
       {
         q: 'Welche Plattformen unterstützt PostTruncate?',
-        a: 'PostTruncate zeigt Vorschauen für LinkedIn, X (Twitter), Threads, Instagram, Facebook und SMS — mit Live-Zeichenzählung, Falz-Markierungen, Thread-Aufteilung und SMS-Segmentberechnung. Dazu kommen eine Google-SERP-Vorschau für Seitentitel und Meta-Beschreibungen sowie ein kostenloses einbettbares Zähler-Widget für deine eigene Website.',
+        a: 'PostTruncate zeigt Vorschauen für LinkedIn, X (Twitter), TikTok, Threads, Instagram, Facebook und SMS — mit Live-Zeichenzählung, Falz-Markierungen, Thread-Aufteilung und SMS-Segmentberechnung. Dazu kommen eine Google-SERP-Vorschau für Seitentitel und Meta-Beschreibungen sowie ein kostenloses einbettbares Zähler-Widget für deine eigene Website.',
       },
       {
         q: 'Wie genau sind die Zeichenlimits?',
@@ -321,7 +321,7 @@ export const de: Translations = {
   limitsPage: {
     title: 'Zeichenlimits sozialer Netzwerke 2026 — Die komplette Tabelle',
     description:
-      'Die vollständige Zeichenlimit-Tabelle für LinkedIn, X (Twitter), Threads, Instagram, Facebook und SMS — harte Obergrenzen, Kürzungs-Falze und die Regeln dahinter.',
+      'Die vollständige Zeichenlimit-Tabelle für LinkedIn, X (Twitter), TikTok, Threads, Instagram, Facebook und SMS — harte Obergrenzen, Kürzungs-Falze und die Regeln dahinter.',
     eyebrow: 'Referenz',
     heading: 'Alle Plattform-Limits in einer Tabelle',
     lede: 'Harte Obergrenzen, Falze für sichtbaren Text und Überlauf-Verhalten für jede Plattform, die PostTruncate in der Vorschau zeigt. Die Zahlen unten sind dieselben Konstanten, gegen die der Live-Editor prüft.',
@@ -418,7 +418,7 @@ export const de: Translations = {
     backToTop: 'Nach oben',
     copyright: '© {year} PostTruncate. Gebaut für Creator überall.',
     disclaimer:
-      'Nicht verbunden mit LinkedIn, X, Meta oder Instagram. Limits sind Schätzungen und können sich ändern.',
+      'Nicht verbunden mit LinkedIn, X, TikTok, Meta oder Instagram. Limits sind Schätzungen und können sich ändern.',
   },
 
   pages: {
@@ -492,7 +492,7 @@ export const de: Translations = {
         {
           heading: 'Keine Verbindung',
           paragraphs: [
-            'PostTruncate ist ein unabhängiges Tool und ist <strong>nicht verbunden mit, unterstützt von oder gesponsert von</strong> LinkedIn, X (Twitter), Meta, Instagram, Facebook oder Threads. Alle Produktnamen, Logos und Marken sind Eigentum ihrer jeweiligen Inhaber und werden hier nur verwendet, um das Verhalten jeder Plattform zu beschreiben.',
+            'PostTruncate ist ein unabhängiges Tool und ist <strong>nicht verbunden mit, unterstützt von oder gesponsert von</strong> LinkedIn, X (Twitter), TikTok, Meta, Instagram, Facebook oder Threads. Alle Produktnamen, Logos und Marken sind Eigentum ihrer jeweiligen Inhaber und werden hier nur verwendet, um das Verhalten jeder Plattform zu beschreiben.',
           ],
         },
         {
@@ -520,7 +520,7 @@ export const de: Translations = {
         {
           heading: 'Was es tut',
           paragraphs: [
-            'Schreib oder füge einen Entwurf einmal ein, und PostTruncate stellt ihn so dar, wie <strong>LinkedIn, X, Threads, Instagram und Facebook</strong> es tatsächlich tun werden — die \u201e\u2026mehr anzeigen\u201c-Falz, die 280-Zeichen-Thread-Aufteilung, die 23-Zeichen-Link-Gewichtung, die empfohlene ~5-Hashtag-Marke und das harte Limit von 30. Du siehst genau, was über der Falz überlebt, bevor du dich zur Veröffentlichung entscheidest.',
+            'Schreib oder füge einen Entwurf einmal ein, und PostTruncate stellt ihn so dar, wie <strong>LinkedIn, X, TikTok, Threads, Instagram und Facebook</strong> es tatsächlich tun werden — die \u201e\u2026mehr anzeigen\u201c-Falz, die 280-Zeichen-Thread-Aufteilung, die 23-Zeichen-Link-Gewichtung, die empfohlene ~5-Hashtag-Marke und das harte Limit von 30. Du siehst genau, was über der Falz überlebt, bevor du dich zur Veröffentlichung entscheidest.',
             'Es erkennt auch die stillen Probleme, die deine Reichweite schrumpfen lassen: unsichtbare nullbreite Zeichen, die Zählungen und Screenreader stören, und pseudo-Unicode-\u201eFancy-Schriften\u201c, die gestaltet aussehen, aber für assistive Technik unlesbar sind.',
           ],
         },

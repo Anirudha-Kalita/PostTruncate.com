@@ -235,7 +235,7 @@ export const da: Translations = {
       },
       {
         q: 'Hvilke platforme understøtter PostTruncate?',
-        a: 'PostTruncate viser forhåndsvisninger for LinkedIn, X (Twitter), Threads, Instagram, Facebook og SMS — med live tegnoptælling, foldmarkeringer, trådopdeling og SMS-segmentberegning for hver. Der er også en Google SERP-forhåndsvisning til sidetitler og metabeskrivelser samt en gratis tæller-widget, du kan indlejre på dit eget websted.',
+        a: 'PostTruncate viser forhåndsvisninger for LinkedIn, X (Twitter), TikTok, Threads, Instagram, Facebook og SMS — med live tegnoptælling, foldmarkeringer, trådopdeling og SMS-segmentberegning for hver. Der er også en Google SERP-forhåndsvisning til sidetitler og metabeskrivelser samt en gratis tæller-widget, du kan indlejre på dit eget websted.',
       },
       {
         q: 'Hvor nøjagtige er tegngrænserne?',
@@ -320,7 +320,7 @@ export const da: Translations = {
   limitsPage: {
     title: 'Tegngrænser på sociale medier 2026 — Komplet tabel',
     description:
-      'Den komplette tabel over tegngrænser for LinkedIn, X (Twitter), Threads, Instagram, Facebook og SMS — hårde lofter, trunkeringsfolder og reglerne bag dem.',
+      'Den komplette tabel over tegngrænser for LinkedIn, X (Twitter), TikTok, Threads, Instagram, Facebook og SMS — hårde lofter, trunkeringsfolder og reglerne bag dem.',
     eyebrow: 'Reference',
     heading: 'Alle platformgrænser i én tabel',
     lede: 'Hårde lofter, folder for synlig tekst og overløbsadfærd for hver platform, PostTruncate forhåndsviser. Tallene herunder er de samme konstanter, som live-editoren tjekker imod.',
@@ -417,7 +417,7 @@ export const da: Translations = {
     backToTop: 'Til toppen',
     copyright: '© {year} PostTruncate. Bygget til kreative overalt.',
     disclaimer:
-      'Ikke tilknyttet LinkedIn, X, Meta eller Instagram. Grænser er estimater og kan ændre sig.',
+      'Ikke tilknyttet LinkedIn, X, TikTok, Meta eller Instagram. Grænser er estimater og kan ændre sig.',
   },
 
   pages: {
@@ -491,7 +491,7 @@ export const da: Translations = {
         {
           heading: 'Ingen tilknytning',
           paragraphs: [
-            'PostTruncate er et uafhængigt værktøj og er <strong>ikke tilknyttet, godkendt af eller sponsoreret af</strong> LinkedIn, X (Twitter), Meta, Instagram, Facebook eller Threads. Alle produktnavne, logoer og varemærker tilhører deres respektive ejere og bruges her kun til at beskrive hver platforms adfærd.',
+            'PostTruncate er et uafhængigt værktøj og er <strong>ikke tilknyttet, godkendt af eller sponsoreret af</strong> LinkedIn, X (Twitter), TikTok, Meta, Instagram, Facebook eller Threads. Alle produktnavne, logoer og varemærker tilhører deres respektive ejere og bruges her kun til at beskrive hver platforms adfærd.',
           ],
         },
         {
@@ -519,7 +519,7 @@ export const da: Translations = {
         {
           heading: 'Hvad det gør',
           paragraphs: [
-            'Skriv eller indsæt et udkast én gang, og PostTruncate gengiver det, som <strong>LinkedIn, X, Threads, Instagram og Facebook</strong> rent faktisk vil — \u201e\u2026se mere\u201c-folden, trådopdelingen ved 280 tegn, link-vægtningen på 23 tegn, det anbefalede niveau på ~5 hashtags og den hårde grænse på 30. Du ser præcis, hvad der overlever over folden, før du forpligter dig til at publicere.',
+            'Skriv eller indsæt et udkast én gang, og PostTruncate gengiver det, som <strong>LinkedIn, X, TikTok, Threads, Instagram og Facebook</strong> rent faktisk vil — \u201e\u2026se mere\u201c-folden, trådopdelingen ved 280 tegn, link-vægtningen på 23 tegn, det anbefalede niveau på ~5 hashtags og den hårde grænse på 30. Du ser præcis, hvad der overlever over folden, før du forpligter dig til at publicere.',
             'Det fanger også de stille problemer, der skrumper din rækkevidde: usynlige nul-bredde-tegn, der bryder tæller og skærmlæsere, og pseudo-Unicode-\u201esmarte skrifttyper\u201c, der ser stilede ud, men er ulæselige for hjælpeteknologi.',
           ],
         },

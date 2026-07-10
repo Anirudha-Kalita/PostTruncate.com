@@ -12,7 +12,7 @@ export const en: Translations = {
     title:
       'See Where Your Post Gets Cut Off | Character Counter',
     description:
-      'See exactly where LinkedIn, X, Instagram & Threads cut off your post — free live previewer with a built-in character counter. No signup.',
+      'See exactly where LinkedIn, X, TikTok, Instagram & Threads cut off your post — free live previewer with a built-in character counter. No signup.',
     skipLink: 'Skip to the editor',
   },
 
@@ -50,7 +50,7 @@ export const en: Translations = {
   hero: {
     eyebrow: 'Social preview & truncation simulator',
     title: 'See exactly where every platform cuts your text.',
-    lede: 'See the fold. Stop guessing. Write once and watch your post render in native LinkedIn, X, Threads, Instagram, and Facebook previews — with fold lines, thread splits, hashtag limits, and accessibility warnings live as you type, plus one-tap AI to improve your post on the spot.',
+    lede: 'See the fold. Stop guessing. Write once and watch your post render in native LinkedIn, X, TikTok, Threads, Instagram, and Facebook previews — with fold lines, thread splits, hashtag limits, and accessibility warnings live as you type, plus one-tap AI to improve your post on the spot.',
     primary: 'Start writing',
     secondary: 'See platform limits',
     badge: 'Real-time previews. No more guessing.',
@@ -243,7 +243,7 @@ export const en: Translations = {
       },
       {
         q: 'Which platforms does PostTruncate support?',
-        a: 'PostTruncate previews LinkedIn, X (Twitter), Threads, Instagram, Facebook, and SMS — with live character counts, fold markers, thread splitting, and SMS segment math for each. There is also a Google SERP preview for page titles and meta descriptions, and a free embeddable counter widget for your own site.',
+        a: 'PostTruncate previews LinkedIn, X (Twitter), TikTok, Threads, Instagram, Facebook, and SMS — with live character counts, fold markers, thread splitting, and SMS segment math for each. There is also a Google SERP preview for page titles and meta descriptions, and a free embeddable counter widget for your own site.',
       },
       {
         q: 'How accurate are the character limits?',
@@ -328,7 +328,7 @@ export const en: Translations = {
   limitsPage: {
     title: 'Social Media Character Limits 2026 — Full Platform Table',
     description:
-      'The complete character-limit table for LinkedIn, X (Twitter), Threads, Instagram, Facebook, and SMS — hard caps, truncation folds, and the rules behind them.',
+      'The complete character-limit table for LinkedIn, X (Twitter), TikTok, Threads, Instagram, Facebook, and SMS — hard caps, truncation folds, and the rules behind them.',
     eyebrow: 'Reference',
     heading: 'Every platform limit, in one table',
     lede: 'Hard caps, visible-text folds, and overflow behavior for every platform PostTruncate previews. The numbers below are the same constants the live editor checks against.',
@@ -425,7 +425,7 @@ export const en: Translations = {
     backToTop: 'Back to top',
     copyright: '© {year} PostTruncate. Built for creators everywhere.',
     disclaimer:
-      'Not affiliated with LinkedIn, X, Meta, or Instagram. Limits are estimates and can change.',
+      'Not affiliated with LinkedIn, X, TikTok, Meta, or Instagram. Limits are estimates and can change.',
   },
 
   pages: {
@@ -499,7 +499,7 @@ export const en: Translations = {
         {
           heading: 'No affiliation',
           paragraphs: [
-            'PostTruncate is an independent tool and is <strong>not affiliated with, endorsed by, or sponsored by</strong> LinkedIn, X (Twitter), Meta, Instagram, Facebook, or Threads. All product names, logos, and brands are the property of their respective owners and are used here only to describe each platform’s behavior.',
+            'PostTruncate is an independent tool and is <strong>not affiliated with, endorsed by, or sponsored by</strong> LinkedIn, X (Twitter), TikTok, Meta, Instagram, Facebook, or Threads. All product names, logos, and brands are the property of their respective owners and are used here only to describe each platform’s behavior.',
           ],
         },
         {
@@ -527,7 +527,7 @@ export const en: Translations = {
         {
           heading: 'What it does',
           paragraphs: [
-            'Write or paste a draft once, and PostTruncate renders it the way <strong>LinkedIn, X, Threads, Instagram, and Facebook</strong> actually will — the “…see more” fold, the 280-character thread split, the 23-character link weighting, the recommended ~5-hashtag mark and 30 hard cap. You see exactly what survives above the fold before you commit to publishing.',
+            'Write or paste a draft once, and PostTruncate renders it the way <strong>LinkedIn, X, TikTok, Threads, Instagram, and Facebook</strong> actually will — the “…see more” fold, the 280-character thread split, the 23-character link weighting, the recommended ~5-hashtag mark and 30 hard cap. You see exactly what survives above the fold before you commit to publishing.',
             'It also catches the quiet problems that shrink your reach: invisible zero-width characters that break counts and screen readers, and pseudo-Unicode “fancy fonts” that look styled but are unreadable to assistive tech.',
           ],
         },
@@ -766,7 +766,7 @@ export const en: Translations = {
 
   ctaBanner: {
     title: 'Ready to optimize your content?',
-    body: 'Check your post before LinkedIn, X, or Instagram cuts it for you.',
+    body: 'Check your post before LinkedIn, X, TikTok, or Instagram cuts it for you.',
     cta: 'Start Writing Free',
     noCard: 'No credit card required',
     free: 'Free forever',

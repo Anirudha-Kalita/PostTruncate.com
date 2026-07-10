@@ -282,7 +282,7 @@ The single most reliable improvement I've made to my hook-writing process is che
 
 A post that reads clearly in a Google Doc might look completely different in a LinkedIn feed on mobile. A thread-ready X post might look seamless in my draft and reveal an awkward line break in the actual preview. A hook that I think lands at 130 characters might actually be getting cut at 110 on Facebook mobile.
 
-[PostTruncate's character counter](/en/character-counter/) solves this. You paste your text into the editor, and it renders real-time previews for LinkedIn, X, Instagram, Facebook, Threads, and SMS - each with the exact fold line marked. You can see precisely which characters are visible before "see more" on each platform, and adjust your hook until it lands in the visible window.
+[PostTruncate's character counter](/en/character-counter/) solves this. You paste your text into the editor, and it renders real-time previews for LinkedIn, X, TikTok, Instagram, Facebook, Threads, and SMS - each with the exact fold line marked. You can see precisely which characters are visible before "see more" on each platform, and adjust your hook until it lands in the visible window.
 
 ![PostTruncate character counter showing real-time platform previews with fold line indicators for LinkedIn, X, Instagram, and other social platforms](/og/Mastering_socia_media_hooks_5%20%281%29.webp)
 
@@ -326,5 +326,5 @@ The best hook you've ever written is worth nothing if it never gets read.
 </details>
 
 <details><summary><b>How can I test whether my hook will survive a platform's fold before posting?</b></summary>
-<p>The most reliable way is to use <a href="/en/character-counter/">PostTruncate's free character counter</a>, which shows real-time previews of how your post will appear on LinkedIn, X, Instagram, Facebook, Threads, and SMS - with exact fold line markers. You can see at a glance whether your hook fits before the 'see more' collapse, and adjust the opening line until it lands in the visible window. No account required, runs entirely in your browser.</p>
+<p>The most reliable way is to use <a href="/en/character-counter/">PostTruncate's free character counter</a>, which shows real-time previews of how your post will appear on LinkedIn, X, TikTok, Instagram, Facebook, Threads, and SMS - with exact fold line markers. You can see at a glance whether your hook fits before the 'see more' collapse, and adjust the opening line until it lands in the visible window. No account required, runs entirely in your browser.</p>
 </details>

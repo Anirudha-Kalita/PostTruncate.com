@@ -49,7 +49,7 @@ export const fr: Translations = {
   hero: {
     eyebrow: 'Simulateur d’aperçu social et de troncature',
     title: 'Voyez exactement où chaque plateforme coupe votre texte.',
-    lede: 'Écrivez une seule fois et regardez votre publication s’afficher dans les aperçus natifs de LinkedIn, X, Threads, Instagram et Facebook — avec des lignes de pli, des découpes en fils, des limites de hashtags et des avertissements d’accessibilité en direct pendant que vous écrivez, plus une IA en un clic pour améliorer votre publication sur le champ.',
+    lede: 'Écrivez une seule fois et regardez votre publication s’afficher dans les aperçus natifs de LinkedIn, X, TikTok, Threads, Instagram et Facebook — avec des lignes de pli, des découpes en fils, des limites de hashtags et des avertissements d’accessibilité en direct pendant que vous écrivez, plus une IA en un clic pour améliorer votre publication sur le champ.',
     primary: 'Commencer à écrire',
     secondary: 'Voir les limites des plateformes',
     badge: 'Aperçus en temps réel. Plus de devinettes.',
@@ -235,7 +235,7 @@ export const fr: Translations = {
       },
       {
         q: 'Quelles plateformes PostTruncate prend-il en charge ?',
-        a: 'PostTruncate prévisualise LinkedIn, X (Twitter), Threads, Instagram, Facebook et les SMS — avec compteur de caractères en direct, repères de pli, découpage en fils et calcul des segments SMS pour chacun. Il propose aussi un aperçu Google SERP pour les titres de page et méta-descriptions, ainsi qu’un widget compteur gratuit à intégrer sur votre propre site.',
+        a: 'PostTruncate prévisualise LinkedIn, X (Twitter), TikTok, Threads, Instagram, Facebook et les SMS — avec compteur de caractères en direct, repères de pli, découpage en fils et calcul des segments SMS pour chacun. Il propose aussi un aperçu Google SERP pour les titres de page et méta-descriptions, ainsi qu’un widget compteur gratuit à intégrer sur votre propre site.',
       },
       {
         q: 'Quelle est la précision des limites de caractères ?',
@@ -320,7 +320,7 @@ export const fr: Translations = {
   limitsPage: {
     title: 'Limites de caractères des réseaux sociaux 2026 — Tableau complet',
     description:
-      'Le tableau complet des limites de caractères pour LinkedIn, X (Twitter), Threads, Instagram, Facebook et SMS — plafonds stricts, plis de troncature et les règles qui les régissent.',
+      'Le tableau complet des limites de caractères pour LinkedIn, X (Twitter), TikTok, Threads, Instagram, Facebook et SMS — plafonds stricts, plis de troncature et les règles qui les régissent.',
     eyebrow: 'Référence',
     heading: 'Toutes les limites des plateformes, dans un seul tableau',
     lede: 'Plafonds stricts, plis de texte visible et comportement de dépassement pour chaque plateforme prévisualisée par PostTruncate. Les chiffres ci-dessous sont les mêmes constantes que vérifie l’éditeur en direct.',
@@ -417,7 +417,7 @@ export const fr: Translations = {
     backToTop: 'Haut de page',
     copyright: '© {year} PostTruncate. Conçu pour les créateurs du monde entier.',
     disclaimer:
-      'Sans affiliation avec LinkedIn, X, Meta ou Instagram. Les limites sont des estimations et peuvent changer.',
+      'Sans affiliation avec LinkedIn, X, TikTok, Meta ou Instagram. Les limites sont des estimations et peuvent changer.',
   },
 
   pages: {
@@ -491,7 +491,7 @@ export const fr: Translations = {
         {
           heading: 'Aucune affiliation',
           paragraphs: [
-            'PostTruncate est un outil indépendant et n’est <strong>ni affilié à, ni approuvé par, ni sponsorisé par</strong> LinkedIn, X (Twitter), Meta, Instagram, Facebook ou Threads. Tous les noms de produits, logos et marques sont la propriété de leurs détenteurs respectifs et ne sont utilisés ici que pour décrire le comportement de chaque plateforme.',
+            'PostTruncate est un outil indépendant et n’est <strong>ni affilié à, ni approuvé par, ni sponsorisé par</strong> LinkedIn, X (Twitter), TikTok, Meta, Instagram, Facebook ou Threads. Tous les noms de produits, logos et marques sont la propriété de leurs détenteurs respectifs et ne sont utilisés ici que pour décrire le comportement de chaque plateforme.',
           ],
         },
         {
@@ -519,7 +519,7 @@ export const fr: Translations = {
         {
           heading: 'Ce qu’il fait',
           paragraphs: [
-            'Rédigez ou collez un brouillon une seule fois, et PostTruncate le rend tel que <strong>LinkedIn, X, Threads, Instagram et Facebook</strong> le feront réellement — le repli «…voir plus», la division en fils à 280 caractères, la pondération des liens à 23 caractères, le repère recommandé de ~5 hashtags et le plafond de 30. Vous voyez exactement ce qui survit au-dessus du repli avant de vous engager à publier.',
+            'Rédigez ou collez un brouillon une seule fois, et PostTruncate le rend tel que <strong>LinkedIn, X, TikTok, Threads, Instagram et Facebook</strong> le feront réellement — le repli «…voir plus», la division en fils à 280 caractères, la pondération des liens à 23 caractères, le repère recommandé de ~5 hashtags et le plafond de 30. Vous voyez exactement ce qui survit au-dessus du repli avant de vous engager à publier.',
             'Il détecte aussi les problèmes silencieux qui réduisent votre portée : les caractères invisibles à largeur nulle qui faussent les comptages et les lecteurs d’écran, et les «polices décoratives» pseudo-Unicode qui semblent stylisées mais sont illisibles pour les technologies d’assistance.',
           ],
         },
