@@ -92,6 +92,22 @@ const faqItems = tool.faq?.[lang];
     breadcrumbs={breadcrumbs}
     faqItems={faqItems}
   />
+  {tool.id === 'linkedin' && (
+    <script slot="head" is:inline>
+      function gtagSendEvent(url) {
+        var callback = function () {
+          if (typeof url === 'string') {
+            window.location = url;
+          }
+        };
+        gtag('event', 'ads_conversion_About_Us_1', {
+          'event_callback': callback,
+          'event_timeout': 2000,
+        });
+        return false;
+      }
+    </script>
+  )}
   <ToolPageContent
     tool={tool}
     lang={lang}

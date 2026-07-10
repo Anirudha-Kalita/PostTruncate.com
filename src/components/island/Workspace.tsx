@@ -92,6 +92,8 @@ export function Workspace({ text, setText, lang, s, focus, image, mediaKind = 'i
   const onSanitize = () => setText(sanitizeText(text).text);
   const onClear = () => setText('');
 
+  const hasFiredGtagRef = useRef(false);
+
   // Paste from the system clipboard into the editor. Inserts at the caret when
   // the textarea is focused, otherwise appends; capped at EDITOR_MAX_CHARS. If
   // the Clipboard API is blocked (permissions / insecure context), fall back to
@@ -207,7 +209,16 @@ export function Workspace({ text, setText, lang, s, focus, image, mediaKind = 'i
             id="post-input"
             value={text}
             maxLength={EDITOR_MAX_CHARS}
-            onInput={(e) => setText((e.currentTarget as HTMLTextAreaElement).value)}
+            onInput={(e) => {
+              const val = (e.currentTarget as HTMLTextAreaElement).value;
+              setText(val);
+              if (focus === 'linkedin' && !hasFiredGtagRef.current && val.trim().length >= 5) {
+                hasFiredGtagRef.current = true;
+                if (typeof window !== 'undefined' && typeof (window as any).gtagSendEvent === 'function') {
+                  (window as any).gtagSendEvent();
+                }
+              }
+            }}
             placeholder={focus && w.placeholders && w.placeholders[focus as keyof typeof w.placeholders] ? w.placeholders[focus as keyof typeof w.placeholders] : w.placeholder}
             rows={12}
             spellcheck
