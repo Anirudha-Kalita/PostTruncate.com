@@ -10,6 +10,7 @@ import geistLatin from '@fontsource-variable/geist/files/geist-latin-wght-normal
 import geistMonoLatin from '@fontsource-variable/geist-mono/files/geist-mono-latin-wght-normal.woff2';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
+import FooterMinimal from '../components/FooterMinimal.astro';
 import FAQSchema from '../components/FAQSchema.astro';
 import { getTranslations } from '../i18n';
 import { LOCALES, getLocale, DEFAULT_LOCALE } from '../i18n/config';
@@ -56,6 +57,8 @@ export interface Props {
   articlePublishedTime?: string;
   /** ISO 8601 modified time → article:modified_time (only when ogType="article"). */
   articleModifiedTime?: string;
+  /** Footer variant to render. Defaults to 'full'. */
+  footerVariant?: 'full' | 'minimal';
 }
 
 const {
@@ -72,6 +75,7 @@ const {
   ogImage: ogImageOverride,
   articlePublishedTime,
   articleModifiedTime,
+  footerVariant = 'full',
 } = Astro.props;
 
 const t = getTranslations(lang);
@@ -270,7 +274,11 @@ const canonical = canonicalOverride ?? localeHref(lang);
     <Nav lang={lang} nav={t.nav} />
     <span id="main-content" class="skip-target" tabindex="-1" aria-hidden="true"></span>
     <slot />
-    <Footer lang={lang} footer={t.footer} isHome={path === '/'} />
+    {footerVariant === 'full' ? (
+      <Footer lang={lang} footer={t.footer} isHome={path === '/'} />
+    ) : (
+      <FooterMinimal lang={lang} footer={t.footer} />
+    )}
 
     <!-- Back-to-top: fixed floating control, revealed once the page is
          scrolled. Smooth-scrolls to the top (instant under reduced-motion). -->

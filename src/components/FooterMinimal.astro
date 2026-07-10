@@ -1,0 +1,147 @@
+---
+import { interp } from '../i18n/interp';
+import { getLocale } from '../i18n/config';
+import { getTranslations } from '../i18n';
+import type { Translations } from '../i18n/types';
+import ResponsiveImage from './ResponsiveImage.astro';
+
+interface Props {
+  lang: string;
+  footer: Translations['footer'];
+}
+
+const { lang, footer } = Astro.props;
+const year = 2026; // matching Footer.astro
+const locale = getLocale(lang);
+const images = getTranslations(lang).images;
+const home = `/${lang}/${locale.slug}/`;
+
+const legalLinks = [
+  { label: 'Home', href: home },
+  { label: footer.columns.legal.links[0], href: `${home}privacy/` },
+  { label: footer.columns.legal.links[1], href: `${home}terms/` },
+  { label: footer.columns.legal.links[2], href: `${home}about/` },
+  { label: footer.columns.legal.links[3], href: `${home}contact/` },
+];
+---
+
+<footer class="footer">
+  <div class="footer__mesh mesh-gradient" aria-hidden="true"></div>
+
+  <div class="container-page footer__inner">
+    <div class="footer__brand">
+      <a href={home} class="footer__logo" aria-label={footer.homeAria}>
+        <ResponsiveImage class="footer__logo-img footer__logo-img--light" src="/logo.webp" alt={images.logoAlt} sizes="172px" />
+        <ResponsiveImage class="footer__logo-img footer__logo-img--dark" src="/logo-dark.webp" alt={images.logoAlt} sizes="172px" />
+      </a>
+      
+      <ul class="footer__nav">
+        {legalLinks.map((l) => (
+          <li>
+            <a href={l.href} class="footer__link">{l.label}</a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </div>
+
+  <div class="container-page footer__bar">
+    <p>{interp(footer.copyright, { year })}</p>
+    <p class="footer__note">{footer.disclaimer}</p>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    position: relative;
+    overflow: hidden;
+    margin-top: 96px;
+    background: var(--color-canvas);
+    border-top: 1px solid var(--color-hairline);
+  }
+  .footer__mesh {
+    position: absolute;
+    inset: 0;
+    opacity: 0.16;
+    filter: blur(8px);
+    pointer-events: none;
+  }
+  .footer__inner {
+    position: relative;
+    padding-top: 64px;
+    padding-bottom: 24px;
+  }
+  .footer__brand {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 32px;
+    text-align: center;
+  }
+  @media (min-width: 768px) {
+    .footer__brand {
+      flex-direction: row;
+      justify-content: space-between;
+      text-align: left;
+    }
+  }
+  .footer__logo {
+    display: inline-flex;
+    align-items: center;
+    color: var(--color-ink);
+  }
+  .footer__logo :global(.footer__logo-img) {
+    height: 35px;
+    width: auto;
+    display: block;
+  }
+  .footer__logo :global(.footer__logo-img--dark) {
+    display: none;
+  }
+  :global(html[data-theme='dark']) .footer__logo :global(.footer__logo-img--light) {
+    display: none;
+  }
+  :global(html[data-theme='dark']) .footer__logo :global(.footer__logo-img--dark) {
+    display: block;
+  }
+
+  .footer__nav {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 16px 32px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .footer__link {
+    color: var(--color-body);
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: -0.28px;
+    text-decoration: none;
+    transition: color 0.15s ease;
+  }
+  .footer__link:hover {
+    color: var(--color-ink);
+  }
+
+  .footer__bar {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px 24px;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 24px;
+    padding-bottom: 40px;
+    border-top: 1px solid var(--color-hairline);
+    color: var(--color-mute);
+    font-size: 12px;
+    line-height: 16px;
+  }
+  .footer__note {
+    max-width: 420px;
+  }
+</style>
