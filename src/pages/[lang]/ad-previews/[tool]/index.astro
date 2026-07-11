@@ -93,7 +93,7 @@ const platform = PLATFORM_BY_ID[tool.id];
     breadcrumbs={breadcrumbs}
     faqItems={faqItems}
   />
-  <AdPreviewPageContent tool={tool} lang={lang} homeHref={homeHref} platformKey={platform}>
+  <AdPreviewPageContent tool={tool} lang={lang} homeHref={homeHref} platformKey={platform} breadcrumbs={breadcrumbs}>
     {platform && <AdSimulator client:load platform={platform} s={t.island} lang={lang} />}
   </AdPreviewPageContent>
 </Layout>

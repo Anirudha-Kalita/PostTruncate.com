@@ -40,9 +40,11 @@ interface Props {
   toolSlugs?: Record<string, string>;
   /** Full home editor URL for the cross-promo CTA (e.g. /en/character-counter/#workspace). */
   homeHref?: string;
+  /** Ordered breadcrumb trail to render above the page title. */
+  breadcrumbs?: { name: string; item: string }[];
 }
 
-const { tool, lang, editorHref, hideCta = false, strings, toolSlugs, homeHref } = Astro.props;
+const { tool, lang, editorHref, hideCta = false, strings, toolSlugs, homeHref, breadcrumbs = [] } = Astro.props;
 
 const tStr = <T,>(record: Record<string, T>): T => record[lang] ?? record[DEFAULT_LOCALE];
 const globalT = getTranslations(lang);
@@ -150,6 +152,21 @@ const faqBlogAccent = FAQ_BLOG_ACCENT[tool.id] ?? {
 
 {isStandalone ? (
   <section class:list={['tool-page container-page', { 'tool-page--wide': useCards, 'tool-page--cta-tight': useCards }]}>
+    {breadcrumbs.length > 0 && (
+      <nav class:list={['tool-page__crumbs', { 'tool-page__prose': !useCards }]} aria-label="Breadcrumb">
+        {breadcrumbs.map((crumb, i) => (
+          <>
+            {i > 0 && <span aria-hidden="true">→</span>}
+            {i === breadcrumbs.length - 1 ? (
+              <span aria-current="page">{crumb.name}</span>
+            ) : (
+              <a href={crumb.item}>{crumb.name}</a>
+            )}
+          </>
+        ))}
+      </nav>
+    )}
+
     {tool.id === 'twitter' ? (
       <TwitterHero
         title={h1Str}
@@ -275,6 +292,21 @@ const faqBlogAccent = FAQ_BLOG_ACCENT[tool.id] ?? {
   </section>
 ) : (
   <section class="tool-page container-page">
+    {breadcrumbs.length > 0 && (
+      <nav class="tool-page__crumbs tool-page__prose" aria-label="Breadcrumb">
+        {breadcrumbs.map((crumb, i) => (
+          <>
+            {i > 0 && <span aria-hidden="true">→</span>}
+            {i === breadcrumbs.length - 1 ? (
+              <span aria-current="page">{crumb.name}</span>
+            ) : (
+              <a href={crumb.item}>{crumb.name}</a>
+            )}
+          </>
+        ))}
+      </nav>
+    )}
+
     <header class="tool-page__head tool-page__prose">
       <h1 class="tool-page__title">{h1Str}</h1>
       <OnThisPage label={globalT.toolPage.onThisPage} sections={sections} />
@@ -309,6 +341,24 @@ const faqBlogAccent = FAQ_BLOG_ACCENT[tool.id] ?? {
 )}
 
 <style>
+  .tool-page__crumbs {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    margin-bottom: 24px;
+    color: var(--color-mute);
+  }
+  .tool-page__crumbs a {
+    color: var(--color-body);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  .tool-page__crumbs a:hover {
+    color: var(--color-ink);
+  }
+
   .tool-page {
     scroll-margin-top: 80px;
     padding-top: 64px;

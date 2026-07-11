@@ -30,9 +30,11 @@ interface Props {
   homeHref: string;
   /** Simulator platform key ('facebook'|'google'|…) — themes the section cards. */
   platformKey?: string;
+  /** Ordered breadcrumb trail to render above the page title. */
+  breadcrumbs?: { name: string; item: string }[];
 }
 
-const { tool, lang, homeHref, platformKey } = Astro.props;
+const { tool, lang, homeHref, platformKey, breadcrumbs = [] } = Astro.props;
 
 const tStr = <T,>(record: Record<string, T>): T => record[lang] ?? record[DEFAULT_LOCALE];
 const globalT = getTranslations(lang);
@@ -107,6 +109,21 @@ const faqBlogAccent = (platformKey && FAQ_BLOG_ACCENT[platformKey]) || {
 ---
 
 <section class="tool-page container-page tool-page--cta-tight">
+  {breadcrumbs.length > 0 && (
+    <nav class:list={['tool-page__crumbs']} aria-label="Breadcrumb">
+      {breadcrumbs.map((crumb, i) => (
+        <>
+          {i > 0 && <span aria-hidden="true">→</span>}
+          {i === breadcrumbs.length - 1 ? (
+            <span aria-current="page">{crumb.name}</span>
+          ) : (
+            <a href={crumb.item}>{crumb.name}</a>
+          )}
+        </>
+      ))}
+    </nav>
+  )}
+
   {tool.id === 'instagram-ads' ? (
     <InstagramAdsHero
       title={tStr(tool.titles)}
@@ -182,6 +199,24 @@ const faqBlogAccent = (platformKey && FAQ_BLOG_ACCENT[platformKey]) || {
 </section>
 
 <style>
+  .tool-page__crumbs {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    margin-bottom: 24px;
+    color: var(--color-mute);
+  }
+  .tool-page__crumbs a {
+    color: var(--color-body);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  .tool-page__crumbs a:hover {
+    color: var(--color-ink);
+  }
+
   .tool-page {
     scroll-margin-top: 80px;
     padding-top: 64px;

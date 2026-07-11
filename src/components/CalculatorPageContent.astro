@@ -36,9 +36,11 @@ interface Props {
   lang: string;
   /** Full home editor URL for the closing CTA (e.g. /en/character-counter/#workspace). */
   homeHref: string;
+  /** Ordered breadcrumb trail to render above the page title. */
+  breadcrumbs?: { name: string; item: string }[];
 }
 
-const { tool, lang, homeHref } = Astro.props;
+const { tool, lang, homeHref, breadcrumbs = [] } = Astro.props;
 
 const tStr = <T,>(record: Record<string, T>): T => record[lang] ?? record[DEFAULT_LOCALE];
 const globalT = getTranslations(lang);
@@ -105,6 +107,21 @@ const relatedIconPath = tool.related ? (RELATED_ICON[tool.related.id] ?? '<path 
 ---
 
 <section class:list={['tool-page container-page', { 'tool-page--cta-tight': isCounter || isWppCards, 'tool-page--counter': isCounter, 'tool-page--wpp': isWppCards && !isCounter }]}>
+  {breadcrumbs.length > 0 && (
+    <nav class:list={['tool-page__crumbs', { 'tool-page__prose': !isCounter && !isWppCards }]} aria-label="Breadcrumb">
+      {breadcrumbs.map((crumb, i) => (
+        <>
+          {i > 0 && <span aria-hidden="true">→</span>}
+          {i === breadcrumbs.length - 1 ? (
+            <span aria-current="page">{crumb.name}</span>
+          ) : (
+            <a href={crumb.item}>{crumb.name}</a>
+          )}
+        </>
+      ))}
+    </nav>
+  )}
+
   {tool.id === 'words-per-page' ? (
     <WordsPerPageHero
       title={tStr(tool.titles)}
@@ -281,6 +298,24 @@ const relatedIconPath = tool.related ? (RELATED_ICON[tool.related.id] ?? '<path 
 </section>
 
 <style>
+  .tool-page__crumbs {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    margin-bottom: 24px;
+    color: var(--color-mute);
+  }
+  .tool-page__crumbs a {
+    color: var(--color-body);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  .tool-page__crumbs a:hover {
+    color: var(--color-ink);
+  }
+
   .tool-page {
     scroll-margin-top: 80px;
     padding-top: 64px;

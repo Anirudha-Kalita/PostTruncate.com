@@ -91,7 +91,7 @@ const faqItems = tool.faq?.[lang];
     breadcrumbs={breadcrumbs}
     faqItems={faqItems}
   />
-  <CalculatorPageContent tool={tool} lang={lang} homeHref={homeHref}>
+  <CalculatorPageContent tool={tool} lang={lang} homeHref={homeHref} breadcrumbs={breadcrumbs}>
     {/* Each calculator's live island is a static reference so Astro can resolve
         its hydration script. New tools add a branch here. */}
     {tool.id === 'words-per-page' && (
