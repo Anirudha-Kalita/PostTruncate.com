@@ -14,7 +14,11 @@ const { lang } = Astro.params as { lang: string };
 const t = getTranslations(lang);
 const ew = t.embedWidget;
 const embedSrc = `https://posttruncate.com/${lang}/embed/`;
-const embedCode = `<iframe src="${embedSrc}" width="100%" height="320" frameborder="0"></iframe>`;
+const previewSrc = `/${lang}/embed/`;
+const embedCode = `<iframe src="${embedSrc}" width="100%" height="400" frameborder="0"></iframe>`;
+
+// Highlight the target phrase if present
+const headingHtml = ew.heading.replace('on your site', '<span class="text-[#0066e0]">on your site</span>');
 ---
 
 <Layout
@@ -24,62 +28,130 @@ const embedCode = `<iframe src="${embedSrc}" width="100%" height="320" framebord
   description={ew.description}
   noindex={false}
 >
-  <div class="ew-page container-page">
-    <!-- Header -->
-    <header class="ew-header">
-      <p class="ew-eyebrow">{ew.eyebrow}</p>
-      <h1 class="ew-heading">{ew.heading}</h1>
-      <p class="ew-lede">{ew.lede}</p>
-    </header>
+  <div class="max-w-[1080px] mx-auto px-6 pt-16 pb-32 flex flex-col gap-24 font-sans">
+    
+    <!-- Hero Section -->
+    <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+      <!-- Left Content -->
+      <header class="flex flex-col items-start gap-5 max-w-xl">
+        <div class="inline-flex items-center px-3 py-1 rounded-full bg-[#eef5ff] border border-[#d3e5ff] text-[#0066e0] text-[11px] font-bold uppercase tracking-wider">
+          {ew.eyebrow}
+        </div>
+        <h1 class="text-[40px] sm:text-5xl lg:text-[54px] font-bold tracking-tight text-[#111111] leading-[1.1]" set:html={headingHtml}>
+        </h1>
+        <p class="text-[17px] text-[#555555] leading-relaxed">
+          {ew.lede}
+        </p>
+      </header>
+      
+      <!-- Right Illustration -->
+      <div class="relative w-full aspect-[4/3] lg:aspect-square max-h-[400px] flex items-center justify-center bg-[#f8fafc] rounded-[32px] overflow-hidden">
+        <!-- Dotted background pattern -->
+        <div class="absolute inset-0 opacity-40 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iMiIgY3k9IjIiIHI9IjEiIGZpbGw9IiM5Y2EzYWYiLz48L3N2Zz4=')]"></div>
+        
+        <!-- Background Mock Card -->
+        <div class="relative z-10 w-[300px] sm:w-[340px] h-[220px] bg-white rounded-3xl shadow-[0_4px_24px_rgb(0,0,0,0.03)] border border-gray-100 p-6 flex flex-col gap-4">
+          <div class="w-12 h-12 rounded-xl bg-[#eef5ff] text-[#0066e0] flex items-center justify-center mb-2">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
+          </div>
+          <div class="w-3/4 h-2 bg-gray-100 rounded-full"></div>
+          <div class="w-full h-2 bg-gray-100 rounded-full"></div>
+          <div class="w-5/6 h-2 bg-gray-100 rounded-full"></div>
+          <div class="w-full h-2 bg-gray-100 rounded-full"></div>
+          <div class="w-2/3 h-2 bg-gray-100 rounded-full"></div>
+        </div>
+        
+        <!-- Foreground Live Card -->
+        <div class="absolute z-20 bottom-8 sm:bottom-12 right-6 sm:right-10 w-[140px] sm:w-[150px] bg-white rounded-2xl shadow-[0_20px_40px_rgb(0,0,0,0.08)] border border-gray-100 p-5 flex flex-col items-center">
+          <div class="flex items-center gap-1.5 self-start mb-1">
+            <div class="w-1.5 h-1.5 rounded-full bg-green-500"></div>
+            <span class="text-[10px] font-bold tracking-wider text-gray-900">LIVE</span>
+          </div>
+          <div class="text-[40px] sm:text-[44px] font-bold text-[#111111] tracking-tight leading-none mb-1">128</div>
+          <div class="text-[12px] text-[#555555] font-medium">characters</div>
+        </div>
+        
+        <!-- Curvy arrow SVG connecting the cards -->
+        <svg class="absolute z-10 bottom-6 sm:bottom-10 left-16 sm:left-24 w-24 sm:w-32 h-24 sm:h-32 text-[#d3e5ff] fill-none stroke-current" viewBox="0 0 100 100" stroke-width="3" stroke-linecap="round">
+          <path d="M 20 80 C 40 80, 60 40, 80 50" />
+          <path d="M 70 42 L 80 50 L 72 58" />
+        </svg>
+      </div>
+    </div>
 
-    <!-- Live iframe preview -->
-    <section class="ew-preview-section" aria-label={ew.previewLabel}>
-      <h2 class="ew-section-title">{ew.previewLabel}</h2>
-      <div class="ew-preview-frame">
+    <!-- Live Preview Section -->
+    <section class="flex flex-col gap-6" aria-label={ew.previewLabel}>
+      <div class="flex items-center gap-3">
+        <div class="w-1 h-6 bg-[#0066e0] rounded-full"></div>
+        <h2 class="text-xl font-bold text-[#111111] tracking-tight">{ew.previewLabel}</h2>
+      </div>
+      <div class="w-full bg-white rounded-[24px] border border-gray-200 shadow-[0_2px_12px_rgb(0,0,0,0.02)] overflow-hidden p-2 sm:p-4">
         <iframe
-          src={embedSrc}
+          src={previewSrc}
           width="100%"
-          height="320"
+          height="400"
           frameborder="0"
           title={ew.previewLabel}
           loading="lazy"
+          class="rounded-[16px] w-full"
         ></iframe>
       </div>
     </section>
 
-    <!-- Embed code block -->
-    <section class="ew-code-section">
-      <h2 class="ew-section-title">{ew.codeLabel}</h2>
-      <div class="ew-code-wrap">
-        <pre class="ew-code"><code id="embed-code">{embedCode}</code></pre>
+    <!-- Embed Code Section -->
+    <section class="flex flex-col gap-6">
+      <div class="flex items-center gap-3">
+        <div class="w-1 h-6 bg-[#0066e0] rounded-full"></div>
+        <h2 class="text-xl font-bold text-[#111111] tracking-tight">{ew.codeLabel}</h2>
+      </div>
+      
+      <div class="flex flex-col sm:flex-row items-center justify-between gap-4 p-2 sm:p-3 bg-white border border-gray-200 rounded-[2rem] sm:rounded-full shadow-[0_2px_12px_rgb(0,0,0,0.02)] w-full">
+        
+        <div class="flex items-center gap-4 w-full min-w-0 px-2 sm:px-4">
+          <div class="flex-shrink-0 w-10 h-10 rounded-full bg-[#eef5ff] flex items-center justify-center text-[#0066e0]">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+          </div>
+          <code id="embed-code" class="text-[13px] font-mono text-[#555555] truncate w-full select-all">{embedCode}</code>
+        </div>
+        
         <button
           id="copy-btn"
           type="button"
-          class="ew-copy-btn"
+          class="flex-shrink-0 flex items-center justify-center gap-2 h-12 px-6 rounded-full bg-[#0066e0] hover:bg-[#0761d1] text-white text-sm font-semibold transition-all active:scale-95 w-full sm:w-auto"
           data-code={embedCode}
           data-label-default={ew.copyButton}
           data-label-copied={ew.copiedButton}
         >
-          {ew.copyButton}
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="copy-icon"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+          <span class="btn-text">{ew.copyButton}</span>
         </button>
       </div>
     </section>
 
-    <!-- Audience paragraphs -->
-    <section class="ew-audience">
-      <h2 class="ew-section-title">{ew.audienceHeading}</h2>
-      <div class="ew-audience-grid">
-        <div class="ew-audience-card">
-          <p>{ew.forBloggers}</p>
+    <!-- Audience Cards -->
+    <section class="grid md:grid-cols-3 gap-6">
+      <div class="bg-white border border-gray-100 rounded-[24px] p-7 sm:p-8 shadow-[0_4px_20px_rgb(0,0,0,0.03)] flex items-start gap-5 transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_8px_30px_rgb(0,0,0,0.06)] hover:border-gray-200 cursor-default">
+        <div class="flex-shrink-0 w-14 h-14 rounded-[16px] bg-[#eef5ff] text-[#0066e0] flex items-center justify-center">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/><path d="m15 5 4 4"/></svg>
         </div>
-        <div class="ew-audience-card">
-          <p>{ew.forEducators}</p>
+        <p class="text-[15px] leading-[1.6] text-[#555555] font-medium">{ew.forBloggers}</p>
+      </div>
+      
+      <div class="bg-white border border-gray-100 rounded-[24px] p-7 sm:p-8 shadow-[0_4px_20px_rgb(0,0,0,0.03)] flex items-start gap-5 transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_8px_30px_rgb(0,0,0,0.06)] hover:border-gray-200 cursor-default">
+        <div class="flex-shrink-0 w-14 h-14 rounded-[16px] bg-green-50 text-green-600 flex items-center justify-center">
+          <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
         </div>
-        <div class="ew-audience-card">
-          <p>{ew.forDevelopers}</p>
+        <p class="text-[15px] leading-[1.6] text-[#555555] font-medium">{ew.forEducators}</p>
+      </div>
+      
+      <div class="bg-white border border-gray-100 rounded-[24px] p-7 sm:p-8 shadow-[0_4px_20px_rgb(0,0,0,0.03)] flex items-start gap-5 transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_8px_30px_rgb(0,0,0,0.06)] hover:border-gray-200 cursor-default">
+        <div class="flex-shrink-0 w-14 h-14 rounded-[16px] bg-[#f5effa] text-[#7928ca] flex items-center justify-center">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
         </div>
+        <p class="text-[15px] leading-[1.6] text-[#555555] font-medium">{ew.forDevelopers}</p>
       </div>
     </section>
+
   </div>
 </Layout>
 
@@ -90,10 +162,12 @@ const embedCode = `<iframe src="${embedSrc}" width="100%" height="320" framebord
       const code = btn.dataset.code ?? '';
       const labelDefault = btn.dataset.labelDefault ?? 'Copy';
       const labelCopied = btn.dataset.labelCopied ?? 'Copied!';
+      const btnText = btn.querySelector('.btn-text');
+      const icon = btn.querySelector('.copy-icon');
+      
       try {
         await navigator.clipboard.writeText(code);
       } catch {
-        // execCommand fallback for older browsers / restricted contexts
         const ta = document.createElement('textarea');
         ta.value = code;
         ta.style.position = 'fixed';
@@ -103,146 +177,24 @@ const embedCode = `<iframe src="${embedSrc}" width="100%" height="320" framebord
         document.execCommand('copy');
         document.body.removeChild(ta);
       }
-      btn.textContent = labelCopied;
+      
+      if (btnText) btnText.textContent = labelCopied;
+      if (icon) {
+        icon.innerHTML = '<polyline points="20 6 9 17 4 12"></polyline>';
+      }
       btn.disabled = true;
+      btn.classList.add('bg-green-600', 'hover:bg-green-600');
+      btn.classList.remove('bg-[#0066e0]', 'hover:bg-[#0761d1]');
+      
       setTimeout(() => {
-        btn.textContent = labelDefault;
+        if (btnText) btnText.textContent = labelDefault;
+        if (icon) {
+          icon.innerHTML = '<rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/>';
+        }
         btn.disabled = false;
+        btn.classList.remove('bg-green-600', 'hover:bg-green-600');
+        btn.classList.add('bg-[#0066e0]', 'hover:bg-[#0761d1]');
       }, 2000);
     });
   }
 </script>
-
-<style>
-  .ew-page {
-    padding-top: 64px;
-    padding-bottom: 96px;
-    display: flex;
-    flex-direction: column;
-    gap: 56px;
-  }
-
-  /* Header */
-  .ew-header {
-    max-width: 680px;
-  }
-  .ew-eyebrow {
-    font-family: var(--font-mono);
-    font-size: 12px;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-    color: var(--color-mute);
-  }
-  .ew-heading {
-    margin-top: 12px;
-    font-size: clamp(28px, 5vw, 44px);
-    font-weight: 600;
-    line-height: 1.05;
-    letter-spacing: -1.6px;
-    color: var(--color-ink);
-  }
-  .ew-lede {
-    margin-top: 16px;
-    font-size: 17px;
-    line-height: 28px;
-    color: var(--color-body);
-  }
-
-  /* Shared section heading */
-  .ew-section-title {
-    font-size: 20px;
-    font-weight: 600;
-    letter-spacing: -0.6px;
-    color: var(--color-ink);
-    margin-bottom: 16px;
-  }
-
-  /* Preview iframe */
-  .ew-preview-frame {
-    border-radius: var(--radius-lg);
-    border: 1px solid var(--color-hairline);
-    overflow: hidden;
-    background: var(--color-canvas);
-    box-shadow: var(--shadow-e1);
-  }
-  .ew-preview-frame iframe {
-    display: block;
-  }
-
-  /* Code block */
-  .ew-code-wrap {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    align-items: flex-start;
-  }
-  .ew-code {
-    width: 100%;
-    background: var(--color-canvas-soft);
-    border: 1px solid var(--color-hairline);
-    border-radius: var(--radius-md);
-    padding: 16px;
-    font-family: var(--font-mono);
-    font-size: 13px;
-    line-height: 20px;
-    color: var(--color-ink);
-    white-space: pre-wrap;
-    word-break: break-all;
-    overflow-x: auto;
-  }
-  .ew-copy-btn {
-    display: inline-flex;
-    align-items: center;
-    height: 40px;
-    padding: 0 20px;
-    border-radius: var(--radius-pill);
-    background: var(--color-ink);
-    color: var(--color-on-primary);
-    font-size: 14px;
-    font-weight: 500;
-    border: none;
-    cursor: pointer;
-    transition: opacity 0.15s ease, transform 0.1s ease;
-  }
-  .ew-copy-btn:hover {
-    opacity: 0.88;
-  }
-  .ew-copy-btn:active {
-    transform: scale(0.96);
-  }
-  .ew-copy-btn:disabled {
-    opacity: 0.6;
-    cursor: default;
-  }
-
-  /* Audience grid */
-  .ew-audience-grid {
-    display: grid;
-    gap: 16px;
-  }
-  .ew-audience-card {
-    border-radius: var(--radius-lg);
-    background: var(--color-canvas);
-    border: 1px solid var(--color-hairline);
-    padding: 20px 24px;
-    box-shadow: var(--shadow-e1);
-  }
-  .ew-audience-card p {
-    font-size: 15px;
-    line-height: 26px;
-    color: var(--color-body);
-  }
-
-  @media (min-width: 720px) {
-    .ew-audience-grid {
-      grid-template-columns: repeat(3, 1fr);
-    }
-    .ew-code-wrap {
-      flex-direction: row;
-      align-items: flex-end;
-    }
-    .ew-code {
-      flex: 1;
-    }
-  }
-</style>
