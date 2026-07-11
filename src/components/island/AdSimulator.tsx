@@ -1,5 +1,5 @@
 /** @jsxImportSource preact */
-import { useEffect, useRef, useState } from 'preact/hooks';
+import { useEffect, useRef, useState, useLayoutEffect } from 'preact/hooks';
 import { Card, CardHead, Meter, Segmented, type Tone } from './ui';
 import { GoogleRsaPreview } from './GoogleRsaPreview';
 import { FacebookFeedAd } from './FacebookFeedAd';
@@ -84,6 +84,13 @@ export function AdSimulator({ platform, s, lang }: Props) {
 
   const [values, setValues] = useState<Record<FieldKey, string>>({ ...EMPTY_VALUES });
   const [device, setDevice] = useState<'mobile' | 'desktop'>('mobile');
+
+  useLayoutEffect(() => {
+    if (typeof window !== 'undefined') {
+      const isMobile = !window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+      setDevice(isMobile ? 'mobile' : 'desktop');
+    }
+  }, []);
   const [mode, setMode] = useState<'feed' | 'reels'>('feed');
   const [fbFormat, setFbFormat] = useState<FbFormat>('feed');
   const [cards, setCards] = useState<CarouselCard[]>([]);

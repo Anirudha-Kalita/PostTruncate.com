@@ -205,6 +205,24 @@ export default function Dashboard({ lang, strings, toolSlugs, focus }: Props) {
     }
   }, [focus]);
 
+  useLayoutEffect(() => {
+    if (typeof window !== 'undefined') {
+      const isMobile = !window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+      const targetView = isMobile ? 'mobile' : 'desktop';
+      setViews((prev) => {
+        const next = { ...prev };
+        let changed = false;
+        (Object.keys(next) as ViewablePlatform[]).forEach((k) => {
+          if (next[k] !== targetView) {
+            next[k] = targetView;
+            changed = true;
+          }
+        });
+        return changed ? next : prev;
+      });
+    }
+  }, []);
+
   // ── Scoped-view derivations (a no-op when `focus` is undefined) ──────────
   const focusCard = focus && focus !== 'sms' ? PLATFORM_TO_CARD[focus] : undefined;
   const rightOrder = focus ? (focusCard ? [focusCard] : []) : cardOrder;
@@ -465,7 +483,7 @@ export default function Dashboard({ lang, strings, toolSlugs, focus }: Props) {
                       aria-label={interp(strings.previewPanel.tabAria, { platform: p.name })}
                       onClick={() => { setPreviewTab(p.id); setCompare(false); }}
                       onKeyDown={(e) => onTabKey(e, i)}
-                      class={`relative flex h-10 w-10 shrink-0 items-center justify-center transition-[background,opacity] duration-100 sm:h-11 sm:w-11 ${active ? 'opacity-100' : 'opacity-40 hover:bg-canvas-soft hover:opacity-80'
+                      class={`relative flex h-12 w-12 shrink-0 items-center justify-center transition-[background,opacity] duration-100 sm:h-11 sm:w-11 ${active ? 'opacity-100' : 'opacity-40 hover:bg-canvas-soft hover:opacity-80'
                         }`}
                     >
                       {p.brand && <BrandLogo brand={p.brand} size={20} />}
@@ -481,7 +499,7 @@ export default function Dashboard({ lang, strings, toolSlugs, focus }: Props) {
                 aria-pressed={compare}
                 aria-label={strings.previewPanel.compareAll}
                 onClick={() => setCompare((c) => !c)}
-                class={`mb-2 inline-flex h-10 w-10 shrink-0 items-center justify-center gap-1.5 rounded-pill border p-0 text-[12px] font-medium transition-[transform,color,background,border-color] duration-100 active:scale-[0.96] sm:h-auto sm:w-auto sm:px-3 sm:py-1.5 ${compare
+                class={`mb-2 inline-flex h-12 w-12 shrink-0 items-center justify-center gap-1.5 rounded-pill border p-0 text-[12px] font-medium transition-[transform,color,background,border-color] duration-100 active:scale-[0.96] sm:h-auto sm:w-auto sm:px-3 sm:py-1.5 ${compare
                     ? 'border-link bg-link-bg-soft text-link-deep'
                     : 'border-hairline bg-canvas text-body hover:bg-canvas-soft-2 hover:text-ink'
                   }`}

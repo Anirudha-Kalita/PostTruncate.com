@@ -467,6 +467,33 @@ const adPreviewLinks = adPreviews.map((tool) => ({
       for (const d of disclosures) d.removeAttribute('open');
   });
 
+  // ── Mobile Menu Focus Trap & Scroll Lock ──────────────────────────────────
+  const mobileMenu = document.querySelector<HTMLDetailsElement>('.nav__menu');
+  if (mobileMenu) {
+    mobileMenu.addEventListener('toggle', () => {
+      document.body.style.overflow = mobileMenu.open ? 'hidden' : '';
+    });
+    mobileMenu.addEventListener('keydown', (e) => {
+      if (e.key !== 'Tab') return;
+      const focusable = Array.from(
+        mobileMenu.querySelectorAll<HTMLElement>(
+          'a[href], button, input, textarea, select, details > summary, [tabindex]:not([tabindex="-1"])'
+        )
+      ).filter(el => el.offsetParent !== null); // only visible elements
+      
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last?.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first?.focus();
+      }
+    });
+  }
+
   // ── Desktop dropdowns (Guides + Tools): open on hover ──────────────────
   const hoverMenus = document.querySelectorAll<HTMLDetailsElement>('.nav__guides');
   for (const menu of hoverMenus) {
@@ -621,7 +648,7 @@ const adPreviewLinks = adPreviews.map((tool) => ({
   /* Hidden on mobile (it overflowed narrow viewports); the language list is
      relocated into the hamburger panel below. Restored to the bar at ≥768px. */
   .nav__lang {
-    display: block;
+    display: none;
     position: relative;
     flex-shrink: 0;
   }
@@ -841,6 +868,9 @@ const adPreviewLinks = adPreviews.map((tool) => ({
     top: 64px;
     left: 0;
     right: 0;
+    max-height: calc(100vh - 64px);
+    overflow-y: auto;
+    overscroll-behavior: contain;
     display: flex;
     flex-direction: column;
     gap: 6px;
@@ -993,7 +1023,7 @@ const adPreviewLinks = adPreviews.map((tool) => ({
 
   /* ── Language switcher — mobile inline expand (inside hamburger panel) ── */
   .nav__lang-mobile {
-    display: none;
+    display: block;
   }
   .nav__lang-mobile-toggle {
     display: flex;
@@ -1051,6 +1081,12 @@ const adPreviewLinks = adPreviews.map((tool) => ({
       display: block;
     }
     .nav__guides-mobile {
+      display: none;
+    }
+    .nav__lang {
+      display: block;
+    }
+    .nav__lang-mobile {
       display: none;
     }
   }
