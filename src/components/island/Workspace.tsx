@@ -16,7 +16,7 @@ import {
   formatUppercase,
   stripEmojiAndSymbols,
 } from '../../lib/textTools';
-import { Card, Stat, Badge } from './ui';
+import { Card, Stat, Badge, CopyButton } from './ui';
 import { AiImprove } from './AiImprove';
 import { interp, plural } from '../../i18n/interp';
 import type { IslandStrings } from '../../i18n/types';
@@ -194,6 +194,12 @@ export function Workspace({ text, setText, lang, s, focus, image, mediaKind = 'i
             <PasteIcon />
             {w.paste}
           </button>
+          <CopyButton 
+            text={text} 
+            label={s.common.actions.copyAria?.replace('{platform}', 'Editor') || 'Copy Editor text'} 
+            copiedLabel={s.common.actions.copied || 'Copied!'} 
+            copyLabel={s.common.actions.copy || 'Copy'} 
+          />
           <button
             type="button"
             onClick={onClear}

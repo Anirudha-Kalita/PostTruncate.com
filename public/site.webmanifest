@@ -1,6 +1,8 @@
 {
   "name": "PostTruncate",
   "short_name": "PostT",
+  "start_url": "/",
+  "id": "/",
   "icons": [
     {
       "src": "/web-app-manifest-192x192.png",

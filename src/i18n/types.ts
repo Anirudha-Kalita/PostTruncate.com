@@ -540,6 +540,9 @@ export interface IslandStrings {
       repost: string;
       /** LinkedIn bottom-bar "Send" action. */
       send: string;
+      copy?: string;
+      copied?: string;
+      copyAria?: string;
     };
   };
   sms: {

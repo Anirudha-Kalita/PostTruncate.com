@@ -483,7 +483,7 @@ export default function Dashboard({ lang, strings, toolSlugs, focus }: Props) {
                       aria-label={interp(strings.previewPanel.tabAria, { platform: p.name })}
                       onClick={() => { setPreviewTab(p.id); setCompare(false); }}
                       onKeyDown={(e) => onTabKey(e, i)}
-                      class={`relative flex h-12 w-12 shrink-0 items-center justify-center transition-[background,opacity] duration-100 sm:h-11 sm:w-11 ${active ? 'opacity-100' : 'opacity-40 hover:bg-canvas-soft hover:opacity-80'
+                      class={`relative flex h-12 w-12 shrink-0 items-center justify-center transition-[background,opacity] duration-100 sm:h-11 sm:w-11 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-link rounded-md ${active ? 'opacity-100' : 'opacity-40 hover:bg-canvas-soft hover:opacity-80'
                         }`}
                     >
                       {p.brand && <BrandLogo brand={p.brand} size={20} />}

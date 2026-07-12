@@ -356,10 +356,19 @@ const canonical = canonicalOverride ?? localeHref(lang);
         } catch {}
         if (seen) return; // already shown once — do nothing this session
 
+        let deferredPrompt: any = null;
+        window.addEventListener('beforeinstallprompt', (e) => {
+          e.preventDefault();
+          deferredPrompt = e;
+        });
+
         // Desktop = a device with a precise, hovering pointer (i.e. a mouse).
         // Everything else (touch) takes the mobile path.
         const isDesktop = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
         toast.classList.add(isDesktop ? 'bk-toast--desktop' : 'bk-toast--mobile');
+
+        const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+        const isStandalone = window.matchMedia('(display-mode: standalone)').matches || ('standalone' in navigator && (navigator as any).standalone);
 
         // Fill the desktop body, swapping {shortcut} for an OS-correct <kbd>.
         if (isDesktop) {
@@ -372,6 +381,14 @@ const canonical = canonicalOverride ?? localeHref(lang);
             kbd.textContent = isMac ? '⌘ + D' : 'Ctrl + D';
             const [before, after] = tpl.split('{shortcut}');
             textEl.append(document.createTextNode(before ?? ''), kbd, document.createTextNode(after ?? ''));
+          }
+        } else {
+          // Mobile adjustments
+          if (isIOS && !isStandalone) {
+            const label = toast.querySelector('.bk-toast__share-label');
+            if (label) {
+              label.innerHTML = 'Tap Share &rarr; Add to Home Screen';
+            }
           }
         }
 
@@ -411,6 +428,17 @@ const canonical = canonicalOverride ?? localeHref(lang);
         const shareBtn = toast.querySelector<HTMLButtonElement>('.bk-toast__share');
         shareBtn?.addEventListener('click', async () => {
           markSeen();
+          
+          if (deferredPrompt) {
+            deferredPrompt.prompt();
+            const { outcome } = await deferredPrompt.userChoice;
+            deferredPrompt = null;
+            if (outcome === 'accepted') {
+              hide();
+            }
+            return;
+          }
+
           const url = window.location.href;
           const shareData = { title: document.title, url };
           if (navigator.share) {

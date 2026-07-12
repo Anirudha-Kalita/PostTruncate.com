@@ -1,0 +1,1596 @@
+﻿[
+  {
+    "id": "color-contrast",
+    "impact": "serious",
+    "tags": [
+      "cat.color",
+      "wcag2aa",
+      "wcag143",
+      "TTv5",
+      "TT13.c",
+      "EN-301-549",
+      "EN-9.1.4.3",
+      "ACT",
+      "RGAAv4",
+      "RGAA-3.2.1"
+    ],
+    "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+    "help": "Elements must meet minimum color contrast ratio thresholds",
+    "helpUrl": "https://dequeuniversity.com/rules/axe/4.12/color-contrast?application=playwright",
+    "nodes": [
+      {
+        "any": [
+          {
+            "id": "color-contrast",
+            "data": {
+              "fgColor": "#29bc9b",
+              "bgColor": "#aaffec",
+              "contrastRatio": 2.08,
+              "fontSize": "9.0pt (12px)",
+              "fontWeight": "normal",
+              "messageKey": null,
+              "expectedContrastRatio": "4.5:1"
+            },
+            "relatedNodes": [
+              {
+                "html": "<span class=\"inline-flex items-center gap-1.5 rounded-pill px-2.5 py-1 text-[12px] font-medium leading-4 bg-cyan-soft text-cyan-deep \"><span class=\"h-1.5 w-1.5 shrink-0 rounded-full bg-cyan-deep\"></span>Safe hook line</span>",
+                "target": [
+                  ".gap-y-1 > .bg-cyan-soft.py-1.px-2\\.5"
+                ]
+              }
+            ],
+            "impact": "serious",
+            "message": "Element has insufficient color contrast of 2.08 (foreground color: #29bc9b, background color: #aaffec, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+          }
+        ],
+        "all": [],
+        "none": [],
+        "impact": "serious",
+        "html": "<span class=\"inline-flex items-center gap-1.5 rounded-pill px-2.5 py-1 text-[12px] font-medium leading-4 bg-cyan-soft text-cyan-deep \"><span class=\"h-1.5 w-1.5 shrink-0 rounded-full bg-cyan-deep\"></span>Safe hook line</span>",
+        "target": [
+          ".gap-y-1 > .bg-cyan-soft.py-1.px-2\\.5"
+        ],
+        "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 2.08 (foreground color: #29bc9b, background color: #aaffec, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+      },
+      {
+        "any": [
+          {
+            "id": "color-contrast",
+            "data": {
+              "fgColor": "#29bc9b",
+              "bgColor": "#aaffec",
+              "contrastRatio": 2.08,
+              "fontSize": "9.0pt (12px)",
+              "fontWeight": "normal",
+              "messageKey": null,
+              "expectedContrastRatio": "4.5:1"
+            },
+            "relatedNodes": [
+              {
+                "html": "<span class=\"inline-flex items-center gap-1.5 rounded-pill px-2.5 py-1 text-[12px] font-medium leading-4 bg-cyan-soft text-cyan-deep \">",
+                "target": [
+                  ".p-3\\.5.transition-all.hover\\:-translate-y-0\\.5:nth-child(1) > .bg-cyan-soft.py-1.px-2\\.5"
+                ]
+              }
+            ],
+            "impact": "serious",
+            "message": "Element has insufficient color contrast of 2.08 (foreground color: #29bc9b, background color: #aaffec, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+          }
+        ],
+        "all": [],
+        "none": [],
+        "impact": "serious",
+        "html": "<span class=\"inline-flex items-center gap-1.5 rounded-pill px-2.5 py-1 text-[12px] font-medium leading-4 bg-cyan-soft text-cyan-deep \">",
+        "target": [
+          ".p-3\\.5.transition-all.hover\\:-translate-y-0\\.5:nth-child(1) > .bg-cyan-soft.py-1.px-2\\.5"
+        ],
+        "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 2.08 (foreground color: #29bc9b, background color: #aaffec, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+      },
+      {
+        "any": [
+          {
+            "id": "color-contrast",
+            "data": {
+              "fgColor": "#29bc9b",
+              "bgColor": "#aaffec",
+              "contrastRatio": 2.08,
+              "fontSize": "9.0pt (12px)",
+              "fontWeight": "normal",
+              "messageKey": null,
+              "expectedContrastRatio": "4.5:1"
+            },
+            "relatedNodes": [
+              {
+                "html": "<span class=\"inline-flex items-center gap-1.5 rounded-pill px-2.5 py-1 text-[12px] font-medium leading-4 bg-cyan-soft text-cyan-deep \">",
+                "target": [
+                  ".p-3\\.5.transition-all.hover\\:-translate-y-0\\.5:nth-child(2) > .bg-cyan-soft.py-1.px-2\\.5"
+                ]
+              }
+            ],
+            "impact": "serious",
+            "message": "Element has insufficient color contrast of 2.08 (foreground color: #29bc9b, background color: #aaffec, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+          }
+        ],
+        "all": [],
+        "none": [],
+        "impact": "serious",
+        "html": "<span class=\"inline-flex items-center gap-1.5 rounded-pill px-2.5 py-1 text-[12px] font-medium leading-4 bg-cyan-soft text-cyan-deep \">",
+        "target": [
+          ".p-3\\.5.transition-all.hover\\:-translate-y-0\\.5:nth-child(2) > .bg-cyan-soft.py-1.px-2\\.5"
+        ],
+        "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 2.08 (foreground color: #29bc9b, background color: #aaffec, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+      },
+      {
+        "any": [
+          {
+            "id": "color-contrast",
+            "data": {
+              "fgColor": "#29bc9b",
+              "bgColor": "#aaffec",
+              "contrastRatio": 2.08,
+              "fontSize": "9.0pt (12px)",
+              "fontWeight": "normal",
+              "messageKey": null,
+              "expectedContrastRatio": "4.5:1"
+            },
+            "relatedNodes": [
+              {
+                "html": "<span class=\"inline-flex items-center gap-1.5 rounded-pill px-2.5 py-1 text-[12px] font-medium leading-4 bg-cyan-soft text-cyan-deep \">",
+                "target": [
+                  ".p-3\\.5.transition-all.hover\\:-translate-y-0\\.5:nth-child(3) > .bg-cyan-soft.py-1.px-2\\.5"
+                ]
+              }
+            ],
+            "impact": "serious",
+            "message": "Element has insufficient color contrast of 2.08 (foreground color: #29bc9b, background color: #aaffec, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+          }
+        ],
+        "all": [],
+        "none": [],
+        "impact": "serious",
+        "html": "<span class=\"inline-flex items-center gap-1.5 rounded-pill px-2.5 py-1 text-[12px] font-medium leading-4 bg-cyan-soft text-cyan-deep \">",
+        "target": [
+          ".p-3\\.5.transition-all.hover\\:-translate-y-0\\.5:nth-child(3) > .bg-cyan-soft.py-1.px-2\\.5"
+        ],
+        "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 2.08 (foreground color: #29bc9b, background color: #aaffec, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+      },
+      {
+        "any": [
+          {
+            "id": "color-contrast",
+            "data": {
+              "fgColor": "#29bc9b",
+              "bgColor": "#aaffec",
+              "contrastRatio": 2.08,
+              "fontSize": "9.0pt (12px)",
+              "fontWeight": "normal",
+              "messageKey": null,
+              "expectedContrastRatio": "4.5:1"
+            },
+            "relatedNodes": [
+              {
+                "html": "<span class=\"inline-flex items-center gap-1.5 rounded-pill px-2.5 py-1 text-[12px] font-medium leading-4 bg-cyan-soft text-cyan-deep \">",
+                "target": [
+                  ".p-3\\.5.transition-all.hover\\:-translate-y-0\\.5:nth-child(4) > .bg-cyan-soft.py-1.px-2\\.5"
+                ]
+              }
+            ],
+            "impact": "serious",
+            "message": "Element has insufficient color contrast of 2.08 (foreground color: #29bc9b, background color: #aaffec, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+          }
+        ],
+        "all": [],
+        "none": [],
+        "impact": "serious",
+        "html": "<span class=\"inline-flex items-center gap-1.5 rounded-pill px-2.5 py-1 text-[12px] font-medium leading-4 bg-cyan-soft text-cyan-deep \">",
+        "target": [
+          ".p-3\\.5.transition-all.hover\\:-translate-y-0\\.5:nth-child(4) > .bg-cyan-soft.py-1.px-2\\.5"
+        ],
+        "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 2.08 (foreground color: #29bc9b, background color: #aaffec, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+      },
+      {
+        "any": [
+          {
+            "id": "color-contrast",
+            "data": {
+              "fgColor": "#29bc9b",
+              "bgColor": "#aaffec",
+              "contrastRatio": 2.08,
+              "fontSize": "9.0pt (12px)",
+              "fontWeight": "normal",
+              "messageKey": null,
+              "expectedContrastRatio": "4.5:1"
+            },
+            "relatedNodes": [
+              {
+                "html": "<span class=\"inline-flex items-center gap-1.5 rounded-pill px-2.5 py-1 text-[12px] font-medium leading-4 bg-cyan-soft text-cyan-deep \">",
+                "target": [
+                  ".p-3\\.5.transition-all.hover\\:-translate-y-0\\.5:nth-child(5) > .bg-cyan-soft.py-1.px-2\\.5"
+                ]
+              }
+            ],
+            "impact": "serious",
+            "message": "Element has insufficient color contrast of 2.08 (foreground color: #29bc9b, background color: #aaffec, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+          }
+        ],
+        "all": [],
+        "none": [],
+        "impact": "serious",
+        "html": "<span class=\"inline-flex items-center gap-1.5 rounded-pill px-2.5 py-1 text-[12px] font-medium leading-4 bg-cyan-soft text-cyan-deep \">",
+        "target": [
+          ".p-3\\.5.transition-all.hover\\:-translate-y-0\\.5:nth-child(5) > .bg-cyan-soft.py-1.px-2\\.5"
+        ],
+        "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 2.08 (foreground color: #29bc9b, background color: #aaffec, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+      },
+      {
+        "any": [
+          {
+            "id": "color-contrast",
+            "data": {
+              "fgColor": "#29bc9b",
+              "bgColor": "#aaffec",
+              "contrastRatio": 2.08,
+              "fontSize": "9.0pt (12px)",
+              "fontWeight": "normal",
+              "messageKey": null,
+              "expectedContrastRatio": "4.5:1"
+            },
+            "relatedNodes": [
+              {
+                "html": "<span class=\"inline-flex items-center gap-1.5 rounded-pill px-2.5 py-1 text-[12px] font-medium leading-4 bg-cyan-soft text-cyan-deep \">",
+                "target": [
+                  ".p-3\\.5.transition-all.hover\\:-translate-y-0\\.5:nth-child(6) > .bg-cyan-soft.py-1.px-2\\.5"
+                ]
+              }
+            ],
+            "impact": "serious",
+            "message": "Element has insufficient color contrast of 2.08 (foreground color: #29bc9b, background color: #aaffec, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+          }
+        ],
+        "all": [],
+        "none": [],
+        "impact": "serious",
+        "html": "<span class=\"inline-flex items-center gap-1.5 rounded-pill px-2.5 py-1 text-[12px] font-medium leading-4 bg-cyan-soft text-cyan-deep \">",
+        "target": [
+          ".p-3\\.5.transition-all.hover\\:-translate-y-0\\.5:nth-child(6) > .bg-cyan-soft.py-1.px-2\\.5"
+        ],
+        "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 2.08 (foreground color: #29bc9b, background color: #aaffec, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+      },
+      {
+        "any": [
+          {
+            "id": "color-contrast",
+            "data": {
+              "fgColor": "#16a34a",
+              "bgColor": "#e8f8f0",
+              "contrastRatio": 3,
+              "fontSize": "9.8pt (13px)",
+              "fontWeight": "normal",
+              "messageKey": null,
+              "expectedContrastRatio": "4.5:1"
+            },
+            "relatedNodes": [
+              {
+                "html": "<span class=\"who-cta\" data-astro-cid-wlesxkre=\"\">",
+                "target": [
+                  ".who-card--green > .who-cta[data-astro-cid-wlesxkre=\"\"]"
+                ]
+              }
+            ],
+            "impact": "serious",
+            "message": "Element has insufficient color contrast of 3 (foreground color: #16a34a, background color: #e8f8f0, font size: 9.8pt (13px), font weight: normal). Expected contrast ratio of 4.5:1"
+          }
+        ],
+        "all": [],
+        "none": [],
+        "impact": "serious",
+        "html": "<span class=\"who-cta\" data-astro-cid-wlesxkre=\"\">",
+        "target": [
+          ".who-card--green > .who-cta[data-astro-cid-wlesxkre=\"\"]"
+        ],
+        "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 3 (foreground color: #16a34a, background color: #e8f8f0, font size: 9.8pt (13px), font weight: normal). Expected contrast ratio of 4.5:1"
+      },
+      {
+        "any": [
+          {
+            "id": "color-contrast",
+            "data": {
+              "fgColor": "#16a34a",
+              "bgColor": "#ffffff",
+              "contrastRatio": 3.29,
+              "fontSize": "10.5pt (14px)",
+              "fontWeight": "normal",
+              "messageKey": null,
+              "expectedContrastRatio": "4.5:1"
+            },
+            "relatedNodes": [
+              {
+                "html": "<article class=\"seo-card seo-card--green\" data-astro-cid-ur32db6f=\"\">",
+                "target": [
+                  ".seo-card--green"
+                ]
+              }
+            ],
+            "impact": "serious",
+            "message": "Element has insufficient color contrast of 3.29 (foreground color: #16a34a, background color: #ffffff, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+          }
+        ],
+        "all": [],
+        "none": [],
+        "impact": "serious",
+        "html": "<a class=\"seo-card__link\" href=\"/en/tools/sms-character-counter/\" data-astro-cid-ur32db6f=\"\"> SMS Character Counter<span aria-hidden=\"true\" data-astro-cid-ur32db6f=\"\">ΓåÆ</span> </a>",
+        "target": [
+          ".seo-card--green > .seo-card__body[data-astro-cid-ur32db6f=\"\"] > .seo-card__link"
+        ],
+        "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 3.29 (foreground color: #16a34a, background color: #ffffff, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+      },
+      {
+        "any": [
+          {
+            "id": "color-contrast",
+            "data": {
+              "fgColor": "#e1306c",
+              "bgColor": "#ffffff",
+              "contrastRatio": 4.33,
+              "fontSize": "10.5pt (14px)",
+              "fontWeight": "normal",
+              "messageKey": null,
+              "expectedContrastRatio": "4.5:1"
+            },
+            "relatedNodes": [
+              {
+                "html": "<article class=\"seo-card seo-card--pink\" data-astro-cid-ur32db6f=\"\">",
+                "target": [
+                  ".seo-card--pink"
+                ]
+              }
+            ],
+            "impact": "serious",
+            "message": "Element has insufficient color contrast of 4.33 (foreground color: #e1306c, background color: #ffffff, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+          }
+        ],
+        "all": [],
+        "none": [],
+        "impact": "serious",
+        "html": "<a class=\"seo-card__link\" href=\"/en/instagram-character-counter/\" data-astro-cid-ur32db6f=\"\"> Instagram Caption Cutoff Previewer &amp; Counter<span aria-hidden=\"true\" data-astro-cid-ur32db6f=\"\">ΓåÆ</span> </a>",
+        "target": [
+          ".seo-card--pink > .seo-card__body[data-astro-cid-ur32db6f=\"\"] > .seo-card__link"
+        ],
+        "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.33 (foreground color: #e1306c, background color: #ffffff, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+      }
+    ]
+  },
+  {
+    "id": "region",
+    "impact": "moderate",
+    "tags": [
+      "cat.keyboard",
+      "best-practice",
+      "RGAAv4",
+      "RGAA-9.2.1"
+    ],
+    "description": "Ensure all page content is contained by landmarks",
+    "help": "All page content should be contained by landmarks",
+    "helpUrl": "https://dequeuniversity.com/rules/axe/4.12/region?application=playwright",
+    "nodes": [
+      {
+        "any": [
+          {
+            "id": "region",
+            "data": {
+              "isIframe": false
+            },
+            "relatedNodes": [],
+            "impact": "moderate",
+            "message": "Some page content is not contained by landmarks"
+          }
+        ],
+        "all": [],
+        "none": [],
+        "impact": "moderate",
+        "html": "<span data-astro-cid-ur32db6f=\"\">Real-time previews. No more guessing.</span>",
+        "target": [
+          ".hero__badge > span[data-astro-cid-ur32db6f=\"\"]"
+        ],
+        "failureSummary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+      },
+      {
+        "any": [
+          {
+            "id": "region",
+            "data": {
+              "isIframe": false
+            },
+            "relatedNodes": [],
+            "impact": "moderate",
+            "message": "Some page content is not contained by landmarks"
+          }
+        ],
+        "all": [],
+        "none": [],
+        "impact": "moderate",
+        "html": "<h1 class=\"hero__title\" data-astro-cid-ur32db6f=\"\">See exactly where every platform cuts your text.</h1>",
+        "target": [
+          ".hero__title"
+        ],
+        "failureSummary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+      },
+      {
+        "any": [
+          {
+            "id": "region",
+            "data": {
+              "isIframe": false
+            },
+            "relatedNodes": [],
+            "impact": "moderate",
+            "message": "Some page content is not contained by landmarks"
+          }
+        ],
+        "all": [],
+        "none": [],
+        "impact": "moderate",
+        "html": "<p class=\"hero__lede\" data-astro-cid-ur32db6f=\"\">",
+        "target": [
+          ".hero__lede"
+        ],
+        "failureSummary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+      },
+      {
+        "any": [
+          {
+            "id": "region",
+            "data": {
+              "isIframe": false
+            },
+            "relatedNodes": [],
+            "impact": "moderate",
+            "message": "Some page content is not contained by landmarks"
+          }
+        ],
+        "all": [],
+        "none": [],
+        "impact": "moderate",
+        "html": "<div class=\"hero__cta\" data-astro-cid-ur32db6f=\"\"> <a href=\"#workspace\" class=\"hero__primary\" data-astro-cid-ur32db6f=\"\">Start writing</a> <a href=\"/en/platform-limits/\" class=\"hero__secondary\" data-astro-cid-ur32db6f=\"\">See platform limits</a> </div>",
+        "target": [
+          ".hero__cta"
+        ],
+        "failureSummary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+      },
+      {
+        "any": [
+          {
+            "id": "region",
+            "data": {
+              "isIframe": false
+            },
+            "relatedNodes": [],
+            "impact": "moderate",
+            "message": "Some page content is not contained by landmarks"
+          }
+        ],
+        "all": [],
+        "none": [],
+        "impact": "moderate",
+        "html": "<p class=\"hero__trust\" data-astro-cid-ur32db6f=\"\">100% free ΓÇö no sign-up ┬╖ Text never leaves your browser ┬╖ 10+ platform limits covered</p>",
+        "target": [
+          ".hero__trust"
+        ],
+        "failureSummary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+      },
+      {
+        "any": [
+          {
+            "id": "region",
+            "data": {
+              "isIframe": false
+            },
+            "relatedNodes": [],
+            "impact": "moderate",
+            "message": "Some page content is not contained by landmarks"
+          }
+        ],
+        "all": [],
+        "none": [],
+        "impact": "moderate",
+        "html": "<div class=\"hpc\" role=\"img\" aria-label=\"Fold line ΓÇö text below is hidden behind ΓÇ£ΓÇªmoreΓÇ¥.\" data-astro-cid-pfnqyxhf=\"\">",
+        "target": [
+          ".hpc"
+        ],
+        "failureSummary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+      },
+      {
+        "any": [
+          {
+            "id": "region",
+            "data": {
+              "isIframe": false
+            },
+            "relatedNodes": [],
+            "impact": "moderate",
+            "message": "Some page content is not contained by landmarks"
+          }
+        ],
+        "all": [],
+        "none": [],
+        "impact": "moderate",
+        "html": "<p class=\"why-eyebrow\" data-astro-cid-okp4fg44=\"\">WHY POSTTRUNCATE?</p>",
+        "target": [
+          ".why-eyebrow"
+        ],
+        "failureSummary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+      },
+      {
+        "any": [
+          {
+            "id": "region",
+            "data": {
+              "isIframe": false
+            },
+            "relatedNodes": [],
+            "impact": "moderate",
+            "message": "Some page content is not contained by landmarks"
+          }
+        ],
+        "all": [],
+        "none": [],
+        "impact": "moderate",
+        "html": "<h2 class=\"why-title\" data-astro-cid-okp4fg44=\"\">Write with <span class=\"why-title__accent\">confidence.</span><br>Post without worries.</h2>",
+        "target": [
+          ".why-title"
+        ],
+        "failureSummary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+      },
+      {
+        "any": [
+          {
+            "id": "region",
+            "data": {
+              "isIframe": false
+            },
+            "relatedNodes": [],
+            "impact": "moderate",
+            "message": "Some page content is not contained by landmarks"
+          }
+        ],
+        "all": [],
+        "none": [],
+        "impact": "moderate",
+        "html": "<p class=\"why-text\" data-astro-cid-okp4fg44=\"\">Every platform has different character limits and truncation rules. PostTruncate shows you exactly how your content will appear before you hit publish.</p>",
+        "target": [
+          ".why-text[data-astro-cid-okp4fg44=\"\"]:nth-child(4)"
+        ],
+        "failureSummary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+      },
+      {
+        "any": [
+          {
+            "id": "region",
+            "data": {
+              "isIframe": false
+            },
+            "relatedNodes": [],
+            "impact": "moderate",
+            "message": "Some page content is not contained by landmarks"
+          }
+        ],
+        "all": [],
+        "none": [],
+        "impact": "moderate",
+        "html": "<p class=\"why-text\" data-astro-cid-okp4fg44=\"\">Save time, increase engagement, and make every character count with real-time previews, smart insights, and one-tap AI tone rewriting.</p>",
+        "target": [
+          ".why-text[data-astro-cid-okp4fg44=\"\"]:nth-child(5)"
+        ],
+        "failureSummary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+      },
+      {
+        "any": [
+          {
+            "id": "region",
+            "data": {
+              "isIframe": false
+            },
+            "relatedNodes": [],
+            "impact": "moderate",
+            "message": "Some page content is not contained by landmarks"
+          }
+        ],
+        "all": [],
+        "none": [],
+        "impact": "moderate",
+        "html": "<h3 class=\"feature-title\" data-astro-cid-okp4fg44=\"\">Real-time Previews</h3>",
+        "target": [
+          ".feature-card--blue > .feature-title"
+        ],
+        "failureSummary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+      },
+      {
+        "any": [
+          {
+            "id": "region",
+            "data": {
+              "isIframe": false
+            },
+            "relatedNodes": [],
+            "impact": "moderate",
+            "message": "Some page content is not contained by landmarks"
+          }
+        ],
+        "all": [],
+        "none": [],
+        "impact": "moderate",
+        "html": "<p class=\"feature-desc\" data-astro-cid-okp4fg44=\"\">See exactly how your post will appear across 6+ platforms instantly.</p>",
+        "target": [
+          ".feature-card--blue > .feature-desc[data-astro-cid-okp4fg44=\"\"]"
+        ],
+        "failureSummary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+      },
+      {
+        "any": [
+          {
+            "id": "region",
+            "data": {
+              "isIframe": false
+            },
+            "relatedNodes": [],
+            "impact": "moderate",
+            "message": "Some page content is not contained by landmarks"
+          }
+        ],
+        "all": [],
+        "none": [],
+        "impact": "moderate",
+        "html": "<h3 class=\"feature-title\" data-astro-cid-okp4fg44=\"\">Smart Insights</h3>",
+        "target": [
+          ".feature-card--purple > .feature-title"
+        ],
+        "failureSummary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+      },
+      {
+        "any": [
+          {
+            "id": "region",
+            "data": {
+              "isIframe": false
+            },
+            "relatedNodes": [],
+            "impact": "moderate",
+            "message": "Some page content is not contained by landmarks"
+          }
+        ],
+        "all": [],
+        "none": [],
+        "impact": "moderate",
+        "html": "<p class=\"feature-desc\" data-astro-cid-okp4fg44=\"\">Get readability scores, keyword analysis, and content optimization tips.</p>",
+        "target": [
+          ".feature-card--purple > .feature-desc[data-astro-cid-okp4fg44=\"\"]"
+        ],
+        "failureSummary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+      },
+      {
+        "any": [
+          {
+            "id": "region",
+            "data": {
+              "isIframe": false
+            },
+            "relatedNodes": [],
+            "impact": "moderate",
+            "message": "Some page content is not contained by landmarks"
+          }
+        ],
+        "all": [],
+        "none": [],
+        "impact": "moderate",
+        "html": "<h3 class=\"feature-title\" data-astro-cid-okp4fg44=\"\">Privacy First</h3>",
+        "target": [
+          ".feature-card--green > .feature-title"
+        ],
+        "failureSummary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+      },
+      {
+        "any": [
+          {
+            "id": "region",
+            "data": {
+              "isIframe": false
+            },
+            "relatedNodes": [],
+            "impact": "moderate",
+            "message": "Some page content is not contained by landmarks"
+          }
+        ],
+        "all": [],
+        "none": [],
+        "impact": "moderate",
+        "html": "<p class=\"feature-desc\" data-astro-cid-okp4fg44=\"\">Your content is never stored or shared. Everything stays private.</p>",
+        "target": [
+          ".feature-card--green > .feature-desc[data-astro-cid-okp4fg44=\"\"]"
+        ],
+        "failureSummary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+      },
+      {
+        "any": [
+          {
+            "id": "region",
+            "data": {
+              "isIframe": false
+            },
+            "relatedNodes": [],
+            "impact": "moderate",
+            "message": "Some page content is not contained by landmarks"
+          }
+        ],
+        "all": [],
+        "none": [],
+        "impact": "moderate",
+        "html": "<h3 class=\"feature-title\" data-astro-cid-okp4fg44=\"\">AI Tone Rewriter</h3>",
+        "target": [
+          ".feature-card--amber > .feature-title"
+        ],
+        "failureSummary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+      },
+      {
+        "any": [
+          {
+            "id": "region",
+            "data": {
+              "isIframe": false
+            },
+            "relatedNodes": [],
+            "impact": "moderate",
+            "message": "Some page content is not contained by landmarks"
+          }
+        ],
+        "all": [],
+        "none": [],
+        "impact": "moderate",
+        "html": "<p class=\"feature-desc\" data-astro-cid-okp4fg44=\"\">Instantly rewrite your post in a professional, casual, friendly, or concise tone with one tap ΓÇö powered by AI.</p>",
+        "target": [
+          ".feature-card--amber > .feature-desc[data-astro-cid-okp4fg44=\"\"]"
+        ],
+        "failureSummary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+      },
+      {
+        "any": [
+          {
+            "id": "region",
+            "data": {
+              "isIframe": false
+            },
+            "relatedNodes": [],
+            "impact": "moderate",
+            "message": "Some page content is not contained by landmarks"
+          }
+        ],
+        "all": [],
+        "none": [],
+        "impact": "moderate",
+        "html": "<div class=\"truncation-head\" data-astro-cid-gq46l4gh=\"\">",
+        "target": [
+          ".truncation-head"
+        ],
+        "failureSummary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+      },
+      {
+        "any": [
+          {
+            "id": "region",
+            "data": {
+              "isIframe": false
+            },
+            "relatedNodes": [],
+            "impact": "moderate",
+            "message": "Some page content is not contained by landmarks"
+          }
+        ],
+        "all": [],
+        "none": [],
+        "impact": "moderate",
+        "html": "<h3 class=\"platform-name\" data-astro-cid-gq46l4gh=\"\">LinkedIn</h3>",
+        "target": [
+          ".platform-card--linkedin > .platform-name"
+        ],
+        "failureSummary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+      },
+      {
+        "any": [
+          {
+            "id": "region",
+            "data": {
+              "isIframe": false
+            },
+            "relatedNodes": [],
+            "impact": "moderate",
+            "message": "Some page content is not contained by landmarks"
+          }
+        ],
+        "all": [],
+        "none": [],
+        "impact": "moderate",
+        "html": "<div class=\"platform-stat\" data-astro-cid-gq46l4gh=\"\"> <span class=\"platform-stat-label\" data-astro-cid-gq46l4gh=\"\">Fold (mobile)</span> <span class=\"platform-stat-value\" data-astro-cid-gq46l4gh=\"\">~140</span> </div>",
+        "target": [
+          ".platform-card--linkedin > .platform-stats[data-astro-cid-gq46l4gh=\"\"] > .platform-stat[data-astro-cid-gq46l4gh=\"\"]:nth-child(1)"
+        ],
+        "failureSummary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+      },
+      {
+        "any": [
+          {
+            "id": "region",
+            "data": {
+              "isIframe": false
+            },
+            "relatedNodes": [],
+            "impact": "moderate",
+            "message": "Some page content is not contained by landmarks"
+          }
+        ],
+        "all": [],
+        "none": [],
+        "impact": "moderate",
+        "html": "<div class=\"platform-stat\" data-astro-cid-gq46l4gh=\"\"> <span class=\"platform-stat-label\" data-astro-cid-gq46l4gh=\"\">Fold (desktop)</span> <span class=\"platform-stat-value\" data-astro-cid-gq46l4gh=\"\">~210</span> </div>",
+        "target": [
+          ".platform-card--linkedin > .platform-stats[data-astro-cid-gq46l4gh=\"\"] > .platform-stat[data-astro-cid-gq46l4gh=\"\"]:nth-child(3)"
+        ],
+        "failureSummary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+      },
+      {
+        "any": [
+          {
+            "id": "region",
+            "data": {
+              "isIframe": false
+            },
+            "relatedNodes": [],
+            "impact": "moderate",
+            "message": "Some page content is not contained by landmarks"
+          }
+        ],
+        "all": [],
+        "none": [],
+        "impact": "moderate",
+        "html": "<h3 class=\"platform-name\" data-astro-cid-gq46l4gh=\"\">X (Twitter)</h3>",
+        "target": [
+          ".platform-card--twitter > .platform-name"
+        ],
+        "failureSummary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+      },
+      {
+        "any": [
+          {
+            "id": "region",
+            "data": {
+              "isIframe": false
+            },
+            "relatedNodes": [],
+            "impact": "moderate",
+            "message": "Some page content is not contained by landmarks"
+          }
+        ],
+        "all": [],
+        "none": [],
+        "impact": "moderate",
+        "html": "<div class=\"platform-stat\" data-astro-cid-gq46l4gh=\"\"> <span class=\"platform-stat-label\" data-astro-cid-gq46l4gh=\"\">No fold</span>  </div>",
+        "target": [
+          ".platform-card--twitter > .platform-stats[data-astro-cid-gq46l4gh=\"\"] > .platform-stat[data-astro-cid-gq46l4gh=\"\"]:nth-child(1)"
+        ],
+        "failureSummary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+      },
+      {
+        "any": [
+          {
+            "id": "region",
+            "data": {
+              "isIframe": false
+            },
+            "relatedNodes": [],
+            "impact": "moderate",
+            "message": "Some page content is not contained by landmarks"
+          }
+        ],
+        "all": [],
+        "none": [],
+        "impact": "moderate",
+        "html": "<div class=\"platform-stat\" data-astro-cid-gq46l4gh=\"\"> <span class=\"platform-stat-label\" data-astro-cid-gq46l4gh=\"\">Hard limit</span> <span class=\"platform-stat-value\" data-astro-cid-gq46l4gh=\"\">280</span> </div>",
+        "target": [
+          ".platform-card--twitter > .platform-stats[data-astro-cid-gq46l4gh=\"\"] > .platform-stat[data-astro-cid-gq46l4gh=\"\"]:nth-child(3)"
+        ],
+        "failureSummary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+      },
+      {
+        "any": [
+          {
+            "id": "region",
+            "data": {
+              "isIframe": false
+            },
+            "relatedNodes": [],
+            "impact": "moderate",
+            "message": "Some page content is not contained by landmarks"
+          }
+        ],
+        "all": [],
+        "none": [],
+        "impact": "moderate",
+        "html": "<h3 class=\"platform-name\" data-astro-cid-gq46l4gh=\"\">Instagram</h3>",
+        "target": [
+          ".platform-card--instagram > .platform-name"
+        ],
+        "failureSummary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+      },
+      {
+        "any": [
+          {
+            "id": "region",
+            "data": {
+              "isIframe": false
+            },
+            "relatedNodes": [],
+            "impact": "moderate",
+            "message": "Some page content is not contained by landmarks"
+          }
+        ],
+        "all": [],
+        "none": [],
+        "impact": "moderate",
+        "html": "<div class=\"platform-stat\" data-astro-cid-gq46l4gh=\"\"> <span class=\"platform-stat-label\" data-astro-cid-gq46l4gh=\"\">Fold (mobile)</span> <span class=\"platform-stat-value\" data-astro-cid-gq46l4gh=\"\">~125</span> </div>",
+        "target": [
+          ".platform-card--instagram > .platform-stats[data-astro-cid-gq46l4gh=\"\"] > .platform-stat[data-astro-cid-gq46l4gh=\"\"]:nth-child(1)"
+        ],
+        "failureSummary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+      },
+      {
+        "any": [
+          {
+            "id": "region",
+            "data": {
+              "isIframe": false
+            },
+            "relatedNodes": [],
+            "impact": "moderate",
+            "message": "Some page content is not contained by landmarks"
+          }
+        ],
+        "all": [],
+        "none": [],
+        "impact": "moderate",
+        "html": "<div class=\"platform-stat\" data-astro-cid-gq46l4gh=\"\"> <span class=\"platform-stat-label\" data-astro-cid-gq46l4gh=\"\">Fold (desktop)</span> <span class=\"platform-stat-value\" data-astro-cid-gq46l4gh=\"\">~125</span> </div>",
+        "target": [
+          ".platform-card--instagram > .platform-stats[data-astro-cid-gq46l4gh=\"\"] > .platform-stat[data-astro-cid-gq46l4gh=\"\"]:nth-child(3)"
+        ],
+        "failureSummary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+      },
+      {
+        "any": [
+          {
+            "id": "region",
+            "data": {
+              "isIframe": false
+            },
+            "relatedNodes": [],
+            "impact": "moderate",
+            "message": "Some page content is not contained by landmarks"
+          }
+        ],
+        "all": [],
+        "none": [],
+        "impact": "moderate",
+        "html": "<h3 class=\"platform-name\" data-astro-cid-gq46l4gh=\"\">Facebook</h3>",
+        "target": [
+          ".platform-card--facebook > .platform-name"
+        ],
+        "failureSummary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+      },
+      {
+        "any": [
+          {
+            "id": "region",
+            "data": {
+              "isIframe": false
+            },
+            "relatedNodes": [],
+            "impact": "moderate",
+            "message": "Some page content is not contained by landmarks"
+          }
+        ],
+        "all": [],
+        "none": [],
+        "impact": "moderate",
+        "html": "<div class=\"platform-stat\" data-astro-cid-gq46l4gh=\"\"> <span class=\"platform-stat-label\" data-astro-cid-gq46l4gh=\"\">Fold (mobile)</span> <span class=\"platform-stat-value\" data-astro-cid-gq46l4gh=\"\">~125</span> </div>",
+        "target": [
+          ".platform-card--facebook > .platform-stats[data-astro-cid-gq46l4gh=\"\"] > .platform-stat[data-astro-cid-gq46l4gh=\"\"]:nth-child(1)"
+        ],
+        "failureSummary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+      },
+      {
+        "any": [
+          {
+            "id": "region",
+            "data": {
+              "isIframe": false
+            },
+            "relatedNodes": [],
+            "impact": "moderate",
+            "message": "Some page content is not contained by landmarks"
+          }
+        ],
+        "all": [],
+        "none": [],
+        "impact": "moderate",
+        "html": "<div class=\"platform-stat\" data-astro-cid-gq46l4gh=\"\"> <span class=\"platform-stat-label\" data-astro-cid-gq46l4gh=\"\">Fold (desktop)</span> <span class=\"platform-stat-value\" data-astro-cid-gq46l4gh=\"\">~480</span> </div>",
+        "target": [
+          ".platform-card--facebook > .platform-stats[data-astro-cid-gq46l4gh=\"\"] > .platform-stat[data-astro-cid-gq46l4gh=\"\"]:nth-child(3)"
+        ],
+        "failureSummary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+      },
+      {
+        "any": [
+          {
+            "id": "region",
+            "data": {
+              "isIframe": false
+            },
+            "relatedNodes": [],
+            "impact": "moderate",
+            "message": "Some page content is not contained by landmarks"
+          }
+        ],
+        "all": [],
+        "none": [],
+        "impact": "moderate",
+        "html": "<h3 class=\"platform-name\" data-astro-cid-gq46l4gh=\"\">Threads</h3>",
+        "target": [
+          ".platform-card--threads > .platform-name"
+        ],
+        "failureSummary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+      },
+      {
+        "any": [
+          {
+            "id": "region",
+            "data": {
+              "isIframe": false
+            },
+            "relatedNodes": [],
+            "impact": "moderate",
+            "message": "Some page content is not contained by landmarks"
+          }
+        ],
+        "all": [],
+        "none": [],
+        "impact": "moderate",
+        "html": "<div class=\"platform-stat\" data-astro-cid-gq46l4gh=\"\"> <span class=\"platform-stat-label\" data-astro-cid-gq46l4gh=\"\">Fold (mobile)</span> <span class=\"platform-stat-value\" data-astro-cid-gq46l4gh=\"\">~250</span> </div>",
+        "target": [
+          ".platform-card--threads > .platform-stats[data-astro-cid-gq46l4gh=\"\"] > .platform-stat[data-astro-cid-gq46l4gh=\"\"]:nth-child(1)"
+        ],
+        "failureSummary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+      },
+      {
+        "any": [
+          {
+            "id": "region",
+            "data": {
+              "isIframe": false
+            },
+            "relatedNodes": [],
+            "impact": "moderate",
+            "message": "Some page content is not contained by landmarks"
+          }
+        ],
+        "all": [],
+        "none": [],
+        "impact": "moderate",
+        "html": "<div class=\"platform-stat\" data-astro-cid-gq46l4gh=\"\"> <span class=\"platform-stat-label\" data-astro-cid-gq46l4gh=\"\">Fold (desktop)</span> <span class=\"platform-stat-value\" data-astro-cid-gq46l4gh=\"\">500</span> </div>",
+        "target": [
+          ".platform-card--threads > .platform-stats[data-astro-cid-gq46l4gh=\"\"] > .platform-stat[data-astro-cid-gq46l4gh=\"\"]:nth-child(3)"
+        ],
+        "failureSummary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+      },
+      {
+        "any": [
+          {
+            "id": "region",
+            "data": {
+              "isIframe": false
+            },
+            "relatedNodes": [],
+            "impact": "moderate",
+            "message": "Some page content is not contained by landmarks"
+          }
+        ],
+        "all": [],
+        "none": [],
+        "impact": "moderate",
+        "html": "<h3 class=\"platform-name\" data-astro-cid-gq46l4gh=\"\">TikTok</h3>",
+        "target": [
+          ".platform-card--tiktok > .platform-name"
+        ],
+        "failureSummary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+      },
+      {
+        "any": [
+          {
+            "id": "region",
+            "data": {
+              "isIframe": false
+            },
+            "relatedNodes": [],
+            "impact": "moderate",
+            "message": "Some page content is not contained by landmarks"
+          }
+        ],
+        "all": [],
+        "none": [],
+        "impact": "moderate",
+        "html": "<div class=\"platform-stat\" data-astro-cid-gq46l4gh=\"\"> <span class=\"platform-stat-label\" data-astro-cid-gq46l4gh=\"\">Fold (mobile)</span> <span class=\"platform-stat-value\" data-astro-cid-gq46l4gh=\"\">~100</span> </div>",
+        "target": [
+          ".platform-card--tiktok > .platform-stats[data-astro-cid-gq46l4gh=\"\"] > .platform-stat[data-astro-cid-gq46l4gh=\"\"]:nth-child(1)"
+        ],
+        "failureSummary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+      },
+      {
+        "any": [
+          {
+            "id": "region",
+            "data": {
+              "isIframe": false
+            },
+            "relatedNodes": [],
+            "impact": "moderate",
+            "message": "Some page content is not contained by landmarks"
+          }
+        ],
+        "all": [],
+        "none": [],
+        "impact": "moderate",
+        "html": "<div class=\"platform-stat\" data-astro-cid-gq46l4gh=\"\"> <span class=\"platform-stat-label\" data-astro-cid-gq46l4gh=\"\">Fold (desktop)</span> <span class=\"platform-stat-value\" data-astro-cid-gq46l4gh=\"\">~100</span> </div>",
+        "target": [
+          ".platform-card--tiktok > .platform-stats[data-astro-cid-gq46l4gh=\"\"] > .platform-stat[data-astro-cid-gq46l4gh=\"\"]:nth-child(3)"
+        ],
+        "failureSummary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+      },
+      {
+        "any": [
+          {
+            "id": "region",
+            "data": {
+              "isIframe": false
+            },
+            "relatedNodes": [],
+            "impact": "moderate",
+            "message": "Some page content is not contained by landmarks"
+          }
+        ],
+        "all": [],
+        "none": [],
+        "impact": "moderate",
+        "html": "<div class=\"who-head\" data-astro-cid-wlesxkre=\"\">",
+        "target": [
+          ".who-head"
+        ],
+        "failureSummary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+      },
+      {
+        "any": [
+          {
+            "id": "region",
+            "data": {
+              "isIframe": false
+            },
+            "relatedNodes": [],
+            "impact": "moderate",
+            "message": "Some page content is not contained by landmarks"
+          }
+        ],
+        "all": [],
+        "none": [],
+        "impact": "moderate",
+        "html": "<h3 class=\"who-card-title\" data-astro-cid-wlesxkre=\"\">Marketers</h3>",
+        "target": [
+          ".who-card--blue > .who-card-title"
+        ],
+        "failureSummary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+      },
+      {
+        "any": [
+          {
+            "id": "region",
+            "data": {
+              "isIframe": false
+            },
+            "relatedNodes": [],
+            "impact": "moderate",
+            "message": "Some page content is not contained by landmarks"
+          }
+        ],
+        "all": [],
+        "none": [],
+        "impact": "moderate",
+        "html": "<p class=\"who-card-desc\" data-astro-cid-wlesxkre=\"\">Optimize campaigns, ad copy, and social posts for maximum reach and engagement.</p>",
+        "target": [
+          ".who-card--blue > .who-card-desc[data-astro-cid-wlesxkre=\"\"]"
+        ],
+        "failureSummary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+      },
+      {
+        "any": [
+          {
+            "id": "region",
+            "data": {
+              "isIframe": false
+            },
+            "relatedNodes": [],
+            "impact": "moderate",
+            "message": "Some page content is not contained by landmarks"
+          }
+        ],
+        "all": [],
+        "none": [],
+        "impact": "moderate",
+        "html": "<span class=\"who-cta\" data-astro-cid-wlesxkre=\"\">",
+        "target": [
+          ".who-card--blue > .who-cta[data-astro-cid-wlesxkre=\"\"]"
+        ],
+        "failureSummary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+      },
+      {
+        "any": [
+          {
+            "id": "region",
+            "data": {
+              "isIframe": false
+            },
+            "relatedNodes": [],
+            "impact": "moderate",
+            "message": "Some page content is not contained by landmarks"
+          }
+        ],
+        "all": [],
+        "none": [],
+        "impact": "moderate",
+        "html": "<h3 class=\"who-card-title\" data-astro-cid-wlesxkre=\"\">Creators</h3>",
+        "target": [
+          ".who-card--purple > .who-card-title"
+        ],
+        "failureSummary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+      },
+      {
+        "any": [
+          {
+            "id": "region",
+            "data": {
+              "isIframe": false
+            },
+            "relatedNodes": [],
+            "impact": "moderate",
+            "message": "Some page content is not contained by landmarks"
+          }
+        ],
+        "all": [],
+        "none": [],
+        "impact": "moderate",
+        "html": "<p class=\"who-card-desc\" data-astro-cid-wlesxkre=\"\">Write better captions and threads that get more likes, shares, and saves.</p>",
+        "target": [
+          ".who-card--purple > .who-card-desc[data-astro-cid-wlesxkre=\"\"]"
+        ],
+        "failureSummary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+      },
+      {
+        "any": [
+          {
+            "id": "region",
+            "data": {
+              "isIframe": false
+            },
+            "relatedNodes": [],
+            "impact": "moderate",
+            "message": "Some page content is not contained by landmarks"
+          }
+        ],
+        "all": [],
+        "none": [],
+        "impact": "moderate",
+        "html": "<span class=\"who-cta\" data-astro-cid-wlesxkre=\"\">",
+        "target": [
+          ".who-card--purple > .who-cta[data-astro-cid-wlesxkre=\"\"]"
+        ],
+        "failureSummary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+      },
+      {
+        "any": [
+          {
+            "id": "region",
+            "data": {
+              "isIframe": false
+            },
+            "relatedNodes": [],
+            "impact": "moderate",
+            "message": "Some page content is not contained by landmarks"
+          }
+        ],
+        "all": [],
+        "none": [],
+        "impact": "moderate",
+        "html": "<h3 class=\"who-card-title\" data-astro-cid-wlesxkre=\"\">Agencies</h3>",
+        "target": [
+          ".who-card--darkblue > .who-card-title"
+        ],
+        "failureSummary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+      },
+      {
+        "any": [
+          {
+            "id": "region",
+            "data": {
+              "isIframe": false
+            },
+            "relatedNodes": [],
+            "impact": "moderate",
+            "message": "Some page content is not contained by landmarks"
+          }
+        ],
+        "all": [],
+        "none": [],
+        "impact": "moderate",
+        "html": "<p class=\"who-card-desc\" data-astro-cid-wlesxkre=\"\">Manage multiple clients and ensure every post is perfectly optimized.</p>",
+        "target": [
+          ".who-card--darkblue > .who-card-desc[data-astro-cid-wlesxkre=\"\"]"
+        ],
+        "failureSummary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+      },
+      {
+        "any": [
+          {
+            "id": "region",
+            "data": {
+              "isIframe": false
+            },
+            "relatedNodes": [],
+            "impact": "moderate",
+            "message": "Some page content is not contained by landmarks"
+          }
+        ],
+        "all": [],
+        "none": [],
+        "impact": "moderate",
+        "html": "<span class=\"who-cta\" data-astro-cid-wlesxkre=\"\">",
+        "target": [
+          ".who-card--darkblue > .who-cta[data-astro-cid-wlesxkre=\"\"]"
+        ],
+        "failureSummary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+      },
+      {
+        "any": [
+          {
+            "id": "region",
+            "data": {
+              "isIframe": false
+            },
+            "relatedNodes": [],
+            "impact": "moderate",
+            "message": "Some page content is not contained by landmarks"
+          }
+        ],
+        "all": [],
+        "none": [],
+        "impact": "moderate",
+        "html": "<h3 class=\"who-card-title\" data-astro-cid-wlesxkre=\"\">Founders</h3>",
+        "target": [
+          ".who-card--green > .who-card-title"
+        ],
+        "failureSummary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+      },
+      {
+        "any": [
+          {
+            "id": "region",
+            "data": {
+              "isIframe": false
+            },
+            "relatedNodes": [],
+            "impact": "moderate",
+            "message": "Some page content is not contained by landmarks"
+          }
+        ],
+        "all": [],
+        "none": [],
+        "impact": "moderate",
+        "html": "<p class=\"who-card-desc\" data-astro-cid-wlesxkre=\"\">Share updates and build your brand with clear, impactful content.</p>",
+        "target": [
+          ".who-card--green > .who-card-desc[data-astro-cid-wlesxkre=\"\"]"
+        ],
+        "failureSummary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+      },
+      {
+        "any": [
+          {
+            "id": "region",
+            "data": {
+              "isIframe": false
+            },
+            "relatedNodes": [],
+            "impact": "moderate",
+            "message": "Some page content is not contained by landmarks"
+          }
+        ],
+        "all": [],
+        "none": [],
+        "impact": "moderate",
+        "html": "<span class=\"who-cta\" data-astro-cid-wlesxkre=\"\">",
+        "target": [
+          ".who-card--green > .who-cta[data-astro-cid-wlesxkre=\"\"]"
+        ],
+        "failureSummary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+      },
+      {
+        "any": [
+          {
+            "id": "region",
+            "data": {
+              "isIframe": false
+            },
+            "relatedNodes": [],
+            "impact": "moderate",
+            "message": "Some page content is not contained by landmarks"
+          }
+        ],
+        "all": [],
+        "none": [],
+        "impact": "moderate",
+        "html": "<section id=\"ad-previews\" class=\"container-page\" style=\"margin-top: var(--spacing-section);\" data-astro-cid-ur32db6f=\"\">",
+        "target": [
+          "#ad-previews"
+        ],
+        "failureSummary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+      },
+      {
+        "any": [
+          {
+            "id": "region",
+            "data": {
+              "isIframe": false
+            },
+            "relatedNodes": [],
+            "impact": "moderate",
+            "message": "Some page content is not contained by landmarks"
+          }
+        ],
+        "all": [],
+        "none": [],
+        "impact": "moderate",
+        "html": "<section id=\"embed-widget-promo\" class=\"container-page\" style=\"margin-top: 16px;\" data-astro-cid-ur32db6f=\"\">",
+        "target": [
+          "#embed-widget-promo"
+        ],
+        "failureSummary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+      },
+      {
+        "any": [
+          {
+            "id": "region",
+            "data": {
+              "isIframe": false
+            },
+            "relatedNodes": [],
+            "impact": "moderate",
+            "message": "Some page content is not contained by landmarks"
+          }
+        ],
+        "all": [],
+        "none": [],
+        "impact": "moderate",
+        "html": "<div class=\"hookband__inner\" data-astro-cid-ur32db6f=\"\">",
+        "target": [
+          ".hookband__inner"
+        ],
+        "failureSummary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+      },
+      {
+        "any": [
+          {
+            "id": "region",
+            "data": {
+              "isIframe": false
+            },
+            "relatedNodes": [],
+            "impact": "moderate",
+            "message": "Some page content is not contained by landmarks"
+          }
+        ],
+        "all": [],
+        "none": [],
+        "impact": "moderate",
+        "html": "<header class=\"faqblog__head\" data-astro-cid-ur32db6f=\"\"> <h2 class=\"faqblog__label\" data-astro-cid-ur32db6f=\"\">FAQ</h2> </header>",
+        "target": [
+          ".faqblog__col[data-astro-cid-ur32db6f=\"\"]:nth-child(1) > .faqblog__head"
+        ],
+        "failureSummary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+      },
+      {
+        "any": [
+          {
+            "id": "region",
+            "data": {
+              "isIframe": false
+            },
+            "relatedNodes": [],
+            "impact": "moderate",
+            "message": "Some page content is not contained by landmarks"
+          }
+        ],
+        "all": [],
+        "none": [],
+        "impact": "moderate",
+        "html": "<p class=\"faqblog__all faqblog__all--center\" data-astro-cid-ur32db6f=\"\"> <a href=\"/en/faq/\" data-astro-cid-ur32db6f=\"\">View all FAQs ΓåÆ</a> </p>",
+        "target": [
+          ".faqblog__all"
+        ],
+        "failureSummary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+      },
+      {
+        "any": [
+          {
+            "id": "region",
+            "data": {
+              "isIframe": false
+            },
+            "relatedNodes": [],
+            "impact": "moderate",
+            "message": "Some page content is not contained by landmarks"
+          }
+        ],
+        "all": [],
+        "none": [],
+        "impact": "moderate",
+        "html": "<div class=\"faqblog__col\" aria-labelledby=\"latest-heading\" data-astro-cid-ur32db6f=\"\">",
+        "target": [
+          "div[aria-labelledby=\"latest-heading\"]"
+        ],
+        "failureSummary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+      },
+      {
+        "any": [
+          {
+            "id": "region",
+            "data": {
+              "isIframe": false
+            },
+            "relatedNodes": [],
+            "impact": "moderate",
+            "message": "Some page content is not contained by landmarks"
+          }
+        ],
+        "all": [],
+        "none": [],
+        "impact": "moderate",
+        "html": "<div class=\"cta-banner__copy\" data-astro-cid-ur32db6f=\"\"> <h2 class=\"cta-banner__title\" data-astro-cid-ur32db6f=\"\">Ready to optimize your content?</h2> <p class=\"cta-banner__body\" data-astro-cid-ur32db6f=\"\">Check your post before LinkedIn, X, TikTok, or Instagram cuts it for you.</p> </div>",
+        "target": [
+          ".cta-banner__copy"
+        ],
+        "failureSummary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+      },
+      {
+        "any": [
+          {
+            "id": "region",
+            "data": {
+              "isIframe": false
+            },
+            "relatedNodes": [],
+            "impact": "moderate",
+            "message": "Some page content is not contained by landmarks"
+          }
+        ],
+        "all": [],
+        "none": [],
+        "impact": "moderate",
+        "html": "<div class=\"cta-banner__action\" data-astro-cid-ur32db6f=\"\">",
+        "target": [
+          ".cta-banner__action"
+        ],
+        "failureSummary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+      }
+    ]
+  }
+]

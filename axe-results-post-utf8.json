@@ -1,0 +1,1358 @@
+﻿[
+  {
+    "id": "color-contrast",
+    "impact": "serious",
+    "tags": [
+      "cat.color",
+      "wcag2aa",
+      "wcag143",
+      "TTv5",
+      "TT13.c",
+      "EN-301-549",
+      "EN-9.1.4.3",
+      "ACT",
+      "RGAAv4",
+      "RGAA-3.2.1"
+    ],
+    "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+    "help": "Elements must meet minimum color contrast ratio thresholds",
+    "helpUrl": "https://dequeuniversity.com/rules/axe/4.12/color-contrast?application=playwright",
+    "nodes": [
+      {
+        "any": [
+          {
+            "id": "color-contrast",
+            "data": {
+              "fgColor": "#16a34a",
+              "bgColor": "#e8f8f0",
+              "contrastRatio": 3,
+              "fontSize": "9.8pt (13px)",
+              "fontWeight": "normal",
+              "messageKey": null,
+              "expectedContrastRatio": "4.5:1"
+            },
+            "relatedNodes": [
+              {
+                "html": "<span class=\"who-cta\" data-astro-cid-wlesxkre=\"\" data-astro-source-file=\"D:/AICodingProjects/PostTruncate.com/src/components/WhoIsItFor.astro\" data-astro-source-loc=\"67:31\">",
+                "target": [
+                  ".who-card--green > .who-cta[data-astro-source-loc=\"67:31\"][data-astro-cid-wlesxkre=\"\"]"
+                ]
+              }
+            ],
+            "impact": "serious",
+            "message": "Element has insufficient color contrast of 3 (foreground color: #16a34a, background color: #e8f8f0, font size: 9.8pt (13px), font weight: normal). Expected contrast ratio of 4.5:1"
+          }
+        ],
+        "all": [],
+        "none": [],
+        "impact": "serious",
+        "html": "<span class=\"who-cta\" data-astro-cid-wlesxkre=\"\" data-astro-source-file=\"D:/AICodingProjects/PostTruncate.com/src/components/WhoIsItFor.astro\" data-astro-source-loc=\"67:31\">",
+        "target": [
+          ".who-card--green > .who-cta[data-astro-source-loc=\"67:31\"][data-astro-cid-wlesxkre=\"\"]"
+        ],
+        "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 3 (foreground color: #16a34a, background color: #e8f8f0, font size: 9.8pt (13px), font weight: normal). Expected contrast ratio of 4.5:1"
+      },
+      {
+        "any": [
+          {
+            "id": "color-contrast",
+            "data": {
+              "fgColor": "#16a34a",
+              "bgColor": "#ffffff",
+              "contrastRatio": 3.29,
+              "fontSize": "10.5pt (14px)",
+              "fontWeight": "normal",
+              "messageKey": null,
+              "expectedContrastRatio": "4.5:1"
+            },
+            "relatedNodes": [
+              {
+                "html": "<article class=\"seo-card seo-card--green\" data-astro-cid-ur32db6f=\"\" data-astro-source-file=\"D:/AICodingProjects/PostTruncate.com/src/pages/[lang]/[slug]/index.astro\" data-astro-source-loc=\"203:76\">",
+                "target": [
+                  ".seo-card--green"
+                ]
+              }
+            ],
+            "impact": "serious",
+            "message": "Element has insufficient color contrast of 3.29 (foreground color: #16a34a, background color: #ffffff, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+          }
+        ],
+        "all": [],
+        "none": [],
+        "impact": "serious",
+        "html": "<a class=\"seo-card__link\" href=\"/en/tools/sms-character-counter/\" data-astro-cid-ur32db6f=\"\" data-astro-source-file=\"D:/AICodingProjects/PostTruncate.com/src/pages/[lang]/[slug]/index.astro\" data-astro-source-loc=\"230:62\">",
+        "target": [
+          ".seo-card--green > .seo-card__body[data-astro-source-loc=\"224:43\"][data-astro-cid-ur32db6f=\"\"] > .seo-card__link[data-astro-source-loc=\"230:62\"]"
+        ],
+        "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 3.29 (foreground color: #16a34a, background color: #ffffff, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+      },
+      {
+        "any": [
+          {
+            "id": "color-contrast",
+            "data": {
+              "fgColor": "#e1306c",
+              "bgColor": "#ffffff",
+              "contrastRatio": 4.33,
+              "fontSize": "10.5pt (14px)",
+              "fontWeight": "normal",
+              "messageKey": null,
+              "expectedContrastRatio": "4.5:1"
+            },
+            "relatedNodes": [
+              {
+                "html": "<article class=\"seo-card seo-card--pink\" data-astro-cid-ur32db6f=\"\" data-astro-source-file=\"D:/AICodingProjects/PostTruncate.com/src/pages/[lang]/[slug]/index.astro\" data-astro-source-loc=\"203:76\">",
+                "target": [
+                  ".seo-card--pink"
+                ]
+              }
+            ],
+            "impact": "serious",
+            "message": "Element has insufficient color contrast of 4.33 (foreground color: #e1306c, background color: #ffffff, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+          }
+        ],
+        "all": [],
+        "none": [],
+        "impact": "serious",
+        "html": "<a class=\"seo-card__link\" href=\"/en/instagram-character-counter/\" data-astro-cid-ur32db6f=\"\" data-astro-source-file=\"D:/AICodingProjects/PostTruncate.com/src/pages/[lang]/[slug]/index.astro\" data-astro-source-loc=\"230:62\">",
+        "target": [
+          ".seo-card--pink > .seo-card__body[data-astro-source-loc=\"224:43\"][data-astro-cid-ur32db6f=\"\"] > .seo-card__link[data-astro-source-loc=\"230:62\"]"
+        ],
+        "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.33 (foreground color: #e1306c, background color: #ffffff, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+      }
+    ]
+  },
+  {
+    "id": "region",
+    "impact": "moderate",
+    "tags": [
+      "cat.keyboard",
+      "best-practice",
+      "RGAAv4",
+      "RGAA-9.2.1"
+    ],
+    "description": "Ensure all page content is contained by landmarks",
+    "help": "All page content should be contained by landmarks",
+    "helpUrl": "https://dequeuniversity.com/rules/axe/4.12/region?application=playwright",
+    "nodes": [
+      {
+        "any": [
+          {
+            "id": "region",
+            "data": {
+              "isIframe": false
+            },
+            "relatedNodes": [],
+            "impact": "moderate",
+            "message": "Some page content is not contained by landmarks"
+          }
+        ],
+        "all": [],
+        "none": [],
+        "impact": "moderate",
+        "html": "<span data-astro-cid-ur32db6f=\"\" data-astro-source-file=\"D:/AICodingProjects/PostTruncate.com/src/pages/[lang]/[slug]/index.astro\" data-astro-source-loc=\"149:17\">Real-time previews. No more guessing.</span>",
+        "target": [
+          "span[data-astro-source-loc=\"149:17\"]"
+        ],
+        "failureSummary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+      },
+      {
+        "any": [
+          {
+            "id": "region",
+            "data": {
+              "isIframe": false
+            },
+            "relatedNodes": [],
+            "impact": "moderate",
+            "message": "Some page content is not contained by landmarks"
+          }
+        ],
+        "all": [],
+        "none": [],
+        "impact": "moderate",
+        "html": "<h1 class=\"hero__title\" data-astro-cid-ur32db6f=\"\" data-astro-source-file=\"D:/AICodingProjects/PostTruncate.com/src/pages/[lang]/[slug]/index.astro\" data-astro-source-loc=\"151:33\">See exactly where every platform cuts your text.</h1>",
+        "target": [
+          "h1"
+        ],
+        "failureSummary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+      },
+      {
+        "any": [
+          {
+            "id": "region",
+            "data": {
+              "isIframe": false
+            },
+            "relatedNodes": [],
+            "impact": "moderate",
+            "message": "Some page content is not contained by landmarks"
+          }
+        ],
+        "all": [],
+        "none": [],
+        "impact": "moderate",
+        "html": "<p class=\"hero__lede\" data-astro-cid-ur32db6f=\"\" data-astro-source-file=\"D:/AICodingProjects/PostTruncate.com/src/pages/[lang]/[slug]/index.astro\" data-astro-source-loc=\"152:31\">",
+        "target": [
+          ".hero__lede"
+        ],
+        "failureSummary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+      },
+      {
+        "any": [
+          {
+            "id": "region",
+            "data": {
+              "isIframe": false
+            },
+            "relatedNodes": [],
+            "impact": "moderate",
+            "message": "Some page content is not contained by landmarks"
+          }
+        ],
+        "all": [],
+        "none": [],
+        "impact": "moderate",
+        "html": "<div class=\"hero__cta\" data-astro-cid-ur32db6f=\"\" data-astro-source-file=\"D:/AICodingProjects/PostTruncate.com/src/pages/[lang]/[slug]/index.astro\" data-astro-source-loc=\"153:32\">",
+        "target": [
+          ".hero__cta"
+        ],
+        "failureSummary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+      },
+      {
+        "any": [
+          {
+            "id": "region",
+            "data": {
+              "isIframe": false
+            },
+            "relatedNodes": [],
+            "impact": "moderate",
+            "message": "Some page content is not contained by landmarks"
+          }
+        ],
+        "all": [],
+        "none": [],
+        "impact": "moderate",
+        "html": "<p class=\"hero__trust\" data-astro-cid-ur32db6f=\"\" data-astro-source-file=\"D:/AICodingProjects/PostTruncate.com/src/pages/[lang]/[slug]/index.astro\" data-astro-source-loc=\"157:32\">100% free ΓÇö no sign-up ┬╖ Text never leaves your browser ┬╖ 10+ platform limits covered</p>",
+        "target": [
+          ".hero__trust"
+        ],
+        "failureSummary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+      },
+      {
+        "any": [
+          {
+            "id": "region",
+            "data": {
+              "isIframe": false
+            },
+            "relatedNodes": [],
+            "impact": "moderate",
+            "message": "Some page content is not contained by landmarks"
+          }
+        ],
+        "all": [],
+        "none": [],
+        "impact": "moderate",
+        "html": "<div class=\"hpc\" role=\"img\" aria-label=\"Fold line ΓÇö text below is hidden behind ΓÇ£ΓÇªmoreΓÇ¥.\" data-astro-cid-pfnqyxhf=\"\" data-astro-source-file=\"D:/AICodingProjects/PostTruncate.com/src/components/HeroPreviewCard.astro\" data-astro-source-loc=\"74:52\">",
+        "target": [
+          ".hpc"
+        ],
+        "failureSummary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+      },
+      {
+        "any": [
+          {
+            "id": "region",
+            "data": {
+              "isIframe": false
+            },
+            "relatedNodes": [],
+            "impact": "moderate",
+            "message": "Some page content is not contained by landmarks"
+          }
+        ],
+        "all": [],
+        "none": [],
+        "impact": "moderate",
+        "html": "<p class=\"why-eyebrow\" data-astro-cid-okp4fg44=\"\" data-astro-source-file=\"D:/AICodingProjects/PostTruncate.com/src/components/WhyPostTruncate.astro\" data-astro-source-loc=\"22:30\">WHY POSTTRUNCATE?</p>",
+        "target": [
+          ".why-eyebrow"
+        ],
+        "failureSummary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+      },
+      {
+        "any": [
+          {
+            "id": "region",
+            "data": {
+              "isIframe": false
+            },
+            "relatedNodes": [],
+            "impact": "moderate",
+            "message": "Some page content is not contained by landmarks"
+          }
+        ],
+        "all": [],
+        "none": [],
+        "impact": "moderate",
+        "html": "<h2 class=\"why-title\" data-astro-cid-okp4fg44=\"\" data-astro-source-file=\"D:/AICodingProjects/PostTruncate.com/src/components/WhyPostTruncate.astro\" data-astro-source-loc=\"23:8\">Write with <span class=\"why-title__accent\">confidence.</span><br>Post without worries.</h2>",
+        "target": [
+          ".why-title"
+        ],
+        "failureSummary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+      },
+      {
+        "any": [
+          {
+            "id": "region",
+            "data": {
+              "isIframe": false
+            },
+            "relatedNodes": [],
+            "impact": "moderate",
+            "message": "Some page content is not contained by landmarks"
+          }
+        ],
+        "all": [],
+        "none": [],
+        "impact": "moderate",
+        "html": "<p class=\"why-text\" data-astro-cid-okp4fg44=\"\" data-astro-source-file=\"D:/AICodingProjects/PostTruncate.com/src/components/WhyPostTruncate.astro\" data-astro-source-loc=\"28:27\">",
+        "target": [
+          "p[data-astro-source-loc=\"28:27\"]"
+        ],
+        "failureSummary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+      },
+      {
+        "any": [
+          {
+            "id": "region",
+            "data": {
+              "isIframe": false
+            },
+            "relatedNodes": [],
+            "impact": "moderate",
+            "message": "Some page content is not contained by landmarks"
+          }
+        ],
+        "all": [],
+        "none": [],
+        "impact": "moderate",
+        "html": "<p class=\"why-text\" data-astro-cid-okp4fg44=\"\" data-astro-source-file=\"D:/AICodingProjects/PostTruncate.com/src/components/WhyPostTruncate.astro\" data-astro-source-loc=\"29:27\">",
+        "target": [
+          "p[data-astro-source-loc=\"29:27\"]"
+        ],
+        "failureSummary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+      },
+      {
+        "any": [
+          {
+            "id": "region",
+            "data": {
+              "isIframe": false
+            },
+            "relatedNodes": [],
+            "impact": "moderate",
+            "message": "Some page content is not contained by landmarks"
+          }
+        ],
+        "all": [],
+        "none": [],
+        "impact": "moderate",
+        "html": "<h3 class=\"feature-title\" data-astro-cid-okp4fg44=\"\" data-astro-source-file=\"D:/AICodingProjects/PostTruncate.com/src/components/WhyPostTruncate.astro\" data-astro-source-loc=\"62:37\">Real-time Previews</h3>",
+        "target": [
+          ".feature-card--blue > .feature-title[data-astro-source-loc=\"62:37\"]"
+        ],
+        "failureSummary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+      },
+      {
+        "any": [
+          {
+            "id": "region",
+            "data": {
+              "isIframe": false
+            },
+            "relatedNodes": [],
+            "impact": "moderate",
+            "message": "Some page content is not contained by landmarks"
+          }
+        ],
+        "all": [],
+        "none": [],
+        "impact": "moderate",
+        "html": "<p class=\"feature-desc\" data-astro-cid-okp4fg44=\"\" data-astro-source-file=\"D:/AICodingProjects/PostTruncate.com/src/components/WhyPostTruncate.astro\" data-astro-source-loc=\"64:35\">See exactly how your post will appear across 6+ platforms instantly.</p>",
+        "target": [
+          ".feature-card--blue > .feature-desc[data-astro-source-loc=\"64:35\"][data-astro-cid-okp4fg44=\"\"]"
+        ],
+        "failureSummary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+      },
+      {
+        "any": [
+          {
+            "id": "region",
+            "data": {
+              "isIframe": false
+            },
+            "relatedNodes": [],
+            "impact": "moderate",
+            "message": "Some page content is not contained by landmarks"
+          }
+        ],
+        "all": [],
+        "none": [],
+        "impact": "moderate",
+        "html": "<h3 class=\"feature-title\" data-astro-cid-okp4fg44=\"\" data-astro-source-file=\"D:/AICodingProjects/PostTruncate.com/src/components/WhyPostTruncate.astro\" data-astro-source-loc=\"62:37\">Smart Insights</h3>",
+        "target": [
+          ".feature-card--purple > .feature-title[data-astro-source-loc=\"62:37\"]"
+        ],
+        "failureSummary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+      },
+      {
+        "any": [
+          {
+            "id": "region",
+            "data": {
+              "isIframe": false
+            },
+            "relatedNodes": [],
+            "impact": "moderate",
+            "message": "Some page content is not contained by landmarks"
+          }
+        ],
+        "all": [],
+        "none": [],
+        "impact": "moderate",
+        "html": "<p class=\"feature-desc\" data-astro-cid-okp4fg44=\"\" data-astro-source-file=\"D:/AICodingProjects/PostTruncate.com/src/components/WhyPostTruncate.astro\" data-astro-source-loc=\"64:35\">Get readability scores, keyword analysis, and content optimization tips.</p>",
+        "target": [
+          ".feature-card--purple > .feature-desc[data-astro-source-loc=\"64:35\"][data-astro-cid-okp4fg44=\"\"]"
+        ],
+        "failureSummary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+      },
+      {
+        "any": [
+          {
+            "id": "region",
+            "data": {
+              "isIframe": false
+            },
+            "relatedNodes": [],
+            "impact": "moderate",
+            "message": "Some page content is not contained by landmarks"
+          }
+        ],
+        "all": [],
+        "none": [],
+        "impact": "moderate",
+        "html": "<h3 class=\"feature-title\" data-astro-cid-okp4fg44=\"\" data-astro-source-file=\"D:/AICodingProjects/PostTruncate.com/src/components/WhyPostTruncate.astro\" data-astro-source-loc=\"62:37\">Privacy First</h3>",
+        "target": [
+          ".feature-card--green > .feature-title[data-astro-source-loc=\"62:37\"]"
+        ],
+        "failureSummary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+      },
+      {
+        "any": [
+          {
+            "id": "region",
+            "data": {
+              "isIframe": false
+            },
+            "relatedNodes": [],
+            "impact": "moderate",
+            "message": "Some page content is not contained by landmarks"
+          }
+        ],
+        "all": [],
+        "none": [],
+        "impact": "moderate",
+        "html": "<p class=\"feature-desc\" data-astro-cid-okp4fg44=\"\" data-astro-source-file=\"D:/AICodingProjects/PostTruncate.com/src/components/WhyPostTruncate.astro\" data-astro-source-loc=\"64:35\">Your content is never stored or shared. Everything stays private.</p>",
+        "target": [
+          ".feature-card--green > .feature-desc[data-astro-source-loc=\"64:35\"][data-astro-cid-okp4fg44=\"\"]"
+        ],
+        "failureSummary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+      },
+      {
+        "any": [
+          {
+            "id": "region",
+            "data": {
+              "isIframe": false
+            },
+            "relatedNodes": [],
+            "impact": "moderate",
+            "message": "Some page content is not contained by landmarks"
+          }
+        ],
+        "all": [],
+        "none": [],
+        "impact": "moderate",
+        "html": "<h3 class=\"feature-title\" data-astro-cid-okp4fg44=\"\" data-astro-source-file=\"D:/AICodingProjects/PostTruncate.com/src/components/WhyPostTruncate.astro\" data-astro-source-loc=\"62:37\">AI Tone Rewriter</h3>",
+        "target": [
+          ".feature-card--amber > .feature-title[data-astro-source-loc=\"62:37\"]"
+        ],
+        "failureSummary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+      },
+      {
+        "any": [
+          {
+            "id": "region",
+            "data": {
+              "isIframe": false
+            },
+            "relatedNodes": [],
+            "impact": "moderate",
+            "message": "Some page content is not contained by landmarks"
+          }
+        ],
+        "all": [],
+        "none": [],
+        "impact": "moderate",
+        "html": "<p class=\"feature-desc\" data-astro-cid-okp4fg44=\"\" data-astro-source-file=\"D:/AICodingProjects/PostTruncate.com/src/components/WhyPostTruncate.astro\" data-astro-source-loc=\"64:35\">Instantly rewrite your post in a professional, casual, friendly, or concise tone with one tap ΓÇö powered by AI.</p>",
+        "target": [
+          ".feature-card--amber > .feature-desc[data-astro-source-loc=\"64:35\"][data-astro-cid-okp4fg44=\"\"]"
+        ],
+        "failureSummary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+      },
+      {
+        "any": [
+          {
+            "id": "region",
+            "data": {
+              "isIframe": false
+            },
+            "relatedNodes": [],
+            "impact": "moderate",
+            "message": "Some page content is not contained by landmarks"
+          }
+        ],
+        "all": [],
+        "none": [],
+        "impact": "moderate",
+        "html": "<div class=\"truncation-head\" data-astro-cid-gq46l4gh=\"\" data-astro-source-file=\"D:/AICodingProjects/PostTruncate.com/src/components/HowTruncationWorks.astro\" data-astro-source-loc=\"72:32\">",
+        "target": [
+          ".truncation-head"
+        ],
+        "failureSummary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+      },
+      {
+        "any": [
+          {
+            "id": "region",
+            "data": {
+              "isIframe": false
+            },
+            "relatedNodes": [],
+            "impact": "moderate",
+            "message": "Some page content is not contained by landmarks"
+          }
+        ],
+        "all": [],
+        "none": [],
+        "impact": "moderate",
+        "html": "<h3 class=\"platform-name\" data-astro-cid-gq46l4gh=\"\" data-astro-source-file=\"D:/AICodingProjects/PostTruncate.com/src/components/HowTruncationWorks.astro\" data-astro-source-loc=\"108:35\">LinkedIn</h3>",
+        "target": [
+          ".platform-card--linkedin > .platform-name[data-astro-source-loc=\"108:35\"]"
+        ],
+        "failureSummary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+      },
+      {
+        "any": [
+          {
+            "id": "region",
+            "data": {
+              "isIframe": false
+            },
+            "relatedNodes": [],
+            "impact": "moderate",
+            "message": "Some page content is not contained by landmarks"
+          }
+        ],
+        "all": [],
+        "none": [],
+        "impact": "moderate",
+        "html": "<div class=\"platform-stat\" data-astro-cid-gq46l4gh=\"\" data-astro-source-file=\"D:/AICodingProjects/PostTruncate.com/src/components/HowTruncationWorks.astro\" data-astro-source-loc=\"111:38\">",
+        "target": [
+          ".platform-card--linkedin > .platform-stats[data-astro-source-loc=\"110:37\"][data-astro-cid-gq46l4gh=\"\"] > .platform-stat[data-astro-source-loc=\"111:38\"][data-astro-cid-gq46l4gh=\"\"]"
+        ],
+        "failureSummary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+      },
+      {
+        "any": [
+          {
+            "id": "region",
+            "data": {
+              "isIframe": false
+            },
+            "relatedNodes": [],
+            "impact": "moderate",
+            "message": "Some page content is not contained by landmarks"
+          }
+        ],
+        "all": [],
+        "none": [],
+        "impact": "moderate",
+        "html": "<div class=\"platform-stat\" data-astro-cid-gq46l4gh=\"\" data-astro-source-file=\"D:/AICodingProjects/PostTruncate.com/src/components/HowTruncationWorks.astro\" data-astro-source-loc=\"118:38\">",
+        "target": [
+          ".platform-card--linkedin > .platform-stats[data-astro-source-loc=\"110:37\"][data-astro-cid-gq46l4gh=\"\"] > .platform-stat[data-astro-source-loc=\"118:38\"][data-astro-cid-gq46l4gh=\"\"]"
+        ],
+        "failureSummary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+      },
+      {
+        "any": [
+          {
+            "id": "region",
+            "data": {
+              "isIframe": false
+            },
+            "relatedNodes": [],
+            "impact": "moderate",
+            "message": "Some page content is not contained by landmarks"
+          }
+        ],
+        "all": [],
+        "none": [],
+        "impact": "moderate",
+        "html": "<h3 class=\"platform-name\" data-astro-cid-gq46l4gh=\"\" data-astro-source-file=\"D:/AICodingProjects/PostTruncate.com/src/components/HowTruncationWorks.astro\" data-astro-source-loc=\"108:35\">X (Twitter)</h3>",
+        "target": [
+          ".platform-card--twitter > .platform-name[data-astro-source-loc=\"108:35\"]"
+        ],
+        "failureSummary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+      },
+      {
+        "any": [
+          {
+            "id": "region",
+            "data": {
+              "isIframe": false
+            },
+            "relatedNodes": [],
+            "impact": "moderate",
+            "message": "Some page content is not contained by landmarks"
+          }
+        ],
+        "all": [],
+        "none": [],
+        "impact": "moderate",
+        "html": "<div class=\"platform-stat\" data-astro-cid-gq46l4gh=\"\" data-astro-source-file=\"D:/AICodingProjects/PostTruncate.com/src/components/HowTruncationWorks.astro\" data-astro-source-loc=\"111:38\">",
+        "target": [
+          ".platform-card--twitter > .platform-stats[data-astro-source-loc=\"110:37\"][data-astro-cid-gq46l4gh=\"\"] > .platform-stat[data-astro-source-loc=\"111:38\"][data-astro-cid-gq46l4gh=\"\"]"
+        ],
+        "failureSummary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+      },
+      {
+        "any": [
+          {
+            "id": "region",
+            "data": {
+              "isIframe": false
+            },
+            "relatedNodes": [],
+            "impact": "moderate",
+            "message": "Some page content is not contained by landmarks"
+          }
+        ],
+        "all": [],
+        "none": [],
+        "impact": "moderate",
+        "html": "<div class=\"platform-stat\" data-astro-cid-gq46l4gh=\"\" data-astro-source-file=\"D:/AICodingProjects/PostTruncate.com/src/components/HowTruncationWorks.astro\" data-astro-source-loc=\"118:38\">",
+        "target": [
+          ".platform-card--twitter > .platform-stats[data-astro-source-loc=\"110:37\"][data-astro-cid-gq46l4gh=\"\"] > .platform-stat[data-astro-source-loc=\"118:38\"][data-astro-cid-gq46l4gh=\"\"]"
+        ],
+        "failureSummary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+      },
+      {
+        "any": [
+          {
+            "id": "region",
+            "data": {
+              "isIframe": false
+            },
+            "relatedNodes": [],
+            "impact": "moderate",
+            "message": "Some page content is not contained by landmarks"
+          }
+        ],
+        "all": [],
+        "none": [],
+        "impact": "moderate",
+        "html": "<h3 class=\"platform-name\" data-astro-cid-gq46l4gh=\"\" data-astro-source-file=\"D:/AICodingProjects/PostTruncate.com/src/components/HowTruncationWorks.astro\" data-astro-source-loc=\"108:35\">Instagram</h3>",
+        "target": [
+          ".platform-card--instagram > .platform-name[data-astro-source-loc=\"108:35\"]"
+        ],
+        "failureSummary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+      },
+      {
+        "any": [
+          {
+            "id": "region",
+            "data": {
+              "isIframe": false
+            },
+            "relatedNodes": [],
+            "impact": "moderate",
+            "message": "Some page content is not contained by landmarks"
+          }
+        ],
+        "all": [],
+        "none": [],
+        "impact": "moderate",
+        "html": "<div class=\"platform-stat\" data-astro-cid-gq46l4gh=\"\" data-astro-source-file=\"D:/AICodingProjects/PostTruncate.com/src/components/HowTruncationWorks.astro\" data-astro-source-loc=\"111:38\">",
+        "target": [
+          ".platform-card--instagram > .platform-stats[data-astro-source-loc=\"110:37\"][data-astro-cid-gq46l4gh=\"\"] > .platform-stat[data-astro-source-loc=\"111:38\"][data-astro-cid-gq46l4gh=\"\"]"
+        ],
+        "failureSummary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+      },
+      {
+        "any": [
+          {
+            "id": "region",
+            "data": {
+              "isIframe": false
+            },
+            "relatedNodes": [],
+            "impact": "moderate",
+            "message": "Some page content is not contained by landmarks"
+          }
+        ],
+        "all": [],
+        "none": [],
+        "impact": "moderate",
+        "html": "<div class=\"platform-stat\" data-astro-cid-gq46l4gh=\"\" data-astro-source-file=\"D:/AICodingProjects/PostTruncate.com/src/components/HowTruncationWorks.astro\" data-astro-source-loc=\"118:38\">",
+        "target": [
+          ".platform-card--instagram > .platform-stats[data-astro-source-loc=\"110:37\"][data-astro-cid-gq46l4gh=\"\"] > .platform-stat[data-astro-source-loc=\"118:38\"][data-astro-cid-gq46l4gh=\"\"]"
+        ],
+        "failureSummary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+      },
+      {
+        "any": [
+          {
+            "id": "region",
+            "data": {
+              "isIframe": false
+            },
+            "relatedNodes": [],
+            "impact": "moderate",
+            "message": "Some page content is not contained by landmarks"
+          }
+        ],
+        "all": [],
+        "none": [],
+        "impact": "moderate",
+        "html": "<h3 class=\"platform-name\" data-astro-cid-gq46l4gh=\"\" data-astro-source-file=\"D:/AICodingProjects/PostTruncate.com/src/components/HowTruncationWorks.astro\" data-astro-source-loc=\"108:35\">Facebook</h3>",
+        "target": [
+          ".platform-card--facebook > .platform-name[data-astro-source-loc=\"108:35\"]"
+        ],
+        "failureSummary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+      },
+      {
+        "any": [
+          {
+            "id": "region",
+            "data": {
+              "isIframe": false
+            },
+            "relatedNodes": [],
+            "impact": "moderate",
+            "message": "Some page content is not contained by landmarks"
+          }
+        ],
+        "all": [],
+        "none": [],
+        "impact": "moderate",
+        "html": "<div class=\"platform-stat\" data-astro-cid-gq46l4gh=\"\" data-astro-source-file=\"D:/AICodingProjects/PostTruncate.com/src/components/HowTruncationWorks.astro\" data-astro-source-loc=\"111:38\">",
+        "target": [
+          ".platform-card--facebook > .platform-stats[data-astro-source-loc=\"110:37\"][data-astro-cid-gq46l4gh=\"\"] > .platform-stat[data-astro-source-loc=\"111:38\"][data-astro-cid-gq46l4gh=\"\"]"
+        ],
+        "failureSummary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+      },
+      {
+        "any": [
+          {
+            "id": "region",
+            "data": {
+              "isIframe": false
+            },
+            "relatedNodes": [],
+            "impact": "moderate",
+            "message": "Some page content is not contained by landmarks"
+          }
+        ],
+        "all": [],
+        "none": [],
+        "impact": "moderate",
+        "html": "<div class=\"platform-stat\" data-astro-cid-gq46l4gh=\"\" data-astro-source-file=\"D:/AICodingProjects/PostTruncate.com/src/components/HowTruncationWorks.astro\" data-astro-source-loc=\"118:38\">",
+        "target": [
+          ".platform-card--facebook > .platform-stats[data-astro-source-loc=\"110:37\"][data-astro-cid-gq46l4gh=\"\"] > .platform-stat[data-astro-source-loc=\"118:38\"][data-astro-cid-gq46l4gh=\"\"]"
+        ],
+        "failureSummary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+      },
+      {
+        "any": [
+          {
+            "id": "region",
+            "data": {
+              "isIframe": false
+            },
+            "relatedNodes": [],
+            "impact": "moderate",
+            "message": "Some page content is not contained by landmarks"
+          }
+        ],
+        "all": [],
+        "none": [],
+        "impact": "moderate",
+        "html": "<h3 class=\"platform-name\" data-astro-cid-gq46l4gh=\"\" data-astro-source-file=\"D:/AICodingProjects/PostTruncate.com/src/components/HowTruncationWorks.astro\" data-astro-source-loc=\"108:35\">Threads</h3>",
+        "target": [
+          ".platform-card--threads > .platform-name[data-astro-source-loc=\"108:35\"]"
+        ],
+        "failureSummary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+      },
+      {
+        "any": [
+          {
+            "id": "region",
+            "data": {
+              "isIframe": false
+            },
+            "relatedNodes": [],
+            "impact": "moderate",
+            "message": "Some page content is not contained by landmarks"
+          }
+        ],
+        "all": [],
+        "none": [],
+        "impact": "moderate",
+        "html": "<div class=\"platform-stat\" data-astro-cid-gq46l4gh=\"\" data-astro-source-file=\"D:/AICodingProjects/PostTruncate.com/src/components/HowTruncationWorks.astro\" data-astro-source-loc=\"111:38\">",
+        "target": [
+          ".platform-card--threads > .platform-stats[data-astro-source-loc=\"110:37\"][data-astro-cid-gq46l4gh=\"\"] > .platform-stat[data-astro-source-loc=\"111:38\"][data-astro-cid-gq46l4gh=\"\"]"
+        ],
+        "failureSummary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+      },
+      {
+        "any": [
+          {
+            "id": "region",
+            "data": {
+              "isIframe": false
+            },
+            "relatedNodes": [],
+            "impact": "moderate",
+            "message": "Some page content is not contained by landmarks"
+          }
+        ],
+        "all": [],
+        "none": [],
+        "impact": "moderate",
+        "html": "<div class=\"platform-stat\" data-astro-cid-gq46l4gh=\"\" data-astro-source-file=\"D:/AICodingProjects/PostTruncate.com/src/components/HowTruncationWorks.astro\" data-astro-source-loc=\"118:38\">",
+        "target": [
+          ".platform-card--threads > .platform-stats[data-astro-source-loc=\"110:37\"][data-astro-cid-gq46l4gh=\"\"] > .platform-stat[data-astro-source-loc=\"118:38\"][data-astro-cid-gq46l4gh=\"\"]"
+        ],
+        "failureSummary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+      },
+      {
+        "any": [
+          {
+            "id": "region",
+            "data": {
+              "isIframe": false
+            },
+            "relatedNodes": [],
+            "impact": "moderate",
+            "message": "Some page content is not contained by landmarks"
+          }
+        ],
+        "all": [],
+        "none": [],
+        "impact": "moderate",
+        "html": "<h3 class=\"platform-name\" data-astro-cid-gq46l4gh=\"\" data-astro-source-file=\"D:/AICodingProjects/PostTruncate.com/src/components/HowTruncationWorks.astro\" data-astro-source-loc=\"108:35\">TikTok</h3>",
+        "target": [
+          ".platform-card--tiktok > .platform-name[data-astro-source-loc=\"108:35\"]"
+        ],
+        "failureSummary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+      },
+      {
+        "any": [
+          {
+            "id": "region",
+            "data": {
+              "isIframe": false
+            },
+            "relatedNodes": [],
+            "impact": "moderate",
+            "message": "Some page content is not contained by landmarks"
+          }
+        ],
+        "all": [],
+        "none": [],
+        "impact": "moderate",
+        "html": "<div class=\"platform-stat\" data-astro-cid-gq46l4gh=\"\" data-astro-source-file=\"D:/AICodingProjects/PostTruncate.com/src/components/HowTruncationWorks.astro\" data-astro-source-loc=\"111:38\">",
+        "target": [
+          ".platform-card--tiktok > .platform-stats[data-astro-source-loc=\"110:37\"][data-astro-cid-gq46l4gh=\"\"] > .platform-stat[data-astro-source-loc=\"111:38\"][data-astro-cid-gq46l4gh=\"\"]"
+        ],
+        "failureSummary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+      },
+      {
+        "any": [
+          {
+            "id": "region",
+            "data": {
+              "isIframe": false
+            },
+            "relatedNodes": [],
+            "impact": "moderate",
+            "message": "Some page content is not contained by landmarks"
+          }
+        ],
+        "all": [],
+        "none": [],
+        "impact": "moderate",
+        "html": "<div class=\"platform-stat\" data-astro-cid-gq46l4gh=\"\" data-astro-source-file=\"D:/AICodingProjects/PostTruncate.com/src/components/HowTruncationWorks.astro\" data-astro-source-loc=\"118:38\">",
+        "target": [
+          ".platform-card--tiktok > .platform-stats[data-astro-source-loc=\"110:37\"][data-astro-cid-gq46l4gh=\"\"] > .platform-stat[data-astro-source-loc=\"118:38\"][data-astro-cid-gq46l4gh=\"\"]"
+        ],
+        "failureSummary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+      },
+      {
+        "any": [
+          {
+            "id": "region",
+            "data": {
+              "isIframe": false
+            },
+            "relatedNodes": [],
+            "impact": "moderate",
+            "message": "Some page content is not contained by landmarks"
+          }
+        ],
+        "all": [],
+        "none": [],
+        "impact": "moderate",
+        "html": "<div class=\"who-head\" data-astro-cid-wlesxkre=\"\" data-astro-source-file=\"D:/AICodingProjects/PostTruncate.com/src/components/WhoIsItFor.astro\" data-astro-source-loc=\"20:25\">",
+        "target": [
+          ".who-head"
+        ],
+        "failureSummary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+      },
+      {
+        "any": [
+          {
+            "id": "region",
+            "data": {
+              "isIframe": false
+            },
+            "relatedNodes": [],
+            "impact": "moderate",
+            "message": "Some page content is not contained by landmarks"
+          }
+        ],
+        "all": [],
+        "none": [],
+        "impact": "moderate",
+        "html": "<h3 class=\"who-card-title\" data-astro-cid-wlesxkre=\"\" data-astro-source-file=\"D:/AICodingProjects/PostTruncate.com/src/components/WhoIsItFor.astro\" data-astro-source-loc=\"62:36\">Marketers</h3>",
+        "target": [
+          ".who-card--blue > .who-card-title[data-astro-source-loc=\"62:36\"]"
+        ],
+        "failureSummary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+      },
+      {
+        "any": [
+          {
+            "id": "region",
+            "data": {
+              "isIframe": false
+            },
+            "relatedNodes": [],
+            "impact": "moderate",
+            "message": "Some page content is not contained by landmarks"
+          }
+        ],
+        "all": [],
+        "none": [],
+        "impact": "moderate",
+        "html": "<p class=\"who-card-desc\" data-astro-cid-wlesxkre=\"\" data-astro-source-file=\"D:/AICodingProjects/PostTruncate.com/src/components/WhoIsItFor.astro\" data-astro-source-loc=\"63:34\">Optimize campaigns, ad copy, and social posts for maximum reach and engagement.</p>",
+        "target": [
+          ".who-card--blue > .who-card-desc[data-astro-source-loc=\"63:34\"][data-astro-cid-wlesxkre=\"\"]"
+        ],
+        "failureSummary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+      },
+      {
+        "any": [
+          {
+            "id": "region",
+            "data": {
+              "isIframe": false
+            },
+            "relatedNodes": [],
+            "impact": "moderate",
+            "message": "Some page content is not contained by landmarks"
+          }
+        ],
+        "all": [],
+        "none": [],
+        "impact": "moderate",
+        "html": "<span class=\"who-cta\" data-astro-cid-wlesxkre=\"\" data-astro-source-file=\"D:/AICodingProjects/PostTruncate.com/src/components/WhoIsItFor.astro\" data-astro-source-loc=\"67:31\">",
+        "target": [
+          ".who-card--blue > .who-cta[data-astro-source-loc=\"67:31\"][data-astro-cid-wlesxkre=\"\"]"
+        ],
+        "failureSummary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+      },
+      {
+        "any": [
+          {
+            "id": "region",
+            "data": {
+              "isIframe": false
+            },
+            "relatedNodes": [],
+            "impact": "moderate",
+            "message": "Some page content is not contained by landmarks"
+          }
+        ],
+        "all": [],
+        "none": [],
+        "impact": "moderate",
+        "html": "<h3 class=\"who-card-title\" data-astro-cid-wlesxkre=\"\" data-astro-source-file=\"D:/AICodingProjects/PostTruncate.com/src/components/WhoIsItFor.astro\" data-astro-source-loc=\"62:36\">Creators</h3>",
+        "target": [
+          ".who-card--purple > .who-card-title[data-astro-source-loc=\"62:36\"]"
+        ],
+        "failureSummary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+      },
+      {
+        "any": [
+          {
+            "id": "region",
+            "data": {
+              "isIframe": false
+            },
+            "relatedNodes": [],
+            "impact": "moderate",
+            "message": "Some page content is not contained by landmarks"
+          }
+        ],
+        "all": [],
+        "none": [],
+        "impact": "moderate",
+        "html": "<p class=\"who-card-desc\" data-astro-cid-wlesxkre=\"\" data-astro-source-file=\"D:/AICodingProjects/PostTruncate.com/src/components/WhoIsItFor.astro\" data-astro-source-loc=\"63:34\">Write better captions and threads that get more likes, shares, and saves.</p>",
+        "target": [
+          ".who-card--purple > .who-card-desc[data-astro-source-loc=\"63:34\"][data-astro-cid-wlesxkre=\"\"]"
+        ],
+        "failureSummary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+      },
+      {
+        "any": [
+          {
+            "id": "region",
+            "data": {
+              "isIframe": false
+            },
+            "relatedNodes": [],
+            "impact": "moderate",
+            "message": "Some page content is not contained by landmarks"
+          }
+        ],
+        "all": [],
+        "none": [],
+        "impact": "moderate",
+        "html": "<span class=\"who-cta\" data-astro-cid-wlesxkre=\"\" data-astro-source-file=\"D:/AICodingProjects/PostTruncate.com/src/components/WhoIsItFor.astro\" data-astro-source-loc=\"67:31\">",
+        "target": [
+          ".who-card--purple > .who-cta[data-astro-source-loc=\"67:31\"][data-astro-cid-wlesxkre=\"\"]"
+        ],
+        "failureSummary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+      },
+      {
+        "any": [
+          {
+            "id": "region",
+            "data": {
+              "isIframe": false
+            },
+            "relatedNodes": [],
+            "impact": "moderate",
+            "message": "Some page content is not contained by landmarks"
+          }
+        ],
+        "all": [],
+        "none": [],
+        "impact": "moderate",
+        "html": "<h3 class=\"who-card-title\" data-astro-cid-wlesxkre=\"\" data-astro-source-file=\"D:/AICodingProjects/PostTruncate.com/src/components/WhoIsItFor.astro\" data-astro-source-loc=\"62:36\">Agencies</h3>",
+        "target": [
+          ".who-card--darkblue > .who-card-title[data-astro-source-loc=\"62:36\"]"
+        ],
+        "failureSummary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+      },
+      {
+        "any": [
+          {
+            "id": "region",
+            "data": {
+              "isIframe": false
+            },
+            "relatedNodes": [],
+            "impact": "moderate",
+            "message": "Some page content is not contained by landmarks"
+          }
+        ],
+        "all": [],
+        "none": [],
+        "impact": "moderate",
+        "html": "<p class=\"who-card-desc\" data-astro-cid-wlesxkre=\"\" data-astro-source-file=\"D:/AICodingProjects/PostTruncate.com/src/components/WhoIsItFor.astro\" data-astro-source-loc=\"63:34\">Manage multiple clients and ensure every post is perfectly optimized.</p>",
+        "target": [
+          ".who-card--darkblue > .who-card-desc[data-astro-source-loc=\"63:34\"][data-astro-cid-wlesxkre=\"\"]"
+        ],
+        "failureSummary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+      },
+      {
+        "any": [
+          {
+            "id": "region",
+            "data": {
+              "isIframe": false
+            },
+            "relatedNodes": [],
+            "impact": "moderate",
+            "message": "Some page content is not contained by landmarks"
+          }
+        ],
+        "all": [],
+        "none": [],
+        "impact": "moderate",
+        "html": "<span class=\"who-cta\" data-astro-cid-wlesxkre=\"\" data-astro-source-file=\"D:/AICodingProjects/PostTruncate.com/src/components/WhoIsItFor.astro\" data-astro-source-loc=\"67:31\">",
+        "target": [
+          ".who-card--darkblue > .who-cta[data-astro-source-loc=\"67:31\"][data-astro-cid-wlesxkre=\"\"]"
+        ],
+        "failureSummary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+      },
+      {
+        "any": [
+          {
+            "id": "region",
+            "data": {
+              "isIframe": false
+            },
+            "relatedNodes": [],
+            "impact": "moderate",
+            "message": "Some page content is not contained by landmarks"
+          }
+        ],
+        "all": [],
+        "none": [],
+        "impact": "moderate",
+        "html": "<h3 class=\"who-card-title\" data-astro-cid-wlesxkre=\"\" data-astro-source-file=\"D:/AICodingProjects/PostTruncate.com/src/components/WhoIsItFor.astro\" data-astro-source-loc=\"62:36\">Founders</h3>",
+        "target": [
+          ".who-card--green > .who-card-title[data-astro-source-loc=\"62:36\"]"
+        ],
+        "failureSummary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+      },
+      {
+        "any": [
+          {
+            "id": "region",
+            "data": {
+              "isIframe": false
+            },
+            "relatedNodes": [],
+            "impact": "moderate",
+            "message": "Some page content is not contained by landmarks"
+          }
+        ],
+        "all": [],
+        "none": [],
+        "impact": "moderate",
+        "html": "<p class=\"who-card-desc\" data-astro-cid-wlesxkre=\"\" data-astro-source-file=\"D:/AICodingProjects/PostTruncate.com/src/components/WhoIsItFor.astro\" data-astro-source-loc=\"63:34\">Share updates and build your brand with clear, impactful content.</p>",
+        "target": [
+          ".who-card--green > .who-card-desc[data-astro-source-loc=\"63:34\"][data-astro-cid-wlesxkre=\"\"]"
+        ],
+        "failureSummary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+      },
+      {
+        "any": [
+          {
+            "id": "region",
+            "data": {
+              "isIframe": false
+            },
+            "relatedNodes": [],
+            "impact": "moderate",
+            "message": "Some page content is not contained by landmarks"
+          }
+        ],
+        "all": [],
+        "none": [],
+        "impact": "moderate",
+        "html": "<span class=\"who-cta\" data-astro-cid-wlesxkre=\"\" data-astro-source-file=\"D:/AICodingProjects/PostTruncate.com/src/components/WhoIsItFor.astro\" data-astro-source-loc=\"67:31\">",
+        "target": [
+          ".who-card--green > .who-cta[data-astro-source-loc=\"67:31\"][data-astro-cid-wlesxkre=\"\"]"
+        ],
+        "failureSummary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+      },
+      {
+        "any": [
+          {
+            "id": "region",
+            "data": {
+              "isIframe": false
+            },
+            "relatedNodes": [],
+            "impact": "moderate",
+            "message": "Some page content is not contained by landmarks"
+          }
+        ],
+        "all": [],
+        "none": [],
+        "impact": "moderate",
+        "html": "<section id=\"ad-previews\" class=\"container-page\" style=\"margin-top: var(--spacing-section);\" data-astro-cid-ur32db6f=\"\" data-astro-source-file=\"D:/AICodingProjects/PostTruncate.com/src/pages/[lang]/[slug]/index.astro\" data-astro-source-loc=\"243:96\">",
+        "target": [
+          "#ad-previews"
+        ],
+        "failureSummary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+      },
+      {
+        "any": [
+          {
+            "id": "region",
+            "data": {
+              "isIframe": false
+            },
+            "relatedNodes": [],
+            "impact": "moderate",
+            "message": "Some page content is not contained by landmarks"
+          }
+        ],
+        "all": [],
+        "none": [],
+        "impact": "moderate",
+        "html": "<section id=\"embed-widget-promo\" class=\"container-page\" style=\"margin-top: 16px;\" data-astro-cid-ur32db6f=\"\" data-astro-source-file=\"D:/AICodingProjects/PostTruncate.com/src/pages/[lang]/[slug]/index.astro\" data-astro-source-loc=\"278:85\">",
+        "target": [
+          "#embed-widget-promo"
+        ],
+        "failureSummary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+      },
+      {
+        "any": [
+          {
+            "id": "region",
+            "data": {
+              "isIframe": false
+            },
+            "relatedNodes": [],
+            "impact": "moderate",
+            "message": "Some page content is not contained by landmarks"
+          }
+        ],
+        "all": [],
+        "none": [],
+        "impact": "moderate",
+        "html": "<div class=\"hookband__inner\" data-astro-cid-ur32db6f=\"\" data-astro-source-file=\"D:/AICodingProjects/PostTruncate.com/src/pages/[lang]/[slug]/index.astro\" data-astro-source-loc=\"311:36\">",
+        "target": [
+          ".hookband__inner"
+        ],
+        "failureSummary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+      },
+      {
+        "any": [
+          {
+            "id": "region",
+            "data": {
+              "isIframe": false
+            },
+            "relatedNodes": [],
+            "impact": "moderate",
+            "message": "Some page content is not contained by landmarks"
+          }
+        ],
+        "all": [],
+        "none": [],
+        "impact": "moderate",
+        "html": "<header class=\"faqblog__head\" data-astro-cid-ur32db6f=\"\" data-astro-source-file=\"D:/AICodingProjects/PostTruncate.com/src/pages/[lang]/[slug]/index.astro\" data-astro-source-loc=\"332:41\">",
+        "target": [
+          "header[data-astro-source-loc=\"332:41\"]"
+        ],
+        "failureSummary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+      },
+      {
+        "any": [
+          {
+            "id": "region",
+            "data": {
+              "isIframe": false
+            },
+            "relatedNodes": [],
+            "impact": "moderate",
+            "message": "Some page content is not contained by landmarks"
+          }
+        ],
+        "all": [],
+        "none": [],
+        "impact": "moderate",
+        "html": "<p class=\"faqblog__all faqblog__all--center\" data-astro-cid-ur32db6f=\"\" data-astro-source-file=\"D:/AICodingProjects/PostTruncate.com/src/pages/[lang]/[slug]/index.astro\" data-astro-source-loc=\"359:56\">",
+        "target": [
+          ".faqblog__all"
+        ],
+        "failureSummary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+      },
+      {
+        "any": [
+          {
+            "id": "region",
+            "data": {
+              "isIframe": false
+            },
+            "relatedNodes": [],
+            "impact": "moderate",
+            "message": "Some page content is not contained by landmarks"
+          }
+        ],
+        "all": [],
+        "none": [],
+        "impact": "moderate",
+        "html": "<div class=\"faqblog__col\" aria-labelledby=\"latest-heading\" data-astro-cid-ur32db6f=\"\" data-astro-source-file=\"D:/AICodingProjects/PostTruncate.com/src/pages/[lang]/[slug]/index.astro\" data-astro-source-loc=\"365:68\">",
+        "target": [
+          "div[aria-labelledby=\"latest-heading\"]"
+        ],
+        "failureSummary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+      },
+      {
+        "any": [
+          {
+            "id": "region",
+            "data": {
+              "isIframe": false
+            },
+            "relatedNodes": [],
+            "impact": "moderate",
+            "message": "Some page content is not contained by landmarks"
+          }
+        ],
+        "all": [],
+        "none": [],
+        "impact": "moderate",
+        "html": "<div class=\"cta-banner__copy\" data-astro-cid-ur32db6f=\"\" data-astro-source-file=\"D:/AICodingProjects/PostTruncate.com/src/pages/[lang]/[slug]/index.astro\" data-astro-source-loc=\"425:39\">",
+        "target": [
+          ".cta-banner__copy"
+        ],
+        "failureSummary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+      },
+      {
+        "any": [
+          {
+            "id": "region",
+            "data": {
+              "isIframe": false
+            },
+            "relatedNodes": [],
+            "impact": "moderate",
+            "message": "Some page content is not contained by landmarks"
+          }
+        ],
+        "all": [],
+        "none": [],
+        "impact": "moderate",
+        "html": "<div class=\"cta-banner__action\" data-astro-cid-ur32db6f=\"\" data-astro-source-file=\"D:/AICodingProjects/PostTruncate.com/src/pages/[lang]/[slug]/index.astro\" data-astro-source-loc=\"430:39\">",
+        "target": [
+          ".cta-banner__action"
+        ],
+        "failureSummary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+      }
+    ]
+  }
+]

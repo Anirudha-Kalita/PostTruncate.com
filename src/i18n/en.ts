@@ -1032,6 +1032,9 @@ export const en: Translations = {
         share: 'Share',
         repost: 'Repost',
         send: 'Send',
+        copy: 'Copy',
+        copied: 'Copied!',
+        copyAria: 'Copy {platform} post text',
       },
     },
     sms: {

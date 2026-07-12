@@ -286,7 +286,7 @@ export function AiImprove({ text, setText, s, onImproved }: Props) {
                       aria-label={s.tones[tone]}
                       onClick={() => improve(tone)}
                       style={{ left: `${cx}px`, top: `${cy}px` }}
-                      class="absolute flex h-10 w-10 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-link text-on-primary shadow-e2 transition-[transform,background] duration-100 hover:bg-link-deep active:scale-90"
+                      class="absolute flex h-10 w-10 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-link text-on-primary shadow-e2 transition-[transform,background,box-shadow] duration-100 hover:bg-link-deep active:scale-90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-link"
                     >
                       <ToneIcon tone={tone} />
                       <span class="pointer-events-none absolute left-1/2 top-full mt-1 -translate-x-1/2 whitespace-nowrap rounded bg-ink/85 px-1.5 py-0.5 text-[11px] font-semibold leading-none text-canvas shadow-e1">

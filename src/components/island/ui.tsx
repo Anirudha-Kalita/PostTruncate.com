@@ -68,13 +68,27 @@ interface MeterProps {
 
 export function Meter({ value, max, tone, label, caption }: MeterProps) {
   const pct = max <= 0 ? 0 : Math.min(100, Math.round((value / max) * 100));
+  
+  const icon = tone === 'warn' ? (
+    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="text-warning-deep" aria-hidden="true" aria-label="Warning"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+  ) : tone === 'danger' ? (
+    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="text-error-deep" aria-hidden="true" aria-label="Over limit"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+  ) : null;
+  // I will use a different icon for danger if needed, but a triangle alert is fine, maybe an X or just triangle. For danger, let's use an X:
+  const dangerIcon = (
+    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="text-error-deep" aria-hidden="true" aria-label="Over limit"><path d="M18 6 6 18M6 6l12 12" /></svg>
+  );
+
+  const activeIcon = tone === 'danger' ? dangerIcon : (tone === 'warn' ? icon : null);
+
   return (
     <div>
       {(label || caption) && (
         <div class="mb-1.5 flex items-baseline justify-between">
           {label && <span class="text-[13px] text-body">{label}</span>}
           {caption && (
-            <span class="font-mono text-[12px] text-mute tabular-nums">
+            <span class="flex items-center gap-1.5 font-mono text-[12px] text-mute tabular-nums">
+              {activeIcon}
               {caption}
             </span>
           )}
@@ -985,3 +999,37 @@ export function BrandLogo({ brand, size = 22 }: BrandLogoProps) {
       );
   }
 }
+
+export function CopyButton({ text, label, copiedLabel, copyLabel }: { text: string; label: string; copiedLabel: string; copyLabel: string }) {
+  const [copied, setCopied] = useState(false);
+  const onCopy = async () => {
+    try {
+      await navigator.clipboard.writeText(text);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch (err) {
+      // Handle fallback or ignore
+    }
+  };
+  return (
+    <button
+      type="button"
+      onClick={onCopy}
+      aria-label={label}
+      class="inline-flex h-9 items-center justify-center gap-1.5 rounded-pill border border-hairline bg-canvas px-3 py-1.5 text-[12px] font-medium transition-[transform,color,background,border-color,box-shadow] duration-100 hover:border-hairline-strong hover:bg-canvas-soft-2 active:scale-[0.96] active:bg-canvas-soft-2 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-link"
+    >
+      {copied ? (
+        <>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="text-cyan-deep shrink-0"><polyline points="20 6 9 17 4 12"></polyline></svg>
+          <span>{copiedLabel}</span>
+        </>
+      ) : (
+        <>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="shrink-0"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+          <span>{copyLabel}</span>
+        </>
+      )}
+    </button>
+  );
+}
+
