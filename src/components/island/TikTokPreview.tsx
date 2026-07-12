@@ -113,7 +113,7 @@ export function TikTokPreview({ text, lang, s, toolLinkHref, view, setView, imag
         )}
       </div>
 
-      <div class="p-4 sm:p-5">
+      <div class="p-4 sm:p-5 font-tiktok">
         <div class="relative mx-auto w-full max-w-[300px] overflow-hidden rounded-xl bg-ink aspect-[9/16]">
           {/* Media fill */}
           {image ? (

@@ -81,6 +81,7 @@ export function LinkedInAd({
       <div class="flex flex-col items-center gap-2 p-4 sm:p-5">
         <div style={`width:100%;max-width:${frameWidth}px;`}>
           <PostCard
+            platform="linkedin"
             layout="stacked"
             avatar={<Avatar initial={monogram(name)} />}
             identity={

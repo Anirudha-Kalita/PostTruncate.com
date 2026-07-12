@@ -77,7 +77,7 @@ export function InstagramAd({ s, lang, caption, headline, mode, safeZone, mediaU
         <Badge tone={badgeTone}>{badgeLabel}</Badge>
       </CardHead>
 
-      <div class="flex flex-col items-center gap-2 p-4 sm:p-5">
+      <div class="flex flex-col items-center gap-2 p-4 sm:p-5 font-meta">
         <div style="width:100%;max-width:360px;">
           {/* Feed header — Reels is full-screen, so its identity lives in the
               overlay instead. */}
@@ -94,7 +94,7 @@ export function InstagramAd({ s, lang, caption, headline, mode, safeZone, mediaU
 
           {/* Media frame with optional safe-zone overlay + Reels ad chrome. */}
           <div
-            class="relative overflow-hidden rounded-md border border-hairline bg-canvas-soft-2"
+            class={`relative overflow-hidden ${isReels ? 'rounded-xl' : 'rounded-md border border-hairline'} bg-canvas-soft-2`}
             style={`aspect-ratio:${frameAspect};`}
           >
             {mediaUrl ? (

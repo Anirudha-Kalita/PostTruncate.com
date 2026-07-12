@@ -209,7 +209,7 @@ export function TwitterPreview({ text, lang, s, toolLinkHref, image, mediaKind =
         )}
       </div>
 
-      <div class="space-y-3 p-4 sm:p-5">
+      <div class="space-y-0 sm:space-y-3 py-2 sm:p-5 bg-canvas-soft-2 sm:bg-transparent">
         {isPremium ? (
           // ── Premium: one long-form post, folded at the 280-char "Show more". ──
           !trimmed && !image ? (
@@ -218,6 +218,7 @@ export function TwitterPreview({ text, lang, s, toolLinkHref, image, mediaKind =
             </article>
           ) : (
             <PostCard
+              platform="twitter"
               layout="gutter"
               avatar={<Avatar size="h-10 w-10" initial={initial} />}
               identity={identity}
@@ -254,6 +255,7 @@ export function TwitterPreview({ text, lang, s, toolLinkHref, image, mediaKind =
           displayTweets.map((tweet, i) => (
             <Fragment key={i}>
             <PostCard
+              platform="twitter"
               layout="gutter"
               avatar={<Avatar size="h-10 w-10" initial={initial} />}
               identity={identity}

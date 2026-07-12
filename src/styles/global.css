@@ -364,6 +364,26 @@ html[data-theme='dark'] {
   letter-spacing: 0.04em;
 }
 
+/* Platform specific mock styling utilities */
+@utility font-twitter {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+@utility font-linkedin {
+  font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", "Fira Sans", Ubuntu, Oxygen, "Oxygen Sans", Cantarell, "Droid Sans", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+@utility font-meta {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+@utility font-facebook {
+  font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+}
+@utility font-tiktok {
+  font-family: "Proxima Nova", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+}
+@utility shadow-facebook {
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
 /* ──────────────────────────────────────────────────────────────────────────
    Brand mesh gradient — the only decorative chrome. Hero scale only.
    ────────────────────────────────────────────────────────────────────────── */

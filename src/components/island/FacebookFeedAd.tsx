@@ -88,6 +88,7 @@ export function FacebookFeedAd({ s, primary, headline, description, device, medi
       <div class="flex flex-col items-center gap-2 p-4 sm:p-5">
         <div style={`width:100%;max-width:${frameWidth}px;`}>
           <PostCard
+            platform="facebook"
             layout="stacked"
             avatar={<Avatar initial={monogram(name)} />}
             identity={

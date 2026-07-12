@@ -125,6 +125,7 @@ export function LinkedInPreview({ text, view, setView, lang, s, toolLinkHref, im
       {/* Feed mockup */}
       <div class="p-4 sm:p-5">
         <PostCard
+          platform="linkedin"
           layout="stacked"
           class={view === 'desktop' ? 'feed-phone--desktop' : ''}
           avatar={

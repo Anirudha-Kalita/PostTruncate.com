@@ -130,6 +130,7 @@ export function ThreadsPreview({ text, lang, s, toolLinkHref, view, setView, ima
         ) : (
           displayPosts.map((post, i) => (
             <PostCard
+              platform="threads"
               layout="gutter"
               class={view === 'desktop' ? 'feed-phone--desktop' : ''}
               avatar={

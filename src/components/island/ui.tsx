@@ -740,16 +740,35 @@ interface PostCardProps {
   trailing?: ComponentChildren;
   /** Body, engagement row, and tool annotations. */
   children: ComponentChildren;
+  platform?: 'twitter' | 'linkedin' | 'facebook' | 'instagram' | 'threads' | 'tiktok';
   class?: string;
 }
+
+interface PlatformStyle {
+  font: string;
+  radius: string;
+  border: string;
+  shadow: string;
+  extra?: string;
+}
+
+const PLATFORM_STYLES: Record<string, PlatformStyle> = {
+  twitter: { font: 'font-twitter', radius: 'rounded-none sm:rounded-md', border: 'border-y border-x-0 sm:border-x border-hairline', shadow: 'shadow-none' },
+  linkedin: { font: 'font-linkedin', radius: 'rounded-lg', border: 'border border-hairline', shadow: 'shadow-none' },
+  facebook: { font: 'font-facebook', radius: 'rounded-lg', border: 'border-transparent', shadow: 'shadow-facebook' },
+  instagram: { font: 'font-meta', radius: 'rounded-none', border: 'border-y border-hairline border-x-0', shadow: 'shadow-none' },
+  threads: { font: 'font-meta', radius: 'rounded-xl', border: 'border border-hairline', shadow: 'shadow-none' },
+  tiktok: { font: 'font-tiktok', radius: 'rounded-xl', border: 'border border-hairline', shadow: 'shadow-none', extra: '!bg-[#171717] !text-white' },
+};
 
 /**
  * Shared feed-post scaffold. Centralizes the article shell and the two
  * avatar/content arrangements every platform card draws into, so the platform
  * components only supply their distinct chrome (identity, body, actions).
  */
-export function PostCard({ layout = 'stacked', avatar, identity, trailing, children, class: extra = '' }: PostCardProps) {
-  const shell = `feed-phone rounded-md border border-hairline bg-canvas p-4 ${extra}`;
+export function PostCard({ layout = 'stacked', avatar, identity, trailing, children, platform, class: extra = '' }: PostCardProps) {
+  const p = platform ? PLATFORM_STYLES[platform] : { font: '', radius: 'rounded-md', border: 'border border-hairline', shadow: '' };
+  const shell = `feed-phone bg-canvas p-4 ${p.font} ${p.radius} ${p.border} ${p.shadow} ${p.extra ?? ''} ${extra}`;
 
   if (layout === 'gutter') {
     return (
