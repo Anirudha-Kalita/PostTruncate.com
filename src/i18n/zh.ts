@@ -653,6 +653,7 @@ export const zh: Translations = {
     eyebrow: '截断如何工作',
     title: '<span class="truncation-title__accent">精确</span>查看你的帖子将如何显示',
     description: '每个平台都有独特的字符限制和显示规则。当您的内容超过这些限制时，将用“...”或“查看更多”截断。PostTruncate 完全模拟您发布后帖子的外观。',
+    verified: '限制最后验证日期: {date}',
     platforms: {
       linkedin: { name: 'LinkedIn', desc: '在“...查看更多”之前显示 ~220 字符' },
       twitter: { name: 'X (Twitter)', desc: '截断前显示 ~125 字符（因设备而异）' },

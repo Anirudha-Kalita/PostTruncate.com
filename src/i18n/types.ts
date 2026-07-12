@@ -1390,6 +1390,8 @@ export interface Translations {
     /** Section heading (HTML); the emphasis word is wrapped in a blue accent span. */
     title: string;
     description: string;
+    /** String with a {date} token for the freshness indicator. */
+    verified: string;
     platforms: {
       linkedin: { name: string; desc: string };
       twitter: { name: string; desc: string };

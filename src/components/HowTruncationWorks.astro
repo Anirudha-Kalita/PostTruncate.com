@@ -79,6 +79,7 @@ const platforms = [
     </p>
     <h2 class="truncation-title" set:html={s.title}></h2>
     <p class="truncation-desc">{s.description}</p>
+    <p class="truncation-verified">{s.verified.replace('{date}', LIMITS.LIMITS_LAST_VERIFIED)}</p>
   </div>
 
   <div class="platforms-grid">
@@ -179,6 +180,11 @@ const platforms = [
     font-size: 16px;
     line-height: 26px;
     color: var(--color-body);
+  }
+  .truncation-verified {
+    font-size: 13px;
+    color: var(--color-mute);
+    margin-top: 12px;
   }
 
   .platforms-grid {

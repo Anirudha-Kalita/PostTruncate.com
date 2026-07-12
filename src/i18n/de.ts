@@ -656,6 +656,7 @@ export const de: Translations = {
     eyebrow: 'WIE KÜRZUNGEN FUNKTIONIEREN',
     title: 'Sieh <span class="truncation-title__accent">genau</span>, wie dein Beitrag erscheint',
     description: 'Jede Plattform hat eigene Zeichenlimits und Anzeigeregeln. Wenn Ihr Inhalt diese Limits überschreitet, wird er mit "..." oder "Mehr anzeigen" gekürzt. PostTruncate simuliert genau, wie Ihr Beitrag aussehen wird.',
+    verified: 'Zuletzt verifizierte Limits: {date}',
     platforms: {
       linkedin: { name: 'LinkedIn', desc: 'Zeigt ~220 Zeichen vor "...mehr anzeigen"' },
       twitter: { name: 'X (Twitter)', desc: 'Zeigt ~125 Zeichen vor Kürzung (variiert je nach Gerät)' },

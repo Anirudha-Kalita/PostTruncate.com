@@ -55,4 +55,6 @@ export const LIMITS = {
   TIKTOK_CAPTION_SAFE: 2200,
   /** TikTok organic caption "…more" fold (≈1 line). */
   TIKTOK_FOLD: 100,
+  /** Date when platform limits were last verified. */
+  LIMITS_LAST_VERIFIED: 'July 12, 2026',
 } as const;

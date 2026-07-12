@@ -655,6 +655,7 @@ export const nl: Translations = {
     eyebrow: 'HOE AFKAPPEN WERKT',
     title: 'Zie <span class="truncation-title__accent">precies</span> hoe je bericht eruit komt te zien',
     description: 'Elk platform heeft unieke tekenlimieten en weergave regels. Wanneer uw inhoud deze limieten overschrijdt, wordt deze afgekapt met "..." of "Meer weergeven". PostTruncate simuleert precies hoe uw post zal verschijnen.',
+    verified: 'Limieten laatst geverifieerd: {date}',
     platforms: {
       linkedin: { name: 'LinkedIn', desc: 'Toont ~220 tekens vóór "...meer weergeven"' },
       twitter: { name: 'X (Twitter)', desc: 'Toont ~125 tekens vóór afkappen (varieert per apparaat)' },

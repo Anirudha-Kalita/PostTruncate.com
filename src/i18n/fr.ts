@@ -655,6 +655,7 @@ export const fr: Translations = {
     eyebrow: 'COMMENT FONCTIONNE LA TRONCATURE',
     title: 'Voyez <span class="truncation-title__accent">exactement</span> comment votre publication apparaîtra',
     description: 'Chaque plateforme a des limites de caractères et des règles d\'affichage uniques. Lorsque votre contenu dépasse ces limites, il est tronqué par "..." ou "Voir plus". PostTruncate simule exactement l\'apparence de votre publication.',
+    verified: 'Limites vérifiées pour la dernière fois: {date}',
     platforms: {
       linkedin: { name: 'LinkedIn', desc: 'Affiche ~220 caractères avant "...voir plus"' },
       twitter: { name: 'X (Twitter)', desc: 'Affiche ~125 caractères avant troncature (varie selon l\'appareil)' },

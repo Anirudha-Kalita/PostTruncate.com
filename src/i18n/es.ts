@@ -655,6 +655,7 @@ export const es: Translations = {
     eyebrow: 'CÓMO FUNCIONA EL TRUNCAMIENTO',
     title: 'Ve <span class="truncation-title__accent">exactamente</span> cómo aparecerá tu publicación',
     description: 'Cada plataforma tiene límites de caracteres y reglas de visualización únicos. Cuando tu contenido supera estos límites, se trunca con "..." o "Ver más". PostTruncate simula exactamente cómo aparecerá tu publicación.',
+    verified: 'Límites verificados por última vez: {date}',
     platforms: {
       linkedin: { name: 'LinkedIn', desc: 'Muestra ~220 caracteres antes de "...ver más"' },
       twitter: { name: 'X (Twitter)', desc: 'Muestra ~125 caracteres antes de truncar (varía según el dispositivo)' },

@@ -655,6 +655,7 @@ export const ja: Translations = {
     eyebrow: '切り捨ての仕組み',
     title: '投稿の表示を<span class="truncation-title__accent">正確に</span>確認',
     description: '各プラットフォームには固有の文字数制限と表示ルールがあります。コンテンツがこれらの制限を超えると、「...」や「さらに表示」で切り捨てられます。PostTruncateは投稿後どのように表示されるかを正確にシミュレートします。',
+    verified: '制限の最終確認日: {date}',
     platforms: {
       linkedin: { name: 'LinkedIn', desc: '「...さらに表示」の前に約220文字を表示' },
       twitter: { name: 'X (Twitter)', desc: '切り捨て前に約125文字を表示（デバイスによって異なります）' },

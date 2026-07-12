@@ -655,6 +655,7 @@ export const da: Translations = {
     eyebrow: 'HVORDAN AFKORTNING VIRKER',
     title: 'Se <span class="truncation-title__accent">præcis</span>, hvordan dit opslag vil se ud',
     description: 'Hver platform har unikke tegngrænser og visningsregler. Når dit indhold overstiger disse grænser, afkortes det med "..." eller "Se mere". PostTruncate simulerer præcis, hvordan dit opslag vil se ud.',
+    verified: 'Grænser sidst bekræftet: {date}',
     platforms: {
       linkedin: { name: 'LinkedIn', desc: 'Viser ~220 tegn før "...se mere"' },
       twitter: { name: 'X (Twitter)', desc: 'Viser ~125 tegn før afkortning (varierer efter enhed)' },
