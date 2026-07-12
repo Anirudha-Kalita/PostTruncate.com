@@ -59,6 +59,8 @@ export interface Props {
   articleModifiedTime?: string;
   /** Footer variant to render. Defaults to 'full'. */
   footerVariant?: 'full' | 'minimal';
+  /** Suppress the bookmark/save toast (e.g. on legal pages). */
+  hideBookmarkToast?: boolean;
 }
 
 const {
@@ -76,6 +78,7 @@ const {
   articlePublishedTime,
   articleModifiedTime,
   footerVariant = 'full',
+  hideBookmarkToast = false,
 } = Astro.props;
 
 const t = getTranslations(lang);
@@ -289,64 +292,63 @@ const canonical = canonicalOverride ?? localeHref(lang);
     </button>
 
     {/* Bookmark / save nudge — fixed slide-in toast shown once per visitor
-        (localStorage-gated). Desktop: exit-intent. Mobile: time delay. The
-        element is always in the DOM but visibility-hidden, so it never causes
-        layout shift (CLS). Strings come from the active locale. */}
-    <aside
-      class="bk-toast"
-      role="dialog"
-      aria-live="polite"
-      aria-label={t.nav.bookmarkToast.heading}
-    >
-      <button type="button" class="bk-toast__close" aria-label={t.nav.bookmarkToast.close}>
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <path d="M18 6 6 18M6 6l12 12" />
-        </svg>
-      </button>
-      <div class="bk-toast__icon" aria-hidden="true">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z" />
-        </svg>
-      </div>
-      <div class="bk-toast__body">
-        <p class="bk-toast__heading">{t.nav.bookmarkToast.heading}</p>
-        {/* Desktop: the {shortcut} token is replaced client-side with the
-            OS-correct keys wrapped in a <kbd> — so it's left empty here and
-            filled from data-tpl by the script. */}
-        <p
-          class="bk-toast__text bk-toast__text--desktop"
-          data-tpl={t.nav.bookmarkToast.desktopBody}
-        ></p>
-        {/* Mobile: a share/copy action button. */}
-        <div class="bk-toast__mobile">
-          <p class="bk-toast__text">{t.nav.bookmarkToast.mobileBody}</p>
-          <button
-            type="button"
-            class="bk-toast__share"
-            data-copied={t.nav.bookmarkToast.copied}
-          >
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <circle cx="18" cy="5" r="3" /><circle cx="6" cy="12" r="3" /><circle cx="18" cy="19" r="3" />
-              <path d="M8.59 13.51l6.83 3.98M15.41 6.51l-6.82 3.98" />
-            </svg>
-            <span class="bk-toast__share-label">{t.nav.bookmarkToast.mobileButton}</span>
-          </button>
+        (localStorage-gated). Triggered contextually by the editor.
+        The element is visibility-hidden initially so it never causes layout shift (CLS).
+        Strings come from the active locale. */}
+    {!hideBookmarkToast && (
+      <aside
+        class="bk-toast"
+        role="dialog"
+        aria-live="polite"
+        aria-label={t.nav.bookmarkToast.heading}
+      >
+        <button type="button" class="bk-toast__close" aria-label={t.nav.bookmarkToast.close}>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M18 6 6 18M6 6l12 12" />
+          </svg>
+        </button>
+        <div class="bk-toast__icon" aria-hidden="true">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z" />
+          </svg>
         </div>
-      </div>
-    </aside>
+        <div class="bk-toast__body">
+          <p class="bk-toast__heading">{t.nav.bookmarkToast.heading}</p>
+          {/* Desktop: the {shortcut} token is replaced client-side with the
+              OS-correct keys wrapped in a <kbd> — so it's left empty here and
+              filled from data-tpl by the script. */}
+          <p
+            class="bk-toast__text bk-toast__text--desktop"
+            data-tpl={t.nav.bookmarkToast.desktopBody}
+          ></p>
+          {/* Mobile: a share/copy action button. */}
+          <div class="bk-toast__mobile">
+            <p class="bk-toast__text">{t.nav.bookmarkToast.mobileBody}</p>
+            <button
+              type="button"
+              class="bk-toast__share"
+              data-copied={t.nav.bookmarkToast.copied}
+            >
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <circle cx="18" cy="5" r="3" /><circle cx="6" cy="12" r="3" /><circle cx="18" cy="19" r="3" />
+                <path d="M8.59 13.51l6.83 3.98M15.41 6.51l-6.82 3.98" />
+              </svg>
+              <span class="bk-toast__share-label">{t.nav.bookmarkToast.mobileButton}</span>
+            </button>
+          </div>
+        </div>
+      </aside>
+    )}
 
     <script>
       // ── Bookmark / save nudge ─────────────────────────────────────────────
-      // Shown at most once per visitor. Desktop fires on exit-intent (cursor
-      // leaves the top of the viewport); mobile (no fine pointer) fires after a
-      // delay. Either path sets the localStorage flag the first time it shows,
-      // so it never reappears on later visits or reloads.
+      // Shown at most once per visitor. Triggered contextually by the editor
+      // after a moment of demonstrated value (e.g. pasting text).
       (() => {
         const toast = document.querySelector<HTMLElement>('.bk-toast');
         if (!toast) return;
 
         const STORAGE_KEY = 'pt_bookmark_nudge_seen';
-        const MOBILE_DELAY = 60_000; // 60s
 
         let seen = false;
         try {
@@ -395,22 +397,11 @@ const canonical = canonicalOverride ?? localeHref(lang);
         };
 
         // ── Triggers ──────────────────────────────────────────────────────
-        let mobileTimer: ReturnType<typeof setTimeout> | undefined;
-        const onMouseOut = (e: MouseEvent) => {
-          // Cursor left the document through the top edge.
-          if (!e.relatedTarget && e.clientY <= 0) show();
-        };
-
         const cleanup = () => {
-          document.removeEventListener('mouseout', onMouseOut);
-          if (mobileTimer) clearTimeout(mobileTimer);
+          window.removeEventListener('pt:show-bookmark-toast', show);
         };
 
-        if (isDesktop) {
-          document.addEventListener('mouseout', onMouseOut);
-        } else {
-          mobileTimer = setTimeout(show, MOBILE_DELAY);
-        }
+        window.addEventListener('pt:show-bookmark-toast', show, { once: true });
 
         // ── Interactions ──────────────────────────────────────────────────
         toast

@@ -116,6 +116,9 @@ export function Workspace({ text, setText, lang, s, focus, image, mediaKind = 'i
         el?.focus({ preventScroll: true });
         el?.setSelectionRange(caret, caret);
       });
+      if (typeof window !== 'undefined') {
+        window.dispatchEvent(new CustomEvent('pt:show-bookmark-toast'));
+      }
     } catch {
       el?.focus();
     }
@@ -212,6 +215,11 @@ export function Workspace({ text, setText, lang, s, focus, image, mediaKind = 'i
             onInput={(e) => {
               const val = (e.currentTarget as HTMLTextAreaElement).value;
               setText(val);
+              
+              if (val.length >= 20 && typeof window !== 'undefined') {
+                window.dispatchEvent(new CustomEvent('pt:show-bookmark-toast'));
+              }
+              
               if (focus === 'linkedin' && !hasFiredGtagRef.current && val.trim().length >= 5) {
                 hasFiredGtagRef.current = true;
                 if (typeof window !== 'undefined' && typeof (window as any).gtagSendEvent === 'function') {
