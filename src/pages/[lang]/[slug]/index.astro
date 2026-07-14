@@ -249,9 +249,9 @@ const latestPosts = (await getPublishedPosts())
   <section id="ad-previews" class="container-page" style="margin-top: var(--spacing-section);">
     <div class="promo-split promo-split--ads">
       <div class="promo-split__copy">
-        <p class="section-eyebrow">Paid Campaigns</p>
-        <h2 class="promo-split__title">Ad Preview Simulators</h2>
-        <p class="promo-split__body">Sponsored content has completely different truncation rules. Preview your exact ad copy cutoff for Facebook, LinkedIn, Google, Instagram, and TikTok.</p>
+        <p class="section-eyebrow">{t.adPreviewsCallout?.eyebrow}</p>
+        <h2 class="promo-split__title">{t.adPreviewsCallout?.title}</h2>
+        <p class="promo-split__body">{t.adPreviewsCallout?.body}</p>
       </div>
       <div class="promo-split__visual" aria-label="Ad platform simulators">
         <div class="ad-chips">

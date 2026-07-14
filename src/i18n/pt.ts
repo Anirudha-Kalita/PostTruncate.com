@@ -591,11 +591,17 @@ export const pt: Translations = {
     homepageLinkLabel: 'Incorporar no seu site →',
   },
 
+    adPreviewsCallout: {
+    eyebrow: 'Campanhas pagas',
+    title: 'Simuladores de pré-visualização de anúncios',
+    body: 'Conteúdos patrocinados têm regras de truncamento completamente diferentes. Pré-visualize o corte exato do seu anúncio para o Facebook, LinkedIn, Google, Instagram e TikTok.',
+  },
+
   embedCallout: {
-    eyebrow: 'Free Widget',
-    title: 'Embed a live character counter on your site',
-    body: 'Bloggers, educators, and developers: add our real-time character counter to any web page with a single line of HTML. Let your users track platform limits for X, LinkedIn, Threads, Instagram, and SMS without leaving your site. Free, no account or API key required.',
-    cta: 'Get the free embed code',
+    eyebrow: 'Widget gratuito',
+    title: 'Incorpore um contador de caracteres ao vivo no seu site',
+    body: 'Bloggers, educadores e desenvolvedores: adicionem o nosso contador de caracteres em tempo real a qualquer página web com uma única linha de HTML. Permitam que os seus utilizadores acompanhem os limites de plataforma para X, LinkedIn, Threads, Instagram e SMS sem sair do seu site. Gratuito, não é necessária conta nem chave API.',
+    cta: 'Obter o código de incorporação gratuito',
   },
 
 

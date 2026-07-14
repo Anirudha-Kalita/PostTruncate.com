@@ -591,11 +591,17 @@ export const nl: Translations = {
     homepageLinkLabel: 'Insluiten op je site →',
   },
 
+    adPreviewsCallout: {
+    eyebrow: 'Betaalde campagnes',
+    title: 'Simulators voor advertentievoorbeelden',
+    body: 'Gesponsorde inhoud heeft volledig andere afkappingsregels. Bekijk het exacte voorbeeld van je advertentietekst voor Facebook, LinkedIn, Google, Instagram en TikTok.',
+  },
+
   embedCallout: {
-    eyebrow: 'Free Widget',
-    title: 'Embed a live character counter on your site',
-    body: 'Bloggers, educators, and developers: add our real-time character counter to any web page with a single line of HTML. Let your users track platform limits for X, LinkedIn, Threads, Instagram, and SMS without leaving your site. Free, no account or API key required.',
-    cta: 'Get the free embed code',
+    eyebrow: 'Gratis widget',
+    title: 'Sluit een live tekenteller in op je site',
+    body: 'Bloggers, docenten en ontwikkelaars: voeg onze realtime tekenteller toe aan elke webpagina met één regel HTML. Laat je gebruikers platformlimieten bijhouden voor X, LinkedIn, Threads, Instagram en SMS zonder je site te verlaten. Gratis, geen account of API-sleutel vereist.',
+    cta: 'Ontvang de gratis insluitcode',
   },
 
 

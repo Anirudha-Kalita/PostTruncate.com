@@ -591,11 +591,17 @@ export const ja: Translations = {
     homepageLinkLabel: 'サイトに埋め込む →',
   },
 
+    adPreviewsCallout: {
+    eyebrow: '有料キャンペーン',
+    title: '広告プレビューシミュレーター',
+    body: 'スポンサー付きコンテンツには全く異なる省略ルールがあります。Facebook、LinkedIn、Google、Instagram、TikTokの広告コピーの正確なカットオフをプレビューします。',
+  },
+
   embedCallout: {
-    eyebrow: 'Free Widget',
-    title: 'Embed a live character counter on your site',
-    body: 'Bloggers, educators, and developers: add our real-time character counter to any web page with a single line of HTML. Let your users track platform limits for X, LinkedIn, Threads, Instagram, and SMS without leaving your site. Free, no account or API key required.',
-    cta: 'Get the free embed code',
+    eyebrow: '無料ウィジェット',
+    title: 'サイトにライブ文字数カウンターを埋め込む',
+    body: 'ブロガー、教育者、開発者の皆様へ：1行のHTMLで、任意のウェブページにリアルタイム文字数カウンターを追加できます。ユーザーがサイトから離れることなく、X、LinkedIn、Threads、Instagram、SMSのプラットフォーム制限を追跡できるようになります。無料で、アカウントやAPIキーは必要ありません。',
+    cta: '無料の埋め込みコードを取得',
   },
 
 

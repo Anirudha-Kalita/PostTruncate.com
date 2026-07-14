@@ -592,11 +592,17 @@ export const de: Translations = {
     homepageLinkLabel: 'Auf deiner Website einbetten →',
   },
 
+    adPreviewsCallout: {
+    eyebrow: 'Bezahlte Kampagnen',
+    title: 'Anzeigenvorschau-Simulatoren',
+    body: 'Gesponserte Inhalte haben völlig andere Abschneideregeln. Sehen Sie sich die genaue Vorschau Ihres Anzeigentextes für Facebook, LinkedIn, Google, Instagram und TikTok an.',
+  },
+
   embedCallout: {
-    eyebrow: 'Free Widget',
-    title: 'Embed a live character counter on your site',
-    body: 'Bloggers, educators, and developers: add our real-time character counter to any web page with a single line of HTML. Let your users track platform limits for X, LinkedIn, Threads, Instagram, and SMS without leaving your site. Free, no account or API key required.',
-    cta: 'Get the free embed code',
+    eyebrow: 'Kostenloses Widget',
+    title: 'Betten Sie einen Live-Zeichenzähler auf Ihrer Website ein',
+    body: 'Blogger, Pädagogen und Entwickler: Fügen Sie unseren Echtzeit-Zeichenzähler mit einer einzigen Zeile HTML zu jeder Webseite hinzu. Lassen Sie Ihre Benutzer Plattform-Limits für X, LinkedIn, Threads, Instagram und SMS verfolgen, ohne Ihre Website zu verlassen. Kostenlos, kein Konto oder API-Schlüssel erforderlich.',
+    cta: 'Kostenlosen Einbettungscode abrufen',
   },
 
 

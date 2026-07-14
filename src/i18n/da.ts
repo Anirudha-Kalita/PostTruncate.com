@@ -591,11 +591,17 @@ export const da: Translations = {
     homepageLinkLabel: 'Indlejr på dit websted →',
   },
 
+    adPreviewsCallout: {
+    eyebrow: 'Betalte kampagner',
+    title: 'Simulatorer til forhåndsvisning af annoncer',
+    body: 'Sponsoreret indhold har helt andre afkortningsregler. Se det nøjagtige afsnit for din annoncetekst til Facebook, LinkedIn, Google, Instagram og TikTok.',
+  },
+
   embedCallout: {
-    eyebrow: 'Free Widget',
-    title: 'Embed a live character counter on your site',
-    body: 'Bloggers, educators, and developers: add our real-time character counter to any web page with a single line of HTML. Let your users track platform limits for X, LinkedIn, Threads, Instagram, and SMS without leaving your site. Free, no account or API key required.',
-    cta: 'Get the free embed code',
+    eyebrow: 'Gratis widget',
+    title: 'Indlejr en live tegntæller på dit websted',
+    body: 'Bloggere, undervisere og udviklere: tilføj vores tegntæller i realtid til enhver webside med en enkelt linje HTML. Lad dine brugere spore platformgrænser for X, LinkedIn, Threads, Instagram og SMS uden at forlade dit websted. Gratis, ingen konto eller API-nøgle påkrævet.',
+    cta: 'Få den gratis indlejringskode',
   },
 
 

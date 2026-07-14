@@ -591,11 +591,17 @@ export const it: Translations = {
     homepageLinkLabel: "Incorpora nel tuo sito →",
   },
 
+    adPreviewsCallout: {
+    eyebrow: 'Campagne a pagamento',
+    title: 'Simulatori di anteprime degli annunci',
+    body: 'I contenuti sponsorizzati hanno regole di troncamento completamente diverse. Visualizza in anteprima il taglio esatto del testo del tuo annuncio per Facebook, LinkedIn, Google, Instagram e TikTok.',
+  },
+
   embedCallout: {
-    eyebrow: 'Free Widget',
-    title: 'Embed a live character counter on your site',
-    body: 'Bloggers, educators, and developers: add our real-time character counter to any web page with a single line of HTML. Let your users track platform limits for X, LinkedIn, Threads, Instagram, and SMS without leaving your site. Free, no account or API key required.',
-    cta: 'Get the free embed code',
+    eyebrow: 'Widget gratuito',
+    title: 'Incorpora un contatore di caratteri live sul tuo sito',
+    body: 'Blogger, educatori e sviluppatori: aggiungete il nostro contatore di caratteri in tempo reale a qualsiasi pagina web con una singola riga di HTML. Permettete ai vostri utenti di tracciare i limiti delle piattaforme per X, LinkedIn, Threads, Instagram e SMS senza lasciare il vostro sito. Gratuito, nessun account o chiave API richiesti.',
+    cta: 'Ottieni il codice di incorporamento gratuito',
   },
 
 

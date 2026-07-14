@@ -591,11 +591,17 @@ export const zh: Translations = {
     homepageLinkLabel: '嵌入到你的网站 →',
   },
 
+    adPreviewsCallout: {
+    eyebrow: '付费活动',
+    title: '广告预览模拟器',
+    body: '赞助内容有完全不同的截断规则。预览 Facebook、LinkedIn、Google、Instagram 和 TikTok 广告文案的确切截断位置。',
+  },
+
   embedCallout: {
-    eyebrow: 'Free Widget',
-    title: 'Embed a live character counter on your site',
-    body: 'Bloggers, educators, and developers: add our real-time character counter to any web page with a single line of HTML. Let your users track platform limits for X, LinkedIn, Threads, Instagram, and SMS without leaving your site. Free, no account or API key required.',
-    cta: 'Get the free embed code',
+    eyebrow: '免费小工具',
+    title: '在您的网站上嵌入实时字符计数器',
+    body: '博主、教育工作者和开发者：只需一行 HTML 即可在任何网页添加我们的实时字符计数器。让您的用户无需离开网站即可跟踪 X、LinkedIn、Threads、Instagram 和 SMS 的平台限制。免费，无需帐户或 API 密钥。',
+    cta: '获取免费嵌入代码',
   },
 
 

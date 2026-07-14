@@ -1437,6 +1437,11 @@ export interface Translations {
     };
   };
   /** Homepage callout section for the embed widget. */
+  adPreviewsCallout: {
+    eyebrow: string;
+    title: string;
+    body: string;
+  };
   embedCallout: {
     eyebrow: string;
     title: string;

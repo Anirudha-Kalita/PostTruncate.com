@@ -599,6 +599,12 @@ export const en: Translations = {
     homepageLinkLabel: 'Embed on your site →',
   },
 
+  adPreviewsCallout: {
+    eyebrow: 'Paid Campaigns',
+    title: 'Ad Preview Simulators',
+    body: 'Sponsored content has completely different truncation rules. Preview your exact ad copy cutoff for Facebook, LinkedIn, Google, Instagram, and TikTok.',
+  },
+
   embedCallout: {
     eyebrow: 'Free Widget',
     title: 'Embed a live character counter on your site',
