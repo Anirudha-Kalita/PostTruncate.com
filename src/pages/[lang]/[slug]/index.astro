@@ -8,6 +8,7 @@ import { interp } from '../../../i18n/interp';
 import { LOCALES, getLocale } from '../../../i18n/config';
 import { tools } from '../../../data/tools';
 import { calculators } from '../../../data/calculators';
+import { adPreviews } from '../../../data/adPreviews';
 import { getFeaturedFaqs } from '../../../data/faq';
 import PlatformBanner from '../../../components/PlatformBanner.astro';
 import HeroPreviewCard from '../../../components/HeroPreviewCard.astro';
@@ -37,6 +38,11 @@ const locale = getLocale(lang);
 const toolSlugs: Record<string, string> = {};
 for (const tool of tools) {
   toolSlugs[tool.id] = tool.slugs[lang] ?? tool.slugs['en'];
+}
+
+const adPreviewSlugs: Record<string, string> = {};
+for (const ad of adPreviews) {
+  adPreviewSlugs[ad.id] = ad.slugs[lang] ?? ad.slugs['en'];
 }
 
 // Build a per-tool { href, label } lookup used by seoCopy and guide card links.
@@ -249,23 +255,23 @@ const latestPosts = (await getPublishedPosts())
       </div>
       <div class="promo-split__visual" aria-label="Ad platform simulators">
         <div class="ad-chips">
-          <a href={`/${lang}/ad-previews/facebook-ads/`} class="ad-chip" id="ad-chip-facebook">
+          <a href={`/${lang}/ad-previews/${adPreviewSlugs['facebook-ads']}/`} class="ad-chip" id="ad-chip-facebook">
             <img src="/logos/facebook.svg" width="18" height="18" alt="" aria-hidden="true" class="ad-chip__logo" />
             <span>Facebook</span>
           </a>
-          <a href={`/${lang}/ad-previews/linkedin-ads/`} class="ad-chip" id="ad-chip-linkedin">
+          <a href={`/${lang}/ad-previews/${adPreviewSlugs['linkedin-ads']}/`} class="ad-chip" id="ad-chip-linkedin">
             <img src="/logos/linkedin.svg" width="18" height="18" alt="" aria-hidden="true" class="ad-chip__logo" />
             <span>LinkedIn</span>
           </a>
-          <a href={`/${lang}/ad-previews/google-ads/`} class="ad-chip" id="ad-chip-google">
+          <a href={`/${lang}/ad-previews/${adPreviewSlugs['google-ads']}/`} class="ad-chip" id="ad-chip-google">
             <img src="/logos/google-serp.svg" width="18" height="18" alt="" aria-hidden="true" class="ad-chip__logo" />
             <span>Google</span>
           </a>
-          <a href={`/${lang}/ad-previews/instagram-ads/`} class="ad-chip" id="ad-chip-instagram">
+          <a href={`/${lang}/ad-previews/${adPreviewSlugs['instagram-ads']}/`} class="ad-chip" id="ad-chip-instagram">
             <img src="/logos/instagram.svg" width="18" height="18" alt="" aria-hidden="true" class="ad-chip__logo" />
             <span>Instagram</span>
           </a>
-          <a href={`/${lang}/ad-previews/tiktok-ads/`} class="ad-chip" id="ad-chip-tiktok">
+          <a href={`/${lang}/ad-previews/${adPreviewSlugs['tiktok-ads']}/`} class="ad-chip" id="ad-chip-tiktok">
             <img src="/logos/tiktok.svg" width="18" height="18" alt="" aria-hidden="true" class="ad-chip__logo" />
             <span>TikTok</span>
           </a>
