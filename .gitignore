@@ -38,3 +38,6 @@ pnpm-debug.log*
 .claude/
 
 .agents/
+
+# lighthouse reports + dev server logs (local audits)
+.lighthouse/
