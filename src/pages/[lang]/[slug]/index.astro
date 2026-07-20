@@ -648,6 +648,13 @@ const latestPosts = (await getPublishedPosts())
     .hero__badge {
       margin-inline: 0;
     }
+    /* Reserve the lede's height at desktop widths to absorb the ±1-line
+       rewrap that happens when Geist lands vs. the metric-matched Arial
+       fallback. 7 lines × 28px = 196px matches the EN lede in the ~440px
+       desktop track; bump if longer translations rewrap further. */
+    .hero__lede {
+      min-height: 196px;
+    }
     .hero__cta {
       justify-content: flex-start;
     }
