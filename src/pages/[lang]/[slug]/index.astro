@@ -1,6 +1,5 @@
 ---
 import Layout from '../../../layouts/Layout.astro';
-import Ad from '../../../components/Ad.astro';
 import Dashboard from '../../../components/island/Dashboard.tsx';
 import StructuredData from '../../../components/StructuredData.astro';
 import { getTranslations } from '../../../i18n';
@@ -189,11 +188,6 @@ const latestPosts = (await getPublishedPosts())
   <WhyPostTruncate s={t.whyPostTruncate} />
   <HowTruncationWorks s={t.howTruncationWorks} lang={lang} />
   <WhoIsItFor s={t.whoIsItFor} />
-
-  <!-- ── Top leaderboard ad (reserved height → 0 CLS) ─────────────────── -->
-  <div class="container-page">
-    <Ad variant="leaderboard" />
-  </div>
 
   <!-- ── Long-form SEO copy ───────────────────────────────────────────────
        Localized keyword body. Headings are plain text; paragraphs carry inline
